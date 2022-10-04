@@ -1,0 +1,529 @@
+
+namespace Levels {
+
+
+    int8_t Level1x_FG[] = {
+        82,-1,-1,-1,-1,107,-1,-1,-1,-1,108,-1,80,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,82,-1,-1,-1,106,105,105,105,-1,107,107,-1,-1,-1,-1,-1,-1,-1,-1,107,107,-1,-1,-1,-1,116,-1,-1,105,117,-1,-1,-1,106,105,105,-1,-1,80,81,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
+        108,-1,-1,-1,-1,86,87,87,87,87,88,-1,108,-1,86,87,87,87,87,87,87,87,87,88,-1,-1,107,-1,-1,107,107,-1,105,105,108,-1,-1,86,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,88,108,-1,86,88,-1,-1,-1,108,-1,86,87,87,87,87,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
+        108,-1,-1,-1,-1,80,81,81,81,81,81,81,82,105,107,105,105,110,-1,106,107,105,105,107,105,105,80,81,81,81,81,82,107,105,107,105,105,80,81,81,81,81,81,81,81,81,81,81,81,81,81,82,105,105,110,-1,107,105,80,81,81,81,81,82,-1,108,-1,106,105,80,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
+        108,-1,-1,-1,-1,107,106,106,106,106,110,-1,-1,-1,-1,-1,106,107,-1,117,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,105,108,-1,-1,107,-1,117,-1,-1,-1,-1,-1,-1,-1,105,105,116,-1,-1,-1,-1,107,-1,-1,-1,-1,108,-1,-1,86,87,87,88,-1,-1,86,87,87,87,87,87,87,87,87,87,87,88,-1,-1,-1,-1,-1,-1,-1,-1,-1,86
+        108,-1,-1,-1,-1,107,106,105,-1,107,107,-1,-1,122,-1,-1,80,81,81,82,-1,-1,-1,-1,110,-1,106,-1,-1,-1,-1,-1,107,105,108,-1,-1,80,81,82,-1,-1,110,-1,-1,106,107,-1,-1,80,81,81,82,-1,80,81,81,81,81,82,-1,-1,107,-1,-1,107,-1,-1,107,-1,107,-1,-1,-1,-1,-1,-1,-1,-1,107,107,-1,-1,-1,-1,-1,-1,-1,-1,80
+        88,105,105,105,105,108,-1,86,87,87,87,87,87,88,-1,-1,86,87,87,87,87,87,87,87,88,-1,86,87,87,87,87,87,88,-1,107,105,105,107,-1,86,86,87,88,-1,-1,86,87,87,87,87,87,87,88,-1,-1,86,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87
+        82,-1,-1,106,-1,107,-1,108,-1,80,81,81,81,81,82,-1,80,81,81,81,81,81,81,81,82,-1,80,81,81,81,81,81,82,-1,107,-1,110,-1,-1,80,81,81,82,-1,-1,80,81,81,81,81,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
+        88,-1,-1,86,87,87,87,88,-1,107,107,-1,-1,-1,107,-1,107,-1,-1,107,107,-1,-1,108,-1,-1,-1,86,87,87,87,87,87,87,87,88,108,-1,-1,86,86,87,88,-1,-1,-1,86,87,87,87,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
+        82,-1,-1,80,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,82,-1,-1,-1,80,81,81,81,81,81,81,81,81,82,-1,-1,107,107,-1,107,-1,-1,-1,80,81,81,81,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
+    };
+
+    int8_t Level1x_BG[] = {
+        -1,119,75,75,75,96,90,77,77,78,84,85,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,119,92,75,76,77,77,77,78,89,112,90,78,77,77,78,77,77,77,89,112,90,77,77,77,77,114,94,102,77,118,75,75,76,77,78,77,79,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+        100,103,75,92,75,-1,-1,-1,-1,-1,-1,109,84,85,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,119,92,96,90,77,89,112,90,77,77,84,103,75,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,100,103,-1,-1,83,77,77,84,85,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+        100,103,75,92,75,-1,-1,-1,-1,-1,-1,-1,-1,109,89,90,77,77,111,76,89,90,77,89,90,99,-1,-1,-1,-1,-1,-1,100,90,89,90,99,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,113,77,77,111,96,104,-1,-1,-1,-1,-1,-1,83,84,85,76,79,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+        100,103,75,92,75,96,90,77,77,78,77,94,75,76,98,92,76,89,90,115,118,75,92,75,75,75,75,75,75,92,75,75,76,77,84,103,75,96,90,115,118,92,75,75,75,75,102,77,78,115,114,77,77,98,96,90,77,78,77,84,85,92,-1,-1,-1,-1,91,92,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,113,94,75,75,75,75,92,75,75,-1,
+        100,85,75,92,75,96,90,77,77,89,112,90,99,-1,97,92,-1,-1,-1,-1,83,77,78,77,77,98,76,77,77,78,78,77,89,90,84,103,92,-1,-1,-1,83,77,77,98,75,102,89,90,99,-1,-1,-1,-1,97,-1,-1,-1,-1,-1,-1,83,77,89,90,77,89,90,77,89,90,89,90,77,77,77,77,77,77,77,89,112,90,78,77,77,77,77,77,79,-1,
+        -1,83,77,77,77,89,103,-1,-1,-1,-1,-1,-1,-1,109,98,-1,-1,-1,-1,-1,-1,-1,-1,-1,97,-1,-1,-1,-1,-1,-1,-1,120,96,90,77,89,104,-1,-1,-1,-1,97,92,-1,-1,-1,-1,-1,-1,-1,-1,109,99,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+        -1,120,92,76,77,89,90,89,85,-1,-1,-1,-1,-1,-1,119,-1,-1,-1,-1,-1,-1,-1,-1,-1,91,-1,-1,-1,-1,-1,-1,-1,83,89,90,77,94,92,-1,-1,-1,-1,97,92,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,80,80,80,80,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+        -1,97,92,-1,-1,-1,-1,-1,83,89,112,90,77,77,89,90,89,90,77,89,112,90,77,84,85,92,75,-1,-1,-1,-1,-1,-1,-1,-1,-1,100,85,92,-1,-1,-1,-1,119,92,75,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+        -1,83,99,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,83,78,99,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,83,77,89,112,90,89,90,77,99,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+    };
+
+
+    int8_t Level1_FG[] = {
+        82,-1,-1,-1,-1,107,-1,-1,-1,-1,108,-1,80,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,82,-1,-1,-1,106,105,105,105,-1,107,107,-1,-1,-1,-1,-1,-1,-1,-1,107,107,-1,-1,-1,-1,116,-1,-1,105,117,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
+        108,-1,-1,-1,-1,86,87,87,87,87,88,-1,108,-1,86,87,87,87,87,87,87,87,87,88,-1,-1,107,-1,-1,107,107,-1,105,105,108,-1,-1,86,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,88,108,-1,86,88,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
+        108,-1,-1,-1,-1,80,81,81,81,81,81,81,82,105,107,105,105,110,-1,106,107,105,105,107,105,105,80,81,81,81,81,82,107,105,107,105,105,80,81,81,81,81,81,81,81,81,81,81,81,81,81,82,105,105,110,-1,107,105,80,81,81,81,81,82,-1,108,-1,106,105,80,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
+        108,-1,-1,-1,-1,107,106,106,106,106,110,-1,-1,-1,-1,-1,106,107,-1,117,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,105,108,-1,-1,107,-1,117,-1,-1,-1,-1,-1,-1,-1,105,105,116,-1,-1,-1,-1,107,-1,-1,-1,-1,108,-1,-1,86,87,87,88,-1,-1,86,87,87,87,87,87,87,87,87,87,87,88,-1,-1,-1,-1,-1,-1,-1,-1,-1,86
+        108,-1,-1,-1,-1,107,106,105,-1,107,107,-1,-1,122,-1,-1,80,81,81,82,-1,-1,-1,-1,110,-1,106,-1,-1,-1,-1,-1,107,105,108,-1,-1,80,81,82,-1,-1,110,-1,-1,106,107,-1,-1,80,81,81,82,-1,80,81,81,81,81,82,-1,-1,107,-1,-1,107,-1,-1,107,-1,107,-1,-1,-1,-1,-1,-1,-1,-1,107,107,-1,-1,-1,-1,-1,-1,-1,-1,80
+        88,105,105,105,105,108,-1,86,87,87,87,87,87,88,-1,-1,86,87,87,87,87,87,87,87,88,-1,86,87,87,87,87,87,88,-1,107,105,105,107,-1,86,86,87,88,-1,-1,86,87,87,87,87,87,87,88,-1,-1,86,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87,87
+        82,-1,-1,106,-1,107,-1,108,-1,80,81,81,81,81,82,-1,80,81,81,81,81,81,81,81,82,-1,80,81,81,81,81,81,82,-1,107,-1,110,-1,-1,80,81,81,82,-1,-1,80,81,81,81,81,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
+        88,-1,-1,86,87,87,87,88,-1,107,107,-1,-1,-1,107,-1,107,-1,-1,107,107,-1,-1,108,-1,-1,-1,86,87,87,87,87,87,87,87,88,108,-1,-1,86,86,87,88,-1,-1,-1,86,87,87,87,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
+        82,-1,-1,80,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,82,-1,-1,-1,80,81,81,81,81,81,81,81,81,82,-1,-1,107,107,-1,107,-1,-1,-1,80,81,81,81,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
+    };
+
+    int8_t Level1_BG[] = {
+        -1,119,75,75,75,96,90,77,77,78,84,85,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,119,92,75,76,77,77,77,78,89,112,90,78,77,77,78,77,77,77,89,112,90,77,77,77,77,114,94,102,77,118,75,75,75,75,75,75,75,75,76,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+        100,103,75,92,75,-1,-1,-1,-1,-1,-1,109,84,85,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,119,92,96,90,77,89,112,90,77,77,84,103,75,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,100,103,77,77,77,77,77,77,77,77,77,77,77,77,118,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+        100,103,75,92,75,-1,-1,-1,-1,-1,-1,-1,-1,109,89,90,77,77,111,76,89,90,77,89,90,99,-1,-1,-1,-1,-1,-1,100,90,89,90,99,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,113,77,77,111,96,104,-1,-1,-1,-1,-1,-1,83,84,85,76,79,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+        100,103,75,92,75,96,90,77,77,78,77,94,75,76,98,92,76,89,90,115,118,75,92,75,75,75,75,75,75,92,75,75,76,77,84,103,75,96,90,115,118,92,75,75,75,75,102,77,78,115,114,77,77,98,96,90,77,78,77,84,85,92,-1,-1,-1,-1,91,92,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,113,94,75,75,75,75,92,75,75,-1,
+        100,85,75,92,75,96,90,77,77,89,112,90,99,-1,97,92,-1,-1,-1,-1,83,77,78,77,77,98,76,77,77,78,78,77,89,90,84,103,92,-1,-1,-1,83,77,77,98,75,102,89,90,99,-1,-1,-1,-1,97,-1,-1,-1,-1,-1,-1,83,77,89,90,77,89,90,77,89,90,89,90,77,77,77,77,77,77,77,89,112,90,78,77,77,77,77,77,79,-1,
+        -1,83,77,77,77,89,103,-1,-1,-1,-1,-1,-1,-1,109,98,-1,-1,-1,-1,-1,-1,-1,-1,-1,97,-1,-1,-1,-1,-1,-1,-1,120,96,90,77,89,104,-1,-1,-1,-1,97,92,-1,-1,-1,-1,-1,-1,-1,-1,109,99,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+        -1,120,92,76,77,89,90,89,85,-1,-1,-1,-1,-1,-1,119,-1,-1,-1,-1,-1,-1,-1,-1,-1,91,-1,-1,-1,-1,-1,-1,-1,83,89,90,77,94,92,-1,-1,-1,-1,97,92,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,80,80,80,80,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+        -1,97,92,-1,-1,-1,-1,-1,83,89,112,90,77,77,89,90,89,90,77,89,112,90,77,84,85,92,75,-1,-1,-1,-1,-1,-1,-1,-1,-1,100,85,92,-1,-1,-1,-1,119,92,75,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+        -1,83,99,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,83,78,99,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,83,77,89,112,90,89,90,77,99,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
+    };
+
+}
+namespace_end
+
+namespace Images {
+
+    image_t Tile_Dungeon_00 = "../images/tiles/tile_dungeon_00.png"
+    image_t Tile_Dungeon_01 = "../images/tiles/tile_dungeon_01.png"
+    image_t Tile_Dungeon_02 = "../images/tiles/tile_dungeon_02.png"
+    image_t Tile_Dungeon_03 = "../images/tiles/tile_dungeon_03.png"
+    image_t Tile_Dungeon_04 = "../images/tiles/tile_dungeon_04.png"
+    image_t Tile_Dungeon_05 = "../images/tiles/tile_dungeon_05.png"
+    image_t Tile_Dungeon_06 = "../images/tiles/tile_dungeon_06.png"
+    image_t Tile_Dungeon_07 = "../images/tiles/tile_dungeon_07.png"
+    image_t Tile_Dungeon_08 = "../images/tiles/tile_dungeon_08.png"
+    image_t Tile_Dungeon_09 = "../images/tiles/tile_dungeon_09.png"
+    image_t Tile_Dungeon_10 = "../images/tiles/tile_dungeon_10.png"
+    image_t Tile_Dungeon_11 = "../images/tiles/tile_dungeon_11.png"
+    image_t Tile_Dungeon_12 = "../images/tiles/tile_dungeon_12.png"
+    image_t Tile_Dungeon_13 = "../images/tiles/tile_dungeon_13.png"
+    image_t Tile_Dungeon_14 = "../images/tiles/tile_dungeon_14.png"
+    image_t Tile_Dungeon_15 = "../images/tiles/tile_dungeon_15.png"
+    image_t Tile_Dungeon_16 = "../images/tiles/tile_dungeon_16.png"
+    image_t Tile_Dungeon_17 = "../images/tiles/tile_dungeon_17.png"
+    image_t Tile_Dungeon_18 = "../images/tiles/tile_dungeon_18.png"
+    image_t Tile_Dungeon_19 = "../images/tiles/tile_dungeon_19.png"
+    image_t Tile_Dungeon_20 = "../images/tiles/tile_dungeon_20.png"
+    image_t Tile_Dungeon_21 = "../images/tiles/tile_dungeon_21.png"
+    image_t Tile_Dungeon_22 = "../images/tiles/tile_dungeon_22.png"
+    image_t Tile_Dungeon_23 = "../images/tiles/tile_dungeon_23.png"
+    image_t Tile_Dungeon_24 = "../images/tiles/tile_dungeon_24.png"
+    image_t Tile_Dungeon_25 = "../images/tiles/tile_dungeon_25.png"
+    image_t Tile_Dungeon_26 = "../images/tiles/tile_dungeon_26.png"
+    image_t Tile_Dungeon_27 = "../images/tiles/tile_dungeon_27.png"
+    image_t Tile_Dungeon_28 = "../images/tiles/tile_dungeon_28.png"
+    image_t Tile_Dungeon_29 = "../images/tiles/tile_dungeon_29.png"
+    image_t Tile_Dungeon_30 = "../images/tiles/tile_dungeon_30.png"
+    image_t Tile_Dungeon_31 = "../images/tiles/tile_dungeon_31.png"
+    image_t Tile_Dungeon_32 = "../images/tiles/tile_dungeon_32.png"
+    image_t Tile_Dungeon_33 = "../images/tiles/tile_dungeon_33.png"
+    image_t Tile_Dungeon_34 = "../images/tiles/tile_dungeon_34.png"
+    image_t Tile_Dungeon_35 = "../images/tiles/tile_dungeon_35.png"
+    image_t Tile_Dungeon_36 = "../images/tiles/tile_dungeon_36.png"
+    image_t Tile_Dungeon_37 = "../images/tiles/tile_dungeon_37.png"
+    image_t Tile_Dungeon_38 = "../images/tiles/tile_dungeon_38.png"
+    image_t Tile_Dungeon_39 = "../images/tiles/tile_dungeon_39.png"
+    image_t Tile_Dungeon_40 = "../images/tiles/tile_dungeon_40.png"
+    image_t Tile_Dungeon_41 = "../images/tiles/tile_dungeon_41.png"
+    image_t Tile_Dungeon_42 = "../images/tiles/tile_dungeon_42.png"
+    image_t Tile_Dungeon_43 = "../images/tiles/tile_dungeon_43.png"
+    image_t Tile_Dungeon_44 = "../images/tiles/tile_dungeon_44.png"
+    image_t Tile_Dungeon_45 = "../images/tiles/tile_dungeon_45.png"
+    image_t Tile_Dungeon_46 = "../images/tiles/tile_dungeon_46.png"
+    image_t Tile_Dungeon_47 = "../images/tiles/tile_dungeon_47.png"
+    image_t Tile_Dungeon_48 = "../images/tiles/tile_dungeon_48.png"
+    image_t Tile_Dungeon_49 = "../images/tiles/tile_dungeon_49.png"
+
+
+
+
+   int8_t Prince_XOffset[] = {
+   
+   //          001,      002,      003,      004,      005,      006,      007,      008,      009,      010,
+   //         X    Y    X    Y    X    Y    X    Y    X    Y    X    Y    X    Y    X    Y    X    Y    X    Y  
+   //         ------    ------    ------    ------    ------    ------    ------    ------    ------    ------
+              0,   0,   1,   0,   1,   0,   1,   0,   2,   0,   2,   0,   3,   0,   3,   0,   3,   0,   3,   0,    //  001 - 010
+              3,   0,   3,   0,   3,   0,   3,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  011 - 020
+              0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  021 - 030
+              0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  031 - 040
+              0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  041 - 050
+              0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  051 - 060
+              0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  061 - 070
+              0,   0,   0,   0,   0,   0,   0,   0,   1,   0,   1,   0,   1,   0,   2,   0,   2,   0,   1,   0,    //  071 - 080
+              1,   0,   1,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  081 - 090
+              0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  091 - 100
+              0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  101 - 110
+              0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  111 - 120
+              0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  121 - 130
+              0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  141 - 150
+              0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  151 - 160
+              0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  161 - 170
+              0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  171 - 180
+              0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  181 - 190
+              0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  191 - 200
+              0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  201 - 210
+              0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  211 - 220
+              0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  221 - 230
+
+    };
+
+
+
+
+
+
+
+
+
+
+    // Prince Images
+
+    image_t Prince_Left_001 = "../images/prince/left/0401_Run_Start_1_Start.png"
+    image_t Prince_Left_002 = "../images/prince/left/0402_Run_Start_2.png"
+    image_t Prince_Left_003 = "../images/prince/left/0403_Run_Start_3.png"
+    image_t Prince_Left_004 = "../images/prince/left/0404_Run_Start_4.png"
+    image_t Prince_Left_005 = "../images/prince/left/0405_Run_Start_5.png"
+    image_t Prince_Left_006 = "../images/prince/left/0406_Run_Start_6_End.png"
+    image_t Prince_Left_007 = "../images/prince/left/0407_Run_Repeat_1_Start.png"
+    image_t Prince_Left_008 = "../images/prince/left/0408_Run_Repeat_2.png"
+    image_t Prince_Left_009 = "../images/prince/left/0409_Run_Repeat_3.png"
+    image_t Prince_Left_010 = "../images/prince/left/0410_Run_Repeat_4.png"
+    image_t Prince_Left_011 = "../images/prince/left/0411_Run_Repeat_5_Mid.png"
+    image_t Prince_Left_012 = "../images/prince/left/0412_Run_Repeat_6.png"
+    image_t Prince_Left_013 = "../images/prince/left/0413_Run_Repeat_7.png"
+    image_t Prince_Left_014 = "../images/prince/left/0414_Run_Repeat_8_End.png"
+    image_t Prince_Left_015 = "../images/prince/left/0415_Upright.png"
+    image_t Prince_Left_016 = "../images/prince/left/0434_Running_Jump_1_Start.png"
+    image_t Prince_Left_017 = "../images/prince/left/0435_Running_Jump_2.png"
+    image_t Prince_Left_018 = "../images/prince/left/0436_Running_Jump_3.png"
+    image_t Prince_Left_019 = "../images/prince/left/0437_Running_Jump_4.png"
+    image_t Prince_Left_020 = "../images/prince/left/0438_Running_Jump_5.png"
+    image_t Prince_Left_021 = "../images/prince/left/0439_Running_Jump_6.png"
+    image_t Prince_Left_022 = "../images/prince/left/0440_Running_Jump_7.png"
+    image_t Prince_Left_023 = "../images/prince/left/0441_Running_Jump_8.png"
+    image_t Prince_Left_024 = "../images/prince/left/0442_Running_Jump_9.png"
+    image_t Prince_Left_025 = "../images/prince/left/0443_Running_Jump_10.png"
+    image_t Prince_Left_026 = "../images/prince/left/0444_Running_Jump_11_End.png"
+    image_t Prince_Left_027 = "../images/prince/left/0446_Standing_Turn_1_Start.png"
+    image_t Prince_Left_028 = "../images/prince/left/0447_Standing_Turn_2.png"
+    image_t Prince_Left_029 = "../images/prince/left/0448_Standing_Turn_3.png"
+    image_t Prince_Left_030 = "../images/prince/left/0449_Standing_Turn_4.png"
+    image_t Prince_Left_031 = "../images/prince/left/0450_Standing_Turn_5_End.png"
+    image_t Prince_Left_032 = "../images/prince/left/0465_Running_Turn_1_Start.png"
+    image_t Prince_Left_033 = "../images/prince/left/0466_Running_Turn_2.png"
+    image_t Prince_Left_034 = "../images/prince/left/0467_Running_Turn_3.png"
+    image_t Prince_Left_035 = "../images/prince/left/0468_Running_Turn_4.png"
+    image_t Prince_Left_036 = "../images/prince/left/0469_Running_Turn_5.png"
+    image_t Prince_Left_037 = "../images/prince/left/0470_Running_Turn_6.png"
+    image_t Prince_Left_038 = "../images/prince/left/0471_Running_Turn_7.png"
+    image_t Prince_Left_039 = "../images/prince/left/0472_Running_Turn_8.png"
+    image_t Prince_Left_040 = "../images/prince/left/0473_Running_Turn_9.png"
+    image_t Prince_Left_041 = "../images/prince/left/0474_Running_Turn_10.png"
+    image_t Prince_Left_042 = "../images/prince/left/0475_Running_Turn_11.png"
+    image_t Prince_Left_043 = "../images/prince/left/0476_Running_Turn_12.png"
+    image_t Prince_Left_044 = "../images/prince/left/0477_Running_Turn_13_End.png"
+    image_t Prince_Left_045 = "../images/prince/left/0416_Standing_Jump_1_Start.png"
+    image_t Prince_Left_046 = "../images/prince/left/0417_Standing_Jump_2.png"
+    image_t Prince_Left_047 = "../images/prince/left/0418_Standing_Jump_3.png"
+    image_t Prince_Left_048 = "../images/prince/left/0419_Standing_Jump_4.png"
+    image_t Prince_Left_049 = "../images/prince/left/0420_Standing_Jump_5.png"
+    image_t Prince_Left_050 = "../images/prince/left/0421_Standing_Jump_6.png"
+    image_t Prince_Left_051 = "../images/prince/left/0422_Standing_Jump_7.png"
+    image_t Prince_Left_052 = "../images/prince/left/0423_Standing_Jump_8.png"
+    image_t Prince_Left_053 = "../images/prince/left/0424_Standing_Jump_9.png"
+    image_t Prince_Left_054 = "../images/prince/left/0425_Standing_Jump_10.png"
+    image_t Prince_Left_055 = "../images/prince/left/0426_Standing_Jump_11.png"
+    image_t Prince_Left_056 = "../images/prince/left/0427_Standing_Jump_12.png"
+    image_t Prince_Left_057 = "../images/prince/left/0428_Standing_Jump_13.png"
+    image_t Prince_Left_058 = "../images/prince/left/0429_Standing_Jump_14.png"
+    image_t Prince_Left_059 = "../images/prince/left/0430_Standing_Jump_15.png"
+    image_t Prince_Left_060 = "../images/prince/left/0431_Standing_Jump_16.png"
+    image_t Prince_Left_061 = "../images/prince/left/0432_Standing_Jump_17.png"
+    image_t Prince_Left_062 = "../images/prince/left/0433_Standing_Jump_18_End.png"
+    image_t Prince_Left_063 = "../images/prince/left/0534_Step_Fwd_One_1_Start.png"
+    image_t Prince_Left_064 = "../images/prince/left/0535_Step_Fwd_One_2.png"
+    image_t Prince_Left_065 = "../images/prince/left/0536_Step_Fwd_One_3.png"
+    image_t Prince_Left_066 = "../images/prince/left/0537_Step_Fwd_One_4.png"
+    image_t Prince_Left_067 = "../images/prince/left/0538_Step_Fwd_One_5.png"
+    image_t Prince_Left_068 = "../images/prince/left/0539_Step_Fwd_One_6_End.png"
+    image_t Prince_Left_069 = "../images/prince/left/0540_Step_Fwd_Two_1_Start.png"
+    image_t Prince_Left_070 = "../images/prince/left/0541_Step_Fwd_Two_2.png"
+    image_t Prince_Left_071 = "../images/prince/left/0542_Step_Fwd_Two_3.png"
+    image_t Prince_Left_072 = "../images/prince/left/0543_Step_Fwd_Two_4.png"
+    image_t Prince_Left_073 = "../images/prince/left/0544_Step_Fwd_Two_5.png"
+    image_t Prince_Left_074 = "../images/prince/left/0545_Step_Fwd_Two_6_End.png"
+    image_t Prince_Left_075 = "../images/prince/left/0534_Step_Fwd_One_1_Start.png"
+    image_t Prince_Left_076 = "../images/prince/left/0535_Step_Fwd_One_2.png"
+    image_t Prince_Left_077 = "../images/prince/left/0536_Step_Fwd_One_3.png"
+    image_t Prince_Left_078 = "../images/prince/left/0537_Step_Fwd_One_4.png"
+    image_t Prince_Left_079 = "../images/prince/left/0542_Step_Fwd_Two_3.png"
+    image_t Prince_Left_080 = "../images/prince/left/0543_Step_Fwd_Two_4.png"
+    image_t Prince_Left_081 = "../images/prince/left/0544_Step_Fwd_Two_5.png"
+    image_t Prince_Left_082 = "../images/prince/left/0545_Step_Fwd_Two_6_End.png"
+    image_t Prince_Left_083 = "../images/prince/left/0405_Run_Start_5.png"
+    image_t Prince_Left_084 = "../images/prince/left/0404_Run_Start_4.png"
+    image_t Prince_Left_085 = "../images/prince/left/0403_Run_Start_3.png"
+    image_t Prince_Left_086 = "../images/prince/left/0402_Run_Start_2.png"
+    image_t Prince_Left_087 = "../images/prince/left/0401_Run_Start_1_Start.png"
+    image_t Prince_Left_088 = "../images/prince/left/0546_Climbing_1_Start.png"
+    image_t Prince_Left_089 = "../images/prince/left/0547_Climbing_2.png"
+    image_t Prince_Left_090 = "../images/prince/left/0548_Climbing_3.png"
+    image_t Prince_Left_091 = "../images/prince/left/0549_Climbing_4.png"
+    image_t Prince_Left_092 = "../images/prince/left/0550_Climbing_5.png"
+    image_t Prince_Left_093 = "../images/prince/left/0551_Climbing_6.png"
+    image_t Prince_Left_094 = "../images/prince/left/0552_Climbing_7.png"
+    image_t Prince_Left_095 = "../images/prince/left/0553_Climbing_8.png"
+    image_t Prince_Left_096 = "../images/prince/left/0554_Climbing_9.png"
+    image_t Prince_Left_097 = "../images/prince/left/0555_Climbing_10.png"
+    image_t Prince_Left_098 = "../images/prince/left/0556_Climbing_11.png"
+    image_t Prince_Left_099 = "../images/prince/left/0557_Climbing_12.png"
+    image_t Prince_Left_100 = "../images/prince/left/0558_Climbing_13.png"
+    image_t Prince_Left_101 = "../images/prince/left/0559_Climbing_14.png"
+    image_t Prince_Left_102 = "../images/prince/left/0560_Climbing_15_End.png"
+
+    image_t Prince_Left_103 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_104 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_105 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_106 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_107 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_108 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_109 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_110 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_111 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_112 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_113 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_114 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_115 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_116 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_117 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_118 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_119 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_120 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_121 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_122 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_123 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_124 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_125 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_126 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_127 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_128 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_129 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_130 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_131 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_132 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_133 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_134 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_135 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_136 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_137 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_138 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_139 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_140 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_141 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_142 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_143 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_144 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_145 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_146 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_147 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_148 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_149 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_150 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_151 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_152 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_153 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_154 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_155 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_156 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_157 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_158 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_159 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_160 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_161 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_162 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_163 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_164 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_165 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_166 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_167 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_168 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_169 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_170 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_171 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_172 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_173 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_174 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_175 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_176 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_177 = "../images/prince/left/xxx.png"
+
+
+    // RHS Images ..
+
+    image_t Prince_Right_001 = "../images/prince/right/0401_Run_Start_1_Start.png"
+    image_t Prince_Right_002 = "../images/prince/right/0402_Run_Start_2.png"
+    image_t Prince_Right_003 = "../images/prince/right/0403_Run_Start_3.png"
+    image_t Prince_Right_004 = "../images/prince/right/0404_Run_Start_4.png"
+    image_t Prince_Right_005 = "../images/prince/right/0405_Run_Start_5.png"
+    image_t Prince_Right_006 = "../images/prince/right/0406_Run_Start_6_End.png"
+    image_t Prince_Right_007 = "../images/prince/right/0407_Run_Repeat_1_Start.png"
+    image_t Prince_Right_008 = "../images/prince/right/0408_Run_Repeat_2.png"
+    image_t Prince_Right_009 = "../images/prince/right/0409_Run_Repeat_3.png"
+    image_t Prince_Right_010 = "../images/prince/right/0410_Run_Repeat_4.png"
+    image_t Prince_Right_011 = "../images/prince/right/0411_Run_Repeat_5_Mid.png"
+    image_t Prince_Right_012 = "../images/prince/right/0412_Run_Repeat_6.png"
+    image_t Prince_Right_013 = "../images/prince/right/0413_Run_Repeat_7.png"
+    image_t Prince_Right_014 = "../images/prince/right/0414_Run_Repeat_8_End.png"
+    image_t Prince_Right_015 = "../images/prince/right/0415_Upright.png"
+    image_t Prince_Right_016 = "../images/prince/right/0434_Running_Jump_1_Start.png"
+    image_t Prince_Right_017 = "../images/prince/right/0435_Running_Jump_2.png"
+    image_t Prince_Right_018 = "../images/prince/right/0436_Running_Jump_3.png"
+    image_t Prince_Right_019 = "../images/prince/right/0437_Running_Jump_4.png"
+    image_t Prince_Right_020 = "../images/prince/right/0438_Running_Jump_5.png"
+    image_t Prince_Right_021 = "../images/prince/right/0439_Running_Jump_6.png"
+    image_t Prince_Right_022 = "../images/prince/right/0440_Running_Jump_7.png"
+    image_t Prince_Right_023 = "../images/prince/right/0441_Running_Jump_8.png"
+    image_t Prince_Right_024 = "../images/prince/right/0442_Running_Jump_9.png"
+    image_t Prince_Right_025 = "../images/prince/right/0443_Running_Jump_10.png"
+    image_t Prince_Right_026 = "../images/prince/right/0444_Running_Jump_11_End.png"
+    image_t Prince_Right_027 = "../images/prince/right/0446_Standing_Turn_1_Start.png"
+    image_t Prince_Right_028 = "../images/prince/right/0447_Standing_Turn_2.png"
+    image_t Prince_Right_029 = "../images/prince/right/0448_Standing_Turn_3.png"
+    image_t Prince_Right_030 = "../images/prince/right/0449_Standing_Turn_4.png"
+    image_t Prince_Right_031 = "../images/prince/right/0450_Standing_Turn_5_End.png"
+    image_t Prince_Right_032 = "../images/prince/right/0465_Running_Turn_1_Start.png"
+    image_t Prince_Right_033 = "../images/prince/right/0466_Running_Turn_2.png"
+    image_t Prince_Right_034 = "../images/prince/right/0467_Running_Turn_3.png"
+    image_t Prince_Right_035 = "../images/prince/right/0468_Running_Turn_4.png"
+    image_t Prince_Right_036 = "../images/prince/right/0469_Running_Turn_5.png"
+    image_t Prince_Right_037 = "../images/prince/right/0470_Running_Turn_6.png"
+    image_t Prince_Right_038 = "../images/prince/right/0471_Running_Turn_7.png"
+    image_t Prince_Right_039 = "../images/prince/right/0472_Running_Turn_8.png"
+    image_t Prince_Right_040 = "../images/prince/right/0473_Running_Turn_9.png"
+    image_t Prince_Right_041 = "../images/prince/right/0474_Running_Turn_10.png"
+    image_t Prince_Right_042 = "../images/prince/right/0475_Running_Turn_11.png"
+    image_t Prince_Right_043 = "../images/prince/right/0476_Running_Turn_12.png"
+    image_t Prince_Right_044 = "../images/prince/right/0477_Running_Turn_13_End.png"
+    image_t Prince_Right_045 = "../images/prince/right/0416_Standing_Jump_1_Start.png"
+    image_t Prince_Right_046 = "../images/prince/right/0417_Standing_Jump_2.png"
+    image_t Prince_Right_047 = "../images/prince/right/0418_Standing_Jump_3.png"
+    image_t Prince_Right_048 = "../images/prince/right/0419_Standing_Jump_4.png"
+    image_t Prince_Right_049 = "../images/prince/right/0420_Standing_Jump_5.png"
+    image_t Prince_Right_050 = "../images/prince/right/0421_Standing_Jump_6.png"
+    image_t Prince_Right_051 = "../images/prince/right/0422_Standing_Jump_7.png"
+    image_t Prince_Right_052 = "../images/prince/right/0423_Standing_Jump_8.png"
+    image_t Prince_Right_053 = "../images/prince/right/0424_Standing_Jump_9.png"
+    image_t Prince_Right_054 = "../images/prince/right/0425_Standing_Jump_10.png"
+    image_t Prince_Right_055 = "../images/prince/right/0426_Standing_Jump_11.png"
+    image_t Prince_Right_056 = "../images/prince/right/0427_Standing_Jump_12.png"
+    image_t Prince_Right_057 = "../images/prince/right/0428_Standing_Jump_13.png"
+    image_t Prince_Right_058 = "../images/prince/right/0429_Standing_Jump_14.png"
+    image_t Prince_Right_059 = "../images/prince/right/0430_Standing_Jump_15.png"
+    image_t Prince_Right_060 = "../images/prince/right/0431_Standing_Jump_16.png"
+    image_t Prince_Right_061 = "../images/prince/right/0432_Standing_Jump_17.png"
+    image_t Prince_Right_062 = "../images/prince/right/0433_Standing_Jump_18_End.png"
+    image_t Prince_Right_063 = "../images/prince/right/0534_Step_Fwd_One_1_Start.png"
+    image_t Prince_Right_064 = "../images/prince/right/0535_Step_Fwd_One_2.png"
+    image_t Prince_Right_065 = "../images/prince/right/0536_Step_Fwd_One_3.png"
+    image_t Prince_Right_066 = "../images/prince/right/0537_Step_Fwd_One_4.png"
+    image_t Prince_Right_067 = "../images/prince/right/0538_Step_Fwd_One_5.png"
+    image_t Prince_Right_068 = "../images/prince/right/0539_Step_Fwd_One_6_End.png"
+    image_t Prince_Right_069 = "../images/prince/right/0540_Step_Fwd_Two_1_Start.png"
+    image_t Prince_Right_070 = "../images/prince/right/0541_Step_Fwd_Two_2.png"
+    image_t Prince_Right_071 = "../images/prince/right/0542_Step_Fwd_Two_3.png"
+    image_t Prince_Right_072 = "../images/prince/right/0543_Step_Fwd_Two_4.png"
+    image_t Prince_Right_073 = "../images/prince/right/0544_Step_Fwd_Two_5.png"
+    image_t Prince_Right_074 = "../images/prince/right/0545_Step_Fwd_Two_6_End.png"
+    image_t Prince_Right_075 = "../images/prince/right/0534_Step_Fwd_One_1_Start.png"
+    image_t Prince_Right_076 = "../images/prince/right/0535_Step_Fwd_One_2.png"
+    image_t Prince_Right_077 = "../images/prince/right/0536_Step_Fwd_One_3.png"
+    image_t Prince_Right_078 = "../images/prince/right/0537_Step_Fwd_One_4.png"
+    image_t Prince_Right_079 = "../images/prince/right/0542_Step_Fwd_Two_3.png"
+    image_t Prince_Right_080 = "../images/prince/right/0543_Step_Fwd_Two_4.png"
+    image_t Prince_Right_081 = "../images/prince/right/0544_Step_Fwd_Two_5.png"
+    image_t Prince_Right_082 = "../images/prince/right/0545_Step_Fwd_Two_6_End.png"
+    image_t Prince_Right_083 = "../images/prince/right/0405_Run_Start_5.png"
+    image_t Prince_Right_084 = "../images/prince/right/0404_Run_Start_4.png"
+    image_t Prince_Right_085 = "../images/prince/right/0403_Run_Start_3.png"
+    image_t Prince_Right_086 = "../images/prince/right/0402_Run_Start_2.png"
+    image_t Prince_Right_087 = "../images/prince/right/0401_Run_Start_1_Start.png"
+    image_t Prince_Right_088 = "../images/prince/right/0546_Climbing_1_Start.png"
+    image_t Prince_Right_089 = "../images/prince/right/0547_Climbing_2.png"
+    image_t Prince_Right_090 = "../images/prince/right/0548_Climbing_3.png"
+    image_t Prince_Right_091 = "../images/prince/right/0549_Climbing_4.png"
+    image_t Prince_Right_092 = "../images/prince/right/0550_Climbing_5.png"
+    image_t Prince_Right_093 = "../images/prince/right/0551_Climbing_6.png"
+    image_t Prince_Right_094 = "../images/prince/right/0552_Climbing_7.png"
+    image_t Prince_Right_095 = "../images/prince/right/0553_Climbing_8.png"
+    image_t Prince_Right_096 = "../images/prince/right/0554_Climbing_9.png"
+    image_t Prince_Right_097 = "../images/prince/right/0555_Climbing_10.png"
+    image_t Prince_Right_098 = "../images/prince/right/0556_Climbing_11.png"
+    image_t Prince_Right_099 = "../images/prince/right/0557_Climbing_12.png"
+    image_t Prince_Right_100 = "../images/prince/right/0558_Climbing_13.png"
+    image_t Prince_Right_101 = "../images/prince/right/0559_Climbing_14.png"
+    image_t Prince_Right_102 = "../images/prince/right/0560_Climbing_15_End.png"
+
+    image_t Prince_Right_103 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_104 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_105 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_106 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_107 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_108 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_109 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_110 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_111 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_112 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_113 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_114 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_115 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_116 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_117 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_118 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_119 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_120 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_121 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_122 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_123 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_124 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_125 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_126 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_127 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_128 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_129 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_130 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_131 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_132 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_133 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_134 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_135 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_136 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_137 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_138 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_139 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_140 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_141 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_142 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_143 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_144 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_145 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_146 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_147 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_148 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_149 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_150 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_151 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_152 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_153 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_154 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_155 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_156 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_157 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_158 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_159 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_160 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_161 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_162 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_163 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_164 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_165 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_166 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_167 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_168 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_169 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_170 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_171 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_172 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_173 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_174 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_175 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_176 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_177 = "../images/prince/right/xxx.png"
+
+}
+namespace_end
+
+
+
+
+
+
+
+
+
+
+
+
+
