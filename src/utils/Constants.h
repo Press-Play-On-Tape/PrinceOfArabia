@@ -109,6 +109,12 @@
 #define STANCE_CLIMBING_13              100
 #define STANCE_CLIMBING_14              101
 #define STANCE_CLIMBING_15_END          102
+#define STANCE_SMALL_STEP_1_START       103
+#define STANCE_SMALL_STEP_2             104
+#define STANCE_SMALL_STEP_3             105
+#define STANCE_SMALL_STEP_4             106
+#define STANCE_SMALL_STEP_5             107
+#define STANCE_SMALL_STEP_6_END         108
 
 #define STANCE_JUMP_DOWN_1_START        220
 #define STANCE_JUMP_DOWN_2              220
@@ -207,4 +213,13 @@ enum class Direction : uint8_t {
     Down,
 };
 
+enum class Layer : uint8_t {
+    Background,
+    Foreground,
+};
 
+
+enum class Action : uint8_t {
+    Step,
+    SmallStep,
+};

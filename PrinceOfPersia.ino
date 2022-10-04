@@ -6,119 +6,31 @@
 #include "src/utils/Constants.h"
 #include "src/utils/Stack.h"
 #include "src/entities/Entities.h"
+#include "src/fonts/Font4x6.h"
 
 
-uint8_t xLoc = 60;
-uint8_t yLoc = 0;
-
-uint8_t playerXLoc = 10;
+int16_t playerXLoc = 10;
 uint8_t playerYLoc = 26;
 
-// uint8_t xLoc = 40;
-// uint8_t yLoc = 0;
-
-// uint8_t playerXLoc = 10;
-// uint8_t playerYLoc = -6;
-
-int8_t bg[3][11];
-int8_t fg[3][11];
-
 Arduboy2 arduboy;
-
+Font4x6 font4x6 = Font4x6();
 
 Stack <uint8_t, 15> princeStack;
 Prince prince;
+Level level;
 
-void printMap() {
-
-    Serial.println("Map ---------------");
-    Serial.print("xLoc: ");
-    Serial.print(xLoc);
-    Serial.print(", yLoc: ");
-    Serial.println(yLoc);
-
-    Serial.println("BG ---------------");
-
-    for (uint8_t y = 0; y < 3; y++) {
-
-        for (uint8_t x = 0; x < 11; x++) {
-
-            Serial.print(bg[y][x]);
-            Serial.print(" ");
-
-        }
-
-        Serial.println("");
-
-    }
-
-
-    Serial.println("FG ---------------");
-
-    for (uint8_t y = 0; y < 3; y++) {
-
-        for (uint8_t x = 0; x < 11; x++) {
-
-            Serial.print(fg[y][x]);
-            Serial.print(" ");
-
-        }
-
-        Serial.println("");
-
-    }
-
-}
-
-
-void loadMap(uint8_t xLoc, uint8_t yLoc) {
-
-
-    // Background ..
-
-    for (uint8_t y = yLoc; y < yLoc + 3; y++) {
-
-        FX::seekData(static_cast<uint24_t>(Levels::Level1_BG + (y * Levels::Level1_Width) + xLoc));
-
-        for (uint8_t x = 0; x < 11; x++) {
-
-            int8_t tileId = static_cast<int8_t>(FX::readPendingUInt8());
-            bg[y - yLoc][x] = tileId;
-
-        }
-
-        FX::readEnd();
-
-    }
-
-    // Foreground ..
-
-    for (uint8_t y = yLoc; y < yLoc + 3; y++) {
-
-        FX::seekData(static_cast<uint24_t>(Levels::Level1_FG + (y * Levels::Level1_Width) + xLoc));
-
-        for (uint8_t x = 0; x < 11; x++) {
-
-            int8_t tileId = static_cast<int8_t>(FX::readPendingUInt8());
-            fg[y - yLoc][x] = tileId;
-
-        }
-
-        FX::readEnd();
-
-    }
-
-    //printMap();
-
-}
 
 void setup() {
 
     arduboy.begin();
+    arduboy.setFrameRate(30);
+
     FX::disableOLED();
     FX::begin(FX_DATA_PAGE);
 
-    loadMap(xLoc, yLoc);
+    level.setLevel(1);
+    level.init(60, 0);
+
     prince.setStack(&princeStack);
 
 }
@@ -135,7 +47,9 @@ void loop() {
 Serial.print("Stance: ");
 Serial.print(prince.getStance());
 Serial.print(", Direction: ");
-Serial.println((uint8_t)prince.getDirection());
+Serial.print((uint8_t)prince.getDirection());
+Serial.print(", X: ");
+Serial.println(playerXLoc);
 
     // if (arduboy.justPressed(LEFT_BUTTON)) {
     //     xLoc = xLoc - 10;
@@ -197,7 +111,9 @@ Serial.println((uint8_t)prince.getDirection());
         // }
 
     }
-
+if (arduboy.justPressed(B_BUTTON)) {
+prince.pushSequence(STANCE_RUNNING_JUMP_1_START, STANCE_RUNNING_JUMP_11_END, STANCE_RUN_START_6_END, true);    
+}
 
     if (prince.isEmpty()) {
 
@@ -208,7 +124,12 @@ Serial.println((uint8_t)prince.getDirection());
 
                 if (prince.getDirection() == Direction::Right) {
 
-                    if (arduboy.pressed(RIGHT_BUTTON)) {
+                    if (arduboy.pressed(RIGHT_BUTTON) && arduboy.pressed(DOWN_BUTTON)) {
+                        if (level.canMoveForward(Action::Step, prince)) {
+                            prince.pushSequence(STANCE_SMALL_STEP_1_START, STANCE_SMALL_STEP_6_END, STANCE_UPRIGHT, true);
+                        }
+                    }
+                    else if (arduboy.pressed(RIGHT_BUTTON)) {
                         if (true) {
                         // if (this->world.canMoveForward(Action::Step)) {
                             prince.push(STANCE_SINGLE_STEP_1_START, true);
@@ -226,7 +147,13 @@ Serial.println((uint8_t)prince.getDirection());
                 }
                 else {
 
-                    if (arduboy.pressed(LEFT_BUTTON)) {
+                    if (arduboy.pressed(LEFT_BUTTON) && arduboy.pressed(DOWN_BUTTON)) {
+                        // if (this->world.canMoveForward(Action::Step)) {
+                        if (true) {
+                            prince.pushSequence(STANCE_SMALL_STEP_1_START, STANCE_SMALL_STEP_6_END, STANCE_UPRIGHT, true);
+                        }
+                    }
+                    else if (arduboy.pressed(LEFT_BUTTON)) {
                         // if (this->world.canMoveForward(Action::Step)) {
                         if (true) {
                             prince.push(STANCE_SINGLE_STEP_1_START, true);
@@ -670,52 +597,47 @@ printf("do it!\n");
 
         for (uint8_t x = 0; x < 11; x++) {
 
-            int8_t bgTile = bg[y][x];
-            int8_t fgTile = fg[y][x];
+            int8_t bgTile = level.getTile(Layer::Background, x, y);
 
             if (bgTile >= 0) {
                 FX::drawBitmap(x * 12, y * 31, Images::Tile_Dungeon[Images::xRef[bgTile]], 0, dbmNormal);
             }
 
+        }
 
-//            FX::drawBitmap(playerXLoc, playerYLoc, Images::Prince[prince.getStance()], 0, dbmMasked);
+    }
 
-            // FX::drawBitmap(0, 0, Images::Tile_Dungeon_49, 0, dbmMasked);
 
-            uint16_t stance = prince.getStance();
-            uint24_t startPos = Images::Prince_Left_001 + ((stance - 1) * 364);
+    // Draw prince ..
 
-            if (prince.getDirection() == Direction::Left) {
+    uint16_t stance = prince.getStance();
+    uint24_t startPos = Images::Prince_Left_001 + ((stance - 1) * 364);
 
-//                 if (stance == STANCE_UPRIGHT) {
-// //                    FX::drawBitmap(playerXLoc, playerYLoc, Images::Prince[STANCE_UPRIGHT], 0, dbmMasked);
-//                     FX::drawBitmap(playerXLoc, playerYLoc, Images::Prince_Left_001 + ((STANCE_UPRIGHT - 1) * 364), 0, dbmMasked);
-//                 }
-//                 else {
-                    // FX::drawBitmap(playerXLoc, playerYLoc, Images::Prince_Left[stance], 0, dbmMasked);
-                    FX::drawBitmap(playerXLoc, playerYLoc, startPos, 0, dbmMasked);
-                // }
+    if (prince.getDirection() == Direction::Left) {
 
-            }
-            else {
+        FX::drawBitmap(playerXLoc, playerYLoc, startPos, 0, dbmMasked);
 
-                // if (stance == STANCE_UPRIGHT) {
-                //     // FX::drawBitmap(playerXLoc, playerYLoc, Images::Prince[STANCE_UPRIGHT] + (Images::Prince_Right_001 - Images::Prince_Left_001), 0, dbmMasked);
-                //     // Serial.println("33333333333333333333");
-                //     FX::drawBitmap(playerXLoc, playerYLoc, Images::Prince_Left_001 + ((STANCE_UPRIGHT - 1) * 364) + (Images::Prince_Right_001 - Images::Prince_Left_001), 0, dbmMasked);
-                // }
-                // else {
-                    // Serial.println("44444444444444444444");
-                    // FX::drawBitmap(playerXLoc, playerYLoc, Images::Prince[stance] + (Images::Prince_Right_001 - Images::Prince_Left_001), 0, dbmMasked);
-                    FX::drawBitmap(playerXLoc, playerYLoc, startPos + (Images::Prince_Right_001 - Images::Prince_Left_001), 0, dbmMasked);
-                // }
+    }
+    else {
 
-            }
+        FX::drawBitmap(playerXLoc, playerYLoc, startPos + (Images::Prince_Right_001 - Images::Prince_Left_001), 0, dbmMasked);
+
+    }
+
+
+
+    // Draw foreground ..
+
+    for (uint8_t y = 0; y < 3; y++) {
+
+        for (uint8_t x = 0; x < 11; x++) {
+
+            int8_t fgTile = level.getTile(Layer::Foreground, x, y);
 
             if (fgTile >= 0) {
 
                 if (Images::xRef_IsMasked[fgTile]) {
-                    // FX::drawBitmap(x * 12, y * 31, Images::Tile_Dungeon_Mask[Images::xRef[fgTile]], 0, dbmWhite);
+
                     FX::drawBitmap(x * 12, y * 31, Images::Tile_Dungeon[Images::xRef[fgTile]], 0, dbmMasked);
 
                 }
@@ -728,6 +650,8 @@ printf("do it!\n");
         }
 
     }
+
+
 
 
 // FX::drawBitmap(0, -4, Images::Prince_Left_090, 0, dbmMasked);
@@ -746,10 +670,12 @@ printf("do it!\n");
     //program code
 
 
-    arduboy.setTextColor(0);
-    arduboy.fillRect(0, 0, 25, 8);
-    arduboy.setCursor(0, 0);
-    arduboy.print(prince.getStance());
+    font4x6.setTextColor(0);
+    arduboy.fillRect(0, 0, 32, 8);
+    font4x6.setCursor(0, 0);
+    font4x6.print(prince.getStance());
+    font4x6.setCursor(16, 0);
+    font4x6.print(playerXLoc);
 
     FX::enableOLED();
     arduboy.display(CLEAR_BUFFER);
