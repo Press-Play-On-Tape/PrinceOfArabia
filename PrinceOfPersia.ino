@@ -9,13 +9,13 @@
 #include "src/fonts/Font4x6.h"
 
 
-int16_t playerXLoc = 10;
-uint8_t playerYLoc = 26;
+// int16_t playerXLoc = 10;
+// uint8_t playerYLoc = 26;
 
 Arduboy2 arduboy;
 Font4x6 font4x6 = Font4x6();
 
-Stack <uint8_t, 15> princeStack;
+Stack <uint8_t, 20> princeStack;
 Prince prince;
 Level level;
 
@@ -32,6 +32,7 @@ void setup() {
     level.init(60, 0);
 
     prince.setStack(&princeStack);
+    prince.init(18, 57);
 
 }
 
@@ -49,7 +50,7 @@ Serial.print(prince.getStance());
 Serial.print(", Direction: ");
 Serial.print((uint8_t)prince.getDirection());
 Serial.print(", X: ");
-Serial.println(playerXLoc);
+Serial.println(prince.getX());
 
     // if (arduboy.justPressed(LEFT_BUTTON)) {
     //     xLoc = xLoc - 10;
@@ -519,7 +520,7 @@ printf("distance %i\n", distance);
             xOffset = static_cast<int8_t>(FX::readPendingUInt8()) * (prince.getDirection() == Direction::Left ? -1 : 1);
             FX::readEnd();
 
-            playerXLoc = playerXLoc + xOffset;
+            prince.incX(xOffset);
 
 // Serial.println(prince.getStance());
 // Serial.print("Stance: ");
@@ -593,89 +594,29 @@ printf("do it!\n");
 
 
 
-    for (uint8_t y = 0; y < 3; y++) {
 
-        for (uint8_t x = 0; x < 11; x++) {
+    // Render scene ..
 
-            int8_t bgTile = level.getTile(Layer::Background, x, y);
+    render();
 
-            if (bgTile >= 0) {
-                FX::drawBitmap(x * 12, y * 31, Images::Tile_Dungeon[Images::xRef[bgTile]], 0, dbmNormal);
-            }
-
-        }
-
-    }
-
-
-    // Draw prince ..
-
-    uint16_t stance = prince.getStance();
-    uint24_t startPos = Images::Prince_Left_001 + ((stance - 1) * 364);
-
-    if (prince.getDirection() == Direction::Left) {
-
-        FX::drawBitmap(playerXLoc, playerYLoc, startPos, 0, dbmMasked);
-
-    }
-    else {
-
-        FX::drawBitmap(playerXLoc, playerYLoc, startPos + (Images::Prince_Right_001 - Images::Prince_Left_001), 0, dbmMasked);
-
-    }
-
-
-
-    // Draw foreground ..
-
-    for (uint8_t y = 0; y < 3; y++) {
-
-        for (uint8_t x = 0; x < 11; x++) {
-
-            int8_t fgTile = level.getTile(Layer::Foreground, x, y);
-
-            if (fgTile >= 0) {
-
-                if (Images::xRef_IsMasked[fgTile]) {
-
-                    FX::drawBitmap(x * 12, y * 31, Images::Tile_Dungeon[Images::xRef[fgTile]], 0, dbmMasked);
-
-                }
-                else {
-                    FX::drawBitmap(x * 12, y * 31, Images::Tile_Dungeon[Images::xRef[fgTile]], 0, dbmNormal);
-
-                }
-            }
-
-        }
-
-    }
-
-
-
-
-// FX::drawBitmap(0, -4, Images::Prince_Left_090, 0, dbmMasked);
-// FX::drawBitmap(16, -4, Images::Prince_Left_091, 0, dbmMasked);
-// FX::drawBitmap(32, -4, Images::Prince_Left_092, 0, dbmMasked);
-// FX::drawBitmap(48, -4, Images::Prince_Left_093, 0, dbmMasked);
-// uint24_t startPos = (90 - 1) * 364;
-// FX::drawBitmap(0, -4, Images::Prince_Left_001 + (startPos), 0, dbmMasked);
-// startPos = startPos + 364;
-// FX::drawBitmap(16, -4, Images::Prince_Left_001 + (startPos), 0, dbmMasked);
-// startPos = startPos + 364;
-// FX::drawBitmap(32, -4, Images::Prince_Left_001 + (startPos), 0, dbmMasked);
-// startPos = startPos + 364;
-// FX::drawBitmap(48, -4, Images::Prince_Left_001 + (startPos), 0, dbmMasked);
-
-    //program code
 
 
     font4x6.setTextColor(0);
-    arduboy.fillRect(0, 0, 32, 8);
+    arduboy.fillRect(0, 0, 128, 8);
     font4x6.setCursor(0, 0);
     font4x6.print(prince.getStance());
-    font4x6.setCursor(16, 0);
-    font4x6.print(playerXLoc);
+    font4x6.print(" ");
+    font4x6.print(prince.getX());
+    font4x6.print(" ");
+    font4x6.print(level.coordToTileIndexX(prince.getDirection(), (level.getXLocation() * 12) + prince.getX()));
+    font4x6.print(" ");
+    font4x6.print(level.coordToTileIndexY(prince.getDirection(), (level.getYLocation() * 31) + prince.getY()));
+    font4x6.print(" ");
+    font4x6.print((level.getXLocation() * 12) + prince.getX());
+    font4x6.print(" ");
+    font4x6.print((level.getYLocation() * 31) + prince.getY());
+    font4x6.print(" ");
+    font4x6.print(level.distToEdgeOfTile(prince.getDirection(),  (level.getXLocation() * 12) + prince.getX()));
 
     FX::enableOLED();
     arduboy.display(CLEAR_BUFFER);

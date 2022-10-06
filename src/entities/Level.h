@@ -13,8 +13,8 @@ struct Level {
         uint8_t xLoc = 60;
         uint8_t yLoc = 0;
 
-        int8_t bg[3][11];
-        int8_t fg[3][11];
+        int8_t bg[3][15];
+        int8_t fg[3][15];
 
     public:
 
@@ -37,15 +37,74 @@ struct Level {
             this->loadMap();
         }
 
-        int8_t getTile(Layer layer, uint8_t x, uint8_t y) { 
-            
+        int8_t coordToTileIndexX(Direction direction, int16_t x) {
+
+            switch (direction) {
+
+                case Direction::Left:
+                    return (x / 12);                
+
+                case Direction::Right:
+                    return (x / 12) + 1;
+
+                default:
+                    return 255;
+                    
+            }
+
+        }
+
+        int8_t coordToTileIndexY(Direction direction, int16_t y) {
+
+            switch (direction) {
+
+                case Direction::Left:
+                    return (y / 31);                
+
+                case Direction::Right:
+                    return (y / 31) + 1;
+
+                default:
+                    return 255;
+                    
+            }
+
+        }
+
+        int8_t distToEdgeOfTile(Direction direction, int16_t x) {
+
+            int8_t tile = coordToTileIndexX(direction, x);
+
+            switch (direction) {
+
+                case Direction::Left:
+                    return x - (tile * 12);         
+
+                case Direction::Right:
+                    return (tile * 12) - x;
+
+                default:
+                    return 255;
+                    
+            }
+
+        }
+
+        int8_t getTile(Layer layer, int8_t x, int8_t y) { 
+
+            if (x < 0)      return 255;         // SJH
+            if (x >= 100)   return 255;         // SJH
+
+            if (y < 0)      return 255;         // SJH
+            if (y >= 100)   return 255;         // SJH
+
             switch (layer) {
 
                 case Layer::Foreground:
-                    return fg[y][x];
+                    return fg[y][x + 2];
 
                 case Layer::Background:
-                    return bg[y][x];
+                    return bg[y][x + 2];
 
 
             }
@@ -64,7 +123,7 @@ struct Level {
 
             for (uint8_t y = 0; y < 3; y++) {
 
-                for (uint8_t x = 0; x < 11; x++) {
+                for (uint8_t x = 0; x < 15; x++) {
 
                     Serial.print(bg[y][x]);
                     Serial.print(" ");
@@ -80,7 +139,7 @@ struct Level {
 
             for (uint8_t y = 0; y < 3; y++) {
 
-                for (uint8_t x = 0; x < 11; x++) {
+                for (uint8_t x = 0; x < 15; x++) {
 
                     Serial.print(fg[y][x]);
                     Serial.print(" ");
@@ -101,9 +160,9 @@ struct Level {
 
             for (uint8_t y = this->yLoc; y < yLoc + 3; y++) {
 
-                FX::seekData(static_cast<uint24_t>(Levels::Level1_BG + (y * Levels::Level1_Width) + this->xLoc));
+                FX::seekData(static_cast<uint24_t>(Levels::Level1_BG + (y * Levels::Level1_Width) + this->xLoc - 2));
 
-                for (uint8_t x = 0; x < 11; x++) {
+                for (uint8_t x = 0; x < 15; x++) {
 
                     int8_t tileId = static_cast<int8_t>(FX::readPendingUInt8());
                     bg[y - this->yLoc][x] = tileId;
@@ -119,9 +178,9 @@ struct Level {
 
             for (uint8_t y = this->yLoc; y < this->yLoc + 3; y++) {
 
-                FX::seekData(static_cast<uint24_t>(Levels::Level1_FG + (y * Levels::Level1_Width) + this->xLoc));
+                FX::seekData(static_cast<uint24_t>(Levels::Level1_FG + (y * Levels::Level1_Width) + this->xLoc - 2));
 
-                for (uint8_t x = 0; x < 11; x++) {
+                for (uint8_t x = 0; x < 15; x++) {
 
                     int8_t tileId = static_cast<int8_t>(FX::readPendingUInt8());
                     fg[y - this->yLoc][x] = tileId;
@@ -139,6 +198,54 @@ struct Level {
 
 
         bool canMoveForward(Action action, Prince prince) {
+
+            Point player;
+
+            player.x = (this->xLoc * 12) + prince.getX();
+            player.y = (this->yLoc * 31) + prince.getY();
+
+            switch (prince.getDirection()) {
+
+                case Direction::Left:
+                    {
+
+                        int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), player.x);
+                        int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), player.y);
+
+                        uint8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx);
+                        uint8_t bgTile2 = this->getTile(Layer::Background, tileXIdx - 1, tileYIdx);
+
+                        uint8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx);
+                        uint8_t fgTile2 = this->getTile(Layer::Foreground, tileXIdx - 1, tileYIdx);
+
+
+                        switch (action) {
+
+                            case Action::SmallStep:
+
+                                // if (this->isSolid(bgTile1, fgTile1)) {
+
+
+                                // }
+
+                                break;
+
+
+                        }
+
+
+                    }
+
+
+                    break;
+
+
+            }
+
+
+
+
+
             return true;
         }
 
