@@ -222,4 +222,7 @@ enum class Layer : uint8_t {
 enum class Action : uint8_t {
     Step,
     SmallStep,
+    RunStart,
+    RunRepeat,
+    StandingJump,
 };

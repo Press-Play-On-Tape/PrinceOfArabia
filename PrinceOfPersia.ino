@@ -6,14 +6,14 @@
 #include "src/utils/Constants.h"
 #include "src/utils/Stack.h"
 #include "src/entities/Entities.h"
-#include "src/fonts/Font4x6.h"
+#include "src/fonts/Font3x5.h"
 
 
 // int16_t playerXLoc = 10;
 // uint8_t playerYLoc = 26;
 
 Arduboy2 arduboy;
-Font4x6 font4x6 = Font4x6();
+Font3x5 font3x5 = Font3x5();
 
 Stack <uint8_t, 20> princeStack;
 Prince prince;
@@ -45,12 +45,12 @@ void loop() {
 
 
 // Serial.println("----------------------");
-Serial.print("Stance: ");
-Serial.print(prince.getStance());
-Serial.print(", Direction: ");
-Serial.print((uint8_t)prince.getDirection());
-Serial.print(", X: ");
-Serial.println(prince.getX());
+// Serial.print("Stance: ");
+// Serial.print(prince.getStance());
+// Serial.print(", Direction: ");
+// Serial.print((uint8_t)prince.getDirection());
+// Serial.print(", X: ");
+// Serial.println(prince.getX());
 
     // if (arduboy.justPressed(LEFT_BUTTON)) {
     //     xLoc = xLoc - 10;
@@ -112,9 +112,9 @@ Serial.println(prince.getX());
         // }
 
     }
-if (arduboy.justPressed(B_BUTTON)) {
-prince.pushSequence(STANCE_RUNNING_JUMP_1_START, STANCE_RUNNING_JUMP_11_END, STANCE_RUN_START_6_END, true);    
-}
+// if (arduboy.justPressed(B_BUTTON)) {
+// prince.pushSequence(STANCE_RUNNING_JUMP_1_START, STANCE_RUNNING_JUMP_11_END, STANCE_RUN_START_6_END, true);    
+// }
 
     if (prince.isEmpty()) {
 
@@ -126,47 +126,50 @@ prince.pushSequence(STANCE_RUNNING_JUMP_1_START, STANCE_RUNNING_JUMP_11_END, STA
                 if (prince.getDirection() == Direction::Right) {
 
                     if (arduboy.pressed(RIGHT_BUTTON) && arduboy.pressed(DOWN_BUTTON)) {
-                        if (level.canMoveForward(Action::Step, prince)) {
+                        if (level.canMoveForward(Action::SmallStep, prince)) {
                             prince.pushSequence(STANCE_SMALL_STEP_1_START, STANCE_SMALL_STEP_6_END, STANCE_UPRIGHT, true);
                         }
                     }
                     else if (arduboy.pressed(RIGHT_BUTTON)) {
-                        if (true) {
-                        // if (this->world.canMoveForward(Action::Step)) {
+                        if (level.canMoveForward(Action::Step, prince)) {
                             prince.push(STANCE_SINGLE_STEP_1_START, true);
                         }
+                        else if (level.canMoveForward(Action::SmallStep, prince)) {
+                            prince.pushSequence(STANCE_SMALL_STEP_1_START, STANCE_SMALL_STEP_6_END, STANCE_UPRIGHT, true);
+                        }
                     }
-                    else if (arduboy.pressed(LEFT_BUTTON)/* && !this->world.isChangingDirections()*/) {
-// Serial.println("Left Pressed");
-                        // this->world.switchDirections(Direction::Left);
+                    else if (arduboy.pressed(LEFT_BUTTON)) {
                         prince.pushSequence(STANCE_STANDING_TURN_1_START, STANCE_STANDING_TURN_5_END, STANCE_UPRIGHT_TURN, true);
                     }
                     else if (arduboy.pressed(A_BUTTON)) {
-                        prince.pushSequence(STANCE_STANDING_JUMP_1_START, STANCE_STANDING_JUMP_18_END, STANCE_UPRIGHT, true);
+                        if (level.canMoveForward(Action::StandingJump, prince)) {
+                            prince.pushSequence(STANCE_STANDING_JUMP_1_START, STANCE_STANDING_JUMP_18_END, STANCE_UPRIGHT, true);
+                        }
                     }
                     
                 }
                 else {
 
                     if (arduboy.pressed(LEFT_BUTTON) && arduboy.pressed(DOWN_BUTTON)) {
-                        // if (this->world.canMoveForward(Action::Step)) {
-                        if (true) {
+                        if (level.canMoveForward(Action::SmallStep, prince)) {
                             prince.pushSequence(STANCE_SMALL_STEP_1_START, STANCE_SMALL_STEP_6_END, STANCE_UPRIGHT, true);
                         }
                     }
                     else if (arduboy.pressed(LEFT_BUTTON)) {
-                        // if (this->world.canMoveForward(Action::Step)) {
-                        if (true) {
+                        if (level.canMoveForward(Action::Step, prince)) {
                             prince.push(STANCE_SINGLE_STEP_1_START, true);
                         }
+                        else if (level.canMoveForward(Action::SmallStep, prince)) {
+                            prince.pushSequence(STANCE_SMALL_STEP_1_START, STANCE_SMALL_STEP_6_END, STANCE_UPRIGHT, true);
+                        }                        
                     }
-                    else if (arduboy.pressed(RIGHT_BUTTON) /*&& !this->world.isChangingDirections()*/) {
-// Serial.println("ss Pressed");
-                        // this->world.switchDirections(Direction::Right);
+                    else if (arduboy.pressed(RIGHT_BUTTON)) {
                         prince.pushSequence(STANCE_STANDING_TURN_1_START, STANCE_STANDING_TURN_5_END, STANCE_UPRIGHT_TURN, true);
                     }
                     else if (arduboy.pressed(A_BUTTON)) {
-                        prince.pushSequence(STANCE_STANDING_JUMP_1_START, STANCE_STANDING_JUMP_18_END, STANCE_UPRIGHT, true);
+                        if (level.canMoveForward(Action::StandingJump, prince)) {
+                            prince.pushSequence(STANCE_STANDING_JUMP_1_START, STANCE_STANDING_JUMP_18_END, STANCE_UPRIGHT, true);
+                        }
                     }
 
 
@@ -249,8 +252,7 @@ printf("distance %i\n", distance);
                 if (prince.getDirection() == Direction::Right) {
 // printf("canMoveForward STANCE_SINGLE_STEP_1_START 1\n");
                     if (arduboy.pressed(RIGHT_BUTTON)) {
-                        // if (this->world.canMoveForward(Action::RunStart)) {
-                        if (true) {
+                        if (level.canMoveForward(Action::RunStart, prince)) {
                             prince.pushSequence(STANCE_RUN_START_2, STANCE_RUN_START_6_END, true);
                         }
                         else {
@@ -265,8 +267,7 @@ printf("distance %i\n", distance);
                 else {
 
                     if (arduboy.pressed(LEFT_BUTTON)) {
-                        // if (this->world.canMoveForward(Action::RunStart)) {
-                        if (true) {
+                        if (level.canMoveForward(Action::RunStart, prince)) {
                             prince.pushSequence(STANCE_RUN_START_2, STANCE_RUN_START_6_END, true);
                         }
                         else {
@@ -307,8 +308,10 @@ printf("distance %i\n", distance);
                         }
                     }
                     else if (arduboy.pressed(RIGHT_BUTTON)) {
-                        // if (this->world.canMoveForward(Action::RunRepeat)) {
-                        if (true) {
+                        if (level.canMoveForward(Action::RunRepeat, prince)) {
+Serial.print("1 p.x ");
+Serial.println(prince.getX());
+
 // printf("Run 1\n");                            
                             prince.pushSequence(STANCE_RUN_REPEAT_5_MID, STANCE_RUN_REPEAT_8_END, true);
                         }
@@ -347,9 +350,10 @@ printf("distance %i\n", distance);
                         }
                     }
                     else if (arduboy.pressed(LEFT_BUTTON)) {
-                        // if (this->world.canMoveForward(Action::RunRepeat)) {
-                        if (true) {
+                        if (level.canMoveForward(Action::RunRepeat, prince)) {
 // printf("Run 2\n"); 
+Serial.print("2 p.x ");
+Serial.println(prince.getX());
                             prince.pushSequence(STANCE_RUN_REPEAT_5_MID, STANCE_RUN_REPEAT_8_END, true);
                         }
                         else {
@@ -393,8 +397,9 @@ printf("distance %i\n", distance);
                         }
                     }
                     else if (arduboy.pressed(RIGHT_BUTTON)) {
-                        // if (this->world.canMoveForward(Action::RunRepeat)) {
-                        if (true) {
+                        if (level.canMoveForward(Action::RunRepeat, prince)) {
+Serial.print("3 p.x ");
+Serial.println(prince.getX());
 // printf("Run 3\n");
                             prince.pushSequence(STANCE_RUN_REPEAT_1_START, STANCE_RUN_REPEAT_4, true);
                         }
@@ -438,8 +443,9 @@ printf("distance %i\n", distance);
                         }
                     }
                     else if (arduboy.pressed(LEFT_BUTTON)) {
-                        // if (this->world.canMoveForward(Action::RunRepeat)) {
-                        if (true) {
+                        if (level.canMoveForward(Action::RunRepeat, prince)) {
+Serial.print("4 p.x ");
+Serial.println(prince.getX());
 // printf("Run 4\n");
                             prince.pushSequence(STANCE_RUN_REPEAT_1_START, STANCE_RUN_REPEAT_4, true);
                         }
@@ -601,22 +607,23 @@ printf("do it!\n");
 
 
 
-    font4x6.setTextColor(0);
-    arduboy.fillRect(0, 0, 128, 8);
-    font4x6.setCursor(0, 0);
-    font4x6.print(prince.getStance());
-    font4x6.print(" ");
-    font4x6.print(prince.getX());
-    font4x6.print(" ");
-    font4x6.print(level.coordToTileIndexX(prince.getDirection(), (level.getXLocation() * 12) + prince.getX()));
-    font4x6.print(" ");
-    font4x6.print(level.coordToTileIndexY(prince.getDirection(), (level.getYLocation() * 31) + prince.getY()));
-    font4x6.print(" ");
-    font4x6.print((level.getXLocation() * 12) + prince.getX());
-    font4x6.print(" ");
-    font4x6.print((level.getYLocation() * 31) + prince.getY());
-    font4x6.print(" ");
-    font4x6.print(level.distToEdgeOfTile(prince.getDirection(),  (level.getXLocation() * 12) + prince.getX()));
+    font3x5.setTextColor(0);
+    arduboy.fillRect(0, 0, 128, 7);
+    font3x5.setCursor(0, 0);
+    font3x5.print("St");
+    font3x5.print(prince.getStance());
+    font3x5.print(" px");
+    font3x5.print(prince.getX());
+    font3x5.print(" x");
+    font3x5.print(level.coordToTileIndexX(prince.getDirection(), (level.getXLocation() * 12) + prince.getX()));
+    font3x5.print(" ");
+    font3x5.print((level.getXLocation() * 12) + prince.getX());
+    font3x5.print(" y");
+    font3x5.print(level.coordToTileIndexY(prince.getDirection(), (level.getYLocation() * 31) + prince.getY()));
+    font3x5.print(" ");
+    font3x5.print((level.getYLocation() * 31) + prince.getY());
+    font3x5.print(" dst");
+    font3x5.print(level.distToEdgeOfTile(prince.getDirection(),  (level.getXLocation() * 12) + prince.getX()));
 
     FX::enableOLED();
     arduboy.display(CLEAR_BUFFER);

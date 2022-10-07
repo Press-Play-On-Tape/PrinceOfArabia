@@ -6,7 +6,7 @@
 #include "src/utils/Constants.h"
 #include "src/utils/Stack.h"
 #include "src/entities/Entities.h"
-#include "src/fonts/Font4x6.h"
+#include "src/fonts/Font3x5.h"
 
 
 void render() {
@@ -43,7 +43,7 @@ void render() {
 
     }
 
-    arduboy.drawFastVLine(prince.getX(), prince.getY() - 31, 36, arduboy.frameCount % 2);
+    // arduboy.drawFastVLine(prince.getX(), prince.getY() - 31, 36, arduboy.frameCount % 2);
 
 
     // Draw foreground ..
