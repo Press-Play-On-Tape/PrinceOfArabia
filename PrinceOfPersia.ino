@@ -15,7 +15,7 @@
 Arduboy2 arduboy;
 Font3x5 font3x5 = Font3x5();
 
-Stack <uint8_t, 20> princeStack;
+Stack <int16_t, 35>  princeStack;
 Prince prince;
 Level level;
 
@@ -41,16 +41,20 @@ void loop() {
     if (!arduboy.nextFrame()) return; 
     arduboy.pollButtons();
 
+
+    // Update the prince object ..
+
     prince.update();
 
-
-// Serial.println("----------------------");
-// Serial.print("Stance: ");
-// Serial.print(prince.getStance());
-// Serial.print(", Direction: ");
-// Serial.print((uint8_t)prince.getDirection());
-// Serial.print(", X: ");
-// Serial.println(prince.getX());
+    #if defined(DEBUG) && defined(DEBUG_PRINCE_DETAILS)
+    DEBUG_PRINTLN("----------------------");
+    DEBUG_PRINT("Stance: ");
+    DEBUG_PRINT(prince.getStance());
+    DEBUG_PRINT(", Direction: ");
+    DEBUG_PRINT((uint8_t)prince.getDirection());
+    DEBUG_PRINT(", X: ");
+    DEBUG_PRINTLN(prince.getX());
+    #endif
 
     // if (arduboy.justPressed(LEFT_BUTTON)) {
     //     xLoc = xLoc - 10;
@@ -118,7 +122,6 @@ void loop() {
 
     if (prince.isEmpty()) {
 
-// Serial.println("Stack empty");
         switch (prince.getStance()) {
 
             case STANCE_UPRIGHT:
@@ -192,10 +195,53 @@ void loop() {
                 }
 
                 if (arduboy.pressed(DOWN_BUTTON)) {
-                    Serial.println("Climb down");
-                    prince.pushSequence(STANCE_STEP_CLIMBING_15_END, STANCE_STEP_CLIMBING_1_START, true);
+                
+                    CanClimbDownResult canClimbDownResult = level.canClimbDown(prince);
 
-                    //prince.pushSequence(STANCE_SQUAT_1_START, STANCE_SQUAT_3_LOW_POINT, true);
+                    switch (canClimbDownResult) {
+
+                        case CanClimbDownResult::ClimbDown:
+
+                            #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
+                            DEBUG_PRINTLN("DOWN_BUTTON, Climb down");
+                            #endif
+
+                            prince.pushSequence(STANCE_STEP_CLIMBING_15_END, STANCE_STEP_CLIMBING_1_START, STANCE_JUMP_UP_14_END, true);
+                            break;
+
+                        case CanClimbDownResult::StepThenClimbDown:
+                            #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
+                            DEBUG_PRINTLN("DOWN_BUTTON, Step then climb down");
+                            #endif
+
+                            prince.pushSequence(STANCE_STEP_CLIMBING_15_END, STANCE_STEP_CLIMBING_1_START, STANCE_JUMP_UP_14_END, true);
+                            // prince.pushSequence(STANCE_SMALL_STEP_1_START, STANCE_SMALL_STEP_6_END, STANCE_UPRIGHT, false);
+                            prince.pushSequence(STANCE_SMALL_STEP_6_END, STANCE_SMALL_STEP_1_START, STANCE_UPRIGHT, false);
+                            break;
+
+                        case CanClimbDownResult::TurnThenClimbDown:
+                            #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
+                            DEBUG_PRINTLN("DOWN_BUTTON, Step then climb down");
+                            #endif
+
+                            prince.pushSequence(STANCE_STEP_CLIMBING_15_END, STANCE_STEP_CLIMBING_1_START, STANCE_JUMP_UP_14_END, true);
+                            prince.pushSequence(STANCE_STANDING_TURN_1_START, STANCE_STANDING_TURN_5_END, STANCE_UPRIGHT_TURN, false);
+                            break;
+
+                        case CanClimbDownResult::StepThenTurnThenClimbDown:
+                            #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
+                            DEBUG_PRINTLN("DOWN_BUTTON, Step then turn then climb down");
+                            #endif
+
+                            prince.pushSequence(STANCE_STEP_CLIMBING_15_END, STANCE_STEP_CLIMBING_1_START, STANCE_JUMP_UP_14_END, true);
+                            prince.pushSequence(STANCE_STANDING_TURN_1_START, STANCE_STANDING_TURN_5_END, STANCE_UPRIGHT_TURN, false);
+                            prince.pushSequence(STANCE_SMALL_STEP_1_START, STANCE_SMALL_STEP_6_END, STANCE_UPRIGHT, false);
+                            break;
+
+                        case CanClimbDownResult::None:
+                            break;
+
+                    }
 
 
                 }
@@ -206,21 +252,21 @@ void loop() {
                     switch (jumpResult) {
 
                         case CanJumpResult::Jump:
-                            prince.pushSequence(STANCE_JUMP_UP_1_START, STANCE_JUMP_UP_14_End, true);
+                            prince.pushSequence(STANCE_JUMP_UP_1_START, STANCE_JUMP_UP_14_END, true);
                             break;
 
                         case CanJumpResult::JumpThenFall:
                             prince.pushSequence(STANCE_JUMP_UP_DROP_1_START, STANCE_JUMP_UP_DROP_5_END, STANCE_UPRIGHT, false);
-                            prince.pushSequence(STANCE_JUMP_UP_1_START, STANCE_JUMP_UP_14_End, true);
+                            prince.pushSequence(STANCE_JUMP_UP_1_START, STANCE_JUMP_UP_14_END, true);
                             break;
 
                         case CanJumpResult::StepThenJump:
-                            prince.pushSequence(STANCE_JUMP_UP_1_START, STANCE_JUMP_UP_14_End, false);
+                            prince.pushSequence(STANCE_JUMP_UP_1_START, STANCE_JUMP_UP_14_END, false);
                             prince.pushSequence(STANCE_SMALL_STEP_1_START, STANCE_SMALL_STEP_6_END, STANCE_UPRIGHT, true);
                             break;
 
                         case CanJumpResult::TurnThenJump:
-                            prince.pushSequence(STANCE_JUMP_UP_1_START, STANCE_JUMP_UP_14_End, false);
+                            prince.pushSequence(STANCE_JUMP_UP_1_START, STANCE_JUMP_UP_14_END, false);
                             prince.pushSequence(STANCE_STANDING_TURN_1_START, STANCE_STANDING_TURN_5_END, STANCE_UPRIGHT_TURN, true);
                             break;
 
@@ -232,13 +278,19 @@ void loop() {
 
                 break;
 
-            case STANCE_JUMP_UP_14_End:
+            case STANCE_JUMP_UP_14_END:
 
                 if (arduboy.pressed(DOWN_BUTTON)) {
                     prince.pushSequence(STANCE_JUMP_UP_DROP_1_START, STANCE_JUMP_UP_DROP_5_END, STANCE_UPRIGHT, true);
                 }
                 else if (arduboy.pressed(UP_BUTTON)) {
                     prince.pushSequence(STANCE_STEP_CLIMBING_1_START, STANCE_STEP_CLIMBING_15_END, STANCE_UPRIGHT, true);
+                }
+
+                // Drop after a period of time hanging ..
+
+                else if(prince.getHangingCounter() == 0) {
+                    prince.pushSequence(STANCE_JUMP_UP_DROP_1_START, STANCE_JUMP_UP_DROP_5_END, STANCE_UPRIGHT, true);
                 }
 
                 break;
@@ -304,22 +356,39 @@ void loop() {
                         }
                     }
                     else if (arduboy.pressed(RIGHT_BUTTON)) {
-                        if (level.canMoveForward(Action::RunRepeat, prince)) {
-Serial.print("1 p.x ");
-Serial.println(prince.getX());
 
-// printf("Run 1\n");                            
+                        if (level.canMoveForward(Action::RunRepeat, prince)) {
+
+                            #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
+                            DEBUG_PRINTLN("RIGHT_BUTTON, Run Repeat (1)");
+                            #endif
+
                             prince.pushSequence(STANCE_RUN_REPEAT_5_MID, STANCE_RUN_REPEAT_8_END, true);
                         }
                         else {
+
+                            #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
+                            DEBUG_PRINTLN("RIGHT_BUTTON, Run Stop (1)");
+                            #endif
+
                             prince.pushSequence(STANCE_STOPPING_1_START, STANCE_STOPPING_5_END, STANCE_UPRIGHT, true);
                         }
+
                     }
                     else if (arduboy.pressed(LEFT_BUTTON)) {
-                        // this->world.switchDirections(Direction::Left);
+
+                        #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
+                        DEBUG_PRINTLN("LEFT_BUTTON, Switch Directions");
+                        #endif
+
                         prince.pushSequence(STANCE_RUNNING_TURN_1_START, STANCE_RUNNING_TURN_13_END, STANCE_RUN_REPEAT_8_END_TURN, true);
                     }
                     else if (!arduboy.pressed(RIGHT_BUTTON)) {
+
+                        #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
+                        DEBUG_PRINTLN("RIGHT_BUTTON, Run Stop (2)");
+                        #endif
+
                         prince.pushSequence(STANCE_STOPPING_1_START, STANCE_STOPPING_5_END, STANCE_UPRIGHT, true);
                     }
 
@@ -327,8 +396,15 @@ Serial.println(prince.getX());
                 else {
 
                     if (arduboy.pressed(LEFT_BUTTON) && arduboy.pressed(A_BUTTON)) {
+
                         // if (this->world.canMoveForward(Action::RunJump)) {
                         if (true) {
+
+                            #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
+                            DEBUG_PRINTLN("LEFT_BUTTON & A_BUTTON, Running Jumpp");
+                            #endif
+
+
 //                             distToTile = this->world.distanceToTile(this->world.getLevel(), SceneryTile::GroundPit);
 // printf("dist %i\n", distToTile);                            
 //                             if (distToTile > 20) {
@@ -341,26 +417,47 @@ Serial.println(prince.getX());
 //                             }
                         }
                         else {
-// printf("Run Jump 2 FAIL\n"); 
+
+                            #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
+                            DEBUG_PRINTLN("LEFT_BUTTON & A_BUTTON, Running Stop (3)");
+                            #endif
+
                             prince.pushSequence(STANCE_STOPPING_1_START, STANCE_STOPPING_5_END, STANCE_UPRIGHT, true);
                         }
                     }
                     else if (arduboy.pressed(LEFT_BUTTON)) {
+
                         if (level.canMoveForward(Action::RunRepeat, prince)) {
-// printf("Run 2\n"); 
-Serial.print("2 p.x ");
-Serial.println(prince.getX());
+
+                            #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
+                            DEBUG_PRINTLN("LEFT_BUTTON, Running Repeat");
+                            #endif
+
                             prince.pushSequence(STANCE_RUN_REPEAT_5_MID, STANCE_RUN_REPEAT_8_END, true);
                         }
                         else {
+
+                            #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
+                            DEBUG_PRINTLN("LEFT_BUTTON, Running Stop");
+                            #endif
+
                             prince.pushSequence(STANCE_STOPPING_1_START, STANCE_STOPPING_5_END, STANCE_UPRIGHT, true);
                         }                        
                     }
                     else if (arduboy.pressed(RIGHT_BUTTON)) {
+
+                        #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
+                        DEBUG_PRINTLN("RIGHT_BUTTON, Running Start");
+                        #endif
                         // this->world.switchDirections(Direction::Right);
                         prince.pushSequence(STANCE_RUNNING_TURN_1_START, STANCE_RUNNING_TURN_13_END, STANCE_RUN_REPEAT_8_END_TURN, true);
                     }
                     else if (!arduboy.pressed(LEFT_BUTTON)) {
+
+                        #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
+                        DEBUG_PRINTLN("LEFT_BUTTON, Running Stop (4)");
+                        #endif
+
                         prince.pushSequence(STANCE_STOPPING_1_START, STANCE_STOPPING_5_END, STANCE_UPRIGHT, true);
                     }
 
@@ -393,21 +490,40 @@ Serial.println(prince.getX());
                         }
                     }
                     else if (arduboy.pressed(RIGHT_BUTTON)) {
+
                         if (level.canMoveForward(Action::RunRepeat, prince)) {
-Serial.print("3 p.x ");
-Serial.println(prince.getX());
-// printf("Run 3\n");
+
+                            #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
+                            DEBUG_PRINTLN("RIGHT_BUTTON, Running Repeat");
+                            #endif
+                            
                             prince.pushSequence(STANCE_RUN_REPEAT_1_START, STANCE_RUN_REPEAT_4, true);
                         }
                         else {
+
+                            #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
+                            DEBUG_PRINTLN("RIGHT_BUTTON, Running Stop");
+                            #endif
+
                             prince.pushSequence(STANCE_STOPPING_1_START, STANCE_STOPPING_5_END, STANCE_UPRIGHT, true);
                         }
+
                     }
                     else if (arduboy.pressed(LEFT_BUTTON)) {
                         // this->world.switchDirections(Direction::Left);
+
+                        #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
+                        DEBUG_PRINTLN("LEFT_BUTTON, Running Turn");
+                        #endif
+
                         prince.pushSequence(STANCE_RUNNING_TURN_1_START, STANCE_RUNNING_TURN_13_END, STANCE_RUN_REPEAT_8_END_TURN, true);
                     }
                     else if (!arduboy.pressed(RIGHT_BUTTON)) {
+
+                        #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
+                        DEBUG_PRINTLN("RIGHT_BUTTON, Running Stop");
+                        #endif
+
                         prince.pushSequence(STANCE_STOPPING_1_START, STANCE_STOPPING_5_END, STANCE_UPRIGHT, true);
                     }
 
@@ -441,9 +557,11 @@ Serial.println(prince.getX());
                     else if (arduboy.pressed(LEFT_BUTTON)) {
 
                         if (level.canMoveForward(Action::RunRepeat, prince)) {
-Serial.print("4 p.x ");
-Serial.println(prince.getX());
-// printf("Run 4\n");
+
+                            #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
+                            DEBUG_PRINTLN("LEFT_BUTTON, Running Repeat");
+                            #endif
+
                             prince.pushSequence(STANCE_RUN_REPEAT_1_START, STANCE_RUN_REPEAT_4, true);
                         }
                         else {
@@ -522,25 +640,29 @@ Serial.println(prince.getX());
 
             int xOffset = 0;
             int yOffset = 0;
-            prince.setStance(prince.pop());
+
+            int16_t newStance = prince.pop();
+            prince.setStance(abs(newStance));
 
             FX::seekData(static_cast<uint24_t>(Images::Prince_XOffset + ((prince.getStance() - 1) * 2)));
-            xOffset = static_cast<int8_t>(FX::readPendingUInt8()) * (prince.getDirection() == Direction::Left ? -1 : 1);
-            yOffset = static_cast<int8_t>(FX::readPendingUInt8());
+            xOffset = static_cast<int8_t>(FX::readPendingUInt8()) * (prince.getDirection() == Direction::Left ? -1 : 1) * (newStance < 0 ? -1 : 1);
+            yOffset = static_cast<int8_t>(FX::readPendingUInt8()) * (newStance < 0 ? -1 : 1);
             FX::readEnd();
 
             prince.incX(xOffset);
             prince.incY(yOffset);
 
-Serial.println(prince.getStance());
-Serial.print("Stance: ");
-Serial.print(prince.getStance());
-Serial.print(", Direction: ");
-Serial.print((uint8_t)prince.getDirection());
-Serial.print(", xOffset: ");
-Serial.print(xOffset);
-Serial.print(", yOffset: ");
-Serial.println(yOffset);
+            #if defined(DEBUG) && defined(DEBUG_PRINCE_DETAILS)
+            DEBUG_PRINTLN(prince.getStance());
+            DEBUG_PRINT("Stance: ");
+            DEBUG_PRINT(prince.getStance());
+            DEBUG_PRINT(", Direction: ");
+            DEBUG_PRINT((uint8_t)prince.getDirection());
+            DEBUG_PRINT(", xOffset: ");
+            DEBUG_PRINT(xOffset);
+            DEBUG_PRINT(", yOffset: ");
+            DEBUG_PRINTLN(yOffset);
+            #endif
 
             switch (prince.getStance()) {
 

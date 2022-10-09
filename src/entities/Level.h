@@ -107,25 +107,35 @@ struct Level {
             switch (layer) {
 
                 case Layer::Foreground:
-                    // if (print) {
-                    //     Serial.print("getTile(FG, ");
-                    //     Serial.print(x);
-                    //     Serial.print(",");
-                    //     Serial.print(y);
-                    //     Serial.print(") = ");
-                    //     Serial.println(fg[y][x + 2]);
-                    // }
+
+                    if (print) {
+
+                        #if defined(DEBUG) && defined(DEBUG_LEVEL_PROCESSING)
+                        DEBUG_PRINT("getTile(FG, ");
+                        DEBUG_PRINT(x);
+                        DEBUG_PRINT(",");
+                        DEBUG_PRINT(y);
+                        DEBUG_PRINT(") = ");
+                        DEBUG_PRINTLN(fg[y][x + 2]);
+                        #endif
+
+                    }
                     return fg[y][x + 2];
 
                 case Layer::Background:
-                    // if (print) {
-                    //     Serial.print("getTile(BG, ");
-                    //     Serial.print(x);
-                    //     Serial.print(",");
-                    //     Serial.print(y);
-                    //     Serial.print(") = ");
-                    //     Serial.println(bg[y][x + 2]);
-                    // }
+
+                    if (print) {
+
+                        #if defined(DEBUG) && defined(DEBUG_LEVEL_PROCESSING)
+                        DEBUG_PRINT("getTile(BG, ");
+                        DEBUG_PRINT(x);
+                        DEBUG_PRINT(",");
+                        DEBUG_PRINT(y);
+                        DEBUG_PRINT(") = ");
+                        DEBUG_PRINTLN(bg[y][x + 2]);
+                        #endif
+
+                    }
                     return bg[y][x + 2];
 
 
@@ -135,50 +145,53 @@ struct Level {
 
         void printMap() {
 
-            Serial.println("Map ---------------");
-            Serial.print("xLoc: ");
-            Serial.print(xLoc);
-            Serial.print(", yLoc: ");
-            Serial.println(yLoc);
+            #if defined(DEBUG) && defined(DEBUG_LEVEL_LOAD_MAP)
 
-            Serial.println("BG ---------------");
-
-            for (uint8_t y = 0; y < 3; y++) {
-
-                for (uint8_t x = 0; x < 14; x++) {
-
-                    Serial.print(bg[y][x]);
-                    Serial.print(" ");
-
-                    if (x == 1 || x == 11) {
-                        Serial.print("| ");
-                    }
-
-                }
-
-                Serial.println("");
-
-            }
-
-
-            Serial.println("FG ---------------");
+            DEBUG_PRINTLN("Map ---------------");
+            DEBUG_PRINT("xLoc: ");
+            DEBUG_PRINT(xLoc);
+            DEBUG_PRINT(", yLoc: ");
+            DEBUG_PRINTLN(yLoc);
+            DEBUG_PRINTLN("BG ---------------");
 
             for (uint8_t y = 0; y < 3; y++) {
 
                 for (uint8_t x = 0; x < 14; x++) {
 
-                    Serial.print(fg[y][x]);
-                    Serial.print(" ");
+                    DEBUG_PRINT(bg[y][x]);
+                    DEBUG_PRINT(" ");
 
                     if (x == 1 || x == 11) {
-                        Serial.print("| ");
+                    DEBUG_PRINT("| ");
                     }
 
                 }
 
-                Serial.println("");
+                DEBUG_PRINTLN("");
 
             }
+
+
+            DEBUG_PRINTLN("FG ---------------");
+
+            for (uint8_t y = 0; y < 3; y++) {
+
+                for (uint8_t x = 0; x < 14; x++) {
+
+                    DEBUG_PRINT(fg[y][x]);
+                    DEBUG_PRINT(" ");
+
+                    if (x == 1 || x == 11) {
+                        DEBUG_PRINT("| ");
+                    }
+
+                }
+
+                DEBUG_PRINTLN("");
+
+            }
+
+            #endif
 
         }
 
@@ -221,7 +234,9 @@ struct Level {
 
             }
 
+            #if defined(DEBUG) && defined(DEBUG_LEVEL_LOAD_MAP)
             printMap();
+            #endif
 
         }
 
@@ -231,6 +246,7 @@ struct Level {
         #define TILE_FLOOR_LH_END_PATTERN_1 102
         #define TILE_FLOOR_LH_END_PATTERN_2 93
         #define TILE_FLOOR_RH_END 99
+        #define TILE_FLOOR_RH_END_GATE 118
 
         #define TILE_FLOOR_LH_WALL_1 83
         #define TILE_FLOOR_LH_WALL_2 109
@@ -275,12 +291,6 @@ struct Level {
 
         bool isGroundTile(uint8_t bgTile, uint8_t fgTile) {
 
-// Serial.print("isGroundTile(");
-// Serial.print(bgTile);
-// Serial.print(",");
-// Serial.print(fgTile);
-// Serial.print(") ");
-
             switch (bgTile) {
 
                 case TILE_FLOOR_BASIC:
@@ -289,6 +299,7 @@ struct Level {
                 case TILE_FLOOR_LH_END_PATTERN_1:
                 case TILE_FLOOR_LH_END_PATTERN_2:
                 case TILE_FLOOR_RH_END:
+                case TILE_FLOOR_RH_END_GATE:
                 case TILE_FLOOR_LH_WALL_1:
                 case TILE_FLOOR_LH_WALL_2:
                 case TILE_FLOOR_LH_WALL_3:
@@ -300,7 +311,6 @@ struct Level {
                 case TILE_COLUMN_5:
                 case TILE_COLUMN_REAR_1:
                 case TILE_COLUMN_REAR_2:
-                // Serial.println(" true (1)");
                     return true;
 
             }
@@ -313,7 +323,6 @@ struct Level {
                 case TILE_FG_WALL_4:
                 case TILE_FG_WALL_5:
                 case TILE_FG_WALL_6:
-                // Serial.println(" false (2)");
                     return false;
 
             }
@@ -338,14 +347,17 @@ struct Level {
 
                         int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), player.x) - this->getXLocation();
                         int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), player.y) - this->getYLocation();
-Serial.print("coordToTileIndexX ");
-Serial.print(player.x);
-Serial.print(" = ");
-Serial.print(tileXIdx);
-Serial.print(", coordToTileIndexY ");
-Serial.print(player.y);
-Serial.print(" = ");
-Serial.println(tileYIdx);
+
+                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+                        DEBUG_PRINT("coordToTileIndexX ");
+                        DEBUG_PRINT(player.x);
+                        DEBUG_PRINT(" = ");
+                        DEBUG_PRINT(tileXIdx);
+                        DEBUG_PRINT(", coordToTileIndexY ");
+                        DEBUG_PRINT(player.y);
+                        DEBUG_PRINT(" = ");
+                        DEBUG_PRINTLN(tileYIdx);
+                        #endif
 
                         int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, true);
                         int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx - 1, tileYIdx, true);
@@ -359,25 +371,28 @@ Serial.println(tileYIdx);
                         
                         int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(prince.getDirection(), player.x);
 
-Serial.print("dist ");
-Serial.print(distToEdgeOfCurrentTile);
-Serial.print(", bg ");
-Serial.print(bgTile4);
-Serial.print(" ");
-Serial.print(bgTile3);
-Serial.print(" ");
-Serial.print(bgTile2);
-Serial.print(" ");
-Serial.print(bgTile1);
-Serial.print(", fg ");
-Serial.print(fgTile4);
-Serial.print(" ");
-Serial.print(fgTile3);
-Serial.print(" ");
-Serial.print(fgTile2);
-Serial.print(" ");
-Serial.print(fgTile1);
-Serial.println("");
+                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+                        DEBUG_PRINT("dist ");
+                        DEBUG_PRINT(distToEdgeOfCurrentTile);
+                        DEBUG_PRINT(", bg ");
+                        DEBUG_PRINT(bgTile4);
+                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT(bgTile3);
+                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT(bgTile2);
+                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT(bgTile1);
+                        DEBUG_PRINT(", fg ");
+                        DEBUG_PRINT(fgTile4);
+                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT(fgTile3);
+                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT(fgTile2);
+                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT(fgTile1);
+                        DEBUG_PRINTLN("");
+                        #endif
+
                         switch (action) {
 
                             case Action::SmallStep:
@@ -450,52 +465,59 @@ Serial.println("");
 
                         int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), player.x) - this->getXLocation();
                         int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), player.y) - this->getYLocation();
-Serial.print("coordToTileIndexX ");
-Serial.print(player.x);
-Serial.print(" = ");
-Serial.print(tileXIdx);
-Serial.print(", coordToTileIndexY ");
-Serial.print(player.y);
-Serial.print(" = ");
-Serial.println(tileYIdx);
+
+                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+                        DEBUG_PRINT("coordToTileIndexX ");
+                        DEBUG_PRINT(player.x);
+                        DEBUG_PRINT(" = ");
+                        DEBUG_PRINT(tileXIdx);
+                        DEBUG_PRINT(", coordToTileIndexY ");
+                        DEBUG_PRINT(player.y);
+                        DEBUG_PRINT(" = ");
+                        DEBUG_PRINTLN(tileYIdx);
+                        #endif
 
                         int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, true);
                         int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx + 1, tileYIdx, true);
                         int8_t bgTile3 = this->getTile(Layer::Background, tileXIdx + 2, tileYIdx, true);
+                        int8_t bgTile4 = this->getTile(Layer::Background, tileXIdx + 3, tileYIdx, true);
 
                         int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, true);
                         int8_t fgTile2 = this->getTile(Layer::Foreground, tileXIdx + 1, tileYIdx, true);
                         int8_t fgTile3 = this->getTile(Layer::Foreground, tileXIdx + 2, tileYIdx, true);
+                        int8_t fgTile4 = this->getTile(Layer::Foreground, tileXIdx + 3, tileYIdx, true);
                         
-                        int8_t dist = distToEdgeOfTile(prince.getDirection(), player.x);
+                        int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(prince.getDirection(), player.x);
 
-Serial.print("dist ");
-Serial.print(dist);
-Serial.print(", bg ");
-Serial.print(bgTile1);
-Serial.print(" ");
-Serial.print(bgTile2);
-Serial.print(" ");
-Serial.print(bgTile3);
-Serial.print(", fg ");
-Serial.print(fgTile1);
-Serial.print(" ");
-Serial.print(fgTile2);
-Serial.print(" ");
-Serial.print(fgTile3);
-Serial.println("");
+                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+                        DEBUG_PRINT("dist ");
+                        DEBUG_PRINT(distToEdgeOfCurrentTile);
+                        DEBUG_PRINT(", bg ");
+                        DEBUG_PRINT(bgTile1);
+                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT(bgTile2);
+                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT(bgTile3);
+                        DEBUG_PRINT(", fg ");
+                        DEBUG_PRINT(fgTile1);
+                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT(fgTile2);
+                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT(fgTile3);
+                        DEBUG_PRINTLN("");
+                        #endif
+
                         switch (action) {
 
                             case Action::SmallStep:
-Serial.println("SmallStep R");
-                                switch (dist) {
+
+                                switch (distToEdgeOfCurrentTile) {
 
                                     case 0 ... 5:
 
                                          return this->isGroundTile(bgTile2, fgTile2);
 
                                     default:
-Serial.println("3");
 
                                         return true;
 
@@ -506,7 +528,7 @@ Serial.println("3");
                             case Action::Step:
                             case Action::RunStart:
 
-                                switch (dist) {
+                                switch (distToEdgeOfCurrentTile) {
 
                                     case 0 ... 9:
                                          return this->isGroundTile(bgTile2, fgTile2);
@@ -522,13 +544,35 @@ Serial.println("3");
 
                                 return this->isGroundTile(bgTile2, fgTile2);
 
+                            case Action::StandingJump:
+
+                                switch (distToEdgeOfCurrentTile) {
+
+                                    case  2 ... 12:
+
+                                        if (this->isGroundTile(bgTile2, fgTile2) && this->isGroundTile(bgTile3, fgTile3) && this->isGroundTile(bgTile4, fgTile4)) {
+                                            return true;                                            
+                                        }
+
+                                        return false;
+
+                                    default:
+
+                                        if (this->isGroundTile(bgTile2, fgTile2) && this->isGroundTile(bgTile3, fgTile3)) {
+                                            return true;                                            
+                                        }
+
+                                        return false;
+
+                                }
+
+                                return true;
+
                             default: return false;
 
                         }
 
-
                     }
-
 
                     break;
 
@@ -552,71 +596,128 @@ Serial.println("3");
 
                 case Direction::Left:
                     {
-                        CanJumpResult jumpResultRight = canJumpUp_Test(prince, Direction::Left);
+                        CanJumpResult resultLeft = canJumpUp_Test(prince, Direction::Left);
 
-                        switch (jumpResultRight) {
+                        switch (resultLeft) {
 
                             case CanJumpResult::Jump:
                             case CanJumpResult::StepThenJump:
-                                return jumpResultRight;
+
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                DEBUG_PRINT("Left Test success, Return ");
+                                DEBUG_PRINTLN(static_cast<uint8_t>(resultLeft));
+                                #endif
+                                                                    
+                                return resultLeft;
 
                             default:
                                 {
-                                    CanJumpResult jumpResultLeft = canJumpUp_Test(prince, Direction::Right);
+                                    CanJumpResult resultRight = canJumpUp_Test(prince, Direction::Right);
 
-                                    switch (jumpResultLeft) {
+                                    switch (resultRight) {
 
                                         case CanJumpResult::Jump:
+
+                                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                            DEBUG_PRINT("Right Test success, Return TurnThenJump");
+                                            #endif
+
                                             return CanJumpResult::TurnThenJump;
 
                                         default:
-                                            return jumpResultRight;
+
+                                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                            DEBUG_PRINT("Right Test failed, Return ");
+                                            DEBUG_PRINTLN(static_cast<uint8_t>(resultLeft));
+                                            #endif
+
+                                            return resultLeft;
 
                                     }
 
                                 }
+
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                DEBUG_PRINT("Return None");
+                                #endif
 
                                 return CanJumpResult::None;
 
                         }
                         
                     }
+
+                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                    DEBUG_PRINT("Return None");
+                    #endif
+
                     return CanJumpResult::None;
 
                 case Direction::Right:
                     {
-                        CanJumpResult jumpResultRight = canJumpUp_Test(prince, Direction::Right);
+                        CanJumpResult resultRight = canJumpUp_Test(prince, Direction::Right);
 
-                        switch (jumpResultRight) {
+                        switch (resultRight) {
 
                             case CanJumpResult::Jump:
                             case CanJumpResult::StepThenJump:
-                                return jumpResultRight;
+
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                DEBUG_PRINT("Right Test success, Return ");
+                                DEBUG_PRINTLN(static_cast<uint8_t>(resultRight));
+                                #endif                            
+
+                                return resultRight;
 
                             default:
                                 {
-                                    CanJumpResult jumpResultLeft = canJumpUp_Test(prince, Direction::Left);
+                                    CanJumpResult resultLeft = canJumpUp_Test(prince, Direction::Left);
 
-                                    switch (jumpResultLeft) {
+                                    switch (resultLeft) {
 
                                         case CanJumpResult::Jump:
+
+                                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                            DEBUG_PRINT("Left Test success, Return TurnThenJump");
+                                            #endif     
+
                                             return CanJumpResult::TurnThenJump;
 
                                         default:
-                                            return jumpResultRight;
+
+                                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                            DEBUG_PRINT("Left Test failed, Return ");
+                                            DEBUG_PRINTLN(static_cast<uint8_t>(resultRight));
+                                            #endif     
+
+                                            return resultRight;
 
                                     }
 
                                 }
+
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                DEBUG_PRINT("Return None");
+                                #endif     
 
                                 return CanJumpResult::None;
 
                         }
                         
                     }
+
+                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                    DEBUG_PRINT("Return None");
+                    #endif     
+
                     return CanJumpResult::None;
 
                 default: 
+
+                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                    DEBUG_PRINT("Return None");
+                    #endif     
+
                     return CanJumpResult::None;
 
             }
@@ -633,64 +734,117 @@ Serial.println("3");
             uint8_t inc = (direction == Direction::Left ? -1 : 1);
             int8_t tileXIdx = this->coordToTileIndexX(direction, player.x) - this->getXLocation();
             int8_t tileYIdx = this->coordToTileIndexY(direction, player.y) - this->getYLocation();
-Serial.print("coordToTileIndexX ");
-Serial.print(player.x);
-Serial.print(" = ");
-Serial.print(tileXIdx);
-Serial.print(", coordToTileIndexY ");
-Serial.print(player.y);
-Serial.print(" = ");
-Serial.println(tileYIdx);
+
+            #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+            DEBUG_PRINT("coordToTileIndexX ");
+            DEBUG_PRINT(player.x);
+            DEBUG_PRINT(" = ");
+            DEBUG_PRINT(tileXIdx);
+            DEBUG_PRINT(", coordToTileIndexY ");
+            DEBUG_PRINT(player.y);
+            DEBUG_PRINT(" = ");
+            DEBUG_PRINTLN(tileYIdx);
+            #endif
 
             int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx - 1, true);
             int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx + inc, tileYIdx - 1, true);
-            
             int8_t distToEdge = distToEdgeOfTile(direction, player.x);
 
-Serial.print("dist ");
-Serial.print(distToEdge);
-Serial.print(", bg ");
-Serial.print(bgTile1);
-Serial.print(" ");
-Serial.print(bgTile2);
-Serial.println("");
+            #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+            DEBUG_PRINT("dist ");
+            DEBUG_PRINT(distToEdge);
+            DEBUG_PRINT(", bg ");
+            DEBUG_PRINT(bgTile1);
+            DEBUG_PRINT(" ");
+            DEBUG_PRINT(bgTile2);
+            DEBUG_PRINTLN("");
+            #endif
 
-            switch (distToEdge) {
+            switch (direction) {
 
-                case 7 ... 12:
-                    return CanJumpResult::JumpThenFall;
+                case Direction::Left:
 
-                case 3 ... 6:
+                    switch (distToEdge) {
 
-                    switch (bgTile2) {
-
-                        case TILE_FLOOR_LH_END:
-                        case TILE_FLOOR_LH_END_PATTERN_1:
-                        case TILE_FLOOR_LH_END_PATTERN_2:
-                            return CanJumpResult::StepThenJump;
-
-                        default:                                
+                        case 7 ... 12:
                             return CanJumpResult::JumpThenFall;
+
+                        case 3 ... 6:
+
+                            switch (bgTile1) {
+
+                                case TILE_FLOOR_RH_END:
+                                case TILE_FLOOR_RH_END_GATE:
+                                    return CanJumpResult::StepThenJump;
+
+                                default:                                
+                                    return CanJumpResult::JumpThenFall;
+
+                            }
+
+                            break;
+
+                        case 0 ... 2:
+
+                            switch (bgTile1) {
+
+                                case TILE_FLOOR_RH_END:
+                                case TILE_FLOOR_RH_END_GATE:
+                                    return CanJumpResult::Jump;
+
+                                default:
+                                    return CanJumpResult::JumpThenFall;
+
+                            }
+
+                            break;
 
                     }
 
-                    break;
+                    return CanJumpResult::None;
 
-                case 0 ... 2:
+                case Direction::Right:
 
-                    switch (bgTile2) {
+                    switch (distToEdge) {
 
-                        case TILE_FLOOR_LH_END:
-                        case TILE_FLOOR_LH_END_PATTERN_1:
-                        case TILE_FLOOR_LH_END_PATTERN_2:
-                            return CanJumpResult::Jump;
-
-                        default:
+                        case 7 ... 12:
                             return CanJumpResult::JumpThenFall;
+
+                        case 3 ... 6:
+
+                            switch (bgTile2) {
+
+                                case TILE_FLOOR_LH_END:
+                                case TILE_FLOOR_LH_END_PATTERN_1:
+                                case TILE_FLOOR_LH_END_PATTERN_2:
+                                    return CanJumpResult::StepThenJump;
+
+                                default:                                
+                                    return CanJumpResult::JumpThenFall;
+
+                            }
+
+                            break;
+
+                        case 0 ... 2:
+
+                            switch (bgTile2) {
+
+                                case TILE_FLOOR_LH_END:
+                                case TILE_FLOOR_LH_END_PATTERN_1:
+                                case TILE_FLOOR_LH_END_PATTERN_2:
+                                    return CanJumpResult::Jump;
+
+                                default:
+                                    return CanJumpResult::JumpThenFall;
+
+                            }
+
+                            break;
 
                     }
 
-                    break;
+                    return CanJumpResult::None;
 
             }
 
@@ -698,4 +852,369 @@ Serial.println("");
 
         }
         
+
+        CanClimbDownResult canClimbDown(Prince prince) {
+
+            Point player;
+
+            player.x = (this->xLoc * 12) + prince.getX();
+            player.y = (this->yLoc * 31) + prince.getY();
+
+            switch (prince.getDirection()) {
+
+                case Direction::Left:
+                    {
+                        CanClimbDownResult resultRight = canClimbDown_Test(prince, Direction::Right);
+
+                        switch (resultRight) {
+
+                            case CanClimbDownResult::ClimbDown:
+                            case CanClimbDownResult::StepThenClimbDown:
+
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
+                                DEBUG_PRINT("Return: ");
+                                DEBUG_PRINTLN(static_cast<uint8_t>(resultRight));
+                                #endif
+
+                                return resultRight;
+
+                            default:
+                                {
+                                    CanClimbDownResult resultLeft = canClimbDown_Test(prince, Direction::Left);
+
+                                    switch (resultLeft) {
+
+                                        case CanClimbDownResult::ClimbDown:
+
+                                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
+                                            DEBUG_PRINTLN("Return: TurnThenClimbDown");
+                                            #endif
+
+                                            return CanClimbDownResult::TurnThenClimbDown;
+
+                                        case CanClimbDownResult::StepThenClimbDown:
+
+                                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
+                                            DEBUG_PRINTLN("Return: StepThenTurnThenClimbDown");
+                                            #endif
+
+                                            return CanClimbDownResult::StepThenTurnThenClimbDown;
+
+                                        default:
+
+                                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
+                                            DEBUG_PRINT("Return: ");
+                                            DEBUG_PRINTLN(static_cast<uint8_t>(resultRight));
+                                            #endif
+                                            
+                                            return resultRight;
+
+                                    }
+
+                                }
+                                        
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
+                                DEBUG_PRINTLN("Return: None");
+                                #endif
+
+                                return CanClimbDownResult::None;
+
+                        }
+                        
+                    }
+
+                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
+                    DEBUG_PRINTLN("Return: None");
+                    #endif
+
+                    return CanClimbDownResult::None;
+
+                case Direction::Right:
+                    {
+                        CanClimbDownResult resultLeft = canClimbDown_Test(prince, Direction::Left);
+
+                        switch (resultLeft) {
+
+                            case CanClimbDownResult::ClimbDown:
+                            case CanClimbDownResult::StepThenClimbDown:
+
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
+                                DEBUG_PRINT("Return: ");
+                                DEBUG_PRINTLN(static_cast<uint8_t>(resultLeft));
+                                #endif
+
+                                return resultLeft;
+
+                            default:
+                                {
+                                    CanClimbDownResult resultRight = canClimbDown_Test(prince, Direction::Right);
+
+                                    switch (resultRight) {
+
+                                        case CanClimbDownResult::ClimbDown:
+
+                                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
+                                            DEBUG_PRINTLN("Return: TurnThenClimbDown");
+                                            #endif
+
+                                            return CanClimbDownResult::TurnThenClimbDown;
+
+                                        case CanClimbDownResult::StepThenClimbDown:
+
+                                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
+                                            DEBUG_PRINTLN("Return: StepThenTurnThenClimbDown");
+                                            #endif
+
+                                            return CanClimbDownResult::StepThenTurnThenClimbDown;
+
+                                        default:
+
+                                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
+                                            DEBUG_PRINT("Return: ");
+                                            DEBUG_PRINTLN(static_cast<uint8_t>(resultLeft));
+                                            #endif
+                                            
+                                            return resultLeft;
+
+                                    }
+
+                                }
+
+                                return CanClimbDownResult::None;
+
+                        }
+                        
+                    }
+
+                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
+                    DEBUG_PRINTLN("Return: None");
+                    #endif
+
+                    return CanClimbDownResult::None;
+
+                default: 
+
+                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
+                    DEBUG_PRINTLN("Return: None");
+                    #endif
+
+                    return CanClimbDownResult::None;
+
+            }
+
+        }
+
+
+
+        CanClimbDownResult canClimbDown_Test(Prince prince, Direction direction) {
+
+            Point player;
+
+            player.x = (this->xLoc * 12) + prince.getX();
+            player.y = (this->yLoc * 31) + prince.getY();
+
+            int8_t tileXIdx = this->coordToTileIndexX(direction, player.x) - this->getXLocation() + (direction == Direction::Right ? 1 : 0);
+            int8_t tileYIdx = this->coordToTileIndexY(direction, player.y) - this->getYLocation();
+
+            #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
+            DEBUG_PRINT("coordToTileIndexX ");
+            DEBUG_PRINT(player.x);
+            DEBUG_PRINT(" = ");
+            DEBUG_PRINT(tileXIdx);
+            DEBUG_PRINT(", coordToTileIndexY ");
+            DEBUG_PRINT(player.y);
+            DEBUG_PRINT(" = ");
+            DEBUG_PRINTLN(tileYIdx);
+            #endif
+
+            int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, true);
+            int8_t distToEdge = distToEdgeOfTile(direction, player.x);
+
+            #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
+            DEBUG_PRINT("dist ");
+            DEBUG_PRINT(distToEdge);
+            DEBUG_PRINT(", bg ");
+            DEBUG_PRINT(bgTile1);
+            DEBUG_PRINTLN("");
+            #endif
+
+            // switch (distToEdge) {
+
+            //     case 7 ... 12:
+            //         return CanClimbDownResult::None;
+
+            //     case 3 ... 6:
+
+            //         switch (direction) {
+
+            //             case Direction::Left:
+
+            //                 switch (bgTile1) {
+
+            //                     case TILE_FLOOR_LH_END:
+            //                     case TILE_FLOOR_LH_END_PATTERN_1:
+            //                     case TILE_FLOOR_LH_END_PATTERN_2:
+            //                         return CanClimbDownResult::StepThenClimbDown;
+
+            //                     default:                                
+            //                         return CanClimbDownResult::None;
+
+            //                 }
+
+            //                 break;
+
+            //             case Direction::Right:
+
+            //                 switch (bgTile1) {
+
+            //                     case TILE_FLOOR_RH_END:
+            //                     case TILE_FLOOR_RH_END_GATE:
+            //                         return CanClimbDownResult::StepThenClimbDown;
+
+            //                     default:                                
+            //                         return CanClimbDownResult::None;
+
+            //                 }
+
+            //                 break;
+
+            //         }
+                    
+            //         break;
+
+            //     case 0 ... 2:
+
+            //         switch (direction) {
+
+            //             case Direction::Left:
+
+            //                 switch (bgTile1) {
+
+            //                     case TILE_FLOOR_LH_END:
+            //                     case TILE_FLOOR_LH_END_PATTERN_1:
+            //                     case TILE_FLOOR_LH_END_PATTERN_2:
+            //                         return CanClimbDownResult::ClimbDown;
+
+            //                     default:
+            //                         return CanClimbDownResult::None;
+
+            //                 }
+
+            //                 break;
+
+            //             case Direction::Right:
+
+            //                 switch (bgTile1) {
+
+            //                     case TILE_FLOOR_RH_END:
+            //                     case TILE_FLOOR_RH_END_GATE:
+            //                         return CanClimbDownResult::ClimbDown;
+
+            //                     default:
+            //                         return CanClimbDownResult::None;
+
+            //                 }
+
+            //                 break;
+
+            //         }
+            // }
+
+            // return CanClimbDownResult::None;
+
+            switch (direction) {
+
+                case Direction::Left:
+
+                    switch (distToEdge) {
+
+                        case 7 ... 12:
+                            return CanClimbDownResult::None;
+
+                        case 3 ... 6:
+
+                            switch (bgTile1) {
+
+                                case TILE_FLOOR_LH_END:
+                                case TILE_FLOOR_LH_END_PATTERN_1:
+                                case TILE_FLOOR_LH_END_PATTERN_2:
+                                    return CanClimbDownResult::StepThenClimbDown;
+
+                                default:                                
+                                    return CanClimbDownResult::None;
+
+                            }
+
+                            break;
+
+                        case 0 ... 2:
+
+                            switch (bgTile1) {
+
+                                case TILE_FLOOR_LH_END:
+                                case TILE_FLOOR_LH_END_PATTERN_1:
+                                case TILE_FLOOR_LH_END_PATTERN_2:
+                                    return CanClimbDownResult::ClimbDown;
+
+                                default:
+                                    return CanClimbDownResult::None;
+
+                            }
+
+                            break;
+
+                    }
+
+                    return CanClimbDownResult::None;
+
+
+                case Direction::Right:
+
+                    switch (distToEdge) {
+
+                        case 7 ... 12:
+                            return CanClimbDownResult::None;
+
+                        case 3 ... 6:
+
+                            switch (bgTile1) {
+
+                                case TILE_FLOOR_RH_END:
+                                case TILE_FLOOR_RH_END_GATE:
+                                    return CanClimbDownResult::StepThenClimbDown;
+
+                                default:                                
+                                    return CanClimbDownResult::None;
+
+                            }
+
+                            break;
+
+                        case 0 ... 2:
+
+                            switch (bgTile1) {
+
+                                case TILE_FLOOR_RH_END:
+                                case TILE_FLOOR_RH_END_GATE:
+                                    return CanClimbDownResult::ClimbDown;
+
+                                default:
+                                    return CanClimbDownResult::None;
+
+                            }
+
+                            break;
+
+                    }
+
+                    return CanClimbDownResult::None;
+
+                default:
+
+                    return CanClimbDownResult::None;
+
+            }
+
+        }
+
 };

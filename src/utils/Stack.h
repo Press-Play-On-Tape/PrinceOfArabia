@@ -12,7 +12,7 @@ class Stack {
 		static_assert(Capacity < 128, "Attempt to create a Stack with Capacity greater than 127");
 
 		using ItemType = Type;
-		using IndexType = uint8_t;
+		using IndexType = int16_t;
 		using IndexOfType = int8_t;
 
 		constexpr static const IndexType FirstIndex = 0;

@@ -1,6 +1,22 @@
 
 #pragma once
 
+
+
+#define DEBUG_PRINT    Serial.print
+#define DEBUG_PRINTLN  Serial.println
+
+#define DEBUG
+#define _DEBUG_PRINCE_DETAILS
+#define _DEBUG_PRINT_ACTION
+#define _DEBUG_LOAD_MAO
+
+#define _DEBUG_ACTION_CANMOVEFORWARD
+#define _DEBUG_ACTION_CANJUMPUP
+#define DEBUG_ACTION_CANCLIMBDOWN
+
+//-------------------------------------------------------------------------------------
+
 #define ANIMATION_NUMBER_OF_FRAMES                2
 
 #define STANCE_NONE                     0
@@ -129,7 +145,7 @@
 #define STANCE_JUMP_UP_11               119
 #define STANCE_JUMP_UP_12               120
 #define STANCE_JUMP_UP_13               121
-#define STANCE_JUMP_UP_14_End           122
+#define STANCE_JUMP_UP_14_END           122
 #define STANCE_JUMP_UP_DROP_1_START     123
 #define STANCE_JUMP_UP_DROP_2           124
 #define STANCE_JUMP_UP_DROP_3           125
@@ -249,4 +265,12 @@ enum class CanJumpResult : uint8_t {
     StepThenJump,
     JumpThenFall,
     TurnThenJump,
+};
+
+enum class CanClimbDownResult : uint8_t {
+    None,
+    ClimbDown,
+    StepThenClimbDown,
+    TurnThenClimbDown,
+    StepThenTurnThenClimbDown,
 };
