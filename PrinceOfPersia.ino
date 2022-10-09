@@ -32,7 +32,7 @@ void setup() {
     level.init(60, 0);
 
     prince.setStack(&princeStack);
-    prince.init(18, 57);
+    prince.init(18, 56);
 
 }
 
@@ -126,123 +126,119 @@ void loop() {
                 if (prince.getDirection() == Direction::Right) {
 
                     if (arduboy.pressed(RIGHT_BUTTON) && arduboy.pressed(DOWN_BUTTON)) {
+
                         if (level.canMoveForward(Action::SmallStep, prince)) {
                             prince.pushSequence(STANCE_SMALL_STEP_1_START, STANCE_SMALL_STEP_6_END, STANCE_UPRIGHT, true);
                         }
+
                     }
                     else if (arduboy.pressed(RIGHT_BUTTON)) {
+
                         if (level.canMoveForward(Action::Step, prince)) {
                             prince.push(STANCE_SINGLE_STEP_1_START, true);
                         }
                         else if (level.canMoveForward(Action::SmallStep, prince)) {
                             prince.pushSequence(STANCE_SMALL_STEP_1_START, STANCE_SMALL_STEP_6_END, STANCE_UPRIGHT, true);
                         }
+
                     }
                     else if (arduboy.pressed(LEFT_BUTTON)) {
+
                         prince.pushSequence(STANCE_STANDING_TURN_1_START, STANCE_STANDING_TURN_5_END, STANCE_UPRIGHT_TURN, true);
+
                     }
                     else if (arduboy.pressed(A_BUTTON)) {
+
                         if (level.canMoveForward(Action::StandingJump, prince)) {
                             prince.pushSequence(STANCE_STANDING_JUMP_1_START, STANCE_STANDING_JUMP_18_END, STANCE_UPRIGHT, true);
                         }
+
                     }
                     
                 }
                 else {
 
                     if (arduboy.pressed(LEFT_BUTTON) && arduboy.pressed(DOWN_BUTTON)) {
+
                         if (level.canMoveForward(Action::SmallStep, prince)) {
                             prince.pushSequence(STANCE_SMALL_STEP_1_START, STANCE_SMALL_STEP_6_END, STANCE_UPRIGHT, true);
                         }
+
                     }
                     else if (arduboy.pressed(LEFT_BUTTON)) {
+
                         if (level.canMoveForward(Action::Step, prince)) {
                             prince.push(STANCE_SINGLE_STEP_1_START, true);
                         }
                         else if (level.canMoveForward(Action::SmallStep, prince)) {
                             prince.pushSequence(STANCE_SMALL_STEP_1_START, STANCE_SMALL_STEP_6_END, STANCE_UPRIGHT, true);
-                        }                        
+                        }
+                        
                     }
                     else if (arduboy.pressed(RIGHT_BUTTON)) {
+
                         prince.pushSequence(STANCE_STANDING_TURN_1_START, STANCE_STANDING_TURN_5_END, STANCE_UPRIGHT_TURN, true);
+
                     }
                     else if (arduboy.pressed(A_BUTTON)) {
+
                         if (level.canMoveForward(Action::StandingJump, prince)) {
                             prince.pushSequence(STANCE_STANDING_JUMP_1_START, STANCE_STANDING_JUMP_18_END, STANCE_UPRIGHT, true);
                         }
+
                     }
 
 
                 }
 
                 if (arduboy.pressed(DOWN_BUTTON)) {
+                    Serial.println("Climb down");
+                    prince.pushSequence(STANCE_STEP_CLIMBING_15_END, STANCE_STEP_CLIMBING_1_START, true);
+
                     //prince.pushSequence(STANCE_SQUAT_1_START, STANCE_SQUAT_3_LOW_POINT, true);
+
+
                 }
                 else if (arduboy.pressed(UP_BUTTON)) {
 
-/*
-                    SceneryLevel level = this->world.getLevel();
-                    int16_t distance = this->world.distanceToTile(--level, this->prince.getDirection() == Direction::Right ? SceneryTile::PlatformLH : SceneryTile::PlatformRH);
-printf("distance %i\n", distance);                    
-                    switch (distance) {
+                    CanJumpResult jumpResult = level.canJumpUp(prince);
 
-                        case -6 ... -1:
-// printf("Climb 0\n");                        
-                            // step back
-                            this->world.decX(8);
-                            this->prince.climbUpwards();
+                    switch (jumpResult) {
+
+                        case CanJumpResult::Jump:
+                            prince.pushSequence(STANCE_JUMP_UP_1_START, STANCE_JUMP_UP_14_End, true);
                             break;
 
-                        case 0 ... 5:
-// printf("Climb 0\n");                        
-                            // step back
-                            this->world.decX(4);
-                            this->prince.climbUpwards();
+                        case CanJumpResult::JumpThenFall:
+                            prince.pushSequence(STANCE_JUMP_UP_DROP_1_START, STANCE_JUMP_UP_DROP_5_END, STANCE_UPRIGHT, false);
+                            prince.pushSequence(STANCE_JUMP_UP_1_START, STANCE_JUMP_UP_14_End, true);
                             break;
 
-                        case 6 ... 7:
-// printf("Climb 1\n");                        
-                            this->prince.climbUpwards();
-                            this->prince.push(STANCE_SINGLE_STEP_2, true);
+                        case CanJumpResult::StepThenJump:
+                            prince.pushSequence(STANCE_JUMP_UP_1_START, STANCE_JUMP_UP_14_End, false);
+                            prince.pushSequence(STANCE_SMALL_STEP_1_START, STANCE_SMALL_STEP_6_END, STANCE_UPRIGHT, true);
                             break;
 
-                        case 8 ... 9:
-// printf("Climb 2\n");                        
-                            this->prince.climbUpwards();
-                            this->prince.stepForwardOne();
+                        case CanJumpResult::TurnThenJump:
+                            prince.pushSequence(STANCE_JUMP_UP_1_START, STANCE_JUMP_UP_14_End, false);
+                            prince.pushSequence(STANCE_STANDING_TURN_1_START, STANCE_STANDING_TURN_5_END, STANCE_UPRIGHT_TURN, true);
                             break;
 
-                        case 10 ... 12:
-// printf("Climb 3\n");                        
-                            this->prince.climbUpwards();
-                            this->prince.stepForwardTwo();
-                            break;
-
-                        case 13 ... 18:
-// printf("Climb 4\n");                   
-                            this->prince.pushSequence(STANCE_STEP_CLIMBING_1_START, STANCE_STEP_CLIMBING_20_END, STANCE_UPRIGHT_END_CLIMB, true);
-                            break;
-
-                        case 19 ... 21:
-// printf("Climb 5\n");                   
-//                            prince.pushSequence(STANCE_STEP_CLIMBING_1_START, STANCE_STEP_CLIMBING_20_END, STANCE_UPRIGHT_END_CLIMB, true);
-                            prince.pushSequence(STANCE_STEP_CLIMBING_1_START, STANCE_STEP_CLIMBING_20_END, STANCE_UPRIGHT_END_CLIMB, true);
-                            prince.pushSequence(STANCE_SINGLE_STEP_2, STANCE_SINGLE_STEP_8_END, STANCE_UPRIGHT, true);
-                            prince.push(STANCE_SINGLE_STEP_1_START, true);
-                            break;
-
-                        default: 
-                            distance = TILE_NOT_FOUND;
-                            break;
+                        default: break;
 
                     }
 
-                    if (distance == TILE_NOT_FOUND) {
-// printf("Swing\n");  
-                        this->prince.pushSequence(STANCE_SWINGING_1_START, STANCE_SWINGING_12_END, STANCE_UPRIGHT, true);
+                }
 
-                    }
-*/
+                break;
+
+            case STANCE_JUMP_UP_14_End:
+
+                if (arduboy.pressed(DOWN_BUTTON)) {
+                    prince.pushSequence(STANCE_JUMP_UP_DROP_1_START, STANCE_JUMP_UP_DROP_5_END, STANCE_UPRIGHT, true);
+                }
+                else if (arduboy.pressed(UP_BUTTON)) {
+                    prince.pushSequence(STANCE_STEP_CLIMBING_1_START, STANCE_STEP_CLIMBING_15_END, STANCE_UPRIGHT, true);
                 }
 
                 break;
@@ -443,6 +439,7 @@ Serial.println(prince.getX());
                         }
                     }
                     else if (arduboy.pressed(LEFT_BUTTON)) {
+
                         if (level.canMoveForward(Action::RunRepeat, prince)) {
 Serial.print("4 p.x ");
 Serial.println(prince.getX());
@@ -451,14 +448,18 @@ Serial.println(prince.getX());
                         }
                         else {
                             prince.pushSequence(STANCE_STOPPING_1_START, STANCE_STOPPING_5_END, STANCE_UPRIGHT, true);
-                        }                        
+                        }         
+
                     }
                     else if (arduboy.pressed(RIGHT_BUTTON)) {
                         // this->world.switchDirections(Direction::Right);
                         prince.pushSequence(STANCE_RUNNING_TURN_1_START, STANCE_RUNNING_TURN_13_END, STANCE_RUN_REPEAT_8_END_TURN, true);
+
                     }
                     else if (!arduboy.pressed(LEFT_BUTTON)) {
+
                         prince.pushSequence(STANCE_STOPPING_1_START, STANCE_STOPPING_5_END, STANCE_UPRIGHT, true);
+
                     }
 
                 }
@@ -520,19 +521,26 @@ Serial.println(prince.getX());
         if (!prince.isEmpty()) {
 
             int xOffset = 0;
+            int yOffset = 0;
             prince.setStance(prince.pop());
 
             FX::seekData(static_cast<uint24_t>(Images::Prince_XOffset + ((prince.getStance() - 1) * 2)));
             xOffset = static_cast<int8_t>(FX::readPendingUInt8()) * (prince.getDirection() == Direction::Left ? -1 : 1);
+            yOffset = static_cast<int8_t>(FX::readPendingUInt8());
             FX::readEnd();
 
             prince.incX(xOffset);
+            prince.incY(yOffset);
 
-// Serial.println(prince.getStance());
-// Serial.print("Stance: ");
-// Serial.print(prince.getStance());
-// Serial.print(", Direction: ");
-// Serial.println((uint8_t)prince.getDirection());
+Serial.println(prince.getStance());
+Serial.print("Stance: ");
+Serial.print(prince.getStance());
+Serial.print(", Direction: ");
+Serial.print((uint8_t)prince.getDirection());
+Serial.print(", xOffset: ");
+Serial.print(xOffset);
+Serial.print(", yOffset: ");
+Serial.println(yOffset);
 
             switch (prince.getStance()) {
 

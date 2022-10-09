@@ -107,21 +107,39 @@ struct Prince {
 
         void pushSequence(uint8_t fromStance, uint8_t toStance, bool resetFrame) {
 
-            this->idleFrame = 0;
+            // this->idleFrame = 0;
 
-            for (uint8_t x = toStance; x >= fromStance; x--) {
-                this->stack->push(static_cast<uint8_t>(x), resetFrame);
-            }
+            // for (uint8_t x = toStance; x >= fromStance; x--) {
+            //     this->stack->push(static_cast<uint8_t>(x), resetFrame);
+            // }
+
+            pushSequence(fromStance, toStance, STANCE_NONE, resetFrame);
 
         }
 
         void pushSequence(uint8_t fromStance, uint8_t toStance, uint8_t finalStance, bool resetFrame) {
 
             this->idleFrame = 0;
-            this->push(finalStance, resetFrame);
 
-            for (uint8_t x = toStance; x >= fromStance; x--) {
-                this->stack->push(static_cast<uint8_t>(x), resetFrame);
+            if (finalStance != STANCE_NONE) {
+                this->push(finalStance, resetFrame);
+            }
+
+            if (fromStance < toStance) {
+
+                for (uint8_t x = toStance; x >= fromStance; x--) {
+                    this->stack->push(static_cast<uint8_t>(x), resetFrame);
+                }
+
+            }
+            else {
+
+                for (uint8_t x = fromStance; x >= toStance; x--) {
+
+Serial.println(x);
+                    this->stack->push(static_cast<uint8_t>(x), resetFrame);
+                }
+
             }
 
         }

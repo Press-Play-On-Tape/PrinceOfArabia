@@ -437,6 +437,8 @@ Serial.println("");
 
                                 return true;
 
+                            default: return false;
+
                         }
 
                     }
@@ -520,6 +522,8 @@ Serial.println("3");
 
                                 return this->isGroundTile(bgTile2, fgTile2);
 
+                            default: return false;
+
                         }
 
 
@@ -532,12 +536,166 @@ Serial.println("3");
 
             }
 
-
-
-
-Serial.println("9999");
-
             return true;
+
         }
 
+
+        CanJumpResult canJumpUp(Prince prince) {
+
+            Point player;
+
+            player.x = (this->xLoc * 12) + prince.getX();
+            player.y = (this->yLoc * 31) + prince.getY();
+
+            switch (prince.getDirection()) {
+
+                case Direction::Left:
+                    {
+                        CanJumpResult jumpResultRight = canJumpUp_Test(prince, Direction::Left);
+
+                        switch (jumpResultRight) {
+
+                            case CanJumpResult::Jump:
+                            case CanJumpResult::StepThenJump:
+                                return jumpResultRight;
+
+                            default:
+                                {
+                                    CanJumpResult jumpResultLeft = canJumpUp_Test(prince, Direction::Right);
+
+                                    switch (jumpResultLeft) {
+
+                                        case CanJumpResult::Jump:
+                                            return CanJumpResult::TurnThenJump;
+
+                                        default:
+                                            return jumpResultRight;
+
+                                    }
+
+                                }
+
+                                return CanJumpResult::None;
+
+                        }
+                        
+                    }
+                    return CanJumpResult::None;
+
+                case Direction::Right:
+                    {
+                        CanJumpResult jumpResultRight = canJumpUp_Test(prince, Direction::Right);
+
+                        switch (jumpResultRight) {
+
+                            case CanJumpResult::Jump:
+                            case CanJumpResult::StepThenJump:
+                                return jumpResultRight;
+
+                            default:
+                                {
+                                    CanJumpResult jumpResultLeft = canJumpUp_Test(prince, Direction::Left);
+
+                                    switch (jumpResultLeft) {
+
+                                        case CanJumpResult::Jump:
+                                            return CanJumpResult::TurnThenJump;
+
+                                        default:
+                                            return jumpResultRight;
+
+                                    }
+
+                                }
+
+                                return CanJumpResult::None;
+
+                        }
+                        
+                    }
+                    return CanJumpResult::None;
+
+                default: 
+                    return CanJumpResult::None;
+
+            }
+
+        }
+
+        CanJumpResult canJumpUp_Test(Prince prince, Direction direction) {
+
+            Point player;
+
+            player.x = (this->xLoc * 12) + prince.getX();
+            player.y = (this->yLoc * 31) + prince.getY();
+
+            uint8_t inc = (direction == Direction::Left ? -1 : 1);
+            int8_t tileXIdx = this->coordToTileIndexX(direction, player.x) - this->getXLocation();
+            int8_t tileYIdx = this->coordToTileIndexY(direction, player.y) - this->getYLocation();
+Serial.print("coordToTileIndexX ");
+Serial.print(player.x);
+Serial.print(" = ");
+Serial.print(tileXIdx);
+Serial.print(", coordToTileIndexY ");
+Serial.print(player.y);
+Serial.print(" = ");
+Serial.println(tileYIdx);
+
+            int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx - 1, true);
+            int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx + inc, tileYIdx - 1, true);
+            
+            int8_t distToEdge = distToEdgeOfTile(direction, player.x);
+
+Serial.print("dist ");
+Serial.print(distToEdge);
+Serial.print(", bg ");
+Serial.print(bgTile1);
+Serial.print(" ");
+Serial.print(bgTile2);
+Serial.println("");
+
+            switch (distToEdge) {
+
+                case 7 ... 12:
+                    return CanJumpResult::JumpThenFall;
+
+                case 3 ... 6:
+
+                    switch (bgTile2) {
+
+                        case TILE_FLOOR_LH_END:
+                        case TILE_FLOOR_LH_END_PATTERN_1:
+                        case TILE_FLOOR_LH_END_PATTERN_2:
+                            return CanJumpResult::StepThenJump;
+
+                        default:                                
+                            return CanJumpResult::JumpThenFall;
+
+                    }
+
+                    break;
+
+                case 0 ... 2:
+
+                    switch (bgTile2) {
+
+                        case TILE_FLOOR_LH_END:
+                        case TILE_FLOOR_LH_END_PATTERN_1:
+                        case TILE_FLOOR_LH_END_PATTERN_2:
+                            return CanJumpResult::Jump;
+
+                        default:
+                            return CanJumpResult::JumpThenFall;
+
+                    }
+
+                    break;
+
+            }
+
+            return CanJumpResult::None;
+
+        }
+        
 };

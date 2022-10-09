@@ -3,6 +3,7 @@
 
 #define ANIMATION_NUMBER_OF_FRAMES                2
 
+#define STANCE_NONE                     0
 #define STANCE_RUN_START_1_START        1 
 #define STANCE_RUN_START_2              2 
 #define STANCE_RUN_START_3              3 
@@ -115,6 +116,41 @@
 #define STANCE_SMALL_STEP_4             106
 #define STANCE_SMALL_STEP_5             107
 #define STANCE_SMALL_STEP_6_END         108
+#define STANCE_JUMP_UP_1_START          109
+#define STANCE_JUMP_UP_2                110
+#define STANCE_JUMP_UP_3                111
+#define STANCE_JUMP_UP_4                112
+#define STANCE_JUMP_UP_5                113
+#define STANCE_JUMP_UP_6                114
+#define STANCE_JUMP_UP_7                115
+#define STANCE_JUMP_UP_8                116
+#define STANCE_JUMP_UP_9                117
+#define STANCE_JUMP_UP_10               118
+#define STANCE_JUMP_UP_11               119
+#define STANCE_JUMP_UP_12               120
+#define STANCE_JUMP_UP_13               121
+#define STANCE_JUMP_UP_14_End           122
+#define STANCE_JUMP_UP_DROP_1_START     123
+#define STANCE_JUMP_UP_DROP_2           124
+#define STANCE_JUMP_UP_DROP_3           125
+#define STANCE_JUMP_UP_DROP_4           126
+#define STANCE_JUMP_UP_DROP_5_END       127
+#define STANCE_STEP_CLIMBING_1_START    128
+#define STANCE_STEP_CLIMBING_2          129
+#define STANCE_STEP_CLIMBING_3          130
+#define STANCE_STEP_CLIMBING_4          131
+#define STANCE_STEP_CLIMBING_5          132
+#define STANCE_STEP_CLIMBING_6          133
+#define STANCE_STEP_CLIMBING_7          134
+#define STANCE_STEP_CLIMBING_8          135
+#define STANCE_STEP_CLIMBING_9          136
+#define STANCE_STEP_CLIMBING_10         137
+#define STANCE_STEP_CLIMBING_11         138
+#define STANCE_STEP_CLIMBING_12         139
+#define STANCE_STEP_CLIMBING_13         140
+#define STANCE_STEP_CLIMBING_14         141
+#define STANCE_STEP_CLIMBING_15_END     142
+
 
 #define STANCE_JUMP_DOWN_1_START        220
 #define STANCE_JUMP_DOWN_2              220
@@ -154,26 +190,6 @@
 #define STANCE_FALLING_2                220 // 62 STANCE_DYING_1_START   
 #define STANCE_FALLING_3_END            220 // 62 STANCE_DYING_1_START   
 #define STANCE_FALLING_3_ADJ            220 // 62 STANCE_DYING_1_START   
-#define STANCE_STEP_CLIMBING_1_START    220 // 71 STANCE_SWINGING_1_START
-#define STANCE_STEP_CLIMBING_2          220 // 72 STANCE_SWINGING_2
-#define STANCE_STEP_CLIMBING_3          220 // 73 STANCE_SWINGING_3
-#define STANCE_STEP_CLIMBING_4          220 // 74 STANCE_SWINGING_4
-#define STANCE_STEP_CLIMBING_5          220 // 75 STANCE_SWINGING_5
-#define STANCE_STEP_CLIMBING_6          220 // 76 STANCE_SWINGING_6
-#define STANCE_STEP_CLIMBING_7          220 // 77 STANCE_SWINGING_7
-#define STANCE_STEP_CLIMBING_8          220 // 78 STANCE_SWINGING_8
-#define STANCE_STEP_CLIMBING_9          220 // 29 STANCE_CLIMBING_1_START        
-#define STANCE_STEP_CLIMBING_10         220 // 30 STANCE_CLIMBING_2               
-#define STANCE_STEP_CLIMBING_11         220 // 31 STANCE_CLIMBING_3               
-#define STANCE_STEP_CLIMBING_12         220 // 32 STANCE_CLIMBING_4               
-#define STANCE_STEP_CLIMBING_13         220 // 33 STANCE_CLIMBING_5               
-#define STANCE_STEP_CLIMBING_14         220 // 34 STANCE_CLIMBING_6               
-#define STANCE_STEP_CLIMBING_15         220 // 35 STANCE_CLIMBING_7               
-#define STANCE_STEP_CLIMBING_16         220 // 36 STANCE_CLIMBING_8               
-#define STANCE_STEP_CLIMBING_17         220 // 37 STANCE_CLIMBING_9               
-#define STANCE_STEP_CLIMBING_18         220 // 38 STANCE_CLIMBING_10              
-#define STANCE_STEP_CLIMBING_19         220 // 39 STANCE_CLIMBING_11              
-#define STANCE_STEP_CLIMBING_20_END     220 // 40 STANCE_CLIMBING_15_END          
 #define STANCE_DRINK_TONIC_1_START      220 
 #define STANCE_DRINK_TONIC_2            220
 #define STANCE_DRINK_TONIC_3            220
@@ -225,4 +241,12 @@ enum class Action : uint8_t {
     RunStart,
     RunRepeat,
     StandingJump,
+};
+
+enum class CanJumpResult : uint8_t {
+    None,
+    Jump,
+    StepThenJump,
+    JumpThenFall,
+    TurnThenJump,
 };
