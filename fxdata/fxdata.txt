@@ -51,10 +51,41 @@ namespace Levels {
         -1,83,99,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,83,78,99,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,83,77,89,112,90,89,90,77,99,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
     };
 
+    uint8_t Level1_Items[] = {
+        0, 60, 0, 9, 64,    // Gate @ 60, 0 starting position 9 (top), falls in 64 frames.
+        1, 63, 1,           // Torch
+        1, 64, 1,           // Torch
+        255                 // End
+    }
+
 }
 namespace_end
 
 namespace Images {
+
+    image_t Title = "../images/title/Title.png"
+
+    image_t PPOT_00 = "../images/splash/PPOT_00.png"
+    image_t PPOT_01 = "../images/splash/PPOT_01.png"
+    image_t PPOT_02 = "../images/splash/PPOT_02.png"
+    image_t PPOT_03 = "../images/splash/PPOT_03.png"
+
+    image_t Gate_00 = "../images/items/Gate_00.png"
+    image_t Gate_01 = "../images/items/Gate_01.png"
+    image_t Gate_02 = "../images/items/Gate_02.png"
+    image_t Gate_03 = "../images/items/Gate_03.png"
+    image_t Gate_04 = "../images/items/Gate_04.png"
+    image_t Gate_05 = "../images/items/Gate_05.png"
+    image_t Gate_06 = "../images/items/Gate_06.png"
+    image_t Gate_07 = "../images/items/Gate_07.png"
+    image_t Gate_08 = "../images/items/Gate_08.png"
+    image_t Gate_09 = "../images/items/Gate_09.png"
+
+    image_t Torch_00 = "../images/items/Torch_00.png"
+    image_t Torch_01 = "../images/items/Torch_01.png"
+    image_t Torch_02 = "../images/items/Torch_02.png"
+    image_t Torch_03 = "../images/items/Torch_03.png"
+    image_t Torch_04 = "../images/items/Torch_04.png"
 
     image_t Tile_Dungeon_00 = "../images/tiles/tile_dungeon_00.png"
     image_t Tile_Dungeon_01 = "../images/tiles/tile_dungeon_01.png"

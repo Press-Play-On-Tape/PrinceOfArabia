@@ -8,7 +8,7 @@ struct Prince {
 
     private:
 
-        Stack <int16_t, 35>  *stack;
+        Stack <int16_t, 20>  *stack;
         
         uint8_t hangingCounter = 0;
         uint8_t stance = STANCE_UPRIGHT;
@@ -29,10 +29,10 @@ struct Prince {
         uint8_t getHangingCounter()                 { return this->hangingCounter; }
         bool isFalling()                            { return this->falling; }
 
-        Stack <int16_t, 35>  * getStack()           { return this->stack; }
+        Stack <int16_t, 20>  * getStack()           { return this->stack; }
         Direction getDirection()                    { return this->direction; }
 
-        void setStack(Stack <int16_t, 35>  *val)    { this->stack = val; }
+        void setStack(Stack <int16_t, 20>  *val)    { this->stack = val; }
         void setStance(uint8_t val)                 { this->stance = val; }
         void setDirection(Direction val)            { this->direction = val; }
         void setFalling(bool val)                   { this->falling = val; }

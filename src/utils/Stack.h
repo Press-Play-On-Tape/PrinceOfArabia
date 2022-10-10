@@ -1,7 +1,6 @@
 #pragma once
 
 #include <stdint.h>
-//#include "Enums.h"
 
 template< typename Type, uint8_t Capacity >
 

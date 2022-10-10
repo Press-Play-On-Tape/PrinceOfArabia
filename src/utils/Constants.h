@@ -6,18 +6,19 @@
 #define DEBUG_PRINT    Serial.print
 #define DEBUG_PRINTLN  Serial.println
 
-#define DEBUG
+#define _DEBUG
 #define _DEBUG_PRINCE_DETAILS
 #define _DEBUG_PRINT_ACTION
 #define _DEBUG_LOAD_MAO
 
 #define _DEBUG_ACTION_CANMOVEFORWARD
 #define _DEBUG_ACTION_CANJUMPUP
-#define DEBUG_ACTION_CANCLIMBDOWN
+#define _DEBUG_ACTION_CANCLIMBDOWN
 
 //-------------------------------------------------------------------------------------
 
-#define ANIMATION_NUMBER_OF_FRAMES                2
+#define ANIMATION_NUMBER_OF_FRAMES      2
+#define NUMBER_OF_ITEMS                 20
 
 #define STANCE_NONE                     0
 #define STANCE_RUN_START_1_START        1 
@@ -234,8 +235,14 @@
 #define STANCE_RUN_REPEAT_8_END_TURN    254
 #define STANCE_UPRIGHT_TURN             255
 
-
-
+enum GameState : uint8_t {
+	SplashScreen_Init,
+	SplashScreen,
+	Title_Init,
+	Title,
+	Game_Init,
+	Game,
+};
 
 enum class Direction : uint8_t {
     None,
@@ -273,4 +280,11 @@ enum class CanClimbDownResult : uint8_t {
     StepThenClimbDown,
     TurnThenClimbDown,
     StepThenTurnThenClimbDown,
+};
+
+enum class ItemType : uint8_t {
+    Gate,
+    Torch,
+    Door,
+    Sword,
 };

@@ -4,6 +4,13 @@
 
 namespace Images {
 
+    constexpr uint24_t PPOT[] = { 
+        PPOT_00,
+        PPOT_01,
+        PPOT_02,
+        PPOT_03,
+    };
+
     constexpr uint24_t Tile_Dungeon[] = { 
         Tile_Dungeon_00,
         Tile_Dungeon_01,

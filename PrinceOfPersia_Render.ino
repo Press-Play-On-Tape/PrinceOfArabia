@@ -12,6 +12,8 @@
 void render() {
 
 
+    // Draw background ..
+
     for (uint8_t y = 0; y < 3; y++) {
 
         for (uint8_t x = 0; x < 11; x++) {
@@ -24,6 +26,32 @@ void render() {
 
         }
 
+    }
+
+
+    // Draw items ..
+
+    for (uint8_t i = 0; i < NUMBER_OF_ITEMS; i++) {
+
+        Item &item = level.getItem(i);
+
+        if (item.active) {
+
+            switch (item.itemType) {
+
+                case ItemType::Gate:
+                    FX::drawBitmap((item.x - level.getXLocation()) * 12, (item.y - level.getYLocation()) * 31, Images::Gate_00 + (item.data.gate.position * 76), 0, dbmMasked);
+                    break;
+
+                case ItemType::Torch:
+                    FX::drawBitmap((item.x - level.getXLocation()) * 12, (item.y - level.getYLocation()) * 31, Images::Torch_00 + (item.data.torch.frame * 116), 0, dbmMasked);
+                    break;
+
+                default: break;
+
+            }
+
+        }
     }
 
 
@@ -71,25 +99,5 @@ void render() {
         }
 
     }
-
-
-
-
-// FX::drawBitmap(0, -4, Images::Prince_Left_090, 0, dbmMasked);
-// FX::drawBitmap(16, -4, Images::Prince_Left_091, 0, dbmMasked);
-// FX::drawBitmap(32, -4, Images::Prince_Left_092, 0, dbmMasked);
-// FX::drawBitmap(48, -4, Images::Prince_Left_093, 0, dbmMasked);
-// uint24_t startPos = (90 - 1) * 364;
-// FX::drawBitmap(0, -4, Images::Prince_Left_001 + (startPos), 0, dbmMasked);
-// startPos = startPos + 364;
-// FX::drawBitmap(16, -4, Images::Prince_Left_001 + (startPos), 0, dbmMasked);
-// startPos = startPos + 364;
-// FX::drawBitmap(32, -4, Images::Prince_Left_001 + (startPos), 0, dbmMasked);
-// startPos = startPos + 364;
-// FX::drawBitmap(48, -4, Images::Prince_Left_001 + (startPos), 0, dbmMasked);
-
-    //program code
-
-
 
 }

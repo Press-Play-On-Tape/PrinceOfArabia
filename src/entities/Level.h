@@ -4,6 +4,7 @@
 #include "Prince.h"   
 #include "../utils/Constants.h"
 #include "../utils/Stack.h"
+#include "Item.h"
 
 struct Level {
 
@@ -15,12 +16,14 @@ struct Level {
 
         int8_t bg[3][14];
         int8_t fg[3][14];
+        Item items[NUMBER_OF_ITEMS];
 
     public:
 
         uint8_t getLevel()                      { return this->level; }
         uint8_t getXLocation()                  { return this->xLoc; }
         uint8_t getYLocation()                  { return this->yLoc; }
+        Item &getItem(uint8_t idx)              { return this->items[idx]; }
 
         void setLevel(uint8_t val)              { this->level = val; }
         void setXLocation(uint8_t val)          { this->xLoc = val; }
@@ -141,6 +144,8 @@ struct Level {
 
             }
 
+            return 0;
+
         }
 
         void printMap() {
@@ -233,6 +238,55 @@ struct Level {
                 FX::readEnd();
 
             }
+
+
+            // Items
+            
+
+            for (Item &item : items) {
+                item.active = false;
+            }
+
+            uint8_t itemIdx = 0;
+            FX::seekData(Levels::Level1_Items);
+            uint8_t itemType = FX::readPendingUInt8();
+
+            while (itemType != 255) {
+
+                Item &item = this->items[itemIdx];
+
+                switch (static_cast<ItemType>(itemType)) {
+
+                    case ItemType::Gate:
+                        item.itemType = ItemType::Gate;
+                        item.active = true;
+                        item.x = FX::readPendingUInt8();
+                        item.y = FX::readPendingUInt8();
+                        item.data.gate.position = FX::readPendingUInt8();
+                        item.data.gate.closingDelay = FX::readPendingUInt8();
+                        break;
+
+                    case ItemType::Torch:
+                        item.itemType = ItemType::Torch;
+                        item.active = true;
+                        item.x = FX::readPendingUInt8();
+                        item.y = FX::readPendingUInt8();
+                        break;
+                
+                    default:
+                        break;
+
+                }
+
+                itemType = FX::readPendingUInt8();
+                itemIdx++;
+
+            }
+
+
+            FX::readEnd();
+
+
 
             #if defined(DEBUG) && defined(DEBUG_LEVEL_LOAD_MAP)
             printMap();
