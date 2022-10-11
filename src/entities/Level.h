@@ -947,17 +947,6 @@ struct Level {
             DEBUG_PRINTLN("");
             #endif
 
-            uint8_t gateIdx = 255;
-
-            for (Item &item : this->items) {
-
-                if (item.itemtype == ItemType::Gate && item.active) {
-
-                    if (item.x = )
-
-                }
-
-            }
 
             switch (direction) {
 
@@ -1050,7 +1039,138 @@ struct Level {
             return CanJumpResult::None;
 
         }
-        
+
+
+        bool canJumpUp_Part2(Prince prince) {
+
+            int8_t tileXIdx;
+            int8_t tileYIdx;
+
+            Point player;
+
+            player.x = (this->xLoc * 12) + prince.getX();
+            player.y = (this->yLoc * 31) + prince.getY();
+
+            switch (prince.getDirection()) {
+
+                case Direction::Left:
+                    {
+
+                        tileXIdx = this->coordToTileIndexX(prince.getDirection(), player.x) - this->getXLocation();
+                        tileYIdx = this->coordToTileIndexY(prince.getDirection(), player.y) - this->getYLocation() - 1;
+
+                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP_PART2)
+                        DEBUG_PRINT("coordToTileIndexX ");
+                        DEBUG_PRINT(player.x);
+                        DEBUG_PRINT(" = ");
+                        DEBUG_PRINT(tileXIdx);
+                        DEBUG_PRINT(", coordToTileIndexY ");
+                        DEBUG_PRINT(player.y);
+                        DEBUG_PRINT(" = ");
+                        DEBUG_PRINTLN(tileYIdx);
+                        #endif
+
+                        // int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, true);
+                        // int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, true);
+
+                        // #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP_PART2)
+                        // DEBUG_PRINT("bg ");
+                        // DEBUG_PRINT(bgTile1);
+                        // DEBUG_PRINT(", fg ");
+                        // DEBUG_PRINT(fgTile1);
+                        // DEBUG_PRINTLN("");
+                        // #endif
+
+                    }
+
+                    break;
+
+                case Direction::Right:
+                    {
+
+                        tileXIdx = this->coordToTileIndexX(prince.getDirection(), player.x) - this->getXLocation() + 1;
+                        tileYIdx = this->coordToTileIndexY(prince.getDirection(), player.y) - this->getYLocation() - 1;
+
+                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP_PART2)
+                        DEBUG_PRINT("coordToTileIndexX ");
+                        DEBUG_PRINT(player.x);
+                        DEBUG_PRINT(" = ");
+                        DEBUG_PRINT(tileXIdx);
+                        DEBUG_PRINT(", coordToTileIndexY ");
+                        DEBUG_PRINT(player.y);
+                        DEBUG_PRINT(" = ");
+                        DEBUG_PRINTLN(tileYIdx);
+                        #endif
+
+                        // int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, true);
+                        // int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, true);
+
+                        // #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP_PART2)
+                        // DEBUG_PRINT("bg ");
+                        // DEBUG_PRINT(bgTile1);
+                        // DEBUG_PRINT(", fg ");
+                        // DEBUG_PRINT(fgTile1);
+                        // DEBUG_PRINTLN("");
+                        // #endif
+
+                    }
+
+                    break;
+
+                default: break;
+
+            }
+
+
+
+            // Look for closed gate in the same cell as possible ledge ..
+
+            uint8_t gatePosition = 255;
+            uint8_t inc = (prince.getDirection() == Direction::Left ? 0 : 1);
+
+            for (uint8_t i = 0; i < NUMBER_OF_ITEMS; i++) {
+
+                Item &item = this->items[i];
+
+                if (item.itemType == ItemType::Gate && item.active) {
+
+                    // switch (prince.getDirection()) {
+
+                    //     case Direction::Left:
+
+                            if (item.x == tileXIdx + this->xLoc && item.y == tileYIdx + this->yLoc) {
+
+                                gatePosition = item.data.gate.position;
+                                break;
+
+                            }
+
+                    //         break;
+
+                    //     case Direction::Right:
+
+                    //         if (item.x == tileXIdx + this->xLoc + inc && item.y == tileYIdx + this->yLoc) {
+
+                    //             gatePosition = item.data.gate.position;
+                    //             break;
+
+                    //         }
+
+                    //         break;
+
+                    // }
+
+                }
+
+            }
+
+
+            // Was a gate found?
+
+            return (gatePosition == 9 || gatePosition == 255);
+
+        }        
+
 
         CanClimbDownResult canClimbDown(Prince prince) {
 
@@ -1202,8 +1322,6 @@ struct Level {
             }
 
         }
-
-
 
         CanClimbDownResult canClimbDown_Test(Prince prince, Direction direction) {
 
@@ -1415,5 +1533,7 @@ struct Level {
             }
 
         }
+
+
 
 };

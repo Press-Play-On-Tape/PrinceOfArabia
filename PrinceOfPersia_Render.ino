@@ -61,10 +61,6 @@ void render() {
     uint16_t stance = prince.getStance();
     uint16_t imageIndex = static_cast<uint16_t>(pgm_read_byte(&Images::StanceToImageXRef[stance]));
     uint24_t startPos = Images::Prince_Left_001 + ((imageIndex - 1) * 364);
-Serial.print("Stance: ");
-Serial.print(stance);
-Serial.print(", imageIndex: ");
-Serial.println(imageIndex);
 
     if (prince.getDirection() == Direction::Left) {
 

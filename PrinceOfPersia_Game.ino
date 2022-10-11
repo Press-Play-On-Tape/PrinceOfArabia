@@ -257,9 +257,8 @@ void game() {
                             #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
                             DEBUG_PRINTLN("DOWN_BUTTON, Cannot climb down, squat");
                             #endif
-Serial.println("Crouch");
-                            prince.pushSequence(STANCE_CROUCH_1_START, STANCE_CROUCH_3_END, false);
 
+                            prince.pushSequence(STANCE_CROUCH_1_START, STANCE_CROUCH_3_END, false);
                             break;
 
                     }
@@ -299,13 +298,19 @@ Serial.println("Crouch");
 
                 break;
 
-            case STANCE_JUMP_UP_14_END:
+            case STANCE_JUMP_UP_14_END:     // Hanging on ledge ..
 
                 if (arduboy.pressed(DOWN_BUTTON)) {
                     prince.pushSequence(STANCE_JUMP_UP_DROP_1_START, STANCE_JUMP_UP_DROP_5_END, STANCE_UPRIGHT, true);
                 }
                 else if (arduboy.pressed(UP_BUTTON)) {
-                    prince.pushSequence(STANCE_STEP_CLIMBING_1_START, STANCE_STEP_CLIMBING_15_END, STANCE_UPRIGHT, true);
+                    if (level.canJumpUp_Part2(prince)) {
+                        prince.pushSequence(STANCE_STEP_CLIMBING_1_START, STANCE_STEP_CLIMBING_15_END, STANCE_UPRIGHT, true);
+                    }
+                    else {
+                        prince.pushSequence(STANCE_STEP_CLIMBING_BLOCK_1_START, STANCE_STEP_CLIMBING_BLOCK_9_END, STANCE_UPRIGHT, true);
+                        
+                    }
                 }
 
                 // Drop after a period of time hanging ..
@@ -318,15 +323,19 @@ Serial.println("Crouch");
 
             case STANCE_SINGLE_STEP_1_START:
 
+                // If the user is still holding the left / right button then escalate the movement to a run ..
+
                 if (prince.getDirection() == Direction::Right) {
-// printf("canMoveForward STANCE_SINGLE_STEP_1_START 1\n");
+
                     if (arduboy.pressed(RIGHT_BUTTON)) {
+
                         if (level.canMoveForward(Action::RunStart, prince)) {
                             prince.pushSequence(STANCE_RUN_START_2, STANCE_RUN_START_6_END, true);
                         }
                         else {
                             prince.pushSequence(STANCE_SINGLE_STEP_2, STANCE_SINGLE_STEP_8_END, STANCE_UPRIGHT, true);
                         }
+
                     }
                     else if (!arduboy.pressed(RIGHT_BUTTON)) {
                         prince.pushSequence(STANCE_SINGLE_STEP_2, STANCE_SINGLE_STEP_8_END, STANCE_UPRIGHT, true);
@@ -470,7 +479,7 @@ Serial.println("Crouch");
                         #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
                         DEBUG_PRINTLN("RIGHT_BUTTON, Running Start");
                         #endif
-                        // this->world.switchDirections(Direction::Right);
+
                         prince.pushSequence(STANCE_RUNNING_TURN_1_START, STANCE_RUNNING_TURN_13_END, STANCE_RUN_REPEAT_8_END_TURN, true);
                     }
                     else if (!arduboy.pressed(LEFT_BUTTON)) {
@@ -591,7 +600,7 @@ Serial.println("Crouch");
 
                     }
                     else if (arduboy.pressed(RIGHT_BUTTON)) {
-                        // this->world.switchDirections(Direction::Right);
+
                         prince.pushSequence(STANCE_RUNNING_TURN_1_START, STANCE_RUNNING_TURN_13_END, STANCE_RUN_REPEAT_8_END_TURN, true);
 
                     }
