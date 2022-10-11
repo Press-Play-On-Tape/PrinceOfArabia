@@ -25,40 +25,7 @@ void game() {
     // Update the objects ..
 
     prince.update();
-
-    for (uint8_t i = 0; i < NUMBER_OF_ITEMS; i++) {
-
-        Item &item = level.getItem(i);
-
-        if (item.active) {
-
-            switch (item.itemType) {
-
-                case ItemType::Gate:
-                    if (item.data.gate.closingDelay > 0) {
-                        item.data.gate.closingDelay--;
-                    }
-                    else {
-
-                        if (item.data.gate.position > 0 && arduboy.getFrameCount(3)) {
-
-                            item.data.gate.position--;
-                        }
-                    }
-                    break;
-
-                case ItemType::Torch:
-                    if (arduboy.getFrameCount(3)) {
-                        item.data.torch.frame = (++item.data.torch.frame) % 5;
-                    }
-                    break;
-
-                default: break;
-
-            }
-
-        }
-    }
+    level.updateItems(arduboy, prince);
 
 
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Arduboy2.h>   
+#include "../utils/Arduboy2Ext.h"
 #include "Prince.h"   
 #include "../utils/Constants.h"
 #include "../utils/Stack.h"
@@ -39,6 +39,61 @@ struct Level {
 
             this->loadMap();
         }
+
+        void getPrincePosition(Prince &prince, Point &point) {
+
+            point.x = (this->xLoc * 12) + prince.getX();
+            point.y = (this->yLoc * 31) + prince.getY();
+
+        }
+
+
+        void updateItems(Arduboy2Ext &arduboy, Prince &prince) {
+
+            Point princePos;
+            this->getPrincePosition(prince, princePos);
+
+            uint8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), princePos.x) - this->getXLocation();
+            uint8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), princePos.y) - this->getYLocation() - 1;
+
+            for (uint8_t i = 0; i < NUMBER_OF_ITEMS; i++) {
+
+                Item &item = this->getItem(i);
+
+                if (item.active) {
+
+                    switch (item.itemType) {
+
+                        case ItemType::Gate:
+
+                            if (item.data.gate.closingDelay > 0) {
+                                item.data.gate.closingDelay--;
+                            }
+                            else {
+
+                                if (item.data.gate.position > 0 && arduboy.getFrameCount(3)) {
+
+                                    item.data.gate.position--;
+                                }
+                            }
+                            break;
+
+                        case ItemType::Torch:
+                            if (arduboy.getFrameCount(3)) {
+                                item.data.torch.frame = (++item.data.torch.frame) % 5;
+                            }
+                            break;
+
+                        default: break;
+
+                    }
+
+                }
+
+            }
+
+        }
+               
 
         int8_t coordToTileIndexX(Direction direction, int16_t x) {
 
@@ -283,10 +338,7 @@ struct Level {
 
             }
 
-
             FX::readEnd();
-
-
 
             #if defined(DEBUG) && defined(DEBUG_LEVEL_LOAD_MAP)
             printMap();
@@ -340,7 +392,7 @@ struct Level {
         #define TILE_COLUMN_REAR_2 90
 
 
-        bool isWallTile(uint8_t bgTile, uint8_t fgTile) {
+        bool isWallTile(int8_t bgTile, int8_t fgTile) {
 
             switch (bgTile) {
 
@@ -359,7 +411,7 @@ struct Level {
 
         }
 
-        bool isGroundTile(uint8_t bgTile, uint8_t fgTile) {
+        bool isGroundTile(int8_t bgTile, int8_t fgTile) {
 
             switch (bgTile) {
 
@@ -401,7 +453,7 @@ struct Level {
 
         }
 
-        bool canFall(uint8_t bgTile, uint8_t fgTile) {
+        bool canFall(int8_t bgTile, int8_t fgTile) {
 
             switch (bgTile) {
 
@@ -433,128 +485,92 @@ struct Level {
 
         }
 
-        bool canFall(Prince prince, int8_t xOffset = 0) {
+        bool canFall(Prince &prince, int8_t xOffset = 0) {
 
-            Point player;
+            Point princePos;
+            this->getPrincePosition(prince, princePos);
 
-            player.x = (this->xLoc * 12) + prince.getX() + (prince.getDirection() == Direction::Left ? xOffset * -1 : xOffset);
-            player.y = (this->yLoc * 31) + prince.getY();
 
-            switch (prince.getDirection()) {
+            // player.x = (this->xLoc * 12) + prince.getX() + (prince.getDirection() == Direction::Left ? xOffset * -1 : xOffset);
+            // player.y = (this->yLoc * 31) + prince.getY();
+            princePos.x = princePos.x + (prince.getDirection() == Direction::Left ? xOffset * -1 : xOffset);
 
-                case Direction::Left:
-                    {
+            int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), princePos.x) - this->getXLocation();
+            int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), princePos.y) - this->getYLocation();
 
-                        int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), player.x) - this->getXLocation();
-                        int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), player.y) - this->getYLocation();
+            #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
+            DEBUG_PRINT("coordToTileIndexX ");
+            DEBUG_PRINT(princePos.x);
+            DEBUG_PRINT(" = ");
+            DEBUG_PRINT(tileXIdx);
+            DEBUG_PRINT(", coordToTileIndexY ");
+            DEBUG_PRINT(princePos.y);
+            DEBUG_PRINT(" = ");
+            DEBUG_PRINTLN(tileYIdx);
+            #endif
 
-                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
-                        DEBUG_PRINT("coordToTileIndexX ");
-                        DEBUG_PRINT(player.x);
-                        DEBUG_PRINT(" = ");
-                        DEBUG_PRINT(tileXIdx);
-                        DEBUG_PRINT(", coordToTileIndexY ");
-                        DEBUG_PRINT(player.y);
-                        DEBUG_PRINT(" = ");
-                        DEBUG_PRINTLN(tileYIdx);
-                        #endif
 
-                        int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, true);
-                        int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, true);
+            int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, true);
+            int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, true);
 
-                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
-                        DEBUG_PRINT("bg ");
-                        DEBUG_PRINT(bgTile1);
-                        DEBUG_PRINT(", fg ");
-                        DEBUG_PRINT(fgTile1);
-                        DEBUG_PRINTLN("");
-                        #endif
+            #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+            DEBUG_PRINT("bg ");
+            DEBUG_PRINT(bgTile1);
+            DEBUG_PRINT(", fg ");
+            DEBUG_PRINT(fgTile1);
+            DEBUG_PRINTLN("");
+            #endif
 
-                        return this->canFall(bgTile1, fgTile1);
-
-                    }
-
-                    break;
-
-                case Direction::Right:
-                    {
-
-                        int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), player.x) - this->getXLocation();
-                        int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), player.y) - this->getYLocation();
-
-                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
-                        DEBUG_PRINT("coordToTileIndexX ");
-                        DEBUG_PRINT(player.x);
-                        DEBUG_PRINT(" = ");
-                        DEBUG_PRINT(tileXIdx);
-                        DEBUG_PRINT(", coordToTileIndexY ");
-                        DEBUG_PRINT(player.y);
-                        DEBUG_PRINT(" = ");
-                        DEBUG_PRINTLN(tileYIdx);
-                        #endif
-
-                        int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, true);
-                        int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, true);
-
-                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
-                        DEBUG_PRINT("bg ");
-                        DEBUG_PRINT(bgTile1);
-                        DEBUG_PRINT(", fg ");
-                        DEBUG_PRINT(fgTile1);
-                        DEBUG_PRINTLN("");
-                        #endif
-
-                        return this->canFall(bgTile1, fgTile1);
-
-                    }
-
-                    break;
-
-                default: break;
-
-            }
-
-            return false;
+            return this->canFall(bgTile1, fgTile1);
 
         }
 
-        bool canMoveForward(Action action, Prince prince) {
+        bool canMoveForward(Action action, Prince &prince) {
 
-            Point player;
+            Point princePos;
+            this->getPrincePosition(prince, princePos);
 
-            player.x = (this->xLoc * 12) + prince.getX();
-            player.y = (this->yLoc * 31) + prince.getY();
+
+            // player.x = (this->xLoc * 12) + prince.getX();
+            // player.y = (this->yLoc * 31) + prince.getY();
+
+
+            int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), princePos.x) - this->getXLocation();
+            int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), princePos.y) - this->getYLocation();
+
+            #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+            DEBUG_PRINT("coordToTileIndexX ");
+            DEBUG_PRINT(princePos.x);
+            DEBUG_PRINT(" = ");
+            DEBUG_PRINT(tileXIdx);
+            DEBUG_PRINT(", coordToTileIndexY ");
+            DEBUG_PRINT(princePos.y);
+            DEBUG_PRINT(" = ");
+            DEBUG_PRINTLN(tileYIdx);
+            #endif
 
             switch (prince.getDirection()) {
 
                 case Direction::Left:
                     {
 
-                        int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), player.x) - this->getXLocation();
-                        int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), player.y) - this->getYLocation();
-
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
-                        DEBUG_PRINT("coordToTileIndexX ");
-                        DEBUG_PRINT(player.x);
-                        DEBUG_PRINT(" = ");
-                        DEBUG_PRINT(tileXIdx);
-                        DEBUG_PRINT(", coordToTileIndexY ");
-                        DEBUG_PRINT(player.y);
-                        DEBUG_PRINT(" = ");
-                        DEBUG_PRINTLN(tileYIdx);
+                        int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, true);
                         #endif
 
-                        int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, true);
                         int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx - 1, tileYIdx, true);
                         int8_t bgTile3 = this->getTile(Layer::Background, tileXIdx - 2, tileYIdx, true);
                         int8_t bgTile4 = this->getTile(Layer::Background, tileXIdx - 3, tileYIdx, true);
 
+                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
                         int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, true);
+                        #endif
+
                         int8_t fgTile2 = this->getTile(Layer::Foreground, tileXIdx - 1, tileYIdx, true);
                         int8_t fgTile3 = this->getTile(Layer::Foreground, tileXIdx - 2, tileYIdx, true);
                         int8_t fgTile4 = this->getTile(Layer::Foreground, tileXIdx - 3, tileYIdx, true);
                         
-                        int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(prince.getDirection(), player.x);
+                        int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(prince.getDirection(), princePos.x);
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
                         DEBUG_PRINT("dist ");
@@ -649,31 +665,23 @@ struct Level {
                 case Direction::Right:
                     {
 
-                        int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), player.x) - this->getXLocation();
-                        int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), player.y) - this->getYLocation();
-
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
-                        DEBUG_PRINT("coordToTileIndexX ");
-                        DEBUG_PRINT(player.x);
-                        DEBUG_PRINT(" = ");
-                        DEBUG_PRINT(tileXIdx);
-                        DEBUG_PRINT(", coordToTileIndexY ");
-                        DEBUG_PRINT(player.y);
-                        DEBUG_PRINT(" = ");
-                        DEBUG_PRINTLN(tileYIdx);
-                        #endif
-
                         int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, true);
+                        #endif
+                        
                         int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx + 1, tileYIdx, true);
                         int8_t bgTile3 = this->getTile(Layer::Background, tileXIdx + 2, tileYIdx, true);
                         int8_t bgTile4 = this->getTile(Layer::Background, tileXIdx + 3, tileYIdx, true);
 
+                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
                         int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, true);
+                        #endif
+
                         int8_t fgTile2 = this->getTile(Layer::Foreground, tileXIdx + 1, tileYIdx, true);
                         int8_t fgTile3 = this->getTile(Layer::Foreground, tileXIdx + 2, tileYIdx, true);
                         int8_t fgTile4 = this->getTile(Layer::Foreground, tileXIdx + 3, tileYIdx, true);
                         
-                        int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(prince.getDirection(), player.x);
+                        int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(prince.getDirection(), princePos.x);
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
                         DEBUG_PRINT("dist ");
@@ -772,12 +780,14 @@ struct Level {
         }
 
 
-        CanJumpResult canJumpUp(Prince prince) {
+        CanJumpResult canJumpUp(Prince &prince) {
 
-            Point player;
+            // Point princePos;
+            // this->getPrincePosition(prince, princePos);
 
-            player.x = (this->xLoc * 12) + prince.getX();
-            player.y = (this->yLoc * 31) + prince.getY();
+
+            // player.x = (this->xLoc * 12) + prince.getX();
+            // player.y = (this->yLoc * 31) + prince.getY();
 
             switch (prince.getDirection()) {
 
@@ -911,31 +921,33 @@ struct Level {
 
         }
 
-        CanJumpResult canJumpUp_Test(Prince prince, Direction direction) {
+        CanJumpResult canJumpUp_Test(Prince &prince, Direction direction) {
 
-            Point player;
+            Point princePos;
+            this->getPrincePosition(prince, princePos);
 
-            player.x = (this->xLoc * 12) + prince.getX();
-            player.y = (this->yLoc * 31) + prince.getY();
+
+            // player.x = (this->xLoc * 12) + prince.getX();
+            // player.y = (this->yLoc * 31) + prince.getY();
 
             uint8_t inc = (direction == Direction::Left ? -1 : 1);
-            int8_t tileXIdx = this->coordToTileIndexX(direction, player.x) - this->getXLocation();
-            int8_t tileYIdx = this->coordToTileIndexY(direction, player.y) - this->getYLocation();
+            int8_t tileXIdx = this->coordToTileIndexX(direction, princePos.x) - this->getXLocation();
+            int8_t tileYIdx = this->coordToTileIndexY(direction, princePos.y) - this->getYLocation();
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
             DEBUG_PRINT("coordToTileIndexX ");
-            DEBUG_PRINT(player.x);
+            DEBUG_PRINT(princePos.x);
             DEBUG_PRINT(" = ");
             DEBUG_PRINT(tileXIdx);
             DEBUG_PRINT(", coordToTileIndexY ");
-            DEBUG_PRINT(player.y);
+            DEBUG_PRINT(princePos.y);
             DEBUG_PRINT(" = ");
             DEBUG_PRINTLN(tileYIdx);
             #endif
 
             int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx - 1, true);
             int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx + inc, tileYIdx - 1, true);
-            int8_t distToEdge = distToEdgeOfTile(direction, player.x);
+            int8_t distToEdge = distToEdgeOfTile(direction, princePos.x);
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
             DEBUG_PRINT("dist ");
@@ -946,7 +958,6 @@ struct Level {
             DEBUG_PRINT(bgTile2);
             DEBUG_PRINTLN("");
             #endif
-
 
             switch (direction) {
 
@@ -1034,6 +1045,8 @@ struct Level {
 
                     return CanJumpResult::None;
 
+                default: break;
+
             }
 
             return CanJumpResult::None;
@@ -1041,31 +1054,33 @@ struct Level {
         }
 
 
-        bool canJumpUp_Part2(Prince prince) {
+        bool canJumpUp_Part2(Prince &prince) {
 
             int8_t tileXIdx;
             int8_t tileYIdx;
 
-            Point player;
+            Point princePos;
+            this->getPrincePosition(prince, princePos);
 
-            player.x = (this->xLoc * 12) + prince.getX();
-            player.y = (this->yLoc * 31) + prince.getY();
+
+            // player.x = (this->xLoc * 12) + prince.getX();
+            // player.y = (this->yLoc * 31) + prince.getY();
 
             switch (prince.getDirection()) {
 
                 case Direction::Left:
                     {
 
-                        tileXIdx = this->coordToTileIndexX(prince.getDirection(), player.x) - this->getXLocation();
-                        tileYIdx = this->coordToTileIndexY(prince.getDirection(), player.y) - this->getYLocation() - 1;
+                        tileXIdx = this->coordToTileIndexX(prince.getDirection(), princePos.x) - this->getXLocation();
+                        tileYIdx = this->coordToTileIndexY(prince.getDirection(), princePos.y) - this->getYLocation() - 1;
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP_PART2)
                         DEBUG_PRINT("coordToTileIndexX ");
-                        DEBUG_PRINT(player.x);
+                        DEBUG_PRINT(princePos.x);
                         DEBUG_PRINT(" = ");
                         DEBUG_PRINT(tileXIdx);
                         DEBUG_PRINT(", coordToTileIndexY ");
-                        DEBUG_PRINT(player.y);
+                        DEBUG_PRINT(princePos.y);
                         DEBUG_PRINT(" = ");
                         DEBUG_PRINTLN(tileYIdx);
                         #endif
@@ -1088,16 +1103,16 @@ struct Level {
                 case Direction::Right:
                     {
 
-                        tileXIdx = this->coordToTileIndexX(prince.getDirection(), player.x) - this->getXLocation() + 1;
-                        tileYIdx = this->coordToTileIndexY(prince.getDirection(), player.y) - this->getYLocation() - 1;
+                        tileXIdx = this->coordToTileIndexX(prince.getDirection(), princePos.x) - this->getXLocation() + 1;
+                        tileYIdx = this->coordToTileIndexY(prince.getDirection(), princePos.y) - this->getYLocation() - 1;
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP_PART2)
                         DEBUG_PRINT("coordToTileIndexX ");
-                        DEBUG_PRINT(player.x);
+                        DEBUG_PRINT(princePos.x);
                         DEBUG_PRINT(" = ");
                         DEBUG_PRINT(tileXIdx);
                         DEBUG_PRINT(", coordToTileIndexY ");
-                        DEBUG_PRINT(player.y);
+                        DEBUG_PRINT(princePos.y);
                         DEBUG_PRINT(" = ");
                         DEBUG_PRINTLN(tileYIdx);
                         #endif
@@ -1126,7 +1141,6 @@ struct Level {
             // Look for closed gate in the same cell as possible ledge ..
 
             uint8_t gatePosition = 255;
-            uint8_t inc = (prince.getDirection() == Direction::Left ? 0 : 1);
 
             for (uint8_t i = 0; i < NUMBER_OF_ITEMS; i++) {
 
@@ -1172,12 +1186,14 @@ struct Level {
         }        
 
 
-        CanClimbDownResult canClimbDown(Prince prince) {
+        CanClimbDownResult canClimbDown(Prince &prince) {
 
-            Point player;
+            // Point princePos;
+            // this->getPrincePosition(prince, princePos);
 
-            player.x = (this->xLoc * 12) + prince.getX();
-            player.y = (this->yLoc * 31) + prince.getY();
+
+            // player.x = (this->xLoc * 12) + prince.getX();
+            // player.y = (this->yLoc * 31) + prince.getY();
 
             switch (prince.getDirection()) {
 
@@ -1323,29 +1339,31 @@ struct Level {
 
         }
 
-        CanClimbDownResult canClimbDown_Test(Prince prince, Direction direction) {
+        CanClimbDownResult canClimbDown_Test(Prince &prince, Direction direction) {
 
-            Point player;
+            Point princePos;
+            this->getPrincePosition(prince, princePos);
 
-            player.x = (this->xLoc * 12) + prince.getX();
-            player.y = (this->yLoc * 31) + prince.getY();
 
-            int8_t tileXIdx = this->coordToTileIndexX(direction, player.x) - this->getXLocation() + (direction == Direction::Right ? 1 : 0);
-            int8_t tileYIdx = this->coordToTileIndexY(direction, player.y) - this->getYLocation();
+            // player.x = (this->xLoc * 12) + prince.getX();
+            // player.y = (this->yLoc * 31) + prince.getY();
+
+            int8_t tileXIdx = this->coordToTileIndexX(direction, princePos.x) - this->getXLocation() + (direction == Direction::Right ? 1 : 0);
+            int8_t tileYIdx = this->coordToTileIndexY(direction, princePos.y) - this->getYLocation();
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
             DEBUG_PRINT("coordToTileIndexX ");
-            DEBUG_PRINT(player.x);
+            DEBUG_PRINT(princePos.x);
             DEBUG_PRINT(" = ");
             DEBUG_PRINT(tileXIdx);
             DEBUG_PRINT(", coordToTileIndexY ");
-            DEBUG_PRINT(player.y);
+            DEBUG_PRINT(princePos.y);
             DEBUG_PRINT(" = ");
             DEBUG_PRINTLN(tileYIdx);
             #endif
 
             int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, true);
-            int8_t distToEdge = distToEdgeOfTile(direction, player.x);
+            int8_t distToEdge = distToEdgeOfTile(direction, princePos.x);
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
             DEBUG_PRINT("dist ");

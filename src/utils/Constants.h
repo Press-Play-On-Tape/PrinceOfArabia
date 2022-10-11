@@ -13,9 +13,9 @@
 
 #define _DEBUG_ACTION_CANMOVEFORWARD
 #define _DEBUG_ACTION_CANJUMPUP
-#define DEBUG_ACTION_CANJUMPUP_PART2
+#define _DEBUG_ACTION_CANJUMPUP_PART2
 #define _DEBUG_ACTION_CANCLIMBDOWN
-#define _DEBUG_ONSCREEN_DETAILS
+#define DEBUG_ONSCREEN_DETAILS
 
 //-------------------------------------------------------------------------------------
 
