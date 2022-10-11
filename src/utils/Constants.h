@@ -12,10 +12,10 @@
 #define _DEBUG_LEVEL_LOAD_MAP
 
 #define _DEBUG_ACTION_CANMOVEFORWARD
-#define _DEBUG_ACTION_CANJUMPUP
+#define DEBUG_ACTION_CANJUMPUP
 #define _DEBUG_ACTION_CANJUMPUP_PART2
 #define _DEBUG_ACTION_CANCLIMBDOWN
-#define DEBUG_ONSCREEN_DETAILS
+#define _DEBUG_ONSCREEN_DETAILS
 
 //-------------------------------------------------------------------------------------
 
@@ -135,20 +135,20 @@
 #define STANCE_SMALL_STEP_4                     106
 #define STANCE_SMALL_STEP_5                     107
 #define STANCE_SMALL_STEP_6_END                 108
-#define STANCE_JUMP_UP_1_START                  109
-#define STANCE_JUMP_UP_2                        110
-#define STANCE_JUMP_UP_3                        111
-#define STANCE_JUMP_UP_4                        112
-#define STANCE_JUMP_UP_5                        113
-#define STANCE_JUMP_UP_6                        114
-#define STANCE_JUMP_UP_7                        115
-#define STANCE_JUMP_UP_8                        116
-#define STANCE_JUMP_UP_9                        117
-#define STANCE_JUMP_UP_10                       118
-#define STANCE_JUMP_UP_11                       119
-#define STANCE_JUMP_UP_12                       120
-#define STANCE_JUMP_UP_13                       121
-#define STANCE_JUMP_UP_14_END                   122
+#define STANCE_JUMP_UP_A_1_START                109     /* Dist 2 */
+#define STANCE_JUMP_UP_A_2                      110
+#define STANCE_JUMP_UP_A_3                      111
+#define STANCE_JUMP_UP_A_4                      112
+#define STANCE_JUMP_UP_A_5                      113
+#define STANCE_JUMP_UP_A_6                      114
+#define STANCE_JUMP_UP_A_7                      115
+#define STANCE_JUMP_UP_A_8                      116
+#define STANCE_JUMP_UP_A_9                      117
+#define STANCE_JUMP_UP_A_10                     118
+#define STANCE_JUMP_UP_A_11                     119
+#define STANCE_JUMP_UP_A_12                     120
+#define STANCE_JUMP_UP_A_13                     121
+#define STANCE_JUMP_UP_A_14_END                 122
 #define STANCE_JUMP_UP_DROP_1_START             123
 #define STANCE_JUMP_UP_DROP_2                   124
 #define STANCE_JUMP_UP_DROP_3                   125
@@ -219,6 +219,21 @@
 #define STANCE_STEP_CLIMBING_BLOCK_8            190
 #define STANCE_STEP_CLIMBING_BLOCK_9_END        191
 
+#define STANCE_JUMP_UP_B_1_START                192
+#define STANCE_JUMP_UP_B_2                      193
+#define STANCE_JUMP_UP_B_3                      194
+#define STANCE_JUMP_UP_B_4                      195
+#define STANCE_JUMP_UP_B_5                      196
+#define STANCE_JUMP_UP_B_6                      197
+#define STANCE_JUMP_UP_B_7                      198
+#define STANCE_JUMP_UP_B_8                      199
+#define STANCE_JUMP_UP_B_9                      200
+#define STANCE_JUMP_UP_B_10                     201
+#define STANCE_JUMP_UP_B_11                     202
+#define STANCE_JUMP_UP_B_12                     203
+#define STANCE_JUMP_UP_B_13                     204
+#define STANCE_JUMP_UP_B_14_END                 205
+
 
 
 
@@ -256,10 +271,6 @@
 #define STANCE_SWINGING_10              220
 #define STANCE_SWINGING_11              220
 #define STANCE_SWINGING_12_END          220
-// #define STANCE_FALLING_A_1_START          220 // 62 STANCE_DYING_1_START   
-// #define STANCE_FALLING_2                220 // 62 STANCE_DYING_1_START   
-// #define STANCE_FALLING_3_END            220 // 62 STANCE_DYING_1_START   
-// #define STANCE_FALLING_3_ADJ            220 // 62 STANCE_DYING_1_START   
 #define STANCE_DRINK_TONIC_1_START      220 
 #define STANCE_DRINK_TONIC_2            220
 #define STANCE_DRINK_TONIC_3            220
@@ -320,12 +331,13 @@ enum class Action : uint8_t {
     CrouchHop,
 };
 
-enum class CanJumpResult : uint8_t {
+enum class CanJumpUpResult : uint8_t {
     None,
     Jump,
     StepThenJump,
     JumpThenFall,
     TurnThenJump,
+    JumpDist10,
 };
 
 enum class CanClimbDownResult : uint8_t {

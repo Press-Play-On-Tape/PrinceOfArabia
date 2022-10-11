@@ -40,21 +40,10 @@ struct Level {
             this->loadMap();
         }
 
-        void getPrincePosition(Prince &prince, Point &point) {
-
-            point.x = (this->xLoc * 12) + prince.getX();
-            point.y = (this->yLoc * 31) + prince.getY();
-
-        }
-
-
         void updateItems(Arduboy2Ext &arduboy, Prince &prince) {
 
-            Point princePos;
-            this->getPrincePosition(prince, princePos);
-
-            uint8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), princePos.x) - this->getXLocation();
-            uint8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), princePos.y) - this->getYLocation() - 1;
+            uint8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), prince.getPosition().x) - this->getXLocation();
+            uint8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), prince.getPosition().y) - this->getYLocation() - 1;
 
             for (uint8_t i = 0; i < NUMBER_OF_ITEMS; i++) {
 
@@ -358,7 +347,8 @@ struct Level {
 
         #define TILE_FLOOR_BASIC 77
         #define TILE_FLOOR_LH_END 76
-        #define TILE_FLOOR_PATTERN 78
+        #define TILE_FLOOR_PATTERN_1 78
+        #define TILE_FLOOR_PATTERN_2 79
         #define TILE_FLOOR_LH_END_PATTERN_1 102
         #define TILE_FLOOR_LH_END_PATTERN_2 93
         #define TILE_FLOOR_RH_END 99
@@ -417,7 +407,8 @@ struct Level {
 
                 case TILE_FLOOR_BASIC:
                 case TILE_FLOOR_LH_END:
-                case TILE_FLOOR_PATTERN:
+                case TILE_FLOOR_PATTERN_1:
+                case TILE_FLOOR_PATTERN_2:
                 case TILE_FLOOR_LH_END_PATTERN_1:
                 case TILE_FLOOR_LH_END_PATTERN_2:
                 case TILE_FLOOR_RH_END:
@@ -487,24 +478,19 @@ struct Level {
 
         bool canFall(Prince &prince, int8_t xOffset = 0) {
 
-            Point princePos;
-            this->getPrincePosition(prince, princePos);
+            Point newPos = prince.getPosition();
+            newPos.x = newPos.x + (prince.getDirection() == Direction::Left ? xOffset * -1 : xOffset);
 
-
-            // player.x = (this->xLoc * 12) + prince.getX() + (prince.getDirection() == Direction::Left ? xOffset * -1 : xOffset);
-            // player.y = (this->yLoc * 31) + prince.getY();
-            princePos.x = princePos.x + (prince.getDirection() == Direction::Left ? xOffset * -1 : xOffset);
-
-            int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), princePos.x) - this->getXLocation();
-            int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), princePos.y) - this->getYLocation();
+            int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), newPos.x) - this->getXLocation();
+            int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), newPos.y) - this->getYLocation();
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
             DEBUG_PRINT("coordToTileIndexX ");
-            DEBUG_PRINT(princePos.x);
+            DEBUG_PRINT(newPos.x);
             DEBUG_PRINT(" = ");
             DEBUG_PRINT(tileXIdx);
             DEBUG_PRINT(", coordToTileIndexY ");
-            DEBUG_PRINT(princePos.y);
+            DEBUG_PRINT(newPos.y);
             DEBUG_PRINT(" = ");
             DEBUG_PRINTLN(tileYIdx);
             #endif
@@ -527,24 +513,16 @@ struct Level {
 
         bool canMoveForward(Action action, Prince &prince) {
 
-            Point princePos;
-            this->getPrincePosition(prince, princePos);
-
-
-            // player.x = (this->xLoc * 12) + prince.getX();
-            // player.y = (this->yLoc * 31) + prince.getY();
-
-
-            int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), princePos.x) - this->getXLocation();
-            int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), princePos.y) - this->getYLocation();
+            int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), prince.getPosition().x) - this->getXLocation();
+            int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), prince.getPosition().y) - this->getYLocation();
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
             DEBUG_PRINT("coordToTileIndexX ");
-            DEBUG_PRINT(princePos.x);
+            DEBUG_PRINT(prince.getPosition().x);
             DEBUG_PRINT(" = ");
             DEBUG_PRINT(tileXIdx);
             DEBUG_PRINT(", coordToTileIndexY ");
-            DEBUG_PRINT(princePos.y);
+            DEBUG_PRINT(prince.getPosition().y);
             DEBUG_PRINT(" = ");
             DEBUG_PRINTLN(tileYIdx);
             #endif
@@ -570,7 +548,7 @@ struct Level {
                         int8_t fgTile3 = this->getTile(Layer::Foreground, tileXIdx - 2, tileYIdx, true);
                         int8_t fgTile4 = this->getTile(Layer::Foreground, tileXIdx - 3, tileYIdx, true);
                         
-                        int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(prince.getDirection(), princePos.x);
+                        int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(prince.getDirection(), prince.getPosition().x);
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
                         DEBUG_PRINT("dist ");
@@ -681,7 +659,7 @@ struct Level {
                         int8_t fgTile3 = this->getTile(Layer::Foreground, tileXIdx + 2, tileYIdx, true);
                         int8_t fgTile4 = this->getTile(Layer::Foreground, tileXIdx + 3, tileYIdx, true);
                         
-                        int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(prince.getDirection(), princePos.x);
+                        int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(prince.getDirection(), prince.getPosition().x);
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
                         DEBUG_PRINT("dist ");
@@ -780,25 +758,18 @@ struct Level {
         }
 
 
-        CanJumpResult canJumpUp(Prince &prince) {
-
-            // Point princePos;
-            // this->getPrincePosition(prince, princePos);
-
-
-            // player.x = (this->xLoc * 12) + prince.getX();
-            // player.y = (this->yLoc * 31) + prince.getY();
+        CanJumpUpResult canJumpUp(Prince &prince) {
 
             switch (prince.getDirection()) {
 
                 case Direction::Left:
                     {
-                        CanJumpResult resultLeft = canJumpUp_Test(prince, Direction::Left);
+                        CanJumpUpResult resultLeft = this->canJumpUp_Test(prince, Direction::Left);
 
                         switch (resultLeft) {
 
-                            case CanJumpResult::Jump:
-                            case CanJumpResult::StepThenJump:
+                            case CanJumpUpResult::Jump:
+                            case CanJumpUpResult::StepThenJump:
 
                                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
                                 DEBUG_PRINT("Left Test success, Return ");
@@ -809,17 +780,17 @@ struct Level {
 
                             default:
                                 {
-                                    CanJumpResult resultRight = canJumpUp_Test(prince, Direction::Right);
+                                    CanJumpUpResult resultRight = this->canJumpUp_Test(prince, Direction::Right);
 
                                     switch (resultRight) {
 
-                                        case CanJumpResult::Jump:
+                                        case CanJumpUpResult::Jump:
 
                                             #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
                                             DEBUG_PRINT("Right Test success, Return TurnThenJump");
                                             #endif
 
-                                            return CanJumpResult::TurnThenJump;
+                                            return CanJumpUpResult::TurnThenJump;
 
                                         default:
 
@@ -828,36 +799,28 @@ struct Level {
                                             DEBUG_PRINTLN(static_cast<uint8_t>(resultLeft));
                                             #endif
 
-                                            return resultLeft;
+                                            return this->canJumpUp_Test_Dist10(prince, Direction::Left);
 
                                     }
 
                                 }
 
-                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                DEBUG_PRINT("Return None");
-                                #endif
-
-                                return CanJumpResult::None;
+                                break;
 
                         }
                         
                     }
 
-                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                    DEBUG_PRINT("Return None");
-                    #endif
-
-                    return CanJumpResult::None;
+                    break;
 
                 case Direction::Right:
                     {
-                        CanJumpResult resultRight = canJumpUp_Test(prince, Direction::Right);
+                        CanJumpUpResult resultRight = this->canJumpUp_Test(prince, Direction::Right);
 
                         switch (resultRight) {
 
-                            case CanJumpResult::Jump:
-                            case CanJumpResult::StepThenJump:
+                            case CanJumpUpResult::Jump:
+                            case CanJumpUpResult::StepThenJump:
 
                                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
                                 DEBUG_PRINT("Right Test success, Return ");
@@ -868,17 +831,17 @@ struct Level {
 
                             default:
                                 {
-                                    CanJumpResult resultLeft = canJumpUp_Test(prince, Direction::Left);
+                                    CanJumpUpResult resultLeft = this->canJumpUp_Test(prince, Direction::Left);
 
                                     switch (resultLeft) {
 
-                                        case CanJumpResult::Jump:
+                                        case CanJumpUpResult::Jump:
 
                                             #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
                                             DEBUG_PRINT("Left Test success, Return TurnThenJump");
                                             #endif     
 
-                                            return CanJumpResult::TurnThenJump;
+                                            return CanJumpUpResult::TurnThenJump;
 
                                         default:
 
@@ -887,73 +850,57 @@ struct Level {
                                             DEBUG_PRINTLN(static_cast<uint8_t>(resultRight));
                                             #endif     
 
-                                            return resultRight;
+                                            return this->canJumpUp_Test_Dist10(prince, Direction::Right);
 
                                     }
 
                                 }
 
-                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                DEBUG_PRINT("Return None");
-                                #endif     
-
-                                return CanJumpResult::None;
-
+                                break;
                         }
                         
                     }
 
-                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                    DEBUG_PRINT("Return None");
-                    #endif     
+                    break;
 
-                    return CanJumpResult::None;
-
-                default: 
-
-                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                    DEBUG_PRINT("Return None");
-                    #endif     
-
-                    return CanJumpResult::None;
+                default:  break;
 
             }
 
+            #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+            DEBUG_PRINT("Return None");
+            #endif
+
+            return CanJumpUpResult::None;            
+
         }
 
-        CanJumpResult canJumpUp_Test(Prince &prince, Direction direction) {
-
-            Point princePos;
-            this->getPrincePosition(prince, princePos);
-
-
-            // player.x = (this->xLoc * 12) + prince.getX();
-            // player.y = (this->yLoc * 31) + prince.getY();
+        CanJumpUpResult canJumpUp_Test(Prince &prince, Direction direction) {
 
             uint8_t inc = (direction == Direction::Left ? -1 : 1);
-            int8_t tileXIdx = this->coordToTileIndexX(direction, princePos.x) - this->getXLocation();
-            int8_t tileYIdx = this->coordToTileIndexY(direction, princePos.y) - this->getYLocation();
+            int8_t tileXIdx = this->coordToTileIndexX(direction, prince.getPosition().x) - this->getXLocation();
+            int8_t tileYIdx = this->coordToTileIndexY(direction, prince.getPosition().y) - this->getYLocation();
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-            DEBUG_PRINT("coordToTileIndexX ");
-            DEBUG_PRINT(princePos.x);
+            DEBUG_PRINT("canJumpUp_Test: coordToTileIndexX ");
+            DEBUG_PRINT(prince.getPosition().x);
             DEBUG_PRINT(" = ");
             DEBUG_PRINT(tileXIdx);
             DEBUG_PRINT(", coordToTileIndexY ");
-            DEBUG_PRINT(princePos.y);
+            DEBUG_PRINT(prince.getPosition().y);
             DEBUG_PRINT(" = ");
             DEBUG_PRINTLN(tileYIdx);
             #endif
 
             int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx - 1, true);
             int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx + inc, tileYIdx - 1, true);
-            int8_t distToEdge = distToEdgeOfTile(direction, princePos.x);
+            int8_t distToEdge = distToEdgeOfTile(direction, prince.getPosition().x);
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
             DEBUG_PRINT("dist ");
             DEBUG_PRINT(distToEdge);
             DEBUG_PRINT(", bg ");
-            DEBUG_PRINT(bgTile);
+            DEBUG_PRINT(bgTile1);
             DEBUG_PRINT(" ");
             DEBUG_PRINT(bgTile2);
             DEBUG_PRINTLN("");
@@ -966,7 +913,7 @@ struct Level {
                     switch (distToEdge) {
 
                         case 7 ... 12:
-                            return CanJumpResult::JumpThenFall;
+                            return CanJumpUpResult::JumpThenFall;
 
                         case 3 ... 6:
 
@@ -974,10 +921,10 @@ struct Level {
 
                                 case TILE_FLOOR_RH_END:
                                 case TILE_FLOOR_RH_END_GATE:
-                                    return CanJumpResult::StepThenJump;
+                                    return CanJumpUpResult::StepThenJump;
 
                                 default:                                
-                                    return CanJumpResult::JumpThenFall;
+                                    return CanJumpUpResult::JumpThenFall;
 
                             }
 
@@ -989,10 +936,10 @@ struct Level {
 
                                 case TILE_FLOOR_RH_END:
                                 case TILE_FLOOR_RH_END_GATE:
-                                    return CanJumpResult::Jump;
+                                    return CanJumpUpResult::Jump;
 
                                 default:
-                                    return CanJumpResult::JumpThenFall;
+                                    return CanJumpUpResult::JumpThenFall;
 
                             }
 
@@ -1000,14 +947,14 @@ struct Level {
 
                     }
 
-                    return CanJumpResult::None;
+                    break;
 
                 case Direction::Right:
 
                     switch (distToEdge) {
 
                         case 7 ... 12:
-                            return CanJumpResult::JumpThenFall;
+                            return CanJumpUpResult::JumpThenFall;
 
                         case 3 ... 6:
 
@@ -1016,10 +963,10 @@ struct Level {
                                 case TILE_FLOOR_LH_END:
                                 case TILE_FLOOR_LH_END_PATTERN_1:
                                 case TILE_FLOOR_LH_END_PATTERN_2:
-                                    return CanJumpResult::StepThenJump;
+                                    return CanJumpUpResult::StepThenJump;
 
                                 default:                                
-                                    return CanJumpResult::JumpThenFall;
+                                    return CanJumpUpResult::JumpThenFall;
 
                             }
 
@@ -1032,10 +979,10 @@ struct Level {
                                 case TILE_FLOOR_LH_END:
                                 case TILE_FLOOR_LH_END_PATTERN_1:
                                 case TILE_FLOOR_LH_END_PATTERN_2:
-                                    return CanJumpResult::Jump;
+                                    return CanJumpUpResult::Jump;
 
                                 default:
-                                    return CanJumpResult::JumpThenFall;
+                                    return CanJumpUpResult::JumpThenFall;
 
                             }
 
@@ -1043,44 +990,123 @@ struct Level {
 
                     }
 
-                    return CanJumpResult::None;
+                    break;
 
                 default: break;
 
             }
 
-            return CanJumpResult::None;
+            return CanJumpUpResult::None;
 
         }
 
+        CanJumpUpResult canJumpUp_Test_Dist10(Prince &prince, Direction direction) {
+
+            int8_t tileXIdx = this->coordToTileIndexX(direction, prince.getPosition().x) - this->getXLocation();
+            int8_t tileYIdx = this->coordToTileIndexY(direction, prince.getPosition().y) - this->getYLocation();
+
+            #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+            DEBUG_PRINT("canJumpUp_Test_Dist10: coordToTileIndexX ");
+            DEBUG_PRINT(prince.getPosition().x);
+            DEBUG_PRINT(" = ");
+            DEBUG_PRINT(tileXIdx);
+            DEBUG_PRINT(", coordToTileIndexY ");
+            DEBUG_PRINT(prince.getPosition().y);
+            DEBUG_PRINT(" = ");
+            DEBUG_PRINTLN(tileYIdx);
+            #endif
+
+            int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx - 1, true);
+            int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx, tileYIdx - 1, true);
+            int8_t distToEdge = distToEdgeOfTile(direction, prince.getPosition().x);
+
+            #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+            DEBUG_PRINT("dist ");
+            DEBUG_PRINT(distToEdge);
+            DEBUG_PRINT(", bg ");
+            DEBUG_PRINT(bgTile1);
+            DEBUG_PRINT(" ");
+            DEBUG_PRINT(bgTile2);
+            DEBUG_PRINTLN("");
+            #endif
+
+            switch (direction) {
+
+                case Direction::Left:
+
+                    switch (distToEdge) {
+
+                        case 10:
+
+                            switch (bgTile1) {
+
+                                case TILE_FLOOR_RH_END:
+                                case TILE_FLOOR_RH_END_GATE:
+                                    return CanJumpUpResult::JumpDist10;
+
+                                default:                                
+                                    return CanJumpUpResult::JumpThenFall;
+
+                            }
+
+                            break;
+
+                    }
+
+                    break;
+
+                case Direction::Right:
+
+                    switch (distToEdge) {
+
+                        case 10:
+
+                            switch (bgTile2) {
+
+                                case TILE_FLOOR_LH_END:
+                                case TILE_FLOOR_LH_END_PATTERN_1:
+                                case TILE_FLOOR_LH_END_PATTERN_2:
+                                    return CanJumpUpResult::JumpDist10;
+
+                                default:                                
+                                    return CanJumpUpResult::JumpThenFall;
+
+                            }
+
+                            break;
+
+                    }
+
+                    break;
+
+                default: break;
+
+            }
+
+            return CanJumpUpResult::None;
+
+        }
 
         bool canJumpUp_Part2(Prince &prince) {
 
-            int8_t tileXIdx;
-            int8_t tileYIdx;
-
-            Point princePos;
-            this->getPrincePosition(prince, princePos);
-
-
-            // player.x = (this->xLoc * 12) + prince.getX();
-            // player.y = (this->yLoc * 31) + prince.getY();
+            int8_t tileXIdx = 0;
+            int8_t tileYIdx = 0;
 
             switch (prince.getDirection()) {
 
                 case Direction::Left:
                     {
 
-                        tileXIdx = this->coordToTileIndexX(prince.getDirection(), princePos.x) - this->getXLocation();
-                        tileYIdx = this->coordToTileIndexY(prince.getDirection(), princePos.y) - this->getYLocation() - 1;
+                        tileXIdx = this->coordToTileIndexX(prince.getDirection(), prince.getPosition().x) - this->getXLocation();
+                        tileYIdx = this->coordToTileIndexY(prince.getDirection(), prince.getPosition().y) - this->getYLocation() - 1;
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP_PART2)
                         DEBUG_PRINT("coordToTileIndexX ");
-                        DEBUG_PRINT(princePos.x);
+                        DEBUG_PRINT(prince.getPosition().x);
                         DEBUG_PRINT(" = ");
                         DEBUG_PRINT(tileXIdx);
                         DEBUG_PRINT(", coordToTileIndexY ");
-                        DEBUG_PRINT(princePos.y);
+                        DEBUG_PRINT(prince.getPosition().y);
                         DEBUG_PRINT(" = ");
                         DEBUG_PRINTLN(tileYIdx);
                         #endif
@@ -1103,16 +1129,16 @@ struct Level {
                 case Direction::Right:
                     {
 
-                        tileXIdx = this->coordToTileIndexX(prince.getDirection(), princePos.x) - this->getXLocation() + 1;
-                        tileYIdx = this->coordToTileIndexY(prince.getDirection(), princePos.y) - this->getYLocation() - 1;
+                        tileXIdx = this->coordToTileIndexX(prince.getDirection(), prince.getPosition().x) - this->getXLocation() + 1;
+                        tileYIdx = this->coordToTileIndexY(prince.getDirection(), prince.getPosition().y) - this->getYLocation() - 1;
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP_PART2)
                         DEBUG_PRINT("coordToTileIndexX ");
-                        DEBUG_PRINT(princePos.x);
+                        DEBUG_PRINT(prince.getPosition().x);
                         DEBUG_PRINT(" = ");
                         DEBUG_PRINT(tileXIdx);
                         DEBUG_PRINT(", coordToTileIndexY ");
-                        DEBUG_PRINT(princePos.y);
+                        DEBUG_PRINT(prince.getPosition().y);
                         DEBUG_PRINT(" = ");
                         DEBUG_PRINTLN(tileYIdx);
                         #endif
@@ -1187,13 +1213,6 @@ struct Level {
 
 
         CanClimbDownResult canClimbDown(Prince &prince) {
-
-            // Point princePos;
-            // this->getPrincePosition(prince, princePos);
-
-
-            // player.x = (this->xLoc * 12) + prince.getX();
-            // player.y = (this->yLoc * 31) + prince.getY();
 
             switch (prince.getDirection()) {
 
@@ -1341,29 +1360,22 @@ struct Level {
 
         CanClimbDownResult canClimbDown_Test(Prince &prince, Direction direction) {
 
-            Point princePos;
-            this->getPrincePosition(prince, princePos);
-
-
-            // player.x = (this->xLoc * 12) + prince.getX();
-            // player.y = (this->yLoc * 31) + prince.getY();
-
-            int8_t tileXIdx = this->coordToTileIndexX(direction, princePos.x) - this->getXLocation() + (direction == Direction::Right ? 1 : 0);
-            int8_t tileYIdx = this->coordToTileIndexY(direction, princePos.y) - this->getYLocation();
+            int8_t tileXIdx = this->coordToTileIndexX(direction, prince.getPosition().x) - this->getXLocation() + (direction == Direction::Right ? 1 : 0);
+            int8_t tileYIdx = this->coordToTileIndexY(direction, prince.getPosition().y) - this->getYLocation();
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
             DEBUG_PRINT("coordToTileIndexX ");
-            DEBUG_PRINT(princePos.x);
+            DEBUG_PRINT(prince.getPosition().x);
             DEBUG_PRINT(" = ");
             DEBUG_PRINT(tileXIdx);
             DEBUG_PRINT(", coordToTileIndexY ");
-            DEBUG_PRINT(princePos.y);
+            DEBUG_PRINT(prince.getPosition().y);
             DEBUG_PRINT(" = ");
             DEBUG_PRINTLN(tileYIdx);
             #endif
 
             int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, true);
-            int8_t distToEdge = distToEdgeOfTile(direction, princePos.x);
+            int8_t distToEdge = distToEdgeOfTile(direction, prince.getPosition().x);
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
             DEBUG_PRINT("dist ");
@@ -1372,90 +1384,6 @@ struct Level {
             DEBUG_PRINT(bgTile1);
             DEBUG_PRINTLN("");
             #endif
-
-            // switch (distToEdge) {
-
-            //     case 7 ... 12:
-            //         return CanClimbDownResult::None;
-
-            //     case 3 ... 6:
-
-            //         switch (direction) {
-
-            //             case Direction::Left:
-
-            //                 switch (bgTile1) {
-
-            //                     case TILE_FLOOR_LH_END:
-            //                     case TILE_FLOOR_LH_END_PATTERN_1:
-            //                     case TILE_FLOOR_LH_END_PATTERN_2:
-            //                         return CanClimbDownResult::StepThenClimbDown;
-
-            //                     default:                                
-            //                         return CanClimbDownResult::None;
-
-            //                 }
-
-            //                 break;
-
-            //             case Direction::Right:
-
-            //                 switch (bgTile1) {
-
-            //                     case TILE_FLOOR_RH_END:
-            //                     case TILE_FLOOR_RH_END_GATE:
-            //                         return CanClimbDownResult::StepThenClimbDown;
-
-            //                     default:                                
-            //                         return CanClimbDownResult::None;
-
-            //                 }
-
-            //                 break;
-
-            //         }
-                    
-            //         break;
-
-            //     case 0 ... 2:
-
-            //         switch (direction) {
-
-            //             case Direction::Left:
-
-            //                 switch (bgTile1) {
-
-            //                     case TILE_FLOOR_LH_END:
-            //                     case TILE_FLOOR_LH_END_PATTERN_1:
-            //                     case TILE_FLOOR_LH_END_PATTERN_2:
-            //                         return CanClimbDownResult::ClimbDown;
-
-            //                     default:
-            //                         return CanClimbDownResult::None;
-
-            //                 }
-
-            //                 break;
-
-            //             case Direction::Right:
-
-            //                 switch (bgTile1) {
-
-            //                     case TILE_FLOOR_RH_END:
-            //                     case TILE_FLOOR_RH_END_GATE:
-            //                         return CanClimbDownResult::ClimbDown;
-
-            //                     default:
-            //                         return CanClimbDownResult::None;
-
-            //                 }
-
-            //                 break;
-
-            //         }
-            // }
-
-            // return CanClimbDownResult::None;
 
             switch (direction) {
 

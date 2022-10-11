@@ -19,6 +19,8 @@ struct Prince {
         int16_t x = 0;
         int16_t y = 0;
 
+        Point location;
+
     public:
 
         uint8_t getStance()                         { return this->stance; }
@@ -28,6 +30,7 @@ struct Prince {
         int16_t getYImage()                         { return this->y - 31; }
         uint8_t getHangingCounter()                 { return this->hangingCounter; }
         bool isFalling()                            { return this->falling; }
+        Point &getPosition()                        { return this->location; }
 
         Stack <int16_t, 30>  * getStack()           { return this->stack; }
         Direction getDirection()                    { return this->direction; }
@@ -159,7 +162,8 @@ struct Prince {
 
             switch (retValue) {
 
-                case STANCE_JUMP_UP_14_END:
+                case STANCE_JUMP_UP_A_14_END:
+                case STANCE_JUMP_UP_B_14_END:
                     this->hangingCounter = 40;
                     break;
                     
@@ -185,7 +189,7 @@ struct Prince {
             return this->stack->contains(item);
         }
 
-    	void update() {
+    	void update(uint8_t xLoc, uint8_t yLoc) {
 
             // Housekeeping ..
 
@@ -194,6 +198,10 @@ struct Prince {
             }
 
             this->stack->update();
+
+            location.x = (xLoc * 12) + this->x;
+            location.y = (yLoc * 31) + this->y;
+
         }
 
     	uint8_t getStackFrame() {

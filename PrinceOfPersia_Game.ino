@@ -24,7 +24,7 @@ void game() {
 
     // Update the objects ..
 
-    prince.update();
+    prince.update(level.getXLocation(), level.getYLocation());
     level.updateItems(arduboy, prince);
 
 
@@ -188,7 +188,7 @@ void game() {
                             DEBUG_PRINTLN("DOWN_BUTTON, Climb down");
                             #endif
 
-                            prince.pushSequence(STANCE_STEP_CLIMBING_15_END, STANCE_STEP_CLIMBING_1_START, STANCE_JUMP_UP_14_END, true);
+                            prince.pushSequence(STANCE_STEP_CLIMBING_15_END, STANCE_STEP_CLIMBING_1_START, STANCE_JUMP_UP_A_14_END, true);
                             break;
 
                         case CanClimbDownResult::StepThenClimbDown:
@@ -196,7 +196,7 @@ void game() {
                             DEBUG_PRINTLN("DOWN_BUTTON, Step then climb down");
                             #endif
 
-                            prince.pushSequence(STANCE_STEP_CLIMBING_15_END, STANCE_STEP_CLIMBING_1_START, STANCE_JUMP_UP_14_END, true);
+                            prince.pushSequence(STANCE_STEP_CLIMBING_15_END, STANCE_STEP_CLIMBING_1_START, STANCE_JUMP_UP_A_14_END, true);
                             // prince.pushSequence(STANCE_SMALL_STEP_1_START, STANCE_SMALL_STEP_6_END, STANCE_UPRIGHT, false);
                             prince.pushSequence(STANCE_SMALL_STEP_6_END, STANCE_SMALL_STEP_1_START, STANCE_UPRIGHT, false);
                             break;
@@ -206,7 +206,7 @@ void game() {
                             DEBUG_PRINTLN("DOWN_BUTTON, Step then climb down");
                             #endif
 
-                            prince.pushSequence(STANCE_STEP_CLIMBING_15_END, STANCE_STEP_CLIMBING_1_START, STANCE_JUMP_UP_14_END, true);
+                            prince.pushSequence(STANCE_STEP_CLIMBING_15_END, STANCE_STEP_CLIMBING_1_START, STANCE_JUMP_UP_A_14_END, true);
                             prince.pushSequence(STANCE_STANDING_TURN_1_START, STANCE_STANDING_TURN_5_END, STANCE_UPRIGHT_TURN, false);
                             break;
 
@@ -215,7 +215,7 @@ void game() {
                             DEBUG_PRINTLN("DOWN_BUTTON, Step then turn then climb down");
                             #endif
 
-                            prince.pushSequence(STANCE_STEP_CLIMBING_15_END, STANCE_STEP_CLIMBING_1_START, STANCE_JUMP_UP_14_END, true);
+                            prince.pushSequence(STANCE_STEP_CLIMBING_15_END, STANCE_STEP_CLIMBING_1_START, STANCE_JUMP_UP_A_14_END, true);
                             prince.pushSequence(STANCE_STANDING_TURN_1_START, STANCE_STANDING_TURN_5_END, STANCE_UPRIGHT_TURN, false);
                             prince.pushSequence(STANCE_SMALL_STEP_1_START, STANCE_SMALL_STEP_6_END, STANCE_UPRIGHT, false);
                             break;
@@ -234,27 +234,31 @@ void game() {
                 }
                 else if (arduboy.pressed(UP_BUTTON)) {
 
-                    CanJumpResult jumpResult = level.canJumpUp(prince);
+                    CanJumpUpResult jumpResult = level.canJumpUp(prince);
 
                     switch (jumpResult) {
 
-                        case CanJumpResult::Jump:
-                            prince.pushSequence(STANCE_JUMP_UP_1_START, STANCE_JUMP_UP_14_END, true);
+                        case CanJumpUpResult::Jump:
+                            prince.pushSequence(STANCE_JUMP_UP_A_1_START, STANCE_JUMP_UP_A_14_END, true);
                             break;
 
-                        case CanJumpResult::JumpThenFall:
+                        case CanJumpUpResult::JumpThenFall:
                             prince.pushSequence(STANCE_JUMP_UP_DROP_1_START, STANCE_JUMP_UP_DROP_5_END, STANCE_UPRIGHT, false);
-                            prince.pushSequence(STANCE_JUMP_UP_1_START, STANCE_JUMP_UP_14_END, true);
+                            prince.pushSequence(STANCE_JUMP_UP_A_1_START, STANCE_JUMP_UP_A_14_END, true);
                             break;
 
-                        case CanJumpResult::StepThenJump:
-                            prince.pushSequence(STANCE_JUMP_UP_1_START, STANCE_JUMP_UP_14_END, STANCE_UPRIGHT, true);
+                        case CanJumpUpResult::StepThenJump:
+                            prince.pushSequence(STANCE_JUMP_UP_A_1_START, STANCE_JUMP_UP_A_14_END, STANCE_UPRIGHT, true);
                             prince.pushSequence(STANCE_SMALL_STEP_1_START, STANCE_SMALL_STEP_6_END, STANCE_UPRIGHT, false);
                             break;
 
-                        case CanJumpResult::TurnThenJump:
-                            prince.pushSequence(STANCE_JUMP_UP_1_START, STANCE_JUMP_UP_14_END, false);
+                        case CanJumpUpResult::TurnThenJump:
+                            prince.pushSequence(STANCE_JUMP_UP_A_1_START, STANCE_JUMP_UP_A_14_END, false);
                             prince.pushSequence(STANCE_STANDING_TURN_1_START, STANCE_STANDING_TURN_5_END, STANCE_UPRIGHT_TURN, true);
+                            break;
+
+                        case CanJumpUpResult::JumpDist10:
+                            prince.pushSequence(STANCE_JUMP_UP_B_1_START, STANCE_JUMP_UP_B_14_END, true);
                             break;
 
                         default: break;
@@ -265,8 +269,9 @@ void game() {
 
                 break;
 
-            case STANCE_JUMP_UP_14_END:     // Hanging on ledge ..
-
+            case STANCE_JUMP_UP_A_14_END:     // Hanging on ledge  (dist 2)..
+            case STANCE_JUMP_UP_B_14_END:    
+            
                 if (arduboy.pressed(DOWN_BUTTON)) {
                     prince.pushSequence(STANCE_JUMP_UP_DROP_1_START, STANCE_JUMP_UP_DROP_5_END, STANCE_UPRIGHT, true);
                 }
