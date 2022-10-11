@@ -15,7 +15,7 @@
 Arduboy2Ext arduboy;
 Font3x5 font3x5 = Font3x5();
 
-Stack <int16_t, 20>  princeStack;
+Stack <int16_t, 30>  princeStack;
 Prince prince;
 Level level;
 GameState gameState = GameState::SplashScreen_Init;

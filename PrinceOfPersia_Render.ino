@@ -21,7 +21,8 @@ void render() {
             int8_t bgTile = level.getTile(Layer::Background, x, y);
 
             if (bgTile >= 0) {
-                FX::drawBitmap(x * 12, y * 31, Images::Tile_Dungeon[Images::xRef[bgTile]], 0, dbmNormal);
+               FX::drawBitmap(x * 12, y * 31, Images::Tile_Dungeon[Images::xRef[bgTile]], 0, dbmNormal);
+                // FX::drawBitmap(x * 12, y * 31, Images::Tile_Dungeon_00 + (Images::xRef[bgTile] * 52), 0, dbmNormal);
             }
 
         }
@@ -40,11 +41,11 @@ void render() {
             switch (item.itemType) {
 
                 case ItemType::Gate:
-                    FX::drawBitmap((item.x - level.getXLocation()) * 12, (item.y - level.getYLocation()) * 31, Images::Gate_00 + (item.data.gate.position * 76), 0, dbmMasked);
+                    FX::drawBitmap(((item.x - level.getXLocation()) * 12) - 5, (item.y - level.getYLocation()) * 31, Images::Gate_00 + (item.data.gate.position * 76), 0, dbmMasked);
                     break;
 
                 case ItemType::Torch:
-                    FX::drawBitmap((item.x - level.getXLocation()) * 12, (item.y - level.getYLocation()) * 31, Images::Torch_00 + (item.data.torch.frame * 116), 0, dbmMasked);
+                    FX::drawBitmap((item.x - level.getXLocation()) * 12, (item.y - level.getYLocation()) * 31, Images::Torch_00 + (item.data.torch.frame * 16), 0, dbmMasked);
                     break;
 
                 default: break;
@@ -58,7 +59,12 @@ void render() {
     // Draw prince ..
 
     uint16_t stance = prince.getStance();
-    uint24_t startPos = Images::Prince_Left_001 + ((stance - 1) * 364);
+    uint16_t imageIndex = static_cast<uint16_t>(pgm_read_byte(&Images::StanceToImageXRef[stance]));
+    uint24_t startPos = Images::Prince_Left_001 + ((imageIndex - 1) * 364);
+Serial.print("Stance: ");
+Serial.print(stance);
+Serial.print(", imageIndex: ");
+Serial.println(imageIndex);
 
     if (prince.getDirection() == Direction::Left) {
 

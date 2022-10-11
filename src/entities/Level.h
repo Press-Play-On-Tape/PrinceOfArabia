@@ -294,6 +294,16 @@ struct Level {
 
         }
 
+        #define TILE_NONE -1
+        #define TILE_FLOOR_NONE 75
+        #define TILE_FLOOR_NONE_PATTERN 92
+
+        #define TILE_FLOOR_NONE_LH_WALL_1 97
+        #define TILE_FLOOR_NONE_LH_WALL_2 120
+        #define TILE_FLOOR_NONE_LH_WALL_3 91
+        #define TILE_FLOOR_NONE_LH_WALL_4 119
+
+
         #define TILE_FLOOR_BASIC 77
         #define TILE_FLOOR_LH_END 76
         #define TILE_FLOOR_PATTERN 78
@@ -301,6 +311,12 @@ struct Level {
         #define TILE_FLOOR_LH_END_PATTERN_2 93
         #define TILE_FLOOR_RH_END 99
         #define TILE_FLOOR_RH_END_GATE 118
+
+        #define TILE_FLOOR_RH_END_1 98
+        #define TILE_FLOOR_RH_END_2 85
+        #define TILE_FLOOR_RH_END_3 103
+        #define TILE_FLOOR_RH_END_4 94
+        #define TILE_FLOOR_RH_END_5 111
 
         #define TILE_FLOOR_LH_WALL_1 83
         #define TILE_FLOOR_LH_WALL_2 109
@@ -385,7 +401,122 @@ struct Level {
 
         }
 
+        bool canFall(uint8_t bgTile, uint8_t fgTile) {
 
+            switch (bgTile) {
+
+                case TILE_NONE:
+                case TILE_FLOOR_NONE:
+                case TILE_FLOOR_NONE_PATTERN:
+                case TILE_FLOOR_NONE_LH_WALL_1:
+                case TILE_FLOOR_NONE_LH_WALL_2:
+                case TILE_FLOOR_NONE_LH_WALL_3:
+                case TILE_FLOOR_NONE_LH_WALL_4:
+                case TILE_FLOOR_RH_END_1:
+                case TILE_FLOOR_RH_END_2:
+                case TILE_FLOOR_RH_END_3:
+                case TILE_FLOOR_RH_END_4:
+                case TILE_FLOOR_RH_END_5:
+
+                    return true;
+
+            }
+
+            // switch (fgTile) {
+
+            //     case :
+            //         return false;
+
+            // }
+
+            return false;
+
+        }
+
+        bool canFall(Prince prince, int8_t xOffset = 0) {
+
+            Point player;
+
+            player.x = (this->xLoc * 12) + prince.getX() + (prince.getDirection() == Direction::Left ? xOffset * -1 : xOffset);
+            player.y = (this->yLoc * 31) + prince.getY();
+
+            switch (prince.getDirection()) {
+
+                case Direction::Left:
+                    {
+
+                        int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), player.x) - this->getXLocation();
+                        int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), player.y) - this->getYLocation();
+
+                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
+                        DEBUG_PRINT("coordToTileIndexX ");
+                        DEBUG_PRINT(player.x);
+                        DEBUG_PRINT(" = ");
+                        DEBUG_PRINT(tileXIdx);
+                        DEBUG_PRINT(", coordToTileIndexY ");
+                        DEBUG_PRINT(player.y);
+                        DEBUG_PRINT(" = ");
+                        DEBUG_PRINTLN(tileYIdx);
+                        #endif
+
+                        int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, true);
+                        int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, true);
+
+                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+                        DEBUG_PRINT("bg ");
+                        DEBUG_PRINT(bgTile1);
+                        DEBUG_PRINT(", fg ");
+                        DEBUG_PRINT(fgTile1);
+                        DEBUG_PRINTLN("");
+                        #endif
+
+                        return this->canFall(bgTile1, fgTile1);
+
+                    }
+
+                    break;
+
+                case Direction::Right:
+                    {
+
+                        int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), player.x) - this->getXLocation();
+                        int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), player.y) - this->getYLocation();
+
+                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
+                        DEBUG_PRINT("coordToTileIndexX ");
+                        DEBUG_PRINT(player.x);
+                        DEBUG_PRINT(" = ");
+                        DEBUG_PRINT(tileXIdx);
+                        DEBUG_PRINT(", coordToTileIndexY ");
+                        DEBUG_PRINT(player.y);
+                        DEBUG_PRINT(" = ");
+                        DEBUG_PRINTLN(tileYIdx);
+                        #endif
+
+                        int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, true);
+                        int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, true);
+
+                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+                        DEBUG_PRINT("bg ");
+                        DEBUG_PRINT(bgTile1);
+                        DEBUG_PRINT(", fg ");
+                        DEBUG_PRINT(fgTile1);
+                        DEBUG_PRINTLN("");
+                        #endif
+
+                        return this->canFall(bgTile1, fgTile1);
+
+                    }
+
+                    break;
+
+                default: break;
+
+            }
+
+            return false;
+
+        }
 
         bool canMoveForward(Action action, Prince prince) {
 
@@ -450,11 +581,12 @@ struct Level {
                         switch (action) {
 
                             case Action::SmallStep:
+                            case Action::CrouchHop:
 
                                 switch (distToEdgeOfCurrentTile) {
 
                                     case 0 ... 5:
-                                         return this->isGroundTile(bgTile2, fgTile2);
+                                         return (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2));
 
                                     default:
                                         return true;
@@ -469,7 +601,7 @@ struct Level {
                                 switch (distToEdgeOfCurrentTile) {
 
                                     case 0 ... 9:
-                                         return this->isGroundTile(bgTile2, fgTile2);
+                                         return (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2));
 
                                     default:
                                         return true;
@@ -480,7 +612,7 @@ struct Level {
 
                             case Action::RunRepeat:
 
-                                return this->isGroundTile(bgTile2, fgTile2);
+                                return (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2));
 
                             case Action::StandingJump:
 
@@ -564,12 +696,13 @@ struct Level {
                         switch (action) {
 
                             case Action::SmallStep:
+                            case Action::CrouchHop:
 
                                 switch (distToEdgeOfCurrentTile) {
 
                                     case 0 ... 5:
 
-                                         return this->isGroundTile(bgTile2, fgTile2);
+                                         return (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2));
 
                                     default:
 
@@ -585,7 +718,7 @@ struct Level {
                                 switch (distToEdgeOfCurrentTile) {
 
                                     case 0 ... 9:
-                                         return this->isGroundTile(bgTile2, fgTile2);
+                                         return (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2));
 
                                     default:
                                         return true;
@@ -596,7 +729,7 @@ struct Level {
 
                             case Action::RunRepeat:
 
-                                return this->isGroundTile(bgTile2, fgTile2);
+                                return (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2));
 
                             case Action::StandingJump:
 
@@ -808,11 +941,23 @@ struct Level {
             DEBUG_PRINT("dist ");
             DEBUG_PRINT(distToEdge);
             DEBUG_PRINT(", bg ");
-            DEBUG_PRINT(bgTile1);
+            DEBUG_PRINT(bgTile);
             DEBUG_PRINT(" ");
             DEBUG_PRINT(bgTile2);
             DEBUG_PRINTLN("");
             #endif
+
+            uint8_t gateIdx = 255;
+
+            for (Item &item : this->items) {
+
+                if (item.itemtype == ItemType::Gate && item.active) {
+
+                    if (item.x = )
+
+                }
+
+            }
 
             switch (direction) {
 

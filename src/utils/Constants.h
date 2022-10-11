@@ -2,18 +2,19 @@
 #pragma once
 
 
-
 #define DEBUG_PRINT    Serial.print
 #define DEBUG_PRINTLN  Serial.println
 
-#define _DEBUG
-#define _DEBUG_PRINCE_DETAILS
+#define DEBUG
+#define DEBUG_PRINCE_DETAILS
+#define _DEBUG_PRINCE_STACK
 #define _DEBUG_PRINT_ACTION
-#define _DEBUG_LOAD_MAO
+#define _DEBUG_LEVEL_LOAD_MAP
 
-#define _DEBUG_ACTION_CANMOVEFORWARD
+#define DEBUG_ACTION_CANMOVEFORWARD
 #define _DEBUG_ACTION_CANJUMPUP
 #define _DEBUG_ACTION_CANCLIMBDOWN
+#define DEBUG_ONSCREEN_DETAILS
 
 //-------------------------------------------------------------------------------------
 
@@ -167,6 +168,48 @@
 #define STANCE_STEP_CLIMBING_13         140
 #define STANCE_STEP_CLIMBING_14         141
 #define STANCE_STEP_CLIMBING_15_END     142
+#define STANCE_CROUCH_STAND_1_START     143
+#define STANCE_CROUCH_STAND_2           144
+#define STANCE_CROUCH_STAND_3           145
+#define STANCE_CROUCH_STAND_4           146
+#define STANCE_CROUCH_STAND_5           147
+#define STANCE_CROUCH_STAND_6           148
+#define STANCE_CROUCH_STAND_7           149
+#define STANCE_CROUCH_STAND_8           150
+#define STANCE_CROUCH_STAND_9           151
+#define STANCE_CROUCH_STAND_10          152
+#define STANCE_CROUCH_STAND_11          153
+#define STANCE_CROUCH_STAND_12_END      154
+#define STANCE_FALLING_A_1_START        155     /* While walking */
+#define STANCE_FALLING_A_2              156
+#define STANCE_FALLING_A_3              157
+#define STANCE_FALLING_A_4              158
+#define STANCE_FALLING_A_5              159
+#define STANCE_FALLING_A_6_END          160
+#define STANCE_FALLING_B_1_START        161     /* If dst = 0, 4, 8 */
+#define STANCE_FALLING_B_2              162
+#define STANCE_FALLING_B_3              163
+#define STANCE_FALLING_B_4              164
+#define STANCE_FALLING_B_5              165
+#define STANCE_FALLING_B_6_END          166
+#define STANCE_FALLING_C_1_START        167     /* If dst = 0, 4, 8 */
+#define STANCE_FALLING_C_2              168
+#define STANCE_FALLING_C_3              169
+#define STANCE_FALLING_C_4              170
+#define STANCE_FALLING_C_5              171
+#define STANCE_FALLING_C_6_END          172
+#define STANCE_CROUCH_1_START           173
+#define STANCE_CROUCH_2                 174
+#define STANCE_CROUCH_3_END             175
+#define STANCE_CROUCH_HOP_1_START       176
+#define STANCE_CROUCH_HOP_2             177
+#define STANCE_CROUCH_HOP_3             178
+#define STANCE_CROUCH_HOP_4             179
+#define STANCE_CROUCH_HOP_5             180
+#define STANCE_CROUCH_HOP_6             181
+#define STANCE_CROUCH_HOP_7_END         182
+
+
 
 
 #define STANCE_JUMP_DOWN_1_START        220
@@ -203,10 +246,10 @@
 #define STANCE_SWINGING_10              220
 #define STANCE_SWINGING_11              220
 #define STANCE_SWINGING_12_END          220
-#define STANCE_FALLING_1_START          220 // 62 STANCE_DYING_1_START   
-#define STANCE_FALLING_2                220 // 62 STANCE_DYING_1_START   
-#define STANCE_FALLING_3_END            220 // 62 STANCE_DYING_1_START   
-#define STANCE_FALLING_3_ADJ            220 // 62 STANCE_DYING_1_START   
+// #define STANCE_FALLING_A_1_START          220 // 62 STANCE_DYING_1_START   
+// #define STANCE_FALLING_2                220 // 62 STANCE_DYING_1_START   
+// #define STANCE_FALLING_3_END            220 // 62 STANCE_DYING_1_START   
+// #define STANCE_FALLING_3_ADJ            220 // 62 STANCE_DYING_1_START   
 #define STANCE_DRINK_TONIC_1_START      220 
 #define STANCE_DRINK_TONIC_2            220
 #define STANCE_DRINK_TONIC_3            220
@@ -264,6 +307,7 @@ enum class Action : uint8_t {
     RunStart,
     RunRepeat,
     StandingJump,
+    CrouchHop,
 };
 
 enum class CanJumpResult : uint8_t {

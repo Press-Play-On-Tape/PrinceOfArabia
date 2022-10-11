@@ -63,7 +63,6 @@ void game() {
 
 
     #if defined(DEBUG) && defined(DEBUG_PRINCE_DETAILS)
-    DEBUG_PRINTLN("----------------------");
     DEBUG_PRINT("Stance: ");
     DEBUG_PRINT(prince.getStance());
     DEBUG_PRINT(", Direction: ");
@@ -113,16 +112,16 @@ void game() {
         //                 this->prince.clear();
         //                 this->prince.setFalling(true);
         //                 this->prince.pushSequence(STANCE_SQUAT_1_START, STANCE_SQUAT_10_END, STANCE_UPRIGHT, true);
-        //                 this->prince.pushSequence(STANCE_FALLING_1_START, STANCE_FALLING_3_END, true);
-        //                 this->prince.setStance(STANCE_FALLING_1_START);
+        //                 this->prince.pushSequence(STANCE_FALLING_A_1_START, STANCE_FALLING_3_END, true);
+        //                 this->prince.setStance(STANCE_FALLING_A_1_START);
         //                 break;
 
         //             case 2:
         //                 this->prince.clear();
         //                 this->prince.setFalling(true);
         //                 this->prince.pushSequence(STANCE_SQUAT_1_START, STANCE_SQUAT_10_END, STANCE_UPRIGHT, true);
-        //                 this->prince.pushSequence(STANCE_FALLING_1_START, STANCE_FALLING_3_END, true);
-        //                 this->prince.setStance(STANCE_FALLING_1_START);
+        //                 this->prince.pushSequence(STANCE_FALLING_A_1_START, STANCE_FALLING_3_END, true);
+        //                 this->prince.setStance(STANCE_FALLING_A_1_START);
         //                 break;
 
         //         }
@@ -255,6 +254,12 @@ void game() {
                             break;
 
                         case CanClimbDownResult::None:
+                            #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
+                            DEBUG_PRINTLN("DOWN_BUTTON, Cannot climb down, squat");
+                            #endif
+Serial.println("Crouch");
+                            prince.pushSequence(STANCE_CROUCH_1_START, STANCE_CROUCH_3_END, false);
+
                             break;
 
                     }
@@ -277,8 +282,8 @@ void game() {
                             break;
 
                         case CanJumpResult::StepThenJump:
-                            prince.pushSequence(STANCE_JUMP_UP_1_START, STANCE_JUMP_UP_14_END, false);
-                            prince.pushSequence(STANCE_SMALL_STEP_1_START, STANCE_SMALL_STEP_6_END, STANCE_UPRIGHT, true);
+                            prince.pushSequence(STANCE_JUMP_UP_1_START, STANCE_JUMP_UP_14_END, STANCE_UPRIGHT, true);
+                            prince.pushSequence(STANCE_SMALL_STEP_1_START, STANCE_SMALL_STEP_6_END, STANCE_UPRIGHT, false);
                             break;
 
                         case CanJumpResult::TurnThenJump:
@@ -599,45 +604,33 @@ void game() {
                 }
 
                 break;
-/*
-            case STANCE_SQUAT_3_LOW_POINT:
 
-                if (prince.getDirection() == Direction::Right) {
-                        
-                    if (arduboy.justPressed(RIGHT_BUTTON) && arduboy.pressed(DOWN_BUTTON)) {
-                        prince.pushSequence(STANCE_SQUAT_MOVE_1_START, STANCE_SQUAT_MOVE_3_END, STANCE_SQUAT_3_LOW_POINT, true);
-                    }
-                    else if (arduboy.pressed(RIGHT_BUTTON) && !arduboy.pressed(DOWN_BUTTON)) {
-                        prince.push(STANCE_RUN_REPEAT_4, true);
-                        prince.pushSequence(STANCE_SQUAT_4, STANCE_SQUAT_9, true);
-                    }
-                    else if (arduboy.justPressed(LEFT_BUTTON) && arduboy.pressed(DOWN_BUTTON) / *&& !this->world.isChangingDirections()* /) {
-                        // this->world.switchDirections(Direction::Left);
-                        prince.pushSequence(STANCE_SQUAT_ROTATE_01_START, STANCE_SQUAT_ROTATE_05_END, true);
-                    }
+            case STANCE_CROUCH_3_END:
+            case STANCE_CROUCH_HOP_7_END:
 
-                }
-                else {
-                        
-                    if (arduboy.justPressed(LEFT_BUTTON) && arduboy.pressed(DOWN_BUTTON)) {
-                        prince.pushSequence(STANCE_SQUAT_MOVE_1_START, STANCE_SQUAT_MOVE_3_END, STANCE_SQUAT_3_LOW_POINT, true);
-                    }
-                    else if (arduboy.justPressed(LEFT_BUTTON) && !arduboy.pressed(DOWN_BUTTON)) {
-                        prince.push(STANCE_RUN_REPEAT_4, true);
-                        prince.pushSequence(STANCE_SQUAT_4, STANCE_SQUAT_9, true);
-                    }
-                    else if (arduboy.justPressed(RIGHT_BUTTON) && arduboy.pressed(DOWN_BUTTON) / *&& !this->world.isChangingDirections()* /) {
-                        // this->world.switchDirections(Direction::Right);
-                        prince.pushSequence(STANCE_SQUAT_ROTATE_01_START, STANCE_SQUAT_ROTATE_05_END, true);
-                    }
-                }
-                
                 if (!arduboy.pressed(DOWN_BUTTON)) {
-                    prince.pushSequence(STANCE_SQUAT_4, STANCE_SQUAT_10_END, STANCE_UPRIGHT, true);
+
+                    prince.pushSequence(STANCE_CROUCH_STAND_3, STANCE_CROUCH_STAND_12_END, STANCE_UPRIGHT, true);
+
+                }
+                else if (arduboy.pressed(LEFT_BUTTON)) {
+
+                    if (level.canMoveForward(Action::CrouchHop, prince)) {
+                        prince.pushSequence(STANCE_CROUCH_HOP_1_START, STANCE_CROUCH_HOP_7_END, true);
+                    }
+
+                }
+                else if (arduboy.pressed(RIGHT_BUTTON)) {
+
+                    if (level.canMoveForward(Action::CrouchHop, prince)) {
+                        prince.pushSequence(STANCE_CROUCH_HOP_1_START, STANCE_CROUCH_HOP_7_END, true);
+                    }
+
                 }
 
                 break;
-*/
+            
+
             default: break;
 
         }
@@ -682,61 +675,79 @@ void game() {
 
             switch (prince.getStance()) {
 
-                // case STANCE_UPRIGHT_END_CLIMB:
-                //     //this->world.decLevel();
-                //     prince.setStance(STANCE_UPRIGHT);
-                //     break;
-
                 case STANCE_UPRIGHT_TURN:
                     prince.setStance(STANCE_UPRIGHT);
                     prince.changeDirection();
                     break;
-
-                // case STANCE_FALLING_3_END:
-                //     // this->world.incLevel();
-                //     // this->world.setY(this->world.getY() - 13);
-                //     prince.setStance(STANCE_FALLING_3_ADJ);
-                //     prince.setFalling(false);
-                //     break;
 
                 case STANCE_RUN_REPEAT_8_END_TURN:
                     prince.setStance(STANCE_RUN_REPEAT_8_END);
                     prince.changeDirection();
                     break;
 
-                // case STANCE_SQUAT_ROTATE_05_END:
-                //     prince.setStance(STANCE_SQUAT_3_LOW_POINT);
-                //     prince.changeDirection();
-                //     break;
-
-/*
-                case STANCE_SWINGING_10:
+                case STANCE_SINGLE_STEP_5:
+                case STANCE_RUNNING_JUMP_4:
                     {
-                        int8_t xOffset = 0;
-                        int8_t width = 0;
-
-                        if (prince.getDirection() == Direction::Right) {
-
-                            xOffset = prince.getXOffset();
-                            width = 12; // distance from LHS image to middle of hand
-
+                        if (level.canFall(prince)) {
+                            prince.clear();
+                            prince.pushSequence(STANCE_CROUCH_STAND_1_START, STANCE_CROUCH_STAND_12_END, STANCE_UPRIGHT, true);
+                            prince.pushSequence(STANCE_FALLING_A_1_START, STANCE_FALLING_A_6_END, true);
                         }
-                        else {
+                    }
+                    break;
 
-                            xOffset = -prince.getXOffset();
-                            width = -12;
+                case STANCE_RUNNING_JUMP_1_START:
+                case STANCE_RUNNING_JUMP_10:
+                    {
+                        if (level.canFall(prince)) {
 
-                        }
-printf("%i,%i,%i,%i >> %i, %i\n", this->world.getX() ,this->world.getXOffset() , width , xOffset, (this->world.getX() - width - xOffset) , this->gateSwitch.getX());
-                        if (abs((this->world.getX() - width - xOffset) - (this->gateSwitch.getX() - 3 )) < 16) {
-printf("do it!\n");
-                            this->gateSwitch.update();
+                            prince.clear();
+
+                            int8_t dist = abs(level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * 12) + prince.getX()));
+
+                            switch (dist) {
+
+                                case 0:
+                                case 4:
+                                case 8:
+                                case 12:
+                                    prince.pushSequence(STANCE_CROUCH_STAND_1_START, STANCE_CROUCH_STAND_12_END, STANCE_UPRIGHT, true);
+                                    prince.pushSequence(STANCE_FALLING_B_1_START, STANCE_FALLING_B_6_END, true);
+                                    break;
+
+                                case 2:
+                                case 6:
+                                case 10:
+                                    prince.pushSequence(STANCE_CROUCH_STAND_1_START, STANCE_CROUCH_STAND_12_END, STANCE_UPRIGHT, true);
+                                    prince.pushSequence(STANCE_FALLING_C_1_START, STANCE_FALLING_C_6_END, true);
+                                    break;
+
+                            }
 
                         }
 
                     }
                     break;
-*/
+
+                // case STANCE_RUNNING_JUMP_4:
+                //     {
+                //         if (level.canFall(prince, 10)) {
+                //             prince.clear();
+                //             prince.pushSequence(STANCE_CROUCH_STAND_1_START, STANCE_CROUCH_STAND_12_END, STANCE_UPRIGHT, true);
+                //             prince.pushSequence(STANCE_FALLING_A_1_START, STANCE_FALLING_A_6_END, true);
+                //         }
+                //     }
+                //     break;
+
+                // case STANCE_RUNNING_JUMP_10:
+                //     {
+                //         if (level.canFall(prince, 8)) {
+                //             prince.clear();
+                //             prince.pushSequence(STANCE_CROUCH_STAND_1_START, STANCE_CROUCH_STAND_12_END, STANCE_UPRIGHT, true);
+                //             prince.pushSequence(STANCE_FALLING_B_1_START, STANCE_FALLING_B_6_END, true);
+                //         }
+                //     }
+                //     break;
 
             }
 
