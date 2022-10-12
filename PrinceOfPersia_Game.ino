@@ -1,4 +1,4 @@
-#include <Arduboy2.h>   
+#include "src/utils/Arduboy2Ext.h"  
 #include <ArduboyFX.h>  
 #include "fxdata/Images.h"  
 #include "fxdata/Levels.h"  
@@ -22,6 +22,10 @@ void game_Init() {
 void game() {
 
 
+    auto justPressed = arduboy.justPressedButtons();
+    auto pressed = arduboy.justPressedButtons();
+
+
     // Update the objects ..
 
     prince.update(level.getXLocation(), level.getYLocation());
@@ -37,24 +41,6 @@ void game() {
     DEBUG_PRINT(", X: ");
     DEBUG_PRINTLN(prince.getX());
     #endif
-
-    // if (arduboy.justPressed(LEFT_BUTTON)) {
-    //     xLoc = xLoc - 10;
-    //     loadMap(xLoc, yLoc);
-    // }
-    // if (arduboy.justPressed(RIGHT_BUTTON)) {
-    //     xLoc = xLoc + 10;
-    //     loadMap(xLoc, yLoc);
-    // }
-    // if (arduboy.justPressed(UP_BUTTON)) {
-    //     yLoc = yLoc - 3;
-    //     loadMap(xLoc, yLoc);
-    // }
-    // if (arduboy.justPressed(DOWN_BUTTON)) {
-    //     yLoc = yLoc + 3;
-    //     loadMap(xLoc, yLoc);
-    // }
-
 
 
     if (!prince.isFalling()) { //} && this->world.aboutToFall(Action::RunRepeat, tile, distToTile, distToFall)) {
@@ -110,14 +96,14 @@ void game() {
 
                 if (prince.getDirection() == Direction::Right) {
 
-                    if (arduboy.pressed(RIGHT_BUTTON) && arduboy.pressed(DOWN_BUTTON)) {
+                    if ((pressed & RIGHT_BUTTON) && (pressed &DOWN_BUTTON)) {
 
                         if (level.canMoveForward(Action::SmallStep, prince)) {
                             prince.pushSequence(STANCE_SMALL_STEP_1_START, STANCE_SMALL_STEP_6_END, STANCE_UPRIGHT, true);
                         }
 
                     }
-                    else if (arduboy.pressed(RIGHT_BUTTON)) {
+                    else if (pressed & RIGHT_BUTTON) {
 
                         if (level.canMoveForward(Action::Step, prince)) {
                             prince.push(STANCE_SINGLE_STEP_1_START, true);
@@ -127,12 +113,12 @@ void game() {
                         }
 
                     }
-                    else if (arduboy.pressed(LEFT_BUTTON)) {
+                    else if (pressed & LEFT_BUTTON) {
 
                         prince.pushSequence(STANCE_STANDING_TURN_1_START, STANCE_STANDING_TURN_5_END, STANCE_UPRIGHT_TURN, true);
 
                     }
-                    else if (arduboy.pressed(A_BUTTON)) {
+                    else if (pressed & A_BUTTON) {
 
                         if (level.canMoveForward(Action::StandingJump, prince)) {
                             prince.pushSequence(STANCE_STANDING_JUMP_1_START, STANCE_STANDING_JUMP_18_END, STANCE_UPRIGHT, true);
@@ -143,14 +129,14 @@ void game() {
                 }
                 else {
 
-                    if (arduboy.pressed(LEFT_BUTTON) && arduboy.pressed(DOWN_BUTTON)) {
+                    if ((pressed &LEFT_BUTTON) && (pressed & DOWN_BUTTON)) {
 
                         if (level.canMoveForward(Action::SmallStep, prince)) {
                             prince.pushSequence(STANCE_SMALL_STEP_1_START, STANCE_SMALL_STEP_6_END, STANCE_UPRIGHT, true);
                         }
 
                     }
-                    else if (arduboy.pressed(LEFT_BUTTON)) {
+                    else if (pressed & LEFT_BUTTON) {
 
                         if (level.canMoveForward(Action::Step, prince)) {
                             prince.push(STANCE_SINGLE_STEP_1_START, true);
@@ -160,12 +146,12 @@ void game() {
                         }
                         
                     }
-                    else if (arduboy.pressed(RIGHT_BUTTON)) {
+                    else if (pressed & RIGHT_BUTTON) {
 
                         prince.pushSequence(STANCE_STANDING_TURN_1_START, STANCE_STANDING_TURN_5_END, STANCE_UPRIGHT_TURN, true);
 
                     }
-                    else if (arduboy.pressed(A_BUTTON)) {
+                    else if (pressed & A_BUTTON) {
 
                         if (level.canMoveForward(Action::StandingJump, prince)) {
                             prince.pushSequence(STANCE_STANDING_JUMP_1_START, STANCE_STANDING_JUMP_18_END, STANCE_UPRIGHT, true);
@@ -176,7 +162,7 @@ void game() {
 
                 }
 
-                if (arduboy.pressed(DOWN_BUTTON)) {
+                if (pressed & DOWN_BUTTON) {
                 
                     CanClimbDownResult canClimbDownResult = level.canClimbDown(prince);
 
@@ -197,7 +183,6 @@ void game() {
                             #endif
 
                             prince.pushSequence(STANCE_STEP_CLIMBING_15_END, STANCE_STEP_CLIMBING_1_START, STANCE_JUMP_UP_A_14_END, true);
-                            // prince.pushSequence(STANCE_SMALL_STEP_1_START, STANCE_SMALL_STEP_6_END, STANCE_UPRIGHT, false);
                             prince.pushSequence(STANCE_SMALL_STEP_6_END, STANCE_SMALL_STEP_1_START, STANCE_UPRIGHT, false);
                             break;
 
@@ -232,7 +217,7 @@ void game() {
 
 
                 }
-                else if (arduboy.pressed(UP_BUTTON)) {
+                else if (pressed & UP_BUTTON) {
 
                     CanJumpUpResult jumpResult = level.canJumpUp(prince);
 
@@ -272,10 +257,10 @@ void game() {
             case STANCE_JUMP_UP_A_14_END:     // Hanging on ledge  (dist 2)..
             case STANCE_JUMP_UP_B_14_END:    
             
-                if (arduboy.pressed(DOWN_BUTTON)) {
+                if (pressed & DOWN_BUTTON) {
                     prince.pushSequence(STANCE_JUMP_UP_DROP_1_START, STANCE_JUMP_UP_DROP_5_END, STANCE_UPRIGHT, true);
                 }
-                else if (arduboy.pressed(UP_BUTTON)) {
+                else if (pressed & UP_BUTTON) {
                     if (level.canJumpUp_Part2(prince)) {
                         prince.pushSequence(STANCE_STEP_CLIMBING_1_START, STANCE_STEP_CLIMBING_15_END, STANCE_UPRIGHT, true);
                     }
@@ -299,7 +284,7 @@ void game() {
 
                 if (prince.getDirection() == Direction::Right) {
 
-                    if (arduboy.pressed(RIGHT_BUTTON)) {
+                    if (pressed & RIGHT_BUTTON) {
 
                         if (level.canMoveForward(Action::RunStart, prince)) {
                             prince.pushSequence(STANCE_RUN_START_2, STANCE_RUN_START_6_END, true);
@@ -309,14 +294,14 @@ void game() {
                         }
 
                     }
-                    else if (!arduboy.pressed(RIGHT_BUTTON)) {
+                    else if (!(pressed & RIGHT_BUTTON)) {
                         prince.pushSequence(STANCE_SINGLE_STEP_2, STANCE_SINGLE_STEP_8_END, STANCE_UPRIGHT, true);
                     }
 
                 }
                 else {
 
-                    if (arduboy.pressed(LEFT_BUTTON)) {
+                    if (pressed & LEFT_BUTTON) {
                         if (level.canMoveForward(Action::RunStart, prince)) {
                             prince.pushSequence(STANCE_RUN_START_2, STANCE_RUN_START_6_END, true);
                         }
@@ -324,7 +309,7 @@ void game() {
                             prince.pushSequence(STANCE_SINGLE_STEP_2, STANCE_SINGLE_STEP_8_END, STANCE_UPRIGHT, true);
                         }                            
                     }
-                    else if (!arduboy.pressed(LEFT_BUTTON)) {
+                    else if (!(pressed & LEFT_BUTTON)) {
                         prince.pushSequence(STANCE_SINGLE_STEP_2, STANCE_SINGLE_STEP_8_END, STANCE_UPRIGHT, true);
                     }
 
@@ -335,7 +320,7 @@ void game() {
 
                 if (prince.getDirection() == Direction::Right) {
                         
-                    if (arduboy.pressed(RIGHT_BUTTON) && arduboy.pressed(A_BUTTON)) {
+                    if ((pressed & RIGHT_BUTTON) && (pressed & A_BUTTON)) {
                         // if (this->world.canMoveForward(Action::RunJump)) {
                         if (true) {
                             
@@ -357,7 +342,7 @@ void game() {
                             prince.pushSequence(STANCE_STOPPING_1_START, STANCE_STOPPING_5_END, STANCE_UPRIGHT, true);
                         }
                     }
-                    else if (arduboy.pressed(RIGHT_BUTTON)) {
+                    else if (pressed & RIGHT_BUTTON) {
 
                         if (level.canMoveForward(Action::RunRepeat, prince)) {
 
@@ -377,7 +362,7 @@ void game() {
                         }
 
                     }
-                    else if (arduboy.pressed(LEFT_BUTTON)) {
+                    else if (pressed & LEFT_BUTTON) {
 
                         #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
                         DEBUG_PRINTLN("LEFT_BUTTON, Switch Directions");
@@ -385,7 +370,7 @@ void game() {
 
                         prince.pushSequence(STANCE_RUNNING_TURN_1_START, STANCE_RUNNING_TURN_13_END, STANCE_RUN_REPEAT_8_END_TURN, true);
                     }
-                    else if (!arduboy.pressed(RIGHT_BUTTON)) {
+                    else if (!(pressed  & RIGHT_BUTTON)) {
 
                         #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
                         DEBUG_PRINTLN("RIGHT_BUTTON, Run Stop (2)");
@@ -397,7 +382,7 @@ void game() {
                 }
                 else {
 
-                    if (arduboy.pressed(LEFT_BUTTON) && arduboy.pressed(A_BUTTON)) {
+                    if ((pressed & LEFT_BUTTON) && (pressed & A_BUTTON)) {
 
                         // if (this->world.canMoveForward(Action::RunJump)) {
                         if (true) {
@@ -427,7 +412,7 @@ void game() {
                             prince.pushSequence(STANCE_STOPPING_1_START, STANCE_STOPPING_5_END, STANCE_UPRIGHT, true);
                         }
                     }
-                    else if (arduboy.pressed(LEFT_BUTTON)) {
+                    else if (pressed & LEFT_BUTTON) {
 
                         if (level.canMoveForward(Action::RunRepeat, prince)) {
 
@@ -446,7 +431,7 @@ void game() {
                             prince.pushSequence(STANCE_STOPPING_1_START, STANCE_STOPPING_5_END, STANCE_UPRIGHT, true);
                         }                        
                     }
-                    else if (arduboy.pressed(RIGHT_BUTTON)) {
+                    else if (pressed & RIGHT_BUTTON) {
 
                         #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
                         DEBUG_PRINTLN("RIGHT_BUTTON, Running Start");
@@ -454,7 +439,7 @@ void game() {
 
                         prince.pushSequence(STANCE_RUNNING_TURN_1_START, STANCE_RUNNING_TURN_13_END, STANCE_RUN_REPEAT_8_END_TURN, true);
                     }
-                    else if (!arduboy.pressed(LEFT_BUTTON)) {
+                    else if (!(pressed & LEFT_BUTTON)) {
 
                         #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
                         DEBUG_PRINTLN("LEFT_BUTTON, Running Stop (4)");
@@ -471,7 +456,7 @@ void game() {
 
                 if (prince.getDirection() == Direction::Right) {
                                     
-                    if (arduboy.pressed(RIGHT_BUTTON) && arduboy.pressed(A_BUTTON)) {
+                    if ((pressed & RIGHT_BUTTON) && (pressed & A_BUTTON)) {
                         // if (this->world.canMoveForward(Action::RunJump)) {
                         if (true) {
 //                             distToTile = this->world.distanceToTile(this->world.getLevel(), SceneryTile::GroundPit);
@@ -491,7 +476,7 @@ void game() {
                             prince.pushSequence(STANCE_STOPPING_1_START, STANCE_STOPPING_5_END, STANCE_UPRIGHT, true);
                         }
                     }
-                    else if (arduboy.pressed(RIGHT_BUTTON)) {
+                    else if (pressed & RIGHT_BUTTON) {
 
                         if (level.canMoveForward(Action::RunRepeat, prince)) {
 
@@ -511,7 +496,7 @@ void game() {
                         }
 
                     }
-                    else if (arduboy.pressed(LEFT_BUTTON)) {
+                    else if (pressed & LEFT_BUTTON) {
                         // this->world.switchDirections(Direction::Left);
 
                         #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
@@ -520,7 +505,7 @@ void game() {
 
                         prince.pushSequence(STANCE_RUNNING_TURN_1_START, STANCE_RUNNING_TURN_13_END, STANCE_RUN_REPEAT_8_END_TURN, true);
                     }
-                    else if (!arduboy.pressed(RIGHT_BUTTON)) {
+                    else if (!(pressed & RIGHT_BUTTON)) {
 
                         #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
                         DEBUG_PRINTLN("RIGHT_BUTTON, Running Stop");
@@ -532,7 +517,7 @@ void game() {
                 }
                 else {
                                     
-                    if (arduboy.pressed(LEFT_BUTTON) && arduboy.pressed(A_BUTTON)) {
+                    if ((pressed & LEFT_BUTTON) && (pressed & A_BUTTON)) {
                         // if (this->world.canMoveForward(Action::RunJump)) {
                         if (true) {
 //                             distToTile = this->world.distanceToTile(this->world.getLevel(), SceneryTile::GroundPit);
@@ -556,7 +541,7 @@ void game() {
                             prince.pushSequence(STANCE_STOPPING_1_START, STANCE_STOPPING_5_END, STANCE_UPRIGHT, true);
                         }
                     }
-                    else if (arduboy.pressed(LEFT_BUTTON)) {
+                    else if (pressed & LEFT_BUTTON) {
 
                         if (level.canMoveForward(Action::RunRepeat, prince)) {
 
@@ -571,12 +556,12 @@ void game() {
                         }         
 
                     }
-                    else if (arduboy.pressed(RIGHT_BUTTON)) {
+                    else if (pressed & RIGHT_BUTTON) {
 
                         prince.pushSequence(STANCE_RUNNING_TURN_1_START, STANCE_RUNNING_TURN_13_END, STANCE_RUN_REPEAT_8_END_TURN, true);
 
                     }
-                    else if (!arduboy.pressed(LEFT_BUTTON)) {
+                    else if (!(pressed & LEFT_BUTTON)) {
 
                         prince.pushSequence(STANCE_STOPPING_1_START, STANCE_STOPPING_5_END, STANCE_UPRIGHT, true);
 
@@ -589,19 +574,19 @@ void game() {
             case STANCE_CROUCH_3_END:
             case STANCE_CROUCH_HOP_7_END:
 
-                if (!arduboy.pressed(DOWN_BUTTON)) {
+                if (!(pressed & DOWN_BUTTON)) {
 
                     prince.pushSequence(STANCE_CROUCH_STAND_3, STANCE_CROUCH_STAND_12_END, STANCE_UPRIGHT, true);
 
                 }
-                else if (arduboy.pressed(LEFT_BUTTON)) {
+                else if (pressed & LEFT_BUTTON) {
 
                     if (level.canMoveForward(Action::CrouchHop, prince)) {
                         prince.pushSequence(STANCE_CROUCH_HOP_1_START, STANCE_CROUCH_HOP_7_END, true);
                     }
 
                 }
-                else if (arduboy.pressed(RIGHT_BUTTON)) {
+                else if (pressed & RIGHT_BUTTON) {
 
                     if (level.canMoveForward(Action::CrouchHop, prince)) {
                         prince.pushSequence(STANCE_CROUCH_HOP_1_START, STANCE_CROUCH_HOP_7_END, true);

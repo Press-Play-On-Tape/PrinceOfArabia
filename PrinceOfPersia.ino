@@ -81,5 +81,4 @@ void loop() {
     arduboy.display(CLEAR_BUFFER);
     FX::disableOLED();
 
-
 }
