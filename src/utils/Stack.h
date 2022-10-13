@@ -71,7 +71,7 @@ void Stack< Type, Capacity >::update() {
 		this->frame--;
 	}
 	else {
-		this->frame = ANIMATION_NUMBER_OF_FRAMES;
+		this->frame = Constants::Animation_NumberOfFrames;
 	}
 }
 
@@ -141,7 +141,7 @@ bool Stack< Type, Capacity >::insert(const typename Stack< Type, Capacity >::Ite
 template< typename Type, uint8_t Capacity >
 bool Stack< Type, Capacity >::push(typename Stack< Type, Capacity >::ItemType && item, bool resetFrame) { // O(1)
 
-	if (this->isEmpty() && resetFrame) this->frame = ANIMATION_NUMBER_OF_FRAMES;
+	if (this->isEmpty() && resetFrame) this->frame = Constants::Animation_NumberOfFrames;
 	if (this->isFull())
 		return false;
 
@@ -153,7 +153,7 @@ bool Stack< Type, Capacity >::push(typename Stack< Type, Capacity >::ItemType &&
 template< typename Type, uint8_t Capacity >
 bool Stack< Type, Capacity >::push(typename Stack< Type, Capacity >::ItemType && item1, typename Stack< Type, Capacity >::ItemType && item2, bool resetFrame) {// O(1)
 
-	if (this->isEmpty() && resetFrame) this->frame = ANIMATION_NUMBER_OF_FRAMES;
+	if (this->isEmpty() && resetFrame) this->frame = Constants::Animation_NumberOfFrames;
 	if (this->isFull()) return false;
 
 	this->items[this->next] = item1; // ought to be std::move
@@ -169,7 +169,7 @@ bool Stack< Type, Capacity >::push(typename Stack< Type, Capacity >::ItemType &&
 template< typename Type, uint8_t Capacity >
 bool Stack< Type, Capacity >::push(typename Stack< Type, Capacity >::ItemType && item1, typename Stack< Type, Capacity >::ItemType && item2, typename Stack< Type, Capacity >::ItemType && item3,  bool resetFrame) { // O(1)
 
-	if (this->isEmpty() && resetFrame) this->frame = ANIMATION_NUMBER_OF_FRAMES;
+	if (this->isEmpty() && resetFrame) this->frame = Constants::Animation_NumberOfFrames;
 	if (this->isFull()) return false;
 	this->items[this->next] = item1; // ought to be std::move
 	++this->next;

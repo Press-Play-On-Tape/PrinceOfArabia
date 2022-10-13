@@ -815,7 +815,7 @@ void game() {
 
                 case STANCE_JUMP_UP_DROP_4: // Ripple collapsible floors.
 
-                    for (uint8_t i = 0; i < NUMBER_OF_ITEMS; i++) {
+                    for (uint8_t i = 0; i < Constants::NumberOfItems; i++) {
                         
                         Item &item = level.getItem(i);
 

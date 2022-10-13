@@ -18,9 +18,6 @@
 
 //-------------------------------------------------------------------------------------
 
-#define ANIMATION_NUMBER_OF_FRAMES      2
-#define NUMBER_OF_ITEMS                 20
-
 #define STANCE_NONE                             0
 #define STANCE_RUN_START_1_START                1 
 #define STANCE_RUN_START_2                      2 
@@ -301,6 +298,8 @@
 namespace Constants {
 
     constexpr uint8_t FrameRate = 30;
+    constexpr uint8_t NumberOfItems = 20;
+    constexpr uint8_t Animation_NumberOfFrames = 2;
 
 }
 

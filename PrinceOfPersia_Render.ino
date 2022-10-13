@@ -32,7 +32,7 @@ void render() {
 
     // Draw items ..
 
-    for (uint8_t i = 0; i < NUMBER_OF_ITEMS; i++) {
+    for (uint8_t i = 0; i < Constants::NumberOfItems; i++) {
 
         Item &item = level.getItem(i);
 

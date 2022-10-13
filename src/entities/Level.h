@@ -18,7 +18,7 @@ struct Level {
 
         int8_t bg[3][14];
         int8_t fg[3][14];
-        Item items[NUMBER_OF_ITEMS];
+        Item items[Constants::NumberOfItems];
 
     public:
 
@@ -92,7 +92,7 @@ struct Level {
             // uint8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), prince.getPosition().x) - this->getXLocation();
             // uint8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), prince.getPosition().y) - this->getYLocation() - 1;
 
-            for (uint8_t i = 0; i < NUMBER_OF_ITEMS; i++) {
+            for (uint8_t i = 0; i < Constants::NumberOfItems; i++) {
 
                 Item &item = this->getItem(i);
 
@@ -1278,7 +1278,7 @@ struct Level {
 
             uint8_t gatePosition = 255;
 
-            for (uint8_t i = 0; i < NUMBER_OF_ITEMS; i++) {
+            for (uint8_t i = 0; i < Constants::NumberOfItems; i++) {
 
                 Item &item = this->items[i];
 
