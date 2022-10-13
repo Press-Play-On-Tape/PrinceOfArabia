@@ -38,12 +38,19 @@ struct Level {
 
     public:
 
-        void init(uint8_t xLoc, uint8_t yLoc) {
+        void init(Prince &prince, uint8_t xLoc, uint8_t yLoc) {
 
             this->xLoc = xLoc;
             this->yLoc = yLoc;
 
             this->loadMap();
+
+            if (prince.getY() > 56) {
+
+                this->yOffset = prince.getY() - 56;
+
+            }
+
         }
 
         void incYOffset(int8_t inc) {
@@ -228,11 +235,11 @@ struct Level {
                     if (print) {
 
                         #if defined(DEBUG) && defined(DEBUG_LEVEL_PROCESSING)
-                        DEBUG_PRINT("getTile(FG, ");
+                        DEBUG_PRINT(F("getTile(FG, "));
                         DEBUG_PRINT(x);
-                        DEBUG_PRINT(",");
+                        DEBUG_PRINT(F(","));
                         DEBUG_PRINT(y);
-                        DEBUG_PRINT(") = ");
+                        DEBUG_PRINT(F(") = "));
                         DEBUG_PRINTLN(fg[y][x + 2]);
                         #endif
 
@@ -244,11 +251,11 @@ struct Level {
                     if (print) {
 
                         #if defined(DEBUG) && defined(DEBUG_LEVEL_PROCESSING)
-                        DEBUG_PRINT("getTile(BG, ");
+                        DEBUG_PRINT(F("getTile(BG, "));
                         DEBUG_PRINT(x);
-                        DEBUG_PRINT(",");
+                        DEBUG_PRINT(F(","));
                         DEBUG_PRINT(y);
-                        DEBUG_PRINT(") = ");
+                        DEBUG_PRINT(F(") = "));
                         DEBUG_PRINTLN(bg[y][x + 2]);
                         #endif
 
@@ -266,12 +273,12 @@ struct Level {
 
             #if defined(DEBUG) && defined(DEBUG_LEVEL_LOAD_MAP)
 
-            DEBUG_PRINTLN("Map ---------------");
-            DEBUG_PRINT("xLoc: ");
+            DEBUG_PRINTLN(F("Map ---------------"));
+            DEBUG_PRINT(F("xLoc: "));
             DEBUG_PRINT(xLoc);
-            DEBUG_PRINT(", yLoc: ");
+            DEBUG_PRINT(F(", yLoc: "));
             DEBUG_PRINTLN(yLoc);
-            DEBUG_PRINTLN("BG ---------------");
+            DEBUG_PRINTLN(F("BG ---------------"));
 
             for (uint8_t y = 0; y < 3; y++) {
 
@@ -291,7 +298,7 @@ struct Level {
             }
 
 
-            DEBUG_PRINTLN("FG ---------------");
+            DEBUG_PRINTLN(F("FG ---------------"));
 
             for (uint8_t y = 0; y < 3; y++) {
 
@@ -561,14 +568,7 @@ struct Level {
             int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), newPos.y) - this->getYLocation();
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
-            DEBUG_PRINT("coordToTileIndexX ");
-            DEBUG_PRINT(newPos.x);
-            DEBUG_PRINT(" = ");
-            DEBUG_PRINT(tileXIdx);
-            DEBUG_PRINT(", coordToTileIndexY ");
-            DEBUG_PRINT(newPos.y);
-            DEBUG_PRINT(" = ");
-            DEBUG_PRINTLN(tileYIdx);
+            printCoordToIndex(newPos, tileXIdx, tileYIdx);
             #endif
 
 
@@ -576,9 +576,9 @@ struct Level {
             int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, true);
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
-            DEBUG_PRINT("bg ");
+            DEBUG_PRINTF(("bg "));
             DEBUG_PRINT(bgTile1);
-            DEBUG_PRINT(", fg ");
+            DEBUG_PRINT(F(", fg "));
             DEBUG_PRINT(fgTile1);
             DEBUG_PRINTLN("");
             #endif
@@ -594,13 +594,13 @@ struct Level {
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
             printAction(action);
-            DEBUG_PRINT(" coordToTileIndexX ");
+            DEBUG_PRINT(F(" coordToTileIndexX "));
             DEBUG_PRINT(prince.getPosition().x);
-            DEBUG_PRINT(" = ");
+            DEBUG_PRINT(F(" = "));
             DEBUG_PRINT(tileXIdx);
-            DEBUG_PRINT(", coordToTileIndexY ");
+            DEBUG_PRINT(F(", coordToTileIndexY "));
             DEBUG_PRINT(prince.getPosition().y);
-            DEBUG_PRINT(" = ");
+            DEBUG_PRINT(F(" = "));
             DEBUG_PRINTLN(tileYIdx);
             #endif
 
@@ -628,23 +628,23 @@ struct Level {
                         int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(prince.getDirection(), prince.getPosition().x);
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
-                        DEBUG_PRINT(" dist ");
+                        DEBUG_PRINT(F(" dist "));
                         DEBUG_PRINT(distToEdgeOfCurrentTile);
-                        DEBUG_PRINT(", bg ");
+                        DEBUG_PRINT(F(", bg "));
                         DEBUG_PRINT(bgTile4);
-                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT(F(" "));
                         DEBUG_PRINT(bgTile3);
-                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT(F(" "));
                         DEBUG_PRINT(bgTile2);
-                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT(F(" "));
                         DEBUG_PRINT(bgTile1);
-                        DEBUG_PRINT(", fg ");
+                        DEBUG_PRINT(F(", fg "));
                         DEBUG_PRINT(fgTile4);
-                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT(F(" "));
                         DEBUG_PRINT(fgTile3);
-                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT(F(" "));
                         DEBUG_PRINT(fgTile2);
-                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT(F(" "));
                         DEBUG_PRINT(fgTile1);
                         DEBUG_PRINTLN("");
                         #endif
@@ -756,19 +756,19 @@ struct Level {
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
                         printAction(action);
-                        DEBUG_PRINT("dist ");
+                        DEBUG_PRINT(F("dist "));
                         DEBUG_PRINT(distToEdgeOfCurrentTile);
-                        DEBUG_PRINT(", bg ");
+                        DEBUG_PRINT(F(", bg "));
                         DEBUG_PRINT(bgTile1);
-                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT(F(" "));
                         DEBUG_PRINT(bgTile2);
-                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT(F(" "));
                         DEBUG_PRINT(bgTile3);
-                        DEBUG_PRINT(", fg ");
+                        DEBUG_PRINT(F(", fg "));
                         DEBUG_PRINT(fgTile1);
-                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT(F(" "));
                         DEBUG_PRINT(fgTile2);
-                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT(F(" "));
                         DEBUG_PRINT(fgTile3);
                         DEBUG_PRINTLN("");
                         #endif
@@ -875,7 +875,7 @@ struct Level {
                             case CanJumpUpResult::StepThenJump:
 
                                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                DEBUG_PRINT("Left Test success, Return ");
+                                DEBUG_PRINT(F("Left Test success, Return "));
                                 DEBUG_PRINTLN(static_cast<uint8_t>(resultLeft));
                                 #endif
                                                                     
@@ -890,7 +890,7 @@ struct Level {
                                         case CanJumpUpResult::Jump:
 
                                             #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                            DEBUG_PRINT("Right Test success, Return TurnThenJump");
+                                            DEBUG_PRINT(F("Right Test success, Return TurnThenJump"));
                                             #endif
 
                                             return CanJumpUpResult::TurnThenJump;
@@ -898,7 +898,7 @@ struct Level {
                                         default:
 
                                             #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                            DEBUG_PRINT("Right Test failed, Return ");
+                                            DEBUG_PRINT(F("Right Test failed, Return "));
                                             DEBUG_PRINTLN(static_cast<uint8_t>(resultLeft));
                                             #endif
 
@@ -926,7 +926,7 @@ struct Level {
                             case CanJumpUpResult::StepThenJump:
 
                                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                DEBUG_PRINT("Right Test success, Return ");
+                                DEBUG_PRINT(F("Right Test success, Return "));
                                 DEBUG_PRINTLN(static_cast<uint8_t>(resultRight));
                                 #endif                            
 
@@ -941,7 +941,7 @@ struct Level {
                                         case CanJumpUpResult::Jump:
 
                                             #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                            DEBUG_PRINT("Left Test success, Return TurnThenJump");
+                                            DEBUG_PRINT(F("Left Test success, Return TurnThenJump"));
                                             #endif     
 
                                             return CanJumpUpResult::TurnThenJump;
@@ -949,7 +949,7 @@ struct Level {
                                         default:
 
                                             #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                            DEBUG_PRINT("Left Test failed, Return ");
+                                            DEBUG_PRINT(F("Left Test failed, Return "));
                                             DEBUG_PRINTLN(static_cast<uint8_t>(resultRight));
                                             #endif     
 
@@ -971,7 +971,7 @@ struct Level {
             }
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-            DEBUG_PRINT("Return None");
+            DEBUG_PRINT(F("Return None"));
             #endif
 
             return CanJumpUpResult::None;            
@@ -985,13 +985,13 @@ struct Level {
             int8_t tileYIdx = this->coordToTileIndexY(direction, prince.getPosition().y) - this->getYLocation();
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-            DEBUG_PRINT("canJumpUp_Test: coordToTileIndexX ");
+            DEBUG_PRINT(F("canJumpUp_Test: coordToTileIndexX "));
             DEBUG_PRINT(prince.getPosition().x);
-            DEBUG_PRINT(" = ");
+            DEBUG_PRINT(F(" = "));
             DEBUG_PRINT(tileXIdx);
-            DEBUG_PRINT(", coordToTileIndexY ");
+            DEBUG_PRINT(F(", coordToTileIndexY "));
             DEBUG_PRINT(prince.getPosition().y);
-            DEBUG_PRINT(" = ");
+            DEBUG_PRINT(F(" = "));
             DEBUG_PRINTLN(tileYIdx);
             #endif
 
@@ -1000,11 +1000,11 @@ struct Level {
             int8_t distToEdge = distToEdgeOfTile(direction, prince.getPosition().x);
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-            DEBUG_PRINT("dist ");
+            DEBUG_PRINT(F("dist "));
             DEBUG_PRINT(distToEdge);
-            DEBUG_PRINT(", bg ");
+            DEBUG_PRINT(F(", bg "));
             DEBUG_PRINT(bgTile1);
-            DEBUG_PRINT(" ");
+            DEBUG_PRINT(F(" "));
             DEBUG_PRINT(bgTile2);
             DEBUG_PRINTLN("");
             #endif
@@ -1029,6 +1029,7 @@ struct Level {
                                 case TILE_FLOOR_RH_END_4:
                                 case TILE_FLOOR_RH_END_5:
                                 case TILE_FLOOR_RH_END_GATE:
+                                case TILE_COLUMN_LH_WALL:
                                     return CanJumpUpResult::StepThenJump;
 
                                 default:                                
@@ -1049,6 +1050,7 @@ struct Level {
                                 case TILE_FLOOR_RH_END_4:
                                 case TILE_FLOOR_RH_END_5:
                                 case TILE_FLOOR_RH_END_GATE:
+                                case TILE_COLUMN_LH_WALL:
                                     return CanJumpUpResult::Jump;
 
                                 default:
@@ -1076,6 +1078,7 @@ struct Level {
                                 case TILE_FLOOR_LH_END:
                                 case TILE_FLOOR_LH_END_PATTERN_1:
                                 case TILE_FLOOR_LH_END_PATTERN_2:
+                                case TILE_COLUMN_3:
                                     return CanJumpUpResult::StepThenJump;
 
                                 default:                                
@@ -1092,6 +1095,7 @@ struct Level {
                                 case TILE_FLOOR_LH_END:
                                 case TILE_FLOOR_LH_END_PATTERN_1:
                                 case TILE_FLOOR_LH_END_PATTERN_2:
+                                case TILE_COLUMN_3:
                                     return CanJumpUpResult::Jump;
 
                                 default:
@@ -1119,26 +1123,26 @@ struct Level {
             int8_t tileYIdx = this->coordToTileIndexY(direction, prince.getPosition().y) - this->getYLocation();
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-            DEBUG_PRINT("canJumpUp_Test_Dist10: coordToTileIndexX ");
+            DEBUG_PRINT(F("canJumpUp_Test_Dist10: coordToTileIndexX "));
             DEBUG_PRINT(prince.getPosition().x);
-            DEBUG_PRINT(" = ");
+            DEBUG_PRINT(F(" = "));
             DEBUG_PRINT(tileXIdx);
-            DEBUG_PRINT(", coordToTileIndexY ");
+            DEBUG_PRINT(F(", coordToTileIndexY "));
             DEBUG_PRINT(prince.getPosition().y);
             DEBUG_PRINT(" = ");
             DEBUG_PRINTLN(tileYIdx);
             #endif
 
-            int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx - 1, true);
+            int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx + 1, tileYIdx - 1, true);
             int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx, tileYIdx - 1, true);
             int8_t distToEdge = distToEdgeOfTile(direction, prince.getPosition().x);
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-            DEBUG_PRINT("dist ");
+            DEBUG_PRINT(F("dist "));
             DEBUG_PRINT(distToEdge);
-            DEBUG_PRINT(", bg ");
+            DEBUG_PRINT(F(", bg "));
             DEBUG_PRINT(bgTile1);
-            DEBUG_PRINT(" ");
+            DEBUG_PRINT(F(" "));
             DEBUG_PRINT(bgTile2);
             DEBUG_PRINTLN("");
             #endif
@@ -1160,6 +1164,7 @@ struct Level {
                                 case TILE_FLOOR_RH_END_4:
                                 case TILE_FLOOR_RH_END_5:
                                 case TILE_FLOOR_RH_END_GATE:
+                                case TILE_COLUMN_LH_WALL:
                                     return CanJumpUpResult::JumpDist10;
 
                                 default:                                
@@ -1184,6 +1189,7 @@ struct Level {
                                 case TILE_FLOOR_LH_END:
                                 case TILE_FLOOR_LH_END_PATTERN_1:
                                 case TILE_FLOOR_LH_END_PATTERN_2:
+                                case TILE_COLUMN_3:
                                     return CanJumpUpResult::JumpDist10;
 
                                 default:                                
@@ -1219,26 +1225,8 @@ struct Level {
                         tileYIdx = this->coordToTileIndexY(prince.getDirection(), prince.getPosition().y) - this->getYLocation() - 1;
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP_PART2)
-                        DEBUG_PRINT("coordToTileIndexX ");
-                        DEBUG_PRINT(prince.getPosition().x);
-                        DEBUG_PRINT(" = ");
-                        DEBUG_PRINT(tileXIdx);
-                        DEBUG_PRINT(", coordToTileIndexY ");
-                        DEBUG_PRINT(prince.getPosition().y);
-                        DEBUG_PRINT(" = ");
-                        DEBUG_PRINTLN(tileYIdx);
+                        printCoordToIndex(prince.getPosition(), tileXIdx, tileYIdx);
                         #endif
-
-                        // int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, true);
-                        // int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, true);
-
-                        // #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP_PART2)
-                        // DEBUG_PRINT("bg ");
-                        // DEBUG_PRINT(bgTile1);
-                        // DEBUG_PRINT(", fg ");
-                        // DEBUG_PRINT(fgTile1);
-                        // DEBUG_PRINTLN("");
-                        // #endif
 
                     }
 
@@ -1251,26 +1239,8 @@ struct Level {
                         tileYIdx = this->coordToTileIndexY(prince.getDirection(), prince.getPosition().y) - this->getYLocation() - 1;
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP_PART2)
-                        DEBUG_PRINT("coordToTileIndexX ");
-                        DEBUG_PRINT(prince.getPosition().x);
-                        DEBUG_PRINT(" = ");
-                        DEBUG_PRINT(tileXIdx);
-                        DEBUG_PRINT(", coordToTileIndexY ");
-                        DEBUG_PRINT(prince.getPosition().y);
-                        DEBUG_PRINT(" = ");
-                        DEBUG_PRINTLN(tileYIdx);
+                        printCoordToIndex(prince.getPosition(), tileXIdx, tileYIdx);
                         #endif
-
-                        // int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, true);
-                        // int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, true);
-
-                        // #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP_PART2)
-                        // DEBUG_PRINT("bg ");
-                        // DEBUG_PRINT(bgTile1);
-                        // DEBUG_PRINT(", fg ");
-                        // DEBUG_PRINT(fgTile1);
-                        // DEBUG_PRINTLN("");
-                        // #endif
 
                     }
 
@@ -1292,31 +1262,12 @@ struct Level {
 
                 if (item.itemType == ItemType::Gate && item.active) {
 
-                    // switch (prince.getDirection()) {
+                    if (item.x == tileXIdx + this->xLoc && item.y == tileYIdx + this->yLoc) {
 
-                    //     case Direction::Left:
+                        gatePosition = item.data.gate.position;
+                        break;
 
-                            if (item.x == tileXIdx + this->xLoc && item.y == tileYIdx + this->yLoc) {
-
-                                gatePosition = item.data.gate.position;
-                                break;
-
-                            }
-
-                    //         break;
-
-                    //     case Direction::Right:
-
-                    //         if (item.x == tileXIdx + this->xLoc + inc && item.y == tileYIdx + this->yLoc) {
-
-                    //             gatePosition = item.data.gate.position;
-                    //             break;
-
-                    //         }
-
-                    //         break;
-
-                    // }
+                    }
 
                 }
 
@@ -1343,11 +1294,12 @@ struct Level {
                             case CanClimbDownResult::StepThenClimbDown:
 
                                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
-                                DEBUG_PRINT("Return: ");
+                                DEBUG_PRINT(F("Return: "));
                                 DEBUG_PRINTLN(static_cast<uint8_t>(resultRight));
                                 #endif
 
                                 return resultRight;
+                                break;
 
                             default:
                                 {
@@ -1358,51 +1310,61 @@ struct Level {
                                         case CanClimbDownResult::ClimbDown:
 
                                             #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
-                                            DEBUG_PRINTLN("Return: TurnThenClimbDown");
+                                            DEBUG_PRINTLN(F("Return: TurnThenClimbDown"));
                                             #endif
 
                                             return CanClimbDownResult::TurnThenClimbDown;
+                                            break;
 
                                         case CanClimbDownResult::StepThenClimbDown:
 
                                             #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
-                                            DEBUG_PRINTLN("Return: StepThenTurnThenClimbDown");
+                                            DEBUG_PRINTLN(F("Return: StepThenTurnThenClimbDown"));
                                             #endif
 
                                             return CanClimbDownResult::StepThenTurnThenClimbDown;
+                                            break;
 
                                         default:
 
                                             #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
-                                            DEBUG_PRINT("Return: ");
+                                            DEBUG_PRINT(F("Return: "));
                                             DEBUG_PRINTLN(static_cast<uint8_t>(resultRight));
                                             #endif
                                             
                                             return resultRight;
+                                            break;
 
                                     }
 
                                 }
                                         
                                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
-                                DEBUG_PRINTLN("Return: None");
+                                DEBUG_PRINTLN(F("Return: None"));
                                 #endif
 
                                 return CanClimbDownResult::None;
+                                break;
 
                         }
                         
                     }
 
                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
-                    DEBUG_PRINTLN("Return: None");
+                    DEBUG_PRINTLN(F("Return: None"));
                     #endif
 
                     return CanClimbDownResult::None;
+                    break;
 
                 case Direction::Right:
                     {
                         CanClimbDownResult resultLeft = canClimbDown_Test(prince, Direction::Left);
+
+                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
+                        DEBUG_PRINT(F("canClimbDown: facing right, initial result "));
+                        DEBUG_PRINTLN(static_cast<uint8_t>(resultLeft));
+                        #endif
 
                         switch (resultLeft) {
 
@@ -1410,66 +1372,78 @@ struct Level {
                             case CanClimbDownResult::StepThenClimbDown:
 
                                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
-                                DEBUG_PRINT("Return: ");
+                                DEBUG_PRINT(F("1 Return: "));
                                 DEBUG_PRINTLN(static_cast<uint8_t>(resultLeft));
                                 #endif
 
                                 return resultLeft;
+                                break;
 
                             default:
                                 {
                                     CanClimbDownResult resultRight = canClimbDown_Test(prince, Direction::Right);
+
+                                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
+                                    DEBUG_PRINT(F("canClimbDown: check left, result "));
+                                    DEBUG_PRINTLN(static_cast<uint8_t>(resultLeft));
+                                    #endif
 
                                     switch (resultRight) {
 
                                         case CanClimbDownResult::ClimbDown:
 
                                             #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
-                                            DEBUG_PRINTLN("Return: TurnThenClimbDown");
+                                            DEBUG_PRINTLN(F("2. Return: TurnThenClimbDown"));
                                             #endif
 
                                             return CanClimbDownResult::TurnThenClimbDown;
+                                            break;
 
                                         case CanClimbDownResult::StepThenClimbDown:
 
                                             #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
-                                            DEBUG_PRINTLN("Return: StepThenTurnThenClimbDown");
+                                            DEBUG_PRINTLN(F("3. Return: StepThenTurnThenClimbDown"));
                                             #endif
 
                                             return CanClimbDownResult::StepThenTurnThenClimbDown;
+                                            break;
 
                                         default:
 
                                             #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
-                                            DEBUG_PRINT("Return: ");
+                                            DEBUG_PRINT(F("4. Return: "));
                                             DEBUG_PRINTLN(static_cast<uint8_t>(resultLeft));
                                             #endif
                                             
                                             return resultLeft;
+                                            break;
 
                                     }
 
                                 }
 
                                 return CanClimbDownResult::None;
+                                break;
 
                         }
                         
                     }
 
                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
-                    DEBUG_PRINTLN("Return: None");
+                    DEBUG_PRINTLN(F("Return: None"));
                     #endif
 
                     return CanClimbDownResult::None;
+                    break;
 
                 default: 
 
                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
-                    DEBUG_PRINTLN("Return: None");
+                    DEBUG_PRINTLN(F("Return: None"));
                     #endif
 
                     return CanClimbDownResult::None;
+                    break;
 
             }
 
@@ -1481,23 +1455,22 @@ struct Level {
             int8_t tileYIdx = this->coordToTileIndexY(direction, prince.getPosition().y) - this->getYLocation();
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
-            DEBUG_PRINT("coordToTileIndexX ");
-            DEBUG_PRINT(prince.getPosition().x);
-            DEBUG_PRINT(" = ");
-            DEBUG_PRINT(tileXIdx);
-            DEBUG_PRINT(", coordToTileIndexY ");
-            DEBUG_PRINT(prince.getPosition().y);
-            DEBUG_PRINT(" = ");
-            DEBUG_PRINTLN(tileYIdx);
+            printCoordToIndex(prince.getPosition(), tileXIdx, tileYIdx);
             #endif
 
             int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, true);
             int8_t distToEdge = distToEdgeOfTile(direction, prince.getPosition().x);
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
-            DEBUG_PRINT("dist ");
+            if(direction == Direction::Left) {
+                DEBUG_PRINT(F("Left "));
+            }
+            else {
+                DEBUG_PRINT(F("Right "));
+            }
+            DEBUG_PRINT(F("dist "));
             DEBUG_PRINT(distToEdge);
-            DEBUG_PRINT(", bg ");
+            DEBUG_PRINT(F(", bg "));
             DEBUG_PRINT(bgTile1);
             DEBUG_PRINTLN("");
             #endif
@@ -1518,6 +1491,7 @@ struct Level {
                                 case TILE_FLOOR_LH_END:
                                 case TILE_FLOOR_LH_END_PATTERN_1:
                                 case TILE_FLOOR_LH_END_PATTERN_2:
+                                case TILE_COLUMN_3:
                                     return CanClimbDownResult::StepThenClimbDown;
 
                                 default:                                
@@ -1534,6 +1508,7 @@ struct Level {
                                 case TILE_FLOOR_LH_END:
                                 case TILE_FLOOR_LH_END_PATTERN_1:
                                 case TILE_FLOOR_LH_END_PATTERN_2:
+                                case TILE_COLUMN_3:
                                     return CanClimbDownResult::ClimbDown;
 
                                 default:
@@ -1614,27 +1589,27 @@ struct Level {
             switch (action) {
 
                 case Action::SmallStep:
-                    DEBUG_PRINT("SmallStep");
+                    DEBUG_PRINT(F("SmallStep"));
                     break;
 
                 case Action::CrouchHop:
-                    DEBUG_PRINT("CrouchHop");
+                    DEBUG_PRINT(F("CrouchHop"));
                     break;
 
                 case Action::Step:
-                    DEBUG_PRINT("Step");
+                    DEBUG_PRINT(F("Step"));
                     break;
 
                 case Action::RunStart:
-                    DEBUG_PRINT("RunStart");
+                    DEBUG_PRINT(F("RunStart"));
                     break;
 
                 case Action::RunRepeat:
-                    DEBUG_PRINT("RunRepeat");
+                    DEBUG_PRINT(F("RunRepeat"));
                     break;
 
                 case Action::StandingJump:
-                    DEBUG_PRINT("StandingJump");
+                    DEBUG_PRINT(F("StandingJump"));
                     break;
 
             }
@@ -1643,17 +1618,30 @@ struct Level {
 
         void printTileInfo(int8_t bgTile, int8_t fgTile) {
 
-            DEBUG_PRINT("isWallTile(");
+            DEBUG_PRINT(F("isWallTile("));
             DEBUG_PRINT(bgTile);
-            DEBUG_PRINT(",");
+            DEBUG_PRINT(F(","));
             DEBUG_PRINT(fgTile);
-            DEBUG_PRINT(") ");
+            DEBUG_PRINT(F(") "));
             DEBUG_PRINT(this->isWallTile(bgTile, fgTile));
-            DEBUG_PRINT(", isGroundTile() ");
+            DEBUG_PRINT(F(", isGroundTile() "));
             DEBUG_PRINT(this->isGroundTile(bgTile, fgTile));
-            DEBUG_PRINT(", canFall() ");
+            DEBUG_PRINT(F(", canFall() "));
             DEBUG_PRINTLN(this->canFall(bgTile, fgTile));
         
+        }
+
+        void printCoordToIndex(Point point, int tileXIdx, int8_t tileYIdx) {
+
+            DEBUG_PRINT(F("coordToTileIndexX "));
+            DEBUG_PRINT(point.x);
+            DEBUG_PRINT(F(" = "));
+            DEBUG_PRINT(tileXIdx);
+            DEBUG_PRINT(F(", coordToTileIndexY "));
+            DEBUG_PRINT(point.y);
+            DEBUG_PRINT(F(" = "));
+            DEBUG_PRINTLN(tileYIdx);
+
         }
         #endif
 

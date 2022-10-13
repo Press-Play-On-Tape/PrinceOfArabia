@@ -10,10 +10,10 @@
 #define _DEBUG_PRINT_ACTION
 #define DEBUG_LEVEL_LOAD_MAP
 
-#define DEBUG_ACTION_CANMOVEFORWARD
+#define _DEBUG_ACTION_CANMOVEFORWARD
 #define _DEBUG_ACTION_CANJUMPUP
 #define _DEBUG_ACTION_CANJUMPUP_PART2
-#define _DEBUG_ACTION_CANCLIMBDOWN
+#define DEBUG_ACTION_CANCLIMBDOWN
 #define DEBUG_ONSCREEN_DETAILS
 
 //-------------------------------------------------------------------------------------
@@ -145,12 +145,12 @@
 #define STANCE_JUMP_UP_A_12                     120
 #define STANCE_JUMP_UP_A_13                     121
 #define STANCE_JUMP_UP_A_14_END                 122
-#define STANCE_JUMP_UP_DROP_1_START             123
-#define STANCE_JUMP_UP_DROP_2                   124
-#define STANCE_JUMP_UP_DROP_3                   125
-#define STANCE_JUMP_UP_DROP_4                   126
-#define STANCE_JUMP_UP_DROP_5_END               127
-#define STANCE_STEP_CLIMBING_1_START            128
+#define STANCE_JUMP_UP_DROP_A_1_START           123  // Drop down to Pos 2
+#define STANCE_JUMP_UP_DROP_A_2                 124
+#define STANCE_JUMP_UP_DROP_A_3                 125
+#define STANCE_JUMP_UP_DROP_A_4                 126
+#define STANCE_JUMP_UP_DROP_A_5_END             127
+#define STANCE_STEP_CLIMBING_1_START            128  // Climb up / down from a ledge (second part)
 #define STANCE_STEP_CLIMBING_2                  129
 #define STANCE_STEP_CLIMBING_3                  130
 #define STANCE_STEP_CLIMBING_4                  131
@@ -214,7 +214,6 @@
 #define STANCE_STEP_CLIMBING_BLOCK_7            189
 #define STANCE_STEP_CLIMBING_BLOCK_8            190
 #define STANCE_STEP_CLIMBING_BLOCK_9_END        191
-
 #define STANCE_JUMP_UP_B_1_START                192
 #define STANCE_JUMP_UP_B_2                      193
 #define STANCE_JUMP_UP_B_3                      194
@@ -229,67 +228,71 @@
 #define STANCE_JUMP_UP_B_12                     203
 #define STANCE_JUMP_UP_B_13                     204
 #define STANCE_JUMP_UP_B_14_END                 205
+#define STANCE_JUMP_UP_DROP_B_1_START           206  // Drop down to Pos 10
+#define STANCE_JUMP_UP_DROP_B_2                 207
+#define STANCE_JUMP_UP_DROP_B_3                 208
+#define STANCE_JUMP_UP_DROP_B_4                 209
+#define STANCE_JUMP_UP_DROP_B_5_END             210
 
 
 
-
-#define STANCE_JUMP_DOWN_1_START        220
-#define STANCE_JUMP_DOWN_2              220
-#define STANCE_JUMP_DOWN_3              220
-#define STANCE_SQUAT_1_START            220
-#define STANCE_SQUAT_2                  220
-#define STANCE_SQUAT_3_LOW_POINT        220
-#define STANCE_SQUAT_4                  220
-#define STANCE_SQUAT_5                  220
-#define STANCE_SQUAT_6                  220
-#define STANCE_SQUAT_7                  220
-#define STANCE_SQUAT_8                  220
-#define STANCE_SQUAT_9                  220
-#define STANCE_SQUAT_10_END             220
-#define STANCE_DYING_1_START            220
-#define STANCE_DYING_2                  220
-#define STANCE_DYING_3                  220
-#define STANCE_DYING_4                  220
-#define STANCE_DYING_5                  220
-#define STANCE_DYING_6_END              220
-#define STANCE_SQUAT_MOVE_1_START       220 // 55 STANCE_SQUAT_4
-#define STANCE_SQUAT_MOVE_2             220 // 56 STANCE_SQUAT_5
-#define STANCE_SQUAT_MOVE_3_END         220 // 57 STANCE_SQUAT_4
-#define STANCE_SWINGING_1_START         220
-#define STANCE_SWINGING_2               220
-#define STANCE_SWINGING_3               220
-#define STANCE_SWINGING_4               220
-#define STANCE_SWINGING_5               220
-#define STANCE_SWINGING_6               220
-#define STANCE_SWINGING_7               220
-#define STANCE_SWINGING_8               220
-#define STANCE_SWINGING_9               220
-#define STANCE_SWINGING_10              220
-#define STANCE_SWINGING_11              220
-#define STANCE_SWINGING_12_END          220
-#define STANCE_DRINK_TONIC_1_START      220 
-#define STANCE_DRINK_TONIC_2            220
-#define STANCE_DRINK_TONIC_3            220
-#define STANCE_DRINK_TONIC_4            220
-#define STANCE_DRINK_TONIC_5            220
-#define STANCE_DRINK_TONIC_6            220
-#define STANCE_DRINK_TONIC_7            220
-#define STANCE_DRINK_TONIC_8            220
-#define STANCE_DRINK_TONIC_9            220
-#define STANCE_DRINK_TONIC_10           220
-#define STANCE_DRINK_TONIC_11           220
-#define STANCE_DRINK_TONIC_12           220
-#define STANCE_DRINK_TONIC_13           220
-#define STANCE_DRINK_TONIC_14           220
-#define STANCE_DRINK_TONIC_15           220
-#define STANCE_DRINK_TONIC_16           220
-#define STANCE_DRINK_TONIC_17           220
-#define STANCE_DRINK_TONIC_18_END       220
-#define STANCE_SQUAT_ROTATE_01_START    220 //54
-#define STANCE_SQUAT_ROTATE_02          220 //54
-#define STANCE_SQUAT_ROTATE_03          220 //54
-#define STANCE_SQUAT_ROTATE_04          220 //54
-#define STANCE_SQUAT_ROTATE_05_END      220 //54
+#define STANCE_JUMP_DOWN_1_START        240
+#define STANCE_JUMP_DOWN_2              240
+#define STANCE_JUMP_DOWN_3              240
+#define STANCE_SQUAT_1_START            240
+#define STANCE_SQUAT_2                  240
+#define STANCE_SQUAT_3_LOW_POINT        240
+#define STANCE_SQUAT_4                  240
+#define STANCE_SQUAT_5                  240
+#define STANCE_SQUAT_6                  240
+#define STANCE_SQUAT_7                  240
+#define STANCE_SQUAT_8                  240
+#define STANCE_SQUAT_9                  240
+#define STANCE_SQUAT_10_END             240
+#define STANCE_DYING_1_START            240
+#define STANCE_DYING_2                  240
+#define STANCE_DYING_3                  240
+#define STANCE_DYING_4                  240
+#define STANCE_DYING_5                  240
+#define STANCE_DYING_6_END              240
+#define STANCE_SQUAT_MOVE_1_START       240 // 55 STANCE_SQUAT_4
+#define STANCE_SQUAT_MOVE_2             240 // 56 STANCE_SQUAT_5
+#define STANCE_SQUAT_MOVE_3_END         240 // 57 STANCE_SQUAT_4
+#define STANCE_SWINGING_1_START         240
+#define STANCE_SWINGING_2               240
+#define STANCE_SWINGING_3               240
+#define STANCE_SWINGING_4               240
+#define STANCE_SWINGING_5               240
+#define STANCE_SWINGING_6               240
+#define STANCE_SWINGING_7               240
+#define STANCE_SWINGING_8               240
+#define STANCE_SWINGING_9               240
+#define STANCE_SWINGING_10              240
+#define STANCE_SWINGING_11              240
+#define STANCE_SWINGING_12_END          240
+#define STANCE_DRINK_TONIC_1_START      240 
+#define STANCE_DRINK_TONIC_2            240
+#define STANCE_DRINK_TONIC_3            240
+#define STANCE_DRINK_TONIC_4            240
+#define STANCE_DRINK_TONIC_5            240
+#define STANCE_DRINK_TONIC_6            240
+#define STANCE_DRINK_TONIC_7            240
+#define STANCE_DRINK_TONIC_8            240
+#define STANCE_DRINK_TONIC_9            240
+#define STANCE_DRINK_TONIC_10           240
+#define STANCE_DRINK_TONIC_11           240
+#define STANCE_DRINK_TONIC_12           240
+#define STANCE_DRINK_TONIC_13           240
+#define STANCE_DRINK_TONIC_14           240
+#define STANCE_DRINK_TONIC_15           240
+#define STANCE_DRINK_TONIC_16           240
+#define STANCE_DRINK_TONIC_17           240
+#define STANCE_DRINK_TONIC_18_END       240
+#define STANCE_SQUAT_ROTATE_01_START    240 //54
+#define STANCE_SQUAT_ROTATE_02          240 //54
+#define STANCE_SQUAT_ROTATE_03          240 //54
+#define STANCE_SQUAT_ROTATE_04          240 //54
+#define STANCE_SQUAT_ROTATE_05_END      240 //54
 
 #define STANCE_UPRIGHT_END_CLIMB        253
 #define STANCE_RUN_REPEAT_8_END_TURN    254

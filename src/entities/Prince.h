@@ -120,11 +120,11 @@ struct Prince {
             }
 
             #if defined(DEBUG) && defined(DEBUG_PRINCE_STACK)
-            DEBUG_PRINT("Add to Stack ");
+            DEBUG_PRINT(F("Add to Stack "));
             DEBUG_PRINT(toStance);
-            DEBUG_PRINT(" to ");
+            DEBUG_PRINT(F(" to "));
             DEBUG_PRINT(fromStance);
-            DEBUG_PRINT(", count ");
+            DEBUG_PRINT(F(", count "));
             DEBUG_PRINT(this->stack->getCount());
             DEBUG_PRINT(" ");  
             #endif
@@ -160,7 +160,7 @@ struct Prince {
             }
 
             #if defined(DEBUG) && defined(DEBUG_PRINCE_STACK)
-            DEBUG_PRINT(", count ");
+            DEBUG_PRINT(F(", count "));
             DEBUG_PRINTLN(this->stack->getCount());
             #endif
 

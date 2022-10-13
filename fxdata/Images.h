@@ -20,7 +20,7 @@ namespace Images {
         /* STANCE_CLIMBING */                   88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 
         /* STANCE_SMALL_STEP */                 103, 104, 105, 106, 107, 108,
         /* STANCE_JUMP_UP_A */                  109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122,
-        /* STANCE_JUMP_DROP */                  123, 124, 125, 126, 127, 
+        /* STANCE_JUMP_DROP_A */                123, 124, 125, 126, 127,   // Drop to position 2
         /* STANCE_STEP_CLIMBING */              128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 
         /* STANCE_CROUCH_STAND */               143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154,
         /* STANCE_FALLING_A */                  155, 156, 157, 158, 159, 160,   // Used when walking.
@@ -30,6 +30,7 @@ namespace Images {
         /* STANCE_CROUCH_HOP */                 144, 145, 146, 147, 146, 145, 144,
         /* STANCE_STEP_CLIMBING_BLOCK */        128, 129, 130, 131, 132, 131, 130, 129, 128,
         /* STANCE_JUMP_UP_B */                  109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122,
+        /* STANCE_JUMP_DROP_B */                123, 124, 125, 126, 127,   // Drop to position 10
     };
 
 
