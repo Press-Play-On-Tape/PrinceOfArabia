@@ -18,18 +18,20 @@ Font3x5 font3x5 = Font3x5();
 Stack <int16_t, 30>  princeStack;
 Prince prince;
 Level level;
-GameState gameState = GameState::SplashScreen_Init;
+MenuItem menu;
+GamePlay gamePlay;
 
 
 void setup() {
 
     arduboy.begin();
-    arduboy.setFrameRate(30);
+    arduboy.setFrameRate(Constants::FrameRate);
 
     FX::disableOLED();
     FX::begin(FX_DATA_PAGE);
 
     prince.setStack(&princeStack);
+    gamePlay.gameState = GameState::SplashScreen_Init;
 
 }
 
@@ -38,7 +40,7 @@ void loop() {
     if (!arduboy.nextFrame()) return; 
     arduboy.pollButtons();
 
-    switch (gameState) {
+    switch (gamePlay.gameState) {
 
         case GameState::SplashScreen_Init:
 
@@ -53,7 +55,7 @@ void loop() {
 
         case GameState::Title_Init:
 
-            gameState = GameState::Title;
+            gamePlay.gameState = GameState::Title;
             title_Init();
             title();
             break;
@@ -70,6 +72,7 @@ void loop() {
             break;
 
         case GameState::Game:
+        case GameState::Menu:
 
             game();
             break;

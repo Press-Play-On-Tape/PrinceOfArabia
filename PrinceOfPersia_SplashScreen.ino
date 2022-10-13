@@ -6,7 +6,7 @@
 //
 void splashScreen_Init() {
 
-    gameState = GameState::SplashScreen;
+    gamePlay.gameState = GameState::SplashScreen;
 
 }
 
@@ -20,7 +20,7 @@ void splashScreen() {
 
     if (justPressed > 0) {
         
-        gameState = GameState::Title_Init; 
+        gamePlay.gameState = GameState::Title_Init; 
 
     }
 

@@ -18,6 +18,7 @@ struct Prince {
 
         int16_t x = 0;
         int16_t y = 0;
+        int16_t prevY = 0;
 
         Point location;
 
@@ -26,6 +27,7 @@ struct Prince {
         uint8_t getStance()                         { return this->stance; }
         int16_t getX()                              { return this->x; }
         int16_t getY()                              { return this->y; }
+        int16_t getYPrevious()                      { return this->prevY; }
         int16_t getXImage()                         { return this->x - 18 + 2; }
         int16_t getYImage()                         { return this->y - 31; }
         uint8_t getHangingCounter()                 { return this->hangingCounter; }
@@ -46,18 +48,20 @@ struct Prince {
 
             this->x = x;
             this->y = y;
+            this->prevY = y;
 
         }
 
-        void incX(int8_t x) {
+        void incX(int8_t inc) {
 
-            this->x = this->x + x;
+            this->x = this->x + inc;
             
         }
 
-        void incY(int8_t y) {
+        void incY(int8_t inc) {
 
-            this->y = this->y + y;
+            this->prevY = y;
+            this->y = this->y + inc;
             
         }
 

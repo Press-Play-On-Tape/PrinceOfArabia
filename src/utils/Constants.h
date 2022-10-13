@@ -5,14 +5,14 @@
 #define DEBUG_PRINT    Serial.print
 #define DEBUG_PRINTLN  Serial.println
 
-#define DEBUG
+#define _DEBUG
 #define _DEBUG_PRINCE_DETAILS
 #define _DEBUG_PRINCE_STACK
 #define _DEBUG_PRINT_ACTION
 #define _DEBUG_LEVEL_LOAD_MAP
 
 #define _DEBUG_ACTION_CANMOVEFORWARD
-#define DEBUG_ACTION_CANJUMPUP
+#define _DEBUG_ACTION_CANJUMPUP
 #define _DEBUG_ACTION_CANJUMPUP_PART2
 #define _DEBUG_ACTION_CANCLIMBDOWN
 #define _DEBUG_ONSCREEN_DETAILS
@@ -299,6 +299,12 @@
 #define STANCE_RUN_REPEAT_8_END_TURN    254
 #define STANCE_UPRIGHT_TURN             255
 
+namespace Constants {
+
+    constexpr uint8_t FrameRate = 30;
+
+}
+
 enum GameState : uint8_t {
 	SplashScreen_Init,
 	SplashScreen,
@@ -306,6 +312,7 @@ enum GameState : uint8_t {
 	Title,
 	Game_Init,
 	Game,
+    Menu,
 };
 
 enum class Direction : uint8_t {
@@ -353,4 +360,11 @@ enum class ItemType : uint8_t {
     Torch,
     Door,
     Sword,
+};
+
+enum class MenuOption : uint8_t {
+    Resume,
+    Save,
+    Load,
+    MainMenu,
 };

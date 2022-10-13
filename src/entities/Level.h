@@ -13,6 +13,8 @@ struct Level {
         uint8_t level = 0;
         uint8_t xLoc = 60;
         uint8_t yLoc = 0;
+        uint8_t yOffset = 0;                        // Ofset when rendering.
+        Direction yOffsetDir = Direction::None;     // Ofset movement
 
         int8_t bg[3][14];
         int8_t fg[3][14];
@@ -23,11 +25,15 @@ struct Level {
         uint8_t getLevel()                      { return this->level; }
         uint8_t getXLocation()                  { return this->xLoc; }
         uint8_t getYLocation()                  { return this->yLoc; }
+        uint8_t getYOffset()                    { return this->yOffset; }
         Item &getItem(uint8_t idx)              { return this->items[idx]; }
+        Direction getYDirection()               { return this->yOffsetDir; }
 
         void setLevel(uint8_t val)              { this->level = val; }
         void setXLocation(uint8_t val)          { this->xLoc = val; }
         void setYLocation(uint8_t val)          { this->yLoc = val; }
+        void setYOffset(uint8_t val)            { this->yOffset = val; }
+        void setYOffsetDir(Direction val)       { this->yOffsetDir = val; }
 
 
     public:
@@ -40,10 +46,51 @@ struct Level {
             this->loadMap();
         }
 
-        void updateItems(Arduboy2Ext &arduboy, Prince &prince) {
+        void incYOffset(int8_t inc) {
 
-            uint8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), prince.getPosition().x) - this->getXLocation();
-            uint8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), prince.getPosition().y) - this->getYLocation() - 1;
+            this->yOffset = this->yOffset + inc;
+        }
+
+        void update(Arduboy2Ext &arduboy, Prince &prince) {
+
+
+            // Update level offset ..
+
+            switch (this->yOffsetDir) {
+
+                case Direction::Down:
+                    
+                    if (this->yOffset < 31) {
+                    
+                        this->yOffset++;
+                    
+                        if (this->yOffset == 31) {
+                            this->yOffsetDir = Direction::None;
+                        }
+                    
+                    }
+                    break;
+
+                case Direction::Up:
+                    
+                    if (this->yOffset > 0) {
+                    
+                        this->yOffset--;
+                    
+                        if (this->yOffset == 0) {
+                            this->yOffsetDir = Direction::None;
+                        }
+                    
+                    }
+                    break;
+
+                default: break;
+
+            }
+
+
+            // uint8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), prince.getPosition().x) - this->getXLocation();
+            // uint8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), prince.getPosition().y) - this->getYLocation() - 1;
 
             for (uint8_t i = 0; i < NUMBER_OF_ITEMS; i++) {
 
@@ -64,12 +111,17 @@ struct Level {
 
                                     item.data.gate.position--;
                                 }
+
                             }
                             break;
 
                         case ItemType::Torch:
+
                             if (arduboy.getFrameCount(3)) {
-                                item.data.torch.frame = (++item.data.torch.frame) % 5;
+
+                                item.data.torch.frame++;
+                                item.data.torch.frame = (item.data.torch.frame) % 5;
+
                             }
                             break;
 
@@ -82,7 +134,6 @@ struct Level {
             }
 
         }
-               
 
         int8_t coordToTileIndexX(Direction direction, int16_t x) {
 
@@ -243,7 +294,6 @@ struct Level {
             #endif
 
         }
-
 
         void loadMap() {
 
@@ -412,6 +462,11 @@ struct Level {
                 case TILE_FLOOR_LH_END_PATTERN_1:
                 case TILE_FLOOR_LH_END_PATTERN_2:
                 case TILE_FLOOR_RH_END:
+                case TILE_FLOOR_RH_END_1:
+                case TILE_FLOOR_RH_END_2:
+                case TILE_FLOOR_RH_END_3:
+                case TILE_FLOOR_RH_END_4:
+                case TILE_FLOOR_RH_END_5:
                 case TILE_FLOOR_RH_END_GATE:
                 case TILE_FLOOR_LH_WALL_1:
                 case TILE_FLOOR_LH_WALL_2:
@@ -757,7 +812,6 @@ struct Level {
 
         }
 
-
         CanJumpUpResult canJumpUp(Prince &prince) {
 
             switch (prince.getDirection()) {
@@ -920,6 +974,11 @@ struct Level {
                             switch (bgTile1) {
 
                                 case TILE_FLOOR_RH_END:
+                                case TILE_FLOOR_RH_END_1:
+                                case TILE_FLOOR_RH_END_2:
+                                case TILE_FLOOR_RH_END_3:
+                                case TILE_FLOOR_RH_END_4:
+                                case TILE_FLOOR_RH_END_5:
                                 case TILE_FLOOR_RH_END_GATE:
                                     return CanJumpUpResult::StepThenJump;
 
@@ -935,6 +994,11 @@ struct Level {
                             switch (bgTile1) {
 
                                 case TILE_FLOOR_RH_END:
+                                case TILE_FLOOR_RH_END_1:
+                                case TILE_FLOOR_RH_END_2:
+                                case TILE_FLOOR_RH_END_3:
+                                case TILE_FLOOR_RH_END_4:
+                                case TILE_FLOOR_RH_END_5:
                                 case TILE_FLOOR_RH_END_GATE:
                                     return CanJumpUpResult::Jump;
 
@@ -1041,6 +1105,11 @@ struct Level {
                             switch (bgTile1) {
 
                                 case TILE_FLOOR_RH_END:
+                                case TILE_FLOOR_RH_END_1:
+                                case TILE_FLOOR_RH_END_2:
+                                case TILE_FLOOR_RH_END_3:
+                                case TILE_FLOOR_RH_END_4:
+                                case TILE_FLOOR_RH_END_5:
                                 case TILE_FLOOR_RH_END_GATE:
                                     return CanJumpUpResult::JumpDist10;
 
@@ -1210,7 +1279,6 @@ struct Level {
             return (gatePosition == 9 || gatePosition == 255);
 
         }        
-
 
         CanClimbDownResult canClimbDown(Prince &prince) {
 
@@ -1443,6 +1511,11 @@ struct Level {
                             switch (bgTile1) {
 
                                 case TILE_FLOOR_RH_END:
+                                case TILE_FLOOR_RH_END_1:
+                                case TILE_FLOOR_RH_END_2:
+                                case TILE_FLOOR_RH_END_3:
+                                case TILE_FLOOR_RH_END_4:
+                                case TILE_FLOOR_RH_END_5:
                                 case TILE_FLOOR_RH_END_GATE:
                                     return CanClimbDownResult::StepThenClimbDown;
 
@@ -1458,6 +1531,11 @@ struct Level {
                             switch (bgTile1) {
 
                                 case TILE_FLOOR_RH_END:
+                                case TILE_FLOOR_RH_END_1:
+                                case TILE_FLOOR_RH_END_2:
+                                case TILE_FLOOR_RH_END_3:
+                                case TILE_FLOOR_RH_END_4:
+                                case TILE_FLOOR_RH_END_5:
                                 case TILE_FLOOR_RH_END_GATE:
                                     return CanClimbDownResult::ClimbDown;
 

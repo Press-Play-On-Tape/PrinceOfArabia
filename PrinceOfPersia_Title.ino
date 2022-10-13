@@ -2,7 +2,7 @@
 
 void title_Init() {
 
-    gameState = GameState::Title;
+    gamePlay.gameState = GameState::Title;
 
 }
 
@@ -14,7 +14,7 @@ void title() {
 
     if (arduboy.justPressed(A_BUTTON)) {
         
-        gameState = GameState::Game_Init; 
+        gamePlay.gameState = GameState::Game_Init; 
 
     }
 

@@ -15,7 +15,8 @@ void game_Init() {
     level.init(60, 0);
 
     prince.init(18, 56);
-    gameState = GameState::Game;
+    gamePlay.init(arduboy, 1);
+    menu.init();
 
 }
 
@@ -23,13 +24,27 @@ void game() {
 
 
     auto justPressed = arduboy.justPressedButtons();
-    auto pressed = arduboy.justPressedButtons();
+    auto pressed = arduboy.pressedButtons();
+
+
+    // Calculate screen offset ..
+
+    if (prince.getYPrevious() <= 56 && prince.getY() > 56) {
+        level.setYOffsetDir(Direction::Down);
+    }
+    else if (prince.getYPrevious() > 56 && prince.getY() <= 56) {
+        level.setYOffsetDir(Direction::Up);
+    }
+
 
 
     // Update the objects ..
 
     prince.update(level.getXLocation(), level.getYLocation());
-    level.updateItems(arduboy, prince);
+    level.update(arduboy, prince);
+    /* if (gamePlay.gameState == GameState::Game) */ gamePlay.update(arduboy);
+    if (menu.update()) gamePlay.gameState = GameState::Game;
+    
 
 
 
@@ -88,7 +103,7 @@ void game() {
 // prince.pushSequence(STANCE_RUNNING_JUMP_1_START, STANCE_RUNNING_JUMP_11_END, STANCE_RUN_START_6_END, true);    
 // }
 
-    if (prince.isEmpty()) {
+    if (gamePlay.gameState == GameState::Game && prince.isEmpty()) {
 
         switch (prince.getStance()) {
 
@@ -210,7 +225,11 @@ void game() {
                             DEBUG_PRINTLN("DOWN_BUTTON, Cannot climb down, squat");
                             #endif
 
-                            prince.pushSequence(STANCE_CROUCH_1_START, STANCE_CROUCH_3_END, false);
+                            gamePlay.crouchTimer++;
+                            
+                            if (gamePlay.crouchTimer == 8) {
+                                prince.pushSequence(STANCE_CROUCH_1_START, STANCE_CROUCH_3_END, false);
+                            }
                             break;
 
                     }
@@ -605,6 +624,81 @@ void game() {
 
 
 
+    // Post input cleanup!
+
+    if (!(pressed & DOWN_BUTTON)) {
+
+        gameState.crouchTimer = 0;
+
+    }
+
+
+
+    // Handle menu
+
+    switch (gamePlay.gameState) {
+
+        case GameState::Game:
+
+            if (justPressed & B_BUTTON) {
+
+                gamePlay.gameState = GameState::Menu;
+                menu.direction = Direction::Left;
+                menu.cursor = static_cast<uint8_t>(MenuOption::Resume);
+
+            }
+
+            break;
+
+
+        case GameState::Menu:
+
+            if (justPressed & B_BUTTON) {
+
+                menu.direction = Direction::Right;
+
+            }
+
+            if (justPressed & UP_BUTTON && menu.cursor > 0) {
+
+                menu.cursor--;
+                
+            }
+
+            if (justPressed & DOWN_BUTTON && menu.cursor < 3) {
+
+                menu.cursor++;
+                
+            }
+
+            if (justPressed & A_BUTTON) {
+
+                switch (static_cast<MenuOption>(menu.cursor)) {
+
+                    case MenuOption::Resume:
+                        menu.direction = Direction::Right;  
+                        break;
+
+                    case MenuOption::Save:
+                        menu.direction = Direction::Right;  
+                        break;
+
+                    case MenuOption::Load:
+                        menu.direction = Direction::Right;  
+                        break;
+
+                    case MenuOption::MainMenu:
+                        gamePlay.gameState = GameState::Title_Init;  
+                        break;
+                        
+                }
+
+            }   
+
+        default: break;
+
+    }
+
 
 
     // Update the prince's stance ..
@@ -727,6 +821,10 @@ void game() {
     // Render scene ..
 
     render();
+    
+    if (gamePlay.gameState == GameState::Menu) {
+        renderMenu();
+    }
 
 
     #if defined(DEBUG) && defined(DEBUG_ONSCREEN_DETAILS)
