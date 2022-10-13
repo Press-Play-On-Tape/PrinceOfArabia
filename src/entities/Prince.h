@@ -11,6 +11,7 @@ struct Prince {
         Stack <int16_t, 30>  *stack;
         
         uint8_t hangingCounter = 0;
+        uint8_t crouchingCounter = 0;
         uint8_t stance = STANCE_UPRIGHT;
 
         Direction direction = Direction::Left;
@@ -31,6 +32,7 @@ struct Prince {
         int16_t getXImage()                         { return this->x - 18 + 2; }
         int16_t getYImage()                         { return this->y - 31; }
         uint8_t getHangingCounter()                 { return this->hangingCounter; }
+        uint8_t getCrouchingCounter()               { return this->crouchingCounter; }
         bool isFalling()                            { return this->falling; }
         Point &getPosition()                        { return this->location; }
 
@@ -42,6 +44,7 @@ struct Prince {
         void setDirection(Direction val)            { this->direction = val; }
         void setFalling(bool val)                   { this->falling = val; }
         void setHangingCounter(uint8_t val)         { this->hangingCounter = val; }
+        void setCrouchingCounter(uint8_t val)       { this->crouchingCounter = val; }
 
 
         void init(int16_t x, int16_t y, Direction direction, uint8_t stance) {
@@ -51,6 +54,7 @@ struct Prince {
             this->prevY = y;
             this->direction = direction;
             this->stance = stance;
+            this->crouchingCounter = 32;
 
         }
 
@@ -201,6 +205,10 @@ struct Prince {
 
             if (this->hangingCounter > 0) {
                 this->hangingCounter--;
+            }
+
+            if (this->crouchingCounter > 0) {
+                this->crouchingCounter--;
             }
 
             this->stack->update();

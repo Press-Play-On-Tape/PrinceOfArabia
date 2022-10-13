@@ -616,7 +616,7 @@ void game() {
             case STANCE_CROUCH_3_END:
             case STANCE_CROUCH_HOP_7_END:
 
-                if (!(pressed & DOWN_BUTTON)) {
+                if (!(pressed & DOWN_BUTTON) && prince.getCrouchingCounter() == 0) {
 
                     prince.pushSequence(STANCE_CROUCH_STAND_3, STANCE_CROUCH_STAND_12_END, STANCE_UPRIGHT, true);
 
