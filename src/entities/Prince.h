@@ -44,11 +44,13 @@ struct Prince {
         void setHangingCounter(uint8_t val)         { this->hangingCounter = val; }
 
 
-        void init(int16_t x, int16_t y) {
+        void init(int16_t x, int16_t y, Direction direction, uint8_t stance) {
 
             this->x = x;
             this->y = y;
             this->prevY = y;
+            this->direction = direction;
+            this->stance = stance;
 
         }
 

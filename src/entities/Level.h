@@ -455,7 +455,7 @@ struct Level {
 
         bool isWallTile(int8_t bgTile, int8_t fgTile) {
 
-            switch (bgTile) {
+            switch (fgTile) {
 
                 case TILE_FG_WALL_1:
                 case TILE_FG_WALL_2:
@@ -593,7 +593,8 @@ struct Level {
             int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), prince.getPosition().y) - this->getYLocation();
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
-            DEBUG_PRINT("coordToTileIndexX ");
+            printAction(action);
+            DEBUG_PRINT(" coordToTileIndexX ");
             DEBUG_PRINT(prince.getPosition().x);
             DEBUG_PRINT(" = ");
             DEBUG_PRINT(tileXIdx);
@@ -627,7 +628,7 @@ struct Level {
                         int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(prince.getDirection(), prince.getPosition().x);
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
-                        DEBUG_PRINT("dist ");
+                        DEBUG_PRINT(" dist ");
                         DEBUG_PRINT(distToEdgeOfCurrentTile);
                         DEBUG_PRINT(", bg ");
                         DEBUG_PRINT(bgTile4);
@@ -656,7 +657,12 @@ struct Level {
                                 switch (distToEdgeOfCurrentTile) {
 
                                     case 0 ... 5:
-                                         return (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2));
+
+                                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+                                        printTileInfo(bgTile2, fgTile2);
+                                        #endif
+
+                                        return (!this->isWallTile(bgTile2, fgTile2) && (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2)));
 
                                     default:
                                         return true;
@@ -671,7 +677,12 @@ struct Level {
                                 switch (distToEdgeOfCurrentTile) {
 
                                     case 0 ... 9:
-                                         return (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2));
+
+                                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+                                        printTileInfo(bgTile2, fgTile2);
+                                        #endif
+
+                                        return (!this->isWallTile(bgTile2, fgTile2) && (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2)));
 
                                     default:
                                         return true;
@@ -690,7 +701,8 @@ struct Level {
 
                                     case  2 ... 12:
 
-                                        if (this->isGroundTile(bgTile2, fgTile2) && this->isGroundTile(bgTile3, fgTile3) && this->isGroundTile(bgTile4, fgTile4)) {
+//                                        if (this->isGroundTile(bgTile2, fgTile2) && this->isGroundTile(bgTile3, fgTile3) && this->isGroundTile(bgTile4, fgTile4)) {
+                                        if (!this->isWallTile(bgTile2, fgTile2)) {
                                             return true;                                            
                                         }
 
@@ -698,7 +710,8 @@ struct Level {
 
                                     default:
 
-                                        if (this->isGroundTile(bgTile2, fgTile2) && this->isGroundTile(bgTile3, fgTile3)) {
+//                                        if (this->isGroundTile(bgTile2, fgTile2) && this->isGroundTile(bgTile3, fgTile3)) {
+                                        if (!this->isWallTile(bgTile2, fgTile2)) {
                                             return true;                                            
                                         }
 
@@ -738,6 +751,7 @@ struct Level {
                         int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(prince.getDirection(), prince.getPosition().x);
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+                        printAction(action);
                         DEBUG_PRINT("dist ");
                         DEBUG_PRINT(distToEdgeOfCurrentTile);
                         DEBUG_PRINT(", bg ");
@@ -764,7 +778,11 @@ struct Level {
 
                                     case 0 ... 5:
 
-                                         return (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2));
+                                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+                                        printTileInfo(bgTile2, fgTile2);
+                                        #endif
+
+                                        return (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2));
 
                                     default:
 
@@ -799,7 +817,8 @@ struct Level {
 
                                     case  2 ... 12:
 
-                                        if (this->isGroundTile(bgTile2, fgTile2) && this->isGroundTile(bgTile3, fgTile3) && this->isGroundTile(bgTile4, fgTile4)) {
+                                        // if (this->isGroundTile(bgTile2, fgTile2) && this->isGroundTile(bgTile3, fgTile3) && this->isGroundTile(bgTile4, fgTile4)) {
+                                        if (!this->isWallTile(bgTile2, fgTile2)) {
                                             return true;                                            
                                         }
 
@@ -807,7 +826,8 @@ struct Level {
 
                                     default:
 
-                                        if (this->isGroundTile(bgTile2, fgTile2) && this->isGroundTile(bgTile3, fgTile3)) {
+                                        // if (this->isGroundTile(bgTile2, fgTile2) && this->isGroundTile(bgTile3, fgTile3)) {
+                                        if (!this->isWallTile(bgTile2, fgTile2)) {
                                             return true;                                            
                                         }
 
@@ -1579,6 +1599,55 @@ struct Level {
 
         }
 
+
+        #if defined(DEBUG)
+        void printAction(Action action) {
+
+            switch (action) {
+
+                case Action::SmallStep:
+                    DEBUG_PRINT("SmallStep");
+                    break;
+
+                case Action::CrouchHop:
+                    DEBUG_PRINT("CrouchHop");
+                    break;
+
+                case Action::Step:
+                    DEBUG_PRINT("Step");
+                    break;
+
+                case Action::RunStart:
+                    DEBUG_PRINT("RunStart");
+                    break;
+
+                case Action::RunRepeat:
+                    DEBUG_PRINT("RunRepeat");
+                    break;
+
+                case Action::StandingJump:
+                    DEBUG_PRINT("StandingJump");
+                    break;
+
+            }
+
+        }
+
+        void printTileInfo(int8_t bgTile, int8_t fgTile) {
+
+            DEBUG_PRINT("isWallTile(");
+            DEBUG_PRINT(bgTile);
+            DEBUG_PRINT(",");
+            DEBUG_PRINT(fgTile);
+            DEBUG_PRINT(") ");
+            DEBUG_PRINT(this->isWallTile(bgTile, fgTile));
+            DEBUG_PRINT(", isGroundTile() ");
+            DEBUG_PRINT(this->isGroundTile(bgTile, fgTile));
+            DEBUG_PRINT(", canFall() ");
+            DEBUG_PRINTLN(this->canFall(bgTile, fgTile));
+        
+        }
+        #endif
 
 
 };

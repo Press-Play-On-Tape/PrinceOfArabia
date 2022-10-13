@@ -14,7 +14,7 @@ void game_Init() {
     level.setLevel(1);
     level.init(60, 0);
 
-    prince.init(18, 56);
+    prince.init(18, 56, Direction::Right, STANCE_CROUCH_3_END);
     gamePlay.init(arduboy, 1);
     menu.init();
 
@@ -298,7 +298,7 @@ void game() {
                 if (pressed & DOWN_BUTTON) {
 
                     prince.pushSequence(STANCE_JUMP_UP_DROP_1_START, STANCE_JUMP_UP_DROP_5_END, STANCE_UPRIGHT, true);
-                    
+
                 }
                 else if (pressed & UP_BUTTON) {
 
@@ -768,6 +768,7 @@ void game() {
                     prince.changeDirection();
                     break;
 
+                case STANCE_SMALL_STEP_5:
                 case STANCE_SINGLE_STEP_5:
                 case STANCE_RUNNING_JUMP_4:
                     {

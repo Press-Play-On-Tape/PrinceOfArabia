@@ -1,11 +1,10 @@
 
 #pragma once
 
-
 #define DEBUG_PRINT    Serial.print
 #define DEBUG_PRINTLN  Serial.println
 
-#define DEBUG
+#define _DEBUG
 #define _DEBUG_PRINCE_DETAILS
 #define _DEBUG_PRINCE_STACK
 #define _DEBUG_PRINT_ACTION
@@ -15,7 +14,7 @@
 #define _DEBUG_ACTION_CANJUMPUP
 #define _DEBUG_ACTION_CANJUMPUP_PART2
 #define _DEBUG_ACTION_CANCLIMBDOWN
-#define DEBUG_ONSCREEN_DETAILS
+#define _DEBUG_ONSCREEN_DETAILS
 
 //-------------------------------------------------------------------------------------
 
