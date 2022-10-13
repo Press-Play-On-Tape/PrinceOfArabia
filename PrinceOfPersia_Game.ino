@@ -114,29 +114,40 @@ void game() {
                     if ((pressed & RIGHT_BUTTON) && (pressed &DOWN_BUTTON)) {
 
                         if (level.canMoveForward(Action::SmallStep, prince)) {
+
                             prince.pushSequence(STANCE_SMALL_STEP_1_START, STANCE_SMALL_STEP_6_END, STANCE_UPRIGHT, true);
+                            break;
+
                         }
 
                     }
                     else if (pressed & RIGHT_BUTTON) {
 
                         if (level.canMoveForward(Action::Step, prince)) {
+
                             prince.push(STANCE_SINGLE_STEP_1_START, true);
+                            break;
+
                         }
                         else if (level.canMoveForward(Action::SmallStep, prince)) {
+
                             prince.pushSequence(STANCE_SMALL_STEP_1_START, STANCE_SMALL_STEP_6_END, STANCE_UPRIGHT, true);
+                            break;
+
                         }
 
                     }
                     else if (pressed & LEFT_BUTTON) {
 
                         prince.pushSequence(STANCE_STANDING_TURN_1_START, STANCE_STANDING_TURN_5_END, STANCE_UPRIGHT_TURN, true);
+                        break;
 
                     }
                     else if (pressed & A_BUTTON) {
 
                         if (level.canMoveForward(Action::StandingJump, prince)) {
                             prince.pushSequence(STANCE_STANDING_JUMP_1_START, STANCE_STANDING_JUMP_18_END, STANCE_UPRIGHT, true);
+                            break;
                         }
 
                     }
@@ -148,32 +159,40 @@ void game() {
 
                         if (level.canMoveForward(Action::SmallStep, prince)) {
                             prince.pushSequence(STANCE_SMALL_STEP_1_START, STANCE_SMALL_STEP_6_END, STANCE_UPRIGHT, true);
+                            break;
                         }
 
                     }
                     else if (pressed & LEFT_BUTTON) {
 
                         if (level.canMoveForward(Action::Step, prince)) {
+
                             prince.push(STANCE_SINGLE_STEP_1_START, true);
+                            break;
+
                         }
                         else if (level.canMoveForward(Action::SmallStep, prince)) {
+
                             prince.pushSequence(STANCE_SMALL_STEP_1_START, STANCE_SMALL_STEP_6_END, STANCE_UPRIGHT, true);
+                            break;
+
                         }
                         
                     }
                     else if (pressed & RIGHT_BUTTON) {
 
                         prince.pushSequence(STANCE_STANDING_TURN_1_START, STANCE_STANDING_TURN_5_END, STANCE_UPRIGHT_TURN, true);
+                        break;
 
                     }
                     else if (pressed & A_BUTTON) {
 
                         if (level.canMoveForward(Action::StandingJump, prince)) {
                             prince.pushSequence(STANCE_STANDING_JUMP_1_START, STANCE_STANDING_JUMP_18_END, STANCE_UPRIGHT, true);
+                            break;
                         }
 
                     }
-
 
                 }
 
@@ -227,7 +246,7 @@ void game() {
 
                             gamePlay.crouchTimer++;
                             
-                            if (gamePlay.crouchTimer == 8) {
+                            if (gamePlay.crouchTimer == 4) {
                                 prince.pushSequence(STANCE_CROUCH_1_START, STANCE_CROUCH_3_END, false);
                             }
                             break;
@@ -277,9 +296,12 @@ void game() {
             case STANCE_JUMP_UP_B_14_END:    
             
                 if (pressed & DOWN_BUTTON) {
+
                     prince.pushSequence(STANCE_JUMP_UP_DROP_1_START, STANCE_JUMP_UP_DROP_5_END, STANCE_UPRIGHT, true);
+                    
                 }
                 else if (pressed & UP_BUTTON) {
+
                     if (level.canJumpUp_Part2(prince)) {
                         prince.pushSequence(STANCE_STEP_CLIMBING_1_START, STANCE_STEP_CLIMBING_15_END, STANCE_UPRIGHT, true);
                     }
@@ -287,6 +309,7 @@ void game() {
                         prince.pushSequence(STANCE_STEP_CLIMBING_BLOCK_1_START, STANCE_STEP_CLIMBING_BLOCK_9_END, STANCE_UPRIGHT, true);
                         
                     }
+
                 }
 
                 // Drop after a period of time hanging ..
@@ -787,6 +810,22 @@ void game() {
                         }
 
                     }
+                    break;
+
+                case STANCE_JUMP_UP_DROP_4: // Ripple collapsible floors.
+
+                    for (uint8_t i = 0; i < NUMBER_OF_ITEMS; i++) {
+                        
+                        Item &item = level.getItem(i);
+
+                        if (item.active && item.itemType == ItemType::CollapsingFloor && item.data.collapsingFloor.frame == 0) {
+
+                            item.data.collapsingFloor.frame = 3;
+
+                        }
+
+                    }
+
                     break;
 
                 // case STANCE_RUNNING_JUMP_4:

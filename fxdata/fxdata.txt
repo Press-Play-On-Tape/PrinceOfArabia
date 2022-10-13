@@ -29,6 +29,8 @@ int8_t Level1_BG[] = {
     uint8_t Level1_Items[] = {
         0, 60, 0, 9, 255,    // Gate @ 60, 0 starting position 9 (top), falls in 64 frames.
         1, 62, 1,           // Torch
+        4, 66, 2,           // CollapsingTile
+        5, 64, 2,           // CollapsedTile
         255                 // End
     }
 
@@ -136,6 +138,12 @@ namespace Images {
     image_t Torch_02 = "../images/items/Torch_02.png"
     image_t Torch_03 = "../images/items/Torch_03.png"
     image_t Torch_04 = "../images/items/Torch_04.png"
+
+    image_t CollapsedFloor = "../images/items/CollapsedTile.png"
+    image_t CollapsingFloor_01 = "../images/items/CollapsingTile_01.png"
+    image_t CollapsingFloor_02 = "../images/items/CollapsingTile_02.png"
+    image_t CollapsingFloor_03 = "../images/items/CollapsingTile_03.png"
+    image_t CollapsingFloor_00 = "../images/items/CollapsingTile_00.png"
 
     image_t Tile_Dungeon_00 = "../images/tiles/tile_dungeon_00.png"
     image_t Tile_Dungeon_01 = "../images/tiles/tile_dungeon_01.png"

@@ -125,6 +125,25 @@ struct Level {
                             }
                             break;
 
+                        case ItemType::CollapsingFloor:
+
+                            if (arduboy.isFrameCount(4) && item.data.collapsingFloor.frame > 0) {
+
+                                item.data.collapsingFloor.frame--;
+
+                            }
+                            break;
+
+                        // case ItemType::CollpasedFloor:
+
+                        //     if (arduboy.getFrameCount(3)) {
+
+                        //         item.data.torch.frame++;
+                        //         item.data.torch.frame = (item.data.torch.frame) % 5;
+
+                        //     }
+                        //     break;
+
                         default: break;
 
                     }
@@ -348,24 +367,26 @@ struct Level {
             while (itemType != 255) {
 
                 Item &item = this->items[itemIdx];
+                item.itemType = static_cast<ItemType>(itemType);
+                item.active = true;
+                item.x = FX::readPendingUInt8();
+                item.y = FX::readPendingUInt8();
 
-                switch (static_cast<ItemType>(itemType)) {
+                switch (item.itemType) {
 
                     case ItemType::Gate:
-                        item.itemType = ItemType::Gate;
-                        item.active = true;
-                        item.x = FX::readPendingUInt8();
-                        item.y = FX::readPendingUInt8();
                         item.data.gate.position = FX::readPendingUInt8();
                         item.data.gate.closingDelay = FX::readPendingUInt8();
                         break;
 
-                    case ItemType::Torch:
-                        item.itemType = ItemType::Torch;
-                        item.active = true;
-                        item.x = FX::readPendingUInt8();
-                        item.y = FX::readPendingUInt8();
-                        break;
+                    // case ItemType::Torch:
+                    //     break;
+
+                    // case ItemType::CollapsingFloor:
+                    //     break;
+
+                    // case ItemType::CollpasedFloor:
+                    //     break;
                 
                     default:
                         break;

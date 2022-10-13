@@ -20,6 +20,16 @@ struct Sword {
 struct Torch {
     uint8_t frame;
 };
+ 
+struct CollapsingFloor {
+    uint8_t frame;
+    uint8_t distToFall;
+    uint8_t distanceFallen;     // 255 not falling. Or 0 to distToFall when falling.  Turns into a CollapsedFloor when fallen.
+    uint8_t timeToFall;         // 255 if not counting down.
+};
+ 
+struct CollapsedFloor {
+};
 
 struct Item {
 
@@ -33,6 +43,8 @@ struct Item {
         struct Door door;
         struct Sword sword;
         struct Torch torch;
+        struct CollapsingFloor collapsingFloor;
+        struct CollapsedFloor collapsedFloor;
     } data; // access with some_info_object.data.a or some_info_object.data.b
  
 };

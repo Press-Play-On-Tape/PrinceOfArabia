@@ -48,6 +48,14 @@ void render() {
                     FX::drawBitmap((item.x - level.getXLocation()) * 12, ((item.y - level.getYLocation()) * 31) - level.getYOffset(), Images::Torch_00 + (item.data.torch.frame * 16), 0, dbmMasked);
                     break;
 
+                case ItemType::CollapsingFloor:
+                    FX::drawBitmap((item.x - level.getXLocation()) * 12, ((item.y - level.getYLocation()) * 31) - level.getYOffset(), Images::CollapsingFloor_01 + (item.data.collapsingFloor.frame * 172), 0, dbmMasked);
+                    break;
+
+                case ItemType::CollpasedFloor:
+                    FX::drawBitmap((item.x - level.getXLocation()) * 12, ((item.y - level.getYLocation()) * 31) - level.getYOffset() + 19, Images::CollapsedFloor, 0, dbmMasked);
+                    break;
+
                 default: break;
 
             }
