@@ -693,6 +693,10 @@ struct Level {
 
                             case Action::RunRepeat:
 
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+                                printTileInfo(bgTile2, fgTile2);
+                                #endif
+                                
                                 return (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2));
 
                             case Action::StandingJump:
@@ -809,6 +813,10 @@ struct Level {
 
                             case Action::RunRepeat:
 
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+                                printTileInfo(bgTile2, fgTile2);
+                                #endif
+                                
                                 return (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2));
 
                             case Action::StandingJump:

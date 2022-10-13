@@ -99,9 +99,6 @@ void game() {
         // }
 
     }
-// if (arduboy.justPressed(B_BUTTON)) {
-// prince.pushSequence(STANCE_RUNNING_JUMP_1_START, STANCE_RUNNING_JUMP_11_END, STANCE_RUN_START_6_END, true);    
-// }
 
     if (gamePlay.gameState == GameState::Game && prince.isEmpty()) {
 
@@ -673,26 +670,11 @@ void game() {
 
             break;
 
-
         case GameState::Menu:
 
-            if (justPressed & B_BUTTON) {
-
-                menu.direction = Direction::Right;
-
-            }
-
-            if (justPressed & UP_BUTTON && menu.cursor > 0) {
-
-                menu.cursor--;
-                
-            }
-
-            if (justPressed & DOWN_BUTTON && menu.cursor < 3) {
-
-                menu.cursor++;
-                
-            }
+            if (justPressed & B_BUTTON)                         menu.direction = Direction::Right;
+            if (justPressed & UP_BUTTON && menu.cursor > 0)     menu.cursor--;
+            if (justPressed & DOWN_BUTTON && menu.cursor < 3)   menu.cursor++;
 
             if (justPressed & A_BUTTON) {
 
@@ -721,6 +703,12 @@ void game() {
         default: break;
 
     }
+
+
+    // Have we collided with a wall?
+
+    
+
 
 
 
