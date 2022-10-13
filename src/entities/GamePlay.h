@@ -19,7 +19,7 @@ struct GamePlay {
 
         this->frameCount = arduboy.getFrameCount();
 
-        this->level = 1;
+        this->level = level;
         this->timer_Sec = 0;
         this->timer_Min = 60;
 

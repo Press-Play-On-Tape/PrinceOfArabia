@@ -628,7 +628,7 @@ void game() {
 
     if (!(pressed & DOWN_BUTTON)) {
 
-        gameState.crouchTimer = 0;
+        gamePlay.crouchTimer = 0;
 
     }
 
