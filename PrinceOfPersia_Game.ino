@@ -11,12 +11,14 @@
 
 void game_Init() {
 
-    prince.init(30, 56, Direction::Right, STANCE_CROUCH_3_END);        // Top left
+   prince.init(30, 56, Direction::Right, STANCE_CROUCH_3_END);        // Top left
+    // prince.init(30, 56 - 31, Direction::Right, STANCE_CROUCH_3_END);        // Top left
     // prince.init(18, 56, Direction::Right, STANCE_CROUCH_3_END);          // Normal starting pos
     // prince.init(30, 56 + 31, Direction::Right, STANCE_CROUCH_3_END);     // Column of climbs
     gamePlay.init(arduboy, 1);
     
     level.setLevel(1);
+    // level.init(prince, 3, 0);   // Top left
     level.init(prince, 31, 0);   // Top left
     // level.init(prince, 60, 0);  // Normal starting pos
     // level.init(prince, 0, 3);   // Column of climbs
@@ -877,6 +879,24 @@ void game() {
 
     }
 
+
+
+    // Trigger floors 
+
+    int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x);
+    int8_t tileYIdx = level.coordToTileIndexY(prince.getDirection(), prince.getPosition().y);
+
+    for (uint8_t i = 0; i < Constants::NumberOfItems; i++) {
+        
+        Item &item = level.getItem(i);
+
+        if (item.active && item.itemType == ItemType::CollapsingFloor && item.x == tileXIdx && item.y == tileYIdx && item.data.collapsingFloor.timeToFall == 0) {
+Serial.println("triggetr fall");
+            item.data.collapsingFloor.timeToFall = 12;
+
+        }
+
+    }
 
 
 

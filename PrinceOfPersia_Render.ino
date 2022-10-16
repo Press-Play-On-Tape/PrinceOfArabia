@@ -22,7 +22,6 @@ void render() {
 
             if (bgTile >= 0) {
                FX::drawBitmap(x * 12, (y * 31) - level.getYOffset(), Images::Tile_Dungeon[Images::xRef[bgTile]], 0, dbmNormal);
-                // FX::drawBitmap(x * 12, y * 31, Images::Tile_Dungeon_00 + (Images::xRef[bgTile] * 52), 0, dbmNormal);
             }
 
         }
@@ -49,7 +48,7 @@ void render() {
                     break;
 
                 case ItemType::CollapsingFloor:
-                    FX::drawBitmap((item.x - level.getXLocation()) * 12, ((item.y - level.getYLocation()) * 31) - level.getYOffset(), Images::CollapsingFloor_01 + (item.data.collapsingFloor.frame * 172), 0, dbmMasked);
+                    FX::drawBitmap((item.x - level.getXLocation()) * 12, ((item.y - level.getYLocation()) * 31) - level.getYOffset() + item.data.collapsingFloor.distanceFallen, Images::CollapsingFloor_01 + (item.data.collapsingFloor.frame * 172), 0, dbmMasked);
                     break;
 
                 case ItemType::CollpasedFloor:

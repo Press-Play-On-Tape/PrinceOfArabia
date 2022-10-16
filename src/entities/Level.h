@@ -62,8 +62,8 @@ struct Level {
         uint8_t yOffset = 0;                        // Ofset when rendering.
         Direction yOffsetDir = Direction::None;     // Ofset movement
 
-        int8_t bg[3][14];
-        int8_t fg[3][14];
+        int8_t bg[5][16];
+        int8_t fg[5][16];
         Item items[Constants::NumberOfItems];
 
     public:
@@ -185,6 +185,26 @@ struct Level {
                                 item.data.collapsingFloor.frame--;
 
                             }
+
+                            if (item.data.collapsingFloor.timeToFall > 1) {
+
+                                item.data.collapsingFloor.timeToFall--;
+
+                            }
+
+                            if (item.data.collapsingFloor.timeToFall == 1) {
+
+                                item.data.collapsingFloor.distanceFallen = item.data.collapsingFloor.distanceFallen + 2;
+
+                                if (item.data.collapsingFloor.distanceFallen >= item.data.collapsingFloor.distToFall) {
+
+                                    item.y = item.y + 1; //item.data.collapsingFloor.distanceFallen;
+                                    item.itemType = ItemType::CollpasedFloor;
+
+                                }
+
+                            }
+
                             break;
 
                         case ItemType::Potion_Small:
@@ -195,16 +215,6 @@ struct Level {
 
                             }
                             break;
-
-                        // case ItemType::CollpasedFloor:
-
-                        //     if (arduboy.getFrameCount(3)) {
-
-                        //         item.data.torch.frame++;
-                        //         item.data.torch.frame = (item.data.torch.frame) % 5;
-
-                        //     }
-                        //     break;
 
                         default: break;
 
@@ -277,12 +287,6 @@ struct Level {
 
         int8_t getTile(Layer layer, int8_t x, int8_t y, bool print) { 
 
-            // if (x < 0)      return 255;         // SJH
-            // if (x >= 100)   return 255;         // SJH
-
-            // if (y < 0)      return 255;         // SJH
-            // if (y >= 100)   return 255;         // SJH
-
             switch (layer) {
 
                 case Layer::Foreground:
@@ -295,33 +299,91 @@ struct Level {
                         DEBUG_PRINT(F(","));
                         DEBUG_PRINT(y);
                         DEBUG_PRINT(F(") = "));
-                        DEBUG_PRINTLN(fg[y][x + 2]);
+                        DEBUG_PRINTLN(fg[y + 1][x + 3]);
                         #endif
 
                     }
-                    return fg[y][x + 2];
+
+                    return fg[y + 1][x + 3];
 
                 case Layer::Background:
+                    {
+                        uint8_t tile = bg[y + 1][x + 3];
 
-                    if (print) {
+                        if (print) {
 
-                        #if defined(DEBUG) && defined(DEBUG_LEVEL_PROCESSING)
-                        DEBUG_PRINT(F("getTile(BG, "));
-                        DEBUG_PRINT(x);
-                        DEBUG_PRINT(F(","));
-                        DEBUG_PRINT(y);
-                        DEBUG_PRINT(F(") = "));
-                        DEBUG_PRINTLN(bg[y][x + 2]);
-                        #endif
+                            #if defined(DEBUG) && defined(DEBUG_LEVEL_PROCESSING)
+                            DEBUG_PRINT(F("getTile(BG, "));
+                            DEBUG_PRINT(x);
+                            DEBUG_PRINT(F(","));
+                            DEBUG_PRINT(y);
+                            DEBUG_PRINT(F(") = "));
+                            DEBUG_PRINTLN(tile);
+                            #endif
+
+                        }
+
+                        if (isCollapsingFloor(this->xLoc + x, this->yLoc + y)) {
+
+                            return TILE_FLOOR_BASIC;
+
+                        }
+
+                        // if (tile == TILE_COLUMN_1 && isCollapsingFloor(this->xLoc + x + 1, this->yLoc + y)) {
+
+                        //     return TILE_COLUMN_2;
+
+                        // }
+
+//                         if (tile == TILE_FLOOR_RH_END_3 && isCollapsingFloor(this->xLoc + x + 1, this->yLoc + y)) {
+// Serial.println("ddfgdf");
+//                             return TILE_COLUMN_REAR_2;
+
+//                         }
+                        if (tile == TILE_COLUMN_REAR_2 && isCollapsingFloor(this->xLoc + x + 1, this->yLoc + y)) {
+Serial.println("ddfgdf");
+                            return TILE_FLOOR_RH_END_3;
+
+                        }
+                        return tile;
 
                     }
-                    return bg[y][x + 2];
+
+                    break;
 
 
             }
 
             return 0;
 
+        }
+
+        // bool getItem(ItemType itemType, int8_t x, int8_t y) {
+
+        //     for (Item &item : this->items) {
+
+        //         if (item.active && item.itemType == itemType && item.x == x && item.y == y) {
+        //             return true;
+        //         }
+
+        //     }
+
+        //     return false;
+            
+        // }
+
+        bool isCollapsingFloor(int8_t x, int8_t y) {
+
+            for (Item &item : this->items) {
+
+                if (item.active && item.itemType == ItemType::CollapsingFloor && item.x == x && item.y == y && item.data.collapsingFloor.timeToFall == 0) {
+                    return true;
+                }
+
+            }
+
+            return false;
+            
         }
 
         void printMap() {
@@ -335,9 +397,9 @@ struct Level {
             DEBUG_PRINTLN(yLoc);
             DEBUG_PRINTLN(F("BG ---------------"));
 
-            for (uint8_t y = 0; y < 3; y++) {
+            for (uint8_t y = 0; y < 5; y++) {
 
-                for (uint8_t x = 0; x < 14; x++) {
+                for (uint8_t x = 0; x < 16; x++) {
 
                     DEBUG_PRINT(bg[y][x]);
                     DEBUG_PRINT(" ");
@@ -355,9 +417,9 @@ struct Level {
 
             DEBUG_PRINTLN(F("FG ---------------"));
 
-            for (uint8_t y = 0; y < 3; y++) {
+            for (uint8_t y = 0; y < 5; y++) {
 
-                for (uint8_t x = 0; x < 14; x++) {
+                for (uint8_t x = 0; x < 16; x++) {
 
                     DEBUG_PRINT(fg[y][x]);
                     DEBUG_PRINT(" ");
@@ -381,36 +443,64 @@ struct Level {
 
             // Background ..
 
-            for (uint8_t y = this->yLoc; y < yLoc + 3; y++) {
+            for (int8_t y = this->yLoc - 1; y < yLoc + 4; y++) {
 
-                FX::seekData(static_cast<uint24_t>(Levels::Level1_BG + (y * Levels::Level1_Width) + this->xLoc - 2));
+                if (y < 0) {
 
-                for (uint8_t x = 0; x < 14; x++) {
+                    for (uint8_t x = 0; x < 16; x++) {
 
-                    int8_t tileId = static_cast<int8_t>(FX::readPendingUInt8());
-                    bg[y - this->yLoc][x] = tileId;
+                        int8_t tileId = static_cast<int8_t>(FX::readPendingUInt8());
+                        bg[y - this->yLoc + 1][x] = TILE_FG_WALL_1;
+
+                    }
 
                 }
+                else {
 
-                FX::readEnd();
+                    FX::seekData(static_cast<uint24_t>(Levels::Level1_BG + (y * Levels::Level1_Width) + this->xLoc - 3));
+
+                    for (uint8_t x = 0; x < 16; x++) {
+
+                        int8_t tileId = static_cast<int8_t>(FX::readPendingUInt8());
+                        bg[y - this->yLoc + 1][x] = tileId;
+
+                    }
+
+                    FX::readEnd();
+
+                }
 
             }
 
 
             // Foreground ..
 
-            for (uint8_t y = this->yLoc; y < this->yLoc + 3; y++) {
+            for (int8_t y = this->yLoc - 1; y < this->yLoc + 4; y++) {
 
-                FX::seekData(static_cast<uint24_t>(Levels::Level1_FG + (y * Levels::Level1_Width) + this->xLoc - 2));
+                if (y < 0) {
 
-                for (uint8_t x = 0; x < 14; x++) {
+                    for (uint8_t x = 0; x < 16; x++) {
 
-                    int8_t tileId = static_cast<int8_t>(FX::readPendingUInt8());
-                    fg[y - this->yLoc][x] = tileId;
+                        int8_t tileId = static_cast<int8_t>(FX::readPendingUInt8());
+                        fg[y - this->yLoc + 1][x] = TILE_FG_WALL_1;
+
+                    }
 
                 }
+                else {
 
-                FX::readEnd();
+                    FX::seekData(static_cast<uint24_t>(Levels::Level1_FG + (y * Levels::Level1_Width) + this->xLoc - 3));
+
+                    for (uint8_t x = 0; x < 16; x++) {
+
+                        int8_t tileId = static_cast<int8_t>(FX::readPendingUInt8());
+                        fg[y - this->yLoc + 1][x] = tileId;
+
+                    }
+
+                    FX::readEnd();
+
+                }
 
             }
 
@@ -444,8 +534,10 @@ struct Level {
                     // case ItemType::Torch:
                     //     break;
 
-                    // case ItemType::CollapsingFloor:
-                    //     break;
+                    case ItemType::CollapsingFloor:
+                        item.data.collapsingFloor.distanceFallen = 0;
+                        item.data.collapsingFloor.distToFall = FX::readPendingUInt8();
+                        break;
 
                     // case ItemType::CollpasedFloor:
                     //     break;

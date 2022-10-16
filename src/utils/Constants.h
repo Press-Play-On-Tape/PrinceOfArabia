@@ -8,13 +8,13 @@
 #define _DEBUG_PRINCE_DETAILS
 #define _DEBUG_PRINCE_STACK
 #define _DEBUG_PRINT_ACTION
-#define _DEBUG_LEVEL_LOAD_MAP
+#define DEBUG_LEVEL_LOAD_MAP
 
 #define _DEBUG_ACTION_CANMOVEFORWARD
 #define _DEBUG_ACTION_CANJUMPUP
 #define _DEBUG_ACTION_CANJUMPUP_PART2
-#define DEBUG_ACTION_CANCLIMBDOWN
-#define _DEBUG_ONSCREEN_DETAILS
+#define _DEBUG_ACTION_CANCLIMBDOWN
+#define DEBUG_ONSCREEN_DETAILS
 
 //-------------------------------------------------------------------------------------
 
