@@ -6,6 +6,52 @@
 #include "../utils/Stack.h"
 #include "Item.h"
 
+#define TILE_NONE -1
+#define TILE_FLOOR_NONE 75
+#define TILE_FLOOR_NONE_PATTERN 92
+
+#define TILE_FLOOR_NONE_LH_WALL_1 97
+#define TILE_FLOOR_NONE_LH_WALL_2 120
+#define TILE_FLOOR_NONE_LH_WALL_3 91
+#define TILE_FLOOR_NONE_LH_WALL_4 119
+
+
+#define TILE_FLOOR_BASIC 77
+#define TILE_FLOOR_LH_END 76
+#define TILE_FLOOR_PATTERN_1 78
+#define TILE_FLOOR_PATTERN_2 79
+#define TILE_FLOOR_LH_END_PATTERN_1 102
+#define TILE_FLOOR_LH_END_PATTERN_2 93
+#define TILE_FLOOR_RH_END 99
+#define TILE_FLOOR_RH_END_GATE 118
+
+#define TILE_FLOOR_RH_END_1 98
+#define TILE_FLOOR_RH_END_2 85
+#define TILE_FLOOR_RH_END_3 103
+#define TILE_FLOOR_RH_END_4 94
+#define TILE_FLOOR_RH_END_5 111
+
+#define TILE_FLOOR_LH_WALL_1 83
+#define TILE_FLOOR_LH_WALL_2 109
+#define TILE_FLOOR_LH_WALL_3 113
+
+#define TILE_FG_WALL_1 80
+#define TILE_FG_WALL_2 81
+#define TILE_FG_WALL_3 82
+#define TILE_FG_WALL_4 86
+#define TILE_FG_WALL_5 87
+#define TILE_FG_WALL_6 88
+
+#define TILE_COLUMN_LH_WALL 100
+#define TILE_COLUMN_1 84
+#define TILE_COLUMN_2 112
+#define TILE_COLUMN_3 96
+#define TILE_COLUMN_4 89
+#define TILE_COLUMN_5 101
+
+#define TILE_COLUMN_REAR_1 104
+#define TILE_COLUMN_REAR_2 90
+
 struct Level {
 
     private:
@@ -421,52 +467,6 @@ struct Level {
             #endif
 
         }
-
-        #define TILE_NONE -1
-        #define TILE_FLOOR_NONE 75
-        #define TILE_FLOOR_NONE_PATTERN 92
-
-        #define TILE_FLOOR_NONE_LH_WALL_1 97
-        #define TILE_FLOOR_NONE_LH_WALL_2 120
-        #define TILE_FLOOR_NONE_LH_WALL_3 91
-        #define TILE_FLOOR_NONE_LH_WALL_4 119
-
-
-        #define TILE_FLOOR_BASIC 77
-        #define TILE_FLOOR_LH_END 76
-        #define TILE_FLOOR_PATTERN_1 78
-        #define TILE_FLOOR_PATTERN_2 79
-        #define TILE_FLOOR_LH_END_PATTERN_1 102
-        #define TILE_FLOOR_LH_END_PATTERN_2 93
-        #define TILE_FLOOR_RH_END 99
-        #define TILE_FLOOR_RH_END_GATE 118
-
-        #define TILE_FLOOR_RH_END_1 98
-        #define TILE_FLOOR_RH_END_2 85
-        #define TILE_FLOOR_RH_END_3 103
-        #define TILE_FLOOR_RH_END_4 94
-        #define TILE_FLOOR_RH_END_5 111
-
-        #define TILE_FLOOR_LH_WALL_1 83
-        #define TILE_FLOOR_LH_WALL_2 109
-        #define TILE_FLOOR_LH_WALL_3 113
-
-        #define TILE_FG_WALL_1 80
-        #define TILE_FG_WALL_2 81
-        #define TILE_FG_WALL_3 82
-        #define TILE_FG_WALL_4 86
-        #define TILE_FG_WALL_5 87
-        #define TILE_FG_WALL_6 88
-
-        #define TILE_COLUMN_LH_WALL 100
-        #define TILE_COLUMN_1 84
-        #define TILE_COLUMN_2 112
-        #define TILE_COLUMN_3 96
-        #define TILE_COLUMN_4 89
-        #define TILE_COLUMN_5 101
-
-        #define TILE_COLUMN_REAR_1 104
-        #define TILE_COLUMN_REAR_2 90
 
 
         bool isWallTile(int8_t bgTile, int8_t fgTile) {
@@ -1564,7 +1564,7 @@ struct Level {
 
                             switch (bgTile1) {
 
-                                case TILE_FLOOR_RH_END:
+                                // case TILE_FLOOR_RH_END:
                                 case TILE_FLOOR_RH_END_1:
                                 case TILE_FLOOR_RH_END_2:
                                 case TILE_FLOOR_RH_END_3:
@@ -1584,7 +1584,7 @@ struct Level {
 
                             switch (bgTile1) {
 
-                                case TILE_FLOOR_RH_END:
+                                // case TILE_FLOOR_RH_END:
                                 case TILE_FLOOR_RH_END_1:
                                 case TILE_FLOOR_RH_END_2:
                                 case TILE_FLOOR_RH_END_3:

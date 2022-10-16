@@ -32,6 +32,8 @@ int8_t Level1_BG[] = {
         4, 66, 2,           // CollapsingTile
         5, 64, 2,           // CollapsedTile
         6, 33, 2,           // Potion Small
+        4, 35, 1,           // CollapsingTile
+        4, 36, 1,           // CollapsingTile
         255                 // End
     }
 
