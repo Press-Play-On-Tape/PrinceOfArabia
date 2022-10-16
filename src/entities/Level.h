@@ -141,6 +141,15 @@ struct Level {
                             }
                             break;
 
+                        case ItemType::Potion_Small:
+
+                            if (arduboy.isFrameCount(4)) {
+
+                                item.data.potionSmall.frame = !item.data.potionSmall.frame;
+
+                            }
+                            break;
+
                         // case ItemType::CollpasedFloor:
 
                         //     if (arduboy.getFrameCount(3)) {
@@ -584,6 +593,27 @@ struct Level {
             #endif
 
             return this->canFall(bgTile1, fgTile1);
+
+        }
+
+        uint8_t canReachItem(Prince &prince, ItemType itemType) {
+
+            int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), prince.getPosition().x);
+            int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), prince.getPosition().y);
+
+            for (uint8_t i = 0; i < Constants::NumberOfItems; i++) {
+
+                Item &item = this->items[i];
+
+                if (item.itemType == itemType && item.active && item.x == tileXIdx && item.y == tileYIdx) {
+
+                    return i;
+
+                }
+
+            }
+
+            return Constants::NoItemFound;
 
         }
 

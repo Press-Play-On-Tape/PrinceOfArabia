@@ -11,13 +11,13 @@
 
 void game_Init() {
 
-    prince.init(30, 56 - 31, Direction::Right, STANCE_CROUCH_3_END);        // Top left
+    prince.init(30, 56, Direction::Right, STANCE_CROUCH_3_END);        // Top left
     // prince.init(18, 56, Direction::Right, STANCE_CROUCH_3_END);          // Normal starting pos
     // prince.init(30, 56 + 31, Direction::Right, STANCE_CROUCH_3_END);     // Column of climbs
     gamePlay.init(arduboy, 1);
     
     level.setLevel(1);
-    level.init(prince, 4, 0);   // Top left
+    level.init(prince, 31, 0);   // Top left
     // level.init(prince, 60, 0);  // Normal starting pos
     // level.init(prince, 0, 3);   // Column of climbs
 
@@ -647,6 +647,19 @@ void game() {
 
                         if (level.canMoveForward(Action::CrouchHop, prince)) {
                             prince.pushSequence(STANCE_CROUCH_HOP_1_START, STANCE_CROUCH_HOP_7_END, true);
+                        }
+
+                    }
+                    else if (pressed & A_BUTTON) {
+
+                        uint8_t itemIdx = level.canReachItem(prince, ItemType::Potion_Small);
+
+                        if (itemIdx != Constants::NoItemFound) {
+
+                            Item &item = level.getItem(itemIdx);
+                            item.active = false;
+                            prince.pushSequence(STANCE_DRINK_TONIC_1_START, STANCE_DRINK_TONIC_15_END, STANCE_UPRIGHT, true);
+
                         }
 
                     }

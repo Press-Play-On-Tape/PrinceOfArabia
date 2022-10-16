@@ -30,6 +30,10 @@ struct CollapsingFloor {
  
 struct CollapsedFloor {
 };
+ 
+struct PotionSmall {
+    uint8_t frame;
+};
 
 struct Item {
 
@@ -45,6 +49,7 @@ struct Item {
         struct Torch torch;
         struct CollapsingFloor collapsingFloor;
         struct CollapsedFloor collapsedFloor;
+        struct PotionSmall potionSmall;
     } data; // access with some_info_object.data.a or some_info_object.data.b
  
 };

@@ -56,6 +56,10 @@ void render() {
                     FX::drawBitmap((item.x - level.getXLocation()) * 12, ((item.y - level.getYLocation()) * 31) - level.getYOffset() + 19, Images::CollapsedFloor, 0, dbmMasked);
                     break;
 
+                case ItemType::Potion_Small:
+                    FX::drawBitmap(((item.x - level.getXLocation()) * 12) + 6, ((item.y - level.getYLocation()) * 31) - level.getYOffset() + 12, Images::Potion_Small_00 + (item.data.potionSmall.frame * 28), 0, dbmMasked);
+                    break;
+
                 default: break;
 
             }

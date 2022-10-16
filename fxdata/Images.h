@@ -31,6 +31,7 @@ namespace Images {
         /* STANCE_STEP_CLIMBING_BLOCK */        128, 129, 130, 131, 132, 131, 130, 129, 128,
         /* STANCE_JUMP_UP_B */                  109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122,
         /* STANCE_JUMP_DROP_B */                123, 124, 125, 126, 127,   // Drop to position 10
+        /* STANCE_DRINK_TONIC */                161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175,
     };
 
 

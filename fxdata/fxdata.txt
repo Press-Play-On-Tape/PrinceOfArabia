@@ -31,6 +31,7 @@ int8_t Level1_BG[] = {
         1, 62, 1,           // Torch
         4, 66, 2,           // CollapsingTile
         5, 64, 2,           // CollapsedTile
+        6, 33, 2,           // Potion Small
         255                 // End
     }
 
@@ -138,6 +139,9 @@ namespace Images {
     image_t Torch_02 = "../images/items/Torch_02.png"
     image_t Torch_03 = "../images/items/Torch_03.png"
     image_t Torch_04 = "../images/items/Torch_04.png"
+
+    image_t Potion_Small_00 = "../images/items/Potion_Small_00.png"
+    image_t Potion_Small_01 = "../images/items/Potion_Small_01.png"
 
     image_t CollapsedFloor = "../images/items/CollapsedTile.png"
     image_t CollapsingFloor_01 = "../images/items/CollapsingTile_01.png"
@@ -401,23 +405,21 @@ namespace Images {
     image_t Prince_Left_158 = "../images/prince/left/0516_Falling_4.png"
     image_t Prince_Left_159 = "../images/prince/left/0517_Falling_5.png"
     image_t Prince_Left_160 = "../images/prince/left/0518_Falling_6_End.png"
-    image_t Prince_Left_161 = "../images/prince/left/xxx.png"
-    image_t Prince_Left_162 = "../images/prince/left/xxx.png"
-    image_t Prince_Left_163 = "../images/prince/left/xxx.png"
-    image_t Prince_Left_164 = "../images/prince/left/xxx.png"
-    image_t Prince_Left_165 = "../images/prince/left/xxx.png"
-    image_t Prince_Left_166 = "../images/prince/left/xxx.png"
-    image_t Prince_Left_167 = "../images/prince/left/xxx.png"
-    image_t Prince_Left_168 = "../images/prince/left/xxx.png"
-    image_t Prince_Left_169 = "../images/prince/left/xxx.png"
-    image_t Prince_Left_170 = "../images/prince/left/xxx.png"
-    image_t Prince_Left_171 = "../images/prince/left/xxx.png"
-    image_t Prince_Left_172 = "../images/prince/left/xxx.png"
-    image_t Prince_Left_173 = "../images/prince/left/xxx.png"
-    image_t Prince_Left_174 = "../images/prince/left/xxx.png"
-    image_t Prince_Left_175 = "../images/prince/left/xxx.png"
-    image_t Prince_Left_176 = "../images/prince/left/xxx.png"
-    image_t Prince_Left_177 = "../images/prince/left/xxx.png"
+    image_t Prince_Left_161 = "../images/prince/left/0593_Drink_Tonic_1_Start.png"
+    image_t Prince_Left_162 = "../images/prince/left/0594_Drink_Tonic_2.png"
+    image_t Prince_Left_163 = "../images/prince/left/0595_Drink_Tonic_3.png"
+    image_t Prince_Left_164 = "../images/prince/left/0596_Drink_Tonic_4.png"
+    image_t Prince_Left_165 = "../images/prince/left/0597_Drink_Tonic_5.png"
+    image_t Prince_Left_166 = "../images/prince/left/0598_Drink_Tonic_6.png"
+    image_t Prince_Left_167 = "../images/prince/left/0599_Drink_Tonic_7.png"
+    image_t Prince_Left_168 = "../images/prince/left/0600_Drink_Tonic_8.png"
+    image_t Prince_Left_169 = "../images/prince/left/0601_Drink_Tonic_9.png"
+    image_t Prince_Left_170 = "../images/prince/left/0602_Drink_Tonic_10.png"
+    image_t Prince_Left_171 = "../images/prince/left/0603_Drink_Tonic_11.png"
+    image_t Prince_Left_172 = "../images/prince/left/0604_Drink_Tonic_12.png"
+    image_t Prince_Left_173 = "../images/prince/left/0605_Drink_Tonic_13.png"
+    image_t Prince_Left_174 = "../images/prince/left/0606_Drink_Tonic_14.png"
+    image_t Prince_Left_175 = "../images/prince/left/0607_Drink_Tonic_15_End.png"
 
 
     // RHS Images ..
@@ -582,23 +584,21 @@ namespace Images {
     image_t Prince_Right_158 = "../images/prince/right/0516_Falling_4.png"
     image_t Prince_Right_159 = "../images/prince/right/0517_Falling_5.png"
     image_t Prince_Right_160 = "../images/prince/right/0518_Falling_6_End.png"
-    image_t Prince_Right_161 = "../images/prince/right/xxx.png"
-    image_t Prince_Right_162 = "../images/prince/right/xxx.png"
-    image_t Prince_Right_163 = "../images/prince/right/xxx.png"
-    image_t Prince_Right_164 = "../images/prince/right/xxx.png"
-    image_t Prince_Right_165 = "../images/prince/right/xxx.png"
-    image_t Prince_Right_166 = "../images/prince/right/xxx.png"
-    image_t Prince_Right_167 = "../images/prince/right/xxx.png"
-    image_t Prince_Right_168 = "../images/prince/right/xxx.png"
-    image_t Prince_Right_169 = "../images/prince/right/xxx.png"
-    image_t Prince_Right_170 = "../images/prince/right/xxx.png"
-    image_t Prince_Right_171 = "../images/prince/right/xxx.png"
-    image_t Prince_Right_172 = "../images/prince/right/xxx.png"
-    image_t Prince_Right_173 = "../images/prince/right/xxx.png"
-    image_t Prince_Right_174 = "../images/prince/right/xxx.png"
-    image_t Prince_Right_175 = "../images/prince/right/xxx.png"
-    image_t Prince_Right_176 = "../images/prince/right/xxx.png"
-    image_t Prince_Right_177 = "../images/prince/right/xxx.png"
+    image_t Prince_Right_161 = "../images/prince/right/0593_Drink_Tonic_1_Start.png"
+    image_t Prince_Right_162 = "../images/prince/right/0594_Drink_Tonic_2.png"
+    image_t Prince_Right_163 = "../images/prince/right/0595_Drink_Tonic_3.png"
+    image_t Prince_Right_164 = "../images/prince/right/0596_Drink_Tonic_4.png"
+    image_t Prince_Right_165 = "../images/prince/right/0597_Drink_Tonic_5.png"
+    image_t Prince_Right_166 = "../images/prince/right/0598_Drink_Tonic_6.png"
+    image_t Prince_Right_167 = "../images/prince/right/0599_Drink_Tonic_7.png"
+    image_t Prince_Right_168 = "../images/prince/right/0600_Drink_Tonic_8.png"
+    image_t Prince_Right_169 = "../images/prince/right/0601_Drink_Tonic_9.png"
+    image_t Prince_Right_170 = "../images/prince/right/0602_Drink_Tonic_10.png"
+    image_t Prince_Right_171 = "../images/prince/right/0603_Drink_Tonic_11.png"
+    image_t Prince_Right_172 = "../images/prince/right/0604_Drink_Tonic_12.png"
+    image_t Prince_Right_173 = "../images/prince/right/0605_Drink_Tonic_13.png"
+    image_t Prince_Right_174 = "../images/prince/right/0606_Drink_Tonic_14.png"
+    image_t Prince_Right_175 = "../images/prince/right/0607_Drink_Tonic_15_End.png"
 
 }
 namespace_end

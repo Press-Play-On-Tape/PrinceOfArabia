@@ -8,13 +8,13 @@
 #define _DEBUG_PRINCE_DETAILS
 #define _DEBUG_PRINCE_STACK
 #define _DEBUG_PRINT_ACTION
-#define DEBUG_LEVEL_LOAD_MAP
+#define _DEBUG_LEVEL_LOAD_MAP
 
 #define _DEBUG_ACTION_CANMOVEFORWARD
 #define _DEBUG_ACTION_CANJUMPUP
 #define _DEBUG_ACTION_CANJUMPUP_PART2
-#define DEBUG_ACTION_CANCLIMBDOWN
-#define DEBUG_ONSCREEN_DETAILS
+#define _DEBUG_ACTION_CANCLIMBDOWN
+#define _DEBUG_ONSCREEN_DETAILS
 
 //-------------------------------------------------------------------------------------
 
@@ -233,7 +233,21 @@
 #define STANCE_JUMP_UP_DROP_B_3                 208
 #define STANCE_JUMP_UP_DROP_B_4                 209
 #define STANCE_JUMP_UP_DROP_B_5_END             210
-
+#define STANCE_DRINK_TONIC_1_START              211 
+#define STANCE_DRINK_TONIC_2                    212
+#define STANCE_DRINK_TONIC_3                    213
+#define STANCE_DRINK_TONIC_4                    214
+#define STANCE_DRINK_TONIC_5                    215
+#define STANCE_DRINK_TONIC_6                    216
+#define STANCE_DRINK_TONIC_7                    217
+#define STANCE_DRINK_TONIC_8                    218
+#define STANCE_DRINK_TONIC_9                    219
+#define STANCE_DRINK_TONIC_10                   220
+#define STANCE_DRINK_TONIC_11                   221
+#define STANCE_DRINK_TONIC_12                   222
+#define STANCE_DRINK_TONIC_13                   223
+#define STANCE_DRINK_TONIC_14                   224
+#define STANCE_DRINK_TONIC_15_END               225
 
 
 #define STANCE_JUMP_DOWN_1_START        240
@@ -270,24 +284,7 @@
 #define STANCE_SWINGING_10              240
 #define STANCE_SWINGING_11              240
 #define STANCE_SWINGING_12_END          240
-#define STANCE_DRINK_TONIC_1_START      240 
-#define STANCE_DRINK_TONIC_2            240
-#define STANCE_DRINK_TONIC_3            240
-#define STANCE_DRINK_TONIC_4            240
-#define STANCE_DRINK_TONIC_5            240
-#define STANCE_DRINK_TONIC_6            240
-#define STANCE_DRINK_TONIC_7            240
-#define STANCE_DRINK_TONIC_8            240
-#define STANCE_DRINK_TONIC_9            240
-#define STANCE_DRINK_TONIC_10           240
-#define STANCE_DRINK_TONIC_11           240
-#define STANCE_DRINK_TONIC_12           240
-#define STANCE_DRINK_TONIC_13           240
-#define STANCE_DRINK_TONIC_14           240
-#define STANCE_DRINK_TONIC_15           240
-#define STANCE_DRINK_TONIC_16           240
-#define STANCE_DRINK_TONIC_17           240
-#define STANCE_DRINK_TONIC_18_END       240
+
 #define STANCE_SQUAT_ROTATE_01_START    240 //54
 #define STANCE_SQUAT_ROTATE_02          240 //54
 #define STANCE_SQUAT_ROTATE_03          240 //54
@@ -303,6 +300,7 @@ namespace Constants {
     constexpr uint8_t FrameRate = 30;
     constexpr uint8_t NumberOfItems = 20;
     constexpr uint8_t Animation_NumberOfFrames = 2;
+    constexpr uint8_t NoItemFound = 255;
 
 }
 
@@ -357,12 +355,13 @@ enum class CanClimbDownResult : uint8_t {
 };
 
 enum class ItemType : uint8_t {
-    Gate,
-    Torch,
-    Door,
-    Sword,
-    CollapsingFloor,
-    CollpasedFloor,
+    /* 00 */ Gate,               
+    /* 01 */ Torch,
+    /* 02 */ Door,
+    /* 03 */ Sword,
+    /* 04 */ CollapsingFloor,
+    /* 05 */ CollpasedFloor,
+    /* 06 */ Potion_Small,
 };
 
 enum class MenuOption : uint8_t {
