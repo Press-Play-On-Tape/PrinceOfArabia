@@ -329,6 +329,25 @@ void game() {
                             }
                             break;
 
+                        case CanJumpUpResult::StepThenJumpThenFall_CollapseFloor:
+                            {
+                                int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x) + (prince.getDirection() == Direction::Left ? -1 : 1);
+                                int8_t tileYIdx = level.coordToTileIndexY(prince.getDirection(), prince.getPosition().y) - 1;
+                                uint8_t itemIdx = level.getItem(ItemType::CollapsingFloor, tileXIdx, tileYIdx);
+
+                                if (itemIdx != Constants::NoItemFound) {
+
+                                    Item &item = level.getItem(itemIdx);
+                                    item.data.collapsingFloor.timeToFall = 52;
+
+                                }
+
+                                prince.pushSequence(STANCE_JUMP_UP_DROP_A_1_START, STANCE_JUMP_UP_DROP_A_5_END, STANCE_UPRIGHT, false);
+                                prince.pushSequence(STANCE_JUMP_UP_A_1_START, STANCE_JUMP_UP_A_14_END, true);
+                                prince.pushSequence(STANCE_SMALL_STEP_1_START, STANCE_SMALL_STEP_6_END, STANCE_UPRIGHT, false);
+                            }
+                            break;
+
                         case CanJumpUpResult::StepThenJump:
                             prince.pushSequence(STANCE_JUMP_UP_A_1_START, STANCE_JUMP_UP_A_14_END, STANCE_UPRIGHT, true);
                             prince.pushSequence(STANCE_SMALL_STEP_1_START, STANCE_SMALL_STEP_6_END, STANCE_UPRIGHT, false);

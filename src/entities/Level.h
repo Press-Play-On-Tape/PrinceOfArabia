@@ -1006,6 +1006,14 @@ struct Level {
 
                                 return CanJumpUpResult::JumpThenFall_CollapseFloor;
 
+                            case CanJumpUpResult::StepThenJumpThenFall_CollapseFloor:
+
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                DEBUG_PRINTLN(F("Left Test success, Return StepThenJumpThenFall_CollapseFloor"));
+                                #endif                            
+
+                                return CanJumpUpResult::StepThenJumpThenFall_CollapseFloor;
+
                             default:
                                 {
                                     CanJumpUpResult resultRight = this->canJumpUp_Test(prince, Direction::Right);
@@ -1064,6 +1072,14 @@ struct Level {
                                 #endif                            
 
                                 return CanJumpUpResult::JumpThenFall_CollapseFloor;
+
+                            case CanJumpUpResult::StepThenJumpThenFall_CollapseFloor:
+
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                DEBUG_PRINTLN(F("Right Test success, Return StepThenJumpThenFall_CollapseFloor"));
+                                #endif                            
+
+                                return CanJumpUpResult::StepThenJumpThenFall_CollapseFloor;
 
                             default:
                                 {
@@ -1173,7 +1189,7 @@ struct Level {
                                     switch (bgTile2) {
 
                                         case TILE_COLLAPSING_FLOOR:
-                                            return CanJumpUpResult::JumpThenFall_CollapseFloor;
+                                            return CanJumpUpResult::StepThenJumpThenFall_CollapseFloor;
 
                                         default:
                                             return CanJumpUpResult::JumpThenFall;
@@ -1236,7 +1252,7 @@ struct Level {
                                     return CanJumpUpResult::StepThenJump;
 
                                 case TILE_COLLAPSING_FLOOR:
-                                    return CanJumpUpResult::JumpThenFall_CollapseFloor;
+                                    return CanJumpUpResult::StepThenJumpThenFall_CollapseFloor;
 
                                 default:                                
                                     return CanJumpUpResult::JumpThenFall;
@@ -1273,7 +1289,7 @@ struct Level {
 
             }
 
-            return CanJumpUpResult::None;
+            return CanJumpUpResult::JumpThenFall;
 
         }
 
@@ -1369,7 +1385,7 @@ struct Level {
 
             }
 
-            return CanJumpUpResult::None;
+            return CanJumpUpResult::JumpThenFall;
 
         }
 
