@@ -29,11 +29,11 @@ int8_t Level1_BG[] = {
     uint8_t Level1_Items[] = {
         0, 60, 0, 9, 255,    // Gate @ 60, 0 starting position 9 (top), falls in 64 frames.
         1, 62, 1,            // Torch
-        4, 66, 2, 26,        // CollapsingTile (dist to fall)
+        4, 66, 2, 24,        // CollapsingTile (dist to fall, 24 + 31 + 31 ..)
         5, 64, 2,            // CollapsedTile
         6, 33, 2,            // Potion Small
-        4, 35, 1, 26,        // CollapsingTile (dist to fall)
-        4, 36, 1, 26,           // CollapsingTile (dist to fall)
+        4, 35, 1, 24,        // CollapsingTile (dist to fall)
+        4, 36, 1, 24,        // CollapsingTile (dist to fall)
         6, 8, 0,             // Potion Small
         255                  // End
     }

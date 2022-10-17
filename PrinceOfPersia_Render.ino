@@ -18,7 +18,7 @@ void render() {
 
         for (uint8_t x = 0; x < 11; x++) {
 
-            int8_t bgTile = level.getTile(Layer::Background, x, y);
+            int8_t bgTile = level.getTile(Layer::Background, x, y, TILE_NONE);
 
             if (bgTile >= 0) {
                FX::drawBitmap(x * 12, (y * 31) - level.getYOffset(), Images::Tile_Dungeon[Images::xRef[bgTile]], 0, dbmNormal);
@@ -52,7 +52,7 @@ void render() {
                     break;
 
                 case ItemType::CollpasedFloor:
-                    FX::drawBitmap((item.x - level.getXLocation()) * 12, ((item.y - level.getYLocation()) * 31) - level.getYOffset() + 19, Images::CollapsedFloor, 0, dbmMasked);
+                    FX::drawBitmap((item.x - level.getXLocation()) * 12, ((item.y - level.getYLocation()) * 31) - level.getYOffset() + 18, Images::CollapsedFloor, 0, dbmMasked);
                     break;
 
                 case ItemType::Potion_Small:
@@ -92,7 +92,7 @@ void render() {
 
         for (uint8_t x = 0; x < 11; x++) {
 
-            int8_t fgTile = level.getTile(Layer::Foreground, x, y);
+            int8_t fgTile = level.getTile(Layer::Foreground, x, y, TILE_NONE);
 
             if (fgTile >= 0) {
 

@@ -11,7 +11,7 @@
 #define DEBUG_LEVEL_LOAD_MAP
 
 #define _DEBUG_ACTION_CANMOVEFORWARD
-#define _DEBUG_ACTION_CANJUMPUP
+#define DEBUG_ACTION_CANJUMPUP
 #define _DEBUG_ACTION_CANJUMPUP_PART2
 #define _DEBUG_ACTION_CANCLIMBDOWN
 #define DEBUG_ONSCREEN_DETAILS
@@ -344,6 +344,7 @@ enum class CanJumpUpResult : uint8_t {
     JumpThenFall,
     TurnThenJump,
     JumpDist10,
+    JumpThenFall_CollapseFloor, // Take this as gospel!
 };
 
 enum class CanClimbDownResult : uint8_t {

@@ -11,7 +11,7 @@
 
 void game_Init() {
 
-   prince.init(30, 56, Direction::Right, STANCE_CROUCH_3_END);        // Top left
+   prince.init(66, 56, Direction::Right, STANCE_CROUCH_3_END);        // Top left
     // prince.init(30, 56 - 31, Direction::Right, STANCE_CROUCH_3_END);        // Top left
     // prince.init(18, 56, Direction::Right, STANCE_CROUCH_3_END);          // Normal starting pos
     // prince.init(30, 56 + 31, Direction::Right, STANCE_CROUCH_3_END);     // Column of climbs
@@ -42,6 +42,43 @@ void game() {
     else if (prince.getYPrevious() > 56 && prince.getY() <= 56) {
         level.setYOffsetDir(Direction::Up);
     }
+
+
+
+    if (justPressed & B_BUTTON) {
+
+        switch (level.distToEdgeOfTile(prince.getDirection(),  (level.getXLocation() * 12) + prince.getX())) {
+
+            case 0:
+                prince.incX(2);
+                break;
+
+            case 1:
+            case 5:
+            case 9:
+                prince.incX(1);
+                break;
+
+            case 3:
+            case 7:
+            case 11:
+                prince.incX(-1);
+                break;
+
+            case 2:
+            case 6:
+            case 10:
+                break;
+
+            case 4:
+            case 8:
+                prince.incX(2);
+                break;
+
+        }
+
+    }
+
 
 
 
@@ -115,7 +152,7 @@ void game() {
 
                 if (prince.getDirection() == Direction::Right) {
 
-                    if ((pressed & RIGHT_BUTTON) && (pressed &DOWN_BUTTON)) {
+                    if ((pressed & RIGHT_BUTTON) && (pressed & DOWN_BUTTON)) {
 
                         if (level.canMoveForward(Action::SmallStep, prince)) {
 
@@ -272,6 +309,24 @@ void game() {
                         case CanJumpUpResult::JumpThenFall:
                             prince.pushSequence(STANCE_JUMP_UP_DROP_A_1_START, STANCE_JUMP_UP_DROP_A_5_END, STANCE_UPRIGHT, false);
                             prince.pushSequence(STANCE_JUMP_UP_A_1_START, STANCE_JUMP_UP_A_14_END, true);
+                            break;
+
+                        case CanJumpUpResult::JumpThenFall_CollapseFloor:
+                            {
+                                int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x) + (prince.getDirection() == Direction::Left ? -1 : 1);
+                                int8_t tileYIdx = level.coordToTileIndexY(prince.getDirection(), prince.getPosition().y) - 1;
+                                uint8_t itemIdx = level.getItem(ItemType::CollapsingFloor, tileXIdx, tileYIdx);
+
+                                if (itemIdx != Constants::NoItemFound) {
+
+                                    Item &item = level.getItem(itemIdx);
+                                    item.data.collapsingFloor.timeToFall = 52;
+
+                                }
+
+                                prince.pushSequence(STANCE_JUMP_UP_DROP_A_1_START, STANCE_JUMP_UP_DROP_A_5_END, STANCE_UPRIGHT, false);
+                                prince.pushSequence(STANCE_JUMP_UP_A_1_START, STANCE_JUMP_UP_A_14_END, true);
+                            }
                             break;
 
                         case CanJumpUpResult::StepThenJump:
@@ -882,22 +937,24 @@ void game() {
 
 
     // Trigger floors 
+    {
 
-    int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x);
-    int8_t tileYIdx = level.coordToTileIndexY(prince.getDirection(), prince.getPosition().y);
+        int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x);
+        int8_t tileYIdx = level.coordToTileIndexY(prince.getDirection(), prince.getPosition().y);
 
-    for (uint8_t i = 0; i < Constants::NumberOfItems; i++) {
-        
-        Item &item = level.getItem(i);
+        for (uint8_t i = 0; i < Constants::NumberOfItems; i++) {
+            
+            Item &item = level.getItem(i);
 
-        if (item.active && item.itemType == ItemType::CollapsingFloor && item.x == tileXIdx && item.y == tileYIdx && item.data.collapsingFloor.timeToFall == 0) {
-Serial.println("triggetr fall");
-            item.data.collapsingFloor.timeToFall = 12;
+            if (item.active && item.itemType == ItemType::CollapsingFloor && item.x == tileXIdx && item.y == tileYIdx && item.data.collapsingFloor.timeToFall == 0) {
+    Serial.println("triggetr fall");
+                item.data.collapsingFloor.timeToFall = 12;
+
+            }
 
         }
 
     }
-
 
 
     // Render scene ..

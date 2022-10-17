@@ -52,6 +52,9 @@
 #define TILE_COLUMN_REAR_1 104
 #define TILE_COLUMN_REAR_2 90
 
+
+#define TILE_COLLAPSING_FLOOR - 2
+
 struct Level {
 
     private:
@@ -198,7 +201,7 @@ struct Level {
 
                                 if (item.data.collapsingFloor.distanceFallen >= item.data.collapsingFloor.distToFall) {
 
-                                    item.y = item.y + 1; //item.data.collapsingFloor.distanceFallen;
+                                    item.y = item.y + ((item.data.collapsingFloor.distToFall / 31) + 1);
                                     item.itemType = ItemType::CollpasedFloor;
 
                                 }
@@ -279,30 +282,20 @@ struct Level {
 
         }
 
-        int8_t getTile(Layer layer, int8_t x, int8_t y) { 
-
-            return getTile(layer, x, y, false);
-
-        }
-
-        int8_t getTile(Layer layer, int8_t x, int8_t y, bool print) { 
+        int8_t getTile(Layer layer, int8_t x, int8_t y, int8_t returnCollapsingTile) { 
 
             switch (layer) {
 
                 case Layer::Foreground:
 
-                    if (print) {
-
-                        #if defined(DEBUG) && defined(DEBUG_LEVEL_PROCESSING)
-                        DEBUG_PRINT(F("getTile(FG, "));
-                        DEBUG_PRINT(x);
-                        DEBUG_PRINT(F(","));
-                        DEBUG_PRINT(y);
-                        DEBUG_PRINT(F(") = "));
-                        DEBUG_PRINTLN(fg[y + 1][x + 3]);
-                        #endif
-
-                    }
+                    #if defined(DEBUG) && defined(DEBUG_LEVEL_PROCESSING)
+                    DEBUG_PRINT(F("getTile(FG, "));
+                    DEBUG_PRINT(x);
+                    DEBUG_PRINT(F(","));
+                    DEBUG_PRINT(y);
+                    DEBUG_PRINT(F(") = "));
+                    DEBUG_PRINTLN(fg[y + 1][x + 3]);
+                    #endif
 
                     return fg[y + 1][x + 3];
 
@@ -310,22 +303,18 @@ struct Level {
                     {
                         uint8_t tile = bg[y + 1][x + 3];
 
-                        if (print) {
+                        #if defined(DEBUG) && defined(DEBUG_LEVEL_PROCESSING)
+                        DEBUG_PRINT(F("getTile(BG, "));
+                        DEBUG_PRINT(x);
+                        DEBUG_PRINT(F(","));
+                        DEBUG_PRINT(y);
+                        DEBUG_PRINT(F(") = "));
+                        DEBUG_PRINTLN(tile);
+                        #endif
 
-                            #if defined(DEBUG) && defined(DEBUG_LEVEL_PROCESSING)
-                            DEBUG_PRINT(F("getTile(BG, "));
-                            DEBUG_PRINT(x);
-                            DEBUG_PRINT(F(","));
-                            DEBUG_PRINT(y);
-                            DEBUG_PRINT(F(") = "));
-                            DEBUG_PRINTLN(tile);
-                            #endif
+                        if (returnCollapsingTile != TILE_NONE && isCollapsingFloor(this->xLoc + x, this->yLoc + y)) {
 
-                        }
-
-                        if (isCollapsingFloor(this->xLoc + x, this->yLoc + y)) {
-
-                            return TILE_FLOOR_BASIC;
+                            return returnCollapsingTile;
 
                         }
 
@@ -340,11 +329,11 @@ struct Level {
 //                             return TILE_COLUMN_REAR_2;
 
 //                         }
-                        if (tile == TILE_COLUMN_REAR_2 && isCollapsingFloor(this->xLoc + x + 1, this->yLoc + y)) {
-Serial.println("ddfgdf");
-                            return TILE_FLOOR_RH_END_3;
+//                         if (tile == TILE_COLUMN_REAR_2 && isCollapsingFloor(this->xLoc + x + 1, this->yLoc + y)) {
+// Serial.println("ddfgdf");
+//                             return TILE_FLOOR_RH_END_3;
 
-                        }
+//                         }
                         return tile;
 
                     }
@@ -354,23 +343,25 @@ Serial.println("ddfgdf");
 
             }
 
-            return 0;
+            return TILE_NONE;
 
         }
 
-        // bool getItem(ItemType itemType, int8_t x, int8_t y) {
+        uint8_t getItem(ItemType itemType, int8_t x, int8_t y) {
 
-        //     for (Item &item : this->items) {
+            for (uint8_t i = 0; i < Constants::NumberOfItems; i++) {
+                
+                Item &item = this->items[i];
 
-        //         if (item.active && item.itemType == itemType && item.x == x && item.y == y) {
-        //             return true;
-        //         }
+                if (item.active && item.itemType == itemType && item.x == x && item.y == y) {
+                    return i;
+                }
 
-        //     }
+            }
 
-        //     return false;
+            return Constants::NoItemFound;
             
-        // }
+        }
 
         bool isCollapsingFloor(int8_t x, int8_t y) {
 
@@ -673,8 +664,8 @@ Serial.println("ddfgdf");
             #endif
 
 
-            int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, true);
-            int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, true);
+            int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
+            int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
             DEBUG_PRINTF(("bg "));
@@ -732,20 +723,20 @@ Serial.println("ddfgdf");
                     {
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
-                        int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, true);
+                        int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
                         #endif
 
-                        int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx - 1, tileYIdx, true);
-                        int8_t bgTile3 = this->getTile(Layer::Background, tileXIdx - 2, tileYIdx, true);
-                        int8_t bgTile4 = this->getTile(Layer::Background, tileXIdx - 3, tileYIdx, true);
+                        int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx - 1, tileYIdx, TILE_FLOOR_BASIC);
+                        int8_t bgTile3 = this->getTile(Layer::Background, tileXIdx - 2, tileYIdx, TILE_FLOOR_BASIC);
+                        int8_t bgTile4 = this->getTile(Layer::Background, tileXIdx - 3, tileYIdx, TILE_FLOOR_BASIC);
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
-                        int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, true);
+                        int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
                         #endif
 
-                        int8_t fgTile2 = this->getTile(Layer::Foreground, tileXIdx - 1, tileYIdx, true);
-                        int8_t fgTile3 = this->getTile(Layer::Foreground, tileXIdx - 2, tileYIdx, true);
-                        int8_t fgTile4 = this->getTile(Layer::Foreground, tileXIdx - 3, tileYIdx, true);
+                        int8_t fgTile2 = this->getTile(Layer::Foreground, tileXIdx - 1, tileYIdx, TILE_FLOOR_BASIC);
+                        int8_t fgTile3 = this->getTile(Layer::Foreground, tileXIdx - 2, tileYIdx, TILE_FLOOR_BASIC);
+                        int8_t fgTile4 = this->getTile(Layer::Foreground, tileXIdx - 3, tileYIdx, TILE_FLOOR_BASIC);
                         
                         int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(prince.getDirection(), prince.getPosition().x);
 
@@ -859,20 +850,20 @@ Serial.println("ddfgdf");
                     {
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
-                        int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, true);
+                        int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
                         #endif
                         
-                        int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx + 1, tileYIdx, true);
-                        int8_t bgTile3 = this->getTile(Layer::Background, tileXIdx + 2, tileYIdx, true);
-                        int8_t bgTile4 = this->getTile(Layer::Background, tileXIdx + 3, tileYIdx, true);
+                        int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx + 1, tileYIdx, TILE_FLOOR_BASIC);
+                        int8_t bgTile3 = this->getTile(Layer::Background, tileXIdx + 2, tileYIdx, TILE_FLOOR_BASIC);
+                        int8_t bgTile4 = this->getTile(Layer::Background, tileXIdx + 3, tileYIdx, TILE_FLOOR_BASIC);
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
-                        int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, true);
+                        int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
                         #endif
 
-                        int8_t fgTile2 = this->getTile(Layer::Foreground, tileXIdx + 1, tileYIdx, true);
-                        int8_t fgTile3 = this->getTile(Layer::Foreground, tileXIdx + 2, tileYIdx, true);
-                        int8_t fgTile4 = this->getTile(Layer::Foreground, tileXIdx + 3, tileYIdx, true);
+                        int8_t fgTile2 = this->getTile(Layer::Foreground, tileXIdx + 1, tileYIdx, TILE_FLOOR_BASIC);
+                        int8_t fgTile3 = this->getTile(Layer::Foreground, tileXIdx + 2, tileYIdx, TILE_FLOOR_BASIC);
+                        int8_t fgTile4 = this->getTile(Layer::Foreground, tileXIdx + 3, tileYIdx, TILE_FLOOR_BASIC);
                         
                         int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(prince.getDirection(), prince.getPosition().x);
 
@@ -985,6 +976,10 @@ Serial.println("ddfgdf");
 
         CanJumpUpResult canJumpUp(Prince &prince) {
 
+            #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+            DEBUG_PRINTLN(F("-----------------------------------------------------"));
+            #endif
+
             switch (prince.getDirection()) {
 
                 case Direction::Left:
@@ -1002,6 +997,14 @@ Serial.println("ddfgdf");
                                 #endif
                                                                     
                                 return resultLeft;
+
+                            case CanJumpUpResult::JumpThenFall_CollapseFloor:
+
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                DEBUG_PRINTLN(F("Left Test success, Return JumpThenFall_CollapseFloor"));
+                                #endif                            
+
+                                return CanJumpUpResult::JumpThenFall_CollapseFloor;
 
                             default:
                                 {
@@ -1053,6 +1056,14 @@ Serial.println("ddfgdf");
                                 #endif                            
 
                                 return resultRight;
+
+                            case CanJumpUpResult::JumpThenFall_CollapseFloor:
+
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                DEBUG_PRINTLN(F("Right Test success, Return JumpThenFall_CollapseFloor"));
+                                #endif                            
+
+                                return CanJumpUpResult::JumpThenFall_CollapseFloor;
 
                             default:
                                 {
@@ -1107,7 +1118,9 @@ Serial.println("ddfgdf");
             int8_t tileYIdx = this->coordToTileIndexY(direction, prince.getPosition().y) - this->getYLocation();
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-            DEBUG_PRINT(F("canJumpUp_Test: coordToTileIndexX "));
+            DEBUG_PRINT(F("canJumpUp_Test: direction "));
+            DEBUG_PRINT((direction == Direction::Left ? "Left" : "Right"));
+            DEBUG_PRINT(F(", canJumpUp_Test: coordToTileIndexX "));
             DEBUG_PRINT(prince.getPosition().x);
             DEBUG_PRINT(F(" = "));
             DEBUG_PRINT(tileXIdx);
@@ -1117,8 +1130,9 @@ Serial.println("ddfgdf");
             DEBUG_PRINTLN(tileYIdx);
             #endif
 
-            int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx - 1, true);
-            int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx + inc, tileYIdx - 1, true);
+            int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx - 1, TILE_FLOOR_BASIC);
+            // int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx + inc, tileYIdx - 1, (direction == Direction::Left ? TILE_FLOOR_BASIC : TILE_COLLAPSING_FLOOR));
+            int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx + inc, tileYIdx - 1, TILE_COLLAPSING_FLOOR);
             int8_t distToEdge = distToEdgeOfTile(direction, prince.getPosition().x);
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
@@ -1155,8 +1169,17 @@ Serial.println("ddfgdf");
                                     return CanJumpUpResult::StepThenJump;
 
                                 default:                                
-                                    return CanJumpUpResult::JumpThenFall;
 
+                                    switch (bgTile2) {
+
+                                        case TILE_COLLAPSING_FLOOR:
+                                            return CanJumpUpResult::JumpThenFall_CollapseFloor;
+
+                                        default:
+                                            return CanJumpUpResult::JumpThenFall;
+
+                                    }
+    
                             }
 
                             break;
@@ -1175,8 +1198,17 @@ Serial.println("ddfgdf");
                                 case TILE_COLUMN_LH_WALL:
                                     return CanJumpUpResult::Jump;
 
-                                default:
-                                    return CanJumpUpResult::JumpThenFall;
+                                default:                                
+
+                                    switch (bgTile2) {
+
+                                        case TILE_COLLAPSING_FLOOR:
+                                            return CanJumpUpResult::JumpThenFall_CollapseFloor;
+
+                                        default:
+                                            return CanJumpUpResult::JumpThenFall;
+
+                                    }
 
                             }
 
@@ -1203,6 +1235,9 @@ Serial.println("ddfgdf");
                                 case TILE_COLUMN_3:
                                     return CanJumpUpResult::StepThenJump;
 
+                                case TILE_COLLAPSING_FLOOR:
+                                    return CanJumpUpResult::JumpThenFall_CollapseFloor;
+
                                 default:                                
                                     return CanJumpUpResult::JumpThenFall;
 
@@ -1219,6 +1254,9 @@ Serial.println("ddfgdf");
                                 case TILE_FLOOR_LH_END_PATTERN_2:
                                 case TILE_COLUMN_3:
                                     return CanJumpUpResult::Jump;
+
+                                case TILE_COLLAPSING_FLOOR:
+                                    return CanJumpUpResult::JumpThenFall_CollapseFloor;
 
                                 default:
                                     return CanJumpUpResult::JumpThenFall;
@@ -1245,7 +1283,9 @@ Serial.println("ddfgdf");
             int8_t tileYIdx = this->coordToTileIndexY(direction, prince.getPosition().y) - this->getYLocation();
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-            DEBUG_PRINT(F("canJumpUp_Test_Dist10: coordToTileIndexX "));
+            DEBUG_PRINT(F("canJumpUp_Test_Dist10: direction "));
+            DEBUG_PRINT((direction == Direction::Left ? "Left" : "Right"));
+            DEBUG_PRINT(F(", coordToTileIndexX "));
             DEBUG_PRINT(prince.getPosition().x);
             DEBUG_PRINT(F(" = "));
             DEBUG_PRINT(tileXIdx);
@@ -1255,8 +1295,8 @@ Serial.println("ddfgdf");
             DEBUG_PRINTLN(tileYIdx);
             #endif
 
-            int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx + 1, tileYIdx - 1, true);
-            int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx, tileYIdx - 1, true);
+            int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx + 1, tileYIdx - 1, TILE_FLOOR_BASIC);
+            int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx, tileYIdx - 1, TILE_FLOOR_BASIC);
             int8_t distToEdge = distToEdgeOfTile(direction, prince.getPosition().x);
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
@@ -1580,7 +1620,7 @@ Serial.println("ddfgdf");
             printCoordToIndex(prince.getPosition(), tileXIdx, tileYIdx);
             #endif
 
-            int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, true);
+            int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
             int8_t distToEdge = distToEdgeOfTile(direction, prince.getPosition().x);
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
