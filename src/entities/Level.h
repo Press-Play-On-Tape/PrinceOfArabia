@@ -93,6 +93,7 @@ struct Level {
             this->yLoc = yLoc;
 
             this->loadMap();
+            this->loadItems();
 
             if (prince.getY() > 56) {
 
@@ -429,6 +430,60 @@ struct Level {
 
         }
 
+        void loadItems() {
+
+
+            // Items
+            
+
+            for (Item &item : items) {
+                item.active = false;
+            }
+
+            uint8_t itemIdx = 0;
+            FX::seekData(Levels::Level1_Items);
+            uint8_t itemType = FX::readPendingUInt8();
+
+            while (itemType != 255) {
+
+                Item &item = this->items[itemIdx];
+                item.itemType = static_cast<ItemType>(itemType);
+                item.active = true;
+                item.x = FX::readPendingUInt8();
+                item.y = FX::readPendingUInt8();
+
+                switch (item.itemType) {
+
+                    case ItemType::Gate:
+                        item.data.gate.position = FX::readPendingUInt8();
+                        item.data.gate.closingDelay = FX::readPendingUInt8();
+                        break;
+
+                    // case ItemType::Torch:
+                    //     break;
+
+                    case ItemType::CollapsingFloor:
+                        item.data.collapsingFloor.distanceFallen = 0;
+                        item.data.collapsingFloor.distToFall = FX::readPendingUInt8();
+                        break;
+
+                    // case ItemType::CollpasedFloor:
+                    //     break;
+                
+                    default:
+                        break;
+
+                }
+
+                itemType = FX::readPendingUInt8();
+                itemIdx++;
+
+            }
+
+            FX::readEnd();
+
+        }
+
         void loadMap() {
 
 
@@ -494,56 +549,6 @@ struct Level {
                 }
 
             }
-
-
-            // Items
-            
-
-            for (Item &item : items) {
-                item.active = false;
-            }
-
-            uint8_t itemIdx = 0;
-            FX::seekData(Levels::Level1_Items);
-            uint8_t itemType = FX::readPendingUInt8();
-
-            while (itemType != 255) {
-
-                Item &item = this->items[itemIdx];
-                item.itemType = static_cast<ItemType>(itemType);
-                item.active = true;
-                item.x = FX::readPendingUInt8();
-                item.y = FX::readPendingUInt8();
-
-                switch (item.itemType) {
-
-                    case ItemType::Gate:
-                        item.data.gate.position = FX::readPendingUInt8();
-                        item.data.gate.closingDelay = FX::readPendingUInt8();
-                        break;
-
-                    // case ItemType::Torch:
-                    //     break;
-
-                    case ItemType::CollapsingFloor:
-                        item.data.collapsingFloor.distanceFallen = 0;
-                        item.data.collapsingFloor.distToFall = FX::readPendingUInt8();
-                        break;
-
-                    // case ItemType::CollpasedFloor:
-                    //     break;
-                
-                    default:
-                        break;
-
-                }
-
-                itemType = FX::readPendingUInt8();
-                itemIdx++;
-
-            }
-
-            FX::readEnd();
 
             #if defined(DEBUG) && defined(DEBUG_LEVEL_LOAD_MAP)
             printMap();
@@ -640,18 +645,37 @@ struct Level {
 
             }
 
-            // switch (fgTile) {
-
-            //     case :
-            //         return false;
-
-            // }
-
             return false;
 
         }
 
+
         bool canFall(Prince &prince, int8_t xOffset = 0) {
+
+            Point newPos = prince.getPosition();
+            newPos.x = newPos.x + (prince.getDirection() == Direction::Left ? xOffset * -1 : xOffset);
+
+            int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), newPos.x) - this->getXLocation();
+            int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), newPos.y) - this->getYLocation();
+            
+            int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
+            int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
+            
+            #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+            DEBUG_PRINTF((canFall() "bg "));
+            DEBUG_PRINT(bgTile1);
+            DEBUG_PRINT(F(", fg "));
+            DEBUG_PRINT(fgTile1);
+            DEBUG_PRINTLN("");
+            #endif
+
+            return this->canFall(bgTile1, fgTile1);
+
+        
+        }
+
+
+        uint8_t levelsToFall(Prince &prince, int8_t xOffset = 0) { // number of levels.
 
             Point newPos = prince.getPosition();
             newPos.x = newPos.x + (prince.getDirection() == Direction::Left ? xOffset * -1 : xOffset);
@@ -664,18 +688,63 @@ struct Level {
             #endif
 
 
-            int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
-            int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
+            int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx - 1, TILE_FLOOR_BASIC);
+            int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx - 1, TILE_FLOOR_BASIC);
 
-            #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
-            DEBUG_PRINTF(("bg "));
+            int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
+            int8_t fgTile2 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
+
+            #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
+            DEBUG_PRINT(F("levelsToFall() ("));
+            DEBUG_PRINT(tileXIdx);
+            DEBUG_PRINT(F(","));
+            DEBUG_PRINT(tileYIdx);
+            DEBUG_PRINT(F(") bg1 "));
             DEBUG_PRINT(bgTile1);
-            DEBUG_PRINT(F(", fg "));
+            DEBUG_PRINT(F(", fg1 "));
             DEBUG_PRINT(fgTile1);
-            DEBUG_PRINTLN("");
+            DEBUG_PRINT(F(", canFall: "));
+            DEBUG_PRINT(this->canFall(bgTile1, fgTile1));
+            DEBUG_PRINT(F("  ("));
+            DEBUG_PRINT(tileXIdx);
+            DEBUG_PRINT(F(","));
+            DEBUG_PRINT(tileYIdx + 1);
+            DEBUG_PRINT(F(") bg1 "));
+            DEBUG_PRINT(bgTile2);
+            DEBUG_PRINT(F(", fg2 "));
+            DEBUG_PRINT(fgTile2);
+            DEBUG_PRINT(F(", canFall: "));
+            DEBUG_PRINT(this->canFall(bgTile2, fgTile2));
             #endif
 
-            return this->canFall(bgTile1, fgTile1);
+            bool canFall1 = this->canFall(bgTile1, fgTile1);
+
+            if (!canFall1) {
+
+                #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
+                DEBUG_PRINTLN(" return 0");
+                #endif
+                
+                return 0;
+
+            }
+
+            bool canFall2 = this->canFall(bgTile2, fgTile2);
+
+            if (canFall1 && !canFall2) {
+
+                #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
+                DEBUG_PRINTLN(" return 1");
+                #endif
+                
+                return 1;
+
+            }
+
+            #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
+            DEBUG_PRINTLN(" return 2");
+            #endif
+            return 2;
 
         }
 

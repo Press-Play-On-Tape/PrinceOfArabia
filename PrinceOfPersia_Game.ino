@@ -11,16 +11,14 @@
 
 void game_Init() {
 
-   prince.init(66, 56, Direction::Right, STANCE_CROUCH_3_END);        // Top left
-    // prince.init(30, 56 - 31, Direction::Right, STANCE_CROUCH_3_END);        // Top left
-    // prince.init(18, 56, Direction::Right, STANCE_CROUCH_3_END);          // Normal starting pos
+    // prince.init(66, 56, Direction::Right, STANCE_CROUCH_3_END);        // Top left
+    prince.init(18, 56, Direction::Right, STANCE_CROUCH_3_END);          // Normal starting pos
     // prince.init(30, 56 + 31, Direction::Right, STANCE_CROUCH_3_END);     // Column of climbs
     gamePlay.init(arduboy, 1);
     
     level.setLevel(1);
-    // level.init(prince, 3, 0);   // Top left
-    level.init(prince, 31, 0);   // Top left
-    // level.init(prince, 60, 0);  // Normal starting pos
+    // level.init(prince, 31, 0);   // Top left
+    level.init(prince, 60, 0);  // Normal starting pos
     // level.init(prince, 0, 3);   // Column of climbs
 
     menu.init();
@@ -32,6 +30,35 @@ void game() {
 
     auto justPressed = arduboy.justPressedButtons();
     auto pressed = arduboy.pressedButtons();
+
+// Serial.print(prince.getY());
+// Serial.print(" ");
+// Serial.print(level.getYOffset());
+// Serial.print(" ");
+// Serial.print(prince.getY() - level.getYOffset());
+// Serial.println(" ");
+    if (prince.getY() - level.getYOffset() >= 56 + 31) {
+
+        prince.incY(- 56 - 31);
+        level.setYLocation(level.getYLocation() + 3);
+        level.loadMap();
+        level.setYOffset(0);
+        level.setYOffsetDir(Direction::None);
+
+    }
+    // else if (prince.getY() - level.getYOffset() < 25) {
+
+    //     prince.incY(25);
+    //     level.setYLocation(level.getYLocation() - 3);
+    //     level.loadMap();
+    //     level.setYOffset(31);
+    //     level.setYOffsetDir(Direction::None);
+
+    // }
+
+
+
+
 
 
     // Calculate screen offset ..
@@ -196,7 +223,7 @@ void game() {
                 }
                 else {
 
-                    if ((pressed &LEFT_BUTTON) && (pressed & DOWN_BUTTON)) {
+                    if ((pressed & LEFT_BUTTON) && (pressed & DOWN_BUTTON)) {
 
                         if (level.canMoveForward(Action::SmallStep, prince)) {
                             prince.pushSequence(STANCE_SMALL_STEP_1_START, STANCE_SMALL_STEP_6_END, STANCE_UPRIGHT, true);
@@ -382,6 +409,24 @@ void game() {
                         prince.pushSequence(STANCE_JUMP_UP_DROP_B_1_START, STANCE_JUMP_UP_DROP_B_5_END, STANCE_UPRIGHT, true);
                     }
 
+//                     uint8_t levelsToFall = level.levelsToFall(prince, 0);
+// Serial.print("1 ");
+// Serial.println(levelsToFall);
+//                     switch (levelsToFall) {
+
+//                         case 0:
+//                             prince.pushSequence(STANCE_JUMP_UP_DROP_A_1_START, STANCE_JUMP_UP_DROP_A_5_END, STANCE_UPRIGHT, true);
+//                             break;
+
+//                         case 1:
+//                             prince.pushSequence(STANCE_JUMP_UP_DROP_B_1_START, STANCE_JUMP_UP_DROP_B_5_END, STANCE_UPRIGHT, true);
+//                             break;
+
+//                         default:
+//                             break;
+
+//                     }
+
                 }
                 else if (pressed & UP_BUTTON) {
 
@@ -404,6 +449,24 @@ void game() {
                     else {
                         prince.pushSequence(STANCE_JUMP_UP_DROP_B_1_START, STANCE_JUMP_UP_DROP_B_5_END, STANCE_UPRIGHT, true);
                     }
+
+
+//                     uint8_t levelsToFall = level.levelsToFall(prince, 0);
+// Serial.print("2 ");
+// Serial.println(levelsToFall);
+//                     switch (levelsToFall) {
+
+//                         case 0:
+//                             prince.pushSequence(STANCE_JUMP_UP_DROP_A_1_START, STANCE_JUMP_UP_DROP_A_5_END, STANCE_UPRIGHT, true);
+//                             break;
+
+//                         case 1:
+//                             prince.pushSequence(STANCE_JUMP_UP_DROP_B_1_START, STANCE_JUMP_UP_DROP_B_5_END, STANCE_UPRIGHT, true);
+//                             break;
+
+//                         default:
+//                             break;
+//                     }
 
                 }
 
@@ -868,46 +931,46 @@ void game() {
                 case STANCE_SMALL_STEP_5:
                 case STANCE_SINGLE_STEP_5:
                 case STANCE_RUNNING_JUMP_4:
-                    {
-                        if (level.canFall(prince)) {
-                            prince.clear();
-                            prince.pushSequence(STANCE_CROUCH_STAND_1_START, STANCE_CROUCH_STAND_12_END, STANCE_UPRIGHT, true);
-                            prince.pushSequence(STANCE_FALLING_A_1_START, STANCE_FALLING_A_6_END, true);
-                        }
+
+                    if (level.canFall(prince)) {
+
+                        prince.clear();
+                        prince.pushSequence(STANCE_CROUCH_STAND_1_START, STANCE_CROUCH_STAND_12_END, STANCE_UPRIGHT, true);
+                        prince.pushSequence(STANCE_FALLING_A_1_START, STANCE_FALLING_A_6_END, true);
                     }
+
                     break;
 
                 case STANCE_RUNNING_JUMP_1_START:
                 case STANCE_RUNNING_JUMP_10:
-                    {
-                        if (level.canFall(prince)) {
+                    
+                    if (level.canFall(prince)) {
 
-                            prince.clear();
+                        prince.clear();
 
-                            int8_t dist = abs(level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * 12) + prince.getX()));
+                        int8_t dist = abs(level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * 12) + prince.getX()));
 
-                            switch (dist) {
+                        switch (dist) {
 
-                                case 0:
-                                case 4:
-                                case 8:
-                                case 12:
-                                    prince.pushSequence(STANCE_CROUCH_STAND_1_START, STANCE_CROUCH_STAND_12_END, STANCE_UPRIGHT, true);
-                                    prince.pushSequence(STANCE_FALLING_B_1_START, STANCE_FALLING_B_6_END, true);
-                                    break;
+                            case 0:
+                            case 4:
+                            case 8:
+                            case 12:
+                                prince.pushSequence(STANCE_CROUCH_STAND_1_START, STANCE_CROUCH_STAND_12_END, STANCE_UPRIGHT, true);
+                                prince.pushSequence(STANCE_FALLING_B_1_START, STANCE_FALLING_B_6_END, true);
+                                break;
 
-                                case 2:
-                                case 6:
-                                case 10:
-                                    prince.pushSequence(STANCE_CROUCH_STAND_1_START, STANCE_CROUCH_STAND_12_END, STANCE_UPRIGHT, true);
-                                    prince.pushSequence(STANCE_FALLING_C_1_START, STANCE_FALLING_C_6_END, true);
-                                    break;
-
-                            }
+                            case 2:
+                            case 6:
+                            case 10:
+                                prince.pushSequence(STANCE_CROUCH_STAND_1_START, STANCE_CROUCH_STAND_12_END, STANCE_UPRIGHT, true);
+                                prince.pushSequence(STANCE_FALLING_C_1_START, STANCE_FALLING_C_6_END, true);
+                                break;
 
                         }
 
                     }
+
                     break;
 
                 case STANCE_JUMP_UP_DROP_A_4: // Ripple collapsible floors.
@@ -966,7 +1029,7 @@ void game() {
             Item &item = level.getItem(i);
 
             if (item.active && item.itemType == ItemType::CollapsingFloor && item.x == tileXIdx && item.y == tileYIdx && item.data.collapsingFloor.timeToFall == 0) {
-    Serial.println("triggetr fall");
+
                 item.data.collapsingFloor.timeToFall = 12;
 
             }
@@ -1000,7 +1063,8 @@ void game() {
     font3x5.print(F(" y"));
     font3x5.print(level.coordToTileIndexY(prince.getDirection(), (level.getYLocation() * 31) + prince.getY()));
     font3x5.print(F(" "));
-    font3x5.print((level.getYLocation() * 31) + prince.getY());
+ //   font3x5.print((level.getYLocation() * 31) + prince.getY());
+    font3x5.print(prince.getY());
     font3x5.print(F(" dst"));
     font3x5.print(level.distToEdgeOfTile(prince.getDirection(),  (level.getXLocation() * 12) + prince.getX()));
     #endif
