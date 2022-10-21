@@ -432,8 +432,13 @@ void game() {
                             prince.pushSequence(STANCE_JUMP_UP_DROP_A_1_START, STANCE_JUMP_UP_DROP_A_5_END, STANCE_UPRIGHT, true);
                             break;
 
-                        case CanClimbDownPart2Result::Level_2:
-                            prince.pushSequence(STANCE_JUMP_UP_DROP_C_1_START, STANCE_JUMP_UP_DROP_C_10_END, STANCE_UPRIGHT, true);
+                        case CanClimbDownPart2Result::Falling:
+//                            prince.setFalling(true);
+//                            prince.pushSequence(STANCE_JUMP_UP_DROP_C_1_START, STANCE_JUMP_UP_DROP_C_5_END, true);
+//                            prince.push(STANCE_JUMP_UP_DROP_C_5_END, false);
+                            // prince.pushSequence(STANCE_CROUCH_STAND_1_START, STANCE_CROUCH_STAND_12_END, STANCE_UPRIGHT, true);
+                            // prince.pushSequence(STANCE_FALLING_D_1_START, STANCE_FALLING_D_2_END, true);
+                            prince.pushSequence(STANCE_JUMP_UP_DROP_C_1_START, STANCE_JUMP_UP_DROP_C_5_END, true);
                             break;
 
                         default:
@@ -477,9 +482,14 @@ void game() {
                             prince.pushSequence(STANCE_JUMP_UP_DROP_A_1_START, STANCE_JUMP_UP_DROP_A_5_END, STANCE_UPRIGHT, true);
                             break;
 
-                        case CanClimbDownPart2Result::Level_2:
-                            prince.pushSequence(STANCE_JUMP_UP_DROP_C_1_START, STANCE_JUMP_UP_DROP_C_10_END, STANCE_UPRIGHT, true);
+                        case CanClimbDownPart2Result::Falling:
+                            // prince.setFalling(true);
+                            // prince.pushSequence(STANCE_JUMP_UP_DROP_C_1_START, STANCE_JUMP_UP_DROP_C_5_END, true);
+                            // prince.pushSequence(STANCE_CROUCH_STAND_1_START, STANCE_CROUCH_STAND_12_END, STANCE_UPRIGHT, true);
+                            // prince.pushSequence(STANCE_FALLING_D_1_START, STANCE_FALLING_D_2_END, true);
+                            prince.pushSequence(STANCE_JUMP_UP_DROP_C_1_START, STANCE_JUMP_UP_DROP_C_5_END, true);
                             break;
+
 
                         default:
                             break;
@@ -1008,6 +1018,11 @@ void game() {
 
                     break;
 
+                case STANCE_JUMP_UP_DROP_C_5_END: // Falling after climbing down ..
+                    Serial.println("STANCE_JUMP_UP_DROP_C_5_END");
+                    prince.pushSequence(STANCE_CROUCH_STAND_1_START, STANCE_CROUCH_STAND_12_END, STANCE_UPRIGHT, true);
+                    prince.pushSequence(STANCE_FALLING_D_1_START, STANCE_FALLING_D_2_END, true);
+                    break;
                 // case STANCE_RUNNING_JUMP_4:
                 //     {
                 //         if (level.canFall(prince, 10)) {
