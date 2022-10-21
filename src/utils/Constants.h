@@ -4,7 +4,7 @@
 #define DEBUG_PRINT    Serial.print
 #define DEBUG_PRINTLN  Serial.println
 
-#define DEBUG
+#define _DEBUG
 #define DEBUG_ONSCREEN_DETAILS
 
 #define _DEBUG_PRINCE_DETAILS
@@ -17,6 +17,7 @@
 #define _DEBUG_ACTION_CANJUMPUP_PART2
 #define _DEBUG_ACTION_CANCLIMBDOWN
 #define _DEBUG_ACTION_CANFALL
+#define DEBUG_ACTION_CANCLIMBDOWN_PART2
 
 //-------------------------------------------------------------------------------------
 
@@ -250,6 +251,16 @@
 #define STANCE_DRINK_TONIC_13                   223
 #define STANCE_DRINK_TONIC_14                   224
 #define STANCE_DRINK_TONIC_15_END               225
+#define STANCE_JUMP_UP_DROP_C_1_START           226  // Drop down to Pos 2 (two levels)
+#define STANCE_JUMP_UP_DROP_C_2                 227
+#define STANCE_JUMP_UP_DROP_C_3                 228
+#define STANCE_JUMP_UP_DROP_C_4                 229
+#define STANCE_JUMP_UP_DROP_C_5                 230
+#define STANCE_JUMP_UP_DROP_C_6                 231
+#define STANCE_JUMP_UP_DROP_C_7                 232
+#define STANCE_JUMP_UP_DROP_C_8                 233
+#define STANCE_JUMP_UP_DROP_C_9                 234
+#define STANCE_JUMP_UP_DROP_C_10_END            235
 
 
 #define STANCE_JUMP_DOWN_1_START        240
@@ -356,6 +367,14 @@ enum class CanClimbDownResult : uint8_t {
     StepThenClimbDown,
     TurnThenClimbDown,
     StepThenTurnThenClimbDown,
+};
+
+enum class CanClimbDownPart2Result : uint8_t {
+    None,
+    Level_1,
+    Level_2,
+    Level_3,
+    Level_1_Under,
 };
 
 enum class ItemType : uint8_t {

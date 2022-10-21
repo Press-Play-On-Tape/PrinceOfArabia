@@ -11,15 +11,17 @@
 
 void game_Init() {
 
-    // prince.init(66, 56, Direction::Right, STANCE_CROUCH_3_END);        // Top left
+    // prince.init(66, 56, Direction::Right, STANCE_CROUCH_3_END);        // Normal starting Pos
     prince.init(18, 56, Direction::Right, STANCE_CROUCH_3_END);          // Normal starting pos
     // prince.init(30, 56 + 31, Direction::Right, STANCE_CROUCH_3_END);     // Column of climbs
+    // prince.init(80, 25, Direction::Right, STANCE_CROUCH_3_END);     // Top Left
     gamePlay.init(arduboy, 1);
     
     level.setLevel(1);
-    // level.init(prince, 31, 0);   // Top left
+    // level.init(prince, 31, 0);   // Normal starting Pos
     level.init(prince, 60, 0);  // Normal starting pos
-    // level.init(prince, 0, 3);   // Column of climbs
+//    level.init(prince, 0, 3);   // Column of climbs
+    // level.init(prince, 0, 0);   // Top left
 
     menu.init();
 
@@ -31,30 +33,39 @@ void game() {
     auto justPressed = arduboy.justPressedButtons();
     auto pressed = arduboy.pressedButtons();
 
-// Serial.print(prince.getY());
-// Serial.print(" ");
-// Serial.print(level.getYOffset());
-// Serial.print(" ");
-// Serial.print(prince.getY() - level.getYOffset());
-// Serial.println(" ");
+
     if (prince.getY() - level.getYOffset() >= 56 + 31) {
 
-        prince.incY(- 56 - 31);
+        prince.incY(- 56 - 31 - 6);
         level.setYLocation(level.getYLocation() + 3);
         level.loadMap();
         level.setYOffset(0);
         level.setYOffsetDir(Direction::None);
 
     }
-    // else if (prince.getY() - level.getYOffset() < 25) {
+    else if (prince.getY() - level.getYOffset() < 0) {
 
-    //     prince.incY(25);
-    //     level.setYLocation(level.getYLocation() - 3);
-    //     level.loadMap();
-    //     level.setYOffset(31);
-    //     level.setYOffsetDir(Direction::None);
+        prince.incY(56 + 31 + 6);
+        level.setYLocation(level.getYLocation() - 3);
+        level.loadMap();
+        level.setYOffset(31);
+        level.setYOffsetDir(Direction::None);
 
-    // }
+    }
+    else if (prince.getX() < 0) {
+
+        prince.incX(120);
+        level.setXLocation(level.getXLocation() - 10);
+        level.loadMap();
+
+    }
+    else if (prince.getX() > 120) {
+
+        prince.incX(-120);
+        level.setXLocation(level.getXLocation() + 10);
+        level.loadMap();
+
+    }
 
 
 
@@ -402,30 +413,33 @@ void game() {
             
                 if (pressed & DOWN_BUTTON) {
 
-                    if (!level.canFall(prince, 0)) {
-                        prince.pushSequence(STANCE_JUMP_UP_DROP_A_1_START, STANCE_JUMP_UP_DROP_A_5_END, STANCE_UPRIGHT, true);
+                    // if (!level.canFall(prince, 0)) {
+                    //     prince.pushSequence(STANCE_JUMP_UP_DROP_A_1_START, STANCE_JUMP_UP_DROP_A_5_END, STANCE_UPRIGHT, true);
+                    // }
+                    // else {
+                    //     prince.pushSequence(STANCE_JUMP_UP_DROP_B_1_START, STANCE_JUMP_UP_DROP_B_5_END, STANCE_UPRIGHT, true);
+                    // }
+
+                    CanClimbDownPart2Result climbDownResult = level.canClimbDown_Part2(prince, 0);
+
+                    switch (climbDownResult) {
+
+                        case CanClimbDownPart2Result::Level_1_Under:
+                            prince.pushSequence(STANCE_JUMP_UP_DROP_B_1_START, STANCE_JUMP_UP_DROP_B_5_END, STANCE_UPRIGHT, true);
+                            break;
+
+                        case CanClimbDownPart2Result::Level_1:
+                            prince.pushSequence(STANCE_JUMP_UP_DROP_A_1_START, STANCE_JUMP_UP_DROP_A_5_END, STANCE_UPRIGHT, true);
+                            break;
+
+                        case CanClimbDownPart2Result::Level_2:
+                            prince.pushSequence(STANCE_JUMP_UP_DROP_C_1_START, STANCE_JUMP_UP_DROP_C_10_END, STANCE_UPRIGHT, true);
+                            break;
+
+                        default:
+                            break;
+
                     }
-                    else {
-                        prince.pushSequence(STANCE_JUMP_UP_DROP_B_1_START, STANCE_JUMP_UP_DROP_B_5_END, STANCE_UPRIGHT, true);
-                    }
-
-//                     uint8_t levelsToFall = level.levelsToFall(prince, 0);
-// Serial.print("1 ");
-// Serial.println(levelsToFall);
-//                     switch (levelsToFall) {
-
-//                         case 0:
-//                             prince.pushSequence(STANCE_JUMP_UP_DROP_A_1_START, STANCE_JUMP_UP_DROP_A_5_END, STANCE_UPRIGHT, true);
-//                             break;
-
-//                         case 1:
-//                             prince.pushSequence(STANCE_JUMP_UP_DROP_B_1_START, STANCE_JUMP_UP_DROP_B_5_END, STANCE_UPRIGHT, true);
-//                             break;
-
-//                         default:
-//                             break;
-
-//                     }
 
                 }
                 else if (pressed & UP_BUTTON) {
@@ -443,30 +457,34 @@ void game() {
 
                 else if(prince.getHangingCounter() == 0) {
 
-                    if (!level.canFall(prince, 0)) {
-                        prince.pushSequence(STANCE_JUMP_UP_DROP_A_1_START, STANCE_JUMP_UP_DROP_A_5_END, STANCE_UPRIGHT, true);
+                    // if (!level.canFall(prince, 0)) {
+                    //     prince.pushSequence(STANCE_JUMP_UP_DROP_A_1_START, STANCE_JUMP_UP_DROP_A_5_END, STANCE_UPRIGHT, true);
+                    // }
+                    // else {
+                    //     prince.pushSequence(STANCE_JUMP_UP_DROP_B_1_START, STANCE_JUMP_UP_DROP_B_5_END, STANCE_UPRIGHT, true);
+                    // }
+
+
+                    CanClimbDownPart2Result climbDownResult = level.canClimbDown_Part2(prince, 0);
+
+                    switch (climbDownResult) {
+
+                        case CanClimbDownPart2Result::Level_1_Under:
+                            prince.pushSequence(STANCE_JUMP_UP_DROP_B_1_START, STANCE_JUMP_UP_DROP_B_5_END, STANCE_UPRIGHT, true);
+                            break;
+
+                        case CanClimbDownPart2Result::Level_1:
+                            prince.pushSequence(STANCE_JUMP_UP_DROP_A_1_START, STANCE_JUMP_UP_DROP_A_5_END, STANCE_UPRIGHT, true);
+                            break;
+
+                        case CanClimbDownPart2Result::Level_2:
+                            prince.pushSequence(STANCE_JUMP_UP_DROP_C_1_START, STANCE_JUMP_UP_DROP_C_10_END, STANCE_UPRIGHT, true);
+                            break;
+
+                        default:
+                            break;
+
                     }
-                    else {
-                        prince.pushSequence(STANCE_JUMP_UP_DROP_B_1_START, STANCE_JUMP_UP_DROP_B_5_END, STANCE_UPRIGHT, true);
-                    }
-
-
-//                     uint8_t levelsToFall = level.levelsToFall(prince, 0);
-// Serial.print("2 ");
-// Serial.println(levelsToFall);
-//                     switch (levelsToFall) {
-
-//                         case 0:
-//                             prince.pushSequence(STANCE_JUMP_UP_DROP_A_1_START, STANCE_JUMP_UP_DROP_A_5_END, STANCE_UPRIGHT, true);
-//                             break;
-
-//                         case 1:
-//                             prince.pushSequence(STANCE_JUMP_UP_DROP_B_1_START, STANCE_JUMP_UP_DROP_B_5_END, STANCE_UPRIGHT, true);
-//                             break;
-
-//                         default:
-//                             break;
-//                     }
 
                 }
 

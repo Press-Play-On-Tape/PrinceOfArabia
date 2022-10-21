@@ -503,16 +503,43 @@ struct Level {
                 }
                 else {
 
-                    FX::seekData(static_cast<uint24_t>(Levels::Level1_BG + (y * Levels::Level1_Width) + this->xLoc - 3));
+                    if (y == 0 && this->xLoc == 0) {
 
-                    for (uint8_t x = 0; x < 16; x++) {
+                        FX::seekData(static_cast<uint24_t>(Levels::Level1_BG + (y * Levels::Level1_Width) + this->xLoc));
 
-                        int8_t tileId = static_cast<int8_t>(FX::readPendingUInt8());
-                        bg[y - this->yLoc + 1][x] = tileId;
+                        for (uint8_t x = 0; x < 16; x++) {
+
+                            if (x < 3) {
+
+                                bg[y - this->yLoc + 1][x] = TILE_FG_WALL_1;
+
+                            }
+                            else {
+
+                                int8_t tileId = static_cast<int8_t>(FX::readPendingUInt8());
+                                bg[y - this->yLoc + 1][x] = tileId;
+
+                            }
+
+                        }
+
+                        FX::readEnd();
 
                     }
+                    else {
 
-                    FX::readEnd();
+                        FX::seekData(static_cast<uint24_t>(Levels::Level1_BG + (y * Levels::Level1_Width) + this->xLoc - 3));
+
+                        for (uint8_t x = 0; x < 16; x++) {
+
+                            int8_t tileId = static_cast<int8_t>(FX::readPendingUInt8());
+                            bg[y - this->yLoc + 1][x] = tileId;
+
+                        }
+
+                        FX::readEnd();
+
+                    }
 
                 }
 
@@ -535,16 +562,43 @@ struct Level {
                 }
                 else {
 
-                    FX::seekData(static_cast<uint24_t>(Levels::Level1_FG + (y * Levels::Level1_Width) + this->xLoc - 3));
+                    if (y == 0 && this->xLoc == 0) {
 
-                    for (uint8_t x = 0; x < 16; x++) {
+                        FX::seekData(static_cast<uint24_t>(Levels::Level1_FG + (y * Levels::Level1_Width) + this->xLoc));
 
-                        int8_t tileId = static_cast<int8_t>(FX::readPendingUInt8());
-                        fg[y - this->yLoc + 1][x] = tileId;
+                        for (uint8_t x = 0; x < 16; x++) {
+
+                            if (x < 3) {
+
+                                bg[y - this->yLoc + 1][x] = TILE_FG_WALL_1;
+
+                            }
+                            else {
+
+                                int8_t tileId = static_cast<int8_t>(FX::readPendingUInt8());
+                                fg[y - this->yLoc + 1][x] = tileId;
+
+                            }
+
+                        }
+
+                        FX::readEnd();
 
                     }
+                    else {
 
-                    FX::readEnd();
+                        FX::seekData(static_cast<uint24_t>(Levels::Level1_FG + (y * Levels::Level1_Width) + this->xLoc - 3));
+
+                        for (uint8_t x = 0; x < 16; x++) {
+
+                            int8_t tileId = static_cast<int8_t>(FX::readPendingUInt8());
+                            fg[y - this->yLoc + 1][x] = tileId;
+
+                        }
+
+                        FX::readEnd();
+
+                    }
 
                 }
 
@@ -675,7 +729,9 @@ struct Level {
         }
 
 
-        uint8_t levelsToFall(Prince &prince, int8_t xOffset = 0) { // number of levels.
+        // Prince is hanging from upper level.  Test to see if he can fall down one level, down one level and 'back, down twwo levels, three .. etc.
+
+        CanClimbDownPart2Result canClimbDown_Part2(Prince &prince, int8_t xOffset = 0) { 
 
             Point newPos = prince.getPosition();
             newPos.x = newPos.x + (prince.getDirection() == Direction::Left ? xOffset * -1 : xOffset);
@@ -683,68 +739,136 @@ struct Level {
             int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), newPos.x) - this->getXLocation();
             int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), newPos.y) - this->getYLocation();
 
-            #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
+            #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN_PART2)
             printCoordToIndex(newPos, tileXIdx, tileYIdx);
             #endif
 
+            int8_t bgTile = this->getTile(Layer::Background, tileXIdx + (prince.getDirection() == Direction::Left ? 1 : 0), tileYIdx, TILE_FLOOR_BASIC);
+            int8_t fgTile = this->getTile(Layer::Foreground, tileXIdx + (prince.getDirection() == Direction::Left ? 1 : 0), tileYIdx, TILE_FLOOR_BASIC);
 
-            int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx - 1, TILE_FLOOR_BASIC);
-            int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx - 1, TILE_FLOOR_BASIC);
-
-            int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
-            int8_t fgTile2 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
-
-            #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
-            DEBUG_PRINT(F("levelsToFall() ("));
-            DEBUG_PRINT(tileXIdx);
+            #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN_PART2)
+            DEBUG_PRINT(F("canClimbDown_Part2() Test can land 1 level below ("));
+            DEBUG_PRINT(tileXIdx + (prince.getDirection() == Direction::Left ? 1 : 0));
             DEBUG_PRINT(F(","));
             DEBUG_PRINT(tileYIdx);
-            DEBUG_PRINT(F(") bg1 "));
-            DEBUG_PRINT(bgTile1);
-            DEBUG_PRINT(F(", fg1 "));
-            DEBUG_PRINT(fgTile1);
-            DEBUG_PRINT(F(", canFall: "));
-            DEBUG_PRINT(this->canFall(bgTile1, fgTile1));
-            DEBUG_PRINT(F("  ("));
-            DEBUG_PRINT(tileXIdx);
+            DEBUG_PRINT(F(") bg "));
+            DEBUG_PRINT(bgTile);
+            DEBUG_PRINT(F(", fg "));
+            DEBUG_PRINT(fgTile);
+            DEBUG_PRINT(F(", isGroundTile: "));
+            DEBUG_PRINT(this->isGroundTile(bgTile, fgTile));
+            #endif
+
+            bool isGroundTile = this->isGroundTile(bgTile, fgTile);
+
+            if (isGroundTile) {
+
+                #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN_PART2)
+                DEBUG_PRINTLN(" return Level_1");
+                #endif
+                
+                return CanClimbDownPart2Result::Level_1;
+
+            }
+
+            bgTile = this->getTile(Layer::Background, tileXIdx + (prince.getDirection() == Direction::Left ? 0 : 1), tileYIdx, TILE_FLOOR_BASIC);
+            fgTile = this->getTile(Layer::Foreground, tileXIdx + (prince.getDirection() == Direction::Left ? 0 : 1), tileYIdx, TILE_FLOOR_BASIC);
+
+            #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN_PART2)
+            DEBUG_PRINTLN(" skip");
+            DEBUG_PRINT(F("canClimbDown_Part2() Test can land 1 level below and under ("));
+            DEBUG_PRINT(tileXIdx + (prince.getDirection() == Direction::Left ? 0 : 1));
+            DEBUG_PRINT(F(","));
+            DEBUG_PRINT(tileYIdx);
+            DEBUG_PRINT(F(") bg "));
+            DEBUG_PRINT(bgTile);
+            DEBUG_PRINT(F(", fg "));
+            DEBUG_PRINT(fgTile);
+            DEBUG_PRINT(F(", isGroundTile: "));
+            DEBUG_PRINT(this->isGroundTile(bgTile, fgTile));
+            #endif
+
+            isGroundTile = this->isGroundTile(bgTile, fgTile);
+
+            if (isGroundTile) {
+
+                #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN_PART2)
+                DEBUG_PRINTLN(" return Level_1_Under");
+                #endif
+                
+                return CanClimbDownPart2Result::Level_1_Under;
+
+            }
+
+
+            // Two levels?
+
+            bgTile = this->getTile(Layer::Background, tileXIdx + (prince.getDirection() == Direction::Left ? 1 : 0), tileYIdx + 1, TILE_FLOOR_BASIC);
+            fgTile = this->getTile(Layer::Foreground, tileXIdx + (prince.getDirection() == Direction::Left ? 1 : 0), tileYIdx + 1, TILE_FLOOR_BASIC);
+
+            #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN_PART2)
+            DEBUG_PRINTLN(" skip");
+            DEBUG_PRINT(F("canClimbDown_Part2() Test can land 2 levels below ("));
+            DEBUG_PRINT(tileXIdx + (prince.getDirection() == Direction::Left ? 1 : 0));
             DEBUG_PRINT(F(","));
             DEBUG_PRINT(tileYIdx + 1);
-            DEBUG_PRINT(F(") bg1 "));
-            DEBUG_PRINT(bgTile2);
-            DEBUG_PRINT(F(", fg2 "));
-            DEBUG_PRINT(fgTile2);
-            DEBUG_PRINT(F(", canFall: "));
-            DEBUG_PRINT(this->canFall(bgTile2, fgTile2));
+            DEBUG_PRINT(F(") bg "));
+            DEBUG_PRINT(bgTile);
+            DEBUG_PRINT(F(", fg "));
+            DEBUG_PRINT(fgTile);
+            DEBUG_PRINT(F(", isGroundTile: "));
+            DEBUG_PRINT(this->isGroundTile(bgTile, fgTile));
             #endif
 
-            bool canFall1 = this->canFall(bgTile1, fgTile1);
+            isGroundTile = this->isGroundTile(bgTile, fgTile);
 
-            if (!canFall1) {
+            if (isGroundTile) {
 
-                #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
-                DEBUG_PRINTLN(" return 0");
+                #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN_PART2)
+                DEBUG_PRINTLN(" return Level_2");
                 #endif
                 
-                return 0;
+                return CanClimbDownPart2Result::Level_2;
 
             }
 
-            bool canFall2 = this->canFall(bgTile2, fgTile2);
 
-            if (canFall1 && !canFall2) {
+            // Three levels?
 
-                #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
-                DEBUG_PRINTLN(" return 1");
+            bgTile = this->getTile(Layer::Background, tileXIdx + (prince.getDirection() == Direction::Left ? 1 : 0), tileYIdx + 2, TILE_FLOOR_BASIC);
+            fgTile = this->getTile(Layer::Foreground, tileXIdx + (prince.getDirection() == Direction::Left ? 1 : 0), tileYIdx + 2, TILE_FLOOR_BASIC);
+
+            #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN_PART2)
+            DEBUG_PRINTLN(" skip");
+            DEBUG_PRINT(F("canClimbDown_Part2() Test can land 3 levels below ("));
+            DEBUG_PRINT(tileXIdx + (prince.getDirection() == Direction::Left ? 1 : 0));
+            DEBUG_PRINT(F(","));
+            DEBUG_PRINT(tileYIdx + 2);
+            DEBUG_PRINT(F(") bg "));
+            DEBUG_PRINT(bgTile);
+            DEBUG_PRINT(F(", fg "));
+            DEBUG_PRINT(fgTile);
+            DEBUG_PRINT(F(", isGroundTile: "));
+            DEBUG_PRINT(this->isGroundTile(bgTile, fgTile));
+            #endif
+
+            isGroundTile = this->isGroundTile(bgTile, fgTile);
+
+            if (isGroundTile) {
+
+                #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN_PART2)
+                DEBUG_PRINTLN(" return Level_3");
                 #endif
                 
-                return 1;
+                return CanClimbDownPart2Result::Level_3;
 
             }
 
-            #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
-            DEBUG_PRINTLN(" return 2");
+            #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN_PART2)
+            DEBUG_PRINTLN(" return None");
             #endif
-            return 2;
+
+            return CanClimbDownPart2Result::None;
 
         }
 
