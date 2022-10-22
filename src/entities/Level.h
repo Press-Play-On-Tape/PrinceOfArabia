@@ -24,6 +24,8 @@
 #define TILE_FLOOR_LH_END_PATTERN_2 93
 #define TILE_FLOOR_RH_END 99
 #define TILE_FLOOR_RH_END_GATE 118
+#define TILE_FLOOR_GATE_REAR_TRACK 114
+#define TILE_FLOOR_GATE_FRONT_TRACK 115
 
 #define TILE_FLOOR_RH_END_1 98
 #define TILE_FLOOR_RH_END_2 85
@@ -658,6 +660,8 @@ struct Level {
                 case TILE_COLUMN_5:
                 case TILE_COLUMN_REAR_1:
                 case TILE_COLUMN_REAR_2:
+                case TILE_FLOOR_GATE_REAR_TRACK:
+                case TILE_FLOOR_GATE_FRONT_TRACK:
                     return true;
 
             }
@@ -715,8 +719,8 @@ struct Level {
             int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
             int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
             
-            #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
-            DEBUG_PRINTF((canFall() "bg "));
+            #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
+            DEBUG_PRINT(F("canFall() bg "));
             DEBUG_PRINT(bgTile1);
             DEBUG_PRINT(F(", fg "));
             DEBUG_PRINT(fgTile1);
@@ -899,6 +903,7 @@ struct Level {
             int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), prince.getPosition().y) - this->getYLocation();
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+            DEBUG_PRINTLN(F("------------------------------"));
             printAction(action);
             DEBUG_PRINT(F(" coordToTileIndexX "));
             DEBUG_PRINT(prince.getPosition().x);
@@ -920,16 +925,16 @@ struct Level {
                         #endif
 
                         int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx - 1, tileYIdx, TILE_FLOOR_BASIC);
-                        int8_t bgTile3 = this->getTile(Layer::Background, tileXIdx - 2, tileYIdx, TILE_FLOOR_BASIC);
-                        int8_t bgTile4 = this->getTile(Layer::Background, tileXIdx - 3, tileYIdx, TILE_FLOOR_BASIC);
+                        // int8_t bgTile3 = this->getTile(Layer::Background, tileXIdx - 2, tileYIdx, TILE_FLOOR_BASIC);
+                        // int8_t bgTile4 = this->getTile(Layer::Background, tileXIdx - 3, tileYIdx, TILE_FLOOR_BASIC);
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
                         int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
                         #endif
 
                         int8_t fgTile2 = this->getTile(Layer::Foreground, tileXIdx - 1, tileYIdx, TILE_FLOOR_BASIC);
-                        int8_t fgTile3 = this->getTile(Layer::Foreground, tileXIdx - 2, tileYIdx, TILE_FLOOR_BASIC);
-                        int8_t fgTile4 = this->getTile(Layer::Foreground, tileXIdx - 3, tileYIdx, TILE_FLOOR_BASIC);
+                        // int8_t fgTile3 = this->getTile(Layer::Foreground, tileXIdx - 2, tileYIdx, TILE_FLOOR_BASIC);
+                        // int8_t fgTile4 = this->getTile(Layer::Foreground, tileXIdx - 3, tileYIdx, TILE_FLOOR_BASIC);
                         
                         int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(prince.getDirection(), prince.getPosition().x);
 
@@ -937,18 +942,18 @@ struct Level {
                         DEBUG_PRINT(F(" dist "));
                         DEBUG_PRINT(distToEdgeOfCurrentTile);
                         DEBUG_PRINT(F(", bg "));
-                        DEBUG_PRINT(bgTile4);
-                        DEBUG_PRINT(F(" "));
-                        DEBUG_PRINT(bgTile3);
-                        DEBUG_PRINT(F(" "));
+                        // DEBUG_PRINT(bgTile4);
+                        // DEBUG_PRINT(F(" "));
+                        // DEBUG_PRINT(bgTile3);
+                        // DEBUG_PRINT(F(" "));
                         DEBUG_PRINT(bgTile2);
                         DEBUG_PRINT(F(" "));
                         DEBUG_PRINT(bgTile1);
                         DEBUG_PRINT(F(", fg "));
-                        DEBUG_PRINT(fgTile4);
-                        DEBUG_PRINT(F(" "));
-                        DEBUG_PRINT(fgTile3);
-                        DEBUG_PRINT(F(" "));
+                        // DEBUG_PRINT(fgTile4);
+                        // DEBUG_PRINT(F(" "));
+                        // DEBUG_PRINT(fgTile3);
+                        // DEBUG_PRINT(F(" "));
                         DEBUG_PRINT(fgTile2);
                         DEBUG_PRINT(F(" "));
                         DEBUG_PRINT(fgTile1);
@@ -1047,16 +1052,16 @@ struct Level {
                         #endif
                         
                         int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx + 1, tileYIdx, TILE_FLOOR_BASIC);
-                        int8_t bgTile3 = this->getTile(Layer::Background, tileXIdx + 2, tileYIdx, TILE_FLOOR_BASIC);
-                        int8_t bgTile4 = this->getTile(Layer::Background, tileXIdx + 3, tileYIdx, TILE_FLOOR_BASIC);
+                        // int8_t bgTile3 = this->getTile(Layer::Background, tileXIdx + 2, tileYIdx, TILE_FLOOR_BASIC);
+                        // int8_t bgTile4 = this->getTile(Layer::Background, tileXIdx + 3, tileYIdx, TILE_FLOOR_BASIC);
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
                         int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
                         #endif
 
                         int8_t fgTile2 = this->getTile(Layer::Foreground, tileXIdx + 1, tileYIdx, TILE_FLOOR_BASIC);
-                        int8_t fgTile3 = this->getTile(Layer::Foreground, tileXIdx + 2, tileYIdx, TILE_FLOOR_BASIC);
-                        int8_t fgTile4 = this->getTile(Layer::Foreground, tileXIdx + 3, tileYIdx, TILE_FLOOR_BASIC);
+                        // int8_t fgTile3 = this->getTile(Layer::Foreground, tileXIdx + 2, tileYIdx, TILE_FLOOR_BASIC);
+                        // int8_t fgTile4 = this->getTile(Layer::Foreground, tileXIdx + 3, tileYIdx, TILE_FLOOR_BASIC);
                         
                         int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(prince.getDirection(), prince.getPosition().x);
 
@@ -1068,14 +1073,14 @@ struct Level {
                         DEBUG_PRINT(bgTile1);
                         DEBUG_PRINT(F(" "));
                         DEBUG_PRINT(bgTile2);
-                        DEBUG_PRINT(F(" "));
-                        DEBUG_PRINT(bgTile3);
+                        // DEBUG_PRINT(F(" "));
+                        // DEBUG_PRINT(bgTile3);
                         DEBUG_PRINT(F(", fg "));
                         DEBUG_PRINT(fgTile1);
                         DEBUG_PRINT(F(" "));
                         DEBUG_PRINT(fgTile2);
-                        DEBUG_PRINT(F(" "));
-                        DEBUG_PRINT(fgTile3);
+                        // DEBUG_PRINT(F(" "));
+                        // DEBUG_PRINT(fgTile3);
                         DEBUG_PRINTLN("");
                         #endif
 

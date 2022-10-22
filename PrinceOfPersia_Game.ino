@@ -13,9 +13,10 @@ void game_Init() {
 
     // prince.init(18, 56, Direction::Right, STANCE_CROUCH_3_END, 3);          // Normal starting pos
     // prince.init(66, 56, Direction::Right, STANCE_CROUCH_3_END, 3);        // Get tonic
-    prince.init(30, 56 + Constants::TileHeight, Direction::Right, STANCE_CROUCH_3_END, 3);     // Column of climbs
+    // prince.init(30, 56 + Constants::TileHeight, Direction::Right, STANCE_CROUCH_3_END, 3);     // Column of climbs
     // prince.init(80, 25, Direction::Right, STANCE_CROUCH_3_END, 3);     // Top Left
     // prince.init(18, 25, Direction::Right, STANCE_CROUCH_3_END, 3);          // Long Fall
+    prince.init(18, 56, Direction::Right, STANCE_CROUCH_3_END, 3);          // problem
 
 
     gamePlay.init(arduboy, 1);
@@ -23,9 +24,10 @@ void game_Init() {
     level.setLevel(1);
     // level.init(prince, 60, 0);  // Normal starting posa
     // level.init(prince, Constants::TileHeight, 0);   // Get tonic
-   level.init(prince, 0, 3);   // Column of climbs
+//    level.init(prince, 0, 3);   // Column of climbs
     // level.init(prince, 0, 0);   // Top left
     // level.init(prince, 40, 4);  // Long Fall
+    level.init(prince, 60, 3);  // problem
 
     menu.init();
 
@@ -101,7 +103,9 @@ void game() {
 
 
     if (justPressed & B_BUTTON) {
-
+//prince.pushSequence(STANCE_RUNNING_JUMP_1_START, STANCE_RUNNING_JUMP_11_END, STANCE_RUN_REPEAT_4, true);
+// prince.pushSequence(STANCE_RUNNING_JUMP_1_START, STANCE_RUNNING_JUMP_11_END, STANCE_RUN_START_6_END, true);
+// //
         switch (level.distToEdgeOfTile(prince.getDirection(),  (level.getXLocation() * Constants::TileWidth) + prince.getX())) {
 
             case 0:
@@ -486,24 +490,14 @@ void game() {
                 if (prince.getDirection() == Direction::Right) {
                         
                     if ((pressed & RIGHT_BUTTON) && (pressed & A_BUTTON)) {
-                        // if (this->world.canMoveForward(Action::RunJump)) {
+
                         if (true) {
-                            
-//                             distToTile = this->world.distanceToTile(this->world.getLevel(), SceneryTile::GroundPit);
-// printf("dist %i\n", distToTile);                            
-//                             if (distToTile > 20) {
-
-// printf("Run Jump 1a\n");                            
+Serial.println("aaaa");
                             prince.pushSequence(STANCE_RUNNING_JUMP_1_START, STANCE_RUNNING_JUMP_11_END, STANCE_RUN_START_6_END, true);
-//                             }
-//                             else {
-// printf("Run Jump 1b\n");                            
-//                                 this->prince.pushSequence(STANCE_RUNNING_JUMP_2, STANCE_RUNNING_JUMP_11_END, STANCE_RUN_START_6_END, true);
 
-//                             }
                         }
                         else {
-// printf("Run Jump 1 FAIL\n");                            
+
                             prince.pushSequence(STANCE_STOPPING_1_START, STANCE_STOPPING_5_END, STANCE_UPRIGHT, true);
                         }
                     }
@@ -555,18 +549,10 @@ void game() {
                             #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
                             DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jumpp"));
                             #endif
+Serial.println("bbb");
 
+                            prince.pushSequence(STANCE_RUNNING_JUMP_1_START, STANCE_RUNNING_JUMP_11_END, STANCE_RUN_START_6_END, true);
 
-//                             distToTile = this->world.distanceToTile(this->world.getLevel(), SceneryTile::GroundPit);
-// printf("dist %i\n", distToTile);                            
-//                             if (distToTile > 20) {
-// printf("Run Jump 2a\n"); 
-                                prince.pushSequence(STANCE_RUNNING_JUMP_1_START, STANCE_RUNNING_JUMP_11_END, STANCE_RUN_START_6_END, true);
-//                             }
-//                             else {
-// printf("Run Jump 2b\n"); 
-//                                 this->prince.pushSequence(STANCE_RUNNING_JUMP_2, STANCE_RUNNING_JUMP_11_END, STANCE_RUN_START_6_END, true);
-//                             }
                         }
                         else {
 
@@ -622,24 +608,19 @@ void game() {
                 if (prince.getDirection() == Direction::Right) {
                                     
                     if ((pressed & RIGHT_BUTTON) && (pressed & A_BUTTON)) {
-                        // if (this->world.canMoveForward(Action::RunJump)) {
-                        if (true) {
-//                             distToTile = this->world.distanceToTile(this->world.getLevel(), SceneryTile::GroundPit);
-// printf("dist %i\n", distToTile);                            
-//                             if (distToTile > 20) {
-// printf("Run Jump 3a\n");
-                            prince.pushSequence(STANCE_RUNNING_JUMP_1_START, STANCE_RUNNING_JUMP_11_END, STANCE_RUN_REPEAT_4, true);
-//                             }
-//                             else {
-// printf("Run Jump 3b\n");
-//                             this->prince.pushSequence(STANCE_RUNNING_JUMP_2, STANCE_RUNNING_JUMP_11_END, STANCE_RUN_REPEAT_4, true);
 
-//                             }
+                        if (true) {
+Serial.println("cccc");
+
+                            prince.pushSequence(STANCE_RUNNING_JUMP_1_START, STANCE_RUNNING_JUMP_11_END, STANCE_RUN_REPEAT_4, true);
+
                         }
                         else {
-// printf("Run Jump 3 FAIL\n");
+
                             prince.pushSequence(STANCE_STOPPING_1_START, STANCE_STOPPING_5_END, STANCE_UPRIGHT, true);
+
                         }
+
                     }
                     else if (pressed & RIGHT_BUTTON) {
 
@@ -685,21 +666,10 @@ void game() {
                     if ((pressed & LEFT_BUTTON) && (pressed & A_BUTTON)) {
                         // if (this->world.canMoveForward(Action::RunJump)) {
                         if (true) {
-//                             distToTile = this->world.distanceToTile(this->world.getLevel(), SceneryTile::GroundPit);
-// printf("dist %i\n", distToTile);                            
-//                             if (distToTile > 20) {
-// printf("Run Jump 4a\n");
-//                             // this->prince.push(STANCE_RUN_REPEAT_4, STANCE_RUNNING_JUMP_11_END, STANCE_RUNNING_JUMP_7, true);
-//                             // this->prince.push(STANCE_RUNNING_JUMP_6, STANCE_RUNNING_JUMP_6, STANCE_RUNNING_JUMP_5, true);
-                               prince.pushSequence(STANCE_RUNNING_JUMP_1_START, STANCE_RUNNING_JUMP_11_END, STANCE_RUN_REPEAT_4, true);
-//                             }
-//                             else{
-// printf("Run Jump 4b\n");
-//                             // this->prince.push(STANCE_RUN_REPEAT_4, STANCE_RUNNING_JUMP_11_END, STANCE_RUNNING_JUMP_7, true);
-//                             // this->prince.push(STANCE_RUNNING_JUMP_6, STANCE_RUNNING_JUMP_6, STANCE_RUNNING_JUMP_5, true);
-//                             this->prince.pushSequence(STANCE_RUNNING_JUMP_2, STANCE_RUNNING_JUMP_11_END, STANCE_RUN_REPEAT_4, true);
+Serial.println("dddd");
 
-//                             }
+                            prince.pushSequence(STANCE_RUNNING_JUMP_1_START, STANCE_RUNNING_JUMP_11_END, STANCE_RUN_REPEAT_4, true);
+
                         }
                         else {
 // printf("Run Jump 4 FAIL\n");
@@ -861,39 +831,32 @@ void game() {
 
         if (!prince.isEmpty()) {
 
-            int xOffset = 0;
-            int yOffset = 0;
+            Point offset;
+            // int8_t xOffset = 0;
+            // int8_t yOffset = 0;
 
             int16_t newStance = prince.pop();
             prince.setStance(abs(newStance));
 
-            FX::seekData(static_cast<uint24_t>(Images::Prince_XOffset + ((prince.getStance() - 1) * 2)));
-            xOffset = static_cast<int8_t>(FX::readPendingUInt8()) * (prince.getDirection() == Direction::Left ? -1 : 1) * (newStance < 0 ? -1 : 1);
-            yOffset = static_cast<int8_t>(FX::readPendingUInt8()) * (newStance < 0 ? -1 : 1);
-            FX::readEnd();
+            // FX::seekData(static_cast<uint24_t>(Images::Prince_XOffset + ((prince.getStance() - 1) * 2)));
+            // xOffset = static_cast<int8_t>(FX::readPendingUInt8()) * (prince.getDirection() == Direction::Left ? -1 : 1) * (newStance < 0 ? -1 : 1);
+            // yOffset = static_cast<int8_t>(FX::readPendingUInt8()) * (newStance < 0 ? -1 : 1);
+            // FX::readEnd();
+            // uint16_t idx = (prince.getStance() - 1) * 2;
+            // xOffset = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[idx])) * (prince.getDirection() == Direction::Left ? -1 : 1) * (newStance < 0 ? -1 : 1);
+            // yOffset = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[idx + 1])) * (newStance < 0 ? -1 : 1);
 
-            prince.incX(xOffset);
-            prince.incY(yOffset);
-
-            #if defined(DEBUG) && defined(DEBUG_PRINCE_DETAILS)
-            DEBUG_PRINT(F("Stance: "));
-            DEBUG_PRINT(prince.getStance());
-            DEBUG_PRINT(F(", Direction: "));
-            DEBUG_PRINT((uint8_t)prince.getDirection());
-            DEBUG_PRINT(F(", xOffset: "));
-            DEBUG_PRINT(xOffset);
-            DEBUG_PRINT(F(", yOffset: "));
-            DEBUG_PRINTLN(yOffset);
-            #endif
 
             switch (prince.getStance()) {
 
                 case STANCE_UPRIGHT_TURN:
+                    newStance = (newStance < 0 ? -1 : 1) * STANCE_UPRIGHT;
                     prince.setStance(STANCE_UPRIGHT);
                     prince.changeDirection();
                     break;
 
                 case STANCE_RUN_REPEAT_8_END_TURN:
+                    newStance = (newStance < 0 ? -1 : 1) * STANCE_RUN_REPEAT_8_END;
                     prince.setStance(STANCE_RUN_REPEAT_8_END);
                     prince.changeDirection();
                     break;
@@ -991,6 +954,21 @@ void game() {
 
             }
 
+            getStance_Offsets(prince.getDirection(), offset, newStance);
+            prince.incX(offset.x);
+            prince.incY(offset.y);
+
+            #if defined(DEBUG) && defined(DEBUG_PRINCE_DETAILS)
+            DEBUG_PRINT(F("Stance: "));
+            DEBUG_PRINT(prince.getStance());
+            DEBUG_PRINT(F(", Direction: "));
+            DEBUG_PRINT((uint8_t)prince.getDirection());
+            DEBUG_PRINT(F(", xOffset: "));
+            DEBUG_PRINT(offset.x);
+            DEBUG_PRINT(F(", yOffset: "));
+            DEBUG_PRINTLN(offset.y);
+            #endif
+
         }
 
     }
@@ -1047,5 +1025,13 @@ void game() {
     font3x5.print(F(" dst"));
     font3x5.print(level.distToEdgeOfTile(prince.getDirection(),  (level.getXLocation() * Constants::TileWidth) + prince.getX()));
     #endif
+
+}
+
+void getStance_Offsets(Direction direction, Point &offset, int16_t stance) {
+
+    uint16_t idx = (stance - 1) * 2;
+    offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[idx])) * (direction == Direction::Left ? -1 : 1) * (stance < 0 ? -1 : 1);
+    offset.y = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[idx + 1])) * (stance < 0 ? -1 : 1);
 
 }

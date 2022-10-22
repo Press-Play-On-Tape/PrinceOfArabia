@@ -107,14 +107,75 @@ struct Prince {
         }
 
         bool push(int16_t item, bool resetFrame) {
+
+            #if defined(DEBUG) && defined(DEBUG_PRINCE_STACK)
+            Point offset;
+            offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[(item - 1) * 2]));
+            DEBUG_PRINT(F("Prince X: "));
+            DEBUG_PRINT(this->x % 12);
+            DEBUG_PRINT(F(", Item "));
+            DEBUG_PRINT(item);
+            DEBUG_PRINT(F(", count "));
+            DEBUG_PRINT(this->stack->getCount());
+            DEBUG_PRINT(F(" ("));  
+            DEBUG_PRINT(offset.x);  
+            DEBUG_PRINTLN(F(")"));  
+            #endif
+
             return this->stack->push(static_cast<int16_t>(item), resetFrame);
         }
 
         bool push(int16_t item1, int16_t item2, bool resetFrame) {
+
+            #if defined(DEBUG) && defined(DEBUG_PRINCE_STACK)
+            Point offset;
+            uint8_t xOffset = 0;
+            offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[(item1 - 1) * 2]));
+            xOffset = xOffset + offset.x;
+            offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[(item2 - 1) * 2]));
+            xOffset = xOffset + offset.x;
+            DEBUG_PRINT(F("Prince X: "));
+            DEBUG_PRINT(this->x % 12);
+            DEBUG_PRINT(F(", Item 1 "));
+            DEBUG_PRINT(item1);
+            DEBUG_PRINT(F(", Item 2 "));
+            DEBUG_PRINT(item2);
+            DEBUG_PRINT(F(", count "));
+            DEBUG_PRINT(this->stack->getCount());
+            DEBUG_PRINT(F(" ("));  
+            DEBUG_PRINT(xOffset);  
+            DEBUG_PRINTLN(F(")"));  
+            #endif
+
             return this->stack->push(static_cast<int16_t>(item1), static_cast<int16_t>(item2), resetFrame);
         }
 
         bool push(int16_t item1, int16_t item2, int16_t item3, bool resetFrame) {
+
+            #if defined(DEBUG) && defined(DEBUG_PRINCE_STACK)
+            Point offset;
+            uint8_t xOffset = 0;
+            offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[(item1 - 1) * 2]));
+            xOffset = xOffset + offset.x;
+            offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[(item2 - 1) * 2]));
+            xOffset = xOffset + offset.x;
+            offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[(item3 - 1) * 2]));
+            xOffset = xOffset + offset.x;
+            DEBUG_PRINT(F("Prince X: "));
+            DEBUG_PRINT(this->x % 12);
+            DEBUG_PRINT(F(", Item 1 "));
+            DEBUG_PRINT(item1);
+            DEBUG_PRINT(F(", Item 2 "));
+            DEBUG_PRINT(item2);
+            DEBUG_PRINT(F(", Item 3 "));
+            DEBUG_PRINT(item3);
+            DEBUG_PRINT(F(", count "));;
+            DEBUG_PRINT(this->stack->getCount());
+            DEBUG_PRINT(F(" ("));  
+            DEBUG_PRINT(xOffset);  
+            DEBUG_PRINTLN(F(")"));  
+            #endif
+
             return this->stack->push(static_cast<int16_t>(item1), static_cast<int16_t>(item2), static_cast<int16_t>(item3), resetFrame);
         }
 
@@ -131,13 +192,17 @@ struct Prince {
             }
 
             #if defined(DEBUG) && defined(DEBUG_PRINCE_STACK)
-            DEBUG_PRINT(F("Add to Stack "));
+            uint8_t xOffset;
+            Point offset;
+            DEBUG_PRINT(F("Prince X: "));
+            DEBUG_PRINT(this->x % 12);
+            DEBUG_PRINT(F(", Add to Stack "));
             DEBUG_PRINT(toStance);
             DEBUG_PRINT(F(" to "));
             DEBUG_PRINT(fromStance);
             DEBUG_PRINT(F(", count "));
             DEBUG_PRINT(this->stack->getCount());
-            DEBUG_PRINT(" ");  
+            DEBUG_PRINT(" - ");  
             #endif
             
             if (fromStance < toStance) {
@@ -146,10 +211,13 @@ struct Prince {
 
                     #if defined(DEBUG) && defined(DEBUG_PRINCE_STACK)
                     DEBUG_PRINT(x); 
-                    DEBUG_PRINT(" ");                         
+                    DEBUG_PRINT(" ");        
+                    offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[(x - 1) * 2]));
+                    xOffset = xOffset + offset.x;
                     #endif
 
                     this->stack->push(static_cast<int16_t>(x), resetFrame);
+
                 }
 
             }
@@ -163,6 +231,8 @@ struct Prince {
                     #if defined(DEBUG) && defined(DEBUG_PRINCE_STACK)
                     DEBUG_PRINT(-x); 
                     DEBUG_PRINT(" ");                         
+                    offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[(x - 1) * 2]));
+                    xOffset = xOffset + offset.x;
                     #endif
 
                     this->stack->push(static_cast<int16_t>(-x), resetFrame);
@@ -172,7 +242,10 @@ struct Prince {
 
             #if defined(DEBUG) && defined(DEBUG_PRINCE_STACK)
             DEBUG_PRINT(F(", count "));
-            DEBUG_PRINTLN(this->stack->getCount());
+            DEBUG_PRINT(this->stack->getCount());
+            DEBUG_PRINT(F(" ("));
+            DEBUG_PRINT(xOffset);
+            DEBUG_PRINTLN(F(")"));
             #endif
 
         }
