@@ -15,26 +15,27 @@ namespace Images {
         /* STANCE_STANDING_JUMP */              45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62,
         /* STANCE_STEP_FWD_ONE */               63, 64, 65, 66, 67, 68,
         /* STANCE_STEP_FWD_TWO */               69, 70, 71, 72, 73, 74,
-        /* STANCE_SINGLE_STEP */                75, 76, 77, 78, 79, 80, 81, 82,
-        /* STANCE_STOPPING */                   83, 84, 85, 86, 87,
-        /* STANCE_CLIMBING */                   88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 
-        /* STANCE_SMALL_STEP */                 103, 104, 105, 106, 107, 108,
-        /* STANCE_JUMP_UP_A */                  109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122,
-        /* STANCE_JUMP_DROP_A */                123, 124, 125, 126, 127,   // Drop to position 2
-        /* STANCE_STEP_CLIMBING */              128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 
-        /* STANCE_CROUCH_STAND */               143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154,
-        /* STANCE_FALLING_A */                  155, 156, 157, 158, 159, 160,   // Used when walking.
-        /* STANCE_FALLING_B */                  155, 156, 157, 158, 159, 160,   // Used when walking.
-        /* STANCE_FALLING_C */                  155, 156, 157, 158, 159, 160,   // Used when walking.
-        /* STANCE_CROUCHING */                  160, 143, 144,
-        /* STANCE_CROUCH_HOP */                 144, 145, 146, 147, 146, 145, 144,
-        /* STANCE_STEP_CLIMBING_BLOCK */        128, 129, 130, 131, 132, 131, 130, 129, 128,
-        /* STANCE_JUMP_UP_B */                  109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122,
-        /* STANCE_JUMP_DROP_B */                123, 124, 125, 126, 127,   // Drop to position 10
-        /* STANCE_DRINK_TONIC */                161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175,
-        /* STANCE_JUMP_DROP_C */                123, 123, 123, 123, 123,   // Cliimb down, drop straight down 31 px
-        /* STANCE_FALLING_D */                  159, 160,   // climb down, drop a level (and crouch)
-        /* STANCE_FALLING_DEAD */               159, 160, 176,   // climb down, drop a level (and crouch)
+        /* STANCE_SINGLE_STEP */                63, 64, 65, 66, 71, 72, 73, 74,
+        /* STANCE_STOPPING */                   5, 4, 3, 2, 1,
+
+        /* STANCE_CLIMBING */                   75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89,                     /* Done */
+        /* STANCE_SMALL_STEP */                 63, 64, 65, 72, 73, 74,                                                         /* Done */
+        /* STANCE_JUMP_UP_A */                  90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103,                     /* Done */
+        /* STANCE_JUMP_DROP_A */                104, 105, 106, 107, 108,   // Drop to position 2                                /* Done */
+        /* STANCE_STEP_CLIMBING */              75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89,                     /* Done */
+        /* STANCE_CROUCH_STAND */               109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120,                     /* Done */
+        /* STANCE_FALLING_A */                  121, 122, 123, 124, 125, 126,   // Used when walking.                           /* Done */
+        /* STANCE_FALLING_B */                  121, 122, 123, 124, 125, 126,   // Used when walking.                           /* Done */
+        /* STANCE_FALLING_C */                  121, 122, 123, 124, 125, 126,   // Used when walking.                           /* Done */        
+        /* STANCE_CROUCHING */                  126, 109, 110,                                                                  /* Done */
+        /* STANCE_CROUCH_HOP */                 110, 111, 112, 113, 112, 111, 110,                                              /* Done */
+        /* STANCE_STEP_CLIMBING_BLOCK */        75, 76, 77, 78, 79, 78, 77, 76, 75,                                             /* Done */
+        /* STANCE_JUMP_UP_B */                  90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103,                     /* Done */
+        /* STANCE_JUMP_DROP_B */                104, 105, 106, 107, 108,   // Drop to position 10                               /* Done */
+        /* STANCE_DRINK_TONIC */                127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141,      /* Done */
+        /* STANCE_JUMP_DROP_C */                104, 105, 106, 107, 108,   // Climb down, drop straight down 31 px              /* Done */
+        /* STANCE_FALLING_D */                  125, 126,   // climb down, drop a level (and crouch)                            /* Done */
+        /* STANCE_FALLING_DEAD */               125, 126, 142,   // climb down, drop a level (and crouch)                       /* Done */
     };
 
 
