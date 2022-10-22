@@ -187,13 +187,22 @@ struct Prince {
 
         void pushSequence(uint8_t fromStance, uint8_t toStance, uint8_t finalStance, bool resetFrame) {
 
-            if (finalStance != STANCE_NONE) {
-                this->push(finalStance, resetFrame);
-            }
-
             #if defined(DEBUG) && defined(DEBUG_PRINCE_STACK)
             uint8_t xOffset;
             Point offset;
+            #endif
+
+            if (finalStance != STANCE_NONE) {
+
+                #if defined(DEBUG) && defined(DEBUG_PRINCE_STACK)
+                offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[(finalStance - 1) * 2]));
+                xOffset = xOffset + offset.x;
+                #endif
+
+                this->stack->push(static_cast<int16_t>(finalStance), resetFrame);
+            }
+
+            #if defined(DEBUG) && defined(DEBUG_PRINCE_STACK)
             DEBUG_PRINT(F("Prince X: "));
             DEBUG_PRINT(this->x % 12);
             DEBUG_PRINT(F(", Add to Stack "));
