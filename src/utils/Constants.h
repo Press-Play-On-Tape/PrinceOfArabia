@@ -315,6 +315,11 @@ namespace Constants {
     constexpr uint8_t Animation_NumberOfFrames = 2;
     constexpr uint8_t NoItemFound = 255;
 
+    constexpr uint8_t TileHeight = 31;
+    constexpr uint8_t TileWidth = 12;
+    constexpr uint8_t ScreenTopOffset = 1;
+    constexpr uint8_t ScreenWidthInTiles = 10;
+
 }
 
 enum GameState : uint8_t {

@@ -11,9 +11,9 @@
 
 void game_Init() {
 
-    prince.init(18, 56, Direction::Right, STANCE_CROUCH_3_END, 3);          // Normal starting pos
+    // prince.init(18, 56, Direction::Right, STANCE_CROUCH_3_END, 3);          // Normal starting pos
     // prince.init(66, 56, Direction::Right, STANCE_CROUCH_3_END, 3);        // Get tonic
-    // prince.init(30, 56 + 31, Direction::Right, STANCE_CROUCH_3_END, 3);     // Column of climbs
+    prince.init(30, 56 + Constants::TileHeight, Direction::Right, STANCE_CROUCH_3_END, 3);     // Column of climbs
     // prince.init(80, 25, Direction::Right, STANCE_CROUCH_3_END, 3);     // Top Left
     // prince.init(18, 25, Direction::Right, STANCE_CROUCH_3_END, 3);          // Long Fall
 
@@ -21,9 +21,9 @@ void game_Init() {
     gamePlay.init(arduboy, 1);
     
     level.setLevel(1);
-    level.init(prince, 60, 0);  // Normal starting posa
-    // level.init(prince, 31, 0);   // Get tonic
-//    level.init(prince, 0, 3);   // Column of climbs
+    // level.init(prince, 60, 0);  // Normal starting posa
+    // level.init(prince, Constants::TileHeight, 0);   // Get tonic
+   level.init(prince, 0, 3);   // Column of climbs
     // level.init(prince, 0, 0);   // Top left
     // level.init(prince, 40, 4);  // Long Fall
 
@@ -38,9 +38,9 @@ void game() {
     auto pressed = arduboy.pressedButtons();
 
 
-    if (prince.getY() - level.getYOffset() >= 56 + 31) {
+    if (prince.getY() - level.getYOffset() >= 56 + Constants::TileHeight) {
 
-        prince.incY(- 56 - 31 - 6);
+        prince.incY(- Constants::TileHeight * 3);
         level.setYLocation(level.getYLocation() + 3);
         level.loadMap();
         level.setYOffset(0);
@@ -48,24 +48,24 @@ void game() {
 
     }
     else if (prince.getY() - level.getYOffset() < 0) {
-
-        prince.incY(56 + 31 + 6);
+Serial.println("ccccccc");
+        prince.incY(Constants::TileHeight * 3);
         level.setYLocation(level.getYLocation() - 3);
         level.loadMap();
-        level.setYOffset(31);
+        level.setYOffset(Constants::TileHeight);
         level.setYOffsetDir(Direction::None);
 
     }
     else if (prince.getX() < 0) {
 
-        prince.incX(120);
+        prince.incX(Constants::TileWidth * Constants::ScreenWidthInTiles);
         level.setXLocation(level.getXLocation() - 10);
         level.loadMap();
 
     }
-    else if (prince.getX() > 120) {
+    else if (prince.getX() > Constants::TileWidth * Constants::ScreenWidthInTiles) {
 
-        prince.incX(-120);
+        prince.incX(-Constants::TileWidth * Constants::ScreenWidthInTiles);
         level.setXLocation(level.getXLocation() + 10);
         level.loadMap();
 
@@ -89,7 +89,7 @@ void game() {
 
     if (justPressed & B_BUTTON) {
 
-        switch (level.distToEdgeOfTile(prince.getDirection(),  (level.getXLocation() * 12) + prince.getX())) {
+        switch (level.distToEdgeOfTile(prince.getDirection(),  (level.getXLocation() * Constants::TileWidth) + prince.getX())) {
 
             case 0:
                 prince.incX(2);
@@ -918,7 +918,7 @@ void game() {
 
                         prince.clear();
 
-                        int8_t dist = abs(level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * 12) + prince.getX()));
+                        int8_t dist = abs(level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX()));
 
                         switch (dist) {
 
@@ -1036,16 +1036,16 @@ void game() {
     font3x5.print(F(" px"));
     font3x5.print(prince.getX());
     font3x5.print(F(" x"));
-    font3x5.print(level.coordToTileIndexX(prince.getDirection(), (level.getXLocation() * 12) + prince.getX()));
+    font3x5.print(level.coordToTileIndexX(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX()));
     font3x5.print(F(" "));
-    font3x5.print((level.getXLocation() * 12) + prince.getX());
+    font3x5.print((level.getXLocation() * Constants::TileWidth) + prince.getX());
     font3x5.print(F(" y"));
-    font3x5.print(level.coordToTileIndexY(prince.getDirection(), (level.getYLocation() * 31) + prince.getY()));
+    font3x5.print(level.coordToTileIndexY(prince.getDirection(), (level.getYLocation() * Constants::TileHeight) + prince.getY()));
     font3x5.print(F(" "));
- //   font3x5.print((level.getYLocation() * 31) + prince.getY());
+ //   font3x5.print((level.getYLocation() * Constants::TileHeight) + prince.getY());
     font3x5.print(prince.getY());
     font3x5.print(F(" dst"));
-    font3x5.print(level.distToEdgeOfTile(prince.getDirection(),  (level.getXLocation() * 12) + prince.getX()));
+    font3x5.print(level.distToEdgeOfTile(prince.getDirection(),  (level.getXLocation() * Constants::TileWidth) + prince.getX()));
     #endif
 
 }

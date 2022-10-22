@@ -14,14 +14,14 @@ void render() {
 
     // Draw background ..
 
-    for (uint8_t y = 0; y < 3; y++) {
+    for (uint8_t y = 0; y < 4; y++) {
 
         for (uint8_t x = 0; x < 10; x++) {
 
-            int8_t bgTile = level.getTile(Layer::Background, x, y, TILE_NONE);
+            int8_t bgTile = level.getTile(Layer::Background, x, y - 1, TILE_NONE);
 
             if (bgTile >= 0) {
-               FX::drawBitmap(x * 12, (y * 31) - level.getYOffset(), Images::Tile_Dungeon[Images::xRef[bgTile]], 0, dbmNormal);
+               FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon[Images::xRef[bgTile]], 0, dbmNormal);
             }
 
         }
@@ -34,29 +34,31 @@ void render() {
     for (uint8_t i = 0; i < Constants::NumberOfItems; i++) {
 
         Item &item = level.getItem(i);
+        int16_t xLoc = (item.x - level.getXLocation()) * Constants::TileWidth;
+        int16_t yLoc = ((item.y - level.getYLocation()) * Constants::TileHeight) - level.getYOffset() + Constants::ScreenTopOffset;
 
         if (item.active) {
 
             switch (item.itemType) {
 
                 case ItemType::Gate:
-                    FX::drawBitmap(((item.x - level.getXLocation()) * 12) - 5, ((item.y - level.getYLocation()) * 31) - level.getYOffset(), Images::Gate_00 + (item.data.gate.position * 76), 0, dbmMasked);
+                    FX::drawBitmap(xLoc - 5, yLoc, Images::Gate_00 + (item.data.gate.position * 76), 0, dbmMasked);
                     break;
 
                 case ItemType::Torch:
-                    FX::drawBitmap((item.x - level.getXLocation()) * 12, ((item.y - level.getYLocation()) * 31) - level.getYOffset(), Images::Torch_00 + (item.data.torch.frame * 16), 0, dbmMasked);
+                    FX::drawBitmap(xLoc, yLoc, Images::Torch_00 + (item.data.torch.frame * 16), 0, dbmMasked);
                     break;
 
                 case ItemType::CollapsingFloor:
-                    FX::drawBitmap((item.x - level.getXLocation()) * 12, ((item.y - level.getYLocation()) * 31) - level.getYOffset() + item.data.collapsingFloor.distanceFallen, Images::CollapsingFloor_01 + (item.data.collapsingFloor.frame * 172), 0, dbmMasked);
+                    FX::drawBitmap(xLoc, yLoc + item.data.collapsingFloor.distanceFallen, Images::CollapsingFloor_01 + (item.data.collapsingFloor.frame * 172), 0, dbmMasked);
                     break;
 
                 case ItemType::CollpasedFloor:
-                    FX::drawBitmap((item.x - level.getXLocation()) * 12, ((item.y - level.getYLocation()) * 31) - level.getYOffset() + 18, Images::CollapsedFloor, 0, dbmMasked);
+                    FX::drawBitmap(xLoc, yLoc + 18, Images::CollapsedFloor, 0, dbmMasked);
                     break;
 
                 case ItemType::Potion_Small:
-                    FX::drawBitmap(((item.x - level.getXLocation()) * 12) + 6, ((item.y - level.getYLocation()) * 31) - level.getYOffset() + 12, Images::Potion_Small_00 + (item.data.potionSmall.frame * 28), 0, dbmMasked);
+                    FX::drawBitmap(xLoc + 6, yLoc + 12, Images::Potion_Small_00 + (item.data.potionSmall.frame * 28), 0, dbmMasked);
                     break;
 
                 default: break;
@@ -83,34 +85,34 @@ void render() {
 
     if (prince.getDirection() == Direction::Left) {
 
-        FX::drawBitmap(prince.getXImage(), prince.getYImage() - level.getYOffset(), startPos, 0, dbmMasked);
+        FX::drawBitmap(prince.getXImage(), prince.getYImage() - level.getYOffset() + Constants::ScreenTopOffset, startPos, 0, dbmMasked);
 
     }
     else {
 
-        FX::drawBitmap(prince.getXImage(), prince.getYImage() - level.getYOffset(), startPos + (Images::Prince_Right_001 - Images::Prince_Left_001), 0, dbmMasked);
+        FX::drawBitmap(prince.getXImage(), prince.getYImage() - level.getYOffset() + Constants::ScreenTopOffset, startPos + (Images::Prince_Right_001 - Images::Prince_Left_001), 0, dbmMasked);
 
     }
 
 
     // Draw foreground ..
 
-    for (uint8_t y = 0; y < 3; y++) {
+    for (uint8_t y = 0; y < 4; y++) {
 
         for (uint8_t x = 0; x < 10; x++) {
 
-            int8_t fgTile = level.getTile(Layer::Foreground, x, y, TILE_NONE);
+            int8_t fgTile = level.getTile(Layer::Foreground, x, y - 1, TILE_NONE);
 
             if (fgTile >= 0) {
 
                 if (Images::xRef_IsMasked[fgTile]) {
 
-                    FX::drawBitmap(x * 12, (y * 31) - level.getYOffset(), Images::Tile_Dungeon[Images::xRef[fgTile]], 0, dbmMasked);
+                    FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon[Images::xRef[fgTile]], 0, dbmMasked);
 
                 }
                 else {
 
-                    FX::drawBitmap(x * 12, (y * 31) - level.getYOffset(), Images::Tile_Dungeon[Images::xRef[fgTile]], 0, dbmNormal);
+                    FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon[Images::xRef[fgTile]], 0, dbmNormal);
 
                 }
 
