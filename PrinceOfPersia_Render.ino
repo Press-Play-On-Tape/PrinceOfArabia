@@ -142,6 +142,14 @@ void render() {
         
     }
 
+    FX::drawBitmap(124, 39, Images::Number_Small_00 + ((gamePlay.timer_Min / 10) * 7), 0, dbmNormal);
+    FX::drawBitmap(124, 45, Images::Number_Small_00 + ((gamePlay.timer_Min % 10) * 7), 0, dbmNormal);
+    FX::drawBitmap(124, 53, Images::Number_Small_00 + ((gamePlay.timer_Sec / 10) * 7), 0, dbmNormal);
+    FX::drawBitmap(124, 59, Images::Number_Small_00 + ((gamePlay.timer_Sec % 10) * 7), 0, dbmNormal);
+
+    arduboy.drawPixel(124, 51);
+    arduboy.drawPixel(126, 51);
+
 }
 
 void renderMenu() {

@@ -46,6 +46,7 @@ namespace Images {
 
     image_t Menu = "../images/hud/Menu.png"
     image_t Sword = "../images/hud/Sword.png"
+
     image_t Number_00 = "../images/hud/Number_00.png"
     image_t Number_01 = "../images/hud/Number_01.png"
     image_t Number_02 = "../images/hud/Number_02.png"
@@ -56,6 +57,17 @@ namespace Images {
     image_t Number_07 = "../images/hud/Number_07.png"
     image_t Number_08 = "../images/hud/Number_08.png"
     image_t Number_09 = "../images/hud/Number_09.png"
+
+    image_t Number_Small_00 = "../images/hud/Number_Small_00.png"
+    image_t Number_Small_01 = "../images/hud/Number_Small_01.png"
+    image_t Number_Small_02 = "../images/hud/Number_Small_02.png"
+    image_t Number_Small_03 = "../images/hud/Number_Small_03.png"
+    image_t Number_Small_04 = "../images/hud/Number_Small_04.png"
+    image_t Number_Small_05 = "../images/hud/Number_Small_05.png"
+    image_t Number_Small_06 = "../images/hud/Number_Small_06.png"
+    image_t Number_Small_07 = "../images/hud/Number_Small_07.png"
+    image_t Number_Small_08 = "../images/hud/Number_Small_08.png"
+    image_t Number_Small_09 = "../images/hud/Number_Small_09.png"
 
     image_t Health_00 = "../images/hud/Health_00.png"
     image_t Health_01 = "../images/hud/Health_01.png"
