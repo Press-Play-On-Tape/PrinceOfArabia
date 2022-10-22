@@ -37,6 +37,19 @@ void game() {
     auto justPressed = arduboy.justPressedButtons();
     auto pressed = arduboy.pressedButtons();
 
+    #if defined(DEBUG) && defined(DEBUG_PRINCE_DETAILS)
+    DEBUG_PRINT(F("Stance: "));
+    DEBUG_PRINT(prince.getStance());
+    DEBUG_PRINT(F(", Direction: "));
+    DEBUG_PRINT((uint8_t)prince.getDirection());
+    DEBUG_PRINT(F(", X: "));
+    DEBUG_PRINT(prince.getX());
+    DEBUG_PRINT(F(", Y: "));
+    DEBUG_PRINT(prince.getY());
+    DEBUG_PRINT(F(", yOffset: "));
+    DEBUG_PRINTLN(level.getYOffset());
+    #endif
+
 
     if (prince.getY() - level.getYOffset() >= 56 + Constants::TileHeight) {
 
@@ -47,8 +60,8 @@ void game() {
         level.setYOffsetDir(Direction::None);
 
     }
-    else if (prince.getY() - level.getYOffset() < 0) {
-Serial.println("ccccccc");
+    else if (static_cast<int8_t>(prince.getY() - level.getYOffset()) < static_cast<int8_t>(0)) {
+
         prince.incY(Constants::TileHeight * 3);
         level.setYLocation(level.getYLocation() - 3);
         level.loadMap();
@@ -131,18 +144,6 @@ Serial.println("ccccccc");
     /* if (gamePlay.gameState == GameState::Game) */ gamePlay.update(arduboy);
     if (menu.update()) gamePlay.gameState = GameState::Game;
     
-
-
-
-    #if defined(DEBUG) && defined(DEBUG_PRINCE_DETAILS)
-    DEBUG_PRINT(F("Stance: "));
-    DEBUG_PRINT(prince.getStance());
-    DEBUG_PRINT(F(", Direction: "));
-    DEBUG_PRINT((uint8_t)prince.getDirection());
-    DEBUG_PRINT(F(", X: "));
-    DEBUG_PRINTLN(prince.getX());
-    #endif
-
 
 
     // If prince wueu is empty then accept input from player ..
@@ -875,7 +876,6 @@ Serial.println("ccccccc");
             prince.incY(yOffset);
 
             #if defined(DEBUG) && defined(DEBUG_PRINCE_DETAILS)
-            DEBUG_PRINTLN(prince.getStance());
             DEBUG_PRINT(F("Stance: "));
             DEBUG_PRINT(prince.getStance());
             DEBUG_PRINT(F(", Direction: "));
