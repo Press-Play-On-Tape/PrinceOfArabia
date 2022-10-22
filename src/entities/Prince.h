@@ -15,11 +15,14 @@ struct Prince {
         uint8_t stance = STANCE_UPRIGHT;
 
         Direction direction = Direction::Left;
-        bool falling = false;
+        uint8_t falling = 0;
 
         int16_t x = 0;
         int16_t y = 0;
         int16_t prevY = 0;
+
+        uint8_t health = 0;
+        uint8_t healthMax = 0;
 
         Point location;
 
@@ -33,7 +36,9 @@ struct Prince {
         int16_t getYImage()                         { return this->y - 31; }
         uint8_t getHangingCounter()                 { return this->hangingCounter; }
         uint8_t getCrouchingCounter()               { return this->crouchingCounter; }
-        bool isFalling()                            { return this->falling; }
+        uint8_t getFalling()                        { return this->falling; }
+        uint8_t getHealth()                         { return this->health; }
+        uint8_t getHealthMax()                      { return this->healthMax; }
         Point &getPosition()                        { return this->location; }
 
         Stack <int16_t, 30>  * getStack()           { return this->stack; }
@@ -42,12 +47,16 @@ struct Prince {
         void setStack(Stack <int16_t, 30>  *val)    { this->stack = val; }
         void setStance(uint8_t val)                 { this->stance = val; }
         void setDirection(Direction val)            { this->direction = val; }
-        void setFalling(bool val)                   { this->falling = val; }
+        void setFalling(uint8_t val)                { this->falling = val; }
         void setHangingCounter(uint8_t val)         { this->hangingCounter = val; }
         void setCrouchingCounter(uint8_t val)       { this->crouchingCounter = val; }
+        void setHealth(uint8_t val)                 { this->health = val; }
+        void setHealthMax(uint8_t val)              { this->healthMax = val; }
 
+        void incFalling()                           { this->falling++; }
+        void decHealth(uint8_t val)                 { health > val ? this->health = this->health - val: 0; }
 
-        void init(int16_t x, int16_t y, Direction direction, uint8_t stance) {
+        void init(int16_t x, int16_t y, Direction direction, uint8_t stance, uint8_t health) {
 
             this->x = x;
             this->y = y;
@@ -55,6 +64,8 @@ struct Prince {
             this->direction = direction;
             this->stance = stance;
             this->crouchingCounter = 32;
+            this->health = health;
+            this->healthMax = health;
 
         }
 

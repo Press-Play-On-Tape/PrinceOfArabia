@@ -16,7 +16,7 @@ void render() {
 
     for (uint8_t y = 0; y < 3; y++) {
 
-        for (uint8_t x = 0; x < 11; x++) {
+        for (uint8_t x = 0; x < 10; x++) {
 
             int8_t bgTile = level.getTile(Layer::Background, x, y, TILE_NONE);
 
@@ -74,6 +74,13 @@ void render() {
     uint16_t imageIndex = static_cast<uint16_t>(pgm_read_byte(&Images::StanceToImageXRef[stance]));
     uint24_t startPos = Images::Prince_Left_001 + ((imageIndex - 1) * 364);
 
+    #if defined(DEBUG) && defined(DEBUG_PRINCE_RENDERING)
+    DEBUG_PRINT(F("Stance: "));
+    DEBUG_PRINT(prince.getStance());
+    DEBUG_PRINT(F(", ImageIndex: "));
+    DEBUG_PRINTLN(imageIndex);
+    #endif
+
     if (prince.getDirection() == Direction::Left) {
 
         FX::drawBitmap(prince.getXImage(), prince.getYImage() - level.getYOffset(), startPos, 0, dbmMasked);
@@ -90,7 +97,7 @@ void render() {
 
     for (uint8_t y = 0; y < 3; y++) {
 
-        for (uint8_t x = 0; x < 11; x++) {
+        for (uint8_t x = 0; x < 10; x++) {
 
             int8_t fgTile = level.getTile(Layer::Foreground, x, y, TILE_NONE);
 
@@ -111,6 +118,28 @@ void render() {
 
         }
 
+    }
+
+
+    // Render health ..
+
+    // arduboy.setTextColor(WHITE);
+    arduboy.fillRect(120, 0, WIDTH, HEIGHT, BLACK);
+    arduboy.drawFastVLine(121, 0, HEIGHT, WHITE);
+
+    for (uint8_t i = 0; i < prince.getHealthMax(); i++) {
+
+        if (prince.getHealth() > i) {
+
+            FX::drawBitmap(123, 1 + (i * 4), Images::Health_00, 0, dbmNormal);
+
+        }
+        else {
+
+            FX::drawBitmap(123, 1 + (i * 4), Images::Health_01, 0, dbmNormal);
+
+        }
+        
     }
 
 }

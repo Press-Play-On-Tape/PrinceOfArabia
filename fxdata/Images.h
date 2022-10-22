@@ -34,6 +34,7 @@ namespace Images {
         /* STANCE_DRINK_TONIC */                161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175,
         /* STANCE_JUMP_DROP_C */                123, 123, 123, 123, 123,   // Cliimb down, drop straight down 31 px
         /* STANCE_FALLING_D */                  159, 160,   // climb down, drop a level (and crouch)
+        /* STANCE_FALLING_DEAD */               159, 160, 176,   // climb down, drop a level (and crouch)
     };
 
 

@@ -4,20 +4,21 @@
 #define DEBUG_PRINT    Serial.print
 #define DEBUG_PRINTLN  Serial.println
 
-#define DEBUG
+#define _DEBUG
 #define DEBUG_ONSCREEN_DETAILS
 
 #define _DEBUG_PRINCE_DETAILS
-#define DEBUG_PRINCE_STACK
+#define _DEBUG_PRINCE_STACK
 #define _DEBUG_PRINT_ACTION
 #define DEBUG_LEVEL_LOAD_MAP
+#define _DEBUG_PRINCE_RENDERING
 
 #define _DEBUG_ACTION_CANMOVEFORWARD
 #define _DEBUG_ACTION_CANJUMPUP
 #define _DEBUG_ACTION_CANJUMPUP_PART2
 #define _DEBUG_ACTION_CANCLIMBDOWN
-#define _DEBUG_ACTION_CANFALL
 #define DEBUG_ACTION_CANCLIMBDOWN_PART2
+#define _DEBUG_ACTION_CANFALL
 
 //-------------------------------------------------------------------------------------
 
@@ -258,6 +259,9 @@
 #define STANCE_JUMP_UP_DROP_C_5_END             230
 #define STANCE_FALLING_D_1_START                231  // Climbing down, falling two levels
 #define STANCE_FALLING_D_2_END                  232
+#define STANCE_FALLING_DEAD_1_START             233  // Climbing down, fall to death
+#define STANCE_FALLING_DEAD_2                   234
+#define STANCE_FALLING_DEAD_3_END               235
 
 #define STANCE_JUMP_DOWN_1_START        240
 #define STANCE_JUMP_DOWN_2              240
