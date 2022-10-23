@@ -11,6 +11,7 @@
 
 void game_Init() {
 
+
     prince.init(18, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
     // prince.init(66, 56, Direction::Right, Stance::Crouch_3_End, 3);        // Get tonic
     // prince.init(30, 56 + Constants::TileHeight, Direction::Right, Stance::Crouch_3_End, 3);     // Column of climbs
@@ -878,7 +879,7 @@ void game() {
 
                         prince.clear();
                         prince.setFalling(0);
-                        prince.pushSequence(Stance::Falling_E_1_Start, Stance::Falling_E_5_Check_CanFall, true);
+                        prince.pushSequence(Stance::Falling_SingleStep_1_Start, Stance::Falling_SingleStep_5_Check_CanFall, true);
 
                     }
 
@@ -976,6 +977,7 @@ void game() {
                 case Stance::Falling_B_5_Check_CanFall:
                 case Stance::Falling_C_5_Check_CanFall:
                 case Stance::Falling_E_5_Check_CanFall:
+                case Stance::Falling_SingleStep_5_Check_CanFall:
                 case Stance::Falling_Down_5_End:
 
                     if (level.canFall(prince)) { // Fall some more
@@ -1008,6 +1010,10 @@ void game() {
                                 prince.push(Stance::Falling_E_6_End, true);
                                 break;
 
+                            case Stance::Falling_SingleStep_5_Check_CanFall:
+                                prince.push(Stance::Falling_SingleStep_6_End, true);
+                                break;
+
                             case Stance::Falling_Down_5_End:
 
                                 switch (prince.getPrevStance()) {
@@ -1029,6 +1035,10 @@ void game() {
                                         prince.push(Stance::Falling_E_6_End, true);
                                         break;
 
+                                    case Stance::Falling_SingleStep_5_Check_CanFall:
+                                        prince.push(Stance::Falling_SingleStep_6_End, true);
+                                        break;
+                                        
                                     default:  
                                         break;
 
@@ -1120,9 +1130,17 @@ void game() {
     font3x5.print(F(" y"));
     font3x5.print(level.coordToTileIndexY(prince.getDirection(), (level.getYLocation() * Constants::TileHeight) + prince.getY()));
     font3x5.print(F(" "));
- //   font3x5.print((level.getYLocation() * Constants::TileHeight) + prince.getY());
     font3x5.print(prince.getY());
-    font3x5.print(F(" dst"));
+    font3x5.print(F(" D"));
+    font3x5.print(level.distToEdgeOfTile(prince.getDirection(),  (level.getXLocation() * Constants::TileWidth) + prince.getX()));
+    #endif
+
+
+    #if defined(DEBUG) && defined(DEBUG_ONSCREEN_DETAILS_MIN)
+    font3x5.setTextColor(0);
+    font3x5.setCursor(1, 0);
+    arduboy.fillRect(0, 0, 12, 7);
+    font3x5.print(F("D"));
     font3x5.print(level.distToEdgeOfTile(prince.getDirection(),  (level.getXLocation() * Constants::TileWidth) + prince.getX()));
     #endif
 

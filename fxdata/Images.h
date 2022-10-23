@@ -38,6 +38,7 @@ namespace Images {
         /* 236 - 236 Run_Repeat_8_End_Turn */      14,   // single entry to allow x correction
         /* 237 - 241 Falling_Down */               125, 125, 125, 125, 125,  // falling straight down.
         /* 242 - 247 Falling_E */                  121, 122, 123, 124, 125, 126,   // Used when walking.                                   
+        /* 248 - 253 Falling_SingleStep */         121, 122, 123, 124, 125, 126,   // Falling as part of a Single Step                                   
         255,                   
     };
 

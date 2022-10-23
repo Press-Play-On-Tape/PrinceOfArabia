@@ -940,18 +940,10 @@ struct Level {
                         DEBUG_PRINT(F(" dist "));
                         DEBUG_PRINT(distToEdgeOfCurrentTile);
                         DEBUG_PRINT(F(", bg "));
-                        // DEBUG_PRINT(bgTile4);
-                        // DEBUG_PRINT(F(" "));
-                        // DEBUG_PRINT(bgTile3);
-                        // DEBUG_PRINT(F(" "));
                         DEBUG_PRINT(bgTile2);
                         DEBUG_PRINT(F(" "));
                         DEBUG_PRINT(bgTile1);
                         DEBUG_PRINT(F(", fg "));
-                        // DEBUG_PRINT(fgTile4);
-                        // DEBUG_PRINT(F(" "));
-                        // DEBUG_PRINT(fgTile3);
-                        // DEBUG_PRINT(F(" "));
                         DEBUG_PRINT(fgTile2);
                         DEBUG_PRINT(F(" "));
                         DEBUG_PRINT(fgTile1);
