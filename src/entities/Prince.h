@@ -32,8 +32,8 @@ struct Prince {
         int16_t getX()                              { return this->x; }
         int16_t getY()                              { return this->y; }
         int16_t getYPrevious()                      { return this->prevY; }
-        int16_t getXImage()                         { return this->x - 18 + 2; }
-        int16_t getYImage()                         { return this->y - 31; }
+        int16_t getXImage()                         { return this->x - 18 + 3; }                // Image is 36 x 36 hence - 18, the plus 3 is due to the orthagonal tiles offset.
+        int16_t getYImage()                         { return this->y - 31; }                    // -31 moves the player up 5 pixels on the orthagonal tiles ?
         uint8_t getHangingCounter()                 { return this->hangingCounter; }
         uint8_t getCrouchingCounter()               { return this->crouchingCounter; }
         uint8_t getFalling()                        { return this->falling; }

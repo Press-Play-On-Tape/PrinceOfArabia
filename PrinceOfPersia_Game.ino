@@ -11,23 +11,23 @@
 
 void game_Init() {
 
-    // prince.init(18, 56, Direction::Right, STANCE_CROUCH_3_END, 3);          // Normal starting pos
+    prince.init(18, 56, Direction::Right, STANCE_CROUCH_3_END, 3);          // Normal starting pos
     // prince.init(66, 56, Direction::Right, STANCE_CROUCH_3_END, 3);        // Get tonic
     // prince.init(30, 56 + Constants::TileHeight, Direction::Right, STANCE_CROUCH_3_END, 3);     // Column of climbs
     // prince.init(80, 25, Direction::Right, STANCE_CROUCH_3_END, 3);     // Top Left
     // prince.init(18, 25, Direction::Right, STANCE_CROUCH_3_END, 3);          // Long Fall
-    prince.init(18, 56, Direction::Right, STANCE_CROUCH_3_END, 3);          // problem
+    // prince.init(18, 56, Direction::Right, STANCE_CROUCH_3_END, 3);          // problem
 
 
     gamePlay.init(arduboy, 1);
     
     level.setLevel(1);
-    // level.init(prince, 60, 0);  // Normal starting posa
+    level.init(prince, 60, 0);  // Normal starting posa
     // level.init(prince, Constants::TileHeight, 0);   // Get tonic
 //    level.init(prince, 0, 3);   // Column of climbs
     // level.init(prince, 0, 0);   // Top left
     // level.init(prince, 40, 4);  // Long Fall
-    level.init(prince, 60, 3);  // problem
+    // level.init(prince, 60, 3);  // problem
 
     menu.init();
 
@@ -149,8 +149,11 @@ void game() {
     if (menu.update()) gamePlay.gameState = GameState::Game;
     
 
-
-    // If prince wueu is empty then accept input from player ..
+    // ---------------------------------------------------------------------------------------------------------------------------------------
+    //  
+    //  If prince queue is empty then accept input from player ..
+    //
+    // ---------------------------------------------------------------------------------------------------------------------------------------
 
     if (gamePlay.gameState == GameState::Game && prince.isEmpty()) {
 
@@ -821,9 +824,11 @@ void game() {
 
 
 
-
-
-    // Update the prince's stance ..
+    // ---------------------------------------------------------------------------------------------------------------------------------------
+    //  
+    //  Queue handling ..
+    //
+    // ---------------------------------------------------------------------------------------------------------------------------------------
 
     if (prince.getStackFrame() == 0) {
 
@@ -836,26 +841,18 @@ void game() {
             int16_t newStance = prince.pop();
             prince.setStance(abs(newStance));
 
-            // FX::seekData(static_cast<uint24_t>(Images::Prince_XOffset + ((prince.getStance() - 1) * 2)));
-            // xOffset = static_cast<int8_t>(FX::readPendingUInt8()) * (prince.getDirection() == Direction::Left ? -1 : 1) * (newStance < 0 ? -1 : 1);
-            // yOffset = static_cast<int8_t>(FX::readPendingUInt8()) * (newStance < 0 ? -1 : 1);
-            // FX::readEnd();
-            // uint16_t idx = (prince.getStance() - 1) * 2;
-            // xOffset = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[idx])) * (prince.getDirection() == Direction::Left ? -1 : 1) * (newStance < 0 ? -1 : 1);
-            // yOffset = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[idx + 1])) * (newStance < 0 ? -1 : 1);
 
+            // Handle specific events .. such as turning at end of sequences, falling after a land, etc.
 
             switch (prince.getStance()) {
 
                 case STANCE_UPRIGHT_TURN:
-                    newStance = (newStance < 0 ? -1 : 1) * STANCE_UPRIGHT;
+                    newStance = STANCE_UPRIGHT;
                     prince.setStance(STANCE_UPRIGHT);
                     prince.changeDirection();
                     break;
 
                 case STANCE_RUN_REPEAT_8_END_TURN:
-                    // newStance = (newStance < 0 ? -1 : 1) * STANCE_RUN_REPEAT_8_END;
-                    // prince.setStance(STANCE_RUN_REPEAT_8_END);
                     prince.changeDirection();
                     break;
 
@@ -952,9 +949,16 @@ void game() {
 
             }
 
-            getStance_Offsets(prince.getDirection(), offset, newStance);
-            prince.incX(offset.x);
-            prince.incY(offset.y);
+            getStance_Offsets(prince.getDirection(), offset, prince.getStance());
+            prince.incX(offset.x * (newStance < 0 ? -1 : 1));
+            prince.incY(offset.y * (newStance < 0 ? -1 : 1));
+
+
+
+            // Has the player collided with a wall?
+
+            level.collideWithWall(prince);
+
 
             #if defined(DEBUG) && defined(DEBUG_PRINCE_DETAILS)
             DEBUG_PRINT(F("Stance: "));

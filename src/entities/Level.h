@@ -1957,6 +1957,51 @@ struct Level {
         }
 
 
+
+
+        bool collideWithWall(Prince &prince) {
+
+            Direction direction = prince.getDirection();
+
+            int8_t reach = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[(prince.getStance() - 1) * 3]));
+            #if defined(DEBUG) && defined(DEBUG_ACTION_COLLIDEWITHWALL)
+            DEBUG_PRINT("collideWithWall() Stance: ");
+            DEBUG_PRINT(prince.getStance());
+            DEBUG_PRINT(", reach: ");
+            DEBUG_PRINTLN(reach);
+            #endif
+
+            int8_t tileXIdx = this->coordToTileIndexX(direction, prince.getPosition().x) - this->getXLocation() + (direction == Direction::Right ? 1 : 0);
+            int8_t tileYIdx = this->coordToTileIndexY(direction, prince.getPosition().y) - this->getYLocation();
+
+            #if defined(DEBUG) && defined(DEBUG_ACTION_COLLIDEWITHWALL)
+            printCoordToIndex(prince.getPosition(), tileXIdx, tileYIdx);
+            #endif
+
+            int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
+            int8_t bgTile2 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
+            int8_t distToEdge = distToEdgeOfTile(direction, prince.getPosition().x);
+
+            #if defined(DEBUG) && defined(DEBUG_ACTION_COLLIDEWITHWALL)
+            if(direction == Direction::Left) {
+                DEBUG_PRINT(F("Left "));
+            }
+            else {
+                DEBUG_PRINT(F("Right "));
+            }
+            DEBUG_PRINT(F("dist "));
+            DEBUG_PRINT(distToEdge);
+            DEBUG_PRINT(F(", bg "));
+            DEBUG_PRINT(bgTile1);
+            DEBUG_PRINTLN("");
+            #endif
+
+
+            return true;
+
+
+        }
+
         #if defined(DEBUG)
         void printAction(Action action) {
 
