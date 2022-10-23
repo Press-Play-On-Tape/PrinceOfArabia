@@ -201,9 +201,9 @@ struct Prince {
                 xOffset = offset.x;
                 DEBUG_PRINT(F(", Final "));
                 DEBUG_PRINT(finalStance);
-                DEBUG_PRINT(F("="));
-                DEBUG_PRINT(offset.x);
-                DEBUG_PRINT(F("="));
+                // DEBUG_PRINT(F(" ="));
+                // DEBUG_PRINT(offset.x);
+                // DEBUG_PRINT(F("= "));
                 #endif
 
                 this->stack->push(static_cast<int16_t>(finalStance), resetFrame);
@@ -228,9 +228,9 @@ struct Prince {
                     DEBUG_PRINT(" ");        
                     offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[(x - 1) * 2]));
                     xOffset = xOffset + offset.x;
-                DEBUG_PRINT(F("="));
-                DEBUG_PRINT(offset.x);
-                DEBUG_PRINT(F("="));                    
+                    // DEBUG_PRINT(F(" ="));
+                    // DEBUG_PRINT(offset.x);
+                    // DEBUG_PRINT(F("= "));                    
                     #endif
 
                     this->stack->push(static_cast<int16_t>(x), resetFrame);

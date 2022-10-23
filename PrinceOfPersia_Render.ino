@@ -21,7 +21,7 @@ void render() {
             int8_t bgTile = level.getTile(Layer::Background, x, y - 1, TILE_NONE);
 
             if (bgTile >= 0) {
-               FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon[Images::xRef[bgTile]], 0, dbmNormal);
+               FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon[Images::xTiles_Ref[bgTile]], 0, dbmNormal);
             }
 
         }
@@ -105,14 +105,14 @@ void render() {
 
             if (fgTile >= 0) {
 
-                if (Images::xRef_IsMasked[fgTile]) {
+                if (Images::xTilesRef_IsMasked[fgTile]) {
 
-                    FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon[Images::xRef[fgTile]], 0, dbmMasked);
+                    FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon[Images::xTiles_Ref[fgTile]], 0, dbmMasked);
 
                 }
                 else {
 
-                    FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon[Images::xRef[fgTile]], 0, dbmNormal);
+                    FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon[Images::xTiles_Ref[fgTile]], 0, dbmNormal);
 
                 }
 
