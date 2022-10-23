@@ -12,7 +12,8 @@ struct Prince {
         
         uint8_t hangingCounter = 0;
         uint8_t crouchingCounter = 0;
-        uint8_t stance = STANCE_UPRIGHT;
+        uint16_t stance = STANCE_UPRIGHT;
+        uint16_t prevStance = STANCE_UPRIGHT;
 
         Direction direction = Direction::Left;
         uint8_t falling = 0;
@@ -28,7 +29,8 @@ struct Prince {
 
     public:
 
-        uint8_t getStance()                         { return this->stance; }
+        uint16_t getStance()                        { return this->stance; }
+        uint16_t getPrevStance()                    { return this->prevStance; }
         int16_t getX()                              { return this->x; }
         int16_t getY()                              { return this->y; }
         int16_t getYPrevious()                      { return this->prevY; }
@@ -44,7 +46,8 @@ struct Prince {
         Direction getDirection()                    { return this->direction; }
 
         void setStack(Stack <int16_t, 30>  *val)    { this->stack = val; }
-        void setStance(uint8_t val)                 { this->stance = val; }
+        void setStance(uint16_t val)                { this->stance = val; }
+        void setPrevStance(uint16_t val)            { this->prevStance = val; }
         void setDirection(Direction val)            { this->direction = val; }
         void setFalling(uint8_t val)                { this->falling = val; }
         void setHangingCounter(uint8_t val)         { this->hangingCounter = val; }
@@ -68,7 +71,7 @@ struct Prince {
             
         }
 
-        void init(int16_t x, int16_t y, Direction direction, uint8_t stance, uint8_t health) {
+        void init(int16_t x, int16_t y, Direction direction, uint16_t stance, uint8_t health) {
 
             this->x = x;
             this->y = y;
@@ -136,7 +139,7 @@ struct Prince {
 
             return this->stack->push(static_cast<int16_t>(item), resetFrame);
         }
-
+/*
         bool push(int16_t item1, int16_t item2, bool resetFrame) {
 
             #if defined(DEBUG) && defined(DEBUG_PRINCE_STACK)
@@ -190,7 +193,7 @@ struct Prince {
 
             return this->stack->push(static_cast<int16_t>(item1), static_cast<int16_t>(item2), static_cast<int16_t>(item3), resetFrame);
         }
-
+*/
         void pushSequence(uint8_t fromStance, uint8_t toStance, bool resetFrame) {
 
             pushSequence(fromStance, toStance, STANCE_NONE, resetFrame);
@@ -200,7 +203,7 @@ struct Prince {
         void pushSequence(uint8_t fromStance, uint8_t toStance, uint8_t finalStance, bool resetFrame) {
 
             #if defined(DEBUG) && defined(DEBUG_PRINCE_STACK)
-            uint8_t xOffset = 0;
+            int8_t xOffset = 0;
             Point offset;
             DEBUG_PRINT(F("Prince X: "));
             DEBUG_PRINT(this->x % 12);
@@ -226,8 +229,6 @@ struct Prince {
             DEBUG_PRINT(toStance);
             DEBUG_PRINT(F(" to "));
             DEBUG_PRINT(fromStance);
-            DEBUG_PRINT(F(", count "));
-            DEBUG_PRINT(this->stack->getCount());
             DEBUG_PRINT(" - ");  
             #endif
             
@@ -262,6 +263,9 @@ struct Prince {
                     DEBUG_PRINT(" ");                         
                     offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[(x - 1) * 2]));
                     xOffset = xOffset + offset.x;
+                    // DEBUG_PRINT(F(" ="));
+                    // DEBUG_PRINT(-offset.x);
+                    // DEBUG_PRINT(F("= "));                             
                     #endif
 
                     this->stack->push(static_cast<int16_t>(-x), resetFrame);

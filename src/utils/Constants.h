@@ -4,11 +4,11 @@
 #define DEBUG_PRINT    Serial.print
 #define DEBUG_PRINTLN  Serial.println
 
-#define _DEBUG
+#define DEBUG
 #define DEBUG_ONSCREEN_DETAILS
 
 #define _DEBUG_PRINCE_DETAILS
-#define _DEBUG_PRINCE_STACK
+#define DEBUG_PRINCE_STACK
 #define _DEBUG_PRINT_ACTION
 #define _DEBUG_LEVEL_LOAD_MAP
 #define _DEBUG_PRINCE_RENDERING
@@ -19,295 +19,316 @@
 #define _DEBUG_ACTION_CANCLIMBDOWN
 #define _DEBUG_ACTION_CANCLIMBDOWN_PART2
 #define _DEBUG_ACTION_CANFALL
-#define DEBUG_ACTION_COLLIDEWITHWALL
+#define _DEBUG_ACTION_COLLIDEWITHWALL
 
 //-------------------------------------------------------------------------------------
 
-#define STANCE_NONE                             0
-#define STANCE_RUN_START_1_START                1 
-#define STANCE_RUN_START_2                      2 
-#define STANCE_RUN_START_3                      3 
-#define STANCE_RUN_START_4                      4 
-#define STANCE_RUN_START_5                      5 
-#define STANCE_RUN_START_6_END                  6 
-#define STANCE_RUN_REPEAT_1_START               7 
-#define STANCE_RUN_REPEAT_2                     8 
-#define STANCE_RUN_REPEAT_3                     9 
-#define STANCE_RUN_REPEAT_4                     10 
-#define STANCE_RUN_REPEAT_5_MID                 11 
-#define STANCE_RUN_REPEAT_6                     12 
-#define STANCE_RUN_REPEAT_7                     13 
-#define STANCE_RUN_REPEAT_8_END                 14 
-#define STANCE_UPRIGHT                          15
-#define STANCE_RUNNING_JUMP_1_START             16
-#define STANCE_RUNNING_JUMP_2                   17
-#define STANCE_RUNNING_JUMP_3                   18
-#define STANCE_RUNNING_JUMP_4                   19
-#define STANCE_RUNNING_JUMP_5                   20
-#define STANCE_RUNNING_JUMP_6                   21
-#define STANCE_RUNNING_JUMP_7                   22
-#define STANCE_RUNNING_JUMP_8                   23
-#define STANCE_RUNNING_JUMP_9                   24
-#define STANCE_RUNNING_JUMP_10                  25
-#define STANCE_RUNNING_JUMP_11_END              26
-#define STANCE_STANDING_TURN_1_START            27 
-#define STANCE_STANDING_TURN_2                  28 
-#define STANCE_STANDING_TURN_3                  29 
-#define STANCE_STANDING_TURN_4                  30 
-#define STANCE_STANDING_TURN_5_END              31 
-#define STANCE_RUNNING_TURN_1_START             32   // 15 STANCE_STOPPING_1_START         
-#define STANCE_RUNNING_TURN_2                   33   // 16 STANCE_STANDING_2
-#define STANCE_RUNNING_TURN_3                   34   // 17 STANCE_STANDING_3
-#define STANCE_RUNNING_TURN_4                   35   // 18 STANCE_STANDING_4
-#define STANCE_RUNNING_TURN_5                   36   
-#define STANCE_RUNNING_TURN_6                   37 
-#define STANCE_RUNNING_TURN_7                   38 
-#define STANCE_RUNNING_TURN_8                   39 
-#define STANCE_RUNNING_TURN_9                   40 
-#define STANCE_RUNNING_TURN_10                  41 
-#define STANCE_RUNNING_TURN_11                  42 
-#define STANCE_RUNNING_TURN_12                  43 
-#define STANCE_RUNNING_TURN_13_END              44 
-#define STANCE_STANDING_JUMP_1_START            45
-#define STANCE_STANDING_JUMP_2                  46
-#define STANCE_STANDING_JUMP_3                  47
-#define STANCE_STANDING_JUMP_4                  48
-#define STANCE_STANDING_JUMP_5                  49
-#define STANCE_STANDING_JUMP_6                  50
-#define STANCE_STANDING_JUMP_7                  51
-#define STANCE_STANDING_JUMP_8                  52
-#define STANCE_STANDING_JUMP_9                  53
-#define STANCE_STANDING_JUMP_10                 54
-#define STANCE_STANDING_JUMP_11                 55
-#define STANCE_STANDING_JUMP_12                 56
-#define STANCE_STANDING_JUMP_13                 57
-#define STANCE_STANDING_JUMP_14                 58
-#define STANCE_STANDING_JUMP_15                 59
-#define STANCE_STANDING_JUMP_16                 60
-#define STANCE_STANDING_JUMP_17                 61
-#define STANCE_STANDING_JUMP_18_END             62
-#define STANCE_STEP_FWD_ONE_1_START             63
-#define STANCE_STEP_FWD_ONE_2                   64
-#define STANCE_STEP_FWD_ONE_3                   65
-#define STANCE_STEP_FWD_ONE_4                   66    
-#define STANCE_STEP_FWD_ONE_5                   67    
-#define STANCE_STEP_FWD_ONE_6_END               68    
-#define STANCE_STEP_FWD_TWO_1_START             69
-#define STANCE_STEP_FWD_TWO_2                   70
-#define STANCE_STEP_FWD_TWO_3                   71
-#define STANCE_STEP_FWD_TWO_4                   72    
-#define STANCE_STEP_FWD_TWO_5                   73    
-#define STANCE_STEP_FWD_TWO_6_END               74
-#define STANCE_SINGLE_STEP_1_START              75
-#define STANCE_SINGLE_STEP_2                    76
-#define STANCE_SINGLE_STEP_3                    77
-#define STANCE_SINGLE_STEP_4                    78
-#define STANCE_SINGLE_STEP_5                    79
-#define STANCE_SINGLE_STEP_6                    80
-#define STANCE_SINGLE_STEP_7                    81
-#define STANCE_SINGLE_STEP_8_END                82
+namespace Stance {
+
+constexpr uint16_t STANCE_NONE                             0
+constexpr uint16_t STANCE_RUN_START_1_START                1 
+constexpr uint16_t STANCE_RUN_START_2                      2 
+constexpr uint16_t STANCE_RUN_START_3                      3 
+constexpr uint16_t STANCE_RUN_START_4                      4 
+constexpr uint16_t STANCE_RUN_START_5                      5 
+constexpr uint16_t STANCE_RUN_START_6_END                  6 
+constexpr uint16_t STANCE_RUN_REPEAT_1_START               7 
+constexpr uint16_t STANCE_RUN_REPEAT_2                     8 
+constexpr uint16_t STANCE_RUN_REPEAT_3                     9 
+constexpr uint16_t STANCE_RUN_REPEAT_4                     10 
+constexpr uint16_t STANCE_RUN_REPEAT_5_MID                 11 
+constexpr uint16_t STANCE_RUN_REPEAT_6                     12 
+constexpr uint16_t STANCE_RUN_REPEAT_7                     13 
+constexpr uint16_t STANCE_RUN_REPEAT_8_END                 14 
+constexpr uint16_t STANCE_UPRIGHT                          15
+constexpr uint16_t STANCE_RUNNING_JUMP_1_START             16
+constexpr uint16_t STANCE_RUNNING_JUMP_2                   17
+constexpr uint16_t STANCE_RUNNING_JUMP_3                   18
+constexpr uint16_t STANCE_RUNNING_JUMP_4                   19
+constexpr uint16_t STANCE_RUNNING_JUMP_5                   20
+constexpr uint16_t STANCE_RUNNING_JUMP_6                   21
+constexpr uint16_t STANCE_RUNNING_JUMP_7                   22
+constexpr uint16_t STANCE_RUNNING_JUMP_8                   23
+constexpr uint16_t STANCE_RUNNING_JUMP_9                   24
+constexpr uint16_t STANCE_RUNNING_JUMP_10                  25
+constexpr uint16_t STANCE_RUNNING_JUMP_11_END              26
+constexpr uint16_t STANCE_STANDING_TURN_1_START            27 
+constexpr uint16_t STANCE_STANDING_TURN_2                  28 
+constexpr uint16_t STANCE_STANDING_TURN_3                  29 
+constexpr uint16_t STANCE_STANDING_TURN_4                  30 
+constexpr uint16_t STANCE_STANDING_TURN_5_END              31 
+constexpr uint16_t STANCE_RUNNING_TURN_1_START             32   // 15 STANCE_STOPPING_1_START         
+constexpr uint16_t STANCE_RUNNING_TURN_2                   33   // 16 STANCE_STANDING_2
+constexpr uint16_t STANCE_RUNNING_TURN_3                   34   // 17 STANCE_STANDING_3
+constexpr uint16_t STANCE_RUNNING_TURN_4                   35   // 18 STANCE_STANDING_4
+constexpr uint16_t STANCE_RUNNING_TURN_5                   36   
+constexpr uint16_t STANCE_RUNNING_TURN_6                   37 
+constexpr uint16_t STANCE_RUNNING_TURN_7                   38 
+constexpr uint16_t STANCE_RUNNING_TURN_8                   39 
+constexpr uint16_t STANCE_RUNNING_TURN_9                   40 
+constexpr uint16_t STANCE_RUNNING_TURN_10                  41 
+constexpr uint16_t STANCE_RUNNING_TURN_11                  42 
+constexpr uint16_t STANCE_RUNNING_TURN_12                  43 
+constexpr uint16_t STANCE_RUNNING_TURN_13_END              44 
+constexpr uint16_t STANCE_STANDING_JUMP_1_START            45
+constexpr uint16_t STANCE_STANDING_JUMP_2                  46
+constexpr uint16_t STANCE_STANDING_JUMP_3                  47
+constexpr uint16_t STANCE_STANDING_JUMP_4                  48
+constexpr uint16_t STANCE_STANDING_JUMP_5                  49
+constexpr uint16_t STANCE_STANDING_JUMP_6                  50
+constexpr uint16_t STANCE_STANDING_JUMP_7                  51
+constexpr uint16_t STANCE_STANDING_JUMP_8                  52
+constexpr uint16_t STANCE_STANDING_JUMP_9                  53
+constexpr uint16_t STANCE_STANDING_JUMP_10_LAND_POINT      54
+constexpr uint16_t STANCE_STANDING_JUMP_11                 55
+constexpr uint16_t STANCE_STANDING_JUMP_12                 56
+constexpr uint16_t STANCE_STANDING_JUMP_13                 57
+constexpr uint16_t STANCE_STANDING_JUMP_14                 58
+constexpr uint16_t STANCE_STANDING_JUMP_15                 59
+constexpr uint16_t STANCE_STANDING_JUMP_16                 60
+constexpr uint16_t STANCE_STANDING_JUMP_17                 61
+constexpr uint16_t STANCE_STANDING_JUMP_18_END             62
+constexpr uint16_t STANCE_STEP_FWD_ONE_1_START             63
+constexpr uint16_t STANCE_STEP_FWD_ONE_2                   64
+constexpr uint16_t STANCE_STEP_FWD_ONE_3                   65
+constexpr uint16_t STANCE_STEP_FWD_ONE_4                   66    
+constexpr uint16_t STANCE_STEP_FWD_ONE_5                   67    
+constexpr uint16_t STANCE_STEP_FWD_ONE_6_END               68    
+constexpr uint16_t STANCE_STEP_FWD_TWO_1_START             69
+constexpr uint16_t STANCE_STEP_FWD_TWO_2                   70
+constexpr uint16_t STANCE_STEP_FWD_TWO_3                   71
+constexpr uint16_t STANCE_STEP_FWD_TWO_4                   72    
+constexpr uint16_t STANCE_STEP_FWD_TWO_5                   73    
+constexpr uint16_t STANCE_STEP_FWD_TWO_6_END               74
+constexpr uint16_t STANCE_SINGLE_STEP_1_START              75
+constexpr uint16_t STANCE_SINGLE_STEP_2                    76
+constexpr uint16_t STANCE_SINGLE_STEP_3                    77
+constexpr uint16_t STANCE_SINGLE_STEP_4                    78
+constexpr uint16_t STANCE_SINGLE_STEP_5                    79
+constexpr uint16_t STANCE_SINGLE_STEP_6                    80
+constexpr uint16_t STANCE_SINGLE_STEP_7                    81
+constexpr uint16_t STANCE_SINGLE_STEP_8_END                82
 
 // Not sure about this set      
-#define STANCE_STOPPING_1_START                 83
-#define STANCE_STOPPING_2                       84
-#define STANCE_STOPPING_3                       85
-#define STANCE_STOPPING_4                       86
-#define STANCE_STOPPING_5_END                   87
+constexpr uint16_t STANCE_STOPPING_1_START                 83
+constexpr uint16_t STANCE_STOPPING_2                       84
+constexpr uint16_t STANCE_STOPPING_3                       85
+constexpr uint16_t STANCE_STOPPING_4                       86
+constexpr uint16_t STANCE_STOPPING_5_END                   87
 // Not sure about this set      
 
-#define STANCE_CLIMBING_1_START                 88
-#define STANCE_CLIMBING_2                       89
-#define STANCE_CLIMBING_3                       90
-#define STANCE_CLIMBING_4                       91
-#define STANCE_CLIMBING_5                       92
-#define STANCE_CLIMBING_6                       93
-#define STANCE_CLIMBING_7                       94
-#define STANCE_CLIMBING_8                       95
-#define STANCE_CLIMBING_9                       96
-#define STANCE_CLIMBING_10                      97
-#define STANCE_CLIMBING_11                      98
-#define STANCE_CLIMBING_12                      99
-#define STANCE_CLIMBING_13                      100
-#define STANCE_CLIMBING_14                      101
-#define STANCE_CLIMBING_15_END                  102
-#define STANCE_SMALL_STEP_1_START               103
-#define STANCE_SMALL_STEP_2                     104
-#define STANCE_SMALL_STEP_3                     105
-#define STANCE_SMALL_STEP_4                     106
-#define STANCE_SMALL_STEP_5                     107
-#define STANCE_SMALL_STEP_6_END                 108
-#define STANCE_JUMP_UP_A_1_START                109     /* Dist 2 */
-#define STANCE_JUMP_UP_A_2                      110
-#define STANCE_JUMP_UP_A_3                      111
-#define STANCE_JUMP_UP_A_4                      112
-#define STANCE_JUMP_UP_A_5                      113
-#define STANCE_JUMP_UP_A_6                      114
-#define STANCE_JUMP_UP_A_7                      115
-#define STANCE_JUMP_UP_A_8                      116
-#define STANCE_JUMP_UP_A_9                      117
-#define STANCE_JUMP_UP_A_10                     118
-#define STANCE_JUMP_UP_A_11                     119
-#define STANCE_JUMP_UP_A_12                     120
-#define STANCE_JUMP_UP_A_13                     121
-#define STANCE_JUMP_UP_A_14_END                 122
-#define STANCE_JUMP_UP_DROP_A_1_START           123  // Drop down to Pos 2
-#define STANCE_JUMP_UP_DROP_A_2                 124
-#define STANCE_JUMP_UP_DROP_A_3                 125
-#define STANCE_JUMP_UP_DROP_A_4                 126
-#define STANCE_JUMP_UP_DROP_A_5_END             127
-#define STANCE_STEP_CLIMBING_1_START            128  // Climb up / down from a ledge (second part)
-#define STANCE_STEP_CLIMBING_2                  129
-#define STANCE_STEP_CLIMBING_3                  130
-#define STANCE_STEP_CLIMBING_4                  131
-#define STANCE_STEP_CLIMBING_5                  132
-#define STANCE_STEP_CLIMBING_6                  133
-#define STANCE_STEP_CLIMBING_7                  134
-#define STANCE_STEP_CLIMBING_8                  135
-#define STANCE_STEP_CLIMBING_9                  136
-#define STANCE_STEP_CLIMBING_10                 137
-#define STANCE_STEP_CLIMBING_11                 138
-#define STANCE_STEP_CLIMBING_12                 139
-#define STANCE_STEP_CLIMBING_13                 140
-#define STANCE_STEP_CLIMBING_14                 141
-#define STANCE_STEP_CLIMBING_15_END             142
-#define STANCE_CROUCH_STAND_1_START             143
-#define STANCE_CROUCH_STAND_2                   144
-#define STANCE_CROUCH_STAND_3                   145
-#define STANCE_CROUCH_STAND_4                   146
-#define STANCE_CROUCH_STAND_5                   147
-#define STANCE_CROUCH_STAND_6                   148
-#define STANCE_CROUCH_STAND_7                   149
-#define STANCE_CROUCH_STAND_8                   150
-#define STANCE_CROUCH_STAND_9                   151
-#define STANCE_CROUCH_STAND_10                  152
-#define STANCE_CROUCH_STAND_11                  153
-#define STANCE_CROUCH_STAND_12_END              154
-#define STANCE_FALLING_A_1_START                155     /* While walking */
-#define STANCE_FALLING_A_2                      156
-#define STANCE_FALLING_A_3                      157
-#define STANCE_FALLING_A_4                      158
-#define STANCE_FALLING_A_5                      159
-#define STANCE_FALLING_A_6_END                  160
-#define STANCE_FALLING_B_1_START                161     /* If dst = 0, 4, 8 */
-#define STANCE_FALLING_B_2                      162
-#define STANCE_FALLING_B_3                      163
-#define STANCE_FALLING_B_4                      164
-#define STANCE_FALLING_B_5                      165
-#define STANCE_FALLING_B_6_END                  166
-#define STANCE_FALLING_C_1_START                167     /* If dst = 0, 4, 8 */
-#define STANCE_FALLING_C_2                      168
-#define STANCE_FALLING_C_3                      169
-#define STANCE_FALLING_C_4                      170
-#define STANCE_FALLING_C_5                      171
-#define STANCE_FALLING_C_6_END                  172
-#define STANCE_CROUCH_1_START                   173
-#define STANCE_CROUCH_2                         174
-#define STANCE_CROUCH_3_END                     175
-#define STANCE_CROUCH_HOP_1_START               176
-#define STANCE_CROUCH_HOP_2                     177
-#define STANCE_CROUCH_HOP_3                     178
-#define STANCE_CROUCH_HOP_4                     179
-#define STANCE_CROUCH_HOP_5                     180
-#define STANCE_CROUCH_HOP_6                     181
-#define STANCE_CROUCH_HOP_7_END                 182
-#define STANCE_STEP_CLIMBING_BLOCK_1_START      183
-#define STANCE_STEP_CLIMBING_BLOCK_2            184
-#define STANCE_STEP_CLIMBING_BLOCK_3            185
-#define STANCE_STEP_CLIMBING_BLOCK_4            186
-#define STANCE_STEP_CLIMBING_BLOCK_5            187
-#define STANCE_STEP_CLIMBING_BLOCK_6            188
-#define STANCE_STEP_CLIMBING_BLOCK_7            189
-#define STANCE_STEP_CLIMBING_BLOCK_8            190
-#define STANCE_STEP_CLIMBING_BLOCK_9_END        191
-#define STANCE_JUMP_UP_B_1_START                192
-#define STANCE_JUMP_UP_B_2                      193
-#define STANCE_JUMP_UP_B_3                      194
-#define STANCE_JUMP_UP_B_4                      195
-#define STANCE_JUMP_UP_B_5                      196
-#define STANCE_JUMP_UP_B_6                      197
-#define STANCE_JUMP_UP_B_7                      198
-#define STANCE_JUMP_UP_B_8                      199
-#define STANCE_JUMP_UP_B_9                      200
-#define STANCE_JUMP_UP_B_10                     201
-#define STANCE_JUMP_UP_B_11                     202
-#define STANCE_JUMP_UP_B_12                     203
-#define STANCE_JUMP_UP_B_13                     204
-#define STANCE_JUMP_UP_B_14_END                 205
-#define STANCE_JUMP_UP_DROP_B_1_START           206  // Drop down to Pos 10
-#define STANCE_JUMP_UP_DROP_B_2                 207
-#define STANCE_JUMP_UP_DROP_B_3                 208
-#define STANCE_JUMP_UP_DROP_B_4                 209
-#define STANCE_JUMP_UP_DROP_B_5_END             210
-#define STANCE_DRINK_TONIC_1_START              211 
-#define STANCE_DRINK_TONIC_2                    212
-#define STANCE_DRINK_TONIC_3                    213
-#define STANCE_DRINK_TONIC_4                    214
-#define STANCE_DRINK_TONIC_5                    215
-#define STANCE_DRINK_TONIC_6                    216
-#define STANCE_DRINK_TONIC_7                    217
-#define STANCE_DRINK_TONIC_8                    218
-#define STANCE_DRINK_TONIC_9                    219
-#define STANCE_DRINK_TONIC_10                   220
-#define STANCE_DRINK_TONIC_11                   221
-#define STANCE_DRINK_TONIC_12                   222
-#define STANCE_DRINK_TONIC_13                   223
-#define STANCE_DRINK_TONIC_14                   224
-#define STANCE_DRINK_TONIC_15_END               225
-#define STANCE_JUMP_UP_DROP_C_1_START           226  // Drop down to Pos 2 (two levels)
-#define STANCE_JUMP_UP_DROP_C_2                 227
-#define STANCE_JUMP_UP_DROP_C_3                 228
-#define STANCE_JUMP_UP_DROP_C_4                 229
-#define STANCE_JUMP_UP_DROP_C_5_END             230
-#define STANCE_FALLING_D_1_START                231  // Climbing down, falling two levels
-#define STANCE_FALLING_D_2_END                  232
-#define STANCE_FALLING_DEAD_1_START             233  // Climbing down, fall to death
-#define STANCE_FALLING_DEAD_2                   234
-#define STANCE_FALLING_DEAD_3_END               235
-#define STANCE_RUN_REPEAT_8_END_TURN            236  // Single entry to allow x correction
+constexpr uint16_t  STANCE_CLIMBING_1_START                 88
+constexpr uint16_t  STANCE_CLIMBING_2                       89
+constexpr uint16_t  STANCE_CLIMBING_3                       90
+constexpr uint16_t  STANCE_CLIMBING_4                       91
+constexpr uint16_t  STANCE_CLIMBING_5                       92
+constexpr uint16_t  STANCE_CLIMBING_6                       93
+constexpr uint16_t  STANCE_CLIMBING_7                       94
+constexpr uint16_t  STANCE_CLIMBING_8                       95
+constexpr uint16_t  STANCE_CLIMBING_9                       96
+constexpr uint16_t  STANCE_CLIMBING_10                      97
+constexpr uint16_t  STANCE_CLIMBING_11                      98
+constexpr uint16_t  STANCE_CLIMBING_12                      99
+constexpr uint16_t  STANCE_CLIMBING_13                      100
+constexpr uint16_t  STANCE_CLIMBING_14                      101
+constexpr uint16_t  STANCE_CLIMBING_15_END                  102
+constexpr uint16_t  STANCE_SMALL_STEP_1_START               103
+constexpr uint16_t  STANCE_SMALL_STEP_2                     104
+constexpr uint16_t  STANCE_SMALL_STEP_3                     105
+constexpr uint16_t  STANCE_SMALL_STEP_4                     106
+constexpr uint16_t  STANCE_SMALL_STEP_5                     107
+constexpr uint16_t  STANCE_SMALL_STEP_6_END                 108
+constexpr uint16_t  STANCE_JUMP_UP_A_1_START                109     /* Dist 2 */
+constexpr uint16_t  STANCE_JUMP_UP_A_2                      110
+constexpr uint16_t  STANCE_JUMP_UP_A_3                      111
+constexpr uint16_t  STANCE_JUMP_UP_A_4                      112
+constexpr uint16_t  STANCE_JUMP_UP_A_5                      113
+constexpr uint16_t  STANCE_JUMP_UP_A_6                      114
+constexpr uint16_t  STANCE_JUMP_UP_A_7                      115
+constexpr uint16_t  STANCE_JUMP_UP_A_8                      116
+constexpr uint16_t  STANCE_JUMP_UP_A_9                      117
+constexpr uint16_t  STANCE_JUMP_UP_A_10                     118
+constexpr uint16_t  STANCE_JUMP_UP_A_11                     119
+constexpr uint16_t  STANCE_JUMP_UP_A_12                     120
+constexpr uint16_t  STANCE_JUMP_UP_A_13                     121
+constexpr uint16_t  STANCE_JUMP_UP_A_14_END                 122
+constexpr uint16_t  STANCE_JUMP_UP_DROP_A_1_START           123  // Drop down to Pos 2
+constexpr uint16_t  STANCE_JUMP_UP_DROP_A_2                 124
+constexpr uint16_t  STANCE_JUMP_UP_DROP_A_3                 125
+constexpr uint16_t  STANCE_JUMP_UP_DROP_A_4                 126
+constexpr uint16_t  STANCE_JUMP_UP_DROP_A_5_END             127
+constexpr uint16_t  STANCE_STEP_CLIMBING_1_START            128  // Climb up / down from a ledge (second part)
+constexpr uint16_t  STANCE_STEP_CLIMBING_2                  129
+constexpr uint16_t  STANCE_STEP_CLIMBING_3                  130
+constexpr uint16_t  STANCE_STEP_CLIMBING_4                  131
+constexpr uint16_t  STANCE_STEP_CLIMBING_5                  132
+constexpr uint16_t  STANCE_STEP_CLIMBING_6                  133
+constexpr uint16_t  STANCE_STEP_CLIMBING_7                  134
+constexpr uint16_t  STANCE_STEP_CLIMBING_8                  135
+constexpr uint16_t  STANCE_STEP_CLIMBING_9                  136
+constexpr uint16_t  STANCE_STEP_CLIMBING_10                 137
+constexpr uint16_t  STANCE_STEP_CLIMBING_11                 138
+constexpr uint16_t  STANCE_STEP_CLIMBING_12                 139
+constexpr uint16_t  STANCE_STEP_CLIMBING_13                 140
+constexpr uint16_t  STANCE_STEP_CLIMBING_14                 141
+constexpr uint16_t  STANCE_STEP_CLIMBING_15_END             142
+constexpr uint16_t  STANCE_CROUCH_STAND_1_START             143
+constexpr uint16_t  STANCE_CROUCH_STAND_2                   144
+constexpr uint16_t  STANCE_CROUCH_STAND_3                   145
+constexpr uint16_t  STANCE_CROUCH_STAND_4                   146
+constexpr uint16_t  STANCE_CROUCH_STAND_5                   147
+constexpr uint16_t  STANCE_CROUCH_STAND_6                   148
+constexpr uint16_t  STANCE_CROUCH_STAND_7                   149
+constexpr uint16_t  STANCE_CROUCH_STAND_8                   150
+constexpr uint16_t  STANCE_CROUCH_STAND_9                   151
+constexpr uint16_t  STANCE_CROUCH_STAND_10                  152
+constexpr uint16_t  STANCE_CROUCH_STAND_11                  153
+constexpr uint16_t  STANCE_CROUCH_STAND_12_END              154
+constexpr uint16_t  STANCE_FALLING_A_1_START                155     /* While walking */
+constexpr uint16_t  STANCE_FALLING_A_2                      156
+constexpr uint16_t  STANCE_FALLING_A_3                      157
+constexpr uint16_t  STANCE_FALLING_A_4                      158
+constexpr uint16_t  STANCE_FALLING_A_5_CHECK_CANFALL        159
+constexpr uint16_t  STANCE_FALLING_A_6_END                  160
+constexpr uint16_t  STANCE_FALLING_B_1_START                161     /* If dst = 0, 4, 8 */
+constexpr uint16_t  STANCE_FALLING_B_2                      162
+constexpr uint16_t  STANCE_FALLING_B_3                      163
+constexpr uint16_t  STANCE_FALLING_B_4                      164
+constexpr uint16_t  STANCE_FALLING_B_5_CHECK_CANFALL        165
+constexpr uint16_t  STANCE_FALLING_B_6_END                  166
+constexpr uint16_t  STANCE_FALLING_C_1_START                167     /* If dst = 0, 4, 8 */
+constexpr uint16_t  STANCE_FALLING_C_2                      168
+constexpr uint16_t  STANCE_FALLING_C_3                      169
+constexpr uint16_t  STANCE_FALLING_C_4                      170
+constexpr uint16_t  STANCE_FALLING_C_5_CHECK_CANFALL        171
+constexpr uint16_t  STANCE_FALLING_C_6_END                  172
+constexpr uint16_t  STANCE_CROUCH_1_START                   173
+constexpr uint16_t  STANCE_CROUCH_2                         174
+constexpr uint16_t  STANCE_CROUCH_3_END                     175
+constexpr uint16_t  STANCE_CROUCH_HOP_1_START               176
+constexpr uint16_t  STANCE_CROUCH_HOP_2                     177
+constexpr uint16_t  STANCE_CROUCH_HOP_3                     178
+constexpr uint16_t  STANCE_CROUCH_HOP_4                     179
+constexpr uint16_t  STANCE_CROUCH_HOP_5                     180
+constexpr uint16_t  STANCE_CROUCH_HOP_6                     181
+constexpr uint16_t  STANCE_CROUCH_HOP_7_END                 182
+constexpr uint16_t  STANCE_STEP_CLIMBING_BLOCK_1_START      183
+constexpr uint16_t  STANCE_STEP_CLIMBING_BLOCK_2            184
+constexpr uint16_t  STANCE_STEP_CLIMBING_BLOCK_3            185
+constexpr uint16_t  STANCE_STEP_CLIMBING_BLOCK_4            186
+constexpr uint16_t  STANCE_STEP_CLIMBING_BLOCK_5            187
+constexpr uint16_t  STANCE_STEP_CLIMBING_BLOCK_6            188
+constexpr uint16_t  STANCE_STEP_CLIMBING_BLOCK_7            189
+constexpr uint16_t  STANCE_STEP_CLIMBING_BLOCK_8            190
+constexpr uint16_t  STANCE_STEP_CLIMBING_BLOCK_9_END        191
+constexpr uint16_t  STANCE_JUMP_UP_B_1_START                192
+constexpr uint16_t  STANCE_JUMP_UP_B_2                      193
+constexpr uint16_t  STANCE_JUMP_UP_B_3                      194
+constexpr uint16_t  STANCE_JUMP_UP_B_4                      195
+constexpr uint16_t  STANCE_JUMP_UP_B_5                      196
+constexpr uint16_t  STANCE_JUMP_UP_B_6                      197
+constexpr uint16_t  STANCE_JUMP_UP_B_7                      198
+constexpr uint16_t  STANCE_JUMP_UP_B_8                      199
+constexpr uint16_t  STANCE_JUMP_UP_B_9                      200
+constexpr uint16_t  STANCE_JUMP_UP_B_10                     201
+constexpr uint16_t  STANCE_JUMP_UP_B_11                     202
+constexpr uint16_t  STANCE_JUMP_UP_B_12                     203
+constexpr uint16_t  STANCE_JUMP_UP_B_13                     204
+constexpr uint16_t  STANCE_JUMP_UP_B_14_END                 205
+constexpr uint16_t  STANCE_JUMP_UP_DROP_B_1_START           206  // Drop down to Pos 10
+constexpr uint16_t  STANCE_JUMP_UP_DROP_B_2                 207
+constexpr uint16_t  STANCE_JUMP_UP_DROP_B_3                 208
+constexpr uint16_t  STANCE_JUMP_UP_DROP_B_4                 209
+constexpr uint16_t  STANCE_JUMP_UP_DROP_B_5_END             210
+constexpr uint16_t  STANCE_DRINK_TONIC_1_START              211 
+constexpr uint16_t  STANCE_DRINK_TONIC_2                    212
+constexpr uint16_t  STANCE_DRINK_TONIC_3                    213
+constexpr uint16_t  STANCE_DRINK_TONIC_4                    214
+constexpr uint16_t  STANCE_DRINK_TONIC_5                    215
+constexpr uint16_t  STANCE_DRINK_TONIC_6                    216
+constexpr uint16_t  STANCE_DRINK_TONIC_7                    217
+constexpr uint16_t  STANCE_DRINK_TONIC_8                    218
+constexpr uint16_t  STANCE_DRINK_TONIC_9                    219
+constexpr uint16_t  STANCE_DRINK_TONIC_10                   220
+constexpr uint16_t  STANCE_DRINK_TONIC_11                   221
+constexpr uint16_t  STANCE_DRINK_TONIC_12                   222
+constexpr uint16_t  STANCE_DRINK_TONIC_13                   223
+constexpr uint16_t  STANCE_DRINK_TONIC_14                   224
+constexpr uint16_t  STANCE_DRINK_TONIC_15_END               225
+constexpr uint16_t  STANCE_JUMP_UP_DROP_C_1_START           226  // Drop down to Pos 2 (two levels)
+constexpr uint16_t  STANCE_JUMP_UP_DROP_C_2                 227
+constexpr uint16_t  STANCE_JUMP_UP_DROP_C_3                 228
+constexpr uint16_t  STANCE_JUMP_UP_DROP_C_4                 229
+constexpr uint16_t  STANCE_JUMP_UP_DROP_C_5_END             230
+constexpr uint16_t  STANCE_FALLING_D_1_START                231  // Climbing down, falling two levels
+constexpr uint16_t  STANCE_FALLING_D_2_END                  232
+constexpr uint16_t  STANCE_FALLING_DEAD_1_START             233  // Climbing down, fall to death
+constexpr uint16_t  STANCE_FALLING_DEAD_2                   234
+constexpr uint16_t  STANCE_FALLING_DEAD_3_END               235
+constexpr uint16_t  STANCE_RUN_REPEAT_8_END_TURN            236  // Single entry to allow x correction
+constexpr uint16_t  STANCE_FALLING_DOWN_1_START             237
+constexpr uint16_t  STANCE_FALLING_DOWN_2                   238
+constexpr uint16_t  STANCE_FALLING_DOWN_3                   239
+constexpr uint16_t  STANCE_FALLING_DOWN_4                   240
+constexpr uint16_t  STANCE_FALLING_DOWN_5_END               241
+constexpr uint16_t  STANCE_FALLING_E_1_START                242  /* Standing Jump (1 pixel more than A) */
+constexpr uint16_t  STANCE_FALLING_E_2                      243
+constexpr uint16_t  STANCE_FALLING_E_3                      244
+constexpr uint16_t  STANCE_FALLING_E_4                      245
+constexpr uint16_t  STANCE_FALLING_E_5_CHECK_CANFALL        246
+constexpr uint16_t  STANCE_FALLING_E_6_END                  247
+constexpr uint16_t  STANCE_FALLING_F_1_START                248  /* Standing Jump (1 pixel more than A) */
+constexpr uint16_t  STANCE_FALLING_F_2                      249
+constexpr uint16_t  STANCE_FALLING_F_3                      250
+constexpr uint16_t  STANCE_FALLING_F_4                      251
+constexpr uint16_t  STANCE_FALLING_F_5_CHECK_CANFALL        252
+constexpr uint16_t  STANCE_FALLING_F_6_END                  253
 
-#define STANCE_JUMP_DOWN_1_START        240
-#define STANCE_JUMP_DOWN_2              240
-#define STANCE_JUMP_DOWN_3              240
-#define STANCE_SQUAT_1_START            240
-#define STANCE_SQUAT_2                  240
-#define STANCE_SQUAT_3_LOW_POINT        240
-#define STANCE_SQUAT_4                  240
-#define STANCE_SQUAT_5                  240
-#define STANCE_SQUAT_6                  240
-#define STANCE_SQUAT_7                  240
-#define STANCE_SQUAT_8                  240
-#define STANCE_SQUAT_9                  240
-#define STANCE_SQUAT_10_END             240
-#define STANCE_DYING_1_START            240
-#define STANCE_DYING_2                  240
-#define STANCE_DYING_3                  240
-#define STANCE_DYING_4                  240
-#define STANCE_DYING_5                  240
-#define STANCE_DYING_6_END              240
-#define STANCE_SQUAT_MOVE_1_START       240 // 55 STANCE_SQUAT_4
-#define STANCE_SQUAT_MOVE_2             240 // 56 STANCE_SQUAT_5
-#define STANCE_SQUAT_MOVE_3_END         240 // 57 STANCE_SQUAT_4
-#define STANCE_SWINGING_1_START         240
-#define STANCE_SWINGING_2               240
-#define STANCE_SWINGING_3               240
-#define STANCE_SWINGING_4               240
-#define STANCE_SWINGING_5               240
-#define STANCE_SWINGING_6               240
-#define STANCE_SWINGING_7               240
-#define STANCE_SWINGING_8               240
-#define STANCE_SWINGING_9               240
-#define STANCE_SWINGING_10              240
-#define STANCE_SWINGING_11              240
-#define STANCE_SWINGING_12_END          240
+constexpr uint16_t  STANCE_JUMP_DOWN_1_START        1250
+constexpr uint16_t  STANCE_JUMP_DOWN_2              1250
+constexpr uint16_t  STANCE_JUMP_DOWN_3              1250
+constexpr uint16_t  STANCE_SQUAT_1_START            1250
+constexpr uint16_t  STANCE_SQUAT_2                  1250
+constexpr uint16_t  STANCE_SQUAT_3_LOW_POINT        1250
+constexpr uint16_t  STANCE_SQUAT_4                  1250
+constexpr uint16_t  STANCE_SQUAT_5                  1250
+constexpr uint16_t  STANCE_SQUAT_6                  1250
+constexpr uint16_t  STANCE_SQUAT_7                  1250
+constexpr uint16_t  STANCE_SQUAT_8                  1250
+constexpr uint16_t  STANCE_SQUAT_9                  1250
+constexpr uint16_t  STANCE_SQUAT_10_END             1250
+constexpr uint16_t  STANCE_DYING_1_START            1250
+constexpr uint16_t  STANCE_DYING_2                  1250
+constexpr uint16_t  STANCE_DYING_3                  1250
+constexpr uint16_t  STANCE_DYING_4                  1250
+constexpr uint16_t  STANCE_DYING_5                  1250
+constexpr uint16_t  STANCE_DYING_6_END              1250
+constexpr uint16_t  STANCE_SQUAT_MOVE_1_START       1250 // 55 STANCE_SQUAT_4
+constexpr uint16_t  STANCE_SQUAT_MOVE_2             1250 // 56 STANCE_SQUAT_5
+constexpr uint16_t  STANCE_SQUAT_MOVE_3_END         1250 // 57 STANCE_SQUAT_4
+constexpr uint16_t  STANCE_SWINGING_1_START         1250
+constexpr uint16_t  STANCE_SWINGING_2               1250
+constexpr uint16_t  STANCE_SWINGING_3               1250
+constexpr uint16_t  STANCE_SWINGING_4               1250
+constexpr uint16_t  STANCE_SWINGING_5               1250
+constexpr uint16_t  STANCE_SWINGING_6               1250
+constexpr uint16_t  STANCE_SWINGING_7               1250
+constexpr uint16_t  STANCE_SWINGING_8               1250
+constexpr uint16_t  STANCE_SWINGING_9               1250
+constexpr uint16_t  STANCE_SWINGING_10              1250
+constexpr uint16_t  STANCE_SWINGING_11              1250
+constexpr uint16_t  STANCE_SWINGING_12_END          1250
 
-#define STANCE_SQUAT_ROTATE_01_START    240 //54
-#define STANCE_SQUAT_ROTATE_02          240 //54
-#define STANCE_SQUAT_ROTATE_03          240 //54
-#define STANCE_SQUAT_ROTATE_04          240 //54
-#define STANCE_SQUAT_ROTATE_05_END      240 //54
+constexpr uint16_t  STANCE_SQUAT_ROTATE_01_START    1250 //54
+constexpr uint16_t  STANCE_SQUAT_ROTATE_02          1250 //54
+constexpr uint16_t  STANCE_SQUAT_ROTATE_03          1250 //54
+constexpr uint16_t  STANCE_SQUAT_ROTATE_04          1250 //54
+constexpr uint16_t  STANCE_SQUAT_ROTATE_05_END      1250 //54
 
-#define STANCE_UPRIGHT_END_CLIMB        253
-#define STANCE_UPRIGHT_TURN             255
+constexpr uint16_t  STANCE_UPRIGHT_END_CLIMB        1253
+constexpr uint16_t  STANCE_UPRIGHT_TURN             1255
+};
+
 
 namespace Constants {
 
@@ -347,8 +368,8 @@ namespace Constants {
               0,  -3,   0,  -2,   0,  -2,   0,  -3,   0,  -3,   0,  -1,   1,  -3,   1,  -2,   0,  -1,   1,  -1,    //  131 - 140
               1,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  141 - 150
 
-              0,   0,   0,   0,   0,   0,   0,   0,   3,   6,   2,   5,   2,   5,   0,   5,   0,   5,   0,   5,    //  151 - 160
-              5,   6,   5,   5,   4,   5,   0,   5,   0,   5,   0,   5,   5,   6,   4,   3,   4,   5,   0,   5,    //  161 - 170
+              0,   0,   0,   0,   0,   0,   0,   0,   3,   6,   2,   5,   2,   5,   1,   5,   0,   5,   0,   5,    //  151 - 160
+              5,   6,   5,   5,   4,   5,   0,   5,   0,   5,   0,   5,   5,   6,   4,   3,   4,   5,   1,   5,    //  161 - 170
               0,   5,   0,   5,   0,   0,   0,   0,   0,   0,   0,   0,   1,   0,   1,   0,   1,   0,   1,   0,    //  171 - 180
 
               0,   0,   0,   0,   0,  -4,   0,  -4,   0,  -2,   0,  -3,   0,   0,   0,   3,   0,   2,   0,   4,    //  181 - 190
@@ -357,10 +378,17 @@ namespace Constants {
 
               0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  211 - 220
               0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   6,   0,   6,   0,   6,   0,   6,   0,   7,    //  221 - 230
-              0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   4,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  231 - 240
+              0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   4,   0,   0,   6,   0,   6,   0,   6,   0,   6,    //  231 - 240
+
+              0,   7,   4,   6,   2,   5,   2,   5,   1,   5,   0,   5,   0,   5,   0,   0,   0,   0,   0,   0,    //  241 - 250
+              0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  251 - 260
+              0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  261 - 270
 
     };
 
+//a     3,   6,   2,   5,   2,   5,   1,   5,   0,   5,   0,   5,        8
+//b     5,   6,   5,   5,   4,   5,   0,   5,   0,   5,   0,   5,       14
+//c     5,   6,   4,   3,   4,   5,   1,   5,   0,   5,   0,   5,       14
 
 constexpr int8_t Prince_ImageDetails[] PROGMEM = {
 /* 001 */  3, 2, -4,

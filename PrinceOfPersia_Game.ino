@@ -859,14 +859,39 @@ void game() {
                     break;
 
                 case STANCE_SMALL_STEP_5:
-                case STANCE_SINGLE_STEP_5:
+                // case STANCE_SINGLE_STEP_5:
                 case STANCE_RUNNING_JUMP_4:
 
                     if (level.canFall(prince)) {
 
                         prince.clear();
-                        prince.pushSequence(STANCE_CROUCH_STAND_1_START, STANCE_CROUCH_STAND_12_END, STANCE_UPRIGHT, true);
-                        prince.pushSequence(STANCE_FALLING_A_1_START, STANCE_FALLING_A_6_END, true);
+                        prince.setFalling(0);
+                        // prince.pushSequence(STANCE_CROUCH_STAND_1_START, STANCE_CROUCH_STAND_12_END, STANCE_UPRIGHT, true);
+                        prince.pushSequence(STANCE_FALLING_A_1_START, STANCE_FALLING_A_5_CHECK_CANFALL, true);
+                    }
+
+                    break;
+
+                case STANCE_SINGLE_STEP_5:
+
+                    if (level.canFall(prince)) {
+
+                        prince.clear();
+                        prince.setFalling(0);
+                        // prince.pushSequence(STANCE_CROUCH_STAND_1_START, STANCE_CROUCH_STAND_12_END, STANCE_UPRIGHT, true);
+                        prince.pushSequence(STANCE_FALLING_E_1_START, STANCE_FALLING_E_5_CHECK_CANFALL, true);
+                    }
+
+                    break;
+
+                case STANCE_STANDING_JUMP_10_LAND_POINT:
+
+                    if (level.canFall(prince)) {
+
+                        prince.clear();
+                        prince.setFalling(0);
+                        // prince.pushSequence(STANCE_CROUCH_STAND_1_START, STANCE_CROUCH_STAND_12_END, STANCE_UPRIGHT, true);
+                        prince.pushSequence(STANCE_FALLING_E_1_START, STANCE_FALLING_E_5_CHECK_CANFALL, true);
                     }
 
                     break;
@@ -876,7 +901,7 @@ void game() {
                     
                     if (level.canFall(prince)) {
 
-                        prince.clear();
+                        //prince.clear();
 
                         int8_t dist = abs(level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX()));
 
@@ -886,15 +911,15 @@ void game() {
                             case 4:
                             case 8:
                             case 12:
-                                prince.pushSequence(STANCE_CROUCH_STAND_1_START, STANCE_CROUCH_STAND_12_END, STANCE_UPRIGHT, true);
-                                prince.pushSequence(STANCE_FALLING_B_1_START, STANCE_FALLING_B_6_END, true);
+                                // prince.pushSequence(STANCE_CROUCH_STAND_1_START, STANCE_CROUCH_STAND_12_END, STANCE_UPRIGHT, true);
+                                prince.pushSequence(STANCE_FALLING_B_1_START, STANCE_FALLING_B_5_CHECK_CANFALL, true);
                                 break;
 
                             case 2:
                             case 6:
                             case 10:
-                                prince.pushSequence(STANCE_CROUCH_STAND_1_START, STANCE_CROUCH_STAND_12_END, STANCE_UPRIGHT, true);
-                                prince.pushSequence(STANCE_FALLING_C_1_START, STANCE_FALLING_C_6_END, true);
+                                // prince.pushSequence(STANCE_CROUCH_STAND_1_START, STANCE_CROUCH_STAND_12_END, STANCE_UPRIGHT, true);
+                                prince.pushSequence(STANCE_FALLING_C_1_START, STANCE_FALLING_C_5_CHECK_CANFALL, true);
                                 break;
 
                         }
@@ -941,6 +966,79 @@ void game() {
                             default:    // Dead!
                                 prince.pushSequence(STANCE_FALLING_DEAD_1_START, STANCE_FALLING_DEAD_3_END, true);
                                 prince.setHealth(0);
+                                break;
+
+                        }
+                        
+                    }
+
+                    break;
+
+                case STANCE_FALLING_A_5_CHECK_CANFALL:
+                case STANCE_FALLING_B_5_CHECK_CANFALL:
+                case STANCE_FALLING_C_5_CHECK_CANFALL:
+                case STANCE_FALLING_E_5_CHECK_CANFALL:
+                case STANCE_FALLING_DOWN_5_END:
+
+                    if (level.canFall(prince)) { // Fall some more
+
+                        prince.incFalling();
+                        prince.setPrevStance(prince.getStance());
+                        prince.pushSequence(STANCE_FALLING_DOWN_1_START, STANCE_FALLING_DOWN_5_END, true);
+
+                    }
+                    else {
+
+                        prince.pushSequence(STANCE_CROUCH_STAND_1_START, STANCE_CROUCH_STAND_12_END, STANCE_UPRIGHT, true);
+
+                        switch (prince.getStance()) {
+
+                            case STANCE_FALLING_A_5_CHECK_CANFALL:    
+                                prince.push(STANCE_FALLING_A_6_END, true);
+                                // prince.decHealth(1);
+                                break;
+
+                            case STANCE_FALLING_B_5_CHECK_CANFALL:
+                                prince.push(STANCE_FALLING_B_6_END, true);
+                                break;
+
+                            case STANCE_FALLING_C_5_CHECK_CANFALL:
+                                prince.push(STANCE_FALLING_C_6_END, true);
+                                break;
+
+                            case STANCE_FALLING_E_5_CHECK_CANFALL:
+                                prince.push(STANCE_FALLING_E_6_END, true);
+                                break;
+
+                            case STANCE_FALLING_DOWN_5_END:
+
+                                switch (prince.getPrevStance()) {
+
+                                    case STANCE_FALLING_A_5_CHECK_CANFALL:     
+                                        prince.push(STANCE_FALLING_A_6_END, true);
+                                        // prince.decHealth(1);
+                                        break;
+
+                                    case STANCE_FALLING_B_5_CHECK_CANFALL:
+                                        prince.push(STANCE_FALLING_B_6_END, true);
+                                        break;
+
+                                    case STANCE_FALLING_C_5_CHECK_CANFALL:
+                                        prince.push(STANCE_FALLING_C_6_END, true);
+                                        break;
+
+                                    case STANCE_FALLING_E_5_CHECK_CANFALL:
+                                        prince.push(STANCE_FALLING_E_6_END, true);
+                                        break;
+
+                                    default:  
+                                        break;
+
+                                }
+
+                                break;
+
+                            default:  
                                 break;
 
                         }
