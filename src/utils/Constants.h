@@ -262,6 +262,7 @@
 #define STANCE_FALLING_DEAD_1_START             233  // Climbing down, fall to death
 #define STANCE_FALLING_DEAD_2                   234
 #define STANCE_FALLING_DEAD_3_END               235
+#define STANCE_RUN_REPEAT_8_END_TURN            236  // Single entry to allow x correction
 
 #define STANCE_JUMP_DOWN_1_START        240
 #define STANCE_JUMP_DOWN_2              240
@@ -305,7 +306,6 @@
 #define STANCE_SQUAT_ROTATE_05_END      240 //54
 
 #define STANCE_UPRIGHT_END_CLIMB        253
-#define STANCE_RUN_REPEAT_8_END_TURN    254
 #define STANCE_UPRIGHT_TURN             255
 
 namespace Constants {
@@ -328,7 +328,7 @@ namespace Constants {
    //          001,      002,      003,      004,      005,      006,      007,      008,      009,      010,
    //         X    Y    X    Y    X    Y    X    Y    X    Y    X    Y    X    Y    X    Y    X    Y    X    Y  
    //         ------    ------    ------    ------    ------    ------    ------    ------    ------    ------
-              0,   0,   1,   0,   1,   0,   1,   0,   2,   0,   3,   0,   3,   0,   3,   0,   3,   0,   3,   0,    //  001 - 010
+              0,   0,   1,   0,   1,   0,   1,   0,   2,   0,   2,   0,   3,   0,   3,   0,   3,   0,   3,   0,    //  001 - 010
               3,   0,   3,   0,   3,   0,   3,   0,   0,   0,   2,   0,   3,   0,   4,   0,   4,   0,   5,   0,    //  011 - 020
               6,   0,   6,   0,   6,   0,   4,   0,   3,   0,   2,   0,   0,   0,  -1,   0,  -1,   0,   2,   0,    //  021 - 030
               
@@ -358,7 +358,7 @@ namespace Constants {
 
               0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  211 - 220
               0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   6,   0,   6,   0,   6,   0,   6,   0,   7,    //  221 - 230
-              0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  231 - 240
+              0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   4,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  231 - 240
 
     };
 

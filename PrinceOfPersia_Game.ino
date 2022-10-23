@@ -492,7 +492,7 @@ void game() {
                     if ((pressed & RIGHT_BUTTON) && (pressed & A_BUTTON)) {
 
                         if (true) {
-Serial.println("aaaa");
+
                             prince.pushSequence(STANCE_RUNNING_JUMP_1_START, STANCE_RUNNING_JUMP_11_END, STANCE_RUN_START_6_END, true);
 
                         }
@@ -549,7 +549,6 @@ Serial.println("aaaa");
                             #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
                             DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jumpp"));
                             #endif
-Serial.println("bbb");
 
                             prince.pushSequence(STANCE_RUNNING_JUMP_1_START, STANCE_RUNNING_JUMP_11_END, STANCE_RUN_START_6_END, true);
 
@@ -604,13 +603,13 @@ Serial.println("bbb");
 
             case STANCE_RUN_START_6_END:
             case STANCE_RUN_REPEAT_8_END:
+            case STANCE_RUN_REPEAT_8_END_TURN:
 
                 if (prince.getDirection() == Direction::Right) {
                                     
                     if ((pressed & RIGHT_BUTTON) && (pressed & A_BUTTON)) {
 
                         if (true) {
-Serial.println("cccc");
 
                             prince.pushSequence(STANCE_RUNNING_JUMP_1_START, STANCE_RUNNING_JUMP_11_END, STANCE_RUN_REPEAT_4, true);
 
@@ -666,7 +665,6 @@ Serial.println("cccc");
                     if ((pressed & LEFT_BUTTON) && (pressed & A_BUTTON)) {
                         // if (this->world.canMoveForward(Action::RunJump)) {
                         if (true) {
-Serial.println("dddd");
 
                             prince.pushSequence(STANCE_RUNNING_JUMP_1_START, STANCE_RUNNING_JUMP_11_END, STANCE_RUN_REPEAT_4, true);
 
@@ -856,8 +854,8 @@ Serial.println("dddd");
                     break;
 
                 case STANCE_RUN_REPEAT_8_END_TURN:
-                    newStance = (newStance < 0 ? -1 : 1) * STANCE_RUN_REPEAT_8_END;
-                    prince.setStance(STANCE_RUN_REPEAT_8_END);
+                    // newStance = (newStance < 0 ? -1 : 1) * STANCE_RUN_REPEAT_8_END;
+                    // prince.setStance(STANCE_RUN_REPEAT_8_END);
                     prince.changeDirection();
                     break;
 

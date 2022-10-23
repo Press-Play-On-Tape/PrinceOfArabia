@@ -328,12 +328,10 @@ struct Level {
                         // }
 
 //                         if (tile == TILE_FLOOR_RH_END_3 && isCollapsingFloor(this->xLoc + x + 1, this->yLoc + y)) {
-// Serial.println("ddfgdf");
 //                             return TILE_COLUMN_REAR_2;
 
 //                         }
 //                         if (tile == TILE_COLUMN_REAR_2 && isCollapsingFloor(this->xLoc + x + 1, this->yLoc + y)) {
-// Serial.println("ddfgdf");
 //                             return TILE_FLOOR_RH_END_3;
 
 //                         }
