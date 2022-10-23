@@ -1006,7 +1006,8 @@ struct Level {
                                 printTileInfo(bgTile2, fgTile2);
                                 #endif
                                 
-                                return (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2));
+//                                return (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2));
+                                return (!this->isWallTile(bgTile2, fgTile2));
 
                             case Action::StandingJump:
 
@@ -1126,7 +1127,8 @@ struct Level {
                                 printTileInfo(bgTile2, fgTile2);
                                 #endif
                                 
-                                return (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2));
+                                //return (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2));
+                                return (!this->isWallTile(bgTile2, fgTile2));
 
                             case Action::StandingJump:
 
@@ -1971,34 +1973,34 @@ struct Level {
             DEBUG_PRINTLN(reach);
             #endif
 
-            int8_t tileXIdx = this->coordToTileIndexX(direction, prince.getPosition().x) - this->getXLocation() + (direction == Direction::Right ? 1 : 0);
+            int8_t tileXIdx = this->coordToTileIndexX(direction, prince.getPosition(-reach).x) - this->getXLocation() + (direction == Direction::Right ? 1 : 0);
             int8_t tileYIdx = this->coordToTileIndexY(direction, prince.getPosition().y) - this->getYLocation();
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_COLLIDEWITHWALL)
             printCoordToIndex(prince.getPosition(), tileXIdx, tileYIdx);
             #endif
 
-            int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
-            int8_t bgTile2 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
-            int8_t distToEdge = distToEdgeOfTile(direction, prince.getPosition().x);
+            int8_t bgTile = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
+            int8_t fgTile = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_COLLIDEWITHWALL)
+            DEBUG_PRINT(F(", direction "));
             if(direction == Direction::Left) {
                 DEBUG_PRINT(F("Left "));
             }
             else {
                 DEBUG_PRINT(F("Right "));
             }
-            DEBUG_PRINT(F("dist "));
-            DEBUG_PRINT(distToEdge);
             DEBUG_PRINT(F(", bg "));
-            DEBUG_PRINT(bgTile1);
+            DEBUG_PRINT(bgTile);
+            DEBUG_PRINT(F(", fg "));
+            DEBUG_PRINT(fgTile);
+            DEBUG_PRINT(F(", isWall() "));
+            DEBUG_PRINT(isWallTile(bgTile, fgTile));
             DEBUG_PRINTLN("");
             #endif
 
-
-            return true;
-
+            return isWallTile(bgTile, fgTile);
 
         }
 

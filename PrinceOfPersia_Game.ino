@@ -474,12 +474,14 @@ void game() {
                 else {
 
                     if (pressed & LEFT_BUTTON) {
+
                         if (level.canMoveForward(Action::RunStart, prince)) {
                             prince.pushSequence(STANCE_RUN_START_2, STANCE_RUN_START_6_END, true);
                         }
                         else {
                             prince.pushSequence(STANCE_SINGLE_STEP_2, STANCE_SINGLE_STEP_8_END, STANCE_UPRIGHT, true);
-                        }                            
+                        }     
+                                               
                     }
                     else if (!(pressed & LEFT_BUTTON)) {
                         prince.pushSequence(STANCE_SINGLE_STEP_2, STANCE_SINGLE_STEP_8_END, STANCE_UPRIGHT, true);

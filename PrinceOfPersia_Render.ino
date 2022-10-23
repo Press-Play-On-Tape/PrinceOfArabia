@@ -83,8 +83,11 @@ void render() {
     DEBUG_PRINTLN(imageIndex);
     #endif
 
-    if (prince.getDirection() == Direction::Left) {
+    
+    // /arduboy.drawFastVLine(prince.getX() + 3, prince.getY() - 31, 36, arduboy.isFrameCount(2));
 
+    if (prince.getDirection() == Direction::Left) {
+        
         FX::drawBitmap(prince.getXImage(), prince.getYImage() - level.getYOffset() + Constants::ScreenTopOffset, startPos, 0, dbmMasked);
 
     }
@@ -133,24 +136,24 @@ void render() {
 
         if (prince.getHealth() > i) {
 
-            FX::drawBitmap(123, 1 + (i * 4), Images::Health_00, 0, dbmNormal);
+            FX::drawBitmap(123, i * 4, Images::Health_00, 0, dbmNormal);
 
         }
         else {
 
-            FX::drawBitmap(123, 1 + (i * 4), Images::Health_01, 0, dbmNormal);
+            FX::drawBitmap(123, i * 4, Images::Health_01, 0, dbmNormal);
 
         }
         
     }
 
-    FX::drawBitmap(124, 39, Images::Number_Small_00 + ((gamePlay.timer_Min / 10) * 7), 0, dbmNormal);
-    FX::drawBitmap(124, 45, Images::Number_Small_00 + ((gamePlay.timer_Min % 10) * 7), 0, dbmNormal);
-    FX::drawBitmap(124, 53, Images::Number_Small_00 + ((gamePlay.timer_Sec / 10) * 7), 0, dbmNormal);
-    FX::drawBitmap(124, 59, Images::Number_Small_00 + ((gamePlay.timer_Sec % 10) * 7), 0, dbmNormal);
+    FX::drawBitmap(123, 47, Images::Number_Small_00 + ((gamePlay.timer_Min / 10) * 9), 0, dbmNormal);
+    FX::drawBitmap(123, 51, Images::Number_Small_00 + ((gamePlay.timer_Min % 10) * 9), 0, dbmNormal);
+    FX::drawBitmap(123, 57, Images::Number_Small_00 + ((gamePlay.timer_Sec / 10) * 9), 0, dbmNormal);
+    FX::drawBitmap(123, 61, Images::Number_Small_00 + ((gamePlay.timer_Sec % 10) * 9), 0, dbmNormal);
 
-    arduboy.drawPixel(124, 51);
-    arduboy.drawPixel(126, 51);
+    arduboy.drawPixel(124, 55);
+    arduboy.drawPixel(126, 55);
 
 }
 

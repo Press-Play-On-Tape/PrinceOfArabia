@@ -39,7 +39,6 @@ struct Prince {
         uint8_t getFalling()                        { return this->falling; }
         uint8_t getHealth()                         { return this->health; }
         uint8_t getHealthMax()                      { return this->healthMax; }
-        Point &getPosition()                        { return this->location; }
 
         Stack <int16_t, 30>  * getStack()           { return this->stack; }
         Direction getDirection()                    { return this->direction; }
@@ -55,6 +54,19 @@ struct Prince {
 
         void incFalling()                           { this->falling++; }
         void decHealth(uint8_t val)                 { health > val ? this->health = this->health - val: 0; }
+
+
+        Point &getPosition()                        { return this->location; }
+
+        Point getPosition(int8_t x, int8_t y = 0)   { 
+            
+            Point newPoint;
+
+            newPoint.x = this->location.x + x;
+            newPoint.y = this->location.y + y;
+            return newPoint; 
+            
+        }
 
         void init(int16_t x, int16_t y, Direction direction, uint8_t stance, uint8_t health) {
 
