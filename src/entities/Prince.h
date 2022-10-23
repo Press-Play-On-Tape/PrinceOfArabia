@@ -12,8 +12,8 @@ struct Prince {
         
         uint8_t hangingCounter = 0;
         uint8_t crouchingCounter = 0;
-        uint16_t stance = STANCE_UPRIGHT;
-        uint16_t prevStance = STANCE_UPRIGHT;
+        uint16_t stance = Stance::Upright;
+        uint16_t prevStance = Stance::Upright;
 
         Direction direction = Direction::Left;
         uint8_t falling = 0;
@@ -194,13 +194,13 @@ struct Prince {
             return this->stack->push(static_cast<int16_t>(item1), static_cast<int16_t>(item2), static_cast<int16_t>(item3), resetFrame);
         }
 */
-        void pushSequence(uint8_t fromStance, uint8_t toStance, bool resetFrame) {
+        void pushSequence(uint16_t fromStance, uint16_t toStance, bool resetFrame) {
 
-            pushSequence(fromStance, toStance, STANCE_NONE, resetFrame);
+            pushSequence(fromStance, toStance, Stance::None, resetFrame);
 
         }
 
-        void pushSequence(uint8_t fromStance, uint8_t toStance, uint8_t finalStance, bool resetFrame) {
+        void pushSequence(uint16_t fromStance, uint16_t toStance, uint16_t finalStance, bool resetFrame) {
 
             #if defined(DEBUG) && defined(DEBUG_PRINCE_STACK)
             int8_t xOffset = 0;
@@ -209,7 +209,7 @@ struct Prince {
             DEBUG_PRINT(this->x % 12);
             #endif
 
-            if (finalStance != STANCE_NONE) {
+            if (finalStance != Stance::None) {
 
                 #if defined(DEBUG) && defined(DEBUG_PRINCE_STACK)
                 offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[(finalStance - 1) * 2]));
@@ -234,7 +234,7 @@ struct Prince {
             
             if (fromStance < toStance) {
 
-                for (uint8_t x = toStance; x >= fromStance; x--) {
+                for (uint16_t x = toStance; x >= fromStance; x--) {
 
                     #if defined(DEBUG) && defined(DEBUG_PRINCE_STACK)
                     DEBUG_PRINT(x); 
@@ -289,8 +289,8 @@ struct Prince {
 
             switch (retValue) {
 
-                case STANCE_JUMP_UP_A_14_END:
-                case STANCE_JUMP_UP_B_14_END:
+                case Stance::Jump_Up_A_14_End:
+                case Stance::Jump_Up_B_14_End:
                     this->hangingCounter = 40;
                     break;
                     
@@ -348,19 +348,19 @@ struct Prince {
 
         void stepForwardOne() {
 
-            this->pushSequence(STANCE_STEP_FWD_ONE_1_START, STANCE_STEP_FWD_ONE_6_END, STANCE_UPRIGHT, true);
+            this->pushSequence(Stance::Step_Fwd_One_1_Start, Stance::Step_Fwd_One_6_End, Stance::Upright, true);
 
         }
 
         void stepForwardTwo() {
 
-            this->pushSequence(STANCE_STEP_FWD_TWO_1_START, STANCE_STEP_FWD_TWO_6_END, STANCE_UPRIGHT, true);
+            this->pushSequence(Stance::Step_Fwd_Two_1_Start, Stance::Step_Fwd_Two_6_End, Stance::Upright, true);
 
         }
 
         void climbUpwards() {
 
-            this->pushSequence(STANCE_CLIMBING_1_START, STANCE_CLIMBING_15_END, STANCE_UPRIGHT_END_CLIMB, true);
+            this->pushSequence(Stance::Climbing_1_Start, Stance::Climbing_15_End, Stance::Upright_End_Climb, true);
 
         }
 
