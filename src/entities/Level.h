@@ -1196,6 +1196,14 @@ struct Level {
 
                                 return CanJumpUpResult::JumpThenFall_CollapseFloor;
 
+                            case CanJumpUpResult::JumpThenFall_CollapseFloorAbove:
+
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                DEBUG_PRINTLN(F("Left Test success, Return JumpThenFall_CollapseFloorAbove"));
+                                #endif                            
+
+                                return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
+
                             case CanJumpUpResult::StepThenJumpThenFall_CollapseFloor:
 
                                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
@@ -1263,6 +1271,14 @@ struct Level {
 
                                 return CanJumpUpResult::JumpThenFall_CollapseFloor;
 
+                            case CanJumpUpResult::JumpThenFall_CollapseFloorAbove:
+
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                DEBUG_PRINTLN(F("Right Test success, Return JumpThenFall_CollapseFloorAbove"));
+                                #endif                            
+
+                                return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
+
                             case CanJumpUpResult::StepThenJumpThenFall_CollapseFloor:
 
                                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
@@ -1319,7 +1335,7 @@ struct Level {
 
         CanJumpUpResult canJumpUp_Test(Prince &prince, Direction direction) {
 
-            uint8_t inc = (direction == Direction::Left ? -1 : 1);
+            int8_t inc = (direction == Direction::Left ? -1 : 1);
             int8_t tileXIdx = this->coordToTileIndexX(direction, prince.getPosition().x) - this->getXLocation();
             int8_t tileYIdx = this->coordToTileIndexY(direction, prince.getPosition().y) - this->getYLocation();
 
@@ -1337,8 +1353,8 @@ struct Level {
             #endif
 
             int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx - 1, TILE_FLOOR_BASIC);
-            // int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx + inc, tileYIdx - 1, (direction == Direction::Left ? TILE_FLOOR_BASIC : TILE_COLLAPSING_FLOOR));
             int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx + inc, tileYIdx - 1, TILE_COLLAPSING_FLOOR);
+            int8_t midTile = this->getTile(Layer::Background, tileXIdx, tileYIdx - 1, TILE_COLLAPSING_FLOOR);
             int8_t distToEdge = distToEdgeOfTile(direction, prince.getPosition().x);
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
@@ -1348,6 +1364,13 @@ struct Level {
             DEBUG_PRINT(bgTile1);
             DEBUG_PRINT(F(" "));
             DEBUG_PRINT(bgTile2);
+            DEBUG_PRINT(F(", mid "));
+            DEBUG_PRINT(midTile);
+            DEBUG_PRINT(F(" ("));
+            DEBUG_PRINT(tileXIdx - inc);
+            DEBUG_PRINT(F(","));
+            DEBUG_PRINT(tileYIdx - 1);
+            DEBUG_PRINT(F(")"));
             DEBUG_PRINTLN("");
             #endif
 
@@ -1358,7 +1381,15 @@ struct Level {
                     switch (distToEdge) {
 
                         case 7 ... 12:
-                            return CanJumpUpResult::JumpThenFall;
+
+                            if (midTile == TILE_COLLAPSING_FLOOR) {
+                                return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
+                            }
+                            else {
+                                return CanJumpUpResult::JumpThenFall;
+                            }
+
+                            break;
 
                         case 3 ... 6:
 
@@ -1372,7 +1403,15 @@ struct Level {
                                 case TILE_FLOOR_RH_END_5:
                                 case TILE_FLOOR_RH_END_GATE:
                                 case TILE_COLUMN_LH_WALL:
-                                    return CanJumpUpResult::StepThenJump;
+
+                                    if (midTile == TILE_COLLAPSING_FLOOR) {
+                                        return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
+                                    }
+                                    else {
+                                        return CanJumpUpResult::StepThenJump;
+                                    }                                
+
+                                    break;
 
                                 default:                                
 
@@ -1382,7 +1421,13 @@ struct Level {
                                             return CanJumpUpResult::StepThenJumpThenFall_CollapseFloor;
 
                                         default:
-                                            return CanJumpUpResult::JumpThenFall;
+
+                                            if (midTile == TILE_COLLAPSING_FLOOR) {
+                                                return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
+                                            }
+                                            else {
+                                                return CanJumpUpResult::JumpThenFall;
+                                            }
 
                                     }
     
@@ -1402,7 +1447,15 @@ struct Level {
                                 case TILE_FLOOR_RH_END_5:
                                 case TILE_FLOOR_RH_END_GATE:
                                 case TILE_COLUMN_LH_WALL:
-                                    return CanJumpUpResult::Jump;
+
+                                    if (midTile == TILE_COLLAPSING_FLOOR) {
+                                        return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
+                                    }
+                                    else {
+                                        return CanJumpUpResult::Jump;
+                                    }
+
+                                    break;
 
                                 default:                                
 
@@ -1412,7 +1465,13 @@ struct Level {
                                             return CanJumpUpResult::JumpThenFall_CollapseFloor;
 
                                         default:
-                                            return CanJumpUpResult::JumpThenFall;
+
+                                            if (midTile == TILE_COLLAPSING_FLOOR) {
+                                                return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
+                                            }
+                                            else {
+                                                return CanJumpUpResult::JumpThenFall;
+                                            }
 
                                     }
 
@@ -1429,7 +1488,15 @@ struct Level {
                     switch (distToEdge) {
 
                         case 7 ... 12:
-                            return CanJumpUpResult::JumpThenFall;
+
+                            if (midTile == TILE_COLLAPSING_FLOOR) {
+                                return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
+                            }
+                            else {
+                                return CanJumpUpResult::JumpThenFall;
+                            }
+
+                            break;
 
                         case 3 ... 6:
 
@@ -1439,13 +1506,30 @@ struct Level {
                                 case TILE_FLOOR_LH_END_PATTERN_1:
                                 case TILE_FLOOR_LH_END_PATTERN_2:
                                 case TILE_COLUMN_3:
-                                    return CanJumpUpResult::StepThenJump;
+Serial.println("A");                                
+                                    if (midTile == TILE_COLLAPSING_FLOOR) {
+Serial.println("A1");                                
+                                        return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
+                                    }
+                                    else {
+Serial.println("A2");                                
+                                        return CanJumpUpResult::StepThenJump;
+                                    }
 
                                 case TILE_COLLAPSING_FLOOR:
+Serial.println("B");                                
                                     return CanJumpUpResult::StepThenJumpThenFall_CollapseFloor;
 
                                 default:                                
-                                    return CanJumpUpResult::JumpThenFall;
+
+                                    if (midTile == TILE_COLLAPSING_FLOOR) {
+Serial.println("C");                                
+                                        return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
+                                    }
+                                    else {
+Serial.println("D");                                
+                                        return CanJumpUpResult::JumpThenFall;
+                                    }
 
                             }
 
@@ -1459,13 +1543,28 @@ struct Level {
                                 case TILE_FLOOR_LH_END_PATTERN_1:
                                 case TILE_FLOOR_LH_END_PATTERN_2:
                                 case TILE_COLUMN_3:
-                                    return CanJumpUpResult::Jump;
+                                
+                                    if (midTile == TILE_COLLAPSING_FLOOR) {
+                                        return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
+                                    }
+                                    else {
+                                        return CanJumpUpResult::Jump;
+                                    }
+
+                                    break;
+
 
                                 case TILE_COLLAPSING_FLOOR:
                                     return CanJumpUpResult::JumpThenFall_CollapseFloor;
 
                                 default:
-                                    return CanJumpUpResult::JumpThenFall;
+
+                                    if (midTile == TILE_COLLAPSING_FLOOR) {
+                                        return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
+                                    }
+                                    else {
+                                        return CanJumpUpResult::JumpThenFall;
+                                    }
 
                             }
 

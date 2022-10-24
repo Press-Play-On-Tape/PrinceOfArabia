@@ -23,9 +23,9 @@ namespace Images {
         /* 123 - 127 Jump_Drop_A */                104, 105, 106, 107, 108,   // Drop to position 2                                
         /* 128 - 142 Step_Climbing */              75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89,                     
         /* 143 - 154 Crouch_Stand */               109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120,                     
-        /* 155 - 160 Falling_A */                  121, 122, 123, 124, 125, 126,   // Used when walking.                           
-        /* 161 - 166 Falling_B */                  121, 122, 123, 124, 125, 126,   // Used when walking.                           
-        /* 167 - 172 Falling_C */                  121, 122, 123, 124, 125, 126,   // Used when walking.                                   
+        /* 155 - 160 Falling_SmallStep */          121, 122, 123, 124, 125, 126,                  
+        /* 161 - 166 Falling_RunningJump */        121, 122, 123, 124, 125, 126,                     
+        /* 167 - 172 Falling_C */                  121, 122, 123, 124, 125, 126,                             
         /* 173 - 175 Crouching */                  126, 109, 110,                                                                  
         /* 176 - 182 Crouch_HOP */                 110, 111, 112, 113, 112, 111, 110,                                              
         /* 183 - 191 Step_Climbing_Block */        75, 76, 77, 78, 79, 78, 77, 76, 75,                                             
@@ -33,12 +33,12 @@ namespace Images {
         /* 206 - 210 Jump_Drop_B */                104, 105, 106, 107, 108,   // Drop to position 10                               
         /* 211 - 225 Drink_Tonic */                127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141,      
         /* 226 - 230 Jump_Drop_C */                104, 105, 106, 107, 108,   // Climb down, drop straight down 31 px              
-        /* 231 - 232 Falling_D */                  125, 126,   // climb down, drop a level (and crouch)                            
-        /* 233 - 235 Falling_Dead */               125, 126, 142,   // climb down, drop a level (and crouch)    
+        /* 231 - 232 Falling_Injured */            125, 126,   
+        /* 233 - 235 Falling_Dead */               125, 126, 142,  
         /* 236 - 236 Run_Repeat_8_End_Turn */      14,   // single entry to allow x correction
         /* 237 - 241 Falling_Down */               125, 125, 125, 125, 125,  // falling straight down.
-        /* 242 - 247 Falling_E */                  121, 122, 123, 124, 125, 126,   // Used when walking.                                   
-        /* 248 - 253 Falling_SingleStep */         121, 122, 123, 124, 125, 126,   // Falling as part of a Single Step                                   
+        /* 242 - 247 Falling_StandingJump */       121, 122, 123, 124, 125, 126,                                   
+        /* 248 - 253 Falling_SingleStep */         121, 122, 123, 124, 125, 126,                               
         255,                   
     };
 

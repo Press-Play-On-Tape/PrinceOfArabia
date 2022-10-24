@@ -9,13 +9,13 @@
 #define DEBUG_ONSCREEN_DETAILS_MIN
 
 #define _DEBUG_PRINCE_DETAILS
-#define DEBUG_PRINCE_STACK
+#define _DEBUG_PRINCE_STACK
 #define _DEBUG_PRINT_ACTION
-#define _DEBUG_LEVEL_LOAD_MAP
+#define DEBUG_LEVEL_LOAD_MAP
 #define _DEBUG_PRINCE_RENDERING
 
 #define _DEBUG_ACTION_CANMOVEFORWARD
-#define _DEBUG_ACTION_CANJUMPUP
+#define DEBUG_ACTION_CANJUMPUP
 #define _DEBUG_ACTION_CANJUMPUP_PART2
 #define _DEBUG_ACTION_CANCLIMBDOWN
 #define _DEBUG_ACTION_CANCLIMBDOWN_PART2
@@ -80,7 +80,7 @@ constexpr uint16_t Standing_Jump_6                          = 50;
 constexpr uint16_t Standing_Jump_7                          = 51;
 constexpr uint16_t Standing_Jump_8                          = 52;
 constexpr uint16_t Standing_Jump_9                          = 53;
-constexpr uint16_t Standing_Jump_10_LAND_POINT              = 54;
+constexpr uint16_t Standing_Jump_10_Land_Point              = 54;
 constexpr uint16_t Standing_Jump_11                         = 55;
 constexpr uint16_t Standing_Jump_12                         = 56;
 constexpr uint16_t Standing_Jump_13                         = 57;
@@ -185,18 +185,18 @@ constexpr uint16_t  Crouch_Stand_9                          = 151;
 constexpr uint16_t  Crouch_Stand_10                         = 152;
 constexpr uint16_t  Crouch_Stand_11                         = 153;
 constexpr uint16_t  Crouch_Stand_12_End                     = 154;
-constexpr uint16_t  Falling_A_1_Start                       = 155;     /* While walking */
-constexpr uint16_t  Falling_A_2                             = 156;
-constexpr uint16_t  Falling_A_3                             = 157;
-constexpr uint16_t  Falling_A_4                             = 158;
-constexpr uint16_t  Falling_A_5_Check_CanFall               = 159;
-constexpr uint16_t  Falling_A_6_End                         = 160;
-constexpr uint16_t  Falling_B_1_Start                       = 161;     /* If dst = 0, 4, 8 */
-constexpr uint16_t  Falling_B_2                             = 162;
-constexpr uint16_t  Falling_B_3                             = 163;
-constexpr uint16_t  Falling_B_4                             = 164;
-constexpr uint16_t  Falling_B_5_Check_CanFall               = 165;
-constexpr uint16_t  Falling_B_6_End                         = 166;
+constexpr uint16_t  Falling_SmallStep_1_Start               = 155;
+constexpr uint16_t  Falling_SmallStep_2                     = 156;
+constexpr uint16_t  Falling_SmallStep_3                     = 157;
+constexpr uint16_t  Falling_SmallStep_4                     = 158;
+constexpr uint16_t  Falling_SmallStep_5_Check_CanFall       = 159;
+constexpr uint16_t  Falling_SmallStep_6_End                 = 160;
+constexpr uint16_t  Falling_RunningJump_1_Start             = 161;     /* If dst = 0, 4, 8 */
+constexpr uint16_t  Falling_RunningJump_2                   = 162;
+constexpr uint16_t  Falling_RunningJump_3                   = 163;
+constexpr uint16_t  Falling_RunningJump_4                   = 164;
+constexpr uint16_t  Falling_RunningJump_5_Check_CanFall     = 165;
+constexpr uint16_t  Falling_RunningJump_6_End               = 166;
 constexpr uint16_t  Falling_C_1_Start                       = 167;     /* If dst = 0, 4, 8 */
 constexpr uint16_t  Falling_C_2                             = 168;
 constexpr uint16_t  Falling_C_3                             = 169;
@@ -261,8 +261,8 @@ constexpr uint16_t  Jump_Up_Drop_C_2                        = 227;
 constexpr uint16_t  Jump_Up_Drop_C_3                        = 228;
 constexpr uint16_t  Jump_Up_Drop_C_4                        = 229;
 constexpr uint16_t  Jump_Up_Drop_C_5_End                    = 230;
-constexpr uint16_t  Falling_D_1_Start                       = 231;  // Climbing down, falling two levels
-constexpr uint16_t  Falling_D_2_End                         = 232;
+constexpr uint16_t  Falling_Injured_1_Start                 = 231;  // Climbing down, falling two levels
+constexpr uint16_t  Falling_Injured_2_End                   = 232;
 constexpr uint16_t  Falling_Dead_1_Start                    = 233;  // Climbing down, fall to death
 constexpr uint16_t  Falling_Dead_2                          = 234;
 constexpr uint16_t  Falling_Dead_3_End                      = 235;
@@ -272,13 +272,13 @@ constexpr uint16_t  Falling_Down_2                          = 238;
 constexpr uint16_t  Falling_Down_3                          = 239;
 constexpr uint16_t  Falling_Down_4                          = 240;
 constexpr uint16_t  Falling_Down_5_End                      = 241;
-constexpr uint16_t  Falling_E_1_Start                       = 242;  /* Standing Jump (1 pixel more than A) */
-constexpr uint16_t  Falling_E_2                             = 243;
-constexpr uint16_t  Falling_E_3                             = 244;
-constexpr uint16_t  Falling_E_4                             = 245;
-constexpr uint16_t  Falling_E_5_Check_CanFall               = 246;
-constexpr uint16_t  Falling_E_6_End                         = 247;
-constexpr uint16_t  Falling_SingleStep_1_Start              = 248;  /* Single Step */
+constexpr uint16_t  Falling_StandingJump_1_Start            = 242;
+constexpr uint16_t  Falling_StandingJump_2                  = 243;
+constexpr uint16_t  Falling_StandingJump_3                  = 244;
+constexpr uint16_t  Falling_StandingJump_4                  = 245;
+constexpr uint16_t  Falling_StandingJump_5_Check_CanFall    = 246;
+constexpr uint16_t  Falling_StandingJump_6_End              = 247;
+constexpr uint16_t  Falling_SingleStep_1_Start              = 248;
 constexpr uint16_t  Falling_SingleStep_2                    = 249;
 constexpr uint16_t  Falling_SingleStep_3                    = 250;
 constexpr uint16_t  Falling_SingleStep_4                    = 251;
@@ -361,7 +361,7 @@ namespace Constants {
               1,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  141 - 150
 
               0,   0,   0,   0,   0,   0,   0,   0,   3,   6,   2,   5,   2,   5,   1,   5,   0,   5,   0,   5,    //  151 - 160
-              5,   6,   5,   5,   4,   5,   0,   5,   0,   5,   0,   5,   5,   6,   4,   3,   4,   5,   1,   5,    //  161 - 170
+              6,   6,   5,   5,   4,   5,   0,   5,   0,   5,   1,   5,   5,   6,   4,   3,   4,   5,   1,   5,    //  161 - 170
               0,   5,   0,   5,   0,   0,   0,   0,   0,   0,   0,   0,   1,   0,   1,   0,   1,   0,   1,   0,    //  171 - 180
 
               0,   0,   0,   0,   0,  -4,   0,  -4,   0,  -2,   0,  -3,   0,   0,   0,   3,   0,   2,   0,   4,    //  181 - 190
@@ -573,6 +573,7 @@ enum class CanJumpUpResult : uint8_t {
     JumpDist10,
     JumpThenFall_CollapseFloor,             // Take this as gospel!
     StepThenJumpThenFall_CollapseFloor,     // This too!
+    JumpThenFall_CollapseFloorAbove,             // Take this as gospel!
 };
 
 enum class CanClimbDownResult : uint8_t {

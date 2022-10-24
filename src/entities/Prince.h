@@ -57,6 +57,7 @@ struct Prince {
 
         void incFalling()                           { this->falling++; }
         void decHealth(uint8_t val)                 { health > val ? this->health = this->health - val: 0; }
+        void incHealth(int8_t val)                  { this->health = this->health + val > this->healthMax ? this->HealthMax : this->health + val; } 
 
 
         Point &getPosition()                        { return this->location; }
