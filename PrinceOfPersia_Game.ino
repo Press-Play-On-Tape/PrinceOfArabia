@@ -11,9 +11,9 @@
 
 void game_Init() {
 
-    prince.init(86, 87, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
-    // prince.init(70, 25, Direction::Left, Stance::Crouch_3_End, 3);          // Under collapsible floor
     // prince.init(18, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
+    // prince.init(86, 87, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos but next to drop floor 3rd floor
+    prince.init(70, 25, Direction::Left, Stance::Crouch_3_End, 3);          // Under collapsible floor
     // prince.init(66, 56, Direction::Right, Stance::Crouch_3_End, 3);        // Get tonic
     // prince.init(30, 56 + Constants::TileHeight, Direction::Right, Stance::Crouch_3_End, 3);     // Column of climbs
     // prince.init(80, 25, Direction::Right, Stance::Crouch_3_End, 3);     // Top Left
@@ -24,11 +24,11 @@ void game_Init() {
     gamePlay.init(arduboy, 1);
     
     level.setLevel(1);
-    level.init(prince, 60, 0);  // Normal starting posa
-    // level.init(prince, 50, 3);  // Under collapsible floor
     // level.init(prince, 60, 0);  // Normal starting posa
+    // level.init(prince, 60, 0);  //Normal starting pos but next to drop floor 3rd floor
+    level.init(prince, 50, 3);  // Under collapsible floor
     // level.init(prince, Constants::TileHeight, 0);   // Get tonic
-//    level.init(prince, 0, 3);   // Column of climbs
+    // level.init(prince, 0, 3);   // Column of climbs
     // level.init(prince, 0, 0);   // Top left
     // level.init(prince, 40, 4);  // Long Fall
     // level.init(prince, 60, 3);  // problem
@@ -147,6 +147,7 @@ void game() {
     prince.update(level.getXLocation(), level.getYLocation());
     bool reevaluatePrinceFalling = level.update(arduboy, prince);
     /* if (gamePlay.gameState == GameState::Game) */ gamePlay.update(arduboy);
+
     if (menu.update()) gamePlay.gameState = GameState::Game;
     
 
@@ -1142,6 +1143,20 @@ void game() {
 
 
     if (reevaluatePrinceFalling) {
+
+        if (prince.isFootDown() && level.canFall(prince)) {
+
+            Serial.println("start falling");
+            prince.setFalling(1);
+            prince.setPrevStance(Stance::None);
+            prince.pushSequence(Stance::Falling_Down_1_Start, Stance::Falling_Down_5_End, true);
+
+        }
+
+        if (prince.isFootDown()) {
+
+            Serial.println("foot down");
+        }
         Serial.println("reevaluate");
     }
 

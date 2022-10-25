@@ -4,9 +4,9 @@
 #define DEBUG_PRINT    Serial.print
 #define DEBUG_PRINTLN  Serial.println
 
-#define _DEBUG
-#define DEBUG_ONSCREEN_DETAILS
-#define _DEBUG_ONSCREEN_DETAILS_MIN
+#define DEBUG
+#define _DEBUG_ONSCREEN_DETAILS
+#define DEBUG_ONSCREEN_DETAILS_MIN
 
 #define _DEBUG_PRINCE_DETAILS
 #define _DEBUG_PRINCE_STACK
@@ -325,7 +325,7 @@ constexpr uint16_t  Upright_Turn             = 1255;
 namespace Constants {
 
     constexpr uint8_t FrameRate = 30;
-    constexpr uint8_t NumberOfItems = 20;
+    constexpr uint8_t NumberOfItems = 25;
     constexpr uint8_t Animation_NumberOfFrames = 2;
     constexpr uint8_t NoItemFound = 255;
 
@@ -352,7 +352,7 @@ namespace Constants {
               0,   0,   0,   0,   0,   0,   0,   0,   1,   0,   1,   0,   1,   0,   1,   0,   1,   0,   1,   0,    //  071 - 080
               1,   0,   1,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  081 - 090
 
-              0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  091 - 100
+             -1,  -1,   0,   0,   0,   0,   0,   0,   0,   0,   1,   0,   0,   0,   1,   0,   0,   0,   0,   0,    //  091 - 100
               0,   0,   0,   0,   1,   0,   1,   0,   1,   0,   1,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  101 - 110
               0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  111 - 120
 

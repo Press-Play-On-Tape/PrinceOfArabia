@@ -230,7 +230,7 @@ struct Level {
 
                                 }
 
-                                return item.data.collapsingFloor.timeToFall;
+                                return (item.data.collapsingFloor.timeToFall == 1 && item.data.collapsingFloor.distanceFallen == 2);
 
                             }
 
@@ -780,7 +780,7 @@ struct Level {
 
                             Item &item = this->getItem(idx);
 
-                            if (item.data.gate.position == 0) {
+                            if (item.data.collapsingFloor.distanceFallen == 0) {
 
                                 return false;
 
@@ -832,10 +832,7 @@ struct Level {
             DEBUG_PRINTLN("");
             #endif
 
-
-
             return this->canFall(bgTile1, fgTile1, tileXIdx, tileYIdx);
-
         
         }
 
