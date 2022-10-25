@@ -4,9 +4,9 @@
 #define DEBUG_PRINT    Serial.print
 #define DEBUG_PRINTLN  Serial.println
 
-#define DEBUG
-#define _DEBUG_ONSCREEN_DETAILS
-#define DEBUG_ONSCREEN_DETAILS_MIN
+#define _DEBUG
+#define DEBUG_ONSCREEN_DETAILS
+#define _DEBUG_ONSCREEN_DETAILS_MIN
 
 #define _DEBUG_PRINCE_DETAILS
 #define _DEBUG_PRINCE_STACK
@@ -14,12 +14,12 @@
 #define DEBUG_LEVEL_LOAD_MAP
 #define _DEBUG_PRINCE_RENDERING
 
-#define _DEBUG_ACTION_CANMOVEFORWARD
-#define DEBUG_ACTION_CANJUMPUP
+#define DEBUG_ACTION_CANMOVEFORWARD
+#define _DEBUG_ACTION_CANJUMPUP
 #define _DEBUG_ACTION_CANJUMPUP_PART2
 #define _DEBUG_ACTION_CANCLIMBDOWN
 #define _DEBUG_ACTION_CANCLIMBDOWN_PART2
-#define _DEBUG_ACTION_CANFALL
+#define DEBUG_ACTION_CANFALL
 #define _DEBUG_ACTION_COLLIDEWITHWALL
 
 //-------------------------------------------------------------------------------------
@@ -80,8 +80,8 @@ constexpr uint16_t Standing_Jump_6                          = 50;
 constexpr uint16_t Standing_Jump_7                          = 51;
 constexpr uint16_t Standing_Jump_8                          = 52;
 constexpr uint16_t Standing_Jump_9                          = 53;
-constexpr uint16_t Standing_Jump_10_Land_Point              = 54;
-constexpr uint16_t Standing_Jump_11                         = 55;
+constexpr uint16_t Standing_Jump_10                         = 54;
+constexpr uint16_t Standing_Jump_11_Land_Point              = 55;
 constexpr uint16_t Standing_Jump_12                         = 56;
 constexpr uint16_t Standing_Jump_13                         = 57;
 constexpr uint16_t Standing_Jump_14                         = 58;
@@ -118,172 +118,172 @@ constexpr uint16_t Stopping_4                               = 86;
 constexpr uint16_t Stopping_5_End                           = 87;
 // Not sure about this set              
 
-constexpr uint16_t  Climbing_1_Start                        = 88;
-constexpr uint16_t  Climbing_2                              = 89;
-constexpr uint16_t  Climbing_3                              = 90;
-constexpr uint16_t  Climbing_4                              = 91;
-constexpr uint16_t  Climbing_5                              = 92;
-constexpr uint16_t  Climbing_6                              = 93;
-constexpr uint16_t  Climbing_7                              = 94;
-constexpr uint16_t  Climbing_8                              = 95;
-constexpr uint16_t  Climbing_9                              = 96;
-constexpr uint16_t  Climbing_10                             = 97;
-constexpr uint16_t  Climbing_11                             = 98;
-constexpr uint16_t  Climbing_12                             = 99;
-constexpr uint16_t  Climbing_13                             = 100;
-constexpr uint16_t  Climbing_14                             = 101;
-constexpr uint16_t  Climbing_15_End                         = 102;
-constexpr uint16_t  Small_Step_1_Start                      = 103;
-constexpr uint16_t  Small_Step_2                            = 104;
-constexpr uint16_t  Small_Step_3                            = 105;
-constexpr uint16_t  Small_Step_4                            = 106;
-constexpr uint16_t  Small_Step_5                            = 107;
-constexpr uint16_t  Small_Step_6_End                        = 108;
-constexpr uint16_t  Jump_Up_A_1_Start                       = 109;     /* Dist 2 */
-constexpr uint16_t  Jump_Up_A_2                             = 110;
-constexpr uint16_t  Jump_Up_A_3                             = 111;
-constexpr uint16_t  Jump_Up_A_4                             = 112;
-constexpr uint16_t  Jump_Up_A_5                             = 113;
-constexpr uint16_t  Jump_Up_A_6                             = 114;
-constexpr uint16_t  Jump_Up_A_7                             = 115;
-constexpr uint16_t  Jump_Up_A_8                             = 116;
-constexpr uint16_t  Jump_Up_A_9                             = 117;
-constexpr uint16_t  Jump_Up_A_10                            = 118;
-constexpr uint16_t  Jump_Up_A_11                            = 119;
-constexpr uint16_t  Jump_Up_A_12                            = 120;
-constexpr uint16_t  Jump_Up_A_13                            = 121;
-constexpr uint16_t  Jump_Up_A_14_End                        = 122;
-constexpr uint16_t  Jump_Up_Drop_A_1_Start                  = 123;  // Drop down to Pos 2
-constexpr uint16_t  Jump_Up_Drop_A_2                        = 124;
-constexpr uint16_t  Jump_Up_Drop_A_3                        = 125;
-constexpr uint16_t  Jump_Up_Drop_A_4                        = 126;
-constexpr uint16_t  Jump_Up_Drop_A_5_End                    = 127;
-constexpr uint16_t  Step_Climbing_1_Start                   = 128;  // Climb up / down from a ledge (second part)
-constexpr uint16_t  Step_Climbing_2                         = 129;
-constexpr uint16_t  Step_Climbing_3                         = 130;
-constexpr uint16_t  Step_Climbing_4                         = 131;
-constexpr uint16_t  Step_Climbing_5                         = 132;
-constexpr uint16_t  Step_Climbing_6                         = 133;
-constexpr uint16_t  Step_Climbing_7                         = 134;
-constexpr uint16_t  Step_Climbing_8                         = 135;
-constexpr uint16_t  Step_Climbing_9                         = 136;
-constexpr uint16_t  Step_Climbing_10                        = 137;
-constexpr uint16_t  Step_Climbing_11                        = 138;
-constexpr uint16_t  Step_Climbing_12                        = 139;
-constexpr uint16_t  Step_Climbing_13                        = 140;
-constexpr uint16_t  Step_Climbing_14                        = 141;
-constexpr uint16_t  Step_Climbing_15_End                    = 142;
-constexpr uint16_t  Crouch_Stand_1_Start                    = 143;
-constexpr uint16_t  Crouch_Stand_2                          = 144;
-constexpr uint16_t  Crouch_Stand_3                          = 145;
-constexpr uint16_t  Crouch_Stand_4                          = 146;
-constexpr uint16_t  Crouch_Stand_5                          = 147;
-constexpr uint16_t  Crouch_Stand_6                          = 148;
-constexpr uint16_t  Crouch_Stand_7                          = 149;
-constexpr uint16_t  Crouch_Stand_8                          = 150;
-constexpr uint16_t  Crouch_Stand_9                          = 151;
-constexpr uint16_t  Crouch_Stand_10                         = 152;
-constexpr uint16_t  Crouch_Stand_11                         = 153;
-constexpr uint16_t  Crouch_Stand_12_End                     = 154;
-constexpr uint16_t  Falling_SmallStep_1_Start               = 155;
-constexpr uint16_t  Falling_SmallStep_2                     = 156;
-constexpr uint16_t  Falling_SmallStep_3                     = 157;
-constexpr uint16_t  Falling_SmallStep_4                     = 158;
-constexpr uint16_t  Falling_SmallStep_5_Check_CanFall       = 159;
-constexpr uint16_t  Falling_SmallStep_6_End                 = 160;
-constexpr uint16_t  Falling_RunningJump_1_Start             = 161;     /* If dst = 0, 4, 8 */
-constexpr uint16_t  Falling_RunningJump_2                   = 162;
-constexpr uint16_t  Falling_RunningJump_3                   = 163;
-constexpr uint16_t  Falling_RunningJump_4                   = 164;
-constexpr uint16_t  Falling_RunningJump_5_Check_CanFall     = 165;
-constexpr uint16_t  Falling_RunningJump_6_End               = 166;
-constexpr uint16_t  Falling_C_1_Start                       = 167;     /* If dst = 0, 4, 8 */
-constexpr uint16_t  Falling_C_2                             = 168;
-constexpr uint16_t  Falling_C_3                             = 169;
-constexpr uint16_t  Falling_C_4                             = 170;
-constexpr uint16_t  Falling_C_5_Check_CanFall               = 171;
-constexpr uint16_t  Falling_C_6_End                         = 172;
-constexpr uint16_t  Crouch_1_Start                          = 173;
-constexpr uint16_t  Crouch_2                                = 174;
-constexpr uint16_t  Crouch_3_End                            = 175;
-constexpr uint16_t  Crouch_HOP_1_Start                      = 176;
-constexpr uint16_t  Crouch_HOP_2                            = 177;
-constexpr uint16_t  Crouch_HOP_3                            = 178;
-constexpr uint16_t  Crouch_HOP_4                            = 179;
-constexpr uint16_t  Crouch_HOP_5                            = 180;
-constexpr uint16_t  Crouch_HOP_6                            = 181;
-constexpr uint16_t  Crouch_HOP_7_End                        = 182;
-constexpr uint16_t  Step_Climbing_Block_1_Start             = 183;
-constexpr uint16_t  Step_Climbing_Block_2                   = 184;
-constexpr uint16_t  Step_Climbing_Block_3                   = 185;
-constexpr uint16_t  Step_Climbing_Block_4                   = 186;
-constexpr uint16_t  Step_Climbing_Block_5                   = 187;
-constexpr uint16_t  Step_Climbing_Block_6                   = 188;
-constexpr uint16_t  Step_Climbing_Block_7                   = 189;
-constexpr uint16_t  Step_Climbing_Block_8                   = 190;
-constexpr uint16_t  Step_Climbing_Block_9_End               = 191;
-constexpr uint16_t  Jump_Up_B_1_Start                       = 192;
-constexpr uint16_t  Jump_Up_B_2                             = 193;
-constexpr uint16_t  Jump_Up_B_3                             = 194;
-constexpr uint16_t  Jump_Up_B_4                             = 195;
-constexpr uint16_t  Jump_Up_B_5                             = 196;
-constexpr uint16_t  Jump_Up_B_6                             = 197;
-constexpr uint16_t  Jump_Up_B_7                             = 198;
-constexpr uint16_t  Jump_Up_B_8                             = 199;
-constexpr uint16_t  Jump_Up_B_9                             = 200;
-constexpr uint16_t  Jump_Up_B_10                            = 201;
-constexpr uint16_t  Jump_Up_B_11                            = 202;
-constexpr uint16_t  Jump_Up_B_12                            = 203;
-constexpr uint16_t  Jump_Up_B_13                            = 204;
-constexpr uint16_t  Jump_Up_B_14_End                        = 205;
-constexpr uint16_t  Jump_Up_Drop_B_1_Start                  = 206;  // Drop down to Pos 10
-constexpr uint16_t  Jump_Up_Drop_B_2                        = 207;
-constexpr uint16_t  Jump_Up_Drop_B_3                        = 208;
-constexpr uint16_t  Jump_Up_Drop_B_4                        = 209;
-constexpr uint16_t  Jump_Up_Drop_B_5_End                    = 210;
-constexpr uint16_t  Drink_Tonic_1_Start                     = 211; 
-constexpr uint16_t  Drink_Tonic_2                           = 212;
-constexpr uint16_t  Drink_Tonic_3                           = 213;
-constexpr uint16_t  Drink_Tonic_4                           = 214;
-constexpr uint16_t  Drink_Tonic_5                           = 215;
-constexpr uint16_t  Drink_Tonic_6                           = 216;
-constexpr uint16_t  Drink_Tonic_7                           = 217;
-constexpr uint16_t  Drink_Tonic_8                           = 218;
-constexpr uint16_t  Drink_Tonic_9                           = 219;
-constexpr uint16_t  Drink_Tonic_10                          = 220;
-constexpr uint16_t  Drink_Tonic_11                          = 221;
-constexpr uint16_t  Drink_Tonic_12                          = 222;
-constexpr uint16_t  Drink_Tonic_13                          = 223;
-constexpr uint16_t  Drink_Tonic_14                          = 224;
-constexpr uint16_t  Drink_Tonic_15_End                      = 225;
-constexpr uint16_t  Jump_Up_Drop_C_1_Start                  = 226;  // Drop down to Pos 2 (two levels)
-constexpr uint16_t  Jump_Up_Drop_C_2                        = 227;
-constexpr uint16_t  Jump_Up_Drop_C_3                        = 228;
-constexpr uint16_t  Jump_Up_Drop_C_4                        = 229;
-constexpr uint16_t  Jump_Up_Drop_C_5_End                    = 230;
-constexpr uint16_t  Falling_Injured_1_Start                 = 231;  // Climbing down, falling two levels
-constexpr uint16_t  Falling_Injured_2_End                   = 232;
-constexpr uint16_t  Falling_Dead_1_Start                    = 233;  // Climbing down, fall to death
-constexpr uint16_t  Falling_Dead_2                          = 234;
-constexpr uint16_t  Falling_Dead_3_End                      = 235;
-constexpr uint16_t  Run_Repeat_8_End_Turn                   = 236;  // Single entry to allow x correction
-constexpr uint16_t  Falling_Down_1_Start                    = 237;
-constexpr uint16_t  Falling_Down_2                          = 238;
-constexpr uint16_t  Falling_Down_3                          = 239;
-constexpr uint16_t  Falling_Down_4                          = 240;
-constexpr uint16_t  Falling_Down_5_End                      = 241;
-constexpr uint16_t  Falling_StandingJump_1_Start            = 242;
-constexpr uint16_t  Falling_StandingJump_2                  = 243;
-constexpr uint16_t  Falling_StandingJump_3                  = 244;
-constexpr uint16_t  Falling_StandingJump_4                  = 245;
-constexpr uint16_t  Falling_StandingJump_5_Check_CanFall    = 246;
-constexpr uint16_t  Falling_StandingJump_6_End              = 247;
-constexpr uint16_t  Falling_SingleStep_1_Start              = 248;
-constexpr uint16_t  Falling_SingleStep_2                    = 249;
-constexpr uint16_t  Falling_SingleStep_3                    = 250;
-constexpr uint16_t  Falling_SingleStep_4                    = 251;
-constexpr uint16_t  Falling_SingleStep_5_Check_CanFall      = 252;
-constexpr uint16_t  Falling_SingleStep_6_End                = 253;
+constexpr uint16_t Climbing_1_Start                         = 88;
+constexpr uint16_t Climbing_2                               = 89;
+constexpr uint16_t Climbing_3                               = 90;
+constexpr uint16_t Climbing_4                               = 91;
+constexpr uint16_t Climbing_5                               = 92;
+constexpr uint16_t Climbing_6                               = 93;
+constexpr uint16_t Climbing_7                               = 94;
+constexpr uint16_t Climbing_8                               = 95;
+constexpr uint16_t Climbing_9                               = 96;
+constexpr uint16_t Climbing_10                              = 97;
+constexpr uint16_t Climbing_11                              = 98;
+constexpr uint16_t Climbing_12                              = 99;
+constexpr uint16_t Climbing_13                              = 100;
+constexpr uint16_t Climbing_14                              = 101;
+constexpr uint16_t Climbing_15_End                          = 102;
+constexpr uint16_t Small_Step_1_Start                       = 103;
+constexpr uint16_t Small_Step_2                             = 104;
+constexpr uint16_t Small_Step_3                             = 105;
+constexpr uint16_t Small_Step_4                             = 106;
+constexpr uint16_t Small_Step_5                             = 107;
+constexpr uint16_t Small_Step_6_End                         = 108;
+constexpr uint16_t Jump_Up_A_1_Start                        = 109;     /* Dist 2 */
+constexpr uint16_t Jump_Up_A_2                              = 110;
+constexpr uint16_t Jump_Up_A_3                              = 111;
+constexpr uint16_t Jump_Up_A_4                              = 112;
+constexpr uint16_t Jump_Up_A_5                              = 113;
+constexpr uint16_t Jump_Up_A_6                              = 114;
+constexpr uint16_t Jump_Up_A_7                              = 115;
+constexpr uint16_t Jump_Up_A_8                              = 116;
+constexpr uint16_t Jump_Up_A_9                              = 117;
+constexpr uint16_t Jump_Up_A_10                             = 118;
+constexpr uint16_t Jump_Up_A_11                             = 119;
+constexpr uint16_t Jump_Up_A_12                             = 120;
+constexpr uint16_t Jump_Up_A_13                             = 121;
+constexpr uint16_t Jump_Up_A_14_End                         = 122;
+constexpr uint16_t Jump_Up_Drop_A_1_Start                   = 123;  // Drop down to Pos 2
+constexpr uint16_t Jump_Up_Drop_A_2                         = 124;
+constexpr uint16_t Jump_Up_Drop_A_3                         = 125;
+constexpr uint16_t Jump_Up_Drop_A_4                         = 126;
+constexpr uint16_t Jump_Up_Drop_A_5_End                     = 127;
+constexpr uint16_t Step_Climbing_1_Start                    = 128;  // Climb up / down from a ledge (second part)
+constexpr uint16_t Step_Climbing_2                          = 129;
+constexpr uint16_t Step_Climbing_3                          = 130;
+constexpr uint16_t Step_Climbing_4                          = 131;
+constexpr uint16_t Step_Climbing_5                          = 132;
+constexpr uint16_t Step_Climbing_6                          = 133;
+constexpr uint16_t Step_Climbing_7                          = 134;
+constexpr uint16_t Step_Climbing_8                          = 135;
+constexpr uint16_t Step_Climbing_9                          = 136;
+constexpr uint16_t Step_Climbing_10                         = 137;
+constexpr uint16_t Step_Climbing_11                         = 138;
+constexpr uint16_t Step_Climbing_12                         = 139;
+constexpr uint16_t Step_Climbing_13                         = 140;
+constexpr uint16_t Step_Climbing_14                         = 141;
+constexpr uint16_t Step_Climbing_15_End                     = 142;
+constexpr uint16_t Crouch_Stand_1_Start                     = 143;
+constexpr uint16_t Crouch_Stand_2                           = 144;
+constexpr uint16_t Crouch_Stand_3                           = 145;
+constexpr uint16_t Crouch_Stand_4                           = 146;
+constexpr uint16_t Crouch_Stand_5                           = 147;
+constexpr uint16_t Crouch_Stand_6                           = 148;
+constexpr uint16_t Crouch_Stand_7                           = 149;
+constexpr uint16_t Crouch_Stand_8                           = 150;
+constexpr uint16_t Crouch_Stand_9                           = 151;
+constexpr uint16_t Crouch_Stand_10                          = 152;
+constexpr uint16_t Crouch_Stand_11                          = 153;
+constexpr uint16_t Crouch_Stand_12_End                      = 154;
+constexpr uint16_t Falling_SmallStep_1_Start                = 155;
+constexpr uint16_t Falling_SmallStep_2                      = 156;
+constexpr uint16_t Falling_SmallStep_3                      = 157;
+constexpr uint16_t Falling_SmallStep_4                      = 158;
+constexpr uint16_t Falling_SmallStep_5_Check_CanFall        = 159;
+constexpr uint16_t Falling_SmallStep_6_End                  = 160;
+constexpr uint16_t Falling_RunningJump_1_Start              = 161;     /* If dst = 0, 4, 8 */
+constexpr uint16_t Falling_RunningJump_2                    = 162;
+constexpr uint16_t Falling_RunningJump_3                    = 163;
+constexpr uint16_t Falling_RunningJump_4                    = 164;
+constexpr uint16_t Falling_RunningJump_5_Check_CanFall      = 165;
+constexpr uint16_t Falling_RunningJump_6_End                = 166;
+constexpr uint16_t Falling_C_1_Start                        = 167;     /* If dst = 0, 4, 8 */
+constexpr uint16_t Falling_C_2                              = 168;
+constexpr uint16_t Falling_C_3                              = 169;
+constexpr uint16_t Falling_C_4                              = 170;
+constexpr uint16_t Falling_C_5_Check_CanFall                = 171;
+constexpr uint16_t Falling_C_6_End                          = 172;
+constexpr uint16_t Crouch_1_Start                           = 173;
+constexpr uint16_t Crouch_2                                 = 174;
+constexpr uint16_t Crouch_3_End                             = 175;
+constexpr uint16_t Crouch_HOP_1_Start                       = 176;
+constexpr uint16_t Crouch_HOP_2                             = 177;
+constexpr uint16_t Crouch_HOP_3                             = 178;
+constexpr uint16_t Crouch_HOP_4                             = 179;
+constexpr uint16_t Crouch_HOP_5                             = 180;
+constexpr uint16_t Crouch_HOP_6                             = 181;
+constexpr uint16_t Crouch_HOP_7_End                         = 182;
+constexpr uint16_t Step_Climbing_Block_1_Start              = 183;
+constexpr uint16_t Step_Climbing_Block_2                    = 184;
+constexpr uint16_t Step_Climbing_Block_3                    = 185;
+constexpr uint16_t Step_Climbing_Block_4                    = 186;
+constexpr uint16_t Step_Climbing_Block_5                    = 187;
+constexpr uint16_t Step_Climbing_Block_6                    = 188;
+constexpr uint16_t Step_Climbing_Block_7                    = 189;
+constexpr uint16_t Step_Climbing_Block_8                    = 190;
+constexpr uint16_t Step_Climbing_Block_9_End                = 191;
+constexpr uint16_t Jump_Up_B_1_Start                        = 192;
+constexpr uint16_t Jump_Up_B_2                              = 193;
+constexpr uint16_t Jump_Up_B_3                              = 194;
+constexpr uint16_t Jump_Up_B_4                              = 195;
+constexpr uint16_t Jump_Up_B_5                              = 196;
+constexpr uint16_t Jump_Up_B_6                              = 197;
+constexpr uint16_t Jump_Up_B_7                              = 198;
+constexpr uint16_t Jump_Up_B_8                              = 199;
+constexpr uint16_t Jump_Up_B_9                              = 200;
+constexpr uint16_t Jump_Up_B_10                             = 201;
+constexpr uint16_t Jump_Up_B_11                             = 202;
+constexpr uint16_t Jump_Up_B_12                             = 203;
+constexpr uint16_t Jump_Up_B_13                             = 204;
+constexpr uint16_t Jump_Up_B_14_End                         = 205;
+constexpr uint16_t Jump_Up_Drop_B_1_Start                   = 206;  // Drop down to Pos 10
+constexpr uint16_t Jump_Up_Drop_B_2                         = 207;
+constexpr uint16_t Jump_Up_Drop_B_3                         = 208;
+constexpr uint16_t Jump_Up_Drop_B_4                         = 209;
+constexpr uint16_t Jump_Up_Drop_B_5_End                     = 210;
+constexpr uint16_t Drink_Tonic_1_Start                      = 211; 
+constexpr uint16_t Drink_Tonic_2                            = 212;
+constexpr uint16_t Drink_Tonic_3                            = 213;
+constexpr uint16_t Drink_Tonic_4                            = 214;
+constexpr uint16_t Drink_Tonic_5                            = 215;
+constexpr uint16_t Drink_Tonic_6                            = 216;
+constexpr uint16_t Drink_Tonic_7                            = 217;
+constexpr uint16_t Drink_Tonic_8                            = 218;
+constexpr uint16_t Drink_Tonic_9                            = 219;
+constexpr uint16_t Drink_Tonic_10                           = 220;
+constexpr uint16_t Drink_Tonic_11                           = 221;
+constexpr uint16_t Drink_Tonic_12                           = 222;
+constexpr uint16_t Drink_Tonic_13                           = 223;
+constexpr uint16_t Drink_Tonic_14                           = 224;
+constexpr uint16_t Drink_Tonic_15_End                       = 225;
+constexpr uint16_t Jump_Up_Drop_C_1_Start                   = 226;  // Drop down to Pos 2 (two levels)
+constexpr uint16_t Jump_Up_Drop_C_2                         = 227;
+constexpr uint16_t Jump_Up_Drop_C_3                         = 228;
+constexpr uint16_t Jump_Up_Drop_C_4                         = 229;
+constexpr uint16_t Jump_Up_Drop_C_5_End                     = 230;
+constexpr uint16_t Falling_Injured_1_Start                  = 231;  // Climbing down, falling two levels
+constexpr uint16_t Falling_Injured_2_End                    = 232;
+constexpr uint16_t Falling_Dead_1_Start                     = 233;  // Climbing down, fall to death
+constexpr uint16_t Falling_Dead_2                           = 234;
+constexpr uint16_t Falling_Dead_3_End                       = 235;
+constexpr uint16_t Run_Repeat_8_End_Turn                    = 236;  // Single entry to allow x correction
+constexpr uint16_t Falling_Down_1_Start                     = 237;
+constexpr uint16_t Falling_Down_2                           = 238;
+constexpr uint16_t Falling_Down_3                           = 239;
+constexpr uint16_t Falling_Down_4                           = 240;
+constexpr uint16_t Falling_Down_5_End                       = 241;
+constexpr uint16_t Falling_StandingJump_1_Start             = 242;
+constexpr uint16_t Falling_StandingJump_2                   = 243;
+constexpr uint16_t Falling_StandingJump_3                   = 244;
+constexpr uint16_t Falling_StandingJump_4                   = 245;
+constexpr uint16_t Falling_StandingJump_5_Check_CanFall     = 246;
+constexpr uint16_t Falling_StandingJump_6_End               = 247;
+constexpr uint16_t Falling_SingleStep_1_Start               = 248;
+constexpr uint16_t Falling_SingleStep_2                     = 249;
+constexpr uint16_t Falling_SingleStep_3                     = 250;
+constexpr uint16_t Falling_SingleStep_4                     = 251;
+constexpr uint16_t Falling_SingleStep_5_Check_CanFall       = 252;
+constexpr uint16_t Falling_SingleStep_6_End                 = 253;
 
 // constexpr uint16_t  Jump_Down_1_Start        1250
 // constexpr uint16_t  Jump_Down_2              1250
@@ -333,7 +333,7 @@ namespace Constants {
     constexpr uint8_t TileWidth = 12;
     constexpr uint8_t ScreenTopOffset = 1;
     constexpr uint8_t ScreenWidthInTiles = 10;
-
+    constexpr int8_t CoordNone = 127;
 
     constexpr int8_t Prince_XOffset[] PROGMEM = {
    
@@ -592,13 +592,15 @@ enum class CanClimbDownPart2Result : uint8_t {
 };
 
 enum class ItemType : uint8_t {
-    /* 00 */ Gate,               
-    /* 01 */ Torch,
+    AnyItem,
+    /* 01 */ Gate,               
     /* 02 */ Door,
     /* 03 */ Sword,
     /* 04 */ CollapsingFloor,
     /* 05 */ CollpasedFloor,
     /* 06 */ Potion_Small,
+    /* 07 */ FloorButton,
+    Flash,
 };
 
 enum class MenuOption : uint8_t {

@@ -11,8 +11,9 @@
 
 void game_Init() {
 
+    prince.init(86, 87, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
     // prince.init(70, 25, Direction::Left, Stance::Crouch_3_End, 3);          // Under collapsible floor
-    prince.init(18, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
+    // prince.init(18, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
     // prince.init(66, 56, Direction::Right, Stance::Crouch_3_End, 3);        // Get tonic
     // prince.init(30, 56 + Constants::TileHeight, Direction::Right, Stance::Crouch_3_End, 3);     // Column of climbs
     // prince.init(80, 25, Direction::Right, Stance::Crouch_3_End, 3);     // Top Left
@@ -23,8 +24,9 @@ void game_Init() {
     gamePlay.init(arduboy, 1);
     
     level.setLevel(1);
-    // level.init(prince, 50, 3);  // Under collapsible floor
     level.init(prince, 60, 0);  // Normal starting posa
+    // level.init(prince, 50, 3);  // Under collapsible floor
+    // level.init(prince, 60, 0);  // Normal starting posa
     // level.init(prince, Constants::TileHeight, 0);   // Get tonic
 //    level.init(prince, 0, 3);   // Column of climbs
     // level.init(prince, 0, 0);   // Top left
@@ -90,9 +92,6 @@ void game() {
 
 
 
-
-
-
     // Calculate screen offset ..
 
     if (prince.getYPrevious() <= 56 && prince.getY() > 56) {
@@ -146,7 +145,7 @@ void game() {
     // Update the objects ..
 
     prince.update(level.getXLocation(), level.getYLocation());
-    level.update(arduboy, prince);
+    bool reevaluatePrinceFalling = level.update(arduboy, prince);
     /* if (gamePlay.gameState == GameState::Game) */ gamePlay.update(arduboy);
     if (menu.update()) gamePlay.gameState = GameState::Game;
     
@@ -631,7 +630,7 @@ void game() {
                 if (prince.getDirection() == Direction::Right) {
                                     
                     if ((pressed & RIGHT_BUTTON) && (pressed & A_BUTTON)) {
-
+//check can jump
                         if (true) {
                             prince.pushSequence(Stance::Running_Jump_1_Start, Stance::Running_Jump_11_End, Stance::Run_Repeat_4, true);
                         }
@@ -893,7 +892,7 @@ void game() {
 
                     break;
 
-                case Stance::Standing_Jump_10_Land_Point:
+                case Stance::Standing_Jump_11_Land_Point:
 
                     if (level.canFall(prince)) {
 
@@ -921,7 +920,7 @@ void game() {
                 case Stance::Jump_Up_Drop_A_4: // Ripple collapsible floors.
                 case Stance::Jump_Up_Drop_B_4: 
 
-                    for (uint8_t i = 0; i < Constants::NumberOfItems; i++) {
+                    for (uint8_t i = 1; i < Constants::NumberOfItems; i++) {
                         
                         Item &item = level.getItem(i);
 
@@ -944,6 +943,12 @@ void game() {
 
                     }
                     else {
+
+                        Item &flash = level.getItem(0);
+                        flash.active = true;
+                        flash.data.flash.frame = 5;
+                        flash.x = level.coordToTileIndexX(prince.getDirection(), prince.getX()) + level.getXLocation();
+                        flash.y = level.coordToTileIndexY(prince.getDirection(), prince.getY()) + level.getYLocation();
 
                         switch (prince.getFalling()) {
 
@@ -1052,15 +1057,72 @@ void game() {
 
             }
 
+
             getStance_Offsets(prince.getDirection(), offset, prince.getStance());
             prince.incX(offset.x * (newStance < 0 ? -1 : 1));
             prince.incY(offset.y * (newStance < 0 ? -1 : 1));
 
 
 
+            // Has the player stepped on anything ?
+
+            if (prince.isFootDown()) {
+
+// Serial.println("Foot down!");
+
+
+                // Check for floor buttons and collapsing floors ..
+
+                int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x);
+                int8_t tileYIdx = level.coordToTileIndexY(prince.getDirection(), prince.getPosition().y);
+                uint8_t itemIdx = level.getItem(ItemType::AnyItem, tileXIdx, tileYIdx);
+
+                if (itemIdx != Constants::NoItemFound) {
+
+                    Item &item = level.getItem(itemIdx);
+
+                    switch (item.itemType) {
+                        
+                        case ItemType::CollapsingFloor:
+
+                            if (item.x == tileXIdx && item.y == tileYIdx && item.data.collapsingFloor.timeToFall == 0) {
+
+                                item.data.collapsingFloor.timeToFall = 24;//12;
+
+                            }
+
+                            break;
+
+                        case ItemType::FloorButton:
+
+                            itemIdx = level.getItem(ItemType::Gate, item.data.floorButton.gateX, item.data.floorButton.gateY);
+
+                            if (itemIdx != Constants::NoItemFound) {
+
+                                Item &gate = level.getItem(itemIdx);
+
+                                item.data.floorButton.frame = 1;
+                                item.data.floorButton.timeToFall = 24;
+                                gate.data.gate.closingDelay = 48;
+
+                            }
+
+                            break;
+
+                        default: break;
+
+                    }
+
+                }
+
+            }
+
+
+
+
             // Has the player collided with a wall?
 
-            level.collideWithWall(prince);
+            //level.collideWithWall(prince);
 
 
             #if defined(DEBUG) && defined(DEBUG_PRINCE_DETAILS)
@@ -1079,25 +1141,8 @@ void game() {
     }
 
 
-
-    // Trigger floors 
-    {
-
-        int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x);
-        int8_t tileYIdx = level.coordToTileIndexY(prince.getDirection(), prince.getPosition().y);
-
-        for (uint8_t i = 0; i < Constants::NumberOfItems; i++) {
-            
-            Item &item = level.getItem(i);
-
-            if (item.active && item.itemType == ItemType::CollapsingFloor && item.x == tileXIdx && item.y == tileYIdx && item.data.collapsingFloor.timeToFall == 0) {
-
-                item.data.collapsingFloor.timeToFall = 12;
-
-            }
-
-        }
-
+    if (reevaluatePrinceFalling) {
+        Serial.println("reevaluate");
     }
 
 
@@ -1134,7 +1179,7 @@ void game() {
     #if defined(DEBUG) && defined(DEBUG_ONSCREEN_DETAILS_MIN)
     font3x5.setTextColor(0);
     font3x5.setCursor(1, 0);
-    arduboy.fillRect(0, 0, 12, 7);
+    arduboy.fillRect(0, 0, 13, 7);
     font3x5.print(F("D"));
     font3x5.print(level.distToEdgeOfTile(prince.getDirection(),  (level.getXLocation() * Constants::TileWidth) + prince.getX()));
     #endif

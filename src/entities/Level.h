@@ -17,6 +17,7 @@
 
 
 #define TILE_FLOOR_BASIC 77
+#define TILE_FLOOR_BASIC_TORCH 127
 #define TILE_FLOOR_LH_END 76
 #define TILE_FLOOR_PATTERN_1 78
 #define TILE_FLOOR_PATTERN_2 79
@@ -110,7 +111,7 @@ struct Level {
             this->yOffset = this->yOffset + inc;
         }
 
-        void update(Arduboy2Ext &arduboy, Prince &prince) {
+        bool update(Arduboy2Ext &arduboy, Prince &prince) { // returns true if player should be tested for a fall.
 
 
             // Update level offset ..
@@ -147,10 +148,6 @@ struct Level {
 
             }
 
-
-            // uint8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), prince.getPosition().x) - this->getXLocation();
-            // uint8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), prince.getPosition().y) - this->getYLocation() - 1;
-
             for (uint8_t i = 0; i < Constants::NumberOfItems; i++) {
 
                 Item &item = this->getItem(i);
@@ -159,27 +156,51 @@ struct Level {
 
                     switch (item.itemType) {
 
-                        case ItemType::Gate:
+                        case ItemType::Flash:
 
-                            if (item.data.gate.closingDelay > 0) {
-                                item.data.gate.closingDelay--;
-                            }
-                            else {
+                            if (item.data.flash.frame > 0) {
 
-                                if (item.data.gate.position > 0 && arduboy.getFrameCount(3)) {
+                                if (arduboy.isFrameCount(2)) {
+                                        
+                                    item.data.flash.frame--;
 
-                                    item.data.gate.position--;
+                                    if (item.data.flash.frame == 0) {
+
+                                        item.active = false;
+
+                                    }
+                                        
                                 }
 
                             }
+
                             break;
 
-                        case ItemType::Torch:
 
-                            if (arduboy.getFrameCount(3)) {
+                        case ItemType::Gate:
 
-                                item.data.torch.frame++;
-                                item.data.torch.frame = (item.data.torch.frame) % 5;
+                            if (arduboy.isFrameCount(4)) {
+                                    
+                                if (item.data.gate.closingDelay > 0) {
+
+                                    item.data.gate.closingDelay--;
+
+                                    if (item.data.gate.position < 9 && arduboy.getFrameCount(3)) {
+
+                                        item.data.gate.position++;
+                                        
+                                    }
+
+                                }
+                                else {
+
+                                    if (item.data.gate.position > 0 && arduboy.getFrameCount(3)) {
+
+                                        item.data.gate.position--;
+
+                                    }
+
+                                }
 
                             }
                             break;
@@ -209,6 +230,8 @@ struct Level {
 
                                 }
 
+                                return item.data.collapsingFloor.timeToFall;
+
                             }
 
                             break;
@@ -222,6 +245,26 @@ struct Level {
                             }
                             break;
 
+                        case ItemType::FloorButton:
+
+                            if (arduboy.isFrameCount(4)) {
+
+                                if (item.data.floorButton.timeToFall > 1) {
+
+                                    item.data.floorButton.timeToFall--;
+
+                                }
+
+                                if (item.data.floorButton.timeToFall == 1) {
+                                
+                                    item.data.floorButton.frame = 0;
+                                    item.data.floorButton.timeToFall = 0;
+
+                                }
+
+                            }
+                            break;
+
                         default: break;
 
                     }
@@ -229,6 +272,8 @@ struct Level {
                 }
 
             }
+
+            return false;
 
         }
 
@@ -315,26 +360,15 @@ struct Level {
                         DEBUG_PRINTLN(tile);
                         #endif
 
-                        if (returnCollapsingTile != TILE_NONE && isCollapsingFloor(this->xLoc + x, this->yLoc + y)) {
+
+                        // Substitute tiles if needed ..
+
+                        if (returnCollapsingTile != TILE_NONE && this->isCollapsingFloor(this->xLoc + x, this->yLoc + y)) {
 
                             return returnCollapsingTile;
 
                         }
 
-                        // if (tile == TILE_COLUMN_1 && isCollapsingFloor(this->xLoc + x + 1, this->yLoc + y)) {
-
-                        //     return TILE_COLUMN_2;
-
-                        // }
-
-//                         if (tile == TILE_FLOOR_RH_END_3 && isCollapsingFloor(this->xLoc + x + 1, this->yLoc + y)) {
-//                             return TILE_COLUMN_REAR_2;
-
-//                         }
-//                         if (tile == TILE_COLUMN_REAR_2 && isCollapsingFloor(this->xLoc + x + 1, this->yLoc + y)) {
-//                             return TILE_FLOOR_RH_END_3;
-
-//                         }
                         return tile;
 
                     }
@@ -348,14 +382,28 @@ struct Level {
 
         }
 
+
+        // Locate the itemType at x, y.  Return the index of the specified itemType
+
         uint8_t getItem(ItemType itemType, int8_t x, int8_t y) {
 
-            for (uint8_t i = 0; i < Constants::NumberOfItems; i++) {
+            for (uint8_t i = 1; i < Constants::NumberOfItems; i++) {
                 
                 Item &item = this->items[i];
 
-                if (item.active && item.itemType == itemType && item.x == x && item.y == y) {
-                    return i;
+                if (itemType == ItemType::AnyItem) {
+
+                    if (item.active && item.x == x && item.y == y) {
+                        return i;
+                    }
+
+                }
+                else {
+
+                    if (item.active && (item.itemType == itemType) && (item.x == x) && (item.y == y)) {
+                        return i;
+                    }
+
                 }
 
             }
@@ -363,6 +411,7 @@ struct Level {
             return Constants::NoItemFound;
             
         }
+
 
         bool isCollapsingFloor(int8_t x, int8_t y) {
 
@@ -433,14 +482,19 @@ struct Level {
         void loadItems() {
 
 
-            // Items
-            
+            // Deactivate all items ..            
 
             for (Item &item : items) {
                 item.active = false;
             }
 
-            uint8_t itemIdx = 0;
+
+            // Populate first item with explosion ..
+
+            Item &explosion = this->items[0];
+            explosion.itemType = ItemType::Flash;
+
+            uint8_t itemIdx = 1;
             FX::seekData(Levels::Level1_Items);
             uint8_t itemType = FX::readPendingUInt8();
 
@@ -459,16 +513,17 @@ struct Level {
                         item.data.gate.closingDelay = FX::readPendingUInt8();
                         break;
 
-                    // case ItemType::Torch:
-                    //     break;
-
                     case ItemType::CollapsingFloor:
                         item.data.collapsingFloor.distanceFallen = 0;
                         item.data.collapsingFloor.distToFall = FX::readPendingUInt8();
                         break;
 
-                    // case ItemType::CollpasedFloor:
-                    //     break;
+                    case ItemType::FloorButton:
+                        item.data.floorButton.frame = 0;
+                        item.data.floorButton.gateX = FX::readPendingUInt8();
+                        item.data.floorButton.gateY = FX::readPendingUInt8();
+                        item.data.floorButton.timeToFall = 0;
+                        break;
                 
                     default:
                         break;
@@ -494,7 +549,7 @@ struct Level {
                 if (y < 0) {
 
                     for (uint8_t x = 0; x < 16; x++) {
-
+                        
                         int8_t tileId = static_cast<int8_t>(FX::readPendingUInt8());
                         bg[y - this->yLoc + 1][x] = TILE_FG_WALL_1;
 
@@ -611,7 +666,7 @@ struct Level {
         }
 
 
-        bool isWallTile(int8_t bgTile, int8_t fgTile) {
+        bool isWallTile(int8_t bgTile, int8_t fgTile, int8_t x = Constants::CoordNone, int8_t y = Constants::CoordNone) {
 
             switch (fgTile) {
 
@@ -623,8 +678,27 @@ struct Level {
                 case TILE_FG_WALL_6:
                     return true;
 
+                default: 
 
-                default: return false;
+                    if (x != Constants::CoordNone && y != Constants::CoordNone) {
+
+                        uint8_t idx = this->getItem(ItemType::Gate, x + this->getXLocation(), y + this->getYLocation());
+
+                        if (idx != Constants::NoItemFound) {
+
+                            Item &item = this->getItem(idx);
+
+                            if (item.data.gate.position == 0) {
+
+                                return true;
+
+                            }
+
+                        }
+
+                    }
+
+                    return false;
 
             }
 
@@ -635,6 +709,7 @@ struct Level {
             switch (bgTile) {
 
                 case TILE_FLOOR_BASIC:
+                case TILE_FLOOR_BASIC_TORCH:
                 case TILE_FLOOR_LH_END:
                 case TILE_FLOOR_PATTERN_1:
                 case TILE_FLOOR_PATTERN_2:
@@ -680,7 +755,7 @@ struct Level {
 
         }
 
-        bool canFall(int8_t bgTile, int8_t fgTile) {
+        bool canFall(int8_t bgTile, int8_t fgTile, int8_t x = Constants::CoordNone, int8_t y = Constants::CoordNone) {
 
             switch (bgTile) {
 
@@ -697,6 +772,24 @@ struct Level {
                 case TILE_FLOOR_RH_END_4:
                 case TILE_FLOOR_RH_END_5:
 
+                    if (x != Constants::CoordNone && y != Constants::CoordNone) {
+
+                        uint8_t idx = this->getItem(ItemType::CollapsingFloor, x + this->getXLocation(), y + this->getYLocation());
+
+                        if (idx != Constants::NoItemFound) {
+
+                            Item &item = this->getItem(idx);
+
+                            if (item.data.gate.position == 0) {
+
+                                return false;
+
+                            }
+
+                        }
+
+                    }
+
                     return true;
 
             }
@@ -711,21 +804,37 @@ struct Level {
             Point newPos = prince.getPosition();
             newPos.x = newPos.x + (prince.getDirection() == Direction::Left ? xOffset * -1 : xOffset);
 
-            int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), newPos.x) - this->getXLocation();
+            uint8_t imageIndex = static_cast<uint8_t>(pgm_read_byte(&Images::StanceToImageXRef[prince.getStance()]));
+            uint16_t pos = (imageIndex - 1) * 3;
+            int8_t reach = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos]));
+            int8_t footToe = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 1]));
+            int8_t footHeel = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 2]));
+
+            int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), newPos.x + (prince.getDirection() == Direction::Left ? -footHeel : footHeel)) - this->getXLocation();
             int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), newPos.y) - this->getYLocation();
             
             int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
             int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
             
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
-            DEBUG_PRINT(F("canFall() bg "));
+            DEBUG_PRINT(F("canFall() stance:"));
+            DEBUG_PRINT(prince.getStance());
+            DEBUG_PRINT(F(", r:"));
+            DEBUG_PRINT(reach);
+            DEBUG_PRINT(F(", ft "));
+            DEBUG_PRINT(footToe);
+            DEBUG_PRINT(F(", fh "));
+            DEBUG_PRINT(footHeel);
+            DEBUG_PRINT(F(", bg "));
             DEBUG_PRINT(bgTile1);
             DEBUG_PRINT(F(", fg "));
             DEBUG_PRINT(fgTile1);
             DEBUG_PRINTLN("");
             #endif
 
-            return this->canFall(bgTile1, fgTile1);
+
+
+            return this->canFall(bgTile1, fgTile1, tileXIdx, tileYIdx);
 
         
         }
@@ -879,7 +988,7 @@ struct Level {
             int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), prince.getPosition().x);
             int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), prince.getPosition().y);
 
-            for (uint8_t i = 0; i < Constants::NumberOfItems; i++) {
+            for (uint8_t i = 1; i < Constants::NumberOfItems; i++) {
 
                 Item &item = this->items[i];
 
@@ -937,7 +1046,7 @@ struct Level {
                         int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(prince.getDirection(), prince.getPosition().x);
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
-                        DEBUG_PRINT(F(" dist "));
+                        DEBUG_PRINT(F(" left dist "));
                         DEBUG_PRINT(distToEdgeOfCurrentTile);
                         DEBUG_PRINT(F(", bg "));
                         DEBUG_PRINT(bgTile2);
@@ -963,7 +1072,7 @@ struct Level {
                                         printTileInfo(bgTile2, fgTile2);
                                         #endif
 
-                                        return (!this->isWallTile(bgTile2, fgTile2) && (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2)));
+                                        return (!this->isWallTile(bgTile2, fgTile2, tileXIdx, tileYIdx) && (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2)));
 
                                     default:
                                         return true;
@@ -983,7 +1092,7 @@ struct Level {
                                         printTileInfo(bgTile2, fgTile2);
                                         #endif
 
-                                        return (!this->isWallTile(bgTile2, fgTile2) && (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2)));
+                                        return (!this->isWallTile(bgTile2, fgTile2, tileXIdx, tileYIdx) && (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2)));
 
                                     default:
                                         return true;
@@ -999,7 +1108,7 @@ struct Level {
                                 #endif
                                 
 //                                return (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2));
-                                return (!this->isWallTile(bgTile2, fgTile2));
+                                return (!this->isWallTile(bgTile2, fgTile2, tileXIdx, tileYIdx));
 
                             case Action::StandingJump:
 
@@ -1008,7 +1117,7 @@ struct Level {
                                     case  2 ... 12:
 
 //                                        if (this->isGroundTile(bgTile2, fgTile2) && this->isGroundTile(bgTile3, fgTile3) && this->isGroundTile(bgTile4, fgTile4)) {
-                                        if (!this->isWallTile(bgTile2, fgTile2)) {
+                                        if (!this->isWallTile(bgTile2, fgTile2, tileXIdx, tileYIdx)) {
                                             return true;                                            
                                         }
 
@@ -1017,7 +1126,7 @@ struct Level {
                                     default:
 
 //                                        if (this->isGroundTile(bgTile2, fgTile2) && this->isGroundTile(bgTile3, fgTile3)) {
-                                        if (!this->isWallTile(bgTile2, fgTile2)) {
+                                        if (!this->isWallTile(bgTile2, fgTile2, tileXIdx, tileYIdx)) {
                                             return true;                                            
                                         }
 
@@ -1057,8 +1166,7 @@ struct Level {
                         int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(prince.getDirection(), prince.getPosition().x);
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
-                        printAction(action);
-                        DEBUG_PRINT(F("dist "));
+                        DEBUG_PRINT(F(" right dist "));
                         DEBUG_PRINT(distToEdgeOfCurrentTile);
                         DEBUG_PRINT(F(", bg "));
                         DEBUG_PRINT(bgTile1);
@@ -1120,7 +1228,7 @@ struct Level {
                                 #endif
                                 
                                 //return (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2));
-                                return (!this->isWallTile(bgTile2, fgTile2));
+                                return (!this->isWallTile(bgTile2, fgTile2, tileXIdx + 1, tileYIdx));
 
                             case Action::StandingJump:
 
@@ -1129,7 +1237,7 @@ struct Level {
                                     case  2 ... 12:
 
                                         // if (this->isGroundTile(bgTile2, fgTile2) && this->isGroundTile(bgTile3, fgTile3) && this->isGroundTile(bgTile4, fgTile4)) {
-                                        if (!this->isWallTile(bgTile2, fgTile2)) {
+                                        if (!this->isWallTile(bgTile2, fgTile2, tileXIdx + 1, tileYIdx)) {
                                             return true;                                            
                                         }
 
@@ -1138,7 +1246,7 @@ struct Level {
                                     default:
 
                                         // if (this->isGroundTile(bgTile2, fgTile2) && this->isGroundTile(bgTile3, fgTile3)) {
-                                        if (!this->isWallTile(bgTile2, fgTile2)) {
+                                        if (!this->isWallTile(bgTile2, fgTile2, tileXIdx + 1, tileYIdx)) {
                                             return true;                                            
                                         }
 
@@ -1506,28 +1614,28 @@ struct Level {
                                 case TILE_FLOOR_LH_END_PATTERN_1:
                                 case TILE_FLOOR_LH_END_PATTERN_2:
                                 case TILE_COLUMN_3:
-Serial.println("A");                                
+
                                     if (midTile == TILE_COLLAPSING_FLOOR) {
-Serial.println("A1");                                
+
                                         return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
                                     }
                                     else {
-Serial.println("A2");                                
+
                                         return CanJumpUpResult::StepThenJump;
                                     }
 
                                 case TILE_COLLAPSING_FLOOR:
-Serial.println("B");                                
+
                                     return CanJumpUpResult::StepThenJumpThenFall_CollapseFloor;
 
                                 default:                                
 
                                     if (midTile == TILE_COLLAPSING_FLOOR) {
-Serial.println("C");                                
+
                                         return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
                                     }
                                     else {
-Serial.println("D");                                
+
                                         return CanJumpUpResult::JumpThenFall;
                                     }
 
@@ -1543,7 +1651,7 @@ Serial.println("D");
                                 case TILE_FLOOR_LH_END_PATTERN_1:
                                 case TILE_FLOOR_LH_END_PATTERN_2:
                                 case TILE_COLUMN_3:
-                                
+
                                     if (midTile == TILE_COLLAPSING_FLOOR) {
                                         return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
                                     }
@@ -1723,7 +1831,7 @@ Serial.println("D");
 
             uint8_t gatePosition = 255;
 
-            for (uint8_t i = 0; i < Constants::NumberOfItems; i++) {
+            for (uint8_t i = 1; i < Constants::NumberOfItems; i++) {
 
                 Item &item = this->items[i];
 

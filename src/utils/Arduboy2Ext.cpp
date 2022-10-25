@@ -33,9 +33,9 @@ uint16_t Arduboy2Ext::getFrameCount() const {
 
 }
 
-uint8_t Arduboy2Ext::getFrameCount(uint8_t mod) const {
+uint8_t Arduboy2Ext::getFrameCount(uint8_t mod, int8_t offset) const {
 
-  return frameCount % mod;
+  return (frameCount + offset) % mod;
 
 }
 

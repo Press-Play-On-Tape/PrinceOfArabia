@@ -20,8 +20,16 @@ void render() {
 
             int8_t bgTile = level.getTile(Layer::Background, x, y - 1, TILE_NONE);
 
-            if (bgTile >= 0) {
-               FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon[Images::xTiles_Ref[bgTile]], 0, dbmNormal);
+            switch (bgTile) {
+
+                case 0 ... 126:
+                   FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon[Images::xTiles_Ref[bgTile]], 0, dbmNormal);
+                   break;
+//52
+                case 127:
+                   FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon_50_00 + ((arduboy.getFrameCount(15, (x + 2)) / 5) * 52), 0, dbmNormal);
+                   break;
+
             }
 
         }
@@ -31,7 +39,7 @@ void render() {
 
     // Draw items ..
 
-    for (uint8_t i = 0; i < Constants::NumberOfItems; i++) {
+    for (uint8_t i = 1; i < Constants::NumberOfItems; i++) {
 
         Item &item = level.getItem(i);
         int16_t xLoc = (item.x - level.getXLocation()) * Constants::TileWidth;
@@ -41,12 +49,11 @@ void render() {
 
             switch (item.itemType) {
 
-                case ItemType::Gate:
-                    FX::drawBitmap(xLoc - 5, yLoc, Images::Gate_00 + (item.data.gate.position * 76), 0, dbmMasked);
+                case ItemType::Flash:
                     break;
 
-                case ItemType::Torch:
-                    FX::drawBitmap(xLoc, yLoc, Images::Torch_00 + (item.data.torch.frame * 16), 0, dbmMasked);
+                case ItemType::Gate:
+                    FX::drawBitmap(xLoc - 5, yLoc, Images::Gate_00 + (item.data.gate.position * 76), 0, dbmMasked);
                     break;
 
                 case ItemType::CollapsingFloor:
@@ -59,6 +66,10 @@ void render() {
 
                 case ItemType::Potion_Small:
                     FX::drawBitmap(xLoc + 6, yLoc + 12, Images::Potion_Small_00 + (item.data.potionSmall.frame * 28), 0, dbmMasked);
+                    break;
+
+                case ItemType::FloorButton:
+                    FX::drawBitmap(xLoc, yLoc + item.data.floorButton.frame - 1, Images::FloorButton_00 + (item.data.floorButton.frame * (Images::FloorButton_01 - Images::FloorButton_00)), 0, dbmMasked);
                     break;
 
                 default: break;
@@ -124,6 +135,19 @@ void render() {
         }
 
     }
+
+
+    // Draw flash ..
+
+    Item &item = level.getItem(0);
+    int16_t xLoc = (item.x - level.getXLocation()) * Constants::TileWidth;
+    int16_t yLoc = ((item.y - level.getYLocation()) * Constants::TileHeight) - level.getYOffset() + Constants::ScreenTopOffset;
+
+    if (item.data.flash.frame > 0 && item.data.flash.frame < 5) {
+
+        FX::drawBitmap(xLoc - 3, yLoc + 12, Images::Flash_00 + ((item.data.flash.frame - 1) * 136), 0, dbmMasked);
+    }
+
 
 
     // Render health ..

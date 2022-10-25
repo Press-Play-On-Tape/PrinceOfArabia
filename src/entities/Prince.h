@@ -57,7 +57,7 @@ struct Prince {
 
         void incFalling()                           { this->falling++; }
         void decHealth(uint8_t val)                 { health > val ? this->health = this->health - val: 0; }
-        void incHealth(int8_t val)                  { this->health = this->health + val > this->healthMax ? this->HealthMax : this->health + val; } 
+        void incHealth(int8_t val)                  { this->health = this->health + val > this->healthMax ? this->healthMax : this->health + val; } 
 
 
         Point &getPosition()                        { return this->location; }
@@ -365,5 +365,28 @@ struct Prince {
 
         }
 
+        bool isFootDown() {
+
+            switch (this->getStance()) {
+
+                case Stance::Running_Jump_7                 ... Stance::Running_Jump_10:
+                case Stance::Standing_Jump_9                ... Stance::Standing_Jump_10:
+                case Stance::Climbing_1_Start               ... Stance::Climbing_15_End:
+                case Stance::Jump_Up_B_11                   ... Stance::Jump_Up_B_14_End:
+                case Stance::Falling_SmallStep_1_Start      ... Stance::Falling_SmallStep_5_Check_CanFall:
+                case Stance::Falling_RunningJump_1_Start    ... Stance::Falling_RunningJump_5_Check_CanFall:
+                case Stance::Falling_StandingJump_1_Start   ... Stance::Falling_StandingJump_5_Check_CanFall:
+                case Stance::Falling_SingleStep_1_Start     ... Stance::Falling_SingleStep_5_Check_CanFall:
+                case Stance::Falling_C_1_Start              ... Stance::Falling_C_5_Check_CanFall:
+                case Stance::Falling_Injured_1_Start:
+                case Stance::Falling_Dead_1_Start           ... Stance::Falling_Dead_2:
+                    return false;
+
+                default:
+                    return true;
+
+            }
+
+        }
 
 };
