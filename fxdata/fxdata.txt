@@ -37,17 +37,17 @@ int8_t Level1_BG[] = {
         4, 36, 1, 24,           // CollapsingTile (dist to fall)                                    // Verified
         4, 43, 4, 117,          // CollapsingTile (dist to fall)                                    // Verified
         6, 53, 2,               // Potion Small                                                     // Verified
-        7, 46, 3, 50, 3,        // Floor Button (gateX, gateY)                                      // Verified
-        7, 52, 3, 50, 3,        // Floor Button (gateX, gateY)                                      // Verified
+        7, 46, 3, 50, 3,        // Floor Button 1 (gateX, gateY)                                    // Verified
+        7, 52, 3, 50, 3,        // Floor Button 1 (gateX, gateY)                                    // Verified
         2, 50, 3, 0, 0,         // Gate @ 50, 3 starting position 0 (bottom).                       // Verified
         7, 47, 4, 40, 3,        // Floor Button (gateX, gateY)                                      // Verified
         2, 40, 3, 0, 0,         // Gate @ 50, 3 starting position 0 (bottom).                       // Verified
         4, 35, 3, 55,           // CollapsingTile (dist to fall)                                    // Verified
         4, 36, 3, 55,           // CollapsingTile (dist to fall)                                    // Verified
-        7, 32, 3, 40, 3,        // Floor Button (gateX, gateY)                                      // Verified
+        7, 32, 3, 40, 3,        // Floor Button 1 (gateX, gateY)                                    // Verified
         4, 25, 4, 117,          // CollapsingTile (dist to fall)                                    // Verified
-        7, 27, 4, 20, 3,        // Floor Button (gateX, gateY)                                      // Verified
-        7, 24, 4, 20, 3,        // Floor Button (gateX, gateY)                                      // Verified
+        7, 27, 4, 20, 3,        // Floor Button 1 (gateX, gateY)                                    // Verified
+        8, 24, 4, 20, 3,        // Floor Button 2 (gateX, gateY)                                    // Verified
         2, 20, 3, 0, 0,         // Gate @ 50, 3 starting position 0 (bottom).                       // Verified
         4, 18, 2, 24,           // CollapsingTile (dist to fall)                                    // Verified
         4, 33, 5, 24,           // CollapsingTile (dist to fall)                                    // Verified

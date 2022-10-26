@@ -73,7 +73,11 @@ void render() {
                     break;
 
                 case ItemType::FloorButton1:
-                    FX::drawBitmap(xLoc, yLoc + item.data.floorButton.frame - 1, Images::FloorButton_00 + (item.data.floorButton.frame * (Images::FloorButton_01 - Images::FloorButton_00)), 0, dbmMasked);
+                    FX::drawBitmap(xLoc, yLoc + item.data.floorButton1.frame - 1, Images::FloorButton_00 + (item.data.floorButton1.frame * (Images::FloorButton_01 - Images::FloorButton_00)), 0, dbmMasked);
+                    break;
+
+                case ItemType::FloorButton2:
+                    FX::drawBitmap(xLoc, yLoc + item.data.floorButton2.frame - 1, Images::FloorButton_00 + (item.data.floorButton2.frame * (Images::FloorButton_01 - Images::FloorButton_00)), 0, dbmMasked);
                     break;
 
                 default: break;

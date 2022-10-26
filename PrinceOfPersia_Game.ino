@@ -1096,14 +1096,30 @@ void game() {
 
                         case ItemType::FloorButton1:
 
-                            itemIdx = level.getItem(ItemType::Gate, item.data.floorButton.gateX, item.data.floorButton.gateY);
+                            itemIdx = level.getItem(ItemType::Gate, item.data.floorButton1.gateX, item.data.floorButton1.gateY);
 
                             if (itemIdx != Constants::NoItemFound) {
 
                                 Item &gate = level.getItem(itemIdx);
 
-                                item.data.floorButton.frame = 1;
-                                item.data.floorButton.timeToFall = 24;
+                                item.data.floorButton1.frame = 1;
+                                item.data.floorButton1.timeToFall = 24;
+                                gate.data.gate.closingDelay = 48;
+
+                            }
+
+                            break;
+
+                        case ItemType::FloorButton2:
+
+                            itemIdx = level.getItem(ItemType::Gate, item.data.floorButton2.gateX, item.data.floorButton2.gateY);
+
+                            if (itemIdx != Constants::NoItemFound) {
+
+                                Item &gate = level.getItem(itemIdx);
+
+                                item.data.floorButton2.frame = 1;
+                                item.data.floorButton2.timeToFall = 24;
                                 gate.data.gate.closingDelay = 48;
 
                             }

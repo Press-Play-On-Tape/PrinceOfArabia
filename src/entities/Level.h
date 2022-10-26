@@ -249,16 +249,36 @@ struct Level {
 
                             if (arduboy.isFrameCount(4)) {
 
-                                if (item.data.floorButton.timeToFall > 1) {
+                                if (item.data.floorButton1.timeToFall > 1) {
 
-                                    item.data.floorButton.timeToFall--;
+                                    item.data.floorButton1.timeToFall--;
 
                                 }
 
-                                if (item.data.floorButton.timeToFall == 1) {
+                                if (item.data.floorButton1.timeToFall == 1) {
                                 
-                                    item.data.floorButton.frame = 0;
-                                    item.data.floorButton.timeToFall = 0;
+                                    item.data.floorButton1.frame = 0;
+                                    item.data.floorButton1.timeToFall = 0;
+
+                                }
+
+                            }
+                            break;
+
+                        case ItemType::FloorButton2:
+
+                            if (arduboy.isFrameCount(4)) {
+
+                                if (item.data.floorButton2.timeToFall > 1) {
+
+                                    item.data.floorButton2.timeToFall--;
+
+                                }
+
+                                if (item.data.floorButton2.timeToFall == 1) {
+                                
+                                    item.data.floorButton2.frame = 0;
+                                    item.data.floorButton2.timeToFall = 0;
 
                                 }
 
@@ -519,10 +539,17 @@ struct Level {
                         break;
 
                     case ItemType::FloorButton1:
-                        item.data.floorButton.frame = 0;
-                        item.data.floorButton.gateX = FX::readPendingUInt8();
-                        item.data.floorButton.gateY = FX::readPendingUInt8();
-                        item.data.floorButton.timeToFall = 0;
+                        item.data.floorButton1.frame = 0;
+                        item.data.floorButton1.gateX = FX::readPendingUInt8();
+                        item.data.floorButton1.gateY = FX::readPendingUInt8();
+                        item.data.floorButton1.timeToFall = 0;
+                        break;
+
+                    case ItemType::FloorButton2:
+                        item.data.floorButton2.frame = 0;
+                        item.data.floorButton2.gateX = FX::readPendingUInt8();
+                        item.data.floorButton2.gateY = FX::readPendingUInt8();
+                        item.data.floorButton2.timeToFall = 0;
                         break;
                 
                     default:
@@ -908,70 +935,6 @@ struct Level {
 
             }
 
-
-            // // Two levels?
-
-            // bgTile = this->getTile(Layer::Background, tileXIdx + (prince.getDirection() == Direction::Left ? 1 : 0), tileYIdx + 1, TILE_FLOOR_BASIC);
-            // fgTile = this->getTile(Layer::Foreground, tileXIdx + (prince.getDirection() == Direction::Left ? 1 : 0), tileYIdx + 1, TILE_FLOOR_BASIC);
-
-            // #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN_PART2)
-            // DEBUG_PRINTLN(" skip");
-            // DEBUG_PRINT(F("canClimbDown_Part2() Test can land 2 levels below ("));
-            // DEBUG_PRINT(tileXIdx + (prince.getDirection() == Direction::Left ? 1 : 0));
-            // DEBUG_PRINT(F(","));
-            // DEBUG_PRINT(tileYIdx + 1);
-            // DEBUG_PRINT(F(") bg "));
-            // DEBUG_PRINT(bgTile);
-            // DEBUG_PRINT(F(", fg "));
-            // DEBUG_PRINT(fgTile);
-            // DEBUG_PRINT(F(", isGroundTile: "));
-            // DEBUG_PRINT(this->isGroundTile(bgTile, fgTile));
-            // #endif
-
-            // isGroundTile = this->isGroundTile(bgTile, fgTile);
-
-            // if (isGroundTile) {
-
-            //     #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN_PART2)
-            //     DEBUG_PRINTLN(" return Level_2");
-            //     #endif
-                
-            //     return CanClimbDownPart2Result::Level_2;
-
-            // }
-
-
-            // // Three levels?
-
-            // bgTile = this->getTile(Layer::Background, tileXIdx + (prince.getDirection() == Direction::Left ? 1 : 0), tileYIdx + 2, TILE_FLOOR_BASIC);
-            // fgTile = this->getTile(Layer::Foreground, tileXIdx + (prince.getDirection() == Direction::Left ? 1 : 0), tileYIdx + 2, TILE_FLOOR_BASIC);
-
-            // #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN_PART2)
-            // DEBUG_PRINTLN(" skip");
-            // DEBUG_PRINT(F("canClimbDown_Part2() Test can land 3 levels below ("));
-            // DEBUG_PRINT(tileXIdx + (prince.getDirection() == Direction::Left ? 1 : 0));
-            // DEBUG_PRINT(F(","));
-            // DEBUG_PRINT(tileYIdx + 2);
-            // DEBUG_PRINT(F(") bg "));
-            // DEBUG_PRINT(bgTile);
-            // DEBUG_PRINT(F(", fg "));
-            // DEBUG_PRINT(fgTile);
-            // DEBUG_PRINT(F(", isGroundTile: "));
-            // DEBUG_PRINT(this->isGroundTile(bgTile, fgTile));
-            // #endif
-
-            // isGroundTile = this->isGroundTile(bgTile, fgTile);
-
-            // if (isGroundTile) {
-
-            //     #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN_PART2)
-            //     DEBUG_PRINTLN(" return Level_3");
-            //     #endif
-                
-            //     return CanClimbDownPart2Result::Level_3;
-
-            // }
-
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN_PART2)
             DEBUG_PRINTLN(" return Falling");
             #endif
@@ -1023,26 +986,13 @@ struct Level {
 
                 case Direction::Left:
                     {
-
-                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
-                        int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
-                        #endif
-
                         int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx - 1, tileYIdx, TILE_FLOOR_BASIC);
-                        // int8_t bgTile3 = this->getTile(Layer::Background, tileXIdx - 2, tileYIdx, TILE_FLOOR_BASIC);
-                        // int8_t bgTile4 = this->getTile(Layer::Background, tileXIdx - 3, tileYIdx, TILE_FLOOR_BASIC);
-
-                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
-                        int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
-                        #endif
-
                         int8_t fgTile2 = this->getTile(Layer::Foreground, tileXIdx - 1, tileYIdx, TILE_FLOOR_BASIC);
-                        // int8_t fgTile3 = this->getTile(Layer::Foreground, tileXIdx - 2, tileYIdx, TILE_FLOOR_BASIC);
-                        // int8_t fgTile4 = this->getTile(Layer::Foreground, tileXIdx - 3, tileYIdx, TILE_FLOOR_BASIC);
-                        
                         int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(prince.getDirection(), prince.getPosition().x);
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+                        int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
+                        int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
                         DEBUG_PRINT(F(" left dist "));
                         DEBUG_PRINT(distToEdgeOfCurrentTile);
                         DEBUG_PRINT(F(", bg "));
@@ -1104,7 +1054,6 @@ struct Level {
                                 printTileInfo(bgTile2, fgTile2);
                                 #endif
                                 
-//                                return (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2));
                                 return (!this->isWallTile(bgTile2, fgTile2, tileXIdx, tileYIdx));
 
                             case Action::StandingJump:
@@ -1113,7 +1062,6 @@ struct Level {
 
                                     case  2 ... 12:
 
-//                                        if (this->isGroundTile(bgTile2, fgTile2) && this->isGroundTile(bgTile3, fgTile3) && this->isGroundTile(bgTile4, fgTile4)) {
                                         if (!this->isWallTile(bgTile2, fgTile2, tileXIdx, tileYIdx)) {
                                             return true;                                            
                                         }
@@ -1122,7 +1070,6 @@ struct Level {
 
                                     default:
 
-//                                        if (this->isGroundTile(bgTile2, fgTile2) && this->isGroundTile(bgTile3, fgTile3)) {
                                         if (!this->isWallTile(bgTile2, fgTile2, tileXIdx, tileYIdx)) {
                                             return true;                                            
                                         }
@@ -1144,39 +1091,23 @@ struct Level {
                 case Direction::Right:
                     {
 
-                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
-                        int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
-                        #endif
-                        
                         int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx + 1, tileYIdx, TILE_FLOOR_BASIC);
-                        // int8_t bgTile3 = this->getTile(Layer::Background, tileXIdx + 2, tileYIdx, TILE_FLOOR_BASIC);
-                        // int8_t bgTile4 = this->getTile(Layer::Background, tileXIdx + 3, tileYIdx, TILE_FLOOR_BASIC);
-
-                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
-                        int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
-                        #endif
-
                         int8_t fgTile2 = this->getTile(Layer::Foreground, tileXIdx + 1, tileYIdx, TILE_FLOOR_BASIC);
-                        // int8_t fgTile3 = this->getTile(Layer::Foreground, tileXIdx + 2, tileYIdx, TILE_FLOOR_BASIC);
-                        // int8_t fgTile4 = this->getTile(Layer::Foreground, tileXIdx + 3, tileYIdx, TILE_FLOOR_BASIC);
-                        
                         int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(prince.getDirection(), prince.getPosition().x);
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+                        int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
+                        int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
                         DEBUG_PRINT(F(" right dist "));
                         DEBUG_PRINT(distToEdgeOfCurrentTile);
                         DEBUG_PRINT(F(", bg "));
                         DEBUG_PRINT(bgTile1);
                         DEBUG_PRINT(F(" "));
                         DEBUG_PRINT(bgTile2);
-                        // DEBUG_PRINT(F(" "));
-                        // DEBUG_PRINT(bgTile3);
                         DEBUG_PRINT(F(", fg "));
                         DEBUG_PRINT(fgTile1);
                         DEBUG_PRINT(F(" "));
                         DEBUG_PRINT(fgTile2);
-                        // DEBUG_PRINT(F(" "));
-                        // DEBUG_PRINT(fgTile3);
                         DEBUG_PRINTLN("");
                         #endif
 
@@ -1233,7 +1164,6 @@ struct Level {
 
                                     case  2 ... 12:
 
-                                        // if (this->isGroundTile(bgTile2, fgTile2) && this->isGroundTile(bgTile3, fgTile3) && this->isGroundTile(bgTile4, fgTile4)) {
                                         if (!this->isWallTile(bgTile2, fgTile2, tileXIdx + 1, tileYIdx)) {
                                             return true;                                            
                                         }
@@ -1242,7 +1172,6 @@ struct Level {
 
                                     default:
 
-                                        // if (this->isGroundTile(bgTile2, fgTile2) && this->isGroundTile(bgTile3, fgTile3)) {
                                         if (!this->isWallTile(bgTile2, fgTile2, tileXIdx + 1, tileYIdx)) {
                                             return true;                                            
                                         }
