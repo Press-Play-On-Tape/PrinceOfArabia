@@ -20,6 +20,7 @@ Prince prince;
 Level level;
 MenuItem menu;
 GamePlay gamePlay;
+TitleScreenVars titleScreenVars;
 
 
 void setup() {

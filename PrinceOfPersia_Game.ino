@@ -1094,7 +1094,7 @@ void game() {
 
                             break;
 
-                        case ItemType::FloorButton:
+                        case ItemType::FloorButton1:
 
                             itemIdx = level.getItem(ItemType::Gate, item.data.floorButton.gateX, item.data.floorButton.gateY);
 
@@ -1146,7 +1146,7 @@ void game() {
 
         if (prince.isFootDown() && level.canFall(prince)) {
 
-            Serial.println("start falling");
+            // Serial.println("start falling");
             prince.setFalling(1);
             prince.setPrevStance(Stance::None);
             prince.pushSequence(Stance::Falling_Down_1_Start, Stance::Falling_Down_5_End, true);
@@ -1155,9 +1155,9 @@ void game() {
 
         if (prince.isFootDown()) {
 
-            Serial.println("foot down");
+            // Serial.println("foot down");
         }
-        Serial.println("reevaluate");
+        // Serial.println("reevaluate");
     }
 
 

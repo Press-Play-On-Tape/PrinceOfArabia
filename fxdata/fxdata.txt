@@ -18,7 +18,7 @@ int8_t Level1_BG[] = {
 100,103,75,92,75,-1,-1,-1,-1,-1,-1,109,84,85,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,119,92,96,90,77,89,112,90,77,77,84,103,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,100,103,-1,-1,83,127,127,84,85,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
 100,103,75,92,75,-1,-1,-1,-1,-1,-1,-1,-1,109,89,90,77,77,111,76,89,90,77,89,90,99,-1,-1,-1,-1,-1,-1,100,90,89,90,99,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,113,77,77,111,96,104,-1,-1,-1,-1,-1,-1,83,84,85,76,79,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
 100,103,75,92,75,96,90,77,77,78,77,94,75,76,98,92,76,89,90,115,118,75,92,75,75,75,75,75,75,92,75,75,76,77,84,103,75,96,90,115,118,92,75,75,75,75,102,77,78,115,114,77,77,98,96,90,77,78,77,84,85,92,-1,-1,-1,-1,91,92,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,113,94,75,75,75,75,92,75,75,-1,
-100,85,75,92,75,96,90,77,77,89,112,90,99,-1,97,92,-1,-1,-1,-1,83,77,78,77,77,98,76,77,77,78,78,77,89,90,84,103,92,-1,-1,-1,83,77,77,98,75,102,89,90,99,-1,-1,-1,-1,97,-1,-1,-1,-1,-1,-1,83,77,89,90,77,89,90,77,89,90,89,90,77,77,77,77,77,77,77,89,112,90,78,77,77,77,77,77,79,-1,
+100,85,75,92,75,96,90,77,77,89,112,90,99,-1,97,92,-1,-1,-1,-1,83,77,78,77,77,98,76,77,77,78,78,77,89,90,84,103,92,-1,-1,-1,83,77,77,98,75,102,89,90,99,-1,-1,-1,-1,97,-1,-1,-1,-1,-1,-1,83,77,89,90,77,89,90,77,89,90,89,90,77,77,77,77,77,77,77,89,112,90,78,127,77,77,127,77,79,-1,
 -1,83,77,77,77,89,103,-1,-1,-1,-1,-1,-1,-1,109,98,-1,-1,-1,-1,-1,-1,-1,-1,-1,97,-1,-1,-1,-1,-1,-1,-1,120,96,90,77,89,104,-1,-1,-1,-1,97,92,-1,-1,-1,-1,-1,-1,-1,-1,109,99,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
 -1,120,92,76,77,89,90,89,85,-1,-1,-1,-1,-1,-1,119,-1,-1,-1,-1,-1,-1,-1,-1,-1,91,-1,-1,-1,-1,-1,-1,-1,83,89,90,77,94,92,-1,-1,-1,-1,97,92,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,80,80,80,80,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
 -1,97,92,-1,-1,-1,-1,-1,83,89,112,90,77,77,89,90,89,90,77,89,112,90,77,84,85,92,75,-1,-1,-1,-1,-1,-1,-1,-1,-1,100,85,92,-1,-1,-1,-1,119,92,75,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
@@ -28,7 +28,8 @@ int8_t Level1_BG[] = {
 
 
     uint8_t Level1_Items[] = {
-        1, 60, 0, 9, 32,        // Gate @ 60, 0 starting position 9 (top), falls in 64 frames.      // Verified
+        1, 84, 4,               // Exit Gate 
+        2, 60, 0, 9, 32,        // Gate @ 60, 0 starting position 9 (top), falls in 64 frames.      // Verified
         4, 66, 2, 55,           // CollapsingTile (dist to fall, 24 + 31 + 31 ..)                   // Verified
         4, 55, 2, 24,           // CollapsingTile (dist to fall, 24 + 31 + 31 ..)                   // Verified
         5, 64, 2,               // CollapsedTile                                                    // Verified
@@ -38,16 +39,16 @@ int8_t Level1_BG[] = {
         6, 53, 2,               // Potion Small                                                     // Verified
         7, 46, 3, 50, 3,        // Floor Button (gateX, gateY)                                      // Verified
         7, 52, 3, 50, 3,        // Floor Button (gateX, gateY)                                      // Verified
-        1, 50, 3, 0, 0,         // Gate @ 50, 3 starting position 0 (bottom).                       // Verified
+        2, 50, 3, 0, 0,         // Gate @ 50, 3 starting position 0 (bottom).                       // Verified
         7, 47, 4, 40, 3,        // Floor Button (gateX, gateY)                                      // Verified
-        1, 40, 3, 0, 0,         // Gate @ 50, 3 starting position 0 (bottom).                       // Verified
+        2, 40, 3, 0, 0,         // Gate @ 50, 3 starting position 0 (bottom).                       // Verified
         4, 35, 3, 55,           // CollapsingTile (dist to fall)                                    // Verified
         4, 36, 3, 55,           // CollapsingTile (dist to fall)                                    // Verified
         7, 32, 3, 40, 3,        // Floor Button (gateX, gateY)                                      // Verified
         4, 25, 4, 117,          // CollapsingTile (dist to fall)                                    // Verified
         7, 27, 4, 20, 3,        // Floor Button (gateX, gateY)                                      // Verified
         7, 24, 4, 20, 3,        // Floor Button (gateX, gateY)                                      // Verified
-        1, 20, 3, 0, 0,         // Gate @ 50, 3 starting position 0 (bottom).                       // Verified
+        2, 20, 3, 0, 0,         // Gate @ 50, 3 starting position 0 (bottom).                       // Verified
         4, 18, 2, 24,           // CollapsingTile (dist to fall)                                    // Verified
         4, 33, 5, 24,           // CollapsingTile (dist to fall)                                    // Verified
         255                     // End
@@ -58,7 +59,10 @@ namespace_end
 
 namespace Images {
 
-    image_t Title = "../images/title/Title.png"
+    image_t Title_PoP = "../images/title/Title_PoP.png"
+    image_t Title_Main = "../images/title/Title_Main.png"
+    image_t Title_Cursor = "../images/title/Title_Cursor.png"
+    image_t Title_Credits = "../images/title/Title_Credits.png"
 
     image_t Menu = "../images/hud/Menu.png"
     image_t Sword = "../images/hud/Sword.png"
@@ -104,6 +108,8 @@ namespace Images {
     image_t Gate_08 = "../images/items/Gate_08.png"
     image_t Gate_09 = "../images/items/Gate_09.png"
 
+    image_t ExitDoor = "../images/items/ExitDoor.png"
+
     image_t Potion_Small_00 = "../images/items/Potion_Small_00.png"
     image_t Potion_Small_01 = "../images/items/Potion_Small_01.png"
 
@@ -114,6 +120,12 @@ namespace Images {
     image_t CollapsingFloor_00 = "../images/items/CollapsingTile_00.png"
     image_t FloorButton_00 = "../images/items/FloorButton_00.png"
     image_t FloorButton_01 = "../images/items/FloorButton_01.png"
+
+    image_t Torch_00 = "../images/items/Torch_00.png"
+    image_t Torch_01 = "../images/items/Torch_01.png"
+    image_t Torch_02 = "../images/items/Torch_02.png"
+    image_t Torch_03 = "../images/items/Torch_03.png"
+    image_t Torch_04 = "../images/items/Torch_04.png"
 
     image_t Flash_00 = "../images/hud/Flash_00.png"
     image_t Flash_01 = "../images/hud/Flash_01.png"

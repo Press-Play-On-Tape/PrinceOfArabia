@@ -52,6 +52,10 @@ void render() {
                 case ItemType::Flash:
                     break;
 
+                case ItemType::ExitDoor:
+                    FX::drawBitmap(xLoc + 1, yLoc - 14, Images::ExitDoor, 0, dbmNormal);
+                    break;
+
                 case ItemType::Gate:
                     FX::drawBitmap(xLoc - 5, yLoc, Images::Gate_00 + (item.data.gate.position * 76), 0, dbmMasked);
                     break;
@@ -68,7 +72,7 @@ void render() {
                     FX::drawBitmap(xLoc + 6, yLoc + 12, Images::Potion_Small_00 + (item.data.potionSmall.frame * 28), 0, dbmMasked);
                     break;
 
-                case ItemType::FloorButton:
+                case ItemType::FloorButton1:
                     FX::drawBitmap(xLoc, yLoc + item.data.floorButton.frame - 1, Images::FloorButton_00 + (item.data.floorButton.frame * (Images::FloorButton_01 - Images::FloorButton_00)), 0, dbmMasked);
                     break;
 

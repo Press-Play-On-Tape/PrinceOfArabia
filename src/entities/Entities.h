@@ -5,3 +5,4 @@
 #include "Menu.h"
 #include "Prince.h"
 #include "GamePlay.h"
+#include "Structs.h"

@@ -4,7 +4,7 @@
 #define DEBUG_PRINT    Serial.print
 #define DEBUG_PRINTLN  Serial.println
 
-#define DEBUG
+#define _DEBUG
 #define _DEBUG_ONSCREEN_DETAILS
 #define DEBUG_ONSCREEN_DETAILS_MIN
 
@@ -325,7 +325,7 @@ constexpr uint16_t  Upright_Turn             = 1255;
 namespace Constants {
 
     constexpr uint8_t FrameRate = 30;
-    constexpr uint8_t NumberOfItems = 25;
+    constexpr uint8_t NumberOfItems = 26;
     constexpr uint8_t Animation_NumberOfFrames = 2;
     constexpr uint8_t NoItemFound = 255;
 
@@ -554,7 +554,6 @@ enum class Layer : uint8_t {
     Foreground,
 };
 
-
 enum class Action : uint8_t {
     Step,
     SmallStep,
@@ -593,13 +592,14 @@ enum class CanClimbDownPart2Result : uint8_t {
 
 enum class ItemType : uint8_t {
     AnyItem,
-    /* 01 */ Gate,               
-    /* 02 */ Door,
+    /* 01 */ ExitDoor,
+    /* 02 */ Gate,               
     /* 03 */ Sword,
     /* 04 */ CollapsingFloor,
     /* 05 */ CollpasedFloor,
     /* 06 */ Potion_Small,
-    /* 07 */ FloorButton,
+    /* 07 */ FloorButton1,
+    /* 08 */ FloorButton2,
     Flash,
 };
 
@@ -609,3 +609,14 @@ enum class MenuOption : uint8_t {
     Load,
     MainMenu,
 };
+
+enum class TitleScreenOptions : uint8_t {
+    Play,
+    Credits, 
+};
+
+enum class TitleScreenMode : uint8_t {
+    Main,
+    Credits, 
+};
+

@@ -7,23 +7,22 @@
 struct Flash {
     uint8_t frame;
 };
+ 
+struct Door {
+};
 
 struct Gate {
     uint8_t position;
     uint8_t closingDelay;
 };
  
-struct Door {
-    uint8_t position;
-};
- 
 struct Sword {
     bool onGround;
 };
  
-struct Torch {
-    uint8_t frame;
-};
+// struct Torch {
+//     uint8_t frame;
+// };
  
 struct CollapsingFloor {
     uint8_t frame;
@@ -58,7 +57,7 @@ struct Item {
         struct Gate gate;
         struct Door door;
         struct Sword sword;
-        struct Torch torch;
+        // struct Torch torch;
         struct CollapsingFloor collapsingFloor;
         struct CollapsedFloor collapsedFloor;
         struct PotionSmall potionSmall;

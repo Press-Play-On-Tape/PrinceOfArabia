@@ -245,7 +245,7 @@ struct Level {
                             }
                             break;
 
-                        case ItemType::FloorButton:
+                        case ItemType::FloorButton1:
 
                             if (arduboy.isFrameCount(4)) {
 
@@ -518,7 +518,7 @@ struct Level {
                         item.data.collapsingFloor.distToFall = FX::readPendingUInt8();
                         break;
 
-                    case ItemType::FloorButton:
+                    case ItemType::FloorButton1:
                         item.data.floorButton.frame = 0;
                         item.data.floorButton.gateX = FX::readPendingUInt8();
                         item.data.floorButton.gateY = FX::readPendingUInt8();

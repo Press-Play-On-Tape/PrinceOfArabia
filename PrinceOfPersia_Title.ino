@@ -3,7 +3,7 @@
 void title_Init() {
 
     gamePlay.gameState = GameState::Title;
-
+    titleScreenVars.reset();
 }
 
 
@@ -12,12 +12,87 @@ void title_Init() {
 //
 void title() { 
 
-    if (arduboy.justPressed(A_BUTTON)) {
-        
-        gamePlay.gameState = GameState::Game_Init; 
+    auto justPressed = arduboy.justPressedButtons();
+
+    if ((justPressed & RIGHT_BUTTON) || (justPressed & LEFT_BUTTON)) {
+
+        titleScreenVars.count = 88;
 
     }
 
-    FX::drawBitmap(0, 0, Images::Title, 0, dbmWhite);
+    if (justPressed & LEFT_BUTTON) {
+
+        titleScreenVars.option = TitleScreenOptions::Play;
+
+    }
+
+    if (justPressed & RIGHT_BUTTON) {
+
+        titleScreenVars.option = TitleScreenOptions::Credits;
+
+    }
+
+    if ((justPressed & A_BUTTON) || (justPressed & B_BUTTON)) {
+
+        switch (titleScreenVars.mode) {
+
+            case TitleScreenMode::Main:
+
+                switch (titleScreenVars.option) {
+
+                    case TitleScreenOptions::Play:
+                        gamePlay.gameState = GameState::Game_Init; 
+                        break;
+
+                    case TitleScreenOptions::Credits:
+                        titleScreenVars.mode = TitleScreenMode::Credits;
+                        titleScreenVars.count = 0;
+                        break;
+
+                }        
+
+                break;
+
+            case TitleScreenMode::Credits:
+
+                titleScreenVars.mode = TitleScreenMode::Main;
+                titleScreenVars.count = 88;
+                break;
+
+        }
+
+    }
+
+    switch (titleScreenVars.mode) {
+
+        case TitleScreenMode::Main:
+
+            FX::drawBitmap(0, (titleScreenVars.count < 81 ? 2 : -(titleScreenVars.count - 81)), Images::Title_Main, 0, dbmNormal);
+            FX::drawBitmap(titleScreenVars.option == TitleScreenOptions::Play ? 32 : 61, 63 + (titleScreenVars.count < 81 ? 2 : -(titleScreenVars.count - 81)), Images::Title_Cursor, 0, dbmNormal);
+            FX::drawBitmap(0, 1, Images::Title_PoP, 0, dbmMasked);
+            titleScreenVars.update();
+
+            break;
+
+        case TitleScreenMode::Credits:
+
+            FX::drawBitmap(7, 40, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
+            FX::drawBitmap(14, 35, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
+            FX::drawBitmap(119, 40, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
+            FX::drawBitmap(112, 35, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
+
+            FX::drawBitmap(0, 55, Images::Tile_Dungeon_12, 0, dbmNormal);
+            FX::drawBitmap(12, 55, Images::Tile_Dungeon_13, 0, dbmNormal);
+            FX::drawBitmap(105, 55, Images::Tile_Dungeon_12, 0, dbmNormal);
+            FX::drawBitmap(117, 55, Images::Tile_Dungeon_13, 0, dbmNormal);
+
+            FX::drawBitmap(27, -titleScreenVars.count, Images::Title_Credits, 0, dbmNormal);
+            FX::drawBitmap(0, 1, Images::Title_PoP, 0, dbmMasked);
+            if (arduboy.isFrameCount(2)) { titleScreenVars.update(); }
+
+            break;
+
+    }
+
 
 }
