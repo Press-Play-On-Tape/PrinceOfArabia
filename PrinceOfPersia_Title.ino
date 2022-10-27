@@ -76,18 +76,11 @@ void title() {
     switch (titleScreenVars.mode) {
 
         case TitleScreenMode::Intro:
-
-            FX::drawBitmap(0, 64 - titleScreenVars.count, Images::Title_Main, 0, dbmNormal);
-            FX::drawBitmap(0, -32 + (titleScreenVars.count / 2), Images::Title_PoP, 0, dbmMasked);
-            titleScreenVars.update();
-
-            break;
-
         case TitleScreenMode::Main:
 
             FX::drawBitmap(0, 64 - titleScreenVars.count, Images::Title_Main, 0, dbmNormal);
             FX::drawBitmap(titleScreenVars.option == TitleScreenOptions::Play ? 32 : 61, 145 - titleScreenVars.count, Images::Title_Cursor, 0, dbmNormal);
-            FX::drawBitmap(0, 0, Images::Title_PoP, 0, dbmMasked);
+            FX::drawBitmap(0, (titleScreenVars.count > 64 ? 0 : -32 + (titleScreenVars.count / 2)), Images::Title_PoP, 0, dbmMasked);
             titleScreenVars.update();
 
             break;

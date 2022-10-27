@@ -30,27 +30,27 @@ int8_t Level1_BG[] = {
     uint8_t Level1_Items[] = {
         1, 84, 4,               // Exit Gate 
         2, 60, 0, 9, 32,        // Gate @ 60, 0 starting position 9 (top), falls in 64 frames.      // Verified
-        4, 66, 2, 55,           // CollapsingTile (dist to fall, 24 + 31 + 31 ..)                   // Verified
-        4, 55, 2, 24,           // CollapsingTile (dist to fall, 24 + 31 + 31 ..)                   // Verified
-        5, 64, 2,               // CollapsedTile                                                    // Verified
-        4, 35, 1, 24,           // CollapsingTile (dist to fall)                                    // Verified
-        4, 36, 1, 24,           // CollapsingTile (dist to fall)                                    // Verified
-        4, 43, 4, 117,          // CollapsingTile (dist to fall)                                    // Verified
         6, 53, 2,               // Potion Small                                                     // Verified
         7, 46, 3, 50, 3,        // Floor Button 1 (gateX, gateY)                                    // Verified
         7, 52, 3, 50, 3,        // Floor Button 1 (gateX, gateY)                                    // Verified
         2, 50, 3, 0, 0,         // Gate @ 50, 3 starting position 0 (bottom).                       // Verified
         7, 47, 4, 40, 3,        // Floor Button (gateX, gateY)                                      // Verified
         2, 40, 3, 0, 0,         // Gate @ 50, 3 starting position 0 (bottom).                       // Verified
-        4, 35, 3, 55,           // CollapsingTile (dist to fall)                                    // Verified
-        4, 36, 3, 55,           // CollapsingTile (dist to fall)                                    // Verified
         7, 32, 3, 40, 3,        // Floor Button 1 (gateX, gateY)                                    // Verified
-        4, 25, 4, 117,          // CollapsingTile (dist to fall)                                    // Verified
         7, 27, 4, 20, 3,        // Floor Button 1 (gateX, gateY)                                    // Verified
         8, 24, 4, 20, 3,        // Floor Button 2 (gateX, gateY)                                    // Verified
         2, 20, 3, 0, 0,         // Gate @ 50, 3 starting position 0 (bottom).                       // Verified
+        5, 64, 2,               // CollapsedTile                                                    // Verified
+        4, 35, 3, 55,           // CollapsingTile (dist to fall)                                    // Verified
+        4, 36, 3, 55,           // CollapsingTile (dist to fall)                                    // Verified
+        4, 25, 4, 117,          // CollapsingTile (dist to fall)                                    // Verified
         4, 18, 2, 24,           // CollapsingTile (dist to fall)                                    // Verified
         4, 33, 5, 24,           // CollapsingTile (dist to fall)                                    // Verified
+        4, 66, 2, 55,           // CollapsingTile (dist to fall, 24 + 31 + 31 ..)                   // Verified
+        4, 55, 2, 24,           // CollapsingTile (dist to fall, 24 + 31 + 31 ..)                   // Verified
+        4, 35, 1, 24,           // CollapsingTile (dist to fall)                                    // Verified
+        4, 36, 1, 24,           // CollapsingTile (dist to fall)                                    // Verified
+        4, 43, 4, 117,          // CollapsingTile (dist to fall)                                    // Verified
         255                     // End
     }
 
@@ -118,8 +118,10 @@ namespace Images {
     image_t CollapsingFloor_02 = "../images/items/CollapsingTile_02.png"
     image_t CollapsingFloor_03 = "../images/items/CollapsingTile_03.png"
     image_t CollapsingFloor_00 = "../images/items/CollapsingTile_00.png"
-    image_t FloorButton_00 = "../images/items/FloorButton_00.png"
-    image_t FloorButton_01 = "../images/items/FloorButton_01.png"
+    image_t FloorButton_0_00 = "../images/items/FloorButton_0_00.png"
+    image_t FloorButton_0_01 = "../images/items/FloorButton_0_01.png"
+    image_t FloorButton_1_00 = "../images/items/FloorButton_1_00.png"
+    image_t FloorButton_1_01 = "../images/items/FloorButton_1_01.png"
 
     image_t Torch_00 = "../images/items/Torch_00.png"
     image_t Torch_01 = "../images/items/Torch_01.png"

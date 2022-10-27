@@ -73,11 +73,13 @@ void render() {
                     break;
 
                 case ItemType::FloorButton1:
-                    FX::drawBitmap(xLoc, yLoc + item.data.floorButton1.frame - 1, Images::FloorButton_00 + (item.data.floorButton1.frame * (Images::FloorButton_01 - Images::FloorButton_00)), 0, dbmMasked);
+                    FX::drawBitmap(xLoc, yLoc + item.data.floorButton1.frame - 1, Images::FloorButton_0_00 + (item.data.floorButton1.frame * (Images::FloorButton_0_01 - Images::FloorButton_0_00)), 0, dbmMasked);
                     break;
 
                 case ItemType::FloorButton2:
-                    FX::drawBitmap(xLoc, yLoc + item.data.floorButton2.frame - 1, Images::FloorButton_00 + (item.data.floorButton2.frame * (Images::FloorButton_01 - Images::FloorButton_00)), 0, dbmMasked);
+                    // FX::drawBitmap(xLoc, yLoc + item.data.floorButton2.frame - 28, Images::FloorButton_1_00 + (item.data.floorButton2.frame * (Images::FloorButton_1_01 - Images::FloorButton_1_00)), 0, dbmMasked);
+                    // FX::drawBitmap(xLoc - item.data.floorButton2.frame, yLoc + item.data.floorButton2.frame, Images::FloorButton_1_00, 0, dbmMasked);
+                    FX::drawBitmap(xLoc - item.data.floorButton2.frame, yLoc + item.data.floorButton2.frame, Images::FloorButton_1_00 + (item.data.floorButton2.frame * (Images::FloorButton_1_01 - Images::FloorButton_1_00)), 0, dbmMasked);
                     break;
 
                 default: break;
