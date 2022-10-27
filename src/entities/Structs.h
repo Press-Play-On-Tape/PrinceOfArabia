@@ -13,7 +13,7 @@ struct TitleScreenVars {
 
         this->count = 0;
         this->option = TitleScreenOptions::Play;
-        this->mode = TitleScreenMode::Main;
+        this->mode = TitleScreenMode::Intro;
 
     }
 
@@ -21,8 +21,12 @@ struct TitleScreenVars {
 
         switch (this->mode) {
 
+            case TitleScreenMode::Intro:
+                if (this->count < 64) this->count = this->count + 2;
+                break;
+
             case TitleScreenMode::Main:
-                if (this->count < 88) this->count++;
+                if (this->count < Constants::TitleScreenScroll_Max) this->count = this->count + 2;
                 break;
 
             case TitleScreenMode::Credits:

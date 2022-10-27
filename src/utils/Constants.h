@@ -334,6 +334,7 @@ namespace Constants {
     constexpr uint8_t ScreenTopOffset = 1;
     constexpr uint8_t ScreenWidthInTiles = 10;
     constexpr int8_t CoordNone = 127;
+    constexpr uint8_t TitleScreenScroll_Max = 87;
 
     constexpr int8_t Prince_XOffset[] PROGMEM = {
    
@@ -616,6 +617,7 @@ enum class TitleScreenOptions : uint8_t {
 };
 
 enum class TitleScreenMode : uint8_t {
+    Intro,
     Main,
     Credits, 
 };

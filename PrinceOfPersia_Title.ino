@@ -14,9 +14,9 @@ void title() {
 
     auto justPressed = arduboy.justPressedButtons();
 
-    if ((justPressed & RIGHT_BUTTON) || (justPressed & LEFT_BUTTON)) {
+    if (justPressed & RIGHT_BUTTON && titleScreenVars.count < Constants::TitleScreenScroll_Max) {
 
-        titleScreenVars.count = 88;
+        titleScreenVars.mode = TitleScreenMode::Main;
 
     }
 
@@ -35,6 +35,13 @@ void title() {
     if ((justPressed & A_BUTTON) || (justPressed & B_BUTTON)) {
 
         switch (titleScreenVars.mode) {
+
+            case TitleScreenMode::Intro:
+
+                titleScreenVars.mode = TitleScreenMode::Main;
+                // titleScreenVars.count = Constants::TitleScreenScroll_Max;    
+
+                break;
 
             case TitleScreenMode::Main:
 
@@ -63,13 +70,24 @@ void title() {
 
     }
 
+
+    // Render ..
+
     switch (titleScreenVars.mode) {
+
+        case TitleScreenMode::Intro:
+
+            FX::drawBitmap(0, 64 - titleScreenVars.count, Images::Title_Main, 0, dbmNormal);
+            FX::drawBitmap(0, -32 + (titleScreenVars.count / 2), Images::Title_PoP, 0, dbmMasked);
+            titleScreenVars.update();
+
+            break;
 
         case TitleScreenMode::Main:
 
-            FX::drawBitmap(0, (titleScreenVars.count < 81 ? 2 : -(titleScreenVars.count - 81)), Images::Title_Main, 0, dbmNormal);
-            FX::drawBitmap(titleScreenVars.option == TitleScreenOptions::Play ? 32 : 61, 63 + (titleScreenVars.count < 81 ? 2 : -(titleScreenVars.count - 81)), Images::Title_Cursor, 0, dbmNormal);
-            FX::drawBitmap(0, 1, Images::Title_PoP, 0, dbmMasked);
+            FX::drawBitmap(0, 64 - titleScreenVars.count, Images::Title_Main, 0, dbmNormal);
+            FX::drawBitmap(titleScreenVars.option == TitleScreenOptions::Play ? 32 : 61, 145 - titleScreenVars.count, Images::Title_Cursor, 0, dbmNormal);
+            FX::drawBitmap(0, 0, Images::Title_PoP, 0, dbmMasked);
             titleScreenVars.update();
 
             break;
@@ -87,7 +105,7 @@ void title() {
             FX::drawBitmap(117, 55, Images::Tile_Dungeon_13, 0, dbmNormal);
 
             FX::drawBitmap(27, -titleScreenVars.count, Images::Title_Credits, 0, dbmNormal);
-            FX::drawBitmap(0, 1, Images::Title_PoP, 0, dbmMasked);
+            FX::drawBitmap(0, 0, Images::Title_PoP, 0, dbmMasked);
             if (arduboy.isFrameCount(2)) { titleScreenVars.update(); }
 
             break;
