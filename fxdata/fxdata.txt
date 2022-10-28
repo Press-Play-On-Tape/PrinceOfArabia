@@ -341,6 +341,20 @@ namespace Images {
     image_t Prince_Left_140 = "../images/prince/left/140_Drink_Tonic_14.png"
     image_t Prince_Left_141 = "../images/prince/left/141_Drink_Tonic_15_End.png"
     image_t Prince_Left_142 = "../images/prince/left/142_Dead.png"
+    image_t Prince_Left_143 = "../images/prince/left/143_PickupSword_1_Start.png"
+    image_t Prince_Left_144 = "../images/prince/left/144_PickupSword_2.png"
+    image_t Prince_Left_145 = "../images/prince/left/145_PickupSword_3.png"
+    image_t Prince_Left_146 = "../images/prince/left/146_PickupSword_4.png"
+    image_t Prince_Left_147 = "../images/prince/left/147_PickupSword_5.png"
+    image_t Prince_Left_148 = "../images/prince/left/148_PickupSword_6.png"
+    image_t Prince_Left_149 = "../images/prince/left/149_PickupSword_7.png"
+    image_t Prince_Left_150 = "../images/prince/left/150_PickupSword_8.png"
+    image_t Prince_Left_151 = "../images/prince/left/151_PickupSword_9.png"
+    image_t Prince_Left_152 = "../images/prince/left/152_PickupSword_10.png"
+    image_t Prince_Left_153 = "../images/prince/left/153_PickupSword_11.png"
+    image_t Prince_Left_154 = "../images/prince/left/154_PickupSword_12.png"
+    image_t Prince_Left_155 = "../images/prince/left/155_PickupSword_13.png"
+    image_t Prince_Left_156 = "../images/prince/left/156_PickupSword_14_End.png"
 
 
 
@@ -488,6 +502,20 @@ namespace Images {
     image_t Prince_Right_140 = "../images/prince/right/140_Drink_Tonic_14.png"
     image_t Prince_Right_141 = "../images/prince/right/141_Drink_Tonic_15_End.png"
     image_t Prince_Right_142 = "../images/prince/right/142_Dead.png"
+    image_t Prince_Right_143 = "../images/prince/right/143_PickupSword_1_Start.png"
+    image_t Prince_Right_144 = "../images/prince/right/144_PickupSword_2.png"
+    image_t Prince_Right_145 = "../images/prince/right/145_PickupSword_3.png"
+    image_t Prince_Right_146 = "../images/prince/right/146_PickupSword_4.png"
+    image_t Prince_Right_147 = "../images/prince/right/147_PickupSword_5.png"
+    image_t Prince_Right_148 = "../images/prince/right/148_PickupSword_6.png"
+    image_t Prince_Right_149 = "../images/prince/right/149_PickupSword_7.png"
+    image_t Prince_Right_150 = "../images/prince/right/150_PickupSword_8.png"
+    image_t Prince_Right_151 = "../images/prince/right/151_PickupSword_9.png"
+    image_t Prince_Right_152 = "../images/prince/right/152_PickupSword_10.png"
+    image_t Prince_Right_153 = "../images/prince/right/153_PickupSword_11.png"
+    image_t Prince_Right_154 = "../images/prince/right/154_PickupSword_12.png"
+    image_t Prince_Right_155 = "../images/prince/right/155_PickupSword_13.png"
+    image_t Prince_Right_156 = "../images/prince/right/156_PickupSword_14_End.png"
 
 }
 namespace_end

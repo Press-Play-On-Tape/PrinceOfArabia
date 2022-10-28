@@ -284,6 +284,21 @@ constexpr uint16_t Falling_SingleStep_3                     = 250;
 constexpr uint16_t Falling_SingleStep_4                     = 251;
 constexpr uint16_t Falling_SingleStep_5_Check_CanFall       = 252;
 constexpr uint16_t Falling_SingleStep_6_End                 = 253;
+constexpr uint16_t Pickup_Sword_1_Start                     = 254;
+constexpr uint16_t Pickup_Sword_2                           = 255;
+constexpr uint16_t Pickup_Sword_3                           = 256;
+constexpr uint16_t Pickup_Sword_4                           = 257;
+constexpr uint16_t Pickup_Sword_5                           = 258;
+constexpr uint16_t Pickup_Sword_6                           = 259;
+constexpr uint16_t Pickup_Sword_7                           = 260;
+constexpr uint16_t Pickup_Sword_8                           = 261;
+constexpr uint16_t Pickup_Sword_9                           = 262;
+constexpr uint16_t Pickup_Sword_10                          = 263;
+constexpr uint16_t Pickup_Sword_11                          = 264;
+constexpr uint16_t Pickup_Sword_12                          = 265;
+constexpr uint16_t Pickup_Sword_13                          = 266;
+constexpr uint16_t Pickup_Sword_14_End                      = 267;
+
 
 // constexpr uint16_t  Jump_Down_1_Start        1250
 // constexpr uint16_t  Jump_Down_2              1250

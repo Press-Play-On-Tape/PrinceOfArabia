@@ -35,14 +35,14 @@ struct CollapsingFloor {
 struct FloorButton1 {
     uint8_t frame;              
     uint8_t gateX;
-    uint8_t gateY;              // 255 not falling. Or 0 to distToFall when falling.  Turns into a CollapsedFloor when fallen.
+    uint8_t gateY;              
     uint8_t timeToFall;         // How long does gate remain open for.
 };
  
 struct FloorButton2 {
     uint8_t frame;              
     uint8_t gateX;
-    uint8_t gateY;              // 255 not falling. Or 0 to distToFall when falling.  Turns into a CollapsedFloor when fallen.
+    uint8_t gateY;              
     uint8_t timeToFall;         // How long does gate remain open for.
 };
  
@@ -55,7 +55,7 @@ struct PotionSmall {
 
 struct Item {
 
-    ItemType itemType; // set accordingly
+    ItemType itemType;
     uint8_t x;
     uint8_t y;
     bool active;
@@ -65,7 +65,6 @@ struct Item {
         struct Gate gate;
         struct Door door;
         struct Sword sword;
-        // struct Torch torch;
         struct CollapsingFloor collapsingFloor;
         struct CollapsedFloor collapsedFloor;
         struct PotionSmall potionSmall;
