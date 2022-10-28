@@ -14,6 +14,7 @@ struct Door {
 struct Gate {
     uint8_t position;
     uint8_t closingDelay;
+    uint8_t closingDelayMax;
 };
  
 struct Sword {

@@ -1107,6 +1107,7 @@ void game() {
                                 item.data.floorButton1.frame = 1;
                                 item.data.floorButton1.timeToFall = 24;
                                 gate.data.gate.closingDelay = 48;
+                                gate.data.gate.closingDelayMax = 48;
 
                             }
 
@@ -1122,7 +1123,8 @@ void game() {
 
                                 item.data.floorButton2.frame = 1;
                                 item.data.floorButton2.timeToFall = 24;
-                                gate.data.gate.closingDelay = 48;
+                                gate.data.gate.closingDelay = 10;
+                                gate.data.gate.closingDelayMax = 255;
 
                             }
 

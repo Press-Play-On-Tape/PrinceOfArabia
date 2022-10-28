@@ -180,28 +180,55 @@ struct Level {
                         case ItemType::Gate:
 
                             if (arduboy.isFrameCount(4)) {
-                                    
+
+
+if(item.x ==20 &&item.y==3){
+Serial.print(item.data.gate.position);               
+Serial.print(" ");               
+Serial.println(item.data.gate.closingDelay);               
+}                  
+                                if (item.data.gate.closingDelay + 9 > item.data.gate.closingDelayMax) {
+if(item.x ==20 &&item.y==3){
+    Serial.println("going up ");
+}
+
+                                    if (item.data.gate.position < 9) {
+
+                                        item.data.gate.position++;
+
+                                    }
+
+                                }
+                                else if (item.data.gate.closingDelay > 0 && item.data.gate.closingDelay <= 9) {
+
+                                        if (item.data.gate.position > 0 ) {
+
+if(item.x ==20 &&item.y==3){
+    Serial.println("going down ");
+}
+
+                                            item.data.gate.position--;
+                                            
+                                        }
+                                        
+                                        break;
+
+                                }
+                                // else {
+
+                                //     if (item.data.gate.position > 0) {
+
+                                //         item.data.gate.position--;
+
+                                //     }
+
+                                // }
+
                                 if (item.data.gate.closingDelay > 0) {
 
                                     item.data.gate.closingDelay--;
 
-                                    if (item.data.gate.position < 9 && arduboy.getFrameCount(3)) {
-
-                                        item.data.gate.position++;
-                                        
-                                    }
-
                                 }
-                                else {
-
-                                    if (item.data.gate.position > 0 && arduboy.getFrameCount(3)) {
-
-                                        item.data.gate.position--;
-
-                                    }
-
-                                }
-
                             }
                             break;
 
@@ -531,6 +558,7 @@ struct Level {
                     case ItemType::Gate:
                         item.data.gate.position = FX::readPendingUInt8();
                         item.data.gate.closingDelay = FX::readPendingUInt8();
+                        item.data.gate.closingDelayMax = 255;
                         break;
 
                     case ItemType::CollapsingFloor:
