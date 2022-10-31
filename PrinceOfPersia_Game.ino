@@ -12,11 +12,11 @@
 void game_Init() {
 
     // prince.init(18, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
-    prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3);          // Both floor types
-    // prince.init(86, 87, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos but next to drop floor 3rd floor
+    // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3);          // Both floor types
+    prince.init(86, 87, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos but next to drop floor 3rd floor
     // prince.init(70, 25, Direction::Left, Stance::Crouch_3_End, 3);          // Under collapsible floor
     // prince.init(66, 56, Direction::Right, Stance::Crouch_3_End, 3);        // Get tonic
-    // prince.init(30, 56 + Constants::TileHeight, Direction::Right, Stance::Crouch_3_End, 3);     // Column of climbs
+    // prince.init(80, 56, Direction::Left, Stance::Crouch_3_End, 3);     // Column of climbs
     // prince.init(80, 25, Direction::Right, Stance::Crouch_3_End, 3);     // Top Left
     // prince.init(18, 25, Direction::Right,Stance:: Crouch_3_End, 3);          // Long Fall
     // prince.init(18, 56, Direction::Right, Stance::Crouch_3_End, 3);          // problem
@@ -26,8 +26,8 @@ void game_Init() {
     
     level.setLevel(1);
     // level.init(prince, 60, 0);  // Normal starting posa
-    level.init(prince, 20, 3);  // Under collapsible floor
-    // level.init(prince, 60, 0);  //Normal starting pos but next to drop floor 3rd floor
+    // level.init(prince, 20, 3);  // Both floor types
+    level.init(prince, 60, 0);  //Normal starting pos but next to drop floor 3rd floor
     // level.init(prince, 50, 3);  // Under collapsible floor
     // level.init(prince, Constants::TileHeight, 0);   // Get tonic
     // level.init(prince, 0, 3);   // Column of climbs
@@ -756,6 +756,19 @@ void game() {
                             item.active = false;
                             prince.pushSequence(Stance::Drink_Tonic_1_Start, Stance::Drink_Tonic_15_End, Stance::Upright, true);
 
+                            break;
+
+                        }
+
+                        itemIdx = level.canReachItem(prince, ItemType::Sword);
+
+                        if (itemIdx != Constants::NoItemFound) {
+
+                            Item &item = level.getItem(itemIdx);
+                            item.active = false;
+                            prince.setSword(true);
+                            prince.pushSequence(Stance::Pickup_Sword_1_Start, Stance::Pickup_Sword_16_End, Stance::Upright, true);
+
                         }
 
                     }
@@ -871,59 +884,59 @@ void game() {
                     prince.changeDirection();
                     break;
 
-                case Stance::Small_Step_5:
+                // case Stance::Small_Step_5:
 
-                    if (level.canFall(prince)) {
+                //     if (level.canFall(prince)) {
 
-                        prince.clear();
-                        prince.setFalling(0);
-                        prince.pushSequence(Stance::Falling_SmallStep_1_Start, Stance::Falling_SmallStep_5_Check_CanFall, true);
+                //         prince.clear();
+                //         prince.setFalling(0);
+                //         prince.pushSequence(Stance::Falling_SmallStep_1_Start, Stance::Falling_SmallStep_5_Check_CanFall, true);
 
-                    }
+                //     }
 
-                    break;
+                //     break;
 
-                case Stance::Single_Step_5:
+                // case Stance::Single_Step_5:
 
-                    if (level.canFall(prince)) {
+                //     if (level.canFall(prince)) {
 
-                        prince.clear();
-                        prince.setFalling(0);
-                        prince.pushSequence(Stance::Falling_SingleStep_1_Start, Stance::Falling_SingleStep_5_Check_CanFall, true);
+                //         prince.clear();
+                //         prince.setFalling(0);
+                //         prince.pushSequence(Stance::Falling_SingleStep_1_Start, Stance::Falling_SingleStep_5_Check_CanFall, true);
 
-                    }
+                //     }
 
-                    break;
+                //     break;
 
-                case Stance::Standing_Jump_11_Land_Point:
+                // case Stance::Standing_Jump_11_Land_Point:
 
-                    if (level.canFall(prince)) {
+                //     if (level.canFall(prince)) {
 
-                        prince.clear();
-                        prince.setFalling(0);
-                        prince.pushSequence(Stance::Falling_StandingJump_1_Start, Stance::Falling_StandingJump_5_Check_CanFall, true);
+                //         prince.clear();
+                //         prince.setFalling(0);
+                //         prince.pushSequence(Stance::Falling_StandingJump_1_Start, Stance::Falling_StandingJump_5_Check_CanFall, true);
 
-                    }
+                //     }
 
-                    break;
+                //     break;
 
-                // case Stance::Running_Jump_1_Start:
-                case Stance::Running_Jump_10:
+                // // case Stance::Running_Jump_1_Start:
+                // case Stance::Running_Jump_10:
                     
-                    if (level.canFall(prince)) {
+                //     if (level.canFall(prince)) {
 
-                        prince.clear();
-                        prince.setFalling(0);
-                        prince.pushSequence(Stance::Falling_RunningJump_1_Start, Stance::Falling_RunningJump_5_Check_CanFall, true);
+                //         prince.clear();
+                //         prince.setFalling(0);
+                //         prince.pushSequence(Stance::Falling_RunningJump_1_Start, Stance::Falling_RunningJump_5_Check_CanFall, true);
 
-                    }
+                //     }
 
-                    break;
+                //     break;
 
                 case Stance::Jump_Up_Drop_A_4: // Ripple collapsible floors.
                 case Stance::Jump_Up_Drop_B_4: 
 
-                    for (uint8_t i = 1; i < Constants::NumberOfItems; i++) {
+                    for (uint8_t i = 2; i < Constants::NumberOfItems; i++) {
                         
                         Item &item = level.getItem(i);
 
@@ -978,6 +991,10 @@ void game() {
                 case Stance::Falling_StandingJump_5_Check_CanFall:
                 case Stance::Falling_SingleStep_5_Check_CanFall:
                 case Stance::Falling_Down_5_End:
+                case Stance::Falling_StepWalkRun_P0_4_8_5_Check_CanFall:
+                case Stance::Falling_StepWalkRun_P1_5_9_5_Check_CanFall:
+                case Stance::Falling_StepWalkRun_P2_6_10_5_Check_CanFall:
+                case Stance::Falling_StepWalkRun_P3_7_11_5_Check_CanFall:
 
                     if (level.canFall(prince)) { // Fall some more
 
@@ -1011,6 +1028,22 @@ void game() {
 
                             case Stance::Falling_SingleStep_5_Check_CanFall:
                                 prince.push(Stance::Falling_SingleStep_6_End, true);
+                                break;
+
+                            case Stance::Falling_StepWalkRun_P2_6_10_5_Check_CanFall:
+                                prince.push(Stance::Falling_StepWalkRun_P2_6_10_6_End, true);
+                                break;
+
+                            case Stance::Falling_StepWalkRun_P0_4_8_5_Check_CanFall:
+                                prince.push(Stance::Falling_StepWalkRun_P0_4_8_6_End, true);
+                                break;
+
+                            case Stance::Falling_StepWalkRun_P1_5_9_5_Check_CanFall:
+                                prince.push(Stance::Falling_StepWalkRun_P1_5_9_6_End, true);
+                                break;
+
+                            case Stance::Falling_StepWalkRun_P3_7_11_5_Check_CanFall:
+                                prince.push(Stance::Falling_StepWalkRun_P3_7_11_6_End, true);
                                 break;
 
                             case Stance::Falling_Down_5_End:
@@ -1050,6 +1083,8 @@ void game() {
 
                         }
                         
+                        prince.setFalling(0);
+
                     }
 
                     break;
@@ -1076,9 +1111,26 @@ void game() {
 
                 // Check for floor buttons and collapsing floors ..
 
-                int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x);
+                int8_t footToe = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[prince.getStance() + 1]));
+                int8_t footHeel = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[prince.getStance() + 2]));
+
+
+                // Test with player's toe ..
+
+                int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x + (prince.getDirection() == Direction::Left ? -footToe : footToe));
                 int8_t tileYIdx = level.coordToTileIndexY(prince.getDirection(), prince.getPosition().y);
                 uint8_t itemIdx = level.getItem(ItemType::AnyItem, tileXIdx, tileYIdx);
+
+
+                // If no match, test with player's heel ..
+
+                if (itemIdx == Constants::NoItemFound) {
+
+                    tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x + (prince.getDirection() == Direction::Left ? -footHeel : footHeel));
+                    itemIdx = level.getItem(ItemType::AnyItem, tileXIdx, tileYIdx);
+
+                }
+
 
                 if (itemIdx != Constants::NoItemFound) {
 
@@ -1162,14 +1214,44 @@ void game() {
     }
 
 
-    if (reevaluatePrinceFalling) {
+    //if (reevaluatePrinceFalling) {
 
-        if (prince.isFootDown() && level.canFall(prince)) {
+        if (prince.isFootDown() && level.canFall(prince) && prince.getFalling() == 0) {
 
-            // Serial.println("start falling");
+            prince.clear();
             prince.setFalling(1);
-            prince.setPrevStance(Stance::None);
-            prince.pushSequence(Stance::Falling_Down_1_Start, Stance::Falling_Down_5_End, true);
+            prince.setPrevStance(prince.getStance());
+
+            switch (prince.getX() % 12) {
+
+                case 6:
+                case 10:
+                case 2:
+                    prince.pushSequence(Stance::Falling_StepWalkRun_P2_6_10_1_Start, Stance::Falling_StepWalkRun_P2_6_10_5_Check_CanFall, true);
+                    break;
+
+                case 1:
+                case 5:
+                case 9:
+                    prince.pushSequence(Stance::Falling_StepWalkRun_P1_5_9_1_Start, Stance::Falling_StepWalkRun_P1_5_9_5_Check_CanFall, true);
+                    break;
+
+                case 3:
+                case 7:
+                case 11:
+                    prince.pushSequence(Stance::Falling_StepWalkRun_P3_7_11_1_Start, Stance::Falling_StepWalkRun_P3_7_11_5_Check_CanFall, true);
+                    break;
+
+                case 0:
+                case 4:
+                case 8:
+                    prince.pushSequence(Stance::Falling_StepWalkRun_P0_4_8_1_Start, Stance::Falling_StepWalkRun_P0_4_8_5_Check_CanFall, true);
+                    break;
+
+            }
+            // prince.pushSequence(Stance::Falling_Down_1_Start, Stance::Falling_Down_5_End, true);
+            // prince.pushSequence(Stance::Falling_SingleStep_1_Start, Stance::Falling_SingleStep_5_Check_CanFall, true);
+
 
         }
 
@@ -1178,6 +1260,29 @@ void game() {
             // Serial.println("foot down");
         }
         // Serial.println("reevaluate");
+    //}
+
+
+
+    // Open exit door ?
+
+    {
+
+        Item &item = level.getItem(1);
+
+        if (item.data.exitDoor.position == 0) {
+
+            int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x);
+            int8_t tileYIdx = level.coordToTileIndexY(prince.getDirection(), prince.getPosition().y);
+
+            if (tileXIdx >= item.data.exitDoor.left && tileXIdx <= item.data.exitDoor.right && item.y == tileYIdx) {
+
+                item.data.exitDoor.direction = Direction::Up;
+
+            }
+
+        }
+
     }
 
 

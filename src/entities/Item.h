@@ -8,7 +8,11 @@ struct Flash {
     uint8_t frame;
 };
  
-struct Door {
+struct ExitDoor {
+    uint8_t position;
+    Direction direction;
+    uint8_t left;
+    uint8_t right;
 };
 
 struct Gate {
@@ -18,12 +22,10 @@ struct Gate {
 };
  
 struct Sword {
-    bool onGround;
 };
- 
-// struct Torch {
-//     uint8_t frame;
-// };
+
+struct Skeleton {
+};
  
 struct CollapsingFloor {
     uint8_t frame;
@@ -63,8 +65,9 @@ struct Item {
     union {
         struct Flash flash;
         struct Gate gate;
-        struct Door door;
+        struct ExitDoor exitDoor;
         struct Sword sword;
+        struct Sword skeleton;
         struct CollapsingFloor collapsingFloor;
         struct CollapsedFloor collapsedFloor;
         struct PotionSmall potionSmall;

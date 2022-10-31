@@ -25,7 +25,7 @@ void render() {
                 case 0 ... 126:
                    FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon[Images::xTiles_Ref[bgTile]], 0, dbmNormal);
                    break;
-//52
+
                 case 127:
                    FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon_50_00 + ((arduboy.getFrameCount(15, (x + 2)) / 5) * 52), 0, dbmNormal);
                    break;
@@ -52,8 +52,16 @@ void render() {
                 case ItemType::Flash:
                     break;
 
+                case ItemType::Sword:
+                    FX::drawBitmap(xLoc + 1, yLoc + 20, Images::Sword, 0, dbmMasked);
+                    break;
+
+                case ItemType::Skeleton:
+                    FX::drawBitmap(xLoc + 5, yLoc + 16, Images::Skeleton, 0, dbmMasked);
+                    break;
+
                 case ItemType::ExitDoor:
-                    FX::drawBitmap(xLoc + 1, yLoc - 14, Images::ExitDoor, 0, dbmNormal);
+                    FX::drawBitmap(xLoc + 1, yLoc - 14, Images::ExitDoor_00 + (item.data.exitDoor.position * 129), 0, dbmNormal);
                     break;
 
                 case ItemType::Gate:
@@ -77,8 +85,6 @@ void render() {
                     break;
 
                 case ItemType::FloorButton2:
-                    // FX::drawBitmap(xLoc, yLoc + item.data.floorButton2.frame - 28, Images::FloorButton_1_00 + (item.data.floorButton2.frame * (Images::FloorButton_1_01 - Images::FloorButton_1_00)), 0, dbmMasked);
-                    // FX::drawBitmap(xLoc - item.data.floorButton2.frame, yLoc + item.data.floorButton2.frame, Images::FloorButton_1_00, 0, dbmMasked);
                     FX::drawBitmap(xLoc - item.data.floorButton2.frame, yLoc + item.data.floorButton2.frame, Images::FloorButton_1_00 + (item.data.floorButton2.frame * (Images::FloorButton_1_01 - Images::FloorButton_1_00)), 0, dbmMasked);
                     break;
 
@@ -186,6 +192,10 @@ void render() {
     FX::drawBitmap(123, 57, Images::Number_Small_00 + ((gamePlay.timer_Sec / 10) * 9), 0, dbmNormal);
     FX::drawBitmap(123, 61, Images::Number_Small_00 + ((gamePlay.timer_Sec % 10) * 9), 0, dbmNormal);
 
+    if (prince.getSword()) {
+        FX::drawBitmap(123, 40, Images::Sword_HUD, 0, dbmNormal);
+    }
+
     arduboy.drawPixel(124, 55);
     arduboy.drawPixel(126, 55);
 
@@ -194,7 +204,7 @@ void render() {
 void renderMenu() {
 
     FX::drawBitmap(menu.x, 0, Images::Menu, 0, dbmNormal);
-    FX::drawBitmap(menu.x + 3, 22 + (menu.cursor * 10), Images::Sword, 0, dbmNormal);
+    FX::drawBitmap(menu.x + 3, 22 + (menu.cursor * 10), Images::Sword_Cursor, 0, dbmNormal);
 
     FX::drawBitmap(menu.x + 27, 3, Images::Number_00 + ((gamePlay.level / 10) * 9), 0, dbmNormal);
     FX::drawBitmap(menu.x + 33, 3, Images::Number_00 + ((gamePlay.level % 10) * 9), 0, dbmNormal);

@@ -1,0 +1,85 @@
+
+Oct 2, 2022: Hopefully the start of something big!
+
+I have the Arduboy rendering from the level map created from the Tile graphics prepared by @Clintonium-119. So far I have only rendered the foreground and the background in two separate passes.  The objects will be a third pass but yet to be implemented.
+
+I have done some basic movements of the player. What you are seeing below is controlled by the buttons and I have implemented turning around, running, jumping from a stand-still and jumping while running. At present there is no left / right movement of the actual player. I will need to come back and add these movements a lookup table based on the image frame being shown. This will also allow me to adjust the image a pixel or two left / right and up / down to make the movements look a little more fluid.
+
+[img 1]
+
+
+Long, long way to go … just wanted to show you some progress!
+
+The movements come from some sample code I made for the Pokitto.  I use a stack and push the image indexes onto it. So if you start running, I push all the image indexes that take you from a stand still to running. The stack is then exhausted over the coming frames … if you are still holding the button to make it continue running then I load up those image indexes that complete a running step. Seems to work well.
+
+The big time effort will be spent making the actions look smooth and ensuring that you cannot do something that the scenery prevents. Like jumping when there is an overhead and so on …
+
+Oct 9, 2022: Climbing up and down levels.
+
+Had some more time to play this weekend.
+
+[img 2]]
+
+Have the climbing up and down from levels sorted. If you are near an ‘edge tile’ (within 6px), the prince will step towards it if needed and climb up. Likewise, if they are within 6px the will move towards the edge and climb down. This will happen if they are facing the correct way or the other way - the prince will turn around if necessary.
+
+This is taking a little time to get right but I think its important to get the movements right.
+
+I am struggling a bit with the longer jumps - that from a a standstill and that while running - as its possible you can hit a wall mid-flight and truncate the action. As I mentioned, I push all the movements into a queue when the player presses a button and pop them out over subsequent frames.
+
+I am not sure whether to try to calculate the collision up front and push a series of images that includes the collision and fall to the ground or to push the images for a ‘correct’ jump and calculate the collision on each frame. When a collision is detected, I would then clear the stack and push in the required frames to simulate the collision at that point.
+
+The good news is that if I get the jumps sorted out properly, I will be well on the way to making this game a reality. There is still a long way to go but its moving along :slight_smile:
+
+
+Oct 13, 2022: Collapsible floors.
+
+[img 3]
+
+More progress … Note how the falling tile ripples as you land on the ground near it. This is how the original worked!
+
+I couldn’t resist adding the PPOT and Prince Of Persia title screens. The title screen needs a little more work but the idea is there.
+
+
+Oct 16, 2022: Power up!
+
+Had some fun with this one!  Need to check with the original to see if the game flashes as the health is restored.
+
+[img 4]
+
+Oct 23, 2022: HUD Tweaks
+
+I added the health indicators on the bottom of the screen as @Mr.Blinky had done in the original thread. It was really hard to see so I moved it to the side of the screen. The arrows didn’t make sense so I swapped them for rectangles and added the time at the lower right.
+
+[img 5]
+
+When fighting an enemy, I will remove the time so we can see both the player’s and the enemy’s health on the screen.
+
+The little 'D2' in the top corner is the distance to the edge of the current tile and is used for debugging. Every movement should end with a distance of 2, 6 or 10 but I have a couple of combinations that leave the player in a different spot. Need to sort these out!
+
+Oct 26, 2022: Title tweaks (Part 1)
+
+@Vampirics helped with the title graphics. What we had originally was sampled off the original graphics but left a lot to be desired. The scrolling to reveal the game options looks good but would be more effective with a larger scroll.
+
+
+[img 6]
+
+Oct 27, 2022: More title tweaks (Part 2)
+
+[img 7]
+
+And another tweak … scrolls a bit better now. Thanks @vampirics!
+
+
+
+Oct 29, 2022: Swords and button floors
+
+I feel like I am avoiding the hard task of working out how to handle collisions with walls mid air.  I also need to tackle the points where the prince should fall.  I have implemented some but not al! At the moment the prince can run off a platform into mid air and not fall .. not really realistic.
+
+I was doing a course over the last week at work and progress on the game has slowed down.  I quickly implemented the scene where the prince picks up a sword to feel like I have made some progress!  I also added a little icon in the HUD to show that the sword has been picked up.
+
+[img 8]
+
+Also implemented is the two buttons states of the floor that open and close gates respectively.
+
+[img 9]
+

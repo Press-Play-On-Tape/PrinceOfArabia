@@ -24,6 +24,7 @@ struct Prince {
 
         uint8_t health = 0;
         uint8_t healthMax = 0;
+        bool sword = false;
 
         Point location;
 
@@ -41,6 +42,7 @@ struct Prince {
         uint8_t getFalling()                        { return this->falling; }
         uint8_t getHealth()                         { return this->health; }
         uint8_t getHealthMax()                      { return this->healthMax; }
+        bool getSword()                             { return this->sword; }
 
         Stack <int16_t, 30>  * getStack()           { return this->stack; }
         Direction getDirection()                    { return this->direction; }
@@ -48,12 +50,15 @@ struct Prince {
         void setStack(Stack <int16_t, 30>  *val)    { this->stack = val; }
         void setStance(uint16_t val)                { this->stance = val; }
         void setPrevStance(uint16_t val)            { this->prevStance = val; }
+        void setX(int16_t val)                      { this->x = val; }
+        void setY(int16_t val)                      { this->y = val; }
         void setDirection(Direction val)            { this->direction = val; }
         void setFalling(uint8_t val)                { this->falling = val; }
         void setHangingCounter(uint8_t val)         { this->hangingCounter = val; }
         void setCrouchingCounter(uint8_t val)       { this->crouchingCounter = val; }
         void setHealth(uint8_t val)                 { this->health = val; }
         void setHealthMax(uint8_t val)              { this->healthMax = val; }
+        void setSword(bool val)                     { this->sword = val; }
 
         void incFalling()                           { this->falling++; }
         void decHealth(uint8_t val)                 { health > val ? this->health = this->health - val: 0; }
@@ -82,6 +87,7 @@ struct Prince {
             this->crouchingCounter = 32;
             this->health = health;
             this->healthMax = health;
+            this->sword = false;
 
         }
 
@@ -367,25 +373,29 @@ struct Prince {
 
         bool isFootDown() {
 
-            switch (this->getStance()) {
+            // switch (this->getStance()) {
 
-                case Stance::Running_Jump_7                 ... Stance::Running_Jump_10:
-                case Stance::Standing_Jump_9                ... Stance::Standing_Jump_10:
-                case Stance::Climbing_1_Start               ... Stance::Climbing_15_End:
-                case Stance::Jump_Up_B_11                   ... Stance::Jump_Up_B_14_End:
-                case Stance::Falling_SmallStep_1_Start      ... Stance::Falling_SmallStep_5_Check_CanFall:
-                case Stance::Falling_RunningJump_1_Start    ... Stance::Falling_RunningJump_5_Check_CanFall:
-                case Stance::Falling_StandingJump_1_Start   ... Stance::Falling_StandingJump_5_Check_CanFall:
-                case Stance::Falling_SingleStep_1_Start     ... Stance::Falling_SingleStep_5_Check_CanFall:
-                case Stance::Falling_C_1_Start              ... Stance::Falling_C_5_Check_CanFall:
-                case Stance::Falling_Injured_1_Start:
-                case Stance::Falling_Dead_1_Start           ... Stance::Falling_Dead_2:
-                    return false;
+            //     case Stance::Running_Jump_7                 ... Stance::Running_Jump_10:
+            //     case Stance::Standing_Jump_9                ... Stance::Standing_Jump_10:
+            //     case Stance::Climbing_1_Start               ... Stance::Climbing_15_End:
+            //     case Stance::Jump_Up_B_11                   ... Stance::Jump_Up_B_14_End:
+            //     case Stance::Falling_SmallStep_1_Start      ... Stance::Falling_SmallStep_5_Check_CanFall:
+            //     case Stance::Falling_RunningJump_1_Start    ... Stance::Falling_RunningJump_5_Check_CanFall:
+            //     case Stance::Falling_StandingJump_1_Start   ... Stance::Falling_StandingJump_5_Check_CanFall:
+            //     case Stance::Falling_SingleStep_1_Start     ... Stance::Falling_SingleStep_5_Check_CanFall:
+            //     case Stance::Falling_C_1_Start              ... Stance::Falling_C_5_Check_CanFall:
+            //     case Stance::Falling_Injured_1_Start:
+            //     case Stance::Falling_Dead_1_Start           ... Stance::Falling_Dead_2:
+            //         return false;
 
-                default:
-                    return true;
+            //     default:
+            //         return true;
 
-            }
+            // }
+
+            int8_t footToe = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[this->stance + 1]));
+
+            return (footToe != 127);
 
         }
 

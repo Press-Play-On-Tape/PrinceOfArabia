@@ -39,6 +39,11 @@ namespace Images {
         /* 237 - 241 Falling_Down */               125, 125, 125, 125, 125,  // falling straight down.
         /* 242 - 247 Falling_StandingJump */       121, 122, 123, 124, 125, 126,                                   
         /* 248 - 253 Falling_SingleStep */         121, 122, 123, 124, 125, 126,                               
+        /* 254 - 269 Pickup_Sword */               143, 144, 145, 145, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 
+        /* 270 - 275 Falling_StepWalkRun_P2_6_10 */    121, 122, 123, 124, 125, 126,                               
+        /* 276 - 281 Falling_StepWalkRun_P0_4_8 */     121, 122, 123, 124, 125, 126,                               
+        /* 282 - 287 Falling_StepWalkRun_P1_5_9 */     121, 122, 123, 124, 125, 126,                               
+        /* 288 - 293 Falling_StepWalkRun_P3_7_11 */     121, 122, 123, 124, 125, 126,                               
         255,                   
     };
 

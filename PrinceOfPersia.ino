@@ -82,6 +82,22 @@ void loop() {
 
 
     FX::enableOLED();
+
+    // Invert screen ?
+    
+    switch (prince.getStance()) {
+
+        case Stance::Pickup_Sword_3:
+        case Stance::Pickup_Sword_5:
+            arduboy.invert(true);
+            break;
+
+        default:
+            arduboy.invert(false);
+            break;
+
+    }    
+
     arduboy.display(CLEAR_BUFFER);
     FX::disableOLED();
 

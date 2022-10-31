@@ -156,6 +156,20 @@ struct Level {
 
                     switch (item.itemType) {
 
+                        case ItemType::ExitDoor:
+
+                            if (arduboy.isFrameCount(2)) {
+                             
+                                if (item.data.exitDoor.direction == Direction::Up && item.data.exitDoor.position < 11) {
+
+                                    item.data.exitDoor.position++;
+
+                                }
+
+                            }
+
+                            break;
+
                         case ItemType::Flash:
 
                             if (item.data.flash.frame > 0) {
@@ -181,16 +195,7 @@ struct Level {
 
                             if (arduboy.isFrameCount(4)) {
 
-
-if(item.x ==20 &&item.y==3){
-Serial.print(item.data.gate.position);               
-Serial.print(" ");               
-Serial.println(item.data.gate.closingDelay);               
-}                  
                                 if (item.data.gate.closingDelay + 9 > item.data.gate.closingDelayMax) {
-if(item.x ==20 &&item.y==3){
-    Serial.println("going up ");
-}
 
                                     if (item.data.gate.position < 9) {
 
@@ -202,10 +207,6 @@ if(item.x ==20 &&item.y==3){
                                 else if (item.data.gate.closingDelay > 0 && item.data.gate.closingDelay <= 9) {
 
                                         if (item.data.gate.position > 0 ) {
-
-if(item.x ==20 &&item.y==3){
-    Serial.println("going down ");
-}
 
                                             item.data.gate.position--;
                                             
@@ -434,7 +435,7 @@ if(item.x ==20 &&item.y==3){
 
         uint8_t getItem(ItemType itemType, int8_t x, int8_t y) {
 
-            for (uint8_t i = 1; i < Constants::NumberOfItems; i++) {
+            for (uint8_t i = 2; i < Constants::NumberOfItems; i++) {
                 
                 Item &item = this->items[i];
 
@@ -555,6 +556,13 @@ if(item.x ==20 &&item.y==3){
 
                 switch (item.itemType) {
 
+                    case ItemType::ExitDoor:
+                        item.data.exitDoor.position = 0;
+                        item.data.exitDoor.direction = Direction::None;
+                        item.data.exitDoor.left = FX::readPendingUInt8();;
+                        item.data.exitDoor.right = FX::readPendingUInt8();;
+                        break;
+
                     case ItemType::Gate:
                         item.data.gate.position = FX::readPendingUInt8();
                         item.data.gate.closingDelay = FX::readPendingUInt8();
@@ -605,7 +613,6 @@ if(item.x ==20 &&item.y==3){
 
                     for (uint8_t x = 0; x < 16; x++) {
                         
-                        int8_t tileId = static_cast<int8_t>(FX::readPendingUInt8());
                         bg[y - this->yLoc + 1][x] = TILE_FG_WALL_1;
 
                     }
@@ -664,7 +671,6 @@ if(item.x ==20 &&item.y==3){
 
                     for (uint8_t x = 0; x < 16; x++) {
 
-                        int8_t tileId = static_cast<int8_t>(FX::readPendingUInt8());
                         fg[y - this->yLoc + 1][x] = TILE_FG_WALL_1;
 
                     }
@@ -837,6 +843,10 @@ if(item.x ==20 &&item.y==3){
 
                             if (item.data.collapsingFloor.distanceFallen == 0) {
 
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
+                                DEBUG_PRINTLN(" false (on collapsing floor");
+                                #endif
+
                                 return false;
 
                             }
@@ -845,9 +855,17 @@ if(item.x ==20 &&item.y==3){
 
                     }
 
+                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
+                    DEBUG_PRINTLN(" true");
+                    #endif
+
                     return true;
 
             }
+
+            #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
+            DEBUG_PRINTLN(" false");
+            #endif
 
             return false;
 
@@ -856,6 +874,7 @@ if(item.x ==20 &&item.y==3){
 
         bool canFall(Prince &prince, int8_t xOffset = 0) {
 
+            bool canFall = false;
             Point newPos = prince.getPosition();
             newPos.x = newPos.x + (prince.getDirection() == Direction::Left ? xOffset * -1 : xOffset);
 
@@ -865,15 +884,17 @@ if(item.x ==20 &&item.y==3){
             int8_t footToe = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 1]));
             int8_t footHeel = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 2]));
 
-            int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), newPos.x + (prince.getDirection() == Direction::Left ? -footHeel : footHeel)) - this->getXLocation();
+            int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), newPos.x + (prince.getDirection() == Direction::Left ? -footToe : footToe)) - this->getXLocation();
             int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), newPos.y) - this->getYLocation();
             
             int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
             int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
             
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
-            DEBUG_PRINT(F("canFall() stance:"));
+            DEBUG_PRINT(F("canFall(toe) stance:"));
             DEBUG_PRINT(prince.getStance());
+            DEBUG_PRINT(F(", ii:"));
+            DEBUG_PRINT(imageIndex);
             DEBUG_PRINT(F(", r:"));
             DEBUG_PRINT(reach);
             DEBUG_PRINT(F(", ft "));
@@ -884,10 +905,62 @@ if(item.x ==20 &&item.y==3){
             DEBUG_PRINT(bgTile1);
             DEBUG_PRINT(F(", fg "));
             DEBUG_PRINT(fgTile1);
-            DEBUG_PRINTLN("");
+            DEBUG_PRINT(" = ");
             #endif
 
-            return this->canFall(bgTile1, fgTile1, tileXIdx, tileYIdx);
+            
+            if (reach != 127) {
+            
+                canFall = this->canFall(bgTile1, fgTile1, tileXIdx, tileYIdx);
+
+
+                // If we the price cannot fall then return this now.  Ortherwise check the heel position ..
+
+                if (!canFall) {
+
+                    return false;
+
+                }
+                else {
+
+                    int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), newPos.x + (prince.getDirection() == Direction::Left ? -footHeel : footHeel)) - this->getXLocation();
+                    int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), newPos.y) - this->getYLocation();
+                    
+                    int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
+                    int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
+                    
+                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
+                    DEBUG_PRINT(F("canFall(heel) stance:"));
+                    DEBUG_PRINT(prince.getStance());
+                    DEBUG_PRINT(F(", r:"));
+                    DEBUG_PRINT(reach);
+                    DEBUG_PRINT(F(", ft "));
+                    DEBUG_PRINT(footToe);
+                    DEBUG_PRINT(F(", fh "));
+                    DEBUG_PRINT(footHeel);
+                    DEBUG_PRINT(F(", bg "));
+                    DEBUG_PRINT(bgTile1);
+                    DEBUG_PRINT(F(", fg "));
+                    DEBUG_PRINT(fgTile1);
+                    DEBUG_PRINT(" = ");
+                    #endif
+
+                    canFall = this->canFall(bgTile1, fgTile1, tileXIdx, tileYIdx);
+
+                    return canFall;
+
+                }
+
+            }
+            else {
+
+                #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
+                DEBUG_PRINTLN(" reach=127 ");
+                #endif
+
+            }
+
+            return false;
         
         }
 
@@ -976,7 +1049,7 @@ if(item.x ==20 &&item.y==3){
             int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), prince.getPosition().x);
             int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), prince.getPosition().y);
 
-            for (uint8_t i = 1; i < Constants::NumberOfItems; i++) {
+            for (uint8_t i = 2; i < Constants::NumberOfItems; i++) {
 
                 Item &item = this->items[i];
 
@@ -1785,7 +1858,7 @@ if(item.x ==20 &&item.y==3){
 
             uint8_t gatePosition = 255;
 
-            for (uint8_t i = 1; i < Constants::NumberOfItems; i++) {
+            for (uint8_t i = 2; i < Constants::NumberOfItems; i++) {
 
                 Item &item = this->items[i];
 

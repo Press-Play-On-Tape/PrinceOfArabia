@@ -20,43 +20,49 @@ int8_t Level1_BG[] = {
 
 //  000,001,002,003,004,005,006,007,008,009,010,011,012,013,014,015,016,017,018,019,020,021,022,023,024,025,026,027,028,029,030,031,032,033,034,035,036,037,038,039,040,041,042,043,044,045,046,047,048,049,050,051,052,053,054,055,056,057,058,059,060,061,062,063,064,065,066,067,068,069,070,071,072,073,074,075,076,077,078,079,080,081,082,083,084,085,086,087,088,089,
 
-     -1,119, 75, 75, 75, 96, 90, 77, 77, 78, 84, 85, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,119, 92, 75, 76, 77, 77, 77, 78, 89,112, 90, 78, 77, 77, 78, 77, 77, 77, 89,112, 90, 77, 77, 77, 77,114, 94,102, 77,118, 75, 75, 76, 77, 78, 77, 79, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-    100,103, 75, 92, 75, -1, -1, -1, -1, -1, -1,109, 84, 85, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,119, 92, 96, 90, 77, 89,112, 90, 77, 77, 84,103, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,100,103, -1, -1, 83,127,127, 84, 85, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-    100,103, 75, 92, 75, -1, -1, -1, -1, -1, -1, -1, -1,109, 89, 90, 77, 77,111, 76, 89, 90, 77, 89, 90, 99, -1, -1, -1, -1, -1, -1,100, 90, 89, 90, 99, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,113, 77, 77,111, 96,104, -1, -1, -1, -1, -1, -1, 83, 84, 85, 76, 79, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-    100,103, 75, 92, 75, 96, 90, 77, 77, 78, 77, 94, 75, 76, 98, 92, 76, 89, 90,115,118, 75, 92, 75, 75, 75, 75, 75, 75, 92, 75, 75, 76, 77, 84,103, 75, 96, 90,115,118, 92, 75, 75, 75, 75,102, 77, 78,115,114, 77, 77, 98, 96, 90, 77, 78, 77, 84, 85, 92, -1, -1, -1, -1, 91, 92, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,113, 94, 75, 75, 75, 75, 92, 75, 75, -1,
-    100, 85, 75, 92, 75, 96, 90, 77, 77, 89,112, 90, 99, -1, 97, 92, -1, -1, -1, -1, 83, 77, 78, 77, 77, 98, 76, 77, 77, 78, 78, 77, 89, 90, 84,103, 92, -1, -1, -1, 83, 77, 77, 98, 75,102, 89, 90, 99, -1, -1, -1, -1, 97, -1, -1, -1, -1, -1, -1, 83, 77, 89, 90, 77, 89, 90, 77, 89, 90, 89, 90, 77, 77, 77, 77, 77, 77, 77, 89,112, 90, 78,127, 77, 77,127, 77, 79, -1,
+     -1,119, 75, 75, 75, 96, 90, 77,127, 78, 84, 85, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,119, 92, 75, 76, 77, 77, 77, 78, 89,112, 90, 78, 77,127, 78,127, 77, 77, 89,112, 90,127, 77,127, 77,114, 94,102, 77,118, 75, 75, 76, 77, 78, 77, 79, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    100,103, 75, 92, 75, -1, -1, -1, -1, -1, -1,109, 84, 85, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,119, 92, 96, 90,127, 89,112, 90,127,127, 84,103, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,100,103, -1, -1, 83,127,127, 84, 85, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    100,103, 75, 92, 75, -1, -1, -1, -1, -1, -1, -1, -1,109, 89, 90, 77,127,111, 76, 89, 90,127, 89, 90, 99, -1, -1, -1, -1, -1, -1,100, 90, 89, 90, 99, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,113, 77, 77,111, 96,104, -1, -1, -1, -1, -1, -1, 83, 84, 85, 76, 79, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    100,103, 75, 92, 75, 96, 90, 77, 77, 78, 77, 94, 75, 76, 98, 92, 76, 89, 90,115,118, 75, 92, 75, 75, 75, 75, 75, 75, 92, 75, 75, 76, 77, 84,103, 75, 96, 90,115,118, 92, 75, 75, 75, 75,102, 77, 78,115,114, 77,127, 98, 96, 90, 77, 78,127, 84, 85, 92, -1, -1, -1, -1, 91, 92, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,113, 94, 75, 75, 75, 75, 92, 75, 75, -1,
+    100, 85, 75, 92, 75, 96, 90,127,127, 89,112, 90, 99, -1, 97, 92, -1, -1, -1, -1, 83,127, 78,127, 77, 98, 76, 77, 77, 78, 78, 77, 89, 90, 84,103, 92, -1, -1, -1, 83,127, 127, 98, 75,102, 89, 90, 99, -1, -1, -1, -1, 97, -1, -1, -1, -1, -1, -1, 83,127, 89, 90,127, 89, 90, 77, 89, 90, 89, 90, 77, 77,127, 77,127, 77, 77, 89,112, 90, 78,127, 77, 77,127, 77, 79, -1,
      -1, 83, 77, 77, 77, 89,103, -1, -1, -1, -1, -1, -1, -1,109, 98, -1, -1, -1, -1, -1, -1, -1, -1, -1, 97, -1, -1, -1, -1, -1, -1, -1,120, 96, 90, 77, 89,104, -1, -1, -1, -1, 97, 92, -1, -1, -1, -1, -1, -1, -1, -1,109, 99, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
      -1,120, 92, 76, 77, 89, 90, 89, 85, -1, -1, -1, -1, -1, -1,119, -1, -1, -1, -1, -1, -1, -1, -1, -1, 91, -1, -1, -1, -1, -1, -1, -1, 83, 89, 90, 77, 94, 92, -1, -1, -1, -1, 97, 92, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 80, 80, 80, 80, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-     -1, 97, 92, -1, -1, -1, -1, -1, 83, 89,112, 90, 77, 77, 89, 90, 89, 90, 77, 89,112, 90, 77, 84, 85, 92, 75, -1, -1, -1, -1, -1, -1, -1, -1, -1,100, 85, 92, -1, -1, -1, -1,119, 92, 75, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+     -1, 97, 92, -1, -1, -1, -1, -1, 83, 89,112, 90,127,127, 89, 90, 89, 90,127, 89,112, 90,127, 84, 85, 92, 75, -1, -1, -1, -1, -1, -1, -1, -1, -1,100, 85, 92, -1, -1, -1, -1,119, 92, 75, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
      -1, 83, 99, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 83, 78, 99, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 83, 77, 89,112, 90, 89, 90, 77, 99, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
 };
 
 
 
+
+
+
+
     uint8_t Level1_Items[] = {
-        1, 84, 4,               // Exit Gate 
-        2, 60, 0, 9, 32,        // Gate @ 60, 0 starting position 9 (top), falls in 32 frames.      // Verified
-        6, 53, 2,               // Potion Small                                                     // Verified
-        7, 46, 3, 50, 3,        // Floor Button 1 (gateX, gateY)                                    // Verified
-        7, 52, 3, 50, 3,        // Floor Button 1 (gateX, gateY)                                    // Verified
-        2, 50, 3, 0, 0,         // Gate @ 50, 3 starting position 0 (bottom).                       // Verified
-        7, 47, 4, 40, 3,        // Floor Button (gateX, gateY)                                      // Verified
-        2, 40, 3, 0, 0,         // Gate @ 50, 3 starting position 0 (bottom).                       // Verified
-        7, 32, 3, 40, 3,        // Floor Button 1 (gateX, gateY)                                    // Verified
-        7, 27, 4, 20, 3,        // Floor Button 1 (gateX, gateY)                                    // Verified
-        8, 24, 4, 20, 3,        // Floor Button 2 (gateX, gateY)                                    // Verified
-        2, 20, 3, 0, 0,         // Gate @ 50, 3 starting position 0 (bottom).                       // Verified
-        5, 64, 2,               // CollapsedTile                                                    // Verified
-        4, 35, 3, 55,           // CollapsingTile (dist to fall)                                    // Verified
-        4, 36, 3, 55,           // CollapsingTile (dist to fall)                                    // Verified
-        4, 25, 4, 117,          // CollapsingTile (dist to fall)                                    // Verified
-        4, 18, 2, 24,           // CollapsingTile (dist to fall)                                    // Verified
-        4, 33, 5, 24,           // CollapsingTile (dist to fall)                                    // Verified
-        4, 66, 2, 55,           // CollapsingTile (dist to fall, 24 + 31 + 31 ..)                   // Verified
-        4, 55, 2, 24,           // CollapsingTile (dist to fall, 24 + 31 + 31 ..)                   // Verified
-        4, 35, 1, 24,           // CollapsingTile (dist to fall)                                    // Verified
-        4, 36, 1, 24,           // CollapsingTile (dist to fall)                                    // Verified
-        4, 43, 4, 117,          // CollapsingTile (dist to fall)                                    // Verified
+        1, 84, 4, 82, 86,       // Exit Gate, let position for open, right position                                                        
+        2, 60, 0, 9, 32,        // Gate @ 60, 0 starting position 9 (top), falls in 32 frames.      
+        6, 53, 2,               // Potion Small                              
+        7, 46, 3, 50, 3,        // Floor Button 1 (gateX, gateY)             
+        7, 52, 3, 50, 3,        // Floor Button 1 (gateX, gateY)             
+        2, 50, 3, 0, 0,         // Gate @ 50, 3 starting position 0 (bottom).
+        7, 47, 4, 40, 3,        // Floor Button (gateX, gateY)               
+        2, 40, 3, 0, 0,         // Gate @ 50, 3 starting position 0 (bottom).
+        7, 32, 3, 40, 3,        // Floor Button 1 (gateX, gateY)             
+        7, 27, 4, 20, 3,        // Floor Button 1 (gateX, gateY)             
+        8, 24, 4, 20, 3,        // Floor Button 2 (gateX, gateY)             
+        2, 20, 3, 0, 0,         // Gate @ 50, 3 starting position 0 (bottom).
+        5, 64, 2,               // CollapsedTile                                                    
+        3, 2, 5,                // Sword
+        9, 3, 5,                // Skeleton
+        4, 35, 3, 55,           // CollapsingTile (dist to fall)                                    
+        4, 36, 3, 55,           // CollapsingTile (dist to fall)                                    
+        4, 25, 4, 117,          // CollapsingTile (dist to fall)                                    
+        4, 18, 2, 24,           // CollapsingTile (dist to fall)                                    
+        4, 33, 5, 24,           // CollapsingTile (dist to fall)                                    
+        4, 66, 2, 55,           // CollapsingTile (dist to fall, 24 + 31 + 31 ..)                   
+        4, 55, 2, 24,           // CollapsingTile (dist to fall, 24 + 31 + 31 ..)                   
+        4, 35, 1, 24,           // CollapsingTile (dist to fall)                                    
+        4, 36, 1, 24,           // CollapsingTile (dist to fall)                                    
+        4, 43, 4, 117,          // CollapsingTile (dist to fall)                                    
         255                     // End
     }
 
@@ -65,14 +71,17 @@ namespace_end
 
 namespace Images {
 
+    image_t PPOT_00 = "../images/splash/PPOT_00.png"
+    image_t PPOT_01 = "../images/splash/PPOT_01.png"
+    image_t PPOT_02 = "../images/splash/PPOT_02.png"
+    image_t PPOT_03 = "../images/splash/PPOT_03.png"
+
     image_t Title_PoP = "../images/title/Title_PoP.png"
     image_t Title_Main = "../images/title/Title_Main.png"
     image_t Title_Cursor = "../images/title/Title_Cursor.png"
     image_t Title_Credits = "../images/title/Title_Credits.png"
 
     image_t Menu = "../images/hud/Menu.png"
-    image_t Sword = "../images/hud/Sword.png"
-
     image_t Number_00 = "../images/hud/Number_00.png"
     image_t Number_01 = "../images/hud/Number_01.png"
     image_t Number_02 = "../images/hud/Number_02.png"
@@ -83,6 +92,7 @@ namespace Images {
     image_t Number_07 = "../images/hud/Number_07.png"
     image_t Number_08 = "../images/hud/Number_08.png"
     image_t Number_09 = "../images/hud/Number_09.png"
+    image_t Sword_Cursor = "../images/hud/Sword.png"
 
     image_t Number_Small_00 = "../images/hud/Number_Small_00.png"
     image_t Number_Small_01 = "../images/hud/Number_Small_01.png"
@@ -97,12 +107,10 @@ namespace Images {
 
     image_t Health_00 = "../images/hud/Health_00.png"
     image_t Health_01 = "../images/hud/Health_01.png"
+    image_t Sword_HUD = "../images/hud/Sword_HUD.png"
 
-    image_t PPOT_00 = "../images/splash/PPOT_00.png"
-    image_t PPOT_01 = "../images/splash/PPOT_01.png"
-    image_t PPOT_02 = "../images/splash/PPOT_02.png"
-    image_t PPOT_03 = "../images/splash/PPOT_03.png"
-
+    image_t Sword = "../images/items/Sword.png"
+    image_t Skeleton = "../images/items/Skeleton.png"
     image_t Gate_00 = "../images/items/Gate_00.png"
     image_t Gate_01 = "../images/items/Gate_01.png"
     image_t Gate_02 = "../images/items/Gate_02.png"
@@ -114,7 +122,18 @@ namespace Images {
     image_t Gate_08 = "../images/items/Gate_08.png"
     image_t Gate_09 = "../images/items/Gate_09.png"
 
-    image_t ExitDoor = "../images/items/ExitDoor.png"
+    image_t ExitDoor_00 = "../images/items/ExitDoor_00.png"
+    image_t ExitDoor_01 = "../images/items/ExitDoor_01.png"
+    image_t ExitDoor_02 = "../images/items/ExitDoor_02.png"
+    image_t ExitDoor_03 = "../images/items/ExitDoor_03.png"
+    image_t ExitDoor_04 = "../images/items/ExitDoor_04.png"
+    image_t ExitDoor_05 = "../images/items/ExitDoor_05.png"
+    image_t ExitDoor_06 = "../images/items/ExitDoor_06.png"
+    image_t ExitDoor_07 = "../images/items/ExitDoor_07.png"
+    image_t ExitDoor_08 = "../images/items/ExitDoor_08.png"
+    image_t ExitDoor_09 = "../images/items/ExitDoor_09.png"
+    image_t ExitDoor_10 = "../images/items/ExitDoor_10.png"
+    image_t ExitDoor_11 = "../images/items/ExitDoor_11.png"
 
     image_t Potion_Small_00 = "../images/items/Potion_Small_00.png"
     image_t Potion_Small_01 = "../images/items/Potion_Small_01.png"
