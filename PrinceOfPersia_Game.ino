@@ -11,9 +11,11 @@
 
 void game_Init() {
 
+    prince.init(42, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Exit Seq
+
     // prince.init(18, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
     // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3);          // Both floor types
-    prince.init(86, 87, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos but next to drop floor 3rd floor
+    // prince.init(86, 87, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos but next to drop floor 3rd floor
     // prince.init(70, 25, Direction::Left, Stance::Crouch_3_End, 3);          // Under collapsible floor
     // prince.init(66, 56, Direction::Right, Stance::Crouch_3_End, 3);        // Get tonic
     // prince.init(80, 56, Direction::Left, Stance::Crouch_3_End, 3);     // Column of climbs
@@ -25,9 +27,10 @@ void game_Init() {
     gamePlay.init(arduboy, 1);
     
     level.setLevel(1);
+    level.init(prince, 80, 3);  // Exit Seq
     // level.init(prince, 60, 0);  // Normal starting posa
     // level.init(prince, 20, 3);  // Both floor types
-    level.init(prince, 60, 0);  //Normal starting pos but next to drop floor 3rd floor
+    // level.init(prince, 60, 0);  //Normal starting pos but next to drop floor 3rd floor
     // level.init(prince, 50, 3);  // Under collapsible floor
     // level.init(prince, Constants::TileHeight, 0);   // Get tonic
     // level.init(prince, 0, 3);   // Column of climbs
@@ -106,38 +109,38 @@ void game() {
 
 
     if (justPressed & B_BUTTON) {
-//prince.pushSequence(Running_Jump_1_Start, Running_Jump_11_End, Run_Repeat_4, true);
+prince.pushSequence(Stance::Exit_Sequence_1_Start, Stance::Exit_Sequence_12_End, true);
 // prince.pushSequence(Running_Jump_1_Start, Running_Jump_11_End, Run_Start_6_End, true);
 // //
-        switch (level.distToEdgeOfTile(prince.getDirection(),  (level.getXLocation() * Constants::TileWidth) + prince.getX())) {
+        // switch (level.distToEdgeOfTile(prince.getDirection(),  (level.getXLocation() * Constants::TileWidth) + prince.getX())) {
 
-            case 0:
-                prince.incX(2);
-                break;
+        //     case 0:
+        //         prince.incX(2);
+        //         break;
 
-            case 1:
-            case 5:
-            case 9:
-                prince.incX(1);
-                break;
+        //     case 1:
+        //     case 5:
+        //     case 9:
+        //         prince.incX(1);
+        //         break;
 
-            case 3:
-            case 7:
-            case 11:
-                prince.incX(-1);
-                break;
+        //     case 3:
+        //     case 7:
+        //     case 11:
+        //         prince.incX(-1);
+        //         break;
 
-            case 2:
-            case 6:
-            case 10:
-                break;
+        //     case 2:
+        //     case 6:
+        //     case 10:
+        //         break;
 
-            case 4:
-            case 8:
-                prince.incX(2);
-                break;
+        //     case 4:
+        //     case 8:
+        //         prince.incX(2);
+        //         break;
 
-        }
+        // }
 
     }
 

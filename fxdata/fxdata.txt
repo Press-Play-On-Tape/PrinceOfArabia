@@ -376,7 +376,6 @@ namespace Images {
     image_t Prince_Left_156 = "../images/prince/left/156_PickupSword_14_End.png"
 
 
-
     // RHS Images ..
 
     image_t Prince_Right_001 = "../images/prince/right/001_Run_Start_1_Start.png"
@@ -537,6 +536,7 @@ namespace Images {
     image_t Prince_Right_156 = "../images/prince/right/156_PickupSword_14_End.png"
 
 }
+
 namespace_end
 
 

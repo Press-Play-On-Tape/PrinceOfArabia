@@ -324,6 +324,18 @@ constexpr uint16_t Falling_StepWalkRun_P3_7_11_3                 = 290;
 constexpr uint16_t Falling_StepWalkRun_P3_7_11_4                 = 291;
 constexpr uint16_t Falling_StepWalkRun_P3_7_11_5_Check_CanFall   = 292;
 constexpr uint16_t Falling_StepWalkRun_P3_7_11_6_End             = 293;
+constexpr uint16_t Exit_Sequence_1_Start                         = 294;
+constexpr uint16_t Exit_Sequence_2                               = 295;
+constexpr uint16_t Exit_Sequence_3                               = 296;
+constexpr uint16_t Exit_Sequence_4                               = 297;
+constexpr uint16_t Exit_Sequence_5                               = 298;
+constexpr uint16_t Exit_Sequence_6                               = 299;
+constexpr uint16_t Exit_Sequence_7                               = 300;
+constexpr uint16_t Exit_Sequence_8                               = 301;
+constexpr uint16_t Exit_Sequence_9                               = 302;
+constexpr uint16_t Exit_Sequence_10                              = 303;
+constexpr uint16_t Exit_Sequence_11                              = 304;
+constexpr uint16_t Exit_Sequence_12_End                          = 305;
 
 
 // constexpr uint16_t  Jump_Down_1_Start        1250
@@ -421,6 +433,10 @@ namespace Constants {
               2,   5,   2,   5,   1,   5,   1,   5,   0,   5,   2,   6,   2,   5,   1,   5,   1,   5,   0,   5,    //  271 - 280
               0,   5,   2,   6,   2,   5,   2,   5,   1,   5,   0,   5,   0,   5,   2,   6,   2,   5,   2,   5,    //  281 - 290
               2,   5,   1,   5,   0,   5,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  291 - 300
+
+              0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  301 - 310
+              0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  311 - 320
+              0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  321 - 330
 
     };
 //    2,   6,   2,   5,   2,   5,  1,   5,   0,   5,   0,   5, 
