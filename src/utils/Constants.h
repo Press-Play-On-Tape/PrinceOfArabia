@@ -9,7 +9,7 @@
 #define _DEBUG_ONSCREEN_DETAILS_MIN
 
 #define _DEBUG_PRINCE_DETAILS
-#define _DEBUG_PRINCE_STACK
+#define DEBUG_PRINCE_STACK
 #define _DEBUG_PRINT_ACTION
 #define _DEBUG_LEVEL_LOAD_MAP
 #define _DEBUG_PRINCE_RENDERING
@@ -324,51 +324,20 @@ constexpr uint16_t Falling_StepWalkRun_P3_7_11_3                 = 290;
 constexpr uint16_t Falling_StepWalkRun_P3_7_11_4                 = 291;
 constexpr uint16_t Falling_StepWalkRun_P3_7_11_5_Check_CanFall   = 292;
 constexpr uint16_t Falling_StepWalkRun_P3_7_11_6_End             = 293;
-constexpr uint16_t Exit_Sequence_1_Start                         = 294;
-constexpr uint16_t Exit_Sequence_2                               = 295;
-constexpr uint16_t Exit_Sequence_3                               = 296;
-constexpr uint16_t Exit_Sequence_4                               = 297;
-constexpr uint16_t Exit_Sequence_5                               = 298;
-constexpr uint16_t Exit_Sequence_6                               = 299;
-constexpr uint16_t Exit_Sequence_7                               = 300;
-constexpr uint16_t Exit_Sequence_8                               = 301;
-constexpr uint16_t Exit_Sequence_9                               = 302;
-constexpr uint16_t Exit_Sequence_10                              = 303;
-constexpr uint16_t Exit_Sequence_11                              = 304;
-constexpr uint16_t Exit_Sequence_12_End                          = 305;
-
-
-// constexpr uint16_t  Jump_Down_1_Start        1250
-// constexpr uint16_t  Jump_Down_2              1250
-// constexpr uint16_t  Jump_Down_3              1250
-// constexpr uint16_t  Squat_1_Start            1250
-// constexpr uint16_t  Squat_2                  1250
-// constexpr uint16_t  Squat_3_LOW_POINT        1250
-// constexpr uint16_t  Squat_4                  1250
-// constexpr uint16_t  Squat_5                  1250
-// constexpr uint16_t  Squat_6                  1250
-// constexpr uint16_t  Squat_7                  1250
-// constexpr uint16_t  Squat_8                  1250
-// constexpr uint16_t  Squat_9                  1250
-// constexpr uint16_t  Squat_10_End             1250
-// constexpr uint16_t  Dying_1_Start            1250
-// constexpr uint16_t  Dying_2                  1250
-// constexpr uint16_t  Dying_3                  1250
-// constexpr uint16_t  Dying_4                  1250
-// constexpr uint16_t  Dying_5                  1250
-// constexpr uint16_t  Dying_6_End              1250
-// constexpr uint16_t  Swinging_1_Start         1250
-// constexpr uint16_t  Swinging_2               1250
-// constexpr uint16_t  Swinging_3               1250
-// constexpr uint16_t  Swinging_4               1250
-// constexpr uint16_t  Swinging_5               1250
-// constexpr uint16_t  Swinging_6               1250
-// constexpr uint16_t  Swinging_7               1250
-// constexpr uint16_t  Swinging_8               1250
-// constexpr uint16_t  Swinging_9               1250
-// constexpr uint16_t  Swinging_10              1250
-// constexpr uint16_t  Swinging_11              1250
-// constexpr uint16_t  Swinging_12_End          1250
+constexpr uint16_t Leave_Gate_1_Start                            = 294;
+constexpr uint16_t Leave_Gate_2                                  = 295;
+constexpr uint16_t Leave_Gate_3                                  = 296;
+constexpr uint16_t Leave_Gate_4                                  = 297;
+constexpr uint16_t Leave_Gate_5                                  = 298;
+constexpr uint16_t Leave_Gate_6                                  = 299;
+constexpr uint16_t Leave_Gate_7                                  = 300;
+constexpr uint16_t Leave_Gate_8                                  = 301;
+constexpr uint16_t Leave_Gate_9                                  = 302;
+constexpr uint16_t Leave_Gate_10                                 = 303;
+constexpr uint16_t Leave_Gate_11                                 = 304;
+constexpr uint16_t Leave_Gate_12                                 = 305;
+constexpr uint16_t Leave_Gate_13                                 = 306;
+constexpr uint16_t Leave_Gate_14_End                             = 307;
 
 constexpr uint16_t  Upright_End_Climb        = 1253;
 constexpr uint16_t  Upright_Turn             = 1255;
@@ -432,9 +401,9 @@ namespace Constants {
 
               2,   5,   2,   5,   1,   5,   1,   5,   0,   5,   2,   6,   2,   5,   1,   5,   1,   5,   0,   5,    //  271 - 280
               0,   5,   2,   6,   2,   5,   2,   5,   1,   5,   0,   5,   0,   5,   2,   6,   2,   5,   2,   5,    //  281 - 290
-              2,   5,   1,   5,   0,   5,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  291 - 300
+              2,   5,   1,   5,   0,   5,   0,   0,   1,   0,   2,  -1,   2,  -1,   2,  -1,   1,  -1,   1,  -1,    //  291 - 300
 
-              0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  301 - 310
+              1,  -1,   1,  -1,   1,  -1,   1,  -2,   0,  -3,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  301 - 310
               0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  311 - 320
               0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  321 - 330
 
@@ -663,7 +632,7 @@ enum class CanClimbDownPart2Result : uint8_t {
 };
 
 enum class ItemType : uint8_t {
-    AnyItem,
+    /* 00 */ AnyItem,
     /* 01 */ ExitDoor,
     /* 02 */ Gate,               
     /* 03 */ Sword,
@@ -673,7 +642,7 @@ enum class ItemType : uint8_t {
     /* 07 */ FloorButton1,
     /* 08 */ FloorButton2,
     /* 09 */ Skeleton,
-    Flash,
+    /* 99 */ Flash = 99,
 };
 
 enum class MenuOption : uint8_t {

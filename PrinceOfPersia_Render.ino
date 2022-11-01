@@ -103,24 +103,25 @@ void render() {
     uint16_t imageIndex = static_cast<uint16_t>(pgm_read_byte(&Images::StanceToImageXRef[stance]));
     uint24_t startPos = Images::Prince_Left_001 + ((imageIndex - 1) * 364);
 
-    #if defined(DEBUG) && defined(DEBUG_PRINCE_RENDERING)
-    DEBUG_PRINT(F("Stance: "));
-    DEBUG_PRINT(prince.getStance());
-    DEBUG_PRINT(F(", ImageIndex: "));
-    DEBUG_PRINTLN(imageIndex);
-    #endif
+    if (imageIndex != 0) {
 
-    
-    // /arduboy.drawFastVLine(prince.getX() + 3, prince.getY() - 31, 36, arduboy.isFrameCount(2));
+        #if defined(DEBUG) && defined(DEBUG_PRINCE_RENDERING)
+        DEBUG_PRINT(F("Stance: "));
+        DEBUG_PRINT(prince.getStance());
+        DEBUG_PRINT(F(", ImageIndex: "));
+        DEBUG_PRINTLN(imageIndex);
+        #endif
 
-    if (prince.getDirection() == Direction::Left) {
-        
-        FX::drawBitmap(prince.getXImage(), prince.getYImage() - level.getYOffset() + Constants::ScreenTopOffset, startPos, 0, dbmMasked);
+        if (prince.getDirection() == Direction::Left) {
+            
+            FX::drawBitmap(prince.getXImage(), prince.getYImage() - level.getYOffset() + Constants::ScreenTopOffset, startPos, 0, dbmMasked);
 
-    }
-    else {
+        }
+        else {
 
-        FX::drawBitmap(prince.getXImage(), prince.getYImage() - level.getYOffset() + Constants::ScreenTopOffset, startPos + (Images::Prince_Right_001 - Images::Prince_Left_001), 0, dbmMasked);
+            FX::drawBitmap(prince.getXImage(), prince.getYImage() - level.getYOffset() + Constants::ScreenTopOffset, startPos + (Images::Prince_Right_001 - Images::Prince_Left_001), 0, dbmMasked);
+
+        }
 
     }
 

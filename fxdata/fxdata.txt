@@ -374,6 +374,18 @@ namespace Images {
     image_t Prince_Left_154 = "../images/prince/left/154_PickupSword_12.png"
     image_t Prince_Left_155 = "../images/prince/left/155_PickupSword_13.png"
     image_t Prince_Left_156 = "../images/prince/left/156_PickupSword_14_End.png"
+    image_t Prince_Left_157 = "../images/prince/left/157_Leave_Gate_1_Start.png"
+    image_t Prince_Left_158 = "../images/prince/left/158_Leave_Gate_2.png"
+    image_t Prince_Left_159 = "../images/prince/left/159_Leave_Gate_3.png"
+    image_t Prince_Left_160 = "../images/prince/left/160_Leave_Gate_4.png"
+    image_t Prince_Left_161 = "../images/prince/left/161_Leave_Gate_5.png"
+    image_t Prince_Left_162 = "../images/prince/left/162_Leave_Gate_6.png"
+    image_t Prince_Left_163 = "../images/prince/left/163_Leave_Gate_7.png"
+    image_t Prince_Left_164 = "../images/prince/left/164_Leave_Gate_8.png"
+    image_t Prince_Left_165 = "../images/prince/left/165_Leave_Gate_9.png"
+    image_t Prince_Left_166 = "../images/prince/left/166_Leave_Gate_10.png"
+    image_t Prince_Left_167 = "../images/prince/left/167_Leave_Gate_11.png"
+    image_t Prince_Left_168 = "../images/prince/left/168_Leave_Gate_12_End.png"
 
 
     // RHS Images ..
@@ -534,7 +546,18 @@ namespace Images {
     image_t Prince_Right_154 = "../images/prince/right/154_PickupSword_12.png"
     image_t Prince_Right_155 = "../images/prince/right/155_PickupSword_13.png"
     image_t Prince_Right_156 = "../images/prince/right/156_PickupSword_14_End.png"
-
+    image_t Prince_Right_157 = "../images/prince/right/157_Leave_Gate_1_Start.png"
+    image_t Prince_Right_158 = "../images/prince/right/158_Leave_Gate_2.png"
+    image_t Prince_Right_159 = "../images/prince/right/159_Leave_Gate_3.png"
+    image_t Prince_Right_160 = "../images/prince/right/160_Leave_Gate_4.png"
+    image_t Prince_Right_161 = "../images/prince/right/161_Leave_Gate_5.png"
+    image_t Prince_Right_162 = "../images/prince/right/162_Leave_Gate_6.png"
+    image_t Prince_Right_163 = "../images/prince/right/163_Leave_Gate_7.png"
+    image_t Prince_Right_164 = "../images/prince/right/164_Leave_Gate_8.png"
+    image_t Prince_Right_165 = "../images/prince/right/165_Leave_Gate_9.png"
+    image_t Prince_Right_166 = "../images/prince/right/166_Leave_Gate_10.png"
+    image_t Prince_Right_167 = "../images/prince/right/167_Leave_Gate_11.png"
+    image_t Prince_Right_168 = "../images/prince/right/168_Leave_Gate_12_End.png"
 }
 
 namespace_end
