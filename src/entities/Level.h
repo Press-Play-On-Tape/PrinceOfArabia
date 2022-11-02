@@ -878,7 +878,7 @@ struct Level {
             Point newPos = prince.getPosition();
             newPos.x = newPos.x + (prince.getDirection() == Direction::Left ? xOffset * -1 : xOffset);
 
-            uint8_t imageIndex = static_cast<uint8_t>(pgm_read_byte(&Images::StanceToImageXRef[prince.getStance()]));
+            uint8_t imageIndex = static_cast<uint8_t>(pgm_read_byte(&Constants::StanceToImageXRef[prince.getStance()]));
             uint16_t pos = (imageIndex - 1) * 3;
             int8_t reach = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos]));
             int8_t footToe = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 1]));
