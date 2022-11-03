@@ -111,7 +111,7 @@ struct Level {
             this->yOffset = this->yOffset + inc;
         }
 
-        bool update(Arduboy2Ext &arduboy, Prince &prince) { // returns true if player should be tested for a fall.
+        bool update(Arduboy2Ext &arduboy) { // returns true if player should be tested for a fall.
 
 
             // Update level offset ..
@@ -384,7 +384,7 @@ struct Level {
 
                 case Layer::Foreground:
 
-                    #if defined(DEBUG) && defined(DEBUG_LEVEL_PROCESSING)
+                    #if defined(DEBUG) && defined(DEBUG_GET_TILE)
                     DEBUG_PRINT(F("getTile(FG, "));
                     DEBUG_PRINT(x);
                     DEBUG_PRINT(F(","));
@@ -397,9 +397,9 @@ struct Level {
 
                 case Layer::Background:
                     {
-                        uint8_t tile = bg[y + 1][x + 3];
+                        int8_t tile = bg[y + 1][x + 3];
 
-                        #if defined(DEBUG) && defined(DEBUG_LEVEL_PROCESSING)
+                        #if defined(DEBUG) && defined(DEBUG_GET_TILE)
                         DEBUG_PRINT(F("getTile(BG, "));
                         DEBUG_PRINT(x);
                         DEBUG_PRINT(F(","));
@@ -407,6 +407,58 @@ struct Level {
                         DEBUG_PRINT(F(") = "));
                         DEBUG_PRINTLN(tile);
                         #endif
+
+
+                        // Substitute tiles if needed ..
+
+                        if (returnCollapsingTile != TILE_NONE && this->isCollapsingFloor(this->xLoc + x, this->yLoc + y)) {
+
+                            return returnCollapsingTile;
+
+                        }
+
+                        return tile;
+
+                    }
+
+                    break;
+
+
+            }
+
+            return TILE_NONE;
+
+        }
+
+        int8_t getTile2(Layer layer, int8_t x, int8_t y, int8_t returnCollapsingTile) { 
+
+            switch (layer) {
+
+                case Layer::Foreground:
+
+                    // #if defined(DEBUG) && defined(DEBUG_GET_TILE)
+                    DEBUG_PRINT(F("getTile(FG, "));
+                    DEBUG_PRINT(x);
+                    DEBUG_PRINT(F(", "));
+                    DEBUG_PRINT(y);
+                    DEBUG_PRINT(F(") = "));
+                    DEBUG_PRINTLN(fg[y + 1][x + 3]);
+                    // #endif
+
+                    return fg[y + 1][x + 3];
+
+                case Layer::Background:
+                    {
+                        int8_t tile = bg[y + 1][x + 3];
+
+                        // #if defined(DEBUG) && defined(DEBUG_GET_TILE)
+                        DEBUG_PRINT(F("getTile(BG, "));
+                        DEBUG_PRINT(x);
+                        DEBUG_PRINT(F(", "));
+                        DEBUG_PRINT(y);
+                        DEBUG_PRINT(F(") = "));
+                        DEBUG_PRINTLN(tile);
+                        // #endif
 
 
                         // Substitute tiles if needed ..
@@ -493,7 +545,7 @@ struct Level {
                     DEBUG_PRINT(bg[y][x]);
                     DEBUG_PRINT(" ");
 
-                    if (x == 1 || x == 11) {
+                    if (x == 2 || x == 12) {
                     DEBUG_PRINT("| ");
                     }
 
@@ -513,7 +565,7 @@ struct Level {
                     DEBUG_PRINT(fg[y][x]);
                     DEBUG_PRINT(" ");
 
-                    if (x == 1 || x == 11) {
+                    if (x == 2 || x == 12) {
                         DEBUG_PRINT("| ");
                     }
 
@@ -909,7 +961,7 @@ struct Level {
             #endif
 
             
-            if (reach != 127) {
+            if (footToe != Constants::InAir) {
             
                 canFall = this->canFall(bgTile1, fgTile1, tileXIdx, tileYIdx);
 
@@ -955,7 +1007,7 @@ struct Level {
             else {
 
                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
-                DEBUG_PRINTLN(" reach=127 ");
+                DEBUG_PRINTLN(" reach=InAir ");
                 #endif
 
             }
@@ -2191,7 +2243,12 @@ struct Level {
 
             Direction direction = prince.getDirection();
 
-            int8_t reach = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[(prince.getStance() - 1) * 3]));
+            uint8_t imageIndex = static_cast<uint8_t>(pgm_read_byte(&Constants::StanceToImageXRef[prince.getStance()]));
+            uint16_t pos = (imageIndex - 1) * 3;
+            int8_t reach = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos]));
+            // int8_t footToe = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 1]));
+            // int8_t footHeel = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 2]));
+
             #if defined(DEBUG) && defined(DEBUG_ACTION_COLLIDEWITHWALL)
             DEBUG_PRINT("collideWithWall() Stance: ");
             DEBUG_PRINT(prince.getStance());

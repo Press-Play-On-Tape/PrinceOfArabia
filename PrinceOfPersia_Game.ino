@@ -11,10 +11,9 @@
 
 void game_Init() {
 
-    // prince.init(54, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Exit Seq
-    prince.init(58 +36, 56, Direction::Left, Stance::Crouch_3_End, 3);          // Exit Seq
+    // prince.init(58 +36, 56, Direction::Left, Stance::Crouch_3_End, 3);          // Exit Seq
 
-    // prince.init(18, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
+    prince.init(18, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
     // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3);          // Both floor types
     // prince.init(86, 87, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos but next to drop floor 3rd floor
     // prince.init(70, 25, Direction::Left, Stance::Crouch_3_End, 3);          // Under collapsible floor
@@ -28,8 +27,8 @@ void game_Init() {
     gamePlay.init(arduboy, 1);
     
     level.setLevel(1);
-    level.init(prince, 80, 3);  // Exit Seq
-    // level.init(prince, 60, 0);  // Normal starting posa
+    // level.init(prince, 80, 3);  // Exit Seq
+    level.init(prince, 60, 0);  // Normal starting posa
     // level.init(prince, 20, 3);  // Both floor types
     // level.init(prince, 60, 0);  //Normal starting pos but next to drop floor 3rd floor
     // level.init(prince, 50, 3);  // Under collapsible floor
@@ -152,7 +151,7 @@ void game() {
     // Update the objects ..
 
     prince.update(level.getXLocation(), level.getYLocation());
-    bool reevaluatePrinceFalling = level.update(arduboy, prince);
+    bool reevaluatePrinceFalling = level.update(arduboy);
     /* if (gamePlay.gameState == GameState::Game) */ gamePlay.update(arduboy);
 
     if (menu.update()) gamePlay.gameState = GameState::Game;
@@ -1051,9 +1050,14 @@ void game() {
                 case Stance::Falling_StepWalkRun_P1_5_9_5_Check_CanFall:
                 case Stance::Falling_StepWalkRun_P2_6_10_5_Check_CanFall:
                 case Stance::Falling_StepWalkRun_P3_7_11_5_Check_CanFall:
+                case Stance::Collide_Wall_P2_Start_End:
+                case Stance::Collide_Wall_P1_Start_End:
+                case Stance::Collide_Wall_P0_Start_End:
+                case Stance::Collide_Wall_M1_Start_End:
+                case Stance::Collide_Wall_M2_Start_End:
 
                     if (level.canFall(prince)) { // Fall some more
-
+Serial.println("Fall some more");
                         prince.incFalling();
                         prince.setPrevStance(prince.getStance());
                         prince.pushSequence(Stance::Falling_Down_1_Start, Stance::Falling_Down_5_End, true);
@@ -1062,6 +1066,7 @@ void game() {
                     else {
 
                         prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
+Serial.println("Stand up");
 
                         switch (prince.getStance()) {
 
@@ -1167,8 +1172,11 @@ void game() {
 
                 // Check for floor buttons and collapsing floors ..
 
-                int8_t footToe = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[prince.getStance() + 1]));
-                int8_t footHeel = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[prince.getStance() + 2]));
+                uint8_t imageIndex = static_cast<uint8_t>(pgm_read_byte(&Constants::StanceToImageXRef[prince.getStance()]));
+                uint16_t pos = (imageIndex - 1) * 3;
+                int8_t reach = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos]));
+                int8_t footToe = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 1]));
+                int8_t footHeel = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 2]));
 
 
                 // Test with player's toe ..
@@ -1270,54 +1278,102 @@ void game() {
     }
 
 
-    //if (reevaluatePrinceFalling) {
+    if (prince.isFootDown() && level.canFall(prince) && prince.getFalling() == 0) {
 
-        if (prince.isFootDown() && level.canFall(prince) && prince.getFalling() == 0) {
+        prince.clear();
+        prince.setFalling(1);
+        prince.setPrevStance(prince.getStance());
+
+        switch (prince.getX() % 12) {
+
+            case 0:
+            case 4:
+            case 8:
+                prince.pushSequence(Stance::Falling_StepWalkRun_P0_4_8_1_Start, Stance::Falling_StepWalkRun_P0_4_8_5_Check_CanFall, true);
+                break;
+
+            case 1:
+            case 5:
+            case 9:
+                prince.pushSequence(Stance::Falling_StepWalkRun_P1_5_9_1_Start, Stance::Falling_StepWalkRun_P1_5_9_5_Check_CanFall, true);
+                break;
+
+            case 2:
+            case 6:
+            case 10:
+                prince.pushSequence(Stance::Falling_StepWalkRun_P2_6_10_1_Start, Stance::Falling_StepWalkRun_P2_6_10_5_Check_CanFall, true);
+                break;
+
+            case 3:
+            case 7:
+            case 11:
+                prince.pushSequence(Stance::Falling_StepWalkRun_P3_7_11_1_Start, Stance::Falling_StepWalkRun_P3_7_11_5_Check_CanFall, true);
+                break;
+
+        }
+
+    }
+
+
+    // If in the air and touching wall, then move backwards ..
+
+    if (prince.inAir() && prince.getFalling() == 0) {
+
+        uint8_t reach = prince.getReach();
+
+        // if (prince.isFootDown() && level.canFall(prince) && prince.getFalling() == 0) {
+
+        int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x + (prince.getDirection() == Direction::Left ? -reach : reach)) - level.getXLocation();
+        int8_t tileYIdx = level.coordToTileIndexY(prince.getDirection(), prince.getPosition().y) - level.getYLocation();
+
+        Serial.print("X:");
+        Serial.print(tileXIdx);
+        Serial.print(", Y:");
+        Serial.print(tileYIdx);
+        Serial.print(", Coll:");
+        Serial.println(level.collideWithWall(prince));
+        // }
+
+        if (level.collideWithWall(prince)) {
 
             prince.clear();
             prince.setFalling(1);
-            prince.setPrevStance(prince.getStance());
 
             switch (prince.getX() % 12) {
 
-                case 6:
-                case 10:
-                case 2:
-                    prince.pushSequence(Stance::Falling_StepWalkRun_P2_6_10_1_Start, Stance::Falling_StepWalkRun_P2_6_10_5_Check_CanFall, true);
+                case 0:
+                    prince.push(Stance::Collide_Wall_M2_Start_End, false);
                     break;
 
                 case 1:
                 case 5:
                 case 9:
-                    prince.pushSequence(Stance::Falling_StepWalkRun_P1_5_9_1_Start, Stance::Falling_StepWalkRun_P1_5_9_5_Check_CanFall, true);
+                    prince.push(Stance::Collide_Wall_M1_Start_End, false);
+                    break;
+
+                case 2:
+                case 6:
+                case 10:
+                    prince.push(Stance::Collide_Wall_P0_Start_End, false);
                     break;
 
                 case 3:
                 case 7:
                 case 11:
-                    prince.pushSequence(Stance::Falling_StepWalkRun_P3_7_11_1_Start, Stance::Falling_StepWalkRun_P3_7_11_5_Check_CanFall, true);
+                    prince.push(Stance::Collide_Wall_P1_Start_End, false);
                     break;
 
-                case 0:
                 case 4:
                 case 8:
-                    prince.pushSequence(Stance::Falling_StepWalkRun_P0_4_8_1_Start, Stance::Falling_StepWalkRun_P0_4_8_5_Check_CanFall, true);
+                case 12:
+                    prince.push(Stance::Collide_Wall_P2_Start_End, false);
                     break;
 
-            }
-            // prince.pushSequence(Stance::Falling_Down_1_Start, Stance::Falling_Down_5_End, true);
-            // prince.pushSequence(Stance::Falling_SingleStep_1_Start, Stance::Falling_SingleStep_5_Check_CanFall, true);
-
+            }                    
 
         }
 
-        if (prince.isFootDown()) {
-
-            // Serial.println("foot down");
-        }
-        // Serial.println("reevaluate");
-    //}
-
+    }
 
 
     // Open exit door ?

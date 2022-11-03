@@ -146,61 +146,7 @@ struct Prince {
 
             return this->stack->push(static_cast<int16_t>(item), resetFrame);
         }
-/*
-        bool push(int16_t item1, int16_t item2, bool resetFrame) {
 
-            #if defined(DEBUG) && defined(DEBUG_PRINCE_STACK)
-            Point offset;
-            uint8_t xOffset = 0;
-            offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[(item1 - 1) * 2]));
-            xOffset = xOffset + offset.x;
-            offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[(item2 - 1) * 2]));
-            xOffset = xOffset + offset.x;
-            DEBUG_PRINT(F("Prince X: "));
-            DEBUG_PRINT(this->x % 12);
-            DEBUG_PRINT(F(", Item 1 "));
-            DEBUG_PRINT(item1);
-            DEBUG_PRINT(F(", Item 2 "));
-            DEBUG_PRINT(item2);
-            DEBUG_PRINT(F(", count "));
-            DEBUG_PRINT(this->stack->getCount());
-            DEBUG_PRINT(F(" ("));  
-            DEBUG_PRINT(xOffset);  
-            DEBUG_PRINTLN(F(")"));  
-            #endif
-
-            return this->stack->push(static_cast<int16_t>(item1), static_cast<int16_t>(item2), resetFrame);
-        }
-
-        bool push(int16_t item1, int16_t item2, int16_t item3, bool resetFrame) {
-
-            #if defined(DEBUG) && defined(DEBUG_PRINCE_STACK)
-            Point offset;
-            uint8_t xOffset = 0;
-            offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[(item1 - 1) * 2]));
-            xOffset = xOffset + offset.x;
-            offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[(item2 - 1) * 2]));
-            xOffset = xOffset + offset.x;
-            offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[(item3 - 1) * 2]));
-            xOffset = xOffset + offset.x;
-            DEBUG_PRINT(F("Prince X: "));
-            DEBUG_PRINT(this->x % 12);
-            DEBUG_PRINT(F(", Item 1 "));
-            DEBUG_PRINT(item1);
-            DEBUG_PRINT(F(", Item 2 "));
-            DEBUG_PRINT(item2);
-            DEBUG_PRINT(F(", Item 3 "));
-            DEBUG_PRINT(item3);
-            DEBUG_PRINT(F(", count "));;
-            DEBUG_PRINT(this->stack->getCount());
-            DEBUG_PRINT(F(" ("));  
-            DEBUG_PRINT(xOffset);  
-            DEBUG_PRINTLN(F(")"));  
-            #endif
-
-            return this->stack->push(static_cast<int16_t>(item1), static_cast<int16_t>(item2), static_cast<int16_t>(item3), resetFrame);
-        }
-*/
         void pushSequence(uint16_t fromStance, uint16_t toStance, bool resetFrame) {
 
             pushSequence(fromStance, toStance, Stance::None, resetFrame);
@@ -393,10 +339,50 @@ struct Prince {
 
             // }
 
-            int8_t footToe = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[this->stance + 1]));
+            uint8_t imageIndex = static_cast<uint8_t>(pgm_read_byte(&Constants::StanceToImageXRef[this->stance]));
+            uint16_t pos = (imageIndex - 1) * 3;
+            // int8_t reach = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos]));
+            int8_t footToe = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 1]));
+            // int8_t footHeel = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 2]));
 
-            return (footToe != 127);
+
+            // int8_t footToe = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[this->stance + 1]));
+
+            return (footToe != Constants::InAir && footToe != Constants::InAir_DoNotFall);
 
         }
 
+        bool inAir() {
+
+            uint8_t imageIndex = static_cast<uint8_t>(pgm_read_byte(&Constants::StanceToImageXRef[this->stance]));
+            uint16_t pos = (imageIndex - 1) * 3;
+            // int8_t reach = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos]));
+            int8_t footToe = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 1]));
+            // int8_t footHeel = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 2]));
+
+if (footToe == Constants::InAir) {
+    Serial.print("Stance ");
+    Serial.print(this->stance);
+    Serial.print(", imageIndex ");
+    Serial.print(imageIndex);
+    Serial.println(" in air.");
+}
+
+            return (footToe == Constants::InAir);
+
+        }
+
+        uint8_t getReach() {
+
+            uint8_t imageIndex = static_cast<uint8_t>(pgm_read_byte(&Constants::StanceToImageXRef[this->stance]));
+            uint16_t pos = (imageIndex - 1) * 3;
+            int8_t reach = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos]));
+            // int8_t footToe = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 1]));
+            // int8_t footHeel = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 2]));
+
+            // int8_t reach = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[this->stance]));
+
+            return reach;
+
+        }
 };
