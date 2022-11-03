@@ -319,34 +319,9 @@ struct Prince {
 
         bool isFootDown() {
 
-            // switch (this->getStance()) {
-
-            //     case Stance::Running_Jump_7                 ... Stance::Running_Jump_10:
-            //     case Stance::Standing_Jump_9                ... Stance::Standing_Jump_10:
-            //     case Stance::Climbing_1_Start               ... Stance::Climbing_15_End:
-            //     case Stance::Jump_Up_B_11                   ... Stance::Jump_Up_B_14_End:
-            //     case Stance::Falling_SmallStep_1_Start      ... Stance::Falling_SmallStep_5_Check_CanFall:
-            //     case Stance::Falling_RunningJump_1_Start    ... Stance::Falling_RunningJump_5_Check_CanFall:
-            //     case Stance::Falling_StandingJump_1_Start   ... Stance::Falling_StandingJump_5_Check_CanFall:
-            //     case Stance::Falling_SingleStep_1_Start     ... Stance::Falling_SingleStep_5_Check_CanFall:
-            //     case Stance::Falling_C_1_Start              ... Stance::Falling_C_5_Check_CanFall:
-            //     case Stance::Falling_Injured_1_Start:
-            //     case Stance::Falling_Dead_1_Start           ... Stance::Falling_Dead_2:
-            //         return false;
-
-            //     default:
-            //         return true;
-
-            // }
-
             uint8_t imageIndex = static_cast<uint8_t>(pgm_read_byte(&Constants::StanceToImageXRef[this->stance]));
             uint16_t pos = (imageIndex - 1) * 3;
-            // int8_t reach = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos]));
             int8_t footToe = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 1]));
-            // int8_t footHeel = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 2]));
-
-
-            // int8_t footToe = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[this->stance + 1]));
 
             return (footToe != Constants::InAir && footToe != Constants::InAir_DoNotFall);
 
@@ -356,17 +331,7 @@ struct Prince {
 
             uint8_t imageIndex = static_cast<uint8_t>(pgm_read_byte(&Constants::StanceToImageXRef[this->stance]));
             uint16_t pos = (imageIndex - 1) * 3;
-            // int8_t reach = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos]));
             int8_t footToe = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 1]));
-            // int8_t footHeel = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 2]));
-
-if (footToe == Constants::InAir) {
-    Serial.print("Stance ");
-    Serial.print(this->stance);
-    Serial.print(", imageIndex ");
-    Serial.print(imageIndex);
-    Serial.println(" in air.");
-}
 
             return (footToe == Constants::InAir);
 
@@ -377,10 +342,6 @@ if (footToe == Constants::InAir) {
             uint8_t imageIndex = static_cast<uint8_t>(pgm_read_byte(&Constants::StanceToImageXRef[this->stance]));
             uint16_t pos = (imageIndex - 1) * 3;
             int8_t reach = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos]));
-            // int8_t footToe = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 1]));
-            // int8_t footHeel = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 2]));
-
-            // int8_t reach = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[this->stance]));
 
             return reach;
 

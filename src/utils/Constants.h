@@ -4,23 +4,24 @@
 #define DEBUG_PRINT    Serial.print
 #define DEBUG_PRINTLN  Serial.println
 
-#define DEBUG
+#define _DEBUG
 #define DEBUG_ONSCREEN_DETAILS
 #define _DEBUG_ONSCREEN_DETAILS_MIN
 
 #define _DEBUG_PRINCE_DETAILS
-#define DEBUG_PRINCE_STACK
+#define _DEBUG_PRINCE_STACK
 #define _DEBUG_PRINT_ACTION
-#define _DEBUG_LEVEL_LOAD_MAP
+#define DEBUG_LEVEL_LOAD_MAP
 #define _DEBUG_GET_TILE
 #define _DEBUG_PRINCE_RENDERING
 
-#define _DEBUG_ACTION_CANMOVEFORWARD
+#define DEBUG_ACTION_CANMOVEFORWARD
 #define _DEBUG_ACTION_CANJUMPUP
 #define _DEBUG_ACTION_CANJUMPUP_PART2
 #define _DEBUG_ACTION_CANCLIMBDOWN
 #define _DEBUG_ACTION_CANCLIMBDOWN_PART2
 #define _DEBUG_ACTION_CANFALL
+#define _DEBUG_ACTION_CANFALLSOMEMORE
 #define _DEBUG_ACTION_COLLIDEWITHWALL
 
 //-------------------------------------------------------------------------------------
@@ -344,7 +345,12 @@ constexpr uint16_t Collide_Wall_P1_Start_End                     = 309;
 constexpr uint16_t Collide_Wall_P0_Start_End                     = 310;
 constexpr uint16_t Collide_Wall_M1_Start_End                     = 311;
 constexpr uint16_t Collide_Wall_M2_Start_End                     = 312;
-
+constexpr uint16_t Vert_Adjustment_1_Start_End                   = 313;
+constexpr uint16_t Vert_Adjustment_2_Start_End                   = 314;
+constexpr uint16_t Vert_Adjustment_3_Start_End                   = 315;
+constexpr uint16_t Vert_Adjustment_4_Start_End                   = 316;
+constexpr uint16_t Vert_Adjustment_5_Start_End                   = 317;
+constexpr uint16_t Vert_Adjustment_6_Start_End                   = 318;
 
 
 constexpr uint16_t  Upright_End_Climb        = 1253;
@@ -410,11 +416,18 @@ namespace Constants {
         /* 282 - 287 Falling_StepWalkRun_P1_5_9 */      121, 122, 123, 124, 125, 126,                               
         /* 288 - 293 Falling_StepWalkRun_P3_7_11 */     121, 122, 123, 124, 125, 126,                               
         /* 294 - 307 Exit Sequence */                   157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 168, 0,
-        /* 308 - 308 Collide_Wall_P2_Start_End */       126,                          
-        /* 309 - 309 Collide_Wall_P2_Start_End */       126,                          
-        /* 310 - 310 Collide_Wall_P2_Start_End */       126,                          
-        /* 311 - 311 Collide_Wall_P2_Start_End */       126,                          
-        /* 312 - 312 Collide_Wall_P2_Start_End */       126,                          
+        /* 308 - 308 Collide_Wall_P2_Start_End */       126,
+        /* 309 - 309 Collide_Wall_P2_Start_End */       126,
+        /* 310 - 310 Collide_Wall_P2_Start_End */       126,
+        /* 311 - 311 Collide_Wall_P2_Start_End */       126,
+        /* 312 - 312 Collide_Wall_P2_Start_End */       126,
+        /* 313 - 313 Vert_Adjustment_1_Start_End */     125,
+        /* 314 - 314 Vert_Adjustment_1_Start_End */     125,
+        /* 315 - 315 Vert_Adjustment_1_Start_End */     125,
+        /* 316 - 316 Vert_Adjustment_1_Start_End */     125,
+        /* 317 - 317 Vert_Adjustment_1_Start_End */     125,
+        /* 318 - 318 Vert_Adjustment_1_Start_End */     125,
+        
         255,                   
     };
 
@@ -427,8 +440,8 @@ namespace Constants {
               3,   0,   3,   0,   3,   0,   3,   0,   0,   0,   2,   0,   3,   0,   4,   0,   4,   0,   5,   0,    //  011 - 020
               6,   0,   6,   0,   6,   0,   5,   0,   3,   0,   2,   0,   0,   0,  -1,   0,  -1,   0,   2,   0,    //  021 - 030
               
-              0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  031 - 040
-              0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   2,   0,   2,   0,   2,   0,   2,   0,    //  041 - 050
+              0,   0,   0,   0,   3,   0,  -3,   0,  -1,   0,   1,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  031 - 040
+              0,   0,  -1,   0,   1,   0,   0,   0,   0,   0,   0,   0,   2,   0,   2,   0,   2,   0,   2,   0,    //  041 - 050
               2,   0,   3,   0,   3,   0,   3,   0,   3,   0,   4,   0,   2,   0,   2,   0,   2,   0,   2,   0,    //  051 - 060
 
               1,   0,   1,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  061 - 070
@@ -464,12 +477,13 @@ namespace Constants {
               2,   5,   1,   5,   0,   5,   0,   0,   1,   0,   2,  -1,   2,  -1,   2,  -1,   1,  -1,   1,  -1,    //  291 - 300
 
               1,  -1,   1,  -1,   1,  -1,   1,  -2,   0,  -3,   0,   0,   0,   0,   2,   0,   1,   0,   0,   0,    //  301 - 310
-             -1,   0,  -2,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  311 - 320
+             -1,   0,  -2,   0,   0,   1,   0,   2,   0,   3,   0,   4,   0,   5,   0,   6,   0,   0,   0,   0,    //  311 - 320
               0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,    //  321 - 330
 
     };
-//    2,   6,   2,   5,   2,   5,  1,   5,   0,   5,   0,   5, 
+
 constexpr int8_t Prince_ImageDetails[] PROGMEM = {
+
 /* 001 */  3, 2, -4,
 /* 002 */  4, -1, -5,
 /* 003 */  4, 0, -5,
@@ -520,8 +534,8 @@ constexpr int8_t Prince_ImageDetails[] PROGMEM = {
 /* 048 */  6, 0, -5,
 /* 049 */  7, -1, -5,
 /* 050 */  7, -2, -8,
-/* 051 */  9, -5, -7,
-/* 052 */  11, -8, -10,
+/* 051 */  9, 127, 127,
+/* 052 */  11, 127, 127,
 /* 053 */  14, 127, 127,
 /* 054 */  14, 127, 127,
 /* 055 */  12, 127, 127,
@@ -567,9 +581,9 @@ constexpr int8_t Prince_ImageDetails[] PROGMEM = {
 /* 095 */  7, 4, 0,
 /* 096 */  7, 4, 0,
 /* 097 */  7, 3, -2,
-/* 098 */  5, 1, -4,
-/* 099 */  5, -1, -5,
-/* 100 */  5, -1, -3,
+/* 098 */  126, 126, 126,
+/* 099 */  126, 126, 126,
+/* 100 */  126, 126, 126,
 /* 101 */  126, 126, 126,
 /* 102 */  126, 126, 126,
 /* 103 */  126, 126, 126,
@@ -626,9 +640,53 @@ constexpr int8_t Prince_ImageDetails[] PROGMEM = {
 /* 154 */  127, 127, 127,
 /* 155 */  127, 127, 127,
 /* 156 */  127, 127, 127,
+/* 157 */  126, 126, 126,
+/* 158 */  126, 126, 126,
+/* 159 */  126, 126, 126,
+/* 160 */  126, 126, 126,
+/* 161 */  126, 126, 126,
+/* 162 */  126, 126, 126,
+/* 163 */  126, 126, 126,
+/* 164 */  126, 126, 126,
+/* 165 */  126, 126, 126,
+/* 166 */  126, 126, 126,
+/* 167 */  126, 126, 126,
+/* 168 */  126, 126, 126,
 
 };
 
+constexpr int8_t VertAdjustments[] PROGMEM = {
+/* 01 */ 1, 0, 0, 0, 0,
+/* 02 */ 2, 0, 0, 0, 0,
+/* 03 */ 3, 0, 0, 0, 0,
+/* 04 */ 4, 0, 0, 0, 0,
+/* 05 */ 5, 0, 0, 0, 0,
+/* 06 */ 6, 0, 0, 0, 0,
+/* 07 */ 3, 4, 0, 0, 0,
+/* 08 */ 4, 4, 0, 0, 0,
+/* 09 */ 4, 5, 0, 0, 0,
+/* 10 */ 5, 5, 0, 0, 0,
+/* 11 */ 5, 6, 0, 0, 0,
+/* 12 */ 6, 6, 0, 0, 0,
+/* 13 */ 4, 5, 4, 0, 0,
+/* 14 */ 5, 4, 5, 0, 0,
+/* 15 */ 5, 5, 5, 0, 0,
+/* 16 */ 5, 6, 5, 0, 0,
+/* 17 */ 6, 5, 6, 0, 0,
+/* 18 */ 6, 6, 6, 0, 0,
+/* 19 */ 5, 5, 5, 4, 0,
+/* 20 */ 5, 5, 5, 5, 0,
+/* 21 */ 6, 5, 5, 5, 0,
+/* 22 */ 6, 5, 6, 5, 0,
+/* 23 */ 6, 5, 6, 6, 0,
+/* 24 */ 6, 6, 6, 6, 0,
+/* 25 */ 5, 5, 5, 5, 5,
+/* 26 */ 6, 5, 5, 5, 5,
+/* 27 */ 5, 6, 5, 6, 5,
+/* 28 */ 6, 5, 6, 5, 6,
+/* 29 */ 6, 6, 5, 6, 6,
+/* 30 */ 6, 6, 6, 6, 6,
+};
 
 }
 

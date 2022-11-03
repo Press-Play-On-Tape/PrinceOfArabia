@@ -215,16 +215,7 @@ struct Level {
                                         break;
 
                                 }
-                                // else {
-
-                                //     if (item.data.gate.position > 0) {
-
-                                //         item.data.gate.position--;
-
-                                //     }
-
-                                // }
-
+ 
                                 if (item.data.gate.closingDelay > 0) {
 
                                     item.data.gate.closingDelay--;
@@ -923,7 +914,6 @@ struct Level {
 
         }
 
-
         bool canFall(Prince &prince, int8_t xOffset = 0) {
 
             bool canFall = false;
@@ -1007,12 +997,48 @@ struct Level {
             else {
 
                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
-                DEBUG_PRINTLN(" reach=InAir ");
+                DEBUG_PRINTLN(" footToe=InAir ");
                 #endif
 
             }
 
             return false;
+        
+        }
+
+        bool canFallSomeMore(Prince &prince, int8_t xOffset = 0) {
+
+            bool canFall = false;
+            Point newPos = prince.getPosition();
+            newPos.x = newPos.x + (prince.getDirection() == Direction::Left ? xOffset * -1 : xOffset);
+
+            int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), newPos.x) - this->getXLocation();
+            int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), newPos.y) - this->getYLocation();
+            
+            int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
+            int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
+                        
+            canFall = this->canFall(bgTile1, fgTile1, tileXIdx, tileYIdx);
+
+            #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALLSOMEMORE)
+            DEBUG_PRINT(F("canFallSomeMore() stance:"));
+            DEBUG_PRINT(prince.getStance());
+            DEBUG_PRINT(F(", ii:"));
+            DEBUG_PRINT(imageIndex);
+            DEBUG_PRINT(F(", bg "));
+            DEBUG_PRINT(bgTile1);
+            DEBUG_PRINT(F(", fg "));
+            DEBUG_PRINT(fgTile1);
+            DEBUG_PRINT(" = ");
+            if (canFall) {
+                DEBUG_PRINTLN("true");
+            }
+            else {
+                DEBUG_PRINTLN("false");
+            }
+            #endif
+
+            return canFall;
         
         }
 
@@ -1277,7 +1303,7 @@ struct Level {
                                         printTileInfo(bgTile2, fgTile2);
                                         #endif
 
-                                        return (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2));
+                                        return (!this->isWallTile(bgTile2, fgTile2, tileXIdx, tileYIdx) && (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2)));
 
                                     default:
 
@@ -1293,7 +1319,9 @@ struct Level {
                                 switch (distToEdgeOfCurrentTile) {
 
                                     case 0 ... 9:
-                                         return (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2));
+                                        return (!this->isWallTile(bgTile2, fgTile2, tileXIdx, tileYIdx) && (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2)));
+
+                                        // return (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2));
 
                                     default:
                                         return true;
@@ -1420,7 +1448,14 @@ struct Level {
                                             DEBUG_PRINTLN(static_cast<uint8_t>(resultLeft));
                                             #endif
 
-                                            return this->canJumpUp_Test_Dist10(prince, Direction::Left);
+                                            CanJumpUpResult result = this->canJumpUp_Test_Dist10(prince, Direction::Left);
+
+                                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                            DEBUG_PRINT(F("canJumpUp_Test_Dist10 Return "));
+                                            DEBUG_PRINTLN(static_cast<uint8_t>(result));
+                                            #endif
+
+                                            return result;
 
                                     }
 
@@ -1495,7 +1530,14 @@ struct Level {
                                             DEBUG_PRINTLN(static_cast<uint8_t>(resultRight));
                                             #endif     
 
-                                            return this->canJumpUp_Test_Dist10(prince, Direction::Right);
+                                            CanJumpUpResult result = this->canJumpUp_Test_Dist10(prince, Direction::Right);
+                                            
+                                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                            DEBUG_PRINT(F("canJumpUp_Test_Dist10 Return "));
+                                            DEBUG_PRINTLN(static_cast<uint8_t>(result));
+                                            #endif
+
+                                            return result;
 
                                     }
 
