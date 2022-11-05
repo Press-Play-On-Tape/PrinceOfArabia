@@ -11,11 +11,12 @@
 
 void game_Init() {
 
+    prince.init(70, 25 + 31, Direction::Right, Stance::Crouch_3_End, 3);          // Under collapsible floor
     // prince.init(58 +36, 56, Direction::Left, Stance::Crouch_3_End, 3);          // Exit Seq
     // prince.init(18, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
     // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3);          // Both floor types
     // prince.init(86, 87, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos but next to drop floor 3rd floor
-    prince.init(70, 25, Direction::Left, Stance::Crouch_3_End, 3);          // Under collapsible floor
+    // prince.init(70, 25, Direction::Left, Stance::Crouch_3_End, 3);          // Under collapsible floor
     // prince.init(66, 56, Direction::Right, Stance::Crouch_3_End, 3);        // Get tonic
 //    prince.init(50, 87, Direction::Left, Stance::Crouch_3_End, 3);     // Column of climbs
     // prince.init(80, 25, Direction::Right, Stance::Crouch_3_End, 3);     // Top Left
@@ -27,11 +28,12 @@ void game_Init() {
     gamePlay.init(arduboy, 1);
     
     level.setLevel(1);
+    level.init(prince, 40, 3);  // Under collapsible floor
     // level.init(prince, 80, 3);  // Exit Seq
     // level.init(prince, 60, 0);  // Normal starting posa
     // level.init(prince, 20, 3);  // Both floor types
     // level.init(prince, 60, 0);  //Normal starting pos but next to drop floor 3rd floor
-    level.init(prince, 50, 3);  // Under collapsible floor
+    // level.init(prince, 50, 3);  // Under collapsible floor
     // level.init(prince, Constants::TileHeight, 0);   // Get tonic
     // level.init(prince, 0, 3);   // Column of climbs
     // level.init(prince, 0, 0);   // Top left
@@ -621,7 +623,12 @@ void game() {
                             
                         if ((pressed & RIGHT_BUTTON) && (pressed & A_BUTTON)) {
 
-                            if (true) {
+                            if (level.canMoveForward(Action::RunJump, prince)) {
+
+                                #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
+                                DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jumpp"));
+                                #endif
+
                                 prince.pushSequence(Stance::Running_Jump_1_Start, Stance::Running_Jump_11_End, Stance::Run_Start_6_End, true);
                             }
                             else {
@@ -671,8 +678,7 @@ void game() {
 
                         if ((pressed & LEFT_BUTTON) && (pressed & A_BUTTON)) {
 
-                            // if (this->world.canMoveForward(Action::RunJump)) {
-                            if (true) {
+                            if (level.canMoveForward(Action::RunJump, prince)) {
 
                                 #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
                                 DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jumpp"));
@@ -736,8 +742,13 @@ void game() {
                     if (prince.getDirection() == Direction::Right) {
                                         
                         if ((pressed & RIGHT_BUTTON) && (pressed & A_BUTTON)) {
-    //check can jump
-                            if (true) {
+
+                            if (level.canMoveForward(Action::RunJump, prince)) {
+
+                                #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
+                                DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jumpp"));
+                                #endif
+
                                 prince.pushSequence(Stance::Running_Jump_1_Start, Stance::Running_Jump_11_End, Stance::Run_Repeat_4, true);
                             }
                             else {
@@ -786,8 +797,13 @@ void game() {
                     else {
                                         
                         if ((pressed & LEFT_BUTTON) && (pressed & A_BUTTON)) {
-                            // if (this->world.canMoveForward(Action::RunJump)) {
-                            if (true) {
+
+                            if (level.canMoveForward(Action::RunJump, prince)) {
+
+                                #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
+                                DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jumpp"));
+                                #endif
+                                
                                 prince.pushSequence(Stance::Running_Jump_1_Start, Stance::Running_Jump_11_End, Stance::Run_Repeat_4, true);
                             }
                             else {
@@ -1077,6 +1093,7 @@ void game() {
                         prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                        DEBUG_PRINTLN(F("End jump, stand up"));
                         DEBUG_PRINTLN(F("End jump, stand up"));
                         #endif
 

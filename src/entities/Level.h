@@ -1259,6 +1259,30 @@ struct Level {
 
                                 return true;
 
+                            case Action::RunJump:
+
+                                switch (distToEdgeOfCurrentTile) {
+
+                                    case  2 ... 12:
+
+                                        if (!this->isWallTile(bgTile2, fgTile2, tileXIdx + 1, tileYIdx)) {
+                                            return true;                                            
+                                        }
+
+                                        return false;
+
+                                    default:
+
+                                        if (!this->isWallTile(bgTile2, fgTile2, tileXIdx + 1, tileYIdx)) {
+                                            return true;                                            
+                                        }
+
+                                        return false;
+
+                                }
+
+                                return true;
+
                             default: return false;
 
                         }
@@ -1270,6 +1294,8 @@ struct Level {
                 case Direction::Right:
                     {
 
+                        int8_t bgTile3 = this->getTile(Layer::Background, tileXIdx + 2, tileYIdx, TILE_FLOOR_BASIC);
+                        int8_t fgTile3 = this->getTile(Layer::Foreground, tileXIdx + 2, tileYIdx, TILE_FLOOR_BASIC);
                         int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx + 1, tileYIdx, TILE_FLOOR_BASIC);
                         int8_t fgTile2 = this->getTile(Layer::Foreground, tileXIdx + 1, tileYIdx, TILE_FLOOR_BASIC);
                         int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(prince.getDirection(), prince.getPosition().x);
@@ -1321,8 +1347,6 @@ struct Level {
                                     case 0 ... 9:
                                         return (!this->isWallTile(bgTile2, fgTile2, tileXIdx, tileYIdx) && (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2)));
 
-                                        // return (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2));
-
                                     default:
                                         return true;
 
@@ -1336,7 +1360,6 @@ struct Level {
                                 printTileInfo(bgTile2, fgTile2);
                                 #endif
                                 
-                                //return (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2));
                                 return (!this->isWallTile(bgTile2, fgTile2, tileXIdx + 1, tileYIdx));
 
                             case Action::StandingJump:
@@ -1359,6 +1382,67 @@ struct Level {
 
                                         return false;
 
+                                }
+
+                                return true;
+
+                            case Action::RunJump:
+Serial.print("RunJump Dist: ");
+Serial.println(distToEdgeOfCurrentTile);
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+                                printTileInfo(bgTile2, fgTile2);
+                                DEBUG_PRINT("isWallTile(");
+                                DEBUG_PRINT(bgTile2);
+                                DEBUG_PRINT(",");
+                                DEBUG_PRINT(fgTile2);
+                                DEBUG_PRINT(",");
+                                DEBUG_PRINT(tileXIdx + 1);
+                                DEBUG_PRINT(",");
+                                DEBUG_PRINT(tileYIdx);
+                                DEBUG_PRINT(") = ");
+                                DEBUG_PRINTLN(this->isWallTile(bgTile2, fgTile2, tileXIdx + 1, tileYIdx));
+                                #endif
+
+                                // switch (distToEdgeOfCurrentTile) {
+
+                                //     case  2 ... 12:
+
+                                //         if (!this->isWallTile(bgTile2, fgTile2, tileXIdx + 1, tileYIdx)) {
+                                //             return true;                                            
+                                //         }
+
+                                //         return false;
+
+                                //     default:
+
+                                //         if (!this->isWallTile(bgTile2, fgTile2, tileXIdx + 1, tileYIdx)) {
+                                //             return true;                                            
+                                //         }
+
+                                //         return false;
+
+                                // }
+
+                                if (this->isWallTile(bgTile2, fgTile2, tileXIdx + 1, tileYIdx)) {
+                                    return false;
+                                }
+
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+                                printTileInfo(bgTile2, fgTile2);
+                                DEBUG_PRINT("isWallTile(");
+                                DEBUG_PRINT(bgTile3);
+                                DEBUG_PRINT(",");
+                                DEBUG_PRINT(fgTile3);
+                                DEBUG_PRINT(",");
+                                DEBUG_PRINT(tileXIdx + 2);
+                                DEBUG_PRINT(",");
+                                DEBUG_PRINT(tileYIdx);
+                                DEBUG_PRINT(") = ");
+                                DEBUG_PRINTLN(this->isWallTile(bgTile3, fgTile3, tileXIdx + 2, tileYIdx));
+                                #endif
+
+                                if (this->isWallTile(bgTile3, fgTile3, tileXIdx + 2, tileYIdx)) {
+                                    return false;
                                 }
 
                                 return true;
@@ -2352,6 +2436,10 @@ struct Level {
 
                 case Action::RunRepeat:
                     DEBUG_PRINT(F("RunRepeat"));
+                    break;
+
+                case Action::RunJump:
+                    DEBUG_PRINT(F("RunJump"));
                     break;
 
                 case Action::StandingJump:

@@ -4,7 +4,7 @@
 #define DEBUG_PRINT    Serial.print
 #define DEBUG_PRINTLN  Serial.println
 
-#define _DEBUG
+#define DEBUG
 #define DEBUG_ONSCREEN_DETAILS
 #define _DEBUG_ONSCREEN_DETAILS_MIN
 
@@ -718,6 +718,7 @@ enum class Action : uint8_t {
     SmallStep,
     RunStart,
     RunRepeat,
+    RunJump,
     StandingJump,
     CrouchHop,
 };
