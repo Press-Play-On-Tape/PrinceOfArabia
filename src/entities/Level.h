@@ -861,6 +861,17 @@ struct Level {
 
         bool canFall(int8_t bgTile, int8_t fgTile, int8_t x = Constants::CoordNone, int8_t y = Constants::CoordNone) {
 
+            bool isWallTile = this->isWallTile(bgTile, fgTile, x, y);
+
+            if (isWallTile) {
+
+                #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
+                DEBUG_PRINTLN(" true (a wall tile)");
+                #endif                
+
+                return false;
+            }
+
             switch (bgTile) {
 
                 case TILE_NONE:
@@ -1023,8 +1034,6 @@ struct Level {
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALLSOMEMORE)
             DEBUG_PRINT(F("canFallSomeMore() stance:"));
             DEBUG_PRINT(prince.getStance());
-            DEBUG_PRINT(F(", ii:"));
-            DEBUG_PRINT(imageIndex);
             DEBUG_PRINT(F(", bg "));
             DEBUG_PRINT(bgTile1);
             DEBUG_PRINT(F(", fg "));
@@ -1259,7 +1268,7 @@ struct Level {
 
                                 return true;
 
-                            case Action::RunJump:
+                            case Action::RunJump_1:
 
                                 switch (distToEdgeOfCurrentTile) {
 
@@ -1294,6 +1303,8 @@ struct Level {
                 case Direction::Right:
                     {
 
+                        int8_t bgTile4 = this->getTile(Layer::Background, tileXIdx + 3, tileYIdx, TILE_FLOOR_BASIC);
+                        int8_t fgTile4 = this->getTile(Layer::Foreground, tileXIdx + 3, tileYIdx, TILE_FLOOR_BASIC);
                         int8_t bgTile3 = this->getTile(Layer::Background, tileXIdx + 2, tileYIdx, TILE_FLOOR_BASIC);
                         int8_t fgTile3 = this->getTile(Layer::Foreground, tileXIdx + 2, tileYIdx, TILE_FLOOR_BASIC);
                         int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx + 1, tileYIdx, TILE_FLOOR_BASIC);
@@ -1386,9 +1397,52 @@ struct Level {
 
                                 return true;
 
-                            case Action::RunJump:
-Serial.print("RunJump Dist: ");
-Serial.println(distToEdgeOfCurrentTile);
+                            case Action::RunJump_3:
+
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+                                printTileInfo(bgTile4, fgTile4);
+                                DEBUG_PRINT("isWallTile(");
+                                DEBUG_PRINT(bgTile4);
+                                DEBUG_PRINT(",");
+                                DEBUG_PRINT(fgTile4);
+                                DEBUG_PRINT(",");
+                                DEBUG_PRINT(tileXIdx + 3);
+                                DEBUG_PRINT(",");
+                                DEBUG_PRINT(tileYIdx);
+                                DEBUG_PRINT(") = ");
+                                DEBUG_PRINTLN(this->isWallTile(bgTile4, fgTile4, tileXIdx + 3, tileYIdx));
+                                #endif
+
+                                if (this->isWallTile(bgTile4, fgTile4, tileXIdx + 3, tileYIdx)) {
+                                    return false;
+                                }
+
+                                return true;                                
+
+                            case Action::RunJump_2:
+
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+                                printTileInfo(bgTile3, fgTile3);
+                                DEBUG_PRINT("isWallTile(");
+                                DEBUG_PRINT(bgTile3);
+                                DEBUG_PRINT(",");
+                                DEBUG_PRINT(fgTile3);
+                                DEBUG_PRINT(",");
+                                DEBUG_PRINT(tileXIdx + 2);
+                                DEBUG_PRINT(",");
+                                DEBUG_PRINT(tileYIdx);
+                                DEBUG_PRINT(") = ");
+                                DEBUG_PRINTLN(this->isWallTile(bgTile3, fgTile3, tileXIdx + 2, tileYIdx));
+                                #endif
+
+                                if (this->isWallTile(bgTile3, fgTile3, tileXIdx + 2, tileYIdx)) {
+                                    return false;
+                                }
+
+                                return true;
+
+                            case Action::RunJump_1:
+
                                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
                                 printTileInfo(bgTile2, fgTile2);
                                 DEBUG_PRINT("isWallTile(");
@@ -1403,45 +1457,7 @@ Serial.println(distToEdgeOfCurrentTile);
                                 DEBUG_PRINTLN(this->isWallTile(bgTile2, fgTile2, tileXIdx + 1, tileYIdx));
                                 #endif
 
-                                // switch (distToEdgeOfCurrentTile) {
-
-                                //     case  2 ... 12:
-
-                                //         if (!this->isWallTile(bgTile2, fgTile2, tileXIdx + 1, tileYIdx)) {
-                                //             return true;                                            
-                                //         }
-
-                                //         return false;
-
-                                //     default:
-
-                                //         if (!this->isWallTile(bgTile2, fgTile2, tileXIdx + 1, tileYIdx)) {
-                                //             return true;                                            
-                                //         }
-
-                                //         return false;
-
-                                // }
-
                                 if (this->isWallTile(bgTile2, fgTile2, tileXIdx + 1, tileYIdx)) {
-                                    return false;
-                                }
-
-                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
-                                printTileInfo(bgTile2, fgTile2);
-                                DEBUG_PRINT("isWallTile(");
-                                DEBUG_PRINT(bgTile3);
-                                DEBUG_PRINT(",");
-                                DEBUG_PRINT(fgTile3);
-                                DEBUG_PRINT(",");
-                                DEBUG_PRINT(tileXIdx + 2);
-                                DEBUG_PRINT(",");
-                                DEBUG_PRINT(tileYIdx);
-                                DEBUG_PRINT(") = ");
-                                DEBUG_PRINTLN(this->isWallTile(bgTile3, fgTile3, tileXIdx + 2, tileYIdx));
-                                #endif
-
-                                if (this->isWallTile(bgTile3, fgTile3, tileXIdx + 2, tileYIdx)) {
                                     return false;
                                 }
 
@@ -2438,8 +2454,16 @@ Serial.println(distToEdgeOfCurrentTile);
                     DEBUG_PRINT(F("RunRepeat"));
                     break;
 
-                case Action::RunJump:
-                    DEBUG_PRINT(F("RunJump"));
+                case Action::RunJump_3:
+                    DEBUG_PRINT(F("RunJump_3"));
+                    break;
+
+                case Action::RunJump_2:
+                    DEBUG_PRINT(F("RunJump_2"));
+                    break;
+
+                case Action::RunJump_1:
+                    DEBUG_PRINT(F("RunJump_1"));
                     break;
 
                 case Action::StandingJump:

@@ -9,20 +9,21 @@
 #define _DEBUG_ONSCREEN_DETAILS_MIN
 
 #define _DEBUG_PRINCE_DETAILS
-#define _DEBUG_PRINCE_STACK
+#define DEBUG_PRINCE_STACK
 #define _DEBUG_PRINT_ACTION
 #define DEBUG_LEVEL_LOAD_MAP
 #define _DEBUG_GET_TILE
 #define _DEBUG_PRINCE_RENDERING
 
-#define DEBUG_ACTION_CANMOVEFORWARD
+#define _DEBUG_ACTION_CANMOVEFORWARD
 #define _DEBUG_ACTION_CANJUMPUP
 #define _DEBUG_ACTION_CANJUMPUP_PART2
 #define _DEBUG_ACTION_CANCLIMBDOWN
 #define _DEBUG_ACTION_CANCLIMBDOWN_PART2
 #define _DEBUG_ACTION_CANFALL
-#define _DEBUG_ACTION_CANFALLSOMEMORE
+#define DEBUG_ACTION_CANFALLSOMEMORE
 #define _DEBUG_ACTION_COLLIDEWITHWALL
+#define _DEBUG_ACTION_RUNJUMP
 
 //-------------------------------------------------------------------------------------
 
@@ -718,7 +719,9 @@ enum class Action : uint8_t {
     SmallStep,
     RunStart,
     RunRepeat,
-    RunJump,
+    RunJump_3,
+    RunJump_2,
+    RunJump_1,
     StandingJump,
     CrouchHop,
 };

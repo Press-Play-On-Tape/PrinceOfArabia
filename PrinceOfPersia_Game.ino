@@ -114,8 +114,6 @@ void game() {
 
     if (justPressed & B_BUTTON) {
 
-// prince.pushSequence(Running_Jump_1_Start, Running_Jump_11_End, Run_Start_6_End, true);
-// //
         switch (level.distToEdgeOfTile(prince.getDirection(),  (level.getXLocation() * Constants::TileWidth) + prince.getX())) {
 
             case 0:
@@ -623,17 +621,11 @@ void game() {
                             
                         if ((pressed & RIGHT_BUTTON) && (pressed & A_BUTTON)) {
 
-                            if (level.canMoveForward(Action::RunJump, prince)) {
+                            #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
+                            DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jump from Run_Repeat_4"));
+                            #endif
 
-                                #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
-                                DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jumpp"));
-                                #endif
-
-                                prince.pushSequence(Stance::Running_Jump_1_Start, Stance::Running_Jump_11_End, Stance::Run_Start_6_End, true);
-                            }
-                            else {
-                                prince.pushSequence(Stance::Stopping_1_Start, Stance::Stopping_5_End, Stance::Upright, true);
-                            }
+                            processRunJump();
 
                         }
                         else if (pressed & RIGHT_BUTTON) {
@@ -678,23 +670,11 @@ void game() {
 
                         if ((pressed & LEFT_BUTTON) && (pressed & A_BUTTON)) {
 
-                            if (level.canMoveForward(Action::RunJump, prince)) {
+                            #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
+                            DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jump from Run_Repeat_4"));
+                            #endif
+                            processRunJump();
 
-                                #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
-                                DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jumpp"));
-                                #endif
-
-                                prince.pushSequence(Stance::Running_Jump_1_Start, Stance::Running_Jump_11_End, Stance::Run_Start_6_End, true);
-
-                            }
-                            else {
-
-                                #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
-                                DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Stop (3)"));
-                                #endif
-
-                                prince.pushSequence(Stance::Stopping_1_Start, Stance::Stopping_5_End, Stance::Upright, true);
-                            }
                         }
                         else if (pressed & LEFT_BUTTON) {
 
@@ -743,17 +723,11 @@ void game() {
                                         
                         if ((pressed & RIGHT_BUTTON) && (pressed & A_BUTTON)) {
 
-                            if (level.canMoveForward(Action::RunJump, prince)) {
+                            #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
+                            DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jump from Run_Start_6_End, Run_Repeat_8_End or Run_Repeat_8_End_Turn"));
+                            #endif
 
-                                #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
-                                DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jumpp"));
-                                #endif
-
-                                prince.pushSequence(Stance::Running_Jump_1_Start, Stance::Running_Jump_11_End, Stance::Run_Repeat_4, true);
-                            }
-                            else {
-                                prince.pushSequence(Stance::Stopping_1_Start, Stance::Stopping_5_End, Stance::Upright, true);
-                            }
+                            processRunJump();
 
                         }
                         else if (pressed & RIGHT_BUTTON) {
@@ -798,17 +772,11 @@ void game() {
                                         
                         if ((pressed & LEFT_BUTTON) && (pressed & A_BUTTON)) {
 
-                            if (level.canMoveForward(Action::RunJump, prince)) {
+                            #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
+                            DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jump from Run_Start_6_End, Run_Repeat_8_End or Run_Repeat_8_End_Turn"));
+                            #endif
 
-                                #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
-                                DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jumpp"));
-                                #endif
-                                
-                                prince.pushSequence(Stance::Running_Jump_1_Start, Stance::Running_Jump_11_End, Stance::Run_Repeat_4, true);
-                            }
-                            else {
-                                prince.pushSequence(Stance::Stopping_1_Start, Stance::Stopping_5_End, Stance::Upright, true);
-                            }
+                            processRunJump();
 
                         }
                         else if (pressed & LEFT_BUTTON) {
@@ -966,11 +934,6 @@ void game() {
         default: break;
 
     }
-
-
-    // Have we collided with a wall?
-
-
 
 
     // ---------------------------------------------------------------------------------------------------------------------------------------
@@ -1387,22 +1350,16 @@ void game() {
 
         uint8_t reach = prince.getReach();
 
-        // if (prince.isFootDown() && level.canFall(prince) && prince.getFalling() == 0) {
-
-        // int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x + (prince.getDirection() == Direction::Left ? -reach : reach)) - level.getXLocation();
-        // int8_t tileYIdx = level.coordToTileIndexY(prince.getDirection(), prince.getPosition().y) - level.getYLocation();
-
-
         if (level.collideWithWall(prince)) {
 
-            #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+            //#if defined(DEBUG) && defined(DEBUG_ACTION_COLLIDEWITHWALL)
             DEBUG_PRINT(F("Collide with wall - X:"));
             DEBUG_PRINT(prince.getX());
             DEBUG_PRINT(", Y:");
             DEBUG_PRINT(prince.getY());
             DEBUG_PRINT(", Coll:");
             DEBUG_PRINTLN(level.collideWithWall(prince));
-            #endif
+            //#endif
 
             prince.clear();
             prince.setFalling(1);
@@ -1444,205 +1401,34 @@ void game() {
 
 
             // Do we need to apply some vertical adjustment?
+            
+            uint8_t adj = (prince.getY() - 25) % 31;
+Serial.print("prince.getY():");
+Serial.print(prince.getY());
+Serial.print(", Adj:");
+Serial.print(adj);
 
-            uint8_t adj = ((31 - ((prince.getY() - 25) % 31)) - 1) * 5;
+            if (adj != 0) {
 
-            for (uint8_t i = adj; i < adj + 5; i++) {
-                
-                uint8_t adjustment = static_cast<int8_t>(pgm_read_byte(&Constants::VertAdjustments[i]));
+                adj = (adj - 1) * 5;
 
-                if (adjustment > 0) {
+                for (uint8_t i = adj; i < adj + 5; i++) {
+                    
+                    uint8_t adjustment = pgm_read_byte(&Constants::VertAdjustments + i);
 
-                    prince.push(Stance::Vert_Adjustment_1_Start_End - 1 + adjustment, false);
+                    if (adjustment > 0) {
+    Serial.print(", adjustment:");
+    Serial.print(adjustment);
+    Serial.print(", base:");
+    Serial.println(Stance::Vert_Adjustment_1_Start_End);
+                        prince.push(Stance::Vert_Adjustment_1_Start_End - 1 + adjustment, false);
+
+                    }
 
                 }
 
             }
-
-
-            // switch (31 - ((prince.getY() - 25) % 31)) {
-
-            //     case 1:
-            //         prince.push(Stance::Vert_Adjustment_1_Start_End, false);
-            //         break;
-
-            //     case 2:
-            //         prince.push(Stance::Vert_Adjustment_2_Start_End, false);
-            //         break;
-
-            //     case 3:
-            //         prince.push(Stance::Vert_Adjustment_3_Start_End, false);
-            //         break;
-
-            //     case 4:
-            //         prince.push(Stance::Vert_Adjustment_4_Start_End, false);
-            //         break;
-
-            //     case 5:
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         break;
-
-            //     case 6:
-            //         prince.push(Stance::Vert_Adjustment_6_Start_End, false);
-            //         break;
-
-            //     case 7:
-            //         prince.push(Stance::Vert_Adjustment_3_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_4_Start_End, false);
-            //         break;
-
-            //     case 8:
-            //         prince.push(Stance::Vert_Adjustment_4_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_4_Start_End, false);
-            //         break;
-
-            //     case 9:
-            //         prince.push(Stance::Vert_Adjustment_4_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         break;
-
-            //     case 10:
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         break;
-
-            //     case 11:
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_6_Start_End, false);
-            //         break;
-
-            //     case 12:
-            //         prince.push(Stance::Vert_Adjustment_6_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_6_Start_End, false);
-            //         break;
-
-            //     case 13:
-            //         prince.push(Stance::Vert_Adjustment_4_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_4_Start_End, false);
-            //         break;
-
-            //     case 14:
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_4_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         break;
-
-            //     case 15:
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         break;
-
-            //     case 16:
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_6_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         break;
-
-            //     case 17:
-            //         prince.push(Stance::Vert_Adjustment_6_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_6_Start_End, false);
-            //         break;
-
-            //     case 18:
-            //         prince.push(Stance::Vert_Adjustment_6_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_6_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_6_Start_End, false);
-            //         break;
-
-            //     case 19:
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_4_Start_End, false);
-            //         break;
-
-            //     case 20:
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         break;
-
-            //     case 21:
-            //         prince.push(Stance::Vert_Adjustment_6_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         break;
-
-            //     case 22:
-            //         prince.push(Stance::Vert_Adjustment_6_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_6_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         break;
-
-            //     case 23:
-            //         prince.push(Stance::Vert_Adjustment_6_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_6_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_6_Start_End, false);
-            //         break;
-
-            //     case 24:
-            //         prince.push(Stance::Vert_Adjustment_6_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_6_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_6_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_6_Start_End, false);
-            //         break;
-
-            //     case 25:
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         break;
-
-            //     case 26:
-            //         prince.push(Stance::Vert_Adjustment_6_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         break;
-
-            //     case 27:
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_6_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_6_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         break;
-
-            //     case 28:
-            //         prince.push(Stance::Vert_Adjustment_6_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_6_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_6_Start_End, false);
-            //         break;
-
-            //     case 29:
-            //         prince.push(Stance::Vert_Adjustment_6_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_6_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_5_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_6_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_6_Start_End, false);
-            //         break;
-
-            //     case 30:
-            //         prince.push(Stance::Vert_Adjustment_6_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_6_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_6_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_6_Start_End, false);
-            //         prince.push(Stance::Vert_Adjustment_6_Start_End, false);
-            //         break;
-
-            // }
+    Serial.println("");        
 
         }
 
@@ -1716,5 +1502,53 @@ void getStance_Offsets(Direction direction, Point &offset, int16_t stance) {
     uint16_t idx = (stance - 1) * 2;
     offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[idx])) * (direction == Direction::Left ? -1 : 1) * (stance < 0 ? -1 : 1);
     offset.y = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[idx + 1])) * (stance < 0 ? -1 : 1);
+
+}
+
+void processRunJump() {
+
+    if (level.canMoveForward(Action::RunJump_1, prince)) {
+
+        if (level.canMoveForward(Action::RunJump_2, prince)) {
+
+            if (level.canMoveForward(Action::RunJump_3, prince)) {
+
+                #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
+                DEBUG_PRINTLN(F("RunningJump_3 true, Jump"));
+                #endif
+
+                prince.pushSequence(Stance::Running_Jump_1_Start, Stance::Running_Jump_11_End, Stance::Run_Repeat_4, true);
+
+            }
+            else {
+
+                #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
+                DEBUG_PRINTLN(F("RunningJump_3 false, RunRepeat"));
+                #endif
+
+                prince.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_4, true);
+
+            }
+
+        }
+        else {
+
+            #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
+            DEBUG_PRINTLN(F("RunningJump_2 false, RunRepeat"));
+            #endif
+
+            prince.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_4, true);
+
+        }
+
+    }
+    else {
+
+        #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
+        DEBUG_PRINTLN(F("RunningJump_1 false, Stopping"));
+        #endif
+
+        prince.pushSequence(Stance::Stopping_1_Start, Stance::Stopping_5_End, Stance::Upright, true);
+    }
 
 }
