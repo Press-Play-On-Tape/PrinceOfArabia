@@ -45,7 +45,7 @@ void render() {
         int16_t xLoc = (item.x - level.getXLocation()) * Constants::TileWidth;
         int16_t yLoc = ((item.y - level.getYLocation()) * Constants::TileHeight) - level.getYOffset() + Constants::ScreenTopOffset;
 
-        if (item.active) {
+        if (item.itemType != ItemType::None) {
 
             switch (item.itemType) {
 
@@ -56,8 +56,17 @@ void render() {
                     FX::drawBitmap(xLoc + 1, yLoc + 20, Images::Sword, 0, dbmMasked);
                     break;
 
+                case ItemType::Spikes:
+                    if (item.data.spikes.imageType == 1) {
+                        FX::drawBitmap(xLoc + 1, yLoc + 14, Images::Spikes_00 + (item.data.spikes.position * 118), 0, dbmMasked);
+                    }
+                    else {
+                        FX::drawBitmap(xLoc + 1, yLoc + 14, Images::Spikes_05 + (item.data.spikes.position * 70), 0, dbmMasked);
+                    }
+                    break;
+
                 case ItemType::Skeleton:
-                    FX::drawBitmap(xLoc + 5, yLoc + 16, Images::Skeleton, 0, dbmMasked);
+                    FX::drawBitmap(xLoc + 5, yLoc + 14, Images::Skeleton, 0, dbmMasked);
                     break;
 
                 case ItemType::ExitDoor:
@@ -163,6 +172,7 @@ void render() {
     if (item.data.flash.frame > 0 && item.data.flash.frame < 5) {
 
         FX::drawBitmap(xLoc - 3, yLoc + 12, Images::Flash_00 + ((item.data.flash.frame - 1) * 136), 0, dbmMasked);
+
     }
 
 
@@ -199,6 +209,24 @@ void render() {
 
     arduboy.drawPixel(124, 55);
     arduboy.drawPixel(126, 55);
+
+    switch (gamePlay.timeRemaining) {
+
+        case 1 ... 48:
+        case 97 ... 144:
+            FX::drawBitmap(23, 51, Images::TimeRemaining, 0, dbmMasked);
+            FX::drawBitmap(29, 56, Images::Number_Upright_00 + ((gamePlay.timer_Min / 10) * 7), 0, dbmNormal);
+            FX::drawBitmap(33, 56, Images::Number_Upright_00 + ((gamePlay.timer_Min % 10) * 7), 0, dbmNormal);
+            break;
+
+        case 49 ... 96:
+        case 145 ... 192:
+            FX::drawBitmap(23, 51, Images::LevelNumber, 0, dbmMasked);
+            FX::drawBitmap(71, 56, Images::Number_Upright_00 + ((gamePlay.level / 10) * 7), 0, dbmNormal);
+            FX::drawBitmap(75, 56, Images::Number_Upright_00 + ((gamePlay.level % 10) * 7), 0, dbmNormal);
+            break;
+
+    }
 
 }
 

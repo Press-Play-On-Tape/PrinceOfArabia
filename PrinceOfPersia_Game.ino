@@ -11,9 +11,9 @@
 
 void game_Init() {
 
-    prince.init(70, 25 + 31, Direction::Right, Stance::Crouch_3_End, 3);          // Under collapsible floor
+    // prince.init(70, 25 + 31, Direction::Right, Stance::Crouch_3_End, 3);          // Under collapsible floor
     // prince.init(58 +36, 56, Direction::Left, Stance::Crouch_3_End, 3);          // Exit Seq
-    // prince.init(18, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
+    prince.init(18, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
     // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3);          // Both floor types
     // prince.init(86, 87, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos but next to drop floor 3rd floor
     // prince.init(70, 25, Direction::Left, Stance::Crouch_3_End, 3);          // Under collapsible floor
@@ -28,9 +28,9 @@ void game_Init() {
     gamePlay.init(arduboy, 1);
     
     level.setLevel(1);
-    level.init(prince, 40, 3);  // Under collapsible floor
+    // level.init(prince, 40, 3);  // Under collapsible floor
     // level.init(prince, 80, 3);  // Exit Seq
-    // level.init(prince, 60, 0);  // Normal starting posa
+    level.init(prince, 60, 0);  // Normal starting posa
     // level.init(prince, 20, 3);  // Both floor types
     // level.init(prince, 60, 0);  //Normal starting pos but next to drop floor 3rd floor
     // level.init(prince, 50, 3);  // Under collapsible floor
@@ -114,7 +114,7 @@ void game() {
 
     if (justPressed & B_BUTTON) {
 
-        switch (level.distToEdgeOfTile(prince.getDirection(),  (level.getXLocation() * Constants::TileWidth) + prince.getX())) {
+        switch (level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX())) {
 
             case 0:
                 prince.incX(2);
@@ -152,7 +152,7 @@ void game() {
     // Update the objects ..
 
     prince.update(level.getXLocation(), level.getYLocation());
-    bool reevaluatePrinceFalling = level.update(arduboy);
+    level.update(arduboy);
     /* if (gamePlay.gameState == GameState::Game) */ gamePlay.update(arduboy);
 
     if (menu.update()) gamePlay.gameState = GameState::Game;
@@ -524,6 +524,7 @@ void game() {
                                 break;
 
                             case CanClimbDownPart2Result::Falling:
+// Serial.println("B setFalling(1)");                        
                                 prince.setFalling(1);
                                 prince.pushSequence(Stance::Jump_Up_Drop_C_1_Start, Stance::Jump_Up_Drop_C_5_End, true);
                                 break;
@@ -562,6 +563,7 @@ void game() {
                                 break;
 
                             case CanClimbDownPart2Result::Falling:
+// Serial.println("C setFalling(1)");    
                                 prince.setFalling(1);
                                 prince.pushSequence(Stance::Jump_Up_Drop_C_1_Start, Stance::Jump_Up_Drop_C_5_End, true);
                                 break;
@@ -840,7 +842,7 @@ void game() {
                             if (itemIdx != Constants::NoItemFound) {
 
                                 Item &item = level.getItem(itemIdx);
-                                item.active = false;
+                                item.itemType = ItemType::None;
                                 prince.pushSequence(Stance::Drink_Tonic_1_Start, Stance::Drink_Tonic_15_End, Stance::Upright, true);
 
                                 break;
@@ -852,7 +854,7 @@ void game() {
                             if (itemIdx != Constants::NoItemFound) {
 
                                 Item &item = level.getItem(itemIdx);
-                                item.active = false;
+                                item.itemType = ItemType::None;
                                 prince.setSword(true);
                                 prince.pushSequence(Stance::Pickup_Sword_1_Start, Stance::Pickup_Sword_16_End, Stance::Upright, true);
 
@@ -979,7 +981,7 @@ void game() {
                         
                         Item &item = level.getItem(i);
 
-                        if (item.active && item.itemType == ItemType::CollapsingFloor && item.data.collapsingFloor.frame == 0) {
+                        if (item.itemType == ItemType::CollapsingFloor && item.data.collapsingFloor.frame == 0) {
 
                             item.data.collapsingFloor.frame = 3;
 
@@ -993,24 +995,31 @@ void game() {
 
                     if (level.canFall(prince)) { // Fall some more
 
+// Serial.print("D incFalling() from ");    
+// Serial.print(prince.getFalling());    
                         prince.incFalling();
+// Serial.print(" to ");    
+// Serial.println(prince.getFalling());    
                         prince.pushSequence(Stance::Jump_Up_Drop_C_1_Start, Stance::Jump_Up_Drop_C_5_End, true);
 
                     }
                     else {
 
-                        Item &flash = level.getItem(0);
-                        flash.active = true;
-                        flash.data.flash.frame = 5;
-                        flash.x = level.coordToTileIndexX(prince.getDirection(), prince.getX()) + level.getXLocation();
-                        flash.y = level.coordToTileIndexY(prince.getDirection(), prince.getY()) + level.getYLocation();
+                        uint8_t itemIdx = activateSpikes(32);
 
                         switch (prince.getFalling()) {
 
-                            case 1:     // OK but lose some health as well
-                                prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
-                                prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
-                                prince.decHealth(1);
+                            case 1:
+                                if (itemIdx == Constants::NoItemFound) {
+                                    initFlash();
+                                    prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
+                                    prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
+                                    prince.decHealth(1);
+                                }
+                                else {
+                                    prince.pushSequence(Stance::Falling_Dead_1_Start, Stance::Falling_Dead_3_End, true);
+                                    prince.setHealth(0);
+                                }
                                 break;
 
                             default:    // Dead!
@@ -1046,57 +1055,57 @@ void game() {
                         DEBUG_PRINTLN(F("Fall some more"));
                         #endif
 
+// Serial.print("E incFalling() from ");    
+// Serial.print(prince.getFalling());    
                         prince.incFalling();
+// Serial.print(" to ");    
+// Serial.println(prince.getFalling());  
                         prince.setPrevStance(prince.getStance());
                         prince.pushSequence(Stance::Falling_Down_1_Start, Stance::Falling_Down_5_End, true);
 
                     }
                     else {
 
-                        prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
+                        uint8_t itemIdx = activateSpikes(32);
+
+                        switch (prince.getFalling()) {
+
+                            case 1:
+                                if (itemIdx == Constants::NoItemFound) {
+                                    prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
+                                }
+                                else {
+                                    prince.pushSequence(Stance::Falling_Dead_1_Start, Stance::Falling_Dead_3_End, true);
+                                    prince.setHealth(0);
+                                }
+                                break;
+
+                            case 2:     // OK but lose some health as well
+                                if (itemIdx == Constants::NoItemFound) {
+                                    initFlash();                          
+                                    prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
+                                    prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
+                                    prince.decHealth(1);
+                                }
+                                else {
+                                    prince.pushSequence(Stance::Falling_Dead_1_Start, Stance::Falling_Dead_3_End, true);
+                                    prince.setHealth(0);
+                                }
+                                break;
+
+                            default:    // Dead!
+                                prince.pushSequence(Stance::Falling_Dead_1_Start, Stance::Falling_Dead_3_End, true);
+                                prince.setHealth(0);
+                                break;
+
+                        }
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                        DEBUG_PRINTLN(F("End jump, stand up"));
-                        DEBUG_PRINTLN(F("End jump, stand up"));
+                        DEBUG_PRINT(F("End jump, stand up "));
+                        DEBUG_PRINTLN(prince.getFalling());
                         #endif
 
                         switch (prince.getStance()) {
-
-                            // case Stance::Falling_SmallStep_5_Check_CanFall:    
-                            //     prince.push(Stance::Falling_SmallStep_6_End, true);
-                            //     break;
-
-                            // case Stance::Falling_RunningJump_5_Check_CanFall:
-                            //     prince.push(Stance::Falling_RunningJump_6_End, true);
-                            //     break;
-
-                            // case Stance::Falling_C_5_Check_CanFall:
-                            //     prince.push(Stance::Falling_C_6_End, true);
-                            //     break;
-
-                            // case Stance::Falling_StandingJump_5_Check_CanFall:
-                            //     prince.push(Stance::Falling_StandingJump_6_End, true);
-                            //     break;
-
-                            // case Stance::Falling_SingleStep_5_Check_CanFall:
-                            //     prince.push(Stance::Falling_SingleStep_6_End, true);
-                            //     break;
-
-                            // case Stance::Falling_StepWalkRun_P2_6_10_5_Check_CanFall:
-                            //     prince.push(Stance::Falling_StepWalkRun_P2_6_10_6_End, true);
-                            //     break;
-
-                            // case Stance::Falling_StepWalkRun_P0_4_8_5_Check_CanFall:
-                            //     prince.push(Stance::Falling_StepWalkRun_P0_4_8_6_End, true);
-                            //     break;
-
-                            // case Stance::Falling_StepWalkRun_P1_5_9_5_Check_CanFall:
-                            //     prince.push(Stance::Falling_StepWalkRun_P1_5_9_6_End, true);
-                            //     break;
-
-                            // case Stance::Falling_StepWalkRun_P3_7_11_5_Check_CanFall:
-                            //     prince.push(Stance::Falling_StepWalkRun_P3_7_11_6_End, true);
-                            //     break;
 
                             case Stance::Falling_SmallStep_5_Check_CanFall:    
                             case Stance::Falling_RunningJump_5_Check_CanFall:
@@ -1111,60 +1120,14 @@ void game() {
                                 break;
 
                             case Stance::Falling_Down_5_End:
-
-                                // switch (prince.getPrevStance()) {
-
-                                //     case Stance::Falling_SmallStep_5_Check_CanFall:     
-                                //         prince.push(Stance::Falling_SmallStep_6_End, true);
-                                //         // prince.decHealth(1);
-                                //         break;
-
-                                //     case Stance::Falling_RunningJump_5_Check_CanFall:
-                                //         prince.push(Stance::Falling_RunningJump_6_End, true);
-                                //         break;
-
-                                //     case Stance::Falling_C_5_Check_CanFall:
-                                //         prince.push(Stance::Falling_C_6_End, true);
-                                //         break;
-
-                                //     case Stance::Falling_StandingJump_5_Check_CanFall:
-                                //         prince.push(Stance::Falling_StandingJump_6_End, true);
-                                //         break;
-
-                                //     case Stance::Falling_SingleStep_5_Check_CanFall:
-                                //         prince.push(Stance::Falling_SingleStep_6_End, true);
-                                //         break;
-                                                
-                                //     case Stance::Falling_StepWalkRun_P2_6_10_5_Check_CanFall:
-                                //         prince.push(Stance::Falling_StepWalkRun_P2_6_10_6_End, true);
-                                //         break;
-
-                                //     case Stance::Falling_StepWalkRun_P0_4_8_5_Check_CanFall:
-                                //         prince.push(Stance::Falling_StepWalkRun_P0_4_8_6_End, true);
-                                //         break;
-
-                                //     case Stance::Falling_StepWalkRun_P1_5_9_5_Check_CanFall:
-                                //         prince.push(Stance::Falling_StepWalkRun_P1_5_9_6_End, true);
-                                //         break;
-
-                                //     case Stance::Falling_StepWalkRun_P3_7_11_5_Check_CanFall:
-                                //         prince.push(Stance::Falling_StepWalkRun_P3_7_11_6_End, true);
-                                //         break;
-
-                                //     default:  
-                                //         break;
-
-                                // }
                                 prince.push(prince.getPrevStance() + 1, true);
-
                                 break;
 
                             default:  
                                 break;
 
                         }
-                        
-                        prince.setFalling(0);
+
                         prince.setPrevStance(Stance::None);
 
                     }
@@ -1173,6 +1136,11 @@ void game() {
 
                 case Stance::Drink_Tonic_14:
                     prince.incHealth(2);
+                    break;
+
+                case Stance::Upright:
+// Serial.println("A setFalling(0)");                        
+                    prince.setFalling(0);
                     break;
 
             }
@@ -1195,7 +1163,6 @@ void game() {
 
                 uint8_t imageIndex = static_cast<uint8_t>(pgm_read_byte(&Constants::StanceToImageXRef[prince.getStance()]));
                 uint16_t pos = (imageIndex - 1) * 3;
-                int8_t reach = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos]));
                 int8_t footToe = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 1]));
                 int8_t footHeel = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 2]));
 
@@ -1276,13 +1243,6 @@ void game() {
             }
 
 
-
-
-            // Has the player collided with a wall?
-
-            //level.collideWithWall(prince);
-
-
             #if defined(DEBUG) && defined(DEBUG_PRINCE_DETAILS)
             DEBUG_PRINT(F("Stance: "));
             DEBUG_PRINT(prince.getStance());
@@ -1302,6 +1262,7 @@ void game() {
     if (prince.isFootDown() && level.canFall(prince) && prince.getFalling() == 0) {
 
         prince.clear();
+// Serial.println("F setFalling(1)");    
         prince.setFalling(1);
         prince.setPrevStance(prince.getStance());
 
@@ -1348,20 +1309,19 @@ void game() {
 
     if (prince.inAir() && prince.getFalling() == 0) {
 
-        uint8_t reach = prince.getReach();
-
         if (level.collideWithWall(prince)) {
 
-            //#if defined(DEBUG) && defined(DEBUG_ACTION_COLLIDEWITHWALL)
+            #if defined(DEBUG) && defined(DEBUG_ACTION_COLLIDEWITHWALL)
             DEBUG_PRINT(F("Collide with wall - X:"));
             DEBUG_PRINT(prince.getX());
             DEBUG_PRINT(", Y:");
             DEBUG_PRINT(prince.getY());
             DEBUG_PRINT(", Coll:");
             DEBUG_PRINTLN(level.collideWithWall(prince));
-            //#endif
+            #endif
 
             prince.clear();
+// Serial.println("G setFalling(1)");    
             prince.setFalling(1);
 
 
@@ -1376,6 +1336,7 @@ void game() {
                 case 1:
                 case 5:
                 case 9:
+                case 3:
                     prince.push(Stance::Collide_Wall_M1_Start_End, false);
                     break;
 
@@ -1385,7 +1346,7 @@ void game() {
                     prince.push(Stance::Collide_Wall_P0_Start_End, false);
                     break;
 
-                case 3:
+                // case 3:
                 case 7:
                 case 11:
                     prince.push(Stance::Collide_Wall_P1_Start_End, false);
@@ -1403,24 +1364,25 @@ void game() {
             // Do we need to apply some vertical adjustment?
             
             uint8_t adj = (prince.getY() - 25) % 31;
-Serial.print("prince.getY():");
-Serial.print(prince.getY());
-Serial.print(", Adj:");
-Serial.print(adj);
+// Serial.print("prince.getY():");
+// Serial.print(prince.getY());
+// Serial.print(", Adj:");
+// Serial.print(adj);
 
             if (adj != 0) {
 
+                adj = 31 - adj;
                 adj = (adj - 1) * 5;
 
                 for (uint8_t i = adj; i < adj + 5; i++) {
                     
-                    uint8_t adjustment = pgm_read_byte(&Constants::VertAdjustments + i);
+                    uint8_t adjustment = static_cast<uint8_t>(pgm_read_byte(&Constants::VertAdjustments[i]));
 
                     if (adjustment > 0) {
-    Serial.print(", adjustment:");
-    Serial.print(adjustment);
-    Serial.print(", base:");
-    Serial.println(Stance::Vert_Adjustment_1_Start_End);
+    // Serial.print(", adjustment:");
+    // Serial.print(adjustment);
+    // Serial.print(", base:");
+    // Serial.println(Stance::Vert_Adjustment_1_Start_End);
                         prince.push(Stance::Vert_Adjustment_1_Start_End - 1 + adjustment, false);
 
                     }
@@ -1428,7 +1390,7 @@ Serial.print(adj);
                 }
 
             }
-    Serial.println("");        
+    // Serial.println("");        
 
         }
 
@@ -1551,4 +1513,53 @@ void processRunJump() {
         prince.pushSequence(Stance::Stopping_1_Start, Stance::Stopping_5_End, Stance::Upright, true);
     }
 
+}
+
+void initFlash() {
+
+    Item &flash = level.getItem(0);
+    flash.itemType = ItemType::Flash;
+    flash.data.flash.frame = 5;
+    flash.x = level.coordToTileIndexX(prince.getDirection(), prince.getX()) + level.getXLocation();
+    flash.y = level.coordToTileIndexY(prince.getDirection(), prince.getY()) + level.getYLocation(); 
+
+}
+
+uint8_t activateSpikes(uint8_t closingDelay) {
+
+    int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x);
+    int8_t tileYIdx = level.coordToTileIndexY(prince.getDirection(), prince.getPosition().y);
+    uint8_t itemIdx = level.getItem(ItemType::Spikes, tileXIdx, tileYIdx);
+
+
+    // Withdraw spikes after a few second..
+
+    if (itemIdx != Constants::NoItemFound) {
+
+        Item &spikes = level.getItem(itemIdx);
+        spikes.data.spikes.closingDelay = closingDelay;
+
+
+        itemIdx = level.getItem(ItemType::Spikes, tileXIdx - 1, tileYIdx);
+
+        if (itemIdx != Constants::NoItemFound) {
+
+            Item &spikes = level.getItem(itemIdx);
+            spikes.data.spikes.closingDelay = closingDelay;
+
+        }
+
+        itemIdx = level.getItem(ItemType::Spikes, tileXIdx + 1, tileYIdx);
+
+        if (itemIdx != Constants::NoItemFound) {
+
+            Item &spikes = level.getItem(itemIdx);
+            spikes.data.spikes.closingDelay = closingDelay;
+
+        }
+
+    }
+
+    return itemIdx;
+    
 }

@@ -13,15 +13,18 @@ struct GamePlay {
     uint8_t timer_Min = 60;
 
     uint8_t crouchTimer = 0;
+    uint8_t timeRemaining = 0;
 
 
     void init(Arduboy2Ext & arduboy, uint8_t level) {
 
         this->frameCount = arduboy.getFrameCount();
+        this->frameCount = 0;
 
         this->level = level;
         this->timer_Sec = 0;
         this->timer_Min = 60;
+        this->timeRemaining = 193;
 
         this->gameState = GameState::Game;
 
@@ -39,6 +42,8 @@ struct GamePlay {
             this->timer_Sec--;
 
         }
+
+        if (this->timeRemaining > 0) this->timeRemaining--;
 
     }
 

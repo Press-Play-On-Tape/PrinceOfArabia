@@ -106,12 +106,14 @@ struct Level {
 
         }
 
+
         void incYOffset(int8_t inc) {
 
             this->yOffset = this->yOffset + inc;
         }
 
-        bool update(Arduboy2Ext &arduboy) { // returns true if player should be tested for a fall.
+
+        void update(Arduboy2Ext &arduboy) { 
 
 
             // Update level offset ..
@@ -152,7 +154,7 @@ struct Level {
 
                 Item &item = this->getItem(i);
 
-                if (item.active) {
+                if (item.itemType != ItemType::None) {
 
                     switch (item.itemType) {
 
@@ -180,7 +182,7 @@ struct Level {
 
                                     if (item.data.flash.frame == 0) {
 
-                                        item.active = false;
+                                        item.itemType = ItemType::None;
 
                                     }
                                         
@@ -304,6 +306,29 @@ struct Level {
                             }
                             break;
 
+                        case ItemType::Spikes:
+
+                            if (arduboy.isFrameCount(4)) {
+
+                                if (item.data.spikes.closingDelay > 0) {
+
+                                    item.data.spikes.closingDelay--;
+
+                                    switch (item.data.spikes.closingDelay) {
+
+                                        case 1 ... 3:
+                                            item.data.spikes.position--;
+                                            break;
+                                        
+                                        default: break;
+                                        
+                                    }
+
+                                }
+
+                            }
+                            break;
+
                         default: break;
 
                     }
@@ -311,8 +336,6 @@ struct Level {
                 }
 
             }
-
-            return false;
 
         }
 
@@ -421,58 +444,6 @@ struct Level {
 
         }
 
-        int8_t getTile2(Layer layer, int8_t x, int8_t y, int8_t returnCollapsingTile) { 
-
-            switch (layer) {
-
-                case Layer::Foreground:
-
-                    // #if defined(DEBUG) && defined(DEBUG_GET_TILE)
-                    DEBUG_PRINT(F("getTile(FG, "));
-                    DEBUG_PRINT(x);
-                    DEBUG_PRINT(F(", "));
-                    DEBUG_PRINT(y);
-                    DEBUG_PRINT(F(") = "));
-                    DEBUG_PRINTLN(fg[y + 1][x + 3]);
-                    // #endif
-
-                    return fg[y + 1][x + 3];
-
-                case Layer::Background:
-                    {
-                        int8_t tile = bg[y + 1][x + 3];
-
-                        // #if defined(DEBUG) && defined(DEBUG_GET_TILE)
-                        DEBUG_PRINT(F("getTile(BG, "));
-                        DEBUG_PRINT(x);
-                        DEBUG_PRINT(F(", "));
-                        DEBUG_PRINT(y);
-                        DEBUG_PRINT(F(") = "));
-                        DEBUG_PRINTLN(tile);
-                        // #endif
-
-
-                        // Substitute tiles if needed ..
-
-                        if (returnCollapsingTile != TILE_NONE && this->isCollapsingFloor(this->xLoc + x, this->yLoc + y)) {
-
-                            return returnCollapsingTile;
-
-                        }
-
-                        return tile;
-
-                    }
-
-                    break;
-
-
-            }
-
-            return TILE_NONE;
-
-        }
-
 
         // Locate the itemType at x, y.  Return the index of the specified itemType
 
@@ -484,14 +455,14 @@ struct Level {
 
                 if (itemType == ItemType::AnyItem) {
 
-                    if (item.active && item.x == x && item.y == y) {
+                    if (item.itemType != ItemType::None && item.x == x && item.y == y) {
                         return i;
                     }
 
                 }
                 else {
 
-                    if (item.active && (item.itemType == itemType) && (item.x == x) && (item.y == y)) {
+                    if (item.itemType != ItemType::None && (item.itemType == itemType) && (item.x == x) && (item.y == y)) {
                         return i;
                     }
 
@@ -508,7 +479,7 @@ struct Level {
 
             for (Item &item : this->items) {
 
-                if (item.active && item.itemType == ItemType::CollapsingFloor && item.x == x && item.y == y && item.data.collapsingFloor.timeToFall == 0) {
+                if (item.itemType == ItemType::CollapsingFloor && item.x == x && item.y == y && item.data.collapsingFloor.timeToFall == 0) {
                     return true;
                 }
 
@@ -576,7 +547,7 @@ struct Level {
             // Deactivate all items ..            
 
             for (Item &item : items) {
-                item.active = false;
+                item.itemType = ItemType::None;
             }
 
 
@@ -593,7 +564,6 @@ struct Level {
 
                 Item &item = this->items[itemIdx];
                 item.itemType = static_cast<ItemType>(itemType);
-                item.active = true;
                 item.x = FX::readPendingUInt8();
                 item.y = FX::readPendingUInt8();
 
@@ -630,7 +600,12 @@ struct Level {
                         item.data.floorButton2.gateY = FX::readPendingUInt8();
                         item.data.floorButton2.timeToFall = 0;
                         break;
-                
+                    
+                    case ItemType::Spikes:
+                        item.data.spikes.imageType = FX::readPendingUInt8();
+                        item.data.spikes.position = 3;
+                        break;
+
                     default:
                         break;
 
@@ -933,7 +908,7 @@ struct Level {
 
             uint8_t imageIndex = static_cast<uint8_t>(pgm_read_byte(&Constants::StanceToImageXRef[prince.getStance()]));
             uint16_t pos = (imageIndex - 1) * 3;
-            int8_t reach = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos]));
+
             int8_t footToe = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 1]));
             int8_t footHeel = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 2]));
 
@@ -1140,7 +1115,7 @@ struct Level {
 
                 Item &item = this->items[i];
 
-                if (item.itemType == itemType && item.active && item.x == tileXIdx && item.y == tileYIdx) {
+                if (item.itemType == itemType && item.x == tileXIdx && item.y == tileYIdx) {
 
                     return i;
 
@@ -1174,6 +1149,10 @@ struct Level {
 
                 case Direction::Left:
                     {
+                        int8_t bgTile4 = this->getTile(Layer::Background, tileXIdx - 3, tileYIdx, TILE_FLOOR_BASIC);
+                        int8_t fgTile4 = this->getTile(Layer::Foreground, tileXIdx - 3, tileYIdx, TILE_FLOOR_BASIC);
+                        int8_t bgTile3 = this->getTile(Layer::Background, tileXIdx - 2, tileYIdx, TILE_FLOOR_BASIC);
+                        int8_t fgTile3 = this->getTile(Layer::Foreground, tileXIdx - 2, tileYIdx, TILE_FLOOR_BASIC);
                         int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx - 1, tileYIdx, TILE_FLOOR_BASIC);
                         int8_t fgTile2 = this->getTile(Layer::Foreground, tileXIdx - 1, tileYIdx, TILE_FLOOR_BASIC);
                         int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(prince.getDirection(), prince.getPosition().x);
@@ -1268,26 +1247,68 @@ struct Level {
 
                                 return true;
 
+                            case Action::RunJump_3:
+
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+                                printTileInfo(bgTile4, fgTile4);
+                                DEBUG_PRINT("isWallTile(");
+                                DEBUG_PRINT(bgTile4);
+                                DEBUG_PRINT(",");
+                                DEBUG_PRINT(fgTile4);
+                                DEBUG_PRINT(",");
+                                DEBUG_PRINT(tileXIdx + 3);
+                                DEBUG_PRINT(",");
+                                DEBUG_PRINT(tileYIdx);
+                                DEBUG_PRINT(") = ");
+                                DEBUG_PRINTLN(this->isWallTile(bgTile4, fgTile4, tileXIdx + 3, tileYIdx));
+                                #endif
+
+                                if (this->isWallTile(bgTile4, fgTile4, tileXIdx + 3, tileYIdx)) {
+                                    return false;
+                                }
+
+                                return true;                                
+
+                            case Action::RunJump_2:
+
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+                                printTileInfo(bgTile3, fgTile3);
+                                DEBUG_PRINT("isWallTile(");
+                                DEBUG_PRINT(bgTile3);
+                                DEBUG_PRINT(",");
+                                DEBUG_PRINT(fgTile3);
+                                DEBUG_PRINT(",");
+                                DEBUG_PRINT(tileXIdx + 2);
+                                DEBUG_PRINT(",");
+                                DEBUG_PRINT(tileYIdx);
+                                DEBUG_PRINT(") = ");
+                                DEBUG_PRINTLN(this->isWallTile(bgTile3, fgTile3, tileXIdx + 2, tileYIdx));
+                                #endif
+
+                                if (this->isWallTile(bgTile3, fgTile3, tileXIdx + 2, tileYIdx)) {
+                                    return false;
+                                }
+
+                                return true;
+
                             case Action::RunJump_1:
 
-                                switch (distToEdgeOfCurrentTile) {
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+                                printTileInfo(bgTile2, fgTile2);
+                                DEBUG_PRINT("isWallTile(");
+                                DEBUG_PRINT(bgTile2);
+                                DEBUG_PRINT(",");
+                                DEBUG_PRINT(fgTile2);
+                                DEBUG_PRINT(",");
+                                DEBUG_PRINT(tileXIdx + 1);
+                                DEBUG_PRINT(",");
+                                DEBUG_PRINT(tileYIdx);
+                                DEBUG_PRINT(") = ");
+                                DEBUG_PRINTLN(this->isWallTile(bgTile2, fgTile2, tileXIdx + 1, tileYIdx));
+                                #endif
 
-                                    case  2 ... 12:
-
-                                        if (!this->isWallTile(bgTile2, fgTile2, tileXIdx + 1, tileYIdx)) {
-                                            return true;                                            
-                                        }
-
-                                        return false;
-
-                                    default:
-
-                                        if (!this->isWallTile(bgTile2, fgTile2, tileXIdx + 1, tileYIdx)) {
-                                            return true;                                            
-                                        }
-
-                                        return false;
-
+                                if (this->isWallTile(bgTile2, fgTile2, tileXIdx + 1, tileYIdx)) {
+                                    return false;
                                 }
 
                                 return true;
@@ -2056,7 +2077,7 @@ struct Level {
 
                 Item &item = this->items[i];
 
-                if (item.itemType == ItemType::Gate && item.active) {
+                if (item.itemType == ItemType::Gate) {
 
                     if (item.x == tileXIdx + this->xLoc && item.y == tileYIdx + this->yLoc) {
 

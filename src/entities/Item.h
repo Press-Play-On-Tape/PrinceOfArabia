@@ -26,6 +26,13 @@ struct Sword {
 
 struct Skeleton {
 };
+
+struct Spikes {
+    uint8_t position;
+    uint8_t openningDelay;
+    uint8_t closingDelay;
+    uint8_t imageType;
+};
  
 struct CollapsingFloor {
     uint8_t frame;
@@ -60,7 +67,6 @@ struct Item {
     ItemType itemType;
     uint8_t x;
     uint8_t y;
-    bool active;
 
     union {
         struct Flash flash;
@@ -73,6 +79,7 @@ struct Item {
         struct PotionSmall potionSmall;
         struct FloorButton1 floorButton1;
         struct FloorButton1 floorButton2;
+        struct Spikes spikes;
     } data; 
  
 };

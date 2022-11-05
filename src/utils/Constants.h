@@ -4,12 +4,12 @@
 #define DEBUG_PRINT    Serial.print
 #define DEBUG_PRINTLN  Serial.println
 
-#define DEBUG
+#define _DEBUG
 #define DEBUG_ONSCREEN_DETAILS
 #define _DEBUG_ONSCREEN_DETAILS_MIN
 
 #define _DEBUG_PRINCE_DETAILS
-#define DEBUG_PRINCE_STACK
+#define _DEBUG_PRINCE_STACK
 #define _DEBUG_PRINT_ACTION
 #define DEBUG_LEVEL_LOAD_MAP
 #define _DEBUG_GET_TILE
@@ -23,7 +23,7 @@
 #define _DEBUG_ACTION_CANFALL
 #define DEBUG_ACTION_CANFALLSOMEMORE
 #define _DEBUG_ACTION_COLLIDEWITHWALL
-#define _DEBUG_ACTION_RUNJUMP
+#define DEBUG_ACTION_RUNJUMP
 
 //-------------------------------------------------------------------------------------
 
@@ -112,15 +112,11 @@ constexpr uint16_t Single_Step_5                                 = 79;
 constexpr uint16_t Single_Step_6                                 = 80;
 constexpr uint16_t Single_Step_7                                 = 81;
 constexpr uint16_t Single_Step_8_End                             = 82;
-
-// Not sure about this set              
 constexpr uint16_t Stopping_1_Start                              = 83;
 constexpr uint16_t Stopping_2                                    = 84;
 constexpr uint16_t Stopping_3                                    = 85;
 constexpr uint16_t Stopping_4                                    = 86;
 constexpr uint16_t Stopping_5_End                                = 87;
-// Not sure about this set              
-
 constexpr uint16_t Climbing_1_Start                              = 88;
 constexpr uint16_t Climbing_2                                    = 89;
 constexpr uint16_t Climbing_3                                    = 90;
@@ -362,7 +358,7 @@ constexpr uint16_t  Upright_Turn             = 1255;
 namespace Constants {
 
     constexpr uint8_t FrameRate = 45;
-    constexpr uint8_t NumberOfItems = 30;
+    constexpr uint8_t NumberOfItems = 40;
     constexpr uint8_t Animation_NumberOfFrames = 2;
     constexpr uint8_t NoItemFound = 255;
 
@@ -764,6 +760,8 @@ enum class ItemType : uint8_t {
     /* 07 */ FloorButton1,
     /* 08 */ FloorButton2,
     /* 09 */ Skeleton,
+    /* 10 */ Spikes,
+    /* 98 */ None = 98,
     /* 99 */ Flash = 99,
 };
 

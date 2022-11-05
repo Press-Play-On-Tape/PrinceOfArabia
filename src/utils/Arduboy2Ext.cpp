@@ -33,6 +33,12 @@ uint16_t Arduboy2Ext::getFrameCount() const {
 
 }
 
+void Arduboy2Ext::setFrameCount(uint16_t val) const {
+
+  frameCount = val;
+
+}
+
 uint8_t Arduboy2Ext::getFrameCount(uint8_t mod, int8_t offset) const {
 
   return (frameCount + offset) % mod;

@@ -53,6 +53,15 @@ int8_t Level1_BG[] = {
         5, 64, 2,               // CollapsedTile                                                    
         3, 2, 5,                // Sword
         9, 3, 5,                // Skeleton
+        10, 53, 5, 1,           // Spikes
+        10, 54, 5, 2,           // Spikes
+        10, 1, 8, 1,            // Spikes
+        10, 2, 8, 2,            // Spikes
+        10, 14, 5, 1,           // Spikes
+        10, 15, 2, 1,           // Spikes
+        10, 15, 7, 2,           // Spikes
+        10, 37, 8, 1,           // Spikes
+        10, 38, 8, 2,           // Spikes
         4, 35, 3, 55,           // CollapsingTile (dist to fall)                                    
         4, 36, 3, 55,           // CollapsingTile (dist to fall)                                    
         4, 25, 4, 117,          // CollapsingTile (dist to fall)                                    
@@ -80,6 +89,20 @@ namespace Images {
     image_t Title_Main = "../images/title/Title_Main.png"
     image_t Title_Cursor = "../images/title/Title_Cursor.png"
     image_t Title_Credits = "../images/title/Title_Credits.png"
+
+    image_t TimeRemaining = "../images/title/TimeRemaining.png"
+    image_t LevelNumber = "../images/title/LevelNumber.png"
+
+    image_t Number_Upright_00 = "../images/title/Number_Upright_00.png"
+    image_t Number_Upright_01 = "../images/title/Number_Upright_01.png"
+    image_t Number_Upright_02 = "../images/title/Number_Upright_02.png"
+    image_t Number_Upright_03 = "../images/title/Number_Upright_03.png"
+    image_t Number_Upright_04 = "../images/title/Number_Upright_04.png"
+    image_t Number_Upright_05 = "../images/title/Number_Upright_05.png"
+    image_t Number_Upright_06 = "../images/title/Number_Upright_06.png"
+    image_t Number_Upright_07 = "../images/title/Number_Upright_07.png"
+    image_t Number_Upright_08 = "../images/title/Number_Upright_08.png"
+    image_t Number_Upright_09 = "../images/title/Number_Upright_09.png"
 
     image_t Menu = "../images/hud/Menu.png"
     image_t Number_00 = "../images/hud/Number_00.png"
@@ -153,6 +176,17 @@ namespace Images {
     image_t Torch_02 = "../images/items/Torch_02.png"
     image_t Torch_03 = "../images/items/Torch_03.png"
     image_t Torch_04 = "../images/items/Torch_04.png"
+
+    image_t Spikes_00 = "../images/items/Spikes_00.png"
+    image_t Spikes_01 = "../images/items/Spikes_01.png"
+    image_t Spikes_02 = "../images/items/Spikes_02.png"
+    image_t Spikes_03 = "../images/items/Spikes_03.png"
+    image_t Spikes_04 = "../images/items/Spikes_04.png"
+    image_t Spikes_05 = "../images/items/Spikes_05.png"
+    image_t Spikes_06 = "../images/items/Spikes_06.png"
+    image_t Spikes_07 = "../images/items/Spikes_07.png"
+    image_t Spikes_08 = "../images/items/Spikes_08.png"
+    image_t Spikes_09 = "../images/items/Spikes_09.png"
 
     image_t Flash_00 = "../images/hud/Flash_00.png"
     image_t Flash_01 = "../images/hud/Flash_01.png"
