@@ -66,6 +66,8 @@ void game() {
     #endif
 
 
+    // Have we scrolled to another screen ?
+
     if (prince.getY() - level.getYOffset() >= 56 + Constants::TileHeight) {
 
         prince.incY(- Constants::TileHeight * 3);
@@ -100,7 +102,6 @@ void game() {
     }
 
 
-
     // Calculate screen offset ..
 
     if (prince.getYPrevious() <= 56 && prince.getY() > 56) {
@@ -111,7 +112,8 @@ void game() {
     }
 
 
-
+    // Remove later !!!
+    //
     if (justPressed & B_BUTTON) {
 
         switch (level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX())) {
@@ -145,6 +147,8 @@ void game() {
         }
 
     }
+    //
+    // REmove later !!
 
 
 
@@ -221,12 +225,12 @@ void game() {
                         
                     switch (level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX())) {
 
-                        case 10:
-                            prince.pushSequence(Stance::Single_Step_1_Start, Stance::Single_Step_8_End, true);
-                            break;
-
                         case 6:
                             prince.pushSequence(Stance::Small_Step_1_Start, Stance::Small_Step_6_End, true);
+                            break;
+
+                        case 10:
+                            prince.pushSequence(Stance::Single_Step_1_Start, Stance::Single_Step_8_End, true);
                             break;
 
                         default: break;
@@ -259,7 +263,6 @@ void game() {
                 default: break;
                 
             }
-
 
         }
         else {
@@ -412,7 +415,6 @@ void game() {
 
                         }
 
-
                     }
                     else if (pressed & UP_BUTTON) {
 
@@ -425,13 +427,12 @@ void game() {
                                 break;
 
                             case CanJumpUpResult::JumpThenFall:
-                                prince.pushSequence(Stance::Jump_Up_Drop_A_1_Start, Stance::Jump_Up_Drop_A_5_End, Stance::Upright, false);
-                                prince.pushSequence(Stance::Jump_Up_A_1_Start, Stance::Jump_Up_A_14_End, true);
+                                pushJumpUp_Drop();
                                 break;
 
                             case CanJumpUpResult::JumpThenFall_CollapseFloor:
                                 {
-                                    int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x) + (prince.getDirection() == Direction::Left ? -1 : 1);
+                                    int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x) + prince.getDirectionOffset(1);
                                     int8_t tileYIdx = level.coordToTileIndexY(prince.getDirection(), prince.getPosition().y) - 1;
                                     uint8_t itemIdx = level.getItem(ItemType::CollapsingFloor, tileXIdx, tileYIdx);
 
@@ -442,8 +443,8 @@ void game() {
 
                                     }
 
-                                    prince.pushSequence(Stance::Jump_Up_Drop_A_1_Start, Stance::Jump_Up_Drop_A_5_End, Stance::Upright, false);
-                                    prince.pushSequence(Stance::Jump_Up_A_1_Start, Stance::Jump_Up_A_14_End, true);
+                                    pushJumpUp_Drop();
+
                                 }
                                 break;
 
@@ -460,14 +461,14 @@ void game() {
 
                                     }
 
-                                    prince.pushSequence(Stance::Jump_Up_Drop_A_1_Start, Stance::Jump_Up_Drop_A_5_End, Stance::Upright, false);
-                                    prince.pushSequence(Stance::Jump_Up_A_1_Start, Stance::Jump_Up_A_14_End, true);
+                                    pushJumpUp_Drop();
+
                                 }
                                 break;
 
                             case CanJumpUpResult::StepThenJumpThenFall_CollapseFloor:
                                 {
-                                    int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x) + (prince.getDirection() == Direction::Left ? -1 : 1);
+                                    int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x) + prince.getDirectionOffset(1);
                                     int8_t tileYIdx = level.coordToTileIndexY(prince.getDirection(), prince.getPosition().y) - 1;
                                     uint8_t itemIdx = level.getItem(ItemType::CollapsingFloor, tileXIdx, tileYIdx);
 
@@ -478,9 +479,9 @@ void game() {
 
                                     }
 
-                                    prince.pushSequence(Stance::Jump_Up_Drop_A_1_Start, Stance::Jump_Up_Drop_A_5_End, Stance::Upright, false);
-                                    prince.pushSequence(Stance::Jump_Up_A_1_Start, Stance::Jump_Up_A_14_End, true);
+                                    pushJumpUp_Drop();
                                     prince.pushSequence(Stance::Small_Step_1_Start, Stance::Small_Step_6_End, Stance::Upright, false);
+
                                 }
                                 break;
 
@@ -790,6 +791,7 @@ void game() {
                                 #endif
 
                                 prince.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_4, true);
+
                             }
                             else {
                                 prince.pushSequence(Stance::Stopping_1_Start, Stance::Stopping_5_End, Stance::Upright, true);
@@ -1169,7 +1171,7 @@ void game() {
 
                 // Test with player's toe ..
 
-                int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x + (prince.getDirection() == Direction::Left ? -footToe : footToe));
+                int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x + prince.getDirectionOffset(footToe));
                 int8_t tileYIdx = level.coordToTileIndexY(prince.getDirection(), prince.getPosition().y);
                 uint8_t itemIdx = level.getItem(ItemType::AnyItem, tileXIdx, tileYIdx);
 
@@ -1178,7 +1180,7 @@ void game() {
 
                 if (itemIdx == Constants::NoItemFound) {
 
-                    tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x + (prince.getDirection() == Direction::Left ? -footHeel : footHeel));
+                    tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x + prince.getDirectionOffset(footHeel));
                     itemIdx = level.getItem(ItemType::AnyItem, tileXIdx, tileYIdx);
 
                 }
@@ -1562,4 +1564,11 @@ uint8_t activateSpikes(uint8_t closingDelay) {
 
     return itemIdx;
     
+}
+
+void pushJumpUp_Drop() {
+
+    prince.pushSequence(Stance::Jump_Up_Drop_A_1_Start, Stance::Jump_Up_Drop_A_5_End, Stance::Upright, false);
+    prince.pushSequence(Stance::Jump_Up_A_1_Start, Stance::Jump_Up_A_14_End, true);
+
 }

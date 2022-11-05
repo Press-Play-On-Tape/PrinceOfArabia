@@ -208,13 +208,13 @@ struct Level {
                                 }
                                 else if (item.data.gate.closingDelay > 0 && item.data.gate.closingDelay <= 9) {
 
-                                        if (item.data.gate.position > 0 ) {
+                                    if (item.data.gate.position > 0 ) {
 
-                                            item.data.gate.position--;
-                                            
-                                        }
+                                        item.data.gate.position--;
                                         
-                                        break;
+                                    }
+                                    
+                                    break;
 
                                 }
  
@@ -904,7 +904,7 @@ struct Level {
 
             bool canFall = false;
             Point newPos = prince.getPosition();
-            newPos.x = newPos.x + (prince.getDirection() == Direction::Left ? xOffset * -1 : xOffset);
+            newPos.x = newPos.x + prince.getDirectionOffset(xOffset);
 
             uint8_t imageIndex = static_cast<uint8_t>(pgm_read_byte(&Constants::StanceToImageXRef[prince.getStance()]));
             uint16_t pos = (imageIndex - 1) * 3;
@@ -912,7 +912,7 @@ struct Level {
             int8_t footToe = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 1]));
             int8_t footHeel = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 2]));
 
-            int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), newPos.x + (prince.getDirection() == Direction::Left ? -footToe : footToe)) - this->getXLocation();
+            int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), newPos.x + prince.getDirectionOffset(footToe)) - this->getXLocation();
             int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), newPos.y) - this->getYLocation();
             
             int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
@@ -951,7 +951,7 @@ struct Level {
                 }
                 else {
 
-                    int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), newPos.x + (prince.getDirection() == Direction::Left ? -footHeel : footHeel)) - this->getXLocation();
+                    int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), newPos.x + prince.getDirectionOffset(footHeel)) - this->getXLocation();
                     int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), newPos.y) - this->getYLocation();
                     
                     int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
@@ -996,7 +996,7 @@ struct Level {
 
             bool canFall = false;
             Point newPos = prince.getPosition();
-            newPos.x = newPos.x + (prince.getDirection() == Direction::Left ? xOffset * -1 : xOffset);
+            newPos.x = newPos.x + prince.getDirectionOffset(xOffset);
 
             int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), newPos.x) - this->getXLocation();
             int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), newPos.y) - this->getYLocation();
@@ -1032,7 +1032,7 @@ struct Level {
         CanClimbDownPart2Result canClimbDown_Part2(Prince &prince, int8_t xOffset = 0) { 
 
             Point newPos = prince.getPosition();
-            newPos.x = newPos.x + (prince.getDirection() == Direction::Left ? xOffset * -1 : xOffset);
+            newPos.x = newPos.x + prince.getDirectionOffset(xOffset);
 
             int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), newPos.x) - this->getXLocation();
             int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), newPos.y) - this->getYLocation();

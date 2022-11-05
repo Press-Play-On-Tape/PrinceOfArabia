@@ -87,18 +87,19 @@ void title() {
 
         case TitleScreenMode::Credits:
 
-            FX::drawBitmap(7, 39, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
-            FX::drawBitmap(14, 34, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
+            FX::drawBitmap(  7, 39, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
+            FX::drawBitmap( 14, 34, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
             FX::drawBitmap(119, 39, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
             FX::drawBitmap(112, 34, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
 
-            FX::drawBitmap(0, 54, Images::Tile_Dungeon_12, 0, dbmNormal);
-            FX::drawBitmap(12, 54, Images::Tile_Dungeon_13, 0, dbmNormal);
+            FX::drawBitmap(  0, 54, Images::Tile_Dungeon_12, 0, dbmNormal);
+            FX::drawBitmap( 12, 54, Images::Tile_Dungeon_13, 0, dbmNormal);
             FX::drawBitmap(105, 54, Images::Tile_Dungeon_12, 0, dbmNormal);
             FX::drawBitmap(117, 54, Images::Tile_Dungeon_13, 0, dbmNormal);
 
             FX::drawBitmap(27, -titleScreenVars.count, Images::Title_Credits, 0, dbmNormal);
             FX::drawBitmap(0, 0, Images::Title_PoP, 0, dbmMasked);
+            
             if (arduboy.isFrameCount(2)) { titleScreenVars.update(); }
 
             break;

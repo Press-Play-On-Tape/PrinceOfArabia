@@ -77,6 +77,17 @@ struct Prince {
             
         }
 
+        int8_t getDirectionOffset(int8_t val) {
+
+            if (this->direction == Direction::Left) {
+                return -val;
+            }
+            else {
+                return val;
+            }
+            
+        }
+
         void init(int16_t x, int16_t y, Direction direction, uint16_t stance, uint8_t health) {
 
             this->x = x;
