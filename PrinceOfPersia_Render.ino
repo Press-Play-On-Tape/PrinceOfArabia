@@ -210,6 +210,7 @@ void render() {
     arduboy.drawPixel(124, 55);
     arduboy.drawPixel(126, 55);
 
+    #ifdef TIME_AND_LEVEL
     switch (gamePlay.timeRemaining) {
 
         case 1 ... 48:
@@ -220,11 +221,30 @@ void render() {
             break;
 
         case 49 ... 96:
-        case 145 ... 192:
             FX::drawBitmap(23, 51, Images::LevelNumber, 0, dbmMasked);
             FX::drawBitmap(71, 56, Images::Number_Upright_00 + ((gamePlay.level / 10) * 7), 0, dbmNormal);
             FX::drawBitmap(75, 56, Images::Number_Upright_00 + ((gamePlay.level % 10) * 7), 0, dbmNormal);
             break;
+
+    }
+    #endif
+
+    #ifdef TIME_ONLY
+    switch (gamePlay.timeRemaining) {
+
+        case 1 ... 80:
+            FX::drawBitmap(23, 51, Images::TimeRemaining, 0, dbmMasked);
+            FX::drawBitmap(29, 56, Images::Number_Upright_00 + ((gamePlay.timer_Min / 10) * 7), 0, dbmNormal);
+            FX::drawBitmap(33, 56, Images::Number_Upright_00 + ((gamePlay.timer_Min % 10) * 7), 0, dbmNormal);
+            break;
+
+    }
+    #endif
+
+    if (!fadeInEffect.isComplete()) {
+
+        fadeInEffect.draw(arduboy);
+        fadeInEffect.update();
 
     }
 

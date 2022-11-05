@@ -13,7 +13,7 @@ void game_Init() {
 
     // prince.init(70, 25 + 31, Direction::Right, Stance::Crouch_3_End, 3);          // Under collapsible floor
     // prince.init(58 +36, 56, Direction::Left, Stance::Crouch_3_End, 3);          // Exit Seq
-    prince.init(18, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
+    prince.init(6, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
     // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3);          // Both floor types
     // prince.init(86, 87, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos but next to drop floor 3rd floor
     // prince.init(70, 25, Direction::Left, Stance::Crouch_3_End, 3);          // Under collapsible floor
@@ -47,7 +47,6 @@ void game_Init() {
 }
 
 void game() {
-
 
     auto justPressed = arduboy.justPressedButtons();
     auto pressed = arduboy.pressedButtons();
@@ -525,7 +524,7 @@ void game() {
                                 break;
 
                             case CanClimbDownPart2Result::Falling:
-// Serial.println("B setFalling(1)");                        
+// Serial.pintln("B setFalling(1)");                        
                                 prince.setFalling(1);
                                 prince.pushSequence(Stance::Jump_Up_Drop_C_1_Start, Stance::Jump_Up_Drop_C_5_End, true);
                                 break;
@@ -564,7 +563,7 @@ void game() {
                                 break;
 
                             case CanClimbDownPart2Result::Falling:
-// Serial.println("C setFalling(1)");    
+// Serial.pintln("C setFalling(1)");    
                                 prince.setFalling(1);
                                 prince.pushSequence(Stance::Jump_Up_Drop_C_1_Start, Stance::Jump_Up_Drop_C_5_End, true);
                                 break;
@@ -997,11 +996,11 @@ void game() {
 
                     if (level.canFall(prince)) { // Fall some more
 
-// Serial.print("D incFalling() from ");    
-// Serial.print(prince.getFalling());    
+// Serial.pint("D incFalling() from ");    
+// Serial.pint(prince.getFalling());    
                         prince.incFalling();
-// Serial.print(" to ");    
-// Serial.println(prince.getFalling());    
+// Serial.pint(" to ");    
+// Serial.pintln(prince.getFalling());    
                         prince.pushSequence(Stance::Jump_Up_Drop_C_1_Start, Stance::Jump_Up_Drop_C_5_End, true);
 
                     }
@@ -1009,25 +1008,33 @@ void game() {
 
                         uint8_t itemIdx = activateSpikes(32);
 
-                        switch (prince.getFalling()) {
+                        if (itemIdx == Constants::NoItemFound) {
 
-                            case 1:
-                                if (itemIdx == Constants::NoItemFound) {
+                            switch (prince.getFalling()) {
+
+                                case 1:
+                                    prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
+                                    break;
+
+                                case 2:
                                     initFlash();
                                     prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
                                     prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
                                     prince.decHealth(1);
-                                }
-                                else {
+                                    break;
+
+                                default:    // Dead!
                                     prince.pushSequence(Stance::Falling_Dead_1_Start, Stance::Falling_Dead_3_End, true);
                                     prince.setHealth(0);
-                                }
-                                break;
+                                    break;
 
-                            default:    // Dead!
-                                prince.pushSequence(Stance::Falling_Dead_1_Start, Stance::Falling_Dead_3_End, true);
-                                prince.setHealth(0);
-                                break;
+                            }
+
+                        }
+                        else {
+
+                            prince.pushSequence(Stance::Falling_Dead_1_Start, Stance::Falling_Dead_3_End, true);
+                            prince.setHealth(0);
 
                         }
                         
@@ -1057,11 +1064,11 @@ void game() {
                         DEBUG_PRINTLN(F("Fall some more"));
                         #endif
 
-// Serial.print("E incFalling() from ");    
-// Serial.print(prince.getFalling());    
+// Serial.pint("E incFalling() from ");    
+// Serial.pint(prince.getFalling());    
                         prince.incFalling();
-// Serial.print(" to ");    
-// Serial.println(prince.getFalling());  
+// Serial.pint(" to ");    
+// Serial.pintln(prince.getFalling());  
                         prince.setPrevStance(prince.getStance());
                         prince.pushSequence(Stance::Falling_Down_1_Start, Stance::Falling_Down_5_End, true);
 
@@ -1070,35 +1077,33 @@ void game() {
 
                         uint8_t itemIdx = activateSpikes(32);
 
-                        switch (prince.getFalling()) {
+                        if (itemIdx == Constants::NoItemFound) {
+                                
+                            switch (prince.getFalling()) {
 
-                            case 1:
-                                if (itemIdx == Constants::NoItemFound) {
+                                case 1:
                                     prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
-                                }
-                                else {
-                                    prince.pushSequence(Stance::Falling_Dead_1_Start, Stance::Falling_Dead_3_End, true);
-                                    prince.setHealth(0);
-                                }
-                                break;
+                                    break;
 
-                            case 2:     // OK but lose some health as well
-                                if (itemIdx == Constants::NoItemFound) {
+                                case 2:     // OK but lose some health as well
                                     initFlash();                          
                                     prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
                                     prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
                                     prince.decHealth(1);
-                                }
-                                else {
+                                    break;
+
+                                default:    // Dead!
                                     prince.pushSequence(Stance::Falling_Dead_1_Start, Stance::Falling_Dead_3_End, true);
                                     prince.setHealth(0);
-                                }
-                                break;
+                                    break;
 
-                            default:    // Dead!
-                                prince.pushSequence(Stance::Falling_Dead_1_Start, Stance::Falling_Dead_3_End, true);
-                                prince.setHealth(0);
-                                break;
+                            }
+
+                        }
+                        else {
+
+                            prince.pushSequence(Stance::Falling_Dead_1_Start, Stance::Falling_Dead_3_End, true);
+                            prince.setHealth(0);
 
                         }
 
@@ -1141,7 +1146,7 @@ void game() {
                     break;
 
                 case Stance::Upright:
-// Serial.println("A setFalling(0)");                        
+// Serial.pintln("A setFalling(0)");                        
                     prince.setFalling(0);
                     break;
 
@@ -1264,7 +1269,7 @@ void game() {
     if (prince.isFootDown() && level.canFall(prince) && prince.getFalling() == 0) {
 
         prince.clear();
-// Serial.println("F setFalling(1)");    
+// Serial.pintln("F setFalling(1)");    
         prince.setFalling(1);
         prince.setPrevStance(prince.getStance());
 

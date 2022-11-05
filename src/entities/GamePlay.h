@@ -24,7 +24,13 @@ struct GamePlay {
         this->level = level;
         this->timer_Sec = 0;
         this->timer_Min = 60;
-        this->timeRemaining = 193;
+
+        #ifdef TIME_AND_LEVEL
+        this->timeRemaining = 192;
+        #endif
+        #ifdef TIME_ONLY
+        this->timeRemaining = 124;
+        #endif
 
         this->gameState = GameState::Game;
 

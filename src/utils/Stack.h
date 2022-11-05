@@ -40,7 +40,6 @@ class Stack {
 		ItemType & pop(void); // O(1)
 
 		void drop(void); // O(1)
-
 		void clear(void); // O(n)
 		bool contains(const ItemType & item) const; // O(n)
 

@@ -12,6 +12,7 @@ void title_Init() {
 //
 void title() { 
 
+
     auto justPressed = arduboy.justPressedButtons();
 
     if (justPressed & RIGHT_BUTTON && titleScreenVars.count < Constants::TitleScreenScroll_Max) {

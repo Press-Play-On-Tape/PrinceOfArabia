@@ -4,14 +4,14 @@
 #define DEBUG_PRINT    Serial.print
 #define DEBUG_PRINTLN  Serial.println
 
-#define _DEBUG
+#define DEBUG
 #define DEBUG_ONSCREEN_DETAILS
 #define _DEBUG_ONSCREEN_DETAILS_MIN
 
 #define _DEBUG_PRINCE_DETAILS
 #define _DEBUG_PRINCE_STACK
 #define _DEBUG_PRINT_ACTION
-#define DEBUG_LEVEL_LOAD_MAP
+#define _DEBUG_LEVEL_LOAD_MAP
 #define _DEBUG_GET_TILE
 #define _DEBUG_PRINCE_RENDERING
 
@@ -21,9 +21,12 @@
 #define _DEBUG_ACTION_CANCLIMBDOWN
 #define _DEBUG_ACTION_CANCLIMBDOWN_PART2
 #define _DEBUG_ACTION_CANFALL
-#define DEBUG_ACTION_CANFALLSOMEMORE
+#define _DEBUG_ACTION_CANFALLSOMEMORE
 #define _DEBUG_ACTION_COLLIDEWITHWALL
-#define DEBUG_ACTION_RUNJUMP
+#define _DEBUG_ACTION_RUNJUMP
+
+#define _TIME_AND_LEVEL
+#define TIME_ONLY
 
 //-------------------------------------------------------------------------------------
 

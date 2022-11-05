@@ -5,6 +5,7 @@
 
 #include "src/utils/Constants.h"
 #include "src/utils/Stack.h"
+#include "src/utils/FadeEffects.h"
 #include "src/entities/Entities.h"
 #include "src/fonts/Font3x5.h"
 
@@ -21,6 +22,7 @@ Level level;
 MenuItem menu;
 GamePlay gamePlay;
 TitleScreenVars titleScreenVars;
+FadeInEffect fadeInEffect;
 
 
 void setup() {
@@ -57,6 +59,7 @@ void loop() {
         case GameState::Title_Init:
 
             gamePlay.gameState = GameState::Title;
+            fadeInEffect.reset();
             title_Init();
             title();
             break;
@@ -68,6 +71,7 @@ void loop() {
 
         case GameState::Game_Init:
 
+            fadeInEffect.reset();
             game_Init();
             game();
             break;
