@@ -11,10 +11,10 @@
 
 void game_Init() {
 
-    prince.init(66, 25, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
+    // prince.init(66, 25, Direction::Right, Stance::Crouch_3_End, 3);          // Upper gate
     // prince.init(70, 25 + 31, Direction::Right, Stance::Crouch_3_End, 3);          // Under collapsible floor
     // prince.init(58 +36, 56, Direction::Left, Stance::Crouch_3_End, 3);          // Exit Seq
-    // prince.init(6, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
+    prince.init(6, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
     // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3);          // Both floor types
     // prince.init(86, 87, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos but next to drop floor 3rd floor
     // prince.init(70, 25, Direction::Left, Stance::Crouch_3_End, 3);          // Under collapsible floor
@@ -29,10 +29,10 @@ void game_Init() {
     gamePlay.init(arduboy, 1);
     
     level.setLevel(1);
-    level.init(prince, 50, 0);  // Normal starting posa
+    // level.init(prince, 50, 0);  // Upper Gate
     // level.init(prince, 40, 3);  // Under collapsible floor
     // level.init(prince, 80, 3);  // Exit Seq
-    // level.init(prince, 60, 0);  // Normal starting posa
+    level.init(prince, 60, 0);  // Normal starting posa
     // level.init(prince, 20, 3);  // Both floor types
     // level.init(prince, 60, 0);  //Normal starting pos but next to drop floor 3rd floor
     // level.init(prince, 50, 3);  // Under collapsible floor
