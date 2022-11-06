@@ -1257,24 +1257,13 @@ struct Level {
                                     return wallTile == WallTileResults::None;
 
                                 }
+
                                 return false;
 
                             case Action::StandingJump:
                                 {
                                     WallTileResults wallTile = this->isWallTile(bgTile2, fgTile2, tileXIdx, tileYIdx);
-
-                                    switch (distToEdgeOfCurrentTile) {
-
-                                        case  2 ... 12:
-
-                                            return wallTile == WallTileResults::None;
-
-                                        default:
-
-                                            return wallTile == WallTileResults::None;//SJH no need for switch
-
-                                    }
-
+                                    return wallTile == WallTileResults::None;
                                 }
 
                                 return true;
@@ -1501,18 +1490,7 @@ struct Level {
                             case Action::StandingJump:
                                 {
                                     WallTileResults wallTile = this->isWallTile(bgTile2, fgTile2, tileXIdx + 1, tileYIdx);
-                                    
-                                    switch (distToEdgeOfCurrentTile) {
-
-                                        case  2 ... 12:
-
-                                            return wallTile == WallTileResults::None;
-
-                                        default:
-
-                                            return wallTile == WallTileResults::None; // SJH why the switch
-
-                                    }
+                                    return wallTile == WallTileResults::None;
 
                                 }
 
