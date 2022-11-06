@@ -40,6 +40,7 @@ int8_t Level1_BG[] = {
     uint8_t Level1_Items[] = {
         1, 84, 4, 82, 86,       // Exit Gate, let position for open, right position                                                        
         2, 60, 0, 9, 32,        // Gate @ 60, 0 starting position 9 (top), falls in 32 frames.      
+        2, 56, 0, 0, 0,         // Gate @ 56, 0 starting position 9 (top), falls in 32 frames.      
         6, 53, 2,               // Potion Small                              
         7, 46, 3, 50, 3,        // Floor Button 1 (gateX, gateY)             
         7, 52, 3, 50, 3,        // Floor Button 1 (gateX, gateY)             
@@ -62,6 +63,7 @@ int8_t Level1_BG[] = {
         10, 15, 7, 2,           // Spikes
         10, 37, 8, 1,           // Spikes
         10, 38, 8, 2,           // Spikes
+        7, 56, 0, 60, 0,        // Floor Button 1 (gateX, gateY)
         4, 35, 3, 55,           // CollapsingTile (dist to fall)                                    
         4, 36, 3, 55,           // CollapsingTile (dist to fall)                                    
         4, 25, 4, 117,          // CollapsingTile (dist to fall)                                    

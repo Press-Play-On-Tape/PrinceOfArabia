@@ -26,7 +26,9 @@
 #define TILE_FLOOR_RH_END 99
 #define TILE_FLOOR_RH_END_GATE 118
 #define TILE_FLOOR_GATE_REAR_TRACK 114
-#define TILE_FLOOR_GATE_FRONT_TRACK 115
+#define TILE_FLOOR_GATE_FRONT_TRACK_1 115
+#define TILE_FLOOR_GATE_FRONT_TRACK_2 116
+#define TILE_FLOOR_GATE_FRONT_TRACK_3 116
 
 #define TILE_FLOOR_RH_END_1 98
 #define TILE_FLOOR_RH_END_2 85
@@ -747,6 +749,16 @@ struct Level {
 
         bool isWallTile(int8_t bgTile, int8_t fgTile, int8_t x = Constants::CoordNone, int8_t y = Constants::CoordNone) {
 
+Serial.print("isWallTile ");
+Serial.print(bgTile);
+Serial.print(", ");
+Serial.print(fgTile);
+Serial.print(", ");
+Serial.print(x);
+Serial.print(", ");
+Serial.print(y);
+Serial.println("");
+
             switch (fgTile) {
 
                 case TILE_FG_WALL_1:
@@ -759,13 +771,26 @@ struct Level {
 
                 default: 
 
+Serial.println("Look for gate");
+
+                    uint8_t offset = 0;
+
+                    switch (bgTile) {
+
+                        case TILE_FLOOR_GATE_REAR_TRACK:
+                            offset = 1;
+                            break;
+                    }
+
                     if (x != Constants::CoordNone && y != Constants::CoordNone) {
 
-                        uint8_t idx = this->getItem(ItemType::Gate, x + this->getXLocation(), y + this->getYLocation());
+                        uint8_t idx = this->getItem(ItemType::Gate, x + this->getXLocation() + offset, y + this->getYLocation());
 
                         if (idx != Constants::NoItemFound) {
 
                             Item &item = this->getItem(idx);
+Serial.print("Found gate ");
+Serial.println(item.data.gate.position);
 
                             if (item.data.gate.position == 0) {
 
@@ -813,7 +838,7 @@ struct Level {
                 case TILE_COLUMN_REAR_1:
                 case TILE_COLUMN_REAR_2:
                 case TILE_FLOOR_GATE_REAR_TRACK:
-                case TILE_FLOOR_GATE_FRONT_TRACK:
+                case TILE_FLOOR_GATE_FRONT_TRACK_1:
                     return true;
 
             }
@@ -1373,7 +1398,7 @@ struct Level {
 
                             case Action::Step:
                             case Action::RunStart:
-
+Serial.println("small step");
                                 switch (distToEdgeOfCurrentTile) {
 
                                     case 0 ... 9:
