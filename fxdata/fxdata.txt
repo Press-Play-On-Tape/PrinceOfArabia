@@ -32,11 +32,6 @@ int8_t Level1_BG[] = {
 };
 
 
-
-
-
-
-
     uint8_t Level1_Items[] = {
         1, 84, 4, 82, 86,       // Exit Gate, let position for open, right position                                                        
         2, 60, 0, 9, 32,        // Gate @ 60, 0 starting position 9 (top), falls in 32 frames.      
