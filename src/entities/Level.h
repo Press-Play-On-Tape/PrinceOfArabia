@@ -749,15 +749,15 @@ struct Level {
 
         WallTileResults isWallTile(int8_t bgTile, int8_t fgTile, int8_t x = Constants::CoordNone, int8_t y = Constants::CoordNone) {
 
-Serial.print("isWallTile ");
-Serial.print(bgTile);
-Serial.print(", ");
-Serial.print(fgTile);
-Serial.print(", ");
-Serial.print(x);
-Serial.print(", ");
-Serial.print(y);
-Serial.println("");
+// Serial.print("isWallTile ");
+// Serial.print(bgTile);
+// Serial.print(", ");
+// Serial.print(fgTile);
+// Serial.print(", ");
+// Serial.print(x);
+// Serial.print(", ");
+// Serial.print(y);
+// Serial.println("");
 
             switch (fgTile) {
 
@@ -771,7 +771,7 @@ Serial.println("");
 
                 default: 
 
-Serial.println("Look for gate");
+// Serial.println("Look for gate");
 
                     uint8_t offset = 0;
 
@@ -789,8 +789,8 @@ Serial.println("Look for gate");
                         if (idx != Constants::NoItemFound) {
 
                             Item &item = this->getItem(idx);
-Serial.print("Found gate ");
-Serial.println(item.data.gate.position);
+// Serial.print("Found gate ");
+// Serial.println(item.data.gate.position);
 
                             if (item.data.gate.position == 0) {
 
@@ -807,6 +807,7 @@ Serial.println(item.data.gate.position);
             }
 
         }
+
 
         bool isGroundTile(int8_t bgTile, int8_t fgTile) {
 
@@ -1389,24 +1390,50 @@ Serial.println(item.data.gate.position);
 
                             case Action::SmallStep:
                             case Action::CrouchHop:
+                                {
+                                    WallTileResults wallTile = this->isWallTile(bgTile2, fgTile2, tileXIdx, tileYIdx);
 
-                                switch (distToEdgeOfCurrentTile) {
+                                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+                                    printTileInfo(bgTile2, fgTile2);
+                                    #endif
 
-                                    case 0 ... 5:
-                                        {
-                                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
-                                            printTileInfo(bgTile2, fgTile2);
-                                            #endif
+                                    switch (distToEdgeOfCurrentTile) {
 
-                                            WallTileResults wallTile = this->isWallTile(bgTile2, fgTile2, tileXIdx, tileYIdx);
-                                            return (wallTile == WallTileResults::None && (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2)));
-                                        }
+                                        case 0 ... 5:
 
-                                        return false;
+                                            switch (wallTile) {
 
-                                    default:
+                                                case WallTileResults::None:
+                                                    return (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2));
 
-                                        return true;
+                                                case WallTileResults::Normal:
+                                                case WallTileResults::GateClosed:
+                                                    return false;
+                                                
+                                            }
+
+                                            return false;
+
+                                        case 6:
+
+                                            switch (wallTile) {
+
+                                                case WallTileResults::None:
+                                                case WallTileResults::Normal:
+                                                    return (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2));
+
+                                                case WallTileResults::GateClosed:
+                                                    return false;
+                                                
+                                            }
+
+                                            return false;
+
+                                        default:
+
+                                            return true;
+
+                                    }
 
                                 }
 
@@ -1414,19 +1441,45 @@ Serial.println(item.data.gate.position);
 
                             case Action::Step:
                             case Action::RunStart:
-Serial.println("small step");
-                                switch (distToEdgeOfCurrentTile) {
+                                {
+                                    WallTileResults wallTile = this->isWallTile(bgTile2, fgTile2, tileXIdx, tileYIdx);
 
-                                    case 0 ... 9:
-                                        {                                    
-                                            WallTileResults wallTile = this->isWallTile(bgTile2, fgTile2, tileXIdx, tileYIdx);
-                                            return (wallTile == WallTileResults::None && (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2)));
-                                        }
+                                    switch (distToEdgeOfCurrentTile) {
 
-                                        return false;
+                                        case 0 ... 9:
 
-                                    default:
-                                        return true;
+                                            switch (wallTile) {
+
+                                                case WallTileResults::None:
+                                                    return (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2));
+
+                                                case WallTileResults::Normal:
+                                                case WallTileResults::GateClosed:
+                                                    return false;
+                                                
+                                            }
+
+                                            return false;
+
+                                        case 10:
+
+                                            switch (wallTile) {
+
+                                                case WallTileResults::None:
+                                                case WallTileResults::Normal:
+                                                    return (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2));
+
+                                                case WallTileResults::GateClosed:
+                                                    return false;
+                                                
+                                            }
+
+                                            return false;
+                                            
+                                        default:
+                                            return true;
+
+                                    }
 
                                 }
 
