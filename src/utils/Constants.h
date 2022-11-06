@@ -786,3 +786,9 @@ enum class TitleScreenMode : uint8_t {
     Credits, 
 };
 
+enum class WallTileResults : uint8_t {
+    None,
+    Normal,
+    GateClosed, 
+};
+
