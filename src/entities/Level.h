@@ -92,7 +92,7 @@ struct Level {
 
     public:
 
-        void init(Prince &prince, uint8_t xLoc, uint8_t yLoc) {
+        void init(const Prince &prince, uint8_t xLoc, uint8_t yLoc) {
 
             this->xLoc = xLoc;
             this->yLoc = yLoc;
@@ -926,7 +926,7 @@ struct Level {
 
         }
 
-        bool canFall(Prince &prince, int8_t xOffset = 0) {
+        bool canFall(const Prince &prince, int8_t xOffset = 0) {
 
             bool canFall = false;
             Point newPos = prince.getPosition();
@@ -1018,7 +1018,7 @@ struct Level {
         
         }
 
-        bool canFallSomeMore(Prince &prince, int8_t xOffset = 0) {
+        bool canFallSomeMore(const Prince &prince, int8_t xOffset = 0) {
 
             bool canFall = false;
             Point newPos = prince.getPosition();
@@ -1055,7 +1055,7 @@ struct Level {
 
         // Prince is hanging from upper level.  Test to see if he can fall down one level, down one level and 'back, down twwo levels, three .. etc.
 
-        CanClimbDownPart2Result canClimbDown_Part2(Prince &prince, int8_t xOffset = 0) { 
+        CanClimbDownPart2Result canClimbDown_Part2(const Prince &prince, int8_t xOffset = 0) { 
 
             Point newPos = prince.getPosition();
             newPos.x = newPos.x + prince.getDirectionOffset(xOffset);
@@ -1132,7 +1132,7 @@ struct Level {
 
         }
 
-        uint8_t canReachItem(Prince &prince, ItemType itemType) {
+        uint8_t canReachItem(const Prince &prince, ItemType itemType) {
 
             int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), prince.getPosition().x);
             int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), prince.getPosition().y);
@@ -1153,7 +1153,7 @@ struct Level {
 
         }
 
-        bool canMoveForward(Action action, Prince &prince) {
+        bool canMoveForward(const Prince &prince, Action action) {
 
             int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), prince.getPosition().x) - this->getXLocation();
             int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), prince.getPosition().y) - this->getYLocation();
@@ -1584,7 +1584,7 @@ struct Level {
 
         }
 
-        CanJumpUpResult canJumpUp(Prince &prince) {
+        CanJumpUpResult canJumpUp(const Prince &prince) {
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
             DEBUG_PRINTLN(F("-----------------------------------------------------"));
@@ -1767,7 +1767,7 @@ struct Level {
 
         }
 
-        CanJumpUpResult canJumpUp_Test(Prince &prince, Direction direction) {
+        CanJumpUpResult canJumpUp_Test(const Prince &prince, Direction direction) {
 
             int8_t inc = (direction == Direction::Left ? -1 : 1);
             int8_t tileXIdx = this->coordToTileIndexX(direction, prince.getPosition().x) - this->getXLocation();
@@ -2016,7 +2016,7 @@ struct Level {
 
         }
 
-        CanJumpUpResult canJumpUp_Test_Dist10(Prince &prince, Direction direction) {
+        CanJumpUpResult canJumpUp_Test_Dist10(const Prince &prince, Direction direction) {
 
             int8_t tileXIdx = this->coordToTileIndexX(direction, prince.getPosition().x) - this->getXLocation();
             int8_t tileYIdx = this->coordToTileIndexY(direction, prince.getPosition().y) - this->getYLocation();
@@ -2112,7 +2112,7 @@ struct Level {
 
         }
 
-        bool canJumpUp_Part2(Prince &prince) {
+        bool canJumpUp_Part2(const Prince &prince) {
 
             int8_t tileXIdx = 0;
             int8_t tileYIdx = 0;
@@ -2181,7 +2181,7 @@ struct Level {
 
         }        
 
-        CanClimbDownResult canClimbDown(Prince &prince) {
+        CanClimbDownResult canClimbDown(const Prince &prince) {
 
             switch (prince.getDirection()) {
 
@@ -2350,7 +2350,7 @@ struct Level {
 
         }
 
-        CanClimbDownResult canClimbDown_Test(Prince &prince, Direction direction) {
+        CanClimbDownResult canClimbDown_Test(const Prince &prince, Direction direction) {
 
             int8_t tileXIdx = this->coordToTileIndexX(direction, prince.getPosition().x) - this->getXLocation() + (direction == Direction::Right ? 1 : 0);
             int8_t tileYIdx = this->coordToTileIndexY(direction, prince.getPosition().y) - this->getYLocation();
@@ -2484,9 +2484,7 @@ struct Level {
         }
 
 
-
-
-        bool collideWithWall(Prince &prince) {
+        bool collideWithWall(const Prince &prince) {
 
             Direction direction = prince.getDirection();
 

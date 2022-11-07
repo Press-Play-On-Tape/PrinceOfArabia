@@ -171,102 +171,10 @@ void game() {
 
     if (gamePlay.gameState == GameState::Game && prince.isEmpty()) {
 
-        int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x);
-        int8_t tileYIdx = level.coordToTileIndexY(prince.getDirection(), prince.getPosition().y);
 
-        Item &exitGate = level.getItem(1);
+        // Check to see if we can leave the level, otherise 
 
-        if (tileXIdx == exitGate.x - 1 && tileYIdx == exitGate.y) {
-
-            switch (prince.getDirection()) {
-
-                case Direction::Left:
-
-                    prince.pushSequence(Stance::Standing_Turn_1_Start, Stance::Standing_Turn_5_End, Stance::Upright_Turn, true);
-                    break;
-
-                case Direction::Right:
-
-                    prince.pushSequence(Stance::Leave_Gate_1_Start, Stance::Leave_Gate_14_End, true);
-                        
-                    switch (level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX())) {
-
-                        case 2:
-                            prince.pushSequence(Stance::Small_Step_1_Start, Stance::Small_Step_6_End, true);
-                            break;
-
-                        case 6:
-                            prince.pushSequence(Stance::Single_Step_2, Stance::Single_Step_8_End, true);
-                            break;
-
-                        case 10:
-                            prince.pushSequence(Stance::Small_Step_1_Start, Stance::Small_Step_6_End, true);
-                            prince.pushSequence(Stance::Single_Step_2, Stance::Single_Step_8_End, true);
-                            break;
-
-                        default: break;
-
-                    }
-
-                    break;
-
-                default: break;
-
-            }
-
-
-        }
-        else if (tileXIdx == exitGate.x && tileYIdx == exitGate.y) {
-
-            prince.pushSequence(Stance::Standing_Turn_1_Start, Stance::Standing_Turn_5_End, Stance::Upright_Turn, true);
-
-            switch (prince.getDirection()) {
-
-                case Direction::Left:
-                        
-                    switch (level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX())) {
-
-                        case 6:
-                            prince.pushSequence(Stance::Small_Step_1_Start, Stance::Small_Step_6_End, true);
-                            break;
-
-                        case 10:
-                            prince.pushSequence(Stance::Single_Step_1_Start, Stance::Single_Step_8_End, true);
-                            break;
-
-                        default: break;
-
-                    }
-
-
-                    break;
-
-                case Direction::Right:
-
-                    prince.pushSequence(Stance::Leave_Gate_1_Start, Stance::Leave_Gate_14_End, true);
-                        
-                    switch (level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX())) {
-
-                        case 2:
-                            prince.pushSequence(Stance::Single_Step_8_End, Stance::Single_Step_1_Start, true);
-                            break;
-
-                        case 6:
-                            prince.pushSequence(Stance::Small_Step_6_End, Stance::Small_Step_1_Start, true);
-                            break;
-
-                        default: break;
-
-                    }
-
-                    break;
-
-                default: break;
-                
-            }
-
-        }
-        else {
+        if (!leaveLevel(prince, level)) {
 
             switch (prince.getStance()) {
 
@@ -276,7 +184,7 @@ void game() {
 
                         if ((pressed & RIGHT_BUTTON) && (pressed & DOWN_BUTTON)) {
 
-                            if (level.canMoveForward(Action::SmallStep, prince)) {
+                            if (level.canMoveForward(prince, Action::SmallStep)) {
 
                                 prince.pushSequence(Stance::Small_Step_1_Start, Stance::Small_Step_6_End, Stance::Upright, true);
                                 break;
@@ -286,13 +194,13 @@ void game() {
                         }
                         else if (pressed & RIGHT_BUTTON) {
 
-                            if (level.canMoveForward(Action::Step, prince)) {
+                            if (level.canMoveForward(prince, Action::Step)) {
 
                                 prince.push(Stance::Single_Step_1_Start, true);
                                 break;
 
                             }
-                            else if (level.canMoveForward(Action::SmallStep, prince)) {
+                            else if (level.canMoveForward(prince, Action::SmallStep)) {
 
                                 prince.pushSequence(Stance::Small_Step_1_Start, Stance::Small_Step_6_End, Stance::Upright, true);
                                 break;
@@ -308,7 +216,7 @@ void game() {
                         }
                         else if (pressed & A_BUTTON) {
 
-                            if (level.canMoveForward(Action::StandingJump, prince)) {
+                            if (level.canMoveForward(prince, Action::StandingJump)) {
                                 prince.pushSequence(Stance::Standing_Jump_1_Start, Stance::Standing_Jump_18_End, Stance::Upright, true);
                                 break;
                             }
@@ -320,7 +228,7 @@ void game() {
 
                         if ((pressed & LEFT_BUTTON) && (pressed & DOWN_BUTTON)) {
 
-                            if (level.canMoveForward(Action::SmallStep, prince)) {
+                            if (level.canMoveForward(prince, Action::SmallStep)) {
                                 prince.pushSequence(Stance::Small_Step_1_Start, Stance::Small_Step_6_End, Stance::Upright, true);
                                 break;
                             }
@@ -328,13 +236,13 @@ void game() {
                         }
                         else if (pressed & LEFT_BUTTON) {
 
-                            if (level.canMoveForward(Action::Step, prince)) {
+                            if (level.canMoveForward(prince, Action::Step)) {
 
                                 prince.push(Stance::Single_Step_1_Start, true);
                                 break;
 
                             }
-                            else if (level.canMoveForward(Action::SmallStep, prince)) {
+                            else if (level.canMoveForward(prince, Action::SmallStep)) {
 
                                 prince.pushSequence(Stance::Small_Step_1_Start, Stance::Small_Step_6_End, Stance::Upright, true);
                                 break;
@@ -350,7 +258,7 @@ void game() {
                         }
                         else if (pressed & A_BUTTON) {
 
-                            if (level.canMoveForward(Action::StandingJump, prince)) {
+                            if (level.canMoveForward(prince, Action::StandingJump)) {
                                 prince.pushSequence(Stance::Standing_Jump_1_Start, Stance::Standing_Jump_18_End, Stance::Upright, true);
                                 break;
                             }
@@ -428,7 +336,7 @@ void game() {
                                 break;
 
                             case CanJumpUpResult::JumpThenFall:
-                                pushJumpUp_Drop();
+                                pushJumpUp_Drop(prince);
                                 break;
 
                             case CanJumpUpResult::JumpThenFall_CollapseFloor:
@@ -444,7 +352,7 @@ void game() {
 
                                     }
 
-                                    pushJumpUp_Drop();
+                                    pushJumpUp_Drop(prince);
 
                                 }
                                 break;
@@ -462,7 +370,7 @@ void game() {
 
                                     }
 
-                                    pushJumpUp_Drop();
+                                    pushJumpUp_Drop(prince);
 
                                 }
                                 break;
@@ -480,7 +388,7 @@ void game() {
 
                                     }
 
-                                    pushJumpUp_Drop();
+                                    pushJumpUp_Drop(prince);
                                     prince.pushSequence(Stance::Small_Step_1_Start, Stance::Small_Step_6_End, Stance::Upright, false);
 
                                 }
@@ -587,7 +495,7 @@ void game() {
 
                         if (pressed & RIGHT_BUTTON) {
 
-                            if (level.canMoveForward(Action::RunStart, prince)) {
+                            if (level.canMoveForward(prince, Action::RunStart)) {
                                 prince.pushSequence(Stance::Run_Start_2, Stance::Run_Start_6_End, true);
                             }
                             else {
@@ -604,7 +512,7 @@ void game() {
 
                         if (pressed & LEFT_BUTTON) {
 
-                            if (level.canMoveForward(Action::RunStart, prince)) {
+                            if (level.canMoveForward(prince, Action::RunStart)) {
                                 prince.pushSequence(Stance::Run_Start_2, Stance::Run_Start_6_End, true);
                             }
                             else {
@@ -629,12 +537,12 @@ void game() {
                             DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jump from Run_Repeat_4"));
                             #endif
 
-                            processRunJump();
+                            processRunJump(prince, level);
 
                         }
                         else if (pressed & RIGHT_BUTTON) {
 
-                            if (level.canMoveForward(Action::RunRepeat, prince)) {
+                            if (level.canMoveForward(prince, Action::RunRepeat)) {
 
                                 #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
                                 DEBUG_PRINTLN(F("RIGHT_BUTTON, Run Repeat (1)"));
@@ -677,12 +585,12 @@ void game() {
                             #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
                             DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jump from Run_Repeat_4"));
                             #endif
-                            processRunJump();
+                            processRunJump(prince, level);
 
                         }
                         else if (pressed & LEFT_BUTTON) {
 
-                            if (level.canMoveForward(Action::RunRepeat, prince)) {
+                            if (level.canMoveForward(prince, Action::RunRepeat)) {
 
                                 #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
                                 DEBUG_PRINTLN(F("LEFT_BUTTON, Running Repeat"));
@@ -731,12 +639,12 @@ void game() {
                             DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jump from Run_Start_6_End, Run_Repeat_8_End or Run_Repeat_8_End_Turn"));
                             #endif
 
-                            processRunJump();
+                            processRunJump(prince, level);
 
                         }
                         else if (pressed & RIGHT_BUTTON) {
 
-                            if (level.canMoveForward(Action::RunRepeat, prince)) {
+                            if (level.canMoveForward(prince, Action::RunRepeat)) {
 
                                 #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
                                 DEBUG_PRINTLN(F("RIGHT_BUTTON, Running Repeat"));
@@ -780,12 +688,12 @@ void game() {
                             DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jump from Run_Start_6_End, Run_Repeat_8_End or Run_Repeat_8_End_Turn"));
                             #endif
 
-                            processRunJump();
+                            processRunJump(prince, level);
 
                         }
                         else if (pressed & LEFT_BUTTON) {
 
-                            if (level.canMoveForward(Action::RunRepeat, prince)) {
+                            if (level.canMoveForward(prince, Action::RunRepeat)) {
 
                                 #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
                                 DEBUG_PRINTLN(F("LEFT_BUTTON, Running Repeat"));
@@ -824,16 +732,9 @@ void game() {
                             prince.pushSequence(Stance::Crouch_Stand_3, Stance::Crouch_Stand_12_End, Stance::Upright, true);
 
                         }
-                        else if (pressed & LEFT_BUTTON) {
+                        else if ((pressed & LEFT_BUTTON) || (pressed & RIGHT_BUTTON)) {
 
-                            if (level.canMoveForward(Action::CrouchHop, prince)) {
-                                prince.pushSequence(Stance::Crouch_HOP_1_Start, Stance::Crouch_HOP_7_End, true);
-                            }
-
-                        }
-                        else if (pressed & RIGHT_BUTTON) {
-
-                            if (level.canMoveForward(Action::CrouchHop, prince)) {
+                            if (level.canMoveForward(prince, Action::CrouchHop)) {
                                 prince.pushSequence(Stance::Crouch_HOP_1_Start, Stance::Crouch_HOP_7_End, true);
                             }
 
@@ -952,8 +853,6 @@ void game() {
         if (!prince.isEmpty()) {
 
             Point offset;
-            // int8_t xOffset = 0;
-            // int8_t yOffset = 0;
 
             int16_t newStance = prince.pop();
             prince.setStance(abs(newStance));
@@ -1008,7 +907,7 @@ void game() {
                     }
                     else {
 
-                        uint8_t itemIdx = activateSpikes(32);
+                        uint8_t itemIdx = activateSpikes(prince, 32);
 
                         if (itemIdx == Constants::NoItemFound) {
 
@@ -1019,7 +918,7 @@ void game() {
                                     break;
 
                                 case 2:
-                                    initFlash();
+                                    initFlash(prince, level);
                                     prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
                                     prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
                                     prince.decHealth(1);
@@ -1044,11 +943,11 @@ void game() {
 
                     break;
 
-                case Stance::Falling_SmallStep_5_Check_CanFall:
-                case Stance::Falling_RunningJump_5_Check_CanFall:
-                case Stance::Falling_C_5_Check_CanFall:
-                case Stance::Falling_StandingJump_5_Check_CanFall:
-                case Stance::Falling_SingleStep_5_Check_CanFall:
+                // case Stance::Falling_SmallStep_5_Check_CanFall:
+                // case Stance::Falling_RunningJump_5_Check_CanFall:
+                // case Stance::Falling_C_5_Check_CanFall:
+                // case Stance::Falling_StandingJump_5_Check_CanFall:
+                // case Stance::Falling_SingleStep_5_Check_CanFall:
                 case Stance::Falling_Down_5_End:
                 case Stance::Falling_StepWalkRun_P0_4_8_5_Check_CanFall:
                 case Stance::Falling_StepWalkRun_P1_5_9_5_Check_CanFall:
@@ -1077,7 +976,7 @@ void game() {
                     }
                     else {
 
-                        uint8_t itemIdx = activateSpikes(32);
+                        uint8_t itemIdx = activateSpikes(prince, 32);
 
                         if (itemIdx == Constants::NoItemFound) {
                                 
@@ -1088,7 +987,7 @@ void game() {
                                     break;
 
                                 case 2:     // OK but lose some health as well
-                                    initFlash();                          
+                                    initFlash(prince, level);                          
                                     prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
                                     prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
                                     prince.decHealth(1);
@@ -1116,11 +1015,11 @@ void game() {
 
                         switch (prince.getStance()) {
 
-                            case Stance::Falling_SmallStep_5_Check_CanFall:    
-                            case Stance::Falling_RunningJump_5_Check_CanFall:
-                            case Stance::Falling_C_5_Check_CanFall:
-                            case Stance::Falling_StandingJump_5_Check_CanFall:
-                            case Stance::Falling_SingleStep_5_Check_CanFall:
+                            // case Stance::Falling_SmallStep_5_Check_CanFall:    
+                            // case Stance::Falling_RunningJump_5_Check_CanFall:
+                            // case Stance::Falling_C_5_Check_CanFall:
+                            // case Stance::Falling_StandingJump_5_Check_CanFall:
+                            // case Stance::Falling_SingleStep_5_Check_CanFall:
                             case Stance::Falling_StepWalkRun_P2_6_10_5_Check_CanFall:
                             case Stance::Falling_StepWalkRun_P0_4_8_5_Check_CanFall:
                             case Stance::Falling_StepWalkRun_P1_5_9_5_Check_CanFall:
@@ -1465,117 +1364,5 @@ void game() {
     font3x5.print(F("D"));
     font3x5.print(level.distToEdgeOfTile(prince.getDirection(),  (level.getXLocation() * Constants::TileWidth) + prince.getX()));
     #endif
-
-}
-
-void getStance_Offsets(Direction direction, Point &offset, int16_t stance) {
-
-    uint16_t idx = (stance - 1) * 2;
-    offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[idx])) * (direction == Direction::Left ? -1 : 1) * (stance < 0 ? -1 : 1);
-    offset.y = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[idx + 1])) * (stance < 0 ? -1 : 1);
-
-}
-
-void processRunJump() {
-
-    if (level.canMoveForward(Action::RunJump_1, prince)) {
-
-        if (level.canMoveForward(Action::RunJump_2, prince)) {
-
-            if (level.canMoveForward(Action::RunJump_3, prince)) {
-
-                #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
-                DEBUG_PRINTLN(F("RunningJump_3 true, Jump"));
-                #endif
-
-                prince.pushSequence(Stance::Running_Jump_1_Start, Stance::Running_Jump_11_End, Stance::Run_Repeat_4, true);
-
-            }
-            else {
-
-                #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
-                DEBUG_PRINTLN(F("RunningJump_3 false, RunRepeat"));
-                #endif
-
-                prince.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_4, true);
-
-            }
-
-        }
-        else {
-
-            #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
-            DEBUG_PRINTLN(F("RunningJump_2 false, RunRepeat"));
-            #endif
-
-            prince.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_4, true);
-
-        }
-
-    }
-    else {
-
-        #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
-        DEBUG_PRINTLN(F("RunningJump_1 false, Stopping"));
-        #endif
-
-        prince.pushSequence(Stance::Stopping_1_Start, Stance::Stopping_5_End, Stance::Upright, true);
-    }
-
-}
-
-void initFlash() {
-
-    Item &flash = level.getItem(0);
-    flash.itemType = ItemType::Flash;
-    flash.data.flash.frame = 5;
-    flash.x = level.coordToTileIndexX(prince.getDirection(), prince.getX()) + level.getXLocation();
-    flash.y = level.coordToTileIndexY(prince.getDirection(), prince.getY()) + level.getYLocation(); 
-
-}
-
-uint8_t activateSpikes(uint8_t closingDelay) {
-
-    int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x);
-    int8_t tileYIdx = level.coordToTileIndexY(prince.getDirection(), prince.getPosition().y);
-    uint8_t itemIdx = level.getItem(ItemType::Spikes, tileXIdx, tileYIdx);
-
-
-    // Withdraw spikes after a few second..
-
-    if (itemIdx != Constants::NoItemFound) {
-
-        Item &spikes = level.getItem(itemIdx);
-        spikes.data.spikes.closingDelay = closingDelay;
-
-
-        itemIdx = level.getItem(ItemType::Spikes, tileXIdx - 1, tileYIdx);
-
-        if (itemIdx != Constants::NoItemFound) {
-
-            Item &spikes = level.getItem(itemIdx);
-            spikes.data.spikes.closingDelay = closingDelay;
-
-        }
-
-        itemIdx = level.getItem(ItemType::Spikes, tileXIdx + 1, tileYIdx);
-
-        if (itemIdx != Constants::NoItemFound) {
-
-            Item &spikes = level.getItem(itemIdx);
-            spikes.data.spikes.closingDelay = closingDelay;
-
-        }
-
-    }
-
-    return itemIdx;
-    
-}
-
-void pushJumpUp_Drop() {
-
-    prince.pushSequence(Stance::Jump_Up_Drop_A_1_Start, Stance::Jump_Up_Drop_A_5_End, Stance::Upright, false);
-    prince.pushSequence(Stance::Jump_Up_A_1_Start, Stance::Jump_Up_A_14_End, true);
 
 }

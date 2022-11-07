@@ -40,8 +40,6 @@ void title() {
             case TitleScreenMode::Intro:
 
                 titleScreenVars.mode = TitleScreenMode::Main;
-                // titleScreenVars.count = Constants::TitleScreenScroll_Max;    
-
                 break;
 
             case TitleScreenMode::Main:
@@ -87,7 +85,7 @@ void title() {
             break;
 
         case TitleScreenMode::Credits:
-
+            
             FX::drawBitmap(  7, 39, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
             FX::drawBitmap( 14, 34, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
             FX::drawBitmap(119, 39, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
