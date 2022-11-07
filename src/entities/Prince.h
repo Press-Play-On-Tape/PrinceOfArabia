@@ -92,7 +92,7 @@ struct Prince {
 
             this->x = x;
             this->y = y;
-            this->prevY = y;
+            // this->prevY = y;
             this->direction = direction;
             this->stance = stance;
             this->crouchingCounter = 32;

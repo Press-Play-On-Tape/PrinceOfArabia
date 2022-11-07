@@ -546,8 +546,14 @@ constexpr uint16_t  Upright_Turn             = 1255;
 
 namespace Constants {
 
+    constexpr uint8_t Item_Flash = 0;
+    constexpr uint8_t Item_Sign = 1;
+    constexpr uint8_t Item_ExitDoor = 2;
+    constexpr uint8_t Items_DynamicRange = 2;
+    constexpr uint8_t Items_Count = 40;
+   
+
     constexpr uint8_t FrameRate = 45;
-    constexpr uint8_t NumberOfItems = 40;
     constexpr uint8_t Animation_NumberOfFrames = 2;
     constexpr uint8_t NoItemFound = 255;
 
@@ -599,7 +605,6 @@ namespace Constants {
         LEAVE_GATE_SEQ
         COLLIDE_WALL_SEQ
         VER_ADJUSTMENTS_SEQ        
-        1023,                   
     };
 
     constexpr int8_t Prince_XOffset[] PROGMEM = {
@@ -925,7 +930,8 @@ enum class ItemType : uint8_t {
     /* 08 */ FloorButton2,
     /* 09 */ Skeleton,
     /* 10 */ Spikes,
-    /* 98 */ None = 98,
+    /* 97 */ None = 97,
+    /* 98 */ Sign = 98,
     /* 99 */ Flash = 99,
 };
 
@@ -951,5 +957,10 @@ enum class WallTileResults : uint8_t {
     None,
     Normal,
     GateClosed, 
+};
+
+enum class SignType : uint8_t {
+    PressA,
+    GameOver,
 };
 

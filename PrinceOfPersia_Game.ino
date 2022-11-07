@@ -877,7 +877,7 @@ void game() {
                 case Stance::Jump_Up_Drop_A_4: // Ripple collapsible floors.
                 case Stance::Jump_Up_Drop_B_4: 
 
-                    for (uint8_t i = 2; i < Constants::NumberOfItems; i++) {
+                    for (uint8_t i = Constants::Items_DynamicRange; i < Constants::Items_Count; i++) {
                         
                         Item &item = level.getItem(i);
 
@@ -923,8 +923,7 @@ void game() {
                                     break;
 
                                 default:    // Dead!
-                                    prince.pushSequence(Stance::Falling_Dead_1_Start, Stance::Falling_Dead_3_End, true);
-                                    prince.setHealth(0);
+                                    pushDead(prince, level, gamePlay);
                                     break;
 
                             }
@@ -932,8 +931,7 @@ void game() {
                         }
                         else {
 
-                            prince.pushSequence(Stance::Falling_Dead_1_Start, Stance::Falling_Dead_3_End, true);
-                            prince.setHealth(0);
+                            pushDead(prince, level, gamePlay);
 
                         }
                         
@@ -992,8 +990,7 @@ void game() {
                                     break;
 
                                 default:    // Dead!
-                                    prince.pushSequence(Stance::Falling_Dead_1_Start, Stance::Falling_Dead_3_End, true);
-                                    prince.setHealth(0);
+                                    pushDead(prince, level, gamePlay);
                                     break;
 
                             }
@@ -1001,8 +998,7 @@ void game() {
                         }
                         else {
 
-                            prince.pushSequence(Stance::Falling_Dead_1_Start, Stance::Falling_Dead_3_End, true);
-                            prince.setHealth(0);
+                            pushDead(prince, level, gamePlay);
 
                         }
 
@@ -1307,7 +1303,7 @@ void game() {
 
     {
 
-        Item &item = level.getItem(1);
+        Item &item = level.getItem(Constants::Item_ExitDoor);
 
         if (item.data.exitDoor.position == 0) {
 

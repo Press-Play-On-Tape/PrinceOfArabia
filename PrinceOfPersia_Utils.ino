@@ -8,7 +8,7 @@
 #include "src/entities/Entities.h"
 #include "src/fonts/Font3x5.h"
 
-void testScroll(const Prince &prince, const Level &level) {
+void testScroll(Prince &prince, Level &level) {
 
 
     // Have we scrolled to another screen ?
@@ -66,7 +66,7 @@ void getStance_Offsets(Direction direction, Point &offset, int16_t stance) {
 
 }
 
-void processRunJump(const Prince &prince, const Level &level) {
+void processRunJump(Prince &prince, Level &level) {
 
     if (level.canMoveForward(prince, Action::RunJump_1)) {
 
@@ -114,9 +114,9 @@ void processRunJump(const Prince &prince, const Level &level) {
 
 }
 
-void initFlash(const Prince &prince, Level &level) {
+void initFlash(Prince &prince, Level &level) {
 
-    Item &flash = level.getItem(0);
+    Item &flash = level.getItem(Constants::Item_Flash);
     flash.itemType = ItemType::Flash;
     flash.data.flash.frame = 5;
     flash.x = level.coordToTileIndexX(prince.getDirection(), prince.getX()) + level.getXLocation();
@@ -124,7 +124,7 @@ void initFlash(const Prince &prince, Level &level) {
 
 }
 
-uint8_t activateSpikes(const Prince &prince, uint8_t closingDelay) {
+uint8_t activateSpikes(Prince &prince, uint8_t closingDelay) {
 
     int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x);
     int8_t tileYIdx = level.coordToTileIndexY(prince.getDirection(), prince.getPosition().y);
@@ -163,19 +163,19 @@ uint8_t activateSpikes(const Prince &prince, uint8_t closingDelay) {
     
 }
 
-void pushJumpUp_Drop(const Prince &prince) {
+void pushJumpUp_Drop(Prince &prince) {
 
     prince.pushSequence(Stance::Jump_Up_Drop_A_1_Start, Stance::Jump_Up_Drop_A_5_End, Stance::Upright, false);
     prince.pushSequence(Stance::Jump_Up_A_1_Start, Stance::Jump_Up_A_14_End, true);
 
 }
 
-bool leaveLevel(const Prince &prince, const Level &level) {
+bool leaveLevel(Prince &prince, Level &level) {
 
     int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x);
     int8_t tileYIdx = level.coordToTileIndexY(prince.getDirection(), prince.getPosition().y);
 
-    Item &exitGate = level.getItem(1);
+    Item &exitGate = level.getItem(Constants::Item_ExitDoor);
 
 
     // Are we close to the exist gate?  If so, exit scene ..
@@ -274,5 +274,60 @@ bool leaveLevel(const Prince &prince, const Level &level) {
     }
 
     return false;
+
+}
+
+void pushDead(Prince &prince, Level &level, GamePlay &gamePlay) {
+
+    prince.pushSequence(Stance::Falling_Dead_1_Start, Stance::Falling_Dead_3_End, true);
+    prince.setHealth(0);
+
+    Item &sign = level.getItem(Constants::Item_Sign);
+
+    if (gamePlay.isGameOver()) {
+
+        showSign(prince, level, SignType::GameOver, 20);
+
+    }
+    else {
+
+        showSign(prince, level, SignType::PressA, 20);
+
+    }
+
+}
+
+void showSign(Prince &prince, Level &level, SignType signType, uint8_t counter) {
+
+    Item &sign = level.getItem(Constants::Item_Sign);
+
+    switch (signType) {
+
+        case SignType::GameOver:
+            sign.data.sign.counter = 20;
+            sign.data.sign.type = SignType::GameOver;
+            sign.x = 39;
+            break;
+
+        case SignType::PressA:
+            sign.data.sign.counter = 20;
+            sign.data.sign.type = SignType::PressA;
+            sign.x = 24;
+            break;
+
+    }
+
+    switch (prince.getY()) {
+
+        case 25:
+            y = 48;
+            break;
+
+        case 56:
+        case 87:
+            y = 1;
+            break;
+
+    }
 
 }

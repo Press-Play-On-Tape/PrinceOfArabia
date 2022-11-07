@@ -7,6 +7,11 @@
 struct Flash {
     uint8_t frame;
 };
+
+struct Sign {
+    SignType type;
+    uint8_t counter;
+};
  
 struct ExitDoor {
     uint8_t position;
@@ -70,6 +75,7 @@ struct Item {
 
     union {
         struct Flash flash;
+        struct Sign sign;
         struct Gate gate;
         struct ExitDoor exitDoor;
         struct Sword sword;

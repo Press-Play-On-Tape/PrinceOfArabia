@@ -32,6 +32,12 @@ int8_t Level1_BG[] = {
 };
 
 
+
+
+
+
+
+
     uint8_t Level1_Items[] = {
         1, 84, 4, 82, 86,       // Exit Gate, let position for open, right position                                                        
         2, 60, 0, 9, 32,        // Gate @ 60, 0 starting position 9 (top), falls in 32 frames.      
@@ -89,6 +95,8 @@ namespace Images {
 
     image_t TimeRemaining = "../images/title/TimeRemaining.png"
     image_t LevelNumber = "../images/title/LevelNumber.png"
+    image_t GameOver = "../images/title/GameOver.png"
+    image_t PressA = "../images/title/PressA.png"
 
     image_t Number_Upright_00 = "../images/title/Number_Upright_00.png"
     image_t Number_Upright_01 = "../images/title/Number_Upright_01.png"

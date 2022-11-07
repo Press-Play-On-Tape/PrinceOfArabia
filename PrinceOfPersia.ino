@@ -9,9 +9,7 @@
 #include "src/entities/Entities.h"
 #include "src/fonts/Font3x5.h"
 
-
-// int16_t playerXLoc = 10;
-// uint8_t playerYLoc = 26;
+ARDUBOY_NO_USB
 
 Arduboy2Ext arduboy;
 Font3x5 font3x5 = Font3x5();
@@ -27,7 +25,12 @@ FadeInEffect fadeInEffect;
 
 void setup() {
 
-    arduboy.begin();
+    arduboy.boot();
+    arduboy.display();
+    arduboy.flashlight();
+    arduboy.systemButtons();
+    // arduboy.audio.begin();
+
     arduboy.setFrameRate(Constants::FrameRate);
 
     FX::disableOLED();

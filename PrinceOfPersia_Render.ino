@@ -39,7 +39,7 @@ void render() {
 
     // Draw items ..
 
-    for (uint8_t i = 1; i < Constants::NumberOfItems; i++) {
+    for (uint8_t i = Constants::Items_DynamicRange; i < Constants::Items_Count; i++) {
 
         Item &item = level.getItem(i);
         int16_t xLoc = (item.x - level.getXLocation()) * Constants::TileWidth;
@@ -165,7 +165,7 @@ void render() {
 
     // Draw flash ..
 
-    Item &item = level.getItem(0);
+    Item &item = level.getItem(Constants::Item_Flash);
     int16_t xLoc = (item.x - level.getXLocation()) * Constants::TileWidth;
     int16_t yLoc = ((item.y - level.getYLocation()) * Constants::TileHeight) - level.getYOffset() + Constants::ScreenTopOffset;
 
@@ -210,6 +210,9 @@ void render() {
     arduboy.drawPixel(124, 55);
     arduboy.drawPixel(126, 55);
 
+
+    // Time remaining ..
+
     #ifdef TIME_AND_LEVEL
     switch (gamePlay.timeRemaining) {
 
@@ -230,16 +233,55 @@ void render() {
     #endif
 
     #ifdef TIME_ONLY
-    switch (gamePlay.timeRemaining) {
+    {
+        uint8_t y = 0;
 
-        case 1 ... 80:
-            FX::drawBitmap(23, 51, Images::TimeRemaining, 0, dbmMasked);
-            FX::drawBitmap(29, 56, Images::Number_Upright_00 + ((gamePlay.timer_Min / 10) * 7), 0, dbmNormal);
-            FX::drawBitmap(33, 56, Images::Number_Upright_00 + ((gamePlay.timer_Min % 10) * 7), 0, dbmNormal);
-            break;
+        switch (prince.getY()) {
 
+            case 25:
+                y = 48;
+                break;
+
+            case 56:
+            case 87:
+                y = 1;
+                break;
+
+        }
+
+        switch (gamePlay.timeRemaining) {
+
+            case 1 ... 80:
+                FX::drawBitmap(23, y, Images::TimeRemaining, 0, dbmMasked);
+                FX::drawBitmap(29, y + 5, Images::Number_Upright_00 + ((gamePlay.timer_Min / 10) * 7), 0, dbmNormal);
+                FX::drawBitmap(33, y + 5, Images::Number_Upright_00 + ((gamePlay.timer_Min % 10) * 7), 0, dbmNormal);
+                break;
+
+        }
+    
     }
     #endif
+
+
+    // Game over / press A ..
+
+    Item sign = level.getItem(Constants::Item_Sign);
+
+    if (sign.data.sign.counter == 1) {
+
+        switch (sign.data.sign.type) {
+
+            case SignType::GameOver:
+                FX::drawBitmap(sign.x, sign.y, Images::GameOver, 0, dbmMasked);
+                break;
+
+            case SignType::PressA:
+                FX::drawBitmap(sign.x, sign.y, Images::PressA, 0, dbmMasked);
+                break;
+
+        }
+    }
+
 
     if (!fadeInEffect.isComplete()) {
 

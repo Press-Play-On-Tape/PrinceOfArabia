@@ -72,7 +72,7 @@ struct Level {
 
         int8_t bg[5][16];
         int8_t fg[5][16];
-        Item items[Constants::NumberOfItems];
+        Item items[Constants::Items_Count];
 
     public:
 
@@ -92,7 +92,7 @@ struct Level {
 
     public:
 
-        void init(const Prince &prince, uint8_t xLoc, uint8_t yLoc) {
+        void init(Prince &prince, uint8_t xLoc, uint8_t yLoc) {
 
             this->xLoc = xLoc;
             this->yLoc = yLoc;
@@ -103,6 +103,11 @@ struct Level {
             if (prince.getY() > 56) {
 
                 this->yOffset = prince.getY() - 56;
+
+            }
+            else {
+
+                this->yOffset = 0;
 
             }
 
@@ -152,7 +157,7 @@ struct Level {
 
             }
 
-            for (uint8_t i = 0; i < Constants::NumberOfItems; i++) {
+            for (uint8_t i = 0; i < Constants::Items_Count; i++) {
 
                 Item &item = this->getItem(i);
 
@@ -253,8 +258,6 @@ struct Level {
 
                                 }
 
-                                return (item.data.collapsingFloor.timeToFall == 1 && item.data.collapsingFloor.distanceFallen == 2);
-
                             }
 
                             break;
@@ -325,6 +328,19 @@ struct Level {
                                         default: break;
                                         
                                     }
+
+                                }
+
+                            }
+                            break;
+
+                        case ItemType::Sign:
+
+                            if (arduboy.isFrameCount(4)) {
+
+                                if (item.data.sign.counter > 1) {
+
+                                    item.data.sign.counter--;
 
                                 }
 
@@ -451,7 +467,7 @@ struct Level {
 
         uint8_t getItem(ItemType itemType, int8_t x, int8_t y) {
 
-            for (uint8_t i = 2; i < Constants::NumberOfItems; i++) {
+            for (uint8_t i = Constants::Items_DynamicRange; i < Constants::Items_Count; i++) {
                 
                 Item &item = this->items[i];
 
@@ -553,12 +569,19 @@ struct Level {
             }
 
 
-            // Populate first item with explosion ..
+            // Populate first item with flash ..
 
-            Item &explosion = this->items[0];
-            explosion.itemType = ItemType::Flash;
+            Item &flash = this->items[Constants::Item_Flash];
+            flash.itemType = ItemType::Flash;
 
-            uint8_t itemIdx = 1;
+
+            // Populate second item with sign ..
+
+            Item &sign = this->items[Constants::Item_Sign];
+            sign.itemType = ItemType::Sign;
+            sign.data.sign.counter = 0;
+
+            uint8_t itemIdx = Constants::Items_DynamicRange;
             FX::seekData(Levels::Level1_Items);
             uint8_t itemType = FX::readPendingUInt8();
 
@@ -926,7 +949,7 @@ struct Level {
 
         }
 
-        bool canFall(const Prince &prince, int8_t xOffset = 0) {
+        bool canFall(Prince &prince, int8_t xOffset = 0) {
 
             bool canFall = false;
             Point newPos = prince.getPosition();
@@ -1018,7 +1041,7 @@ struct Level {
         
         }
 
-        bool canFallSomeMore(const Prince &prince, int8_t xOffset = 0) {
+        bool canFallSomeMore(Prince &prince, int8_t xOffset = 0) {
 
             bool canFall = false;
             Point newPos = prince.getPosition();
@@ -1055,7 +1078,7 @@ struct Level {
 
         // Prince is hanging from upper level.  Test to see if he can fall down one level, down one level and 'back, down twwo levels, three .. etc.
 
-        CanClimbDownPart2Result canClimbDown_Part2(const Prince &prince, int8_t xOffset = 0) { 
+        CanClimbDownPart2Result canClimbDown_Part2(Prince &prince, int8_t xOffset = 0) { 
 
             Point newPos = prince.getPosition();
             newPos.x = newPos.x + prince.getDirectionOffset(xOffset);
@@ -1132,12 +1155,12 @@ struct Level {
 
         }
 
-        uint8_t canReachItem(const Prince &prince, ItemType itemType) {
+        uint8_t canReachItem(Prince &prince, ItemType itemType) {
 
             int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), prince.getPosition().x);
             int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), prince.getPosition().y);
 
-            for (uint8_t i = 2; i < Constants::NumberOfItems; i++) {
+            for (uint8_t i = Constants::Items_DynamicRange; i < Constants::Items_Count; i++) {
 
                 Item &item = this->items[i];
 
@@ -1153,7 +1176,7 @@ struct Level {
 
         }
 
-        bool canMoveForward(const Prince &prince, Action action) {
+        bool canMoveForward(Prince &prince, Action action) {
 
             int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), prince.getPosition().x) - this->getXLocation();
             int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), prince.getPosition().y) - this->getYLocation();
@@ -1584,7 +1607,7 @@ struct Level {
 
         }
 
-        CanJumpUpResult canJumpUp(const Prince &prince) {
+        CanJumpUpResult canJumpUp(Prince &prince) {
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
             DEBUG_PRINTLN(F("-----------------------------------------------------"));
@@ -1767,7 +1790,7 @@ struct Level {
 
         }
 
-        CanJumpUpResult canJumpUp_Test(const Prince &prince, Direction direction) {
+        CanJumpUpResult canJumpUp_Test(Prince &prince, Direction direction) {
 
             int8_t inc = (direction == Direction::Left ? -1 : 1);
             int8_t tileXIdx = this->coordToTileIndexX(direction, prince.getPosition().x) - this->getXLocation();
@@ -2016,7 +2039,7 @@ struct Level {
 
         }
 
-        CanJumpUpResult canJumpUp_Test_Dist10(const Prince &prince, Direction direction) {
+        CanJumpUpResult canJumpUp_Test_Dist10(Prince &prince, Direction direction) {
 
             int8_t tileXIdx = this->coordToTileIndexX(direction, prince.getPosition().x) - this->getXLocation();
             int8_t tileYIdx = this->coordToTileIndexY(direction, prince.getPosition().y) - this->getYLocation();
@@ -2112,7 +2135,7 @@ struct Level {
 
         }
 
-        bool canJumpUp_Part2(const Prince &prince) {
+        bool canJumpUp_Part2(Prince &prince) {
 
             int8_t tileXIdx = 0;
             int8_t tileYIdx = 0;
@@ -2157,7 +2180,7 @@ struct Level {
 
             uint8_t gatePosition = 255;
 
-            for (uint8_t i = 2; i < Constants::NumberOfItems; i++) {
+            for (uint8_t i = Constants::Items_DynamicRange; i < Constants::Items_Count; i++) {
 
                 Item &item = this->items[i];
 
@@ -2181,7 +2204,7 @@ struct Level {
 
         }        
 
-        CanClimbDownResult canClimbDown(const Prince &prince) {
+        CanClimbDownResult canClimbDown(Prince &prince) {
 
             switch (prince.getDirection()) {
 
@@ -2350,7 +2373,7 @@ struct Level {
 
         }
 
-        CanClimbDownResult canClimbDown_Test(const Prince &prince, Direction direction) {
+        CanClimbDownResult canClimbDown_Test(Prince &prince, Direction direction) {
 
             int8_t tileXIdx = this->coordToTileIndexX(direction, prince.getPosition().x) - this->getXLocation() + (direction == Direction::Right ? 1 : 0);
             int8_t tileYIdx = this->coordToTileIndexY(direction, prince.getPosition().y) - this->getYLocation();
@@ -2484,7 +2507,7 @@ struct Level {
         }
 
 
-        bool collideWithWall(const Prince &prince) {
+        bool collideWithWall(Prince &prince) {
 
             Direction direction = prince.getDirection();
 
