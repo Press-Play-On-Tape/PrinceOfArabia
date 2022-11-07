@@ -48,6 +48,44 @@ void game_Init() {
 
 }
 
+void game_StartLevel() {
+
+    // prince.init(66, 25, Direction::Right, Stance::Crouch_3_End, 3);          // Upper gate
+    // prince.init(70, 25 + 31, Direction::Right, Stance::Crouch_3_End, 3);          // Under collapsible floor
+    // prince.init(58 +36, 56, Direction::Left, Stance::Crouch_3_End, 3);          // Exit Seq
+    prince.init(6, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
+    // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3);          // Both floor types
+    // prince.init(86, 87, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos but next to drop floor 3rd floor
+    // prince.init(70, 25, Direction::Left, Stance::Crouch_3_End, 3);          // Under collapsible floor
+    // prince.init(66, 56, Direction::Right, Stance::Crouch_3_End, 3);        // Get tonic
+//    prince.init(50, 87, Direction::Left, Stance::Crouch_3_End, 3);     // Column of climbs
+    // prince.init(80, 25, Direction::Right, Stance::Crouch_3_End, 3);     // Top Left
+    // prince.init(18, 25, Direction::Right,Stance:: Crouch_3_End, 3);          // Long Fall
+    // prince.init(18, 56, Direction::Right, Stance::Crouch_3_End, 3);          // problem
+    // prince.init(98, 87, Direction::Left, Stance::Crouch_3_End, 3);          // At bottom of tthree level drop.
+
+
+    gamePlay.restartLevel(arduboy);
+    
+    // level.init(prince, 50, 0);  // Upper Gate
+    // level.init(prince, 40, 3);  // Under collapsible floor
+    // level.init(prince, 80, 3);  // Exit Seq
+    level.init(prince, 60, 0);  // Normal starting posa
+    // level.init(prince, 20, 3);  // Both floor types
+    // level.init(prince, 60, 0);  //Normal starting pos but next to drop floor 3rd floor
+    // level.init(prince, 50, 3);  // Under collapsible floor
+    // level.init(prince, Constants::TileHeight, 0);   // Get tonic
+    // level.init(prince, 0, 3);   // Column of climbs
+    // level.init(prince, 0, 0);   // Top left
+    // level.init(prince, 40, 4);  // Long Fall
+    // level.init(prince, 60, 3);  // problem
+    // level.init(prince, 30, 6); // At bottom of tthree level drop.
+
+    gamePlay.gameState = GameState::Game;
+    menu.init();
+
+}
+
 void game() {
 
     auto justPressed = arduboy.justPressedButtons();
@@ -69,48 +107,7 @@ void game() {
 
     // Have we scrolled to another screen ?
 
-    if (prince.getY() - level.getYOffset() >= 56 + Constants::TileHeight) {
-
-        prince.incY(- Constants::TileHeight * 3);
-        level.setYLocation(level.getYLocation() + 3);
-        level.loadMap();
-        level.setYOffset(0);
-        level.setYOffsetDir(Direction::None);
-
-    }
-    else if (static_cast<int8_t>(prince.getY() - level.getYOffset()) < static_cast<int8_t>(0)) {
-
-        prince.incY(Constants::TileHeight * 3);
-        level.setYLocation(level.getYLocation() - 3);
-        level.loadMap();
-        level.setYOffset(Constants::TileHeight);
-        level.setYOffsetDir(Direction::None);
-
-    }
-    else if (prince.getX() < 0) {
-
-        prince.incX(Constants::TileWidth * Constants::ScreenWidthInTiles);
-        level.setXLocation(level.getXLocation() - 10);
-        level.loadMap();
-
-    }
-    else if (prince.getX() > Constants::TileWidth * Constants::ScreenWidthInTiles) {
-
-        prince.incX(-Constants::TileWidth * Constants::ScreenWidthInTiles);
-        level.setXLocation(level.getXLocation() + 10);
-        level.loadMap();
-
-    }
-
-
-    // Calculate screen offset ..
-
-    if (prince.getYPrevious() <= 56 && prince.getY() > 56) {
-        level.setYOffsetDir(Direction::Down);
-    }
-    else if (prince.getYPrevious() > 56 && prince.getY() <= 56) {
-        level.setYOffsetDir(Direction::Up);
-    }
+    testScroll(prince, level);
 
 
     // Remove later !!!
@@ -863,7 +860,8 @@ void game() {
             switch (prince.getStance()) {
 
                 case Stance::Leave_Gate_14_End:
-                    gamePlay.gameState = GameState::Title_Init;
+                    gamePlay.gameState = GameState::Game_StartLevel;
+                    gamePlay.incLevel();
                     break;
 
                 case Stance::Upright_Turn:
@@ -1319,6 +1317,28 @@ void game() {
             if (tileXIdx >= item.data.exitDoor.left && tileXIdx <= item.data.exitDoor.right && item.y == tileYIdx) {
 
                 item.data.exitDoor.direction = Direction::Up;
+
+            }
+
+        }
+
+    }
+
+
+    // Is the prince dead?
+
+    if (prince.getStance() == Stance::Falling_Dead_3_End) {
+
+        if (justPressed & A_BUTTON) {
+
+            if (!gamePlay.isGameOver()) {
+
+                gamePlay.gameState = GameState::Game_StartLevel;
+
+            }
+            else {
+
+                gamePlay.gameState = GameState::Game_Over;
 
             }
 

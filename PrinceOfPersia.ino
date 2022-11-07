@@ -76,6 +76,13 @@ void loop() {
             game();
             break;
 
+        case GameState::Game_StartLevel:
+
+            fadeInEffect.reset();
+            game_StartLevel();
+            game();
+            break;
+
         case GameState::Game:
         case GameState::Menu:
 

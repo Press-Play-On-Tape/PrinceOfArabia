@@ -36,6 +36,22 @@ struct GamePlay {
 
     }
 
+    void restartLevel(Arduboy2Ext & arduboy) {
+
+        this->frameCount = arduboy.getFrameCount();
+        this->frameCount = 0;
+
+        #ifdef TIME_AND_LEVEL
+        this->timeRemaining = 192;
+        #endif
+        #ifdef TIME_ONLY
+        this->timeRemaining = 124;
+        #endif
+
+        this->gameState = GameState::Game;
+
+    }
+
     void update(Arduboy2Ext & arduboy) {
 
         if ((arduboy.getFrameCount() - this->frameCount) % Constants::FrameRate == 0) {
@@ -51,6 +67,21 @@ struct GamePlay {
 
         if (this->timeRemaining > 0) this->timeRemaining--;
 
+    }
+
+    void incLevel() {
+
+        level++;
+
+    }
+
+    bool isGameOver() {
+
+        if (this->timer_Min > 0) return false;
+        if (this->timer_Sec > 0) return false;
+
+        return true;
+        
     }
 
 };

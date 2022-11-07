@@ -8,6 +8,55 @@
 #include "src/entities/Entities.h"
 #include "src/fonts/Font3x5.h"
 
+void testScroll(const Prince &prince, const Level &level) {
+
+
+    // Have we scrolled to another screen ?
+
+    if (prince.getY() - level.getYOffset() >= 56 + Constants::TileHeight) {
+
+        prince.incY(- Constants::TileHeight * 3);
+        level.setYLocation(level.getYLocation() + 3);
+        level.loadMap();
+        level.setYOffset(0);
+        level.setYOffsetDir(Direction::None);
+
+    }
+    else if (static_cast<int8_t>(prince.getY() - level.getYOffset()) < static_cast<int8_t>(0)) {
+
+        prince.incY(Constants::TileHeight * 3);
+        level.setYLocation(level.getYLocation() - 3);
+        level.loadMap();
+        level.setYOffset(Constants::TileHeight);
+        level.setYOffsetDir(Direction::None);
+
+    }
+    else if (prince.getX() < 0) {
+
+        prince.incX(Constants::TileWidth * Constants::ScreenWidthInTiles);
+        level.setXLocation(level.getXLocation() - 10);
+        level.loadMap();
+
+    }
+    else if (prince.getX() > Constants::TileWidth * Constants::ScreenWidthInTiles) {
+
+        prince.incX(-Constants::TileWidth * Constants::ScreenWidthInTiles);
+        level.setXLocation(level.getXLocation() + 10);
+        level.loadMap();
+
+    }
+
+
+    // Calculate screen offset ..
+
+    if (prince.getYPrevious() <= 56 && prince.getY() > 56) {
+        level.setYOffsetDir(Direction::Down);
+    }
+    else if (prince.getYPrevious() > 56 && prince.getY() <= 56) {
+        level.setYOffsetDir(Direction::Up);
+    }
+
+}
 
 void getStance_Offsets(Direction direction, Point &offset, int16_t stance) {
 

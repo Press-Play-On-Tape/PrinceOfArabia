@@ -856,6 +856,8 @@ enum GameState : uint8_t {
 	Title,
 	Game_Init,
 	Game,
+    Game_StartLevel,
+    Game_Over,
     Menu,
 };
 
