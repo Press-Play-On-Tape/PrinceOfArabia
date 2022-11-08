@@ -964,7 +964,7 @@ struct Level {
             // int8_t footToe = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 1]));
             // int8_t footHeel = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 2]));
 
-            int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), newPos.x + prince.getDirectionOffset(imageDetails.toe)) - this->getXLocation();
+            int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), newPos.x + imageDetails.toe) - this->getXLocation();
             int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), newPos.y) - this->getYLocation();
             
             int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
@@ -1003,7 +1003,7 @@ struct Level {
                 }
                 else {
 
-                    int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), newPos.x + prince.getDirectionOffset(imageDetails.heel)) - this->getXLocation();
+                    int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), newPos.x + imageDetails.heel) - this->getXLocation();
                     int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), newPos.y) - this->getYLocation();
                     
                     int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);

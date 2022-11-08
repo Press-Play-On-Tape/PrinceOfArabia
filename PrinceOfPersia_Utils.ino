@@ -282,8 +282,6 @@ void pushDead(Prince &prince, Level &level, GamePlay &gamePlay) {
     prince.pushSequence(Stance::Falling_Dead_1_Start, Stance::Falling_Dead_3_End, true);
     prince.setHealth(0);
 
-    Item &sign = level.getItem(Constants::Item_Sign);
-
     if (gamePlay.isGameOver()) {
 
         showSign(prince, level, SignType::GameOver, 20);

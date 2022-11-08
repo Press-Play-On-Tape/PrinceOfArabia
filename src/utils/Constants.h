@@ -440,20 +440,21 @@ constexpr uint16_t Pickup_Sword_16_End                           = Stance::Picku
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /* 235 - 239    x: 0, y: 31                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
-#define FALLING_DOWN_SEQ                                         125,   125,   125,   125,   125,
-#define FALLING_DOWN_OFFSETS                                     0,6,   0,6,   0,6,   0,6,   0,7,
+#define FALLING_DOWN_SEQ                                         125,   125,   125,   125,   125,   125,
+#define FALLING_DOWN_OFFSETS                                     0,6,   0,5,   0,5,   0,5,   0,5,   0,5,
 constexpr uint16_t Falling_Down_1_Start                          = Stance::Pickup_Sword_16_End + 1;
 constexpr uint16_t Falling_Down_2                                = Stance::Falling_Down_1_Start + 1;
 constexpr uint16_t Falling_Down_3                                = Stance::Falling_Down_2 + 1;
 constexpr uint16_t Falling_Down_4                                = Stance::Falling_Down_3 + 1;
-constexpr uint16_t Falling_Down_5_End                            = Stance::Falling_Down_4 + 1;
+constexpr uint16_t Falling_Down_5_Check_CanFall                  = Stance::Falling_Down_4 + 1;
+constexpr uint16_t Falling_Down_6_End                            = Stance::Falling_Down_5_Check_CanFall + 1;
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/* 240 - 245    x: 6, y: 31                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+/* 241 - 246    x: 6, y: 31                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define FALLING_STEPWALKRUN_P0_4_8_SEQ                           121,   122,   123,   124,   125,   126,
 #define FALLING_STEPWALKRUN_P0_4_8_OFFSETS                       2,6,   2,5,   1,5,   1,5,   0,5,   0,5,  
-constexpr uint16_t Falling_StepWalkRun_P0_4_8_1_Start            = Stance::Falling_Down_5_End + 1;
+constexpr uint16_t Falling_StepWalkRun_P0_4_8_1_Start            = Stance::Falling_Down_6_End + 1;
 constexpr uint16_t Falling_StepWalkRun_P0_4_8_2                  = Stance::Falling_StepWalkRun_P0_4_8_1_Start + 1;
 constexpr uint16_t Falling_StepWalkRun_P0_4_8_3                  = Stance::Falling_StepWalkRun_P0_4_8_2 + 1;
 constexpr uint16_t Falling_StepWalkRun_P0_4_8_4                  = Stance::Falling_StepWalkRun_P0_4_8_3 + 1;
@@ -462,7 +463,7 @@ constexpr uint16_t Falling_StepWalkRun_P0_4_8_6_End              = Stance::Falli
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/* 246 - 251    x: 5, y: 31                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+/* 247 - 252    x: 5, y: 31                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define FALLING_STEPWALKRUN_P1_5_9_SEQ                           121,   122,   123,   124,   125,   126,
 #define FALLING_STEPWALKRUN_P1_5_9_OFFSETS                       2,6,   2,5,   2,5,   1,5,   0,5,   0,5,
 constexpr uint16_t Falling_StepWalkRun_P1_5_9_1_Start            = Stance::Falling_StepWalkRun_P0_4_8_6_End + 1;
@@ -474,7 +475,7 @@ constexpr uint16_t Falling_StepWalkRun_P1_5_9_6_End              = Stance::Falli
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/* 252 - 257    x: 8, y: 31                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+/* 253 - 258    x: 8, y: 31                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define FALLING_STEPWALKRUN_P2_6_10_SEQ                          121,   122,   123,   124,   125,   126,
 #define FALLING_STEPWALKRUN_P2_6_10_OFFSETS                      2,6,   2,5,   2,5,   1,5,   1,5,   0,5, 
 constexpr uint16_t Falling_StepWalkRun_P2_6_10_1_Start           = Stance::Falling_StepWalkRun_P1_5_9_6_End + 1;
@@ -486,7 +487,7 @@ constexpr uint16_t Falling_StepWalkRun_P2_6_10_6_End             = Stance::Falli
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/* 258 - 263    x: 9, y: 31                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+/* 259 - 264    x: 9, y: 31                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define FALLING_STEPWALKRUN_P3_7_11_SEQ                          121,   122,   123,   124,   125,   126,
 #define FALLING_STEPWALKRUN_P3_7_11_OFFSETS                      2,6,   2,5,   2,5,    2,5,   1,5,   0,5, 
 constexpr uint16_t Falling_StepWalkRun_P3_7_11_1_Start           = Stance::Falling_StepWalkRun_P2_6_10_6_End + 1;
@@ -498,7 +499,7 @@ constexpr uint16_t Falling_StepWalkRun_P3_7_11_6_End             = Stance::Falli
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/* 264 - 277                                                     01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+/* 265 - 278                                                     01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define LEAVE_GATE_SEQ                                           157,   158,   159,   160,   161,   162,   163,   164,   165,   166,   167,   168,   168,   0,
 #define LEAVE_GATE_OFFSETS                                       0,0,   1,0,   2,-1,  2,-1,  2,-1,  1,-1,  1,-1,  1,-1,  1,-1,  1,-1,  1,-2,  0,-3,  0,0,   0,0,
 constexpr uint16_t Leave_Gate_1_Start                            = Stance::Falling_StepWalkRun_P3_7_11_6_End + 1;
@@ -518,7 +519,7 @@ constexpr uint16_t Leave_Gate_14_End                             = Stance::Leave
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/* 278 - 282                                                     01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+/* 279 - 283                                                     01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define COLLIDE_WALL_SEQ                                         126,   126,   126,   126,   126, 
 #define COLLIDE_WALL_OFFSETS                                     2,0,   1,0,   0,0,   -1,0,  -2,0,
 constexpr uint16_t Collide_Wall_P2_Start_End                     = Stance::Leave_Gate_14_End + 1;
@@ -529,7 +530,7 @@ constexpr uint16_t Collide_Wall_M2_Start_End                     = Stance::Colli
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/* 283 - 288                                                     01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+/* 284 - 289                                                     01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define VER_ADJUSTMENTS_SEQ                                      125,   125,   125,   125,   125,   125, 
 #define VER_ADJUSTMENTS_OFFSETS                                  0,1,   0,2,   0,3,   0,4,   0,5,   0,6,
 constexpr uint16_t Vert_Adjustment_1_Start_End                   = Stance::Collide_Wall_M2_Start_End + 1;

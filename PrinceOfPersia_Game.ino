@@ -944,7 +944,7 @@ void game() {
                 // case Stance::Falling_C_5_Check_CanFall:
                 // case Stance::Falling_StandingJump_5_Check_CanFall:
                 // case Stance::Falling_SingleStep_5_Check_CanFall:
-                case Stance::Falling_Down_5_End:
+                case Stance::Falling_Down_5_Check_CanFall:
                 case Stance::Falling_StepWalkRun_P0_4_8_5_Check_CanFall:
                 case Stance::Falling_StepWalkRun_P1_5_9_5_Check_CanFall:
                 case Stance::Falling_StepWalkRun_P2_6_10_5_Check_CanFall:
@@ -967,7 +967,8 @@ void game() {
 // Serial.pint(" to ");    
 // Serial.pintln(prince.getFalling());  
                         prince.setPrevStance(prince.getStance());
-                        prince.pushSequence(Stance::Falling_Down_1_Start, Stance::Falling_Down_5_End, true);
+                        prince.pushSequence(Stance::Falling_Down_1_Start, Stance::Falling_Down_5_Check_CanFall, true);
+                        prince.push(Stance::Falling_Down_6_End, true);
 
                     }
                     else {
@@ -1021,7 +1022,7 @@ void game() {
                                 prince.push(prince.getStance() + 1, true);
                                 break;
 
-                            case Stance::Falling_Down_5_End:
+                            case Stance::Falling_Down_5_Check_CanFall:
                                 prince.push(prince.getPrevStance() + 1, true);
                                 break;
 
@@ -1073,7 +1074,7 @@ void game() {
 
                 // Test with player's toe ..
 
-                int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x + prince.getDirectionOffset(imageDetails.toe));
+                int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x + imageDetails.toe);
                 int8_t tileYIdx = level.coordToTileIndexY(prince.getDirection(), prince.getPosition().y);
                 uint8_t itemIdx = level.getItem(ItemType::AnyItem, tileXIdx, tileYIdx);
 
@@ -1082,7 +1083,7 @@ void game() {
 
                 if (itemIdx == Constants::NoItemFound) {
 
-                    tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x + prince.getDirectionOffset(imageDetails.heel));
+                    tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x + imageDetails.heel);
                     itemIdx = level.getItem(ItemType::AnyItem, tileXIdx, tileYIdx);
 
                 }
@@ -1178,10 +1179,12 @@ Serial.println(distToEdgeOfCurrentTile);
         DEBUG_PRINTLN(F("Start falling"));
         #endif
 
+        bool fallStraight = false;
+        
         if (distToEdgeOfCurrentTile <= 4) {//SJH
 
-            int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x) + (prince.getDirection() == Direction::Left ? -1 : 1);
-            int8_t tileYIdx = level.coordToTileIndexY(prince.getDirection(), prince.getPosition().y) + 1;
+            int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x) + (prince.getDirection() == Direction::Left ? -1 : 1) - level.getXLocation();
+            int8_t tileYIdx = level.coordToTileIndexY(prince.getDirection(), prince.getPosition().y) + 1 - level.getYLocation();
 
             int8_t bgTile = level.getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
             int8_t fgTile = level.getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
@@ -1202,10 +1205,17 @@ Serial.println((uint8_t)wallTileResult);
 
 //            check if wall tile blocking x Direction
 
+            if (wallTileResult != WallTileResults::None) {
+
+                fallStraight = true;
+
+            }
+
         }
 
-        if (false) {
-
+        if (fallStraight) {
+                    prince.pushSequence(Stance::Falling_Down_1_Start, Stance::Falling_Down_5_Check_CanFall, true);
+                    prince.setPrevStance(Stance::Falling_Down_5_Check_CanFall);
             //Fall directly down.
 
         }

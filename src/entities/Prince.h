@@ -355,10 +355,11 @@ struct Prince {
 
             uint8_t imageIndex = static_cast<uint8_t>(pgm_read_byte(&Constants::StanceToImageXRef[this->stance]));
             uint16_t pos = (imageIndex - 1) * 3;
+            int8_t direction = this->getDirection() == Direction::Left ? -1 : 1;
 
-            imageDetails.reach = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos]));
-            imageDetails.toe = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 1]));
-            imageDetails.heel = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 2]));
+            imageDetails.reach = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos])) * direction;
+            imageDetails.toe = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 1])) * direction;
+            imageDetails.heel = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 2])) * direction;
 
         }
 };
