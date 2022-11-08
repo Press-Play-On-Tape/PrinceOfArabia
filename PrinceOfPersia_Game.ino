@@ -11,13 +11,14 @@
 
 void game_Init() {
 
+    // prince.init(58, 25+31+31, Direction::Right, Stance::Crouch_3_End, 3);          // Second drink tonic
     // prince.init(66, 25, Direction::Right, Stance::Crouch_3_End, 3);          // Upper gate
     // prince.init(70, 25 + 31, Direction::Right, Stance::Crouch_3_End, 3);          // 2 leap
     // prince.init(58 +36, 56, Direction::Left, Stance::Crouch_3_End, 3);          // Exit Seq
-    prince.init(6, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
+    // prince.init(38, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
     // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3);          // Both floor types
     // prince.init(86, 87, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos but next to drop floor 3rd floor
-    // prince.init(78, 25, Direction::Left, Stance::Crouch_3_End, 3);          // Under collapsible floor
+    prince.init(78, 25, Direction::Left, Stance::Crouch_3_End, 3);          // Under collapsible floor
     // prince.init(66, 56, Direction::Right, Stance::Crouch_3_End, 3);        // Get tonic
 //    prince.init(50, 87, Direction::Left, Stance::Crouch_3_End, 3);     // Column of climbs
     // prince.init(80, 25, Direction::Right, Stance::Crouch_3_End, 3);     // Top Left
@@ -29,13 +30,14 @@ void game_Init() {
     gamePlay.init(arduboy, 1);
     
     level.setLevel(1);
+    // level.init(prince, 50, 0);  // Second drink tonic
     // level.init(prince, 50, 0);  // Upper Gate
     // level.init(prince, 40, 3);  // 2 leap
     // level.init(prince, 80, 3);  // Exit Seq
-    level.init(prince, 60, 0);  // Normal starting posa
+    // level.init(prince, 60, 0);  // Normal starting posa
     // level.init(prince, 20, 3);  // Both floor types
     // level.init(prince, 60, 0);  //Normal starting pos but next to drop floor 3rd floor
-    // level.init(prince, 50, 3);  // Under collapsible floor
+    level.init(prince, 50, 3);  // Under collapsible floor
     // level.init(prince, Constants::TileHeight, 0);   // Get tonic
     // level.init(prince, 0, 3);   // Column of climbs
     // level.init(prince, 0, 0);   // Top left
@@ -431,7 +433,11 @@ void game() {
                                 break;
 
                             case CanClimbDownPart2Result::Falling:
-// Serial.pintln("B setFalling(1)");                        
+
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
+                                DEBUG_PRINTLN(F("Jump_Up_A_14_End, Jump_Up_B_14_End, setFalling(1)"));
+                                #endif
+
                                 prince.setFalling(1);
                                 prince.pushSequence(Stance::Jump_Up_Drop_C_1_Start, Stance::Jump_Up_Drop_C_5_End, true);
                                 break;
@@ -470,7 +476,11 @@ void game() {
                                 break;
 
                             case CanClimbDownPart2Result::Falling:
-// Serial.pintln("C setFalling(1)");    
+                                
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
+                                DEBUG_PRINTLN(F("Drop after hanging, setFalling(1)"));
+                                #endif
+
                                 prince.setFalling(1);
                                 prince.pushSequence(Stance::Jump_Up_Drop_C_1_Start, Stance::Jump_Up_Drop_C_5_End, true);
                                 break;
@@ -895,11 +905,18 @@ void game() {
 
                     if (level.canFall(prince)) { // Fall some more
 
-// Serial.pint("D incFalling() from ");    
-// Serial.pint(prince.getFalling());    
+                        #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
+                        DEBUG_PRINT(F("FallSomMore at Jump_Up_Drop_C_5_End, incFalling() from "));
+                        DEBUG_PRINT(prince.getFalling());
+                        #endif
+
                         prince.incFalling();
-// Serial.pint(" to ");    
-// Serial.pintln(prince.getFalling());    
+
+                        #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
+                        DEBUG_PRINT(F(" to"));
+                        DEBUG_PRINTLN(prince.getFalling());
+                        #endif
+
                         prince.pushSequence(Stance::Jump_Up_Drop_C_1_Start, Stance::Jump_Up_Drop_C_5_End, true);
 
                     }
@@ -912,10 +929,20 @@ void game() {
                             switch (prince.getFalling()) {
 
                                 case 1:
+
+                                    #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
+                                    DEBUG_PRINTLN(F("Land and enter crouch, falling = 1"));
+                                    #endif
+
                                     prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
                                     break;
 
                                 case 2:
+
+                                    #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
+                                    DEBUG_PRINTLN(F("Land and enter crouch, falling = 2"));
+                                    #endif
+
                                     initFlash(prince, level);
                                     prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
                                     prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
@@ -960,12 +987,34 @@ void game() {
                         DEBUG_PRINTLN(F("Fall some more"));
                         #endif
 
-// Serial.pint("E incFalling() from ");    
-// Serial.pint(prince.getFalling());    
+                        #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
+                        DEBUG_PRINT(F("FallSomMore at *_Check_CanFall, incFalling() from "));
+                        DEBUG_PRINT(prince.getFalling());
+                        #endif
+
                         prince.incFalling();
-// Serial.pint(" to ");    
-// Serial.pintln(prince.getFalling());  
-                        prince.setPrevStance(prince.getStance());
+
+                        #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
+                        DEBUG_PRINT(F(" to"));
+                        DEBUG_PRINTLN(prince.getFalling());
+                        #endif
+
+                        switch (prince.getStance()) {
+
+                            case Stance::Collide_Wall_P2_Start_End:
+                            case Stance::Collide_Wall_P1_Start_End:
+                            case Stance::Collide_Wall_P0_Start_End:
+                            case Stance::Collide_Wall_M1_Start_End:
+                            case Stance::Collide_Wall_M2_Start_End: 
+                                prince.setPrevStance(Stance::None);
+                                break;
+
+                            default:
+                                prince.setPrevStance(prince.getStance());
+                                break;
+
+                        }
+
                         prince.pushSequence(Stance::Falling_Down_P0_1_Start, Stance::Falling_Down_P0_5_Check_CanFall, true);
                         prince.push(Stance::Falling_Down_P0_6_End, true);
 
@@ -979,10 +1028,20 @@ void game() {
                             switch (prince.getFalling()) {
 
                                 case 1:
+                                    
+                                    #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
+                                    DEBUG_PRINTLN(F("Land and enter crouch, falling = 1"));
+                                    #endif
+
                                     prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
                                     break;
 
                                 case 2:     // OK but lose some health as well
+                                    
+                                    #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
+                                    DEBUG_PRINTLN(F("Land and enter crouch, falling = 2"));
+                                    #endif
+
                                     initFlash(prince, level);                          
                                     prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
                                     prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
@@ -1013,6 +1072,7 @@ void game() {
                             case Stance::Falling_StepWalkRun_P0_4_8_5_Check_CanFall:
                             case Stance::Falling_StepWalkRun_P1_5_9_5_Check_CanFall:
                             case Stance::Falling_StepWalkRun_P3_7_11_5_Check_CanFall:
+
                                 prince.push(prince.getStance() + 1, true);
                                 break;
 
@@ -1021,7 +1081,10 @@ void game() {
                             case Stance::Falling_Down_P0_5_Check_CanFall:
                             case Stance::Falling_Down_M1_5_Check_CanFall:
                             case Stance::Falling_Down_M2_5_Check_CanFall:
-                                prince.push(prince.getPrevStance() + 1, true);
+
+                                if (prince.getPrevStance() != Stance::None) {
+                                    prince.push(prince.getPrevStance() + 1, true);
+                                }
                                 break;
 
                             default:  
@@ -1040,7 +1103,11 @@ void game() {
                     break;
 
                 case Stance::Upright:
-// Serial.pintln("A setFalling(0)");                        
+
+                    #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
+                    DEBUG_PRINTLN(F("Landed, setFalling(0)"));
+                    #endif
+
                     prince.setFalling(0);
                     break;
 
@@ -1056,8 +1123,6 @@ void game() {
             // Has the player stepped on anything ?
 
             if (prince.isFootDown()) {
-
-// Serial.println("Foot down!");
 
 
                 // Check for floor buttons and collapsing floors ..
@@ -1158,20 +1223,28 @@ void game() {
     }
 
 
+
+    // ---------------------------------------------------------------------------------------------------------------------------------------
+    //  
+    //  Falling ..
+    //
+    // ---------------------------------------------------------------------------------------------------------------------------------------
+
+
     if (prince.isFootDown() && level.canFall(prince) && prince.getFalling() == 0) {
 
         uint8_t distToEdgeOfCurrentTile = level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX());
+                                            
+        #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
+        DEBUG_PRINTLN(F("Starting to fall, setFalling(1)"));
+        #endif
 
         prince.clear();
-// Serial.print("F setFalling(1) D:");  
-// Serial.println(distToEdgeOfCurrentTile);
-
         prince.setFalling(1);
         prince.setPrevStance(prince.getStance());
 
-        #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-        DEBUG_PRINTLN(F("Start falling"));
-        #endif
+
+        // If we are at the edge of a tile and their is an adjacent wall, then we need to fall straight down otherwise fall in an arc ..
 
         bool fallStraight = false;
         
@@ -1179,25 +1252,10 @@ void game() {
 
             int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x) + (prince.getDirection() == Direction::Left ? -1 : 1) - level.getXLocation();
             int8_t tileYIdx = level.coordToTileIndexY(prince.getDirection(), prince.getPosition().y) + 1 - level.getYLocation();
-
             int8_t bgTile = level.getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
             int8_t fgTile = level.getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
 
             WallTileResults wallTileResult = level.isWallTile(bgTile, fgTile);
-// Serial.print("isWallTile tx ");
-// Serial.print(tileXIdx);
-// Serial.print(", ty ");
-// Serial.print(tileYIdx);
-// Serial.print(", bg ");
-// Serial.print(bgTile);
-// Serial.print(", fg ");
-// Serial.print(fgTile);
-// Serial.print(" = ");
-// Serial.println((uint8_t)wallTileResult);
-            //level.getTile()
-
-
-//            check if wall tile blocking x Direction
 
             if (wallTileResult != WallTileResults::None) {
 
@@ -1287,7 +1345,7 @@ void game() {
     // If in the air and touching wall, then move backwards ..
 
     if (prince.inAir() && prince.getFalling() == 0) {
-// Serial.println("touch wall move backwards");
+
         if (level.collideWithWall(prince)) {
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_COLLIDEWITHWALL)
@@ -1299,8 +1357,11 @@ void game() {
             DEBUG_PRINTLN(level.collideWithWall(prince));
             #endif
 
+            #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
+            DEBUG_PRINTLN(F("Collide with wall, setFalling(1)"));
+            #endif
+
             prince.clear();
-// Serial.println("G setFalling(1)");    
             prince.setFalling(1);
 
 
@@ -1343,10 +1404,13 @@ void game() {
             // Do we need to apply some vertical adjustment?
             
             uint8_t adj = (prince.getY() - 25) % 31;
-// Serial.print("prince.getY():");
-// Serial.print(prince.getY());
-// Serial.print(", Adj:");
-// Serial.print(adj);
+
+            #if defined(DEBUG) && defined(DEBUG_VERT_ADJ)
+            DEBUG_PRINT(F("Vert AJD, prince.getY():"));
+            DEBUG_PRINT(prince.getY());
+            SDEBUG_PRINT(", Adj:");
+            DEBUG_PRINT(adj);
+            #endif
 
             if (adj != 0) {
 
@@ -1358,10 +1422,14 @@ void game() {
                     uint8_t adjustment = static_cast<uint8_t>(pgm_read_byte(&Constants::VertAdjustments[i]));
 
                     if (adjustment > 0) {
-    // Serial.print(", adjustment:");
-    // Serial.print(adjustment);
-    // Serial.print(", base:");
-    // Serial.println(Stance::Vert_Adjustment_1_Start_End);
+
+                        #if defined(DEBUG) && defined(DEBUG_VERT_ADJ)
+                        DEBUG_PRINT(F(", adjustment: "));
+                        DEBUG_PRINT(adjustment);
+                        SDEBUG_PRINT(", Base: ");
+                        DEBUG_PRINT(Stance::Vert_Adjustment_1_Start_End);
+                        #endif
+
                         prince.push(Stance::Vert_Adjustment_1_Start_End - 1 + adjustment, false);
 
                     }
@@ -1369,7 +1437,10 @@ void game() {
                 }
 
             }
-    // Serial.println("");        
+
+            #if defined(DEBUG) && defined(DEBUG_VERT_ADJ)
+            DEBUG_PRINTLN(F(" "));
+            #endif
 
         }
 
