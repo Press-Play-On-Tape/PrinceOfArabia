@@ -311,26 +311,6 @@ struct Prince {
 
         // ----------------------------------------------------------------------------------------------------------
 
-        // // SJH Delete?
-        // void stepForwardOne() {
-
-        //     this->pushSequence(Stance::Step_Fwd_One_1_Start, Stance::Step_Fwd_One_6_End, Stance::Upright, true);
-
-        // }
-
-        // // SJH Delete?
-        // void stepForwardTwo() {
-
-        //     this->pushSequence(Stance::Step_Fwd_Two_1_Start, Stance::Step_Fwd_Two_6_End, Stance::Upright, true);
-
-        // }
-
-        void climbUpwards() {
-
-            this->pushSequence(Stance::Climbing_1_Start, Stance::Climbing_15_End, Stance::Upright_End_Climb, true);
-
-        }
-
         bool isFootDown() {
 
             uint8_t imageIndex = static_cast<uint8_t>(pgm_read_byte(&Constants::StanceToImageXRef[this->stance]));
