@@ -311,19 +311,19 @@ struct Prince {
 
         // ----------------------------------------------------------------------------------------------------------
 
-        // SJH Delete?
-        void stepForwardOne() {
+        // // SJH Delete?
+        // void stepForwardOne() {
 
-            this->pushSequence(Stance::Step_Fwd_One_1_Start, Stance::Step_Fwd_One_6_End, Stance::Upright, true);
+        //     this->pushSequence(Stance::Step_Fwd_One_1_Start, Stance::Step_Fwd_One_6_End, Stance::Upright, true);
 
-        }
+        // }
 
-        // SJH Delete?
-        void stepForwardTwo() {
+        // // SJH Delete?
+        // void stepForwardTwo() {
 
-            this->pushSequence(Stance::Step_Fwd_Two_1_Start, Stance::Step_Fwd_Two_6_End, Stance::Upright, true);
+        //     this->pushSequence(Stance::Step_Fwd_Two_1_Start, Stance::Step_Fwd_Two_6_End, Stance::Upright, true);
 
-        }
+        // }
 
         void climbUpwards() {
 

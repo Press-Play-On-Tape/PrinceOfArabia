@@ -2525,10 +2525,7 @@ struct Level {
             DEBUG_PRINTLN(reach);
             #endif
 
-
-            //SJH below left only!
-
-            int8_t tileXIdx = this->coordToTileIndexX(direction, prince.getPosition(-imageDetails.reach).x) - this->getXLocation() + (direction == Direction::Right ? 1 : 0);
+            int8_t tileXIdx = this->coordToTileIndexX(direction, prince.getPosition(imageDetails.reach).x) - this->getXLocation() + (direction == Direction::Right ? 1 : 0);
             int8_t tileYIdx = this->coordToTileIndexY(direction, prince.getPosition().y) - this->getYLocation();
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_COLLIDEWITHWALL)
