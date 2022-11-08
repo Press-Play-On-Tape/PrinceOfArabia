@@ -4,7 +4,7 @@
 #define DEBUG_PRINT    Serial.print
 #define DEBUG_PRINTLN  Serial.println
 
-#define DEBUG
+#define _DEBUG
 #define DEBUG_ONSCREEN_DETAILS
 #define _DEBUG_ONSCREEN_DETAILS_MIN
 
@@ -24,7 +24,7 @@
 #define _DEBUG_ACTION_CANFALLSOMEMORE
 #define DEBUG_ACTION_COLLIDEWITHWALL
 #define _DEBUG_ACTION_RUNJUMP
-
+#define _DEBUG_ACTION_FALLING
 #define _TIME_AND_LEVEL
 #define TIME_ONLY
 

@@ -1267,6 +1267,11 @@ void game() {
 
         if (fallStraight) {
 
+            #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
+            DEBUG_PRINT(F("Falling straight down, distToEdge: "));
+            DEBUG_PRINTLN(distToEdgeOfCurrentTile);
+            #endif
+            
             switch (distToEdgeOfCurrentTile) {
 
                 case 0:
@@ -1304,6 +1309,11 @@ void game() {
 
         }
         else {
+
+            #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
+            DEBUG_PRINT(F("Falling in arc, x % 12 ="));
+            DEBUG_PRINTLN(prince.getX() % 12);
+            #endif
 
             switch (prince.getX() % 12) {
 
