@@ -955,13 +955,16 @@ struct Level {
             Point newPos = prince.getPosition();
             newPos.x = newPos.x + prince.getDirectionOffset(xOffset);
 
-            uint8_t imageIndex = static_cast<uint8_t>(pgm_read_byte(&Constants::StanceToImageXRef[prince.getStance()]));
-            uint16_t pos = (imageIndex - 1) * 3;
+            ImageDetails imageDetails;
+            prince.getImageDetails(imageDetails);
 
-            int8_t footToe = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 1]));
-            int8_t footHeel = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 2]));
+            // uint8_t imageIndex = static_cast<uint8_t>(pgm_read_byte(&Constants::StanceToImageXRef[prince.getStance()]));
+            // uint16_t pos = (imageIndex - 1) * 3;
 
-            int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), newPos.x + prince.getDirectionOffset(footToe)) - this->getXLocation();
+            // int8_t footToe = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 1]));
+            // int8_t footHeel = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 2]));
+
+            int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), newPos.x + prince.getDirectionOffset(imageDetails.toe)) - this->getXLocation();
             int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), newPos.y) - this->getYLocation();
             
             int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
@@ -975,9 +978,9 @@ struct Level {
             DEBUG_PRINT(F(", r:"));
             DEBUG_PRINT(reach);
             DEBUG_PRINT(F(", ft "));
-            DEBUG_PRINT(footToe);
+            DEBUG_PRINT(imageDetails.toe);
             DEBUG_PRINT(F(", fh "));
-            DEBUG_PRINT(footHeel);
+            DEBUG_PRINT(imageDetails.heel);
             DEBUG_PRINT(F(", bg "));
             DEBUG_PRINT(bgTile1);
             DEBUG_PRINT(F(", fg "));
@@ -986,7 +989,7 @@ struct Level {
             #endif
 
             
-            if (footToe != Constants::InAir) {
+            if (imageDetails.toe != Constants::InAir) {
             
                 canFall = this->canFall(bgTile1, fgTile1, tileXIdx, tileYIdx);
 
@@ -1000,7 +1003,7 @@ struct Level {
                 }
                 else {
 
-                    int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), newPos.x + prince.getDirectionOffset(footHeel)) - this->getXLocation();
+                    int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), newPos.x + prince.getDirectionOffset(imageDetails.heel)) - this->getXLocation();
                     int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), newPos.y) - this->getYLocation();
                     
                     int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
@@ -1012,9 +1015,9 @@ struct Level {
                     DEBUG_PRINT(F(", r:"));
                     DEBUG_PRINT(reach);
                     DEBUG_PRINT(F(", ft "));
-                    DEBUG_PRINT(footToe);
+                    DEBUG_PRINT(imageDetails.toe);
                     DEBUG_PRINT(F(", fh "));
-                    DEBUG_PRINT(footHeel);
+                    DEBUG_PRINT(imageDetails.heel);
                     DEBUG_PRINT(F(", bg "));
                     DEBUG_PRINT(bgTile1);
                     DEBUG_PRINT(F(", fg "));
@@ -2371,6 +2374,8 @@ struct Level {
 
             }
 
+            return CanClimbDownResult::None;
+            
         }
 
         CanClimbDownResult canClimbDown_Test(Prince &prince, Direction direction) {
@@ -2509,13 +2514,9 @@ struct Level {
 
         bool collideWithWall(Prince &prince) {
 
+            ImageDetails imageDetails;
             Direction direction = prince.getDirection();
-
-            uint8_t imageIndex = static_cast<uint8_t>(pgm_read_byte(&Constants::StanceToImageXRef[prince.getStance()]));
-            uint16_t pos = (imageIndex - 1) * 3;
-            int8_t reach = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos]));
-            // int8_t footToe = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 1]));
-            // int8_t footHeel = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 2]));
+            prince.getImageDetails(imageDetails);
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_COLLIDEWITHWALL)
             DEBUG_PRINT("collideWithWall() Stance: ");
@@ -2524,7 +2525,10 @@ struct Level {
             DEBUG_PRINTLN(reach);
             #endif
 
-            int8_t tileXIdx = this->coordToTileIndexX(direction, prince.getPosition(-reach).x) - this->getXLocation() + (direction == Direction::Right ? 1 : 0);
+
+            //SJH below left only!
+
+            int8_t tileXIdx = this->coordToTileIndexX(direction, prince.getPosition(-imageDetails.reach).x) - this->getXLocation() + (direction == Direction::Right ? 1 : 0);
             int8_t tileYIdx = this->coordToTileIndexY(direction, prince.getPosition().y) - this->getYLocation();
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_COLLIDEWITHWALL)

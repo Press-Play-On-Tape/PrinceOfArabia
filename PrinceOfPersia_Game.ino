@@ -12,12 +12,12 @@
 void game_Init() {
 
     // prince.init(66, 25, Direction::Right, Stance::Crouch_3_End, 3);          // Upper gate
-    // prince.init(70, 25 + 31, Direction::Right, Stance::Crouch_3_End, 3);          // Under collapsible floor
+    // prince.init(70, 25 + 31, Direction::Right, Stance::Crouch_3_End, 3);          // 2 leap
     // prince.init(58 +36, 56, Direction::Left, Stance::Crouch_3_End, 3);          // Exit Seq
-    prince.init(6, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
+    // prince.init(6, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
     // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3);          // Both floor types
     // prince.init(86, 87, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos but next to drop floor 3rd floor
-    // prince.init(70, 25, Direction::Left, Stance::Crouch_3_End, 3);          // Under collapsible floor
+    prince.init(78, 25, Direction::Left, Stance::Crouch_3_End, 3);          // Under collapsible floor
     // prince.init(66, 56, Direction::Right, Stance::Crouch_3_End, 3);        // Get tonic
 //    prince.init(50, 87, Direction::Left, Stance::Crouch_3_End, 3);     // Column of climbs
     // prince.init(80, 25, Direction::Right, Stance::Crouch_3_End, 3);     // Top Left
@@ -30,12 +30,12 @@ void game_Init() {
     
     level.setLevel(1);
     // level.init(prince, 50, 0);  // Upper Gate
-    // level.init(prince, 40, 3);  // Under collapsible floor
+    // level.init(prince, 40, 3);  // 2 leap
     // level.init(prince, 80, 3);  // Exit Seq
-    level.init(prince, 60, 0);  // Normal starting posa
+    // level.init(prince, 60, 0);  // Normal starting posa
     // level.init(prince, 20, 3);  // Both floor types
     // level.init(prince, 60, 0);  //Normal starting pos but next to drop floor 3rd floor
-    // level.init(prince, 50, 3);  // Under collapsible floor
+    level.init(prince, 50, 3);  // Under collapsible floor
     // level.init(prince, Constants::TileHeight, 0);   // Get tonic
     // level.init(prince, 0, 3);   // Column of climbs
     // level.init(prince, 0, 0);   // Top left
@@ -1063,15 +1063,17 @@ void game() {
 
                 // Check for floor buttons and collapsing floors ..
 
-                uint8_t imageIndex = static_cast<uint8_t>(pgm_read_byte(&Constants::StanceToImageXRef[prince.getStance()]));
-                uint16_t pos = (imageIndex - 1) * 3;
-                int8_t footToe = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 1]));
-                int8_t footHeel = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 2]));
+                ImageDetails imageDetails;
+                prince.getImageDetails(imageDetails);
+                // uint8_t imageIndex = static_cast<uint8_t>(pgm_read_byte(&Constants::StanceToImageXRef[prince.getStance()]));
+                // uint16_t pos = (imageIndex - 1) * 3;
+                // int8_t footToe = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 1]));
+                // int8_t footHeel = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 2]));
 
 
                 // Test with player's toe ..
 
-                int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x + prince.getDirectionOffset(footToe));
+                int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x + prince.getDirectionOffset(imageDetails.toe));
                 int8_t tileYIdx = level.coordToTileIndexY(prince.getDirection(), prince.getPosition().y);
                 uint8_t itemIdx = level.getItem(ItemType::AnyItem, tileXIdx, tileYIdx);
 
@@ -1080,7 +1082,7 @@ void game() {
 
                 if (itemIdx == Constants::NoItemFound) {
 
-                    tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x + prince.getDirectionOffset(footHeel));
+                    tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x + prince.getDirectionOffset(imageDetails.heel));
                     itemIdx = level.getItem(ItemType::AnyItem, tileXIdx, tileYIdx);
 
                 }
@@ -1163,8 +1165,12 @@ void game() {
 
     if (prince.isFootDown() && level.canFall(prince) && prince.getFalling() == 0) {
 
+        uint8_t distToEdgeOfCurrentTile = level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX());
+
         prince.clear();
-// Serial.pintln("F setFalling(1)");    
+Serial.print("F setFalling(1) D:");  
+Serial.println(distToEdgeOfCurrentTile);
+
         prince.setFalling(1);
         prince.setPrevStance(prince.getStance());
 
@@ -1172,35 +1178,70 @@ void game() {
         DEBUG_PRINTLN(F("Start falling"));
         #endif
 
-        switch (prince.getX() % 12) {
+        if (distToEdgeOfCurrentTile <= 4) {//SJH
 
-            case 0:
-            case 4:
-            case 8:
-                prince.pushSequence(Stance::Falling_StepWalkRun_P0_4_8_1_Start, Stance::Falling_StepWalkRun_P0_4_8_5_Check_CanFall, true);
-                prince.setPrevStance(Stance::Falling_StepWalkRun_P0_4_8_5_Check_CanFall);
-                break;
+            int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x) + (prince.getDirection() == Direction::Left ? -1 : 1);
+            int8_t tileYIdx = level.coordToTileIndexY(prince.getDirection(), prince.getPosition().y) + 1;
 
-            case 1:
-            case 5:
-            case 9:
-                prince.pushSequence(Stance::Falling_StepWalkRun_P1_5_9_1_Start, Stance::Falling_StepWalkRun_P1_5_9_5_Check_CanFall, true);
-                prince.setPrevStance(Stance::Falling_StepWalkRun_P1_5_9_5_Check_CanFall);
-                break;
+            int8_t bgTile = level.getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
+            int8_t fgTile = level.getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
 
-            case 2:
-            case 6:
-            case 10:
-                prince.pushSequence(Stance::Falling_StepWalkRun_P2_6_10_1_Start, Stance::Falling_StepWalkRun_P2_6_10_5_Check_CanFall, true);
-                prince.setPrevStance(Stance::Falling_StepWalkRun_P2_6_10_5_Check_CanFall);
-                break;
+            WallTileResults wallTileResult = level.isWallTile(bgTile, fgTile);
+Serial.print("isWallTile tx ");
+Serial.print(tileXIdx);
+Serial.print(", ty ");
+Serial.print(tileYIdx);
+Serial.print(", bg ");
+Serial.print(bgTile);
+Serial.print(", fg ");
+Serial.print(fgTile);
+Serial.print(" = ");
+Serial.println((uint8_t)wallTileResult);
+            //level.getTile()
 
-            case 3:
-            case 7:
-            case 11:
-                prince.pushSequence(Stance::Falling_StepWalkRun_P3_7_11_1_Start, Stance::Falling_StepWalkRun_P3_7_11_5_Check_CanFall, true);
-                prince.setPrevStance(Stance::Falling_StepWalkRun_P3_7_11_5_Check_CanFall);
-                break;
+
+//            check if wall tile blocking x Direction
+
+        }
+
+        if (false) {
+
+            //Fall directly down.
+
+        }
+        else {
+
+            switch (prince.getX() % 12) {
+
+                case 0:
+                case 4:
+                case 8:
+                    prince.pushSequence(Stance::Falling_StepWalkRun_P0_4_8_1_Start, Stance::Falling_StepWalkRun_P0_4_8_5_Check_CanFall, true);
+                    prince.setPrevStance(Stance::Falling_StepWalkRun_P0_4_8_5_Check_CanFall);
+                    break;
+
+                case 1:
+                case 5:
+                case 9:
+                    prince.pushSequence(Stance::Falling_StepWalkRun_P1_5_9_1_Start, Stance::Falling_StepWalkRun_P1_5_9_5_Check_CanFall, true);
+                    prince.setPrevStance(Stance::Falling_StepWalkRun_P1_5_9_5_Check_CanFall);
+                    break;
+
+                case 2:
+                case 6:
+                case 10:
+                    prince.pushSequence(Stance::Falling_StepWalkRun_P2_6_10_1_Start, Stance::Falling_StepWalkRun_P2_6_10_5_Check_CanFall, true);
+                    prince.setPrevStance(Stance::Falling_StepWalkRun_P2_6_10_5_Check_CanFall);
+                    break;
+
+                case 3:
+                case 7:
+                case 11:
+                    prince.pushSequence(Stance::Falling_StepWalkRun_P3_7_11_1_Start, Stance::Falling_StepWalkRun_P3_7_11_5_Check_CanFall, true);
+                    prince.setPrevStance(Stance::Falling_StepWalkRun_P3_7_11_5_Check_CanFall);
+                    break;
+
+            }
 
         }
 
@@ -1210,7 +1251,7 @@ void game() {
     // If in the air and touching wall, then move backwards ..
 
     if (prince.inAir() && prince.getFalling() == 0) {
-
+Serial.println("touch wall move backwards");
         if (level.collideWithWall(prince)) {
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_COLLIDEWITHWALL)

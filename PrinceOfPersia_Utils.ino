@@ -304,13 +304,13 @@ void showSign(Prince &prince, Level &level, SignType signType, uint8_t counter) 
     switch (signType) {
 
         case SignType::GameOver:
-            sign.data.sign.counter = 20;
+            sign.data.sign.counter = counter;
             sign.data.sign.type = SignType::GameOver;
             sign.x = 39;
             break;
 
         case SignType::PressA:
-            sign.data.sign.counter = 20;
+            sign.data.sign.counter = counter;
             sign.data.sign.type = SignType::PressA;
             sign.x = 24;
             break;
@@ -320,12 +320,12 @@ void showSign(Prince &prince, Level &level, SignType signType, uint8_t counter) 
     switch (prince.getY()) {
 
         case 25:
-            y = 48;
+            sign.y = 48;
             break;
 
         case 56:
         case 87:
-            y = 1;
+            sign.y = 1;
             break;
 
     }

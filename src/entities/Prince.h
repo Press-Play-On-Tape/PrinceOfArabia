@@ -3,6 +3,7 @@
 #include <Arduboy2.h>   
 #include "../utils/Constants.h"
 #include "../utils/Stack.h"
+#include "../entities/Structs.h"
 
 struct Prince {
 
@@ -310,12 +311,14 @@ struct Prince {
 
         // ----------------------------------------------------------------------------------------------------------
 
+        // SJH Delete?
         void stepForwardOne() {
 
             this->pushSequence(Stance::Step_Fwd_One_1_Start, Stance::Step_Fwd_One_6_End, Stance::Upright, true);
 
         }
 
+        // SJH Delete?
         void stepForwardTwo() {
 
             this->pushSequence(Stance::Step_Fwd_Two_1_Start, Stance::Step_Fwd_Two_6_End, Stance::Upright, true);
@@ -348,13 +351,14 @@ struct Prince {
 
         }
 
-        uint8_t getReach() {
+        void getImageDetails(ImageDetails &imageDetails) {
 
             uint8_t imageIndex = static_cast<uint8_t>(pgm_read_byte(&Constants::StanceToImageXRef[this->stance]));
             uint16_t pos = (imageIndex - 1) * 3;
-            int8_t reach = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos]));
 
-            return reach;
+            imageDetails.reach = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos]));
+            imageDetails.toe = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 1]));
+            imageDetails.heel = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 2]));
 
         }
 };

@@ -39,4 +39,12 @@ struct TitleScreenVars {
     }
 
 };
+
+struct ImageDetails {
+
+    int8_t reach;
+    int8_t toe;
+    int8_t heel;
+
+};
  
