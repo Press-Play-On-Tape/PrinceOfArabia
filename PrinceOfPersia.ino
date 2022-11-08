@@ -9,7 +9,7 @@
 #include "src/entities/Entities.h"
 #include "src/fonts/Font3x5.h"
 
-// ARDUBOY_NO_USB
+ARDUBOY_NO_USB
 
 Arduboy2Ext arduboy;
 Font3x5 font3x5 = Font3x5();
