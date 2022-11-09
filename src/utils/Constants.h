@@ -218,10 +218,31 @@ constexpr uint16_t Jump_Up_A_14_End                              = Stance::Jump_
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/* 111 - 115    x: 0, y: 0                                       01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+/* Used when jumping up from a lower ledge to an upper one, such as in the left handside of platforms in level one.  The offset of x = -4 allows a player to jump 'straight' up to a ledge.              */
+/* 111 - 124    x: -4, y: 0                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define JUMP_UP_B_SEQ                                            90,    91,    92,    93,    94,    95,    96,    97,    98,    99,    100,   101,   102,   103,    
+#define JUMP_UP_B_OFFSETS                                        0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   -1,0,  -1,0,  -1,0,  -1,0,  0,0,
+constexpr uint16_t Jump_Up_B_1_Start                             = Stance::Jump_Up_A_14_End + 1;
+constexpr uint16_t Jump_Up_B_2                                   = Stance::Jump_Up_B_1_Start + 1;
+constexpr uint16_t Jump_Up_B_3                                   = Stance::Jump_Up_B_2 + 1;
+constexpr uint16_t Jump_Up_B_4                                   = Stance::Jump_Up_B_3 + 1;
+constexpr uint16_t Jump_Up_B_5                                   = Stance::Jump_Up_B_4 + 1;
+constexpr uint16_t Jump_Up_B_6                                   = Stance::Jump_Up_B_5 + 1;
+constexpr uint16_t Jump_Up_B_7                                   = Stance::Jump_Up_B_6 + 1;
+constexpr uint16_t Jump_Up_B_8                                   = Stance::Jump_Up_B_7 + 1;
+constexpr uint16_t Jump_Up_B_9                                   = Stance::Jump_Up_B_8 + 1;
+constexpr uint16_t Jump_Up_B_10                                  = Stance::Jump_Up_B_9 + 1;
+constexpr uint16_t Jump_Up_B_11                                  = Stance::Jump_Up_B_10 + 1;
+constexpr uint16_t Jump_Up_B_12                                  = Stance::Jump_Up_B_11 + 1;
+constexpr uint16_t Jump_Up_B_13                                  = Stance::Jump_Up_B_12 + 1;
+constexpr uint16_t Jump_Up_B_14_End                              = Stance::Jump_Up_B_13 + 1;
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* 125 - 129    x: 0, y: 0                                       01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define JUMP_UP_DROP_A_SEQ                                       104,   105,   106,   107,   108,
 #define JUMP_UP_DROP_A_OFFSETS                                   0,0,   0,0,   0,0,   0,0,   0,0,
-constexpr uint16_t Jump_Up_Drop_A_1_Start                        = Stance::Jump_Up_A_14_End + 1;  // Drop down to Pos 2
+constexpr uint16_t Jump_Up_Drop_A_1_Start                        = Stance::Jump_Up_B_14_End + 1;  // Drop down to Pos 2
 constexpr uint16_t Jump_Up_Drop_A_2                              = Stance::Jump_Up_Drop_A_1_Start + 1;
 constexpr uint16_t Jump_Up_Drop_A_3                              = Stance::Jump_Up_Drop_A_2 + 1;
 constexpr uint16_t Jump_Up_Drop_A_4                              = Stance::Jump_Up_Drop_A_3 + 1;
@@ -229,10 +250,33 @@ constexpr uint16_t Jump_Up_Drop_A_5_End                          = Stance::Jump_
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/* 116 - 130    x: 4, y: -31                                     01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+/* Used when dropping from an upper ledge to one directly below. The offset of x = +4 allows a player to land directly underneath. Paired with / opposite of Jump_Up_B sequence.                         */
+/* 130 - 134    x: 4, y: 0                                       01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define JUMP_UP_DROP_B_SEQ                                       104,   105,   106,   107,   108,   // Drop to position 10
+#define JUMP_UP_DROP_B_OFFSETS                                   1,0,   1,0,   1,0,   1,0,   0,0, 
+constexpr uint16_t Jump_Up_Drop_B_1_Start                        = Stance::Jump_Up_Drop_A_5_End + 1;  // Drop down to Pos 10
+constexpr uint16_t Jump_Up_Drop_B_2                              = Stance::Jump_Up_Drop_B_1_Start + 1;
+constexpr uint16_t Jump_Up_Drop_B_3                              = Stance::Jump_Up_Drop_B_2 + 1;
+constexpr uint16_t Jump_Up_Drop_B_4                              = Stance::Jump_Up_Drop_B_3 + 1;
+constexpr uint16_t Jump_Up_Drop_B_5_End                          = Stance::Jump_Up_Drop_B_4 + 1;
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* 135 - 139    x: 0, y: 31                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define JUMP_UP_DROP_C_SEQ                                       104,   105,   106,   107,   108,   // Climb down, drop straight down 31 px 
+#define JUMP_UP_DROP_C_OFFSETS                                   0,6,   0,6,   0,6,   0,6,   0,7,
+constexpr uint16_t Jump_Up_Drop_C_1_Start                        = Stance::Jump_Up_Drop_B_5_End + 1;  // Drop down to Pos 2 (two levels)
+constexpr uint16_t Jump_Up_Drop_C_2                              = Stance::Jump_Up_Drop_C_1_Start + 1;
+constexpr uint16_t Jump_Up_Drop_C_3                              = Stance::Jump_Up_Drop_C_2 + 1;
+constexpr uint16_t Jump_Up_Drop_C_4                              = Stance::Jump_Up_Drop_C_3 + 1;
+constexpr uint16_t Jump_Up_Drop_C_5_End                          = Stance::Jump_Up_Drop_C_4 + 1;
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* 140 - 154    x: 4, y: -31                                     01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define STEP_CLIMBING_SEQ                                        75,    76,    77,    78,    79,    80,    81,    82,    83,    84,    85,    86,    87,    88,    89,  
 #define STEP_CLIMBING_OFFSETS                                    0,-4,  0,-4,  0,-2,  0,-3,  0,-2,  0,-2,  0,-3,  0,-3,  0,-1,  1,-3,  1,-2,  0,-1,  1,-1,  1,0,   0,0, 
-constexpr uint16_t Step_Climbing_1_Start                         = Stance::Jump_Up_Drop_A_5_End + 1;  // Climb up / down from a ledge (second part)
+constexpr uint16_t Step_Climbing_1_Start                         = Stance::Jump_Up_Drop_C_5_End + 1;  // Climb up / down from a ledge (second part)
 constexpr uint16_t Step_Climbing_2                               = Stance::Step_Climbing_1_Start + 1;
 constexpr uint16_t Step_Climbing_3                               = Stance::Step_Climbing_2 + 1;
 constexpr uint16_t Step_Climbing_4                               = Stance::Step_Climbing_3 + 1;
@@ -250,7 +294,7 @@ constexpr uint16_t Step_Climbing_15_End                          = Stance::Step_
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/* 131 - 142    x: 0, y: 0                                       01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+/* 155 - 166    x: 0, y: 0                                       01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define CROUCH_STAND_SEQ                                         109,   110,   111,   112,   113,   114,   115,   116,   117,   118,   119,   120,
 #define CROUCH_STAND_OFFSETS                                     0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,
 constexpr uint16_t Crouch_Stand_1_Start                          = Stance::Step_Climbing_15_End + 1;
@@ -268,7 +312,7 @@ constexpr uint16_t Crouch_Stand_12_End                           = Stance::Crouc
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/* 143 - 145    x: 0, y: 0                                       01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+/* 167 - 169    x: 0, y: 0                                       01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define CROUCH_SEQ                                               126,   109,   110,   
 #define CROUCH_OFFSETS                                           0,0,   0,0,   0,0, 
 constexpr uint16_t Crouch_1_Start                                = Stance::Crouch_Stand_12_End + 1;
@@ -277,7 +321,7 @@ constexpr uint16_t Crouch_3_End                                  = Stance::Crouc
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/* 146 - 152    x: 4, y: 0                                       01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+/* 170 - 176    x: 4, y: 0                                       01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define CROUCH_HOP_SEQ                                           110,   111,   112,   113,   112,   111,   110, 
 #define CROUCH_HOP_OFFSETS                                       0,0,   1,0,   1,0,   1,0,   1,0,   0,0,   0,0,
 constexpr uint16_t Crouch_HOP_1_Start                            = Stance::Crouch_3_End + 1;
@@ -290,7 +334,8 @@ constexpr uint16_t Crouch_HOP_7_End                              = Stance::Crouc
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/* 153 - 161    x: 0, y: 0                                       01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+/* Used when climbing up from a hanging position on a ledge where the climb is blocked by a gate or other obstacle                                                                                       */
+/* 177 - 185    x: 0, y: 0                                       01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define STEP_CLIMBINB_BLOCK_SEQ                                  75,    76,    77,    78,    79,    78,    77,    76,    75, 
 #define STEP_CLIMBINB_BLOCK_OFFSETS                              0,-4,  0,-4,  0,-2,  0,-3,  0,0,   0,3,   0,2,   0,4,   0,4,
 constexpr uint16_t Step_Climbing_Block_1_Start                   = Stance::Crouch_HOP_7_End + 1;
@@ -305,41 +350,11 @@ constexpr uint16_t Step_Climbing_Block_9_End                     = Stance::Step_
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/* 162 - 175    x: -4, y: 0                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
-#define JUMP_UP_B_SEQ                                            90,    91,    92,    93,    94,    95,    96,    97,    98,    99,    100,   101,   102,   103,    
-#define JUMP_UP_B_OFFSETS                                        0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   -1,0,  -1,0,  -1,0,  -1,0,  0,0,
-constexpr uint16_t Jump_Up_B_1_Start                             = Stance::Step_Climbing_Block_9_End + 1;
-constexpr uint16_t Jump_Up_B_2                                   = Stance::Jump_Up_B_1_Start + 1;
-constexpr uint16_t Jump_Up_B_3                                   = Stance::Jump_Up_B_2 + 1;
-constexpr uint16_t Jump_Up_B_4                                   = Stance::Jump_Up_B_3 + 1;
-constexpr uint16_t Jump_Up_B_5                                   = Stance::Jump_Up_B_4 + 1;
-constexpr uint16_t Jump_Up_B_6                                   = Stance::Jump_Up_B_5 + 1;
-constexpr uint16_t Jump_Up_B_7                                   = Stance::Jump_Up_B_6 + 1;
-constexpr uint16_t Jump_Up_B_8                                   = Stance::Jump_Up_B_7 + 1;
-constexpr uint16_t Jump_Up_B_9                                   = Stance::Jump_Up_B_8 + 1;
-constexpr uint16_t Jump_Up_B_10                                  = Stance::Jump_Up_B_9 + 1;
-constexpr uint16_t Jump_Up_B_11                                  = Stance::Jump_Up_B_10 + 1;
-constexpr uint16_t Jump_Up_B_12                                  = Stance::Jump_Up_B_11 + 1;
-constexpr uint16_t Jump_Up_B_13                                  = Stance::Jump_Up_B_12 + 1;
-constexpr uint16_t Jump_Up_B_14_End                              = Stance::Jump_Up_B_13 + 1;
-
-
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/* 176 - 180    x: 4, y: 0                                       01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
-#define JUMP_UP_DROP_B_SEQ                                       104,   105,   106,   107,   108,   // Drop to position 10
-#define JUMP_UP_DROP_B_OFFSETS                                   1,0,   1,0,   1,0,   1,0,   0,0, 
-constexpr uint16_t Jump_Up_Drop_B_1_Start                        = Stance::Jump_Up_B_14_End + 1;  // Drop down to Pos 10
-constexpr uint16_t Jump_Up_Drop_B_2                              = Stance::Jump_Up_Drop_B_1_Start + 1;
-constexpr uint16_t Jump_Up_Drop_B_3                              = Stance::Jump_Up_Drop_B_2 + 1;
-constexpr uint16_t Jump_Up_Drop_B_4                              = Stance::Jump_Up_Drop_B_3 + 1;
-constexpr uint16_t Jump_Up_Drop_B_5_End                          = Stance::Jump_Up_Drop_B_4 + 1;
-
-
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/* 181 - 195    x: 0, y: 0                                       01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+/* Drink the tonic!  Drink_Tonic_14 triggers a health increase.                                                                                                                                          */
+/* 186 - 200    x: 0, y: 0                                       01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define DRINK_TONIC_SEQ                                          127,   128,   129,   130,   131,   132,   133,   134,   135,   136,   137,   138,   139,   140,   141,  
 #define DRINK_TONIC_OFFSETS                                      0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,
-constexpr uint16_t Drink_Tonic_1_Start                           = Stance::Jump_Up_Drop_B_5_End + 1; 
+constexpr uint16_t Drink_Tonic_1_Start                           = Stance::Step_Climbing_Block_9_End + 1; 
 constexpr uint16_t Drink_Tonic_2                                 = Stance::Drink_Tonic_1_Start + 1;
 constexpr uint16_t Drink_Tonic_3                                 = Stance::Drink_Tonic_2 + 1;
 constexpr uint16_t Drink_Tonic_4                                 = Stance::Drink_Tonic_3 + 1;
@@ -357,21 +372,10 @@ constexpr uint16_t Drink_Tonic_15_End                            = Stance::Drink
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/* 196 - 200    x: 0, y: 31                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
-#define JUMP_UP_DROP_C_SEQ                                       104,   105,   106,   107,   108,   // Climb down, drop straight down 31 px 
-#define JUMP_UP_DROP_C_OFFSETS                                   0,6,   0,6,   0,6,   0,6,   0,7,
-constexpr uint16_t Jump_Up_Drop_C_1_Start                        = Stance::Drink_Tonic_15_End + 1;  // Drop down to Pos 2 (two levels)
-constexpr uint16_t Jump_Up_Drop_C_2                              = Stance::Jump_Up_Drop_C_1_Start + 1;
-constexpr uint16_t Jump_Up_Drop_C_3                              = Stance::Jump_Up_Drop_C_2 + 1;
-constexpr uint16_t Jump_Up_Drop_C_4                              = Stance::Jump_Up_Drop_C_3 + 1;
-constexpr uint16_t Jump_Up_Drop_C_5_End                          = Stance::Jump_Up_Drop_C_4 + 1;
-
-
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /* 201 - 202    x: 0, y: 0                                       01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define FALLING_INJURED_SEQ                                      125,   126, 
 #define FALLING_INJURED_OFFSETS                                  0,0,   0,0,
-constexpr uint16_t Falling_Injured_1_Start                       = Stance::Jump_Up_Drop_C_5_End + 1;  // Climbing down, falling two levels
+constexpr uint16_t Falling_Injured_1_Start                       = Stance::Drink_Tonic_15_End + 1;  // Climbing down, falling two levels
 constexpr uint16_t Falling_Injured_2_End                         = Stance::Falling_Injured_1_Start + 1;
 
 
@@ -606,16 +610,16 @@ namespace Constants {
         CLIMBING_SEQ
         SMALL_STEP_SEQ
         JUMP_UP_A_SEQ
+        JUMP_UP_B_SEQ
         JUMP_UP_DROP_A_SEQ
+        JUMP_UP_DROP_B_SEQ
+        JUMP_UP_DROP_C_SEQ
         STEP_CLIMBING_SEQ
         CROUCH_STAND_SEQ
         CROUCH_SEQ
         CROUCH_HOP_SEQ
         STEP_CLIMBINB_BLOCK_SEQ
-        JUMP_UP_B_SEQ
-        JUMP_UP_DROP_B_SEQ
         DRINK_TONIC_SEQ
-        JUMP_UP_DROP_C_SEQ
         FALLING_INJURED_SEQ
         FALLING_DEAD_SEQ
         RUN_REPEAT_8_END_SEQ
@@ -647,16 +651,16 @@ namespace Constants {
         CLIMBING_OFFSETS
         SMALL_STEP_OFFSETS
         JUMP_UP_A_OFFSETS
+        JUMP_UP_B_OFFSETS
         JUMP_UP_DROP_A_OFFSETS
+        JUMP_UP_DROP_B_OFFSETS
+        JUMP_UP_DROP_C_OFFSETS
         STEP_CLIMBING_OFFSETS
         CROUCH_STAND_OFFSETS
         CROUCH_OFFSETS
         CROUCH_HOP_OFFSETS
         STEP_CLIMBINB_BLOCK_OFFSETS
-        JUMP_UP_B_OFFSETS
-        JUMP_UP_DROP_B_OFFSETS
         DRINK_TONIC_OFFSETS
-        JUMP_UP_DROP_C_OFFSETS
         FALLING_INJURED_OFFSETS
         FALLING_DEAD_OFFSETS
         RUN_REPEAT_8_END_OFFSETS
