@@ -68,20 +68,24 @@ void getStance_Offsets(Direction direction, Point &offset, int16_t stance) {
 
 void processRunJump(Prince &prince, Level &level) {
 
-    if (level.canMoveForward(prince, Action::RunJump_1)) {
+    if (level.canRunningJump(prince, Action::RunJump_1)) {
+Serial.println("Can Jump 1");
+        if (level.canRunningJump(prince, Action::RunJump_2)) {
+Serial.println("Can Jump 2");
 
-        if (level.canMoveForward(prince, Action::RunJump_2)) {
-
-            if (level.canMoveForward(prince, Action::RunJump_3)) {
+            if (level.canRunningJump(prince, Action::RunJump_3)) {
+Serial.println("Can Jump 3");
 
                 #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
                 DEBUG_PRINTLN(F("RunningJump_3 true, Jump"));
                 #endif
 
-                prince.pushSequence(Stance::Running_Jump_1_Start, Stance::Running_Jump_11_End, Stance::Run_Repeat_4, true);
+                // prince.pushSequence(Stance::Running_Jump_1_Start, Stance::Running_Jump_11_End, Stance::Run_Repeat_4, true);
+                prince.pushSequence(Stance::Running_Jump_Short_1_Start, Stance::Running_Jump_Short_7_End, Stance::Run_Repeat_4, true);
 
             }
             else {
+Serial.println("Cannot Jump 3");
 
                 #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
                 DEBUG_PRINTLN(F("RunningJump_3 false, RunRepeat"));
@@ -93,6 +97,7 @@ void processRunJump(Prince &prince, Level &level) {
 
         }
         else {
+Serial.println("Cannot Jump 2");
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
             DEBUG_PRINTLN(F("RunningJump_2 false, RunRepeat"));
@@ -104,6 +109,7 @@ void processRunJump(Prince &prince, Level &level) {
 
     }
     else {
+Serial.println("Cannot Jump 1");
 
         #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
         DEBUG_PRINTLN(F("RunningJump_1 false, Stopping"));

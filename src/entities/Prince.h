@@ -26,6 +26,7 @@ struct Prince {
         uint8_t health = 0;
         uint8_t healthMax = 0;
         bool sword = false;
+        bool ignoreWallCollisions = false;
 
         Point location;
 
@@ -44,6 +45,7 @@ struct Prince {
         uint8_t getHealth()                         { return this->health; }
         uint8_t getHealthMax()                      { return this->healthMax; }
         bool getSword()                             { return this->sword; }
+        bool getIgnoreWallCollisions()              { return this->ignoreWallCollisions; }
 
         Stack <int16_t, 30>  * getStack()           { return this->stack; }
         Direction getDirection()                    { return this->direction; }
@@ -60,6 +62,7 @@ struct Prince {
         void setHealth(uint8_t val)                 { this->health = val; }
         void setHealthMax(uint8_t val)              { this->healthMax = val; }
         void setSword(bool val)                     { this->sword = val; }
+        void setIgnoreWallCollisions(bool val)      { this->ignoreWallCollisions = val; }
 
         void incFalling()                           { this->falling++; }
         void decHealth(uint8_t val)                 { health > val ? this->health = this->health - val: 0; }
@@ -100,6 +103,7 @@ struct Prince {
             this->health = health;
             this->healthMax = health;
             this->sword = false;
+            this->ignoreWallCollisions = false;
 
         }
 

@@ -11,18 +11,19 @@
 
 void game_Init() {
 
+    // prince.init(78 + 24, 25, Direction::Left, Stance:: Crouch_3_End, 3);          // Jump 2
     // prince.init(18, 25+31, Direction::Right,Stance:: Crouch_3_End, 3);          // Sword fight
     // prince.init(58, 25+31+31, Direction::Right, Stance::Crouch_3_End, 3);          // Second drink tonic
     // prince.init(66, 25, Direction::Right, Stance::Crouch_3_End, 3);          // Upper gate
     // prince.init(70, 25 + 31, Direction::Right, Stance::Crouch_3_End, 3);          // 2 leap
     // prince.init(58 +36, 56, Direction::Left, Stance::Crouch_3_End, 3);          // Exit Seq
-    prince.init(38-24, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
+    // prince.init(38-24, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
     // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3);          // Both floor types
     // prince.init(86, 87, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos but next to drop floor 3rd floor
     // prince.init(78, 25, Direction::Left, Stance::Crouch_3_End, 3);          // Under collapsible floor
     // prince.init(66, 56, Direction::Right, Stance::Crouch_3_End, 3);        // Get tonic
 //    prince.init(50, 87, Direction::Left, Stance::Crouch_3_End, 3);     // Column of climbs
-    // prince.init(80, 25, Direction::Right, Stance::Crouch_3_End, 3);     // Top Left
+    prince.init(80, 25, Direction::Right, Stance::Crouch_3_End, 3);     // Top Left
     // prince.init(18, 25, Direction::Right,Stance:: Crouch_3_End, 3);          // Long Fall
     // prince.init(18, 56, Direction::Right, Stance::Crouch_3_End, 3);          // problem
     // prince.init(98, 87, Direction::Left, Stance::Crouch_3_End, 3);          // At bottom of tthree level drop.
@@ -31,18 +32,19 @@ void game_Init() {
     gamePlay.init(arduboy, 1);
     
     level.setLevel(1);
+    level.init(prince, 30, 3);  // Jump 2
     // level.init(prince, 70, 3);  // Sword fight
     // level.init(prince, 50, 0);  // Second drink tonic
     // level.init(prince, 50, 0);  // Upper Gate
     // level.init(prince, 40, 3);  // 2 leap
     // level.init(prince, 80, 3);  // Exit Seq
-    level.init(prince, 60, 0);  // Normal starting posa
+    // level.init(prince, 60, 0);  // Normal starting posa
     // level.init(prince, 20, 3);  // Both floor types
     // level.init(prince, 60, 0);  //Normal starting pos but next to drop floor 3rd floor
     // level.init(prince, 50, 3);  // Under collapsible floor
     // level.init(prince, Constants::TileHeight, 0);   // Get tonic
     // level.init(prince, 0, 3);   // Column of climbs
-    // level.init(prince, 0, 0);   // Top left
+    level.init(prince, 0, 0);   // Top left
     // level.init(prince, 40, 4);  // Long Fall
     // level.init(prince, 60, 3);  // problem
     // level.init(prince, 30, 6); // At bottom of tthree level drop.
@@ -217,10 +219,26 @@ void game() {
                         }
                         else if (pressed & A_BUTTON) {
 
-                            if (level.canMoveForward(prince, Action::StandingJump)) {
-                                prince.pushSequence(Stance::Standing_Jump_1_Start, Stance::Standing_Jump_18_End, Stance::Upright, true);
-                                break;
+                            StandingJumpResult standingJumpResult = level.canStandingJump(prince);
+
+                            switch (standingJumpResult) {
+
+                                case StandingJumpResult::DropLevel:
+                                    prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
+                                    prince.pushSequence(Stance::Standing_Jump_DropLvl_1_Start, Stance::Standing_Jump_DropLvl_16_End, true);
+                                    prince.setIgnoreWallCollisions(true);
+                                    break;
+
+                                case StandingJumpResult::Normal:
+                                    prince.pushSequence(Stance::Standing_Jump_1_Start, Stance::Standing_Jump_18_End, Stance::Upright, true);
+                                    break;
+
+                                case StandingJumpResult::None:
+                                    break;
+
                             }
+
+                            break;
 
                         }
                         
@@ -259,10 +277,26 @@ void game() {
                         }
                         else if (pressed & A_BUTTON) {
 
-                            if (level.canMoveForward(prince, Action::StandingJump)) {
-                                prince.pushSequence(Stance::Standing_Jump_1_Start, Stance::Standing_Jump_18_End, Stance::Upright, true);
-                                break;
+                            StandingJumpResult standingJumpResult = level.canStandingJump(prince);
+
+                            switch (standingJumpResult) {
+
+                                case StandingJumpResult::DropLevel:
+                                    prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
+                                    prince.pushSequence(Stance::Standing_Jump_DropLvl_1_Start, Stance::Standing_Jump_DropLvl_16_End, true);
+                                    prince.setIgnoreWallCollisions(true);
+                                    break;
+
+                                case StandingJumpResult::Normal:
+                                    prince.pushSequence(Stance::Standing_Jump_1_Start, Stance::Standing_Jump_18_End, Stance::Upright, true);
+                                    break;
+
+                                case StandingJumpResult::None:
+                                    break;
+
                             }
+
+                            break;
 
                         }
 
@@ -537,7 +571,7 @@ void game() {
                     break;
 
                 case Stance::Run_Repeat_4:
-
+// Serial.println("Run Repeat 4");
                     if (prince.getDirection() == Direction::Right) {
                             
                         if ((pressed & RIGHT_BUTTON) && (pressed & A_BUTTON)) {
@@ -545,7 +579,7 @@ void game() {
                             #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
                             DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jump from Run_Repeat_4"));
                             #endif
-
+// Serial.println("A");
                             processRunJump(prince, level);
 
                         }
@@ -594,6 +628,8 @@ void game() {
                             #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
                             DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jump from Run_Repeat_4"));
                             #endif
+// Serial.println("B");
+
                             processRunJump(prince, level);
 
                         }
@@ -639,7 +675,7 @@ void game() {
                 case Stance::Run_Start_6_End:
                 case Stance::Run_Repeat_8_End:
                 case Stance::Run_Repeat_8_End_Turn:
-
+// Serial.println("Run Repeat 6, 8");
                     if (prince.getDirection() == Direction::Right) {
                                         
                         if ((pressed & RIGHT_BUTTON) && (pressed & A_BUTTON)) {
@@ -647,6 +683,7 @@ void game() {
                             #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
                             DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jump from Run_Start_6_End, Run_Repeat_8_End or Run_Repeat_8_End_Turn"));
                             #endif
+// Serial.println("C");
 
                             processRunJump(prince, level);
 
@@ -696,6 +733,7 @@ void game() {
                             #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
                             DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jump from Run_Start_6_End, Run_Repeat_8_End or Run_Repeat_8_End_Turn"));
                             #endif
+// Serial.println("D");
 
                             processRunJump(prince, level);
 
@@ -1221,6 +1259,14 @@ void game() {
             #endif
 
         }
+        else {
+
+
+            // Nothing in the queue .. stand around doing nothing !
+
+            prince.setIgnoreWallCollisions(false);
+
+        }
 
     }
 
@@ -1233,7 +1279,7 @@ void game() {
     // ---------------------------------------------------------------------------------------------------------------------------------------
 
 
-    if (prince.isFootDown() && level.canFall(prince) && prince.getFalling() == 0) {
+    if (!prince.getIgnoreWallCollisions() && prince.isFootDown() && level.canFall(prince) && prince.getFalling() == 0) {
 
         uint8_t distToEdgeOfCurrentTile = level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX());
                                             
@@ -1356,105 +1402,101 @@ void game() {
 
     // If in the air and touching wall, then move backwards ..
 
-    if (prince.inAir() && prince.getFalling() == 0) {
+    if (!prince.getIgnoreWallCollisions() && prince.inAir() && prince.getFalling() == 0 && level.collideWithWall(prince)) {
 
-        if (level.collideWithWall(prince)) {
+        #if defined(DEBUG) && defined(DEBUG_ACTION_COLLIDEWITHWALL)
+        DEBUG_PRINT(F("Collide with wall - X:"));
+        DEBUG_PRINT(prince.getX());
+        DEBUG_PRINT(", Y:");
+        DEBUG_PRINT(prince.getY());
+        DEBUG_PRINT(", Coll:");
+        DEBUG_PRINTLN(level.collideWithWall(prince));
+        #endif
 
-            #if defined(DEBUG) && defined(DEBUG_ACTION_COLLIDEWITHWALL)
-            DEBUG_PRINT(F("Collide with wall - X:"));
-            DEBUG_PRINT(prince.getX());
-            DEBUG_PRINT(", Y:");
-            DEBUG_PRINT(prince.getY());
-            DEBUG_PRINT(", Coll:");
-            DEBUG_PRINTLN(level.collideWithWall(prince));
-            #endif
+        #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
+        DEBUG_PRINTLN(F("Collide with wall, setFalling(1)"));
+        #endif
 
-            #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
-            DEBUG_PRINTLN(F("Collide with wall, setFalling(1)"));
-            #endif
-
-            prince.clear();
-            prince.setFalling(1);
+        prince.clear();
+        prince.setFalling(1);
 
 
-            // Do we need to apply any horizontal adjustment?
+        // Do we need to apply any horizontal adjustment?
 
-            switch (prince.getX() % 12) {
+        switch (prince.getX() % 12) {
 
-                case 0:
-                    prince.push(Stance::Collide_Wall_M2_Start_End, false);
-                    break;
+            case 0:
+                prince.push(Stance::Collide_Wall_M2_Start_End, false);
+                break;
 
-                case 1:
-                case 5:
-                case 9:
-                case 3:
-                    prince.push(Stance::Collide_Wall_M1_Start_End, false);
-                    break;
+            case 1:
+            case 5:
+            case 9:
+            case 3:
+                prince.push(Stance::Collide_Wall_M1_Start_End, false);
+                break;
 
-                case 2:
-                case 6:
-                case 10:
-                    prince.push(Stance::Collide_Wall_P0_Start_End, false);
-                    break;
+            case 2:
+            case 6:
+            case 10:
+                prince.push(Stance::Collide_Wall_P0_Start_End, false);
+                break;
 
-                // case 3:
-                case 7:
-                case 11:
-                    prince.push(Stance::Collide_Wall_P1_Start_End, false);
-                    break;
+            // case 3:
+            case 7:
+            case 11:
+                prince.push(Stance::Collide_Wall_P1_Start_End, false);
+                break;
 
-                case 4:
-                case 8:
-                case 12:
-                    prince.push(Stance::Collide_Wall_P2_Start_End, false);
-                    break;
+            case 4:
+            case 8:
+            case 12:
+                prince.push(Stance::Collide_Wall_P2_Start_End, false);
+                break;
 
-            }                    
+        }                    
 
 
-            // Do we need to apply some vertical adjustment?
-            
-            uint8_t adj = (prince.getY() - 25) % 31;
+        // Do we need to apply some vertical adjustment?
+        
+        uint8_t adj = (prince.getY() - 25) % 31;
 
-            #if defined(DEBUG) && defined(DEBUG_VERT_ADJ)
-            DEBUG_PRINT(F("Vert AJD, prince.getY():"));
-            DEBUG_PRINT(prince.getY());
-            SDEBUG_PRINT(", Adj:");
-            DEBUG_PRINT(adj);
-            #endif
+        #if defined(DEBUG) && defined(DEBUG_VERT_ADJ)
+        DEBUG_PRINT(F("Vert AJD, prince.getY():"));
+        DEBUG_PRINT(prince.getY());
+        SDEBUG_PRINT(", Adj:");
+        DEBUG_PRINT(adj);
+        #endif
 
-            if (adj != 0) {
+        if (adj != 0) {
 
-                adj = 31 - adj;
-                adj = (adj - 1) * 5;
+            adj = 31 - adj;
+            adj = (adj - 1) * 5;
 
-                for (uint8_t i = adj; i < adj + 5; i++) {
-                    
-                    uint8_t adjustment = static_cast<uint8_t>(pgm_read_byte(&Constants::VertAdjustments[i]));
+            for (uint8_t i = adj; i < adj + 5; i++) {
+                
+                uint8_t adjustment = static_cast<uint8_t>(pgm_read_byte(&Constants::VertAdjustments[i]));
 
-                    if (adjustment > 0) {
+                if (adjustment > 0) {
 
-                        #if defined(DEBUG) && defined(DEBUG_VERT_ADJ)
-                        DEBUG_PRINT(F(", adjustment: "));
-                        DEBUG_PRINT(adjustment);
-                        SDEBUG_PRINT(", Base: ");
-                        DEBUG_PRINT(Stance::Vert_Adjustment_1_Start_End);
-                        #endif
+                    #if defined(DEBUG) && defined(DEBUG_VERT_ADJ)
+                    DEBUG_PRINT(F(", adjustment: "));
+                    DEBUG_PRINT(adjustment);
+                    SDEBUG_PRINT(", Base: ");
+                    DEBUG_PRINT(Stance::Vert_Adjustment_1_Start_End);
+                    #endif
 
-                        prince.push(Stance::Vert_Adjustment_1_Start_End - 1 + adjustment, false);
-
-                    }
+                    prince.push(Stance::Vert_Adjustment_1_Start_End - 1 + adjustment, false);
 
                 }
 
             }
 
-            #if defined(DEBUG) && defined(DEBUG_VERT_ADJ)
-            DEBUG_PRINTLN(F(" "));
-            #endif
-
         }
+
+        #if defined(DEBUG) && defined(DEBUG_VERT_ADJ)
+        DEBUG_PRINTLN(F(" "));
+        #endif
 
     }
 
