@@ -97,8 +97,8 @@ void processRunJump(Prince &prince, Level &level) {
                     break;
 
                 case RunningJumpResult::Jump3_KeepLevel:
-                    // Serial.println("RunningJumpResult::Jump3_KeepLevel");
-                    prince.pushSequence(Stance::Running_Jump_Short_1_Start, Stance::Running_Jump_Short_7_End,  Stance::Run_Repeat_4, true);
+                    Serial.println("RunningJumpResult::Jump3_KeepLevel");
+                    prince.pushSequence(Stance::Running_Jump_3_SameLvl_1_Start, Stance::Running_Jump_3_SameLvl_8_End,  Stance::Run_Repeat_4, true);
                     prince.setIgnoreWallCollisions(true);
                     break;
 

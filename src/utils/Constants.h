@@ -645,8 +645,8 @@ constexpr uint16_t Running_Jump_3_DropLvl_14_End                 = Stance::Runni
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /* 016 - 026     x: 33, y: 0                                     01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
-#define RUNNING_JUMP_3_SAMELVL_SEQ                               20,    21,    22,    23,    24,    25,    26,
-#define RUNNING_JUMP_3_SAMELVL_OFFSETS                           5,0,   6,0,   6,0,   6,-2,  6,-2,  4,3,   2,1,
+#define RUNNING_JUMP_3_SAMELVL_SEQ                               20,    21,    22,    23,    169,   24,    25,    26,
+#define RUNNING_JUMP_3_SAMELVL_OFFSETS                           5,0,   6,0,   6,0,   7,-2,  7,0,   6,-2,  4,3,   2,1,
 constexpr uint16_t Running_Jump_3_SameLvl_1_Start                = Stance::Running_Jump_3_DropLvl_14_End + 1;
 constexpr uint16_t Running_Jump_3_SameLvl_2                      = Stance::Running_Jump_3_SameLvl_1_Start + 1;
 constexpr uint16_t Running_Jump_3_SameLvl_3                      = Stance::Running_Jump_3_SameLvl_2 + 1;
