@@ -68,30 +68,61 @@ void getStance_Offsets(Direction direction, Point &offset, int16_t stance) {
 
 void processRunJump(Prince &prince, Level &level) {
 
-    if (level.canRunningJump(prince, Action::RunJump_1)) {
-Serial.println("Can Jump 1");
-        if (level.canRunningJump(prince, Action::RunJump_2)) {
-Serial.println("Can Jump 2");
+    RunningJumpResult jump_1_Result = level.canRunningJump(prince, Action::RunJump_1);
 
-            if (level.canRunningJump(prince, Action::RunJump_3)) {
-Serial.println("Can Jump 3");
+    if (jump_1_Result != RunningJumpResult::None) {
+// Serial.println("Can Jump 1");
 
-                #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
-                DEBUG_PRINTLN(F("RunningJump_3 true, Jump"));
-                #endif
+        RunningJumpResult jump_2_Result = level.canRunningJump(prince, Action::RunJump_2);
 
-                // prince.pushSequence(Stance::Running_Jump_1_Start, Stance::Running_Jump_11_End, Stance::Run_Repeat_4, true);
-                prince.pushSequence(Stance::Running_Jump_Short_1_Start, Stance::Running_Jump_Short_7_End, Stance::Run_Repeat_4, true);
+        if (jump_2_Result != RunningJumpResult::None) {
+// Serial.println("Can Jump 2");
 
-            }
-            else {
-Serial.println("Cannot Jump 3");
+            RunningJumpResult jump_3_Result = level.canRunningJump(prince, Action::RunJump_3);
 
-                #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
-                DEBUG_PRINTLN(F("RunningJump_3 false, RunRepeat"));
-                #endif
+            switch (jump_3_Result) {
 
-                prince.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_4, true);
+                case RunningJumpResult::Jump4_DropLevel:
+                    Serial.println("RunningJumpResult::Jump4_DropLevel");
+                    prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
+                    prince.pushSequence(Stance::Running_Jump_4_DropLvl_1_Start, Stance::Running_Jump_4_DropLvl_14_End, true);
+                    prince.setIgnoreWallCollisions(true);
+                    break;
+
+                case RunningJumpResult::Jump3_DropLevel:
+                    Serial.println("RunningJumpResult::Jump3_DropLevel");
+                    prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
+                    prince.pushSequence(Stance::Running_Jump_3_DropLvl_1_Start, Stance::Running_Jump_3_DropLvl_14_End, true);
+                    prince.setIgnoreWallCollisions(true);
+                    break;
+
+                case RunningJumpResult::Jump3_KeepLevel:
+                    Serial.println("RunningJumpResult::Jump3_KeepLevel");
+                    prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
+                    prince.pushSequence(Stance::Running_Jump_4_DropLvl_1_Start, Stance::Running_Jump_4_DropLvl_14_End, true);
+                    prince.setIgnoreWallCollisions(true);
+                    break;
+
+                case RunningJumpResult::Normal:
+                    // Serial.println("RunningJumpResult::Normal");
+                    #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
+                    DEBUG_PRINTLN(F("RunningJump_3 true, Jump"));
+                    #endif
+
+                    // prince.pushSequence(Stance::Running_Jump_1_Start, Stance::Running_Jump_11_End, Stance::Run_Repeat_4, true);
+                    prince.pushSequence(Stance::Running_Jump_Short_1_Start, Stance::Running_Jump_Short_7_End, Stance::Run_Repeat_4, true);
+
+                    break;
+
+                case RunningJumpResult::None:
+
+                    // Serial.println("RunningJumpResult::None");
+                    #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
+                    DEBUG_PRINTLN(F("RunningJump_3 false, RunRepeat"));
+                    #endif
+
+                    prince.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_4, true);
+                    break;
 
             }
 
