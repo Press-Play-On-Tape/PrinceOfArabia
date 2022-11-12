@@ -425,6 +425,7 @@ namespace Images {
     image_t Prince_Left_166 = "../images/prince/left/166_Leave_Gate_10.png"
     image_t Prince_Left_167 = "../images/prince/left/167_Leave_Gate_11.png"
     image_t Prince_Left_168 = "../images/prince/left/168_Leave_Gate_12_End.png"
+    image_t Prince_Left_168 = "../images/prince/left/169_Running_Jump_8A.png"
 
 
     // RHS Images ..
@@ -597,6 +598,8 @@ namespace Images {
     image_t Prince_Right_166 = "../images/prince/right/166_Leave_Gate_10.png"
     image_t Prince_Right_167 = "../images/prince/right/167_Leave_Gate_11.png"
     image_t Prince_Right_168 = "../images/prince/right/168_Leave_Gate_12_End.png"
+    image_t Prince_Right_168 = "../images/prince/right/169_Running_Jump_8A.png"
+
 }
 
 namespace_end
