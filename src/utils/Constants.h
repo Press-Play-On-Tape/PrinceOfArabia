@@ -649,12 +649,12 @@ constexpr uint16_t Running_Jump_3_DropLvl_14_End                 = Stance::Runni
 #define RUNNING_JUMP_3_SAMELVL_OFFSETS                           5,0,   6,0,   6,0,   6,-2,  6,-2,  4,3,   2,1,
 constexpr uint16_t Running_Jump_3_SameLvl_1_Start                = Stance::Running_Jump_3_DropLvl_14_End + 1;
 constexpr uint16_t Running_Jump_3_SameLvl_2                      = Stance::Running_Jump_3_SameLvl_1_Start + 1;
-constexpr uint16_t Running_Jump_3_SameLvl_3                      = Stance::Running_Jump_3_SameLvl_3 + 1;
-constexpr uint16_t Running_Jump_3_SameLvl_4                      = Stance::Running_Jump_3_SameLvl_4 + 1;
-constexpr uint16_t Running_Jump_3_SameLvl_5                      = Stance::Running_Jump_3_SameLvl_5 + 1;
-constexpr uint16_t Running_Jump_3_SameLvl_6                      = Stance::Running_Jump_3_SameLvl_6 + 1;
-constexpr uint16_t Running_Jump_3_SameLvl_7                      = Stance::Running_Jump_3_SameLvl_7 + 1;
-constexpr uint16_t Running_Jump_3_SameLvl_8_End                  = Stance::Running_Jump_3_SameLvl_8 + 1;
+constexpr uint16_t Running_Jump_3_SameLvl_3                      = Stance::Running_Jump_3_SameLvl_2 + 1;
+constexpr uint16_t Running_Jump_3_SameLvl_4                      = Stance::Running_Jump_3_SameLvl_3 + 1;
+constexpr uint16_t Running_Jump_3_SameLvl_5                      = Stance::Running_Jump_3_SameLvl_4 + 1;
+constexpr uint16_t Running_Jump_3_SameLvl_6                      = Stance::Running_Jump_3_SameLvl_5 + 1;
+constexpr uint16_t Running_Jump_3_SameLvl_7                      = Stance::Running_Jump_3_SameLvl_6 + 1;
+constexpr uint16_t Running_Jump_3_SameLvl_8_End                  = Stance::Running_Jump_3_SameLvl_7 + 1;
 
 
 constexpr uint16_t  Upright_End_Climb        = 1253;

@@ -1314,9 +1314,9 @@ namespace Images
   constexpr uint16_t Prince_Left_168_width  = 36;
   constexpr uint16_t Prince_Left_168_height = 36;
 
-  constexpr uint24_t Prince_Left_168 = 0x0135B0;
-  constexpr uint16_t Prince_Left_168_width  = 36;
-  constexpr uint16_t Prince_Left_168_height = 36;
+  constexpr uint24_t Prince_Left_169 = 0x0135B0;
+  constexpr uint16_t Prince_Left_169_width  = 36;
+  constexpr uint16_t Prince_Left_169_height = 36;
 
   constexpr uint24_t Prince_Right_001 = 0x01371C;
   constexpr uint16_t Prince_Right_001_width  = 36;
@@ -1990,9 +1990,9 @@ namespace Images
   constexpr uint16_t Prince_Right_168_width  = 36;
   constexpr uint16_t Prince_Right_168_height = 36;
 
-  constexpr uint24_t Prince_Right_168 = 0x0225FC;
-  constexpr uint16_t Prince_Right_168_width  = 36;
-  constexpr uint16_t Prince_Right_168_height = 36;
+  constexpr uint24_t Prince_Right_169 = 0x0225FC;
+  constexpr uint16_t Prince_Right_169_width  = 36;
+  constexpr uint16_t Prince_Right_169_height = 36;
 
 }
 

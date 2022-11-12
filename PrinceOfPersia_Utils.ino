@@ -83,21 +83,21 @@ void processRunJump(Prince &prince, Level &level) {
             switch (jump_3_Result) {
 
                 case RunningJumpResult::Jump4_DropLevel:
-                    Serial.println("RunningJumpResult::Jump4_DropLevel");
+                    // Serial.println("RunningJumpResult::Jump4_DropLevel");
                     prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
                     prince.pushSequence(Stance::Running_Jump_4_DropLvl_1_Start, Stance::Running_Jump_4_DropLvl_14_End, true);
                     prince.setIgnoreWallCollisions(true);
                     break;
 
                 case RunningJumpResult::Jump3_DropLevel:
-                    Serial.println("RunningJumpResult::Jump3_DropLevel");
+                    // Serial.println("RunningJumpResult::Jump3_DropLevel");
                     prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
                     prince.pushSequence(Stance::Running_Jump_3_DropLvl_1_Start, Stance::Running_Jump_3_DropLvl_14_End, true);
                     prince.setIgnoreWallCollisions(true);
                     break;
 
                 case RunningJumpResult::Jump3_KeepLevel:
-                    Serial.println("RunningJumpResult::Jump3_KeepLevel");
+                    // Serial.println("RunningJumpResult::Jump3_KeepLevel");
                     prince.pushSequence(Stance::Running_Jump_Short_1_Start, Stance::Running_Jump_Short_7_End,  Stance::Run_Repeat_4, true);
                     prince.setIgnoreWallCollisions(true);
                     break;
@@ -127,7 +127,7 @@ void processRunJump(Prince &prince, Level &level) {
 
         }
         else {
-Serial.println("Cannot Jump 2");
+// Serial.println("Cannot Jump 2");
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
             DEBUG_PRINTLN(F("RunningJump_2 false, RunRepeat"));
@@ -139,7 +139,7 @@ Serial.println("Cannot Jump 2");
 
     }
     else {
-Serial.println("Cannot Jump 1");
+// Serial.println("Cannot Jump 1");
 
         #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
         DEBUG_PRINTLN(F("RunningJump_1 false, Stopping"));

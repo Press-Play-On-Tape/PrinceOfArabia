@@ -1597,7 +1597,7 @@ struct Level {
                                         switch (distToEdgeOfCurrentTile) {
 
                                             case 0 ... 8:
-Serial.println("Ret Jump4_DropLevel");                                            
+// Serial.println("Ret Jump4_DropLevel");                                            
                                                 return RunningJumpResult::Jump4_DropLevel;
                                             
                                         }
@@ -1616,7 +1616,7 @@ Serial.println("Ret Jump4_DropLevel");
                                         !isGroundTile4_CurrLvl &&
                                         isGroundTile5_CurrLvl) {
 
-Serial.println("Ret Jump3_KeepLevel");                                            
+// Serial.println("Ret Jump3_KeepLevel");                                            
                                         return RunningJumpResult::Jump3_KeepLevel;
 
                                     }
@@ -1640,7 +1640,7 @@ Serial.println("Ret Jump3_KeepLevel");
                                         !isGroundTile4_NextLvl &&
                                         isGroundTile5_NextLvl) {
 
-Serial.println("Ret Jump3_DropLevel");                                            
+// Serial.println("Ret Jump3_DropLevel");                                            
                                         return RunningJumpResult::Jump3_DropLevel;
 
                                     }
@@ -1661,7 +1661,7 @@ Serial.println("Ret Jump3_DropLevel");
                                     DEBUG_PRINT(") = ");
                                     DEBUG_PRINTLN((uint8_t)wallTile);
                                     #endif
-Serial.println("Ret Normal / None");       
+// Serial.println("Ret Normal / None");       
                                     return (wallTile == WallTileResults::None ? RunningJumpResult::Normal : RunningJumpResult::None);
 
                                 }
