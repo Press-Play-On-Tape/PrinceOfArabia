@@ -9,10 +9,16 @@
 #include "src/entities/Entities.h"
 #include "src/fonts/Font3x5.h"
 
-// ARDUBOY_NO_USB
+
+#ifdef SAVE_MEMORY
+ARDUBOY_NO_USB
+#endif
 
 Arduboy2Ext arduboy;
+
+#ifdef SAVE_MEMORY
 Font3x5 font3x5 = Font3x5();
+#endif
 
 Stack <int16_t, 30>  princeStack;
 Prince prince;
