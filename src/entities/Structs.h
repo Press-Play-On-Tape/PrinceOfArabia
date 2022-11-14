@@ -17,22 +17,41 @@ struct TitleScreenVars {
 
     }
 
-    void update() {
+    bool update(bool evenFrame) {
 
         switch (this->mode) {
 
             case TitleScreenMode::Intro:
-                if (this->count < 64) this->count = this->count + 2;
-                break;
+                if (this->count < 64) this->count = this->count + 1;
+                return false;
 
             case TitleScreenMode::Main:
-                if (this->count < Constants::TitleScreenScroll_Max) this->count = this->count + 2;
-                break;
+                if (this->count < Constants::TitleScreenScroll_Max) this->count = this->count + 1;
+                return false;
 
             case TitleScreenMode::Credits:
-                if (this->count < 170) this->count++;
-                if (this->count == 170) this->count = 0;
-                break;
+                if (evenFrame) {
+                    if (this->count < 170) this->count++;
+                    if (this->count == 170) this->count = 0;
+                }
+                return false;
+
+            case TitleScreenMode::IntroGame1:
+                if (evenFrame) {
+                    if (this->count < 170) this->count++;
+                    if (this->count == 170) return true;
+                }
+                return false;
+
+            case TitleScreenMode::CutScene1:
+                return false;
+
+            case TitleScreenMode::IntroGame2:
+                if (evenFrame) {
+                    if (this->count < 170) this->count++;
+                    if (this->count == 170) return true;
+                }
+                return false;
                 
         }
 

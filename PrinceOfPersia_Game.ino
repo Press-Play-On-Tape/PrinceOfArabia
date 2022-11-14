@@ -22,8 +22,8 @@ void game_Init() {
     // prince.init(86, 87, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos but next to drop floor 3rd floor
     // prince.init(78, 25, Direction::Left, Stance::Crouch_3_End, 3);          // Under collapsible floor
     // prince.init(66, 56, Direction::Right, Stance::Crouch_3_End, 3);        // Get tonic
-//    prince.init(50, 87, Direction::Left, Stance::Crouch_3_End, 3);     // Column of climbs
-    prince.init(80, 25, Direction::Right, Stance::Crouch_3_End, 3);     // Top Left
+   prince.init(24, 25+31+31, Direction::Left, Stance::Upright, 3);     // Column of climbs
+    // prince.init(80, 25, Direction::Right, Stance::Crouch_3_End, 3);     // Top Left
     // prince.init(18, 25, Direction::Right,Stance:: Crouch_3_End, 3);          // Long Fall
     // prince.init(18, 56, Direction::Right, Stance::Crouch_3_End, 3);          // problem
     // prince.init(98, 87, Direction::Left, Stance::Crouch_3_End, 3);          // At bottom of tthree level drop.
@@ -43,8 +43,8 @@ void game_Init() {
     // level.init(prince, 60, 0);  //Normal starting pos but next to drop floor 3rd floor
     // level.init(prince, 50, 3);  // Under collapsible floor
     // level.init(prince, Constants::TileHeight, 0);   // Get tonic
-    // level.init(prince, 0, 3);   // Column of climbs
-    level.init(prince, 0, 0);   // Top left
+    level.init(prince, 0, 3);   // Column of climbs
+    // level.init(prince, 0, 0);   // Top left
     // level.init(prince, 40, 4);  // Long Fall
     // level.init(prince, 60, 3);  // problem
     // level.init(prince, 30, 6); // At bottom of tthree level drop.
@@ -571,7 +571,7 @@ void game() {
                     break;
 
                 case Stance::Run_Repeat_4:
-// Serial.println("Run Repeat 4");
+
                     if (prince.getDirection() == Direction::Right) {
                             
                         if ((pressed & RIGHT_BUTTON) && (pressed & A_BUTTON)) {
@@ -579,7 +579,7 @@ void game() {
                             #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
                             DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jump from Run_Repeat_4"));
                             #endif
-// Serial.println("A");
+
                             processRunJump(prince, level);
 
                         }
@@ -628,7 +628,6 @@ void game() {
                             #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
                             DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jump from Run_Repeat_4"));
                             #endif
-// Serial.println("B");
 
                             processRunJump(prince, level);
 
@@ -675,7 +674,7 @@ void game() {
                 case Stance::Run_Start_6_End:
                 case Stance::Run_Repeat_8_End:
                 case Stance::Run_Repeat_8_End_Turn:
-// Serial.println("Run Repeat 6, 8");
+
                     if (prince.getDirection() == Direction::Right) {
                                         
                         if ((pressed & RIGHT_BUTTON) && (pressed & A_BUTTON)) {
@@ -683,7 +682,6 @@ void game() {
                             #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
                             DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jump from Run_Start_6_End, Run_Repeat_8_End or Run_Repeat_8_End_Turn"));
                             #endif
-// Serial.println("C");
 
                             processRunJump(prince, level);
 
@@ -733,7 +731,6 @@ void game() {
                             #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
                             DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jump from Run_Start_6_End, Run_Repeat_8_End or Run_Repeat_8_End_Turn"));
                             #endif
-// Serial.println("D");
 
                             processRunJump(prince, level);
 
@@ -807,6 +804,7 @@ void game() {
                                 Item &item = level.getItem(itemIdx);
                                 item.itemType = ItemType::None;
                                 prince.setSword(true);
+                                prince.clear();
                                 prince.pushSequence(Stance::Pickup_Sword_1_Start, Stance::Pickup_Sword_16_End, Stance::Upright, true);
 
                             }
@@ -1082,7 +1080,8 @@ void game() {
                                     DEBUG_PRINTLN(F("Land and enter crouch, falling = 2"));
                                     #endif
 
-                                    initFlash(prince, level);                          
+                                    initFlash(prince, level);  
+
                                     prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
                                     prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
                                     prince.decHealth(1);
@@ -1409,6 +1408,10 @@ void game() {
         DEBUG_PRINT(prince.getX());
         DEBUG_PRINT(", Y:");
         DEBUG_PRINT(prince.getY());
+        DEBUG_PRINT(", inAir:");
+        DEBUG_PRINT(prince.inAir());
+        DEBUG_PRINT(", falling:");
+        DEBUG_PRINT(prince.getFalling());
         DEBUG_PRINT(", Coll:");
         DEBUG_PRINTLN(level.collideWithWall(prince));
         #endif

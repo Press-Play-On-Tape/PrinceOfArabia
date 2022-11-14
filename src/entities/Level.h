@@ -885,6 +885,25 @@ struct Level {
 
         }
 
+
+
+        bool isEdgeTile(int8_t bgTile, int8_t fgTile) {
+
+            switch (bgTile) {
+
+                case TILE_FLOOR_RH_END_1:
+                case TILE_FLOOR_RH_END_2:
+                case TILE_FLOOR_RH_END_3:        
+                case TILE_FLOOR_RH_END_4:
+                case TILE_FLOOR_RH_END_5:
+                    return true;
+
+            }
+
+            return false;
+
+        }
+
         bool canFall(int8_t bgTile, int8_t fgTile, int8_t x = Constants::CoordNone, int8_t y = Constants::CoordNone) {
 
             WallTileResults wallTile = this->isWallTile(bgTile, fgTile, x, y);
@@ -959,12 +978,6 @@ struct Level {
 
             ImageDetails imageDetails;
             prince.getImageDetails(imageDetails);
-
-            // uint8_t imageIndex = static_cast<uint8_t>(pgm_read_byte(&Constants::StanceToImageXRef[prince.getStance()]));
-            // uint16_t pos = (imageIndex - 1) * 3;
-
-            // int8_t footToe = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 1]));
-            // int8_t footHeel = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 2]));
 
             int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), newPos.x + imageDetails.toe) - this->getXLocation();
             int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), newPos.y) - this->getYLocation();
@@ -1092,6 +1105,13 @@ struct Level {
             int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), newPos.y) - this->getYLocation();
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN_PART2)
+            DEBUG_PRINT(F("canClimbDown_Part2() "));
+            DEBUG_PRINT(tileXIdx);
+            DEBUG_PRINT(F(","));
+            DEBUG_PRINTLN(tileYIdx);
+            #endif
+
+            #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN_PART2)
             printCoordToIndex(newPos, tileXIdx, tileYIdx);
             #endif
 
@@ -1126,6 +1146,9 @@ struct Level {
             bgTile = this->getTile(Layer::Background, tileXIdx + (prince.getDirection() == Direction::Left ? 0 : 1), tileYIdx, TILE_FLOOR_BASIC);
             fgTile = this->getTile(Layer::Foreground, tileXIdx + (prince.getDirection() == Direction::Left ? 0 : 1), tileYIdx, TILE_FLOOR_BASIC);
 
+            isGroundTile = this->isGroundTile(bgTile, fgTile);
+            bool isEdgeTile = this->isEdgeTile(bgTile, fgTile);
+
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN_PART2)
             DEBUG_PRINTLN(" skip");
             DEBUG_PRINT(F("canClimbDown_Part2() Test can land 1 level below and under ("));
@@ -1137,12 +1160,12 @@ struct Level {
             DEBUG_PRINT(F(", fg "));
             DEBUG_PRINT(fgTile);
             DEBUG_PRINT(F(", isGroundTile: "));
-            DEBUG_PRINT(this->isGroundTile(bgTile, fgTile));
+            DEBUG_PRINT(isGroundTile);
+            DEBUG_PRINT(F(", isEdgeTile: "));
+            DEBUG_PRINT(isEdgeTile);
             #endif
 
-            isGroundTile = this->isGroundTile(bgTile, fgTile);
-
-            if (isGroundTile) {
+            if (isGroundTile || isEdgeTile) {
 
                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN_PART2)
                 DEBUG_PRINTLN(" return Level_1_Under");
@@ -1670,17 +1693,17 @@ struct Level {
 
                             case Action::RunJump_2:
                                 {
-                                    int8_t bgTile3_CurrLvl = this->getTile(Layer::Background, tileXIdx - 2, tileYIdx, TILE_FLOOR_BASIC);
-                                    int8_t fgTile3_CurrLvl = this->getTile(Layer::Foreground, tileXIdx - 2, tileYIdx, TILE_FLOOR_BASIC);
+                                    int8_t bgTile = this->getTile(Layer::Background, tileXIdx - 2, tileYIdx, TILE_FLOOR_BASIC);
+                                    int8_t fgTile = this->getTile(Layer::Foreground, tileXIdx - 2, tileYIdx, TILE_FLOOR_BASIC);
 
-                                    WallTileResults wallTile = this->isWallTile(bgTile3_CurrLvl, fgTile3_CurrLvl, tileXIdx + 2, tileYIdx);
+                                    WallTileResults wallTile = this->isWallTile(bgTile, fgTile, tileXIdx + 2, tileYIdx);
                                     
                                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
                                     printTileInfo(bgTile3, fgTile3);
                                     DEBUG_PRINT("isWallTile(");
-                                    DEBUG_PRINT(bgTile3);
+                                    DEBUG_PRINT(bgTile);
                                     DEBUG_PRINT(",");
-                                    DEBUG_PRINT(fgTile3);
+                                    DEBUG_PRINT(fgTile);
                                     DEBUG_PRINT(",");
                                     DEBUG_PRINT(tileXIdx + 2);
                                     DEBUG_PRINT(",");
@@ -1697,17 +1720,17 @@ struct Level {
 
                             case Action::RunJump_1:
                                 {
-                                    int8_t bgTile2_CurrLvl = this->getTile(Layer::Background, tileXIdx - 1, tileYIdx, TILE_FLOOR_BASIC);
-                                    int8_t fgTile2_CurrLvl = this->getTile(Layer::Foreground, tileXIdx - 1, tileYIdx, TILE_FLOOR_BASIC);
+                                    int8_t bgTile = this->getTile(Layer::Background, tileXIdx - 1, tileYIdx, TILE_FLOOR_BASIC);
+                                    int8_t fgTile = this->getTile(Layer::Foreground, tileXIdx - 1, tileYIdx, TILE_FLOOR_BASIC);
 
-                                    WallTileResults wallTile = this->isWallTile(bgTile2_CurrLvl, fgTile2_CurrLvl, tileXIdx + 1, tileYIdx);
+                                    WallTileResults wallTile = this->isWallTile(bgTile, fgTile, tileXIdx + 1, tileYIdx);
 
                                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
                                     printTileInfo(bgTile2, fgTile2);
                                     DEBUG_PRINT("isWallTile(");
-                                    DEBUG_PRINT(bgTile2);
+                                    DEBUG_PRINT(bgTile);
                                     DEBUG_PRINT(",");
-                                    DEBUG_PRINT(fgTile2);
+                                    DEBUG_PRINT(fgTile);
                                     DEBUG_PRINT(",");
                                     DEBUG_PRINT(tileXIdx + 1);
                                     DEBUG_PRINT(",");
@@ -1733,14 +1756,6 @@ struct Level {
                 case Direction::Right:
                     {
 
-                        int8_t bgTile4_CurrLvl = this->getTile(Layer::Background, tileXIdx + 3, tileYIdx, TILE_FLOOR_BASIC);
-                        int8_t fgTile4_CurrLvl = this->getTile(Layer::Foreground, tileXIdx + 3, tileYIdx, TILE_FLOOR_BASIC);
-                        int8_t bgTile3_CurrLvl = this->getTile(Layer::Background, tileXIdx + 2, tileYIdx, TILE_FLOOR_BASIC);
-                        int8_t fgTile3_CurrLvl = this->getTile(Layer::Foreground, tileXIdx + 2, tileYIdx, TILE_FLOOR_BASIC);
-                        int8_t bgTile2_CurrLvl = this->getTile(Layer::Background, tileXIdx + 1, tileYIdx, TILE_FLOOR_BASIC);
-                        int8_t fgTile2_CurrLvl = this->getTile(Layer::Foreground, tileXIdx + 1, tileYIdx, TILE_FLOOR_BASIC);
-                        int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(prince.getDirection(), prince.getPosition().x);
-
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
                         int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
                         int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
@@ -1761,8 +1776,153 @@ struct Level {
 
                             case Action::RunJump_3:
                                 {
-                                    WallTileResults wallTile = this->isWallTile(bgTile4_CurrLvl, fgTile4_CurrLvl, tileXIdx + 3, tileYIdx);
+                                    int8_t bgTile6_CurrLvl = this->getTile(Layer::Background, tileXIdx + 5, tileYIdx, TILE_FLOOR_BASIC);
+                                    int8_t fgTile6_CurrLvl = this->getTile(Layer::Foreground, tileXIdx + 5, tileYIdx, TILE_FLOOR_BASIC);
+                                    int8_t bgTile5_CurrLvl = this->getTile(Layer::Background, tileXIdx + 4, tileYIdx, TILE_FLOOR_BASIC);
+                                    int8_t fgTile5_CurrLvl = this->getTile(Layer::Foreground, tileXIdx + 4, tileYIdx, TILE_FLOOR_BASIC);
+                                    int8_t bgTile4_CurrLvl = this->getTile(Layer::Background, tileXIdx + 3, tileYIdx, TILE_FLOOR_BASIC);
+                                    int8_t fgTile4_CurrLvl = this->getTile(Layer::Foreground, tileXIdx + 3, tileYIdx, TILE_FLOOR_BASIC);
+                                    int8_t bgTile3_CurrLvl = this->getTile(Layer::Background, tileXIdx + 2, tileYIdx, TILE_FLOOR_BASIC);
+                                    int8_t fgTile3_CurrLvl = this->getTile(Layer::Foreground, tileXIdx + 2, tileYIdx, TILE_FLOOR_BASIC);
+                                    int8_t bgTile2_CurrLvl = this->getTile(Layer::Background, tileXIdx + 1, tileYIdx, TILE_FLOOR_BASIC);
+                                    int8_t fgTile2_CurrLvl = this->getTile(Layer::Foreground, tileXIdx + 1, tileYIdx, TILE_FLOOR_BASIC);
 
+                                    int8_t bgTile6_NextLvl = this->getTile(Layer::Background, tileXIdx + 5, tileYIdx + 1, TILE_FLOOR_BASIC);
+                                    int8_t fgTile6_NextLvl = this->getTile(Layer::Foreground, tileXIdx + 5, tileYIdx + 1, TILE_FLOOR_BASIC);
+                                    int8_t bgTile5_NextLvl = this->getTile(Layer::Background, tileXIdx + 4, tileYIdx + 1, TILE_FLOOR_BASIC);
+                                    int8_t fgTile5_NextLvl = this->getTile(Layer::Foreground, tileXIdx + 4, tileYIdx + 1, TILE_FLOOR_BASIC);
+                                    int8_t bgTile4_NextLvl = this->getTile(Layer::Background, tileXIdx + 3, tileYIdx + 1, TILE_FLOOR_BASIC);
+                                    int8_t fgTile4_NextLvl = this->getTile(Layer::Foreground, tileXIdx + 3, tileYIdx + 1, TILE_FLOOR_BASIC);
+                                    int8_t bgTile3_NextLvl = this->getTile(Layer::Background, tileXIdx + 2, tileYIdx + 1, TILE_FLOOR_BASIC);
+                                    int8_t fgTile3_NextLvl = this->getTile(Layer::Foreground, tileXIdx + 2, tileYIdx + 1, TILE_FLOOR_BASIC);
+                                    int8_t bgTile2_NextLvl = this->getTile(Layer::Background, tileXIdx + 1, tileYIdx + 1, TILE_FLOOR_BASIC);
+                                    int8_t fgTile2_NextLvl = this->getTile(Layer::Foreground, tileXIdx + 1, tileYIdx + 1, TILE_FLOOR_BASIC);
+
+                                    int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(prince.getDirection(), prince.getPosition().x);
+
+                                    WallTileResults wallTile2_CurrLvl = this->isWallTile(bgTile2_CurrLvl, fgTile2_CurrLvl, tileXIdx, tileYIdx);
+                                    WallTileResults wallTile3_CurrLvl = this->isWallTile(bgTile3_CurrLvl, fgTile3_CurrLvl, tileXIdx, tileYIdx);
+                                    WallTileResults wallTile4_CurrLvl = this->isWallTile(bgTile4_CurrLvl, fgTile4_CurrLvl, tileXIdx, tileYIdx);
+                                    WallTileResults wallTile5_CurrLvl = this->isWallTile(bgTile5_CurrLvl, fgTile5_CurrLvl, tileXIdx, tileYIdx);
+                                    WallTileResults wallTile6_CurrLvl = this->isWallTile(bgTile6_CurrLvl, fgTile6_CurrLvl, tileXIdx, tileYIdx);
+
+                                    WallTileResults wallTile2_NextLvl = this->isWallTile(bgTile2_NextLvl, fgTile2_NextLvl, tileXIdx, tileYIdx);
+                                    WallTileResults wallTile3_NextLvl = this->isWallTile(bgTile3_NextLvl, fgTile3_NextLvl, tileXIdx, tileYIdx);
+                                    WallTileResults wallTile4_NextLvl = this->isWallTile(bgTile4_NextLvl, fgTile4_NextLvl, tileXIdx, tileYIdx);
+                                    WallTileResults wallTile5_NextLvl = this->isWallTile(bgTile5_NextLvl, fgTile5_NextLvl, tileXIdx, tileYIdx);
+                                    WallTileResults wallTile6_NextLvl = this->isWallTile(bgTile6_NextLvl, fgTile6_NextLvl, tileXIdx, tileYIdx);
+                                    
+                                    bool isGroundTile2_CurrLvl = this->isGroundTile(bgTile2_CurrLvl, fgTile2_CurrLvl);
+                                    bool isGroundTile3_CurrLvl = this->isGroundTile(bgTile3_CurrLvl, fgTile3_CurrLvl);
+                                    bool isGroundTile4_CurrLvl = this->isGroundTile(bgTile4_CurrLvl, fgTile4_CurrLvl);
+                                    bool isGroundTile5_CurrLvl = this->isGroundTile(bgTile5_CurrLvl, fgTile5_CurrLvl);
+
+                                    bool isGroundTile2_NextLvl = this->isGroundTile(bgTile2_NextLvl, fgTile2_NextLvl);
+                                    bool isGroundTile3_NextLvl = this->isGroundTile(bgTile3_NextLvl, fgTile3_NextLvl);
+                                    bool isGroundTile4_NextLvl = this->isGroundTile(bgTile4_NextLvl, fgTile4_NextLvl);
+                                    bool isGroundTile5_NextLvl = this->isGroundTile(bgTile5_NextLvl, fgTile5_NextLvl);
+                                    bool isGroundTile6_NextLvl = this->isGroundTile(bgTile6_NextLvl, fgTile6_NextLvl);
+
+
+                                    // Can we jump four blanks to a lower level?  This occurs on the first level, top left corner.
+// Serial.println("WallTiles");
+// Serial.print((uint8_t)wallTile6_CurrLvl);
+// Serial.print((uint8_t)wallTile5_CurrLvl);
+// Serial.print((uint8_t)wallTile4_CurrLvl);
+// Serial.print((uint8_t)wallTile3_CurrLvl);
+// Serial.println((uint8_t)wallTile2_CurrLvl);
+// Serial.print((uint8_t)wallTile6_NextLvl);
+// Serial.print((uint8_t)wallTile5_NextLvl);
+// Serial.print((uint8_t)wallTile4_NextLvl);
+// Serial.print((uint8_t)wallTile3_NextLvl);
+// Serial.println((uint8_t)wallTile2_NextLvl);
+// Serial.println("GroundTiles");
+// Serial.print("x");
+// Serial.print((uint8_t)isGroundTile5_CurrLvl);
+// Serial.print((uint8_t)isGroundTile4_CurrLvl);
+// Serial.print((uint8_t)isGroundTile3_CurrLvl);
+// Serial.println((uint8_t)isGroundTile2_CurrLvl);
+// Serial.print((uint8_t)isGroundTile6_NextLvl);
+// Serial.print((uint8_t)isGroundTile5_NextLvl);
+// Serial.print((uint8_t)isGroundTile4_NextLvl);
+// Serial.print((uint8_t)isGroundTile3_NextLvl);
+// Serial.println((uint8_t)isGroundTile2_NextLvl);
+// Serial.print("Dist: ");
+// Serial.println(distToEdgeOfCurrentTile);
+
+                                    if (wallTile2_CurrLvl == WallTileResults::None && 
+                                        wallTile3_CurrLvl == WallTileResults::None && 
+                                        wallTile4_CurrLvl == WallTileResults::None && 
+                                        wallTile5_CurrLvl == WallTileResults::None && 
+                                        wallTile2_NextLvl == WallTileResults::None && 
+                                        wallTile3_NextLvl == WallTileResults::None && 
+                                        wallTile4_NextLvl == WallTileResults::None && 
+                                        wallTile5_NextLvl == WallTileResults::None && 
+                                        wallTile6_NextLvl == WallTileResults::None && 
+                                        !isGroundTile2_CurrLvl &&
+                                        !isGroundTile3_CurrLvl &&
+                                        !isGroundTile4_CurrLvl &&
+                                        !isGroundTile5_CurrLvl &&
+                                        !isGroundTile2_NextLvl &&
+                                        !isGroundTile3_NextLvl &&
+                                        !isGroundTile4_NextLvl &&
+                                        !isGroundTile5_NextLvl &&
+                                        isGroundTile6_NextLvl) {
+
+                                        switch (distToEdgeOfCurrentTile) {
+
+                                            case 0 ... 8:
+// Serial.println("Ret Jump4_DropLevel");                                            
+                                                return RunningJumpResult::Jump4_DropLevel;
+                                            
+                                        }
+
+                                    }
+
+
+                                    // Can we jump three blanks to the same level?
+
+                                    if (wallTile2_CurrLvl == WallTileResults::None && 
+                                        wallTile3_CurrLvl == WallTileResults::None && 
+                                        wallTile4_CurrLvl == WallTileResults::None && 
+                                        wallTile5_CurrLvl == WallTileResults::None && 
+                                        !isGroundTile2_CurrLvl &&
+                                        !isGroundTile3_CurrLvl &&
+                                        !isGroundTile4_CurrLvl &&
+                                        isGroundTile5_CurrLvl) {
+
+// Serial.println("Ret Jump3_KeepLevel");                                            
+                                        return RunningJumpResult::Jump3_KeepLevel;
+
+                                    }
+
+
+                                    // Can we jump three blanks to a lower level?  This occurs on the first level, top left corner.
+
+                                    if (wallTile2_CurrLvl == WallTileResults::None && 
+                                        wallTile3_CurrLvl == WallTileResults::None && 
+                                        wallTile4_CurrLvl == WallTileResults::None && 
+                                        wallTile5_CurrLvl != WallTileResults::None && 
+                                        wallTile2_NextLvl == WallTileResults::None && 
+                                        wallTile3_NextLvl == WallTileResults::None && 
+                                        wallTile4_NextLvl == WallTileResults::None && 
+                                        wallTile5_NextLvl == WallTileResults::None && 
+                                        !isGroundTile2_CurrLvl &&
+                                        !isGroundTile3_CurrLvl &&
+                                        !isGroundTile4_CurrLvl &&
+                                        !isGroundTile2_NextLvl &&
+                                        !isGroundTile3_NextLvl &&
+                                        !isGroundTile4_NextLvl &&
+                                        isGroundTile5_NextLvl) {
+
+// Serial.println("Ret Jump3_DropLevel");                                            
+                                        return RunningJumpResult::Jump3_DropLevel;
+
+                                    }
+
+
+                                    WallTileResults wallTile = this->isWallTile(bgTile4_CurrLvl, fgTile4_CurrLvl, tileXIdx + 3, tileYIdx);
+                                
                                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
                                     printTileInfo(bgTile4, fgTile4);
                                     DEBUG_PRINT("isWallTile(");
@@ -1776,23 +1936,26 @@ struct Level {
                                     DEBUG_PRINT(") = ");
                                     DEBUG_PRINTLN((uint8_t)wallTile);
                                     #endif
-
-                                    return (wallTile == WallTileResults::None ? RunningJumpResult::Normal : RunningJumpResult::None);
+// Serial.println("Ret Normal / None");       
+                                    return (wallTile == WallTileResults::None ? RunningJumpResult::Normal : RunningJumpResult::None);                              
 
                                 }
 
-                                return RunningJumpResult::Normal;                               
+                                return RunningJumpResult::Normal;  
 
                             case Action::RunJump_2:
                                 {
-                                    WallTileResults wallTile = this->isWallTile(bgTile3_CurrLvl, fgTile3_CurrLvl, tileXIdx + 2, tileYIdx);
+                                    int8_t bgTile = this->getTile(Layer::Background, tileXIdx + 2, tileYIdx, TILE_FLOOR_BASIC);
+                                    int8_t fgTile = this->getTile(Layer::Foreground, tileXIdx + 2, tileYIdx, TILE_FLOOR_BASIC);
+
+                                    WallTileResults wallTile = this->isWallTile(bgTile, fgTile, tileXIdx + 2, tileYIdx);
 
                                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
                                     printTileInfo(bgTile3, fgTile3);
                                     DEBUG_PRINT("isWallTile(");
-                                    DEBUG_PRINT(bgTile3);
+                                    DEBUG_PRINT(bgTile);
                                     DEBUG_PRINT(",");
-                                    DEBUG_PRINT(fgTile3);
+                                    DEBUG_PRINT(fgTile);
                                     DEBUG_PRINT(",");
                                     DEBUG_PRINT(tileXIdx + 2);
                                     DEBUG_PRINT(",");
@@ -1809,14 +1972,17 @@ struct Level {
 
                             case Action::RunJump_1:
                                 {
-                                    WallTileResults wallTile = this->isWallTile(bgTile2_CurrLvl, fgTile2_CurrLvl, tileXIdx + 1, tileYIdx);
+                                    int8_t bgTile = this->getTile(Layer::Background, tileXIdx + 1, tileYIdx, TILE_FLOOR_BASIC);
+                                    int8_t fgTile = this->getTile(Layer::Foreground, tileXIdx + 1, tileYIdx, TILE_FLOOR_BASIC);
+
+                                    WallTileResults wallTile = this->isWallTile(bgTile, fgTile, tileXIdx + 1, tileYIdx);
                                         
                                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
                                     printTileInfo(bgTile2, fgTile2);
                                     DEBUG_PRINT("isWallTile(");
-                                    DEBUG_PRINT(bgTile2);
+                                    DEBUG_PRINT(bgTile);
                                     DEBUG_PRINT(",");
-                                    DEBUG_PRINT(fgTile2);
+                                    DEBUG_PRINT(fgTile);
                                     DEBUG_PRINT(",");
                                     DEBUG_PRINT(tileXIdx + 1);
                                     DEBUG_PRINT(",");
@@ -1843,7 +2009,7 @@ struct Level {
 
             }
 
-            RunningJumpResult::Normal;
+            return RunningJumpResult::Normal;
 
         }
 

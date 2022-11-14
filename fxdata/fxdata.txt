@@ -98,6 +98,11 @@ namespace Images {
     image_t GameOver = "../images/title/GameOver.png"
     image_t PressA = "../images/title/PressA.png"
 
+
+    image_t IntroGame1 = "../images/title/IntroGame1.png"
+    image_t IntroGame2 = "../images/title/IntroGame2.png"
+    image_t Chambers = "../images/title/Chambers.png"
+
     image_t Number_Upright_00 = "../images/title/Number_Upright_00.png"
     image_t Number_Upright_01 = "../images/title/Number_Upright_01.png"
     image_t Number_Upright_02 = "../images/title/Number_Upright_02.png"
