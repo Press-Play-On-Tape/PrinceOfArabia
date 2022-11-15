@@ -889,6 +889,8 @@ struct Level {
 
         bool isEdgeTile(int8_t bgTile, int8_t fgTile) {
 
+            (void)fgTile;
+            
             switch (bgTile) {
 
                 case TILE_FLOOR_RH_END_1:
@@ -1524,8 +1526,6 @@ struct Level {
 
                             case Action::RunJump_3:
                                 {
-                                    int8_t bgTile6_CurrLvl = this->getTile(Layer::Background, tileXIdx - 5, tileYIdx, TILE_FLOOR_BASIC);
-                                    int8_t fgTile6_CurrLvl = this->getTile(Layer::Foreground, tileXIdx - 5, tileYIdx, TILE_FLOOR_BASIC);
                                     int8_t bgTile5_CurrLvl = this->getTile(Layer::Background, tileXIdx - 4, tileYIdx, TILE_FLOOR_BASIC);
                                     int8_t fgTile5_CurrLvl = this->getTile(Layer::Foreground, tileXIdx - 4, tileYIdx, TILE_FLOOR_BASIC);
                                     int8_t bgTile4_CurrLvl = this->getTile(Layer::Background, tileXIdx - 3, tileYIdx, TILE_FLOOR_BASIC);
@@ -1552,7 +1552,6 @@ struct Level {
                                     WallTileResults wallTile3_CurrLvl = this->isWallTile(bgTile3_CurrLvl, fgTile3_CurrLvl, tileXIdx, tileYIdx);
                                     WallTileResults wallTile4_CurrLvl = this->isWallTile(bgTile4_CurrLvl, fgTile4_CurrLvl, tileXIdx, tileYIdx);
                                     WallTileResults wallTile5_CurrLvl = this->isWallTile(bgTile5_CurrLvl, fgTile5_CurrLvl, tileXIdx, tileYIdx);
-                                    WallTileResults wallTile6_CurrLvl = this->isWallTile(bgTile6_CurrLvl, fgTile6_CurrLvl, tileXIdx, tileYIdx);
 
                                     WallTileResults wallTile2_NextLvl = this->isWallTile(bgTile2_NextLvl, fgTile2_NextLvl, tileXIdx, tileYIdx);
                                     WallTileResults wallTile3_NextLvl = this->isWallTile(bgTile3_NextLvl, fgTile3_NextLvl, tileXIdx, tileYIdx);
@@ -1776,8 +1775,6 @@ struct Level {
 
                             case Action::RunJump_3:
                                 {
-                                    int8_t bgTile6_CurrLvl = this->getTile(Layer::Background, tileXIdx + 5, tileYIdx, TILE_FLOOR_BASIC);
-                                    int8_t fgTile6_CurrLvl = this->getTile(Layer::Foreground, tileXIdx + 5, tileYIdx, TILE_FLOOR_BASIC);
                                     int8_t bgTile5_CurrLvl = this->getTile(Layer::Background, tileXIdx + 4, tileYIdx, TILE_FLOOR_BASIC);
                                     int8_t fgTile5_CurrLvl = this->getTile(Layer::Foreground, tileXIdx + 4, tileYIdx, TILE_FLOOR_BASIC);
                                     int8_t bgTile4_CurrLvl = this->getTile(Layer::Background, tileXIdx + 3, tileYIdx, TILE_FLOOR_BASIC);
@@ -1804,7 +1801,6 @@ struct Level {
                                     WallTileResults wallTile3_CurrLvl = this->isWallTile(bgTile3_CurrLvl, fgTile3_CurrLvl, tileXIdx, tileYIdx);
                                     WallTileResults wallTile4_CurrLvl = this->isWallTile(bgTile4_CurrLvl, fgTile4_CurrLvl, tileXIdx, tileYIdx);
                                     WallTileResults wallTile5_CurrLvl = this->isWallTile(bgTile5_CurrLvl, fgTile5_CurrLvl, tileXIdx, tileYIdx);
-                                    WallTileResults wallTile6_CurrLvl = this->isWallTile(bgTile6_CurrLvl, fgTile6_CurrLvl, tileXIdx, tileYIdx);
 
                                     WallTileResults wallTile2_NextLvl = this->isWallTile(bgTile2_NextLvl, fgTile2_NextLvl, tileXIdx, tileYIdx);
                                     WallTileResults wallTile3_NextLvl = this->isWallTile(bgTile3_NextLvl, fgTile3_NextLvl, tileXIdx, tileYIdx);

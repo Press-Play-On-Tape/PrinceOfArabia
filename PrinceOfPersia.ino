@@ -17,7 +17,7 @@ ARDUBOY_NO_USB
 Arduboy2Ext arduboy;
 
 #ifndef SAVE_MEMORY_OTHER
-Font3x5 font3x5 = Font3x5();
+    Font3x5 font3x5 = Font3x5();
 #endif
 
 Stack <int16_t, 30>  princeStack;
@@ -28,7 +28,7 @@ GamePlay gamePlay;
 TitleScreenVars titleScreenVars;
 
 #ifndef SAVE_MEMORY_OTHER
-FadeEffects fadeEffect;
+    FadeEffects fadeEffect;
 #endif
 
 void setup() {
@@ -45,7 +45,12 @@ void setup() {
     FX::begin(FX_DATA_PAGE);
 
     prince.setStack(&princeStack);
-    gamePlay.gameState = GameState::SplashScreen_Init;
+
+    #ifdef SAVE_MEMORY_OTHER
+        gamePlay.gameState = GameState::Game_Init;
+    #else
+        gamePlay.gameState = GameState::SplashScreen_Init;
+    #endif
 
 }
 
@@ -56,31 +61,35 @@ void loop() {
 
     switch (gamePlay.gameState) {
 
-        case GameState::SplashScreen_Init:
+        #ifndef SAVE_MEMORY_OTHER
+            
+            case GameState::SplashScreen_Init:
 
-            splashScreen_Init();
-            splashScreen();
-            break;
+                splashScreen_Init();
+                splashScreen();
+                break;
 
-        case GameState::SplashScreen:
+            case GameState::SplashScreen:
 
-            splashScreen();
-            break;
+                splashScreen();
+                break;
 
-        case GameState::Title_Init:
+            case GameState::Title_Init:
 
-            gamePlay.gameState = GameState::Title;
-            #ifndef SAVE_MEMORY_OTHER
-                fadeEffect.complete();
-            #endif
-            title_Init();
-            title();
-            break;
+                gamePlay.gameState = GameState::Title;
+                #ifndef SAVE_MEMORY_OTHER
+                    fadeEffect.complete();
+                #endif
+                title_Init();
+                title();
+                break;
 
-        case GameState::Title:
+            case GameState::Title:
 
-            title();
-            break;
+                title();
+                break;
+
+        #endif
 
         case GameState::Game_Init:
 
@@ -110,6 +119,8 @@ void loop() {
 
             // todo
             break;
+
+        default: break;
 
     }
 

@@ -65,6 +65,8 @@ void title() {
                     
                     #endif
 
+                    default: break;
+
                 }        
 
                 break;
@@ -192,8 +194,8 @@ void title() {
 
         #endif
 
+        default: break;
 
     }
-
 
 }

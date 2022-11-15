@@ -4,14 +4,20 @@
 #include "../utils/Constants.h"
 #include "../../fxdata/fxdata.h"
 
+
+struct Character {
+
+    uint8_t x;
+    uint8_t image;
+
+};
+
 struct TitleScreenVars {
 
     uint8_t prevCount;
     uint8_t count;
-    uint8_t zaffar_x;
-    uint8_t zaffar_Image;
-    uint8_t princess_x;
-    uint8_t princess_Image;
+    Character zaffar;
+    Character princess;
     TitleScreenOptions option;
     TitleScreenMode mode;
 
@@ -20,8 +26,8 @@ struct TitleScreenVars {
         this->count = 0;
         this->option = TitleScreenOptions::Play;
         this->mode = TitleScreenMode::Intro;
-        this->zaffar_x = 138;
-        this->princess_x = 36;
+        this->zaffar.x = 138;
+        this->princess.x = 36;
 
     }
 
@@ -63,10 +69,10 @@ struct TitleScreenVars {
 
                     FX::seekData(static_cast<uint24_t>(CutScene::Scene1 + (this->count * 4)));
 
-                    zaffar_Image = static_cast<int8_t>(FX::readPendingUInt8());
-                    zaffar_x = zaffar_x + static_cast<int8_t>(FX::readPendingUInt8());
-                    princess_Image = static_cast<uint8_t>(FX::readPendingUInt8());
-                    princess_x = princess_x + static_cast<int8_t>(FX::readPendingUInt8());
+                    zaffar.image = static_cast<int8_t>(FX::readPendingUInt8());
+                    zaffar.x = zaffar.x + static_cast<int8_t>(FX::readPendingUInt8());
+                    princess.image = static_cast<uint8_t>(FX::readPendingUInt8());
+                    princess.x = princess.x + static_cast<int8_t>(FX::readPendingUInt8());
 
                     this->prevCount = this->count;
                     this->count++;
@@ -88,6 +94,8 @@ struct TitleScreenVars {
                 return false;
                 
         }
+
+        return false;
 
     }
 
