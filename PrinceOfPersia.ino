@@ -68,7 +68,7 @@ void loop() {
         case GameState::Title_Init:
 
             gamePlay.gameState = GameState::Title;
-            fadeInEffect.reset();
+            fadeInEffect.complete();
             title_Init();
             title();
             break;
@@ -122,6 +122,28 @@ void loop() {
             break;
 
     }    
+
+    if (titleScreenVars.mode == TitleScreenMode::CutScene1 && titleScreenVars.count == 118 && titleScreenVars.prevCount != 118) {
+
+        arduboy.invert(true);
+        
+    }
+
+    if (titleScreenVars.mode == TitleScreenMode::CutScene1 && titleScreenVars.count == 123 && titleScreenVars.prevCount != 123) {
+
+        arduboy.invert(true);
+        
+    }
+
+
+    // Handle fade effects ..
+
+    if (!fadeInEffect.isComplete()) {
+
+        fadeInEffect.draw(arduboy);
+        fadeInEffect.update();
+
+    }
 
     arduboy.display(CLEAR_BUFFER);
     FX::disableOLED();

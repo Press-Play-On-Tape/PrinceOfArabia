@@ -22,7 +22,7 @@ void game_Init() {
     // prince.init(86, 87, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos but next to drop floor 3rd floor
     // prince.init(78, 25, Direction::Left, Stance::Crouch_3_End, 3);          // Under collapsible floor
     // prince.init(66, 56, Direction::Right, Stance::Crouch_3_End, 3);        // Get tonic
-   prince.init(24, 25+31+31, Direction::Left, Stance::Upright, 3);     // Column of climbs
+   prince.init(18, 25+31+31, Direction::Left, Stance::Upright, 3);     // Column of climbs
     // prince.init(80, 25, Direction::Right, Stance::Crouch_3_End, 3);     // Top Left
     // prince.init(18, 25, Direction::Right,Stance:: Crouch_3_End, 3);          // Long Fall
     // prince.init(18, 56, Direction::Right, Stance::Crouch_3_End, 3);          // problem

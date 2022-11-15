@@ -70,6 +70,7 @@ void title() {
 
                 titleScreenVars.mode = TitleScreenMode::CutScene1;
                 titleScreenVars.count = 0;
+                fadeInEffect.reset();
                 break;
 
             case TitleScreenMode::CutScene1:
@@ -128,11 +129,13 @@ void title() {
 
         case TitleScreenMode::IntroGame1:
 
-            FX::drawBitmap(5, 80 -titleScreenVars.count, Images::IntroGame1, 0, dbmNormal);
+            FX::drawBitmap(5, 64 - titleScreenVars.count, Images::IntroGame1, 0, dbmNormal);
             
             if (titleScreenVars.update(arduboy.isFrameCount(4))) {
 
                 titleScreenVars.mode = TitleScreenMode::CutScene1;
+                titleScreenVars.count = 0;
+                fadeInEffect.reset();
 
             }
 
@@ -140,11 +143,18 @@ void title() {
 
         case TitleScreenMode::CutScene1:
 
-            FX::drawBitmap(0, 0, Images::Chambers, 0, dbmNormal);
-            
-            if (titleScreenVars.update(arduboy.isFrameCount(4))) {
+            FX::drawBitmap(0, 0, Images::Chambers_BG, 0, dbmNormal);
+            FX::drawBitmap(10, 37, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
+            FX::drawBitmap(114, 37, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
+            FX::drawBitmap(titleScreenVars.zaffar_x, 28, Images::Zaffar_00 + (titleScreenVars.zaffar_Image * 260), 0, dbmMasked);
+            FX::drawBitmap(0, 0, Images::Chambers_FG, 0, dbmMasked);
+
+            if (titleScreenVars.update(arduboy.isFrameCount(3))) {
 
                 titleScreenVars.mode = TitleScreenMode::IntroGame2;
+                titleScreenVars.count = 0;
+                fadeInEffect.complete();
+
 
             }
 
@@ -152,11 +162,12 @@ void title() {
 
         case TitleScreenMode::IntroGame2:
 
-            FX::drawBitmap(2, 80 -titleScreenVars.count, Images::IntroGame2, 0, dbmNormal);
+            FX::drawBitmap(2, 64 -titleScreenVars.count, Images::IntroGame2, 0, dbmNormal);
             
             if (titleScreenVars.update(arduboy.isFrameCount(4))) {
 
                 gamePlay.gameState = GameState::Game_Init; 
+                titleScreenVars.count = 0;
 
             }
 

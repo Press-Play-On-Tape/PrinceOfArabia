@@ -101,7 +101,8 @@ namespace Images {
 
     image_t IntroGame1 = "../images/title/IntroGame1.png"
     image_t IntroGame2 = "../images/title/IntroGame2.png"
-    image_t Chambers = "../images/title/Chambers.png"
+    image_t Chambers_BG = "../images/title/Chambers_BG.png"
+    image_t Chambers_FG = "../images/title/Chambers_FG.png"
 
     image_t Number_Upright_00 = "../images/title/Number_Upright_00.png"
     image_t Number_Upright_01 = "../images/title/Number_Upright_01.png"
@@ -258,6 +259,36 @@ namespace Images {
     image_t Tile_Dungeon_50_02 = "../images/tiles/tile_dungeon_50_02.png"
     image_t Tile_Dungeon_50_03 = "../images/tiles/tile_dungeon_50_03.png"
     image_t Tile_Dungeon_50_04 = "../images/tiles/tile_dungeon_50_04.png"
+
+
+    // Zaffar Images 
+
+    image_t Zaffar_00 = "../images/zaffar/Zaffar_00.png"
+    image_t Zaffar_01 = "../images/zaffar/Zaffar_01.png"
+    image_t Zaffar_02 = "../images/zaffar/Zaffar_02.png"
+    image_t Zaffar_03 = "../images/zaffar/Zaffar_03.png"
+    image_t Zaffar_04 = "../images/zaffar/Zaffar_04.png"
+    image_t Zaffar_05 = "../images/zaffar/Zaffar_05.png"
+    image_t Zaffar_06 = "../images/zaffar/Zaffar_06.png"
+    image_t Zaffar_07 = "../images/zaffar/Zaffar_07.png"
+    image_t Zaffar_08 = "../images/zaffar/Zaffar_08.png"
+    image_t Zaffar_09 = "../images/zaffar/Zaffar_09.png"
+    image_t Zaffar_10 = "../images/zaffar/Zaffar_10.png"
+    image_t Zaffar_11 = "../images/zaffar/Zaffar_11.png"
+    image_t Zaffar_12 = "../images/zaffar/Zaffar_12.png"
+    image_t Zaffar_13 = "../images/zaffar/Zaffar_13.png"
+    image_t Zaffar_14 = "../images/zaffar/Zaffar_14.png"
+    image_t Zaffar_15 = "../images/zaffar/Zaffar_15.png"
+    image_t Zaffar_16 = "../images/zaffar/Zaffar_16.png"
+    image_t Zaffar_17 = "../images/zaffar/Zaffar_17.png"
+    image_t Zaffar_18 = "../images/zaffar/Zaffar_18.png"
+    image_t Zaffar_19 = "../images/zaffar/Zaffar_19.png"
+    image_t Zaffar_20 = "../images/zaffar/Zaffar_20.png"
+    image_t Zaffar_21 = "../images/zaffar/Zaffar_21.png"
+    image_t Zaffar_22 = "../images/zaffar/Zaffar_22.png"
+    image_t Zaffar_23 = "../images/zaffar/Zaffar_23.png"
+    image_t Zaffar_24 = "../images/zaffar/Zaffar_24.png"
+    image_t Zaffar_25 = "../images/zaffar/Zaffar_25.png"
 
 
     // Prince Images

@@ -282,14 +282,6 @@ void render() {
         }
     }
 
-
-    if (!fadeInEffect.isComplete()) {
-
-        fadeInEffect.draw(arduboy);
-        fadeInEffect.update();
-
-    }
-
 }
 
 void renderMenu() {
