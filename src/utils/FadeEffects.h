@@ -2,7 +2,7 @@
 
 #include "Arduboy2Ext.h"
 
-class FadeInEffect {
+class FadeEffects {
 
     private:
         uint8_t fadeWidth = WIDTH;

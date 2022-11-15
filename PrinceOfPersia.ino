@@ -10,13 +10,13 @@
 #include "src/fonts/Font3x5.h"
 
 
-#ifdef SAVE_MEMORY
+#ifdef SAVE_MEMORY_USB
 ARDUBOY_NO_USB
 #endif
 
 Arduboy2Ext arduboy;
 
-#ifdef SAVE_MEMORY
+#ifndef SAVE_MEMORY_OTHER
 Font3x5 font3x5 = Font3x5();
 #endif
 
@@ -26,8 +26,10 @@ Level level;
 MenuItem menu;
 GamePlay gamePlay;
 TitleScreenVars titleScreenVars;
-FadeInEffect fadeInEffect;
 
+#ifndef SAVE_MEMORY_OTHER
+FadeEffects fadeEffect;
+#endif
 
 void setup() {
 
@@ -68,7 +70,9 @@ void loop() {
         case GameState::Title_Init:
 
             gamePlay.gameState = GameState::Title;
-            fadeInEffect.complete();
+            #ifndef SAVE_MEMORY_OTHER
+                fadeEffect.complete();
+            #endif
             title_Init();
             title();
             break;
@@ -80,14 +84,18 @@ void loop() {
 
         case GameState::Game_Init:
 
-            fadeInEffect.reset();
+            #ifndef SAVE_MEMORY_OTHER
+                fadeEffect.reset();
+            #endif
             game_Init();
             game();
             break;
 
         case GameState::Game_StartLevel:
 
-            fadeInEffect.reset();
+            #ifndef SAVE_MEMORY_OTHER
+                fadeEffect.reset();
+            #endif
             game_StartLevel();
             game();
             break;
@@ -138,12 +146,16 @@ void loop() {
 
     // Handle fade effects ..
 
-    if (!fadeInEffect.isComplete()) {
+    #ifndef SAVE_MEMORY_OTHER
+    
+        if (!fadeEffect.isComplete()) {
 
-        fadeInEffect.draw(arduboy);
-        fadeInEffect.update();
+            fadeEffect.draw(arduboy);
+            fadeEffect.update();
 
-    }
+        }
+
+    #endif
 
     arduboy.display(CLEAR_BUFFER);
     FX::disableOLED();
