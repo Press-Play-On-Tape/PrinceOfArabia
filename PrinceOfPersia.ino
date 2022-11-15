@@ -123,13 +123,13 @@ void loop() {
 
     }    
 
-    if (titleScreenVars.mode == TitleScreenMode::CutScene1 && titleScreenVars.count == 118 && titleScreenVars.prevCount != 118) {
+    if (titleScreenVars.mode == TitleScreenMode::CutScene1 && titleScreenVars.count == 168 && titleScreenVars.prevCount != 168) {
 
         arduboy.invert(true);
         
     }
 
-    if (titleScreenVars.mode == TitleScreenMode::CutScene1 && titleScreenVars.count == 123 && titleScreenVars.prevCount != 123) {
+    if (titleScreenVars.mode == TitleScreenMode::CutScene1 && titleScreenVars.count == 171 && titleScreenVars.prevCount != 171) {
 
         arduboy.invert(true);
         
