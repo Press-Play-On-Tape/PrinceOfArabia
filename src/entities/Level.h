@@ -630,7 +630,7 @@ struct Level {
                     
                     case ItemType::Spikes:
                         item.data.spikes.imageType = FX::readPendingUInt8();
-                        item.data.spikes.position = 3;
+                        item.data.spikes.position = FX::readPendingUInt8();
                         break;
 
                     default:

@@ -16,7 +16,7 @@ ARDUBOY_NO_USB
 
 Arduboy2Ext arduboy;
 
-#ifndef SAVE_MEMORY_OTHER
+#if (defined(DEBUG) && defined(DEBUG_ONSCREEN_DETAILS)) or (defined(DEBUG) && defined(DEBUG_ONSCREEN_DETAILS_MIN))
     Font3x5 font3x5 = Font3x5();
 #endif
 

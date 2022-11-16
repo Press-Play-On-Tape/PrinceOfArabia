@@ -26,8 +26,8 @@ struct TitleScreenVars {
         this->count = 0;
         this->option = TitleScreenOptions::Play;
         this->mode = TitleScreenMode::Intro;
-        this->zaffar.x = 138;
-        this->princess.x = 36;
+        this->zaffar.x = 142;
+        this->princess.x = 34;
 
     }
 

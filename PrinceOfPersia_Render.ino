@@ -57,11 +57,12 @@ void render() {
                     break;
 
                 case ItemType::Spikes:
+Serial.println(item.data.spikes.position);                
                     if (item.data.spikes.imageType == 1) {
-                        FX::drawBitmap(xLoc + 1, yLoc + 14, Images::Spikes_00 + (item.data.spikes.position * 118), 0, dbmMasked);
+                        FX::drawBitmap(xLoc, yLoc + 14, Images::Spikes_00 + (item.data.spikes.position * 118), 0, dbmMasked);
                     }
                     else {
-                        FX::drawBitmap(xLoc + 1, yLoc + 14, Images::Spikes_05 + (item.data.spikes.position * 70), 0, dbmMasked);
+                        FX::drawBitmap(xLoc, yLoc + 14, Images::Spikes_05 + (item.data.spikes.position * 70), 0, dbmMasked);
                     }
                     break;
 

@@ -164,21 +164,20 @@ uint8_t activateSpikes(Prince &prince, uint8_t closingDelay) {
         Item &spikes = level.getItem(itemIdx);
         spikes.data.spikes.closingDelay = closingDelay;
 
+        uint8_t itemIdx2 = level.getItem(ItemType::Spikes, tileXIdx - 1, tileYIdx);
 
-        itemIdx = level.getItem(ItemType::Spikes, tileXIdx - 1, tileYIdx);
+        if (itemIdx2 != Constants::NoItemFound) {
 
-        if (itemIdx != Constants::NoItemFound) {
-
-            Item &spikes = level.getItem(itemIdx);
+            Item &spikes = level.getItem(itemIdx2);
             spikes.data.spikes.closingDelay = closingDelay;
 
         }
 
-        itemIdx = level.getItem(ItemType::Spikes, tileXIdx + 1, tileYIdx);
+        itemIdx2 = level.getItem(ItemType::Spikes, tileXIdx + 1, tileYIdx);
 
-        if (itemIdx != Constants::NoItemFound) {
+        if (itemIdx2 != Constants::NoItemFound) {
 
-            Item &spikes = level.getItem(itemIdx);
+            Item &spikes = level.getItem(itemIdx2);
             spikes.data.spikes.closingDelay = closingDelay;
 
         }

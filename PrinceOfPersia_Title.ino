@@ -160,12 +160,12 @@ void title() {
                 FX::drawBitmap(0, 0, Images::Chambers_BG, 0, dbmNormal);
                 FX::drawBitmap(10, 37, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
                 FX::drawBitmap(114, 37, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
-                FX::drawBitmap(titleScreenVars.princess_x, 28, Images::Princess_00 + (titleScreenVars.princess_Image * 260), 0, dbmMasked);
-                FX::drawBitmap(titleScreenVars.zaffar_x, 28, Images::Zaffar_00 + (titleScreenVars.zaffar_Image * 260), 0, dbmMasked);
+                FX::drawBitmap(titleScreenVars.princess.x, 28, Images::Princess_00 + (titleScreenVars.princess.image * 260), 0, dbmMasked);
+                FX::drawBitmap(titleScreenVars.zaffar.x, 28, Images::Zaffar_00 + (titleScreenVars.zaffar.image * 260), 0, dbmMasked);
                 FX::drawBitmap(0, 0, Images::Chambers_FG, 0, dbmMasked);
 
                 if (titleScreenVars.count >= 169) {
-                    FX::drawBitmap(55, 43, Images::HourGlass, 0, dbmMasked);
+                    FX::drawBitmap(54, 40, Images::HourGlass, 0, dbmMasked);
                 }
 
                 if (titleScreenVars.update(arduboy.isFrameCount(3))) {
