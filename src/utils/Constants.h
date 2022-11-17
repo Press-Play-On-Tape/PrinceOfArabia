@@ -6,7 +6,7 @@
 #define _SAVE_MEMORY_USB
 #define _SAVE_MEMORY_OTHER
 
-#define DEBUG
+#define _DEBUG
 #define DEBUG_ONSCREEN_DETAILS
 #define _DEBUG_ONSCREEN_DETAILS_MIN
 
