@@ -4,6 +4,7 @@ void title_Init() {
 
     gamePlay.gameState = GameState::Title;
     titleScreenVars.reset();
+    // titleScreenVars.mode = TitleScreenMode::CutScene9;//SJH remove
 }
 
 
@@ -186,6 +187,53 @@ void title() {
                 if (titleScreenVars.update(arduboy.isFrameCount(4))) {
 
                     gamePlay.gameState = GameState::Game_Init; 
+                    titleScreenVars.count = 0;
+
+                }
+
+                break;
+
+            case TitleScreenMode::CutScene9:
+// Serial.print(titleScreenVars.prince.x);
+// Serial.print(" ");
+// Serial.print(titleScreenVars.prince.image);
+// Serial.print(" ");
+// Serial.print(titleScreenVars.princess.x);
+// Serial.print(" ");
+// Serial.print(titleScreenVars.princess.image);
+// Serial.print(" ");
+// Serial.println(titleScreenVars.count);
+{
+                uint24_t startPos = Images::Prince_Left_001 + ((static_cast<uint24_t>(titleScreenVars.prince.image) - 1) * static_cast<uint24_t>(364));
+                // uint32_t startPos2 = Images::Prince_Left_001 + ((static_cast<uint8_t>(titleScreenVars.prince.image) - 1) * 364);
+// Serial.print("Image ");
+// Serial.println(static_cast<uint32_t>(startPos));
+// Serial.print("Image ");
+// Serial.println(static_cast<uint32_t>(startPos2));
+                FX::drawBitmap(0, 0, Images::Chambers_BG, 0, dbmNormal);
+                FX::drawBitmap(10, 37, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
+                FX::drawBitmap(114, 37, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
+                FX::drawBitmap(titleScreenVars.prince.x, 29, startPos, 0, dbmMasked);
+                FX::drawBitmap(titleScreenVars.princess.x, 28, Images::Princess_00 + (titleScreenVars.princess.image * 260), 0, dbmMasked);
+                FX::drawBitmap(0, 0, Images::Chambers_FG, 0, dbmMasked);
+
+                if (titleScreenVars.update(arduboy.isFrameCount(4))) {
+
+                    titleScreenVars.mode = TitleScreenMode::IntroGame9;
+                    titleScreenVars.count = 0;
+
+                }
+}
+
+                break;
+
+            case TitleScreenMode::IntroGame9:
+
+                FX::drawBitmap(2, 64 - titleScreenVars.count, Images::IntroGame9, 0, dbmNormal);
+                
+                if (titleScreenVars.update(arduboy.isFrameCount(4))) {
+
+                    gamePlay.gameState = GameState::Title_Init; 
                     titleScreenVars.count = 0;
 
                 }

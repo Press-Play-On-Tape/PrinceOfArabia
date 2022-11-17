@@ -358,6 +358,7 @@ namespace Images {
 
     image_t IntroGame1 = "../images/title/IntroGame1.png"
     image_t IntroGame2 = "../images/title/IntroGame2.png"
+    image_t IntroGame9 = "../images/title/IntroGame9.png"
     image_t Chambers_BG = "../images/title/Chambers_BG.png"
     image_t Chambers_FG = "../images/title/Chambers_FG.png"
 
@@ -747,6 +748,10 @@ namespace Images {
     image_t Prince_Left_167 = "../images/prince/left/167_Leave_Gate_11.png"
     image_t Prince_Left_168 = "../images/prince/left/168_Leave_Gate_12_End.png"
     image_t Prince_Left_169 = "../images/prince/left/169_Running_Jump_8A.png"
+    image_t Prince_Left_170 = "../images/prince/left/170_Embrace_1_Start.png"
+    image_t Prince_Left_171 = "../images/prince/left/171_Embrace_2.png"
+    image_t Prince_Left_172 = "../images/prince/left/172_Embrace_3.png"
+    image_t Prince_Left_173 = "../images/prince/left/173_Embrace_4_End.png"
 
 
     // RHS Images ..
@@ -920,6 +925,10 @@ namespace Images {
     image_t Prince_Right_167 = "../images/prince/right/167_Leave_Gate_11.png"
     image_t Prince_Right_168 = "../images/prince/right/168_Leave_Gate_12_End.png"
     image_t Prince_Right_169 = "../images/prince/right/169_Running_Jump_8A.png"
+    image_t Prince_Right_170 = "../images/prince/right/170_Embrace_1_Start.png"
+    image_t Prince_Right_171 = "../images/prince/right/171_Embrace_2.png"
+    image_t Prince_Right_172 = "../images/prince/right/172_Embrace_3.png"
+    image_t Prince_Right_173 = "../images/prince/right/173_Embrace_4_End.png"
 
 }
 
