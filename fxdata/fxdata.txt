@@ -529,6 +529,20 @@ namespace Images {
     image_t Princess_06 = "../images/princess/Princess_06.png"
     image_t Princess_07 = "../images/princess/Princess_07.png"
     image_t Princess_08 = "../images/princess/Princess_08.png"
+    image_t Princess_09 = "../images/princess/Princess_09.png"
+    image_t Princess_10 = "../images/princess/Princess_10.png"
+    image_t Princess_11 = "../images/princess/Princess_11.png"
+    image_t Princess_12 = "../images/princess/Princess_12.png"
+    image_t Princess_13 = "../images/princess/Princess_13.png"
+    image_t Princess_14 = "../images/princess/Princess_14.png"
+    image_t Princess_15 = "../images/princess/Princess_15.png"
+    image_t Princess_16 = "../images/princess/Princess_16.png"
+    image_t Princess_17 = "../images/princess/Princess_17.png"
+    image_t Princess_18 = "../images/princess/Princess_18.png"
+    image_t Princess_19 = "../images/princess/Princess_19.png"
+    image_t Princess_20 = "../images/princess/Princess_20.png"
+    image_t Princess_21 = "../images/princess/Princess_21.png"
+    image_t Princess_22 = "../images/princess/Princess_22.png"
     
 
     // Zaffar Images 
