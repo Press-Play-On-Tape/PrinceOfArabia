@@ -911,6 +911,7 @@ constexpr int8_t SceneFinal[] PROGMEM = {
     constexpr uint8_t Item_Sign = 1;
     constexpr uint8_t Item_ExitDoor = 2;
     constexpr uint8_t Items_DynamicRange = 2;
+    constexpr uint8_t Item_LoveHeart = 3;           // Inside dynamic range as only used in cut scenes..
     constexpr uint8_t Items_Count = 40;
    
 
@@ -1323,7 +1324,8 @@ enum class ItemType : uint8_t {
     /* 08 */ FloorButton2,
     /* 09 */ Skeleton,
     /* 10 */ Spikes,
-    /* 97 */ None = 97,
+    /* 96 */ None = 96,
+    /* 97 */ LoveHeart = 97,
     /* 98 */ Sign = 98,
     /* 99 */ Flash = 99,
 };

@@ -4,7 +4,14 @@ void title_Init() {
 
     gamePlay.gameState = GameState::Title;
     titleScreenVars.reset();
-    // titleScreenVars.mode = TitleScreenMode::CutScene9;//SJH remove
+
+
+    titleScreenVars.mode = TitleScreenMode::CutScene9;//SJH remove
+    Item heart = level.getItem(Constants::Item_LoveHeart);
+    heart.data.loveHeart.counter = 0;
+    heart.x = 57;
+    heart.y = 20;
+
 }
 
 
@@ -158,8 +165,8 @@ void title() {
 
             case TitleScreenMode::CutScene1:
 
-                FX::drawBitmap(0, 0, Images::Chambers_BG, 0, dbmNormal);
-                FX::drawBitmap(10, 37, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
+                FX::drawBitmap(  0,  0, Images::Chambers_BG, 0, dbmNormal);
+                FX::drawBitmap( 10, 37, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
                 FX::drawBitmap(114, 37, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
                 FX::drawBitmap(titleScreenVars.princess.x, 28, Images::Princess_00 + (titleScreenVars.princess.image * 260), 0, dbmMasked);
                 FX::drawBitmap(titleScreenVars.zaffar.x, 28, Images::Zaffar_00 + (titleScreenVars.zaffar.image * 260), 0, dbmMasked);
@@ -203,27 +210,59 @@ void title() {
 // Serial.print(titleScreenVars.princess.image);
 // Serial.print(" ");
 // Serial.println(titleScreenVars.count);
-{
-                uint24_t startPos = Images::Prince_Left_001 + ((static_cast<uint24_t>(titleScreenVars.prince.image) - 1) * static_cast<uint24_t>(364));
-                // uint32_t startPos2 = Images::Prince_Left_001 + ((static_cast<uint8_t>(titleScreenVars.prince.image) - 1) * 364);
-// Serial.print("Image ");
-// Serial.println(static_cast<uint32_t>(startPos));
-// Serial.print("Image ");
-// Serial.println(static_cast<uint32_t>(startPos2));
-                FX::drawBitmap(0, 0, Images::Chambers_BG, 0, dbmNormal);
-                FX::drawBitmap(10, 37, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
-                FX::drawBitmap(114, 37, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
-                FX::drawBitmap(titleScreenVars.prince.x, 29, startPos, 0, dbmMasked);
-                FX::drawBitmap(titleScreenVars.princess.x, 28, Images::Princess_00 + (titleScreenVars.princess.image * 260), 0, dbmMasked);
-                FX::drawBitmap(0, 0, Images::Chambers_FG, 0, dbmMasked);
+                {
+                    uint24_t startPos = Images::Prince_Left_001 + ((static_cast<uint24_t>(titleScreenVars.prince.image) - 1) * static_cast<uint24_t>(364));
+                    // uint32_t startPos2 = Images::Prince_Left_001 + ((static_cast<uint8_t>(titleScreenVars.prince.image) - 1) * 364);
+                // Serial.print("Image ");
+                // Serial.println(static_cast<uint32_t>(startPos));
+                // Serial.print("Image ");
+                // Serial.println(static_cast<uint32_t>(startPos2));
+                    FX::drawBitmap(0, 0, Images::Chambers_BG, 0, dbmNormal);
+                    FX::drawBitmap(10, 37, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
+                    FX::drawBitmap(114, 37, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
+                    FX::drawBitmap(titleScreenVars.prince.x, 29, startPos, 0, dbmMasked);
+                    FX::drawBitmap(titleScreenVars.princess.x, 28, Images::Princess_00 + (titleScreenVars.princess.image * 260), 0, dbmMasked);
+                    FX::drawBitmap(0, 0, Images::Chambers_FG, 0, dbmMasked);
 
-                if (titleScreenVars.update(arduboy.isFrameCount(4))) {
+                    if (titleScreenVars.update(arduboy.isFrameCount(4))) {
 
-                    titleScreenVars.mode = TitleScreenMode::IntroGame9;
-                    titleScreenVars.count = 0;
+                        titleScreenVars.mode = TitleScreenMode::IntroGame9;
+                        titleScreenVars.count = 0;
 
+                    }
+
+                    Item heart = level.getItem(Constants::Item_LoveHeart);
+                    heart.data.loveHeart.counter++;
+
+                    switch (heart.data.loveHeart.counter) {
+
+                        case 0 ... 79:
+                            break;
+
+                        case 80 ... 81:
+                        case 84 ... 85:
+                            FX::drawBitmap(heart.x, heart.y, Images::Heart_03, 0, dbmNormal);
+                            break;
+
+                        case 82 ... 83:
+                        case 84 ... 85:
+                            FX::drawBitmap(heart.x, heart.y, Images::Heart_02, 0, dbmNormal);
+                            break;
+
+                        case 86 ... 87:
+                            heart.y--;
+                            FX::drawBitmap(heart.x, heart.y, Images::Heart_01, 0, dbmNormal);
+                            break;
+
+                        case 88 ... 89:
+                            heart.y--;
+                            FX::drawBitmap(heart.x, heart.y, Images::Heart_00, 0, dbmNormal);
+                            break;
+
+
+                    }
+                    
                 }
-}
 
                 break;
 
