@@ -6,14 +6,8 @@ void title_Init() {
     titleScreenVars.reset();
 
 
-    titleScreenVars.mode = TitleScreenMode::CutScene9;//SJH remove
-    Item &heart = level.getItem(Constants::Item_LoveHeart);
-Serial.println("set to zero");    
-    heart.itemType = ItemType::LoveHeart;
-    heart.data.loveHeart.counter = 0;
-    heart.x = 60;
-    heart.y = 25;
-    titleScreenVars.princess.x = 30;
+    // titleScreenVars.setMode(TitleScreenMode::CutScene9, level);//SJH remove
+
 
 }
 
@@ -28,7 +22,7 @@ void title() {
 
     if (justPressed & RIGHT_BUTTON && titleScreenVars.count < Constants::TitleScreenScroll_Max) {
 
-        titleScreenVars.mode = TitleScreenMode::Main;
+       titleScreenVars.setMode(TitleScreenMode::Main, level);
 
     }
 
@@ -46,11 +40,11 @@ void title() {
 
     if ((justPressed & A_BUTTON) || (justPressed & B_BUTTON)) {
 
-        switch (titleScreenVars.mode) {
+        switch (titleScreenVars.getMode()) {
 
             case TitleScreenMode::Intro:
 
-                titleScreenVars.mode = TitleScreenMode::Main;
+                titleScreenVars.setMode(TitleScreenMode::Main, level);
                 break;
 
             case TitleScreenMode::Main:
@@ -65,12 +59,12 @@ void title() {
                     #else
                     
                         case TitleScreenOptions::Play:
-                            titleScreenVars.mode = TitleScreenMode::IntroGame1;
+                            titleScreenVars.setMode(TitleScreenMode::IntroGame1, level);
                             titleScreenVars.count = 0;
                             break;
                     
                         case TitleScreenOptions::Credits:
-                            titleScreenVars.mode = TitleScreenMode::Credits;
+                            titleScreenVars.setMode(TitleScreenMode::Credits, level);
                             titleScreenVars.count = 0;
                             break;
                     
@@ -86,20 +80,20 @@ void title() {
 
                 case TitleScreenMode::Credits:
 
-                    titleScreenVars.mode = TitleScreenMode::Main;
+                    titleScreenVars.setMode(TitleScreenMode::Main, level);
                     titleScreenVars.count = 88;
                     break;
 
                 case TitleScreenMode::IntroGame1:
 
-                    titleScreenVars.mode = TitleScreenMode::CutScene1;
+                    titleScreenVars.setMode(TitleScreenMode::CutScene1, level);
                     titleScreenVars.count = 0;
                     fadeEffect.reset();
                     break;
 
                 case TitleScreenMode::CutScene1:
 
-                    titleScreenVars.mode = TitleScreenMode::IntroGame2;
+                    titleScreenVars.setMode(TitleScreenMode::IntroGame2, level);
                     titleScreenVars.count = 0;
                     break;
 
@@ -119,7 +113,7 @@ void title() {
 
     // Render ..
 
-    switch (titleScreenVars.mode) {
+    switch (titleScreenVars.getMode()) {
 
         case TitleScreenMode::Intro:
         case TitleScreenMode::Main:
@@ -158,7 +152,7 @@ void title() {
                 
                 if (titleScreenVars.update(arduboy.isFrameCount(4))) {
 
-                    titleScreenVars.mode = TitleScreenMode::CutScene1;
+                    titleScreenVars.setMode(TitleScreenMode::CutScene1, level);
                     titleScreenVars.count = 0;
                     fadeEffect.reset();
 
@@ -181,7 +175,7 @@ void title() {
 
                 if (titleScreenVars.update(arduboy.isFrameCount(3))) {
 
-                    titleScreenVars.mode = TitleScreenMode::IntroGame2;
+                    titleScreenVars.setMode(TitleScreenMode::IntroGame2, level);
                     titleScreenVars.count = 0;
                     fadeEffect.complete();
 
@@ -204,22 +198,9 @@ void title() {
                 break;
 
             case TitleScreenMode::CutScene9:
-// Serial.print(titleScreenVars.prince.x);
-// Serial.print(" ");
-// Serial.print(titleScreenVars.prince.image);
-// Serial.print(" ");
-// Serial.print(titleScreenVars.princess.x);
-// Serial.print(" ");
-// Serial.print(titleScreenVars.princess.image);
-// Serial.print(" ");
-// Serial.println(titleScreenVars.count);
                 {
                     uint24_t startPos = Images::Prince_Left_001 + ((static_cast<uint24_t>(titleScreenVars.prince.image) - 1) * static_cast<uint24_t>(364));
-                    // uint32_t startPos2 = Images::Prince_Left_001 + ((static_cast<uint8_t>(titleScreenVars.prince.image) - 1) * 364);
-                // Serial.print("Image ");
-                // Serial.println(static_cast<uint32_t>(startPos));
-                // Serial.print("Image ");
-                // Serial.println(static_cast<uint32_t>(startPos2));
+
                     FX::drawBitmap(0, 0, Images::Chambers_BG, 0, dbmNormal);
                     FX::drawBitmap(10, 37, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
                     FX::drawBitmap(114, 37, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
@@ -229,7 +210,7 @@ void title() {
 
                     if (titleScreenVars.update(arduboy.isFrameCount(4))) {
 
-                        titleScreenVars.mode = TitleScreenMode::IntroGame9;
+                        titleScreenVars.setMode(TitleScreenMode::IntroGame9, level);
                         titleScreenVars.count = 0;
 
                     }
@@ -239,7 +220,6 @@ void title() {
                     if (arduboy.isFrameCount(2)) {
                         heart.data.loveHeart.counter++;
                     }
-Serial.println(heart.data.loveHeart.counter);
 
                     switch (heart.data.loveHeart.counter) {
 
