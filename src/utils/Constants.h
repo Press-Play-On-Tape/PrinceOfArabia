@@ -3,7 +3,7 @@
 
 #define DEBUG_PRINT    Serial.print
 #define DEBUG_PRINTLN  Serial.println
-#define SAVE_MEMORY_USB
+#define _SAVE_MEMORY_USB
 #define _SAVE_MEMORY_OTHER
 
 #define _DEBUG
@@ -695,8 +695,8 @@ constexpr int8_t SceneFinal[] PROGMEM = {
 15, 0, 0, 0, 
 15, 0, 0, 0, 
 15, 0, 0, 0, 
-15, 0, 0, 0, 
-15, 0, 0, 0, 
+12, -3, 0, 0, 
+14, -3, 0, 0, 
 7, 0, 0, 0, 
 8, -3, 1, 0, 
 9, -3, 1, 0, 

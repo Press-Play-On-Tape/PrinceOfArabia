@@ -7,10 +7,13 @@ void title_Init() {
 
 
     titleScreenVars.mode = TitleScreenMode::CutScene9;//SJH remove
-    Item heart = level.getItem(Constants::Item_LoveHeart);
+    Item &heart = level.getItem(Constants::Item_LoveHeart);
+Serial.println("set to zero");    
+    heart.itemType = ItemType::LoveHeart;
     heart.data.loveHeart.counter = 0;
-    heart.x = 57;
-    heart.y = 20;
+    heart.x = 60;
+    heart.y = 25;
+    titleScreenVars.princess.x = 30;
 
 }
 
@@ -231,31 +234,47 @@ void title() {
 
                     }
 
-                    Item heart = level.getItem(Constants::Item_LoveHeart);
-                    heart.data.loveHeart.counter++;
+                    Item &heart = level.getItem(Constants::Item_LoveHeart);
+
+                    if (arduboy.isFrameCount(2)) {
+                        heart.data.loveHeart.counter++;
+                    }
+Serial.println(heart.data.loveHeart.counter);
 
                     switch (heart.data.loveHeart.counter) {
 
-                        case 0 ... 79:
+                        case 0 ... 189:
                             break;
 
-                        case 80 ... 81:
-                        case 84 ... 85:
-                            FX::drawBitmap(heart.x, heart.y, Images::Heart_03, 0, dbmNormal);
-                            break;
-
-                        case 82 ... 83:
-                        case 84 ... 85:
+                        case 190 ... 193:
+                        case 198 ... 201:
                             FX::drawBitmap(heart.x, heart.y, Images::Heart_02, 0, dbmNormal);
                             break;
 
-                        case 86 ... 87:
+                        case 194 ... 197:
+                        case 202 ... 205:
+                            FX::drawBitmap(heart.x, heart.y, Images::Heart_03, 0, dbmNormal);
+                            break;
+
+                        case 206:
+                        case 208:
                             heart.y--;
                             FX::drawBitmap(heart.x, heart.y, Images::Heart_01, 0, dbmNormal);
                             break;
 
-                        case 88 ... 89:
+                        case 207:
+                        case 209:
+                            FX::drawBitmap(heart.x, heart.y, Images::Heart_01, 0, dbmNormal);
+                            break;
+
+                        case 210:
+                        case 212:
                             heart.y--;
+                            FX::drawBitmap(heart.x, heart.y, Images::Heart_00, 0, dbmNormal);
+                            break;
+
+                        case 211:
+                        case 213:
                             FX::drawBitmap(heart.x, heart.y, Images::Heart_00, 0, dbmNormal);
                             break;
 
