@@ -412,7 +412,7 @@ struct Level {
 
         int8_t getTile(Layer layer, int8_t x, int8_t y, int8_t returnCollapsingTile) { 
 
-            if (x < 0 || x > 15) return TILE_NONE;
+            if (x <= -3 || x > 12) return TILE_NONE;
 
             switch (layer) {
 
@@ -990,14 +990,16 @@ struct Level {
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
             DEBUG_PRINT(F("canFall(toe) stance:"));
             DEBUG_PRINT(prince.getStance());
-            DEBUG_PRINT(F(", ii:"));
-            DEBUG_PRINT(imageIndex);
             DEBUG_PRINT(F(", r:"));
-            DEBUG_PRINT(reach);
+            DEBUG_PRINT(imageDetails.reach);
             DEBUG_PRINT(F(", ft "));
             DEBUG_PRINT(imageDetails.toe);
             DEBUG_PRINT(F(", fh "));
             DEBUG_PRINT(imageDetails.heel);
+            DEBUG_PRINT(F(", tileXIdx:"));
+            DEBUG_PRINT(tileXIdx);
+            DEBUG_PRINT(F(", tileYIdx:"));
+            DEBUG_PRINT(tileYIdx);
             DEBUG_PRINT(F(", bg "));
             DEBUG_PRINT(bgTile1);
             DEBUG_PRINT(F(", fg "));
@@ -1030,11 +1032,15 @@ struct Level {
                     DEBUG_PRINT(F("canFall(heel) stance:"));
                     DEBUG_PRINT(prince.getStance());
                     DEBUG_PRINT(F(", r:"));
-                    DEBUG_PRINT(reach);
+                    DEBUG_PRINT(imageDetails.reach);
                     DEBUG_PRINT(F(", ft "));
                     DEBUG_PRINT(imageDetails.toe);
                     DEBUG_PRINT(F(", fh "));
                     DEBUG_PRINT(imageDetails.heel);
+                    DEBUG_PRINT(F(", tileXIdx:"));
+                    DEBUG_PRINT(tileXIdx);
+                    DEBUG_PRINT(F(", tileYIdx:"));
+                    DEBUG_PRINT(tileYIdx);
                     DEBUG_PRINT(F(", bg "));
                     DEBUG_PRINT(bgTile1);
                     DEBUG_PRINT(F(", fg "));
