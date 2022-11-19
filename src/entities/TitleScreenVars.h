@@ -45,6 +45,7 @@ struct TitleScreenVars {
             
             case TitleScreenMode::IntroGame_1A:
             case TitleScreenMode::CutScene_1:
+            case TitleScreenMode::IntroGame_1B:
 
                 this->count = 0;
                 break;

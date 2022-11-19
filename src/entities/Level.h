@@ -46,6 +46,7 @@
 #define TILE_FG_WALL_4 86
 #define TILE_FG_WALL_5 87
 #define TILE_FG_WALL_6 88
+#define TILE_FG_WALL_7 122
 
 #define TILE_COLUMN_LH_WALL 100
 #define TILE_COLUMN_1 84
@@ -792,6 +793,7 @@ struct Level {
                 case TILE_FG_WALL_4:
                 case TILE_FG_WALL_5:
                 case TILE_FG_WALL_6:
+                case TILE_FG_WALL_7:
                     return WallTileResults::Normal;
 
                 default: 
@@ -877,6 +879,7 @@ struct Level {
                 case TILE_FG_WALL_4:
                 case TILE_FG_WALL_5:
                 case TILE_FG_WALL_6:
+                case TILE_FG_WALL_7:
                     return false;
 
             }

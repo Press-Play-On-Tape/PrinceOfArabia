@@ -7,7 +7,7 @@ void title_Init() {
 
 
     // titleScreenVars.setMode(TitleScreenMode::CutScene_9, level);//SJH remove
-    titleScreenVars.setMode(TitleScreenMode::CutScene_3, level);//SJH remove
+    // titleScreenVars.setMode(TitleScreenMode::CutScene_3, level);//SJH remove
 
 
 }
@@ -33,98 +33,118 @@ void renderChamberFG(uint8_t hourglassX = 0, uint8_t hourglassIdx = 0) {
 //
 void title() { 
 
-
     auto justPressed = arduboy.justPressedButtons();
 
-    if (justPressed & RIGHT_BUTTON && titleScreenVars.count < Constants::TitleScreenScroll_Max) {
+    switch (titleScreenVars.getMode()) {
 
-       titleScreenVars.setMode(TitleScreenMode::Main, level);
-
-    }
-
-    if (justPressed & LEFT_BUTTON) {
-
-        titleScreenVars.option = TitleScreenOptions::Play;
-
-    }
-
-    if (justPressed & RIGHT_BUTTON) {
-
-        titleScreenVars.option = TitleScreenOptions::Credits;
-
-    }
-
-    if ((justPressed & A_BUTTON) || (justPressed & B_BUTTON)) {
-
-        switch (titleScreenVars.getMode()) {
-
-            case TitleScreenMode::Intro:
-
+        case TitleScreenMode::Intro:
+            
+            if ((justPressed & A_BUTTON) || (justPressed & B_BUTTON)) {
                 titleScreenVars.setMode(TitleScreenMode::Main, level);
-                break;
+            }
 
-            case TitleScreenMode::Main:
+            if (justPressed & LEFT_BUTTON) {
+                titleScreenVars.option = TitleScreenOptions::Play;
+                titleScreenVars.setMode(TitleScreenMode::Main, level);
+            }
 
-                switch (titleScreenVars.option) {
+            if (justPressed & RIGHT_BUTTON) {
+                titleScreenVars.option = TitleScreenOptions::Credits;
+                titleScreenVars.setMode(TitleScreenMode::Main, level);
+            }
 
-                    #ifdef SAVE_MEMORY_OTHER
-                        case TitleScreenOptions::Play:
+            break;
+
+        case TitleScreenMode::Main:
+
+            if (justPressed & LEFT_BUTTON) {
+                titleScreenVars.option = TitleScreenOptions::Play;
+            }
+
+            if (justPressed & RIGHT_BUTTON) {
+                titleScreenVars.option = TitleScreenOptions::Credits;
+            }
+
+            switch (titleScreenVars.option) {
+
+                #ifdef SAVE_MEMORY_OTHER
+                    case TitleScreenOptions::Play:
+
+                        if ((justPressed & A_BUTTON) || (justPressed & B_BUTTON)) {
                             gamePlay.gameState = GameState::Game_Init;
-                            break;
+                        }
 
-                    #else
-                    
-                        case TitleScreenOptions::Play:
+                        break;
+
+                #else
+                
+                    case TitleScreenOptions::Play:
+
+                        if ((justPressed & A_BUTTON) || (justPressed & B_BUTTON)) {
                             titleScreenVars.setMode(TitleScreenMode::IntroGame_1A, level);
                             titleScreenVars.count = 0;
-                            break;
-                    
-                        case TitleScreenOptions::Credits:
+                        }
+
+                        break;
+                
+                    case TitleScreenOptions::Credits:
+                        
+                        if ((justPressed & A_BUTTON) || (justPressed & B_BUTTON)) {
                             titleScreenVars.setMode(TitleScreenMode::Credits, level);
                             titleScreenVars.count = 0;
-                            break;
-                    
-                    #endif
+                        }
 
-                    default: break;
+                        break;
+                
+                #endif
 
-                }        
+                default: break;
+
+            }        
+
+            break;
+
+        #ifndef SAVE_MEMORY_OTHER
+
+            case TitleScreenMode::Credits:
+
+                if ((justPressed & A_BUTTON) || (justPressed & B_BUTTON)) {
+                    titleScreenVars.setMode(TitleScreenMode::Main, level);
+                }
 
                 break;
 
-            #ifndef SAVE_MEMORY_OTHER
+            case TitleScreenMode::IntroGame_1A:
 
-                case TitleScreenMode::Credits:
-
-                    titleScreenVars.setMode(TitleScreenMode::Main, level);
-                    // titleScreenVars.count = 88;
-                    break;
-
-                case TitleScreenMode::IntroGame_1A:
-
+                if ((justPressed & A_BUTTON) || (justPressed & B_BUTTON)) {
                     titleScreenVars.setMode(TitleScreenMode::CutScene_1, level);
-                    // titleScreenVars.count = 0;
                     fadeEffect.reset();
-                    break;
+                }
 
-                case TitleScreenMode::CutScene_1:
+                break;
 
+            case TitleScreenMode::CutScene_1:
+
+                if ((justPressed & A_BUTTON) || (justPressed & B_BUTTON)) {
                     titleScreenVars.setMode(TitleScreenMode::IntroGame_1B, level);
-                    // titleScreenVars.count = 0;
-                    break;
+                }
 
-                case TitleScreenMode::IntroGame_1B:
+                break;
 
+            case TitleScreenMode::IntroGame_1B:
+
+                if ((justPressed & A_BUTTON) || (justPressed & B_BUTTON)) {
                     gamePlay.gameState = GameState::Game_Init; 
-                    break;
+                }
 
-            #endif
+                break;
 
-            default: break;
+        #endif
 
-        }
+        default: break;
 
     }
+
 
 
     // Render ..
