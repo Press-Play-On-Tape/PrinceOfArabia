@@ -3,7 +3,7 @@
 
 #define DEBUG_PRINT    Serial.print
 #define DEBUG_PRINTLN  Serial.println
-// #define _SAVE_MEMORY_USB
+#define SAVE_MEMORY_USB
 #define _SAVE_MEMORY_OTHER
 
 #define _DEBUG
@@ -22,11 +22,11 @@
 #define _DEBUG_ACTION_CANJUMPUP_PART2
 #define _DEBUG_ACTION_CANCLIMBDOWN
 #define _DEBUG_ACTION_CANCLIMBDOWN_PART2
-#define _DEBUG_ACTION_CANFALL
+#define DEBUG_ACTION_CANFALL
 #define _DEBUG_ACTION_CANFALLSOMEMORE
 #define _DEBUG_ACTION_COLLIDEWITHWALL
 #define _DEBUG_ACTION_RUNJUMP
-#define _DEBUG_ACTION_FALLING
+#define DEBUG_ACTION_FALLING
 #define _TIME_AND_LEVEL
 #define _TIME_ONLY
 
@@ -667,8 +667,6 @@ constexpr uint16_t  Upright_Turn             = 1255;
 
 namespace Constants {
 
-
-
     constexpr uint8_t Item_Flash = 0;
     constexpr uint8_t Item_Sign = 1;
     constexpr uint8_t Item_ExitDoor = 2;
@@ -1108,11 +1106,12 @@ enum class TitleScreenMode : uint8_t {
     Intro,
     Main,
     Credits, 
-    IntroGame1,
-    CutScene1,
-    IntroGame2,
-    CutScene9,
-    IntroGame9,
+    IntroGame_1A,
+    CutScene_1,
+    IntroGame_1B,
+    CutScene_2,
+    CutScene_9,
+    IntroGame_9,
 };
 
 enum class WallTileResults : uint8_t {

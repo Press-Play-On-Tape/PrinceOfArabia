@@ -11,6 +11,7 @@
 
 void game_Init() {
 
+    // prince.init(78, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
     // prince.init(78 + 24 + 12, 25 + 31 + 31, Direction::Left, Stance:: Crouch_3_End, 3);          // Spikes
     // prince.init(78 + 24, 25, Direction::Left, Stance:: Crouch_3_End, 3);          // Jump 2
     // prince.init(18, 25+31, Direction::Right,Stance:: Crouch_3_End, 3);          // Sword fight
@@ -34,6 +35,7 @@ void game_Init() {
     gamePlay.init(arduboy, 1);
     
     level.setLevel(1);
+    // level.init(prince, 60, 3);  // Normal starting posa
     // level.init(prince, 10, 0);   // Spikes
     // level.init(prince, 30, 3);  // Jump 2
     // level.init(prince, 70, 3);  // Sword fight
@@ -1281,7 +1283,6 @@ void game() {
     //  Falling ..
     //
     // ---------------------------------------------------------------------------------------------------------------------------------------
-
 
     if (!prince.getIgnoreWallCollisions() && prince.isFootDown() && level.canFall(prince) && prince.getFalling() == 0) {
 

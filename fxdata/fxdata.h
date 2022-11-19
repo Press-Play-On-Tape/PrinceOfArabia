@@ -72,17 +72,17 @@ namespace Images
   constexpr uint16_t PressAWidth  = 79;
   constexpr uint16_t PressAHeight = 15;
 
-  constexpr uint24_t IntroGame1 = 0x002824;
-  constexpr uint16_t IntroGame1Width  = 118;
-  constexpr uint16_t IntroGame1Height = 96;
+  constexpr uint24_t IntroGame_1A = 0x002824;
+  constexpr uint16_t IntroGame_1A_width  = 118;
+  constexpr uint16_t IntroGame_1A_height = 96;
 
-  constexpr uint24_t IntroGame2 = 0x002DB0;
-  constexpr uint16_t IntroGame2Width  = 123;
-  constexpr uint16_t IntroGame2Height = 96;
+  constexpr uint24_t IntroGame_1B = 0x002DB0;
+  constexpr uint16_t IntroGame_1B_width  = 123;
+  constexpr uint16_t IntroGame_1B_height = 96;
 
-  constexpr uint24_t IntroGame9 = 0x003378;
-  constexpr uint16_t IntroGame9Width  = 123;
-  constexpr uint16_t IntroGame9Height = 160;
+  constexpr uint24_t IntroGame_9 = 0x003378;
+  constexpr uint16_t IntroGame_9_width  = 123;
+  constexpr uint16_t IntroGame_9_height = 160;
 
   constexpr uint24_t Chambers_BG = 0x003D18;
   constexpr uint16_t Chambers_BG_width  = 128;

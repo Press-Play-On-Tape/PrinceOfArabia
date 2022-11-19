@@ -6,7 +6,7 @@ void title_Init() {
     titleScreenVars.reset();
 
 
-    // titleScreenVars.setMode(TitleScreenMode::CutScene9, level);//SJH remove
+    // titleScreenVars.setMode(TitleScreenMode::CutScene_9, level);//SJH remove
 
 
 }
@@ -59,7 +59,7 @@ void title() {
                     #else
                     
                         case TitleScreenOptions::Play:
-                            titleScreenVars.setMode(TitleScreenMode::IntroGame1, level);
+                            titleScreenVars.setMode(TitleScreenMode::IntroGame_1A, level);
                             titleScreenVars.count = 0;
                             break;
                     
@@ -84,20 +84,20 @@ void title() {
                     titleScreenVars.count = 88;
                     break;
 
-                case TitleScreenMode::IntroGame1:
+                case TitleScreenMode::IntroGame_1A:
 
-                    titleScreenVars.setMode(TitleScreenMode::CutScene1, level);
+                    titleScreenVars.setMode(TitleScreenMode::CutScene_1, level);
                     titleScreenVars.count = 0;
                     fadeEffect.reset();
                     break;
 
-                case TitleScreenMode::CutScene1:
+                case TitleScreenMode::CutScene_1:
 
-                    titleScreenVars.setMode(TitleScreenMode::IntroGame2, level);
+                    titleScreenVars.setMode(TitleScreenMode::IntroGame_1B, level);
                     titleScreenVars.count = 0;
                     break;
 
-                case TitleScreenMode::IntroGame2:
+                case TitleScreenMode::IntroGame_1B:
 
                     gamePlay.gameState = GameState::Game_Init; 
                     break;
@@ -146,13 +146,13 @@ void title() {
 
                 break;
 
-            case TitleScreenMode::IntroGame1:
+            case TitleScreenMode::IntroGame_1A:
 
-                FX::drawBitmap(5, 64 - titleScreenVars.count, Images::IntroGame1, 0, dbmNormal);
+                FX::drawBitmap(5, 64 - titleScreenVars.count, Images::IntroGame_1A, 0, dbmNormal);
                 
                 if (titleScreenVars.update(arduboy.isFrameCount(4))) {
 
-                    titleScreenVars.setMode(TitleScreenMode::CutScene1, level);
+                    titleScreenVars.setMode(TitleScreenMode::CutScene_1, level);
                     titleScreenVars.count = 0;
                     fadeEffect.reset();
 
@@ -160,7 +160,7 @@ void title() {
 
                 break;
 
-            case TitleScreenMode::CutScene1:
+            case TitleScreenMode::CutScene_1:
 
                 FX::drawBitmap(  0,  0, Images::Chambers_BG, 0, dbmNormal);
                 FX::drawBitmap( 10, 37, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
@@ -175,7 +175,7 @@ void title() {
 
                 if (titleScreenVars.update(arduboy.isFrameCount(3))) {
 
-                    titleScreenVars.setMode(TitleScreenMode::IntroGame2, level);
+                    titleScreenVars.setMode(TitleScreenMode::IntroGame_1B, level);
                     titleScreenVars.count = 0;
                     fadeEffect.complete();
 
@@ -184,9 +184,9 @@ void title() {
 
                 break;
 
-            case TitleScreenMode::IntroGame2:
+            case TitleScreenMode::IntroGame_1B:
 
-                FX::drawBitmap(2, 64 -titleScreenVars.count, Images::IntroGame2, 0, dbmNormal);
+                FX::drawBitmap(2, 64 -titleScreenVars.count, Images::IntroGame_1B, 0, dbmNormal);
                 
                 if (titleScreenVars.update(arduboy.isFrameCount(4))) {
 
@@ -197,7 +197,7 @@ void title() {
 
                 break;
 
-            case TitleScreenMode::CutScene9:
+            case TitleScreenMode::CutScene_9:
                 {
                     uint24_t startPos = Images::Prince_Left_001 + ((static_cast<uint24_t>(titleScreenVars.prince.image) - 1) * static_cast<uint24_t>(364));
 
@@ -210,7 +210,7 @@ void title() {
 
                     if (titleScreenVars.update(arduboy.isFrameCount(4))) {
 
-                        titleScreenVars.setMode(TitleScreenMode::IntroGame9, level);
+                        titleScreenVars.setMode(TitleScreenMode::IntroGame_9, level);
                         titleScreenVars.count = 0;
 
                     }
@@ -265,9 +265,9 @@ void title() {
 
                 break;
 
-            case TitleScreenMode::IntroGame9:
+            case TitleScreenMode::IntroGame_9:
 
-                FX::drawBitmap(2, 64 - titleScreenVars.count, Images::IntroGame9, 0, dbmNormal);
+                FX::drawBitmap(2, 64 - titleScreenVars.count, Images::IntroGame_9, 0, dbmNormal);
                 
                 if (titleScreenVars.update(arduboy.isFrameCount(4))) {
 
