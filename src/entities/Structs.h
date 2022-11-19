@@ -30,7 +30,7 @@ struct TitleScreenVars {
         this->option = TitleScreenOptions::Play;
         this->mode = TitleScreenMode::Intro;
         this->zaffar.x = 142;
-        this->prince.x = 130;
+        this->prince.x = 132;
         this->princess.x = 34;
 
     }

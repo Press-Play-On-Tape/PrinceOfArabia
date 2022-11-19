@@ -546,6 +546,11 @@ namespace Images {
     image_t Princess_22 = "../images/princess/Princess_22.png"
     image_t Princess_23 = "../images/princess/Princess_23.png"
     
+    image_t Heart_00 = "../images/princess/Hearts_00.png"
+    image_t Heart_01 = "../images/princess/Hearts_01.png"
+    image_t Heart_02 = "../images/princess/Hearts_02.png"
+    image_t Heart_03 = "../images/princess/Hearts_03.png"
+
 
     // Zaffar Images 
 

@@ -67,6 +67,10 @@ struct PotionSmall {
     uint8_t frame;
 };
 
+struct LoveHeart {
+    uint8_t counter;
+};
+
 struct Item {
 
     ItemType itemType;
@@ -74,6 +78,7 @@ struct Item {
     uint8_t y;
 
     union {
+        struct LoveHeart loveHeart;
         struct Flash flash;
         struct Sign sign;
         struct Gate gate;
