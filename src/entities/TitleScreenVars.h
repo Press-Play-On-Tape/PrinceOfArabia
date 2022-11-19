@@ -38,6 +38,22 @@ struct TitleScreenVars {
 
         switch (this->mode) {
             
+            case TitleScreenMode::Credits:
+
+                this->count = 88;
+                break;
+            
+            case TitleScreenMode::IntroGame_1A:
+            case TitleScreenMode::CutScene_1:
+
+                this->count = 0;
+                break;
+            
+            case TitleScreenMode::CutScene_2:
+
+                this->princess.x = 63;
+                break;
+            
             case TitleScreenMode::CutScene_9:
                 {
                     Item &heart = level.getItem(Constants::Item_LoveHeart);
@@ -123,7 +139,19 @@ struct TitleScreenVars {
                 }
 
                 return false;
-                
+       
+            case TitleScreenMode::CutScene_2:
+            case TitleScreenMode::CutScene_3:
+
+                if (triggerFrame) {
+                    
+                    this->count++;
+                    if (this->count == 96) return true;
+
+                }
+ 
+                return false;
+
             case TitleScreenMode::CutScene_9:
 
                 if (triggerFrame) {

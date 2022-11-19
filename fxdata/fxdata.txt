@@ -677,6 +677,8 @@ namespace Images {
     image_t Princess_21 = "../images/princess/Princess_21.png"
     image_t Princess_22 = "../images/princess/Princess_22.png"
     image_t Princess_23 = "../images/princess/Princess_23.png"
+    image_t Princess_24 = "../images/princess/Princess_24.png"
+    image_t Princess_25 = "../images/princess/Princess_25.png"
     
     image_t Heart_00 = "../images/princess/Hearts_00.png"
     image_t Heart_01 = "../images/princess/Hearts_01.png"
@@ -712,7 +714,17 @@ namespace Images {
     image_t Zaffar_23 = "../images/zaffar/Zaffar_23.png"
     image_t Zaffar_24 = "../images/zaffar/Zaffar_24.png"
     image_t Zaffar_25 = "../images/zaffar/Zaffar_25.png"
-    image_t HourGlass = "../images/zaffar/HourGlass.png"
+
+
+    // Hourglass images 
+
+    image_t HourGlass_00 = "../images/hourGlass/HourGlass_00.png"
+    image_t HourGlass_01 = "../images/hourGlass/HourGlass_01.png"
+    image_t HourGlass_02 = "../images/hourGlass/HourGlass_02.png"
+    image_t HourGlass_03 = "../images/hourGlass/HourGlass_03.png"
+    image_t HourGlass_04 = "../images/hourGlass/HourGlass_04.png"
+    image_t HourGlass_05 = "../images/hourGlass/HourGlass_05.png"
+    image_t HourGlass_06 = "../images/hourGlass/HourGlass_06.png"
 
 
     // Prince Images
