@@ -3,10 +3,10 @@
 
 #define DEBUG_PRINT    Serial.print
 #define DEBUG_PRINTLN  Serial.println
-#define _SAVE_MEMORY_USB
-#define SAVE_MEMORY_OTHER
+#define SAVE_MEMORY_USB
+#define _SAVE_MEMORY_OTHER
 
-#define DEBUG
+#define _DEBUG
 #define DEBUG_ONSCREEN_DETAILS
 #define _DEBUG_ONSCREEN_DETAILS_MIN
 
