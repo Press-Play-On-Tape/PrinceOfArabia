@@ -320,12 +320,16 @@ struct Level {
 
                                     case Constants::SpikeClosingDelay - 2 ... Constants::SpikeClosingDelay:
                                         item.data.spikes.closingDelay--;
-                                        item.data.spikes.position++;
+                                        if (item.data.spikes.position < 3) {
+                                            item.data.spikes.position++;
+                                        }
                                         break;
 
                                     case 1 ... 3:
                                         item.data.spikes.closingDelay--;
-                                        item.data.spikes.position--;
+                                        if (item.data.spikes.position > 0) {
+                                            item.data.spikes.position--;
+                                        }
                                         break; 
 
                                     case 0: 

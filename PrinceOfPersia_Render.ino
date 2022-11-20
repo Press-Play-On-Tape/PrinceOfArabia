@@ -57,12 +57,11 @@ void render() {
                     break;
 
                 case ItemType::Spikes:
-// Serial.println(item.data.spikes.position);                
                     if (item.data.spikes.imageType == 1) {
-                        FX::drawBitmap(xLoc, yLoc + 14, Images::Spikes_00 + (item.data.spikes.position * 118), 0, dbmMasked);
+                        FX::drawBitmap(xLoc, yLoc + 14, Images::Spikes_BG_00 + (item.data.spikes.position * 118), 0, dbmMasked);
                     }
                     else {
-                        FX::drawBitmap(xLoc, yLoc + 14, Images::Spikes_05 + (item.data.spikes.position * 70), 0, dbmMasked);
+                        FX::drawBitmap(xLoc, yLoc + 14, Images::Spikes_BG_05 + (item.data.spikes.position * 70), 0, dbmMasked);
                     }
                     break;
 
@@ -135,6 +134,34 @@ void render() {
 
     }
 
+
+
+    // Draw items ..
+
+    for (uint8_t i = Constants::Items_DynamicRange; i < Constants::Items_Count; i++) {
+
+        Item &item = level.getItem(i);
+        int16_t xLoc = (item.x - level.getXLocation()) * Constants::TileWidth;
+        int16_t yLoc = ((item.y - level.getYLocation()) * Constants::TileHeight) - level.getYOffset() + Constants::ScreenTopOffset;
+
+        if (item.itemType != ItemType::None) {
+
+            switch (item.itemType) {
+
+                case ItemType::Spikes:
+                    if (item.data.spikes.imageType == 1) {
+                        FX::drawBitmap(xLoc, yLoc + 14, Images::Spikes_FG_00 + (item.data.spikes.position * 118), 0, dbmMasked);
+                    }
+                    else {
+                        FX::drawBitmap(xLoc, yLoc + 14, Images::Spikes_FG_05 + (item.data.spikes.position * 70), 0, dbmMasked);
+                    }
+                    break;
+
+            }
+
+        }
+
+    }
 
     // Draw foreground ..
 
