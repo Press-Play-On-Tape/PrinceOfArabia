@@ -11,16 +11,17 @@
 
 void game_Init() {
 
-    // prince.init(78 + 24 + 12, 25 + 31 + 31, Direction::Left, Stance:: Crouch_3_End, 3);          // Spikes
+    prince.init(78 + 24 + 12, 25 + 31 + 31, Direction::Left, Stance:: Crouch_3_End, 3);          // Spikes
     // prince.init(78 + 24, 25, Direction::Left, Stance:: Crouch_3_End, 3);          // Jump 2
     // prince.init(18, 25+31, Direction::Right,Stance:: Crouch_3_End, 3);          // Sword fight
     // prince.init(58, 25+31+31, Direction::Right, Stance::Crouch_3_End, 3);          // Second drink tonic
     // prince.init(66, 25, Direction::Right, Stance::Crouch_3_End, 3);          // Upper gate
     // prince.init(70, 25 + 31, Direction::Right, Stance::Crouch_3_End, 3);          // 2 leap
     // prince.init(58 +36, 56, Direction::Left, Stance::Crouch_3_End, 3);          // Exit Seq
-    prince.init(38-24, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
+    // prince.init(38-24, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
     // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3);          // Both floor types
     // prince.init(86, 87, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos but next to drop floor 3rd floor
+    // prince.init(86-36+4, 87, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos but next to drop floor 3rd floor
     // prince.init(78, 25, Direction::Left, Stance::Crouch_3_End, 3);          // Under collapsible floor
     // prince.init(66, 56, Direction::Right, Stance::Crouch_3_End, 3);        // Get tonic
 //    prince.init(18, 25+31+31, Direction::Left, Stance::Upright, 3);     // Column of climbs
@@ -34,14 +35,14 @@ void game_Init() {
     gamePlay.init(arduboy, 1);
     
     level.setLevel(1);
-    // level.init(prince, 10, 0);   // Spikes
+    level.init(prince, 10, 0);   // Spikes
     // level.init(prince, 30, 3);  // Jump 2
     // level.init(prince, 70, 3);  // Sword fight
     // level.init(prince, 50, 0);  // Second drink tonic
     // level.init(prince, 50, 0);  // Upper Gate
     // level.init(prince, 40, 3);  // 2 leap
     // level.init(prince, 80, 3);  // Exit Seq
-    level.init(prince, 60, 0);  // Normal starting posa
+    // level.init(prince, 60, 0);  // Normal starting posa
     // level.init(prince, 20, 3);  // Both floor types
     // level.init(prince, 60, 0);  //Normal starting pos but next to drop floor 3rd floor
     // level.init(prince, 50, 3);  // Under collapsible floor
@@ -120,43 +121,43 @@ void game() {
     testScroll(prince, level);
 
 
-    // Remove later !!!
-    //
-    if (justPressed & B_BUTTON) {
+    // // Remove later !!!
+    // //
+    // if (justPressed & B_BUTTON) {
 
-        switch (level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX())) {
+    //     switch (level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX())) {
 
-            case 0:
-                prince.incX(2);
-                break;
+    //         case 0:
+    //             prince.incX(2);
+    //             break;
 
-            case 1:
-            case 5:
-            case 9:
-                prince.incX(1);
-                break;
+    //         case 1:
+    //         case 5:
+    //         case 9:
+    //             prince.incX(1);
+    //             break;
 
-            case 3:
-            case 7:
-            case 11:
-                prince.incX(-1);
-                break;
+    //         case 3:
+    //         case 7:
+    //         case 11:
+    //             prince.incX(-1);
+    //             break;
 
-            case 2:
-            case 6:
-            case 10:
-                break;
+    //         case 2:
+    //         case 6:
+    //         case 10:
+    //             break;
 
-            case 4:
-            case 8:
-                prince.incX(2);
-                break;
+    //         case 4:
+    //         case 8:
+    //             prince.incX(2);
+    //             break;
 
-        }
+    //     }
 
-    }
-    //
-    // REmove later !!
+    // }
+    // //
+    // // REmove later !!
 
 
 
@@ -165,7 +166,7 @@ void game() {
 
     prince.update(level.getXLocation(), level.getYLocation());
     level.update(arduboy);
-    /* if (gamePlay.gameState == GameState::Game) */ gamePlay.update(arduboy);
+    gamePlay.update(arduboy);
 
     if (menu.update()) gamePlay.gameState = GameState::Game;
     
@@ -871,10 +872,12 @@ void game() {
                         break;
 
                     case MenuOption::Save:
+                        EEPROM_Utils::saveGame(cookie);
                         menu.direction = Direction::Right;  
                         break;
 
                     case MenuOption::Load:
+                        EEPROM_Utils::loadGame(cookie);
                         menu.direction = Direction::Right;  
                         break;
 
@@ -965,7 +968,7 @@ void game() {
                     }
                     else {
 
-                        uint8_t itemIdx = activateSpikes(prince, 32);
+                        uint8_t itemIdx = activateSpikes(prince, level);
 
                         if (itemIdx == Constants::NoItemFound) {
 
@@ -993,7 +996,7 @@ void game() {
                                     break;
 
                                 default:    // Dead!
-                                    pushDead(prince, level, gamePlay);
+                                    pushDead(prince, level, gamePlay, false);
                                     break;
 
                             }
@@ -1001,7 +1004,7 @@ void game() {
                         }
                         else {
 
-                            pushDead(prince, level, gamePlay);
+                            pushDead(prince, level, gamePlay, false);
 
                         }
                         
@@ -1064,7 +1067,7 @@ void game() {
                     }
                     else {
 
-                        uint8_t itemIdx = activateSpikes(prince, 32);
+                        uint8_t itemIdx = activateSpikes(prince, level);
 
                         if (itemIdx == Constants::NoItemFound) {
                                 
@@ -1093,7 +1096,7 @@ void game() {
                                     break;
 
                                 default:    // Dead!
-                                    pushDead(prince, level, gamePlay);
+                                    pushDead(prince, level, gamePlay, false);
                                     break;
 
                             }
@@ -1101,8 +1104,7 @@ void game() {
                         }
                         else {
 
-
-                            pushDead(prince, level, gamePlay);
+                            pushDead(prince, level, gamePlay, false);
 
                         }
 
@@ -1240,6 +1242,34 @@ void game() {
                                 gate.data.gate.closingDelayMax = 255;
 
                             }
+
+                            break;
+
+                        case ItemType::Spikes:
+
+                           if (prince.getHealth() > 0) {
+
+                                activateSpikes(prince, level);
+
+                                if (level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX()) > 2) {
+                                        
+                                    switch (prince.getStance()) {
+
+                                        case Stance::Run_Start_1_Start ... Stance::Run_Start_6_End:
+                                        case Stance::Run_Repeat_1_Start ... Stance::Run_Repeat_8_End:
+                                        case Stance::Standing_Jump_1_Start ... Stance::Standing_Jump_18_End:
+                                        case Stance::Running_Jump_1_Start ... Stance::Running_Jump_11_End:
+                                            pushDead(prince, level, gamePlay, true);
+                                            break;
+
+                                        default:
+                                            break;
+
+                                    }
+
+                                }
+
+                           }
 
                             break;
 

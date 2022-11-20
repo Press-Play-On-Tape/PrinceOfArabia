@@ -8,6 +8,7 @@
 #include "src/utils/FadeEffects.h"
 #include "src/entities/Entities.h"
 #include "src/fonts/Font3x5.h"
+#include "src/utils/EEPROM_Utils.h"
 
 
 #ifdef SAVE_MEMORY_USB
@@ -20,12 +21,13 @@ Arduboy2Ext arduboy;
     Font3x5 font3x5 = Font3x5();
 #endif
 
-Stack <int16_t, 30>  princeStack;
-Prince prince;
-Level level;
+Cookie cookie;
+Stack <int16_t, 30> princeStack;
+Prince &prince = cookie.prince;
+Level &level = cookie.level;
+GamePlay &gamePlay = cookie.gamePlay;
+TitleScreenVars titleScreenVars = cookie.titleScreenVars;
 MenuItem menu;
-GamePlay gamePlay;
-TitleScreenVars titleScreenVars;
 
 #ifndef SAVE_MEMORY_OTHER
     FadeEffects fadeEffect;
@@ -51,6 +53,8 @@ void setup() {
     #else
         gamePlay.gameState = GameState::SplashScreen_Init;
     #endif
+
+    EEPROM_Utils::initEEPROM(cookie);
 
 }
 

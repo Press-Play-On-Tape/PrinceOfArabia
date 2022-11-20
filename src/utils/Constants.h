@@ -4,7 +4,7 @@
 #define DEBUG_PRINT    Serial.print
 #define DEBUG_PRINTLN  Serial.println
 #define _SAVE_MEMORY_USB
-#define _SAVE_MEMORY_OTHER
+#define SAVE_MEMORY_OTHER
 
 #define _DEBUG
 #define DEBUG_ONSCREEN_DETAILS
@@ -689,6 +689,8 @@ namespace Constants {
     constexpr int8_t InAir = 127;
     constexpr int8_t InAir_DoNotFall = 126;
 
+    constexpr uint8_t SpikeClosingDelay = 32;
+
     const uint8_t StanceToImageXRef[] PROGMEM  = {
         0, 
         RUN_START_SEQ
@@ -789,7 +791,7 @@ constexpr int8_t Prince_ImageDetails[] PROGMEM = {
 /* 004 */  5, -4, -5,
 /* 005 */  6, -3, -6,
 /* 006 */  6, -2, -6,
-/* 007 */  7, -4, -6,
+/* 007 */  7, -1, -6,
 /* 008 */  9, 6, 1,
 /* 009 */  8, 5, 0,
 /* 010 */  6, 2, -3,

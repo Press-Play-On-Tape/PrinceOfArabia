@@ -316,23 +316,29 @@ struct Level {
 
                             if (arduboy.isFrameCount(4)) {
 
-                                if (item.data.spikes.closingDelay > 0) {
+                                switch (item.data.spikes.closingDelay) {
 
-                                    item.data.spikes.closingDelay--;
+                                    case Constants::SpikeClosingDelay - 2 ... Constants::SpikeClosingDelay:
+                                        item.data.spikes.closingDelay--;
+                                        item.data.spikes.position++;
+                                        break;
 
-                                    switch (item.data.spikes.closingDelay) {
+                                    case 1 ... 3:
+                                        item.data.spikes.closingDelay--;
+                                        item.data.spikes.position--;
+                                        break; 
 
-                                        case 1 ... 3:
-                                            item.data.spikes.position--;
-                                            break;
-                                        
-                                        default: break;
-                                        
-                                    }
+                                    case 0: 
+                                        break;
+
+                                    default:
+                                        item.data.spikes.closingDelay--;
+                                        break;
 
                                 }
 
                             }
+
                             break;
 
                         case ItemType::Sign:
