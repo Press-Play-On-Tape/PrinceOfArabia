@@ -11,7 +11,7 @@
 
 void game_Init() {
 
-    prince.init(78 + 24 + 12, 25 + 31 + 31, Direction::Left, Stance:: Crouch_3_End, 3);          // Spikes
+    // prince.init(78 + 24 + 12, 25 + 31 + 31, Direction::Left, Stance:: Crouch_3_End, 3);          // Spikes
     // prince.init(78 + 24, 25, Direction::Left, Stance:: Crouch_3_End, 3);          // Jump 2
     // prince.init(18, 25+31, Direction::Right,Stance:: Crouch_3_End, 3);          // Sword fight
     // prince.init(58, 25+31+31, Direction::Right, Stance::Crouch_3_End, 3);          // Second drink tonic
@@ -24,7 +24,7 @@ void game_Init() {
     // prince.init(86-36+4, 87, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos but next to drop floor 3rd floor
     // prince.init(78, 25, Direction::Left, Stance::Crouch_3_End, 3);          // Under collapsible floor
     // prince.init(66, 56, Direction::Right, Stance::Crouch_3_End, 3);        // Get tonic
-//    prince.init(18, 25+31+31, Direction::Left, Stance::Upright, 3);     // Column of climbs
+   prince.init(18, 25+31+31, Direction::Left, Stance::Upright, 3);     // Column of climbs
 //    prince.init(78, 25, Direction::Left, Stance::Upright, 3);     // Below column of climbs
     // prince.init(80, 25, Direction::Right, Stance::Crouch_3_End, 3);     // Top Left
     // prince.init(18, 25, Direction::Right,Stance:: Crouch_3_End, 3);          // Long Fall
@@ -35,7 +35,7 @@ void game_Init() {
     gamePlay.init(arduboy, 1);
     
     level.setLevel(1);
-    level.init(prince, 10, 0);   // Spikes
+    // level.init(prince, 10, 0);   // Spikes
     // level.init(prince, 30, 3);  // Jump 2
     // level.init(prince, 70, 3);  // Sword fight
     // level.init(prince, 50, 0);  // Second drink tonic
@@ -47,7 +47,7 @@ void game_Init() {
     // level.init(prince, 60, 0);  //Normal starting pos but next to drop floor 3rd floor
     // level.init(prince, 50, 3);  // Under collapsible floor
     // level.init(prince, Constants::TileHeight, 0);   // Get tonic
-    // level.init(prince, 0, 3);   // Column of climbs
+    level.init(prince, 0, 3);   // Column of climbs
     // level.init(prince, 0, 6);   // Below Column of climbs
     // level.init(prince, 0, 0);   // Top left
     // level.init(prince, 40, 4);  // Long Fall
