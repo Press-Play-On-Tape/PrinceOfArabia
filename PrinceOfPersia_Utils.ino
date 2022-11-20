@@ -150,7 +150,7 @@ void initFlash(Prince &prince, Level &level) {
 
 }
 
-uint8_t activateSpikes(Prince &prince, uint8_t closingDelay) {
+uint8_t activateSpikes(Prince &prince, Level &level) {
 
     int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x);
     int8_t tileYIdx = level.coordToTileIndexY(prince.getDirection(), prince.getPosition().y);
@@ -162,14 +162,20 @@ uint8_t activateSpikes(Prince &prince, uint8_t closingDelay) {
     if (itemIdx != Constants::NoItemFound) {
 
         Item &spikes = level.getItem(itemIdx);
-        spikes.data.spikes.closingDelay = closingDelay;
+
+        if (spikes.data.spikes.closingDelay == 0) {
+            spikes.data.spikes.closingDelay = Constants::SpikeClosingDelay;
+        }
 
         uint8_t itemIdx2 = level.getItem(ItemType::Spikes, tileXIdx - 1, tileYIdx);
 
         if (itemIdx2 != Constants::NoItemFound) {
 
             Item &spikes = level.getItem(itemIdx2);
-            spikes.data.spikes.closingDelay = closingDelay;
+
+            if (spikes.data.spikes.closingDelay == 0) {
+                spikes.data.spikes.closingDelay = Constants::SpikeClosingDelay;
+            }
 
         }
 
@@ -178,7 +184,10 @@ uint8_t activateSpikes(Prince &prince, uint8_t closingDelay) {
         if (itemIdx2 != Constants::NoItemFound) {
 
             Item &spikes = level.getItem(itemIdx2);
-            spikes.data.spikes.closingDelay = closingDelay;
+
+            if (spikes.data.spikes.closingDelay == 0) {
+                spikes.data.spikes.closingDelay = Constants::SpikeClosingDelay;
+            }
 
         }
 
@@ -302,8 +311,9 @@ bool leaveLevel(Prince &prince, Level &level) {
 
 }
 
-void pushDead(Prince &prince, Level &level, GamePlay &gamePlay) {
+void pushDead(Prince &prince, Level &level, GamePlay &gamePlay, bool clear) {
 
+    if (clear) prince.clear();
     prince.pushSequence(Stance::Falling_Dead_1_Start, Stance::Falling_Dead_3_End, true);
     prince.setHealth(0);
 

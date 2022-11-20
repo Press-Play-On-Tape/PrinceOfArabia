@@ -117,7 +117,8 @@ void title() {
             case TitleScreenMode::IntroGame_1A:
 
                 if ((justPressed & A_BUTTON) || (justPressed & B_BUTTON)) {
-                    titleScreenVars.setMode(TitleScreenMode::CutScene_1, level);
+                    titleScreenVars.setMode(TitleScreenMode::IntroGame_1B, level);
+                    gamePlay.gameState = GameState::Game_Init; 
                     fadeEffect.reset();
                 }
 
@@ -127,6 +128,7 @@ void title() {
 
                 if ((justPressed & A_BUTTON) || (justPressed & B_BUTTON)) {
                     titleScreenVars.setMode(TitleScreenMode::IntroGame_1B, level);
+                    gamePlay.gameState = GameState::Game_Init; 
                 }
 
                 break;

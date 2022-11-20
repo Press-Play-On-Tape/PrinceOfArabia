@@ -3,7 +3,7 @@
 
 #define DEBUG_PRINT    Serial.print
 #define DEBUG_PRINTLN  Serial.println
-#define _SAVE_MEMORY_USB
+#define SAVE_MEMORY_USB
 #define _SAVE_MEMORY_OTHER
 
 #define _DEBUG
@@ -17,16 +17,16 @@
 #define _DEBUG_GET_TILE
 #define _DEBUG_PRINCE_RENDERING
 
-#define _DEBUG_ACTION_CANMOVEFORWARD
+#define DEBUG_ACTION_CANMOVEFORWARD
 #define _DEBUG_ACTION_CANJUMPUP
 #define _DEBUG_ACTION_CANJUMPUP_PART2
 #define _DEBUG_ACTION_CANCLIMBDOWN
 #define _DEBUG_ACTION_CANCLIMBDOWN_PART2
-#define DEBUG_ACTION_CANFALL
+#define _DEBUG_ACTION_CANFALL
 #define _DEBUG_ACTION_CANFALLSOMEMORE
 #define _DEBUG_ACTION_COLLIDEWITHWALL
 #define _DEBUG_ACTION_RUNJUMP
-#define DEBUG_ACTION_FALLING
+#define _DEBUG_ACTION_FALLING
 #define _TIME_AND_LEVEL
 #define _TIME_ONLY
 
@@ -689,6 +689,8 @@ namespace Constants {
     constexpr int8_t InAir = 127;
     constexpr int8_t InAir_DoNotFall = 126;
 
+    constexpr uint8_t SpikeClosingDelay = 32;
+
     const uint8_t StanceToImageXRef[] PROGMEM  = {
         0, 
         RUN_START_SEQ
@@ -789,7 +791,7 @@ constexpr int8_t Prince_ImageDetails[] PROGMEM = {
 /* 004 */  5, -4, -5,
 /* 005 */  6, -3, -6,
 /* 006 */  6, -2, -6,
-/* 007 */  7, -4, -6,
+/* 007 */  7, -1, -6,
 /* 008 */  9, 6, 1,
 /* 009 */  8, 5, 0,
 /* 010 */  6, 2, -3,

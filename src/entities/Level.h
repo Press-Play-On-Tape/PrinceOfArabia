@@ -316,23 +316,29 @@ struct Level {
 
                             if (arduboy.isFrameCount(4)) {
 
-                                if (item.data.spikes.closingDelay > 0) {
+                                switch (item.data.spikes.closingDelay) {
 
-                                    item.data.spikes.closingDelay--;
+                                    case Constants::SpikeClosingDelay - 2 ... Constants::SpikeClosingDelay:
+                                        item.data.spikes.closingDelay--;
+                                        item.data.spikes.position++;
+                                        break;
 
-                                    switch (item.data.spikes.closingDelay) {
+                                    case 1 ... 3:
+                                        item.data.spikes.closingDelay--;
+                                        item.data.spikes.position--;
+                                        break; 
 
-                                        case 1 ... 3:
-                                            item.data.spikes.position--;
-                                            break;
-                                        
-                                        default: break;
-                                        
-                                    }
+                                    case 0: 
+                                        break;
+
+                                    default:
+                                        item.data.spikes.closingDelay--;
+                                        break;
 
                                 }
 
                             }
+
                             break;
 
                         case ItemType::Sign:
@@ -659,14 +665,16 @@ struct Level {
 
                     for (uint8_t x = 0; x < 16; x++) {
                         
-                        bg[y - this->yLoc + 1][x] = TILE_FG_WALL_1;
+                        // bg[y - this->yLoc + 1][x] = TILE_FG_WALL_1;
+                        bg[y - this->yLoc + 1][x] = TILE_NONE;
 
                     }
 
                 }
                 else {
 
-                    if (y == 0 && this->xLoc == 0) {
+                    // if (y == 0 && this->xLoc == 0) {
+                    if (this->xLoc == 0) {
 
                         FX::seekData(static_cast<uint24_t>(Levels::Level1_BG + (y * Levels::Level1_Width) + this->xLoc));
 
@@ -674,7 +682,8 @@ struct Level {
 
                             if (x < 3) {
 
-                                bg[y - this->yLoc + 1][x] = TILE_FG_WALL_1;
+                                // bg[y - this->yLoc + 1][x] = TILE_FG_WALL_1;
+                                bg[y - this->yLoc + 1][x] = TILE_NONE;
 
                             }
                             else {
@@ -724,7 +733,8 @@ struct Level {
                 }
                 else {
 
-                    if (y == 0 && this->xLoc == 0) {
+                    // if (y == 0 && this->xLoc == 0) {
+                    if (this->xLoc == 0) {
 
                         FX::seekData(static_cast<uint24_t>(Levels::Level1_FG + (y * Levels::Level1_Width) + this->xLoc));
 
@@ -732,7 +742,7 @@ struct Level {
 
                             if (x < 3) {
 
-                                bg[y - this->yLoc + 1][x] = TILE_FG_WALL_1;
+                                fg[y - this->yLoc + 1][x] = TILE_FG_WALL_1;
 
                             }
                             else {
