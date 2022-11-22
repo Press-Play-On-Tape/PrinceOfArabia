@@ -52,9 +52,8 @@ void setup() {
         gamePlay.gameState = GameState::Game_Init;
     #else
         gamePlay.gameState = GameState::SplashScreen_Init;
+        EEPROM_Utils::initEEPROM(cookie);
     #endif
-
-    EEPROM_Utils::initEEPROM(cookie);
 
 }
 
@@ -114,7 +113,9 @@ void loop() {
             break;
 
         case GameState::Game:
+        #ifndef SAVE_MEMORY_OTHER
         case GameState::Menu:
+        #endif
 
             game();
             break;

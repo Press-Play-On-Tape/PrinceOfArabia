@@ -845,55 +845,59 @@ void game() {
 
     // Handle menu
 
-    switch (gamePlay.gameState) {
+    #ifndef SAVE_MEMORY_OTHER
 
-        case GameState::Game:
+        switch (gamePlay.gameState) {
 
-            if (justPressed & B_BUTTON) {
+            case GameState::Game:
 
-                gamePlay.gameState = GameState::Menu;
-                menu.direction = Direction::Left;
-                menu.cursor = static_cast<uint8_t>(MenuOption::Resume);
+                if (justPressed & B_BUTTON) {
 
-            }
+                    gamePlay.gameState = GameState::Menu;
+                    menu.direction = Direction::Left;
+                    menu.cursor = static_cast<uint8_t>(MenuOption::Resume);
 
-            break;
-
-        case GameState::Menu:
-
-            if (justPressed & B_BUTTON)                         menu.direction = Direction::Right;
-            if (justPressed & UP_BUTTON && menu.cursor > 0)     menu.cursor--;
-            if (justPressed & DOWN_BUTTON && menu.cursor < 3)   menu.cursor++;
-
-            if (justPressed & A_BUTTON) {
-
-                switch (static_cast<MenuOption>(menu.cursor)) {
-
-                    case MenuOption::Resume:
-                        menu.direction = Direction::Right;  
-                        break;
-
-                    case MenuOption::Save:
-                        EEPROM_Utils::saveGame(cookie);
-                        menu.direction = Direction::Right;  
-                        break;
-
-                    case MenuOption::Load:
-                        EEPROM_Utils::loadGame(cookie);
-                        menu.direction = Direction::Right;  
-                        break;
-
-                    case MenuOption::MainMenu:
-                        gamePlay.gameState = GameState::Title_Init;  
-                        break;
-                        
                 }
 
-            }   
+                break;
 
-        default: break;
+            case GameState::Menu:
 
-    }
+                if (justPressed & B_BUTTON)                         menu.direction = Direction::Right;
+                if (justPressed & UP_BUTTON && menu.cursor > 0)     menu.cursor--;
+                if (justPressed & DOWN_BUTTON && menu.cursor < 3)   menu.cursor++;
+
+                if (justPressed & A_BUTTON) {
+
+                    switch (static_cast<MenuOption>(menu.cursor)) {
+
+                        case MenuOption::Resume:
+                            menu.direction = Direction::Right;  
+                            break;
+
+                        case MenuOption::Save:
+                            EEPROM_Utils::saveGame(cookie);
+                            menu.direction = Direction::Right;  
+                            break;
+
+                        case MenuOption::Load:
+                            EEPROM_Utils::loadGame(cookie);
+                            menu.direction = Direction::Right;  
+                            break;
+
+                        case MenuOption::MainMenu:
+                            gamePlay.gameState = GameState::Title_Init;  
+                            break;
+                            
+                    }
+
+                }   
+
+            default: break;
+
+
+        }
+    #endif
 
 
     // ---------------------------------------------------------------------------------------------------------------------------------------
@@ -1590,10 +1594,11 @@ void game() {
 
     render();
     
-    if (gamePlay.gameState == GameState::Menu) {
-        renderMenu();
-    }
-
+    #ifndef SAVE_MEMORY_OTHER
+        if (gamePlay.gameState == GameState::Menu) {
+            renderMenu();
+        }
+    #endif
 
     #if defined(DEBUG) && defined(DEBUG_ONSCREEN_DETAILS)
     font3x5.setTextColor(0);
