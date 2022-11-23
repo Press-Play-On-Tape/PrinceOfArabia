@@ -711,6 +711,14 @@ namespace Images {
     image_t Princess_Bounce_15 = "../images/princess/Princess_Bounce_15.png"
     image_t Princess_Bounce_16 = "../images/princess/Princess_Bounce_16.png"
 
+    image_t Princess_Sleep_00 = "../images/princess/Princess_Sleep_00.png"
+    image_t Princess_Sleep_01 = "../images/princess/Princess_Sleep_01.png"
+    image_t Princess_Sleep_02 = "../images/princess/Princess_Sleep_02.png"
+    image_t Princess_Sleep_03 = "../images/princess/Princess_Sleep_03.png"
+    image_t Princess_Sleep_04 = "../images/princess/Princess_Sleep_04.png"
+    image_t Princess_Sleep_05 = "../images/princess/Princess_Sleep_05.png"
+    image_t Princess_Sleep_06 = "../images/princess/Princess_Sleep_06.png"
+
     image_t Heart_00 = "../images/princess/Hearts_00.png"
     image_t Heart_01 = "../images/princess/Hearts_01.png"
     image_t Heart_02 = "../images/princess/Hearts_02.png"

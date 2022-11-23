@@ -368,43 +368,21 @@ struct Level {
 
         }
 
-        int8_t coordToTileIndexX(Direction direction, int16_t x) {
+        int8_t coordToTileIndexX(int16_t x) {
 
-            switch (direction) {
-
-                case Direction::Left:
-                    return (x / 12);                
-
-                case Direction::Right:
-                    return (x / 12);
-
-                default:
-                    return 255;
-                    
-            }
+            return (x / 12);                
 
         }
 
-        int8_t coordToTileIndexY(Direction direction, int16_t y) {
+        int8_t coordToTileIndexY(int16_t y) {
 
-            switch (direction) {
-
-                case Direction::Left:
-                    return (y / 31);                
-
-                case Direction::Right:
-                    return (y / 31);
-
-                default:
-                    return 255;
-                    
-            }
+            return (y / 31);                
 
         }
 
         int8_t distToEdgeOfTile(Direction direction, int16_t x) {
 
-            int8_t tile = coordToTileIndexX(direction, x);
+            int8_t tile = coordToTileIndexX(x);
 
             switch (direction) {
 
@@ -998,8 +976,8 @@ struct Level {
             ImageDetails imageDetails;
             prince.getImageDetails(imageDetails);
 
-            int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), newPos.x + imageDetails.toe) - this->getXLocation();
-            int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), newPos.y) - this->getYLocation();
+            int8_t tileXIdx = this->coordToTileIndexX(newPos.x + imageDetails.toe) - this->getXLocation();
+            int8_t tileYIdx = this->coordToTileIndexY(newPos.y) - this->getYLocation();
             
             int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
             int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
@@ -1039,8 +1017,8 @@ struct Level {
                 }
                 else {
 
-                    int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), newPos.x + imageDetails.heel) - this->getXLocation();
-                    int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), newPos.y) - this->getYLocation();
+                    int8_t tileXIdx = this->coordToTileIndexX(newPos.x + imageDetails.heel) - this->getXLocation();
+                    int8_t tileYIdx = this->coordToTileIndexY(newPos.y) - this->getYLocation();
                     
                     int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
                     int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
@@ -1090,8 +1068,8 @@ struct Level {
             Point newPos = prince.getPosition();
             newPos.x = newPos.x + prince.getDirectionOffset(xOffset);
 
-            int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), newPos.x) - this->getXLocation();
-            int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), newPos.y) - this->getYLocation();
+            int8_t tileXIdx = this->coordToTileIndexX(newPos.x) - this->getXLocation();
+            int8_t tileYIdx = this->coordToTileIndexY(newPos.y) - this->getYLocation();
             
             int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
             int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
@@ -1126,8 +1104,8 @@ struct Level {
             Point newPos = prince.getPosition();
             newPos.x = newPos.x + prince.getDirectionOffset(xOffset);
 
-            int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), newPos.x) - this->getXLocation();
-            int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), newPos.y) - this->getYLocation();
+            int8_t tileXIdx = this->coordToTileIndexX(newPos.x) - this->getXLocation();
+            int8_t tileYIdx = this->coordToTileIndexY(newPos.y) - this->getYLocation();
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN_PART2)
             DEBUG_PRINT(F("canClimbDown_Part2() "));
@@ -1210,8 +1188,8 @@ struct Level {
 
         uint8_t canReachItem(Prince &prince, ItemType itemType) {
 
-            int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), prince.getPosition().x);
-            int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), prince.getPosition().y);
+            int8_t tileXIdx = this->coordToTileIndexX(prince.getPosition().x);
+            int8_t tileYIdx = this->coordToTileIndexY(prince.getPosition().y);
 
             for (uint8_t i = Constants::Items_DynamicRange; i < Constants::Items_Count; i++) {
 
@@ -1231,8 +1209,8 @@ struct Level {
 
         bool canMoveForward(Prince &prince, Action action) {
 
-            int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), prince.getPosition().x) - this->getXLocation();
-            int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), prince.getPosition().y) - this->getYLocation();
+            int8_t tileXIdx = this->coordToTileIndexX(prince.getPosition().x) - this->getXLocation();
+            int8_t tileYIdx = this->coordToTileIndexY(prince.getPosition().y) - this->getYLocation();
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
             DEBUG_PRINTLN(F("------------------------------"));
@@ -1508,8 +1486,8 @@ struct Level {
 
         RunningJumpResult canRunningJump(Prince &prince, Action action) {
 
-            int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), prince.getPosition().x) - this->getXLocation();
-            int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), prince.getPosition().y) - this->getYLocation();
+            int8_t tileXIdx = this->coordToTileIndexX(prince.getPosition().x) - this->getXLocation();
+            int8_t tileYIdx = this->coordToTileIndexY(prince.getPosition().y) - this->getYLocation();
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
             DEBUG_PRINTLN(F("------------------------------"));
@@ -2034,8 +2012,8 @@ struct Level {
 
         StandingJumpResult canStandingJump(Prince &prince) {
 
-            int8_t tileXIdx = this->coordToTileIndexX(prince.getDirection(), prince.getPosition().x) - this->getXLocation();
-            int8_t tileYIdx = this->coordToTileIndexY(prince.getDirection(), prince.getPosition().y) - this->getYLocation();
+            int8_t tileXIdx = this->coordToTileIndexX(prince.getPosition().x) - this->getXLocation();
+            int8_t tileYIdx = this->coordToTileIndexY(prince.getPosition().y) - this->getYLocation();
             int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(prince.getDirection(), prince.getPosition().x);
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
@@ -2363,8 +2341,8 @@ struct Level {
         CanJumpUpResult canJumpUp_Test(Prince &prince, Direction direction) {
 
             int8_t inc = (direction == Direction::Left ? -1 : 1);
-            int8_t tileXIdx = this->coordToTileIndexX(direction, prince.getPosition().x) - this->getXLocation();
-            int8_t tileYIdx = this->coordToTileIndexY(direction, prince.getPosition().y) - this->getYLocation();
+            int8_t tileXIdx = this->coordToTileIndexX(prince.getPosition().x) - this->getXLocation();
+            int8_t tileYIdx = this->coordToTileIndexY(prince.getPosition().y) - this->getYLocation();
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
             DEBUG_PRINT(F("canJumpUp_Test: direction "));
@@ -2611,8 +2589,8 @@ struct Level {
 
         CanJumpUpResult canJumpUp_Test_Dist10(Prince &prince, Direction direction) {
 
-            int8_t tileXIdx = this->coordToTileIndexX(direction, prince.getPosition().x) - this->getXLocation();
-            int8_t tileYIdx = this->coordToTileIndexY(direction, prince.getPosition().y) - this->getYLocation();
+            int8_t tileXIdx = this->coordToTileIndexX(prince.getPosition().x) - this->getXLocation();
+            int8_t tileYIdx = this->coordToTileIndexY(prince.getPosition().y) - this->getYLocation();
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
             DEBUG_PRINT(F("canJumpUp_Test_Dist10: direction "));
@@ -2715,8 +2693,8 @@ struct Level {
                 case Direction::Left:
                     {
 
-                        tileXIdx = this->coordToTileIndexX(prince.getDirection(), prince.getPosition().x) - this->getXLocation();
-                        tileYIdx = this->coordToTileIndexY(prince.getDirection(), prince.getPosition().y) - this->getYLocation() - 1;
+                        tileXIdx = this->coordToTileIndexX(prince.getPosition().x) - this->getXLocation();
+                        tileYIdx = this->coordToTileIndexY(prince.getPosition().y) - this->getYLocation() - 1;
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP_PART2)
                         printCoordToIndex(prince.getPosition(), tileXIdx, tileYIdx);
@@ -2729,8 +2707,8 @@ struct Level {
                 case Direction::Right:
                     {
 
-                        tileXIdx = this->coordToTileIndexX(prince.getDirection(), prince.getPosition().x) - this->getXLocation() + 1;
-                        tileYIdx = this->coordToTileIndexY(prince.getDirection(), prince.getPosition().y) - this->getYLocation() - 1;
+                        tileXIdx = this->coordToTileIndexX(prince.getPosition().x) - this->getXLocation() + 1;
+                        tileYIdx = this->coordToTileIndexY(prince.getPosition().y) - this->getYLocation() - 1;
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP_PART2)
                         printCoordToIndex(prince.getPosition(), tileXIdx, tileYIdx);
@@ -2947,8 +2925,8 @@ struct Level {
 
         CanClimbDownResult canClimbDown_Test(Prince &prince, Direction direction) {
 
-            int8_t tileXIdx = this->coordToTileIndexX(direction, prince.getPosition().x) - this->getXLocation() + (direction == Direction::Right ? 1 : 0);
-            int8_t tileYIdx = this->coordToTileIndexY(direction, prince.getPosition().y) - this->getYLocation();
+            int8_t tileXIdx = this->coordToTileIndexX(prince.getPosition().x) - this->getXLocation() + (direction == Direction::Right ? 1 : 0);
+            int8_t tileYIdx = this->coordToTileIndexY(prince.getPosition().y) - this->getYLocation();
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
             printCoordToIndex(prince.getPosition(), tileXIdx, tileYIdx);
@@ -3082,7 +3060,7 @@ struct Level {
         bool collideWithWall(Prince &prince) {
 
             ImageDetails imageDetails;
-            Direction direction = prince.getDirection();
+            // Direction direction = prince.getDirection();
             prince.getImageDetails(imageDetails);
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_COLLIDEWITHWALL)
@@ -3092,8 +3070,8 @@ struct Level {
             DEBUG_PRINTLN(imageDetails.reach);
             #endif
 
-            int8_t tileXIdx = this->coordToTileIndexX(direction, prince.getPosition(imageDetails.reach).x) - this->getXLocation();// + (direction == Direction::Right ? 1 : 0);
-            int8_t tileYIdx = this->coordToTileIndexY(direction, prince.getPosition().y) - this->getYLocation();
+            int8_t tileXIdx = this->coordToTileIndexX(prince.getPosition(imageDetails.reach).x) - this->getXLocation();// + (direction == Direction::Right ? 1 : 0);
+            int8_t tileYIdx = this->coordToTileIndexY(prince.getPosition().y) - this->getYLocation();
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_COLLIDEWITHWALL)
             printCoordToIndex(prince.getPosition(), tileXIdx, tileYIdx);

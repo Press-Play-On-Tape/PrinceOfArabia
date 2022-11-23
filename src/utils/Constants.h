@@ -1116,6 +1116,7 @@ enum class TitleScreenMode : uint8_t {
     CutScene_2,
     CutScene_3,
     CutScene_4,
+    CutScene_5,
     CutScene_9,
     IntroGame_9,
 };

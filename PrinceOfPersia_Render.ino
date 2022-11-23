@@ -157,6 +157,8 @@ void render() {
                     }
                     break;
 
+                default: break;
+
             }
 
         }
@@ -207,7 +209,6 @@ void render() {
 
     // Render health ..
 
-    // arduboy.setTextColor(WHITE);
     arduboy.fillRect(120, 0, WIDTH, HEIGHT, BLACK);
     arduboy.drawFastVLine(121, 0, HEIGHT, WHITE);
 
