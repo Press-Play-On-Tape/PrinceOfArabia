@@ -7,7 +7,7 @@ void title_Init() {
 
 
     // titleScreenVars.setMode(TitleScreenMode::CutScene_9, level);//SJH remove
-    // titleScreenVars.setMode(TitleScreenMode::CutScene_3, level);//SJH remove
+    // titleScreenVars.setMode(TitleScreenMode::CutScene_4, level);//SJH remove
 
 
 }
@@ -141,6 +141,16 @@ void title() {
 
                 break;
 
+            case TitleScreenMode::CutScene_2:
+            case TitleScreenMode::CutScene_3:
+            case TitleScreenMode::CutScene_4:
+            case TitleScreenMode::CutScene_5:
+
+                if ((justPressed & A_BUTTON) || (justPressed & B_BUTTON)) {
+                    gamePlay.gameState = GameState::Game_Init; 
+                }
+
+                break;
         #endif
 
         default: break;
@@ -280,6 +290,38 @@ void title() {
                 }
 
                 renderChamberFG(53, 1);
+                
+                if (titleScreenVars.update(arduboy.isFrameCount(3))) {
+
+                    gamePlay.gameState = GameState::Game_Init; 
+                    titleScreenVars.count = 0;
+                    fadeEffect.reset();
+
+                }
+
+                break;
+
+            case TitleScreenMode::CutScene_4:
+
+                renderChamberBG();
+                FX::drawBitmap(titleScreenVars.princess.x, 28, Images::Princess_Sleep_00 + ((titleScreenVars.count % 7) * 260), 0, dbmMasked);
+                renderChamberFG(54);
+
+                if (titleScreenVars.update(arduboy.isFrameCount(12))) {
+
+                    gamePlay.gameState = GameState::Game_Init; 
+                    titleScreenVars.count = 0;
+                    fadeEffect.reset();
+
+                }
+
+                break;
+
+            case TitleScreenMode::CutScene_5:
+
+                renderChamberBG();
+                FX::drawBitmap(titleScreenVars.princess.x, 28, Images::Princess_Bounce_00 + ((titleScreenVars.count % 16) * 388), 0, dbmMasked);
+                renderChamberFG(63, 1);
                 
                 if (titleScreenVars.update(arduboy.isFrameCount(3))) {
 

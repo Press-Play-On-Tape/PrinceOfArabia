@@ -39,7 +39,6 @@ void EEPROM_Utils::initEEPROM(Cookie &cookie) {
 
     if (c1 != letter1 || c2 != letter2) { 
 
-        uint32_t score = 0;
         EEPROM.update(EEPROM_START_C1, letter1);
         EEPROM.update(EEPROM_START_C2, letter2);
         EEPROM.put(EEPROM_TOP_START, cookie);

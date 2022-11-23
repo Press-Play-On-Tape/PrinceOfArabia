@@ -140,20 +140,44 @@ void processRunJump(Prince &prince, Level &level) {
 
 }
 
+
+void processStandingJump(Prince &prince, Level &level) {
+
+    StandingJumpResult standingJumpResult = level.canStandingJump(prince);
+
+    switch (standingJumpResult) {
+
+        case StandingJumpResult::DropLevel:
+            prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
+            prince.pushSequence(Stance::Standing_Jump_DropLvl_1_Start, Stance::Standing_Jump_DropLvl_16_End, true);
+            prince.setIgnoreWallCollisions(true);
+            break;
+
+        case StandingJumpResult::Normal:
+            prince.pushSequence(Stance::Standing_Jump_1_Start, Stance::Standing_Jump_18_End, Stance::Upright, true);
+            break;
+
+        case StandingJumpResult::None:
+            break;
+
+    }
+
+}
+
 void initFlash(Prince &prince, Level &level) {
 
     Item &flash = level.getItem(Constants::Item_Flash);
     flash.itemType = ItemType::Flash;
     flash.data.flash.frame = 5;
-    flash.x = level.coordToTileIndexX(prince.getDirection(), prince.getX()) + level.getXLocation();
-    flash.y = level.coordToTileIndexY(prince.getDirection(), prince.getY()) + level.getYLocation(); 
+    flash.x = level.coordToTileIndexY(prince.getX()) + level.getXLocation();
+    flash.y = level.coordToTileIndexY(prince.getY()) + level.getYLocation(); 
 
 }
 
 uint8_t activateSpikes(Prince &prince, Level &level) {
 
-    int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x);
-    int8_t tileYIdx = level.coordToTileIndexY(prince.getDirection(), prince.getPosition().y);
+    int8_t tileXIdx = level.coordToTileIndexY(prince.getPosition().x);
+    int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y);
     uint8_t itemIdx = level.getItem(ItemType::Spikes, tileXIdx, tileYIdx);
 
 
@@ -206,8 +230,8 @@ void pushJumpUp_Drop(Prince &prince) {
 
 bool leaveLevel(Prince &prince, Level &level) {
 
-    int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x);
-    int8_t tileYIdx = level.coordToTileIndexY(prince.getDirection(), prince.getPosition().y);
+    int8_t tileXIdx = level.coordToTileIndexY(prince.getPosition().x);
+    int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y);
 
     Item &exitGate = level.getItem(Constants::Item_ExitDoor);
 

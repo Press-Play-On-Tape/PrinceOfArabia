@@ -226,25 +226,7 @@ void game() {
                         }
                         else if (pressed & A_BUTTON) {
 
-                            StandingJumpResult standingJumpResult = level.canStandingJump(prince);
-
-                            switch (standingJumpResult) {
-
-                                case StandingJumpResult::DropLevel:
-                                    prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
-                                    prince.pushSequence(Stance::Standing_Jump_DropLvl_1_Start, Stance::Standing_Jump_DropLvl_16_End, true);
-                                    prince.setIgnoreWallCollisions(true);
-                                    break;
-
-                                case StandingJumpResult::Normal:
-                                    prince.pushSequence(Stance::Standing_Jump_1_Start, Stance::Standing_Jump_18_End, Stance::Upright, true);
-                                    break;
-
-                                case StandingJumpResult::None:
-                                    break;
-
-                            }
-
+                            processStandingJump(prince, level);
                             break;
 
                         }
@@ -284,25 +266,7 @@ void game() {
                         }
                         else if (pressed & A_BUTTON) {
 
-                            StandingJumpResult standingJumpResult = level.canStandingJump(prince);
-
-                            switch (standingJumpResult) {
-
-                                case StandingJumpResult::DropLevel:
-                                    prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
-                                    prince.pushSequence(Stance::Standing_Jump_DropLvl_1_Start, Stance::Standing_Jump_DropLvl_16_End, true);
-                                    prince.setIgnoreWallCollisions(true);
-                                    break;
-
-                                case StandingJumpResult::Normal:
-                                    prince.pushSequence(Stance::Standing_Jump_1_Start, Stance::Standing_Jump_18_End, Stance::Upright, true);
-                                    break;
-
-                                case StandingJumpResult::None:
-                                    break;
-
-                            }
-
+                            processStandingJump(prince, level);
                             break;
 
                         }
@@ -383,8 +347,8 @@ void game() {
 
                             case CanJumpUpResult::JumpThenFall_CollapseFloor:
                                 {
-                                    int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x) + prince.getDirectionOffset(1);
-                                    int8_t tileYIdx = level.coordToTileIndexY(prince.getDirection(), prince.getPosition().y) - 1;
+                                    int8_t tileXIdx = level.coordToTileIndexY(prince.getPosition().x) + prince.getDirectionOffset(1);
+                                    int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y) - 1;
                                     uint8_t itemIdx = level.getItem(ItemType::CollapsingFloor, tileXIdx, tileYIdx);
 
                                     if (itemIdx != Constants::NoItemFound) {
@@ -401,8 +365,8 @@ void game() {
 
                             case CanJumpUpResult::JumpThenFall_CollapseFloorAbove:
                                 {
-                                    int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x);
-                                    int8_t tileYIdx = level.coordToTileIndexY(prince.getDirection(), prince.getPosition().y) - 1;
+                                    int8_t tileXIdx = level.coordToTileIndexY(prince.getPosition().x);
+                                    int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y) - 1;
                                     uint8_t itemIdx = level.getItem(ItemType::CollapsingFloor, tileXIdx, tileYIdx);
 
                                     if (itemIdx != Constants::NoItemFound) {
@@ -419,8 +383,8 @@ void game() {
 
                             case CanJumpUpResult::StepThenJumpThenFall_CollapseFloor:
                                 {
-                                    int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x) + prince.getDirectionOffset(1);
-                                    int8_t tileYIdx = level.coordToTileIndexY(prince.getDirection(), prince.getPosition().y) - 1;
+                                    int8_t tileXIdx = level.coordToTileIndexY(prince.getPosition().x) + prince.getDirectionOffset(1);
+                                    int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y) - 1;
                                     uint8_t itemIdx = level.getItem(ItemType::CollapsingFloor, tileXIdx, tileYIdx);
 
                                     if (itemIdx != Constants::NoItemFound) {
@@ -845,55 +809,59 @@ void game() {
 
     // Handle menu
 
-    switch (gamePlay.gameState) {
+    #ifndef SAVE_MEMORY_OTHER
 
-        case GameState::Game:
+        switch (gamePlay.gameState) {
 
-            if (justPressed & B_BUTTON) {
+            case GameState::Game:
 
-                gamePlay.gameState = GameState::Menu;
-                menu.direction = Direction::Left;
-                menu.cursor = static_cast<uint8_t>(MenuOption::Resume);
+                if (justPressed & B_BUTTON) {
 
-            }
+                    gamePlay.gameState = GameState::Menu;
+                    menu.direction = Direction::Left;
+                    menu.cursor = static_cast<uint8_t>(MenuOption::Resume);
 
-            break;
-
-        case GameState::Menu:
-
-            if (justPressed & B_BUTTON)                         menu.direction = Direction::Right;
-            if (justPressed & UP_BUTTON && menu.cursor > 0)     menu.cursor--;
-            if (justPressed & DOWN_BUTTON && menu.cursor < 3)   menu.cursor++;
-
-            if (justPressed & A_BUTTON) {
-
-                switch (static_cast<MenuOption>(menu.cursor)) {
-
-                    case MenuOption::Resume:
-                        menu.direction = Direction::Right;  
-                        break;
-
-                    case MenuOption::Save:
-                        EEPROM_Utils::saveGame(cookie);
-                        menu.direction = Direction::Right;  
-                        break;
-
-                    case MenuOption::Load:
-                        EEPROM_Utils::loadGame(cookie);
-                        menu.direction = Direction::Right;  
-                        break;
-
-                    case MenuOption::MainMenu:
-                        gamePlay.gameState = GameState::Title_Init;  
-                        break;
-                        
                 }
 
-            }   
+                break;
 
-        default: break;
+            case GameState::Menu:
 
-    }
+                if (justPressed & B_BUTTON)                         menu.direction = Direction::Right;
+                if (justPressed & UP_BUTTON && menu.cursor > 0)     menu.cursor--;
+                if (justPressed & DOWN_BUTTON && menu.cursor < 3)   menu.cursor++;
+
+                if (justPressed & A_BUTTON) {
+
+                    switch (static_cast<MenuOption>(menu.cursor)) {
+
+                        case MenuOption::Resume:
+                            menu.direction = Direction::Right;  
+                            break;
+
+                        case MenuOption::Save:
+                            EEPROM_Utils::saveGame(cookie);
+                            menu.direction = Direction::Right;  
+                            break;
+
+                        case MenuOption::Load:
+                            EEPROM_Utils::loadGame(cookie);
+                            menu.direction = Direction::Right;  
+                            break;
+
+                        case MenuOption::MainMenu:
+                            gamePlay.gameState = GameState::Title_Init;  
+                            break;
+                            
+                    }
+
+                }   
+
+            default: break;
+
+
+        }
+    #endif
 
 
     // ---------------------------------------------------------------------------------------------------------------------------------------
@@ -1183,8 +1151,8 @@ void game() {
 
                 // Test with player's toe ..
 
-                int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x + imageDetails.toe);
-                int8_t tileYIdx = level.coordToTileIndexY(prince.getDirection(), prince.getPosition().y);
+                int8_t tileXIdx = level.coordToTileIndexY(prince.getPosition().x + imageDetails.toe);
+                int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y);
                 uint8_t itemIdx = level.getItem(ItemType::AnyItem, tileXIdx, tileYIdx);
 
 
@@ -1192,7 +1160,7 @@ void game() {
 
                 if (itemIdx == Constants::NoItemFound) {
 
-                    tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x + imageDetails.heel);
+                    tileXIdx = level.coordToTileIndexY(prince.getPosition().x + imageDetails.heel);
                     itemIdx = level.getItem(ItemType::AnyItem, tileXIdx, tileYIdx);
 
                 }
@@ -1335,8 +1303,8 @@ void game() {
         
         if (distToEdgeOfCurrentTile <= 4) {
 
-            int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x) + (prince.getDirection() == Direction::Left ? -1 : 1) - level.getXLocation();
-            int8_t tileYIdx = level.coordToTileIndexY(prince.getDirection(), prince.getPosition().y) + 1 - level.getYLocation();
+            int8_t tileXIdx = level.coordToTileIndexY(prince.getPosition().x) + (prince.getDirection() == Direction::Left ? -1 : 1) - level.getXLocation();
+            int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y) + 1 - level.getYLocation();
             int8_t bgTile = level.getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
             int8_t fgTile = level.getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
 
@@ -1550,8 +1518,8 @@ void game() {
 
         if (item.data.exitDoor.position == 0) {
 
-            int8_t tileXIdx = level.coordToTileIndexX(prince.getDirection(), prince.getPosition().x);
-            int8_t tileYIdx = level.coordToTileIndexY(prince.getDirection(), prince.getPosition().y);
+            int8_t tileXIdx = level.coordToTileIndexY(prince.getPosition().x);
+            int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y);
 
             if (tileXIdx >= item.data.exitDoor.left && tileXIdx <= item.data.exitDoor.right && item.y == tileYIdx) {
 
@@ -1590,10 +1558,11 @@ void game() {
 
     render();
     
-    if (gamePlay.gameState == GameState::Menu) {
-        renderMenu();
-    }
-
+    #ifndef SAVE_MEMORY_OTHER
+        if (gamePlay.gameState == GameState::Menu) {
+            renderMenu();
+        }
+    #endif
 
     #if defined(DEBUG) && defined(DEBUG_ONSCREEN_DETAILS)
     font3x5.setTextColor(0);
@@ -1604,11 +1573,11 @@ void game() {
     font3x5.print(F(" px"));
     font3x5.print(prince.getX());
     font3x5.print(F(" x"));
-    font3x5.print(level.coordToTileIndexX(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX()));
+    font3x5.print(level.coordToTileIndexX((level.getXLocation() * Constants::TileWidth) + prince.getX()));
     font3x5.print(F(" "));
     font3x5.print((level.getXLocation() * Constants::TileWidth) + prince.getX());
     font3x5.print(F(" y"));
-    font3x5.print(level.coordToTileIndexY(prince.getDirection(), (level.getYLocation() * Constants::TileHeight) + prince.getY()));
+    font3x5.print(level.coordToTileIndexY((level.getYLocation() * Constants::TileHeight) + prince.getY()));
     font3x5.print(F(" "));
     font3x5.print(prince.getY());
     font3x5.print(F(" D"));

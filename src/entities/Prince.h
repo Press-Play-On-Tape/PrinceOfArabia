@@ -25,6 +25,7 @@ struct Prince {
 
         uint8_t health = 0;
         uint8_t healthMax = 0;
+        
         bool sword = false;
         bool ignoreWallCollisions = false;
 
@@ -125,7 +126,6 @@ struct Prince {
             this->direction = (this->direction == Direction::Left ? Direction::Right : Direction::Left);
 
         }
-
 
       	uint8_t getCount(void) {
             return this->stack->getCount();

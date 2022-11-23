@@ -3,7 +3,7 @@
 
 #define DEBUG_PRINT    Serial.print
 #define DEBUG_PRINTLN  Serial.println
-#define SAVE_MEMORY_USB
+#define _SAVE_MEMORY_USB
 #define _SAVE_MEMORY_OTHER
 
 #define _DEBUG
@@ -1005,7 +1005,9 @@ enum GameState : uint8_t {
 	Game,
     Game_StartLevel,
     Game_Over,
+    #ifndef SAVE_MEMORY_OTHER
     Menu,
+    #endif
 };
 
 enum class Direction : uint8_t {
@@ -1113,6 +1115,8 @@ enum class TitleScreenMode : uint8_t {
     IntroGame_1B,
     CutScene_2,
     CutScene_3,
+    CutScene_4,
+    CutScene_5,
     CutScene_9,
     IntroGame_9,
 };
