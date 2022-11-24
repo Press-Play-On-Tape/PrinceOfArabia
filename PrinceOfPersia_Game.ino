@@ -347,7 +347,7 @@ void game() {
 
                             case CanJumpUpResult::JumpThenFall_CollapseFloor:
                                 {
-                                    int8_t tileXIdx = level.coordToTileIndexY(prince.getPosition().x) + prince.getDirectionOffset(1);
+                                    int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x) + prince.getDirectionOffset(1);
                                     int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y) - 1;
                                     uint8_t itemIdx = level.getItem(ItemType::CollapsingFloor, tileXIdx, tileYIdx);
 
@@ -365,7 +365,7 @@ void game() {
 
                             case CanJumpUpResult::JumpThenFall_CollapseFloorAbove:
                                 {
-                                    int8_t tileXIdx = level.coordToTileIndexY(prince.getPosition().x);
+                                    int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x);
                                     int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y) - 1;
                                     uint8_t itemIdx = level.getItem(ItemType::CollapsingFloor, tileXIdx, tileYIdx);
 
@@ -383,7 +383,7 @@ void game() {
 
                             case CanJumpUpResult::StepThenJumpThenFall_CollapseFloor:
                                 {
-                                    int8_t tileXIdx = level.coordToTileIndexY(prince.getPosition().x) + prince.getDirectionOffset(1);
+                                    int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x) + prince.getDirectionOffset(1);
                                     int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y) - 1;
                                     uint8_t itemIdx = level.getItem(ItemType::CollapsingFloor, tileXIdx, tileYIdx);
 
@@ -1151,7 +1151,7 @@ void game() {
 
                 // Test with player's toe ..
 
-                int8_t tileXIdx = level.coordToTileIndexY(prince.getPosition().x + imageDetails.toe);
+                int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x + imageDetails.toe);
                 int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y);
                 uint8_t itemIdx = level.getItem(ItemType::AnyItem, tileXIdx, tileYIdx);
 
@@ -1160,7 +1160,7 @@ void game() {
 
                 if (itemIdx == Constants::NoItemFound) {
 
-                    tileXIdx = level.coordToTileIndexY(prince.getPosition().x + imageDetails.heel);
+                    tileXIdx = level.coordToTileIndexX(prince.getPosition().x + imageDetails.heel);
                     itemIdx = level.getItem(ItemType::AnyItem, tileXIdx, tileYIdx);
 
                 }
@@ -1303,7 +1303,7 @@ void game() {
         
         if (distToEdgeOfCurrentTile <= 4) {
 
-            int8_t tileXIdx = level.coordToTileIndexY(prince.getPosition().x) + (prince.getDirection() == Direction::Left ? -1 : 1) - level.getXLocation();
+            int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x) + (prince.getDirection() == Direction::Left ? -1 : 1) - level.getXLocation();
             int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y) + 1 - level.getYLocation();
             int8_t bgTile = level.getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
             int8_t fgTile = level.getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
@@ -1518,7 +1518,7 @@ void game() {
 
         if (item.data.exitDoor.position == 0) {
 
-            int8_t tileXIdx = level.coordToTileIndexY(prince.getPosition().x);
+            int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x);
             int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y);
 
             if (tileXIdx >= item.data.exitDoor.left && tileXIdx <= item.data.exitDoor.right && item.y == tileYIdx) {

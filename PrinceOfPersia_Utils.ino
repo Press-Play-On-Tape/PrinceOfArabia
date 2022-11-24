@@ -169,14 +169,14 @@ void initFlash(Prince &prince, Level &level) {
     Item &flash = level.getItem(Constants::Item_Flash);
     flash.itemType = ItemType::Flash;
     flash.data.flash.frame = 5;
-    flash.x = level.coordToTileIndexY(prince.getX()) + level.getXLocation();
+    flash.x = level.coordToTileIndexX(prince.getX()) + level.getXLocation();
     flash.y = level.coordToTileIndexY(prince.getY()) + level.getYLocation(); 
 
 }
 
 uint8_t activateSpikes(Prince &prince, Level &level) {
 
-    int8_t tileXIdx = level.coordToTileIndexY(prince.getPosition().x);
+    int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x);
     int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y);
     uint8_t itemIdx = level.getItem(ItemType::Spikes, tileXIdx, tileYIdx);
 
@@ -230,7 +230,7 @@ void pushJumpUp_Drop(Prince &prince) {
 
 bool leaveLevel(Prince &prince, Level &level) {
 
-    int8_t tileXIdx = level.coordToTileIndexY(prince.getPosition().x);
+    int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x);
     int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y);
 
     Item &exitGate = level.getItem(Constants::Item_ExitDoor);
