@@ -11,12 +11,12 @@
 
 void game_Init() {
 
-    // prince.init(38-24, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
+    prince.init(38-24, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
 
 //    prince.init(8+78+24, 25, Direction::Left, Stance::Crouch_3_End, 3);     // Double collapisble
     // prince.init(78 + 24 + 12, 25 + 31 + 31, Direction::Left, Stance:: Crouch_3_End, 3);          // Spikes
     // prince.init(78 + 24, 25, Direction::Left, Stance:: Crouch_3_End, 3);          // Jump 2
-    prince.init(18, 25+31, Direction::Right,Stance:: Crouch_3_End, 3);          // Sword fight
+    // prince.init(18, 25+31, Direction::Right,Stance:: Crouch_3_End, 3);          // Sword fight
     // prince.init(58, 25+31+31, Direction::Right, Stance::Crouch_3_End, 3);          // Second drink tonic
     // prince.init(66, 25, Direction::Right, Stance::Crouch_3_End, 3);          // Upper gate
     // prince.init(70, 25 + 31, Direction::Right, Stance::Crouch_3_End, 3);          // 2 leap
@@ -37,12 +37,12 @@ void game_Init() {
     gamePlay.init(arduboy, 1);
     level.setLevel(1);
 
-    // level.init(prince, 60, 0);  // Normal starting posa
+    level.init(prince, 60, 0);  // Normal starting posa
 
     // level.init(prince, 10, 3);   // Double collapisble
     // level.init(prince, 10, 0);   // Spikes
     // level.init(prince, 30, 3);  // Jump 2
-    level.init(prince, 70, 3);  // Sword fight
+    // level.init(prince, 70, 3);  // Sword fight
     // level.init(prince, 50, 0);  // Second drink tonic
     // level.init(prince, 50, 0);  // Upper Gate
     // level.init(prince, 40, 3);  // 2 leap
