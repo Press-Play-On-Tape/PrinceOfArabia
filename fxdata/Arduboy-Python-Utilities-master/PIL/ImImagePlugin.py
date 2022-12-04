@@ -30,7 +30,6 @@ import os
 import re
 
 from . import Image, ImageFile, ImagePalette
-from ._binary import i8
 
 # --------------------------------------------------------------------
 # Standard tags
@@ -101,7 +100,7 @@ for i in range(2, 33):
 # --------------------------------------------------------------------
 # Read IM directory
 
-split = re.compile(br"^([A-Za-z][^:]*):[ \t]*(.*)[ \t]*$")
+split = re.compile(rb"^([A-Za-z][^:]*):[ \t]*(.*)[ \t]*$")
 
 
 def number(s):
@@ -211,7 +210,7 @@ class ImImageFile(ImageFile.ImageFile):
         self.mode = self.info[MODE]
 
         # Skip forward to start of image data
-        while s and s[0:1] != b"\x1A":
+        while s and s[:1] != b"\x1A":
             s = self.fp.read(1)
         if not s:
             raise SyntaxError("File truncated")
@@ -223,14 +222,14 @@ class ImImageFile(ImageFile.ImageFile):
             linear = 1  # linear greyscale palette
             for i in range(256):
                 if palette[i] == palette[i + 256] == palette[i + 512]:
-                    if i8(palette[i]) != i:
+                    if palette[i] != i:
                         linear = 0
                 else:
                     greyscale = 0
             if self.mode in ["L", "LA", "P", "PA"]:
                 if greyscale:
                     if not linear:
-                        self.lut = [i8(c) for c in palette[:256]]
+                        self.lut = list(palette[:256])
                 else:
                     if self.mode in ["L", "P"]:
                         self.mode = self.rawmode = "P"
@@ -240,13 +239,13 @@ class ImImageFile(ImageFile.ImageFile):
                     self.palette = ImagePalette.raw("RGB;L", palette)
             elif self.mode == "RGB":
                 if not greyscale or not linear:
-                    self.lut = [i8(c) for c in palette]
+                    self.lut = list(palette)
 
         self.frame = 0
 
         self.__offset = offs = self.fp.tell()
 
-        self.__fp = self.fp  # FIXME: hack
+        self._fp = self.fp  # FIXME: hack
 
         if self.rawmode[:2] == "F;":
 
@@ -295,21 +294,12 @@ class ImImageFile(ImageFile.ImageFile):
         size = ((self.size[0] * bits + 7) // 8) * self.size[1]
         offs = self.__offset + frame * size
 
-        self.fp = self.__fp
+        self.fp = self._fp
 
         self.tile = [("raw", (0, 0) + self.size, offs, (self.rawmode, 0, -1))]
 
     def tell(self):
         return self.frame
-
-    def _close__fp(self):
-        try:
-            if self.__fp != self.fp:
-                self.__fp.close()
-        except AttributeError:
-            pass
-        finally:
-            self.__fp = None
 
 
 #
@@ -362,7 +352,13 @@ def _save(im, fp, filename):
         fp.write(b"Lut: 1\r\n")
     fp.write(b"\000" * (511 - fp.tell()) + b"\032")
     if im.mode in ["P", "PA"]:
-        fp.write(im.im.getpalette("RGB", "RGB;L"))  # 768 bytes
+        im_palette = im.im.getpalette("RGB", "RGB;L")
+        colors = len(im_palette) // 3
+        palette = b""
+        for i in range(3):
+            palette += im_palette[colors * i : colors * (i + 1)]
+            palette += b"\x00" * (256 - colors)
+        fp.write(palette)  # 768 bytes
     ImageFile._save(im, fp, [("raw", (0, 0) + im.size, 0, (rawmode, 0, -1))])
 
 

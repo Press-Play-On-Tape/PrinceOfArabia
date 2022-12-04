@@ -11,19 +11,20 @@
 
 void game_Init() {
 
+    // prince.init(38-24, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
+
 //    prince.init(8+78+24, 25, Direction::Left, Stance::Crouch_3_End, 3);     // Double collapisble
     // prince.init(78 + 24 + 12, 25 + 31 + 31, Direction::Left, Stance:: Crouch_3_End, 3);          // Spikes
     // prince.init(78 + 24, 25, Direction::Left, Stance:: Crouch_3_End, 3);          // Jump 2
-    // prince.init(18, 25+31, Direction::Right,Stance:: Crouch_3_End, 3);          // Sword fight
+    prince.init(18, 25+31, Direction::Right,Stance:: Crouch_3_End, 3);          // Sword fight
     // prince.init(58, 25+31+31, Direction::Right, Stance::Crouch_3_End, 3);          // Second drink tonic
     // prince.init(66, 25, Direction::Right, Stance::Crouch_3_End, 3);          // Upper gate
     // prince.init(70, 25 + 31, Direction::Right, Stance::Crouch_3_End, 3);          // 2 leap
     // prince.init(58 +36, 56, Direction::Left, Stance::Crouch_3_End, 3);          // Exit Seq
-    prince.init(38-24, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
     // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3);          // Both floor types
     // prince.init(86, 87, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos but next to drop floor 3rd floor
     // prince.init(86-36+4, 87, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos but next to drop floor 3rd floor
-    // prince.init(78, 25, Direction::Left, Stance::Crouch_3_End, 3);          // Under collapsible floor
+                            // prince.init(78, 25, Direction::Left, Stance::Crouch_3_End, 3);          // Under collapsible floor
     // prince.init(66, 56, Direction::Right, Stance::Crouch_3_End, 3);        // Get tonic
 //    prince.init(18, 25+31+31, Direction::Left, Stance::Upright, 3);     // Column of climbs
 //    prince.init(78, 25, Direction::Left, Stance::Upright, 3);     // Below column of climbs
@@ -34,20 +35,21 @@ void game_Init() {
 
 
     gamePlay.init(arduboy, 1);
-    
     level.setLevel(1);
+
+    // level.init(prince, 60, 0);  // Normal starting posa
+
     // level.init(prince, 10, 3);   // Double collapisble
     // level.init(prince, 10, 0);   // Spikes
     // level.init(prince, 30, 3);  // Jump 2
-    // level.init(prince, 70, 3);  // Sword fight
+    level.init(prince, 70, 3);  // Sword fight
     // level.init(prince, 50, 0);  // Second drink tonic
     // level.init(prince, 50, 0);  // Upper Gate
     // level.init(prince, 40, 3);  // 2 leap
     // level.init(prince, 80, 3);  // Exit Seq
-    level.init(prince, 60, 0);  // Normal starting posa
     // level.init(prince, 20, 3);  // Both floor types
     // level.init(prince, 60, 0);  //Normal starting pos but next to drop floor 3rd floor
-    // level.init(prince, 50, 3);  // Under collapsible floor
+                            // level.init(prince, 50, 3);  // Under collapsible floor
     // level.init(prince, Constants::TileHeight, 0);   // Get tonic
     // level.init(prince, 0, 3);   // Column of climbs
     // level.init(prince, 0, 6);   // Below Column of climbs
@@ -66,10 +68,10 @@ void game_StartLevel() {
     // prince.init(66, 25, Direction::Right, Stance::Crouch_3_End, 3);          // Upper gate
     // prince.init(70, 25 + 31, Direction::Right, Stance::Crouch_3_End, 3);          // Under collapsible floor
     // prince.init(58 +36, 56, Direction::Left, Stance::Crouch_3_End, 3);          // Exit Seq
-    prince.init(6, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
+    // prince.init(6, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
     // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3);          // Both floor types
     // prince.init(86, 87, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos but next to drop floor 3rd floor
-    // prince.init(70, 25, Direction::Left, Stance::Crouch_3_End, 3);          // Under collapsible floor
+    prince.init(66, 25, Direction::Left, Stance::Crouch_3_End, 3);          // Under collapsible floor
     // prince.init(66, 56, Direction::Right, Stance::Crouch_3_End, 3);        // Get tonic
 //    prince.init(50, 87, Direction::Left, Stance::Crouch_3_End, 3);     // Column of climbs
     // prince.init(80, 25, Direction::Right, Stance::Crouch_3_End, 3);     // Top Left
@@ -83,10 +85,10 @@ void game_StartLevel() {
     // level.init(prince, 50, 0);  // Upper Gate
     // level.init(prince, 40, 3);  // Under collapsible floor
     // level.init(prince, 80, 3);  // Exit Seq
-    level.init(prince, 60, 0);  // Normal starting posa
+    // level.init(prince, 60, 0);  // Normal starting posa
     // level.init(prince, 20, 3);  // Both floor types
     // level.init(prince, 60, 0);  //Normal starting pos but next to drop floor 3rd floor
-    // level.init(prince, 50, 3);  // Under collapsible floor
+    level.init(prince, 50, 3);  // Under collapsible floor
     // level.init(prince, Constants::TileHeight, 0);   // Get tonic
     // level.init(prince, 0, 3);   // Column of climbs
     // level.init(prince, 0, 0);   // Top left
@@ -123,6 +125,7 @@ void game() {
     testScroll(prince, level);
 
 
+    #ifdef ALT_B_BUTTON
     // // Remove later !!!
     // //
     // if (justPressed & B_BUTTON) {
@@ -160,6 +163,13 @@ void game() {
     // }
     // //
     // // REmove later !!
+    
+    if (justPressed & B_BUTTON) {
+        prince.pushSequence(Stance::Draw_Sword_1_Start, Stance::Draw_Sword_6_End, Stance::Sword_Normal, true);
+    }
+
+    #endif
+
 
 
 
@@ -785,6 +795,61 @@ void game() {
                     }
 
                     break;
+
+
+                case Stance::Sword_Normal:
+
+                    if (pressed & DOWN_BUTTON) {
+
+                        prince.pushSequence(Stance::Pickup_Sword_7_PutAway, Stance::Pickup_Sword_16_End, Stance::Upright, true);
+
+                    }
+
+                    else if (pressed & A_BUTTON) {
+
+                        prince.pushSequence(Stance::Sword_Attack_01_Start, Stance::Sword_Attack_08_End, Stance::Sword_Normal, true);
+
+                    }
+
+                    else if (pressed & UP_BUTTON) {
+
+                        prince.pushSequence(Stance::Attack_Block_01_Start, Stance::Attack_Block_03_End, Stance::Sword_Normal, true);
+
+                    }
+
+                    else if (prince.getDirection() == Direction::Right) {
+                            
+                        if (pressed & RIGHT_BUTTON) {
+
+                            prince.pushSequence(Stance::Sword_Step_01_Start, Stance::Sword_Step_03_End, Stance::Sword_Normal, true);
+
+                        }
+                            
+                        if (pressed & LEFT_BUTTON) {
+
+                            prince.pushSequence(Stance::Sword_Step_03_End, Stance::Sword_Step_01_Start, Stance::Sword_Normal, true);
+
+                        }
+
+                    }
+                    else {
+                            
+                        if (pressed & LEFT_BUTTON) {
+
+                            prince.pushSequence(Stance::Sword_Step_01_Start, Stance::Sword_Step_03_End, Stance::Sword_Normal, true);
+
+                        }
+                            
+                        if (pressed & RIGHT_BUTTON) {
+
+                            prince.pushSequence(Stance::Sword_Step_03_End, Stance::Sword_Step_01_Start, Stance::Sword_Normal, true);
+
+                        }
+
+                    }
+
+
+                    break;
                 
 
                 default: break;
@@ -815,19 +880,24 @@ void game() {
 
             case GameState::Game:
 
-                if (justPressed & B_BUTTON) {
+                #ifndef ALT_B_BUTTON
+                    if (justPressed & B_BUTTON) {
 
-                    gamePlay.gameState = GameState::Menu;
-                    menu.direction = Direction::Left;
-                    menu.cursor = static_cast<uint8_t>(MenuOption::Resume);
+                        gamePlay.gameState = GameState::Menu;
+                        menu.direction = Direction::Left;
+                        menu.cursor = static_cast<uint8_t>(MenuOption::Resume);
 
-                }
+                    }
+                #endif
 
                 break;
 
             case GameState::Menu:
 
-                if (justPressed & B_BUTTON)                         menu.direction = Direction::Right;
+                #ifndef ALT_B_BUTTON
+                    if (justPressed & B_BUTTON)                     menu.direction = Direction::Right;
+                #endif
+
                 if (justPressed & UP_BUTTON && menu.cursor > 0)     menu.cursor--;
                 if (justPressed & DOWN_BUTTON && menu.cursor < 3)   menu.cursor++;
 

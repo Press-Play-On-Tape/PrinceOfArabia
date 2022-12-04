@@ -18,7 +18,7 @@
 import re
 
 from . import Image, ImageFile, ImagePalette
-from ._binary import i8, o8
+from ._binary import o8
 
 # XPM header
 xpm_head = re.compile(b'"([0-9]*) ([0-9]*) ([0-9]*) ([0-9]*)')
@@ -64,7 +64,7 @@ class XpmImageFile(ImageFile.ImageFile):
 
         palette = [b"\0\0\0"] * 256
 
-        for i in range(pal):
+        for _ in range(pal):
 
             s = self.fp.readline()
             if s[-2:] == b"\r\n":
@@ -72,7 +72,7 @@ class XpmImageFile(ImageFile.ImageFile):
             elif s[-1:] in b"\r\n":
                 s = s[:-1]
 
-            c = i8(s[1])
+            c = s[1]
             s = s[2:-2].split()
 
             for i in range(0, len(s), 2):
@@ -83,7 +83,7 @@ class XpmImageFile(ImageFile.ImageFile):
                     rgb = s[i + 1]
                     if rgb == b"None":
                         self.info["transparency"] = c
-                    elif rgb[0:1] == b"#":
+                    elif rgb[:1] == b"#":
                         # FIXME: handle colour names (see ImagePalette.py)
                         rgb = int(rgb[1:], 16)
                         palette[c] = (

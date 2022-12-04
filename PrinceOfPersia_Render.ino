@@ -110,7 +110,7 @@ void render() {
 
     uint16_t stance = prince.getStance();
     uint16_t imageIndex = static_cast<uint16_t>(pgm_read_byte(&Constants::StanceToImageXRef[stance]));
-    uint24_t startPos = Images::Prince_Left_001 + ((imageIndex - 1) * 364);
+    uint24_t startPos = Images::Prince_Left_001 + ((imageIndex - 1) * static_cast<uint24_t>(364));
 
     if (imageIndex != 0) {
 

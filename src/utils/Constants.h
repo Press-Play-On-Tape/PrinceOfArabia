@@ -4,20 +4,21 @@
 #define DEBUG_PRINT    Serial.print
 #define DEBUG_PRINTLN  Serial.println
 #define _SAVE_MEMORY_USB
-#define _SAVE_MEMORY_OTHER
+#define SAVE_MEMORY_OTHER
+#define ALT_B_BUTTON
 
 #define _DEBUG
 #define DEBUG_ONSCREEN_DETAILS
 #define _DEBUG_ONSCREEN_DETAILS_MIN
 
 #define _DEBUG_PRINCE_DETAILS
-#define _DEBUG_PRINCE_STACK
+#define DEBUG_PRINCE_STACK
 #define _DEBUG_PRINT_ACTION
 #define DEBUG_LEVEL_LOAD_MAP
 #define _DEBUG_GET_TILE
 #define _DEBUG_PRINCE_RENDERING
 
-#define DEBUG_ACTION_CANMOVEFORWARD
+#define _DEBUG_ACTION_CANMOVEFORWARD
 #define _DEBUG_ACTION_CANJUMPUP
 #define _DEBUG_ACTION_CANJUMPUP_PART2
 #define _DEBUG_ACTION_CANCLIMBDOWN
@@ -443,8 +444,8 @@ constexpr uint16_t Pickup_Sword_3                                = Stance::Picku
 constexpr uint16_t Pickup_Sword_4                                = Stance::Pickup_Sword_3 + 1;
 constexpr uint16_t Pickup_Sword_5                                = Stance::Pickup_Sword_4 + 1;
 constexpr uint16_t Pickup_Sword_6                                = Stance::Pickup_Sword_5 + 1;
-constexpr uint16_t Pickup_Sword_7                                = Stance::Pickup_Sword_6 + 1;
-constexpr uint16_t Pickup_Sword_8                                = Stance::Pickup_Sword_7 + 1;
+constexpr uint16_t Pickup_Sword_7_PutAway                        = Stance::Pickup_Sword_6 + 1;
+constexpr uint16_t Pickup_Sword_8                                = Stance::Pickup_Sword_7_PutAway + 1;
 constexpr uint16_t Pickup_Sword_9                                = Stance::Pickup_Sword_8 + 1;
 constexpr uint16_t Pickup_Sword_10                               = Stance::Pickup_Sword_9 + 1;
 constexpr uint16_t Pickup_Sword_11                               = Stance::Pickup_Sword_10 + 1;
@@ -660,7 +661,59 @@ constexpr uint16_t Running_Jump_3_SameLvl_7                      = Stance::Runni
 constexpr uint16_t Running_Jump_3_SameLvl_8_End                  = Stance::Running_Jump_3_SameLvl_7 + 1;
 
 
-constexpr uint16_t  Upright_End_Climb        = 1253;
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* 361 - 361     x: 0, y: 0                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define SWORD_NORMAL_SEQ                                         174,
+#define SWORD_NORMAL_OFFSETS                                     0,0,
+constexpr uint16_t Sword_Normal                                  = Stance::Running_Jump_3_SameLvl_8_End + 1;
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* 362 - 367     x: 0, y: 0                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define DRAW_SWORD_SEQ                                           175,   176,   177,   178,   179,   180,
+#define DRAW_SWORD_OFFSETS                                       0,0,   0,0,   0,0,   0,0,   0,0,   0,0,
+constexpr uint16_t Draw_Sword_1_Start                            = Stance::Sword_Normal + 1;
+constexpr uint16_t Draw_Sword_2                                  = Stance::Draw_Sword_1_Start + 1;
+constexpr uint16_t Draw_Sword_3                                  = Stance::Draw_Sword_2 + 1;
+constexpr uint16_t Draw_Sword_4                                  = Stance::Draw_Sword_3 + 1;
+constexpr uint16_t Draw_Sword_5                                  = Stance::Draw_Sword_4 + 1;
+constexpr uint16_t Draw_Sword_6_End                              = Stance::Draw_Sword_5 + 1;
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* 368 - 370     x: 0, y: 0                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define SWORD_STEP_SEQ                                           181,   182,   183,   
+#define SWORD_STEP_OFFSETS                                       3,0,   1,0,   0,0,  
+constexpr uint16_t Sword_Step_01_Start                           = Stance::Draw_Sword_6_End + 1;
+constexpr uint16_t Sword_Step_02                                 = Stance::Sword_Step_01_Start + 1;
+constexpr uint16_t Sword_Step_03_End                             = Stance::Sword_Step_02 + 1;
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* 371 - 378     x: 0, y: 0                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define SWORD_ATTACK_SEQ                                         186,   187,   188,   189,   190,   191,   192,   193,   
+#define SWORD_ATTACK_OFFSETS                                     2,0,   1,0,   2,0,   2,0,   -3,0,  -3,0,  -1,0,  0,0,
+constexpr uint16_t Sword_Attack_01_Start                         = Stance::Sword_Step_03_End + 1;
+constexpr uint16_t Sword_Attack_02                               = Stance::Sword_Attack_01_Start + 1;
+constexpr uint16_t Sword_Attack_03                               = Stance::Sword_Attack_02 + 1;
+constexpr uint16_t Sword_Attack_04                               = Stance::Sword_Attack_03 + 1;
+constexpr uint16_t Sword_Attack_05                               = Stance::Sword_Attack_04 + 1;
+constexpr uint16_t Sword_Attack_06                               = Stance::Sword_Attack_05 + 1;
+constexpr uint16_t Sword_Attack_07                               = Stance::Sword_Attack_06 + 1;
+constexpr uint16_t Sword_Attack_08_End                           = Stance::Sword_Attack_07 + 1;
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* 371 - 378     x: 0, y: 0                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define ATTACK_BLOCK_SEQ                                         194,   195,   194,   
+#define ATTACK_BLOCK_OFFSETS                                     0,0,   1,0,   -1,0,
+constexpr uint16_t Attack_Block_01_Start                         = Stance::Sword_Attack_08_End + 1;
+constexpr uint16_t Attack_Block_02                               = Stance::Attack_Block_01_Start + 1;
+constexpr uint16_t Attack_Block_03_End                           = Stance::Attack_Block_02 + 1;
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+// constexpr uint16_t  Upright_End_Climb        = 1253;
 constexpr uint16_t  Upright_Turn             = 1255;
 };
 
@@ -736,6 +789,11 @@ namespace Constants {
         RUNNING_JUMP_4_DROPLVL_SEQ
         RUNNING_JUMP_3_DROPLVL_SEQ
         RUNNING_JUMP_3_SAMELVL_SEQ
+        SWORD_NORMAL_SEQ
+        DRAW_SWORD_SEQ
+        SWORD_STEP_SEQ
+        SWORD_ATTACK_SEQ
+        ATTACK_BLOCK_SEQ
     };
 
     constexpr int8_t Prince_XOffset[] PROGMEM = {
@@ -782,6 +840,11 @@ namespace Constants {
         RUNNING_JUMP_4_DROPLVL_OFFSETS
         RUNNING_JUMP_3_DROPLVL_OFFSETS
         RUNNING_JUMP_3_SAMELVL_OFFSETS
+        SWORD_NORMAL_OFFSETS
+        DRAW_SWORD_OFFSETS
+        SWORD_STEP_OFFSETS
+        SWORD_ATTACK_OFFSETS
+        ATTACK_BLOCK_OFFSETS
     };
 
 constexpr int8_t Prince_ImageDetails[] PROGMEM = {
@@ -958,7 +1021,28 @@ constexpr int8_t Prince_ImageDetails[] PROGMEM = {
 /* 171 */  126, 126, 126,
 /* 172 */  126, 126, 126,
 /* 173 */  126, 126, 126,
-
+/* 174 */  10, 5, -6,
+/* 175 */  5, 2, -3,
+/* 176 */  5, -1, -5,
+/* 177 */  7, 4, -4,
+/* 178 */  7, 5, -7,
+/* 179 */  7, 5, -7,
+/* 180 */  7, 5, -7,
+/* 181 */  7, -6, -9,
+/* 182 */  8, -7, -10,
+/* 183 */  7, 7, 3,
+/* 184 */  7, 6, 1,
+/* 185 */  6, 6, 1,
+/* 186 */  7, 6, 1,
+/* 187 */  9, 8, 5,
+/* 188 */  7, 6, 2,
+/* 189 */  7, 6, 2,
+/* 190 */  9, 8, 5,
+/* 191 */  8, 8, 4,
+/* 192 */  7, 7, 3,
+/* 193 */  6, 6, 1,
+/* 194 */  6, 5, 3,
+/* 195 */  8, 5, 1,
 };
 
 constexpr int8_t VertAdjustments[] PROGMEM = {

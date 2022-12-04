@@ -26,7 +26,6 @@ import os
 import struct
 
 from . import Image, ImageFile
-from ._binary import i8
 from ._binary import i16be as i16
 from ._binary import o8
 
@@ -64,22 +63,22 @@ class SgiImageFile(ImageFile.ImageFile):
             raise ValueError("Not an SGI image file")
 
         # compression : verbatim or RLE
-        compression = i8(s[2])
+        compression = s[2]
 
         # bpc : 1 or 2 bytes (8bits or 16bits)
-        bpc = i8(s[3])
+        bpc = s[3]
 
         # dimension : 1, 2 or 3 (depending on xsize, ysize and zsize)
-        dimension = i16(s[4:])
+        dimension = i16(s, 4)
 
         # xsize : width
-        xsize = i16(s[6:])
+        xsize = i16(s, 6)
 
         # ysize : height
-        ysize = i16(s[8:])
+        ysize = i16(s, 8)
 
         # zsize : channels count
-        zsize = i16(s[10:])
+        zsize = i16(s, 10)
 
         # layout
         layout = bpc, dimension, zsize
@@ -139,7 +138,7 @@ def _save(im, fp, filename):
     # Flip the image, since the origin of SGI file is the bottom-left corner
     orientation = -1
     # Define the file as SGI File Format
-    magicNumber = 474
+    magic_number = 474
     # Run-Length Encoding Compression - Unsupported at this time
     rle = 0
 
@@ -168,11 +167,11 @@ def _save(im, fp, filename):
     # Maximum Byte value (255 = 8bits per pixel)
     pinmax = 255
     # Image name (79 characters max, truncated below in write)
-    imgName = os.path.splitext(os.path.basename(filename))[0]
-    imgName = imgName.encode("ascii", "ignore")
+    img_name = os.path.splitext(os.path.basename(filename))[0]
+    img_name = img_name.encode("ascii", "ignore")
     # Standard representation of pixel in the file
     colormap = 0
-    fp.write(struct.pack(">h", magicNumber))
+    fp.write(struct.pack(">h", magic_number))
     fp.write(o8(rle))
     fp.write(o8(bpc))
     fp.write(struct.pack(">H", dim))
@@ -182,8 +181,8 @@ def _save(im, fp, filename):
     fp.write(struct.pack(">l", pinmin))
     fp.write(struct.pack(">l", pinmax))
     fp.write(struct.pack("4s", b""))  # dummy
-    fp.write(struct.pack("79s", imgName))  # truncates to 79 chars
-    fp.write(struct.pack("s", b""))  # force null byte after imgname
+    fp.write(struct.pack("79s", img_name))  # truncates to 79 chars
+    fp.write(struct.pack("s", b""))  # force null byte after img_name
     fp.write(struct.pack(">l", colormap))
     fp.write(struct.pack("404s", b""))  # dummy
 
@@ -194,7 +193,8 @@ def _save(im, fp, filename):
     for channel in im.split():
         fp.write(channel.tobytes("raw", rawmode, 0, orientation))
 
-    fp.close()
+    if hasattr(fp, "flush"):
+        fp.flush()
 
 
 class SGI16Decoder(ImageFile.PyDecoder):

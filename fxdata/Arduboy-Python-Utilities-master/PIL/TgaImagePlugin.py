@@ -20,7 +20,6 @@
 import warnings
 
 from . import Image, ImageFile, ImagePalette
-from ._binary import i8
 from ._binary import i16le as i16
 from ._binary import o8
 from ._binary import o16le as o16
@@ -56,16 +55,16 @@ class TgaImageFile(ImageFile.ImageFile):
         # process header
         s = self.fp.read(18)
 
-        id_len = i8(s[0])
+        id_len = s[0]
 
-        colormaptype = i8(s[1])
-        imagetype = i8(s[2])
+        colormaptype = s[1]
+        imagetype = s[2]
 
-        depth = i8(s[16])
+        depth = s[16]
 
-        flags = i8(s[17])
+        flags = s[17]
 
-        self._size = i16(s[12:]), i16(s[14:])
+        self._size = i16(s, 12), i16(s, 14)
 
         # validate header fields
         if (
@@ -94,9 +93,10 @@ class TgaImageFile(ImageFile.ImageFile):
 
         # orientation
         orientation = flags & 0x30
-        if orientation == 0x20:
+        self._flip_horizontally = orientation in [0x10, 0x30]
+        if orientation in [0x20, 0x30]:
             orientation = 1
-        elif not orientation:
+        elif orientation in [0, 0x10]:
             orientation = -1
         else:
             raise SyntaxError("unknown TGA orientation")
@@ -111,10 +111,10 @@ class TgaImageFile(ImageFile.ImageFile):
 
         if colormaptype:
             # read palette
-            start, size, mapdepth = i16(s[3:]), i16(s[5:]), i16(s[7:])
+            start, size, mapdepth = i16(s, 3), i16(s, 5), s[7]
             if mapdepth == 16:
                 self.palette = ImagePalette.raw(
-                    "BGR;16", b"\0" * 2 * start + self.fp.read(2 * size)
+                    "BGR;15", b"\0" * 2 * start + self.fp.read(2 * size)
                 )
             elif mapdepth == 24:
                 self.palette = ImagePalette.raw(
@@ -149,6 +149,10 @@ class TgaImageFile(ImageFile.ImageFile):
                 ]
         except KeyError:
             pass  # cannot decode
+
+    def load_end(self):
+        if self._flip_horizontally:
+            self.im = self.im.transpose(Image.Transpose.FLIP_LEFT_RIGHT)
 
 
 #
@@ -189,9 +193,10 @@ def _save(im, fp, filename):
         warnings.warn("id_section has been trimmed to 255 characters")
 
     if colormaptype:
-        colormapfirst, colormaplength, colormapentry = 0, 256, 24
+        palette = im.im.getpalette("RGB", "BGR")
+        colormaplength, colormapentry = len(palette) // 3, 24
     else:
-        colormapfirst, colormaplength, colormapentry = 0, 0, 0
+        colormaplength, colormapentry = 0, 0
 
     if im.mode in ("LA", "RGBA"):
         flags = 8
@@ -206,7 +211,7 @@ def _save(im, fp, filename):
         o8(id_len)
         + o8(colormaptype)
         + o8(imagetype)
-        + o16(colormapfirst)
+        + o16(0)  # colormapfirst
         + o16(colormaplength)
         + o8(colormapentry)
         + o16(0)
@@ -221,7 +226,7 @@ def _save(im, fp, filename):
         fp.write(id_section)
 
     if colormaptype:
-        fp.write(im.im.getpalette("RGB", "BGR"))
+        fp.write(palette)
 
     if rle:
         ImageFile._save(
