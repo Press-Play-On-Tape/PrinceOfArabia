@@ -225,7 +225,7 @@ struct Prince {
 
                 // this->stack->clear();
 
-                for (uint8_t x = toStance; x <= fromStance; x++) {
+                for (uint16_t x = toStance; x <= fromStance; x++) {
 
                     #if defined(DEBUG) && defined(DEBUG_PRINCE_STACK)
                     DEBUG_PRINT(-x); 

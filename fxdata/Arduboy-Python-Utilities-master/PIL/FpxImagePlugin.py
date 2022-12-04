@@ -17,13 +17,12 @@
 import olefile
 
 from . import Image, ImageFile
-from ._binary import i8
 from ._binary import i32le as i32
 
 # we map from colour field tuples to (mode, rawmode) descriptors
 MODES = {
     # opacity
-    (0x00007FFE): ("A", "L"),
+    (0x00007FFE,): ("A", "L"),
     # monochrome
     (0x00010000,): ("L", "L"),
     (0x00018000, 0x00017FFE): ("RGBA", "LA"),
@@ -155,15 +154,18 @@ class FpxImageFile(ImageFile.ImageFile):
 
         for i in range(0, len(s), length):
 
+            x1 = min(xsize, x + xtile)
+            y1 = min(ysize, y + ytile)
+
             compression = i32(s, i + 8)
 
             if compression == 0:
                 self.tile.append(
                     (
                         "raw",
-                        (x, y, x + xtile, y + ytile),
+                        (x, y, x1, y1),
                         i32(s, i) + 28,
-                        (self.rawmode),
+                        (self.rawmode,),
                     )
                 )
 
@@ -173,7 +175,7 @@ class FpxImageFile(ImageFile.ImageFile):
                 self.tile.append(
                     (
                         "fill",
-                        (x, y, x + xtile, y + ytile),
+                        (x, y, x1, y1),
                         i32(s, i) + 28,
                         (self.rawmode, s[12:16]),
                     )
@@ -181,8 +183,8 @@ class FpxImageFile(ImageFile.ImageFile):
 
             elif compression == 2:
 
-                internal_color_conversion = i8(s[14])
-                jpeg_tables = i8(s[15])
+                internal_color_conversion = s[14]
+                jpeg_tables = s[15]
                 rawmode = self.rawmode
 
                 if internal_color_conversion:
@@ -202,7 +204,7 @@ class FpxImageFile(ImageFile.ImageFile):
                 self.tile.append(
                     (
                         "jpeg",
-                        (x, y, x + xtile, y + ytile),
+                        (x, y, x1, y1),
                         i32(s, i) + 28,
                         (rawmode, jpegmode),
                     )
