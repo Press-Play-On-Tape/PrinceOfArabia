@@ -5,19 +5,14 @@
 #include "../utils/Stack.h"
 #include "../entities/Structs.h"
 
-struct Prince {
+struct Enemy {
 
     private:
 
-        Stack <int16_t, 30>  *stack;
+        Stack <int16_t, 15>  *stack;
         
-        uint8_t hangingCounter = 0;
-        uint8_t crouchingCounter = 0;
         uint16_t stance = Stance::Upright;
-        uint16_t prevStance = Stance::Upright;
-
         Direction direction = Direction::Left;
-        uint8_t falling = 0;
 
         int16_t x = 0;
         int16_t y = 0;
@@ -25,50 +20,33 @@ struct Prince {
 
         uint8_t health = 0;
         uint8_t healthMax = 0;
-        
-        bool sword = false;
-        bool ignoreWallCollisions = false;
 
         Point location;
 
     public:
 
         uint16_t getStance()                        { return this->stance; }
-        uint16_t getPrevStance()                    { return this->prevStance; }
         int16_t getX()                              { return this->x; }
         int16_t getY()                              { return this->y; }
         int16_t getYPrevious()                      { return this->prevY; }
         int16_t getXImage()                         { return this->x - 18 + 3; }                // Image is 36 x 36 hence - 18, the plus 3 is due to the orthagonal tiles offset.
         int16_t getYImage()                         { return this->y - 31; }                    // -31 moves the player up 5 pixels on the orthagonal tiles ?
-        uint8_t getHangingCounter()                 { return this->hangingCounter; }
-        uint8_t getCrouchingCounter()               { return this->crouchingCounter; }
-        uint8_t getFalling()                        { return this->falling; }
         uint8_t getHealth()                         { return this->health; }
         uint8_t getHealthMax()                      { return this->healthMax; }
-        bool getSword()                             { return this->sword; }
-        bool getIgnoreWallCollisions()              { return this->ignoreWallCollisions; }
 
-        Stack <int16_t, 30>  * getStack()           { return this->stack; }
+        Stack <int16_t, 15>  * getStack()           { return this->stack; }
         Direction getDirection()                    { return this->direction; }
 
-        void setStack(Stack <int16_t, 30>  *val)    { this->stack = val; }
+        void setStack(Stack <int16_t, 15>  *val)    { this->stack = val; }
         void setStance(uint16_t val)                { this->stance = val; }
-        void setPrevStance(uint16_t val)            { this->prevStance = val; }
         void setX(int16_t val)                      { this->x = val; }
         void setY(int16_t val)                      { this->y = val; }
         void setDirection(Direction val)            { this->direction = val; }
-        void setFalling(uint8_t val)                { this->falling = val; }
-        void setHangingCounter(uint8_t val)         { this->hangingCounter = val; }
-        void setCrouchingCounter(uint8_t val)       { this->crouchingCounter = val; }
         void setHealth(uint8_t val)                 { this->health = val; }
         void setHealthMax(uint8_t val)              { this->healthMax = val; }
-        void setSword(bool val)                     { this->sword = val; }
-        void setIgnoreWallCollisions(bool val)      { this->ignoreWallCollisions = val; }
 
-        void incFalling()                           { this->falling++; }
-        uint8_t decHealth(uint8_t val)              { this->health >= val ? this->health = this->health - val: 0; return this->health;}
+        void decHealth(uint8_t val)                 { health > val ? this->health = this->health - val: 0; }
         void incHealth(int8_t val)                  { this->health = this->health + val > this->healthMax ? this->healthMax : this->health + val; } 
-
 
         Point &getPosition()                        { return this->location; }
 
@@ -100,11 +78,8 @@ struct Prince {
             // this->prevY = y;
             this->direction = direction;
             this->stance = stance;
-            this->crouchingCounter = 32;
             this->health = health;
             this->healthMax = health;
-            this->sword = false;
-            this->ignoreWallCollisions = false;
 
         }
 
@@ -185,9 +160,6 @@ struct Prince {
                 xOffset = offset.x;
                 DEBUG_PRINT(F(", Final "));
                 DEBUG_PRINT(finalStance);
-                // DEBUG_PRINT(F(" ="));
-                // DEBUG_PRINT(offset.x);
-                // DEBUG_PRINT(F("= "));
                 #endif
 
                 this->stack->push(static_cast<int16_t>(finalStance), resetFrame);
@@ -210,9 +182,6 @@ struct Prince {
                     DEBUG_PRINT(" ");        
                     offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[(x - 1) * 2]));
                     xOffset = xOffset + offset.x;
-                    // DEBUG_PRINT(F(" ="));
-                    // DEBUG_PRINT(offset.x);
-                    // DEBUG_PRINT(F("= "));                    
                     #endif
 
                     this->stack->push(static_cast<int16_t>(x), resetFrame);
@@ -232,9 +201,6 @@ struct Prince {
                     DEBUG_PRINT(" ");                         
                     offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[(x - 1) * 2]));
                     xOffset = xOffset + offset.x;
-                    // DEBUG_PRINT(F(" ="));
-                    // DEBUG_PRINT(-offset.x);
-                    // DEBUG_PRINT(F("= "));                             
                     #endif
 
                     this->stack->push(static_cast<int16_t>(-x), resetFrame);
@@ -256,14 +222,14 @@ struct Prince {
 
             int16_t retValue = this->stack->pop();
 
-            switch (retValue) {
+            // switch (retValue) {
 
-                case Stance::Jump_Up_A_14_End:
-                case Stance::Jump_Up_B_14_End:
-                    this->hangingCounter = 40;
-                    break;
+            //     case Stance::Jump_Up_A_14_End:
+            //     case Stance::Jump_Up_B_14_End:
+            //         this->hangingCounter = 40;
+            //         break;
                     
-            }
+            // }
 
             return retValue;
 
@@ -285,22 +251,22 @@ struct Prince {
             return this->stack->contains(item);
         }
 
-    	void update(uint8_t xLoc, uint8_t yLoc) {
+    	void update() {
 
             // Housekeeping ..
 
-            if (this->hangingCounter > 0) {
-                this->hangingCounter--;
-            }
+            // if (this->hangingCounter > 0) {
+            //     this->hangingCounter--;
+            // }
 
-            if (this->crouchingCounter > 0) {
-                this->crouchingCounter--;
-            }
+            // if (this->crouchingCounter > 0) {
+            //     this->crouchingCounter--;
+            // }
 
             this->stack->update();
 
-            location.x = (xLoc * Constants::TileWidth) + this->x;
-            location.y = (yLoc * Constants::TileHeight) + this->y;
+            location.x = this->x;
+            location.y = this->y;
 
         }
 

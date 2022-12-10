@@ -24,6 +24,8 @@ Arduboy2Ext arduboy;
 Cookie cookie;
 Stack <int16_t, 30> princeStack;
 Prince &prince = cookie.prince;
+Stack <int16_t, 15> enemyStack;
+Enemy &enemy = cookie.enemy;
 Level &level = cookie.level;
 GamePlay &gamePlay = cookie.gamePlay;
 TitleScreenVars titleScreenVars = cookie.titleScreenVars;
@@ -47,6 +49,7 @@ void setup() {
     FX::begin(FX_DATA_PAGE);
 
     prince.setStack(&princeStack);
+    enemy.setStack(&enemyStack);
 
     #ifdef SAVE_MEMORY_OTHER
         gamePlay.gameState = GameState::Game_Init;

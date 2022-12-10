@@ -7,12 +7,12 @@
 #define SAVE_MEMORY_OTHER
 #define ALT_B_BUTTON
 
-#define _DEBUG
-#define DEBUG_ONSCREEN_DETAILS
+#define DEBUG
+#define _DEBUG_ONSCREEN_DETAILS
 #define _DEBUG_ONSCREEN_DETAILS_MIN
 
 #define _DEBUG_PRINCE_DETAILS
-#define DEBUG_PRINCE_STACK
+#define _DEBUG_PRINCE_STACK
 #define _DEBUG_PRINT_ACTION
 #define DEBUG_LEVEL_LOAD_MAP
 #define _DEBUG_GET_TILE
@@ -28,8 +28,6 @@
 #define _DEBUG_ACTION_COLLIDEWITHWALL
 #define _DEBUG_ACTION_RUNJUMP
 #define _DEBUG_ACTION_FALLING
-#define _TIME_AND_LEVEL
-#define _TIME_ONLY
 
 
 //-------------------------------------------------------------------------------------
@@ -672,19 +670,19 @@ constexpr uint16_t Sword_Normal                                  = Stance::Runni
 /* 362 - 367     x: 0, y: 0                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define DRAW_SWORD_SEQ                                           175,   176,   177,   178,   179,   180,
 #define DRAW_SWORD_OFFSETS                                       0,0,   0,0,   0,0,   0,0,   0,0,   0,0,
-constexpr uint16_t Draw_Sword_1_Start                            = Stance::Sword_Normal + 1;
-constexpr uint16_t Draw_Sword_2                                  = Stance::Draw_Sword_1_Start + 1;
-constexpr uint16_t Draw_Sword_3                                  = Stance::Draw_Sword_2 + 1;
-constexpr uint16_t Draw_Sword_4                                  = Stance::Draw_Sword_3 + 1;
-constexpr uint16_t Draw_Sword_5                                  = Stance::Draw_Sword_4 + 1;
-constexpr uint16_t Draw_Sword_6_End                              = Stance::Draw_Sword_5 + 1;
+constexpr uint16_t Draw_Sword_01_Start                           = Stance::Sword_Normal + 1;
+constexpr uint16_t Draw_Sword_02                                 = Stance::Draw_Sword_01_Start + 1;
+constexpr uint16_t Draw_Sword_03                                 = Stance::Draw_Sword_02 + 1;
+constexpr uint16_t Draw_Sword_04                                 = Stance::Draw_Sword_03 + 1;
+constexpr uint16_t Draw_Sword_05                                 = Stance::Draw_Sword_04 + 1;
+constexpr uint16_t Draw_Sword_06_End                             = Stance::Draw_Sword_05 + 1;
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /* 368 - 370     x: 0, y: 0                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define SWORD_STEP_SEQ                                           181,   182,   183,   
 #define SWORD_STEP_OFFSETS                                       3,0,   1,0,   0,0,  
-constexpr uint16_t Sword_Step_01_Start                           = Stance::Draw_Sword_6_End + 1;
+constexpr uint16_t Sword_Step_01_Start                           = Stance::Draw_Sword_06_End + 1;
 constexpr uint16_t Sword_Step_02                                 = Stance::Sword_Step_01_Start + 1;
 constexpr uint16_t Sword_Step_03_End                             = Stance::Sword_Step_02 + 1;
 

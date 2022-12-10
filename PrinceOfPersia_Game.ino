@@ -12,11 +12,13 @@
 void game_Init() {
 
     // prince.init(38-24, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
+    prince.init(38-24, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
+    enemy.init(104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight
 
 //    prince.init(8+78+24, 25, Direction::Left, Stance::Crouch_3_End, 3);     // Double collapisble
     // prince.init(78 + 24 + 12, 25 + 31 + 31, Direction::Left, Stance:: Crouch_3_End, 3);          // Spikes
     // prince.init(78 + 24, 25, Direction::Left, Stance:: Crouch_3_End, 3);          // Jump 2
-    prince.init(18, 25+31, Direction::Right,Stance:: Crouch_3_End, 3);          // Sword fight
+    // prince.init(18, 25+31, Direction::Right,Stance:: Crouch_3_End, 3);          // Sword fight
     // prince.init(58, 25+31+31, Direction::Right, Stance::Crouch_3_End, 3);          // Second drink tonic
     // prince.init(66, 25, Direction::Right, Stance::Crouch_3_End, 3);          // Upper gate
     // prince.init(70, 25 + 31, Direction::Right, Stance::Crouch_3_End, 3);          // 2 leap
@@ -38,11 +40,12 @@ void game_Init() {
     level.setLevel(1);
 
     // level.init(prince, 60, 0);  // Normal starting posa
+    level.init(prince, 60, 3);  // Normal starting posa
 
     // level.init(prince, 10, 3);   // Double collapisble
     // level.init(prince, 10, 0);   // Spikes
     // level.init(prince, 30, 3);  // Jump 2
-    level.init(prince, 70, 3);  // Sword fight
+    // level.init(prince, 70, 3);  // Sword fight
     // level.init(prince, 50, 0);  // Second drink tonic
     // level.init(prince, 50, 0);  // Upper Gate
     // level.init(prince, 40, 3);  // 2 leap
@@ -105,6 +108,7 @@ void game() {
 
     auto justPressed = arduboy.justPressedButtons();
     auto pressed = arduboy.pressedButtons();
+    auto enemyIsVisible = false;
 
     #if defined(DEBUG) && defined(DEBUG_PRINCE_DETAILS)
     DEBUG_PRINT(F("Stance: "));
@@ -165,7 +169,7 @@ void game() {
     // // REmove later !!
     
     if (justPressed & B_BUTTON) {
-        prince.pushSequence(Stance::Draw_Sword_1_Start, Stance::Draw_Sword_6_End, Stance::Sword_Normal, true);
+        prince.pushSequence(Stance::Draw_Sword_01_Start, Stance::Draw_Sword_06_End, Stance::Sword_Normal, true);
     }
 
     #endif
@@ -177,11 +181,188 @@ void game() {
     // Update the objects ..
 
     prince.update(level.getXLocation(), level.getYLocation());
+    enemy.update();
     level.update(arduboy);
     gamePlay.update(arduboy);
 
     if (menu.update()) gamePlay.gameState = GameState::Game;
     
+
+
+
+
+
+
+    // Is the prince within distance of the enemy?
+
+// Serial.print(prince.getPosition().x);
+// Serial.print(" ");
+// Serial.println(enemy.getPosition().x);
+
+    enemyIsVisible = false;
+
+    if (enemy.getHealth() > 0) {
+
+        uint8_t tileXIdx = level.coordToTileIndexX(enemy.getPosition().x) + prince.getDirectionOffset(1);
+        uint8_t tileYIdx = level.coordToTileIndexY(enemy.getPosition().y) - 1;
+
+        if (tileXIdx >= level.getXLocation() && tileXIdx < level.getXLocation() + 10 && tileYIdx >= level.getYLocation() && tileYIdx < level.getYLocation() + 3) {
+
+            enemyIsVisible = true;
+        }
+
+    }
+
+
+
+    // ---------------------------------------------------------------------------------------------------------------------------------------
+    //  
+    //  If enemy queue is empty then determine next move ..
+    //
+    // ---------------------------------------------------------------------------------------------------------------------------------------
+
+    if (gamePlay.gameState == GameState::Game && enemy.isEmpty()) {
+
+        int16_t xDelta = prince.getPosition().x - enemy.getPosition().x;
+        int16_t yDelta = prince.getPosition().y - enemy.getPosition().y;
+
+        switch (enemy.getStance()) {
+
+            case Stance::Upright:
+
+                // Draw sword ?
+
+                if (abs(xDelta) < 50 && yDelta == 0) {
+
+                    switch (prince.getStance()) {
+
+                        case Stance::Falling_Dead_1_Start ... Stance::Falling_Dead_3_End:
+                            break;
+
+                        default:
+                            enemy.pushSequence(Stance::Draw_Sword_01_Start, Stance::Draw_Sword_06_End, Stance::Sword_Normal, true);
+                            break;
+
+                    }                    
+
+                }
+
+                break;
+
+            case Stance::Sword_Step_03_End:
+
+                if (yDelta == 0) {
+
+                    switch(abs(xDelta)) {
+
+                        case 0 ... 30:
+
+                            enemy.push(Stance::Sword_Normal, false);
+                            break;
+
+                        default:
+
+                            // Advance on prince ..
+
+                            enemy.pushSequence(Stance::Sword_Step_01_Start, Stance::Sword_Step_03_End, true);
+                            break;
+
+                    }
+
+
+                }
+                
+                break;
+
+            case Stance::Sword_Normal:
+
+                switch (prince.getStance()) {
+
+                    case Stance::Sword_Attack_03:
+
+                        if (random(0, 16) == 0) {                    
+                            prince.clear();
+                            prince.pushSequence(Stance::Attack_Block_01_Start, Stance::Attack_Block_03_End, Stance::Sword_Normal, false);
+                            enemy.pushSequence(Stance::Attack_Block_01_Start, Stance::Attack_Block_03_End, Stance::Sword_Normal, false);
+                        }
+
+                        break;
+
+                    case Stance::Falling_Dead_1_Start ... Stance::Falling_Dead_3_End:
+
+                        // Prince is dying, put sword away ..
+
+                        enemy.pushSequence(Stance::Pickup_Sword_7_PutAway, Stance::Pickup_Sword_16_End, Stance::Upright, false);
+                        break;
+                        
+                    default:
+
+                        if (yDelta == 0) {
+
+                            switch(abs(xDelta)) {
+
+                                case 0 ... 21:
+
+                                    switch (prince.getStance()) {
+
+                                        case Stance::Falling_Dead_1_Start ... Stance::Falling_Dead_3_End: 
+
+                                            // Player is dead!
+
+                                            break;
+
+                                        case Stance::Sword_Normal:
+                                            if (random(0, 16) == 0) {
+                                                enemy.pushSequence(Stance::Sword_Attack_01_Start, Stance::Sword_Attack_08_End, Stance::Sword_Normal, true);
+                                            }
+                                            break;
+
+                                        default:
+                                            if (random(0, 16) == 0) {
+                                                enemy.pushSequence(Stance::Sword_Attack_01_Start, Stance::Sword_Attack_08_End, Stance::Sword_Normal, true);
+                                            }
+                                            break;
+
+                                    }
+
+                                    break;
+
+                                case 22 ... 30:
+
+                                    if (random(0, 16) == 0) {
+                                        enemy.pushSequence(Stance::Sword_Step_01_Start, Stance::Sword_Step_03_End, Stance::Sword_Normal, true);
+                                    }
+                                    else {
+
+                                        if (enemy.getStance() == Stance::Sword_Step_03_End) {
+                                            enemy.push(Stance::Sword_Normal, false);
+                                        }
+
+                                    }
+                                    break;
+
+                                default:
+
+                                    // Advance on prince ..
+
+                                    enemy.pushSequence(Stance::Sword_Step_01_Start, Stance::Sword_Step_03_End, true);
+                                    break;
+
+                            }
+
+
+                        }
+                        break;
+
+                }                    
+
+                break;
+
+        }
+
+    }
+
+
 
     // ---------------------------------------------------------------------------------------------------------------------------------------
     //  
@@ -936,7 +1117,7 @@ void game() {
 
     // ---------------------------------------------------------------------------------------------------------------------------------------
     //  
-    //  Queue handling ..
+    //  Prince Queue handling ..
     //
     // ---------------------------------------------------------------------------------------------------------------------------------------
 
@@ -1032,7 +1213,9 @@ void game() {
                                     initFlash(prince, level);
                                     prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
                                     prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
-                                    prince.decHealth(1);
+                                    if (prince.decHealth(1) == 0) {;
+                                        pushDead(prince, level, gamePlay, false);
+                                    }
                                     break;
 
                                 default:    // Dead!
@@ -1132,7 +1315,9 @@ void game() {
 
                                     prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
                                     prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
-                                    prince.decHealth(1);
+                                    if (prince.decHealth(1) == 0) {;
+                                        pushDead(prince, level, gamePlay, false);
+                                    }
                                     break;
 
                                 default:    // Dead!
@@ -1198,6 +1383,22 @@ void game() {
 
                     prince.setFalling(0);
                     break;
+
+
+                case Stance::Sword_Attack_04:
+                    {
+                        int16_t xDelta = prince.getPosition().x - enemy.getPosition().x;
+                        int16_t yDelta = prince.getPosition().y - enemy.getPosition().y;
+
+                        if (abs(xDelta) < 50 && yDelta == 0) {
+                         
+                            if (enemy.decHealth(1) == 0) {
+                                pushDead(prince, level, gamePlay, true);
+                            }
+
+                        }
+
+                    }
 
             }
 
@@ -1346,6 +1547,66 @@ void game() {
 
     }
 
+
+
+    // ---------------------------------------------------------------------------------------------------------------------------------------
+    //  
+    //  Enemy Queue handling ..
+    //
+    // ---------------------------------------------------------------------------------------------------------------------------------------
+
+    if (enemy.getStackFrame() == 0) {
+
+        if (!enemy.isEmpty()) {
+
+            Point offset;
+
+            int16_t newStance = enemy.pop();
+            enemy.setStance(abs(newStance));
+
+            switch (enemy.getStance()) {
+
+                case Stance::Sword_Attack_04:
+
+                    switch (prince.getStance()) {
+
+                        case Stance::Sword_Normal:
+                        case Stance::Draw_Sword_01_Start ... Stance::Draw_Sword_06_End:
+                        case Stance::Sword_Attack_01_Start ... Stance::Sword_Attack_08_End:
+                        case Stance::Sword_Step_01_Start ... Stance::Sword_Step_03_End:
+
+                            if (prince.decHealth(1) == 0) {
+                                pushDead(prince, level, gamePlay, true);
+                            }
+
+                            break;
+
+                        case Stance::Falling_Dead_1_Start ... Stance::Falling_Dead_3_End: // Already dying ..
+
+                            break;
+
+                        default:
+
+                            pushDead(prince, level, gamePlay, true);
+                            break;                            
+
+                    }
+
+                    break;
+
+
+            }
+
+
+            // Move enemy .. 
+
+            getStance_Offsets(enemy.getDirection(), offset, enemy.getStance());
+            enemy.incX(offset.x * (newStance < 0 ? -1 : 1));
+            enemy.incY(offset.y * (newStance < 0 ? -1 : 1));
+
+        }
+
+    }
 
 
     // ---------------------------------------------------------------------------------------------------------------------------------------
@@ -1624,9 +1885,10 @@ void game() {
     }
 
 
+
     // Render scene ..
 
-    render();
+    render(enemyIsVisible);
     
     #ifndef SAVE_MEMORY_OTHER
         if (gamePlay.gameState == GameState::Menu) {

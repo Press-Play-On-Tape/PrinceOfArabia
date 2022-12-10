@@ -5,6 +5,7 @@
 #include "GamePlay.h"
 #include "Level.h"
 #include "Prince.h"
+#include "Enemy.h"
 #include "TitleScreenVars.h"
 
 struct Cookie {
@@ -12,6 +13,7 @@ struct Cookie {
     GamePlay gamePlay;
     Level level;
     Prince prince;
+    Enemy enemy;
     TitleScreenVars titleScreenVars;
 
 };
