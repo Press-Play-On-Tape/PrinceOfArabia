@@ -1213,12 +1213,15 @@ void game() {
                                     initFlash(prince, level);
                                     prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
                                     prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
+
                                     if (prince.decHealth(1) == 0) {;
                                         pushDead(prince, level, gamePlay, false);
                                     }
+
                                     break;
 
                                 default:    // Dead!
+
                                     pushDead(prince, level, gamePlay, false);
                                     break;
 
@@ -1315,9 +1318,11 @@ void game() {
 
                                     prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
                                     prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
+
                                     if (prince.decHealth(1) == 0) {;
                                         pushDead(prince, level, gamePlay, false);
                                     }
+
                                     break;
 
                                 default:    // Dead!
@@ -1390,10 +1395,16 @@ void game() {
                         int16_t xDelta = prince.getPosition().x - enemy.getPosition().x;
                         int16_t yDelta = prince.getPosition().y - enemy.getPosition().y;
 
-                        if (abs(xDelta) < 50 && yDelta == 0) {
+                        if (abs(xDelta) <= 21 && yDelta == 0) {
                          
                             if (enemy.decHealth(1) == 0) {
-                                pushDead(prince, level, gamePlay, true);
+ 
+                                pushDead(enemy, level, gamePlay, true);
+                                
+                                prince.clear();
+                                prince.pushSequence(Stance::Pickup_Sword_7_PutAway, Stance::Pickup_Sword_16_End, Stance::Upright, false);
+                                prince.pushSequence(Stance::Sword_Attack_05, Stance::Sword_Attack_08_End, Stance::Upright, false);
+
                             }
 
                         }
@@ -1501,6 +1512,7 @@ void game() {
                                         case Stance::Run_Repeat_1_Start ... Stance::Run_Repeat_8_End:
                                         case Stance::Standing_Jump_1_Start ... Stance::Standing_Jump_18_End:
                                         case Stance::Running_Jump_1_Start ... Stance::Running_Jump_11_End:
+
                                             pushDead(prince, level, gamePlay, true);
                                             break;
 

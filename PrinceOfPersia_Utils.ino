@@ -335,22 +335,30 @@ bool leaveLevel(Prince &prince, Level &level) {
 
 }
 
-void pushDead(Prince &prince, Level &level, GamePlay &gamePlay, bool clear) {
+void pushDead(Prince &entity, Level &level, GamePlay &gamePlay, bool clear) {
 
     if (clear) prince.clear();
-    prince.pushSequence(Stance::Falling_Dead_1_Start, Stance::Falling_Dead_3_End, true);
-    prince.setHealth(0);
+    entity.pushSequence(Stance::Falling_Dead_1_Start, Stance::Falling_Dead_3_End, true);
+    entity.setHealth(0);
 
     if (gamePlay.isGameOver()) {
 
-        showSign(prince, level, SignType::GameOver, 20);
+        showSign(entity, level, SignType::GameOver, 20);
 
     }
     else {
 
-        showSign(prince, level, SignType::PressA, 20);
+        showSign(entity, level, SignType::PressA, 20);
 
     }
+
+}
+
+void pushDead(Enemy &entity, Level &level, GamePlay &gamePlay, bool clear) {
+
+    if (clear) entity.clear();
+    entity.pushSequence(Stance::Falling_Dead_1_Start, Stance::Falling_Dead_3_End, true);
+    entity.setHealth(0);
 
 }
 

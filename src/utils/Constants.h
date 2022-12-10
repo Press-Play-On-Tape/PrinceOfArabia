@@ -718,6 +718,7 @@ constexpr uint16_t  Upright_Turn             = 1255;
 
 namespace Constants {
 
+    constexpr uint8_t StackSize = 30;
     constexpr uint8_t Item_Flash = 0;
     constexpr uint8_t Item_Sign = 1;
     constexpr uint8_t Item_ExitDoor = 2;
@@ -1098,6 +1099,8 @@ enum class Direction : uint8_t {
     Right,
     Up,
     Down,
+    Forward,
+    Back,
 };
 
 enum class Layer : uint8_t {

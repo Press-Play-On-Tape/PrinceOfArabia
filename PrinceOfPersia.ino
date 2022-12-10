@@ -22,9 +22,9 @@ Arduboy2Ext arduboy;
 #endif
 
 Cookie cookie;
-Stack <int16_t, 30> princeStack;
+Stack <int16_t, Constants::StackSize> princeStack;
 Prince &prince = cookie.prince;
-Stack <int16_t, 15> enemyStack;
+Stack <int16_t, Constants::StackSize> enemyStack;
 Enemy &enemy = cookie.enemy;
 Level &level = cookie.level;
 GamePlay &gamePlay = cookie.gamePlay;
