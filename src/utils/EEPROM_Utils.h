@@ -15,8 +15,8 @@ class EEPROM_Utils {
     EEPROM_Utils(){};
         
     static void initEEPROM(Cookie &cookie);
-    static void EEPROM_Utils::saveGame(Cookie &cookie);
-    static void EEPROM_Utils::loadGame(Cookie &cookie);
+    static void saveGame(Cookie &cookie);
+    static void loadGame(Cookie &cookie);
 
 };
 

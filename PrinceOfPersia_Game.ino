@@ -14,8 +14,8 @@ void game_Init() {
     // prince.init(38-24, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
     // prince.init(38-24, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Sword Fight from Left
     prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3);          // Sword Fight from Right
-//    enemy.init(104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
-    enemy.init(104 - 72 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Right, Stance::Upright, 3);          // Sword fight from Right
+   enemy.init(104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
+    // enemy.init(104 - 72 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Right, Stance::Upright, 3);          // Sword fight from Right
 
 //    prince.init(8+78+24, 25, Direction::Left, Stance::Crouch_3_End, 3);     // Double collapisble
     // prince.init(78 + 24 + 12, 25 + 31 + 31, Direction::Left, Stance:: Crouch_3_End, 3);          // Spikes
@@ -42,8 +42,8 @@ void game_Init() {
     level.setLevel(1);
 
     // level.init(prince, 60, 0);  // Normal starting posa
-    // level.init(prince, 60, 3);  // Fight from Left
-    level.init(prince, 70, 3);  // Fight from Right
+    level.init(prince, 60, 3);  // Fight from Left
+    // level.init(prince, 70, 3);  // Fight from Right
 
     // level.init(prince, 10, 3);   // Double collapisble
     // level.init(prince, 10, 0);   // Spikes
@@ -287,9 +287,9 @@ void game() {
 
                 switch (prince.getStance()) {
 
-                    case Stance::Sword_Attack_04:
+                    case Stance::Sword_Attack_01_Start ... Stance::Sword_Attack_04:
 
-                        if (random(0, 16) == 0) {                    
+                        if (random(0, 8) == 0) {                    
                             prince.clear();
                             prince.pushSequence(Stance::Attack_Block_01_Start, Stance::Attack_Block_03_End, Stance::Sword_Normal, false);
                             enemy.pushSequence(Stance::Attack_Block_01_Start, Stance::Attack_Block_03_End, Stance::Sword_Normal, false);
@@ -326,17 +326,23 @@ void game() {
                                             }
                                             break;
 
-                                        default:
-                                            if (random(0, 16) == 0) {
+                                        case Stance::Sword_Attack_01_Start ... Stance::Sword_Attack_03:
+                                            if (random(0, 8) == 0) {
                                                 enemy.pushSequence(Stance::Sword_Attack_01_Start, Stance::Sword_Attack_08_End, Stance::Sword_Normal, true);
                                             }
+                                            break;
+
+                                        default:
+                                            // if (random(0, 16) == 0) {
+                                            //     enemy.pushSequence(Stance::Sword_Attack_01_Start, Stance::Sword_Attack_08_End, Stance::Sword_Normal, true);
+                                            // }
                                             break;
 
                                     }
 
                                     break;
 
-                                case Constants::StrikeDistance + 1 ... Constants::StrikeDistance + 10:
+                                case Constants::StrikeDistance + 1 ... Constants::StrikeDistance + 20:
 
                                     if (random(0, 16) == 0) {
                                         enemy.pushSequence(Stance::Sword_Step_01_Start, Stance::Sword_Step_03_End, Stance::Sword_Normal, true);
@@ -1452,7 +1458,7 @@ void game() {
                          
                             if (enemy.decHealth(1) == 0) {
 
-                                pushDead(enemy, level, gamePlay, true);
+                                pushDead(enemy, true);
                                 
                                 prince.clear();
                                 prince.pushSequence(Stance::Pickup_Sword_7_PutAway, Stance::Pickup_Sword_16_End, Stance::Upright, false);

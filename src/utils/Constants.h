@@ -7,7 +7,7 @@
 #define SAVE_MEMORY_OTHER
 #define ALT_B_BUTTON
 
-#define DEBUG
+#define _DEBUG
 #define _DEBUG_ONSCREEN_DETAILS
 #define _DEBUG_ONSCREEN_DETAILS_MIN
 

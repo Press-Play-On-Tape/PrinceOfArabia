@@ -366,7 +366,7 @@ void pushDead(Prince &entity, Level &level, GamePlay &gamePlay, bool clear) {
 
 }
 
-void pushDead(Enemy &entity, Level &level, GamePlay &gamePlay, bool clear) {
+void pushDead(Enemy &entity, bool clear) {
 
     if (clear) entity.clear();
     entity.pushSequence(Stance::Falling_Dead_1_Start, Stance::Falling_Dead_3_End, true);
