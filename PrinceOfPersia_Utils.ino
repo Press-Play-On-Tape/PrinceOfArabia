@@ -164,13 +164,25 @@ void processStandingJump(Prince &prince, Level &level) {
 
 }
 
-void initFlash(Prince &prince, Level &level) {
+void initFlash(Prince &prince, Level &level, FlashType flashType) {
 
     Item &flash = level.getItem(Constants::Item_Flash);
     flash.itemType = ItemType::Flash;
     flash.data.flash.frame = 5;
+    flash.data.flash.type = flashType;
     flash.x = level.coordToTileIndexX(prince.getX()) + level.getXLocation();
     flash.y = level.coordToTileIndexY(prince.getY()) + level.getYLocation(); 
+
+}
+
+void initFlash(Enemy &enemy, Level &level, FlashType flashType) {
+
+    Item &flash = level.getItem(Constants::Item_Flash);
+    flash.itemType = ItemType::Flash;
+    flash.data.flash.frame = 5;
+    flash.data.flash.type = flashType;
+    flash.x = level.coordToTileIndexX(enemy.getX());// + level.getXLocation();
+    flash.y = level.coordToTileIndexY(enemy.getY());// + level.getYLocation(); 
 
 }
 

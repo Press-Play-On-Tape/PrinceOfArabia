@@ -231,6 +231,7 @@ void render(bool enemyIsVisible) {
 
         if (item.data.flash.frame > 0 && item.data.flash.frame < 5) {
 
+
             FX::drawBitmap(xLoc - 3, yLoc + 12, Images::Flash_00 + ((item.data.flash.frame - 1) * 136), 0, dbmMasked);
 
         }

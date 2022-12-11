@@ -135,7 +135,8 @@ void loop() {
 
     FX::enableOLED();
 
-    // Invert screen ?
+
+    // Invert screen during play ?
     
     switch (prince.getStance()) {
 
@@ -149,6 +150,23 @@ void loop() {
             break;
 
     }    
+
+
+    // Invert screen when striking player / enemy in sword fight ?
+    
+    {
+        Item &flash = level.getItem(Constants::Item_Flash);
+    
+        if ((flash.data.flash.frame == 2 || flash.data.flash.frame == 4) && flash.data.flash.type == FlashType::SwordFight) {
+
+            arduboy.invert(true);
+
+        }
+    
+    }
+
+
+    // Invert screen during sequence ?
 
     if (titleScreenVars.getMode() == TitleScreenMode::CutScene_1 && titleScreenVars.count == 168 && titleScreenVars.prevCount != 168) {
 

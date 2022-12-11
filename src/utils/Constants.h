@@ -1219,3 +1219,8 @@ enum class SignType : uint8_t {
     GameOver,
 };
 
+enum class FlashType : uint8_t {
+    None,
+    SwordFight,
+};
+

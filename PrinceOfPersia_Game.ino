@@ -1260,7 +1260,8 @@ void game() {
                                     DEBUG_PRINTLN(F("Land and enter crouch, falling = 2"));
                                     #endif
 
-                                    initFlash(prince, level);
+                                    initFlash(prince, level, FlashType::None);
+
                                     prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
                                     prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
 
@@ -1364,7 +1365,7 @@ void game() {
                                     DEBUG_PRINTLN(F("Land and enter crouch, falling = 2"));
                                     #endif
 
-                                    initFlash(prince, level);  
+                                    initFlash(prince, level, FlashType::None);  
 
                                     prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
                                     prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
@@ -1446,6 +1447,8 @@ void game() {
                         int16_t yDelta = prince.getPosition().y - enemy.getPosition().y;
 
                         if (abs(xDelta) <= Constants::StrikeDistance && yDelta == 0) {
+
+                            initFlash(enemy, level, FlashType::SwordFight);
                          
                             if (enemy.decHealth(1) == 0) {
 
@@ -1459,17 +1462,21 @@ void game() {
                             else {
 
                                 if (level.canMoveForward(enemy, Action::Step, enemy.getOppositeDirection())) {
+
                                     enemy.clear();
                                     enemy.pushSequence(Stance::Sword_Step_03_End, Stance::Sword_Step_01_Start, Stance::Sword_Normal, false);
                                     enemy.pushSequence(Stance::Sword_Step_03_End, Stance::Sword_Step_01_Start, false);
                                     break;
+
                                 }
                                 else if (level.canMoveForward(enemy, Action::SmallStep, enemy.getOppositeDirection())) {
+
                                     enemy.clear();
                                     enemy.pushSequence(Stance::Sword_Step_03_End, Stance::Sword_Step_01_Start, Stance::Sword_Normal, false);
                                     break;
+
                                 }
-                                
+
                             }
 
                         }
@@ -1651,6 +1658,8 @@ void game() {
                         case Stance::Draw_Sword_01_Start ... Stance::Draw_Sword_06_End:
                         case Stance::Sword_Attack_01_Start ... Stance::Sword_Attack_08_End:
                         case Stance::Sword_Step_01_Start ... Stance::Sword_Step_03_End:
+
+                            initFlash(prince, level, FlashType::SwordFight);
 
                             if (prince.decHealth(1) == 0) {
                                 pushDead(prince, level, gamePlay, true);
