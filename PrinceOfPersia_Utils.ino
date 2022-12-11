@@ -359,6 +359,7 @@ void pushDead(Enemy &entity, Level &level, GamePlay &gamePlay, bool clear) {
     if (clear) entity.clear();
     entity.pushSequence(Stance::Falling_Dead_1_Start, Stance::Falling_Dead_3_End, true);
     entity.setHealth(0);
+    entity.setMoveCount(64);
 
 }
 

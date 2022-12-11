@@ -224,16 +224,18 @@ void render(bool enemyIsVisible) {
 
     // Draw flash ..
 
-    Item &item = level.getItem(Constants::Item_Flash);
-    int16_t xLoc = (item.x - level.getXLocation()) * Constants::TileWidth;
-    int16_t yLoc = ((item.y - level.getYLocation()) * Constants::TileHeight) - level.getYOffset() + Constants::ScreenTopOffset;
+    {
+        Item &item = level.getItem(Constants::Item_Flash);
+        int16_t xLoc = (item.x - level.getXLocation()) * Constants::TileWidth;
+        int16_t yLoc = ((item.y - level.getYLocation()) * Constants::TileHeight) - level.getYOffset() + Constants::ScreenTopOffset;
 
-    if (item.data.flash.frame > 0 && item.data.flash.frame < 5) {
+        if (item.data.flash.frame > 0 && item.data.flash.frame < 5) {
 
-        FX::drawBitmap(xLoc - 3, yLoc + 12, Images::Flash_00 + ((item.data.flash.frame - 1) * 136), 0, dbmMasked);
+            FX::drawBitmap(xLoc - 3, yLoc + 12, Images::Flash_00 + ((item.data.flash.frame - 1) * 136), 0, dbmMasked);
 
+        }
+    
     }
-
 
 
     // Render health ..

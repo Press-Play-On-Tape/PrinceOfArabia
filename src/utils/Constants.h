@@ -12,9 +12,9 @@
 #define _DEBUG_ONSCREEN_DETAILS_MIN
 
 #define _DEBUG_PRINCE_DETAILS
-#define _DEBUG_PRINCE_STACK
+#define DEBUG_PRINCE_STACK
 #define _DEBUG_PRINT_ACTION
-#define DEBUG_LEVEL_LOAD_MAP
+#define _DEBUG_LEVEL_LOAD_MAP
 #define _DEBUG_GET_TILE
 #define _DEBUG_PRINCE_RENDERING
 
@@ -719,6 +719,8 @@ constexpr uint16_t  Upright_Turn             = 1255;
 namespace Constants {
 
     constexpr uint8_t StackSize = 30;
+    constexpr uint8_t StrikeDistance = 20;
+    
     constexpr uint8_t Item_Flash = 0;
     constexpr uint8_t Item_Sign = 1;
     constexpr uint8_t Item_ExitDoor = 2;

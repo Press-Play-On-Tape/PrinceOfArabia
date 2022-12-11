@@ -17,8 +17,14 @@ struct Enemy : public BaseEntity {
         uint8_t getMoveCount()                      { return this->moveCount; }
         Direction getMoveDirection()                { return this->moveDirection; }
 
-        void getMoveCount(uint8_t val)              { this->moveCount = val; }
+        void setMoveCount(uint8_t val)              { this->moveCount = val; }
         void setMoveDirection(Direction val)        { this->moveDirection = val; }
+
+        void decMoveCount() {
+
+            if (this->moveCount > 0) this->moveCount--;
+            
+        }
 
         void init(int16_t x, int16_t y, Direction direction, uint16_t stance, uint8_t health) {
 

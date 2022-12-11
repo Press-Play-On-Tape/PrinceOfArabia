@@ -63,6 +63,18 @@ class BaseEntity {
             
         }
 
+        Direction getOppositeDirection() {
+
+            switch (this->direction) {
+
+                case Direction::Left:       return Direction::Right;
+                case Direction::Right:      return Direction::Left;
+                default:                    return this->direction;
+                
+            }
+            
+        }
+
         int8_t getDirectionOffset(int8_t val) {
 
             if (this->direction == Direction::Left) {
