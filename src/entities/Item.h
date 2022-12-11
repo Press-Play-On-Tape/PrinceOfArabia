@@ -6,6 +6,7 @@
 
 struct Flash {
     uint8_t frame;
+    FlashType type;
 };
 
 struct Sign {

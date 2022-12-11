@@ -25,13 +25,7 @@ struct GamePlay {
         this->timer_Sec = 0;
         this->timer_Min = 60;
 
-        #ifdef TIME_AND_LEVEL
-        this->timeRemaining = 192;
-        #endif
-        #ifdef TIME_ONLY
         this->timeRemaining = 124;
-        #endif
-
         this->gameState = GameState::Game;
 
     }
@@ -41,13 +35,7 @@ struct GamePlay {
         this->frameCount = arduboy.getFrameCount();
         this->frameCount = 0;
 
-        #ifdef TIME_AND_LEVEL
-        this->timeRemaining = 192;
-        #endif
-        #ifdef TIME_ONLY
         this->timeRemaining = 124;
-        #endif
-
         this->gameState = GameState::Game;
 
     }

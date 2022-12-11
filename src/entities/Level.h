@@ -1207,10 +1207,14 @@ struct Level {
 
         }
 
-        bool canMoveForward(Prince &prince, Action action) {
+        bool canMoveForward(BaseEntity &prince, Action action, Direction direction = Direction::None) {
 
             int8_t tileXIdx = this->coordToTileIndexX(prince.getPosition().x) - this->getXLocation();
             int8_t tileYIdx = this->coordToTileIndexY(prince.getPosition().y) - this->getYLocation();
+
+            if (direction == Direction::None) {
+                direction = prince.getDirection();
+            }
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
             DEBUG_PRINTLN(F("------------------------------"));
@@ -1225,7 +1229,7 @@ struct Level {
             DEBUG_PRINTLN(tileYIdx);
             #endif
 
-            switch (prince.getDirection()) {
+            switch (direction) {
 
                 case Direction::Left:
                     {
@@ -1235,7 +1239,7 @@ struct Level {
                         // int8_t fgTile3 = this->getTile(Layer::Foreground, tileXIdx - 2, tileYIdx, TILE_FLOOR_BASIC);
                         int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx - 1, tileYIdx, TILE_FLOOR_BASIC);
                         int8_t fgTile2 = this->getTile(Layer::Foreground, tileXIdx - 1, tileYIdx, TILE_FLOOR_BASIC);
-                        int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(prince.getDirection(), prince.getPosition().x);
+                        int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(direction, prince.getPosition().x);
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
                         int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
@@ -1333,7 +1337,7 @@ struct Level {
                         // int8_t fgTile3 = this->getTile(Layer::Foreground, tileXIdx + 2, tileYIdx, TILE_FLOOR_BASIC);
                         int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx + 1, tileYIdx, TILE_FLOOR_BASIC);
                         int8_t fgTile2 = this->getTile(Layer::Foreground, tileXIdx + 1, tileYIdx, TILE_FLOOR_BASIC);
-                        int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(prince.getDirection(), prince.getPosition().x);
+                        int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(direction, prince.getPosition().x);
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
                         int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);

@@ -6,5 +6,6 @@
 #include "TitleScreenVars.h"
 #include "Menu.h"
 #include "Prince.h"
+#include "Enemy.h"
 #include "GamePlay.h"
 #include "Cookie.h"

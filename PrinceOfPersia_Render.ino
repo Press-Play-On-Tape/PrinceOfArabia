@@ -9,7 +9,7 @@
 #include "src/fonts/Font3x5.h"
 
 
-void render() {
+void render(bool enemyIsVisible) {
 
 
     // Draw background ..
@@ -136,6 +136,35 @@ void render() {
 
 
 
+    // Draw enemy ..
+
+    stance = enemy.getStance();
+    imageIndex = static_cast<uint16_t>(pgm_read_byte(&Constants::StanceToImageXRef[stance]));
+    startPos = Images::Prince_Left_001 + ((imageIndex - 1) * static_cast<uint24_t>(364));
+
+    if (imageIndex != 0) {
+
+        #if defined(DEBUG) && defined(DEBUG_PRINCE_RENDERING)
+        DEBUG_PRINT(F("Stance: "));
+        DEBUG_PRINT(prince.getStance());
+        DEBUG_PRINT(F(", ImageIndex: "));
+        DEBUG_PRINTLN(imageIndex);
+        #endif
+
+        if (enemy.getDirection() == Direction::Left) {
+            
+            FX::drawBitmap(enemy.getXImage() - (level.getXLocation() * Constants::TileWidth), enemy.getYImage() - (level.getYLocation() * Constants::TileHeight) - level.getYOffset() + Constants::ScreenTopOffset, startPos, 0, dbmMasked);
+
+        }
+        else {
+
+            FX::drawBitmap(enemy.getXImage() - (level.getXLocation() * Constants::TileWidth), enemy.getYImage() - (level.getYLocation() * Constants::TileHeight)- level.getYOffset() + Constants::ScreenTopOffset, startPos + (Images::Prince_Right_001 - Images::Prince_Left_001), 0, dbmMasked);
+
+        }
+
+    }
+
+
     // Draw items ..
 
     for (uint8_t i = Constants::Items_DynamicRange; i < Constants::Items_Count; i++) {
@@ -195,16 +224,19 @@ void render() {
 
     // Draw flash ..
 
-    Item &item = level.getItem(Constants::Item_Flash);
-    int16_t xLoc = (item.x - level.getXLocation()) * Constants::TileWidth;
-    int16_t yLoc = ((item.y - level.getYLocation()) * Constants::TileHeight) - level.getYOffset() + Constants::ScreenTopOffset;
+    {
+        Item &item = level.getItem(Constants::Item_Flash);
+        int16_t xLoc = (item.x - level.getXLocation()) * Constants::TileWidth;
+        int16_t yLoc = ((item.y - level.getYLocation()) * Constants::TileHeight) - level.getYOffset() + Constants::ScreenTopOffset;
 
-    if (item.data.flash.frame > 0 && item.data.flash.frame < 5) {
+        if (item.data.flash.frame > 0 && item.data.flash.frame < 5) {
 
-        FX::drawBitmap(xLoc - 3, yLoc + 12, Images::Flash_00 + ((item.data.flash.frame - 1) * 136), 0, dbmMasked);
 
+            FX::drawBitmap(xLoc - 3, yLoc + 12, Images::Flash_00 + ((item.data.flash.frame - 1) * 136), 0, dbmMasked);
+
+        }
+    
     }
-
 
 
     // Render health ..
@@ -227,42 +259,47 @@ void render() {
         
     }
 
-    FX::drawBitmap(123, 47, Images::Number_Small_00 + ((gamePlay.timer_Min / 10) * 9), 0, dbmNormal);
-    FX::drawBitmap(123, 51, Images::Number_Small_00 + ((gamePlay.timer_Min % 10) * 9), 0, dbmNormal);
-    FX::drawBitmap(123, 57, Images::Number_Small_00 + ((gamePlay.timer_Sec / 10) * 9), 0, dbmNormal);
-    FX::drawBitmap(123, 61, Images::Number_Small_00 + ((gamePlay.timer_Sec % 10) * 9), 0, dbmNormal);
+    if (!enemyIsVisible) {
+    
+        FX::drawBitmap(123, 47, Images::Number_Small_00 + ((gamePlay.timer_Min / 10) * 9), 0, dbmNormal);
+        FX::drawBitmap(123, 51, Images::Number_Small_00 + ((gamePlay.timer_Min % 10) * 9), 0, dbmNormal);
+        FX::drawBitmap(123, 57, Images::Number_Small_00 + ((gamePlay.timer_Sec / 10) * 9), 0, dbmNormal);
+        FX::drawBitmap(123, 61, Images::Number_Small_00 + ((gamePlay.timer_Sec % 10) * 9), 0, dbmNormal);
 
-    if (prince.getSword()) {
-        FX::drawBitmap(123, 40, Images::Sword_HUD, 0, dbmNormal);
-    }
+        if (prince.getSword()) {
+            FX::drawBitmap(123, 40, Images::Sword_HUD, 0, dbmNormal);
+        }
 
-    arduboy.drawPixel(124, 55);
-    arduboy.drawPixel(126, 55);
-
-
-    // Time remaining ..
-
-    #ifdef TIME_AND_LEVEL
-    switch (gamePlay.timeRemaining) {
-
-        case 1 ... 48:
-        case 97 ... 144:
-            FX::drawBitmap(23, 51, Images::TimeRemaining, 0, dbmMasked);
-            FX::drawBitmap(29, 56, Images::Number_Upright_00 + ((gamePlay.timer_Min / 10) * 7), 0, dbmNormal);
-            FX::drawBitmap(33, 56, Images::Number_Upright_00 + ((gamePlay.timer_Min % 10) * 7), 0, dbmNormal);
-            break;
-
-        case 49 ... 96:
-            FX::drawBitmap(23, 51, Images::LevelNumber, 0, dbmMasked);
-            FX::drawBitmap(71, 56, Images::Number_Upright_00 + ((gamePlay.level / 10) * 7), 0, dbmNormal);
-            FX::drawBitmap(75, 56, Images::Number_Upright_00 + ((gamePlay.level % 10) * 7), 0, dbmNormal);
-            break;
+        arduboy.drawPixel(124, 55);
+        arduboy.drawPixel(126, 55);
 
     }
-    #endif
+    else {
 
-    #ifdef TIME_ONLY
+        // Render enemy health ..
+
+        for (uint8_t i = 0; i < enemy.getHealthMax(); i++) {
+
+            if (enemy.getHealth() > i) {
+
+                FX::drawBitmap(123, 60 - (i * 4), Images::Health_00, 0, dbmNormal);
+
+            }
+            else {
+
+                FX::drawBitmap(123, 60 - (i * 4), Images::Health_01, 0, dbmNormal);
+
+            }
+            
+        }
+
+    }
+
+
+    // Time remaining popup ..
+
     {
+
         uint8_t y = 0;
 
         switch (prince.getY()) {
@@ -289,7 +326,6 @@ void render() {
         }
     
     }
-    #endif
 
 
     // Game over / press A ..

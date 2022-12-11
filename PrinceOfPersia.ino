@@ -22,8 +22,10 @@ Arduboy2Ext arduboy;
 #endif
 
 Cookie cookie;
-Stack <int16_t, 30> princeStack;
+Stack <int16_t, Constants::StackSize> princeStack;
 Prince &prince = cookie.prince;
+Stack <int16_t, Constants::StackSize> enemyStack;
+Enemy &enemy = cookie.enemy;
 Level &level = cookie.level;
 GamePlay &gamePlay = cookie.gamePlay;
 TitleScreenVars titleScreenVars = cookie.titleScreenVars;
@@ -47,6 +49,7 @@ void setup() {
     FX::begin(FX_DATA_PAGE);
 
     prince.setStack(&princeStack);
+    enemy.setStack(&enemyStack);
 
     #ifdef SAVE_MEMORY_OTHER
         gamePlay.gameState = GameState::Game_Init;
@@ -132,7 +135,8 @@ void loop() {
 
     FX::enableOLED();
 
-    // Invert screen ?
+
+    // Invert screen during play ?
     
     switch (prince.getStance()) {
 
@@ -146,6 +150,23 @@ void loop() {
             break;
 
     }    
+
+
+    // Invert screen when striking player / enemy in sword fight ?
+    
+    {
+        Item &flash = level.getItem(Constants::Item_Flash);
+    
+        if ((flash.data.flash.frame == 2 || flash.data.flash.frame == 4) && flash.data.flash.type == FlashType::SwordFight) {
+
+            arduboy.invert(true);
+
+        }
+    
+    }
+
+
+    // Invert screen during sequence ?
 
     if (titleScreenVars.getMode() == TitleScreenMode::CutScene_1 && titleScreenVars.count == 168 && titleScreenVars.prevCount != 168) {
 
