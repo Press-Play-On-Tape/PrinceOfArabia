@@ -566,16 +566,16 @@ constexpr uint16_t Falling_Down_M2_6_End                         = Stance::Falli
 /* 300 - 313    x: 13, y: -13                                    01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define LEAVE_GATE_SEQ                                           157,   158,   159,   160,   161,   162,   163,   164,   165,   166,   167,   168,   168,   0,
 #define LEAVE_GATE_OFFSETS                                       0,0,   1,0,   2,-1,  2,-1,  2,-1,  1,-1,  1,-1,  1,-1,  1,-1,  1,-1,  1,-2,  0,-3,  0,0,   0,0,
-constexpr uint16_t Leave_Gate_1_Start                            = Stance::Falling_Down_M2_6_End + 1;
-constexpr uint16_t Leave_Gate_2                                  = Stance::Leave_Gate_1_Start + 1;
-constexpr uint16_t Leave_Gate_3                                  = Stance::Leave_Gate_2 + 1;
-constexpr uint16_t Leave_Gate_4                                  = Stance::Leave_Gate_3 + 1;
-constexpr uint16_t Leave_Gate_5                                  = Stance::Leave_Gate_4 + 1;
-constexpr uint16_t Leave_Gate_6                                  = Stance::Leave_Gate_5 + 1;
-constexpr uint16_t Leave_Gate_7                                  = Stance::Leave_Gate_6 + 1;
-constexpr uint16_t Leave_Gate_8                                  = Stance::Leave_Gate_7 + 1;
-constexpr uint16_t Leave_Gate_9                                  = Stance::Leave_Gate_8 + 1;
-constexpr uint16_t Leave_Gate_10                                 = Stance::Leave_Gate_9 + 1;
+constexpr uint16_t Leave_Gate_01_Start                           = Stance::Falling_Down_M2_6_End + 1;
+constexpr uint16_t Leave_Gate_02                                 = Stance::Leave_Gate_01_Start + 1;
+constexpr uint16_t Leave_Gate_03                                 = Stance::Leave_Gate_02 + 1;
+constexpr uint16_t Leave_Gate_04                                 = Stance::Leave_Gate_03 + 1;
+constexpr uint16_t Leave_Gate_05                                 = Stance::Leave_Gate_04 + 1;
+constexpr uint16_t Leave_Gate_06                                 = Stance::Leave_Gate_05 + 1;
+constexpr uint16_t Leave_Gate_07                                 = Stance::Leave_Gate_06 + 1;
+constexpr uint16_t Leave_Gate_08                                 = Stance::Leave_Gate_07 + 1;
+constexpr uint16_t Leave_Gate_09                                 = Stance::Leave_Gate_08 + 1;
+constexpr uint16_t Leave_Gate_10                                 = Stance::Leave_Gate_09 + 1;
 constexpr uint16_t Leave_Gate_11                                 = Stance::Leave_Gate_10 + 1;
 constexpr uint16_t Leave_Gate_12                                 = Stance::Leave_Gate_11 + 1;
 constexpr uint16_t Leave_Gate_13                                 = Stance::Leave_Gate_12 + 1;
