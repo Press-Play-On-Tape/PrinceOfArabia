@@ -45,7 +45,6 @@ void setup() {
 
     arduboy.boot();
     arduboy.display();
-    arduboy.flashlight();
     arduboy.systemButtons();
 
     #ifndef SAVE_MEMORY_SOUND

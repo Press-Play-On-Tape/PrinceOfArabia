@@ -368,8 +368,8 @@ void renderNumber_Small(uint8_t x, uint8_t y, uint8_t number) {
 
 void renderNumber_Upright(uint8_t x, uint8_t y, uint8_t number) {
 
-    FX::drawBitmap(x, y, Images::Number_Upright_00 + ((number / 10) * 9), 0, dbmNormal);
-    FX::drawBitmap(x + 4, y, Images::Number_Upright_00 + ((number % 10) * 9), 0, dbmNormal);
+    FX::drawBitmap(x, y, Images::Number_Upright_00 + ((number / 10) * 7), 0, dbmNormal);
+    FX::drawBitmap(x + 4, y, Images::Number_Upright_00 + ((number % 10) * 7), 0, dbmNormal);
 
 }
 
