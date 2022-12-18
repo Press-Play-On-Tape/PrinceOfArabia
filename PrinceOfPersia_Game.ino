@@ -2030,9 +2030,12 @@ void game() {
             adj = 31 - adj;
             adj = (adj - 1) * 5;
 
+            uint24_t startPos = Constants::VertAdjustments + adj;
+            FX::seekData(startPos);
+
             for (uint8_t i = adj; i < adj + 5; i++) {
                 
-                uint8_t adjustment = static_cast<uint8_t>(pgm_read_byte(&Constants::VertAdjustments[i]));
+                uint8_t adjustment = FX::readPendingUInt8();
 
                 if (adjustment > 0) {
 
@@ -2048,6 +2051,8 @@ void game() {
                 }
 
             }
+
+            FX::readEnd();
 
         }
 

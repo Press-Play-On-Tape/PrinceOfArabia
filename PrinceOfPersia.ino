@@ -95,7 +95,7 @@ void loop() {
             case GameState::Title_Init:
 
                 #ifndef SAVE_MEMORY_SOUND
-                    sound.tonesFromFX(Theme);
+                    sound.tonesFromFX(Sounds::Theme);
                 #endif
 
                 #ifndef SAVE_MEMORY_OTHER
