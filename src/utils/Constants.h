@@ -901,9 +901,9 @@ enum class CanJumpUpResult : uint8_t {
     JumpThenFall,
     TurnThenJump,
     JumpDist10,
-    JumpThenFall_CollapseFloor,             // Take this as gospel!
-    StepThenJumpThenFall_CollapseFloor,     // This too!
-    JumpThenFall_CollapseFloorAbove,             // Take this as gospel!
+    JumpThenFall_CollapseFloor,             
+    StepThenJumpThenFall_CollapseFloor,     
+    JumpThenFall_CollapseFloorAbove,        
 };
 
 enum class CanClimbDownResult : uint8_t {
