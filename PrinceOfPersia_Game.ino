@@ -1854,10 +1854,9 @@ void game() {
 
             int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x) + (prince.getDirection() == Direction::Left ? -1 : 1) - level.getXLocation();
             int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y) + 1 - level.getYLocation();
-            int8_t bgTile = level.getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
             int8_t fgTile = level.getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
 
-            WallTileResults wallTileResult = level.isWallTile(bgTile, fgTile);
+            WallTileResults wallTileResult = level.isWallTile(fgTile);
 
             if (wallTileResult != WallTileResults::None) {
 

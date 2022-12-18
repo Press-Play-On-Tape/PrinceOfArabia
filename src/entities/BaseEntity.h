@@ -143,7 +143,7 @@ class BaseEntity {
 
         void pushSequence(uint16_t fromStance, uint16_t toStance, bool resetFrame) {
 
-            pushSequence(fromStance, toStance, Stance::None, resetFrame);
+            this->pushSequence(fromStance, toStance, Stance::None, resetFrame);
 
         }
 
@@ -222,20 +222,7 @@ class BaseEntity {
         }
 
         int16_t pop(void) {
-
-            int16_t retValue = this->stack->pop();
-
-            // switch (retValue) {
-
-            //     case Stance::Jump_Up_A_14_End:
-            //     case Stance::Jump_Up_B_14_End:
-            //         this->hangingCounter = 40;
-            //         break;
-                    
-            // }
-
-            return retValue;
-
+            return this->stack->pop();
         }
 
         bool isEmpty(void) {
@@ -253,7 +240,6 @@ class BaseEntity {
     	bool contains(const int16_t & item) {
             return this->stack->contains(item);
         }
-
 
     	uint8_t getStackFrame() {
             return this->stack->getFrame();
