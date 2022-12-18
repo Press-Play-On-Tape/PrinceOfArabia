@@ -174,10 +174,6 @@ void title() {
                 
                 renderTorches(7, 119, 39);
                 renderTorches(14, 112, 34);
-                // FX::drawBitmap(  7, 39, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
-                // FX::drawBitmap( 14, 34, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
-                // FX::drawBitmap(119, 39, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
-                // FX::drawBitmap(112, 34, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
 
                 FX::drawBitmap(  0, 54, Images::Tile_Dungeon_12, 0, dbmNormal);
                 FX::drawBitmap( 12, 54, Images::Tile_Dungeon_13, 0, dbmNormal);
