@@ -5,6 +5,7 @@
 #define DEBUG_PRINTLN  Serial.println
 #define SAVE_MEMORY_USB
 #define _SAVE_MEMORY_OTHER
+#define SAVE_MEMORY_SOUND
 #define _ALT_B_BUTTON
 
 #define _DEBUG
@@ -12,7 +13,7 @@
 #define _DEBUG_ONSCREEN_DETAILS_MIN
 
 #define _DEBUG_PRINCE_DETAILS
-#define DEBUG_PRINCE_STACK
+#define _DEBUG_PRINCE_STACK
 #define _DEBUG_PRINT_ACTION
 #define _DEBUG_LEVEL_LOAD_MAP
 #define _DEBUG_GET_TILE
@@ -312,7 +313,7 @@ constexpr uint16_t Jump_Up_Drop_C_5_End                          = Stance::Jump_
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /* 163 - 177    x: 4, y: -31                                     01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define STEP_CLIMBING_SEQ                                        75,    76,    77,    78,    79,    80,    81,    82,    83,    84,    85,    86,    87,    88,    89,  
-#define STEP_CLIMBING_OFFSETS                                    0,-4,  0,-4,  0,-2,  0,-3,  0,-2,  0,-2,  0,-3,  0,-3,  0,-1,  1,-3,  1,-2,  0,-1,  1,-1,  1,0,   0,0, 
+#define STEP_CLIMBING_OFFSETS                                    0,-4,  0,-4,  0,-2,  0,-3,  0,-2,  0,-3,  0,-4,  0,-4,  0,-1,  1,-3,  1,-1,  0,0,   1,0,   1,0,   0,0, 
 constexpr uint16_t Step_Climbing_1_Start                         = Stance::Jump_Up_Drop_C_5_End + 1;  // Climb up / down from a ledge (second part)
 constexpr uint16_t Step_Climbing_2                               = Stance::Step_Climbing_1_Start + 1;
 constexpr uint16_t Step_Climbing_3                               = Stance::Step_Climbing_2 + 1;
@@ -711,12 +712,13 @@ constexpr uint16_t Attack_Block_03_End                           = Stance::Attac
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-// constexpr uint16_t  Upright_End_Climb        = 1253;
 constexpr uint16_t  Upright_Turn             = 1255;
 };
 
 
 namespace Constants {
+
+    constexpr uint24_t LeftRightOffset = (Images::Prince_Right_001 - Images::Prince_Left_001);
 
     constexpr uint8_t StackSize = 30;
     constexpr uint8_t StrikeDistance = 20;
@@ -726,7 +728,7 @@ namespace Constants {
     constexpr uint8_t Item_ExitDoor = 2;
     constexpr uint8_t Items_DynamicRange = 2;
     constexpr uint8_t Item_LoveHeart = 3;           // Inside dynamic range as only used in cut scenes..
-    constexpr uint8_t Items_Count = 40;
+    constexpr uint8_t Items_Count = 42;
    
 
     constexpr uint8_t FrameRate = 45;

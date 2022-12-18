@@ -11,7 +11,19 @@
 
 void game_Init() {
 
+    gamePlay.init(arduboy, 1);
+    level.setLevel(1);
+    game_PositionChars();
+
+    gamePlay.gameState = GameState::Game;
+    menu.init();
+
+}
+
+void game_PositionChars() {
+
     prince.init(38-24, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
+    // prince.init(38-24, 25, Direction::Right, Stance::Crouch_3_End, 3);          // Gate Issue
     // prince.init(38-24, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Sword Fight from Left
     // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3);          // Sword Fight from Right
    enemy.init(104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
@@ -38,10 +50,9 @@ void game_Init() {
     // prince.init(98, 87, Direction::Left, Stance::Crouch_3_End, 3);          // At bottom of tthree level drop.
 
 
-    gamePlay.init(arduboy, 1);
-    level.setLevel(1);
 
     level.init(prince, 60, 0);  // Normal starting posa
+    // level.init(prince, 37, 3);  // gate issuee
     // level.init(prince, 60, 3);  // Fight from Left
     // level.init(prince, 70, 3);  // Fight from Right
 
@@ -64,43 +75,12 @@ void game_Init() {
     // level.init(prince, 60, 3);  // problem
     // level.init(prince, 30, 6); // At bottom of tthree level drop.
 
-    gamePlay.gameState = GameState::Game;
-    menu.init();
-
 }
 
 void game_StartLevel() {
 
-    // prince.init(66, 25, Direction::Right, Stance::Crouch_3_End, 3);          // Upper gate
-    // prince.init(70, 25 + 31, Direction::Right, Stance::Crouch_3_End, 3);          // Under collapsible floor
-    // prince.init(58 +36, 56, Direction::Left, Stance::Crouch_3_End, 3);          // Exit Seq
-    // prince.init(6, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
-    // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3);          // Both floor types
-    // prince.init(86, 87, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos but next to drop floor 3rd floor
-    prince.init(66, 25, Direction::Left, Stance::Crouch_3_End, 3);          // Under collapsible floor
-    // prince.init(66, 56, Direction::Right, Stance::Crouch_3_End, 3);        // Get tonic
-//    prince.init(50, 87, Direction::Left, Stance::Crouch_3_End, 3);     // Column of climbs
-    // prince.init(80, 25, Direction::Right, Stance::Crouch_3_End, 3);     // Top Left
-    // prince.init(18, 25, Direction::Right,Stance:: Crouch_3_End, 3);          // Long Fall
-    // prince.init(18, 56, Direction::Right, Stance::Crouch_3_End, 3);          // problem
-    // prince.init(98, 87, Direction::Left, Stance::Crouch_3_End, 3);          // At bottom of tthree level drop.
-
-
     gamePlay.restartLevel(arduboy);
-    
-    // level.init(prince, 50, 0);  // Upper Gate
-    // level.init(prince, 40, 3);  // Under collapsible floor
-    // level.init(prince, 80, 3);  // Exit Seq
-    // level.init(prince, 60, 0);  // Normal starting posa
-    // level.init(prince, 20, 3);  // Both floor types
-    // level.init(prince, 60, 0);  //Normal starting pos but next to drop floor 3rd floor
-    level.init(prince, 50, 3);  // Under collapsible floor
-    // level.init(prince, Constants::TileHeight, 0);   // Get tonic
-    // level.init(prince, 0, 3);   // Column of climbs
-    // level.init(prince, 0, 0);   // Top left
-    // level.init(prince, 40, 4);  // Long Fall
-    // level.init(prince, 60, 3);  // problem
-    // level.init(prince, 30, 6); // At bottom of tthree level drop.
+    game_PositionChars();
 
     gamePlay.gameState = GameState::Game;
     menu.init();

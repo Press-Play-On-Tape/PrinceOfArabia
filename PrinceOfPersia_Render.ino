@@ -110,9 +110,11 @@ void render(bool enemyIsVisible) {
 
     uint16_t stance = prince.getStance();
     uint16_t imageIndex = static_cast<uint16_t>(pgm_read_byte(&Constants::StanceToImageXRef[stance]));
-    uint24_t startPos = Images::Prince_Left_001 + ((imageIndex - 1) * static_cast<uint24_t>(364));
+    uint24_t startPos = 0;
 
     if (imageIndex != 0) {
+
+        startPos = Images::Prince_Left_001 + ((imageIndex - 1) * static_cast<uint24_t>(364));
 
         #if defined(DEBUG) && defined(DEBUG_PRINCE_RENDERING)
         DEBUG_PRINT(F("Stance: "));
@@ -121,28 +123,25 @@ void render(bool enemyIsVisible) {
         DEBUG_PRINTLN(imageIndex);
         #endif
 
-        if (prince.getDirection() == Direction::Left) {
+        if (prince.getDirection() != Direction::Left) {
             
-            FX::drawBitmap(prince.getXImage(), prince.getYImage() - level.getYOffset() + Constants::ScreenTopOffset, startPos, 0, dbmMasked);
+            startPos = startPos + Constants::LeftRightOffset;
 
         }
-        else {
 
-            FX::drawBitmap(prince.getXImage(), prince.getYImage() - level.getYOffset() + Constants::ScreenTopOffset, startPos + (Images::Prince_Right_001 - Images::Prince_Left_001), 0, dbmMasked);
-
-        }
+        FX::drawBitmap(prince.getXImage(), prince.getYImage() - level.getYOffset() + Constants::ScreenTopOffset, startPos, 0, dbmMasked);
 
     }
-
 
 
     // Draw enemy ..
 
     stance = enemy.getStance();
     imageIndex = static_cast<uint16_t>(pgm_read_byte(&Constants::StanceToImageXRef[stance]));
-    startPos = Images::Prince_Left_001 + ((imageIndex - 1) * static_cast<uint24_t>(364));
 
     if (imageIndex != 0) {
+
+        startPos = Images::Prince_Left_001 + ((imageIndex - 1) * static_cast<uint24_t>(364));
 
         #if defined(DEBUG) && defined(DEBUG_PRINCE_RENDERING)
         DEBUG_PRINT(F("Stance: "));
@@ -151,17 +150,13 @@ void render(bool enemyIsVisible) {
         DEBUG_PRINTLN(imageIndex);
         #endif
 
-        if (enemy.getDirection() == Direction::Left) {
+        if (enemy.getDirection() != Direction::Left) {
             
-            FX::drawBitmap(enemy.getXImage() - (level.getXLocation() * Constants::TileWidth), enemy.getYImage() - (level.getYLocation() * Constants::TileHeight) - level.getYOffset() + Constants::ScreenTopOffset, startPos, 0, dbmMasked);
-
-        }
-        else {
-
-            FX::drawBitmap(enemy.getXImage() - (level.getXLocation() * Constants::TileWidth), enemy.getYImage() - (level.getYLocation() * Constants::TileHeight)- level.getYOffset() + Constants::ScreenTopOffset, startPos + (Images::Prince_Right_001 - Images::Prince_Left_001), 0, dbmMasked);
+            startPos = startPos + Constants::LeftRightOffset;
 
         }
 
+        FX::drawBitmap(enemy.getXImage() - (level.getXLocation() * Constants::TileWidth), enemy.getYImage() - (level.getYLocation() * Constants::TileHeight)- level.getYOffset() + Constants::ScreenTopOffset, startPos, 0, dbmMasked);
     }
 
 
@@ -261,10 +256,8 @@ void render(bool enemyIsVisible) {
 
     if (!enemyIsVisible) {
     
-        FX::drawBitmap(123, 47, Images::Number_Small_00 + ((gamePlay.timer_Min / 10) * 9), 0, dbmNormal);
-        FX::drawBitmap(123, 51, Images::Number_Small_00 + ((gamePlay.timer_Min % 10) * 9), 0, dbmNormal);
-        FX::drawBitmap(123, 57, Images::Number_Small_00 + ((gamePlay.timer_Sec / 10) * 9), 0, dbmNormal);
-        FX::drawBitmap(123, 61, Images::Number_Small_00 + ((gamePlay.timer_Sec % 10) * 9), 0, dbmNormal);
+        renderNumber_Small(123, 47, gamePlay.timer_Min);
+        renderNumber_Small(123, 57, gamePlay.timer_Sec);
 
         if (prince.getSword()) {
             FX::drawBitmap(123, 40, Images::Sword_HUD, 0, dbmNormal);
@@ -319,8 +312,7 @@ void render(bool enemyIsVisible) {
 
             case 1 ... 80:
                 FX::drawBitmap(23, y, Images::TimeRemaining, 0, dbmMasked);
-                FX::drawBitmap(29, y + 5, Images::Number_Upright_00 + ((gamePlay.timer_Min / 10) * 7), 0, dbmNormal);
-                FX::drawBitmap(33, y + 5, Images::Number_Upright_00 + ((gamePlay.timer_Min % 10) * 7), 0, dbmNormal);
+                renderNumber_Upright(29, y + 5, gamePlay.timer_Min);
                 break;
 
         }
@@ -354,12 +346,36 @@ void renderMenu() {
     FX::drawBitmap(menu.x, 0, Images::Menu, 0, dbmNormal);
     FX::drawBitmap(menu.x + 3, 22 + (menu.cursor * 10), Images::Sword_Cursor, 0, dbmNormal);
 
-    FX::drawBitmap(menu.x + 27, 3, Images::Number_00 + ((gamePlay.level / 10) * 9), 0, dbmNormal);
-    FX::drawBitmap(menu.x + 33, 3, Images::Number_00 + ((gamePlay.level % 10) * 9), 0, dbmNormal);
+    renderNumber(menu.x + 27, 3, gamePlay.level);
+    renderNumber(menu.x + 7, 13, gamePlay.timer_Min);
+    renderNumber(menu.x + 24, 13, gamePlay.timer_Sec);
 
-    FX::drawBitmap(menu.x + 07, 13, Images::Number_00 + ((gamePlay.timer_Min / 10) * 9), 0, dbmNormal);
-    FX::drawBitmap(menu.x + 13, 13, Images::Number_00 + ((gamePlay.timer_Min % 10) * 9), 0, dbmNormal);
-    FX::drawBitmap(menu.x + 24, 13, Images::Number_00 + ((gamePlay.timer_Sec / 10) * 9), 0, dbmNormal);
-    FX::drawBitmap(menu.x + 30, 13, Images::Number_00 + ((gamePlay.timer_Sec % 10) * 9), 0, dbmNormal);
+}
+
+void renderNumber(uint8_t x, uint8_t y, uint8_t number) {
+
+    FX::drawBitmap(x, y, Images::Number_00 + ((number / 10) * 9), 0, dbmNormal);
+    FX::drawBitmap(x + 6, y, Images::Number_00 + ((number % 10) * 9), 0, dbmNormal);
+
+}
+
+void renderNumber_Small(uint8_t x, uint8_t y, uint8_t number) {
+
+    FX::drawBitmap(x, y, Images::Number_Small_00 + ((number / 10) * 9), 0, dbmNormal);
+    FX::drawBitmap(x, y + 4, Images::Number_Small_00 + ((number % 10) * 9), 0, dbmNormal);
+
+}
+
+void renderNumber_Upright(uint8_t x, uint8_t y, uint8_t number) {
+
+    FX::drawBitmap(x, y, Images::Number_Upright_00 + ((number / 10) * 9), 0, dbmNormal);
+    FX::drawBitmap(x + 4, y, Images::Number_Upright_00 + ((number % 10) * 9), 0, dbmNormal);
+
+}
+
+void renderTorches(uint8_t x1, uint8_t x2, uint8_t y) {
+
+    FX::drawBitmap(x1, y, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
+    FX::drawBitmap(x2, y, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
 
 }
