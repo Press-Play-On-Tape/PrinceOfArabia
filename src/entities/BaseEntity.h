@@ -254,33 +254,31 @@ class BaseEntity {
 
         bool isFootDown() {
 
-            uint8_t imageIndex = static_cast<uint8_t>(pgm_read_byte(&Constants::StanceToImageXRef[this->stance]));
-            uint16_t pos = (imageIndex - 1) * 3;
-            int8_t footToe = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 1]));
-
-            return (footToe != Constants::InAir && footToe != Constants::InAir_DoNotFall);
+            ImageDetails imageDetails;
+            this->getImageDetails(imageDetails);
+            return (abs(imageDetails.toe) != Constants::InAir && imageDetails.toe != Constants::InAir_DoNotFall);
 
         }
 
         bool inAir() {
 
-            uint8_t imageIndex = static_cast<uint8_t>(pgm_read_byte(&Constants::StanceToImageXRef[this->stance]));
-            uint16_t pos = (imageIndex - 1) * 3;
-            int8_t footToe = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 1]));
-
-            return (footToe == Constants::InAir);
+            ImageDetails imageDetails;
+            this->getImageDetails(imageDetails);
+            return (abs(imageDetails.toe) == Constants::InAir);
 
         }
 
         void getImageDetails(ImageDetails &imageDetails) {
 
             uint8_t imageIndex = static_cast<uint8_t>(pgm_read_byte(&Constants::StanceToImageXRef[this->stance]));
-            uint16_t pos = (imageIndex - 1) * 3;
+            uint24_t startPos = static_cast<uint24_t>(Constants::Prince_ImageDetails + ((imageIndex - 1) * 3));
             int8_t direction = this->getDirection() == Direction::Left ? -1 : 1;
 
-            imageDetails.reach = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos])) * direction;
-            imageDetails.toe = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 1])) * direction;
-            imageDetails.heel = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_ImageDetails[pos + 2])) * direction;
+            FX::seekData(startPos);
+            imageDetails.reach = static_cast<int8_t>(FX::readByte() * direction);
+            imageDetails.toe = static_cast<int8_t>(FX::readByte() * direction);
+            imageDetails.heel = static_cast<int8_t>(FX::readByte() * direction);
+            FX::readEnd();
 
         }
 
