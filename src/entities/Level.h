@@ -649,7 +649,6 @@ struct Level {
 
                     for (uint8_t x = 0; x < 16; x++) {
                         
-                        // bg[y - this->yLoc + 1][x] = TILE_FG_WALL_1;
                         bg[y - this->yLoc + 1][x] = TILE_NONE;
 
                     }
@@ -657,7 +656,6 @@ struct Level {
                 }
                 else {
 
-                    // if (y == 0 && this->xLoc == 0) {
                     if (this->xLoc == 0) {
 
                         FX::seekData(static_cast<uint24_t>(Levels::Level1_BG + (y * Levels::Level1_Width) + this->xLoc));
@@ -666,7 +664,6 @@ struct Level {
 
                             if (x < 3) {
 
-                                // bg[y - this->yLoc + 1][x] = TILE_FG_WALL_1;
                                 bg[y - this->yLoc + 1][x] = TILE_NONE;
 
                             }
@@ -717,7 +714,6 @@ struct Level {
                 }
                 else {
 
-                    // if (y == 0 && this->xLoc == 0) {
                     if (this->xLoc == 0) {
 
                         FX::seekData(static_cast<uint24_t>(Levels::Level1_FG + (y * Levels::Level1_Width) + this->xLoc));
@@ -825,11 +821,6 @@ struct Level {
                 case TILE_FLOOR_LH_END_PATTERN_1:
                 case TILE_FLOOR_LH_END_PATTERN_2:
                 case TILE_FLOOR_RH_END:
-                // case TILE_FLOOR_RH_END_1:
-                // case TILE_FLOOR_RH_END_2:
-                // case TILE_FLOOR_RH_END_3:        
-                // case TILE_FLOOR_RH_END_4:
-                // case TILE_FLOOR_RH_END_5:
                 case TILE_FLOOR_RH_END_GATE:
                 case TILE_FLOOR_LH_WALL_1:
                 case TILE_FLOOR_LH_WALL_2:
@@ -1252,7 +1243,6 @@ struct Level {
                                             #endif
                                             
                                             WallTileResults wallTile = this->isWallTile(bgTile2, fgTile2, tileXIdx, tileYIdx, Direction::Left);
-                                            // return (wallTile == WallTileResults::None && (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2)));  SJH
                                             return (wallTile == WallTileResults::None);
                                         }
                                         return false;
@@ -1276,7 +1266,6 @@ struct Level {
                                             #endif
 
                                             WallTileResults wallTile = this->isWallTile(bgTile2, fgTile2, tileXIdx, tileYIdx, Direction::Left);
-                                            // return (wallTile == WallTileResults::None && (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2))); SJH
                                             return (wallTile == WallTileResults::None);
                                         }
                                         return false;
@@ -1344,39 +1333,10 @@ struct Level {
 
                                     switch (distToEdgeOfCurrentTile) {
 
-                                        case 0 ... 5:
+                                        case 0 ... 6:
 
-                                            switch (wallTile) { // SJH below could be changed to (return wallTile == WallTileResults::None;)
-
-                                                case WallTileResults::None:
-                                                    // return (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2));  SJH
-                                                    return true;
-
-                                                case WallTileResults::Normal:
-                                                case WallTileResults::GateClosed:
-                                                    return false;
-                                                
-                                            }
-
-                                            return false;
-
-                                        case 6:
-
-                                            switch (wallTile) { // SJH below could be changed to (return wallTile != WallTileResults::GateClosed;)
-
-                                                case WallTileResults::None:
-                                                // case WallTileResults::Normal:
-                                                    // return (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2));  //SJH
-                                                    return true;
-
-                                                case WallTileResults::Normal:
-                                                case WallTileResults::GateClosed:
-                                                    return false;
-                                                
-                                            }
-
-                                            return false;
-
+                                            return wallTile == WallTileResults::None;
+                                            
                                         default:
 
                                             return true;
@@ -1400,35 +1360,11 @@ struct Level {
 
                                         case 0 ... 9:
 
-                                            switch (wallTile) { // SJH below could be changed to (return wallTile == WallTileResults::None;)
-
-                                                case WallTileResults::None:
-                                                    // return (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2)); // SJH
-                                                    return true;
-
-                                                case WallTileResults::Normal:
-                                                case WallTileResults::GateClosed:
-                                                    return false;
-                                                
-                                            }
-
-                                            return false;
+                                            return wallTile == WallTileResults::None;
 
                                         case 10:
 
-                                            switch (wallTile) { // SJH below could be changed to (return wallTile != WallTileResults::GateClosed;)
-
-                                                case WallTileResults::None:
-                                                case WallTileResults::Normal:
-                                                    // return (this->isGroundTile(bgTile2, fgTile2) || this->canFall(bgTile2, fgTile2));  //SJH
-                                                    return true;
-
-                                                case WallTileResults::GateClosed:
-                                                    return false;
-                                                
-                                            }
-
-                                            return false;
+                                            return wallTile != WallTileResults::GateClosed;
                                             
                                         default:
                                             return true;
