@@ -5,6 +5,7 @@
 #include "fxdata/Levels.h"  
 
 #include "src/utils/Constants.h"
+#include "src/utils/Enums.h"
 #include "src/utils/Stack.h"
 #include "src/utils/FadeEffects.h"
 #include "src/entities/Entities.h"

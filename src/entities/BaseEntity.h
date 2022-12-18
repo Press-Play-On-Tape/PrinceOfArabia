@@ -256,7 +256,7 @@ class BaseEntity {
 
             ImageDetails imageDetails;
             this->getImageDetails(imageDetails);
-            return (abs(imageDetails.toe) != Constants::InAir && imageDetails.toe != Constants::InAir_DoNotFall);
+            return (imageDetails.toe != Constants::InAir && imageDetails.toe != Constants::InAir_DoNotFall);
 
         }
 
@@ -264,7 +264,7 @@ class BaseEntity {
 
             ImageDetails imageDetails;
             this->getImageDetails(imageDetails);
-            return (abs(imageDetails.toe) == Constants::InAir);
+            return (imageDetails.toe == Constants::InAir);
 
         }
 
@@ -279,6 +279,9 @@ class BaseEntity {
             imageDetails.toe = static_cast<int8_t>(FX::readByte() * direction);
             imageDetails.heel = static_cast<int8_t>(FX::readByte() * direction);
             FX::readEnd();
+
+            if (imageDetails.toe == -Constants::InAir)              imageDetails.toe = Constants::InAir;
+            if (imageDetails.toe == -Constants::InAir_DoNotFall)    imageDetails.toe = Constants::InAir_DoNotFall;
 
         }
 

@@ -4,12 +4,12 @@
 #define DEBUG_PRINT    Serial.print
 #define DEBUG_PRINTLN  Serial.println
 #define SAVE_MEMORY_USB
-#define _SAVE_MEMORY_OTHER
-#define _SAVE_MEMORY_SOUND
+#define SAVE_MEMORY_OTHER
+#define SAVE_MEMORY_SOUND
 #define _ALT_B_BUTTON
 
-#define _DEBUG
-#define _DEBUG_ONSCREEN_DETAILS
+#define DEBUG
+#define DEBUG_ONSCREEN_DETAILS
 #define _DEBUG_ONSCREEN_DETAILS_MIN
 
 #define _DEBUG_PRINCE_DETAILS
@@ -238,7 +238,7 @@ constexpr uint16_t Small_Step_6_End                              = Stance::Small
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /* 120 - 133     x: 0, y: 0                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define JUMP_UP_A_SEQ                                            90,    91,    92,    93,    94,    95,    96,    97,    98,    99,    100,   101,   102,   103,
-#define JUMP_UP_A_OFFSETS                                        0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,                                             
+#define JUMP_UP_A_OFFSETS                                        0,0,   0,0,   0,0,   -1,0,  -1,0,  0,0,   0,0,   0,0,   0,0,   1,0,   1,0,   0,0,   0,0,   0,0,                                             
 constexpr uint16_t Jump_Up_A_1_Start                             = Stance::Small_Step_6_End + 1; 
 constexpr uint16_t Jump_Up_A_2                                   = Stance::Jump_Up_A_1_Start + 1;
 constexpr uint16_t Jump_Up_A_3                                   = Stance::Jump_Up_A_2 + 1;
@@ -313,7 +313,7 @@ constexpr uint16_t Jump_Up_Drop_C_5_End                          = Stance::Jump_
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /* 163 - 177    x: 4, y: -31                                     01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define STEP_CLIMBING_SEQ                                        75,    76,    77,    78,    79,    80,    81,    82,    83,    84,    85,    86,    87,    88,    89,  
-#define STEP_CLIMBING_OFFSETS                                    0,-4,  0,-4,  0,-2,  0,-3,  0,-2,  0,-3,  0,-4,  0,-4,  0,-1,  1,-3,  1,-1,  0,0,   1,0,   1,0,   0,0, 
+#define STEP_CLIMBING_OFFSETS                                    0,-4,  0,-4,  0,-2,  0,-3,  0,-3,  0,-3,  0,-4,  0,-4,  0,-1,  1,-1,  1,0,   0,-1,  1,-1,  1,0,   0,0, 
 constexpr uint16_t Step_Climbing_1_Start                         = Stance::Jump_Up_Drop_C_5_End + 1;  // Climb up / down from a ledge (second part)
 constexpr uint16_t Step_Climbing_2                               = Stance::Step_Climbing_1_Start + 1;
 constexpr uint16_t Step_Climbing_3                               = Stance::Step_Climbing_2 + 1;
@@ -852,147 +852,3 @@ namespace Constants {
 
 
 }
-
-enum GameState : uint8_t {
-	SplashScreen_Init,
-	SplashScreen,
-	Title_Init,
-	Title,
-	Game_Init,
-	Game,
-    Game_StartLevel,
-    Game_Over,
-    #ifndef SAVE_MEMORY_OTHER
-    Menu,
-    #endif
-};
-
-enum class Direction : uint8_t {
-    None,
-    Left,
-    Right,
-    Up,
-    Down,
-    Forward,
-    Back,
-};
-
-enum class Layer : uint8_t {
-    Background,
-    Foreground,
-};
-
-enum class Action : uint8_t {
-    Step,
-    SmallStep,
-    RunStart,
-    RunRepeat,
-    RunJump_3,
-    RunJump_2,
-    RunJump_1,
-    StandingJump,
-    CrouchHop,
-};
-
-enum class CanJumpUpResult : uint8_t {
-    None,
-    Jump,
-    StepThenJump,
-    JumpThenFall,
-    TurnThenJump,
-    JumpDist10,
-    JumpThenFall_CollapseFloor,             
-    StepThenJumpThenFall_CollapseFloor,     
-    JumpThenFall_CollapseFloorAbove,        
-};
-
-enum class CanClimbDownResult : uint8_t {
-    None,
-    ClimbDown,
-    StepThenClimbDown,
-    TurnThenClimbDown,
-    StepThenTurnThenClimbDown,
-};
-
-enum class CanClimbDownPart2Result : uint8_t {
-    None,
-    Level_1,
-    Falling,
-    Level_1_Under,
-};
-
-enum class StandingJumpResult : uint8_t {
-    None,
-    Normal,
-    DropLevel,
-};
-
-enum class RunningJumpResult : uint8_t {
-    None,
-    Normal,
-    Jump4_DropLevel,
-    Jump3_KeepLevel,
-    Jump3_DropLevel,
-};
-
-enum class ItemType : uint8_t {
-    /* 00 */ AnyItem,
-    /* 01 */ ExitDoor,
-    /* 02 */ Gate,               
-    /* 03 */ Sword,
-    /* 04 */ CollapsingFloor,
-    /* 05 */ CollpasedFloor,
-    /* 06 */ Potion_Small,
-    /* 07 */ FloorButton1,
-    /* 08 */ FloorButton2,
-    /* 09 */ Skeleton,
-    /* 10 */ Spikes,
-    /* 96 */ None = 96,
-    /* 97 */ LoveHeart = 97,
-    /* 98 */ Sign = 98,
-    /* 99 */ Flash = 99,
-};
-
-enum class MenuOption : uint8_t {
-    Resume,
-    Save,
-    Load,
-    MainMenu,
-};
-
-enum class TitleScreenOptions : uint8_t {
-    Play,
-    Credits, 
-};
-
-enum class TitleScreenMode : uint8_t {
-    Intro,
-    Main,
-    Credits, 
-    IntroGame_1A,
-    CutScene_1,
-    IntroGame_1B,
-    CutScene_2,
-    CutScene_3,
-    CutScene_4,
-    CutScene_5,
-    CutScene_9,
-    IntroGame_9,
-};
-
-enum class WallTileResults : uint8_t {
-    None,
-    Normal,
-    GateClosed, 
-};
-
-enum class SignType : uint8_t {
-    PressA,
-    GameOver,
-};
-
-enum class FlashType : uint8_t {
-    None,
-    SwordFight,
-};
-
