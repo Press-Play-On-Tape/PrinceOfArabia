@@ -1,4 +1,5 @@
 #include "src/utils/Arduboy2Ext.h"
+#include "src/ArduboyTonesFX.h"
 #include <ArduboyFX.h>  
 #include "fxdata/Images.h"  
 #include "fxdata/Levels.h"  
@@ -16,6 +17,11 @@ ARDUBOY_NO_USB
 #endif
 
 Arduboy2Ext arduboy;
+
+#ifndef SAVE_MEMORY_SOUND
+    uint16_t buffer[16]; 
+    ArduboyTonesFX sound(arduboy.audio.enabled, buffer);
+#endif
 
 #if (defined(DEBUG) && defined(DEBUG_ONSCREEN_DETAILS)) or (defined(DEBUG) && defined(DEBUG_ONSCREEN_DETAILS_MIN))
     Font3x5 font3x5 = Font3x5();
@@ -39,9 +45,11 @@ void setup() {
 
     arduboy.boot();
     arduboy.display();
-    arduboy.flashlight();
     arduboy.systemButtons();
-    // arduboy.audio.begin();
+
+    #ifndef SAVE_MEMORY_SOUND
+        arduboy.audio.begin();
+    #endif
 
     arduboy.setFrameRate(Constants::FrameRate);
 
@@ -65,6 +73,10 @@ void loop() {
     if (!arduboy.nextFrame()) return; 
     arduboy.pollButtons();
 
+    #ifndef SAVE_MEMORY_SOUND
+        sound.fillBufferFromFX();
+    #endif
+
     switch (gamePlay.gameState) {
 
         #ifndef SAVE_MEMORY_OTHER
@@ -82,10 +94,16 @@ void loop() {
 
             case GameState::Title_Init:
 
-                gamePlay.gameState = GameState::Title;
+                #ifndef SAVE_MEMORY_SOUND
+                    sound.tonesFromFX(Sounds::Theme);
+                #endif
+
                 #ifndef SAVE_MEMORY_OTHER
                     fadeEffect.complete();
                 #endif
+
+                gamePlay.gameState = GameState::Title;
+                
                 title_Init();
                 title();
                 break;
@@ -99,9 +117,14 @@ void loop() {
 
         case GameState::Game_Init:
 
+            #ifndef SAVE_MEMORY_SOUND
+                sound.noTone();
+            #endif
+            
             #ifndef SAVE_MEMORY_OTHER
                 fadeEffect.reset();
             #endif
+
             game_Init();
             game();
             break;

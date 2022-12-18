@@ -168,7 +168,7 @@ void initFlash(Prince &prince, Level &level, FlashType flashType) {
 
     Item &flash = level.getItem(Constants::Item_Flash);
     flash.itemType = ItemType::Flash;
-    flash.data.flash.frame = 5;
+    flash.data.flash.frame = 7;
     flash.data.flash.type = flashType;
     flash.x = level.coordToTileIndexX(prince.getX()) + level.getXLocation();
     flash.y = level.coordToTileIndexY(prince.getY()) + level.getYLocation(); 
@@ -261,7 +261,7 @@ bool leaveLevel(Prince &prince, Level &level) {
 
             case Direction::Right:
 
-                prince.pushSequence(Stance::Leave_Gate_1_Start, Stance::Leave_Gate_14_End, true);
+                prince.pushSequence(Stance::Leave_Gate_01_Start, Stance::Leave_Gate_14_End, true);
                     
                 switch (level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX())) {
 
@@ -317,7 +317,7 @@ bool leaveLevel(Prince &prince, Level &level) {
 
             case Direction::Right:
 
-                prince.pushSequence(Stance::Leave_Gate_1_Start, Stance::Leave_Gate_14_End, true);
+                prince.pushSequence(Stance::Leave_Gate_01_Start, Stance::Leave_Gate_14_End, true);
                     
                 switch (level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX())) {
 

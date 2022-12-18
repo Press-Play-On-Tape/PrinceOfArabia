@@ -1,7 +1,7 @@
 {
-    "configuration": "core=arduboy-core,boot=org",
     "board": "arduboy-homemade:avr:arduboy",
     "output": "/Users/simonholmes/projects/build",
     "sketch": "PrinceOfPersia.ino",
-    "port": "/dev/tty.usbmodem14601"
+    "port": "/dev/tty.usbmodem14601",
+    "configuration": "core=arduboy-core,boot=org"
 }

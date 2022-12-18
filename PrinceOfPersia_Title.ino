@@ -5,18 +5,13 @@ void title_Init() {
     gamePlay.gameState = GameState::Title;
     titleScreenVars.reset();
 
-
-    // titleScreenVars.setMode(TitleScreenMode::CutScene_9, level);//SJH remove
-    // titleScreenVars.setMode(TitleScreenMode::CutScene_4, level);//SJH remove
-
-
 }
+
 
 void renderChamberBG() {
 
     FX::drawBitmap(0, 0, Images::Chambers_BG, 0, dbmNormal);
-    FX::drawBitmap(10, 37, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
-    FX::drawBitmap(114, 37, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
+    renderTorches(10, 114, 37);
 
 }
 
@@ -177,10 +172,12 @@ void title() {
             
             case TitleScreenMode::Credits:
                 
-                FX::drawBitmap(  7, 39, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
-                FX::drawBitmap( 14, 34, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
-                FX::drawBitmap(119, 39, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
-                FX::drawBitmap(112, 34, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
+                renderTorches(7, 119, 39);
+                renderTorches(14, 112, 34);
+                // FX::drawBitmap(  7, 39, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
+                // FX::drawBitmap( 14, 34, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
+                // FX::drawBitmap(119, 39, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
+                // FX::drawBitmap(112, 34, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
 
                 FX::drawBitmap(  0, 54, Images::Tile_Dungeon_12, 0, dbmNormal);
                 FX::drawBitmap( 12, 54, Images::Tile_Dungeon_13, 0, dbmNormal);
