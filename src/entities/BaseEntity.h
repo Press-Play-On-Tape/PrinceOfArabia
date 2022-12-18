@@ -256,7 +256,7 @@ class BaseEntity {
 
             ImageDetails imageDetails;
             this->getImageDetails(imageDetails);
-            return (imageDetails.toe != Constants::InAir && imageDetails.toe != Constants::InAir_DoNotFall);
+            return (abs(imageDetails.toe) != Constants::InAir && imageDetails.toe != Constants::InAir_DoNotFall);
 
         }
 
@@ -264,20 +264,20 @@ class BaseEntity {
 
             ImageDetails imageDetails;
             this->getImageDetails(imageDetails);
-            return (imageDetails.toe == Constants::InAir);
+            return (abs(imageDetails.toe) == Constants::InAir);
 
         }
 
         void getImageDetails(ImageDetails &imageDetails) {
 
             uint8_t imageIndex = static_cast<uint8_t>(pgm_read_byte(&Constants::StanceToImageXRef[this->stance]));
-            uint24_t startPos = Constants::Prince_ImageDetails + ((imageIndex - 1) * 3);
+            uint24_t startPos = static_cast<uint24_t>(Constants::Prince_ImageDetails + ((imageIndex - 1) * 3));
             int8_t direction = this->getDirection() == Direction::Left ? -1 : 1;
 
             FX::seekData(startPos);
-            imageDetails.reach = FX::readPendingInt8() * direction;
-            imageDetails.toe = FX::readPendingInt8() * direction;
-            imageDetails.heel = FX::readPendingInt8() * direction;
+            imageDetails.reach = static_cast<int8_t>(FX::readByte() * direction);
+            imageDetails.toe = static_cast<int8_t>(FX::readByte() * direction);
+            imageDetails.heel = static_cast<int8_t>(FX::readByte() * direction);
             FX::readEnd();
 
         }
