@@ -3,13 +3,13 @@
 
 #define DEBUG_PRINT    Serial.print
 #define DEBUG_PRINTLN  Serial.println
-#define SAVE_MEMORY_USB
+#define _SAVE_MEMORY_USB
 #define SAVE_MEMORY_OTHER
 #define SAVE_MEMORY_SOUND
 #define _ALT_B_BUTTON
 
-#define DEBUG
-#define DEBUG_ONSCREEN_DETAILS
+#define _DEBUG
+#define _DEBUG_ONSCREEN_DETAILS
 #define _DEBUG_ONSCREEN_DETAILS_MIN
 
 #define _DEBUG_PRINCE_DETAILS
@@ -24,7 +24,7 @@
 #define _DEBUG_ACTION_CANJUMPUP_PART2
 #define _DEBUG_ACTION_CANCLIMBDOWN
 #define _DEBUG_ACTION_CANCLIMBDOWN_PART2
-#define _DEBUG_ACTION_CANFALL
+#define DEBUG_ACTION_CANFALL
 #define _DEBUG_ACTION_CANFALLSOMEMORE
 #define _DEBUG_ACTION_COLLIDEWITHWALL
 #define _DEBUG_ACTION_RUNJUMP
@@ -728,7 +728,7 @@ namespace Constants {
     constexpr uint8_t Item_ExitDoor = 2;
     constexpr uint8_t Items_DynamicRange = 2;
     constexpr uint8_t Item_LoveHeart = 3;           // Inside dynamic range as only used in cut scenes..
-    constexpr uint8_t Items_Count = 42;
+    constexpr uint8_t Items_Count = 45;
    
 
     constexpr uint8_t FrameRate = 45;

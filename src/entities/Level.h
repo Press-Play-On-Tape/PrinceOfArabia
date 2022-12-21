@@ -455,25 +455,24 @@ struct Level {
 
         }
 
+        uint8_t getItem(ItemType itemType, int8_t x, int8_t y) {
+
+            return getItem(itemType, itemType, x, y);
+
+        }
+
 
         // Locate the itemType at x, y.  Return the index of the specified itemType
 
-        uint8_t getItem(ItemType itemType, int8_t x, int8_t y) {
+        uint8_t getItem(ItemType itemType_Start, ItemType itemType_End, int8_t x, int8_t y) {
 
             for (uint8_t i = Constants::Items_DynamicRange; i < Constants::Items_Count; i++) {
                 
                 Item &item = this->items[i];
 
-                if (itemType == ItemType::AnyItem) {
+                if (item.itemType >= itemType_Start && item.itemType <= itemType_End) {
 
                     if (item.itemType != ItemType::None && item.x == x && item.y == y) {
-                        return i;
-                    }
-
-                }
-                else {
-
-                    if (item.itemType != ItemType::None && (item.itemType == itemType) && (item.x == x) && (item.y == y)) {
                         return i;
                     }
 

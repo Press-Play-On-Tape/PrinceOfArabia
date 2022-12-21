@@ -94,6 +94,8 @@ namespace Constants {
         6, 6, 6, 6, 6,
     };
 
+
+
     int8_t Prince_ImageDetails[] = {
         3, 2, -4,
         4, -1, -5,
@@ -336,45 +338,46 @@ int8_t Level1_BG[] = {
 
 
     uint8_t Level1_Items[] = {
-        1, 84, 4, 82, 86,       // Exit Gate, let position for open, right position                                                        
-        2, 60, 0, 9, 32,        // Gate @ 60, 0 starting position 9 (top), falls in 32 frames.      
-        2, 56, 0, 0, 0,         // Gate @ 56, 0 starting position 9 (top), falls in 32 frames.      
-        6, 53, 2,               // Potion Small                              
-        7, 46, 3, 50, 3,        // Floor Button 1 (gateX, gateY)             
-        7, 52, 3, 50, 3,        // Floor Button 1 (gateX, gateY)             
-        2, 50, 3, 0, 0,         // Gate @ 50, 3 starting position 0 (bottom).
-        7, 47, 4, 40, 3,        // Floor Button (gateX, gateY)               
-        2, 40, 3, 0, 0,         // Gate @ 50, 3 starting position 0 (bottom).
-        7, 32, 3, 40, 3,        // Floor Button 1 (gateX, gateY)             
-        7, 27, 4, 20, 3,        // Floor Button 1 (gateX, gateY)             
-        8, 24, 4, 20, 3,        // Floor Button 2 (gateX, gateY)             
-        7, 13, 3, 20, 3,        // Floor Button 1 (gateX, gateY)             
-        2, 20, 3, 0, 0,         // Gate @ 50, 3 starting position 0 (bottom).
-        5, 64, 2,               // CollapsedTile                                                    
-        3, 2, 5,                // Sword
-        9, 3, 5,                // Skeleton
-        10, 53, 5, 1, 3,        // Spikes x,y, imageType = Fullview, RHS truncated, position
-        10, 54, 5, 2, 3,        // Spikes
-        10, 1, 8, 1, 3,         // Spikes
-        10, 2, 8, 2, 3,         // Spikes
-        10, 14, 5, 1, 3,        // Spikes
-        10, 15, 2, 1, 0,        // Spikes
-        10, 15, 7, 1, 0,        // Spikes
-        10, 37, 8, 1, 3,        // Spikes
-        10, 38, 8, 2, 3,        // Spikes
-        7, 56, 0, 60, 0,        // Floor Button 1 (gateX, gateY)
-        4, 35, 3, 55,           // CollapsingTile (dist to fall)                                    
-        4, 36, 3, 55,           // CollapsingTile (dist to fall)                                    
-        4, 25, 4, 117,          // CollapsingTile (dist to fall)                                    
-        4, 18, 2, 24,           // CollapsingTile (dist to fall)                                    
-        4, 33, 5, 24,           // CollapsingTile (dist to fall)                                    
-        4, 66, 2, 55,           // CollapsingTile (dist to fall, 24 + 31 + 31 ..)                   
-        4, 55, 2, 24,           // CollapsingTile (dist to fall, 24 + 31 + 31 ..)                   
-        4, 35, 1, 24,           // CollapsingTile (dist to fall)                                    
-        4, 36, 1, 24,           // CollapsingTile (dist to fall)                                    
-        4, 43, 4, 117,          // CollapsingTile (dist to fall)                                    
-        4, 11, 3, 24,           // CollapsingTile (dist to fall)                                    
-        4, 12, 3, 24,           // CollapsingTile (dist to fall)                                    
+        6, 84, 4, 82, 86,       // Exit Gate, let position for open, right position                                                        
+        7, 60, 0, 9, 32,        // Gate @ 60, 0 starting position 9 (top), falls in 32 frames.      
+        7, 56, 0, 0, 0,         // Gate @ 56, 0 starting position 9 (top), falls in 32 frames.      
+        10, 53, 2,               // Potion Small                              
+        2, 46, 3, 50, 3,        // Floor Button 1 (gateX, gateY)             
+        2, 52, 3, 50, 3,        // Floor Button 1 (gateX, gateY)             
+        7, 50, 3, 0, 0,         // Gate @ 50, 3 starting position 0 (bottom).
+        2, 47, 4, 40, 3,        // Floor Button (gateX, gateY)               
+        7, 40, 3, 0, 0,         // Gate @ 50, 3 starting position 0 (bottom).
+        2, 32, 3, 40, 3,        // Floor Button 1 (gateX, gateY)             
+        2, 27, 4, 20, 3,        // Floor Button 1 (gateX, gateY)             
+        3, 24, 4, 20, 3,        // Floor Button 2 (gateX, gateY)             
+        2, 13, 3, 20, 3,        // Floor Button 1 (gateX, gateY)             
+        3, 56, 0, 60, 0,        // Floor Button 2 (gateX, gateY)             
+        7, 20, 3, 0, 0,         // Gate @ 50, 3 starting position 0 (bottom).
+        9, 64, 2,               // CollapsedTile                                                    
+        8, 2, 5,                // Sword
+        5, 3, 5,                // Skeleton
+        4, 53, 5, 1, 3,        // Spikes x,y, imageType = Fullview, RHS truncated, position
+        4, 54, 5, 2, 3,        // Spikes
+        4, 1, 8, 1, 3,         // Spikes
+        4, 2, 8, 2, 3,         // Spikes
+        4, 14, 5, 1, 3,        // Spikes
+        4, 15, 2, 1, 0,        // Spikes
+        4, 15, 7, 1, 0,        // Spikes
+        4, 37, 8, 1, 3,        // Spikes
+        4, 38, 8, 2, 3,        // Spikes
+        2, 56, 0, 60, 0,        // Floor Button 1 (gateX, gateY)
+        1, 35, 3, 55,           // CollapsingTile (dist to fall)                                    
+        1, 36, 3, 55,           // CollapsingTile (dist to fall)                                    
+        1, 25, 4, 117,          // CollapsingTile (dist to fall)                                    
+        1, 18, 2, 24,           // CollapsingTile (dist to fall)                                    
+        1, 33, 5, 24,           // CollapsingTile (dist to fall)                                    
+        1, 66, 2, 55,           // CollapsingTile (dist to fall, 24 + 31 + 31 ..)                   
+        1, 55, 2, 24,           // CollapsingTile (dist to fall, 24 + 31 + 31 ..)                   
+        1, 35, 1, 24,           // CollapsingTile (dist to fall)                                    
+        1, 36, 1, 24,           // CollapsingTile (dist to fall)                                    
+        1, 43, 4, 117,          // CollapsingTile (dist to fall)                                    
+        1, 11, 3, 24,           // CollapsingTile (dist to fall)                                    
+        1, 12, 3, 24,           // CollapsingTile (dist to fall)                                    
         255                     // End
     }
 

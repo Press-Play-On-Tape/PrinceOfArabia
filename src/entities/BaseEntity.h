@@ -271,7 +271,7 @@ class BaseEntity {
         void getImageDetails(ImageDetails &imageDetails) {
 
             uint8_t imageIndex = static_cast<uint8_t>(pgm_read_byte(&Constants::StanceToImageXRef[this->stance]));
-            uint24_t startPos = static_cast<uint24_t>(Constants::Prince_ImageDetails + ((imageIndex - 1) * 3));
+            uint24_t startPos = static_cast<uint24_t>(Constants::Prince_ImageDetails + ((imageIndex - 1) * 3)) - 1;
             int8_t direction = this->getDirection() == Direction::Left ? -1 : 1;
 
             FX::seekData(startPos);

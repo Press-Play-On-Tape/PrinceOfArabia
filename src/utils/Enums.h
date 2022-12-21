@@ -84,21 +84,23 @@ enum class RunningJumpResult : uint8_t {
 };
 
 enum class ItemType : uint8_t {
-    /* 00 */ AnyItem,
-    /* 01 */ ExitDoor,
-    /* 02 */ Gate,               
-    /* 03 */ Sword,
-    /* 04 */ CollapsingFloor,
-    /* 05 */ CollpasedFloor,
-    /* 06 */ Potion_Small,
-    /* 07 */ FloorButton1,
-    /* 08 */ FloorButton2,
-    /* 09 */ Skeleton,
-    /* 10 */ Spikes,
+    /* 00 */ InteractiveItemType_Start,
+    /* 01 */ CollapsingFloor,
+    /* 02 */ FloorButton1,
+    /* 03 */ FloorButton2,
+    /* 04 */ Spikes,
+    /* 04 */ InteractiveItemType_End = Spikes,
+    /* 05 */ Skeleton,
+    /* 06 */ ExitDoor,
+    /* 07 */ Gate,               
+    /* 08 */ Sword,
+    /* 09 */ CollpasedFloor,
+    /* 10 */ Potion_Small,
     /* 96 */ None = 96,
     /* 97 */ LoveHeart = 97,
     /* 98 */ Sign = 98,
     /* 99 */ Flash = 99,
+    /* 99 */ AllItemTypes_End = Flash,
 };
 
 enum class MenuOption : uint8_t {
