@@ -22,11 +22,14 @@ void game_Init() {
 
 void game_PositionChars() {
 
-    // prince.init(38-24, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
+    prince.init(38-24, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
     // prince.init(38-24, 25, Direction::Right, Stance::Crouch_3_End, 3);          // Gate Issue
     // prince.init(38-24, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Sword Fight from Left
     // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3);          // Sword Fight from Right
-   enemy.init(104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
+
+    enemy.initCount(1);
+   enemy.init(0, 104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
+//   enemy.init(1, 104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
     // enemy.init(104 - 72 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Right, Stance::Upright, 3);          // Sword fight from Right
 
 //    prince.init(8+78+24, 25, Direction::Left, Stance::Crouch_3_End, 3);     // Double collapisble
@@ -49,11 +52,11 @@ void game_PositionChars() {
     // prince.init(18, 56, Direction::Right, Stance::Crouch_3_End, 3);          // problem
     // prince.init(98, 87, Direction::Left, Stance::Crouch_3_End, 3);          // At bottom of tthree level drop.
     // prince.init(98, 87, Direction::Left, Stance::Crouch_3_End, 3);          // At bottom of tthree level drop.
-    prince.init(18, 25, Direction::Right, Stance::Crouch_3_End, 3);          // Long Run
+    // prince.init(18, 25, Direction::Right, Stance::Crouch_3_End, 3);          // Long Run
 
 
 
-    // level.init(prince, 60, 0);  // Normal starting posa
+    level.init(prince, 60, 0);  // Normal starting posa
     // level.init(prince, 37, 3);  // gate issuee
     // level.init(prince, 60, 3);  // Fight from Left
     // level.init(prince, 70, 3);  // Fight from Right
@@ -76,7 +79,7 @@ void game_PositionChars() {
     // level.init(prince, 40, 4);  // Long Fall
     // level.init(prince, 60, 3);  // problem
     // level.init(prince, 30, 6); // At bottom of tthree level drop.
-    level.init(prince, 40, 0);  // Long run
+    // level.init(prince, 40, 0);  // Long run
 
 }
 
@@ -219,6 +222,8 @@ void game() {
 
     if (gamePlay.gameState == GameState::Game && enemy.isEmpty()) {
 
+        BaseEntity enemyBase = enemy.getActiveBase();
+
         int16_t xDelta = prince.getPosition().x - enemy.getPosition().x;
         int16_t yDelta = prince.getPosition().y - enemy.getPosition().y;
 
@@ -258,7 +263,7 @@ void game() {
 
                         case 0 ... Constants::StrikeDistance:
 
-                            if (level.canMoveForward(enemy, Action::SmallStep)) {
+                            if (level.canMoveForward(enemyBase, Action::SmallStep)) {
                                 enemy.push(Stance::Sword_Normal, false);
                             }
                             break;
@@ -285,7 +290,7 @@ void game() {
                                 // Otherwise creep forward ..
 
                                 default:
-                                    if (level.canMoveForward(enemy, Action::SmallStep)) {
+                                    if (level.canMoveForward(enemyBase, Action::SmallStep)) {
                                         enemy.pushSequence(Stance::Sword_Step_01_Start, Stance::Sword_Step_03_End, true);
                                     }
                                     break;
@@ -299,7 +304,7 @@ void game() {
 
                             // If the enemy and prince are far apart then the enemy should advance on the prince ..
 
-                            if (level.canMoveForward(enemy, Action::SmallStep)) {
+                            if (level.canMoveForward(enemyBase, Action::SmallStep)) {
                                 enemy.pushSequence(Stance::Sword_Step_01_Start, Stance::Sword_Step_03_End, true);
                             }
                             break;
@@ -322,12 +327,12 @@ void game() {
                 if (xDelta > 0 && enemy.getDirection() == Direction::Left){
 
                     enemy.setDirection(Direction::Right);
-                    moveBackwardsWithSword(enemy);
+                    moveBackwardsWithSword(enemyBase, enemy);
 
                     if (prince.getDirection() == Direction::Right) {
 
                         prince.setDirection(Direction::Left);
-                        moveBackwardsWithSword(prince);
+                        moveBackwardsWithSword(prince, prince);
 
                     }
 
@@ -338,12 +343,12 @@ void game() {
                 else if (xDelta < 0 && enemy.getDirection() == Direction::Right){
 
                     enemy.setDirection(Direction::Left);
-                    moveBackwardsWithSword(enemy);
+                    moveBackwardsWithSword(enemyBase, enemy);
 
                     if (prince.getDirection() == Direction::Left) {
 
                         prince.setDirection(Direction::Right);
-                        moveBackwardsWithSword(prince);
+                        moveBackwardsWithSword(prince, prince);
 
                     }
 
@@ -378,7 +383,7 @@ void game() {
                         }
                         else if (random(0, 12) == 0) {    
 
-                            moveBackwardsWithSword(enemy);
+                            moveBackwardsWithSword(enemyBase, enemy);
                             
                         } 
 
@@ -450,7 +455,7 @@ void game() {
 
                                     if (random(0, 16) == 0) {
 
-                                        if (level.canMoveForward(enemy, Action::SmallStep)) {
+                                        if (level.canMoveForward(enemyBase, Action::SmallStep)) {
                                             enemy.pushSequence(Stance::Sword_Step_01_Start, Stance::Sword_Step_03_End, true); //, Stance::Sword_Normal, true);
                                         }
 
@@ -469,7 +474,7 @@ void game() {
 
                                     // Advance on prince ..
 
-                                    if (level.canMoveForward(enemy, Action::SmallStep)) {
+                                    if (level.canMoveForward(enemyBase, Action::SmallStep)) {
                                        enemy.pushSequence(Stance::Sword_Step_01_Start, Stance::Sword_Step_03_End, true);
                                     }
 
@@ -1582,7 +1587,8 @@ void game() {
                             }
                             else {
 
-                                moveBackwardsWithSword(enemy);
+                                BaseEntity enemyBase = enemy.getActiveBase();
+                                moveBackwardsWithSword(enemyBase, enemy);
 
                             }
 
@@ -1784,7 +1790,7 @@ void game() {
                                     }
                                     else {
 
-                                        if (level.canMoveForward(enemy, Action::SmallStep, enemy.getOppositeDirection())) {
+                                        if (level.canMoveForward(enemy.getActiveBase(), Action::SmallStep, enemy.getOppositeDirection())) {
 
                                             prince.clear();
                                             prince.pushSequence(Stance::Sword_Step_03_End, Stance::Sword_Step_01_Start, Stance::Sword_Normal, false);
@@ -2156,19 +2162,19 @@ void game() {
 }
 
 
-void moveBackwardsWithSword(BaseEntity entity) { 
+void moveBackwardsWithSword(BaseEntity entity, BaseStack stack) { 
 
-    if (level.canMoveForward(entity, Action::Step, enemy.getOppositeDirection())) {
+    if (level.canMoveForward(entity, Action::Step, entity.getOppositeDirection())) {
 
-        entity.clear();
-        entity.pushSequence(Stance::Sword_Step_03_End, Stance::Sword_Step_01_Start, Stance::Sword_Normal, false);
-        entity.pushSequence(Stance::Sword_Step_03_End, Stance::Sword_Step_01_Start, false);
+        stack.clear();
+        stack.pushSequence(Stance::Sword_Step_03_End, Stance::Sword_Step_01_Start, Stance::Sword_Normal, false);
+        stack.pushSequence(Stance::Sword_Step_03_End, Stance::Sword_Step_01_Start, false);
 
     }
-    else if (level.canMoveForward(entity, Action::SmallStep, enemy.getOppositeDirection())) {
+    else if (level.canMoveForward(entity, Action::SmallStep, entity.getOppositeDirection())) {
 
-        entity.clear();
-        entity.pushSequence(Stance::Sword_Step_03_End, Stance::Sword_Step_01_Start, Stance::Sword_Normal, false);
+        stack.clear();
+        stack.pushSequence(Stance::Sword_Step_03_End, Stance::Sword_Step_01_Start, Stance::Sword_Normal, false);
 
     }
 

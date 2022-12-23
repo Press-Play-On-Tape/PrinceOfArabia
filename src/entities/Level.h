@@ -777,12 +777,12 @@ struct Level {
                             Item &item = this->getItem(idx);
 
                             if (item.data.gate.position == 0) {
-Serial.print("x ");
-Serial.print(x);
-Serial.print(", l ");
-Serial.print(this->getXLocation());
-Serial.print(", o ");
-Serial.println(offset);
+// Serial.print("x ");
+// Serial.print(x);
+// Serial.print(", l ");
+// Serial.print(this->getXLocation());
+// Serial.print(", o ");
+// Serial.println(offset);
                                 return WallTileResults::GateClosed;
 
                             }
@@ -1172,24 +1172,24 @@ Serial.println(offset);
 
         }
 
-        bool canMoveForward(BaseEntity &prince, Action action, Direction direction = Direction::None) {
+        bool canMoveForward(BaseEntity &entity, Action action, Direction direction = Direction::None) {
 
-            int8_t tileXIdx = this->coordToTileIndexX(prince.getPosition().x) - this->getXLocation();
-            int8_t tileYIdx = this->coordToTileIndexY(prince.getPosition().y) - this->getYLocation();
+            int8_t tileXIdx = this->coordToTileIndexX(entity.getPosition().x) - this->getXLocation();
+            int8_t tileYIdx = this->coordToTileIndexY(entity.getPosition().y) - this->getYLocation();
 
             if (direction == Direction::None) {
-                direction = prince.getDirection();
+                direction = entity.getDirection();
             }
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
             DEBUG_PRINTLN(F("------------------------------"));
             printAction(action);
             DEBUG_PRINT(F(" coordToTileIndexX "));
-            DEBUG_PRINT(prince.getPosition().x);
+            DEBUG_PRINT(entity.getPosition().x);
             DEBUG_PRINT(F(" = "));
             DEBUG_PRINT(tileXIdx);
             DEBUG_PRINT(F(", coordToTileIndexY "));
-            DEBUG_PRINT(prince.getPosition().y);
+            DEBUG_PRINT(entity.getPosition().y);
             DEBUG_PRINT(F(" = "));
             DEBUG_PRINTLN(tileYIdx);
             #endif
@@ -1203,7 +1203,7 @@ Serial.println(offset);
                         #endif
 
                         int8_t fgTile2 = this->getTile(Layer::Foreground, tileXIdx - 1, tileYIdx, TILE_FLOOR_BASIC);
-                        int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(direction, prince.getPosition().x);
+                        int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(direction, entity.getPosition().x);
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
                         int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
@@ -1297,7 +1297,7 @@ Serial.println(offset);
                         #endif
 
                         int8_t fgTile2 = this->getTile(Layer::Foreground, tileXIdx + 1, tileYIdx, TILE_FLOOR_BASIC);
-                        int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(direction, prince.getPosition().x);
+                        int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(direction, entity.getPosition().x);
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
                         int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
@@ -1928,30 +1928,30 @@ Serial.println(offset);
    
                         // WallTileResults, 0 None, 1 Normal, 2 GateClosed
 
-Serial.print("wt1: ");
-Serial.print(fgTile1_CurrLvl);
-Serial.print(" @ ");
-Serial.print(tileXIdx);
-Serial.print(",");
-Serial.print(tileYIdx);
-Serial.print(" = ");
-Serial.print((uint8_t)wallTile1_CurrLvl);
-Serial.print(" wt2: ");
-Serial.print(fgTile2_CurrLvl);
-Serial.print(" @ ");
-Serial.print(tileXIdx - 1);
-Serial.print(",");
-Serial.print(tileYIdx);
-Serial.print(" = ");
-Serial.print((uint8_t)wallTile2_CurrLvl);
-Serial.print(" wt3: ");
-Serial.print(fgTile3_CurrLvl);
-Serial.print(" @ ");
-Serial.print(tileXIdx - 2);
-Serial.print(",");
-Serial.print(tileYIdx);
-Serial.print(" = ");
-Serial.println((uint8_t)wallTile3_CurrLvl);                     
+// Serial.print("wt1: ");
+// Serial.print(fgTile1_CurrLvl);
+// Serial.print(" @ ");
+// Serial.print(tileXIdx);
+// Serial.print(",");
+// Serial.print(tileYIdx);
+// Serial.print(" = ");
+// Serial.print((uint8_t)wallTile1_CurrLvl);
+// Serial.print(" wt2: ");
+// Serial.print(fgTile2_CurrLvl);
+// Serial.print(" @ ");
+// Serial.print(tileXIdx - 1);
+// Serial.print(",");
+// Serial.print(tileYIdx);
+// Serial.print(" = ");
+// Serial.print((uint8_t)wallTile2_CurrLvl);
+// Serial.print(" wt3: ");
+// Serial.print(fgTile3_CurrLvl);
+// Serial.print(" @ ");
+// Serial.print(tileXIdx - 2);
+// Serial.print(",");
+// Serial.print(tileYIdx);
+// Serial.print(" = ");
+// Serial.println((uint8_t)wallTile3_CurrLvl);                     
                         bool isGroundTile2_CurrLvl = this->isGroundTile(bgTile2_CurrLvl, fgTile2_CurrLvl);
                         bool isGroundTile3_CurrLvl = this->isGroundTile(bgTile3_CurrLvl, fgTile3_CurrLvl);
                         bool isGroundTile2_NextLvl = this->isGroundTile(bgTile2_NextLvl, fgTile2_NextLvl);
@@ -1990,18 +1990,18 @@ Serial.println((uint8_t)wallTile3_CurrLvl);
 
                                     case WallTileResults::None:
                                     case WallTileResults::Normal:
-Serial.println("else normal");                                    
+// Serial.println("else normal");                                    
                                         return StandingJumpResult::Normal;
 
                                     case WallTileResults::GateClosed:
-Serial.println("else short");                                    
+// Serial.println("else short");                                    
                                         return StandingJumpResult::Short;
 
                                 }
 
                             }
                             else {
-Serial.println("else none");                                    
+// Serial.println("else none");                                    
 
                                 return StandingJumpResult::None;
 
@@ -2084,11 +2084,11 @@ Serial.println("else none");
 
                                     case 6:
                                     case 10:
-Serial.println(">>6 or 10");
+// Serial.println(">>6 or 10");
                                         return StandingJumpResult::DropLevel;
 
                                     default:
-Serial.println("default");
+// Serial.println("default");
                                         return (wallTile1_CurrLvl == WallTileResults::None && wallTile2_CurrLvl == WallTileResults::None ? StandingJumpResult::Normal : StandingJumpResult::None);
                                     
                                 }

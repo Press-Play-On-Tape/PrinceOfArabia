@@ -4,11 +4,17 @@
 #include "../utils/Constants.h"
 #include "../utils/Stack.h"
 #include "../entities/Structs.h"
+#include "BaseEntity.h"
+#include "BaseStack.h"
 
-struct Enemy : public BaseEntity {
+class Enemy : public BaseStack {
 
     private:
 
+        BaseEntity base[Constants::EnemyCount];
+
+        uint8_t count = 0;
+        uint8_t activeEnemy = 0;
         uint8_t moveCount = 0;
         Direction moveDirection = Direction::Forward;
 
@@ -26,14 +32,20 @@ struct Enemy : public BaseEntity {
             
         }
 
-        void init(int16_t x, int16_t y, Direction direction, uint16_t stance, uint8_t health) {
+        void initCount(uint8_t count) {
 
-            this->x = x;
-            this->y = y;
-            this->direction = direction;
-            this->stance = stance;
-            this->health = health;
-            this->healthMax = health;
+            this->count = count;
+
+        }
+
+        void init(uint8_t enemyID, int16_t x, int16_t y, Direction direction, uint16_t stance, uint8_t health) {
+
+            this->base[enemyID].setX(x);
+            this->base[enemyID].setY(y);
+            this->base[enemyID].setDirection(direction);
+            this->base[enemyID].setStance(stance);
+            this->base[enemyID].setHealth(health);
+            this->base[enemyID].setHealthMax(health);
 
         }
 
@@ -41,8 +53,133 @@ struct Enemy : public BaseEntity {
 
             this->stack->update();
 
-            this->location.x = this->x;
-            this->location.y = this->y;
+            for (uint8_t i = 0; i < Constants::EnemyCount; i++) {
+
+                this->base[i].getPosition().x = this->base[i].getX();
+                this->base[i].getPosition().y = this->base[i].getY();
+
+            }
+
+        }
+
+        uint16_t getStance()                        { return this->base[this->activeEnemy].getStance(); }
+        uint16_t getPrevStance()                    { return this->base[this->activeEnemy].getPrevStance(); }
+        int16_t getX()                              { return this->base[this->activeEnemy].getX(); }
+        int16_t getY()                              { return this->base[this->activeEnemy].getY(); }
+        int16_t getYPrevious()                      { return this->base[this->activeEnemy].getYPrevious(); }
+        int16_t getXImage()                         { return this->base[this->activeEnemy].getXImage(); }          
+        int16_t getYImage()                         { return this->base[this->activeEnemy].getYImage(); }
+        uint8_t getHealth()                         { return this->base[this->activeEnemy].getHealth(); }
+        uint8_t getHealthMax()                      { return this->base[this->activeEnemy].getHealthMax(); }
+
+        Direction getDirection()                    { return this->base[this->activeEnemy].getDirection(); }
+
+        void setStance(uint16_t val)                { this->base[this->activeEnemy].setStance(val); }
+        void setPrevStance(uint16_t val)            { this->base[this->activeEnemy].setPrevStance(val); }
+        void setX(int16_t val)                      { this->base[this->activeEnemy].setX(val); }
+        void setY(int16_t val)                      { this->base[this->activeEnemy].setY(val); }
+        void setYPrevious(int16_t val)              { this->base[this->activeEnemy].setYPrevious(val); }
+        void setDirection(Direction val)            { this->base[this->activeEnemy].setDirection(val); }
+        void setHealth(uint8_t val)                 { this->base[this->activeEnemy].setHealth(val); }
+        void setHealthMax(uint8_t val)              { this->base[this->activeEnemy].setHealthMax(val); }
+
+        uint8_t decHealth(uint8_t val)              { return this->base[this->activeEnemy].decHealth(val); }
+        void incHealth(int8_t val)                  { this->base[this->activeEnemy].incHealth(val); } 
+
+        Point &getPosition()                        { return this->base[this->activeEnemy].getPosition(); }
+
+        BaseEntity &getActiveBase() {
+
+            return this->base[this->activeEnemy];
+
+        }
+
+
+        // Point getPosition(int8_t x, int8_t y = 0)   { 
+            
+        //     Point newPoint;
+
+        //     newPoint.x = this->base[this->activeEnemy].getPosition().x + x;
+        //     newPoint.y = this->base[this->activeEnemy].getPosition().y + y;
+        //     return newPoint; 
+            
+        // }
+
+        Direction getOppositeDirection() {
+
+            switch (this->base[this->activeEnemy].getDirection()) {
+
+                case Direction::Left:       return Direction::Right;
+                case Direction::Right:      return Direction::Left;
+                default:                    return this->base[this->activeEnemy].getDirection();
+                
+            }
+            
+        }
+
+        int8_t getDirectionOffset(int8_t val) {
+
+            if (this->base[this->activeEnemy].getDirection() == Direction::Left) {
+                return -val;
+            }
+            else {
+                return val;
+            }
+            
+        }
+
+        void incX(int8_t inc) {
+
+            this->base[this->activeEnemy].setX(this->base[this->activeEnemy].getX() + inc);
+            
+        }
+
+        void incY(int8_t inc) {
+
+            this->base[this->activeEnemy].setYPrevious(this->base[this->activeEnemy].getY());
+            this->base[this->activeEnemy].setY(this->base[this->activeEnemy].getY() + inc);
+            
+        }
+
+        void changeDirection() {
+
+           this->base[this->activeEnemy].setDirection(this->base[this->activeEnemy].getDirection() == Direction::Left ? Direction::Right : Direction::Left);
+
+        }
+
+
+        // ----------------------------------------------------------------------------------------------------------
+
+        bool isFootDown() {
+
+            ImageDetails imageDetails;
+            this->getImageDetails(imageDetails);
+            return (imageDetails.toe != Constants::InAir && imageDetails.toe != Constants::InAir_DoNotFall);
+
+        }
+
+        bool inAir() {
+
+            ImageDetails imageDetails;
+            this->getImageDetails(imageDetails);
+            return (imageDetails.toe == Constants::InAir);
+
+        }
+
+        void getImageDetails(ImageDetails &imageDetails) {
+
+            uint8_t imageIndex = static_cast<uint8_t>(pgm_read_byte(&Constants::StanceToImageXRef[this->base[this->activeEnemy].getStance()]));
+            uint24_t startPos = static_cast<uint24_t>(Constants::Prince_ImageDetails + ((imageIndex - 1) * 3)) - 1;
+            int8_t direction = this->getDirection() == Direction::Left ? -1 : 1;
+
+            FX::seekData(startPos);
+            imageDetails.reach = static_cast<int8_t>(FX::readByte() * direction);
+            imageDetails.toe = static_cast<int8_t>(FX::readByte() * direction);
+            imageDetails.heel = static_cast<int8_t>(FX::readByte() * direction);
+            FX::readEnd();
+
+            if (imageDetails.toe == -Constants::InAir)              imageDetails.toe = Constants::InAir;
+            if (imageDetails.toe == -Constants::InAir_DoNotFall)    imageDetails.toe = Constants::InAir_DoNotFall;
 
         }
 

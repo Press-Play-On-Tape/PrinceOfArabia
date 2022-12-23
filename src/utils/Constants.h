@@ -6,7 +6,7 @@
 #define _SAVE_MEMORY_USB
 #define SAVE_MEMORY_OTHER
 #define SAVE_MEMORY_SOUND
-#define _ALT_B_BUTTON
+#define ALT_B_BUTTON
 
 #define _DEBUG
 #define _DEBUG_ONSCREEN_DETAILS
@@ -741,6 +741,7 @@ namespace Constants {
 
     constexpr uint24_t LeftRightOffset = (Images::Prince_Right_001 - Images::Prince_Left_001);
 
+    constexpr uint8_t EnemyCount = 5;
     constexpr uint8_t StackSize = 30;
     constexpr uint8_t StrikeDistance = 20;
     
