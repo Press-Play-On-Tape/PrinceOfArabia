@@ -20,10 +20,14 @@ class Enemy : public BaseStack {
 
     public:
 
+        uint8_t getEnemyCount()                     { return this->count; }
         uint8_t getMoveCount()                      { return this->moveCount; }
+        uint8_t getActiveEnemy()                    { return this->activeEnemy; }
         Direction getMoveDirection()                { return this->moveDirection; }
 
+        void setEnemyCount(uint8_t val)             { this->count = val; }
         void setMoveCount(uint8_t val)              { this->moveCount = val; }
+        void setActiveEnemy(uint8_t val)            { this->activeEnemy = val; }
         void setMoveDirection(Direction val)        { this->moveDirection = val; }
 
         void decMoveCount() {

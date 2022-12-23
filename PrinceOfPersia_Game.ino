@@ -27,8 +27,9 @@ void game_PositionChars() {
     // prince.init(38-24, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Sword Fight from Left
     // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3);          // Sword Fight from Right
 
-    enemy.initCount(1);
+    enemy.initCount(2);
    enemy.init(0, 104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
+   enemy.init(1, 60 + (50 * Constants::TileWidth), 25 + (3 * Constants::TileHeight), Direction::Right, Stance::Upright, 3);          // Sword fight from Left
 //   enemy.init(1, 104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
     // enemy.init(104 - 72 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Right, Stance::Upright, 3);          // Sword fight from Right
 
@@ -179,28 +180,50 @@ void game() {
 
 
 
-    // Is the prince within distance of the enemy?
+    // Is the prince within distance of the enemy (cycle through all enemies to find it any closest)?
 
     enemyIsVisible = false;
 
-    if (enemy.getHealth() > 0 || (enemy.getHealth() == 0 && enemy.getMoveCount() > 0)) {
+    if (enemy.isEmpty()) {
 
-        uint8_t tileXIdx = level.coordToTileIndexX(enemy.getPosition().x) + prince.getDirectionOffset(1);
-        uint8_t tileYIdx = level.coordToTileIndexY(enemy.getPosition().y) - 1;
+        uint8_t currentEnemy = enemy.getActiveEnemy();
 
-        if (tileXIdx >= level.getXLocation() && tileXIdx < level.getXLocation() + 10 && tileYIdx >= level.getYLocation() && tileYIdx < level.getYLocation() + 3) {
+        for (uint8_t i = 0; i < enemy.getEnemyCount(); i++) {
 
-            enemyIsVisible = true;
+            enemy.setActiveEnemy(i);
 
-        }
+            //if (enemy.getHealth() > 0 || (enemy.getHealth() == 0 && enemy.getMoveCount() > 0)) {
 
-        if  (enemy.getHealth() == 0 && enemy.getMoveCount() > 0) {
+                uint8_t tileXIdx = level.coordToTileIndexX(enemy.getPosition().x) + prince.getDirectionOffset(1);
+                uint8_t tileYIdx = level.coordToTileIndexY(enemy.getPosition().y);
 
-            enemy.decMoveCount();
+                if (tileXIdx >= level.getXLocation() && tileXIdx < level.getXLocation() + 10 && tileYIdx >= level.getYLocation() && tileYIdx < level.getYLocation() + 3) {
+
+                    enemyIsVisible = true;
+
+                }
+
+                if  (enemy.getHealth() == 0 && enemy.getMoveCount() > 0) {
+
+                    enemy.decMoveCount();
+
+                }
+
+                if (enemyIsVisible) break;
+
+            //}
+
+            if (!enemyIsVisible) enemy.setActiveEnemy(currentEnemy);
 
         }
 
     }
+    else {
+
+        enemyIsVisible = true;
+
+    }
+
 
 
     // If within distance, we can draw swords if we have one!
