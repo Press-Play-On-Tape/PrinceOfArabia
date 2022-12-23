@@ -39,7 +39,7 @@ void render(bool enemyIsVisible) {
 
     // Draw items ..
 
-    for (uint8_t i = Constants::Items_DynamicRange; i < Constants::Items_Count; i++) {
+    for (uint8_t i = 0; i < Constants::Items_Count; i++) {
 
         Item &item = level.getItem(i);
         int16_t xLoc = (item.x - level.getXLocation()) * Constants::TileWidth;
@@ -162,7 +162,7 @@ void render(bool enemyIsVisible) {
 
     // Draw items ..
 
-    for (uint8_t i = Constants::Items_DynamicRange; i < Constants::Items_Count; i++) {
+    for (uint8_t i = 0; i < Constants::Items_Count; i++) {
 
         Item &item = level.getItem(i);
         int16_t xLoc = (item.x - level.getXLocation()) * Constants::TileWidth;
@@ -220,14 +220,13 @@ void render(bool enemyIsVisible) {
     // Draw flash ..
 
     {
-        Item &item = level.getItem(Constants::Item_Flash);
+        Flash &item = level.getFlash();
         int16_t xLoc = (item.x - level.getXLocation()) * Constants::TileWidth;
         int16_t yLoc = ((item.y - level.getYLocation()) * Constants::TileHeight) - level.getYOffset() + Constants::ScreenTopOffset;
 
-        if (item.data.flash.frame > 0 && item.data.flash.frame < 5) {
+        if (item.frame > 0 && item.frame < 5) {
 
-
-            FX::drawBitmap(xLoc - 3, yLoc + 12, Images::Flash_00 + ((item.data.flash.frame - 1) * 136), 0, dbmMasked);
+            FX::drawBitmap(xLoc - 3, yLoc + 12, Images::Flash_00 + ((item.frame - 1) * 136), 0, dbmMasked);
 
         }
     
@@ -322,11 +321,11 @@ void render(bool enemyIsVisible) {
 
     // Game over / press A ..
 
-    Item sign = level.getItem(Constants::Item_Sign);
+    Sign sign = level.getSign();
 
-    if (sign.data.sign.counter == 1) {
+    if (sign.counter == 1) {
 
-        switch (sign.data.sign.type) {
+        switch (sign.type) {
 
             case SignType::GameOver:
                 FX::drawBitmap(sign.x, sign.y, Images::GameOver, 0, dbmMasked);

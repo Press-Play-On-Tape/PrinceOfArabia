@@ -33,7 +33,7 @@ void game_PositionChars() {
     // prince.init(78 + 24 + 12, 25 + 31 + 31, Direction::Left, Stance:: Crouch_3_End, 3);          // Spikes
     // prince.init(78 + 24, 25, Direction::Left, Stance:: Crouch_3_End, 3);          // Jump 2
     // prince.init(18, 25+31, Direction::Right,Stance:: Crouch_3_End, 3);          // Sword fight
-    prince.init(58, 25+31+31, Direction::Right, Stance::Crouch_3_End, 3);          // Second drink tonic
+    // prince.init(58, 25+31+31, Direction::Right, Stance::Crouch_3_End, 3);          // Second drink tonic
     // prince.init(66, 25, Direction::Right, Stance::Crouch_3_End, 3);          // Upper gate
     // prince.init(70, 25 + 31, Direction::Right, Stance::Crouch_3_End, 3);          // 2 leap
     // prince.init(14, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Exit Seq
@@ -49,6 +49,7 @@ void game_PositionChars() {
     // prince.init(18, 56, Direction::Right, Stance::Crouch_3_End, 3);          // problem
     // prince.init(98, 87, Direction::Left, Stance::Crouch_3_End, 3);          // At bottom of tthree level drop.
     // prince.init(98, 87, Direction::Left, Stance::Crouch_3_End, 3);          // At bottom of tthree level drop.
+    prince.init(18, 25, Direction::Right, Stance::Crouch_3_End, 3);          // Long Run
 
 
 
@@ -61,7 +62,7 @@ void game_PositionChars() {
     // level.init(prince, 10, 0);   // Spikes
     // level.init(prince, 30, 3);  // Jump 2
     // level.init(prince, 70, 3);  // Sword fight
-    level.init(prince, 50, 0);  // Second drink tonic
+    // level.init(prince, 50, 0);  // Second drink tonic
     // level.init(prince, 50, 0);  // Upper Gate
     // level.init(prince, 40, 3);  // 2 leap
     // level.init(prince, 80, 3);  // Exit Seq
@@ -75,6 +76,7 @@ void game_PositionChars() {
     // level.init(prince, 40, 4);  // Long Fall
     // level.init(prince, 60, 3);  // problem
     // level.init(prince, 30, 6); // At bottom of tthree level drop.
+    level.init(prince, 40, 0);  // Long run
 
 }
 
@@ -1321,7 +1323,7 @@ void game() {
                 case Stance::Jump_Up_Drop_A_4: // Ripple collapsible floors.
                 case Stance::Jump_Up_Drop_B_4: 
 
-                    for (uint8_t i = Constants::Items_DynamicRange; i < Constants::Items_Count; i++) {
+                    for (uint8_t i =0; i < Constants::Items_Count; i++) {
                         
                         Item &item = level.getItem(i);
 
@@ -1626,8 +1628,11 @@ void game() {
 
 
                 if (itemIdx != Constants::NoItemFound) {
-
+// Serial.print("fi ");
+// Serial.print(itemIdx);
                     Item &item = level.getItem(itemIdx);
+// Serial.print(", type ");
+// Serial.println((uint8_t)item.itemType);
 
                     switch (item.itemType) {
                         

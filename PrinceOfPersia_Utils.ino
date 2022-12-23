@@ -157,6 +157,10 @@ void processStandingJump(Prince &prince, Level &level) {
             prince.pushSequence(Stance::Standing_Jump_1_Start, Stance::Standing_Jump_18_End, Stance::Upright, true);
             break;
 
+        case StandingJumpResult::Short:
+            prince.pushSequence(Stance::Standing_Jump_Short_1_Start, Stance::Standing_Jump_Short_16_End, Stance::Upright, true);
+            break;
+        
         case StandingJumpResult::None:
             break;
 
@@ -166,10 +170,9 @@ void processStandingJump(Prince &prince, Level &level) {
 
 void initFlash(Prince &prince, Level &level, FlashType flashType) {
 
-    Item &flash = level.getItem(Constants::Item_Flash);
-    flash.itemType = ItemType::Flash;
-    flash.data.flash.frame = 7;
-    flash.data.flash.type = flashType;
+    Flash &flash = level.getFlash();
+    flash.frame = 7;
+    flash.type = flashType;
     flash.x = level.coordToTileIndexX(prince.getX()) + level.getXLocation();
     flash.y = level.coordToTileIndexY(prince.getY()) + level.getYLocation(); 
 
@@ -177,10 +180,9 @@ void initFlash(Prince &prince, Level &level, FlashType flashType) {
 
 void initFlash(Enemy &enemy, Level &level, FlashType flashType) {
 
-    Item &flash = level.getItem(Constants::Item_Flash);
-    flash.itemType = ItemType::Flash;
-    flash.data.flash.frame = 5;
-    flash.data.flash.type = flashType;
+    Flash &flash = level.getFlash();
+    flash.frame = 5;
+    flash.type = flashType;
     flash.x = level.coordToTileIndexX(enemy.getX());// + level.getXLocation();
     flash.y = level.coordToTileIndexY(enemy.getY());// + level.getYLocation(); 
 
@@ -377,19 +379,19 @@ void pushDead(Enemy &entity, bool clear) {
 
 void showSign(Prince &prince, Level &level, SignType signType, uint8_t counter) {
 
-    Item &sign = level.getItem(Constants::Item_Sign);
+    Sign &sign = level.getSign();
 
     switch (signType) {
 
         case SignType::GameOver:
-            sign.data.sign.counter = counter;
-            sign.data.sign.type = SignType::GameOver;
+            sign.counter = counter;
+            sign.type = SignType::GameOver;
             sign.x = 39;
             break;
 
         case SignType::PressA:
-            sign.data.sign.counter = counter;
-            sign.data.sign.type = SignType::PressA;
+            sign.counter = counter;
+            sign.type = SignType::PressA;
             sign.x = 24;
             break;
 

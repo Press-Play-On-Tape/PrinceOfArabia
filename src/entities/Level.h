@@ -73,6 +73,8 @@ struct Level {
 
         int8_t bg[5][16];
         int8_t fg[5][16];
+        Flash flash;
+        Sign sign;
         Item items[Constants::Items_Count];
 
     public:
@@ -81,6 +83,8 @@ struct Level {
         uint8_t getXLocation()                  { return this->xLoc; }
         uint8_t getYLocation()                  { return this->yLoc; }
         uint8_t getYOffset()                    { return this->yOffset; }
+        Flash &getFlash()                        { return this->flash; }
+        Sign &getSign()                         { return this->sign; }
         Item &getItem(uint8_t idx)              { return this->items[idx]; }
         Direction getYDirection()               { return this->yOffsetDir; }
 
@@ -181,27 +185,6 @@ struct Level {
                             }
 
                             break;
-
-                        case ItemType::Flash:
-
-                            if (item.data.flash.frame > 0) {
-
-                                if (arduboy.isFrameCount(2)) {
-                                        
-                                    item.data.flash.frame--;
-
-                                    if (item.data.flash.frame == 0) {
-
-                                        item.itemType = ItemType::None;
-
-                                    }
-                                        
-                                }
-
-                            }
-
-                            break;
-
 
                         case ItemType::Gate:
 
@@ -347,22 +330,35 @@ struct Level {
 
                             break;
 
-                        case ItemType::Sign:
-
-                            if (arduboy.isFrameCount(4)) {
-
-                                if (item.data.sign.counter > 1) {
-
-                                    item.data.sign.counter--;
-
-                                }
-
-                            }
-                            break;
-
                         default: break;
 
                     }
+
+                }
+
+            }
+
+            if (flash.frame > 0) {
+
+                if (arduboy.isFrameCount(2)) {
+
+                    if (flash.frame > 0) {
+                        
+                        flash.frame--;
+
+                    }
+                        
+                }
+
+            }
+
+
+
+            if (arduboy.isFrameCount(4)) {
+
+                if (sign.counter > 1) {
+
+                    sign.counter--;
 
                 }
 
@@ -466,7 +462,7 @@ struct Level {
 
         uint8_t getItem(ItemType itemType_Start, ItemType itemType_End, int8_t x, int8_t y) {
 
-            for (uint8_t i = Constants::Items_DynamicRange; i < Constants::Items_Count; i++) {
+            for (uint8_t i = 0; i < Constants::Items_Count; i++) {
                 
                 Item &item = this->items[i];
 
@@ -560,20 +556,9 @@ struct Level {
                 item.itemType = ItemType::None;
             }
 
+            this->sign.counter = 0;
 
-            // Populate first item with flash ..
-
-            Item &flash = this->items[Constants::Item_Flash];
-            flash.itemType = ItemType::Flash;
-
-
-            // Populate second item with sign ..
-
-            Item &sign = this->items[Constants::Item_Sign];
-            sign.itemType = ItemType::Sign;
-            sign.data.sign.counter = 0;
-
-            uint8_t itemIdx = Constants::Items_DynamicRange;
+            uint8_t itemIdx = 0;
             FX::seekData(Levels::Level1_Items);
             uint8_t itemType = FX::readPendingUInt8();
 
@@ -792,7 +777,12 @@ struct Level {
                             Item &item = this->getItem(idx);
 
                             if (item.data.gate.position == 0) {
-
+Serial.print("x ");
+Serial.print(x);
+Serial.print(", l ");
+Serial.print(this->getXLocation());
+Serial.print(", o ");
+Serial.println(offset);
                                 return WallTileResults::GateClosed;
 
                             }
@@ -1166,7 +1156,7 @@ struct Level {
             int8_t tileXIdx = this->coordToTileIndexX(prince.getPosition().x);
             int8_t tileYIdx = this->coordToTileIndexY(prince.getPosition().y);
 
-            for (uint8_t i = Constants::Items_DynamicRange; i < Constants::Items_Count; i++) {
+            for (uint8_t i = 0; i < Constants::Items_Count; i++) {
 
                 Item &item = this->items[i];
 
@@ -1900,7 +1890,7 @@ struct Level {
             int8_t tileYIdx = this->coordToTileIndexY(prince.getPosition().y) - this->getYLocation();
             int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(prince.getDirection(), prince.getPosition().x);
 
-            #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+            #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP)
             DEBUG_PRINTLN(F("------------------------------"));
             DEBUG_PRINT(F("StandingJump coordToTileIndexX "));
             DEBUG_PRINT(prince.getPosition().x);
@@ -1935,7 +1925,33 @@ struct Level {
                         WallTileResults wallTile2_NextLvl = this->isWallTile(fgTile2_NextLvl, tileXIdx - 1, tileYIdx, Direction::Left);
                         WallTileResults wallTile3_NextLvl = this->isWallTile(fgTile3_NextLvl, tileXIdx - 2, tileYIdx, Direction::Left);
                         WallTileResults wallTile4_NextLvl = this->isWallTile(fgTile4_NextLvl, tileXIdx - 3, tileYIdx, Direction::Left);
-                        
+   
+                        // WallTileResults, 0 None, 1 Normal, 2 GateClosed
+
+Serial.print("wt1: ");
+Serial.print(fgTile1_CurrLvl);
+Serial.print(" @ ");
+Serial.print(tileXIdx);
+Serial.print(",");
+Serial.print(tileYIdx);
+Serial.print(" = ");
+Serial.print((uint8_t)wallTile1_CurrLvl);
+Serial.print(" wt2: ");
+Serial.print(fgTile2_CurrLvl);
+Serial.print(" @ ");
+Serial.print(tileXIdx - 1);
+Serial.print(",");
+Serial.print(tileYIdx);
+Serial.print(" = ");
+Serial.print((uint8_t)wallTile2_CurrLvl);
+Serial.print(" wt3: ");
+Serial.print(fgTile3_CurrLvl);
+Serial.print(" @ ");
+Serial.print(tileXIdx - 2);
+Serial.print(",");
+Serial.print(tileYIdx);
+Serial.print(" = ");
+Serial.println((uint8_t)wallTile3_CurrLvl);                     
                         bool isGroundTile2_CurrLvl = this->isGroundTile(bgTile2_CurrLvl, fgTile2_CurrLvl);
                         bool isGroundTile3_CurrLvl = this->isGroundTile(bgTile3_CurrLvl, fgTile3_CurrLvl);
                         bool isGroundTile2_NextLvl = this->isGroundTile(bgTile2_NextLvl, fgTile2_NextLvl);
@@ -1967,9 +1983,30 @@ struct Level {
 
                         }
                         else {
+                           
+                            if (wallTile1_CurrLvl == WallTileResults::None && wallTile2_CurrLvl == WallTileResults::None) {
 
-                            return (wallTile1_CurrLvl == WallTileResults::None && wallTile2_CurrLvl == WallTileResults::None ? StandingJumpResult::Normal : StandingJumpResult::None);
-                            
+                                switch (wallTile3_CurrLvl) {
+
+                                    case WallTileResults::None:
+                                    case WallTileResults::Normal:
+Serial.println("else normal");                                    
+                                        return StandingJumpResult::Normal;
+
+                                    case WallTileResults::GateClosed:
+Serial.println("else short");                                    
+                                        return StandingJumpResult::Short;
+
+                                }
+
+                            }
+                            else {
+Serial.println("else none");                                    
+
+                                return StandingJumpResult::None;
+
+                            }
+                             
                         }
 
                     }
@@ -1998,6 +2035,33 @@ struct Level {
                         WallTileResults wallTile3_NextLvl = this->isWallTile(fgTile3_NextLvl, tileXIdx + 2, tileYIdx + 1, Direction::Right);
                         WallTileResults wallTile4_NextLvl = this->isWallTile(fgTile4_NextLvl, tileXIdx + 3, tileYIdx + 1, Direction::Right);
 
+                        // WallTileResults, 0 None, 1 Normal, 2 GateClosed
+
+// Serial.print("wt1: ");
+// Serial.print(fgTile1_CurrLvl);
+// Serial.print(" @ ");
+// Serial.print(tileXIdx);
+// Serial.print(",");
+// Serial.print(tileYIdx);
+// Serial.print(" = ");
+// Serial.print((uint8_t)wallTile1_CurrLvl);
+// Serial.print(" wt2: ");
+// Serial.print(fgTile2_CurrLvl);
+// Serial.print(" @ ");
+// Serial.print(tileXIdx + 1);
+// Serial.print(",");
+// Serial.print(tileYIdx);
+// Serial.print(" = ");
+// Serial.print((uint8_t)wallTile2_CurrLvl);
+// Serial.print(" wt3: ");
+// Serial.print(fgTile3_CurrLvl);
+// Serial.print(" @ ");
+// Serial.print(tileXIdx + 2);
+// Serial.print(",");
+// Serial.print(tileYIdx);
+// Serial.print(" = ");
+// Serial.println((uint8_t)wallTile3_CurrLvl);
+
                         bool isGroundTile2_CurrLvl = this->isGroundTile(bgTile2_CurrLvl, fgTile2_CurrLvl);
                         bool isGroundTile3_CurrLvl = this->isGroundTile(bgTile3_CurrLvl, fgTile3_CurrLvl);
                         bool isGroundTile2_NextLvl = this->isGroundTile(bgTile2_NextLvl, fgTile2_NextLvl);
@@ -2020,17 +2084,44 @@ struct Level {
 
                                     case 6:
                                     case 10:
+Serial.println(">>6 or 10");
                                         return StandingJumpResult::DropLevel;
 
                                     default:
+Serial.println("default");
                                         return (wallTile1_CurrLvl == WallTileResults::None && wallTile2_CurrLvl == WallTileResults::None ? StandingJumpResult::Normal : StandingJumpResult::None);
                                     
                                 }
 
                         }
                         else {
+// Serial.print("else ");
+// Serial.println((uint8_t)((wallTile1_CurrLvl == WallTileResults::None && wallTile2_CurrLvl != WallTileResults::None) ? StandingJumpResult::None : StandingJumpResult::Normal));
 
-                            return (wallTile1_CurrLvl == WallTileResults::None && wallTile2_CurrLvl == WallTileResults::None ? StandingJumpResult::Normal : StandingJumpResult::None);
+                            // StandingJumpResult : 0 None, 1 Normal, 2 Drop Level
+
+                            if (wallTile1_CurrLvl == WallTileResults::None && wallTile2_CurrLvl == WallTileResults::None) {
+
+                                switch (wallTile3_CurrLvl) {
+
+                                    case WallTileResults::None:
+                                    case WallTileResults::Normal:
+// Serial.println("else normal");                                    
+                                        return StandingJumpResult::Normal;
+
+                                    case WallTileResults::GateClosed:
+// Serial.println("else short");                                    
+                                        return StandingJumpResult::Short;
+
+                                }
+
+                            }
+                            else {
+// Serial.println("else none");                                    
+
+                                return StandingJumpResult::None;
+
+                            }
                             
                         }
 
@@ -2618,7 +2709,7 @@ struct Level {
 
             uint8_t gatePosition = 255;
 
-            for (uint8_t i = Constants::Items_DynamicRange; i < Constants::Items_Count; i++) {
+            for (uint8_t i = 0; i < Constants::Items_Count; i++) {
 
                 Item &item = this->items[i];
 

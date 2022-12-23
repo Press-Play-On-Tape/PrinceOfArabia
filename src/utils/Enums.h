@@ -73,6 +73,7 @@ enum class StandingJumpResult : uint8_t {
     None,
     Normal,
     DropLevel,
+    Short, // Same level but a little shorter.
 };
 
 enum class RunningJumpResult : uint8_t {

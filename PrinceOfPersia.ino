@@ -179,9 +179,9 @@ void loop() {
     // Invert screen when striking player / enemy in sword fight ?
     
     {
-        Item &flash = level.getItem(Constants::Item_Flash);
+        Flash &flash = level.getFlash();
     
-        if ((flash.data.flash.frame == 2 || flash.data.flash.frame == 4) && flash.data.flash.type == FlashType::SwordFight) {
+        if ((flash.frame == 2 || flash.frame == 4) && flash.type == FlashType::SwordFight) {
 
             arduboy.invert(true);
 
