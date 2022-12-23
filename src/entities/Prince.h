@@ -5,8 +5,9 @@
 #include "../utils/Stack.h"
 #include "../entities/Structs.h"
 #include "BaseEntity.h"
+#include "BaseStack.h"
 
-class Prince : public BaseEntity {
+class Prince : public BaseEntity, public BaseStack {
 
     private:
         

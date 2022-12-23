@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Structs.h"
+#include "Flash.h"
+#include "Sign.h"
 #include "Item.h"
 #include "Level.h"
 #include "TitleScreenVars.h"

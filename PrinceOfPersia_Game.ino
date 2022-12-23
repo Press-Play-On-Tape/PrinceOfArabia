@@ -22,12 +22,14 @@ void game_Init() {
 
 void game_PositionChars() {
 
+    enemy.init();
+    enemy.init(104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
+    enemy.init(80 + (40 * Constants::TileWidth), 25 + (0 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
+
     prince.init(38-24, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
     // prince.init(38-24, 25, Direction::Right, Stance::Crouch_3_End, 3);          // Gate Issue
     // prince.init(38-24, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Sword Fight from Left
     // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3);          // Sword Fight from Right
-   enemy.init(104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
-    // enemy.init(104 - 72 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Right, Stance::Upright, 3);          // Sword fight from Right
 
 //    prince.init(8+78+24, 25, Direction::Left, Stance::Crouch_3_End, 3);     // Double collapisble
     // prince.init(78 + 24 + 12, 25 + 31 + 31, Direction::Left, Stance:: Crouch_3_End, 3);          // Spikes
@@ -48,6 +50,8 @@ void game_PositionChars() {
     // prince.init(18, 25, Direction::Right,Stance:: Crouch_3_End, 3);          // Long Fall
     // prince.init(18, 56, Direction::Right, Stance::Crouch_3_End, 3);          // problem
     // prince.init(98, 87, Direction::Left, Stance::Crouch_3_End, 3);          // At bottom of tthree level drop.
+    // prince.init(98, 87, Direction::Left, Stance::Crouch_3_End, 3);          // At bottom of tthree level drop.
+    // prince.init(18, 25, Direction::Right, Stance::Crouch_3_End, 3);          // Long Run
 
 
 
@@ -74,6 +78,7 @@ void game_PositionChars() {
     // level.init(prince, 40, 4);  // Long Fall
     // level.init(prince, 60, 3);  // problem
     // level.init(prince, 30, 6); // At bottom of tthree level drop.
+    // level.init(prince, 40, 0);  // Long run
 
 }
 
@@ -173,28 +178,50 @@ void game() {
 
 
 
-    // Is the prince within distance of the enemy?
+    // Is the prince within distance of the enemy (cycle through all enemies to find it any closest)?
 
     enemyIsVisible = false;
 
-    if (enemy.getHealth() > 0 || (enemy.getHealth() == 0 && enemy.getMoveCount() > 0)) {
+    if (enemy.isEmpty()) {
 
-        uint8_t tileXIdx = level.coordToTileIndexX(enemy.getPosition().x) + prince.getDirectionOffset(1);
-        uint8_t tileYIdx = level.coordToTileIndexY(enemy.getPosition().y) - 1;
+        uint8_t currentEnemy = enemy.getActiveEnemy();
 
-        if (tileXIdx >= level.getXLocation() && tileXIdx < level.getXLocation() + 10 && tileYIdx >= level.getYLocation() && tileYIdx < level.getYLocation() + 3) {
+        for (uint8_t i = 0; i < enemy.getEnemyCount(); i++) {
 
-            enemyIsVisible = true;
+            enemy.setActiveEnemy(i);
 
-        }
+            //if (enemy.getHealth() > 0 || (enemy.getHealth() == 0 && enemy.getMoveCount() > 0)) {
 
-        if  (enemy.getHealth() == 0 && enemy.getMoveCount() > 0) {
+                uint8_t tileXIdx = level.coordToTileIndexX(enemy.getPosition().x) + prince.getDirectionOffset(1);
+                uint8_t tileYIdx = level.coordToTileIndexY(enemy.getPosition().y);
 
-            enemy.decMoveCount();
+                if (tileXIdx >= level.getXLocation() && tileXIdx < level.getXLocation() + 10 && tileYIdx >= level.getYLocation() && tileYIdx < level.getYLocation() + 3) {
+
+                    enemyIsVisible = true;
+
+                }
+
+                if  (enemy.getHealth() == 0 && enemy.getMoveCount() > 0) {
+
+                    enemy.decMoveCount();
+
+                }
+
+                if (enemyIsVisible) break;
+
+            //}
+
+            if (!enemyIsVisible) enemy.setActiveEnemy(currentEnemy);
 
         }
 
     }
+    else {
+
+        enemyIsVisible = true;
+
+    }
+
 
 
     // If within distance, we can draw swords if we have one!
@@ -215,6 +242,8 @@ void game() {
     // ---------------------------------------------------------------------------------------------------------------------------------------
 
     if (gamePlay.gameState == GameState::Game && enemy.isEmpty()) {
+
+        BaseEntity enemyBase = enemy.getActiveBase();
 
         int16_t xDelta = prince.getPosition().x - enemy.getPosition().x;
         int16_t yDelta = prince.getPosition().y - enemy.getPosition().y;
@@ -255,7 +284,7 @@ void game() {
 
                         case 0 ... Constants::StrikeDistance:
 
-                            if (level.canMoveForward(enemy, Action::SmallStep)) {
+                            if (level.canMoveForward(enemyBase, Action::SmallStep)) {
                                 enemy.push(Stance::Sword_Normal, false);
                             }
                             break;
@@ -282,7 +311,7 @@ void game() {
                                 // Otherwise creep forward ..
 
                                 default:
-                                    if (level.canMoveForward(enemy, Action::SmallStep)) {
+                                    if (level.canMoveForward(enemyBase, Action::SmallStep)) {
                                         enemy.pushSequence(Stance::Sword_Step_01_Start, Stance::Sword_Step_03_End, true);
                                     }
                                     break;
@@ -296,7 +325,7 @@ void game() {
 
                             // If the enemy and prince are far apart then the enemy should advance on the prince ..
 
-                            if (level.canMoveForward(enemy, Action::SmallStep)) {
+                            if (level.canMoveForward(enemyBase, Action::SmallStep)) {
                                 enemy.pushSequence(Stance::Sword_Step_01_Start, Stance::Sword_Step_03_End, true);
                             }
                             break;
@@ -319,12 +348,12 @@ void game() {
                 if (xDelta > 0 && enemy.getDirection() == Direction::Left){
 
                     enemy.setDirection(Direction::Right);
-                    moveBackwardsWithSword(enemy);
+                    moveBackwardsWithSword(enemyBase, enemy);
 
                     if (prince.getDirection() == Direction::Right) {
 
                         prince.setDirection(Direction::Left);
-                        moveBackwardsWithSword(prince);
+                        moveBackwardsWithSword(prince, prince);
 
                     }
 
@@ -335,12 +364,12 @@ void game() {
                 else if (xDelta < 0 && enemy.getDirection() == Direction::Right){
 
                     enemy.setDirection(Direction::Left);
-                    moveBackwardsWithSword(enemy);
+                    moveBackwardsWithSword(enemyBase, enemy);
 
                     if (prince.getDirection() == Direction::Left) {
 
                         prince.setDirection(Direction::Right);
-                        moveBackwardsWithSword(prince);
+                        moveBackwardsWithSword(prince, prince);
 
                     }
 
@@ -375,7 +404,7 @@ void game() {
                         }
                         else if (random(0, 12) == 0) {    
 
-                            moveBackwardsWithSword(enemy);
+                            moveBackwardsWithSword(enemyBase, enemy);
                             
                         } 
 
@@ -447,7 +476,7 @@ void game() {
 
                                     if (random(0, 16) == 0) {
 
-                                        if (level.canMoveForward(enemy, Action::SmallStep)) {
+                                        if (level.canMoveForward(enemyBase, Action::SmallStep)) {
                                             enemy.pushSequence(Stance::Sword_Step_01_Start, Stance::Sword_Step_03_End, true); //, Stance::Sword_Normal, true);
                                         }
 
@@ -466,7 +495,7 @@ void game() {
 
                                     // Advance on prince ..
 
-                                    if (level.canMoveForward(enemy, Action::SmallStep)) {
+                                    if (level.canMoveForward(enemyBase, Action::SmallStep)) {
                                        enemy.pushSequence(Stance::Sword_Step_01_Start, Stance::Sword_Step_03_End, true);
                                     }
 
@@ -1320,7 +1349,7 @@ void game() {
                 case Stance::Jump_Up_Drop_A_4: // Ripple collapsible floors.
                 case Stance::Jump_Up_Drop_B_4: 
 
-                    for (uint8_t i = Constants::Items_DynamicRange; i < Constants::Items_Count; i++) {
+                    for (uint8_t i =0; i < Constants::Items_Count; i++) {
                         
                         Item &item = level.getItem(i);
 
@@ -1579,7 +1608,8 @@ void game() {
                             }
                             else {
 
-                                moveBackwardsWithSword(enemy);
+                                BaseEntity enemyBase = enemy.getActiveBase();
+                                moveBackwardsWithSword(enemyBase, enemy);
 
                             }
 
@@ -1611,7 +1641,7 @@ void game() {
 
                 int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x + imageDetails.toe);
                 int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y);
-                uint8_t itemIdx = level.getItem(ItemType::AnyItem, tileXIdx, tileYIdx);
+                uint8_t itemIdx = level.getItem(ItemType::InteractiveItemType_Start, ItemType::InteractiveItemType_End, tileXIdx, tileYIdx);
 
 
                 // If no match, test with player's heel ..
@@ -1619,7 +1649,7 @@ void game() {
                 if (itemIdx == Constants::NoItemFound) {
 
                     tileXIdx = level.coordToTileIndexX(prince.getPosition().x + imageDetails.heel);
-                    itemIdx = level.getItem(ItemType::AnyItem, tileXIdx, tileYIdx);
+                    itemIdx = level.getItem(ItemType::InteractiveItemType_Start, ItemType::InteractiveItemType_End, tileXIdx, tileYIdx);
 
                 }
 
@@ -1778,7 +1808,7 @@ void game() {
                                     }
                                     else {
 
-                                        if (level.canMoveForward(enemy, Action::SmallStep, enemy.getOppositeDirection())) {
+                                        if (level.canMoveForward(enemy.getActiveBase(), Action::SmallStep, enemy.getOppositeDirection())) {
 
                                             prince.clear();
                                             prince.pushSequence(Stance::Sword_Step_03_End, Stance::Sword_Step_01_Start, Stance::Sword_Normal, false);
@@ -2150,19 +2180,19 @@ void game() {
 }
 
 
-void moveBackwardsWithSword(BaseEntity entity) { 
+void moveBackwardsWithSword(BaseEntity entity, BaseStack stack) { 
 
-    if (level.canMoveForward(entity, Action::Step, enemy.getOppositeDirection())) {
+    if (level.canMoveForward(entity, Action::Step, entity.getOppositeDirection())) {
 
-        entity.clear();
-        entity.pushSequence(Stance::Sword_Step_03_End, Stance::Sword_Step_01_Start, Stance::Sword_Normal, false);
-        entity.pushSequence(Stance::Sword_Step_03_End, Stance::Sword_Step_01_Start, false);
+        stack.clear();
+        stack.pushSequence(Stance::Sword_Step_03_End, Stance::Sword_Step_01_Start, Stance::Sword_Normal, false);
+        stack.pushSequence(Stance::Sword_Step_03_End, Stance::Sword_Step_01_Start, false);
 
     }
-    else if (level.canMoveForward(entity, Action::SmallStep, enemy.getOppositeDirection())) {
+    else if (level.canMoveForward(entity, Action::SmallStep, entity.getOppositeDirection())) {
 
-        entity.clear();
-        entity.pushSequence(Stance::Sword_Step_03_End, Stance::Sword_Step_01_Start, Stance::Sword_Normal, false);
+        stack.clear();
+        stack.pushSequence(Stance::Sword_Step_03_End, Stance::Sword_Step_01_Start, Stance::Sword_Normal, false);
 
     }
 

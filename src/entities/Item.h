@@ -3,16 +3,6 @@
 #include <Arduboy2.h>   
 #include "../utils/Constants.h"
 #include "../utils/Stack.h"
-
-struct Flash {
-    uint8_t frame;
-    FlashType type;
-};
-
-struct Sign {
-    SignType type;
-    uint8_t counter;
-};
  
 struct ExitDoor {
     uint8_t position;
@@ -80,8 +70,6 @@ struct Item {
 
     union {
         struct LoveHeart loveHeart;
-        struct Flash flash;
-        struct Sign sign;
         struct Gate gate;
         struct ExitDoor exitDoor;
         struct Sword sword;
