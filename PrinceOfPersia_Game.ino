@@ -22,16 +22,14 @@ void game_Init() {
 
 void game_PositionChars() {
 
+    enemy.init();
+    enemy.init(104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
+    enemy.init(80 + (40 * Constants::TileWidth), 25 + (0 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
+
     prince.init(38-24, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Normal starting pos
     // prince.init(38-24, 25, Direction::Right, Stance::Crouch_3_End, 3);          // Gate Issue
     // prince.init(38-24, 56, Direction::Right, Stance::Crouch_3_End, 3);          // Sword Fight from Left
     // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3);          // Sword Fight from Right
-
-    enemy.initCount(2);
-   enemy.init(0, 104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
-   enemy.init(1, 60 + (50 * Constants::TileWidth), 25 + (3 * Constants::TileHeight), Direction::Right, Stance::Upright, 3);          // Sword fight from Left
-//   enemy.init(1, 104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
-    // enemy.init(104 - 72 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Right, Stance::Upright, 3);          // Sword fight from Right
 
 //    prince.init(8+78+24, 25, Direction::Left, Stance::Crouch_3_End, 3);     // Double collapisble
     // prince.init(78 + 24 + 12, 25 + 31 + 31, Direction::Left, Stance:: Crouch_3_End, 3);          // Spikes
@@ -1657,11 +1655,8 @@ void game() {
 
 
                 if (itemIdx != Constants::NoItemFound) {
-// Serial.print("fi ");
-// Serial.print(itemIdx);
+
                     Item &item = level.getItem(itemIdx);
-// Serial.print(", type ");
-// Serial.println((uint8_t)item.itemType);
 
                     switch (item.itemType) {
                         

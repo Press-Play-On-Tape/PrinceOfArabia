@@ -36,21 +36,22 @@ class Enemy : public BaseStack {
             
         }
 
-        void initCount(uint8_t count) {
+        void init() {
 
-            this->count = count;
+            this->count = 0;
 
         }
 
-        void init(uint8_t enemyID, int16_t x, int16_t y, Direction direction, uint16_t stance, uint8_t health) {
+        void init(int16_t x, int16_t y, Direction direction, uint16_t stance, uint8_t health) {
 
-            this->base[enemyID].setX(x);
-            this->base[enemyID].setY(y);
-            this->base[enemyID].setDirection(direction);
-            this->base[enemyID].setStance(stance);
-            this->base[enemyID].setHealth(health);
-            this->base[enemyID].setHealthMax(health);
-
+            this->base[this->count].setX(x);
+            this->base[this->count].setY(y);
+            this->base[this->count].setDirection(direction);
+            this->base[this->count].setStance(stance);
+            this->base[this->count].setHealth(health);
+            this->base[this->count].setHealthMax(health);
+            this->count++;
+            
         }
 
     	void update() {

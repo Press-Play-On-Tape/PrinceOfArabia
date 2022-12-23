@@ -777,12 +777,7 @@ struct Level {
                             Item &item = this->getItem(idx);
 
                             if (item.data.gate.position == 0) {
-// Serial.print("x ");
-// Serial.print(x);
-// Serial.print(", l ");
-// Serial.print(this->getXLocation());
-// Serial.print(", o ");
-// Serial.println(offset);
+
                                 return WallTileResults::GateClosed;
 
                             }
@@ -1927,31 +1922,7 @@ struct Level {
                         WallTileResults wallTile4_NextLvl = this->isWallTile(fgTile4_NextLvl, tileXIdx - 3, tileYIdx, Direction::Left);
    
                         // WallTileResults, 0 None, 1 Normal, 2 GateClosed
-
-// Serial.print("wt1: ");
-// Serial.print(fgTile1_CurrLvl);
-// Serial.print(" @ ");
-// Serial.print(tileXIdx);
-// Serial.print(",");
-// Serial.print(tileYIdx);
-// Serial.print(" = ");
-// Serial.print((uint8_t)wallTile1_CurrLvl);
-// Serial.print(" wt2: ");
-// Serial.print(fgTile2_CurrLvl);
-// Serial.print(" @ ");
-// Serial.print(tileXIdx - 1);
-// Serial.print(",");
-// Serial.print(tileYIdx);
-// Serial.print(" = ");
-// Serial.print((uint8_t)wallTile2_CurrLvl);
-// Serial.print(" wt3: ");
-// Serial.print(fgTile3_CurrLvl);
-// Serial.print(" @ ");
-// Serial.print(tileXIdx - 2);
-// Serial.print(",");
-// Serial.print(tileYIdx);
-// Serial.print(" = ");
-// Serial.println((uint8_t)wallTile3_CurrLvl);                     
+                   
                         bool isGroundTile2_CurrLvl = this->isGroundTile(bgTile2_CurrLvl, fgTile2_CurrLvl);
                         bool isGroundTile3_CurrLvl = this->isGroundTile(bgTile3_CurrLvl, fgTile3_CurrLvl);
                         bool isGroundTile2_NextLvl = this->isGroundTile(bgTile2_NextLvl, fgTile2_NextLvl);
@@ -1990,18 +1961,15 @@ struct Level {
 
                                     case WallTileResults::None:
                                     case WallTileResults::Normal:
-// Serial.println("else normal");                                    
                                         return StandingJumpResult::Normal;
 
                                     case WallTileResults::GateClosed:
-// Serial.println("else short");                                    
                                         return StandingJumpResult::Short;
 
                                 }
 
                             }
                             else {
-// Serial.println("else none");                                    
 
                                 return StandingJumpResult::None;
 
@@ -2037,31 +2005,6 @@ struct Level {
 
                         // WallTileResults, 0 None, 1 Normal, 2 GateClosed
 
-// Serial.print("wt1: ");
-// Serial.print(fgTile1_CurrLvl);
-// Serial.print(" @ ");
-// Serial.print(tileXIdx);
-// Serial.print(",");
-// Serial.print(tileYIdx);
-// Serial.print(" = ");
-// Serial.print((uint8_t)wallTile1_CurrLvl);
-// Serial.print(" wt2: ");
-// Serial.print(fgTile2_CurrLvl);
-// Serial.print(" @ ");
-// Serial.print(tileXIdx + 1);
-// Serial.print(",");
-// Serial.print(tileYIdx);
-// Serial.print(" = ");
-// Serial.print((uint8_t)wallTile2_CurrLvl);
-// Serial.print(" wt3: ");
-// Serial.print(fgTile3_CurrLvl);
-// Serial.print(" @ ");
-// Serial.print(tileXIdx + 2);
-// Serial.print(",");
-// Serial.print(tileYIdx);
-// Serial.print(" = ");
-// Serial.println((uint8_t)wallTile3_CurrLvl);
-
                         bool isGroundTile2_CurrLvl = this->isGroundTile(bgTile2_CurrLvl, fgTile2_CurrLvl);
                         bool isGroundTile3_CurrLvl = this->isGroundTile(bgTile3_CurrLvl, fgTile3_CurrLvl);
                         bool isGroundTile2_NextLvl = this->isGroundTile(bgTile2_NextLvl, fgTile2_NextLvl);
@@ -2084,21 +2027,15 @@ struct Level {
 
                                     case 6:
                                     case 10:
-// Serial.println(">>6 or 10");
                                         return StandingJumpResult::DropLevel;
 
                                     default:
-// Serial.println("default");
                                         return (wallTile1_CurrLvl == WallTileResults::None && wallTile2_CurrLvl == WallTileResults::None ? StandingJumpResult::Normal : StandingJumpResult::None);
                                     
                                 }
 
                         }
                         else {
-// Serial.print("else ");
-// Serial.println((uint8_t)((wallTile1_CurrLvl == WallTileResults::None && wallTile2_CurrLvl != WallTileResults::None) ? StandingJumpResult::None : StandingJumpResult::Normal));
-
-                            // StandingJumpResult : 0 None, 1 Normal, 2 Drop Level
 
                             if (wallTile1_CurrLvl == WallTileResults::None && wallTile2_CurrLvl == WallTileResults::None) {
 
@@ -2106,18 +2043,15 @@ struct Level {
 
                                     case WallTileResults::None:
                                     case WallTileResults::Normal:
-// Serial.println("else normal");                                    
                                         return StandingJumpResult::Normal;
 
                                     case WallTileResults::GateClosed:
-// Serial.println("else short");                                    
                                         return StandingJumpResult::Short;
 
                                 }
 
                             }
                             else {
-// Serial.println("else none");                                    
 
                                 return StandingJumpResult::None;
 
