@@ -67,6 +67,9 @@ def imageData(filename):
   pixels = list(img.getdata())
   #check for transparency
   transparency = False
+  if '/tiles/' in filename:
+    #    print('{}\n'.format(filename))
+    transparency = True
   for i in pixels:
    if i[3] < 255:
     transparency = True
@@ -176,6 +179,7 @@ for lineNr in range(len(lines)):
     if part[-1:] == ',' : part = part[:-1]
     if part[-2:] == '[]': part = part[:-2]
     #handle comments
+
     if blkcom == True:
       p = part.find('*/',2)
       if p >= 0:

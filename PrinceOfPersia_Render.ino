@@ -23,11 +23,11 @@ void render(bool enemyIsVisible) {
             switch (bgTile) {
 
                 case 0 ... 126:
-                   FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon[Images::xTiles_Ref[bgTile]], 0, dbmNormal);
+                   FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon[Images::xTiles_Ref[bgTile]], 0, dbmMasked);
                    break;
 
                 case 127:
-                   FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon_50_00 + ((arduboy.getFrameCount(15, (x + 2)) / 5) * 52), 0, dbmNormal);
+                   FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon_50_00 + ((arduboy.getFrameCount(15, (x + 2)) / 5) * 100), 0, dbmMasked);
                    break;
 
             }
@@ -189,6 +189,7 @@ void render(bool enemyIsVisible) {
 
     }
 
+
     // Draw foreground ..
 
     for (uint8_t y = 0; y < 4; y++) {
@@ -199,16 +200,7 @@ void render(bool enemyIsVisible) {
 
             if (fgTile >= 0) {
 
-                if (Images::xTilesRef_IsMasked[fgTile]) {
-
-                    FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon[Images::xTiles_Ref[fgTile]], 0, dbmMasked);
-
-                }
-                else {
-
-                    FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon[Images::xTiles_Ref[fgTile]], 0, dbmNormal);
-
-                }
+                FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon[Images::xTiles_Ref[fgTile]], 0, dbmMasked);
 
             }
 
