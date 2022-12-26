@@ -57,6 +57,7 @@ void render(bool enemyIsVisible) {
                     break;
 
                 case ItemType::Spikes:
+
                     if (item.data.spikes.imageType == 1) {
                         FX::drawBitmap(xLoc, yLoc + 14, Images::Spikes_BG_00 + (item.data.spikes.position * 118), 0, dbmMasked);
                     }
@@ -244,9 +245,10 @@ void render(bool enemyIsVisible) {
         }
         
     }
+// Serial.println(enemyIsVisible);    
 
     if (!enemyIsVisible) {
-    
+
         renderNumber_Small(123, 47, gamePlay.timer_Min);
         renderNumber_Small(123, 57, gamePlay.timer_Sec);
 

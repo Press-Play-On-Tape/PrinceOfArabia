@@ -25,6 +25,7 @@ void game_Init() {
 
 void game_PositionChars(bool clearSword) {
 
+    enemy.init();
 
     #ifdef LEVEL_DATA_FROM_FX
         
@@ -75,16 +76,16 @@ void game_PositionChars(bool clearSword) {
 
     #else
 
-        enemy.clear();
         enemy.init(104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
         enemy.init(80 + (40 * Constants::TileWidth), 25 + (0 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
 
-        prince.init(38-28, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Normal starting pos
+        // prince.init(38-28, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Normal starting pos
         // prince.init(38-24, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Gate Issue
         // prince.init(38-24, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Sword Fight from Left
         // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Sword Fight from Right
         // prince.init(8+78+24, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     // Double collapisble
-        // prince.init(78 + 24 + 12, 25 + 31 + 31, Direction::Left, Stance:: Crouch_3_End, 3, clearSword);          // Spikes
+        // prince.init(78 + 24 + 12, 25 + 31 + 31, Direction::Left, Stance:: Crouch_3_End, 3, clearSword);          // Spikes Upper
+        // prince.init(12, 25 + 31, Direction::Left, Stance:: Crouch_3_End, 3, clearSword);          // Spikes Lower
         // prince.init(78 + 24, 25, Direction::Left, Stance:: Crouch_3_End, 3, clearSword);          // Jump 2
         // prince.init(18, 25+31, Direction::Right,Stance:: Crouch_3_End, 3, clearSword);          // Sword fight
         // prince.init(58, 25+31+31, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Second drink tonic
@@ -103,16 +104,17 @@ void game_PositionChars(bool clearSword) {
         // prince.init(18, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // problem
         // prince.init(98, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // At bottom of tthree level drop.
         // prince.init(98, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // At bottom of tthree level drop.
-        // prince.init(18, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Long Run
+        prince.init(18, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Long Run
         // prince.init(78 - 10, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Fall Error Stading Jump
         // prince.init(78 - 4, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Fall Error running Jump
 
-        level.init(prince, 60, 0);  // Normal starting posa
+        // level.init(prince, 60, 0);  // Normal starting posa
         // level.init(prince, 37, 3);  // gate issuee
         // level.init(prince, 60, 3);  // Fight from Left
         // level.init(prince, 70, 3);  // Fight from Right
         // level.init(prince, 10, 3);   // Double collapisble
-        // level.init(prince, 10, 0);   // Spikes
+        // level.init(prince, 10, 0);   // Spikes Upper
+        // level.init(prince, 10, 6);   // Spikes Lower
         // level.init(prince, 30, 3);  // Jump 2
         // level.init(prince, 70, 3);  // Sword fight
         // level.init(prince, 50, 0);  // Second drink tonic
@@ -129,7 +131,7 @@ void game_PositionChars(bool clearSword) {
         // level.init(prince, 40, 4);  // Long Fall
         // level.init(prince, 60, 3);  // problem
         // level.init(prince, 30, 6); // At bottom of tthree level drop.
-        // level.init(prince, 40, 0);  // Long run
+        level.init(prince, 40, 0);  // Long run
         // level.init(prince, 50, 3);  // Fall Error Stading Jump
         // level.init(prince, 50, 3);  // Fall Error running Jump
 
@@ -215,13 +217,16 @@ void game() {
     // if (justPressed & B_BUTTON) {
     //     prince.pushSequence(Stance::Draw_Sword_01_Start, Stance::Draw_Sword_06_End, Stance::Sword_Normal, true);
     // }
-    // prince.setSword(true);
-    if (justPressed & B_BUTTON) {
-    processRunJump(prince, level);
-    // prince.pushSequence(Stance::Run_Start_1_Start, Stance::Run_Start_6_End, true);
-    }
+    
+    // if (justPressed & B_BUTTON) {
+    //     processRunJump(prince, level);
+    //     // prince.pushSequence(Stance::Run_Start_1_Start, Stance::Run_Start_6_End, true);
+    // }
     #endif
 
+    #ifdef GIVE_SWORD
+        prince.setSword(true);
+    #endif
 
 
 
@@ -241,45 +246,16 @@ void game() {
 
     // Is the prince within distance of the enemy (cycle through all enemies to find it any closest)?
 
-    enemyIsVisible = false;
+    // enemyIsVisible = false;
 
     if (enemy.isEmpty()) {
 
-        uint8_t currentEnemy = enemy.getActiveEnemy();
-
-        for (uint8_t i = 0; i < enemy.getEnemyCount(); i++) {
-
-            enemy.setActiveEnemy(i);
-
-            //if (enemy.getHealth() > 0 || (enemy.getHealth() == 0 && enemy.getMoveCount() > 0)) {
-
-                uint8_t tileXIdx = level.coordToTileIndexX(enemy.getPosition().x) + prince.getDirectionOffset(1);
-                uint8_t tileYIdx = level.coordToTileIndexY(enemy.getPosition().y);
-
-                if (tileXIdx >= level.getXLocation() && tileXIdx < level.getXLocation() + 10 && tileYIdx >= level.getYLocation() && tileYIdx < level.getYLocation() + 3) {
-
-                    enemyIsVisible = true;
-
-                }
-
-                if  (enemy.getHealth() == 0 && enemy.getMoveCount() > 0) {
-
-                    enemy.decMoveCount();
-
-                }
-
-                if (enemyIsVisible) break;
-
-            //}
-
-            if (!enemyIsVisible) enemy.setActiveEnemy(currentEnemy);
-
-        }
+        enemyIsVisible = isEnemyVisible(true);
 
     }
     else {
 
-        enemyIsVisible = true;
+        enemyIsVisible = isEnemyVisible(false);
 
     }
 
@@ -396,7 +372,6 @@ void game() {
                 // Has the enemy gone past the prince?  If so, turn around ..
 
                 if (xDelta > 0 && enemy.getDirection() == Direction::Left){
-Serial.println("rotate a");
 
                     enemy.setDirection(Direction::Right);
                     moveBackwardsWithSword(enemyBase, enemy);
@@ -407,8 +382,8 @@ Serial.println("rotate a");
                         moveBackwardsWithSword(prince, prince);
 
                     }
-                    else if (!prince.isSwordDrawn() && xDelta < 20) {
-Serial.println("dead a");
+                    else if (!prince.isSwordDrawn() && xDelta <= 24) {
+
                         pushDead(prince, level, gamePlay, true);
 
                     }
@@ -418,7 +393,6 @@ Serial.println("dead a");
                 }
 
                 else if (xDelta < 0 && enemy.getDirection() == Direction::Right){
-Serial.println("rotate b");
 
                     enemy.setDirection(Direction::Left);
                     moveBackwardsWithSword(enemyBase, enemy);
@@ -429,8 +403,8 @@ Serial.println("rotate b");
                         moveBackwardsWithSword(prince, prince);
 
                     }
-                    else if (!prince.isSwordDrawn() && xDelta > -20) {
-Serial.println("dead b");
+                    else if (!prince.isSwordDrawn() && xDelta >= -24) {
+
                         pushDead(prince, level, gamePlay, true);
                         
                     }
@@ -596,6 +570,8 @@ Serial.println("dead b");
             switch (prince.getStance()) {
 
                 case Stance::Upright:
+
+                    fixPosition();  // Fix the position if we are not in positions 2, 6 or 10.
 
                     if (prince.getDirection() == Direction::Right) {
 

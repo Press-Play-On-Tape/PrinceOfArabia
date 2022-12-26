@@ -3,10 +3,11 @@
 
 #define DEBUG_PRINT    Serial.print
 #define DEBUG_PRINTLN  Serial.println
-#define _SAVE_MEMORY_USB
-#define SAVE_MEMORY_OTHER
-#define SAVE_MEMORY_SOUND
-#define ALT_B_BUTTON
+#define SAVE_MEMORY_USB
+#define _SAVE_MEMORY_OTHER
+#define _SAVE_MEMORY_SOUND
+#define _ALT_B_BUTTON
+#define _GIVE_SWORD
 
 #define LEVEL_DATA_FROM_FX
 
@@ -759,6 +760,8 @@ namespace Constants {
     constexpr uint8_t TileWidth = 12;
     constexpr uint8_t ScreenTopOffset = 1;
     constexpr uint8_t ScreenWidthInTiles = 10;
+    constexpr uint8_t ScreenHeightInTiles = 3;
+   
     constexpr int8_t CoordNone = 127;
     constexpr uint8_t TitleScreenScroll_Max = 87;
 
