@@ -3,10 +3,12 @@
 
 #define DEBUG_PRINT    Serial.print
 #define DEBUG_PRINTLN  Serial.println
-#define SAVE_MEMORY_USB
-#define _SAVE_MEMORY_OTHER
-#define _SAVE_MEMORY_SOUND
-#define _ALT_B_BUTTON
+#define _SAVE_MEMORY_USB
+#define SAVE_MEMORY_OTHER
+#define SAVE_MEMORY_SOUND
+#define ALT_B_BUTTON
+
+#define LEVEL_DATA_FROM_FX
 
 #define _DEBUG
 #define _DEBUG_ONSCREEN_DETAILS
@@ -40,10 +42,19 @@ constexpr uint16_t None                                          = 0;
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* 190 - 192    x: 0, y: 0                                       01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define CROUCH_SEQ                                               126,   109,   110,   
+#define CROUCH_OFFSETS                                           0,0,   0,0,   0,0, 
+constexpr uint16_t Crouch_1_Start                                = Stance::None + 1;
+constexpr uint16_t Crouch_2                                      = Stance::Crouch_1_Start + 1;
+constexpr uint16_t Crouch_3_End                                  = Stance::Crouch_2 + 1;
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /* 001 - 006    x: 7, y: 0                                       01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define RUN_START_SEQ                                            1,     2,     3,     4,     5,     6, 
 #define RUN_START_OFFSETS                                        0,0,   1,0,   1,0,   1,0,   2,0,   2,0,
-constexpr uint16_t Run_Start_1_Start                             = Stance::None + 1;
+constexpr uint16_t Run_Start_1_Start                             = Stance::Crouch_3_End + 1;
 constexpr uint16_t Run_Start_2                                   = Stance::Run_Start_1_Start + 1;
 constexpr uint16_t Run_Start_3                                   = Stance::Run_Start_2 + 1;
 constexpr uint16_t Run_Start_4                                   = Stance::Run_Start_3 + 1;
@@ -371,19 +382,10 @@ constexpr uint16_t Crouch_Stand_12_End                           = Stance::Crouc
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/* 190 - 192    x: 0, y: 0                                       01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
-#define CROUCH_SEQ                                               126,   109,   110,   
-#define CROUCH_OFFSETS                                           0,0,   0,0,   0,0, 
-constexpr uint16_t Crouch_1_Start                                = Stance::Crouch_Stand_12_End + 1;
-constexpr uint16_t Crouch_2                                      = Stance::Crouch_1_Start + 1;
-constexpr uint16_t Crouch_3_End                                  = Stance::Crouch_2 + 1;
-
-
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /* 193 - 199    x: 4, y: 0                                       01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define CROUCH_HOP_SEQ                                           110,   111,   112,   113,   112,   111,   110, 
 #define CROUCH_HOP_OFFSETS                                       0,0,   1,0,   1,0,   1,0,   1,0,   0,0,   0,0,
-constexpr uint16_t Crouch_HOP_1_Start                            = Stance::Crouch_3_End + 1;
+constexpr uint16_t Crouch_HOP_1_Start                            = Stance::Crouch_Stand_12_End + 1;
 constexpr uint16_t Crouch_HOP_2                                  = Stance::Crouch_HOP_1_Start + 1;
 constexpr uint16_t Crouch_HOP_3                                  = Stance::Crouch_HOP_2 + 1;
 constexpr uint16_t Crouch_HOP_4                                  = Stance::Crouch_HOP_3 + 1;
@@ -767,6 +769,7 @@ namespace Constants {
 
     const uint8_t StanceToImageXRef[] PROGMEM  = {
         0, 
+        CROUCH_SEQ
         RUN_START_SEQ
         RUN_REPEAT_SEQ
         UPRIGHT_SEQ
@@ -788,7 +791,6 @@ namespace Constants {
         JUMP_UP_DROP_C_SEQ
         STEP_CLIMBING_SEQ
         CROUCH_STAND_SEQ
-        CROUCH_SEQ
         CROUCH_HOP_SEQ
         STEP_CLIMBINB_BLOCK_SEQ
         DRINK_TONIC_SEQ
@@ -819,6 +821,7 @@ namespace Constants {
     };
 
     constexpr int8_t Prince_XOffset[] PROGMEM = {
+        CROUCH_OFFSETS
         RUN_START_OFFSETS
         RUN_REPEAT_OFFSETS
         UPRIGHT_OFFSETS
@@ -840,7 +843,6 @@ namespace Constants {
         JUMP_UP_DROP_C_OFFSETS
         STEP_CLIMBING_OFFSETS
         CROUCH_STAND_OFFSETS
-        CROUCH_OFFSETS
         CROUCH_HOP_OFFSETS
         STEP_CLIMBINB_BLOCK_OFFSETS
         DRINK_TONIC_OFFSETS

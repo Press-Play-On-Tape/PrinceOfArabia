@@ -36,7 +36,7 @@ class Enemy : public BaseStack {
             
         }
 
-        void init() {
+        void clear() {
 
             this->count = 0;
 
