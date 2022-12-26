@@ -351,6 +351,10 @@ bool leaveLevel(Prince &prince, Level &level) {
 
 void pushDead(Prince &entity, Level &level, GamePlay &gamePlay, bool clear) {
 
+    #ifndef SAVE_MEMORY_SOUND
+        sound.tonesFromFX(Sounds::Dead);
+    #endif
+
     if (clear) prince.clear();
     entity.pushSequence(Stance::Falling_Dead_1_Start, Stance::Falling_Dead_3_End, true);
     entity.setHealth(0);
@@ -369,6 +373,10 @@ void pushDead(Prince &entity, Level &level, GamePlay &gamePlay, bool clear) {
 }
 
 void pushDead(Enemy &entity, bool clear) {
+
+    #ifndef SAVE_MEMORY_SOUND
+        sound.tonesFromFX(Sounds::Triumph);
+    #endif
 
     if (clear) entity.clear();
     entity.pushSequence(Stance::Falling_Dead_1_Start, Stance::Falling_Dead_3_End, true);
@@ -410,4 +418,32 @@ void showSign(Prince &prince, Level &level, SignType signType, uint8_t counter) 
 
     }
 
+}
+
+void playGrab() {
+
+    #ifndef SAVE_MEMORY_SOUND
+
+        switch (gamePlay.getGrab()) {
+
+            case 0:
+                sound.tonesFromFX(Sounds::Grab1);
+                break;
+
+            case 1:
+                sound.tonesFromFX(Sounds::Grab2);
+                break;
+
+            case 2:
+                sound.tonesFromFX(Sounds::Grab3);
+                break;
+
+            case 3:
+                sound.tonesFromFX(Sounds::Grab4);
+                break;
+
+        }
+
+    #endif
+    
 }

@@ -18,6 +18,8 @@ void game_Init() {
     gamePlay.gameState = GameState::Game;
     menu.init();
 
+    playGrab();
+
 }
 
 void game_PositionChars(bool clearSword) {
@@ -93,6 +95,8 @@ void game_StartLevel() {
 
     gamePlay.gameState = GameState::Game;
     menu.init();
+
+    playGrab();
 
 }
 
@@ -1124,6 +1128,10 @@ void game() {
                             itemIdx = level.canReachItem(prince, ItemType::Sword);
 
                             if (itemIdx != Constants::NoItemFound) {
+
+                                #ifndef SAVE_MEMORY_SOUND
+                                    sound.tonesFromFX(Sounds::Tada);
+                                #endif
 
                                 Item &item = level.getItem(itemIdx);
                                 item.itemType = ItemType::None;

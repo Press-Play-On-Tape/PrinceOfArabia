@@ -76,6 +76,11 @@ void title() {
                     case TitleScreenOptions::Play:
 
                         if ((justPressed & A_BUTTON) || (justPressed & B_BUTTON)) {
+
+                            #ifndef SAVE_MEMORY_SOUND
+                                sound.tonesFromFX(Sounds::Seque);
+                            #endif
+
                             titleScreenVars.setMode(TitleScreenMode::IntroGame_1A, level);
                             titleScreenVars.count = 0;
                         }
@@ -112,6 +117,11 @@ void title() {
             case TitleScreenMode::IntroGame_1A:
 
                 if ((justPressed & A_BUTTON) || (justPressed & B_BUTTON)) {
+
+                    #ifndef SAVE_MEMORY_SOUND
+                        sound.tonesFromFX(Sounds::Seque);
+                    #endif
+                    
                     titleScreenVars.setMode(TitleScreenMode::IntroGame_1B, level);
                     gamePlay.gameState = GameState::Game_Init; 
                     fadeEffect.reset();
