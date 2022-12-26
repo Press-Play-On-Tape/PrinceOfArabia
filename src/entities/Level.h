@@ -352,8 +352,6 @@ struct Level {
 
             }
 
-
-
             if (arduboy.isFrameCount(4)) {
 
                 if (sign.counter > 1) {
@@ -585,6 +583,8 @@ struct Level {
                         break;
 
                     case ItemType::CollapsingFloor:
+                        item.data.collapsingFloor.timeToFall = 0;
+                        item.data.collapsingFloor.frame = 0;
                         item.data.collapsingFloor.distanceFallen = 0;
                         item.data.collapsingFloor.distToFall = FX::readPendingUInt8();
                         break;
@@ -1920,6 +1920,19 @@ struct Level {
                         WallTileResults wallTile2_NextLvl = this->isWallTile(fgTile2_NextLvl, tileXIdx - 1, tileYIdx, Direction::Left);
                         WallTileResults wallTile3_NextLvl = this->isWallTile(fgTile3_NextLvl, tileXIdx - 2, tileYIdx, Direction::Left);
                         WallTileResults wallTile4_NextLvl = this->isWallTile(fgTile4_NextLvl, tileXIdx - 3, tileYIdx, Direction::Left);
+// Serial.print("0 ");
+// Serial.print((uint8_t)wallTile3_CurrLvl);
+// Serial.print(" ");
+// Serial.print((uint8_t)wallTile2_CurrLvl);
+// Serial.print(" ");
+// Serial.print((uint8_t)wallTile1_CurrLvl);
+// Serial.println(" ");
+// Serial.print((uint8_t)wallTile4_NextLvl);
+// Serial.print(" ");
+// Serial.print((uint8_t)wallTile3_NextLvl);
+// Serial.print(" ");
+// Serial.print((uint8_t)wallTile2_NextLvl);
+// Serial.println(" 0");
    
                         // WallTileResults, 0 None, 1 Normal, 2 GateClosed
                    
@@ -1945,15 +1958,18 @@ struct Level {
 
                                     case 6:
                                     case 10:
+// Serial.println("dl");                                    
                                         return StandingJumpResult::DropLevel;
 
                                     default:
+// Serial.println("default");                                    
                                         return (wallTile1_CurrLvl == WallTileResults::None && wallTile2_CurrLvl == WallTileResults::None ? StandingJumpResult::Normal : StandingJumpResult::None);
                                     
                                 }
 
                         }
                         else {
+// Serial.println("else");                                    
                            
                             if (wallTile1_CurrLvl == WallTileResults::None && wallTile2_CurrLvl == WallTileResults::None) {
 
@@ -1961,9 +1977,11 @@ struct Level {
 
                                     case WallTileResults::None:
                                     case WallTileResults::Normal:
+// Serial.println("Normal");                                    
                                         return StandingJumpResult::Normal;
 
                                     case WallTileResults::GateClosed:
+// Serial.println("Short");                                    
                                         return StandingJumpResult::Short;
 
                                 }
@@ -1971,6 +1989,7 @@ struct Level {
                             }
                             else {
 
+// Serial.println("None");                                    
                                 return StandingJumpResult::None;
 
                             }

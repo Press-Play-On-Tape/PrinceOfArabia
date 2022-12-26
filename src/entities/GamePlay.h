@@ -8,6 +8,7 @@ struct GamePlay {
     GameState gameState = GameState::SplashScreen_Init;
 
     uint16_t frameCount = 0;
+    uint8_t grab = 3;
     uint8_t level = 1;
     uint8_t timer_Sec = 0;
     uint8_t timer_Min = 60;
@@ -69,6 +70,16 @@ struct GamePlay {
         if (this->timer_Sec > 0) return false;
 
         return true;
+        
+    }
+
+    uint8_t getGrab() {
+
+        this->grab++;
+
+        if (this->grab == 4) this->grab = 0;
+
+        return this->grab;
         
     }
 
