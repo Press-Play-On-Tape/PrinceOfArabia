@@ -249,10 +249,21 @@ struct Level {
                             break;
 
                         case ItemType::Potion_Small:
+                        case ItemType::Potion_Large:
 
-                            if (arduboy.isFrameCount(4)) {
+                            if (arduboy.isFrameCount(6)) {
 
-                                item.data.potionSmall.frame = !item.data.potionSmall.frame;
+                                item.data.potion.frame = !item.data.potion.frame;
+
+                            }
+                            break;
+
+                        case ItemType::Potion_Poison:
+
+                            if (arduboy.isFrameCount(6)) {
+
+                                item.data.potion.frame++;
+                                if (item.data.potion.frame == 6) item.data.potion.frame = 0;
 
                             }
                             break;
@@ -1146,7 +1157,9 @@ struct Level {
 
         }
 
-        uint8_t canReachItem(Prince &prince, ItemType itemType) {
+        uint8_t canReachItem(Prince &prince, ItemType itemTypeStart, ItemType itemTypeEnd = ItemType::None) {
+
+            if (itemTypeEnd == ItemType::None) itemTypeEnd = itemTypeStart;
 
             int8_t tileXIdx = this->coordToTileIndexX(prince.getPosition().x);
             int8_t tileYIdx = this->coordToTileIndexY(prince.getPosition().y);
@@ -1155,7 +1168,7 @@ struct Level {
 
                 Item &item = this->items[i];
 
-                if (item.itemType == itemType && item.x == tileXIdx && item.y == tileYIdx) {
+                if ((item.itemType >= itemTypeStart && item.itemType <= itemTypeEnd) && item.x == tileXIdx && item.y == tileYIdx) {
 
                     return i;
 
@@ -3016,7 +3029,7 @@ struct Level {
             #if defined(DEBUG) && defined(DEBUG_ACTION_COLLIDEWITHWALL)
             int8_t bgTile = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
             DEBUG_PRINT(F(", direction "));
-            if(direction == Direction::Left) {
+            if(prince.getDirection() == Direction::Left) {
                 DEBUG_PRINT(F("Left "));
             }
             else {

@@ -205,28 +205,28 @@ uint8_t activateSpikes(Prince &prince, Level &level) {
             spikes.data.spikes.closingDelay = Constants::SpikeClosingDelay;
         }
 
-        uint8_t itemIdx2 = level.getItem(ItemType::Spikes, tileXIdx - 1, tileYIdx);
+    }
 
-        if (itemIdx2 != Constants::NoItemFound) {
+    uint8_t itemIdx2 = level.getItem(ItemType::Spikes, tileXIdx - 1, tileYIdx);
 
-            Item &spikes = level.getItem(itemIdx2);
+    if (itemIdx2 != Constants::NoItemFound) {
 
-            if (spikes.data.spikes.closingDelay == 0) {
-                spikes.data.spikes.closingDelay = Constants::SpikeClosingDelay;
-            }
+        Item &spikes = level.getItem(itemIdx2);
 
+        if (spikes.data.spikes.closingDelay == 0) {
+            spikes.data.spikes.closingDelay = Constants::SpikeClosingDelay;
         }
 
-        itemIdx2 = level.getItem(ItemType::Spikes, tileXIdx + 1, tileYIdx);
+    }
 
-        if (itemIdx2 != Constants::NoItemFound) {
+    itemIdx2 = level.getItem(ItemType::Spikes, tileXIdx + 1, tileYIdx);
 
-            Item &spikes = level.getItem(itemIdx2);
+    if (itemIdx2 != Constants::NoItemFound) {
 
-            if (spikes.data.spikes.closingDelay == 0) {
-                spikes.data.spikes.closingDelay = Constants::SpikeClosingDelay;
-            }
+        Item &spikes = level.getItem(itemIdx2);
 
+        if (spikes.data.spikes.closingDelay == 0) {
+            spikes.data.spikes.closingDelay = Constants::SpikeClosingDelay;
         }
 
     }
@@ -446,4 +446,87 @@ void playGrab() {
 
     #endif
     
+}
+
+bool isEnemyVisible(bool swapEnemies) { // Should we swap actrive enemies (no if stack is not empty)
+
+    bool enemyIsVisible = false;
+    uint8_t currentEnemy = enemy.getActiveEnemy();
+
+    for (uint8_t i = 0; i < enemy.getEnemyCount(); i++) {
+
+        enemy.setActiveEnemy(i);
+
+        uint8_t tileXIdx = level.coordToTileIndexX(enemy.getPosition().x) + prince.getDirectionOffset(1);
+        uint8_t tileYIdx = level.coordToTileIndexY(enemy.getPosition().y);
+
+// Serial.print("Enemy #");
+// Serial.print(i);
+// Serial.print(": ");
+// Serial.print(tileXIdx);
+// Serial.print(",");
+// Serial.print(tileYIdx);
+// Serial.print(": ");
+// Serial.print(level.getXLocation());
+// Serial.print(",");
+// Serial.print(level.getYLocation());
+// Serial.print(" - ");
+
+        if (tileXIdx >= level.getXLocation() && tileXIdx < level.getXLocation() + Constants::ScreenWidthInTiles && tileYIdx >= level.getYLocation() && tileYIdx < level.getYLocation() + Constants::ScreenHeightInTiles) {
+
+// Serial.print(" true ");
+            enemyIsVisible = true;
+
+        }
+
+        if  (enemy.getHealth() == 0 && enemy.getMoveCount() > 0) {
+
+            enemy.decMoveCount();
+
+        }
+
+        if (enemyIsVisible) break;
+        
+// Serial.println("");
+    }
+// Serial.println("");
+
+    if (!enemyIsVisible || !swapEnemies) enemy.setActiveEnemy(currentEnemy);
+
+    return enemyIsVisible;
+
+}
+
+void fixPosition() {
+
+    switch (level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX())) {
+
+        case 0:
+            prince.incX(2);
+            break;
+
+        case 1:
+        case 5:
+        case 9:
+            prince.incX(1);
+            break;
+
+        case 3:
+        case 7:
+        case 11:
+            prince.incX(-1);
+            break;
+
+        case 2:
+        case 6:
+        case 10:
+            break;
+
+        case 4:
+        case 8:
+            prince.incX(2);
+            break;
+
+    }
+
 }

@@ -4,6 +4,7 @@
 #include "fxdata/Levels.h"  
 
 #include "src/utils/Constants.h"
+#include "src/utils/Enums.h"
 #include "src/utils/Stack.h"
 #include "src/entities/Entities.h"
 #include "src/fonts/Font3x5.h"
@@ -25,66 +26,116 @@ void game_Init() {
 void game_PositionChars(bool clearSword) {
 
     enemy.init();
-    enemy.init(104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
-    enemy.init(80 + (40 * Constants::TileWidth), 25 + (0 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
 
-    prince.init(38-28, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Normal starting pos
-    // prince.init(38-24, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Gate Issue
-    // prince.init(38-24, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Sword Fight from Left
-    // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Sword Fight from Right
+    #ifdef LEVEL_DATA_FROM_FX
+        
+        FX::seekData(Levels::level1_Data);
 
-//    prince.init(8+78+24, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     // Double collapisble
-    // prince.init(78 + 24 + 12, 25 + 31 + 31, Direction::Left, Stance:: Crouch_3_End, 3, clearSword);          // Spikes
-    // prince.init(78 + 24, 25, Direction::Left, Stance:: Crouch_3_End, 3, clearSword);          // Jump 2
-    // prince.init(18, 25+31, Direction::Right,Stance:: Crouch_3_End, 3, clearSword);          // Sword fight
-    // prince.init(58, 25+31+31, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Second drink tonic
-    // prince.init(66, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Upper gate
-    // prince.init(70, 25 + 31, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // 2 leap
-    // prince.init(14, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Exit Seq
-    // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Both floor types
-    // prince.init(86, 87, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Normal starting pos but next to drop floor 3rd floor
-    // prince.init(86-36+4, 87, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Normal starting pos but next to drop floor 3rd floor
-                            // prince.init(78, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Under collapsible floor
-    // prince.init(66, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);        // Get tonic
-//    prince.init(18, 25+31+31, Direction::Left, Stance::Upright, 3, clearSword);     // Column of climbs
-//    prince.init(78, 25, Direction::Left, Stance::Upright, 3, clearSword);     // Below column of climbs
-    // prince.init(80, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);     // Top Left
-    // prince.init(18, 25, Direction::Right,Stance:: Crouch_3_End, 3, clearSword);          // Long Fall
-    // prince.init(18, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // problem
-    // prince.init(98, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // At bottom of tthree level drop.
-    // prince.init(98, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // At bottom of tthree level drop.
-    // prince.init(18, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Long Run
-//    prince.init(78 - 10, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Fall Error Stading Jump
-    // prince.init(78 - 4, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Fall Error running Jump
+        {
+            uint8_t xPixel = FX::readPendingUInt8();
+            uint8_t yPixel = FX::readPendingUInt8();
+            Direction direction = static_cast<Direction>(FX::readPendingUInt8());
+            uint16_t stance = static_cast<uint16_t>(FX::readPendingUInt8());
+            uint8_t health = FX::readPendingUInt8();
 
+            prince.init(xPixel, yPixel, direction, stance, health, clearSword);
+            
+        }
 
+        {
+            uint8_t xTile = FX::readPendingUInt8();
+            uint8_t yTile = FX::readPendingUInt8();
+            FX::readEnd();
 
-    level.init(prince, 60, 0);  // Normal starting posa
-    // level.init(prince, 37, 3);  // gate issuee
-    // level.init(prince, 60, 3);  // Fight from Left
-    // level.init(prince, 70, 3);  // Fight from Right
+            level.init(prince, xTile, yTile);  
+            
+        }
 
-    // level.init(prince, 10, 3);   // Double collapisble
-    // level.init(prince, 10, 0);   // Spikes
-    // level.init(prince, 30, 3);  // Jump 2
-    // level.init(prince, 70, 3);  // Sword fight
-    // level.init(prince, 50, 0);  // Second drink tonic
-    // level.init(prince, 50, 0);  // Upper Gate
-    // level.init(prince, 40, 3);  // 2 leap
-    // level.init(prince, 80, 3);  // Exit Seq
-    // level.init(prince, 20, 3);  // Both floor types
-    // level.init(prince, 60, 0);  //Normal starting pos but next to drop floor 3rd floor
-                            // level.init(prince, 50, 3);  // Under collapsible floor
-    // level.init(prince, Constants::TileHeight, 0);   // Get tonic
-    // level.init(prince, 0, 3);   // Column of climbs
-    // level.init(prince, 0, 6);   // Below Column of climbs
-    // level.init(prince, 0, 0);   // Top left
-    // level.init(prince, 40, 4);  // Long Fall
-    // level.init(prince, 60, 3);  // problem
-    // level.init(prince, 30, 6); // At bottom of tthree level drop.
-    // level.init(prince, 40, 0);  // Long run
-    // level.init(prince, 50, 3);  // Fall Error Stading Jump
-    // level.init(prince, 50, 3);  // Fall Error running Jump
+        FX::seekData(Levels::level1_Data + 7);
+
+        {
+            uint8_t xTile = FX::readPendingUInt8();
+
+            while (xTile != 255) {
+
+                uint8_t yTile = FX::readPendingUInt8();
+                uint8_t xPixel = FX::readPendingUInt8();
+                uint8_t yPixel = FX::readPendingUInt8();
+
+                Direction direction = static_cast<Direction>(FX::readPendingUInt8());
+                uint8_t health = FX::readPendingUInt8();
+                enemy.init((xTile * Constants::TileWidth) + xPixel, (yTile * Constants::TileHeight) + yPixel, direction, Stance::Upright, health);
+
+                xTile = FX::readPendingUInt8();
+
+            }
+            
+        }
+        
+        FX::readEnd();
+
+    #else
+
+        enemy.init(104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
+        enemy.init(80 + (40 * Constants::TileWidth), 25 + (0 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
+
+        prince.init(38-28+12+4, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Normal starting pos
+        // prince.init(38-24, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Gate Issue
+        // prince.init(38-24, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Sword Fight from Left
+        // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Sword Fight from Right
+        // prince.init(8+78+24, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     // Double collapisble
+        // prince.init(78 + 24 + 12, 25 + 31 + 31, Direction::Left, Stance:: Crouch_3_End, 3, clearSword);          // Spikes Upper
+        // prince.init(12, 25 + 31, Direction::Left, Stance:: Crouch_3_End, 3, clearSword);          // Spikes Lower
+        // prince.init(78 + 24, 25, Direction::Left, Stance:: Crouch_3_End, 3, clearSword);          // Jump 2
+        // prince.init(18, 25+31, Direction::Right,Stance:: Crouch_3_End, 3, clearSword);          // Sword fight
+        // prince.init(58, 25+31+31, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Second drink tonic
+        // prince.init(66, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Upper gate
+        // prince.init(70, 25 + 31, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // 2 leap
+        // prince.init(14, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Exit Seq
+        // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Both floor types
+        // prince.init(86, 87, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Normal starting pos but next to drop floor 3rd floor
+        // prince.init(86-36+4, 87, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Normal starting pos but next to drop floor 3rd floor
+        // prince.init(78, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Under collapsible floor
+        // prince.init(66, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);        // Get tonic
+        // prince.init(18, 25+31+31, Direction::Left, Stance::Upright, 3, clearSword);     // Column of climbs
+        // prince.init(78, 25, Direction::Left, Stance::Upright, 3, clearSword);     // Below column of climbs
+        // prince.init(80, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);     // Top Left
+        // prince.init(18, 25, Direction::Right,Stance:: Crouch_3_End, 3, clearSword);          // Long Fall
+        // prince.init(18, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // problem
+        // prince.init(98, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // At bottom of tthree level drop.
+        // prince.init(98, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // At bottom of tthree level drop.
+        // prince.init(18, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Long Run
+        // prince.init(78 - 10, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Fall Error Stading Jump
+        // prince.init(78 - 4, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Fall Error running Jump
+
+        level.init(prince, 60, 0);  // Normal starting posa
+        // level.init(prince, 37, 3);  // gate issuee
+        // level.init(prince, 60, 3);  // Fight from Left
+        // level.init(prince, 70, 3);  // Fight from Right
+        // level.init(prince, 10, 3);   // Double collapisble
+        // level.init(prince, 10, 0);   // Spikes Upper
+        // level.init(prince, 10, 6);   // Spikes Lower
+        // level.init(prince, 30, 3);  // Jump 2
+        // level.init(prince, 70, 3);  // Sword fight
+        // level.init(prince, 50, 0);  // Second drink tonic
+        // level.init(prince, 50, 0);  // Upper Gate
+        // level.init(prince, 40, 3);  // 2 leap
+        // level.init(prince, 80, 3);  // Exit Seq
+        // level.init(prince, 20, 3);  // Both floor types
+        // level.init(prince, 60, 0);  //Normal starting pos but next to drop floor 3rd floor
+        // level.init(prince, 50, 3);  // Under collapsible floor
+        // level.init(prince, Constants::TileHeight, 0);   // Get tonic
+        // level.init(prince, 0, 3);   // Column of climbs
+        // level.init(prince, 0, 6);   // Below Column of climbs
+        // level.init(prince, 0, 0);   // Top left
+        // level.init(prince, 40, 4);  // Long Fall
+        // level.init(prince, 60, 3);  // problem
+        // level.init(prince, 30, 6); // At bottom of tthree level drop.
+        // level.init(prince, 40, 0);  // Long run
+        // level.init(prince, 50, 3);  // Fall Error Stading Jump
+        // level.init(prince, 50, 3);  // Fall Error running Jump
+
+    #endif
 
 }
 
@@ -166,13 +217,16 @@ void game() {
     // if (justPressed & B_BUTTON) {
     //     prince.pushSequence(Stance::Draw_Sword_01_Start, Stance::Draw_Sword_06_End, Stance::Sword_Normal, true);
     // }
-    // prince.setSword(true);
-    if (justPressed & B_BUTTON) {
-    processRunJump(prince, level);
-    // prince.pushSequence(Stance::Run_Start_1_Start, Stance::Run_Start_6_End, true);
-    }
+    
+    // if (justPressed & B_BUTTON) {
+    //     processRunJump(prince, level);
+    //     // prince.pushSequence(Stance::Run_Start_1_Start, Stance::Run_Start_6_End, true);
+    // }
     #endif
 
+    #ifdef GIVE_SWORD
+        prince.setSword(true);
+    #endif
 
 
 
@@ -192,45 +246,16 @@ void game() {
 
     // Is the prince within distance of the enemy (cycle through all enemies to find it any closest)?
 
-    enemyIsVisible = false;
+    // enemyIsVisible = false;
 
     if (enemy.isEmpty()) {
 
-        uint8_t currentEnemy = enemy.getActiveEnemy();
-
-        for (uint8_t i = 0; i < enemy.getEnemyCount(); i++) {
-
-            enemy.setActiveEnemy(i);
-
-            //if (enemy.getHealth() > 0 || (enemy.getHealth() == 0 && enemy.getMoveCount() > 0)) {
-
-                uint8_t tileXIdx = level.coordToTileIndexX(enemy.getPosition().x) + prince.getDirectionOffset(1);
-                uint8_t tileYIdx = level.coordToTileIndexY(enemy.getPosition().y);
-
-                if (tileXIdx >= level.getXLocation() && tileXIdx < level.getXLocation() + 10 && tileYIdx >= level.getYLocation() && tileYIdx < level.getYLocation() + 3) {
-
-                    enemyIsVisible = true;
-
-                }
-
-                if  (enemy.getHealth() == 0 && enemy.getMoveCount() > 0) {
-
-                    enemy.decMoveCount();
-
-                }
-
-                if (enemyIsVisible) break;
-
-            //}
-
-            if (!enemyIsVisible) enemy.setActiveEnemy(currentEnemy);
-
-        }
+        enemyIsVisible = isEnemyVisible(true);
 
     }
     else {
 
-        enemyIsVisible = true;
+        enemyIsVisible = isEnemyVisible(false);
 
     }
 
@@ -306,27 +331,16 @@ void game() {
 
                         case Constants::StrikeDistance + 1 ... 30:
 
-                            switch (prince.getStance()) {
+                            if (prince.isSwordDrawn()) {
 
+                                enemy.push(Stance::Sword_Normal, false);
 
-                                // If the prince is ready for combat then assume the combat position ..
+                            }
+                            else {
 
-                                case Stance::Sword_Attack_01_Start ... Stance::Sword_Attack_08_End:
-                                case Stance::Attack_Block_01_Start ... Stance::Attack_Block_03_End:
-                                case Stance::Draw_Sword_01_Start ... Stance::Draw_Sword_06_End:
-                                case Stance::Sword_Step_01_Start ... Stance::Sword_Step_03_End:
-                                case Stance::Sword_Normal:
-                                    enemy.push(Stance::Sword_Normal, false);
-                                    break;
-
-
-                                // Otherwise creep forward ..
-
-                                default:
-                                    if (level.canMoveForward(enemyBase, Action::SmallStep)) {
-                                        enemy.pushSequence(Stance::Sword_Step_01_Start, Stance::Sword_Step_03_End, true);
-                                    }
-                                    break;
+                                if (level.canMoveForward(enemyBase, Action::SmallStep)) {
+                                    enemy.pushSequence(Stance::Sword_Step_01_Start, Stance::Sword_Step_03_End, true);
+                                }
                                 
                             }
 
@@ -362,10 +376,15 @@ void game() {
                     enemy.setDirection(Direction::Right);
                     moveBackwardsWithSword(enemyBase, enemy);
 
-                    if (prince.getDirection() == Direction::Right) {
+                    if (prince.isSwordDrawn() && prince.getDirection() == Direction::Right) {
 
                         prince.setDirection(Direction::Left);
                         moveBackwardsWithSword(prince, prince);
+
+                    }
+                    else if (!prince.isSwordDrawn() && xDelta <= 24) {
+
+                        pushDead(prince, level, gamePlay, true);
 
                     }
 
@@ -378,11 +397,16 @@ void game() {
                     enemy.setDirection(Direction::Left);
                     moveBackwardsWithSword(enemyBase, enemy);
 
-                    if (prince.getDirection() == Direction::Left) {
+                    if (prince.isSwordDrawn() && prince.getDirection() == Direction::Left) {
 
                         prince.setDirection(Direction::Right);
                         moveBackwardsWithSword(prince, prince);
 
+                    }
+                    else if (!prince.isSwordDrawn() && xDelta >= -24) {
+
+                        pushDead(prince, level, gamePlay, true);
+                        
                     }
 
                     break;
@@ -546,6 +570,8 @@ void game() {
             switch (prince.getStance()) {
 
                 case Stance::Upright:
+
+                    fixPosition();  // Fix the position if we are not in positions 2, 6 or 10.
 
                     if (prince.getDirection() == Direction::Right) {
 
@@ -758,8 +784,8 @@ void game() {
                                 break;
 
                             case CanJumpUpResult::StepThenJump:
-                                prince.pushSequence(Stance::Jump_Up_A_1_Start, Stance::Jump_Up_A_14_End, Stance::Upright, true);
-                                prince.pushSequence(Stance::Small_Step_1_Start, Stance::Small_Step_6_End, Stance::Upright, false);
+                                prince.pushSequence(Stance::Jump_Up_A_1_Start, Stance::Jump_Up_A_14_End, true);
+                                prince.pushSequence(Stance::Small_Step_1_Start, Stance::Small_Step_6_End, false);
                                 break;
 
                             case CanJumpUpResult::TurnThenJump:
@@ -781,7 +807,7 @@ void game() {
 
                 case Stance::Jump_Up_A_14_End:     // Hanging on ledge  (dist 2)..
                 case Stance::Jump_Up_B_14_End:    
-                
+              
                     if (pressed & DOWN_BUTTON) {
 
                         CanClimbDownPart2Result climbDownResult = level.canClimbDown_Part2(prince, 0);
@@ -1113,13 +1139,31 @@ void game() {
                         }
                         else if (pressed & A_BUTTON) {
 
-                            uint8_t itemIdx = level.canReachItem(prince, ItemType::Potion_Small);
+                            uint8_t itemIdx = level.canReachItem(prince, ItemType::Potion_Small, ItemType::Potion_Poison);
 
                             if (itemIdx != Constants::NoItemFound) {
 
                                 Item &item = level.getItem(itemIdx);
+
+                                switch (item.itemType) {
+
+                                    case ItemType::Potion_Small:
+                                        prince.pushSequence(Stance::Drink_Tonic_Small_1_Start, Stance::Drink_Tonic_Small_15_End, Stance::Upright, true);
+                                        break;
+
+                                    case ItemType::Potion_Large:
+                                        prince.pushSequence(Stance::Drink_Tonic_Large_1_Start, Stance::Drink_Tonic_Large_15_End, Stance::Upright, true);
+                                        break;
+
+                                    case ItemType::Potion_Poison:
+                                        prince.pushSequence(Stance::Drink_Tonic_Poison_1_Start, Stance::Drink_Tonic_Poison_15_End, Stance::Upright, true);
+                                        break;
+
+                                    default: break;
+
+                                }
+
                                 item.itemType = ItemType::None;
-                                prince.pushSequence(Stance::Drink_Tonic_1_Start, Stance::Drink_Tonic_15_End, Stance::Upright, true);
 
                                 break;
 
@@ -1481,7 +1525,7 @@ void game() {
                         prince.incFalling();
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
-                        DEBUG_PRINT(F(" to"));
+                        DEBUG_PRINT(F(" to "));
                         DEBUG_PRINTLN(prince.getFalling());
                         #endif
 
@@ -1590,9 +1634,26 @@ void game() {
 
                     break;
 
-                case Stance::Drink_Tonic_14:
-                    prince.incHealth(2);
+
+                case Stance::Drink_Tonic_Small_14:
+                    prince.incHealth(1);
                     break;
+
+
+                case Stance::Drink_Tonic_Large_14:
+                    prince.incHealthMax(1);
+                    prince.setHealth(prince.getHealthMax());
+                    break;
+
+
+                case Stance::Drink_Tonic_Poison_14:
+                    prince.incHealth(-1);
+
+                    if (prince.getHealth() == 0) {
+                        pushDead(prince, level, gamePlay, true);
+                    }
+                    break;
+
 
                 case Stance::Upright:
 
@@ -2037,7 +2098,7 @@ void game() {
         switch (prince.getX() % 12) {
 
             case 0:
-                prince.push(Stance::Collide_Wall_M2_Start_End, false);
+                prince.push(Stance::Collide_Wall_P2_Start_End, false);
                 break;
 
             case 1:

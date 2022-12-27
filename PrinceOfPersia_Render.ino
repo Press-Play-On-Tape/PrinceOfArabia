@@ -57,6 +57,7 @@ void render(bool enemyIsVisible) {
                     break;
 
                 case ItemType::Spikes:
+
                     if (item.data.spikes.imageType == 1) {
                         FX::drawBitmap(xLoc, yLoc + 14, Images::Spikes_BG_00 + (item.data.spikes.position * 118), 0, dbmMasked);
                     }
@@ -86,7 +87,15 @@ void render(bool enemyIsVisible) {
                     break;
 
                 case ItemType::Potion_Small:
-                    FX::drawBitmap(xLoc + 6, yLoc + 12, Images::Potion_Small_00 + (item.data.potionSmall.frame * 28), 0, dbmMasked);
+                    FX::drawBitmap(xLoc + 6, yLoc + 10, Images::Potion_Small_00 + (item.data.potion.frame * 28), 0, dbmMasked);
+                    break;
+
+                case ItemType::Potion_Large:
+                    FX::drawBitmap(xLoc + 6, yLoc + 10, Images::Potion_Large_00 + (item.data.potion.frame * 28), 0, dbmMasked);
+                    break;
+
+                case ItemType::Potion_Poison:
+                    FX::drawBitmap(xLoc + 6, yLoc + 10, Images::Potion_Poison_00 + (item.data.potion.frame * 28), 0, dbmMasked);
                     break;
 
                 case ItemType::FloorButton1:
@@ -244,9 +253,10 @@ void render(bool enemyIsVisible) {
         }
         
     }
+// Serial.println(enemyIsVisible);    
 
     if (!enemyIsVisible) {
-    
+
         renderNumber_Small(123, 47, gamePlay.timer_Min);
         renderNumber_Small(123, 57, gamePlay.timer_Sec);
 

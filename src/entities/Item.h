@@ -54,7 +54,7 @@ struct FloorButton2 {
 struct CollapsedFloor {
 };
  
-struct PotionSmall {
+struct Potion {
     uint8_t frame;
 };
 
@@ -76,7 +76,7 @@ struct Item {
         struct Sword skeleton;
         struct CollapsingFloor collapsingFloor;
         struct CollapsedFloor collapsedFloor;
-        struct PotionSmall potionSmall;
+        struct Potion potion;
         struct FloorButton1 floorButton1;
         struct FloorButton1 floorButton2;
         struct Spikes spikes;
