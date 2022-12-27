@@ -990,6 +990,8 @@ struct Level {
                 case TILE_FLOOR_GATE_FRONT_TRACK_1:
                     return true;
 
+                default: break;
+
             }
 
             switch (fgTile) {
@@ -1002,6 +1004,9 @@ struct Level {
                 case TILE_FG_WALL_6:
                 case TILE_FG_WALL_7:
                     return false;
+
+                // default:                     << Uncomment adds +32 bytes!
+                //     return true;
 
             }
 
@@ -1085,6 +1090,13 @@ struct Level {
                     #endif
 
                     return true;
+
+                default:
+
+                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
+                    DEBUG_PRINTLN(" false");
+                    #endif
+                    return false;
 
             }
 

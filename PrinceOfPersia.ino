@@ -84,8 +84,7 @@ void loop() {
             case GameState::SplashScreen_Init:
 
                 splashScreen_Init();
-                splashScreen();
-                break;
+                [[fallthrough]];
 
             case GameState::SplashScreen:
 
@@ -105,8 +104,7 @@ void loop() {
                 gamePlay.gameState = GameState::Title;
                 
                 title_Init();
-                title();
-                break;
+                [[fallthrough]];
 
             case GameState::Title:
 
@@ -160,55 +158,53 @@ void loop() {
 
     // Invert screen during play ?
     
-    switch (prince.getStance()) {
+    { 
 
-        case Stance::Pickup_Sword_3:
-        case Stance::Pickup_Sword_5:
-        case Stance::Drink_Tonic_Small_12:
-        case Stance::Drink_Tonic_Small_14:
-        case Stance::Drink_Tonic_Large_12:
-        case Stance::Drink_Tonic_Large_14:
-            arduboy.invert(true);
-            break;
+        bool invert = false;
+        
+        switch (prince.getStance()) {
 
-        case Stance::Drink_Tonic_Poison_12:
-        case Stance::Drink_Tonic_Poison_14:
-            arduboy.invert(true);
-            break;
+            case Stance::Pickup_Sword_3:
+            case Stance::Pickup_Sword_5:
+            case Stance::Drink_Tonic_Small_12:
+            case Stance::Drink_Tonic_Small_14:
+            case Stance::Drink_Tonic_Large_12:
+            case Stance::Drink_Tonic_Large_14:
+            case Stance::Drink_Tonic_Poison_12:
+            case Stance::Drink_Tonic_Poison_14:
+                invert = true;
+                break;
 
-        default:
-            arduboy.invert(false);
-            break;
-
-    }    
+        }    
 
 
-    // Invert screen when striking player / enemy in sword fight ?
+        // Invert screen when striking player / enemy in sword fight ?
     
-    {
         Flash &flash = level.getFlash();
     
         if ((flash.frame == 2 || flash.frame == 4) && flash.type == FlashType::SwordFight) {
-
-            arduboy.invert(true);
-
+            invert = true;
         }
-    
-    }
 
 
-    // Invert screen during sequence ?
+        // Invert screen during sequence ?
 
-    if (titleScreenVars.getMode() == TitleScreenMode::CutScene_1 && titleScreenVars.count == 168 && titleScreenVars.prevCount != 168) {
+        if (titleScreenVars.getMode() == TitleScreenMode::CutScene_1) {
 
-        arduboy.invert(true);
+            if (titleScreenVars.count == 168 && titleScreenVars.prevCount != 168) {
+                invert = true;
+            }
+
+            if (titleScreenVars.count == 171 && titleScreenVars.prevCount != 171) {
+                invert = true;
+            }
         
-    }
+        }
 
-    if (titleScreenVars.getMode() == TitleScreenMode::CutScene_1 && titleScreenVars.count == 171 && titleScreenVars.prevCount != 171) {
+        if (invert) {
+            arduboy.invert(true);
+        }
 
-        arduboy.invert(true);
-        
     }
 
 

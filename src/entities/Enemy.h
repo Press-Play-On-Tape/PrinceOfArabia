@@ -67,13 +67,7 @@ class Enemy : public BaseStack {
 
         }
 
-        uint16_t getStance()                        { 
-            // Serial.print("ae: ");
-            // Serial.print(activeEnemy);
-            // Serial.print(", cnt: ");
-            // Serial.println(count);
-
-        return this->base[this->activeEnemy].getStance(); }
+        uint16_t getStance()                        { return this->base[this->activeEnemy].getStance(); }
         uint16_t getPrevStance()                    { return this->base[this->activeEnemy].getPrevStance(); }
         int16_t getX()                              { return this->base[this->activeEnemy].getX(); }
         int16_t getY()                              { return this->base[this->activeEnemy].getY(); }
@@ -104,17 +98,6 @@ class Enemy : public BaseStack {
             return this->base[this->activeEnemy];
 
         }
-
-
-        // Point getPosition(int8_t x, int8_t y = 0)   { 
-            
-        //     Point newPoint;
-
-        //     newPoint.x = this->base[this->activeEnemy].getPosition().x + x;
-        //     newPoint.y = this->base[this->activeEnemy].getPosition().y + y;
-        //     return newPoint; 
-            
-        // }
 
         Direction getOppositeDirection() {
 

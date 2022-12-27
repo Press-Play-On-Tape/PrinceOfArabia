@@ -51,9 +51,6 @@ struct FloorButton2 {
     uint8_t timeToFall;         // How long does gate remain open for.
 };
  
-struct CollapsedFloor {
-};
- 
 struct Potion {
     uint8_t frame;
 };
@@ -75,7 +72,6 @@ struct Item {
         struct Sword sword;
         struct Sword skeleton;
         struct CollapsingFloor collapsingFloor;
-        struct CollapsedFloor collapsedFloor;
         struct Potion potion;
         struct FloorButton1 floorButton1;
         struct FloorButton1 floorButton2;
