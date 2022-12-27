@@ -784,8 +784,8 @@ void game() {
                                 break;
 
                             case CanJumpUpResult::StepThenJump:
-                                prince.pushSequence(Stance::Jump_Up_A_1_Start, Stance::Jump_Up_A_14_End, Stance::Upright, true);
-                                prince.pushSequence(Stance::Small_Step_1_Start, Stance::Small_Step_6_End, Stance::Upright, false);
+                                prince.pushSequence(Stance::Jump_Up_A_1_Start, Stance::Jump_Up_A_14_End, true);
+                                prince.pushSequence(Stance::Small_Step_1_Start, Stance::Small_Step_6_End, false);
                                 break;
 
                             case CanJumpUpResult::TurnThenJump:
@@ -807,7 +807,7 @@ void game() {
 
                 case Stance::Jump_Up_A_14_End:     // Hanging on ledge  (dist 2)..
                 case Stance::Jump_Up_B_14_End:    
-                
+              
                     if (pressed & DOWN_BUTTON) {
 
                         CanClimbDownPart2Result climbDownResult = level.canClimbDown_Part2(prince, 0);
