@@ -108,7 +108,6 @@ uint8_t level1_Data[] = {
         1, 43, 4, 117,          // CollapsingTile (dist to fall)                                    
         1, 11, 3, 24,           // CollapsingTile (dist to fall)                                    
         1, 12, 3, 24,           // CollapsingTile (dist to fall)                                    
-        12, 63, 0,               // Potion Small                              
         255                     // End
     }
 
