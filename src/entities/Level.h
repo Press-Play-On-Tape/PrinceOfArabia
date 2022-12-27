@@ -2,8 +2,10 @@
 
 #include "../utils/Arduboy2Ext.h"
 #include "Prince.h"   
+#include "Enemy.h"   
 #include "../utils/Constants.h"
 #include "../utils/Stack.h"
+#include "../utils/Levels_Utils.h"
 #include "Item.h"
 
 #define TILE_NONE -1
@@ -66,6 +68,8 @@ struct Level {
     private:
 
         uint8_t level = 0;
+        uint8_t width = 60;
+        uint8_t height = 0;
         uint8_t xLoc = 60;
         uint8_t yLoc = 0;
         uint8_t yOffset = 0;                        // Ofset when rendering.
@@ -80,15 +84,19 @@ struct Level {
     public:
 
         uint8_t getLevel()                      { return this->level; }
+        uint8_t getWidth()                      { return this->width; }
+        uint8_t getHeight()                     { return this->height; }
         uint8_t getXLocation()                  { return this->xLoc; }
         uint8_t getYLocation()                  { return this->yLoc; }
         uint8_t getYOffset()                    { return this->yOffset; }
-        Flash &getFlash()                        { return this->flash; }
+        Flash &getFlash()                       { return this->flash; }
         Sign &getSign()                         { return this->sign; }
         Item &getItem(uint8_t idx)              { return this->items[idx]; }
         Direction getYDirection()               { return this->yOffsetDir; }
 
         void setLevel(uint8_t val)              { this->level = val; }
+        void setWidth(uint8_t val)              { this->width = val; }
+        void setHeight(uint8_t val)             { this->height = val; }
         void setXLocation(uint8_t val)          { this->xLoc = val; }
         void setYLocation(uint8_t val)          { this->yLoc = val; }
         void setYOffset(uint8_t val)            { this->yOffset = val; }
@@ -97,27 +105,163 @@ struct Level {
 
     public:
 
-        void init(Prince &prince, uint8_t xLoc, uint8_t yLoc) {
+        #ifndef LEVEL_DATA_FROM_FX
 
-            this->xLoc = xLoc;
-            this->yLoc = yLoc;
+            void init(Prince &prince, uint8_t width, uint8_t height, uint8_t xLoc, uint8_t yLoc) {
 
-            this->loadMap();
-            this->loadItems();
+                this->width = width;
+                this->height = height;
 
-            if (prince.getY() > 56) {
+                this->xLoc = xLoc;
+                this->yLoc = yLoc;
 
-                this->yOffset = prince.getY() - 56;
+                this->loadMap();
+                this->loadItems();
+
+                if (prince.getY() > 56) {
+
+                    this->yOffset = prince.getY() - 56;
+
+                }
+                else {
+
+                    this->yOffset = 0;
+
+                }
 
             }
-            else {
 
-                this->yOffset = 0;
+        #endif
 
-            }
+        void init_PositionChars(Prince &prince, Enemy &enemy, bool clearSword) {
+
+            enemy.init();
+
+            #ifdef LEVEL_DATA_FROM_FX
+                
+                FX::seekData(Levels_Utils::getLevel_Data(this->level - 1));
+
+                {
+                    uint8_t xPixel = FX::readPendingUInt8();
+                    uint8_t yPixel = FX::readPendingUInt8();
+                    Direction direction = static_cast<Direction>(FX::readPendingUInt8());
+                    uint16_t stance = static_cast<uint16_t>(FX::readPendingUInt8());
+                    uint8_t health = FX::readPendingUInt8();
+
+                    prince.init(xPixel, yPixel, direction, stance, health, clearSword);
+                    
+                }
+
+                {
+                    this->width = FX::readPendingUInt8();
+                    this->height = FX::readPendingUInt8();
+                    this->xLoc = FX::readPendingUInt8();
+                    this->yLoc = yLoc = FX::readPendingUInt8();
+                    FX::readEnd();
+
+                    this->loadMap();
+                    this->loadItems();
+
+                    if (prince.getY() > 56) {
+
+                        this->yOffset = prince.getY() - 56;
+
+                    }
+                    else {
+
+                        this->yOffset = 0;
+
+                    }
+
+                }
+
+                FX::seekData(Levels_Utils::getLevel_Data(this->level - 1) + 9);
+
+                {
+                    uint8_t xTile = FX::readPendingUInt8();
+
+                    while (xTile != 255) {
+
+                        uint8_t yTile = FX::readPendingUInt8();
+                        uint8_t xPixel = FX::readPendingUInt8();
+                        uint8_t yPixel = FX::readPendingUInt8();
+
+                        Direction direction = static_cast<Direction>(FX::readPendingUInt8());
+                        uint8_t health = FX::readPendingUInt8();
+                        enemy.init((xTile * Constants::TileWidth) + xPixel, (yTile * Constants::TileHeight) + yPixel, direction, Stance::Upright, health);
+
+                        xTile = FX::readPendingUInt8();
+
+                    }
+                    
+                }
+                
+                FX::readEnd();
+
+            #else
+
+                enemy.init(104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
+                enemy.init(80 + (40 * Constants::TileWidth), 25 + (0 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
+
+                // prince.init(38-28+12+4, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Normal starting pos
+                // prince.init(38-24, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Gate Issue
+                // prince.init(38-24, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Sword Fight from Left
+                // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Sword Fight from Right
+                prince.init(8+78+24, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     // Double collapisble
+                // prince.init(78 + 24 + 12, 25 + 31 + 31, Direction::Left, Stance:: Crouch_3_End, 3, clearSword);          // Spikes Upper
+                // prince.init(12, 25 + 31, Direction::Left, Stance:: Crouch_3_End, 3, clearSword);          // Spikes Lower
+                // prince.init(78 + 24, 25, Direction::Left, Stance:: Crouch_3_End, 3, clearSword);          // Jump 2
+                // prince.init(18, 25+31, Direction::Right,Stance:: Crouch_3_End, 3, clearSword);          // Sword fight
+                // prince.init(58, 25+31+31, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Second drink tonic
+                // prince.init(66, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Upper gate
+                // prince.init(70, 25 + 31, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // 2 leap
+                // prince.init(14, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Exit Seq
+                // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Both floor types
+                // prince.init(86, 87, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Normal starting pos but next to drop floor 3rd floor
+                // prince.init(86-36+4, 87, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Normal starting pos but next to drop floor 3rd floor
+                // prince.init(78, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Under collapsible floor
+                // prince.init(66, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);        // Get tonic
+                // prince.init(18, 25+31+31, Direction::Left, Stance::Upright, 3, clearSword);     // Column of climbs
+                // prince.init(78, 25, Direction::Left, Stance::Upright, 3, clearSword);     // Below column of climbs
+                // prince.init(80, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);     // Top Left
+                // prince.init(18, 25, Direction::Right,Stance:: Crouch_3_End, 3, clearSword);          // Long Fall
+                // prince.init(18, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // problem
+                // prince.init(98, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // At bottom of tthree level drop.
+                // prince.init(98, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // At bottom of tthree level drop.
+                // prince.init(18, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Long Run
+                // prince.init(78 - 10, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Fall Error Stading Jump
+                // prince.init(78 - 4, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Fall Error running Jump
+
+                this->init(prince, 90, 9, 60, 0);  // Normal starting posa
+                // this->init(prince, 90, 9,  37, 3);  // gate issuee
+                // this->init(prince, 90, 9,  60, 3);  // Fight from Left
+                // this->init(prince, 90, 9,  70, 3);  // Fight from Right
+                // this->init(prince, 90, 9,  10, 3);   // Double collapisble
+                // this->init(prince, 90, 9,  10, 0);   // Spikes Upper
+                // this->init(prince, 90, 9,  10, 6);   // Spikes Lower
+                // this->init(prince, 90, 9,  30, 3);  // Jump 2
+                // this->init(prince, 90, 9,  70, 3);  // Sword fight
+                // this->init(prince, 90, 9,  50, 0);  // Second drink tonic
+                // this->init(prince, 90, 9,  50, 0);  // Upper Gate
+                // this->init(prince, 90, 9,  40, 3);  // 2 leap
+                // this->init(prince, 90, 9,  80, 3);  // Exit Seq
+                // this->init(prince, 90, 9,  20, 3);  // Both floor types
+                // this->init(prince, 90, 9,  60, 0);  //Normal starting pos but next to drop floor 3rd floor
+                this->init(prince, 90, 9,  50, 3);  // Under collapsible floor
+                // this->init(prince, 90, 9,  Constants::TileHeight, 0);   // Get tonic
+                // this->init(prince, 90, 9,  0, 3);   // Column of climbs
+                // this->init(prince, 90, 9,  0, 6);   // Below Column of climbs
+                // this->init(prince, 90, 9,  0, 0);   // Top left
+                // this->init(prince, 90, 9,  40, 4);  // Long Fall
+                // this->init(prince, 90, 9,  60, 3);  // problem
+                // this->init(prince, 90, 9,  30, 6); // At bottom of tthree level drop.
+                // this->init(prince, 90, 9,  40, 0);  // Long run
+                // this->init(prince, 90, 9,  50, 3);  // Fall Error Stading Jump
+                // this->init(prince, 90, 9,  50, 3);  // Fall Error running Jump
+
+            #endif
 
         }
-
 
         void incYOffset(int8_t inc) {
 
@@ -125,7 +269,9 @@ struct Level {
         }
 
 
-        void update(Arduboy2Ext &arduboy) { 
+        LevelUpdate update(Arduboy2Ext &arduboy, Prince &prince) { 
+
+            LevelUpdate levelUpdate = LevelUpdate::NoAction;
 
 
             // Update level offset ..
@@ -241,6 +387,16 @@ struct Level {
 
                                     item.y = item.y + ((item.data.collapsingFloor.distToFall / 31) + 1);
                                     item.itemType = ItemType::CollpasedFloor;
+
+                                    Point newPos = prince.getPosition();
+                                    int8_t tileXIdx = this->coordToTileIndexX(newPos.x);
+                                    int8_t tileYIdx = this->coordToTileIndexY(newPos.y);
+
+                                    if (tileXIdx == item.x && tileYIdx == item.y) {
+
+                                        levelUpdate = LevelUpdate::FloorCollapsedOnPrince;
+
+                                    }
 
                                 }
 
@@ -372,6 +528,8 @@ struct Level {
                 }
 
             }
+
+            return levelUpdate;
 
         }
 
@@ -568,7 +726,7 @@ struct Level {
             this->sign.counter = 0;
 
             uint8_t itemIdx = 0;
-            FX::seekData(Levels::Level1_Items);
+            FX::seekData(Levels_Utils::getLevel_Items(this->level - 1));
             uint8_t itemType = FX::readPendingUInt8();
 
             while (itemType != 255) {
@@ -653,7 +811,7 @@ struct Level {
 
                     if (this->xLoc == 0) {
 
-                        FX::seekData(static_cast<uint24_t>(Levels::Level1_BG + (y * Levels::Level1_Width) + this->xLoc));
+                        FX::seekData(static_cast<uint24_t>(Levels_Utils::getLevel_BG(this->level - 1) + (y * this->width) + this->xLoc));
 
                         for (uint8_t x = 0; x < 16; x++) {
 
@@ -676,7 +834,7 @@ struct Level {
                     }
                     else {
 
-                        FX::seekData(static_cast<uint24_t>(Levels::Level1_BG + (y * Levels::Level1_Width) + this->xLoc - 3));
+                        FX::seekData(static_cast<uint24_t>(Levels_Utils::getLevel_BG(this->level - 1) + (y * this->width) + this->xLoc - 3));
 
                         for (uint8_t x = 0; x < 16; x++) {
 
@@ -711,7 +869,7 @@ struct Level {
 
                     if (this->xLoc == 0) {
 
-                        FX::seekData(static_cast<uint24_t>(Levels::Level1_FG + (y * Levels::Level1_Width) + this->xLoc));
+                        FX::seekData(static_cast<uint24_t>(Levels_Utils::getLevel_FG(this->level - 1) + (y * this->width) + this->xLoc));
 
                         for (uint8_t x = 0; x < 16; x++) {
 
@@ -734,7 +892,7 @@ struct Level {
                     }
                     else {
 
-                        FX::seekData(static_cast<uint24_t>(Levels::Level1_FG + (y * Levels::Level1_Width) + this->xLoc - 3));
+                        FX::seekData(static_cast<uint24_t>(Levels_Utils::getLevel_FG(this->level - 1) + (y * this->width) + this->xLoc - 3));
 
                         for (uint8_t x = 0; x < 16; x++) {
 
@@ -816,7 +974,7 @@ struct Level {
                 case TILE_FLOOR_LH_END_PATTERN_1:
                 case TILE_FLOOR_LH_END_PATTERN_2:
                 case TILE_FLOOR_RH_END:
-                case TILE_FLOOR_RH_END_GATE:
+                // case TILE_FLOOR_RH_END_GATE:
                 case TILE_FLOOR_LH_WALL_1:
                 case TILE_FLOOR_LH_WALL_2:
                 case TILE_FLOOR_LH_WALL_3:

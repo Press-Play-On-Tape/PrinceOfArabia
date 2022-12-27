@@ -149,3 +149,8 @@ enum class FlashType : uint8_t {
     SwordFight,
 };
 
+enum class LevelUpdate : uint8_t {
+    NoAction,
+    FloorCollapsedOnPrince,
+};
+

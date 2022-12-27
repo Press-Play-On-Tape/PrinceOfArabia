@@ -9,7 +9,7 @@
 #define _ALT_B_BUTTON
 #define _GIVE_SWORD
 
-#define LEVEL_DATA_FROM_FX
+#define _LEVEL_DATA_FROM_FX
 
 #define _DEBUG
 #define _DEBUG_ONSCREEN_DETAILS
@@ -24,7 +24,7 @@
 
 #define _DEBUG_ACTION_CANMOVEFORWARD
 #define _DEBUG_ACTION_CANJUMPUP
-#define DEBUG_ACTION_CANJUMPUP_PART2
+#define _DEBUG_ACTION_CANJUMPUP_PART2
 #define _DEBUG_ACTION_CANCLIMBDOWN
 #define _DEBUG_ACTION_CANCLIMBDOWN_PART2
 #define _DEBUG_ACTION_CANFALL
@@ -813,6 +813,8 @@ namespace Constants {
     constexpr int8_t InAir_DoNotFall = 126;
 
     constexpr uint8_t SpikeClosingDelay = 32;
+    constexpr uint8_t FallingTileAbove = 96;
+    constexpr uint8_t FallingTileSteppedOn = 24;
 
     const uint8_t StanceToImageXRef[] PROGMEM  = {
         0, 

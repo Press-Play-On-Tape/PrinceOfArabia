@@ -36,6 +36,7 @@ int8_t Level1_BG[] = {
 
 
 uint8_t level1_Data[] = {
+
     // Prince
     10,                         // Prince starting x pos
     56,                         // Prince starting y pos (25, 56, 87)
@@ -43,6 +44,8 @@ uint8_t level1_Data[] = {
     3,                          // Prince starting stance, 3 Crouch_3_End
     3,                          // Prince starting health
     // Level
+    90,                         // Width
+    9,                          // Height
     60,                         // Level x starting position
     0,                          // Level y starting position
     // Enemy 1          
