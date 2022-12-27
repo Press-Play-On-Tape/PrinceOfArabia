@@ -611,6 +611,8 @@ void game() {
                     else if (pressed & UP_BUTTON) {
 
                         CanJumpUpResult jumpResult = level.canJumpUp(prince);
+                        int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x);
+                        int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y) - 1;
 
                         switch (jumpResult) {
 
@@ -624,8 +626,7 @@ void game() {
 
                             case CanJumpUpResult::JumpThenFall_CollapseFloor:
                                 {
-                                    int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x) + prince.getDirectionOffset(1);
-                                    int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y) - 1;
+                                    tileXIdx = tileXIdx + prince.getDirectionOffset(1);
                                     uint8_t itemIdx = level.getItem(ItemType::CollapsingFloor, tileXIdx, tileYIdx);
 
                                     if (itemIdx != Constants::NoItemFound) {
@@ -642,8 +643,6 @@ void game() {
 
                             case CanJumpUpResult::JumpThenFall_CollapseFloorAbove:
                                 {
-                                    int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x);
-                                    int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y) - 1;
                                     uint8_t itemIdx = level.getItem(ItemType::CollapsingFloor, tileXIdx, tileYIdx);
 
                                     if (itemIdx != Constants::NoItemFound) {
@@ -660,8 +659,7 @@ void game() {
 
                             case CanJumpUpResult::StepThenJumpThenFall_CollapseFloor:
                                 {
-                                    int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x) + prince.getDirectionOffset(1);
-                                    int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y) - 1;
+                                    tileXIdx = tileXIdx + prince.getDirectionOffset(1);
                                     uint8_t itemIdx = level.getItem(ItemType::CollapsingFloor, tileXIdx, tileYIdx);
 
                                     if (itemIdx != Constants::NoItemFound) {
@@ -1039,24 +1037,8 @@ void game() {
 
                                 Item &item = level.getItem(itemIdx);
 
-                                switch (item.itemType) {
-
-                                    case ItemType::Potion_Small:
-                                        prince.pushSequence(Stance::Drink_Tonic_Small_1_Start, Stance::Drink_Tonic_Small_15_End, Stance::Upright, true);
-                                        break;
-
-                                    case ItemType::Potion_Large:
-                                        prince.pushSequence(Stance::Drink_Tonic_Large_1_Start, Stance::Drink_Tonic_Large_15_End, Stance::Upright, true);
-                                        break;
-
-                                    case ItemType::Potion_Poison:
-                                        prince.pushSequence(Stance::Drink_Tonic_Poison_1_Start, Stance::Drink_Tonic_Poison_15_End, Stance::Upright, true);
-                                        break;
-
-                                    default: break;
-
-                                }
-
+                                uint8_t idx = static_cast<uint8_t>(item.itemType) - static_cast<uint8_t>(ItemType::Potion_Poison); 
+                                prince.pushSequence(Stance::Drink_Tonic_Small_1_Start + (idx * 15), Stance::Drink_Tonic_Small_15_End + (idx * 15), Stance::Upright, true);
                                 item.itemType = ItemType::None;
 
                                 break;

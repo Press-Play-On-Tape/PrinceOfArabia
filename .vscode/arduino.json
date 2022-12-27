@@ -3,5 +3,5 @@
     "output": "/Users/simonholmes/projects/build",
     "sketch": "PrinceOfPersia.ino",
     "port": "/dev/tty.usbmodem14601",
-    "configuration": "core=arduboy-core,boot=org"
+    "configuration": "core=arduboy-core,boot=cathy3k"
 }
