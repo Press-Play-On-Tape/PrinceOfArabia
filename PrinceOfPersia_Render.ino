@@ -87,7 +87,15 @@ void render(bool enemyIsVisible) {
                     break;
 
                 case ItemType::Potion_Small:
-                    FX::drawBitmap(xLoc + 6, yLoc + 12, Images::Potion_Small_00 + (item.data.potionSmall.frame * 28), 0, dbmMasked);
+                    FX::drawBitmap(xLoc + 6, yLoc + 10, Images::Potion_Small_00 + (item.data.potion.frame * 28), 0, dbmMasked);
+                    break;
+
+                case ItemType::Potion_Large:
+                    FX::drawBitmap(xLoc + 6, yLoc + 10, Images::Potion_Large_00 + (item.data.potion.frame * 28), 0, dbmMasked);
+                    break;
+
+                case ItemType::Potion_Poison:
+                    FX::drawBitmap(xLoc + 6, yLoc + 10, Images::Potion_Poison_00 + (item.data.potion.frame * 28), 0, dbmMasked);
                     break;
 
                 case ItemType::FloorButton1:

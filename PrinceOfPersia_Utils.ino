@@ -460,21 +460,21 @@ bool isEnemyVisible(bool swapEnemies) { // Should we swap actrive enemies (no if
         uint8_t tileXIdx = level.coordToTileIndexX(enemy.getPosition().x) + prince.getDirectionOffset(1);
         uint8_t tileYIdx = level.coordToTileIndexY(enemy.getPosition().y);
 
-Serial.print("Enemy #");
-Serial.print(i);
-Serial.print(": ");
-Serial.print(tileXIdx);
-Serial.print(",");
-Serial.print(tileYIdx);
-Serial.print(": ");
-Serial.print(level.getXLocation());
-Serial.print(",");
-Serial.print(level.getYLocation());
-Serial.print(" - ");
+// Serial.print("Enemy #");
+// Serial.print(i);
+// Serial.print(": ");
+// Serial.print(tileXIdx);
+// Serial.print(",");
+// Serial.print(tileYIdx);
+// Serial.print(": ");
+// Serial.print(level.getXLocation());
+// Serial.print(",");
+// Serial.print(level.getYLocation());
+// Serial.print(" - ");
 
         if (tileXIdx >= level.getXLocation() && tileXIdx < level.getXLocation() + Constants::ScreenWidthInTiles && tileYIdx >= level.getYLocation() && tileYIdx < level.getYLocation() + Constants::ScreenHeightInTiles) {
 
-Serial.print(" true ");
+// Serial.print(" true ");
             enemyIsVisible = true;
 
         }
@@ -487,9 +487,9 @@ Serial.print(" true ");
 
         if (enemyIsVisible) break;
         
-Serial.println("");
+// Serial.println("");
     }
-Serial.println("");
+// Serial.println("");
 
     if (!enemyIsVisible || !swapEnemies) enemy.setActiveEnemy(currentEnemy);
 

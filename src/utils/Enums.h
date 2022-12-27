@@ -97,6 +97,8 @@ enum class ItemType : uint8_t {
     /* 08 */ Sword,
     /* 09 */ CollpasedFloor,
     /* 10 */ Potion_Small,
+    /* 11 */ Potion_Large,
+    /* 12 */ Potion_Poison,
     /* 96 */ None = 96,
     /* 97 */ LoveHeart = 97,
     /* 98 */ Sign = 98,

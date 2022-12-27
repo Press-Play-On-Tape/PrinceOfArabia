@@ -68,10 +68,10 @@ class Enemy : public BaseStack {
         }
 
         uint16_t getStance()                        { 
-            Serial.print("ae: ");
-            Serial.print(activeEnemy);
-            Serial.print(", cnt: ");
-            Serial.println(count);
+            // Serial.print("ae: ");
+            // Serial.print(activeEnemy);
+            // Serial.print(", cnt: ");
+            // Serial.println(count);
 
         return this->base[this->activeEnemy].getStance(); }
         uint16_t getPrevStance()                    { return this->base[this->activeEnemy].getPrevStance(); }

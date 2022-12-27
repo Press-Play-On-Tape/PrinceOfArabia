@@ -12,7 +12,7 @@
 #define LEVEL_DATA_FROM_FX
 
 #define _DEBUG
-#define _DEBUG_ONSCREEN_DETAILS
+#define DEBUG_ONSCREEN_DETAILS
 #define _DEBUG_ONSCREEN_DETAILS_MIN
 
 #define _DEBUG_PRINCE_DETAILS
@@ -27,12 +27,12 @@
 #define _DEBUG_ACTION_CANJUMPUP_PART2
 #define _DEBUG_ACTION_CANCLIMBDOWN
 #define _DEBUG_ACTION_CANCLIMBDOWN_PART2
-#define DEBUG_ACTION_CANFALL
+#define _DEBUG_ACTION_CANFALL
 #define _DEBUG_ACTION_CANFALLSOMEMORE
 #define _DEBUG_ACTION_COLLIDEWITHWALL
 #define _DEBUG_ACTION_RUNJUMP
-#define DEBUG_ACTION_FALLING
-#define DEBUG_ACTION_CANSTANDINGJUMP
+#define _DEBUG_ACTION_FALLING
+#define _DEBUG_ACTION_CANSTANDINGJUMP
 
 
 //-------------------------------------------------------------------------------------
@@ -412,32 +412,76 @@ constexpr uint16_t Step_Climbing_Block_9_End                     = Stance::Step_
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/* Drink the tonic!  Drink_Tonic_14 triggers a health increase.                                                                                                                                          */
+/* Drink the tonic!  Drink_Tonic_Small_14 triggers a health increase.                                                                                                                                          */
 /* 209 - 223    x: 0, y: 0                                       01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
-#define DRINK_TONIC_SEQ                                          127,   128,   129,   130,   131,   132,   133,   134,   135,   136,   137,   138,   139,   140,   141,  
-#define DRINK_TONIC_OFFSETS                                      0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,
-constexpr uint16_t Drink_Tonic_1_Start                           = Stance::Step_Climbing_Block_9_End + 1; 
-constexpr uint16_t Drink_Tonic_2                                 = Stance::Drink_Tonic_1_Start + 1;
-constexpr uint16_t Drink_Tonic_3                                 = Stance::Drink_Tonic_2 + 1;
-constexpr uint16_t Drink_Tonic_4                                 = Stance::Drink_Tonic_3 + 1;
-constexpr uint16_t Drink_Tonic_5                                 = Stance::Drink_Tonic_4 + 1;
-constexpr uint16_t Drink_Tonic_6                                 = Stance::Drink_Tonic_5 + 1;
-constexpr uint16_t Drink_Tonic_7                                 = Stance::Drink_Tonic_6 + 1;
-constexpr uint16_t Drink_Tonic_8                                 = Stance::Drink_Tonic_7 + 1;
-constexpr uint16_t Drink_Tonic_9                                 = Stance::Drink_Tonic_8 + 1;
-constexpr uint16_t Drink_Tonic_10                                = Stance::Drink_Tonic_9 + 1;
-constexpr uint16_t Drink_Tonic_11                                = Stance::Drink_Tonic_10 + 1;
-constexpr uint16_t Drink_Tonic_12                                = Stance::Drink_Tonic_11 + 1;
-constexpr uint16_t Drink_Tonic_13                                = Stance::Drink_Tonic_12 + 1;
-constexpr uint16_t Drink_Tonic_14                                = Stance::Drink_Tonic_13 + 1;
-constexpr uint16_t Drink_Tonic_15_End                            = Stance::Drink_Tonic_14 + 1;
+#define DRINK_TONIC_SMALL_SEQ                                    127,   128,   129,   130,   131,   132,   133,   134,   135,   136,   137,   138,   139,   140,   141,  
+#define DRINK_TONIC_SMALL_OFFSETS                                0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,
+constexpr uint16_t Drink_Tonic_Small_1_Start                     = Stance::Step_Climbing_Block_9_End + 1; 
+constexpr uint16_t Drink_Tonic_Small_2                           = Stance::Drink_Tonic_Small_1_Start + 1;
+constexpr uint16_t Drink_Tonic_Small_3                           = Stance::Drink_Tonic_Small_2 + 1;
+constexpr uint16_t Drink_Tonic_Small_4                           = Stance::Drink_Tonic_Small_3 + 1;
+constexpr uint16_t Drink_Tonic_Small_5                           = Stance::Drink_Tonic_Small_4 + 1;
+constexpr uint16_t Drink_Tonic_Small_6                           = Stance::Drink_Tonic_Small_5 + 1;
+constexpr uint16_t Drink_Tonic_Small_7                           = Stance::Drink_Tonic_Small_6 + 1;
+constexpr uint16_t Drink_Tonic_Small_8                           = Stance::Drink_Tonic_Small_7 + 1;
+constexpr uint16_t Drink_Tonic_Small_9                           = Stance::Drink_Tonic_Small_8 + 1;
+constexpr uint16_t Drink_Tonic_Small_10                          = Stance::Drink_Tonic_Small_9 + 1;
+constexpr uint16_t Drink_Tonic_Small_11                          = Stance::Drink_Tonic_Small_10 + 1;
+constexpr uint16_t Drink_Tonic_Small_12                          = Stance::Drink_Tonic_Small_11 + 1;
+constexpr uint16_t Drink_Tonic_Small_13                          = Stance::Drink_Tonic_Small_12 + 1;
+constexpr uint16_t Drink_Tonic_Small_14                          = Stance::Drink_Tonic_Small_13 + 1;
+constexpr uint16_t Drink_Tonic_Small_15_End                      = Stance::Drink_Tonic_Small_14 + 1;
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* Drink the tonic!  Drink_Tonic_Large_14 triggers a health and max health increase.                                                                                                                                          */
+/* 209 - 223    x: 0, y: 0                                       01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define DRINK_TONIC_LARGE_SEQ                                    127,   128,   129,   130,   131,   132,   133,   134,   135,   136,   137,   138,   139,   140,   141,  
+#define DRINK_TONIC_LARGE_OFFSETS                                0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,
+constexpr uint16_t Drink_Tonic_Large_1_Start                     = Stance::Drink_Tonic_Small_15_End + 1; 
+constexpr uint16_t Drink_Tonic_Large_2                           = Stance::Drink_Tonic_Large_1_Start + 1;
+constexpr uint16_t Drink_Tonic_Large_3                           = Stance::Drink_Tonic_Large_2 + 1;
+constexpr uint16_t Drink_Tonic_Large_4                           = Stance::Drink_Tonic_Large_3 + 1;
+constexpr uint16_t Drink_Tonic_Large_5                           = Stance::Drink_Tonic_Large_4 + 1;
+constexpr uint16_t Drink_Tonic_Large_6                           = Stance::Drink_Tonic_Large_5 + 1;
+constexpr uint16_t Drink_Tonic_Large_7                           = Stance::Drink_Tonic_Large_6 + 1;
+constexpr uint16_t Drink_Tonic_Large_8                           = Stance::Drink_Tonic_Large_7 + 1;
+constexpr uint16_t Drink_Tonic_Large_9                           = Stance::Drink_Tonic_Large_8 + 1;
+constexpr uint16_t Drink_Tonic_Large_10                          = Stance::Drink_Tonic_Large_9 + 1;
+constexpr uint16_t Drink_Tonic_Large_11                          = Stance::Drink_Tonic_Large_10 + 1;
+constexpr uint16_t Drink_Tonic_Large_12                          = Stance::Drink_Tonic_Large_11 + 1;
+constexpr uint16_t Drink_Tonic_Large_13                          = Stance::Drink_Tonic_Large_12 + 1;
+constexpr uint16_t Drink_Tonic_Large_14                          = Stance::Drink_Tonic_Large_13 + 1;
+constexpr uint16_t Drink_Tonic_Large_15_End                      = Stance::Drink_Tonic_Large_14 + 1;
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* Drink the tonic!  Drink_Tonic_Large_14 triggers a health and max health increase.                                                                                                                                          */
+/* 209 - 223    x: 0, y: 0                                       01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define DRINK_TONIC_POISON_SEQ                                   127,   128,   129,   130,   131,   132,   133,   134,   135,   136,   137,   138,   139,   140,   141,  
+#define DRINK_TONIC_POISON_OFFSETS                               0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,
+constexpr uint16_t Drink_Tonic_Poison_1_Start                    = Stance::Drink_Tonic_Large_15_End + 1; 
+constexpr uint16_t Drink_Tonic_Poison_2                          = Stance::Drink_Tonic_Poison_1_Start + 1;
+constexpr uint16_t Drink_Tonic_Poison_3                          = Stance::Drink_Tonic_Poison_2 + 1;
+constexpr uint16_t Drink_Tonic_Poison_4                          = Stance::Drink_Tonic_Poison_3 + 1;
+constexpr uint16_t Drink_Tonic_Poison_5                          = Stance::Drink_Tonic_Poison_4 + 1;
+constexpr uint16_t Drink_Tonic_Poison_6                          = Stance::Drink_Tonic_Poison_5 + 1;
+constexpr uint16_t Drink_Tonic_Poison_7                          = Stance::Drink_Tonic_Poison_6 + 1;
+constexpr uint16_t Drink_Tonic_Poison_8                          = Stance::Drink_Tonic_Poison_7 + 1;
+constexpr uint16_t Drink_Tonic_Poison_9                          = Stance::Drink_Tonic_Poison_8 + 1;
+constexpr uint16_t Drink_Tonic_Poison_10                         = Stance::Drink_Tonic_Poison_9 + 1;
+constexpr uint16_t Drink_Tonic_Poison_11                         = Stance::Drink_Tonic_Poison_10 + 1;
+constexpr uint16_t Drink_Tonic_Poison_12                         = Stance::Drink_Tonic_Poison_11 + 1;
+constexpr uint16_t Drink_Tonic_Poison_13                         = Stance::Drink_Tonic_Poison_12 + 1;
+constexpr uint16_t Drink_Tonic_Poison_14                         = Stance::Drink_Tonic_Poison_13 + 1;
+constexpr uint16_t Drink_Tonic_Poison_15_End                     = Stance::Drink_Tonic_Poison_14 + 1;
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /* 224 - 225    x: 0, y: 0                                       01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define FALLING_INJURED_SEQ                                      125,   126, 
 #define FALLING_INJURED_OFFSETS                                  0,0,   0,0,
-constexpr uint16_t Falling_Injured_1_Start                       = Stance::Drink_Tonic_15_End + 1;  // Climbing down, falling two levels
+constexpr uint16_t Falling_Injured_1_Start                       = Stance::Drink_Tonic_Poison_15_End + 1;  // Climbing down, falling two levels
 constexpr uint16_t Falling_Injured_2_End                         = Stance::Falling_Injured_1_Start + 1;
 
 
@@ -796,7 +840,9 @@ namespace Constants {
         CROUCH_STAND_SEQ
         CROUCH_HOP_SEQ
         STEP_CLIMBINB_BLOCK_SEQ
-        DRINK_TONIC_SEQ
+        DRINK_TONIC_SMALL_SEQ
+        DRINK_TONIC_LARGE_SEQ
+        DRINK_TONIC_POISON_SEQ
         FALLING_INJURED_SEQ
         FALLING_DEAD_SEQ
         RUN_REPEAT_8_END_SEQ
@@ -848,7 +894,9 @@ namespace Constants {
         CROUCH_STAND_OFFSETS
         CROUCH_HOP_OFFSETS
         STEP_CLIMBINB_BLOCK_OFFSETS
-        DRINK_TONIC_OFFSETS
+        DRINK_TONIC_SMALL_OFFSETS
+        DRINK_TONIC_LARGE_OFFSETS
+        DRINK_TONIC_POISON_OFFSETS
         FALLING_INJURED_OFFSETS
         FALLING_DEAD_OFFSETS
         RUN_REPEAT_8_END_OFFSETS

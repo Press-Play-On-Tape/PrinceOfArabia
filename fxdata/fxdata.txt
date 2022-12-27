@@ -108,6 +108,7 @@ uint8_t level1_Data[] = {
         1, 43, 4, 117,          // CollapsingTile (dist to fall)                                    
         1, 11, 3, 24,           // CollapsingTile (dist to fall)                                    
         1, 12, 3, 24,           // CollapsingTile (dist to fall)                                    
+        12, 63, 0,               // Potion Small                              
         255                     // End
     }
 
@@ -594,6 +595,15 @@ namespace Images {
 
     image_t Potion_Small_00 = "../images/items/Potion_Small_00.png"
     image_t Potion_Small_01 = "../images/items/Potion_Small_01.png"
+    image_t Potion_Large_00 = "../images/items/Potion_Large_00.png"
+    image_t Potion_Large_01 = "../images/items/Potion_Large_01.png"
+    image_t Potion_Poison_00 = "../images/items/Potion_Poison_00.png"
+    image_t Potion_Poison_01 = "../images/items/Potion_Poison_01.png"
+    image_t Potion_Poison_03 = "../images/items/Potion_Poison_02.png"
+    image_t Potion_Poison_04 = "../images/items/Potion_Poison_03.png"
+    image_t Potion_Poison_05 = "../images/items/Potion_Poison_04.png"
+    image_t Potion_Poison_06 = "../images/items/Potion_Poison_05.png"
+    image_t Potion_Poison_Skull = "../images/items/Potion_Poison_Skull.png"
 
     image_t CollapsedFloor = "../images/items/CollapsedTile.png"
     image_t CollapsingFloor_01 = "../images/items/CollapsingTile_01.png"

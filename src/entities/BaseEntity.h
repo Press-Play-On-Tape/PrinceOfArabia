@@ -47,6 +47,7 @@ class BaseEntity {
 
         uint8_t decHealth(uint8_t val)              { this->health >= val ? this->health = this->health - val: 0; return this->health;}
         void incHealth(int8_t val)                  { this->health = this->health + val > this->healthMax ? this->healthMax : this->health + val; } 
+        void incHealthMax(int8_t val)               { this->healthMax = this->healthMax + val; } 
 
         Point &getPosition()                        { return this->location; }
 

@@ -156,7 +156,6 @@ void loop() {
 
     }
 
-
     FX::enableOLED();
 
 
@@ -166,6 +165,15 @@ void loop() {
 
         case Stance::Pickup_Sword_3:
         case Stance::Pickup_Sword_5:
+        case Stance::Drink_Tonic_Small_12:
+        case Stance::Drink_Tonic_Small_14:
+        case Stance::Drink_Tonic_Large_12:
+        case Stance::Drink_Tonic_Large_14:
+            arduboy.invert(true);
+            break;
+
+        case Stance::Drink_Tonic_Poison_12:
+        case Stance::Drink_Tonic_Poison_14:
             arduboy.invert(true);
             break;
 

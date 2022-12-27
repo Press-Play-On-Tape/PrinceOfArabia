@@ -79,7 +79,7 @@ void game_PositionChars(bool clearSword) {
         enemy.init(104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
         enemy.init(80 + (40 * Constants::TileWidth), 25 + (0 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
 
-        // prince.init(38-28, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Normal starting pos
+        prince.init(38-28+12+4, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Normal starting pos
         // prince.init(38-24, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Gate Issue
         // prince.init(38-24, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Sword Fight from Left
         // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Sword Fight from Right
@@ -104,11 +104,11 @@ void game_PositionChars(bool clearSword) {
         // prince.init(18, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // problem
         // prince.init(98, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // At bottom of tthree level drop.
         // prince.init(98, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // At bottom of tthree level drop.
-        prince.init(18, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Long Run
+        // prince.init(18, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Long Run
         // prince.init(78 - 10, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Fall Error Stading Jump
         // prince.init(78 - 4, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Fall Error running Jump
 
-        // level.init(prince, 60, 0);  // Normal starting posa
+        level.init(prince, 60, 0);  // Normal starting posa
         // level.init(prince, 37, 3);  // gate issuee
         // level.init(prince, 60, 3);  // Fight from Left
         // level.init(prince, 70, 3);  // Fight from Right
@@ -131,7 +131,7 @@ void game_PositionChars(bool clearSword) {
         // level.init(prince, 40, 4);  // Long Fall
         // level.init(prince, 60, 3);  // problem
         // level.init(prince, 30, 6); // At bottom of tthree level drop.
-        level.init(prince, 40, 0);  // Long run
+        // level.init(prince, 40, 0);  // Long run
         // level.init(prince, 50, 3);  // Fall Error Stading Jump
         // level.init(prince, 50, 3);  // Fall Error running Jump
 
@@ -1139,13 +1139,31 @@ void game() {
                         }
                         else if (pressed & A_BUTTON) {
 
-                            uint8_t itemIdx = level.canReachItem(prince, ItemType::Potion_Small);
+                            uint8_t itemIdx = level.canReachItem(prince, ItemType::Potion_Small, ItemType::Potion_Poison);
 
                             if (itemIdx != Constants::NoItemFound) {
 
                                 Item &item = level.getItem(itemIdx);
+
+                                switch (item.itemType) {
+
+                                    case ItemType::Potion_Small:
+                                        prince.pushSequence(Stance::Drink_Tonic_Small_1_Start, Stance::Drink_Tonic_Small_15_End, Stance::Upright, true);
+                                        break;
+
+                                    case ItemType::Potion_Large:
+                                        prince.pushSequence(Stance::Drink_Tonic_Large_1_Start, Stance::Drink_Tonic_Large_15_End, Stance::Upright, true);
+                                        break;
+
+                                    case ItemType::Potion_Poison:
+                                        prince.pushSequence(Stance::Drink_Tonic_Poison_1_Start, Stance::Drink_Tonic_Poison_15_End, Stance::Upright, true);
+                                        break;
+
+                                    default: break;
+
+                                }
+
                                 item.itemType = ItemType::None;
-                                prince.pushSequence(Stance::Drink_Tonic_1_Start, Stance::Drink_Tonic_15_End, Stance::Upright, true);
 
                                 break;
 
@@ -1507,7 +1525,7 @@ void game() {
                         prince.incFalling();
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
-                        DEBUG_PRINT(F(" to"));
+                        DEBUG_PRINT(F(" to "));
                         DEBUG_PRINTLN(prince.getFalling());
                         #endif
 
@@ -1616,9 +1634,26 @@ void game() {
 
                     break;
 
-                case Stance::Drink_Tonic_14:
-                    prince.incHealth(2);
+
+                case Stance::Drink_Tonic_Small_14:
+                    prince.incHealth(1);
                     break;
+
+
+                case Stance::Drink_Tonic_Large_14:
+                    prince.incHealthMax(1);
+                    prince.setHealth(prince.getHealthMax());
+                    break;
+
+
+                case Stance::Drink_Tonic_Poison_14:
+                    prince.incHealth(-1);
+
+                    if (prince.getHealth() == 0) {
+                        pushDead(prince, level, gamePlay, true);
+                    }
+                    break;
+
 
                 case Stance::Upright:
 
@@ -2063,7 +2098,7 @@ void game() {
         switch (prince.getX() % 12) {
 
             case 0:
-                prince.push(Stance::Collide_Wall_M2_Start_End, false);
+                prince.push(Stance::Collide_Wall_P2_Start_End, false);
                 break;
 
             case 1:
