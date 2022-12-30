@@ -9,7 +9,7 @@
 #define _ALT_B_BUTTON
 #define GIVE_SWORD
 
-#define _LEVEL_DATA_FROM_FX
+#define LEVEL_DATA_FROM_FX
 
 #define _DEBUG
 #define _DEBUG_ONSCREEN_DETAILS

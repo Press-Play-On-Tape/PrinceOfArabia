@@ -261,7 +261,7 @@ bool leaveLevel(Prince &prince, Level &level) {
 
     // Are we close to the exist gate?  If so, exit scene ..
 
-    if (tileXIdx == exitGate.x - 1 && tileYIdx == exitGate.y) {
+    if (tileXIdx == exitGate.x - 1 && tileYIdx == exitGate.y && exitGate.data.exitDoor.direction == Direction::Up) {
 
         switch (prince.getDirection()) {
 
@@ -302,7 +302,7 @@ bool leaveLevel(Prince &prince, Level &level) {
         return true;
 
     }
-    else if (tileXIdx == exitGate.x && tileYIdx == exitGate.y) {
+    else if (tileXIdx == exitGate.x && tileYIdx == exitGate.y && exitGate.data.exitDoor.direction == Direction::Up) {
 
         prince.pushSequence(Stance::Standing_Turn_1_Start, Stance::Standing_Turn_5_End, Stance::Upright_Turn, true);
 

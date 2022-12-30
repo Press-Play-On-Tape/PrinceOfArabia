@@ -274,7 +274,7 @@ struct Level {
                     // enemy.init(80 + (40 * Constants::TileWidth), 25 + (0 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
 
                     // Normal starting pos
-                    prince.init(66, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    prince.init(40, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
                     this->init(prince, 130, 12, 120, 6); 
 
                     // Top of climbm down showing 10 error.
@@ -315,8 +315,8 @@ struct Level {
                     // enemy.init(80 + (40 * Constants::TileWidth), 25 + (0 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
 
                     // Normal starting pos
-                    // prince.init(46, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
-                    // this->init(prince, 90, 15, 40, 6); 
+                    prince.init(46, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    this->init(prince, 90, 15, 40, 6); 
 
                     // Three blades
                     // prince.init(10, 87, Direction::Right, Stance::Crouch_3_End, 3, clearSword);     
@@ -335,8 +335,8 @@ struct Level {
                     // this->init(prince, 90, 15, 20, 3); 
 
                     // Exit Button
-                    prince.init(10 + (4*12), 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
-                    this->init(prince, 90, 15, 0, 6); 
+                    // prince.init(10 + (4*12), 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    // this->init(prince, 90, 15, 0, 6); 
 
                 }
 

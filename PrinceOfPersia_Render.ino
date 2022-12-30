@@ -118,7 +118,7 @@ void render(bool enemyIsVisible) {
                     break;
 
                 case ItemType::EntryDoor:
-                    FX::drawBitmap(xLoc + 1, yLoc - 14, Images::ExitDoor_00, 0, dbmNormal);
+                    FX::drawBitmap(xLoc + 7, yLoc - 14, Images::ExitDoor_00, 0, dbmNormal);
                     break;
 
                 case ItemType::EntryDoor_Cropped:

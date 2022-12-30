@@ -1,7 +1,3 @@
-
-
-
-
 namespace Levels {
 
     // *****************************************************************************************************************
@@ -109,7 +105,7 @@ namespace Levels {
 
     uint8_t level2_Data[] = {
         // Prince
-        66,                         // Prince starting x pos
+        40,                         // Prince starting x pos
         56,                         // Prince starting y pos (25, 56, 87)
         1,                          // Prince starting direction, 1 Left and 2 Right
         3,                          // Prince starting stance, 3 Crouch_3_End
@@ -160,7 +156,7 @@ namespace Levels {
 
     uint8_t Level2_Items[] = {
         16, 14, 1, 13, 15,      // Exit Gate, let position for open, right position                                                        
-        23, 123, 7,             // Entry Gate
+        23, 122, 7,             // Entry Gate
         20, 105, 5,             // Potion Small                              
         20, 107, 8,             // Potion Small      
         20, 76, 5,              // Potion Small      

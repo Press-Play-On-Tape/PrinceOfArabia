@@ -62,14 +62,13 @@ namespace Images {
         Tile_Dungeon_47,
         Tile_Dungeon_48,
         Tile_Dungeon_49,
+        Tile_Dungeon_50,
+        Tile_Dungeon_51,
+        Tile_Dungeon_52,
+        Tile_Dungeon_53,
+        Tile_Dungeon_54,
+        Tile_Dungeon_55,
     };
-
-
-
-
-
-
-
 
 
 
@@ -189,12 +188,12 @@ namespace Images {
 28,
 51,
 52,
-31,
-32,
-33,
-34,
-35,
-36,
+50,
+51,
+52,
+53,
+54,
+55,
 37,
 38,
 39,
