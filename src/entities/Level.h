@@ -208,7 +208,7 @@ struct Level {
                     enemy.init(104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
                     enemy.init(80 + (40 * Constants::TileWidth), 25 + (0 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
 
-                    // prince.init(38-28+12+4, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Normal starting pos
+                    prince.init(38-28+12+4, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Normal starting pos
                     // prince.init(38-24, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Gate Issue
                     // prince.init(38-24, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Sword Fight from Left
                     // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Sword Fight from Right
@@ -226,7 +226,7 @@ struct Level {
                     // prince.init(86-36+4, 87, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Normal starting pos but next to drop floor 3rd floor
                     // prince.init(78, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Under collapsible floor
                     // prince.init(66, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);        // Get tonic
-                    prince.init(18, 25+31+31, Direction::Left, Stance::Upright, 3, clearSword);     // Column of climbs
+                    // prince.init(18, 25+31+31, Direction::Left, Stance::Upright, 3, clearSword);     // Column of climbs
                     // prince.init(78, 25, Direction::Left, Stance::Upright, 3, clearSword);     // Below column of climbs
                     // prince.init(80, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);     // Top Left
                     // prince.init(18, 25, Direction::Right,Stance:: Crouch_3_End, 3, clearSword);          // Long Fall
@@ -237,7 +237,7 @@ struct Level {
                     // prince.init(78 - 10, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Fall Error Stading Jump
                     // prince.init(78 - 4, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Fall Error running Jump
 
-                    // this->init(prince, 90, 9, 60, 0);  // Normal starting posa
+                    this->init(prince, 90, 9, 60, 0);  // Normal starting posa
                     // this->init(prince, 90, 9,  37, 3);  // gate issuee
                     // this->init(prince, 90, 9,  60, 3);  // Fight from Left
                     // this->init(prince, 90, 9,  70, 3);  // Fight from Right
@@ -252,9 +252,9 @@ struct Level {
                     // this->init(prince, 90, 9,  80, 3);  // Exit Seq
                     // this->init(prince, 90, 9,  20, 3);  // Both floor types
                     // this->init(prince, 90, 9,  60, 0);  //Normal starting pos but next to drop floor 3rd floor
-                    this->init(prince, 90, 9,  50, 3);  // Under collapsible floor
+                    // this->init(prince, 90, 9,  50, 3);  // Under collapsible floor
                     // this->init(prince, 90, 9,  Constants::TileHeight, 0);   // Get tonic
-                    this->init(prince, 90, 9,  0, 3);   // Column of climbs
+                    // this->init(prince, 90, 9,  0, 3);   // Column of climbs
                     // this->init(prince, 90, 9,  0, 6);   // Below Column of climbs
                     // this->init(prince, 90, 9,  0, 0);   // Top left
                     // this->init(prince, 90, 9,  40, 4);  // Long Fall
@@ -304,6 +304,39 @@ struct Level {
                     // Enemy 3
                     // prince.init(22+(12*6), 56, Direction::Left, Stance::Upright, 3, clearSword);  
                     // this->init(prince, 130, 12, 20, 3);  
+
+                }
+
+                // Level 3
+
+                if (this->level == 3) {
+
+                    // enemy.init(104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
+                    // enemy.init(80 + (40 * Constants::TileWidth), 25 + (0 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
+
+                    // Normal starting pos
+                    // prince.init(46, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    // this->init(prince, 90, 15, 40, 6); 
+
+                    // Three blades
+                    // prince.init(10, 87, Direction::Right, Stance::Crouch_3_End, 3, clearSword);     
+                    // this->init(prince, 90, 15, 80, 0); 
+
+                    // Three blades
+                    // prince.init(10, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    // this->init(prince, 90, 15, 60, 3); 
+
+                    // Top Left
+                    // prince.init(10, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    // this->init(prince, 90, 15, 20, 3); 
+
+                    // // Biggest jump
+                    // prince.init(10 + (8*12), 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    // this->init(prince, 90, 15, 20, 3); 
+
+                    // Exit Button
+                    prince.init(10 + (4*12), 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    this->init(prince, 90, 15, 0, 6); 
 
                 }
 
@@ -366,7 +399,20 @@ struct Level {
 
                     switch (item.itemType) {
 
-                        case ItemType::ExitDoor:
+                        case ItemType::Blade:
+                             
+                            item.data.blade.position++;
+                            
+                            if (item.data.blade.position == 40) {
+
+                                item.data.blade.position = -5;
+
+                            }
+
+                            break;
+
+                        case ItemType::ExitDoor_SelfOpen:
+                        case ItemType::ExitDoor_ButtonOpen:
 
                             if (arduboy.isFrameCount(2)) {
                              
@@ -786,11 +832,12 @@ struct Level {
 
                 switch (item.itemType) {
 
-                    case ItemType::ExitDoor:
+                    case ItemType::ExitDoor_SelfOpen:
+                    case ItemType::ExitDoor_ButtonOpen:
                         item.data.exitDoor.position = 0;
                         item.data.exitDoor.direction = Direction::None;
-                        item.data.exitDoor.left = FX::readPendingUInt8();;
-                        item.data.exitDoor.right = FX::readPendingUInt8();;
+                        item.data.exitDoor.left = FX::readPendingUInt8();
+                        item.data.exitDoor.right = FX::readPendingUInt8();
                         break;
 
                     case ItemType::Gate:

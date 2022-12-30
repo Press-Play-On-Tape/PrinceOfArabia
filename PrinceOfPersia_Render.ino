@@ -97,11 +97,19 @@ void render(bool enemyIsVisible) {
                     }
                     break;
 
+                case ItemType::Blade:
+
+                    if (item.data.blade.position <= 5) {
+                        FX::drawBitmap(xLoc, yLoc, Images::Blade_00 + (abs(item.data.blade.position) * 76), 0, dbmMasked);
+                    }
+                    break;
+
                 case ItemType::Skeleton:
                     FX::drawBitmap(xLoc + 5, yLoc + 14, Images::Skeleton, 0, dbmMasked);
                     break;
 
-                case ItemType::ExitDoor:
+                case ItemType::ExitDoor_SelfOpen:
+                case ItemType::ExitDoor_ButtonOpen:
                     FX::drawBitmap(xLoc + 1, yLoc - 14, Images::ExitDoor_00 + (item.data.exitDoor.position * 129), 0, dbmNormal);
                     break;
 
@@ -138,7 +146,12 @@ void render(bool enemyIsVisible) {
                     break;
 
                 case ItemType::FloorButton1:
+                case ItemType::ExitDoor_Button:
                     FX::drawBitmap(xLoc, yLoc + item.data.floorButton1.frame - 1, Images::FloorButton_0_00 + (item.data.floorButton1.frame * (Images::FloorButton_0_01 - Images::FloorButton_0_00)), 0, dbmMasked);
+                    break;
+
+                case ItemType::ExitDoor_Button_Cropped:
+                    FX::drawBitmap(xLoc, yLoc + item.data.floorButton1.frame - 1, Images::FloorButton_2_00 + (item.data.floorButton1.frame * (Images::FloorButton_2_01 - Images::FloorButton_2_00)), 0, dbmMasked);
                     break;
 
                 case ItemType::FloorButton2:
@@ -285,8 +298,10 @@ void render(bool enemyIsVisible) {
 
     // Render health ..
 
-    arduboy.fillRect(120, 0, WIDTH, HEIGHT, BLACK);
-    arduboy.drawFastVLine(121, 0, HEIGHT, WHITE);
+    // arduboy.fillRect(120, 0, WIDTH, HEIGHT, BLACK);
+    // arduboy.drawFastVLine(121, 0, HEIGHT, WHITE);
+
+    FX::drawBitmap(120, 0, Images::HUD_Background, 0, dbmNormal);
 
     for (uint8_t i = 0; i < prince.getHealthMax(); i++) {
 
@@ -302,7 +317,7 @@ void render(bool enemyIsVisible) {
         }
         
     }
-// Serial.println(enemyIsVisible);    
+
 
     if (!enemyIsVisible) {
 
@@ -313,8 +328,8 @@ void render(bool enemyIsVisible) {
             FX::drawBitmap(123, 40, Images::Sword_HUD, 0, dbmNormal);
         }
 
-        arduboy.drawPixel(124, 55);
-        arduboy.drawPixel(126, 55);
+        // arduboy.drawPixel(124, 55);
+        // arduboy.drawPixel(126, 55);
 
     }
     else {

@@ -11,11 +11,12 @@ struct ExitDoor {
     uint8_t right;
 };
 
+struct ExitDoor_Button {
+    uint8_t frame;              
+};
+
 struct Blade {
-    uint8_t position;
-    Direction direction;
-    uint8_t left;
-    uint8_t right;
+    int8_t position;
 };
 
 struct Gate {
@@ -83,6 +84,8 @@ struct Item {
         struct FloorButton1 floorButton1;
         struct FloorButton1 floorButton2;
         struct Spikes spikes;
+        struct Blade blade;
+        struct ExitDoor_Button exitDoor_Button;
     } data; 
  
 };

@@ -17,17 +17,17 @@
             ],
             "intelliSenseMode": "gcc-x64",
             "includePath": [
-                "/Users/simonholmes/Library/Arduino15/packages/arduboy-homemade/hardware/avr/1.3.3/cores/arduboy",
-                "/Users/simonholmes/Library/Arduino15/packages/arduboy-homemade/hardware/avr/1.3.3/variants/arduboy",
-                "/Users/simonholmes/Library/Arduino15/packages/arduboy-homemade/hardware/avr/1.3.3/libraries/Arduboy2/src",
-                "/Users/simonholmes/Library/Arduino15/packages/arduboy-homemade/hardware/avr/1.3.3/libraries/EEPROM/src",
-                "/Users/simonholmes/Library/Arduino15/packages/arduboy-homemade/hardware/avr/1.3.3/libraries/ArduboyFX/src",
+                "/Users/simonholmes/Library/Arduino15/packages/arduboy-homemade/hardware/avr/1.3.5/cores/arduboy",
+                "/Users/simonholmes/Library/Arduino15/packages/arduboy-homemade/hardware/avr/1.3.5/variants/arduboy",
+                "/Users/simonholmes/Library/Arduino15/packages/arduboy-homemade/hardware/avr/1.3.5/libraries/Arduboy2/src",
+                "/Users/simonholmes/Library/Arduino15/packages/arduboy-homemade/hardware/avr/1.3.5/libraries/EEPROM/src",
+                "/Users/simonholmes/Library/Arduino15/packages/arduboy-homemade/hardware/avr/1.3.5/libraries/ArduboyFX/src",
                 "/Applications/Programming/Arduino.app/Contents/Java/hardware/tools/avr/lib/gcc/avr/7.3.0/include",
                 "/Applications/Programming/Arduino.app/Contents/Java/hardware/tools/avr/lib/gcc/avr/7.3.0/include-fixed",
                 "/Applications/Programming/Arduino.app/Contents/Java/hardware/tools/avr/avr/include"
             ],
             "forcedInclude": [
-                "/Users/simonholmes/Library/Arduino15/packages/arduboy-homemade/hardware/avr/1.3.3/cores/arduboy/Arduino.h"
+                "/Users/simonholmes/Library/Arduino15/packages/arduboy-homemade/hardware/avr/1.3.5/cores/arduboy/Arduino.h"
             ],
             "cStandard": "c11",
             "cppStandard": "c++11",

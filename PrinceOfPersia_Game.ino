@@ -1053,7 +1053,7 @@ void game() {
 
                                 Item &item = level.getItem(itemIdx);
 
-                                uint8_t idx = static_cast<uint8_t>(item.itemType) - static_cast<uint8_t>(ItemType::Potion_Poison); 
+                                uint8_t idx = static_cast<uint8_t>(item.itemType) - static_cast<uint8_t>(ItemType::Potion_Small); 
                                 prince.pushSequence(Stance::Drink_Tonic_Small_1_Start + (idx * 15), Stance::Drink_Tonic_Small_15_End + (idx * 15), Stance::Upright, true);
                                 item.itemType = ItemType::None;
 
@@ -1277,8 +1277,6 @@ void game() {
             int16_t newStance = prince.pop();
             prince.setStance(abs(newStance));
 
-// Serial.print("stance: ");
-// Serial.println(prince.getStance());
 
             // Handle specific events .. such as turning at end of sequences, falling after a land, etc.
 
@@ -1603,6 +1601,7 @@ void game() {
 
 
 
+
             // Has the player stepped on anything ?
 
             if (prince.isFootDown()) {
@@ -1681,6 +1680,23 @@ void game() {
 
                             break;
 
+                        case ItemType::ExitDoor_Button:
+                        case ItemType::ExitDoor_Button_Cropped:
+                            {
+
+                                Item &exitDoor = level.getItem(Constants::Item_ExitDoor);
+                                
+                                if (exitDoor.data.exitDoor.direction != Direction::Up) {
+                                    
+                                    item.data.exitDoor_Button.frame = 1;
+                                    exitDoor.data.exitDoor.direction = Direction::Up;
+
+                                }
+
+                            }
+
+                            break;
+
                         case ItemType::Spikes:
 
                            if (prince.getHealth() > 0) {
@@ -1719,6 +1735,7 @@ void game() {
             }
 
 
+
             #if defined(DEBUG) && defined(DEBUG_PRINCE_DETAILS)
             DEBUG_PRINT(F("Stance: "));
             DEBUG_PRINT(prince.getStance());
@@ -1742,6 +1759,38 @@ void game() {
 
     }
 
+    if (gamePlay.gameState == GameState::Game) {
+
+        // Blade?
+        
+        if (prince.getHealth() > 0) {
+
+            int8_t distToEdgeOfTile = level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX());
+// Serial.println(distToEdgeOfTile);
+            if (distToEdgeOfTile <= 4) {
+                
+                int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x) + ((prince.getDirection() == Direction::Right && distToEdgeOfTile <= 4) ? 1 : 0);
+                int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y);
+                
+                uint8_t itemIdx = level.getItem(ItemType::Blade, tileXIdx, tileYIdx);
+
+                if (itemIdx != Constants::NoItemFound) {
+
+                    Item &item = level.getItem(itemIdx);
+
+                    if (abs(item.data.blade.position) <= 5) {
+
+                        pushDead(prince, level, gamePlay, true);
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
 
 
     // ---------------------------------------------------------------------------------------------------------------------------------------
@@ -2084,7 +2133,7 @@ void game() {
 
         Item &item = level.getItem(Constants::Item_ExitDoor);
 
-        if (item.data.exitDoor.position == 0) {
+        if (item.itemType == ItemType::ExitDoor_SelfOpen && item.data.exitDoor.position == 0) {
 
             int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x);
             int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y);

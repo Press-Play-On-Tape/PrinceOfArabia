@@ -3,13 +3,13 @@
 
 #define DEBUG_PRINT    Serial.print
 #define DEBUG_PRINTLN  Serial.println
-#define SAVE_MEMORY_USB
-#define _SAVE_MEMORY_OTHER
+#define _SAVE_MEMORY_USB
+#define SAVE_MEMORY_OTHER
 #define SAVE_MEMORY_SOUND
 #define _ALT_B_BUTTON
 #define GIVE_SWORD
 
-#define LEVEL_DATA_FROM_FX
+#define _LEVEL_DATA_FROM_FX
 
 #define _DEBUG
 #define _DEBUG_ONSCREEN_DETAILS
