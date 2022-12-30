@@ -48,7 +48,8 @@
 #define TILE_FG_WALL_4 86
 #define TILE_FG_WALL_5 87
 #define TILE_FG_WALL_6 88
-#define TILE_FG_WALL_7 122
+#define TILE_FG_WALL_7 121
+#define TILE_FG_WALL_8 122
 
 #define TILE_COLUMN_LH_WALL 100
 #define TILE_COLUMN_1 84
@@ -156,7 +157,7 @@ struct Level {
                     this->width = FX::readPendingUInt8();
                     this->height = FX::readPendingUInt8();
                     this->xLoc = FX::readPendingUInt8();
-                    this->yLoc = yLoc = FX::readPendingUInt8();
+                    this->yLoc = FX::readPendingUInt8();
                     FX::readEnd();
 
                     this->loadMap();
@@ -200,64 +201,111 @@ struct Level {
 
             #else
 
-                enemy.init(104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
-                enemy.init(80 + (40 * Constants::TileWidth), 25 + (0 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
+                // Level 1
 
-                // prince.init(38-28+12+4, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Normal starting pos
-                // prince.init(38-24, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Gate Issue
-                // prince.init(38-24, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Sword Fight from Left
-                // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Sword Fight from Right
-                prince.init(8+78+24, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     // Double collapisble
-                // prince.init(78 + 24 + 12, 25 + 31 + 31, Direction::Left, Stance:: Crouch_3_End, 3, clearSword);          // Spikes Upper
-                // prince.init(12, 25 + 31, Direction::Left, Stance:: Crouch_3_End, 3, clearSword);          // Spikes Lower
-                // prince.init(78 + 24, 25, Direction::Left, Stance:: Crouch_3_End, 3, clearSword);          // Jump 2
-                // prince.init(18, 25+31, Direction::Right,Stance:: Crouch_3_End, 3, clearSword);          // Sword fight
-                // prince.init(58, 25+31+31, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Second drink tonic
-                // prince.init(66, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Upper gate
-                // prince.init(70, 25 + 31, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // 2 leap
-                // prince.init(14, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Exit Seq
-                // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Both floor types
-                // prince.init(86, 87, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Normal starting pos but next to drop floor 3rd floor
-                // prince.init(86-36+4, 87, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Normal starting pos but next to drop floor 3rd floor
-                // prince.init(78, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Under collapsible floor
-                // prince.init(66, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);        // Get tonic
-                // prince.init(18, 25+31+31, Direction::Left, Stance::Upright, 3, clearSword);     // Column of climbs
-                // prince.init(78, 25, Direction::Left, Stance::Upright, 3, clearSword);     // Below column of climbs
-                // prince.init(80, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);     // Top Left
-                // prince.init(18, 25, Direction::Right,Stance:: Crouch_3_End, 3, clearSword);          // Long Fall
-                // prince.init(18, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // problem
-                // prince.init(98, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // At bottom of tthree level drop.
-                // prince.init(98, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // At bottom of tthree level drop.
-                // prince.init(18, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Long Run
-                // prince.init(78 - 10, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Fall Error Stading Jump
-                // prince.init(78 - 4, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Fall Error running Jump
+                if (this->level == 1) {
 
-                this->init(prince, 90, 9, 60, 0);  // Normal starting posa
-                // this->init(prince, 90, 9,  37, 3);  // gate issuee
-                // this->init(prince, 90, 9,  60, 3);  // Fight from Left
-                // this->init(prince, 90, 9,  70, 3);  // Fight from Right
-                // this->init(prince, 90, 9,  10, 3);   // Double collapisble
-                // this->init(prince, 90, 9,  10, 0);   // Spikes Upper
-                // this->init(prince, 90, 9,  10, 6);   // Spikes Lower
-                // this->init(prince, 90, 9,  30, 3);  // Jump 2
-                // this->init(prince, 90, 9,  70, 3);  // Sword fight
-                // this->init(prince, 90, 9,  50, 0);  // Second drink tonic
-                // this->init(prince, 90, 9,  50, 0);  // Upper Gate
-                // this->init(prince, 90, 9,  40, 3);  // 2 leap
-                // this->init(prince, 90, 9,  80, 3);  // Exit Seq
-                // this->init(prince, 90, 9,  20, 3);  // Both floor types
-                // this->init(prince, 90, 9,  60, 0);  //Normal starting pos but next to drop floor 3rd floor
-                this->init(prince, 90, 9,  50, 3);  // Under collapsible floor
-                // this->init(prince, 90, 9,  Constants::TileHeight, 0);   // Get tonic
-                // this->init(prince, 90, 9,  0, 3);   // Column of climbs
-                // this->init(prince, 90, 9,  0, 6);   // Below Column of climbs
-                // this->init(prince, 90, 9,  0, 0);   // Top left
-                // this->init(prince, 90, 9,  40, 4);  // Long Fall
-                // this->init(prince, 90, 9,  60, 3);  // problem
-                // this->init(prince, 90, 9,  30, 6); // At bottom of tthree level drop.
-                // this->init(prince, 90, 9,  40, 0);  // Long run
-                // this->init(prince, 90, 9,  50, 3);  // Fall Error Stading Jump
-                // this->init(prince, 90, 9,  50, 3);  // Fall Error running Jump
+                    enemy.init(104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
+                    enemy.init(80 + (40 * Constants::TileWidth), 25 + (0 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
+
+                    // prince.init(38-28+12+4, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Normal starting pos
+                    // prince.init(38-24, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Gate Issue
+                    // prince.init(38-24, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Sword Fight from Left
+                    // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Sword Fight from Right
+                    // prince.init(8+78+24, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     // Double collapisble
+                    // prince.init(78 + 24 + 12, 25 + 31 + 31, Direction::Left, Stance:: Crouch_3_End, 3, clearSword);          // Spikes Upper
+                    // prince.init(12, 25 + 31, Direction::Left, Stance:: Crouch_3_End, 3, clearSword);          // Spikes Lower
+                    // prince.init(78 + 24, 25, Direction::Left, Stance:: Crouch_3_End, 3, clearSword);          // Jump 2
+                    // prince.init(18, 25+31, Direction::Right,Stance:: Crouch_3_End, 3, clearSword);          // Sword fight
+                    // prince.init(58, 25+31+31, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Second drink tonic
+                    // prince.init(66, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Upper gate
+                    // prince.init(70, 25 + 31, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // 2 leap
+                    // prince.init(14, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Exit Seq
+                    // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Both floor types
+                    // prince.init(86, 87, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Normal starting pos but next to drop floor 3rd floor
+                    // prince.init(86-36+4, 87, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Normal starting pos but next to drop floor 3rd floor
+                    // prince.init(78, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Under collapsible floor
+                    // prince.init(66, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);        // Get tonic
+                    prince.init(18, 25+31+31, Direction::Left, Stance::Upright, 3, clearSword);     // Column of climbs
+                    // prince.init(78, 25, Direction::Left, Stance::Upright, 3, clearSword);     // Below column of climbs
+                    // prince.init(80, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);     // Top Left
+                    // prince.init(18, 25, Direction::Right,Stance:: Crouch_3_End, 3, clearSword);          // Long Fall
+                    // prince.init(18, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // problem
+                    // prince.init(98, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // At bottom of tthree level drop.
+                    // prince.init(98, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // At bottom of tthree level drop.
+                    // prince.init(18, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Long Run
+                    // prince.init(78 - 10, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Fall Error Stading Jump
+                    // prince.init(78 - 4, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Fall Error running Jump
+
+                    // this->init(prince, 90, 9, 60, 0);  // Normal starting posa
+                    // this->init(prince, 90, 9,  37, 3);  // gate issuee
+                    // this->init(prince, 90, 9,  60, 3);  // Fight from Left
+                    // this->init(prince, 90, 9,  70, 3);  // Fight from Right
+                    // this->init(prince, 90, 9,  10, 3);   // Double collapisble
+                    // this->init(prince, 90, 9,  10, 0);   // Spikes Upper
+                    // this->init(prince, 90, 9,  10, 6);   // Spikes Lower
+                    // this->init(prince, 90, 9,  30, 3);  // Jump 2
+                    // this->init(prince, 90, 9,  70, 3);  // Sword fight
+                    // this->init(prince, 90, 9,  50, 0);  // Second drink tonic
+                    // this->init(prince, 90, 9,  50, 0);  // Upper Gate
+                    // this->init(prince, 90, 9,  40, 3);  // 2 leap
+                    // this->init(prince, 90, 9,  80, 3);  // Exit Seq
+                    // this->init(prince, 90, 9,  20, 3);  // Both floor types
+                    // this->init(prince, 90, 9,  60, 0);  //Normal starting pos but next to drop floor 3rd floor
+                    this->init(prince, 90, 9,  50, 3);  // Under collapsible floor
+                    // this->init(prince, 90, 9,  Constants::TileHeight, 0);   // Get tonic
+                    this->init(prince, 90, 9,  0, 3);   // Column of climbs
+                    // this->init(prince, 90, 9,  0, 6);   // Below Column of climbs
+                    // this->init(prince, 90, 9,  0, 0);   // Top left
+                    // this->init(prince, 90, 9,  40, 4);  // Long Fall
+                    // this->init(prince, 90, 9,  60, 3);  // problem
+                    // this->init(prince, 90, 9,  30, 6); // At bottom of tthree level drop.
+                    // this->init(prince, 90, 9,  40, 0);  // Long run
+                    // this->init(prince, 90, 9,  50, 3);  // Fall Error Stading Jump
+                    // this->init(prince, 90, 9,  50, 3);  // Fall Error running Jump
+
+                }
+
+                // Level 2
+
+                if (this->level == 2) {
+
+                    // enemy.init(104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
+                    // enemy.init(80 + (40 * Constants::TileWidth), 25 + (0 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
+
+                    // Normal starting pos
+                    prince.init(66, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    this->init(prince, 130, 12, 120, 6); 
+
+                    // Top of climbm down showing 10 error.
+                    // prince.init(10, 56, Direction::Left, Stance::Upright, 3, clearSword);  
+                    // this->init(prince, 130, 12, 100, 3);  
+
+                    // Jump error
+                    // prince.init(70-24, 56 + 31, Direction::Left, Stance::Upright, 3, clearSword);  
+                    // this->init(prince, 130, 12, 100, 3);  
+
+                    // Enemy 2 Fight.
+                    // prince.init(10, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);  
+                    // this->init(prince, 130, 12, 80, 3);  
+
+                    // Jump Up
+                    // prince.init(22 + 84, 25, Direction::Left, Stance::Upright, 3, clearSword);  
+                    // this->init(prince, 130, 12, 90, 6);  
+
+                    // Jump Up
+                    // prince.init(22, 25, Direction::Left, Stance::Upright, 3, clearSword);  
+                    // this->init(prince, 130, 12, 90, 6);  
+
+                    // Enemy 3
+                    // prince.init(22+(12*6), 25, Direction::Left, Stance::Upright, 3, clearSword);  
+                    // this->init(prince, 130, 12, 60, 3);  
+
+                    // Enemy 3
+                    // prince.init(22+(12*6), 56, Direction::Left, Stance::Upright, 3, clearSword);  
+                    // this->init(prince, 130, 12, 20, 3);  
+
+                }
 
             #endif
 
@@ -927,6 +975,7 @@ struct Level {
                 case TILE_FG_WALL_5:
                 case TILE_FG_WALL_6:
                 case TILE_FG_WALL_7:
+                case TILE_FG_WALL_8:
                     return WallTileResults::Normal;
 
                 default: 
@@ -1003,6 +1052,7 @@ struct Level {
                 case TILE_FG_WALL_5:
                 case TILE_FG_WALL_6:
                 case TILE_FG_WALL_7:
+                case TILE_FG_WALL_8:
                     return false;
 
                 // default:                     << Uncomment adds +32 bytes!
@@ -1259,8 +1309,10 @@ struct Level {
             printCoordToIndex(newPos, tileXIdx, tileYIdx);
             #endif
 
-            int8_t bgTile = this->getTile(Layer::Background, tileXIdx + (prince.getDirection() == Direction::Left ? 1 : 0), tileYIdx, TILE_FLOOR_BASIC);
-            int8_t fgTile = this->getTile(Layer::Foreground, tileXIdx + (prince.getDirection() == Direction::Left ? 1 : 0), tileYIdx, TILE_FLOOR_BASIC);
+            // int8_t bgTile = this->getTile(Layer::Background, tileXIdx + (prince.getDirection() == Direction::Left ? 1 : 0), tileYIdx, TILE_FLOOR_BASIC);
+            // int8_t fgTile = this->getTile(Layer::Foreground, tileXIdx + (prince.getDirection() == Direction::Left ? 1 : 0), tileYIdx, TILE_FLOOR_BASIC);
+            int8_t bgTile = this->getTile(Layer::Background, tileXIdx + (prince.getDirection() == Direction::Left ? 0 : 0), tileYIdx, TILE_FLOOR_BASIC);
+            int8_t fgTile = this->getTile(Layer::Foreground, tileXIdx + (prince.getDirection() == Direction::Left ? 0 : 0), tileYIdx, TILE_FLOOR_BASIC);
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN_PART2)
             DEBUG_PRINT(F("canClimbDown_Part2() Test can land 1 level below ("));
@@ -1604,15 +1656,17 @@ struct Level {
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
                         int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
                         int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
-                        DEBUG_PRINT(F(" left dist "));
-                        DEBUG_PRINT(distToEdgeOfCurrentTile);
-                        DEBUG_PRINT(F(", bg "));
-                        DEBUG_PRINT(bgTile2);
+                        int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(prince.getDirection(), prince.getPosition().x);
+
+                        // DEBUG_PRINT(F(" left dist "));
+                        // DEBUG_PRINT(distToEdgeOfCurrentTile);
+                        // DEBUG_PRINT(F(", bg "));
+                        // DEBUG_PRINT(bgTile2);
                         DEBUG_PRINT(F(" "));
                         DEBUG_PRINT(bgTile1);
                         DEBUG_PRINT(F(", fg "));
-                        DEBUG_PRINT(fgTile2);
-                        DEBUG_PRINT(F(" "));
+                        // DEBUG_PRINT(fgTile2);
+                        // DEBUG_PRINT(F(" "));
                         DEBUG_PRINT(fgTile1);
                         DEBUG_PRINTLN("");
                         #endif
@@ -1709,7 +1763,15 @@ struct Level {
                                         !isGroundTile4_CurrLvl &&
                                         isGroundTile5_CurrLvl) {
 
-                                        return RunningJumpResult::Jump3_KeepLevel;
+                                        switch (distToEdgeOfCurrentTile) {
+
+                                            case 2:
+                                                return RunningJumpResult::Jump3_KeepLevel_Short;
+
+                                            default:
+                                                return RunningJumpResult::Jump3_KeepLevel;
+
+                                        }
 
                                     }
 
@@ -1740,12 +1802,12 @@ struct Level {
                                     WallTileResults wallTile = this->isWallTile(fgTile4_CurrLvl, tileXIdx - 3, tileYIdx, Direction::Left); //SJH -3?
                                 
                                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
-                                    printTileInfo(bgTile4, fgTile4);
+                                    // printTileInfo(bgTile4, fgTile4);
                                     DEBUG_PRINT("isWallTile(");
-                                    DEBUG_PRINT(bgTile4);
-                                    DEBUG_PRINT(",");
-                                    DEBUG_PRINT(fgTile4);
-                                    DEBUG_PRINT(",");
+                                    // DEBUG_PRINT(bgTile4);
+                                    // DEBUG_PRINT(",");
+                                    // DEBUG_PRINT(fgTile4);
+                                    // DEBUG_PRINT(",");
                                     DEBUG_PRINT(tileXIdx + 3);
                                     DEBUG_PRINT(",");
                                     DEBUG_PRINT(tileYIdx);
@@ -1769,7 +1831,7 @@ struct Level {
                                     WallTileResults wallTile = this->isWallTile(fgTile, tileXIdx - 2, tileYIdx, Direction::Left); //SJH -2?
                                     
                                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
-                                    printTileInfo(bgTile3, fgTile3);
+                                    // printTileInfo(bgTile3, fgTile3);
                                     DEBUG_PRINT("isWallTile(");
                                     DEBUG_PRINT(bgTile);
                                     DEBUG_PRINT(",");
@@ -1798,7 +1860,7 @@ struct Level {
                                     WallTileResults wallTile = this->isWallTile(fgTile, tileXIdx - 1, tileYIdx, Direction::Left); //SJH -1?
 
                                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
-                                    printTileInfo(bgTile2, fgTile2);
+                                    // printTileInfo(bgTile2, fgTile2);
                                     DEBUG_PRINT("isWallTile(");
                                     DEBUG_PRINT(bgTile);
                                     DEBUG_PRINT(",");
@@ -1831,17 +1893,17 @@ struct Level {
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
                         int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
                         int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
-                        DEBUG_PRINT(F(" right dist "));
-                        DEBUG_PRINT(distToEdgeOfCurrentTile);
-                        DEBUG_PRINT(F(", bg "));
-                        DEBUG_PRINT(bgTile1);
-                        DEBUG_PRINT(F(" "));
-                        DEBUG_PRINT(bgTile2);
-                        DEBUG_PRINT(F(", fg "));
-                        DEBUG_PRINT(fgTile1);
-                        DEBUG_PRINT(F(" "));
-                        DEBUG_PRINT(fgTile2);
-                        DEBUG_PRINTLN("");
+                        // DEBUG_PRINT(F(" right dist "));
+                        // DEBUG_PRINT(distToEdgeOfCurrentTile);
+                        // DEBUG_PRINT(F(", bg "));
+                        // DEBUG_PRINT(bgTile1);
+                        // DEBUG_PRINT(F(" "));
+                        // DEBUG_PRINT(bgTile2);
+                        // DEBUG_PRINT(F(", fg "));
+                        // DEBUG_PRINT(fgTile1);
+                        // DEBUG_PRINT(F(" "));
+                        // DEBUG_PRINT(fgTile2);
+                        // DEBUG_PRINTLN("");
                         #endif
 
                         switch (action) {
@@ -1967,17 +2029,17 @@ struct Level {
                                     WallTileResults wallTile = this->isWallTile(fgTile4_CurrLvl, tileXIdx + 3, tileYIdx, Direction::Right);
                                 
                                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
-                                    printTileInfo(bgTile4, fgTile4);
-                                    DEBUG_PRINT("isWallTile(");
-                                    DEBUG_PRINT(bgTile4);
-                                    DEBUG_PRINT(",");
-                                    DEBUG_PRINT(fgTile4);
-                                    DEBUG_PRINT(",");
-                                    DEBUG_PRINT(tileXIdx + 3);
-                                    DEBUG_PRINT(",");
-                                    DEBUG_PRINT(tileYIdx);
-                                    DEBUG_PRINT(") = ");
-                                    DEBUG_PRINTLN((uint8_t)wallTile);
+                                    // printTileInfo(bgTile4, fgTile4);
+                                    // DEBUG_PRINT("isWallTile(");
+                                    // DEBUG_PRINT(bgTile4);
+                                    // DEBUG_PRINT(",");
+                                    // DEBUG_PRINT(fgTile4);
+                                    // DEBUG_PRINT(",");
+                                    // DEBUG_PRINT(tileXIdx + 3);
+                                    // DEBUG_PRINT(",");
+                                    // DEBUG_PRINT(tileYIdx);
+                                    // DEBUG_PRINT(") = ");
+                                    // DEBUG_PRINTLN((uint8_t)wallTile);
                                     #endif
     
                                     return (wallTile == WallTileResults::None ? RunningJumpResult::Normal : RunningJumpResult::None);                              
@@ -1997,17 +2059,17 @@ struct Level {
                                     WallTileResults wallTile = this->isWallTile(fgTile, tileXIdx + 2, tileYIdx, Direction::Right);
 
                                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
-                                    printTileInfo(bgTile3, fgTile3);
-                                    DEBUG_PRINT("isWallTile(");
-                                    DEBUG_PRINT(bgTile);
-                                    DEBUG_PRINT(",");
-                                    DEBUG_PRINT(fgTile);
-                                    DEBUG_PRINT(",");
-                                    DEBUG_PRINT(tileXIdx + 2);
-                                    DEBUG_PRINT(",");
-                                    DEBUG_PRINT(tileYIdx);
-                                    DEBUG_PRINT(") = ");
-                                    DEBUG_PRINTLN((uint8_t)wallTile);
+                                    // printTileInfo(bgTile3, fgTile3);
+                                    // DEBUG_PRINT("isWallTile(");
+                                    // DEBUG_PRINT(bgTile);
+                                    // DEBUG_PRINT(",");
+                                    // DEBUG_PRINT(fgTile);
+                                    // DEBUG_PRINT(",");
+                                    // DEBUG_PRINT(tileXIdx + 2);
+                                    // DEBUG_PRINT(",");
+                                    // DEBUG_PRINT(tileYIdx);
+                                    // DEBUG_PRINT(") = ");
+                                    // DEBUG_PRINTLN((uint8_t)wallTile);
                                     #endif
 
                                     return (wallTile == WallTileResults::None ? RunningJumpResult::Normal : RunningJumpResult::None);
@@ -2027,17 +2089,17 @@ struct Level {
                                     WallTileResults wallTile = this->isWallTile(fgTile, tileXIdx + 1, tileYIdx, Direction::Right);
                                         
                                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
-                                    printTileInfo(bgTile2, fgTile2);
-                                    DEBUG_PRINT("isWallTile(");
-                                    DEBUG_PRINT(bgTile);
-                                    DEBUG_PRINT(",");
-                                    DEBUG_PRINT(fgTile);
-                                    DEBUG_PRINT(",");
-                                    DEBUG_PRINT(tileXIdx + 1);
-                                    DEBUG_PRINT(",");
-                                    DEBUG_PRINT(tileYIdx);
-                                    DEBUG_PRINT(") = ");
-                                    DEBUG_PRINTLN((uint8_t)wallTile);
+                                    // printTileInfo(bgTile2, fgTile2);
+                                    // DEBUG_PRINT("isWallTile(");
+                                    // DEBUG_PRINT(bgTile);
+                                    // DEBUG_PRINT(",");
+                                    // DEBUG_PRINT(fgTile);
+                                    // DEBUG_PRINT(",");
+                                    // DEBUG_PRINT(tileXIdx + 1);
+                                    // DEBUG_PRINT(",");
+                                    // DEBUG_PRINT(tileYIdx);
+                                    // DEBUG_PRINT(") = ");
+                                    // DEBUG_PRINTLN((uint8_t)wallTile);
                                     #endif
 
                                     return (wallTile == WallTileResults::None ? RunningJumpResult::Normal : RunningJumpResult::None);
@@ -2091,6 +2153,8 @@ struct Level {
                         int8_t bgTile2_NextLvl = this->getTile(Layer::Background, tileXIdx - 1, tileYIdx + 1, TILE_FLOOR_BASIC);
                         int8_t fgTile2_NextLvl = this->getTile(Layer::Foreground, tileXIdx - 1, tileYIdx + 1, TILE_FLOOR_BASIC);
 
+                        int8_t bgTile4_CurrLvl = this->getTile(Layer::Background, tileXIdx - 3, tileYIdx, TILE_FLOOR_BASIC);
+                        int8_t fgTile4_CurrLvl = this->getTile(Layer::Foreground, tileXIdx - 3, tileYIdx, TILE_FLOOR_BASIC);
                         int8_t bgTile3_CurrLvl = this->getTile(Layer::Background, tileXIdx - 2, tileYIdx, TILE_FLOOR_BASIC);
                         int8_t fgTile3_CurrLvl = this->getTile(Layer::Foreground, tileXIdx - 2, tileYIdx, TILE_FLOOR_BASIC);
                         int8_t bgTile2_CurrLvl = this->getTile(Layer::Background, tileXIdx - 1, tileYIdx, TILE_FLOOR_BASIC);
@@ -2100,10 +2164,13 @@ struct Level {
                         WallTileResults wallTile1_CurrLvl = this->isWallTile(fgTile1_CurrLvl, tileXIdx, tileYIdx, Direction::Left);
                         WallTileResults wallTile2_CurrLvl = this->isWallTile(fgTile2_CurrLvl, tileXIdx - 1, tileYIdx, Direction::Left);
                         WallTileResults wallTile3_CurrLvl = this->isWallTile(fgTile3_CurrLvl, tileXIdx - 2, tileYIdx, Direction::Left);
+                        WallTileResults wallTile4_CurrLvl = this->isWallTile(fgTile4_CurrLvl, tileXIdx - 3, tileYIdx, Direction::Left);
                         WallTileResults wallTile2_NextLvl = this->isWallTile(fgTile2_NextLvl, tileXIdx - 1, tileYIdx, Direction::Left);
                         WallTileResults wallTile3_NextLvl = this->isWallTile(fgTile3_NextLvl, tileXIdx - 2, tileYIdx, Direction::Left);
                         WallTileResults wallTile4_NextLvl = this->isWallTile(fgTile4_NextLvl, tileXIdx - 3, tileYIdx, Direction::Left);
-// Serial.print("0 ");
+
+// Serial.print((uint8_t)wallTile4_CurrLvl);
+// Serial.print(" ");
 // Serial.print((uint8_t)wallTile3_CurrLvl);
 // Serial.print(" ");
 // Serial.print((uint8_t)wallTile2_CurrLvl);
@@ -2116,6 +2183,8 @@ struct Level {
 // Serial.print(" ");
 // Serial.print((uint8_t)wallTile2_NextLvl);
 // Serial.println(" 0");
+// Serial.print("Dist ");
+// Serial.println(distToEdgeOfCurrentTile);
    
                         // WallTileResults, 0 None, 1 Normal, 2 GateClosed
                    
@@ -2159,10 +2228,32 @@ struct Level {
                                 switch (wallTile3_CurrLvl) {
 
                                     case WallTileResults::None:
-                                    case WallTileResults::Normal:
+
+                                        if (wallTile4_CurrLvl != WallTileResults::None) {
+
+                                            switch (distToEdgeOfCurrentTile) {
+                                                
+                                                case 2:
+// Serial.println("Short");                                    
+                                                    return StandingJumpResult::Short;
+                                                
+                                                case 6:
+                                                case 10:
+// Serial.println("Short");                                    
+                                                    return StandingJumpResult::Medium;
+
+                                                default:
+// Serial.println("Normal"); 
+                                                    return StandingJumpResult::Normal;
+
+                                            }
+
+                                        }
+
 // Serial.println("Normal");                                    
                                         return StandingJumpResult::Normal;
 
+                                    case WallTileResults::Normal:
                                     case WallTileResults::GateClosed:
 // Serial.println("Short");                                    
                                         return StandingJumpResult::Short;
@@ -2290,7 +2381,7 @@ struct Level {
                             case CanJumpUpResult::StepThenJump:
 
                                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                DEBUG_PRINT(F("Left Test success, Return "));
+                                DEBUG_PRINT(F("L1 Test success, Return "));
                                 DEBUG_PRINTLN(static_cast<uint8_t>(resultLeft));
                                 #endif
                                                                     
@@ -2299,7 +2390,7 @@ struct Level {
                             case CanJumpUpResult::JumpThenFall_CollapseFloor:
 
                                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                DEBUG_PRINTLN(F("Left Test success, Return JumpThenFall_CollapseFloor"));
+                                DEBUG_PRINTLN(F("L2 Test success, Return JumpThenFall_CollapseFloor"));
                                 #endif                            
 
                                 return CanJumpUpResult::JumpThenFall_CollapseFloor;
@@ -2307,7 +2398,7 @@ struct Level {
                             case CanJumpUpResult::JumpThenFall_CollapseFloorAbove:
 
                                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                DEBUG_PRINTLN(F("Left Test success, Return JumpThenFall_CollapseFloorAbove"));
+                                DEBUG_PRINTLN(F("L3 Test success, Return JumpThenFall_CollapseFloorAbove"));
                                 #endif                            
 
                                 return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
@@ -2315,7 +2406,7 @@ struct Level {
                             case CanJumpUpResult::StepThenJumpThenFall_CollapseFloor:
 
                                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                DEBUG_PRINTLN(F("Left Test success, Return StepThenJumpThenFall_CollapseFloor"));
+                                DEBUG_PRINTLN(F("L4 Test success, Return StepThenJumpThenFall_CollapseFloor"));
                                 #endif                            
 
                                 return CanJumpUpResult::StepThenJumpThenFall_CollapseFloor;
@@ -2329,7 +2420,7 @@ struct Level {
                                         case CanJumpUpResult::Jump:
 
                                             #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                            DEBUG_PRINT(F("Right Test success, Return TurnThenJump"));
+                                            DEBUG_PRINT(F("R1 Test success, Return TurnThenJump"));
                                             #endif
 
                                             return CanJumpUpResult::TurnThenJump;
@@ -2337,14 +2428,14 @@ struct Level {
                                         default:
 
                                             #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                            DEBUG_PRINT(F("Right Test failed, Return "));
+                                            DEBUG_PRINT(F("R2 Test failed, Return "));
                                             DEBUG_PRINTLN(static_cast<uint8_t>(resultLeft));
                                             #endif
 
                                             CanJumpUpResult result = this->canJumpUp_Test_Dist10(prince, Direction::Left);
 
                                             #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                            DEBUG_PRINT(F("canJumpUp_Test_Dist10 Return "));
+                                            DEBUG_PRINT(F("R3 canJumpUp_Test_Dist10 Return "));
                                             DEBUG_PRINTLN(static_cast<uint8_t>(result));
                                             #endif
 
@@ -2372,7 +2463,7 @@ struct Level {
                             case CanJumpUpResult::StepThenJump:
 
                                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                DEBUG_PRINT(F("Right Test success, Return "));
+                                DEBUG_PRINT(F("R1 Test success, Return "));
                                 DEBUG_PRINTLN(static_cast<uint8_t>(resultRight));
                                 #endif                            
 
@@ -2381,7 +2472,7 @@ struct Level {
                             case CanJumpUpResult::JumpThenFall_CollapseFloor:
 
                                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                DEBUG_PRINTLN(F("Right Test success, Return JumpThenFall_CollapseFloor"));
+                                DEBUG_PRINTLN(F("R2 Test success, Return JumpThenFall_CollapseFloor"));
                                 #endif                            
 
                                 return CanJumpUpResult::JumpThenFall_CollapseFloor;
@@ -2389,7 +2480,7 @@ struct Level {
                             case CanJumpUpResult::JumpThenFall_CollapseFloorAbove:
 
                                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                DEBUG_PRINTLN(F("Right Test success, Return JumpThenFall_CollapseFloorAbove"));
+                                DEBUG_PRINTLN(F("R3 Test success, Return JumpThenFall_CollapseFloorAbove"));
                                 #endif                            
 
                                 return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
@@ -2397,7 +2488,7 @@ struct Level {
                             case CanJumpUpResult::StepThenJumpThenFall_CollapseFloor:
 
                                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                DEBUG_PRINTLN(F("Right Test success, Return StepThenJumpThenFall_CollapseFloor"));
+                                DEBUG_PRINTLN(F("R4 Test success, Return StepThenJumpThenFall_CollapseFloor"));
                                 #endif                            
 
                                 return CanJumpUpResult::StepThenJumpThenFall_CollapseFloor;
@@ -2411,7 +2502,7 @@ struct Level {
                                         case CanJumpUpResult::Jump:
 
                                             #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                            DEBUG_PRINT(F("Left Test success, Return TurnThenJump"));
+                                            DEBUG_PRINT(F("L1 Test success, Return TurnThenJump"));
                                             #endif     
 
                                             return CanJumpUpResult::TurnThenJump;
@@ -2419,14 +2510,14 @@ struct Level {
                                         default:
 
                                             #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                            DEBUG_PRINT(F("Left Test failed, Return "));
+                                            DEBUG_PRINT(F("L2 Test failed, Return "));
                                             DEBUG_PRINTLN(static_cast<uint8_t>(resultRight));
                                             #endif     
 
                                             CanJumpUpResult result = this->canJumpUp_Test_Dist10(prince, Direction::Right);
                                             
                                             #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                            DEBUG_PRINT(F("canJumpUp_Test_Dist10 Return "));
+                                            DEBUG_PRINT(F("L3 canJumpUp_Test_Dist10 Return "));
                                             DEBUG_PRINTLN(static_cast<uint8_t>(result));
                                             #endif
 
@@ -2568,7 +2659,7 @@ struct Level {
                                 case TILE_FLOOR_RH_END_4:
                                 case TILE_FLOOR_RH_END_5:
                                 case TILE_FLOOR_RH_END_GATE:
-                                case TILE_COLUMN_LH_WALL:
+                                // case TILE_COLUMN_LH_WALL:                << SJH removed 29/12
 
                                     if (midTile == TILE_COLLAPSING_FLOOR) {
                                         return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
@@ -2870,7 +2961,13 @@ struct Level {
         }        
 
         CanClimbDownResult canClimbDown(Prince &prince) {
-
+// enum class CanClimbDownResult : uint8_t {
+//   0  None,
+//   1  ClimbDown,
+//   2  StepThenClimbDown,
+//   3  TurnThenClimbDown,
+//   4  StepThenTurnThenClimbDown,
+// };
             switch (prince.getDirection()) {
 
                 case Direction::Left:
@@ -2883,7 +2980,7 @@ struct Level {
                             case CanClimbDownResult::StepThenClimbDown:
 
                                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
-                                DEBUG_PRINT(F("Return: "));
+                                DEBUG_PRINT(F("L1 Return: "));
                                 DEBUG_PRINTLN(static_cast<uint8_t>(resultRight));
                                 #endif
 
@@ -2899,7 +2996,7 @@ struct Level {
                                         case CanClimbDownResult::ClimbDown:
 
                                             #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
-                                            DEBUG_PRINTLN(F("Return: TurnThenClimbDown"));
+                                            DEBUG_PRINTLN(F("L2 Return: TurnThenClimbDown"));
                                             #endif
 
                                             return CanClimbDownResult::TurnThenClimbDown;
@@ -2908,7 +3005,7 @@ struct Level {
                                         case CanClimbDownResult::StepThenClimbDown:
 
                                             #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
-                                            DEBUG_PRINTLN(F("Return: StepThenTurnThenClimbDown"));
+                                            DEBUG_PRINTLN(F("L3 Return: StepThenTurnThenClimbDown"));
                                             #endif
 
                                             return CanClimbDownResult::StepThenTurnThenClimbDown;
@@ -2917,7 +3014,7 @@ struct Level {
                                         default:
 
                                             #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
-                                            DEBUG_PRINT(F("Return: "));
+                                            DEBUG_PRINT(F("L4 Return: "));
                                             DEBUG_PRINTLN(static_cast<uint8_t>(resultRight));
                                             #endif
                                             
@@ -2929,7 +3026,7 @@ struct Level {
                                 }
                                         
                                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
-                                DEBUG_PRINTLN(F("Return: None"));
+                                DEBUG_PRINTLN(F("L5 Return: None"));
                                 #endif
 
                                 return CanClimbDownResult::None;
@@ -2940,7 +3037,7 @@ struct Level {
                     }
 
                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
-                    DEBUG_PRINTLN(F("Return: None"));
+                    DEBUG_PRINTLN(F("L6 Return: None"));
                     #endif
 
                     return CanClimbDownResult::None;
@@ -2961,7 +3058,7 @@ struct Level {
                             case CanClimbDownResult::StepThenClimbDown:
 
                                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
-                                DEBUG_PRINT(F("1 Return: "));
+                                DEBUG_PRINT(F("R1 Return: "));
                                 DEBUG_PRINTLN(static_cast<uint8_t>(resultLeft));
                                 #endif
 
@@ -2982,7 +3079,7 @@ struct Level {
                                         case CanClimbDownResult::ClimbDown:
 
                                             #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
-                                            DEBUG_PRINTLN(F("2. Return: TurnThenClimbDown"));
+                                            DEBUG_PRINTLN(F("R2 Return: TurnThenClimbDown"));
                                             #endif
 
                                             return CanClimbDownResult::TurnThenClimbDown;
@@ -2991,7 +3088,7 @@ struct Level {
                                         case CanClimbDownResult::StepThenClimbDown:
 
                                             #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
-                                            DEBUG_PRINTLN(F("3. Return: StepThenTurnThenClimbDown"));
+                                            DEBUG_PRINTLN(F("R3 Return: StepThenTurnThenClimbDown"));
                                             #endif
 
                                             return CanClimbDownResult::StepThenTurnThenClimbDown;
@@ -3000,7 +3097,7 @@ struct Level {
                                         default:
 
                                             #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
-                                            DEBUG_PRINT(F("4. Return: "));
+                                            DEBUG_PRINT(F("R4 Return: "));
                                             DEBUG_PRINTLN(static_cast<uint8_t>(resultLeft));
                                             #endif
                                             
@@ -3010,6 +3107,10 @@ struct Level {
                                     }
 
                                 }
+                                
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
+                                DEBUG_PRINTLN(F("R5 Return: None"));
+                                #endif
 
                                 return CanClimbDownResult::None;
                                 break;
@@ -3019,7 +3120,7 @@ struct Level {
                     }
 
                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
-                    DEBUG_PRINTLN(F("Return: None"));
+                    DEBUG_PRINTLN(F("R^ Return: None"));
                     #endif
 
                     return CanClimbDownResult::None;

@@ -76,6 +76,7 @@ void processRunJump(Prince &prince, Level &level) {
         if (jump_2_Result != RunningJumpResult::None) {
 
             RunningJumpResult jump_3_Result = level.canRunningJump(prince, Action::RunJump_3);
+// Serial.println((uint8_t)jump_3_Result);
 
             switch (jump_3_Result) {
 
@@ -92,12 +93,17 @@ void processRunJump(Prince &prince, Level &level) {
                     break;
 
                 case RunningJumpResult::Jump3_KeepLevel:
-                    prince.pushSequence(Stance::Running_Jump_3_SameLvl_1_Start, Stance::Running_Jump_3_SameLvl_8_End,  Stance::Run_Repeat_4, true);
+                    prince.pushSequence(Stance::Running_Jump_3_SameLvl_1_Start, Stance::Running_Jump_3_SameLvl_8_End, Stance::Run_Repeat_4, true);
+                    prince.setIgnoreWallCollisions(true);
+                    break;
+
+                case RunningJumpResult::Jump3_KeepLevel_Short:
+                    prince.pushSequence(Stance::Running_Jump_3_SameLvl_Short_1_Start, Stance::Running_Jump_3_SameLvl_Short_8_End, Stance::Run_Repeat_4, true);
                     prince.setIgnoreWallCollisions(true);
                     break;
 
                 case RunningJumpResult::Normal:
-                    #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
+                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
                     DEBUG_PRINTLN(F("RunningJump_3 true, Jump"));
                     #endif
 
@@ -107,7 +113,7 @@ void processRunJump(Prince &prince, Level &level) {
 
                 case RunningJumpResult::None:
 
-                    #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
+                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
                     DEBUG_PRINTLN(F("RunningJump_3 false, RunRepeat"));
                     #endif
 
@@ -119,7 +125,7 @@ void processRunJump(Prince &prince, Level &level) {
         }
         else {
 
-            #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
+            #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
             DEBUG_PRINTLN(F("RunningJump_2 false, RunRepeat"));
             #endif
 
@@ -130,7 +136,7 @@ void processRunJump(Prince &prince, Level &level) {
     }
     else {
 
-        #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
+        #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
         DEBUG_PRINTLN(F("RunningJump_1 false, Stopping"));
         #endif
 
@@ -154,6 +160,10 @@ void processStandingJump(Prince &prince, Level &level) {
 
         case StandingJumpResult::Normal:
             prince.pushSequence(Stance::Standing_Jump_1_Start, Stance::Standing_Jump_18_End, Stance::Upright, true);
+            break;
+
+        case StandingJumpResult::Medium:
+            prince.pushSequence(Stance::Standing_Jump_Med_1_Start, Stance::Standing_Jump_Med_16_End, Stance::Upright, true);
             break;
 
         case StandingJumpResult::Short:

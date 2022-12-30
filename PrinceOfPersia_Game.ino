@@ -11,8 +11,8 @@
 
 void game_Init() {
 
-    gamePlay.init(arduboy, 1);
-    level.setLevel(1);
+    gamePlay.init(arduboy, 3);
+    level.setLevel(3);
     level.init_PositionChars(prince, enemy, true);
 
     gamePlay.gameState = GameState::Game;
@@ -106,6 +106,23 @@ void game() {
     //     processRunJump(prince, level);
     //     // prince.pushSequence(Stance::Run_Start_1_Start, Stance::Run_Start_6_End, true);
     // }
+    if (justPressed & B_BUTTON) {
+    
+    // Serial.print(F("St"));
+    // Serial.print(prince.getStance());
+    // Serial.print(F(" px"));
+    // Serial.print(prince.getX());
+    // Serial.print(F(" x"));
+    // Serial.print(level.coordToTileIndexX((level.getXLocation() * Constants::TileWidth) + prince.getX()));
+    // Serial.print(F(" "));
+    // Serial.print((level.getXLocation() * Constants::TileWidth) + prince.getX());
+    // Serial.print(F(" y"));
+    // Serial.print(level.coordToTileIndexY((level.getYLocation() * Constants::TileHeight) + prince.getY()));
+    // Serial.print(F(" "));
+    // Serial.print(prince.getY());
+    // Serial.print(F(" D"));
+    // Serial.println(level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX()));
+    }
     #endif
 
     #ifdef GIVE_SWORD
@@ -561,7 +578,6 @@ void game() {
                                 #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
                                 DEBUG_PRINTLN(F("DOWN_BUTTON, Climb down Pos 2"));
                                 #endif
-
                                 prince.pushSequence(Stance::Step_Climbing_15_End, Stance::Step_Climbing_1_Start, Stance::Jump_Up_A_14_End, true);
                                 break;
 
@@ -822,7 +838,7 @@ void game() {
                             
                         if ((pressed & RIGHT_BUTTON) && (pressed & A_BUTTON)) {
 
-                            #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
+                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
                             DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jump from Run_Repeat_4"));
                             #endif
 
@@ -871,7 +887,7 @@ void game() {
 
                         if ((pressed & LEFT_BUTTON) && (pressed & A_BUTTON)) {
 
-                            #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
+                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
                             DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jump from Run_Repeat_4"));
                             #endif
 
@@ -925,7 +941,7 @@ void game() {
                                         
                         if ((pressed & RIGHT_BUTTON) && (pressed & A_BUTTON)) {
 
-                            #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
+                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
                             DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jump from Run_Start_6_End, Run_Repeat_8_End or Run_Repeat_8_End_Turn"));
                             #endif
 
@@ -974,7 +990,7 @@ void game() {
                                         
                         if ((pressed & LEFT_BUTTON) && (pressed & A_BUTTON)) {
 
-                            #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
+                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
                             DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jump from Run_Start_6_End, Run_Repeat_8_End or Run_Repeat_8_End_Turn"));
                             #endif
 
@@ -1261,6 +1277,8 @@ void game() {
             int16_t newStance = prince.pop();
             prince.setStance(abs(newStance));
 
+// Serial.print("stance: ");
+// Serial.println(prince.getStance());
 
             // Handle specific events .. such as turning at end of sequences, falling after a land, etc.
 
@@ -1346,17 +1364,15 @@ void game() {
                                     prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
                                     prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
 
-                                    if (prince.decHealth(1) == 0) {;
-
-                                        pushDead(prince, level, gamePlay, false);
-
+                                    if (prince.decHealth(1) == 0) {
+                                        pushDead(prince, level, gamePlay, true);
                                     }
 
                                     break;
 
                                 default:    // Dead!
 
-                                    pushDead(prince, level, gamePlay, false);
+                                    pushDead(prince, level, gamePlay, true);
                                     break;
 
                             }
@@ -1364,7 +1380,7 @@ void game() {
                         }
                         else {
 
-                            pushDead(prince, level, gamePlay, false);
+                            pushDead(prince, level, gamePlay, true);
 
                         }
                         
@@ -1388,7 +1404,7 @@ void game() {
                 case Stance::Collide_Wall_M2_Start_End:
 
                     if (level.canFallSomeMore(prince)) { // Fall some more
-
+// Serial.println("cfsm");
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
                         DEBUG_PRINTLN(F("Fall some more"));
                         #endif
@@ -1453,15 +1469,15 @@ void game() {
                                     prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
                                     prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
 
-                                    if (prince.decHealth(1) == 0) {;
-                                        pushDead(prince, level, gamePlay, false);
+                                    if (prince.decHealth(1) == 0) {
+                                        pushDead(prince, level, gamePlay, true);
                                     }
 
                                     break;
 
                                 default:    // Dead!
 
-                                    pushDead(prince, level, gamePlay, false);
+                                    pushDead(prince, level, gamePlay, true);
                                     break;
 
                             }
@@ -1469,7 +1485,7 @@ void game() {
                         }
                         else {
 
-                            pushDead(prince, level, gamePlay, false);
+                            pushDead(prince, level, gamePlay, true);
 
                         }
 
@@ -1574,8 +1590,16 @@ void game() {
 
 
             getStance_Offsets(prince.getDirection(), offset, prince.getStance());
+// Serial.print("X:");
+// Serial.print(prince.getX());
+// Serial.print(",Y");
+// Serial.print(prince.getY());
             prince.incX(offset.x * (newStance < 0 ? -1 : 1));
             prince.incY(offset.y * (newStance < 0 ? -1 : 1));
+// Serial.print("- X:");
+// Serial.print(prince.getX());
+// Serial.print(",Y");
+// Serial.println(prince.getY());
 
 
 
@@ -1754,7 +1778,7 @@ void game() {
 
                                     initFlash(prince, level, FlashType::SwordFight);
 
-                                    if (prince.decHealth(1) == 0) {
+                                    if (prince.decHealth(0) == 0) { //SJH
 
                                         pushDead(prince, level, gamePlay, true);
 

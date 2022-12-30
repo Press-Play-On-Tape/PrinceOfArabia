@@ -201,9 +201,7 @@ void loop() {
         
         }
 
-        if (invert) {
-            arduboy.invert(true);
-        }
+        arduboy.invert(invert);
 
     }
 

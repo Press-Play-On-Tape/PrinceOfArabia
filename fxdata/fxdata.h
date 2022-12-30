@@ -6,8 +6,8 @@ using uint24_t = __uint24;
 
 // Initialize FX hardware using  FX::begin(FX_DATA_PAGE); in the setup() function.
 
-constexpr uint16_t FX_DATA_PAGE  = 0xfcf2;
-constexpr uint24_t FX_DATA_BYTES = 200147;
+constexpr uint16_t FX_DATA_PAGE  = 0xfce0;
+constexpr uint24_t FX_DATA_BYTES = 204719;
 
 namespace Levels
 {
@@ -16,2644 +16,2660 @@ namespace Levels
   constexpr uint24_t level1_Data = 0x000654;
   constexpr uint24_t Level1_Items = 0x00066A;
   constexpr uint24_t Level2_FG = 0x00072A;
-  constexpr uint24_t Level2_BG = 0x000A54;
-  constexpr uint24_t level2_Data = 0x000D7E;
-  constexpr uint24_t Level2_Items = 0x000D94;
+  constexpr uint24_t Level2_BG = 0x000D42;
+  constexpr uint24_t level2_Data = 0x00135A;
+  constexpr uint24_t Level2_Items = 0x001382;
+  constexpr uint24_t Level3_FG = 0x001400;
+  constexpr uint24_t Level3_BG = 0x001946;
+  constexpr uint24_t level3_Data = 0x001E8C;
+  constexpr uint24_t Level3_Items = 0x001E96;
 }
 
 namespace CutScene
 {
-  constexpr uint24_t Scene1 = 0x000E54;
-  constexpr uint24_t Scene9 = 0x001238;
+  constexpr uint24_t Scene1 = 0x001E9F;
+  constexpr uint24_t Scene9 = 0x002283;
 }
 
 namespace Images
 {
-  constexpr uint24_t PPOT_00 = 0x001438;
+  constexpr uint24_t PPOT_00 = 0x002483;
   constexpr uint16_t PPOT_00_WIDTH  = 65;
   constexpr uint16_t PPOT_00HEIGHT  = 31;
 
-  constexpr uint24_t PPOT_01 = 0x001540;
+  constexpr uint24_t PPOT_01 = 0x00258B;
   constexpr uint16_t PPOT_01_WIDTH  = 65;
   constexpr uint16_t PPOT_01HEIGHT  = 31;
 
-  constexpr uint24_t PPOT_02 = 0x001648;
+  constexpr uint24_t PPOT_02 = 0x002693;
   constexpr uint16_t PPOT_02_WIDTH  = 65;
   constexpr uint16_t PPOT_02HEIGHT  = 31;
 
-  constexpr uint24_t PPOT_03 = 0x001750;
+  constexpr uint24_t PPOT_03 = 0x00279B;
   constexpr uint16_t PPOT_03_WIDTH  = 65;
   constexpr uint16_t PPOT_03HEIGHT  = 31;
 
-  constexpr uint24_t Title_PoP = 0x001858;
+  constexpr uint24_t Title_PoP = 0x0028A3;
   constexpr uint16_t Title_PoP_width  = 128;
   constexpr uint16_t Title_PoP_height = 33;
 
-  constexpr uint24_t Title_Main = 0x001D5C;
+  constexpr uint24_t Title_Main = 0x002DA7;
   constexpr uint16_t Title_Main_width  = 128;
   constexpr uint16_t Title_Main_height = 88;
 
-  constexpr uint24_t Title_Cursor = 0x0022E0;
+  constexpr uint24_t Title_Cursor = 0x00332B;
   constexpr uint16_t Title_Cursor_width  = 5;
   constexpr uint16_t Title_Cursor_height = 5;
 
-  constexpr uint24_t Title_Credits = 0x0022E9;
+  constexpr uint24_t Title_Credits = 0x003334;
   constexpr uint16_t Title_Credits_width  = 73;
   constexpr uint16_t Title_Credits_height = 240;
 
-  constexpr uint24_t TimeRemaining = 0x002B7B;
+  constexpr uint24_t TimeRemaining = 0x003BC6;
   constexpr uint16_t TimeRemainingWidth  = 81;
   constexpr uint16_t TimeRemainingHeight = 15;
 
-  constexpr uint24_t LevelNumber = 0x002CC3;
+  constexpr uint24_t LevelNumber = 0x003D0E;
   constexpr uint16_t LevelNumberWidth  = 81;
   constexpr uint16_t LevelNumberHeight = 15;
 
-  constexpr uint24_t GameOver = 0x002E0B;
+  constexpr uint24_t GameOver = 0x003E56;
   constexpr uint16_t GameOverWidth  = 49;
   constexpr uint16_t GameOverHeight = 15;
 
-  constexpr uint24_t PressA = 0x002ED3;
+  constexpr uint24_t PressA = 0x003F1E;
   constexpr uint16_t PressAWidth  = 79;
   constexpr uint16_t PressAHeight = 15;
 
-  constexpr uint24_t IntroGame_1A = 0x003013;
+  constexpr uint24_t IntroGame_1A = 0x00405E;
   constexpr uint16_t IntroGame_1A_width  = 118;
   constexpr uint16_t IntroGame_1A_height = 96;
 
-  constexpr uint24_t IntroGame_1B = 0x00359F;
+  constexpr uint24_t IntroGame_1B = 0x0045EA;
   constexpr uint16_t IntroGame_1B_width  = 123;
   constexpr uint16_t IntroGame_1B_height = 96;
 
-  constexpr uint24_t IntroGame_9 = 0x003B67;
+  constexpr uint24_t IntroGame_9 = 0x004BB2;
   constexpr uint16_t IntroGame_9_width  = 123;
   constexpr uint16_t IntroGame_9_height = 160;
 
-  constexpr uint24_t Chambers_BG = 0x004507;
+  constexpr uint24_t Chambers_BG = 0x005552;
   constexpr uint16_t Chambers_BG_width  = 128;
   constexpr uint16_t Chambers_BG_height = 64;
 
-  constexpr uint24_t Chambers_FG = 0x00490B;
+  constexpr uint24_t Chambers_FG = 0x005956;
   constexpr uint16_t Chambers_FG_width  = 128;
   constexpr uint16_t Chambers_FG_height = 64;
 
-  constexpr uint24_t Number_Upright_00 = 0x00510F;
+  constexpr uint24_t Number_Upright_00 = 0x00615A;
   constexpr uint16_t Number_Upright_00_width  = 3;
   constexpr uint16_t Number_Upright_00_height = 5;
 
-  constexpr uint24_t Number_Upright_01 = 0x005116;
+  constexpr uint24_t Number_Upright_01 = 0x006161;
   constexpr uint16_t Number_Upright_01_width  = 3;
   constexpr uint16_t Number_Upright_01_height = 5;
 
-  constexpr uint24_t Number_Upright_02 = 0x00511D;
+  constexpr uint24_t Number_Upright_02 = 0x006168;
   constexpr uint16_t Number_Upright_02_width  = 3;
   constexpr uint16_t Number_Upright_02_height = 5;
 
-  constexpr uint24_t Number_Upright_03 = 0x005124;
+  constexpr uint24_t Number_Upright_03 = 0x00616F;
   constexpr uint16_t Number_Upright_03_width  = 3;
   constexpr uint16_t Number_Upright_03_height = 5;
 
-  constexpr uint24_t Number_Upright_04 = 0x00512B;
+  constexpr uint24_t Number_Upright_04 = 0x006176;
   constexpr uint16_t Number_Upright_04_width  = 3;
   constexpr uint16_t Number_Upright_04_height = 5;
 
-  constexpr uint24_t Number_Upright_05 = 0x005132;
+  constexpr uint24_t Number_Upright_05 = 0x00617D;
   constexpr uint16_t Number_Upright_05_width  = 3;
   constexpr uint16_t Number_Upright_05_height = 5;
 
-  constexpr uint24_t Number_Upright_06 = 0x005139;
+  constexpr uint24_t Number_Upright_06 = 0x006184;
   constexpr uint16_t Number_Upright_06_width  = 3;
   constexpr uint16_t Number_Upright_06_height = 5;
 
-  constexpr uint24_t Number_Upright_07 = 0x005140;
+  constexpr uint24_t Number_Upright_07 = 0x00618B;
   constexpr uint16_t Number_Upright_07_width  = 3;
   constexpr uint16_t Number_Upright_07_height = 5;
 
-  constexpr uint24_t Number_Upright_08 = 0x005147;
+  constexpr uint24_t Number_Upright_08 = 0x006192;
   constexpr uint16_t Number_Upright_08_width  = 3;
   constexpr uint16_t Number_Upright_08_height = 5;
 
-  constexpr uint24_t Number_Upright_09 = 0x00514E;
+  constexpr uint24_t Number_Upright_09 = 0x006199;
   constexpr uint16_t Number_Upright_09_width  = 3;
   constexpr uint16_t Number_Upright_09_height = 5;
 
-  constexpr uint24_t Menu = 0x005155;
+  constexpr uint24_t Menu = 0x0061A0;
   constexpr uint16_t MenuWidth  = 42;
   constexpr uint16_t MenuHeight = 64;
 
-  constexpr uint24_t Number_00 = 0x0052A9;
+  constexpr uint24_t Number_00 = 0x0062F4;
   constexpr uint16_t Number_00_width  = 5;
   constexpr uint16_t Number_00_height = 7;
 
-  constexpr uint24_t Number_01 = 0x0052B2;
+  constexpr uint24_t Number_01 = 0x0062FD;
   constexpr uint16_t Number_01_width  = 5;
   constexpr uint16_t Number_01_height = 7;
 
-  constexpr uint24_t Number_02 = 0x0052BB;
+  constexpr uint24_t Number_02 = 0x006306;
   constexpr uint16_t Number_02_width  = 5;
   constexpr uint16_t Number_02_height = 7;
 
-  constexpr uint24_t Number_03 = 0x0052C4;
+  constexpr uint24_t Number_03 = 0x00630F;
   constexpr uint16_t Number_03_width  = 5;
   constexpr uint16_t Number_03_height = 7;
 
-  constexpr uint24_t Number_04 = 0x0052CD;
+  constexpr uint24_t Number_04 = 0x006318;
   constexpr uint16_t Number_04_width  = 5;
   constexpr uint16_t Number_04_height = 7;
 
-  constexpr uint24_t Number_05 = 0x0052D6;
+  constexpr uint24_t Number_05 = 0x006321;
   constexpr uint16_t Number_05_width  = 5;
   constexpr uint16_t Number_05_height = 7;
 
-  constexpr uint24_t Number_06 = 0x0052DF;
+  constexpr uint24_t Number_06 = 0x00632A;
   constexpr uint16_t Number_06_width  = 5;
   constexpr uint16_t Number_06_height = 7;
 
-  constexpr uint24_t Number_07 = 0x0052E8;
+  constexpr uint24_t Number_07 = 0x006333;
   constexpr uint16_t Number_07_width  = 5;
   constexpr uint16_t Number_07_height = 7;
 
-  constexpr uint24_t Number_08 = 0x0052F1;
+  constexpr uint24_t Number_08 = 0x00633C;
   constexpr uint16_t Number_08_width  = 5;
   constexpr uint16_t Number_08_height = 7;
 
-  constexpr uint24_t Number_09 = 0x0052FA;
+  constexpr uint24_t Number_09 = 0x006345;
   constexpr uint16_t Number_09_width  = 5;
   constexpr uint16_t Number_09_height = 7;
 
-  constexpr uint24_t Sword_Cursor = 0x005303;
+  constexpr uint24_t Sword_Cursor = 0x00634E;
   constexpr uint16_t Sword_Cursor_width  = 8;
   constexpr uint16_t Sword_Cursor_height = 10;
 
-  constexpr uint24_t Number_Small_00 = 0x005317;
+  constexpr uint24_t Number_Small_00 = 0x006362;
   constexpr uint16_t Number_Small_00_width  = 5;
   constexpr uint16_t Number_Small_00_height = 3;
 
-  constexpr uint24_t Number_Small_01 = 0x005320;
+  constexpr uint24_t Number_Small_01 = 0x00636B;
   constexpr uint16_t Number_Small_01_width  = 5;
   constexpr uint16_t Number_Small_01_height = 3;
 
-  constexpr uint24_t Number_Small_02 = 0x005329;
+  constexpr uint24_t Number_Small_02 = 0x006374;
   constexpr uint16_t Number_Small_02_width  = 5;
   constexpr uint16_t Number_Small_02_height = 3;
 
-  constexpr uint24_t Number_Small_03 = 0x005332;
+  constexpr uint24_t Number_Small_03 = 0x00637D;
   constexpr uint16_t Number_Small_03_width  = 5;
   constexpr uint16_t Number_Small_03_height = 3;
 
-  constexpr uint24_t Number_Small_04 = 0x00533B;
+  constexpr uint24_t Number_Small_04 = 0x006386;
   constexpr uint16_t Number_Small_04_width  = 5;
   constexpr uint16_t Number_Small_04_height = 3;
 
-  constexpr uint24_t Number_Small_05 = 0x005344;
+  constexpr uint24_t Number_Small_05 = 0x00638F;
   constexpr uint16_t Number_Small_05_width  = 5;
   constexpr uint16_t Number_Small_05_height = 3;
 
-  constexpr uint24_t Number_Small_06 = 0x00534D;
+  constexpr uint24_t Number_Small_06 = 0x006398;
   constexpr uint16_t Number_Small_06_width  = 5;
   constexpr uint16_t Number_Small_06_height = 3;
 
-  constexpr uint24_t Number_Small_07 = 0x005356;
+  constexpr uint24_t Number_Small_07 = 0x0063A1;
   constexpr uint16_t Number_Small_07_width  = 5;
   constexpr uint16_t Number_Small_07_height = 3;
 
-  constexpr uint24_t Number_Small_08 = 0x00535F;
+  constexpr uint24_t Number_Small_08 = 0x0063AA;
   constexpr uint16_t Number_Small_08_width  = 5;
   constexpr uint16_t Number_Small_08_height = 3;
 
-  constexpr uint24_t Number_Small_09 = 0x005368;
+  constexpr uint24_t Number_Small_09 = 0x0063B3;
   constexpr uint16_t Number_Small_09_width  = 5;
   constexpr uint16_t Number_Small_09_height = 3;
 
-  constexpr uint24_t Health_00 = 0x005371;
+  constexpr uint24_t Health_00 = 0x0063BC;
   constexpr uint16_t Health_00_width  = 5;
   constexpr uint16_t Health_00_height = 3;
 
-  constexpr uint24_t Health_01 = 0x00537A;
+  constexpr uint24_t Health_01 = 0x0063C5;
   constexpr uint16_t Health_01_width  = 5;
   constexpr uint16_t Health_01_height = 3;
 
-  constexpr uint24_t Sword_HUD = 0x005383;
+  constexpr uint24_t Sword_HUD = 0x0063CE;
   constexpr uint16_t Sword_HUD_width  = 5;
   constexpr uint16_t Sword_HUD_height = 5;
 
-  constexpr uint24_t Sword = 0x00538C;
+  constexpr uint24_t Sword = 0x0063D7;
   constexpr uint16_t SwordWidth  = 14;
   constexpr uint16_t SwordHeight = 5;
 
-  constexpr uint24_t Skeleton = 0x0053AC;
+  constexpr uint24_t Skeleton = 0x0063F7;
   constexpr uint16_t SkeletonWidth  = 15;
   constexpr uint16_t SkeletonHeight = 12;
 
-  constexpr uint24_t Gate_00 = 0x0053EC;
+  constexpr uint24_t Gate_00 = 0x006437;
   constexpr uint16_t Gate_00_width  = 9;
   constexpr uint16_t Gate_00_height = 28;
 
-  constexpr uint24_t Gate_01 = 0x005438;
+  constexpr uint24_t Gate_01 = 0x006483;
   constexpr uint16_t Gate_01_width  = 9;
   constexpr uint16_t Gate_01_height = 28;
 
-  constexpr uint24_t Gate_02 = 0x005484;
+  constexpr uint24_t Gate_02 = 0x0064CF;
   constexpr uint16_t Gate_02_width  = 9;
   constexpr uint16_t Gate_02_height = 28;
 
-  constexpr uint24_t Gate_03 = 0x0054D0;
+  constexpr uint24_t Gate_03 = 0x00651B;
   constexpr uint16_t Gate_03_width  = 9;
   constexpr uint16_t Gate_03_height = 28;
 
-  constexpr uint24_t Gate_04 = 0x00551C;
+  constexpr uint24_t Gate_04 = 0x006567;
   constexpr uint16_t Gate_04_width  = 9;
   constexpr uint16_t Gate_04_height = 28;
 
-  constexpr uint24_t Gate_05 = 0x005568;
+  constexpr uint24_t Gate_05 = 0x0065B3;
   constexpr uint16_t Gate_05_width  = 9;
   constexpr uint16_t Gate_05_height = 28;
 
-  constexpr uint24_t Gate_06 = 0x0055B4;
+  constexpr uint24_t Gate_06 = 0x0065FF;
   constexpr uint16_t Gate_06_width  = 9;
   constexpr uint16_t Gate_06_height = 28;
 
-  constexpr uint24_t Gate_07 = 0x005600;
+  constexpr uint24_t Gate_07 = 0x00664B;
   constexpr uint16_t Gate_07_width  = 9;
   constexpr uint16_t Gate_07_height = 28;
 
-  constexpr uint24_t Gate_08 = 0x00564C;
+  constexpr uint24_t Gate_08 = 0x006697;
   constexpr uint16_t Gate_08_width  = 9;
   constexpr uint16_t Gate_08_height = 28;
 
-  constexpr uint24_t Gate_09 = 0x005698;
+  constexpr uint24_t Gate_09 = 0x0066E3;
   constexpr uint16_t Gate_09_width  = 9;
   constexpr uint16_t Gate_09_height = 28;
 
-  constexpr uint24_t ExitDoor_00 = 0x0056E4;
+  constexpr uint24_t ExitDoor_00 = 0x00672F;
   constexpr uint16_t ExitDoor_00_width  = 25;
   constexpr uint16_t ExitDoor_00_height = 33;
 
-  constexpr uint24_t ExitDoor_01 = 0x005765;
+  constexpr uint24_t ExitDoor_01 = 0x0067B0;
   constexpr uint16_t ExitDoor_01_width  = 25;
   constexpr uint16_t ExitDoor_01_height = 33;
 
-  constexpr uint24_t ExitDoor_02 = 0x0057E6;
+  constexpr uint24_t ExitDoor_02 = 0x006831;
   constexpr uint16_t ExitDoor_02_width  = 25;
   constexpr uint16_t ExitDoor_02_height = 33;
 
-  constexpr uint24_t ExitDoor_03 = 0x005867;
+  constexpr uint24_t ExitDoor_03 = 0x0068B2;
   constexpr uint16_t ExitDoor_03_width  = 25;
   constexpr uint16_t ExitDoor_03_height = 33;
 
-  constexpr uint24_t ExitDoor_04 = 0x0058E8;
+  constexpr uint24_t ExitDoor_04 = 0x006933;
   constexpr uint16_t ExitDoor_04_width  = 25;
   constexpr uint16_t ExitDoor_04_height = 33;
 
-  constexpr uint24_t ExitDoor_05 = 0x005969;
+  constexpr uint24_t ExitDoor_05 = 0x0069B4;
   constexpr uint16_t ExitDoor_05_width  = 25;
   constexpr uint16_t ExitDoor_05_height = 33;
 
-  constexpr uint24_t ExitDoor_06 = 0x0059EA;
+  constexpr uint24_t ExitDoor_06 = 0x006A35;
   constexpr uint16_t ExitDoor_06_width  = 25;
   constexpr uint16_t ExitDoor_06_height = 33;
 
-  constexpr uint24_t ExitDoor_07 = 0x005A6B;
+  constexpr uint24_t ExitDoor_07 = 0x006AB6;
   constexpr uint16_t ExitDoor_07_width  = 25;
   constexpr uint16_t ExitDoor_07_height = 33;
 
-  constexpr uint24_t ExitDoor_08 = 0x005AEC;
+  constexpr uint24_t ExitDoor_08 = 0x006B37;
   constexpr uint16_t ExitDoor_08_width  = 25;
   constexpr uint16_t ExitDoor_08_height = 33;
 
-  constexpr uint24_t ExitDoor_09 = 0x005B6D;
+  constexpr uint24_t ExitDoor_09 = 0x006BB8;
   constexpr uint16_t ExitDoor_09_width  = 25;
   constexpr uint16_t ExitDoor_09_height = 33;
 
-  constexpr uint24_t ExitDoor_10 = 0x005BEE;
+  constexpr uint24_t ExitDoor_10 = 0x006C39;
   constexpr uint16_t ExitDoor_10_width  = 25;
   constexpr uint16_t ExitDoor_10_height = 33;
 
-  constexpr uint24_t ExitDoor_11 = 0x005C6F;
+  constexpr uint24_t ExitDoor_11 = 0x006CBA;
   constexpr uint16_t ExitDoor_11_width  = 25;
   constexpr uint16_t ExitDoor_11_height = 33;
 
-  constexpr uint24_t Potion_Small_00 = 0x005CF0;
+  constexpr uint24_t ExitDoor_12_Cropped = 0x006D3B;
+  constexpr uint16_t ExitDoor_12_Cropped_width  = 25;
+  constexpr uint16_t ExitDoor_12_Cropped_height = 33;
+
+  constexpr uint24_t Potion_Small_00 = 0x006DBC;
   constexpr uint16_t Potion_Small_00_width  = 6;
   constexpr uint16_t Potion_Small_00_height = 15;
 
-  constexpr uint24_t Potion_Small_01 = 0x005D0C;
+  constexpr uint24_t Potion_Small_01 = 0x006DD8;
   constexpr uint16_t Potion_Small_01_width  = 6;
   constexpr uint16_t Potion_Small_01_height = 15;
 
-  constexpr uint24_t Potion_Large_00 = 0x005D28;
+  constexpr uint24_t Potion_Large_00 = 0x006DF4;
   constexpr uint16_t Potion_Large_00_width  = 6;
   constexpr uint16_t Potion_Large_00_height = 15;
 
-  constexpr uint24_t Potion_Large_01 = 0x005D44;
+  constexpr uint24_t Potion_Large_01 = 0x006E10;
   constexpr uint16_t Potion_Large_01_width  = 6;
   constexpr uint16_t Potion_Large_01_height = 15;
 
-  constexpr uint24_t Potion_Poison_00 = 0x005D60;
+  constexpr uint24_t Potion_Poison_00 = 0x006E2C;
   constexpr uint16_t Potion_Poison_00_width  = 6;
   constexpr uint16_t Potion_Poison_00_height = 15;
 
-  constexpr uint24_t Potion_Poison_01 = 0x005D7C;
+  constexpr uint24_t Potion_Poison_01 = 0x006E48;
   constexpr uint16_t Potion_Poison_01_width  = 6;
   constexpr uint16_t Potion_Poison_01_height = 15;
 
-  constexpr uint24_t Potion_Poison_03 = 0x005D98;
+  constexpr uint24_t Potion_Poison_03 = 0x006E64;
   constexpr uint16_t Potion_Poison_03_width  = 6;
   constexpr uint16_t Potion_Poison_03_height = 15;
 
-  constexpr uint24_t Potion_Poison_04 = 0x005DB4;
+  constexpr uint24_t Potion_Poison_04 = 0x006E80;
   constexpr uint16_t Potion_Poison_04_width  = 6;
   constexpr uint16_t Potion_Poison_04_height = 15;
 
-  constexpr uint24_t Potion_Poison_05 = 0x005DD0;
+  constexpr uint24_t Potion_Poison_05 = 0x006E9C;
   constexpr uint16_t Potion_Poison_05_width  = 6;
   constexpr uint16_t Potion_Poison_05_height = 15;
 
-  constexpr uint24_t Potion_Poison_06 = 0x005DEC;
+  constexpr uint24_t Potion_Poison_06 = 0x006EB8;
   constexpr uint16_t Potion_Poison_06_width  = 6;
   constexpr uint16_t Potion_Poison_06_height = 15;
 
-  constexpr uint24_t Potion_Poison_Skull = 0x005E08;
+  constexpr uint24_t Potion_Poison_Skull = 0x006ED4;
   constexpr uint16_t Potion_Poison_Skull_width  = 25;
   constexpr uint16_t Potion_Poison_Skull_height = 26;
 
-  constexpr uint24_t CollapsedFloor = 0x005ED4;
+  constexpr uint24_t CollapsedFloor = 0x006FA0;
   constexpr uint16_t CollapsedFloorWidth  = 21;
   constexpr uint16_t CollapsedFloorHeight = 13;
 
-  constexpr uint24_t CollapsingFloor_01 = 0x005F2C;
+  constexpr uint24_t CollapsingFloor_01 = 0x006FF8;
   constexpr uint16_t CollapsingFloor_01_width  = 21;
   constexpr uint16_t CollapsingFloor_01_height = 31;
 
-  constexpr uint24_t CollapsingFloor_02 = 0x005FD8;
+  constexpr uint24_t CollapsingFloor_02 = 0x0070A4;
   constexpr uint16_t CollapsingFloor_02_width  = 21;
   constexpr uint16_t CollapsingFloor_02_height = 31;
 
-  constexpr uint24_t CollapsingFloor_03 = 0x006084;
+  constexpr uint24_t CollapsingFloor_03 = 0x007150;
   constexpr uint16_t CollapsingFloor_03_width  = 21;
   constexpr uint16_t CollapsingFloor_03_height = 31;
 
-  constexpr uint24_t CollapsingFloor_00 = 0x006130;
+  constexpr uint24_t CollapsingFloor_00 = 0x0071FC;
   constexpr uint16_t CollapsingFloor_00_width  = 21;
   constexpr uint16_t CollapsingFloor_00_height = 31;
 
-  constexpr uint24_t FloorButton_0_00 = 0x0061DC;
+  constexpr uint24_t FloorButton_0_00 = 0x0072A8;
   constexpr uint16_t FloorButton_0_00_width  = 21;
   constexpr uint16_t FloorButton_0_00_height = 32;
 
-  constexpr uint24_t FloorButton_0_01 = 0x006288;
+  constexpr uint24_t FloorButton_0_01 = 0x007354;
   constexpr uint16_t FloorButton_0_01_width  = 21;
   constexpr uint16_t FloorButton_0_01_height = 32;
 
-  constexpr uint24_t FloorButton_1_00 = 0x006334;
+  constexpr uint24_t FloorButton_1_00 = 0x007400;
   constexpr uint16_t FloorButton_1_00_width  = 21;
   constexpr uint16_t FloorButton_1_00_height = 32;
 
-  constexpr uint24_t FloorButton_1_01 = 0x0063E0;
+  constexpr uint24_t FloorButton_1_01 = 0x0074AC;
   constexpr uint16_t FloorButton_1_01_width  = 21;
   constexpr uint16_t FloorButton_1_01_height = 32;
 
-  constexpr uint24_t Torch_00 = 0x00648C;
+  constexpr uint24_t Torch_00 = 0x007558;
   constexpr uint16_t Torch_00_width  = 3;
   constexpr uint16_t Torch_00_height = 11;
 
-  constexpr uint24_t Torch_01 = 0x00649C;
+  constexpr uint24_t Torch_01 = 0x007568;
   constexpr uint16_t Torch_01_width  = 3;
   constexpr uint16_t Torch_01_height = 11;
 
-  constexpr uint24_t Torch_02 = 0x0064AC;
+  constexpr uint24_t Torch_02 = 0x007578;
   constexpr uint16_t Torch_02_width  = 3;
   constexpr uint16_t Torch_02_height = 11;
 
-  constexpr uint24_t Torch_03 = 0x0064BC;
+  constexpr uint24_t Torch_03 = 0x007588;
   constexpr uint16_t Torch_03_width  = 3;
   constexpr uint16_t Torch_03_height = 11;
 
-  constexpr uint24_t Torch_04 = 0x0064CC;
+  constexpr uint24_t Torch_04 = 0x007598;
   constexpr uint16_t Torch_04_width  = 3;
   constexpr uint16_t Torch_04_height = 11;
 
-  constexpr uint24_t Spikes_FG_00 = 0x0064DC;
+  constexpr uint24_t Spikes_FG_00 = 0x0075A8;
   constexpr uint16_t Spikes_FG_00_width  = 19;
   constexpr uint16_t Spikes_FG_00_height = 18;
 
-  constexpr uint24_t Spikes_FG_01 = 0x006552;
+  constexpr uint24_t Spikes_FG_01 = 0x00761E;
   constexpr uint16_t Spikes_FG_01_width  = 19;
   constexpr uint16_t Spikes_FG_01_height = 18;
 
-  constexpr uint24_t Spikes_FG_02 = 0x0065C8;
+  constexpr uint24_t Spikes_FG_02 = 0x007694;
   constexpr uint16_t Spikes_FG_02_width  = 19;
   constexpr uint16_t Spikes_FG_02_height = 18;
 
-  constexpr uint24_t Spikes_FG_03 = 0x00663E;
+  constexpr uint24_t Spikes_FG_03 = 0x00770A;
   constexpr uint16_t Spikes_FG_03_width  = 19;
   constexpr uint16_t Spikes_FG_03_height = 18;
 
-  constexpr uint24_t Spikes_FG_04 = 0x0066B4;
+  constexpr uint24_t Spikes_FG_04 = 0x007780;
   constexpr uint16_t Spikes_FG_04_width  = 19;
   constexpr uint16_t Spikes_FG_04_height = 18;
 
-  constexpr uint24_t Spikes_BG_00 = 0x00672A;
+  constexpr uint24_t Spikes_BG_00 = 0x0077F6;
   constexpr uint16_t Spikes_BG_00_width  = 19;
   constexpr uint16_t Spikes_BG_00_height = 18;
 
-  constexpr uint24_t Spikes_BG_01 = 0x0067A0;
+  constexpr uint24_t Spikes_BG_01 = 0x00786C;
   constexpr uint16_t Spikes_BG_01_width  = 19;
   constexpr uint16_t Spikes_BG_01_height = 18;
 
-  constexpr uint24_t Spikes_BG_02 = 0x006816;
+  constexpr uint24_t Spikes_BG_02 = 0x0078E2;
   constexpr uint16_t Spikes_BG_02_width  = 19;
   constexpr uint16_t Spikes_BG_02_height = 18;
 
-  constexpr uint24_t Spikes_BG_03 = 0x00688C;
+  constexpr uint24_t Spikes_BG_03 = 0x007958;
   constexpr uint16_t Spikes_BG_03_width  = 19;
   constexpr uint16_t Spikes_BG_03_height = 18;
 
-  constexpr uint24_t Spikes_BG_04 = 0x006902;
+  constexpr uint24_t Spikes_BG_04 = 0x0079CE;
   constexpr uint16_t Spikes_BG_04_width  = 19;
   constexpr uint16_t Spikes_BG_04_height = 18;
 
-  constexpr uint24_t Spikes_FG_05 = 0x006978;
+  constexpr uint24_t Spikes_FG_05 = 0x007A44;
   constexpr uint16_t Spikes_FG_05_width  = 11;
   constexpr uint16_t Spikes_FG_05_height = 18;
 
-  constexpr uint24_t Spikes_FG_06 = 0x0069BE;
+  constexpr uint24_t Spikes_FG_06 = 0x007A8A;
   constexpr uint16_t Spikes_FG_06_width  = 11;
   constexpr uint16_t Spikes_FG_06_height = 18;
 
-  constexpr uint24_t Spikes_FG_07 = 0x006A04;
+  constexpr uint24_t Spikes_FG_07 = 0x007AD0;
   constexpr uint16_t Spikes_FG_07_width  = 11;
   constexpr uint16_t Spikes_FG_07_height = 18;
 
-  constexpr uint24_t Spikes_FG_08 = 0x006A4A;
+  constexpr uint24_t Spikes_FG_08 = 0x007B16;
   constexpr uint16_t Spikes_FG_08_width  = 11;
   constexpr uint16_t Spikes_FG_08_height = 18;
 
-  constexpr uint24_t Spikes_FG_09 = 0x006A90;
+  constexpr uint24_t Spikes_FG_09 = 0x007B5C;
   constexpr uint16_t Spikes_FG_09_width  = 11;
   constexpr uint16_t Spikes_FG_09_height = 18;
 
-  constexpr uint24_t Spikes_BG_05 = 0x006AD6;
+  constexpr uint24_t Spikes_BG_05 = 0x007BA2;
   constexpr uint16_t Spikes_BG_05_width  = 11;
   constexpr uint16_t Spikes_BG_05_height = 18;
 
-  constexpr uint24_t Spikes_BG_06 = 0x006B1C;
+  constexpr uint24_t Spikes_BG_06 = 0x007BE8;
   constexpr uint16_t Spikes_BG_06_width  = 11;
   constexpr uint16_t Spikes_BG_06_height = 18;
 
-  constexpr uint24_t Spikes_BG_07 = 0x006B62;
+  constexpr uint24_t Spikes_BG_07 = 0x007C2E;
   constexpr uint16_t Spikes_BG_07_width  = 11;
   constexpr uint16_t Spikes_BG_07_height = 18;
 
-  constexpr uint24_t Spikes_BG_08 = 0x006BA8;
+  constexpr uint24_t Spikes_BG_08 = 0x007C74;
   constexpr uint16_t Spikes_BG_08_width  = 11;
   constexpr uint16_t Spikes_BG_08_height = 18;
 
-  constexpr uint24_t Spikes_BG_09 = 0x006BEE;
+  constexpr uint24_t Spikes_BG_09 = 0x007CBA;
   constexpr uint16_t Spikes_BG_09_width  = 11;
   constexpr uint16_t Spikes_BG_09_height = 18;
 
-  constexpr uint24_t Flash_00 = 0x006C34;
+  constexpr uint24_t Flash_00 = 0x007D00;
   constexpr uint16_t Flash_00_width  = 22;
   constexpr uint16_t Flash_00_height = 20;
 
-  constexpr uint24_t Flash_01 = 0x006CBC;
+  constexpr uint24_t Flash_01 = 0x007D88;
   constexpr uint16_t Flash_01_width  = 22;
   constexpr uint16_t Flash_01_height = 20;
 
-  constexpr uint24_t Flash_02 = 0x006D44;
+  constexpr uint24_t Flash_02 = 0x007E10;
   constexpr uint16_t Flash_02_width  = 22;
   constexpr uint16_t Flash_02_height = 20;
 
-  constexpr uint24_t Flash_03 = 0x006DCC;
+  constexpr uint24_t Flash_03 = 0x007E98;
   constexpr uint16_t Flash_03_width  = 22;
   constexpr uint16_t Flash_03_height = 20;
 
-  constexpr uint24_t Tile_Dungeon_00 = 0x006E54;
+  constexpr uint24_t Tile_Dungeon_00 = 0x007F20;
   constexpr uint16_t Tile_Dungeon_00_width  = 12;
   constexpr uint16_t Tile_Dungeon_00_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_01 = 0x006EB8;
+  constexpr uint24_t Tile_Dungeon_01 = 0x007F84;
   constexpr uint16_t Tile_Dungeon_01_width  = 12;
   constexpr uint16_t Tile_Dungeon_01_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_02 = 0x006F1C;
+  constexpr uint24_t Tile_Dungeon_02 = 0x007FE8;
   constexpr uint16_t Tile_Dungeon_02_width  = 12;
   constexpr uint16_t Tile_Dungeon_02_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_03 = 0x006F80;
+  constexpr uint24_t Tile_Dungeon_03 = 0x00804C;
   constexpr uint16_t Tile_Dungeon_03_width  = 12;
   constexpr uint16_t Tile_Dungeon_03_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_04 = 0x006FE4;
+  constexpr uint24_t Tile_Dungeon_04 = 0x0080B0;
   constexpr uint16_t Tile_Dungeon_04_width  = 12;
   constexpr uint16_t Tile_Dungeon_04_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_05 = 0x007048;
+  constexpr uint24_t Tile_Dungeon_05 = 0x008114;
   constexpr uint16_t Tile_Dungeon_05_width  = 12;
   constexpr uint16_t Tile_Dungeon_05_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_06 = 0x0070AC;
+  constexpr uint24_t Tile_Dungeon_06 = 0x008178;
   constexpr uint16_t Tile_Dungeon_06_width  = 12;
   constexpr uint16_t Tile_Dungeon_06_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_07 = 0x007110;
+  constexpr uint24_t Tile_Dungeon_07 = 0x0081DC;
   constexpr uint16_t Tile_Dungeon_07_width  = 12;
   constexpr uint16_t Tile_Dungeon_07_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_08 = 0x007174;
+  constexpr uint24_t Tile_Dungeon_08 = 0x008240;
   constexpr uint16_t Tile_Dungeon_08_width  = 12;
   constexpr uint16_t Tile_Dungeon_08_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_09 = 0x0071D8;
+  constexpr uint24_t Tile_Dungeon_09 = 0x0082A4;
   constexpr uint16_t Tile_Dungeon_09_width  = 12;
   constexpr uint16_t Tile_Dungeon_09_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_10 = 0x00723C;
+  constexpr uint24_t Tile_Dungeon_10 = 0x008308;
   constexpr uint16_t Tile_Dungeon_10_width  = 12;
   constexpr uint16_t Tile_Dungeon_10_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_11 = 0x0072A0;
+  constexpr uint24_t Tile_Dungeon_11 = 0x00836C;
   constexpr uint16_t Tile_Dungeon_11_width  = 12;
   constexpr uint16_t Tile_Dungeon_11_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_12 = 0x007304;
+  constexpr uint24_t Tile_Dungeon_12 = 0x0083D0;
   constexpr uint16_t Tile_Dungeon_12_width  = 12;
   constexpr uint16_t Tile_Dungeon_12_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_13 = 0x007368;
+  constexpr uint24_t Tile_Dungeon_13 = 0x008434;
   constexpr uint16_t Tile_Dungeon_13_width  = 12;
   constexpr uint16_t Tile_Dungeon_13_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_14 = 0x0073CC;
+  constexpr uint24_t Tile_Dungeon_14 = 0x008498;
   constexpr uint16_t Tile_Dungeon_14_width  = 12;
   constexpr uint16_t Tile_Dungeon_14_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_15 = 0x007430;
+  constexpr uint24_t Tile_Dungeon_15 = 0x0084FC;
   constexpr uint16_t Tile_Dungeon_15_width  = 12;
   constexpr uint16_t Tile_Dungeon_15_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_16 = 0x007494;
+  constexpr uint24_t Tile_Dungeon_16 = 0x008560;
   constexpr uint16_t Tile_Dungeon_16_width  = 12;
   constexpr uint16_t Tile_Dungeon_16_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_17 = 0x0074F8;
+  constexpr uint24_t Tile_Dungeon_17 = 0x0085C4;
   constexpr uint16_t Tile_Dungeon_17_width  = 12;
   constexpr uint16_t Tile_Dungeon_17_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_18 = 0x00755C;
+  constexpr uint24_t Tile_Dungeon_18 = 0x008628;
   constexpr uint16_t Tile_Dungeon_18_width  = 12;
   constexpr uint16_t Tile_Dungeon_18_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_19 = 0x0075C0;
+  constexpr uint24_t Tile_Dungeon_19 = 0x00868C;
   constexpr uint16_t Tile_Dungeon_19_width  = 12;
   constexpr uint16_t Tile_Dungeon_19_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_20 = 0x007624;
+  constexpr uint24_t Tile_Dungeon_20 = 0x0086F0;
   constexpr uint16_t Tile_Dungeon_20_width  = 12;
   constexpr uint16_t Tile_Dungeon_20_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_21 = 0x007688;
+  constexpr uint24_t Tile_Dungeon_21 = 0x008754;
   constexpr uint16_t Tile_Dungeon_21_width  = 12;
   constexpr uint16_t Tile_Dungeon_21_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_22 = 0x0076EC;
+  constexpr uint24_t Tile_Dungeon_22 = 0x0087B8;
   constexpr uint16_t Tile_Dungeon_22_width  = 12;
   constexpr uint16_t Tile_Dungeon_22_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_23 = 0x007750;
+  constexpr uint24_t Tile_Dungeon_23 = 0x00881C;
   constexpr uint16_t Tile_Dungeon_23_width  = 12;
   constexpr uint16_t Tile_Dungeon_23_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_24 = 0x0077B4;
+  constexpr uint24_t Tile_Dungeon_24 = 0x008880;
   constexpr uint16_t Tile_Dungeon_24_width  = 12;
   constexpr uint16_t Tile_Dungeon_24_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_25 = 0x007818;
+  constexpr uint24_t Tile_Dungeon_25 = 0x0088E4;
   constexpr uint16_t Tile_Dungeon_25_width  = 12;
   constexpr uint16_t Tile_Dungeon_25_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_26 = 0x00787C;
+  constexpr uint24_t Tile_Dungeon_26 = 0x008948;
   constexpr uint16_t Tile_Dungeon_26_width  = 12;
   constexpr uint16_t Tile_Dungeon_26_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_27 = 0x0078E0;
+  constexpr uint24_t Tile_Dungeon_27 = 0x0089AC;
   constexpr uint16_t Tile_Dungeon_27_width  = 12;
   constexpr uint16_t Tile_Dungeon_27_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_28 = 0x007944;
+  constexpr uint24_t Tile_Dungeon_28 = 0x008A10;
   constexpr uint16_t Tile_Dungeon_28_width  = 12;
   constexpr uint16_t Tile_Dungeon_28_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_29 = 0x0079A8;
+  constexpr uint24_t Tile_Dungeon_29 = 0x008A74;
   constexpr uint16_t Tile_Dungeon_29_width  = 12;
   constexpr uint16_t Tile_Dungeon_29_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_30 = 0x007A0C;
+  constexpr uint24_t Tile_Dungeon_30 = 0x008AD8;
   constexpr uint16_t Tile_Dungeon_30_width  = 12;
   constexpr uint16_t Tile_Dungeon_30_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_31 = 0x007A70;
+  constexpr uint24_t Tile_Dungeon_31 = 0x008B3C;
   constexpr uint16_t Tile_Dungeon_31_width  = 12;
   constexpr uint16_t Tile_Dungeon_31_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_32 = 0x007AD4;
+  constexpr uint24_t Tile_Dungeon_32 = 0x008BA0;
   constexpr uint16_t Tile_Dungeon_32_width  = 12;
   constexpr uint16_t Tile_Dungeon_32_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_33 = 0x007B38;
+  constexpr uint24_t Tile_Dungeon_33 = 0x008C04;
   constexpr uint16_t Tile_Dungeon_33_width  = 12;
   constexpr uint16_t Tile_Dungeon_33_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_34 = 0x007B9C;
+  constexpr uint24_t Tile_Dungeon_34 = 0x008C68;
   constexpr uint16_t Tile_Dungeon_34_width  = 12;
   constexpr uint16_t Tile_Dungeon_34_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_35 = 0x007C00;
+  constexpr uint24_t Tile_Dungeon_35 = 0x008CCC;
   constexpr uint16_t Tile_Dungeon_35_width  = 12;
   constexpr uint16_t Tile_Dungeon_35_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_36 = 0x007C64;
+  constexpr uint24_t Tile_Dungeon_36 = 0x008D30;
   constexpr uint16_t Tile_Dungeon_36_width  = 12;
   constexpr uint16_t Tile_Dungeon_36_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_37 = 0x007CC8;
+  constexpr uint24_t Tile_Dungeon_37 = 0x008D94;
   constexpr uint16_t Tile_Dungeon_37_width  = 12;
   constexpr uint16_t Tile_Dungeon_37_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_38 = 0x007D2C;
+  constexpr uint24_t Tile_Dungeon_38 = 0x008DF8;
   constexpr uint16_t Tile_Dungeon_38_width  = 12;
   constexpr uint16_t Tile_Dungeon_38_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_39 = 0x007D90;
+  constexpr uint24_t Tile_Dungeon_39 = 0x008E5C;
   constexpr uint16_t Tile_Dungeon_39_width  = 12;
   constexpr uint16_t Tile_Dungeon_39_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_40 = 0x007DF4;
+  constexpr uint24_t Tile_Dungeon_40 = 0x008EC0;
   constexpr uint16_t Tile_Dungeon_40_width  = 12;
   constexpr uint16_t Tile_Dungeon_40_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_41 = 0x007E58;
+  constexpr uint24_t Tile_Dungeon_41 = 0x008F24;
   constexpr uint16_t Tile_Dungeon_41_width  = 12;
   constexpr uint16_t Tile_Dungeon_41_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_42 = 0x007EBC;
+  constexpr uint24_t Tile_Dungeon_42 = 0x008F88;
   constexpr uint16_t Tile_Dungeon_42_width  = 12;
   constexpr uint16_t Tile_Dungeon_42_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_43 = 0x007F20;
+  constexpr uint24_t Tile_Dungeon_43 = 0x008FEC;
   constexpr uint16_t Tile_Dungeon_43_width  = 12;
   constexpr uint16_t Tile_Dungeon_43_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_44 = 0x007F84;
+  constexpr uint24_t Tile_Dungeon_44 = 0x009050;
   constexpr uint16_t Tile_Dungeon_44_width  = 12;
   constexpr uint16_t Tile_Dungeon_44_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_45 = 0x007FE8;
+  constexpr uint24_t Tile_Dungeon_45 = 0x0090B4;
   constexpr uint16_t Tile_Dungeon_45_width  = 12;
   constexpr uint16_t Tile_Dungeon_45_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_46 = 0x00804C;
+  constexpr uint24_t Tile_Dungeon_46 = 0x009118;
   constexpr uint16_t Tile_Dungeon_46_width  = 12;
   constexpr uint16_t Tile_Dungeon_46_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_47 = 0x0080B0;
+  constexpr uint24_t Tile_Dungeon_47 = 0x00917C;
   constexpr uint16_t Tile_Dungeon_47_width  = 12;
   constexpr uint16_t Tile_Dungeon_47_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_48 = 0x008114;
+  constexpr uint24_t Tile_Dungeon_48 = 0x0091E0;
   constexpr uint16_t Tile_Dungeon_48_width  = 12;
   constexpr uint16_t Tile_Dungeon_48_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_49 = 0x008178;
+  constexpr uint24_t Tile_Dungeon_49 = 0x009244;
   constexpr uint16_t Tile_Dungeon_49_width  = 12;
   constexpr uint16_t Tile_Dungeon_49_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_50_00 = 0x0081DC;
-  constexpr uint16_t Tile_Dungeon_50_00_width  = 12;
-  constexpr uint16_t Tile_Dungeon_50_00_height = 31;
+  constexpr uint24_t Tile_Dungeon_97 = 0x0092A8;
+  constexpr uint16_t Tile_Dungeon_97_width  = 21;
+  constexpr uint16_t Tile_Dungeon_97_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_50_01 = 0x008240;
-  constexpr uint16_t Tile_Dungeon_50_01_width  = 12;
-  constexpr uint16_t Tile_Dungeon_50_01_height = 31;
+  constexpr uint24_t Tile_Dungeon_98 = 0x009354;
+  constexpr uint16_t Tile_Dungeon_98_width  = 12;
+  constexpr uint16_t Tile_Dungeon_98_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_50_02 = 0x0082A4;
-  constexpr uint16_t Tile_Dungeon_50_02_width  = 12;
-  constexpr uint16_t Tile_Dungeon_50_02_height = 31;
+  constexpr uint24_t Tile_Dungeon_99_00 = 0x0093B8;
+  constexpr uint16_t Tile_Dungeon_99_00_width  = 12;
+  constexpr uint16_t Tile_Dungeon_99_00_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_50_03 = 0x008308;
-  constexpr uint16_t Tile_Dungeon_50_03_width  = 12;
-  constexpr uint16_t Tile_Dungeon_50_03_height = 31;
+  constexpr uint24_t Tile_Dungeon_99_01 = 0x00941C;
+  constexpr uint16_t Tile_Dungeon_99_01_width  = 12;
+  constexpr uint16_t Tile_Dungeon_99_01_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_50_04 = 0x00836C;
-  constexpr uint16_t Tile_Dungeon_50_04_width  = 12;
-  constexpr uint16_t Tile_Dungeon_50_04_height = 31;
+  constexpr uint24_t Tile_Dungeon_99_02 = 0x009480;
+  constexpr uint16_t Tile_Dungeon_99_02_width  = 12;
+  constexpr uint16_t Tile_Dungeon_99_02_height = 31;
 
-  constexpr uint24_t Princess_00 = 0x0083D0;
+  constexpr uint24_t Tile_Dungeon_99_03 = 0x0094E4;
+  constexpr uint16_t Tile_Dungeon_99_03_width  = 12;
+  constexpr uint16_t Tile_Dungeon_99_03_height = 31;
+
+  constexpr uint24_t Tile_Dungeon_99_04 = 0x009548;
+  constexpr uint16_t Tile_Dungeon_99_04_width  = 12;
+  constexpr uint16_t Tile_Dungeon_99_04_height = 31;
+
+  constexpr uint24_t Princess_00 = 0x0095AC;
   constexpr uint16_t Princess_00_width  = 32;
   constexpr uint16_t Princess_00_height = 32;
 
-  constexpr uint24_t Princess_01 = 0x0084D4;
+  constexpr uint24_t Princess_01 = 0x0096B0;
   constexpr uint16_t Princess_01_width  = 32;
   constexpr uint16_t Princess_01_height = 32;
 
-  constexpr uint24_t Princess_02 = 0x0085D8;
+  constexpr uint24_t Princess_02 = 0x0097B4;
   constexpr uint16_t Princess_02_width  = 32;
   constexpr uint16_t Princess_02_height = 32;
 
-  constexpr uint24_t Princess_03 = 0x0086DC;
+  constexpr uint24_t Princess_03 = 0x0098B8;
   constexpr uint16_t Princess_03_width  = 32;
   constexpr uint16_t Princess_03_height = 32;
 
-  constexpr uint24_t Princess_04 = 0x0087E0;
+  constexpr uint24_t Princess_04 = 0x0099BC;
   constexpr uint16_t Princess_04_width  = 32;
   constexpr uint16_t Princess_04_height = 32;
 
-  constexpr uint24_t Princess_05 = 0x0088E4;
+  constexpr uint24_t Princess_05 = 0x009AC0;
   constexpr uint16_t Princess_05_width  = 32;
   constexpr uint16_t Princess_05_height = 32;
 
-  constexpr uint24_t Princess_06 = 0x0089E8;
+  constexpr uint24_t Princess_06 = 0x009BC4;
   constexpr uint16_t Princess_06_width  = 32;
   constexpr uint16_t Princess_06_height = 32;
 
-  constexpr uint24_t Princess_07 = 0x008AEC;
+  constexpr uint24_t Princess_07 = 0x009CC8;
   constexpr uint16_t Princess_07_width  = 32;
   constexpr uint16_t Princess_07_height = 32;
 
-  constexpr uint24_t Princess_08 = 0x008BF0;
+  constexpr uint24_t Princess_08 = 0x009DCC;
   constexpr uint16_t Princess_08_width  = 32;
   constexpr uint16_t Princess_08_height = 32;
 
-  constexpr uint24_t Princess_09 = 0x008CF4;
+  constexpr uint24_t Princess_09 = 0x009ED0;
   constexpr uint16_t Princess_09_width  = 32;
   constexpr uint16_t Princess_09_height = 32;
 
-  constexpr uint24_t Princess_10 = 0x008DF8;
+  constexpr uint24_t Princess_10 = 0x009FD4;
   constexpr uint16_t Princess_10_width  = 32;
   constexpr uint16_t Princess_10_height = 32;
 
-  constexpr uint24_t Princess_11 = 0x008EFC;
+  constexpr uint24_t Princess_11 = 0x00A0D8;
   constexpr uint16_t Princess_11_width  = 32;
   constexpr uint16_t Princess_11_height = 32;
 
-  constexpr uint24_t Princess_12 = 0x009000;
+  constexpr uint24_t Princess_12 = 0x00A1DC;
   constexpr uint16_t Princess_12_width  = 32;
   constexpr uint16_t Princess_12_height = 32;
 
-  constexpr uint24_t Princess_13 = 0x009104;
+  constexpr uint24_t Princess_13 = 0x00A2E0;
   constexpr uint16_t Princess_13_width  = 32;
   constexpr uint16_t Princess_13_height = 32;
 
-  constexpr uint24_t Princess_14 = 0x009208;
+  constexpr uint24_t Princess_14 = 0x00A3E4;
   constexpr uint16_t Princess_14_width  = 32;
   constexpr uint16_t Princess_14_height = 32;
 
-  constexpr uint24_t Princess_15 = 0x00930C;
+  constexpr uint24_t Princess_15 = 0x00A4E8;
   constexpr uint16_t Princess_15_width  = 32;
   constexpr uint16_t Princess_15_height = 32;
 
-  constexpr uint24_t Princess_16 = 0x009410;
+  constexpr uint24_t Princess_16 = 0x00A5EC;
   constexpr uint16_t Princess_16_width  = 32;
   constexpr uint16_t Princess_16_height = 32;
 
-  constexpr uint24_t Princess_17 = 0x009514;
+  constexpr uint24_t Princess_17 = 0x00A6F0;
   constexpr uint16_t Princess_17_width  = 32;
   constexpr uint16_t Princess_17_height = 32;
 
-  constexpr uint24_t Princess_18 = 0x009618;
+  constexpr uint24_t Princess_18 = 0x00A7F4;
   constexpr uint16_t Princess_18_width  = 32;
   constexpr uint16_t Princess_18_height = 32;
 
-  constexpr uint24_t Princess_19 = 0x00971C;
+  constexpr uint24_t Princess_19 = 0x00A8F8;
   constexpr uint16_t Princess_19_width  = 32;
   constexpr uint16_t Princess_19_height = 32;
 
-  constexpr uint24_t Princess_20 = 0x009820;
+  constexpr uint24_t Princess_20 = 0x00A9FC;
   constexpr uint16_t Princess_20_width  = 32;
   constexpr uint16_t Princess_20_height = 32;
 
-  constexpr uint24_t Princess_21 = 0x009924;
+  constexpr uint24_t Princess_21 = 0x00AB00;
   constexpr uint16_t Princess_21_width  = 32;
   constexpr uint16_t Princess_21_height = 32;
 
-  constexpr uint24_t Princess_22 = 0x009A28;
+  constexpr uint24_t Princess_22 = 0x00AC04;
   constexpr uint16_t Princess_22_width  = 32;
   constexpr uint16_t Princess_22_height = 32;
 
-  constexpr uint24_t Princess_23 = 0x009B2C;
+  constexpr uint24_t Princess_23 = 0x00AD08;
   constexpr uint16_t Princess_23_width  = 32;
   constexpr uint16_t Princess_23_height = 32;
 
-  constexpr uint24_t Princess_24 = 0x009C30;
+  constexpr uint24_t Princess_24 = 0x00AE0C;
   constexpr uint16_t Princess_24_width  = 32;
   constexpr uint16_t Princess_24_height = 32;
 
-  constexpr uint24_t Princess_25 = 0x009D34;
+  constexpr uint24_t Princess_25 = 0x00AF10;
   constexpr uint16_t Princess_25_width  = 32;
   constexpr uint16_t Princess_25_height = 32;
 
-  constexpr uint24_t Princess_Bounce_00 = 0x009E38;
+  constexpr uint24_t Princess_Bounce_00 = 0x00B014;
   constexpr uint16_t Princess_Bounce_00_width  = 48;
   constexpr uint16_t Princess_Bounce_00_height = 32;
 
-  constexpr uint24_t Princess_Bounce_01 = 0x009FBC;
+  constexpr uint24_t Princess_Bounce_01 = 0x00B198;
   constexpr uint16_t Princess_Bounce_01_width  = 48;
   constexpr uint16_t Princess_Bounce_01_height = 32;
 
-  constexpr uint24_t Princess_Bounce_02 = 0x00A140;
+  constexpr uint24_t Princess_Bounce_02 = 0x00B31C;
   constexpr uint16_t Princess_Bounce_02_width  = 48;
   constexpr uint16_t Princess_Bounce_02_height = 32;
 
-  constexpr uint24_t Princess_Bounce_03 = 0x00A2C4;
+  constexpr uint24_t Princess_Bounce_03 = 0x00B4A0;
   constexpr uint16_t Princess_Bounce_03_width  = 48;
   constexpr uint16_t Princess_Bounce_03_height = 32;
 
-  constexpr uint24_t Princess_Bounce_04 = 0x00A448;
+  constexpr uint24_t Princess_Bounce_04 = 0x00B624;
   constexpr uint16_t Princess_Bounce_04_width  = 48;
   constexpr uint16_t Princess_Bounce_04_height = 32;
 
-  constexpr uint24_t Princess_Bounce_05 = 0x00A5CC;
+  constexpr uint24_t Princess_Bounce_05 = 0x00B7A8;
   constexpr uint16_t Princess_Bounce_05_width  = 48;
   constexpr uint16_t Princess_Bounce_05_height = 32;
 
-  constexpr uint24_t Princess_Bounce_06 = 0x00A750;
+  constexpr uint24_t Princess_Bounce_06 = 0x00B92C;
   constexpr uint16_t Princess_Bounce_06_width  = 48;
   constexpr uint16_t Princess_Bounce_06_height = 32;
 
-  constexpr uint24_t Princess_Bounce_07 = 0x00A8D4;
+  constexpr uint24_t Princess_Bounce_07 = 0x00BAB0;
   constexpr uint16_t Princess_Bounce_07_width  = 48;
   constexpr uint16_t Princess_Bounce_07_height = 32;
 
-  constexpr uint24_t Princess_Bounce_08 = 0x00AA58;
+  constexpr uint24_t Princess_Bounce_08 = 0x00BC34;
   constexpr uint16_t Princess_Bounce_08_width  = 48;
   constexpr uint16_t Princess_Bounce_08_height = 32;
 
-  constexpr uint24_t Princess_Bounce_09 = 0x00ABDC;
+  constexpr uint24_t Princess_Bounce_09 = 0x00BDB8;
   constexpr uint16_t Princess_Bounce_09_width  = 48;
   constexpr uint16_t Princess_Bounce_09_height = 32;
 
-  constexpr uint24_t Princess_Bounce_10 = 0x00AD60;
+  constexpr uint24_t Princess_Bounce_10 = 0x00BF3C;
   constexpr uint16_t Princess_Bounce_10_width  = 48;
   constexpr uint16_t Princess_Bounce_10_height = 32;
 
-  constexpr uint24_t Princess_Bounce_11 = 0x00AEE4;
+  constexpr uint24_t Princess_Bounce_11 = 0x00C0C0;
   constexpr uint16_t Princess_Bounce_11_width  = 48;
   constexpr uint16_t Princess_Bounce_11_height = 32;
 
-  constexpr uint24_t Princess_Bounce_12 = 0x00B068;
+  constexpr uint24_t Princess_Bounce_12 = 0x00C244;
   constexpr uint16_t Princess_Bounce_12_width  = 48;
   constexpr uint16_t Princess_Bounce_12_height = 32;
 
-  constexpr uint24_t Princess_Bounce_13 = 0x00B1EC;
+  constexpr uint24_t Princess_Bounce_13 = 0x00C3C8;
   constexpr uint16_t Princess_Bounce_13_width  = 48;
   constexpr uint16_t Princess_Bounce_13_height = 32;
 
-  constexpr uint24_t Princess_Bounce_14 = 0x00B370;
+  constexpr uint24_t Princess_Bounce_14 = 0x00C54C;
   constexpr uint16_t Princess_Bounce_14_width  = 48;
   constexpr uint16_t Princess_Bounce_14_height = 32;
 
-  constexpr uint24_t Princess_Bounce_15 = 0x00B4F4;
+  constexpr uint24_t Princess_Bounce_15 = 0x00C6D0;
   constexpr uint16_t Princess_Bounce_15_width  = 48;
   constexpr uint16_t Princess_Bounce_15_height = 32;
 
-  constexpr uint24_t Princess_Bounce_16 = 0x00B678;
+  constexpr uint24_t Princess_Bounce_16 = 0x00C854;
   constexpr uint16_t Princess_Bounce_16_width  = 48;
   constexpr uint16_t Princess_Bounce_16_height = 32;
 
-  constexpr uint24_t Princess_Sleep_00 = 0x00B7FC;
+  constexpr uint24_t Princess_Sleep_00 = 0x00C9D8;
   constexpr uint16_t Princess_Sleep_00_width  = 32;
   constexpr uint16_t Princess_Sleep_00_height = 32;
 
-  constexpr uint24_t Princess_Sleep_01 = 0x00B900;
+  constexpr uint24_t Princess_Sleep_01 = 0x00CADC;
   constexpr uint16_t Princess_Sleep_01_width  = 32;
   constexpr uint16_t Princess_Sleep_01_height = 32;
 
-  constexpr uint24_t Princess_Sleep_02 = 0x00BA04;
+  constexpr uint24_t Princess_Sleep_02 = 0x00CBE0;
   constexpr uint16_t Princess_Sleep_02_width  = 32;
   constexpr uint16_t Princess_Sleep_02_height = 32;
 
-  constexpr uint24_t Princess_Sleep_03 = 0x00BB08;
+  constexpr uint24_t Princess_Sleep_03 = 0x00CCE4;
   constexpr uint16_t Princess_Sleep_03_width  = 32;
   constexpr uint16_t Princess_Sleep_03_height = 32;
 
-  constexpr uint24_t Princess_Sleep_04 = 0x00BC0C;
+  constexpr uint24_t Princess_Sleep_04 = 0x00CDE8;
   constexpr uint16_t Princess_Sleep_04_width  = 32;
   constexpr uint16_t Princess_Sleep_04_height = 32;
 
-  constexpr uint24_t Princess_Sleep_05 = 0x00BD10;
+  constexpr uint24_t Princess_Sleep_05 = 0x00CEEC;
   constexpr uint16_t Princess_Sleep_05_width  = 32;
   constexpr uint16_t Princess_Sleep_05_height = 32;
 
-  constexpr uint24_t Princess_Sleep_06 = 0x00BE14;
+  constexpr uint24_t Princess_Sleep_06 = 0x00CFF0;
   constexpr uint16_t Princess_Sleep_06_width  = 32;
   constexpr uint16_t Princess_Sleep_06_height = 32;
 
-  constexpr uint24_t Heart_00 = 0x00BF18;
+  constexpr uint24_t Heart_00 = 0x00D0F4;
   constexpr uint16_t Heart_00_width  = 7;
   constexpr uint16_t Heart_00_height = 6;
 
-  constexpr uint24_t Heart_01 = 0x00BF23;
+  constexpr uint24_t Heart_01 = 0x00D0FF;
   constexpr uint16_t Heart_01_width  = 7;
   constexpr uint16_t Heart_01_height = 6;
 
-  constexpr uint24_t Heart_02 = 0x00BF2E;
+  constexpr uint24_t Heart_02 = 0x00D10A;
   constexpr uint16_t Heart_02_width  = 7;
   constexpr uint16_t Heart_02_height = 6;
 
-  constexpr uint24_t Heart_03 = 0x00BF39;
+  constexpr uint24_t Heart_03 = 0x00D115;
   constexpr uint16_t Heart_03_width  = 7;
   constexpr uint16_t Heart_03_height = 6;
 
-  constexpr uint24_t Zaffar_00 = 0x00BF44;
+  constexpr uint24_t Zaffar_00 = 0x00D120;
   constexpr uint16_t Zaffar_00_width  = 32;
   constexpr uint16_t Zaffar_00_height = 32;
 
-  constexpr uint24_t Zaffar_01 = 0x00C048;
+  constexpr uint24_t Zaffar_01 = 0x00D224;
   constexpr uint16_t Zaffar_01_width  = 32;
   constexpr uint16_t Zaffar_01_height = 32;
 
-  constexpr uint24_t Zaffar_02 = 0x00C14C;
+  constexpr uint24_t Zaffar_02 = 0x00D328;
   constexpr uint16_t Zaffar_02_width  = 32;
   constexpr uint16_t Zaffar_02_height = 32;
 
-  constexpr uint24_t Zaffar_03 = 0x00C250;
+  constexpr uint24_t Zaffar_03 = 0x00D42C;
   constexpr uint16_t Zaffar_03_width  = 32;
   constexpr uint16_t Zaffar_03_height = 32;
 
-  constexpr uint24_t Zaffar_04 = 0x00C354;
+  constexpr uint24_t Zaffar_04 = 0x00D530;
   constexpr uint16_t Zaffar_04_width  = 32;
   constexpr uint16_t Zaffar_04_height = 32;
 
-  constexpr uint24_t Zaffar_05 = 0x00C458;
+  constexpr uint24_t Zaffar_05 = 0x00D634;
   constexpr uint16_t Zaffar_05_width  = 32;
   constexpr uint16_t Zaffar_05_height = 32;
 
-  constexpr uint24_t Zaffar_06 = 0x00C55C;
+  constexpr uint24_t Zaffar_06 = 0x00D738;
   constexpr uint16_t Zaffar_06_width  = 32;
   constexpr uint16_t Zaffar_06_height = 32;
 
-  constexpr uint24_t Zaffar_07 = 0x00C660;
+  constexpr uint24_t Zaffar_07 = 0x00D83C;
   constexpr uint16_t Zaffar_07_width  = 32;
   constexpr uint16_t Zaffar_07_height = 32;
 
-  constexpr uint24_t Zaffar_08 = 0x00C764;
+  constexpr uint24_t Zaffar_08 = 0x00D940;
   constexpr uint16_t Zaffar_08_width  = 32;
   constexpr uint16_t Zaffar_08_height = 32;
 
-  constexpr uint24_t Zaffar_09 = 0x00C868;
+  constexpr uint24_t Zaffar_09 = 0x00DA44;
   constexpr uint16_t Zaffar_09_width  = 32;
   constexpr uint16_t Zaffar_09_height = 32;
 
-  constexpr uint24_t Zaffar_10 = 0x00C96C;
+  constexpr uint24_t Zaffar_10 = 0x00DB48;
   constexpr uint16_t Zaffar_10_width  = 32;
   constexpr uint16_t Zaffar_10_height = 32;
 
-  constexpr uint24_t Zaffar_11 = 0x00CA70;
+  constexpr uint24_t Zaffar_11 = 0x00DC4C;
   constexpr uint16_t Zaffar_11_width  = 32;
   constexpr uint16_t Zaffar_11_height = 32;
 
-  constexpr uint24_t Zaffar_12 = 0x00CB74;
+  constexpr uint24_t Zaffar_12 = 0x00DD50;
   constexpr uint16_t Zaffar_12_width  = 32;
   constexpr uint16_t Zaffar_12_height = 32;
 
-  constexpr uint24_t Zaffar_13 = 0x00CC78;
+  constexpr uint24_t Zaffar_13 = 0x00DE54;
   constexpr uint16_t Zaffar_13_width  = 32;
   constexpr uint16_t Zaffar_13_height = 32;
 
-  constexpr uint24_t Zaffar_14 = 0x00CD7C;
+  constexpr uint24_t Zaffar_14 = 0x00DF58;
   constexpr uint16_t Zaffar_14_width  = 32;
   constexpr uint16_t Zaffar_14_height = 32;
 
-  constexpr uint24_t Zaffar_15 = 0x00CE80;
+  constexpr uint24_t Zaffar_15 = 0x00E05C;
   constexpr uint16_t Zaffar_15_width  = 32;
   constexpr uint16_t Zaffar_15_height = 32;
 
-  constexpr uint24_t Zaffar_16 = 0x00CF84;
+  constexpr uint24_t Zaffar_16 = 0x00E160;
   constexpr uint16_t Zaffar_16_width  = 32;
   constexpr uint16_t Zaffar_16_height = 32;
 
-  constexpr uint24_t Zaffar_17 = 0x00D088;
+  constexpr uint24_t Zaffar_17 = 0x00E264;
   constexpr uint16_t Zaffar_17_width  = 32;
   constexpr uint16_t Zaffar_17_height = 32;
 
-  constexpr uint24_t Zaffar_18 = 0x00D18C;
+  constexpr uint24_t Zaffar_18 = 0x00E368;
   constexpr uint16_t Zaffar_18_width  = 32;
   constexpr uint16_t Zaffar_18_height = 32;
 
-  constexpr uint24_t Zaffar_19 = 0x00D290;
+  constexpr uint24_t Zaffar_19 = 0x00E46C;
   constexpr uint16_t Zaffar_19_width  = 32;
   constexpr uint16_t Zaffar_19_height = 32;
 
-  constexpr uint24_t Zaffar_20 = 0x00D394;
+  constexpr uint24_t Zaffar_20 = 0x00E570;
   constexpr uint16_t Zaffar_20_width  = 32;
   constexpr uint16_t Zaffar_20_height = 32;
 
-  constexpr uint24_t Zaffar_21 = 0x00D498;
+  constexpr uint24_t Zaffar_21 = 0x00E674;
   constexpr uint16_t Zaffar_21_width  = 32;
   constexpr uint16_t Zaffar_21_height = 32;
 
-  constexpr uint24_t Zaffar_22 = 0x00D59C;
+  constexpr uint24_t Zaffar_22 = 0x00E778;
   constexpr uint16_t Zaffar_22_width  = 32;
   constexpr uint16_t Zaffar_22_height = 32;
 
-  constexpr uint24_t Zaffar_23 = 0x00D6A0;
+  constexpr uint24_t Zaffar_23 = 0x00E87C;
   constexpr uint16_t Zaffar_23_width  = 32;
   constexpr uint16_t Zaffar_23_height = 32;
 
-  constexpr uint24_t Zaffar_24 = 0x00D7A4;
+  constexpr uint24_t Zaffar_24 = 0x00E980;
   constexpr uint16_t Zaffar_24_width  = 32;
   constexpr uint16_t Zaffar_24_height = 32;
 
-  constexpr uint24_t Zaffar_25 = 0x00D8A8;
+  constexpr uint24_t Zaffar_25 = 0x00EA84;
   constexpr uint16_t Zaffar_25_width  = 32;
   constexpr uint16_t Zaffar_25_height = 32;
 
-  constexpr uint24_t HourGlass_00 = 0x00D9AC;
+  constexpr uint24_t HourGlass_00 = 0x00EB88;
   constexpr uint16_t HourGlass_00_width  = 19;
   constexpr uint16_t HourGlass_00_height = 23;
 
-  constexpr uint24_t HourGlass_01 = 0x00DA22;
+  constexpr uint24_t HourGlass_01 = 0x00EBFE;
   constexpr uint16_t HourGlass_01_width  = 19;
   constexpr uint16_t HourGlass_01_height = 23;
 
-  constexpr uint24_t HourGlass_02 = 0x00DA98;
+  constexpr uint24_t HourGlass_02 = 0x00EC74;
   constexpr uint16_t HourGlass_02_width  = 19;
   constexpr uint16_t HourGlass_02_height = 23;
 
-  constexpr uint24_t HourGlass_03 = 0x00DB0E;
+  constexpr uint24_t HourGlass_03 = 0x00ECEA;
   constexpr uint16_t HourGlass_03_width  = 19;
   constexpr uint16_t HourGlass_03_height = 23;
 
-  constexpr uint24_t HourGlass_04 = 0x00DB84;
+  constexpr uint24_t HourGlass_04 = 0x00ED60;
   constexpr uint16_t HourGlass_04_width  = 19;
   constexpr uint16_t HourGlass_04_height = 23;
 
-  constexpr uint24_t HourGlass_05 = 0x00DBFA;
+  constexpr uint24_t HourGlass_05 = 0x00EDD6;
   constexpr uint16_t HourGlass_05_width  = 19;
   constexpr uint16_t HourGlass_05_height = 23;
 
-  constexpr uint24_t HourGlass_06 = 0x00DC70;
+  constexpr uint24_t HourGlass_06 = 0x00EE4C;
   constexpr uint16_t HourGlass_06_width  = 19;
   constexpr uint16_t HourGlass_06_height = 23;
 
-  constexpr uint24_t Prince_Left_001 = 0x00DCE6;
+  constexpr uint24_t Prince_Left_001 = 0x00EEC2;
   constexpr uint16_t Prince_Left_001_width  = 36;
   constexpr uint16_t Prince_Left_001_height = 36;
 
-  constexpr uint24_t Prince_Left_002 = 0x00DE52;
+  constexpr uint24_t Prince_Left_002 = 0x00F02E;
   constexpr uint16_t Prince_Left_002_width  = 36;
   constexpr uint16_t Prince_Left_002_height = 36;
 
-  constexpr uint24_t Prince_Left_003 = 0x00DFBE;
+  constexpr uint24_t Prince_Left_003 = 0x00F19A;
   constexpr uint16_t Prince_Left_003_width  = 36;
   constexpr uint16_t Prince_Left_003_height = 36;
 
-  constexpr uint24_t Prince_Left_004 = 0x00E12A;
+  constexpr uint24_t Prince_Left_004 = 0x00F306;
   constexpr uint16_t Prince_Left_004_width  = 36;
   constexpr uint16_t Prince_Left_004_height = 36;
 
-  constexpr uint24_t Prince_Left_005 = 0x00E296;
+  constexpr uint24_t Prince_Left_005 = 0x00F472;
   constexpr uint16_t Prince_Left_005_width  = 36;
   constexpr uint16_t Prince_Left_005_height = 36;
 
-  constexpr uint24_t Prince_Left_006 = 0x00E402;
+  constexpr uint24_t Prince_Left_006 = 0x00F5DE;
   constexpr uint16_t Prince_Left_006_width  = 36;
   constexpr uint16_t Prince_Left_006_height = 36;
 
-  constexpr uint24_t Prince_Left_007 = 0x00E56E;
+  constexpr uint24_t Prince_Left_007 = 0x00F74A;
   constexpr uint16_t Prince_Left_007_width  = 36;
   constexpr uint16_t Prince_Left_007_height = 36;
 
-  constexpr uint24_t Prince_Left_008 = 0x00E6DA;
+  constexpr uint24_t Prince_Left_008 = 0x00F8B6;
   constexpr uint16_t Prince_Left_008_width  = 36;
   constexpr uint16_t Prince_Left_008_height = 36;
 
-  constexpr uint24_t Prince_Left_009 = 0x00E846;
+  constexpr uint24_t Prince_Left_009 = 0x00FA22;
   constexpr uint16_t Prince_Left_009_width  = 36;
   constexpr uint16_t Prince_Left_009_height = 36;
 
-  constexpr uint24_t Prince_Left_010 = 0x00E9B2;
+  constexpr uint24_t Prince_Left_010 = 0x00FB8E;
   constexpr uint16_t Prince_Left_010_width  = 36;
   constexpr uint16_t Prince_Left_010_height = 36;
 
-  constexpr uint24_t Prince_Left_011 = 0x00EB1E;
+  constexpr uint24_t Prince_Left_011 = 0x00FCFA;
   constexpr uint16_t Prince_Left_011_width  = 36;
   constexpr uint16_t Prince_Left_011_height = 36;
 
-  constexpr uint24_t Prince_Left_012 = 0x00EC8A;
+  constexpr uint24_t Prince_Left_012 = 0x00FE66;
   constexpr uint16_t Prince_Left_012_width  = 36;
   constexpr uint16_t Prince_Left_012_height = 36;
 
-  constexpr uint24_t Prince_Left_013 = 0x00EDF6;
+  constexpr uint24_t Prince_Left_013 = 0x00FFD2;
   constexpr uint16_t Prince_Left_013_width  = 36;
   constexpr uint16_t Prince_Left_013_height = 36;
 
-  constexpr uint24_t Prince_Left_014 = 0x00EF62;
+  constexpr uint24_t Prince_Left_014 = 0x01013E;
   constexpr uint16_t Prince_Left_014_width  = 36;
   constexpr uint16_t Prince_Left_014_height = 36;
 
-  constexpr uint24_t Prince_Left_015 = 0x00F0CE;
+  constexpr uint24_t Prince_Left_015 = 0x0102AA;
   constexpr uint16_t Prince_Left_015_width  = 36;
   constexpr uint16_t Prince_Left_015_height = 36;
 
-  constexpr uint24_t Prince_Left_016 = 0x00F23A;
+  constexpr uint24_t Prince_Left_016 = 0x010416;
   constexpr uint16_t Prince_Left_016_width  = 36;
   constexpr uint16_t Prince_Left_016_height = 36;
 
-  constexpr uint24_t Prince_Left_017 = 0x00F3A6;
+  constexpr uint24_t Prince_Left_017 = 0x010582;
   constexpr uint16_t Prince_Left_017_width  = 36;
   constexpr uint16_t Prince_Left_017_height = 36;
 
-  constexpr uint24_t Prince_Left_018 = 0x00F512;
+  constexpr uint24_t Prince_Left_018 = 0x0106EE;
   constexpr uint16_t Prince_Left_018_width  = 36;
   constexpr uint16_t Prince_Left_018_height = 36;
 
-  constexpr uint24_t Prince_Left_019 = 0x00F67E;
+  constexpr uint24_t Prince_Left_019 = 0x01085A;
   constexpr uint16_t Prince_Left_019_width  = 36;
   constexpr uint16_t Prince_Left_019_height = 36;
 
-  constexpr uint24_t Prince_Left_020 = 0x00F7EA;
+  constexpr uint24_t Prince_Left_020 = 0x0109C6;
   constexpr uint16_t Prince_Left_020_width  = 36;
   constexpr uint16_t Prince_Left_020_height = 36;
 
-  constexpr uint24_t Prince_Left_021 = 0x00F956;
+  constexpr uint24_t Prince_Left_021 = 0x010B32;
   constexpr uint16_t Prince_Left_021_width  = 36;
   constexpr uint16_t Prince_Left_021_height = 36;
 
-  constexpr uint24_t Prince_Left_022 = 0x00FAC2;
+  constexpr uint24_t Prince_Left_022 = 0x010C9E;
   constexpr uint16_t Prince_Left_022_width  = 36;
   constexpr uint16_t Prince_Left_022_height = 36;
 
-  constexpr uint24_t Prince_Left_023 = 0x00FC2E;
+  constexpr uint24_t Prince_Left_023 = 0x010E0A;
   constexpr uint16_t Prince_Left_023_width  = 36;
   constexpr uint16_t Prince_Left_023_height = 36;
 
-  constexpr uint24_t Prince_Left_024 = 0x00FD9A;
+  constexpr uint24_t Prince_Left_024 = 0x010F76;
   constexpr uint16_t Prince_Left_024_width  = 36;
   constexpr uint16_t Prince_Left_024_height = 36;
 
-  constexpr uint24_t Prince_Left_025 = 0x00FF06;
+  constexpr uint24_t Prince_Left_025 = 0x0110E2;
   constexpr uint16_t Prince_Left_025_width  = 36;
   constexpr uint16_t Prince_Left_025_height = 36;
 
-  constexpr uint24_t Prince_Left_026 = 0x010072;
+  constexpr uint24_t Prince_Left_026 = 0x01124E;
   constexpr uint16_t Prince_Left_026_width  = 36;
   constexpr uint16_t Prince_Left_026_height = 36;
 
-  constexpr uint24_t Prince_Left_027 = 0x0101DE;
+  constexpr uint24_t Prince_Left_027 = 0x0113BA;
   constexpr uint16_t Prince_Left_027_width  = 36;
   constexpr uint16_t Prince_Left_027_height = 36;
 
-  constexpr uint24_t Prince_Left_028 = 0x01034A;
+  constexpr uint24_t Prince_Left_028 = 0x011526;
   constexpr uint16_t Prince_Left_028_width  = 36;
   constexpr uint16_t Prince_Left_028_height = 36;
 
-  constexpr uint24_t Prince_Left_029 = 0x0104B6;
+  constexpr uint24_t Prince_Left_029 = 0x011692;
   constexpr uint16_t Prince_Left_029_width  = 36;
   constexpr uint16_t Prince_Left_029_height = 36;
 
-  constexpr uint24_t Prince_Left_030 = 0x010622;
+  constexpr uint24_t Prince_Left_030 = 0x0117FE;
   constexpr uint16_t Prince_Left_030_width  = 36;
   constexpr uint16_t Prince_Left_030_height = 36;
 
-  constexpr uint24_t Prince_Left_031 = 0x01078E;
+  constexpr uint24_t Prince_Left_031 = 0x01196A;
   constexpr uint16_t Prince_Left_031_width  = 36;
   constexpr uint16_t Prince_Left_031_height = 36;
 
-  constexpr uint24_t Prince_Left_032 = 0x0108FA;
+  constexpr uint24_t Prince_Left_032 = 0x011AD6;
   constexpr uint16_t Prince_Left_032_width  = 36;
   constexpr uint16_t Prince_Left_032_height = 36;
 
-  constexpr uint24_t Prince_Left_033 = 0x010A66;
+  constexpr uint24_t Prince_Left_033 = 0x011C42;
   constexpr uint16_t Prince_Left_033_width  = 36;
   constexpr uint16_t Prince_Left_033_height = 36;
 
-  constexpr uint24_t Prince_Left_034 = 0x010BD2;
+  constexpr uint24_t Prince_Left_034 = 0x011DAE;
   constexpr uint16_t Prince_Left_034_width  = 36;
   constexpr uint16_t Prince_Left_034_height = 36;
 
-  constexpr uint24_t Prince_Left_035 = 0x010D3E;
+  constexpr uint24_t Prince_Left_035 = 0x011F1A;
   constexpr uint16_t Prince_Left_035_width  = 36;
   constexpr uint16_t Prince_Left_035_height = 36;
 
-  constexpr uint24_t Prince_Left_036 = 0x010EAA;
+  constexpr uint24_t Prince_Left_036 = 0x012086;
   constexpr uint16_t Prince_Left_036_width  = 36;
   constexpr uint16_t Prince_Left_036_height = 36;
 
-  constexpr uint24_t Prince_Left_037 = 0x011016;
+  constexpr uint24_t Prince_Left_037 = 0x0121F2;
   constexpr uint16_t Prince_Left_037_width  = 36;
   constexpr uint16_t Prince_Left_037_height = 36;
 
-  constexpr uint24_t Prince_Left_038 = 0x011182;
+  constexpr uint24_t Prince_Left_038 = 0x01235E;
   constexpr uint16_t Prince_Left_038_width  = 36;
   constexpr uint16_t Prince_Left_038_height = 36;
 
-  constexpr uint24_t Prince_Left_039 = 0x0112EE;
+  constexpr uint24_t Prince_Left_039 = 0x0124CA;
   constexpr uint16_t Prince_Left_039_width  = 36;
   constexpr uint16_t Prince_Left_039_height = 36;
 
-  constexpr uint24_t Prince_Left_040 = 0x01145A;
+  constexpr uint24_t Prince_Left_040 = 0x012636;
   constexpr uint16_t Prince_Left_040_width  = 36;
   constexpr uint16_t Prince_Left_040_height = 36;
 
-  constexpr uint24_t Prince_Left_041 = 0x0115C6;
+  constexpr uint24_t Prince_Left_041 = 0x0127A2;
   constexpr uint16_t Prince_Left_041_width  = 36;
   constexpr uint16_t Prince_Left_041_height = 36;
 
-  constexpr uint24_t Prince_Left_042 = 0x011732;
+  constexpr uint24_t Prince_Left_042 = 0x01290E;
   constexpr uint16_t Prince_Left_042_width  = 36;
   constexpr uint16_t Prince_Left_042_height = 36;
 
-  constexpr uint24_t Prince_Left_043 = 0x01189E;
+  constexpr uint24_t Prince_Left_043 = 0x012A7A;
   constexpr uint16_t Prince_Left_043_width  = 36;
   constexpr uint16_t Prince_Left_043_height = 36;
 
-  constexpr uint24_t Prince_Left_044 = 0x011A0A;
+  constexpr uint24_t Prince_Left_044 = 0x012BE6;
   constexpr uint16_t Prince_Left_044_width  = 36;
   constexpr uint16_t Prince_Left_044_height = 36;
 
-  constexpr uint24_t Prince_Left_045 = 0x011B76;
+  constexpr uint24_t Prince_Left_045 = 0x012D52;
   constexpr uint16_t Prince_Left_045_width  = 36;
   constexpr uint16_t Prince_Left_045_height = 36;
 
-  constexpr uint24_t Prince_Left_046 = 0x011CE2;
+  constexpr uint24_t Prince_Left_046 = 0x012EBE;
   constexpr uint16_t Prince_Left_046_width  = 36;
   constexpr uint16_t Prince_Left_046_height = 36;
 
-  constexpr uint24_t Prince_Left_047 = 0x011E4E;
+  constexpr uint24_t Prince_Left_047 = 0x01302A;
   constexpr uint16_t Prince_Left_047_width  = 36;
   constexpr uint16_t Prince_Left_047_height = 36;
 
-  constexpr uint24_t Prince_Left_048 = 0x011FBA;
+  constexpr uint24_t Prince_Left_048 = 0x013196;
   constexpr uint16_t Prince_Left_048_width  = 36;
   constexpr uint16_t Prince_Left_048_height = 36;
 
-  constexpr uint24_t Prince_Left_049 = 0x012126;
+  constexpr uint24_t Prince_Left_049 = 0x013302;
   constexpr uint16_t Prince_Left_049_width  = 36;
   constexpr uint16_t Prince_Left_049_height = 36;
 
-  constexpr uint24_t Prince_Left_050 = 0x012292;
+  constexpr uint24_t Prince_Left_050 = 0x01346E;
   constexpr uint16_t Prince_Left_050_width  = 36;
   constexpr uint16_t Prince_Left_050_height = 36;
 
-  constexpr uint24_t Prince_Left_051 = 0x0123FE;
+  constexpr uint24_t Prince_Left_051 = 0x0135DA;
   constexpr uint16_t Prince_Left_051_width  = 36;
   constexpr uint16_t Prince_Left_051_height = 36;
 
-  constexpr uint24_t Prince_Left_052 = 0x01256A;
+  constexpr uint24_t Prince_Left_052 = 0x013746;
   constexpr uint16_t Prince_Left_052_width  = 36;
   constexpr uint16_t Prince_Left_052_height = 36;
 
-  constexpr uint24_t Prince_Left_053 = 0x0126D6;
+  constexpr uint24_t Prince_Left_053 = 0x0138B2;
   constexpr uint16_t Prince_Left_053_width  = 36;
   constexpr uint16_t Prince_Left_053_height = 36;
 
-  constexpr uint24_t Prince_Left_054 = 0x012842;
+  constexpr uint24_t Prince_Left_054 = 0x013A1E;
   constexpr uint16_t Prince_Left_054_width  = 36;
   constexpr uint16_t Prince_Left_054_height = 36;
 
-  constexpr uint24_t Prince_Left_055 = 0x0129AE;
+  constexpr uint24_t Prince_Left_055 = 0x013B8A;
   constexpr uint16_t Prince_Left_055_width  = 36;
   constexpr uint16_t Prince_Left_055_height = 36;
 
-  constexpr uint24_t Prince_Left_056 = 0x012B1A;
+  constexpr uint24_t Prince_Left_056 = 0x013CF6;
   constexpr uint16_t Prince_Left_056_width  = 36;
   constexpr uint16_t Prince_Left_056_height = 36;
 
-  constexpr uint24_t Prince_Left_057 = 0x012C86;
+  constexpr uint24_t Prince_Left_057 = 0x013E62;
   constexpr uint16_t Prince_Left_057_width  = 36;
   constexpr uint16_t Prince_Left_057_height = 36;
 
-  constexpr uint24_t Prince_Left_058 = 0x012DF2;
+  constexpr uint24_t Prince_Left_058 = 0x013FCE;
   constexpr uint16_t Prince_Left_058_width  = 36;
   constexpr uint16_t Prince_Left_058_height = 36;
 
-  constexpr uint24_t Prince_Left_059 = 0x012F5E;
+  constexpr uint24_t Prince_Left_059 = 0x01413A;
   constexpr uint16_t Prince_Left_059_width  = 36;
   constexpr uint16_t Prince_Left_059_height = 36;
 
-  constexpr uint24_t Prince_Left_060 = 0x0130CA;
+  constexpr uint24_t Prince_Left_060 = 0x0142A6;
   constexpr uint16_t Prince_Left_060_width  = 36;
   constexpr uint16_t Prince_Left_060_height = 36;
 
-  constexpr uint24_t Prince_Left_061 = 0x013236;
+  constexpr uint24_t Prince_Left_061 = 0x014412;
   constexpr uint16_t Prince_Left_061_width  = 36;
   constexpr uint16_t Prince_Left_061_height = 36;
 
-  constexpr uint24_t Prince_Left_062 = 0x0133A2;
+  constexpr uint24_t Prince_Left_062 = 0x01457E;
   constexpr uint16_t Prince_Left_062_width  = 36;
   constexpr uint16_t Prince_Left_062_height = 36;
 
-  constexpr uint24_t Prince_Left_063 = 0x01350E;
+  constexpr uint24_t Prince_Left_063 = 0x0146EA;
   constexpr uint16_t Prince_Left_063_width  = 36;
   constexpr uint16_t Prince_Left_063_height = 36;
 
-  constexpr uint24_t Prince_Left_064 = 0x01367A;
+  constexpr uint24_t Prince_Left_064 = 0x014856;
   constexpr uint16_t Prince_Left_064_width  = 36;
   constexpr uint16_t Prince_Left_064_height = 36;
 
-  constexpr uint24_t Prince_Left_065 = 0x0137E6;
+  constexpr uint24_t Prince_Left_065 = 0x0149C2;
   constexpr uint16_t Prince_Left_065_width  = 36;
   constexpr uint16_t Prince_Left_065_height = 36;
 
-  constexpr uint24_t Prince_Left_066 = 0x013952;
+  constexpr uint24_t Prince_Left_066 = 0x014B2E;
   constexpr uint16_t Prince_Left_066_width  = 36;
   constexpr uint16_t Prince_Left_066_height = 36;
 
-  constexpr uint24_t Prince_Left_067 = 0x013ABE;
+  constexpr uint24_t Prince_Left_067 = 0x014C9A;
   constexpr uint16_t Prince_Left_067_width  = 36;
   constexpr uint16_t Prince_Left_067_height = 36;
 
-  constexpr uint24_t Prince_Left_068 = 0x013C2A;
+  constexpr uint24_t Prince_Left_068 = 0x014E06;
   constexpr uint16_t Prince_Left_068_width  = 36;
   constexpr uint16_t Prince_Left_068_height = 36;
 
-  constexpr uint24_t Prince_Left_069 = 0x013D96;
+  constexpr uint24_t Prince_Left_069 = 0x014F72;
   constexpr uint16_t Prince_Left_069_width  = 36;
   constexpr uint16_t Prince_Left_069_height = 36;
 
-  constexpr uint24_t Prince_Left_070 = 0x013F02;
+  constexpr uint24_t Prince_Left_070 = 0x0150DE;
   constexpr uint16_t Prince_Left_070_width  = 36;
   constexpr uint16_t Prince_Left_070_height = 36;
 
-  constexpr uint24_t Prince_Left_071 = 0x01406E;
+  constexpr uint24_t Prince_Left_071 = 0x01524A;
   constexpr uint16_t Prince_Left_071_width  = 36;
   constexpr uint16_t Prince_Left_071_height = 36;
 
-  constexpr uint24_t Prince_Left_072 = 0x0141DA;
+  constexpr uint24_t Prince_Left_072 = 0x0153B6;
   constexpr uint16_t Prince_Left_072_width  = 36;
   constexpr uint16_t Prince_Left_072_height = 36;
 
-  constexpr uint24_t Prince_Left_073 = 0x014346;
+  constexpr uint24_t Prince_Left_073 = 0x015522;
   constexpr uint16_t Prince_Left_073_width  = 36;
   constexpr uint16_t Prince_Left_073_height = 36;
 
-  constexpr uint24_t Prince_Left_074 = 0x0144B2;
+  constexpr uint24_t Prince_Left_074 = 0x01568E;
   constexpr uint16_t Prince_Left_074_width  = 36;
   constexpr uint16_t Prince_Left_074_height = 36;
 
-  constexpr uint24_t Prince_Left_075 = 0x01461E;
+  constexpr uint24_t Prince_Left_075 = 0x0157FA;
   constexpr uint16_t Prince_Left_075_width  = 36;
   constexpr uint16_t Prince_Left_075_height = 36;
 
-  constexpr uint24_t Prince_Left_076 = 0x01478A;
+  constexpr uint24_t Prince_Left_076 = 0x015966;
   constexpr uint16_t Prince_Left_076_width  = 36;
   constexpr uint16_t Prince_Left_076_height = 36;
 
-  constexpr uint24_t Prince_Left_077 = 0x0148F6;
+  constexpr uint24_t Prince_Left_077 = 0x015AD2;
   constexpr uint16_t Prince_Left_077_width  = 36;
   constexpr uint16_t Prince_Left_077_height = 36;
 
-  constexpr uint24_t Prince_Left_078 = 0x014A62;
+  constexpr uint24_t Prince_Left_078 = 0x015C3E;
   constexpr uint16_t Prince_Left_078_width  = 36;
   constexpr uint16_t Prince_Left_078_height = 36;
 
-  constexpr uint24_t Prince_Left_079 = 0x014BCE;
+  constexpr uint24_t Prince_Left_079 = 0x015DAA;
   constexpr uint16_t Prince_Left_079_width  = 36;
   constexpr uint16_t Prince_Left_079_height = 36;
 
-  constexpr uint24_t Prince_Left_080 = 0x014D3A;
+  constexpr uint24_t Prince_Left_080 = 0x015F16;
   constexpr uint16_t Prince_Left_080_width  = 36;
   constexpr uint16_t Prince_Left_080_height = 36;
 
-  constexpr uint24_t Prince_Left_081 = 0x014EA6;
+  constexpr uint24_t Prince_Left_081 = 0x016082;
   constexpr uint16_t Prince_Left_081_width  = 36;
   constexpr uint16_t Prince_Left_081_height = 36;
 
-  constexpr uint24_t Prince_Left_082 = 0x015012;
+  constexpr uint24_t Prince_Left_082 = 0x0161EE;
   constexpr uint16_t Prince_Left_082_width  = 36;
   constexpr uint16_t Prince_Left_082_height = 36;
 
-  constexpr uint24_t Prince_Left_083 = 0x01517E;
+  constexpr uint24_t Prince_Left_083 = 0x01635A;
   constexpr uint16_t Prince_Left_083_width  = 36;
   constexpr uint16_t Prince_Left_083_height = 36;
 
-  constexpr uint24_t Prince_Left_084 = 0x0152EA;
+  constexpr uint24_t Prince_Left_084 = 0x0164C6;
   constexpr uint16_t Prince_Left_084_width  = 36;
   constexpr uint16_t Prince_Left_084_height = 36;
 
-  constexpr uint24_t Prince_Left_085 = 0x015456;
+  constexpr uint24_t Prince_Left_085 = 0x016632;
   constexpr uint16_t Prince_Left_085_width  = 36;
   constexpr uint16_t Prince_Left_085_height = 36;
 
-  constexpr uint24_t Prince_Left_086 = 0x0155C2;
+  constexpr uint24_t Prince_Left_086 = 0x01679E;
   constexpr uint16_t Prince_Left_086_width  = 36;
   constexpr uint16_t Prince_Left_086_height = 36;
 
-  constexpr uint24_t Prince_Left_087 = 0x01572E;
+  constexpr uint24_t Prince_Left_087 = 0x01690A;
   constexpr uint16_t Prince_Left_087_width  = 36;
   constexpr uint16_t Prince_Left_087_height = 36;
 
-  constexpr uint24_t Prince_Left_088 = 0x01589A;
+  constexpr uint24_t Prince_Left_088 = 0x016A76;
   constexpr uint16_t Prince_Left_088_width  = 36;
   constexpr uint16_t Prince_Left_088_height = 36;
 
-  constexpr uint24_t Prince_Left_089 = 0x015A06;
+  constexpr uint24_t Prince_Left_089 = 0x016BE2;
   constexpr uint16_t Prince_Left_089_width  = 36;
   constexpr uint16_t Prince_Left_089_height = 36;
 
-  constexpr uint24_t Prince_Left_090 = 0x015B72;
+  constexpr uint24_t Prince_Left_090 = 0x016D4E;
   constexpr uint16_t Prince_Left_090_width  = 36;
   constexpr uint16_t Prince_Left_090_height = 36;
 
-  constexpr uint24_t Prince_Left_091 = 0x015CDE;
+  constexpr uint24_t Prince_Left_091 = 0x016EBA;
   constexpr uint16_t Prince_Left_091_width  = 36;
   constexpr uint16_t Prince_Left_091_height = 36;
 
-  constexpr uint24_t Prince_Left_092 = 0x015E4A;
+  constexpr uint24_t Prince_Left_092 = 0x017026;
   constexpr uint16_t Prince_Left_092_width  = 36;
   constexpr uint16_t Prince_Left_092_height = 36;
 
-  constexpr uint24_t Prince_Left_093 = 0x015FB6;
+  constexpr uint24_t Prince_Left_093 = 0x017192;
   constexpr uint16_t Prince_Left_093_width  = 36;
   constexpr uint16_t Prince_Left_093_height = 36;
 
-  constexpr uint24_t Prince_Left_094 = 0x016122;
+  constexpr uint24_t Prince_Left_094 = 0x0172FE;
   constexpr uint16_t Prince_Left_094_width  = 36;
   constexpr uint16_t Prince_Left_094_height = 36;
 
-  constexpr uint24_t Prince_Left_095 = 0x01628E;
+  constexpr uint24_t Prince_Left_095 = 0x01746A;
   constexpr uint16_t Prince_Left_095_width  = 36;
   constexpr uint16_t Prince_Left_095_height = 36;
 
-  constexpr uint24_t Prince_Left_096 = 0x0163FA;
+  constexpr uint24_t Prince_Left_096 = 0x0175D6;
   constexpr uint16_t Prince_Left_096_width  = 36;
   constexpr uint16_t Prince_Left_096_height = 36;
 
-  constexpr uint24_t Prince_Left_097 = 0x016566;
+  constexpr uint24_t Prince_Left_097 = 0x017742;
   constexpr uint16_t Prince_Left_097_width  = 36;
   constexpr uint16_t Prince_Left_097_height = 36;
 
-  constexpr uint24_t Prince_Left_098 = 0x0166D2;
+  constexpr uint24_t Prince_Left_098 = 0x0178AE;
   constexpr uint16_t Prince_Left_098_width  = 36;
   constexpr uint16_t Prince_Left_098_height = 36;
 
-  constexpr uint24_t Prince_Left_099 = 0x01683E;
+  constexpr uint24_t Prince_Left_099 = 0x017A1A;
   constexpr uint16_t Prince_Left_099_width  = 36;
   constexpr uint16_t Prince_Left_099_height = 36;
 
-  constexpr uint24_t Prince_Left_100 = 0x0169AA;
+  constexpr uint24_t Prince_Left_100 = 0x017B86;
   constexpr uint16_t Prince_Left_100_width  = 36;
   constexpr uint16_t Prince_Left_100_height = 36;
 
-  constexpr uint24_t Prince_Left_101 = 0x016B16;
+  constexpr uint24_t Prince_Left_101 = 0x017CF2;
   constexpr uint16_t Prince_Left_101_width  = 36;
   constexpr uint16_t Prince_Left_101_height = 36;
 
-  constexpr uint24_t Prince_Left_102 = 0x016C82;
+  constexpr uint24_t Prince_Left_102 = 0x017E5E;
   constexpr uint16_t Prince_Left_102_width  = 36;
   constexpr uint16_t Prince_Left_102_height = 36;
 
-  constexpr uint24_t Prince_Left_103 = 0x016DEE;
+  constexpr uint24_t Prince_Left_103 = 0x017FCA;
   constexpr uint16_t Prince_Left_103_width  = 36;
   constexpr uint16_t Prince_Left_103_height = 36;
 
-  constexpr uint24_t Prince_Left_104 = 0x016F5A;
+  constexpr uint24_t Prince_Left_104 = 0x018136;
   constexpr uint16_t Prince_Left_104_width  = 36;
   constexpr uint16_t Prince_Left_104_height = 36;
 
-  constexpr uint24_t Prince_Left_105 = 0x0170C6;
+  constexpr uint24_t Prince_Left_105 = 0x0182A2;
   constexpr uint16_t Prince_Left_105_width  = 36;
   constexpr uint16_t Prince_Left_105_height = 36;
 
-  constexpr uint24_t Prince_Left_106 = 0x017232;
+  constexpr uint24_t Prince_Left_106 = 0x01840E;
   constexpr uint16_t Prince_Left_106_width  = 36;
   constexpr uint16_t Prince_Left_106_height = 36;
 
-  constexpr uint24_t Prince_Left_107 = 0x01739E;
+  constexpr uint24_t Prince_Left_107 = 0x01857A;
   constexpr uint16_t Prince_Left_107_width  = 36;
   constexpr uint16_t Prince_Left_107_height = 36;
 
-  constexpr uint24_t Prince_Left_108 = 0x01750A;
+  constexpr uint24_t Prince_Left_108 = 0x0186E6;
   constexpr uint16_t Prince_Left_108_width  = 36;
   constexpr uint16_t Prince_Left_108_height = 36;
 
-  constexpr uint24_t Prince_Left_109 = 0x017676;
+  constexpr uint24_t Prince_Left_109 = 0x018852;
   constexpr uint16_t Prince_Left_109_width  = 36;
   constexpr uint16_t Prince_Left_109_height = 36;
 
-  constexpr uint24_t Prince_Left_110 = 0x0177E2;
+  constexpr uint24_t Prince_Left_110 = 0x0189BE;
   constexpr uint16_t Prince_Left_110_width  = 36;
   constexpr uint16_t Prince_Left_110_height = 36;
 
-  constexpr uint24_t Prince_Left_111 = 0x01794E;
+  constexpr uint24_t Prince_Left_111 = 0x018B2A;
   constexpr uint16_t Prince_Left_111_width  = 36;
   constexpr uint16_t Prince_Left_111_height = 36;
 
-  constexpr uint24_t Prince_Left_112 = 0x017ABA;
+  constexpr uint24_t Prince_Left_112 = 0x018C96;
   constexpr uint16_t Prince_Left_112_width  = 36;
   constexpr uint16_t Prince_Left_112_height = 36;
 
-  constexpr uint24_t Prince_Left_113 = 0x017C26;
+  constexpr uint24_t Prince_Left_113 = 0x018E02;
   constexpr uint16_t Prince_Left_113_width  = 36;
   constexpr uint16_t Prince_Left_113_height = 36;
 
-  constexpr uint24_t Prince_Left_114 = 0x017D92;
+  constexpr uint24_t Prince_Left_114 = 0x018F6E;
   constexpr uint16_t Prince_Left_114_width  = 36;
   constexpr uint16_t Prince_Left_114_height = 36;
 
-  constexpr uint24_t Prince_Left_115 = 0x017EFE;
+  constexpr uint24_t Prince_Left_115 = 0x0190DA;
   constexpr uint16_t Prince_Left_115_width  = 36;
   constexpr uint16_t Prince_Left_115_height = 36;
 
-  constexpr uint24_t Prince_Left_116 = 0x01806A;
+  constexpr uint24_t Prince_Left_116 = 0x019246;
   constexpr uint16_t Prince_Left_116_width  = 36;
   constexpr uint16_t Prince_Left_116_height = 36;
 
-  constexpr uint24_t Prince_Left_117 = 0x0181D6;
+  constexpr uint24_t Prince_Left_117 = 0x0193B2;
   constexpr uint16_t Prince_Left_117_width  = 36;
   constexpr uint16_t Prince_Left_117_height = 36;
 
-  constexpr uint24_t Prince_Left_118 = 0x018342;
+  constexpr uint24_t Prince_Left_118 = 0x01951E;
   constexpr uint16_t Prince_Left_118_width  = 36;
   constexpr uint16_t Prince_Left_118_height = 36;
 
-  constexpr uint24_t Prince_Left_119 = 0x0184AE;
+  constexpr uint24_t Prince_Left_119 = 0x01968A;
   constexpr uint16_t Prince_Left_119_width  = 36;
   constexpr uint16_t Prince_Left_119_height = 36;
 
-  constexpr uint24_t Prince_Left_120 = 0x01861A;
+  constexpr uint24_t Prince_Left_120 = 0x0197F6;
   constexpr uint16_t Prince_Left_120_width  = 36;
   constexpr uint16_t Prince_Left_120_height = 36;
 
-  constexpr uint24_t Prince_Left_121 = 0x018786;
+  constexpr uint24_t Prince_Left_121 = 0x019962;
   constexpr uint16_t Prince_Left_121_width  = 36;
   constexpr uint16_t Prince_Left_121_height = 36;
 
-  constexpr uint24_t Prince_Left_122 = 0x0188F2;
+  constexpr uint24_t Prince_Left_122 = 0x019ACE;
   constexpr uint16_t Prince_Left_122_width  = 36;
   constexpr uint16_t Prince_Left_122_height = 36;
 
-  constexpr uint24_t Prince_Left_123 = 0x018A5E;
+  constexpr uint24_t Prince_Left_123 = 0x019C3A;
   constexpr uint16_t Prince_Left_123_width  = 36;
   constexpr uint16_t Prince_Left_123_height = 36;
 
-  constexpr uint24_t Prince_Left_124 = 0x018BCA;
+  constexpr uint24_t Prince_Left_124 = 0x019DA6;
   constexpr uint16_t Prince_Left_124_width  = 36;
   constexpr uint16_t Prince_Left_124_height = 36;
 
-  constexpr uint24_t Prince_Left_125 = 0x018D36;
+  constexpr uint24_t Prince_Left_125 = 0x019F12;
   constexpr uint16_t Prince_Left_125_width  = 36;
   constexpr uint16_t Prince_Left_125_height = 36;
 
-  constexpr uint24_t Prince_Left_126 = 0x018EA2;
+  constexpr uint24_t Prince_Left_126 = 0x01A07E;
   constexpr uint16_t Prince_Left_126_width  = 36;
   constexpr uint16_t Prince_Left_126_height = 36;
 
-  constexpr uint24_t Prince_Left_127 = 0x01900E;
+  constexpr uint24_t Prince_Left_127 = 0x01A1EA;
   constexpr uint16_t Prince_Left_127_width  = 36;
   constexpr uint16_t Prince_Left_127_height = 36;
 
-  constexpr uint24_t Prince_Left_128 = 0x01917A;
+  constexpr uint24_t Prince_Left_128 = 0x01A356;
   constexpr uint16_t Prince_Left_128_width  = 36;
   constexpr uint16_t Prince_Left_128_height = 36;
 
-  constexpr uint24_t Prince_Left_129 = 0x0192E6;
+  constexpr uint24_t Prince_Left_129 = 0x01A4C2;
   constexpr uint16_t Prince_Left_129_width  = 36;
   constexpr uint16_t Prince_Left_129_height = 36;
 
-  constexpr uint24_t Prince_Left_130 = 0x019452;
+  constexpr uint24_t Prince_Left_130 = 0x01A62E;
   constexpr uint16_t Prince_Left_130_width  = 36;
   constexpr uint16_t Prince_Left_130_height = 36;
 
-  constexpr uint24_t Prince_Left_131 = 0x0195BE;
+  constexpr uint24_t Prince_Left_131 = 0x01A79A;
   constexpr uint16_t Prince_Left_131_width  = 36;
   constexpr uint16_t Prince_Left_131_height = 36;
 
-  constexpr uint24_t Prince_Left_132 = 0x01972A;
+  constexpr uint24_t Prince_Left_132 = 0x01A906;
   constexpr uint16_t Prince_Left_132_width  = 36;
   constexpr uint16_t Prince_Left_132_height = 36;
 
-  constexpr uint24_t Prince_Left_133 = 0x019896;
+  constexpr uint24_t Prince_Left_133 = 0x01AA72;
   constexpr uint16_t Prince_Left_133_width  = 36;
   constexpr uint16_t Prince_Left_133_height = 36;
 
-  constexpr uint24_t Prince_Left_134 = 0x019A02;
+  constexpr uint24_t Prince_Left_134 = 0x01ABDE;
   constexpr uint16_t Prince_Left_134_width  = 36;
   constexpr uint16_t Prince_Left_134_height = 36;
 
-  constexpr uint24_t Prince_Left_135 = 0x019B6E;
+  constexpr uint24_t Prince_Left_135 = 0x01AD4A;
   constexpr uint16_t Prince_Left_135_width  = 36;
   constexpr uint16_t Prince_Left_135_height = 36;
 
-  constexpr uint24_t Prince_Left_136 = 0x019CDA;
+  constexpr uint24_t Prince_Left_136 = 0x01AEB6;
   constexpr uint16_t Prince_Left_136_width  = 36;
   constexpr uint16_t Prince_Left_136_height = 36;
 
-  constexpr uint24_t Prince_Left_137 = 0x019E46;
+  constexpr uint24_t Prince_Left_137 = 0x01B022;
   constexpr uint16_t Prince_Left_137_width  = 36;
   constexpr uint16_t Prince_Left_137_height = 36;
 
-  constexpr uint24_t Prince_Left_138 = 0x019FB2;
+  constexpr uint24_t Prince_Left_138 = 0x01B18E;
   constexpr uint16_t Prince_Left_138_width  = 36;
   constexpr uint16_t Prince_Left_138_height = 36;
 
-  constexpr uint24_t Prince_Left_139 = 0x01A11E;
+  constexpr uint24_t Prince_Left_139 = 0x01B2FA;
   constexpr uint16_t Prince_Left_139_width  = 36;
   constexpr uint16_t Prince_Left_139_height = 36;
 
-  constexpr uint24_t Prince_Left_140 = 0x01A28A;
+  constexpr uint24_t Prince_Left_140 = 0x01B466;
   constexpr uint16_t Prince_Left_140_width  = 36;
   constexpr uint16_t Prince_Left_140_height = 36;
 
-  constexpr uint24_t Prince_Left_141 = 0x01A3F6;
+  constexpr uint24_t Prince_Left_141 = 0x01B5D2;
   constexpr uint16_t Prince_Left_141_width  = 36;
   constexpr uint16_t Prince_Left_141_height = 36;
 
-  constexpr uint24_t Prince_Left_142 = 0x01A562;
+  constexpr uint24_t Prince_Left_142 = 0x01B73E;
   constexpr uint16_t Prince_Left_142_width  = 36;
   constexpr uint16_t Prince_Left_142_height = 36;
 
-  constexpr uint24_t Prince_Left_143 = 0x01A6CE;
+  constexpr uint24_t Prince_Left_143 = 0x01B8AA;
   constexpr uint16_t Prince_Left_143_width  = 36;
   constexpr uint16_t Prince_Left_143_height = 36;
 
-  constexpr uint24_t Prince_Left_144 = 0x01A83A;
+  constexpr uint24_t Prince_Left_144 = 0x01BA16;
   constexpr uint16_t Prince_Left_144_width  = 36;
   constexpr uint16_t Prince_Left_144_height = 36;
 
-  constexpr uint24_t Prince_Left_145 = 0x01A9A6;
+  constexpr uint24_t Prince_Left_145 = 0x01BB82;
   constexpr uint16_t Prince_Left_145_width  = 36;
   constexpr uint16_t Prince_Left_145_height = 36;
 
-  constexpr uint24_t Prince_Left_146 = 0x01AB12;
+  constexpr uint24_t Prince_Left_146 = 0x01BCEE;
   constexpr uint16_t Prince_Left_146_width  = 36;
   constexpr uint16_t Prince_Left_146_height = 36;
 
-  constexpr uint24_t Prince_Left_147 = 0x01AC7E;
+  constexpr uint24_t Prince_Left_147 = 0x01BE5A;
   constexpr uint16_t Prince_Left_147_width  = 36;
   constexpr uint16_t Prince_Left_147_height = 36;
 
-  constexpr uint24_t Prince_Left_148 = 0x01ADEA;
+  constexpr uint24_t Prince_Left_148 = 0x01BFC6;
   constexpr uint16_t Prince_Left_148_width  = 36;
   constexpr uint16_t Prince_Left_148_height = 36;
 
-  constexpr uint24_t Prince_Left_149 = 0x01AF56;
+  constexpr uint24_t Prince_Left_149 = 0x01C132;
   constexpr uint16_t Prince_Left_149_width  = 36;
   constexpr uint16_t Prince_Left_149_height = 36;
 
-  constexpr uint24_t Prince_Left_150 = 0x01B0C2;
+  constexpr uint24_t Prince_Left_150 = 0x01C29E;
   constexpr uint16_t Prince_Left_150_width  = 36;
   constexpr uint16_t Prince_Left_150_height = 36;
 
-  constexpr uint24_t Prince_Left_151 = 0x01B22E;
+  constexpr uint24_t Prince_Left_151 = 0x01C40A;
   constexpr uint16_t Prince_Left_151_width  = 36;
   constexpr uint16_t Prince_Left_151_height = 36;
 
-  constexpr uint24_t Prince_Left_152 = 0x01B39A;
+  constexpr uint24_t Prince_Left_152 = 0x01C576;
   constexpr uint16_t Prince_Left_152_width  = 36;
   constexpr uint16_t Prince_Left_152_height = 36;
 
-  constexpr uint24_t Prince_Left_153 = 0x01B506;
+  constexpr uint24_t Prince_Left_153 = 0x01C6E2;
   constexpr uint16_t Prince_Left_153_width  = 36;
   constexpr uint16_t Prince_Left_153_height = 36;
 
-  constexpr uint24_t Prince_Left_154 = 0x01B672;
+  constexpr uint24_t Prince_Left_154 = 0x01C84E;
   constexpr uint16_t Prince_Left_154_width  = 36;
   constexpr uint16_t Prince_Left_154_height = 36;
 
-  constexpr uint24_t Prince_Left_155 = 0x01B7DE;
+  constexpr uint24_t Prince_Left_155 = 0x01C9BA;
   constexpr uint16_t Prince_Left_155_width  = 36;
   constexpr uint16_t Prince_Left_155_height = 36;
 
-  constexpr uint24_t Prince_Left_156 = 0x01B94A;
+  constexpr uint24_t Prince_Left_156 = 0x01CB26;
   constexpr uint16_t Prince_Left_156_width  = 36;
   constexpr uint16_t Prince_Left_156_height = 36;
 
-  constexpr uint24_t Prince_Left_157 = 0x01BAB6;
+  constexpr uint24_t Prince_Left_157 = 0x01CC92;
   constexpr uint16_t Prince_Left_157_width  = 36;
   constexpr uint16_t Prince_Left_157_height = 36;
 
-  constexpr uint24_t Prince_Left_158 = 0x01BC22;
+  constexpr uint24_t Prince_Left_158 = 0x01CDFE;
   constexpr uint16_t Prince_Left_158_width  = 36;
   constexpr uint16_t Prince_Left_158_height = 36;
 
-  constexpr uint24_t Prince_Left_159 = 0x01BD8E;
+  constexpr uint24_t Prince_Left_159 = 0x01CF6A;
   constexpr uint16_t Prince_Left_159_width  = 36;
   constexpr uint16_t Prince_Left_159_height = 36;
 
-  constexpr uint24_t Prince_Left_160 = 0x01BEFA;
+  constexpr uint24_t Prince_Left_160 = 0x01D0D6;
   constexpr uint16_t Prince_Left_160_width  = 36;
   constexpr uint16_t Prince_Left_160_height = 36;
 
-  constexpr uint24_t Prince_Left_161 = 0x01C066;
+  constexpr uint24_t Prince_Left_161 = 0x01D242;
   constexpr uint16_t Prince_Left_161_width  = 36;
   constexpr uint16_t Prince_Left_161_height = 36;
 
-  constexpr uint24_t Prince_Left_162 = 0x01C1D2;
+  constexpr uint24_t Prince_Left_162 = 0x01D3AE;
   constexpr uint16_t Prince_Left_162_width  = 36;
   constexpr uint16_t Prince_Left_162_height = 36;
 
-  constexpr uint24_t Prince_Left_163 = 0x01C33E;
+  constexpr uint24_t Prince_Left_163 = 0x01D51A;
   constexpr uint16_t Prince_Left_163_width  = 36;
   constexpr uint16_t Prince_Left_163_height = 36;
 
-  constexpr uint24_t Prince_Left_164 = 0x01C4AA;
+  constexpr uint24_t Prince_Left_164 = 0x01D686;
   constexpr uint16_t Prince_Left_164_width  = 36;
   constexpr uint16_t Prince_Left_164_height = 36;
 
-  constexpr uint24_t Prince_Left_165 = 0x01C616;
+  constexpr uint24_t Prince_Left_165 = 0x01D7F2;
   constexpr uint16_t Prince_Left_165_width  = 36;
   constexpr uint16_t Prince_Left_165_height = 36;
 
-  constexpr uint24_t Prince_Left_166 = 0x01C782;
+  constexpr uint24_t Prince_Left_166 = 0x01D95E;
   constexpr uint16_t Prince_Left_166_width  = 36;
   constexpr uint16_t Prince_Left_166_height = 36;
 
-  constexpr uint24_t Prince_Left_167 = 0x01C8EE;
+  constexpr uint24_t Prince_Left_167 = 0x01DACA;
   constexpr uint16_t Prince_Left_167_width  = 36;
   constexpr uint16_t Prince_Left_167_height = 36;
 
-  constexpr uint24_t Prince_Left_168 = 0x01CA5A;
+  constexpr uint24_t Prince_Left_168 = 0x01DC36;
   constexpr uint16_t Prince_Left_168_width  = 36;
   constexpr uint16_t Prince_Left_168_height = 36;
 
-  constexpr uint24_t Prince_Left_169 = 0x01CBC6;
+  constexpr uint24_t Prince_Left_169 = 0x01DDA2;
   constexpr uint16_t Prince_Left_169_width  = 36;
   constexpr uint16_t Prince_Left_169_height = 36;
 
-  constexpr uint24_t Prince_Left_170 = 0x01CD32;
+  constexpr uint24_t Prince_Left_170 = 0x01DF0E;
   constexpr uint16_t Prince_Left_170_width  = 36;
   constexpr uint16_t Prince_Left_170_height = 36;
 
-  constexpr uint24_t Prince_Left_171 = 0x01CE9E;
+  constexpr uint24_t Prince_Left_171 = 0x01E07A;
   constexpr uint16_t Prince_Left_171_width  = 36;
   constexpr uint16_t Prince_Left_171_height = 36;
 
-  constexpr uint24_t Prince_Left_172 = 0x01D00A;
+  constexpr uint24_t Prince_Left_172 = 0x01E1E6;
   constexpr uint16_t Prince_Left_172_width  = 36;
   constexpr uint16_t Prince_Left_172_height = 36;
 
-  constexpr uint24_t Prince_Left_173 = 0x01D176;
+  constexpr uint24_t Prince_Left_173 = 0x01E352;
   constexpr uint16_t Prince_Left_173_width  = 36;
   constexpr uint16_t Prince_Left_173_height = 36;
 
-  constexpr uint24_t Prince_Left_174 = 0x01D2E2;
+  constexpr uint24_t Prince_Left_174 = 0x01E4BE;
   constexpr uint16_t Prince_Left_174_width  = 36;
   constexpr uint16_t Prince_Left_174_height = 36;
 
-  constexpr uint24_t Prince_Left_175 = 0x01D44E;
+  constexpr uint24_t Prince_Left_175 = 0x01E62A;
   constexpr uint16_t Prince_Left_175_width  = 36;
   constexpr uint16_t Prince_Left_175_height = 36;
 
-  constexpr uint24_t Prince_Left_176 = 0x01D5BA;
+  constexpr uint24_t Prince_Left_176 = 0x01E796;
   constexpr uint16_t Prince_Left_176_width  = 36;
   constexpr uint16_t Prince_Left_176_height = 36;
 
-  constexpr uint24_t Prince_Left_177 = 0x01D726;
+  constexpr uint24_t Prince_Left_177 = 0x01E902;
   constexpr uint16_t Prince_Left_177_width  = 36;
   constexpr uint16_t Prince_Left_177_height = 36;
 
-  constexpr uint24_t Prince_Left_178 = 0x01D892;
+  constexpr uint24_t Prince_Left_178 = 0x01EA6E;
   constexpr uint16_t Prince_Left_178_width  = 36;
   constexpr uint16_t Prince_Left_178_height = 36;
 
-  constexpr uint24_t Prince_Left_179 = 0x01D9FE;
+  constexpr uint24_t Prince_Left_179 = 0x01EBDA;
   constexpr uint16_t Prince_Left_179_width  = 36;
   constexpr uint16_t Prince_Left_179_height = 36;
 
-  constexpr uint24_t Prince_Left_180 = 0x01DB6A;
+  constexpr uint24_t Prince_Left_180 = 0x01ED46;
   constexpr uint16_t Prince_Left_180_width  = 36;
   constexpr uint16_t Prince_Left_180_height = 36;
 
-  constexpr uint24_t Prince_Left_181 = 0x01DCD6;
+  constexpr uint24_t Prince_Left_181 = 0x01EEB2;
   constexpr uint16_t Prince_Left_181_width  = 36;
   constexpr uint16_t Prince_Left_181_height = 36;
 
-  constexpr uint24_t Prince_Left_182 = 0x01DE42;
+  constexpr uint24_t Prince_Left_182 = 0x01F01E;
   constexpr uint16_t Prince_Left_182_width  = 36;
   constexpr uint16_t Prince_Left_182_height = 36;
 
-  constexpr uint24_t Prince_Left_183 = 0x01DFAE;
+  constexpr uint24_t Prince_Left_183 = 0x01F18A;
   constexpr uint16_t Prince_Left_183_width  = 36;
   constexpr uint16_t Prince_Left_183_height = 36;
 
-  constexpr uint24_t Prince_Left_184 = 0x01E11A;
+  constexpr uint24_t Prince_Left_184 = 0x01F2F6;
   constexpr uint16_t Prince_Left_184_width  = 36;
   constexpr uint16_t Prince_Left_184_height = 36;
 
-  constexpr uint24_t Prince_Left_185 = 0x01E286;
+  constexpr uint24_t Prince_Left_185 = 0x01F462;
   constexpr uint16_t Prince_Left_185_width  = 36;
   constexpr uint16_t Prince_Left_185_height = 36;
 
-  constexpr uint24_t Prince_Left_186 = 0x01E3F2;
+  constexpr uint24_t Prince_Left_186 = 0x01F5CE;
   constexpr uint16_t Prince_Left_186_width  = 36;
   constexpr uint16_t Prince_Left_186_height = 36;
 
-  constexpr uint24_t Prince_Left_187 = 0x01E55E;
+  constexpr uint24_t Prince_Left_187 = 0x01F73A;
   constexpr uint16_t Prince_Left_187_width  = 36;
   constexpr uint16_t Prince_Left_187_height = 36;
 
-  constexpr uint24_t Prince_Left_188 = 0x01E6CA;
+  constexpr uint24_t Prince_Left_188 = 0x01F8A6;
   constexpr uint16_t Prince_Left_188_width  = 36;
   constexpr uint16_t Prince_Left_188_height = 36;
 
-  constexpr uint24_t Prince_Left_189 = 0x01E836;
+  constexpr uint24_t Prince_Left_189 = 0x01FA12;
   constexpr uint16_t Prince_Left_189_width  = 36;
   constexpr uint16_t Prince_Left_189_height = 36;
 
-  constexpr uint24_t Prince_Left_190 = 0x01E9A2;
+  constexpr uint24_t Prince_Left_190 = 0x01FB7E;
   constexpr uint16_t Prince_Left_190_width  = 36;
   constexpr uint16_t Prince_Left_190_height = 36;
 
-  constexpr uint24_t Prince_Left_191 = 0x01EB0E;
+  constexpr uint24_t Prince_Left_191 = 0x01FCEA;
   constexpr uint16_t Prince_Left_191_width  = 36;
   constexpr uint16_t Prince_Left_191_height = 36;
 
-  constexpr uint24_t Prince_Left_192 = 0x01EC7A;
+  constexpr uint24_t Prince_Left_192 = 0x01FE56;
   constexpr uint16_t Prince_Left_192_width  = 36;
   constexpr uint16_t Prince_Left_192_height = 36;
 
-  constexpr uint24_t Prince_Left_193 = 0x01EDE6;
+  constexpr uint24_t Prince_Left_193 = 0x01FFC2;
   constexpr uint16_t Prince_Left_193_width  = 36;
   constexpr uint16_t Prince_Left_193_height = 36;
 
-  constexpr uint24_t Prince_Left_194 = 0x01EF52;
+  constexpr uint24_t Prince_Left_194 = 0x02012E;
   constexpr uint16_t Prince_Left_194_width  = 36;
   constexpr uint16_t Prince_Left_194_height = 36;
 
-  constexpr uint24_t Prince_Left_195 = 0x01F0BE;
+  constexpr uint24_t Prince_Left_195 = 0x02029A;
   constexpr uint16_t Prince_Left_195_width  = 36;
   constexpr uint16_t Prince_Left_195_height = 36;
 
-  constexpr uint24_t Prince_Right_001 = 0x01F22A;
+  constexpr uint24_t Prince_Right_001 = 0x020406;
   constexpr uint16_t Prince_Right_001_width  = 36;
   constexpr uint16_t Prince_Right_001_height = 36;
 
-  constexpr uint24_t Prince_Right_002 = 0x01F396;
+  constexpr uint24_t Prince_Right_002 = 0x020572;
   constexpr uint16_t Prince_Right_002_width  = 36;
   constexpr uint16_t Prince_Right_002_height = 36;
 
-  constexpr uint24_t Prince_Right_003 = 0x01F502;
+  constexpr uint24_t Prince_Right_003 = 0x0206DE;
   constexpr uint16_t Prince_Right_003_width  = 36;
   constexpr uint16_t Prince_Right_003_height = 36;
 
-  constexpr uint24_t Prince_Right_004 = 0x01F66E;
+  constexpr uint24_t Prince_Right_004 = 0x02084A;
   constexpr uint16_t Prince_Right_004_width  = 36;
   constexpr uint16_t Prince_Right_004_height = 36;
 
-  constexpr uint24_t Prince_Right_005 = 0x01F7DA;
+  constexpr uint24_t Prince_Right_005 = 0x0209B6;
   constexpr uint16_t Prince_Right_005_width  = 36;
   constexpr uint16_t Prince_Right_005_height = 36;
 
-  constexpr uint24_t Prince_Right_006 = 0x01F946;
+  constexpr uint24_t Prince_Right_006 = 0x020B22;
   constexpr uint16_t Prince_Right_006_width  = 36;
   constexpr uint16_t Prince_Right_006_height = 36;
 
-  constexpr uint24_t Prince_Right_007 = 0x01FAB2;
+  constexpr uint24_t Prince_Right_007 = 0x020C8E;
   constexpr uint16_t Prince_Right_007_width  = 36;
   constexpr uint16_t Prince_Right_007_height = 36;
 
-  constexpr uint24_t Prince_Right_008 = 0x01FC1E;
+  constexpr uint24_t Prince_Right_008 = 0x020DFA;
   constexpr uint16_t Prince_Right_008_width  = 36;
   constexpr uint16_t Prince_Right_008_height = 36;
 
-  constexpr uint24_t Prince_Right_009 = 0x01FD8A;
+  constexpr uint24_t Prince_Right_009 = 0x020F66;
   constexpr uint16_t Prince_Right_009_width  = 36;
   constexpr uint16_t Prince_Right_009_height = 36;
 
-  constexpr uint24_t Prince_Right_010 = 0x01FEF6;
+  constexpr uint24_t Prince_Right_010 = 0x0210D2;
   constexpr uint16_t Prince_Right_010_width  = 36;
   constexpr uint16_t Prince_Right_010_height = 36;
 
-  constexpr uint24_t Prince_Right_011 = 0x020062;
+  constexpr uint24_t Prince_Right_011 = 0x02123E;
   constexpr uint16_t Prince_Right_011_width  = 36;
   constexpr uint16_t Prince_Right_011_height = 36;
 
-  constexpr uint24_t Prince_Right_012 = 0x0201CE;
+  constexpr uint24_t Prince_Right_012 = 0x0213AA;
   constexpr uint16_t Prince_Right_012_width  = 36;
   constexpr uint16_t Prince_Right_012_height = 36;
 
-  constexpr uint24_t Prince_Right_013 = 0x02033A;
+  constexpr uint24_t Prince_Right_013 = 0x021516;
   constexpr uint16_t Prince_Right_013_width  = 36;
   constexpr uint16_t Prince_Right_013_height = 36;
 
-  constexpr uint24_t Prince_Right_014 = 0x0204A6;
+  constexpr uint24_t Prince_Right_014 = 0x021682;
   constexpr uint16_t Prince_Right_014_width  = 36;
   constexpr uint16_t Prince_Right_014_height = 36;
 
-  constexpr uint24_t Prince_Right_015 = 0x020612;
+  constexpr uint24_t Prince_Right_015 = 0x0217EE;
   constexpr uint16_t Prince_Right_015_width  = 36;
   constexpr uint16_t Prince_Right_015_height = 36;
 
-  constexpr uint24_t Prince_Right_016 = 0x02077E;
+  constexpr uint24_t Prince_Right_016 = 0x02195A;
   constexpr uint16_t Prince_Right_016_width  = 36;
   constexpr uint16_t Prince_Right_016_height = 36;
 
-  constexpr uint24_t Prince_Right_017 = 0x0208EA;
+  constexpr uint24_t Prince_Right_017 = 0x021AC6;
   constexpr uint16_t Prince_Right_017_width  = 36;
   constexpr uint16_t Prince_Right_017_height = 36;
 
-  constexpr uint24_t Prince_Right_018 = 0x020A56;
+  constexpr uint24_t Prince_Right_018 = 0x021C32;
   constexpr uint16_t Prince_Right_018_width  = 36;
   constexpr uint16_t Prince_Right_018_height = 36;
 
-  constexpr uint24_t Prince_Right_019 = 0x020BC2;
+  constexpr uint24_t Prince_Right_019 = 0x021D9E;
   constexpr uint16_t Prince_Right_019_width  = 36;
   constexpr uint16_t Prince_Right_019_height = 36;
 
-  constexpr uint24_t Prince_Right_020 = 0x020D2E;
+  constexpr uint24_t Prince_Right_020 = 0x021F0A;
   constexpr uint16_t Prince_Right_020_width  = 36;
   constexpr uint16_t Prince_Right_020_height = 36;
 
-  constexpr uint24_t Prince_Right_021 = 0x020E9A;
+  constexpr uint24_t Prince_Right_021 = 0x022076;
   constexpr uint16_t Prince_Right_021_width  = 36;
   constexpr uint16_t Prince_Right_021_height = 36;
 
-  constexpr uint24_t Prince_Right_022 = 0x021006;
+  constexpr uint24_t Prince_Right_022 = 0x0221E2;
   constexpr uint16_t Prince_Right_022_width  = 36;
   constexpr uint16_t Prince_Right_022_height = 36;
 
-  constexpr uint24_t Prince_Right_023 = 0x021172;
+  constexpr uint24_t Prince_Right_023 = 0x02234E;
   constexpr uint16_t Prince_Right_023_width  = 36;
   constexpr uint16_t Prince_Right_023_height = 36;
 
-  constexpr uint24_t Prince_Right_024 = 0x0212DE;
+  constexpr uint24_t Prince_Right_024 = 0x0224BA;
   constexpr uint16_t Prince_Right_024_width  = 36;
   constexpr uint16_t Prince_Right_024_height = 36;
 
-  constexpr uint24_t Prince_Right_025 = 0x02144A;
+  constexpr uint24_t Prince_Right_025 = 0x022626;
   constexpr uint16_t Prince_Right_025_width  = 36;
   constexpr uint16_t Prince_Right_025_height = 36;
 
-  constexpr uint24_t Prince_Right_026 = 0x0215B6;
+  constexpr uint24_t Prince_Right_026 = 0x022792;
   constexpr uint16_t Prince_Right_026_width  = 36;
   constexpr uint16_t Prince_Right_026_height = 36;
 
-  constexpr uint24_t Prince_Right_027 = 0x021722;
+  constexpr uint24_t Prince_Right_027 = 0x0228FE;
   constexpr uint16_t Prince_Right_027_width  = 36;
   constexpr uint16_t Prince_Right_027_height = 36;
 
-  constexpr uint24_t Prince_Right_028 = 0x02188E;
+  constexpr uint24_t Prince_Right_028 = 0x022A6A;
   constexpr uint16_t Prince_Right_028_width  = 36;
   constexpr uint16_t Prince_Right_028_height = 36;
 
-  constexpr uint24_t Prince_Right_029 = 0x0219FA;
+  constexpr uint24_t Prince_Right_029 = 0x022BD6;
   constexpr uint16_t Prince_Right_029_width  = 36;
   constexpr uint16_t Prince_Right_029_height = 36;
 
-  constexpr uint24_t Prince_Right_030 = 0x021B66;
+  constexpr uint24_t Prince_Right_030 = 0x022D42;
   constexpr uint16_t Prince_Right_030_width  = 36;
   constexpr uint16_t Prince_Right_030_height = 36;
 
-  constexpr uint24_t Prince_Right_031 = 0x021CD2;
+  constexpr uint24_t Prince_Right_031 = 0x022EAE;
   constexpr uint16_t Prince_Right_031_width  = 36;
   constexpr uint16_t Prince_Right_031_height = 36;
 
-  constexpr uint24_t Prince_Right_032 = 0x021E3E;
+  constexpr uint24_t Prince_Right_032 = 0x02301A;
   constexpr uint16_t Prince_Right_032_width  = 36;
   constexpr uint16_t Prince_Right_032_height = 36;
 
-  constexpr uint24_t Prince_Right_033 = 0x021FAA;
+  constexpr uint24_t Prince_Right_033 = 0x023186;
   constexpr uint16_t Prince_Right_033_width  = 36;
   constexpr uint16_t Prince_Right_033_height = 36;
 
-  constexpr uint24_t Prince_Right_034 = 0x022116;
+  constexpr uint24_t Prince_Right_034 = 0x0232F2;
   constexpr uint16_t Prince_Right_034_width  = 36;
   constexpr uint16_t Prince_Right_034_height = 36;
 
-  constexpr uint24_t Prince_Right_035 = 0x022282;
+  constexpr uint24_t Prince_Right_035 = 0x02345E;
   constexpr uint16_t Prince_Right_035_width  = 36;
   constexpr uint16_t Prince_Right_035_height = 36;
 
-  constexpr uint24_t Prince_Right_036 = 0x0223EE;
+  constexpr uint24_t Prince_Right_036 = 0x0235CA;
   constexpr uint16_t Prince_Right_036_width  = 36;
   constexpr uint16_t Prince_Right_036_height = 36;
 
-  constexpr uint24_t Prince_Right_037 = 0x02255A;
+  constexpr uint24_t Prince_Right_037 = 0x023736;
   constexpr uint16_t Prince_Right_037_width  = 36;
   constexpr uint16_t Prince_Right_037_height = 36;
 
-  constexpr uint24_t Prince_Right_038 = 0x0226C6;
+  constexpr uint24_t Prince_Right_038 = 0x0238A2;
   constexpr uint16_t Prince_Right_038_width  = 36;
   constexpr uint16_t Prince_Right_038_height = 36;
 
-  constexpr uint24_t Prince_Right_039 = 0x022832;
+  constexpr uint24_t Prince_Right_039 = 0x023A0E;
   constexpr uint16_t Prince_Right_039_width  = 36;
   constexpr uint16_t Prince_Right_039_height = 36;
 
-  constexpr uint24_t Prince_Right_040 = 0x02299E;
+  constexpr uint24_t Prince_Right_040 = 0x023B7A;
   constexpr uint16_t Prince_Right_040_width  = 36;
   constexpr uint16_t Prince_Right_040_height = 36;
 
-  constexpr uint24_t Prince_Right_041 = 0x022B0A;
+  constexpr uint24_t Prince_Right_041 = 0x023CE6;
   constexpr uint16_t Prince_Right_041_width  = 36;
   constexpr uint16_t Prince_Right_041_height = 36;
 
-  constexpr uint24_t Prince_Right_042 = 0x022C76;
+  constexpr uint24_t Prince_Right_042 = 0x023E52;
   constexpr uint16_t Prince_Right_042_width  = 36;
   constexpr uint16_t Prince_Right_042_height = 36;
 
-  constexpr uint24_t Prince_Right_043 = 0x022DE2;
+  constexpr uint24_t Prince_Right_043 = 0x023FBE;
   constexpr uint16_t Prince_Right_043_width  = 36;
   constexpr uint16_t Prince_Right_043_height = 36;
 
-  constexpr uint24_t Prince_Right_044 = 0x022F4E;
+  constexpr uint24_t Prince_Right_044 = 0x02412A;
   constexpr uint16_t Prince_Right_044_width  = 36;
   constexpr uint16_t Prince_Right_044_height = 36;
 
-  constexpr uint24_t Prince_Right_045 = 0x0230BA;
+  constexpr uint24_t Prince_Right_045 = 0x024296;
   constexpr uint16_t Prince_Right_045_width  = 36;
   constexpr uint16_t Prince_Right_045_height = 36;
 
-  constexpr uint24_t Prince_Right_046 = 0x023226;
+  constexpr uint24_t Prince_Right_046 = 0x024402;
   constexpr uint16_t Prince_Right_046_width  = 36;
   constexpr uint16_t Prince_Right_046_height = 36;
 
-  constexpr uint24_t Prince_Right_047 = 0x023392;
+  constexpr uint24_t Prince_Right_047 = 0x02456E;
   constexpr uint16_t Prince_Right_047_width  = 36;
   constexpr uint16_t Prince_Right_047_height = 36;
 
-  constexpr uint24_t Prince_Right_048 = 0x0234FE;
+  constexpr uint24_t Prince_Right_048 = 0x0246DA;
   constexpr uint16_t Prince_Right_048_width  = 36;
   constexpr uint16_t Prince_Right_048_height = 36;
 
-  constexpr uint24_t Prince_Right_049 = 0x02366A;
+  constexpr uint24_t Prince_Right_049 = 0x024846;
   constexpr uint16_t Prince_Right_049_width  = 36;
   constexpr uint16_t Prince_Right_049_height = 36;
 
-  constexpr uint24_t Prince_Right_050 = 0x0237D6;
+  constexpr uint24_t Prince_Right_050 = 0x0249B2;
   constexpr uint16_t Prince_Right_050_width  = 36;
   constexpr uint16_t Prince_Right_050_height = 36;
 
-  constexpr uint24_t Prince_Right_051 = 0x023942;
+  constexpr uint24_t Prince_Right_051 = 0x024B1E;
   constexpr uint16_t Prince_Right_051_width  = 36;
   constexpr uint16_t Prince_Right_051_height = 36;
 
-  constexpr uint24_t Prince_Right_052 = 0x023AAE;
+  constexpr uint24_t Prince_Right_052 = 0x024C8A;
   constexpr uint16_t Prince_Right_052_width  = 36;
   constexpr uint16_t Prince_Right_052_height = 36;
 
-  constexpr uint24_t Prince_Right_053 = 0x023C1A;
+  constexpr uint24_t Prince_Right_053 = 0x024DF6;
   constexpr uint16_t Prince_Right_053_width  = 36;
   constexpr uint16_t Prince_Right_053_height = 36;
 
-  constexpr uint24_t Prince_Right_054 = 0x023D86;
+  constexpr uint24_t Prince_Right_054 = 0x024F62;
   constexpr uint16_t Prince_Right_054_width  = 36;
   constexpr uint16_t Prince_Right_054_height = 36;
 
-  constexpr uint24_t Prince_Right_055 = 0x023EF2;
+  constexpr uint24_t Prince_Right_055 = 0x0250CE;
   constexpr uint16_t Prince_Right_055_width  = 36;
   constexpr uint16_t Prince_Right_055_height = 36;
 
-  constexpr uint24_t Prince_Right_056 = 0x02405E;
+  constexpr uint24_t Prince_Right_056 = 0x02523A;
   constexpr uint16_t Prince_Right_056_width  = 36;
   constexpr uint16_t Prince_Right_056_height = 36;
 
-  constexpr uint24_t Prince_Right_057 = 0x0241CA;
+  constexpr uint24_t Prince_Right_057 = 0x0253A6;
   constexpr uint16_t Prince_Right_057_width  = 36;
   constexpr uint16_t Prince_Right_057_height = 36;
 
-  constexpr uint24_t Prince_Right_058 = 0x024336;
+  constexpr uint24_t Prince_Right_058 = 0x025512;
   constexpr uint16_t Prince_Right_058_width  = 36;
   constexpr uint16_t Prince_Right_058_height = 36;
 
-  constexpr uint24_t Prince_Right_059 = 0x0244A2;
+  constexpr uint24_t Prince_Right_059 = 0x02567E;
   constexpr uint16_t Prince_Right_059_width  = 36;
   constexpr uint16_t Prince_Right_059_height = 36;
 
-  constexpr uint24_t Prince_Right_060 = 0x02460E;
+  constexpr uint24_t Prince_Right_060 = 0x0257EA;
   constexpr uint16_t Prince_Right_060_width  = 36;
   constexpr uint16_t Prince_Right_060_height = 36;
 
-  constexpr uint24_t Prince_Right_061 = 0x02477A;
+  constexpr uint24_t Prince_Right_061 = 0x025956;
   constexpr uint16_t Prince_Right_061_width  = 36;
   constexpr uint16_t Prince_Right_061_height = 36;
 
-  constexpr uint24_t Prince_Right_062 = 0x0248E6;
+  constexpr uint24_t Prince_Right_062 = 0x025AC2;
   constexpr uint16_t Prince_Right_062_width  = 36;
   constexpr uint16_t Prince_Right_062_height = 36;
 
-  constexpr uint24_t Prince_Right_063 = 0x024A52;
+  constexpr uint24_t Prince_Right_063 = 0x025C2E;
   constexpr uint16_t Prince_Right_063_width  = 36;
   constexpr uint16_t Prince_Right_063_height = 36;
 
-  constexpr uint24_t Prince_Right_064 = 0x024BBE;
+  constexpr uint24_t Prince_Right_064 = 0x025D9A;
   constexpr uint16_t Prince_Right_064_width  = 36;
   constexpr uint16_t Prince_Right_064_height = 36;
 
-  constexpr uint24_t Prince_Right_065 = 0x024D2A;
+  constexpr uint24_t Prince_Right_065 = 0x025F06;
   constexpr uint16_t Prince_Right_065_width  = 36;
   constexpr uint16_t Prince_Right_065_height = 36;
 
-  constexpr uint24_t Prince_Right_066 = 0x024E96;
+  constexpr uint24_t Prince_Right_066 = 0x026072;
   constexpr uint16_t Prince_Right_066_width  = 36;
   constexpr uint16_t Prince_Right_066_height = 36;
 
-  constexpr uint24_t Prince_Right_067 = 0x025002;
+  constexpr uint24_t Prince_Right_067 = 0x0261DE;
   constexpr uint16_t Prince_Right_067_width  = 36;
   constexpr uint16_t Prince_Right_067_height = 36;
 
-  constexpr uint24_t Prince_Right_068 = 0x02516E;
+  constexpr uint24_t Prince_Right_068 = 0x02634A;
   constexpr uint16_t Prince_Right_068_width  = 36;
   constexpr uint16_t Prince_Right_068_height = 36;
 
-  constexpr uint24_t Prince_Right_069 = 0x0252DA;
+  constexpr uint24_t Prince_Right_069 = 0x0264B6;
   constexpr uint16_t Prince_Right_069_width  = 36;
   constexpr uint16_t Prince_Right_069_height = 36;
 
-  constexpr uint24_t Prince_Right_070 = 0x025446;
+  constexpr uint24_t Prince_Right_070 = 0x026622;
   constexpr uint16_t Prince_Right_070_width  = 36;
   constexpr uint16_t Prince_Right_070_height = 36;
 
-  constexpr uint24_t Prince_Right_071 = 0x0255B2;
+  constexpr uint24_t Prince_Right_071 = 0x02678E;
   constexpr uint16_t Prince_Right_071_width  = 36;
   constexpr uint16_t Prince_Right_071_height = 36;
 
-  constexpr uint24_t Prince_Right_072 = 0x02571E;
+  constexpr uint24_t Prince_Right_072 = 0x0268FA;
   constexpr uint16_t Prince_Right_072_width  = 36;
   constexpr uint16_t Prince_Right_072_height = 36;
 
-  constexpr uint24_t Prince_Right_073 = 0x02588A;
+  constexpr uint24_t Prince_Right_073 = 0x026A66;
   constexpr uint16_t Prince_Right_073_width  = 36;
   constexpr uint16_t Prince_Right_073_height = 36;
 
-  constexpr uint24_t Prince_Right_074 = 0x0259F6;
+  constexpr uint24_t Prince_Right_074 = 0x026BD2;
   constexpr uint16_t Prince_Right_074_width  = 36;
   constexpr uint16_t Prince_Right_074_height = 36;
 
-  constexpr uint24_t Prince_Right_075 = 0x025B62;
+  constexpr uint24_t Prince_Right_075 = 0x026D3E;
   constexpr uint16_t Prince_Right_075_width  = 36;
   constexpr uint16_t Prince_Right_075_height = 36;
 
-  constexpr uint24_t Prince_Right_076 = 0x025CCE;
+  constexpr uint24_t Prince_Right_076 = 0x026EAA;
   constexpr uint16_t Prince_Right_076_width  = 36;
   constexpr uint16_t Prince_Right_076_height = 36;
 
-  constexpr uint24_t Prince_Right_077 = 0x025E3A;
+  constexpr uint24_t Prince_Right_077 = 0x027016;
   constexpr uint16_t Prince_Right_077_width  = 36;
   constexpr uint16_t Prince_Right_077_height = 36;
 
-  constexpr uint24_t Prince_Right_078 = 0x025FA6;
+  constexpr uint24_t Prince_Right_078 = 0x027182;
   constexpr uint16_t Prince_Right_078_width  = 36;
   constexpr uint16_t Prince_Right_078_height = 36;
 
-  constexpr uint24_t Prince_Right_079 = 0x026112;
+  constexpr uint24_t Prince_Right_079 = 0x0272EE;
   constexpr uint16_t Prince_Right_079_width  = 36;
   constexpr uint16_t Prince_Right_079_height = 36;
 
-  constexpr uint24_t Prince_Right_080 = 0x02627E;
+  constexpr uint24_t Prince_Right_080 = 0x02745A;
   constexpr uint16_t Prince_Right_080_width  = 36;
   constexpr uint16_t Prince_Right_080_height = 36;
 
-  constexpr uint24_t Prince_Right_081 = 0x0263EA;
+  constexpr uint24_t Prince_Right_081 = 0x0275C6;
   constexpr uint16_t Prince_Right_081_width  = 36;
   constexpr uint16_t Prince_Right_081_height = 36;
 
-  constexpr uint24_t Prince_Right_082 = 0x026556;
+  constexpr uint24_t Prince_Right_082 = 0x027732;
   constexpr uint16_t Prince_Right_082_width  = 36;
   constexpr uint16_t Prince_Right_082_height = 36;
 
-  constexpr uint24_t Prince_Right_083 = 0x0266C2;
+  constexpr uint24_t Prince_Right_083 = 0x02789E;
   constexpr uint16_t Prince_Right_083_width  = 36;
   constexpr uint16_t Prince_Right_083_height = 36;
 
-  constexpr uint24_t Prince_Right_084 = 0x02682E;
+  constexpr uint24_t Prince_Right_084 = 0x027A0A;
   constexpr uint16_t Prince_Right_084_width  = 36;
   constexpr uint16_t Prince_Right_084_height = 36;
 
-  constexpr uint24_t Prince_Right_085 = 0x02699A;
+  constexpr uint24_t Prince_Right_085 = 0x027B76;
   constexpr uint16_t Prince_Right_085_width  = 36;
   constexpr uint16_t Prince_Right_085_height = 36;
 
-  constexpr uint24_t Prince_Right_086 = 0x026B06;
+  constexpr uint24_t Prince_Right_086 = 0x027CE2;
   constexpr uint16_t Prince_Right_086_width  = 36;
   constexpr uint16_t Prince_Right_086_height = 36;
 
-  constexpr uint24_t Prince_Right_087 = 0x026C72;
+  constexpr uint24_t Prince_Right_087 = 0x027E4E;
   constexpr uint16_t Prince_Right_087_width  = 36;
   constexpr uint16_t Prince_Right_087_height = 36;
 
-  constexpr uint24_t Prince_Right_088 = 0x026DDE;
+  constexpr uint24_t Prince_Right_088 = 0x027FBA;
   constexpr uint16_t Prince_Right_088_width  = 36;
   constexpr uint16_t Prince_Right_088_height = 36;
 
-  constexpr uint24_t Prince_Right_089 = 0x026F4A;
+  constexpr uint24_t Prince_Right_089 = 0x028126;
   constexpr uint16_t Prince_Right_089_width  = 36;
   constexpr uint16_t Prince_Right_089_height = 36;
 
-  constexpr uint24_t Prince_Right_090 = 0x0270B6;
+  constexpr uint24_t Prince_Right_090 = 0x028292;
   constexpr uint16_t Prince_Right_090_width  = 36;
   constexpr uint16_t Prince_Right_090_height = 36;
 
-  constexpr uint24_t Prince_Right_091 = 0x027222;
+  constexpr uint24_t Prince_Right_091 = 0x0283FE;
   constexpr uint16_t Prince_Right_091_width  = 36;
   constexpr uint16_t Prince_Right_091_height = 36;
 
-  constexpr uint24_t Prince_Right_092 = 0x02738E;
+  constexpr uint24_t Prince_Right_092 = 0x02856A;
   constexpr uint16_t Prince_Right_092_width  = 36;
   constexpr uint16_t Prince_Right_092_height = 36;
 
-  constexpr uint24_t Prince_Right_093 = 0x0274FA;
+  constexpr uint24_t Prince_Right_093 = 0x0286D6;
   constexpr uint16_t Prince_Right_093_width  = 36;
   constexpr uint16_t Prince_Right_093_height = 36;
 
-  constexpr uint24_t Prince_Right_094 = 0x027666;
+  constexpr uint24_t Prince_Right_094 = 0x028842;
   constexpr uint16_t Prince_Right_094_width  = 36;
   constexpr uint16_t Prince_Right_094_height = 36;
 
-  constexpr uint24_t Prince_Right_095 = 0x0277D2;
+  constexpr uint24_t Prince_Right_095 = 0x0289AE;
   constexpr uint16_t Prince_Right_095_width  = 36;
   constexpr uint16_t Prince_Right_095_height = 36;
 
-  constexpr uint24_t Prince_Right_096 = 0x02793E;
+  constexpr uint24_t Prince_Right_096 = 0x028B1A;
   constexpr uint16_t Prince_Right_096_width  = 36;
   constexpr uint16_t Prince_Right_096_height = 36;
 
-  constexpr uint24_t Prince_Right_097 = 0x027AAA;
+  constexpr uint24_t Prince_Right_097 = 0x028C86;
   constexpr uint16_t Prince_Right_097_width  = 36;
   constexpr uint16_t Prince_Right_097_height = 36;
 
-  constexpr uint24_t Prince_Right_098 = 0x027C16;
+  constexpr uint24_t Prince_Right_098 = 0x028DF2;
   constexpr uint16_t Prince_Right_098_width  = 36;
   constexpr uint16_t Prince_Right_098_height = 36;
 
-  constexpr uint24_t Prince_Right_099 = 0x027D82;
+  constexpr uint24_t Prince_Right_099 = 0x028F5E;
   constexpr uint16_t Prince_Right_099_width  = 36;
   constexpr uint16_t Prince_Right_099_height = 36;
 
-  constexpr uint24_t Prince_Right_100 = 0x027EEE;
+  constexpr uint24_t Prince_Right_100 = 0x0290CA;
   constexpr uint16_t Prince_Right_100_width  = 36;
   constexpr uint16_t Prince_Right_100_height = 36;
 
-  constexpr uint24_t Prince_Right_101 = 0x02805A;
+  constexpr uint24_t Prince_Right_101 = 0x029236;
   constexpr uint16_t Prince_Right_101_width  = 36;
   constexpr uint16_t Prince_Right_101_height = 36;
 
-  constexpr uint24_t Prince_Right_102 = 0x0281C6;
+  constexpr uint24_t Prince_Right_102 = 0x0293A2;
   constexpr uint16_t Prince_Right_102_width  = 36;
   constexpr uint16_t Prince_Right_102_height = 36;
 
-  constexpr uint24_t Prince_Right_103 = 0x028332;
+  constexpr uint24_t Prince_Right_103 = 0x02950E;
   constexpr uint16_t Prince_Right_103_width  = 36;
   constexpr uint16_t Prince_Right_103_height = 36;
 
-  constexpr uint24_t Prince_Right_104 = 0x02849E;
+  constexpr uint24_t Prince_Right_104 = 0x02967A;
   constexpr uint16_t Prince_Right_104_width  = 36;
   constexpr uint16_t Prince_Right_104_height = 36;
 
-  constexpr uint24_t Prince_Right_105 = 0x02860A;
+  constexpr uint24_t Prince_Right_105 = 0x0297E6;
   constexpr uint16_t Prince_Right_105_width  = 36;
   constexpr uint16_t Prince_Right_105_height = 36;
 
-  constexpr uint24_t Prince_Right_106 = 0x028776;
+  constexpr uint24_t Prince_Right_106 = 0x029952;
   constexpr uint16_t Prince_Right_106_width  = 36;
   constexpr uint16_t Prince_Right_106_height = 36;
 
-  constexpr uint24_t Prince_Right_107 = 0x0288E2;
+  constexpr uint24_t Prince_Right_107 = 0x029ABE;
   constexpr uint16_t Prince_Right_107_width  = 36;
   constexpr uint16_t Prince_Right_107_height = 36;
 
-  constexpr uint24_t Prince_Right_108 = 0x028A4E;
+  constexpr uint24_t Prince_Right_108 = 0x029C2A;
   constexpr uint16_t Prince_Right_108_width  = 36;
   constexpr uint16_t Prince_Right_108_height = 36;
 
-  constexpr uint24_t Prince_Right_109 = 0x028BBA;
+  constexpr uint24_t Prince_Right_109 = 0x029D96;
   constexpr uint16_t Prince_Right_109_width  = 36;
   constexpr uint16_t Prince_Right_109_height = 36;
 
-  constexpr uint24_t Prince_Right_110 = 0x028D26;
+  constexpr uint24_t Prince_Right_110 = 0x029F02;
   constexpr uint16_t Prince_Right_110_width  = 36;
   constexpr uint16_t Prince_Right_110_height = 36;
 
-  constexpr uint24_t Prince_Right_111 = 0x028E92;
+  constexpr uint24_t Prince_Right_111 = 0x02A06E;
   constexpr uint16_t Prince_Right_111_width  = 36;
   constexpr uint16_t Prince_Right_111_height = 36;
 
-  constexpr uint24_t Prince_Right_112 = 0x028FFE;
+  constexpr uint24_t Prince_Right_112 = 0x02A1DA;
   constexpr uint16_t Prince_Right_112_width  = 36;
   constexpr uint16_t Prince_Right_112_height = 36;
 
-  constexpr uint24_t Prince_Right_113 = 0x02916A;
+  constexpr uint24_t Prince_Right_113 = 0x02A346;
   constexpr uint16_t Prince_Right_113_width  = 36;
   constexpr uint16_t Prince_Right_113_height = 36;
 
-  constexpr uint24_t Prince_Right_114 = 0x0292D6;
+  constexpr uint24_t Prince_Right_114 = 0x02A4B2;
   constexpr uint16_t Prince_Right_114_width  = 36;
   constexpr uint16_t Prince_Right_114_height = 36;
 
-  constexpr uint24_t Prince_Right_115 = 0x029442;
+  constexpr uint24_t Prince_Right_115 = 0x02A61E;
   constexpr uint16_t Prince_Right_115_width  = 36;
   constexpr uint16_t Prince_Right_115_height = 36;
 
-  constexpr uint24_t Prince_Right_116 = 0x0295AE;
+  constexpr uint24_t Prince_Right_116 = 0x02A78A;
   constexpr uint16_t Prince_Right_116_width  = 36;
   constexpr uint16_t Prince_Right_116_height = 36;
 
-  constexpr uint24_t Prince_Right_117 = 0x02971A;
+  constexpr uint24_t Prince_Right_117 = 0x02A8F6;
   constexpr uint16_t Prince_Right_117_width  = 36;
   constexpr uint16_t Prince_Right_117_height = 36;
 
-  constexpr uint24_t Prince_Right_118 = 0x029886;
+  constexpr uint24_t Prince_Right_118 = 0x02AA62;
   constexpr uint16_t Prince_Right_118_width  = 36;
   constexpr uint16_t Prince_Right_118_height = 36;
 
-  constexpr uint24_t Prince_Right_119 = 0x0299F2;
+  constexpr uint24_t Prince_Right_119 = 0x02ABCE;
   constexpr uint16_t Prince_Right_119_width  = 36;
   constexpr uint16_t Prince_Right_119_height = 36;
 
-  constexpr uint24_t Prince_Right_120 = 0x029B5E;
+  constexpr uint24_t Prince_Right_120 = 0x02AD3A;
   constexpr uint16_t Prince_Right_120_width  = 36;
   constexpr uint16_t Prince_Right_120_height = 36;
 
-  constexpr uint24_t Prince_Right_121 = 0x029CCA;
+  constexpr uint24_t Prince_Right_121 = 0x02AEA6;
   constexpr uint16_t Prince_Right_121_width  = 36;
   constexpr uint16_t Prince_Right_121_height = 36;
 
-  constexpr uint24_t Prince_Right_122 = 0x029E36;
+  constexpr uint24_t Prince_Right_122 = 0x02B012;
   constexpr uint16_t Prince_Right_122_width  = 36;
   constexpr uint16_t Prince_Right_122_height = 36;
 
-  constexpr uint24_t Prince_Right_123 = 0x029FA2;
+  constexpr uint24_t Prince_Right_123 = 0x02B17E;
   constexpr uint16_t Prince_Right_123_width  = 36;
   constexpr uint16_t Prince_Right_123_height = 36;
 
-  constexpr uint24_t Prince_Right_124 = 0x02A10E;
+  constexpr uint24_t Prince_Right_124 = 0x02B2EA;
   constexpr uint16_t Prince_Right_124_width  = 36;
   constexpr uint16_t Prince_Right_124_height = 36;
 
-  constexpr uint24_t Prince_Right_125 = 0x02A27A;
+  constexpr uint24_t Prince_Right_125 = 0x02B456;
   constexpr uint16_t Prince_Right_125_width  = 36;
   constexpr uint16_t Prince_Right_125_height = 36;
 
-  constexpr uint24_t Prince_Right_126 = 0x02A3E6;
+  constexpr uint24_t Prince_Right_126 = 0x02B5C2;
   constexpr uint16_t Prince_Right_126_width  = 36;
   constexpr uint16_t Prince_Right_126_height = 36;
 
-  constexpr uint24_t Prince_Right_127 = 0x02A552;
+  constexpr uint24_t Prince_Right_127 = 0x02B72E;
   constexpr uint16_t Prince_Right_127_width  = 36;
   constexpr uint16_t Prince_Right_127_height = 36;
 
-  constexpr uint24_t Prince_Right_128 = 0x02A6BE;
+  constexpr uint24_t Prince_Right_128 = 0x02B89A;
   constexpr uint16_t Prince_Right_128_width  = 36;
   constexpr uint16_t Prince_Right_128_height = 36;
 
-  constexpr uint24_t Prince_Right_129 = 0x02A82A;
+  constexpr uint24_t Prince_Right_129 = 0x02BA06;
   constexpr uint16_t Prince_Right_129_width  = 36;
   constexpr uint16_t Prince_Right_129_height = 36;
 
-  constexpr uint24_t Prince_Right_130 = 0x02A996;
+  constexpr uint24_t Prince_Right_130 = 0x02BB72;
   constexpr uint16_t Prince_Right_130_width  = 36;
   constexpr uint16_t Prince_Right_130_height = 36;
 
-  constexpr uint24_t Prince_Right_131 = 0x02AB02;
+  constexpr uint24_t Prince_Right_131 = 0x02BCDE;
   constexpr uint16_t Prince_Right_131_width  = 36;
   constexpr uint16_t Prince_Right_131_height = 36;
 
-  constexpr uint24_t Prince_Right_132 = 0x02AC6E;
+  constexpr uint24_t Prince_Right_132 = 0x02BE4A;
   constexpr uint16_t Prince_Right_132_width  = 36;
   constexpr uint16_t Prince_Right_132_height = 36;
 
-  constexpr uint24_t Prince_Right_133 = 0x02ADDA;
+  constexpr uint24_t Prince_Right_133 = 0x02BFB6;
   constexpr uint16_t Prince_Right_133_width  = 36;
   constexpr uint16_t Prince_Right_133_height = 36;
 
-  constexpr uint24_t Prince_Right_134 = 0x02AF46;
+  constexpr uint24_t Prince_Right_134 = 0x02C122;
   constexpr uint16_t Prince_Right_134_width  = 36;
   constexpr uint16_t Prince_Right_134_height = 36;
 
-  constexpr uint24_t Prince_Right_135 = 0x02B0B2;
+  constexpr uint24_t Prince_Right_135 = 0x02C28E;
   constexpr uint16_t Prince_Right_135_width  = 36;
   constexpr uint16_t Prince_Right_135_height = 36;
 
-  constexpr uint24_t Prince_Right_136 = 0x02B21E;
+  constexpr uint24_t Prince_Right_136 = 0x02C3FA;
   constexpr uint16_t Prince_Right_136_width  = 36;
   constexpr uint16_t Prince_Right_136_height = 36;
 
-  constexpr uint24_t Prince_Right_137 = 0x02B38A;
+  constexpr uint24_t Prince_Right_137 = 0x02C566;
   constexpr uint16_t Prince_Right_137_width  = 36;
   constexpr uint16_t Prince_Right_137_height = 36;
 
-  constexpr uint24_t Prince_Right_138 = 0x02B4F6;
+  constexpr uint24_t Prince_Right_138 = 0x02C6D2;
   constexpr uint16_t Prince_Right_138_width  = 36;
   constexpr uint16_t Prince_Right_138_height = 36;
 
-  constexpr uint24_t Prince_Right_139 = 0x02B662;
+  constexpr uint24_t Prince_Right_139 = 0x02C83E;
   constexpr uint16_t Prince_Right_139_width  = 36;
   constexpr uint16_t Prince_Right_139_height = 36;
 
-  constexpr uint24_t Prince_Right_140 = 0x02B7CE;
+  constexpr uint24_t Prince_Right_140 = 0x02C9AA;
   constexpr uint16_t Prince_Right_140_width  = 36;
   constexpr uint16_t Prince_Right_140_height = 36;
 
-  constexpr uint24_t Prince_Right_141 = 0x02B93A;
+  constexpr uint24_t Prince_Right_141 = 0x02CB16;
   constexpr uint16_t Prince_Right_141_width  = 36;
   constexpr uint16_t Prince_Right_141_height = 36;
 
-  constexpr uint24_t Prince_Right_142 = 0x02BAA6;
+  constexpr uint24_t Prince_Right_142 = 0x02CC82;
   constexpr uint16_t Prince_Right_142_width  = 36;
   constexpr uint16_t Prince_Right_142_height = 36;
 
-  constexpr uint24_t Prince_Right_143 = 0x02BC12;
+  constexpr uint24_t Prince_Right_143 = 0x02CDEE;
   constexpr uint16_t Prince_Right_143_width  = 36;
   constexpr uint16_t Prince_Right_143_height = 36;
 
-  constexpr uint24_t Prince_Right_144 = 0x02BD7E;
+  constexpr uint24_t Prince_Right_144 = 0x02CF5A;
   constexpr uint16_t Prince_Right_144_width  = 36;
   constexpr uint16_t Prince_Right_144_height = 36;
 
-  constexpr uint24_t Prince_Right_145 = 0x02BEEA;
+  constexpr uint24_t Prince_Right_145 = 0x02D0C6;
   constexpr uint16_t Prince_Right_145_width  = 36;
   constexpr uint16_t Prince_Right_145_height = 36;
 
-  constexpr uint24_t Prince_Right_146 = 0x02C056;
+  constexpr uint24_t Prince_Right_146 = 0x02D232;
   constexpr uint16_t Prince_Right_146_width  = 36;
   constexpr uint16_t Prince_Right_146_height = 36;
 
-  constexpr uint24_t Prince_Right_147 = 0x02C1C2;
+  constexpr uint24_t Prince_Right_147 = 0x02D39E;
   constexpr uint16_t Prince_Right_147_width  = 36;
   constexpr uint16_t Prince_Right_147_height = 36;
 
-  constexpr uint24_t Prince_Right_148 = 0x02C32E;
+  constexpr uint24_t Prince_Right_148 = 0x02D50A;
   constexpr uint16_t Prince_Right_148_width  = 36;
   constexpr uint16_t Prince_Right_148_height = 36;
 
-  constexpr uint24_t Prince_Right_149 = 0x02C49A;
+  constexpr uint24_t Prince_Right_149 = 0x02D676;
   constexpr uint16_t Prince_Right_149_width  = 36;
   constexpr uint16_t Prince_Right_149_height = 36;
 
-  constexpr uint24_t Prince_Right_150 = 0x02C606;
+  constexpr uint24_t Prince_Right_150 = 0x02D7E2;
   constexpr uint16_t Prince_Right_150_width  = 36;
   constexpr uint16_t Prince_Right_150_height = 36;
 
-  constexpr uint24_t Prince_Right_151 = 0x02C772;
+  constexpr uint24_t Prince_Right_151 = 0x02D94E;
   constexpr uint16_t Prince_Right_151_width  = 36;
   constexpr uint16_t Prince_Right_151_height = 36;
 
-  constexpr uint24_t Prince_Right_152 = 0x02C8DE;
+  constexpr uint24_t Prince_Right_152 = 0x02DABA;
   constexpr uint16_t Prince_Right_152_width  = 36;
   constexpr uint16_t Prince_Right_152_height = 36;
 
-  constexpr uint24_t Prince_Right_153 = 0x02CA4A;
+  constexpr uint24_t Prince_Right_153 = 0x02DC26;
   constexpr uint16_t Prince_Right_153_width  = 36;
   constexpr uint16_t Prince_Right_153_height = 36;
 
-  constexpr uint24_t Prince_Right_154 = 0x02CBB6;
+  constexpr uint24_t Prince_Right_154 = 0x02DD92;
   constexpr uint16_t Prince_Right_154_width  = 36;
   constexpr uint16_t Prince_Right_154_height = 36;
 
-  constexpr uint24_t Prince_Right_155 = 0x02CD22;
+  constexpr uint24_t Prince_Right_155 = 0x02DEFE;
   constexpr uint16_t Prince_Right_155_width  = 36;
   constexpr uint16_t Prince_Right_155_height = 36;
 
-  constexpr uint24_t Prince_Right_156 = 0x02CE8E;
+  constexpr uint24_t Prince_Right_156 = 0x02E06A;
   constexpr uint16_t Prince_Right_156_width  = 36;
   constexpr uint16_t Prince_Right_156_height = 36;
 
-  constexpr uint24_t Prince_Right_157 = 0x02CFFA;
+  constexpr uint24_t Prince_Right_157 = 0x02E1D6;
   constexpr uint16_t Prince_Right_157_width  = 36;
   constexpr uint16_t Prince_Right_157_height = 36;
 
-  constexpr uint24_t Prince_Right_158 = 0x02D166;
+  constexpr uint24_t Prince_Right_158 = 0x02E342;
   constexpr uint16_t Prince_Right_158_width  = 36;
   constexpr uint16_t Prince_Right_158_height = 36;
 
-  constexpr uint24_t Prince_Right_159 = 0x02D2D2;
+  constexpr uint24_t Prince_Right_159 = 0x02E4AE;
   constexpr uint16_t Prince_Right_159_width  = 36;
   constexpr uint16_t Prince_Right_159_height = 36;
 
-  constexpr uint24_t Prince_Right_160 = 0x02D43E;
+  constexpr uint24_t Prince_Right_160 = 0x02E61A;
   constexpr uint16_t Prince_Right_160_width  = 36;
   constexpr uint16_t Prince_Right_160_height = 36;
 
-  constexpr uint24_t Prince_Right_161 = 0x02D5AA;
+  constexpr uint24_t Prince_Right_161 = 0x02E786;
   constexpr uint16_t Prince_Right_161_width  = 36;
   constexpr uint16_t Prince_Right_161_height = 36;
 
-  constexpr uint24_t Prince_Right_162 = 0x02D716;
+  constexpr uint24_t Prince_Right_162 = 0x02E8F2;
   constexpr uint16_t Prince_Right_162_width  = 36;
   constexpr uint16_t Prince_Right_162_height = 36;
 
-  constexpr uint24_t Prince_Right_163 = 0x02D882;
+  constexpr uint24_t Prince_Right_163 = 0x02EA5E;
   constexpr uint16_t Prince_Right_163_width  = 36;
   constexpr uint16_t Prince_Right_163_height = 36;
 
-  constexpr uint24_t Prince_Right_164 = 0x02D9EE;
+  constexpr uint24_t Prince_Right_164 = 0x02EBCA;
   constexpr uint16_t Prince_Right_164_width  = 36;
   constexpr uint16_t Prince_Right_164_height = 36;
 
-  constexpr uint24_t Prince_Right_165 = 0x02DB5A;
+  constexpr uint24_t Prince_Right_165 = 0x02ED36;
   constexpr uint16_t Prince_Right_165_width  = 36;
   constexpr uint16_t Prince_Right_165_height = 36;
 
-  constexpr uint24_t Prince_Right_166 = 0x02DCC6;
+  constexpr uint24_t Prince_Right_166 = 0x02EEA2;
   constexpr uint16_t Prince_Right_166_width  = 36;
   constexpr uint16_t Prince_Right_166_height = 36;
 
-  constexpr uint24_t Prince_Right_167 = 0x02DE32;
+  constexpr uint24_t Prince_Right_167 = 0x02F00E;
   constexpr uint16_t Prince_Right_167_width  = 36;
   constexpr uint16_t Prince_Right_167_height = 36;
 
-  constexpr uint24_t Prince_Right_168 = 0x02DF9E;
+  constexpr uint24_t Prince_Right_168 = 0x02F17A;
   constexpr uint16_t Prince_Right_168_width  = 36;
   constexpr uint16_t Prince_Right_168_height = 36;
 
-  constexpr uint24_t Prince_Right_169 = 0x02E10A;
+  constexpr uint24_t Prince_Right_169 = 0x02F2E6;
   constexpr uint16_t Prince_Right_169_width  = 36;
   constexpr uint16_t Prince_Right_169_height = 36;
 
-  constexpr uint24_t Prince_Right_170 = 0x02E276;
+  constexpr uint24_t Prince_Right_170 = 0x02F452;
   constexpr uint16_t Prince_Right_170_width  = 36;
   constexpr uint16_t Prince_Right_170_height = 36;
 
-  constexpr uint24_t Prince_Right_171 = 0x02E3E2;
+  constexpr uint24_t Prince_Right_171 = 0x02F5BE;
   constexpr uint16_t Prince_Right_171_width  = 36;
   constexpr uint16_t Prince_Right_171_height = 36;
 
-  constexpr uint24_t Prince_Right_172 = 0x02E54E;
+  constexpr uint24_t Prince_Right_172 = 0x02F72A;
   constexpr uint16_t Prince_Right_172_width  = 36;
   constexpr uint16_t Prince_Right_172_height = 36;
 
-  constexpr uint24_t Prince_Right_173 = 0x02E6BA;
+  constexpr uint24_t Prince_Right_173 = 0x02F896;
   constexpr uint16_t Prince_Right_173_width  = 36;
   constexpr uint16_t Prince_Right_173_height = 36;
 
-  constexpr uint24_t Prince_Right_174 = 0x02E826;
+  constexpr uint24_t Prince_Right_174 = 0x02FA02;
   constexpr uint16_t Prince_Right_174_width  = 36;
   constexpr uint16_t Prince_Right_174_height = 36;
 
-  constexpr uint24_t Prince_Right_175 = 0x02E992;
+  constexpr uint24_t Prince_Right_175 = 0x02FB6E;
   constexpr uint16_t Prince_Right_175_width  = 36;
   constexpr uint16_t Prince_Right_175_height = 36;
 
-  constexpr uint24_t Prince_Right_176 = 0x02EAFE;
+  constexpr uint24_t Prince_Right_176 = 0x02FCDA;
   constexpr uint16_t Prince_Right_176_width  = 36;
   constexpr uint16_t Prince_Right_176_height = 36;
 
-  constexpr uint24_t Prince_Right_177 = 0x02EC6A;
+  constexpr uint24_t Prince_Right_177 = 0x02FE46;
   constexpr uint16_t Prince_Right_177_width  = 36;
   constexpr uint16_t Prince_Right_177_height = 36;
 
-  constexpr uint24_t Prince_Right_178 = 0x02EDD6;
+  constexpr uint24_t Prince_Right_178 = 0x02FFB2;
   constexpr uint16_t Prince_Right_178_width  = 36;
   constexpr uint16_t Prince_Right_178_height = 36;
 
-  constexpr uint24_t Prince_Right_179 = 0x02EF42;
+  constexpr uint24_t Prince_Right_179 = 0x03011E;
   constexpr uint16_t Prince_Right_179_width  = 36;
   constexpr uint16_t Prince_Right_179_height = 36;
 
-  constexpr uint24_t Prince_Right_180 = 0x02F0AE;
+  constexpr uint24_t Prince_Right_180 = 0x03028A;
   constexpr uint16_t Prince_Right_180_width  = 36;
   constexpr uint16_t Prince_Right_180_height = 36;
 
-  constexpr uint24_t Prince_Right_181 = 0x02F21A;
+  constexpr uint24_t Prince_Right_181 = 0x0303F6;
   constexpr uint16_t Prince_Right_181_width  = 36;
   constexpr uint16_t Prince_Right_181_height = 36;
 
-  constexpr uint24_t Prince_Right_182 = 0x02F386;
+  constexpr uint24_t Prince_Right_182 = 0x030562;
   constexpr uint16_t Prince_Right_182_width  = 36;
   constexpr uint16_t Prince_Right_182_height = 36;
 
-  constexpr uint24_t Prince_Right_183 = 0x02F4F2;
+  constexpr uint24_t Prince_Right_183 = 0x0306CE;
   constexpr uint16_t Prince_Right_183_width  = 36;
   constexpr uint16_t Prince_Right_183_height = 36;
 
-  constexpr uint24_t Prince_Right_184 = 0x02F65E;
+  constexpr uint24_t Prince_Right_184 = 0x03083A;
   constexpr uint16_t Prince_Right_184_width  = 36;
   constexpr uint16_t Prince_Right_184_height = 36;
 
-  constexpr uint24_t Prince_Right_185 = 0x02F7CA;
+  constexpr uint24_t Prince_Right_185 = 0x0309A6;
   constexpr uint16_t Prince_Right_185_width  = 36;
   constexpr uint16_t Prince_Right_185_height = 36;
 
-  constexpr uint24_t Prince_Right_186 = 0x02F936;
+  constexpr uint24_t Prince_Right_186 = 0x030B12;
   constexpr uint16_t Prince_Right_186_width  = 36;
   constexpr uint16_t Prince_Right_186_height = 36;
 
-  constexpr uint24_t Prince_Right_187 = 0x02FAA2;
+  constexpr uint24_t Prince_Right_187 = 0x030C7E;
   constexpr uint16_t Prince_Right_187_width  = 36;
   constexpr uint16_t Prince_Right_187_height = 36;
 
-  constexpr uint24_t Prince_Right_188 = 0x02FC0E;
+  constexpr uint24_t Prince_Right_188 = 0x030DEA;
   constexpr uint16_t Prince_Right_188_width  = 36;
   constexpr uint16_t Prince_Right_188_height = 36;
 
-  constexpr uint24_t Prince_Right_189 = 0x02FD7A;
+  constexpr uint24_t Prince_Right_189 = 0x030F56;
   constexpr uint16_t Prince_Right_189_width  = 36;
   constexpr uint16_t Prince_Right_189_height = 36;
 
-  constexpr uint24_t Prince_Right_190 = 0x02FEE6;
+  constexpr uint24_t Prince_Right_190 = 0x0310C2;
   constexpr uint16_t Prince_Right_190_width  = 36;
   constexpr uint16_t Prince_Right_190_height = 36;
 
-  constexpr uint24_t Prince_Right_191 = 0x030052;
+  constexpr uint24_t Prince_Right_191 = 0x03122E;
   constexpr uint16_t Prince_Right_191_width  = 36;
   constexpr uint16_t Prince_Right_191_height = 36;
 
-  constexpr uint24_t Prince_Right_192 = 0x0301BE;
+  constexpr uint24_t Prince_Right_192 = 0x03139A;
   constexpr uint16_t Prince_Right_192_width  = 36;
   constexpr uint16_t Prince_Right_192_height = 36;
 
-  constexpr uint24_t Prince_Right_193 = 0x03032A;
+  constexpr uint24_t Prince_Right_193 = 0x031506;
   constexpr uint16_t Prince_Right_193_width  = 36;
   constexpr uint16_t Prince_Right_193_height = 36;
 
-  constexpr uint24_t Prince_Right_194 = 0x030496;
+  constexpr uint24_t Prince_Right_194 = 0x031672;
   constexpr uint16_t Prince_Right_194_width  = 36;
   constexpr uint16_t Prince_Right_194_height = 36;
 
-  constexpr uint24_t Prince_Right_195 = 0x030602;
+  constexpr uint24_t Prince_Right_195 = 0x0317DE;
   constexpr uint16_t Prince_Right_195_width  = 36;
   constexpr uint16_t Prince_Right_195_height = 36;
 
@@ -2661,20 +2677,20 @@ namespace Images
 
 namespace Sounds
 {
-  constexpr uint24_t Dead = 0x03076E;
-  constexpr uint24_t Grab1 = 0x03078C;
-  constexpr uint24_t Grab2 = 0x0307B6;
-  constexpr uint24_t Grab3 = 0x0307E0;
-  constexpr uint24_t Grab4 = 0x03081A;
-  constexpr uint24_t Seque = 0x030870;
-  constexpr uint24_t Tada = 0x0308EA;
-  constexpr uint24_t Theme = 0x030908;
-  constexpr uint24_t Triumph = 0x030AD6;
+  constexpr uint24_t Dead = 0x03194A;
+  constexpr uint24_t Grab1 = 0x031968;
+  constexpr uint24_t Grab2 = 0x031992;
+  constexpr uint24_t Grab3 = 0x0319BC;
+  constexpr uint24_t Grab4 = 0x0319F6;
+  constexpr uint24_t Seque = 0x031A4C;
+  constexpr uint24_t Tada = 0x031AC6;
+  constexpr uint24_t Theme = 0x031AE4;
+  constexpr uint24_t Triumph = 0x031CB2;
 }
 
 namespace Constants
 {
-  constexpr uint24_t VertAdjustments = 0x030AF4;
-  constexpr uint24_t Prince_ImageDetails = 0x030B8A;
+  constexpr uint24_t VertAdjustments = 0x031CD0;
+  constexpr uint24_t Prince_ImageDetails = 0x031D66;
 }
 

@@ -73,6 +73,7 @@ enum class StandingJumpResult : uint8_t {
     None,
     Normal,
     DropLevel,
+    Medium,
     Short, // Same level but a little shorter.
 };
 
@@ -81,6 +82,7 @@ enum class RunningJumpResult : uint8_t {
     Normal,
     Jump4_DropLevel,
     Jump3_KeepLevel,
+    Jump3_KeepLevel_Short,
     Jump3_DropLevel,
 };
 
@@ -99,6 +101,9 @@ enum class ItemType : uint8_t {
     /* 10 */ Potion_Small,
     /* 11 */ Potion_Large,
     /* 12 */ Potion_Poison,
+    /* 13 */ EntryDoor,
+    /* 14 */ EntryDoor_Cropped,
+    /* 15 */ Blade,
     /* 96 */ None = 96,
     /* 97 */ LoveHeart = 97,
     /* 98 */ Sign = 98,

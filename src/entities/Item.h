@@ -11,6 +11,13 @@ struct ExitDoor {
     uint8_t right;
 };
 
+struct Blade {
+    uint8_t position;
+    Direction direction;
+    uint8_t left;
+    uint8_t right;
+};
+
 struct Gate {
     uint8_t position;
     uint8_t closingDelay;

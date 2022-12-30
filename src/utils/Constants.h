@@ -5,9 +5,9 @@
 #define DEBUG_PRINTLN  Serial.println
 #define SAVE_MEMORY_USB
 #define _SAVE_MEMORY_OTHER
-#define _SAVE_MEMORY_SOUND
+#define SAVE_MEMORY_SOUND
 #define _ALT_B_BUTTON
-#define _GIVE_SWORD
+#define GIVE_SWORD
 
 #define LEVEL_DATA_FROM_FX
 
@@ -23,16 +23,16 @@
 #define _DEBUG_PRINCE_RENDERING
 
 #define _DEBUG_ACTION_CANMOVEFORWARD
-#define _DEBUG_ACTION_CANJUMPUP
+#define DEBUG_ACTION_CANJUMPUP
 #define _DEBUG_ACTION_CANJUMPUP_PART2
 #define _DEBUG_ACTION_CANCLIMBDOWN
 #define _DEBUG_ACTION_CANCLIMBDOWN_PART2
 #define _DEBUG_ACTION_CANFALL
 #define _DEBUG_ACTION_CANFALLSOMEMORE
 #define _DEBUG_ACTION_COLLIDEWITHWALL
-#define _DEBUG_ACTION_RUNJUMP
 #define _DEBUG_ACTION_FALLING
 #define _DEBUG_ACTION_CANSTANDINGJUMP
+#define _DEBUG_ACTION_CANRUNNINGJUMP
 
 
 //-------------------------------------------------------------------------------------
@@ -168,10 +168,32 @@ constexpr uint16_t Standing_Jump_17                              = Stance::Stand
 constexpr uint16_t Standing_Jump_18_End                          = Stance::Standing_Jump_17 + 1;
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/* 052 - 069    x: 36, y: 0                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+/* 052 - 069    x: 28, y: 0                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define STANDING_JUMP_MED_SEQ                                    45,    46,    47,    48,    49,    50,    51,    52,    55,    56,    57,    58,    59,    60,    61,    62,
+#define STANDING_JUMP_MED_OFFSETS                                0,0,   0,0,   2,0,   2,0,   2,0,   3,0,   3,0,   3,0,   3,0,   3,0,   3,0,   2,0,   2,0,   0,0,   0,0,   0,0, 
+constexpr uint16_t Standing_Jump_Med_1_Start                     = Stance::Standing_Jump_18_End + 1;
+constexpr uint16_t Standing_Jump_Med_2                           = Stance::Standing_Jump_Med_1_Start + 1;
+constexpr uint16_t Standing_Jump_Med_3                           = Stance::Standing_Jump_Med_2 + 1;
+constexpr uint16_t Standing_Jump_Med_4                           = Stance::Standing_Jump_Med_3 + 1;
+constexpr uint16_t Standing_Jump_Med_5                           = Stance::Standing_Jump_Med_4 + 1;
+constexpr uint16_t Standing_Jump_Med_6                           = Stance::Standing_Jump_Med_5 + 1;
+constexpr uint16_t Standing_Jump_Med_7                           = Stance::Standing_Jump_Med_6 + 1;
+constexpr uint16_t Standing_Jump_Med_8                           = Stance::Standing_Jump_Med_7 + 1;
+constexpr uint16_t Standing_Jump_Med_9                           = Stance::Standing_Jump_Med_8 + 1;
+constexpr uint16_t Standing_Jump_Med_10                          = Stance::Standing_Jump_Med_9 + 1;
+constexpr uint16_t Standing_Jump_Med_11                          = Stance::Standing_Jump_Med_10 + 1;
+constexpr uint16_t Standing_Jump_Med_12                          = Stance::Standing_Jump_Med_11 + 1;
+constexpr uint16_t Standing_Jump_Med_13                          = Stance::Standing_Jump_Med_12 + 1;
+constexpr uint16_t Standing_Jump_Med_14                          = Stance::Standing_Jump_Med_13 + 1;
+constexpr uint16_t Standing_Jump_Med_15                          = Stance::Standing_Jump_Med_14 + 1;
+constexpr uint16_t Standing_Jump_Med_16_End                      = Stance::Standing_Jump_Med_15 + 1;
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* 052 - 069    x: 24, y: 0                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define STANDING_JUMP_SHORT_SEQ                                  45,    46,    47,    48,    49,    50,    51,    52,    55,    56,    57,    58,    59,    60,    61,    62,
 #define STANDING_JUMP_SHORT_OFFSETS                              0,0,   0,0,   2,0,   2,0,   2,0,   2,0,   1,0,   2,0,   2,0,   3,0,   3,0,   2,0,   1,0,   1,0,   1,0,   0,0, 
-constexpr uint16_t Standing_Jump_Short_1_Start                   = Stance::Standing_Jump_18_End + 1;
+constexpr uint16_t Standing_Jump_Short_1_Start                   = Stance::Standing_Jump_Med_16_End + 1;
 constexpr uint16_t Standing_Jump_Short_2                         = Stance::Standing_Jump_Short_1_Start + 1;
 constexpr uint16_t Standing_Jump_Short_3                         = Stance::Standing_Jump_Short_2 + 1;
 constexpr uint16_t Standing_Jump_Short_4                         = Stance::Standing_Jump_Short_3 + 1;
@@ -187,6 +209,7 @@ constexpr uint16_t Standing_Jump_Short_13                        = Stance::Stand
 constexpr uint16_t Standing_Jump_Short_14                        = Stance::Standing_Jump_Short_13 + 1;
 constexpr uint16_t Standing_Jump_Short_15                        = Stance::Standing_Jump_Short_14 + 1;
 constexpr uint16_t Standing_Jump_Short_16_End                    = Stance::Standing_Jump_Short_15 + 1;
+
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /* 070 - 085    x: 17, y: 0                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
@@ -729,10 +752,24 @@ constexpr uint16_t Running_Jump_3_SameLvl_8_End                  = Stance::Runni
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* 353 - 360     x: 43, y: 0                                     01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define RUNNING_JUMP_3_SAMELVL_SHORT_SEQ                         20,    21,    22,    23,    169,   24,    25,    26,
+#define RUNNING_JUMP_3_SAMELVL_SHORT_OFFSETS                     5,0,   6,0,   6,0,   7,-2,  6,0,   5,-2,  3,3,   1,1,
+constexpr uint16_t Running_Jump_3_SameLvl_Short_1_Start          = Stance::Running_Jump_3_SameLvl_8_End + 1;
+constexpr uint16_t Running_Jump_3_SameLvl_Short_2                = Stance::Running_Jump_3_SameLvl_Short_1_Start + 1;
+constexpr uint16_t Running_Jump_3_SameLvl_Short_3                = Stance::Running_Jump_3_SameLvl_Short_2 + 1;
+constexpr uint16_t Running_Jump_3_SameLvl_Short_4                = Stance::Running_Jump_3_SameLvl_Short_3 + 1;
+constexpr uint16_t Running_Jump_3_SameLvl_Short_5                = Stance::Running_Jump_3_SameLvl_Short_4 + 1;
+constexpr uint16_t Running_Jump_3_SameLvl_Short_6                = Stance::Running_Jump_3_SameLvl_Short_5 + 1;
+constexpr uint16_t Running_Jump_3_SameLvl_Short_7                = Stance::Running_Jump_3_SameLvl_Short_6 + 1;
+constexpr uint16_t Running_Jump_3_SameLvl_Short_8_End            = Stance::Running_Jump_3_SameLvl_Short_7 + 1;
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /* 361 - 361     x: 0, y: 0                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define SWORD_NORMAL_SEQ                                         174,
 #define SWORD_NORMAL_OFFSETS                                     0,0,
-constexpr uint16_t Sword_Normal                                  = Stance::Running_Jump_3_SameLvl_8_End + 1;
+constexpr uint16_t Sword_Normal                                  = Stance::Running_Jump_3_SameLvl_Short_8_End + 1;
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -827,6 +864,7 @@ namespace Constants {
         STANDING_TURN_SEQ
         RUNNING_TURN_SEQ
         STANDING_JUMP_SEQ
+        STANDING_JUMP_MED_SEQ
         STANDING_JUMP_SHORT_SEQ
         STANDING_JUMP_DROPLVL_SEQ
         SINGLE_STEP_SEQ
@@ -864,6 +902,7 @@ namespace Constants {
         RUNNING_JUMP_4_DROPLVL_SEQ
         RUNNING_JUMP_3_DROPLVL_SEQ
         RUNNING_JUMP_3_SAMELVL_SEQ
+        RUNNING_JUMP_3_SAMELVL_SHORT_SEQ
         SWORD_NORMAL_SEQ
         DRAW_SWORD_SEQ
         SWORD_STEP_SEQ
@@ -881,6 +920,7 @@ namespace Constants {
         STANDING_TURN_OFFSETS
         RUNNING_TURN_OFFSETS
         STANDING_JUMP_OFFSETS
+        STANDING_JUMP_MED_OFFSETS
         STANDING_JUMP_SHORT_OFFSETS
         STANDING_JUMP_DROPLVL_OFFSETS
         SINGLE_STEP_OFFSETS
@@ -918,6 +958,7 @@ namespace Constants {
         RUNNING_JUMP_4_DROPLVL_OFFSETS
         RUNNING_JUMP_3_DROPLVL_OFFSETS
         RUNNING_JUMP_3_SAMELVL_OFFSETS
+        RUNNING_JUMP_3_SAMELVL_SHORT_OFFSETS
         SWORD_NORMAL_OFFSETS
         DRAW_SWORD_OFFSETS
         SWORD_STEP_OFFSETS

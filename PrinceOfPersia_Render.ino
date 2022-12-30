@@ -21,12 +21,13 @@ void render(bool enemyIsVisible) {
 
             switch (bgTile) {
 
-                case 0 ... 126:
+                case 0 ... 123:
                    FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon[Images::xTiles_Ref[bgTile]], 0, dbmMasked);
                    break;
 
+                case 124:
                 case 127:
-                   FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon_50_00 + ((arduboy.getFrameCount(15, (x + 2)) / 5) * 100), 0, dbmMasked);
+                   FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon_99_00 + ((arduboy.getFrameCount(15, (x + 2)) / 5) * 100), 0, dbmMasked);
                    break;
 
             }
@@ -35,6 +36,37 @@ void render(bool enemyIsVisible) {
 
     }
 
+
+    // Draw foreground, collpased tiles ..
+
+    for (uint8_t y = 0; y < 4; y++) {
+
+        for (uint8_t x = 0; x < 10; x++) {
+
+            int8_t fgTile = level.getTile(Layer::Foreground, x, y - 1, TILE_NONE);
+
+            if (fgTile >= 0) {
+
+                switch (fgTile) {
+
+                    case 29:
+                        FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon_97, 0, dbmMasked);
+                        break;
+
+                    case 30:
+                        FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon_98, 0, dbmMasked);
+                        break;
+
+                    default:
+                        break;
+
+                }
+
+            }
+
+        }
+
+    }
 
     // Draw items ..
 
@@ -75,6 +107,14 @@ void render(bool enemyIsVisible) {
 
                 case ItemType::Gate:
                     FX::drawBitmap(xLoc - 5, yLoc, Images::Gate_00 + (item.data.gate.position * 76), 0, dbmMasked);
+                    break;
+
+                case ItemType::EntryDoor:
+                    FX::drawBitmap(xLoc + 1, yLoc - 14, Images::ExitDoor_00, 0, dbmNormal);
+                    break;
+
+                case ItemType::EntryDoor_Cropped:
+                    FX::drawBitmap(xLoc + 1, yLoc - 14, Images::ExitDoor_12_Cropped, 0, dbmNormal);
                     break;
 
                 case ItemType::CollapsingFloor:
@@ -208,7 +248,17 @@ void render(bool enemyIsVisible) {
 
             if (fgTile >= 0) {
 
-                FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon[Images::xTiles_Ref[fgTile]], 0, dbmMasked);
+                switch (fgTile) {
+
+                    case 29:
+                    case 30:
+                        break;
+
+                    default:
+                        FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon[Images::xTiles_Ref[fgTile]], 0, dbmMasked);
+                        break;
+
+                }
 
             }
 
