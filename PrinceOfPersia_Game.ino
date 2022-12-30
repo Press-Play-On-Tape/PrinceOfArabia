@@ -22,7 +22,6 @@ void game_Init() {
 
 }
 
-
 void game_StartLevel() {
 
     gamePlay.restartLevel(arduboy);

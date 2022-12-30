@@ -45,6 +45,7 @@ namespace Images {
     image_t Number_09 = "../images/hud/Number_09.png"
     image_t Sword_Cursor = "../images/hud/Sword.png"
     image_t HUD_Background = "../images/hud/HUD_Background.png"
+    image_t HUD_Background2 = "../images/hud/HUD_Background2.png"
 
     image_t Number_Small_00 = "../images/hud/Number_Small_00.png"
     image_t Number_Small_01 = "../images/hud/Number_Small_01.png"

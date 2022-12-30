@@ -1,7 +1,6 @@
 #!/bin/bash
 cp fxdata.txt temp.txt
 
-
 #
 # Level 1
 #

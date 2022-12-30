@@ -22,7 +22,7 @@ void render(bool enemyIsVisible) {
             switch (bgTile) {
 
                 case 0 ... 123:
-                   FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon[Images::xTiles_Ref[bgTile]], 0, dbmMasked);
+                   FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon_00 + (Images::xTiles_Ref[bgTile] * 100), 0, dbmMasked);
                    break;
 
                 case 124:
@@ -268,7 +268,7 @@ void render(bool enemyIsVisible) {
                         break;
 
                     default:
-                        FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon[Images::xTiles_Ref[fgTile]], 0, dbmMasked);
+                        FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon_00 + (Images::xTiles_Ref[fgTile] * 100), 0, dbmMasked);
                         break;
 
                 }
@@ -298,10 +298,7 @@ void render(bool enemyIsVisible) {
 
     // Render health ..
 
-    // arduboy.fillRect(120, 0, WIDTH, HEIGHT, BLACK);
-    // arduboy.drawFastVLine(121, 0, HEIGHT, WHITE);
-
-    FX::drawBitmap(120, 0, Images::HUD_Background, 0, dbmNormal);
+    FX::drawBitmap(120, 0, Images::HUD_Background + (enemyIsVisible ? 68 : 0), 0, dbmNormal);
 
     for (uint8_t i = 0; i < prince.getHealthMax(); i++) {
 
@@ -327,9 +324,6 @@ void render(bool enemyIsVisible) {
         if (prince.getSword()) {
             FX::drawBitmap(123, 40, Images::Sword_HUD, 0, dbmNormal);
         }
-
-        // arduboy.drawPixel(124, 55);
-        // arduboy.drawPixel(126, 55);
 
     }
     else {
@@ -419,28 +413,32 @@ void renderMenu() {
 
 void renderNumber(uint8_t x, uint8_t y, uint8_t number) {
 
-    FX::drawBitmap(x, y, Images::Number_00 + ((number / 10) * 9), 0, dbmNormal);
-    FX::drawBitmap(x + 6, y, Images::Number_00 + ((number % 10) * 9), 0, dbmNormal);
+    uint24_t frame = Images::Number_00 + ((number / 10) * 9);
+    FX::drawBitmap(x, y, frame, 0, dbmNormal);
+    FX::drawBitmap(x + 6, y, frame, 0, dbmNormal);
 
 }
 
 void renderNumber_Small(uint8_t x, uint8_t y, uint8_t number) {
 
-    FX::drawBitmap(x, y, Images::Number_Small_00 + ((number / 10) * 9), 0, dbmNormal);
-    FX::drawBitmap(x, y + 4, Images::Number_Small_00 + ((number % 10) * 9), 0, dbmNormal);
+    uint24_t frame = Images::Number_Small_00 + ((number / 10) * 9);
+    FX::drawBitmap(x, y, frame, 0, dbmNormal);
+    FX::drawBitmap(x, y + 4, frame, 0, dbmNormal);
 
 }
 
 void renderNumber_Upright(uint8_t x, uint8_t y, uint8_t number) {
 
-    FX::drawBitmap(x, y, Images::Number_Upright_00 + ((number / 10) * 7), 0, dbmNormal);
-    FX::drawBitmap(x + 4, y, Images::Number_Upright_00 + ((number % 10) * 7), 0, dbmNormal);
+    uint24_t frame = Images::Number_Upright_00 + ((number / 10) * 7);
+    FX::drawBitmap(x, y, frame, 0, dbmNormal);
+    FX::drawBitmap(x + 4, y, frame, 0, dbmNormal);
 
 }
 
 void renderTorches(uint8_t x1, uint8_t x2, uint8_t y) {
 
-    FX::drawBitmap(x1, y, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
-    FX::drawBitmap(x2, y, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
+    uint24_t frame = Images::Torch_00 + (arduboy.getFrameCount(15) / 5) * 16;
+    FX::drawBitmap(x1, y, frame, 0, dbmMasked);
+    FX::drawBitmap(x2, y, frame, 0, dbmMasked);
 
 }
