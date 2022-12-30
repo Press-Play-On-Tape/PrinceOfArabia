@@ -413,25 +413,22 @@ void renderMenu() {
 
 void renderNumber(uint8_t x, uint8_t y, uint8_t number) {
 
-    uint24_t frame = Images::Number_00 + ((number / 10) * 9);
-    FX::drawBitmap(x, y, frame, 0, dbmNormal);
-    FX::drawBitmap(x + 6, y, frame, 0, dbmNormal);
+    FX::drawBitmap(x, y, Images::Number_00 + ((number / 10) * 9), 0, dbmNormal);
+    FX::drawBitmap(x + 6, y, Images::Number_00 + ((number % 10) * 9), 0, dbmNormal);
 
 }
 
 void renderNumber_Small(uint8_t x, uint8_t y, uint8_t number) {
 
-    uint24_t frame = Images::Number_Small_00 + ((number / 10) * 9);
-    FX::drawBitmap(x, y, frame, 0, dbmNormal);
-    FX::drawBitmap(x, y + 4, frame, 0, dbmNormal);
+    FX::drawBitmap(x, y, Images::Number_Small_00 + ((number / 10) * 9), 0, dbmNormal);
+    FX::drawBitmap(x, y + 4, Images::Number_Small_00 + ((number % 10) * 9), 0, dbmNormal);
 
 }
 
 void renderNumber_Upright(uint8_t x, uint8_t y, uint8_t number) {
 
-    uint24_t frame = Images::Number_Upright_00 + ((number / 10) * 7);
-    FX::drawBitmap(x, y, frame, 0, dbmNormal);
-    FX::drawBitmap(x + 4, y, frame, 0, dbmNormal);
+    FX::drawBitmap(x, y, Images::Number_Upright_00 + ((number / 10) * 7), 0, dbmNormal);
+    FX::drawBitmap(x + 4, y, Images::Number_Upright_00 + ((number % 10) * 7), 0, dbmNormal);
 
 }
 
