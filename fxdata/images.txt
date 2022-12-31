@@ -57,7 +57,7 @@ namespace Images {
     image_t Spikes_FG_Half = "../images/items/Spikes_FG_11x18_1.png"
     image_t Spikes_BG_Half = "../images/items/Spikes_BG_11x18_1.png"
 
-    image_t Flashes = "../images/hud/Flashes_22X20_1.png"
+    image_t Flashes = "../images/hud/Flash_22x20_1.png"
 
     image_t Tile_Dungeon_00 = "../images/tiles/tile_dungeon_00.png"
     image_t Tile_Dungeon_01 = "../images/tiles/tile_dungeon_01.png"
