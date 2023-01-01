@@ -34,11 +34,11 @@ class FadeEffects {
 
         void draw(Arduboy2Ext & arduboy) const {
 
-            for(uint8_t i = 0; i < (HEIGHT / 2); ++i) {
-
-                arduboy.drawFastHLine(0, (i * 2), this->fadeWidth, BLACK);
-                arduboy.drawFastHLine((WIDTH - this->fadeWidth), (i * 2) + 1, this->fadeWidth, BLACK);
-
+            for (uint8_t r = 0; r < HEIGHT / 8; r++) {
+                for (uint8_t  i = 0; i < this->fadeWidth; i++) {
+                    arduboy.sBuffer[r * WIDTH + i] &= 0x55;
+                    arduboy.sBuffer[r * WIDTH + WIDTH - 1 - i] &= 0xAA;
+                }
             }
 
         }

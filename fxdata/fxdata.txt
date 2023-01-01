@@ -5,11 +5,11 @@ namespace Levels {
     // *****************************************************************************************************************
     
     int8_t Level1_FG[] = {
-    <insert Level1_FG.csv>
+    include "../levels/Level1_FG.csv"
     };
 
     int8_t Level1_BG[] = {
-    <insert Level1_BG.csv>
+    include "../levels/Level1_BG.csv"
     };
 
 
@@ -96,11 +96,11 @@ namespace Levels {
     // *****************************************************************************************************************
 
     int8_t Level2_FG[] = {
-    <insert Level2_FG.csv>
+    include "../levels/Level2_FG.csv"
     };
 
     int8_t Level2_BG[] = {
-    <insert Level2_BG.csv>
+    include "../levels/Level2_BG.csv"
     };
 
     uint8_t level2_Data[] = {
@@ -193,11 +193,11 @@ namespace Levels {
     // *****************************************************************************************************************
     
     int8_t Level3_FG[] = {
-    <insert Level3_FG.csv>
+    include "../levels/Level3_FG.csv"
     };
 
     int8_t Level3_BG[] = {
-    <insert Level3_BG.csv>
+    include "../levels/Level3_BG.csv"
     };
 
     uint8_t level3_Data[] = {
@@ -261,11 +261,11 @@ namespace Levels {
     // *****************************************************************************************************************
     
     int8_t Level4_FG[] = {
-    <insert Level4_FG.csv>
+    include "../levels/Level4_FG.csv"
     };
 
     int8_t Level4_BG[] = {
-    <insert Level4_BG.csv>
+    include "../levels/Level4_BG.csv"
     };
 
     uint8_t level4_Data[] = {
@@ -338,7 +338,7 @@ namespace Levels {
 }
 namespace_end
 
-<insert cutscenes.txt>
-<insert sounds.txt>
-<insert images.txt>
-<insert constants.txt>
+include "cutscenes.txt"
+include "sounds.txt"
+include "images.txt"
+include "constants.txt"
