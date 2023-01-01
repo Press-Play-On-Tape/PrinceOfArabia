@@ -18,7 +18,7 @@ namespace Images {
     image_t Chambers_BG = "../images/title/Chambers_BG.png"
     image_t Chambers_FG = "../images/title/Chambers_FG.png"
 
-    image_t Numbers_Upright = "../images/title/Numbers_Upright_3x5_1.png"
+    image_t Numbers_Upright = "../images/title/Numbers_Upright_7x5_1.png"
 
     image_t Menu = "../images/hud/Menu.png"
     image_t Sword_Cursor = "../images/hud/Sword.png"
