@@ -6,10 +6,10 @@
 #define SAVE_MEMORY_USB
 #define SAVE_MEMORY_OTHER
 #define SAVE_MEMORY_SOUND
-#define ALT_B_BUTTON
+#define _ALT_B_BUTTON
 #define _GIVE_SWORD
 
-#define _LEVEL_DATA_FROM_FX
+#define LEVEL_DATA_FROM_FX
 
 #define DEBUG
 #define DEBUG_ONSCREEN_DETAILS
