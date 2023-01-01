@@ -6,8 +6,8 @@ using uint24_t = __uint24;
 
 // Initialize FX hardware using  FX::begin(FX_DATA_PAGE); in the setup() function.
 
-constexpr uint16_t FX_DATA_PAGE  = 0xfd1c;
-constexpr uint24_t FX_DATA_BYTES = 189327;
+constexpr uint16_t FX_DATA_PAGE  = 0xfc65;
+constexpr uint24_t FX_DATA_BYTES = 236127;
 
 namespace Levels
 {
@@ -289,20 +289,20 @@ namespace Images
   constexpr uint8_t  HourGlassesFrames = 7;
 
   constexpr uint24_t Prince_Left = 0x011EA8;
-  constexpr uint16_t Prince_Left_width  = 32;
-  constexpr uint16_t Prince_Left_height = 32;
+  constexpr uint16_t Prince_Left_width  = 36;
+  constexpr uint16_t Prince_Left_height = 36;
   constexpr uint8_t  Prince_Left_frames = 225;
 
-  constexpr uint24_t Prince_Right = 0x01FFAC;
-  constexpr uint16_t Prince_Right_width  = 32;
-  constexpr uint16_t Prince_Right_height = 32;
+  constexpr uint24_t Prince_Right = 0x025B14;
+  constexpr uint16_t Prince_Right_width  = 36;
+  constexpr uint16_t Prince_Right_height = 36;
   constexpr uint8_t  Prince_Right_frames = 225;
 
 }
 
 namespace Constants
 {
-  constexpr uint24_t VertAdjustments = 0x02E0B0;
-  constexpr uint24_t Prince_ImageDetails = 0x02E146;
+  constexpr uint24_t VertAdjustments = 0x039780;
+  constexpr uint24_t Prince_ImageDetails = 0x039816;
 }
 

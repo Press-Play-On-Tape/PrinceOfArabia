@@ -81,8 +81,8 @@ namespace Images {
 
     // Prince Images
 
-    image_t Prince_Left = "../images/prince/left/Prince_Left_32x32.png"
-    image_t Prince_Right = "../images/prince/right/Prince_Right_32x32.png"
+    image_t Prince_Left = "../images/prince/left/Prince_Left_36x36.png"
+    image_t Prince_Right = "../images/prince/right/Prince_Right_36x36.png"
 
 }
 
