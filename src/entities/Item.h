@@ -23,6 +23,7 @@ struct Gate {
     uint8_t position;
     uint8_t closingDelay;
     uint8_t closingDelayMax;
+    Direction direction;
 };
  
 struct Sword {
@@ -45,14 +46,7 @@ struct CollapsingFloor {
     uint8_t timeToFall;         // 255 if not counting down.
 };
  
-struct FloorButton1 {
-    uint8_t frame;              
-    uint8_t gateX;
-    uint8_t gateY;              
-    uint8_t timeToFall;         // How long does gate remain open for.
-};
- 
-struct FloorButton2 {
+struct FloorButton {
     uint8_t frame;              
     uint8_t gateX;
     uint8_t gateY;              
@@ -81,8 +75,7 @@ struct Item {
         struct Sword skeleton;
         struct CollapsingFloor collapsingFloor;
         struct Potion potion;
-        struct FloorButton1 floorButton1;
-        struct FloorButton1 floorButton2;
+        struct FloorButton floorButton;
         struct Spikes spikes;
         struct Blade blade;
         struct ExitDoor_Button exitDoor_Button;

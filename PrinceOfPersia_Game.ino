@@ -1647,14 +1647,14 @@ void game() {
 
                         case ItemType::FloorButton1:
 
-                            itemIdx = level.getItem(ItemType::Gate, item.data.floorButton1.gateX, item.data.floorButton1.gateY);
+                            itemIdx = level.getItem(ItemType::Gate, item.data.floorButton.gateX, item.data.floorButton.gateY);
 
                             if (itemIdx != Constants::NoItemFound) {
 
                                 Item &gate = level.getItem(itemIdx);
 
-                                item.data.floorButton1.frame = 1;
-                                item.data.floorButton1.timeToFall = Constants::FallingTileSteppedOn;
+                                item.data.floorButton.frame = 1;
+                                item.data.floorButton.timeToFall = Constants::FallingTileSteppedOn;
                                 gate.data.gate.closingDelay = 64;
                                 gate.data.gate.closingDelayMax = 64;
 
@@ -1664,16 +1664,47 @@ void game() {
 
                         case ItemType::FloorButton2:
 
-                            itemIdx = level.getItem(ItemType::Gate, item.data.floorButton2.gateX, item.data.floorButton2.gateY);
+                            itemIdx = level.getItem(ItemType::Gate, item.data.floorButton.gateX, item.data.floorButton.gateY);
 
                             if (itemIdx != Constants::NoItemFound) {
 
                                 Item &gate = level.getItem(itemIdx);
 
-                                item.data.floorButton2.frame = 1;
-                                item.data.floorButton2.timeToFall = Constants::FallingTileSteppedOn;
+                                item.data.floorButton.frame = 1;
+                                item.data.floorButton.timeToFall = Constants::Button2FaillingTime;
                                 gate.data.gate.closingDelay = 10;
                                 gate.data.gate.closingDelayMax = 255;
+
+                            }
+
+                            break;
+
+                        case ItemType::FloorButton3:
+
+                            itemIdx = level.getItem(ItemType::Gate_StayOpen, item.data.floorButton.gateX, item.data.floorButton.gateY);
+
+                            if (itemIdx != Constants::NoItemFound) {
+
+                                Item &gate = level.getItem(itemIdx);
+                              
+                                if (gate.data.gate.closingDelay == 0) {
+                                    
+                                    if (gate.data.gate.position == 9) {
+
+                                        gate.data.gate.direction = Direction::Down;
+                                        
+                                    }
+                                    else if (gate.data.gate.position == 0) {
+                                        
+                                        gate.data.gate.direction = Direction::Up;
+
+                                    }
+
+                                    gate.data.gate.closingDelay = 64;
+                                    item.data.floorButton.frame = 1;
+                                    item.data.floorButton.timeToFall = Constants::Button2FaillingTime;
+
+                                }
 
                             }
 

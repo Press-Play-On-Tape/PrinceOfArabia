@@ -114,6 +114,7 @@ void render(bool enemyIsVisible) {
                     break;
 
                 case ItemType::Gate:
+                case ItemType::Gate_StayOpen:
                     FX::drawBitmap(xLoc - 5, yLoc, Images::Gates, item.data.gate.position, dbmMasked);
                     break;
 
@@ -146,16 +147,17 @@ void render(bool enemyIsVisible) {
                     break;
 
                 case ItemType::FloorButton1:
+                case ItemType::FloorButton3:
                 case ItemType::ExitDoor_Button:
-                    FX::drawBitmap(xLoc, yLoc + item.data.floorButton1.frame - 1, Images::FloorButton_0_00 + (item.data.floorButton1.frame * (Images::FloorButton_0_01 - Images::FloorButton_0_00)), 0, dbmMasked);
+                    FX::drawBitmap(xLoc, yLoc + item.data.floorButton.frame - 1, Images::FloorButton_0_00 + (item.data.floorButton.frame * (Images::FloorButton_0_01 - Images::FloorButton_0_00)), 0, dbmMasked);
                     break;
 
                 case ItemType::ExitDoor_Button_Cropped:
-                    FX::drawBitmap(xLoc, yLoc + item.data.floorButton1.frame - 1, Images::FloorButton_2_00 + (item.data.floorButton1.frame * (Images::FloorButton_2_01 - Images::FloorButton_2_00)), 0, dbmMasked);
+                    FX::drawBitmap(xLoc, yLoc + item.data.floorButton.frame - 1, Images::FloorButton_2_00 + (item.data.floorButton.frame * (Images::FloorButton_2_01 - Images::FloorButton_2_00)), 0, dbmMasked);
                     break;
 
                 case ItemType::FloorButton2:
-                    FX::drawBitmap(xLoc - item.data.floorButton2.frame, yLoc + item.data.floorButton2.frame, Images::FloorButton_1_00 + (item.data.floorButton2.frame * (Images::FloorButton_1_01 - Images::FloorButton_1_00)), 0, dbmMasked);
+                    FX::drawBitmap(xLoc - item.data.floorButton.frame, yLoc + item.data.floorButton.frame, Images::FloorButton_1_00 + (item.data.floorButton.frame * (Images::FloorButton_1_01 - Images::FloorButton_1_00)), 0, dbmMasked);
                     break;
 
                 default: break;

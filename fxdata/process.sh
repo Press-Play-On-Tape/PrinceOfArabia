@@ -43,6 +43,20 @@ line2=$((line+1))
 cp temp2.txt temp.txt
 
 
+#
+# Level 4
+#
+line=$(grep -n '<insert Level4_BG.csv>' temp.txt | cut -d ":" -f 1)
+line2=$((line+1))
+{ head -n $(($line-1)) temp.txt; cat ../levels/Level4_BG.csv; tail -n +$line2 temp.txt; } > temp2.txt
+cp temp2.txt temp.txt
+#
+line=$(grep -n '<insert Level4_FG.csv>' temp.txt | cut -d ":" -f 1)
+line2=$((line+1))
+{ head -n $(($line-1)) temp.txt; cat ../levels/Level4_FG.csv; tail -n +$line2 temp.txt; } > temp2.txt
+cp temp2.txt temp.txt
+
+
 
 #
 # Cut scenes

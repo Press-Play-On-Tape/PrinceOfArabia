@@ -340,6 +340,39 @@ struct Level {
 
                 }
 
+                // Level 4
+
+                if (this->level == 4) {
+
+                    // enemy.init(104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
+                    // enemy.init(80 + (40 * Constants::TileWidth), 25 + (0 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
+
+                    // Normal starting pos
+                    prince.init(46, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    this->init(prince, 120, 9, 10, 0); 
+
+                    // Three blades
+                    // prince.init(10, 87, Direction::Right, Stance::Crouch_3_End, 3, clearSword);     
+                    // this->init(prince, 90, 15, 80, 0); 
+
+                    // Three blades
+                    // prince.init(10, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    // this->init(prince, 90, 15, 60, 3); 
+
+                    // Top Left
+                    // prince.init(10, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    // this->init(prince, 90, 15, 20, 3); 
+
+                    // // Biggest jump
+                    // prince.init(10 + (8*12), 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    // this->init(prince, 90, 15, 20, 3); 
+
+                    // Exit Button
+                    // prince.init(10 + (4*12), 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    // this->init(prince, 90, 15, 0, 6); 
+
+                }
+
             #endif
 
         }
@@ -441,9 +474,14 @@ struct Level {
                                 }
                                 else if (item.data.gate.closingDelay > 0 && item.data.gate.closingDelay <= 9) {
 
-                                    if (item.data.gate.position > 0 ) {
+                                    if (item.data.gate.position >= 3 ) {
 
-                                        item.data.gate.position--;
+                                        item.data.gate.position = item.data.gate.position - 3;
+                                        
+                                    }
+                                    else if (item.data.gate.position < 3) {
+
+                                        item.data.gate.position = 0;
                                         
                                     }
                                     
@@ -456,6 +494,31 @@ struct Level {
                                     item.data.gate.closingDelay--;
 
                                 }
+
+                            }
+                            break;
+
+                        case ItemType::Gate_StayOpen:
+
+                            if (arduboy.isFrameCount(4)) {
+
+                                if (item.data.gate.direction == Direction::Up && item.data.gate.position < 9) {
+
+                                    item.data.gate.position++;
+                                    
+                                }
+                                else if (item.data.gate.direction == Direction::Down && item.data.gate.position > 0) {
+
+                                    item.data.gate.position--;
+
+                                }
+
+                                if (item.data.gate.closingDelay > 0) {
+
+                                    item.data.gate.closingDelay--;
+
+                                }
+
                             }
                             break;
 
@@ -522,16 +585,16 @@ struct Level {
 
                             if (arduboy.isFrameCount(4)) {
 
-                                if (item.data.floorButton1.timeToFall > 1) {
+                                if (item.data.floorButton.timeToFall > 1) {
 
-                                    item.data.floorButton1.timeToFall--;
+                                    item.data.floorButton.timeToFall--;
 
                                 }
 
-                                if (item.data.floorButton1.timeToFall == 1) {
+                                if (item.data.floorButton.timeToFall == 1) {
                                 
-                                    item.data.floorButton1.frame = 0;
-                                    item.data.floorButton1.timeToFall = 0;
+                                    item.data.floorButton.frame = 0;
+                                    item.data.floorButton.timeToFall = 0;
 
                                 }
 
@@ -542,16 +605,16 @@ struct Level {
 
                             if (arduboy.isFrameCount(4)) {
 
-                                if (item.data.floorButton2.timeToFall > 1) {
+                                if (item.data.floorButton.timeToFall > 1) {
 
-                                    item.data.floorButton2.timeToFall--;
+                                    item.data.floorButton.timeToFall--;
 
                                 }
 
-                                if (item.data.floorButton2.timeToFall == 1) {
+                                if (item.data.floorButton.timeToFall == 1) {
                                 
-                                    item.data.floorButton2.frame = 0;
-                                    item.data.floorButton2.timeToFall = 0;
+                                    item.data.floorButton.frame = 0;
+                                    item.data.floorButton.timeToFall = 0;
 
                                 }
 
@@ -846,6 +909,12 @@ struct Level {
                         item.data.gate.closingDelayMax = 255;
                         break;
 
+                    case ItemType::Gate_StayOpen:
+                        item.data.gate.position = FX::readPendingUInt8();
+                        item.data.gate.direction = static_cast<Direction>(FX::readPendingUInt8());
+                        item.data.gate.closingDelay = 0;
+                        break;
+
                     case ItemType::CollapsingFloor:
                         item.data.collapsingFloor.timeToFall = 0;
                         item.data.collapsingFloor.frame = 0;
@@ -854,17 +923,12 @@ struct Level {
                         break;
 
                     case ItemType::FloorButton1:
-                        item.data.floorButton1.frame = 0;
-                        item.data.floorButton1.gateX = FX::readPendingUInt8();
-                        item.data.floorButton1.gateY = FX::readPendingUInt8();
-                        item.data.floorButton1.timeToFall = 0;
-                        break;
-
                     case ItemType::FloorButton2:
-                        item.data.floorButton2.frame = 0;
-                        item.data.floorButton2.gateX = FX::readPendingUInt8();
-                        item.data.floorButton2.gateY = FX::readPendingUInt8();
-                        item.data.floorButton2.timeToFall = 0;
+                    case ItemType::FloorButton3:
+                        item.data.floorButton.frame = 0;
+                        item.data.floorButton.gateX = FX::readPendingUInt8();
+                        item.data.floorButton.gateY = FX::readPendingUInt8();
+                        item.data.floorButton.timeToFall = 0;
                         break;
                     
                     case ItemType::Spikes:
