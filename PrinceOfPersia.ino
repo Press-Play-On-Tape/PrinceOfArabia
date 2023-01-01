@@ -44,7 +44,7 @@ MenuItem menu;
 void setup() {
 
     arduboy.boot();
-    arduboy.display();
+    arduboy.display(CLEAR_BUFFER);
     arduboy.systemButtons();
 
     #ifndef SAVE_MEMORY_SOUND

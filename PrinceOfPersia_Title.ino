@@ -34,18 +34,16 @@ void title() {
 
         case TitleScreenMode::Intro:
             
-            if ((justPressed & A_BUTTON) || (justPressed & B_BUTTON)) {
+            if (justPressed & (LEFT_BUTTON | RIGHT_BUTTON | A_BUTTON | B_BUTTON)) {
                 titleScreenVars.setMode(TitleScreenMode::Main, level);
             }
 
             if (justPressed & LEFT_BUTTON) {
                 titleScreenVars.option = TitleScreenOptions::Play;
-                titleScreenVars.setMode(TitleScreenMode::Main, level);
             }
 
             if (justPressed & RIGHT_BUTTON) {
                 titleScreenVars.option = TitleScreenOptions::Credits;
-                titleScreenVars.setMode(TitleScreenMode::Main, level);
             }
 
             break;
@@ -65,7 +63,7 @@ void title() {
                 #ifdef SAVE_MEMORY_OTHER
                     case TitleScreenOptions::Play:
 
-                        if ((justPressed & A_BUTTON) || (justPressed & B_BUTTON)) {
+                        if (justPressed & (A_BUTTON | B_BUTTON)) {
                             gamePlay.gameState = GameState::Game_Init;
                         }
 
@@ -75,7 +73,7 @@ void title() {
                 
                     case TitleScreenOptions::Play:
 
-                        if ((justPressed & A_BUTTON) || (justPressed & B_BUTTON)) {
+                        if (justPressed & (A_BUTTON | B_BUTTON)) {
 
                             #ifndef SAVE_MEMORY_SOUND
                                 sound.tonesFromFX(Sounds::Seque);
@@ -89,7 +87,7 @@ void title() {
                 
                     case TitleScreenOptions::Credits:
                         
-                        if ((justPressed & A_BUTTON) || (justPressed & B_BUTTON)) {
+                        if (justPressed & (A_BUTTON | B_BUTTON)) {
                             titleScreenVars.setMode(TitleScreenMode::Credits, level);
                             titleScreenVars.count = 0;
                         }
@@ -108,7 +106,7 @@ void title() {
 
             case TitleScreenMode::Credits:
 
-                if ((justPressed & A_BUTTON) || (justPressed & B_BUTTON)) {
+                if (justPressed & (A_BUTTON | B_BUTTON)) {
                     titleScreenVars.setMode(TitleScreenMode::Main, level);
                 }
 
@@ -116,7 +114,7 @@ void title() {
 
             case TitleScreenMode::IntroGame_1A:
 
-                if ((justPressed & A_BUTTON) || (justPressed & B_BUTTON)) {
+                if (justPressed & (A_BUTTON | B_BUTTON)) {
 
                     #ifndef SAVE_MEMORY_SOUND
                         sound.tonesFromFX(Sounds::Seque);
@@ -131,7 +129,7 @@ void title() {
 
             case TitleScreenMode::CutScene_1:
 
-                if ((justPressed & A_BUTTON) || (justPressed & B_BUTTON)) {
+                if (justPressed & (A_BUTTON | B_BUTTON)) {
                     titleScreenVars.setMode(TitleScreenMode::IntroGame_1B, level);
                     gamePlay.gameState = GameState::Game_Init; 
                 }
@@ -140,7 +138,7 @@ void title() {
 
             case TitleScreenMode::IntroGame_1B:
 
-                if ((justPressed & A_BUTTON) || (justPressed & B_BUTTON)) {
+                if (justPressed & (A_BUTTON | B_BUTTON)) {
                     gamePlay.gameState = GameState::Game_Init; 
                 }
 
@@ -151,7 +149,7 @@ void title() {
             case TitleScreenMode::CutScene_4:
             case TitleScreenMode::CutScene_5:
 
-                if ((justPressed & A_BUTTON) || (justPressed & B_BUTTON)) {
+                if (justPressed & (A_BUTTON | B_BUTTON)) {
                     gamePlay.gameState = GameState::Game_StartLevel; 
                 }
 
