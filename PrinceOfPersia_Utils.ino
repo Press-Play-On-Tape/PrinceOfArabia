@@ -4,10 +4,11 @@
 
 #include "src/utils/Constants.h"
 #include "src/utils/Stack.h"
+#include "src/entities/GamePlay.h"
 #include "src/entities/Entities.h"
 #include "src/fonts/Font3x5.h"
 
-void testScroll(Prince &prince, Level &level) {
+void testScroll(GamePlay &gamePlay, Prince &prince, Level &level) {
 
 
     // Have we scrolled to another screen ?
@@ -16,7 +17,7 @@ void testScroll(Prince &prince, Level &level) {
 
         prince.incY(- Constants::TileHeight * 3);
         level.setYLocation(level.getYLocation() + 3);
-        level.loadMap();
+        level.loadMap(gamePlay);
         level.setYOffset(0);
         level.setYOffsetDir(Direction::None);
 
@@ -25,7 +26,7 @@ void testScroll(Prince &prince, Level &level) {
 
         prince.incY(Constants::TileHeight * 3);
         level.setYLocation(level.getYLocation() - 3);
-        level.loadMap();
+        level.loadMap(gamePlay);
         level.setYOffset(Constants::TileHeight);
         level.setYOffsetDir(Direction::None);
 
@@ -34,14 +35,14 @@ void testScroll(Prince &prince, Level &level) {
 
         prince.incX(Constants::TileWidth * Constants::ScreenWidthInTiles);
         level.setXLocation(level.getXLocation() - 10);
-        level.loadMap();
+        level.loadMap(gamePlay);
 
     }
     else if (prince.getX() > Constants::TileWidth * Constants::ScreenWidthInTiles) {
 
         prince.incX(-Constants::TileWidth * Constants::ScreenWidthInTiles);
         level.setXLocation(level.getXLocation() + 10);
-        level.loadMap();
+        level.loadMap(gamePlay);
 
     }
 

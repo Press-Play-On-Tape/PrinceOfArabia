@@ -152,7 +152,7 @@ void title() {
             case TitleScreenMode::CutScene_5:
 
                 if ((justPressed & A_BUTTON) || (justPressed & B_BUTTON)) {
-                    gamePlay.gameState = GameState::Game_Init; 
+                    gamePlay.gameState = GameState::Game_StartLevel; 
                 }
 
                 break;
@@ -258,7 +258,7 @@ void title() {
 
                 if (titleScreenVars.update(arduboy.isFrameCount(3))) {
 
-                    gamePlay.gameState = GameState::Game_Init; 
+                    gamePlay.gameState = GameState::Game_StartLevel; 
                     titleScreenVars.count = 0;
                     fadeEffect.reset();
 
@@ -296,7 +296,7 @@ void title() {
                 
                 if (titleScreenVars.update(arduboy.isFrameCount(3))) {
 
-                    gamePlay.gameState = GameState::Game_Init; 
+                    gamePlay.gameState = GameState::Game_StartLevel; 
                     titleScreenVars.count = 0;
                     fadeEffect.reset();
 
@@ -312,7 +312,7 @@ void title() {
 
                 if (titleScreenVars.update(arduboy.isFrameCount(12))) {
 
-                    gamePlay.gameState = GameState::Game_Init; 
+                    gamePlay.gameState = GameState::Game_StartLevel; 
                     titleScreenVars.count = 0;
                     fadeEffect.reset();
 
@@ -328,7 +328,7 @@ void title() {
                 
                 if (titleScreenVars.update(arduboy.isFrameCount(3))) {
 
-                    gamePlay.gameState = GameState::Game_Init; 
+                    gamePlay.gameState = GameState::Game_StartLevel; 
                     titleScreenVars.count = 0;
                     fadeEffect.reset();
 

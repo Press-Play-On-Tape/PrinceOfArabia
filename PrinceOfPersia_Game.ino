@@ -10,10 +10,9 @@
 
 
 void game_Init() {
-
+// Serial.println("game_Init");
     gamePlay.init(arduboy, 1);
-    level.setLevel(1);
-    level.init_PositionChars(prince, enemy, true);
+    level.init_PositionChars(gamePlay, prince, enemy, true);
 
     gamePlay.gameState = GameState::Game;
     menu.init();
@@ -23,9 +22,9 @@ void game_Init() {
 }
 
 void game_StartLevel() {
-
+// Serial.println("game_StartLevel");
     gamePlay.restartLevel(arduboy);
-    level.init_PositionChars(prince, enemy, false);
+    level.init_PositionChars(gamePlay, prince, enemy, false);
 
     gamePlay.gameState = GameState::Game;
     menu.init();
@@ -56,7 +55,7 @@ void game() {
 
     // Have we scrolled to another screen ?
 
-    testScroll(prince, level);
+    testScroll(gamePlay, prince, level);
 
 
     #ifdef ALT_B_BUTTON
@@ -1285,6 +1284,7 @@ void game() {
                     gamePlay.gameState = GameState::Title;
                     titleScreenVars.setMode(static_cast<TitleScreenMode>(static_cast<uint8_t>(titleScreenVars.getMode()) + 1), level);
                     gamePlay.incLevel();
+// Serial.println("incLevel");                    
                     break;
 
                 case Stance::Upright_Turn:
@@ -1857,7 +1857,7 @@ void game() {
 
                                     initFlash(prince, level, FlashType::SwordFight);
 
-                                    if (prince.decHealth(0) == 0) { //SJH
+                                    if (prince.decHealth(1) == 0) {
 
                                         pushDead(prince, level, gamePlay, true);
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../utils/Arduboy2Ext.h"
+#include "GamePlay.h"   
 #include "Prince.h"   
 #include "Enemy.h"   
 #include "../utils/Constants.h"
@@ -68,7 +69,7 @@ struct Level {
 
     private:
 
-        uint8_t level = 0;
+        //uint8_t level = 0;
         uint8_t width = 60;
         uint8_t height = 0;
         uint8_t xLoc = 60;
@@ -84,7 +85,7 @@ struct Level {
 
     public:
 
-        uint8_t getLevel()                      { return this->level; }
+        //uint8_t getLevel()                      { return this->level; }
         uint8_t getWidth()                      { return this->width; }
         uint8_t getHeight()                     { return this->height; }
         uint8_t getXLocation()                  { return this->xLoc; }
@@ -95,7 +96,7 @@ struct Level {
         Item &getItem(uint8_t idx)              { return this->items[idx]; }
         Direction getYDirection()               { return this->yOffsetDir; }
 
-        void setLevel(uint8_t val)              { this->level = val; }
+        //void setLevel(uint8_t val)              { this->level = val; }
         void setWidth(uint8_t val)              { this->width = val; }
         void setHeight(uint8_t val)             { this->height = val; }
         void setXLocation(uint8_t val)          { this->xLoc = val; }
@@ -116,8 +117,8 @@ struct Level {
                 this->xLoc = xLoc;
                 this->yLoc = yLoc;
 
-                this->loadMap();
-                this->loadItems();
+                this->loadMap(gamePlay);
+                this->loadItems(gamePlay);
 
                 if (prince.getY() > 56) {
 
@@ -134,13 +135,13 @@ struct Level {
 
         #endif
 
-        void init_PositionChars(Prince &prince, Enemy &enemy, bool clearSword) {
+        void init_PositionChars(GamePlay &gamePlay, Prince &prince, Enemy &enemy, bool clearSword) {
 
             enemy.init();
 
             #ifdef LEVEL_DATA_FROM_FX
                 
-                FX::seekData(Levels_Utils::getLevel_Data(this->level - 1));
+                FX::seekData(Levels_Utils::getLevel_Data(gamePlay.level - 1));
 
                 {
                     uint8_t xPixel = FX::readPendingUInt8();
@@ -160,8 +161,8 @@ struct Level {
                     this->yLoc = FX::readPendingUInt8();
                     FX::readEnd();
 
-                    this->loadMap();
-                    this->loadItems();
+                    this->loadMap(gamePlay);
+                    this->loadItems(gamePlay);
 
                     if (prince.getY() > 56) {
 
@@ -176,7 +177,7 @@ struct Level {
 
                 }
 
-                FX::seekData(Levels_Utils::getLevel_Data(this->level - 1) + 9);
+                FX::seekData(Levels_Utils::getLevel_Data(gamePlay.level - 1) + 9);
 
                 {
                     uint8_t xTile = FX::readPendingUInt8();
@@ -871,7 +872,7 @@ struct Level {
 
         }
 
-        void loadItems() {
+        void loadItems(GamePlay &gamePlay) {
 
 
             // Deactivate all items ..            
@@ -883,7 +884,7 @@ struct Level {
             this->sign.counter = 0;
 
             uint8_t itemIdx = 0;
-            FX::seekData(Levels_Utils::getLevel_Items(this->level - 1));
+            FX::seekData(Levels_Utils::getLevel_Items(gamePlay.level - 1));
             uint8_t itemType = FX::readPendingUInt8();
 
             while (itemType != 255) {
@@ -950,7 +951,7 @@ struct Level {
 
         }
 
-        void loadMap() {
+        void loadMap(GamePlay &gamePlay) {
 
 
             // Background ..
@@ -970,7 +971,7 @@ struct Level {
 
                     if (this->xLoc == 0) {
 
-                        FX::seekData(static_cast<uint24_t>(Levels_Utils::getLevel_BG(this->level - 1) + (y * this->width) + this->xLoc));
+                        FX::seekData(static_cast<uint24_t>(Levels_Utils::getLevel_BG(gamePlay.level - 1) + (y * this->width) + this->xLoc));
 
                         for (uint8_t x = 0; x < 16; x++) {
 
@@ -993,7 +994,7 @@ struct Level {
                     }
                     else {
 
-                        FX::seekData(static_cast<uint24_t>(Levels_Utils::getLevel_BG(this->level - 1) + (y * this->width) + this->xLoc - 3));
+                        FX::seekData(static_cast<uint24_t>(Levels_Utils::getLevel_BG(gamePlay.level - 1) + (y * this->width) + this->xLoc - 3));
 
                         for (uint8_t x = 0; x < 16; x++) {
 
@@ -1028,7 +1029,7 @@ struct Level {
 
                     if (this->xLoc == 0) {
 
-                        FX::seekData(static_cast<uint24_t>(Levels_Utils::getLevel_FG(this->level - 1) + (y * this->width) + this->xLoc));
+                        FX::seekData(static_cast<uint24_t>(Levels_Utils::getLevel_FG(gamePlay.level - 1) + (y * this->width) + this->xLoc));
 
                         for (uint8_t x = 0; x < 16; x++) {
 
@@ -1051,7 +1052,7 @@ struct Level {
                     }
                     else {
 
-                        FX::seekData(static_cast<uint24_t>(Levels_Utils::getLevel_FG(this->level - 1) + (y * this->width) + this->xLoc - 3));
+                        FX::seekData(static_cast<uint24_t>(Levels_Utils::getLevel_FG(gamePlay.level - 1) + (y * this->width) + this->xLoc - 3));
 
                         for (uint8_t x = 0; x < 16; x++) {
 

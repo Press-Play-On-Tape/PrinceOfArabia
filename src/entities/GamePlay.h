@@ -6,7 +6,7 @@
 struct GamePlay {
 
     GameState gameState = GameState::SplashScreen_Init;
-
+    
     uint16_t frameCount = 0;
     uint8_t grab = 3;
     uint8_t level = 1;
