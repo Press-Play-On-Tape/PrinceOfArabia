@@ -22,12 +22,12 @@ void render(bool enemyIsVisible) {
             switch (bgTile) {
 
                 case 0 ... 123:
-                   FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon_00 + (Images::xTiles_Ref[bgTile] * 100), 0, dbmMasked);
+                   FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tiles_Dungeon, Images::xTiles_Ref[bgTile], dbmMasked);
                    break;
 
                 case 124:
                 case 127:
-                   FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon_99_00 + ((arduboy.getFrameCount(15, (x + 2)) / 5) * 100), 0, dbmMasked);
+                   FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tiles_Dungeon_Torch, (arduboy.getFrameCount(15, (x + 2)) / 5), dbmMasked);
                    break;
 
             }
@@ -122,7 +122,7 @@ void render(bool enemyIsVisible) {
                     break;
 
                 case ItemType::EntryDoor_Cropped:
-                    FX::drawBitmap(xLoc + 1, yLoc - 14, Images::ExitDoor_12_Cropped, 0, dbmNormal);
+                    FX::drawBitmap(xLoc + 1, yLoc - 14, Images::ExitDoors, Images::ExitDoorsFrames - 1, dbmNormal);
                     break;
 
                 case ItemType::CollapsingFloor:
@@ -171,11 +171,8 @@ void render(bool enemyIsVisible) {
 
     uint16_t stance = prince.getStance();
     uint16_t imageIndex = static_cast<uint16_t>(pgm_read_byte(&Constants::StanceToImageXRef[stance]));
-    uint24_t startPos = 0;
 
     if (imageIndex != 0) {
-
-        startPos = Images::Prince_Left_001 + ((imageIndex - 1) * static_cast<uint24_t>(364));
 
         #if defined(DEBUG) && defined(DEBUG_PRINCE_RENDERING)
         DEBUG_PRINT(F("Stance: "));
@@ -184,13 +181,16 @@ void render(bool enemyIsVisible) {
         DEBUG_PRINTLN(imageIndex);
         #endif
 
-        if (prince.getDirection() != Direction::Left) {
+        if (prince.getDirection() == Direction::Left) {
             
-            startPos = startPos + Constants::LeftRightOffset;
+            FX::drawBitmap(prince.getXImage(), prince.getYImage() - level.getYOffset() + Constants::ScreenTopOffset, Images::Prince_Left, imageIndex - 1, dbmMasked);
 
         }
+        else {
+            
+            FX::drawBitmap(prince.getXImage(), prince.getYImage() - level.getYOffset() + Constants::ScreenTopOffset, Images::Prince_Right, imageIndex - 1, dbmMasked);
 
-        FX::drawBitmap(prince.getXImage(), prince.getYImage() - level.getYOffset() + Constants::ScreenTopOffset, startPos, 0, dbmMasked);
+        }
 
     }
 
@@ -202,8 +202,6 @@ void render(bool enemyIsVisible) {
 
     if (imageIndex != 0) {
 
-        startPos = Images::Prince_Left_001 + ((imageIndex - 1) * static_cast<uint24_t>(364));
-
         #if defined(DEBUG) && defined(DEBUG_PRINCE_RENDERING)
         DEBUG_PRINT(F("Stance: "));
         DEBUG_PRINT(prince.getStance());
@@ -211,13 +209,17 @@ void render(bool enemyIsVisible) {
         DEBUG_PRINTLN(imageIndex);
         #endif
 
-        if (enemy.getDirection() != Direction::Left) {
+        if (enemy.getDirection() == Direction::Left) {
             
-            startPos = startPos + Constants::LeftRightOffset;
+            FX::drawBitmap(enemy.getXImage() - (level.getXLocation() * Constants::TileWidth), enemy.getYImage() - (level.getYLocation() * Constants::TileHeight)- level.getYOffset() + Constants::ScreenTopOffset, Images::Prince_Left, imageIndex - 1, dbmMasked);
 
         }
+        else {
+            
+            FX::drawBitmap(enemy.getXImage() - (level.getXLocation() * Constants::TileWidth), enemy.getYImage() - (level.getYLocation() * Constants::TileHeight)- level.getYOffset() + Constants::ScreenTopOffset, Images::Prince_Right, 0, dbmMasked);
 
-        FX::drawBitmap(enemy.getXImage() - (level.getXLocation() * Constants::TileWidth), enemy.getYImage() - (level.getYLocation() * Constants::TileHeight)- level.getYOffset() + Constants::ScreenTopOffset, startPos, 0, dbmMasked);
+        }
+        
     }
 
 
@@ -268,7 +270,7 @@ void render(bool enemyIsVisible) {
                         break;
 
                     default:
-                        FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon_00 + (Images::xTiles_Ref[fgTile] * 100), 0, dbmMasked);
+                        FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tiles_Dungeon, Images::xTiles_Ref[fgTile], dbmMasked);
                         break;
 
                 }

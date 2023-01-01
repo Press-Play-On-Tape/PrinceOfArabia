@@ -185,10 +185,10 @@ void title() {
                 renderTorches(7, 119, 39);
                 renderTorches(14, 112, 34);
 
-                FX::drawBitmap(  0, 54, Images::Tile_Dungeon_12, 0, dbmMasked);
-                FX::drawBitmap( 12, 54, Images::Tile_Dungeon_13, 0, dbmMasked);
-                FX::drawBitmap(105, 54, Images::Tile_Dungeon_12, 0, dbmMasked);
-                FX::drawBitmap(117, 54, Images::Tile_Dungeon_13, 0, dbmMasked);
+                FX::drawBitmap(  0, 54, Images::Tiles_Dungeon, 12, dbmMasked);
+                FX::drawBitmap( 12, 54, Images::Tiles_Dungeon, 13, dbmMasked);
+                FX::drawBitmap(105, 54, Images::Tiles_Dungeon, 12, dbmMasked);
+                FX::drawBitmap(117, 54, Images::Tiles_Dungeon, 13, dbmMasked);
 
                 FX::drawBitmap(27, -titleScreenVars.count, Images::Title_Credits, 0, dbmNormal);
                 FX::drawBitmap(0, 0, Images::Title_PoP, 0, dbmMasked);
@@ -338,10 +338,9 @@ void title() {
 
             case TitleScreenMode::CutScene_9:
                 {
-                    uint24_t startPos = Images::Prince_Left_001 + ((static_cast<uint24_t>(titleScreenVars.prince.image) - 1) * static_cast<uint24_t>(364));
 
                     renderChamberBG();
-                    FX::drawBitmap(titleScreenVars.prince.x, 29, startPos, 0, dbmMasked);
+                    FX::drawBitmap(titleScreenVars.prince.x, 29, Images::Prince_Left, titleScreenVars.prince.image - 1, dbmMasked);
                     FX::drawBitmap(titleScreenVars.princess.x, 28, Images::Princess, titleScreenVars.princess.image, dbmMasked);
                     renderChamberFG();
 

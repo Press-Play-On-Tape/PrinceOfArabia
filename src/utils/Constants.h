@@ -823,8 +823,6 @@ constexpr uint16_t  Upright_Turn             = 1255;
 
 namespace Constants {
 
-    constexpr uint24_t LeftRightOffset = (Images::Prince_Right_001 - Images::Prince_Left_001);
-
     constexpr uint8_t EnemyCount = 5;
     constexpr uint8_t StackSize = 30;
     constexpr uint8_t StrikeDistance = 20;
