@@ -202,7 +202,7 @@ namespace Levels {
 
     uint8_t level3_Data[] = {
         // Prince
-        58,                         // Prince starting x pos
+        56,                         // Prince starting x pos
         87,                         // Prince starting y pos (25, 56, 87)
         2,                          // Prince starting direction, 1 Left and 2 Right
         3,                          // Prince starting stance, 3 Crouch_3_End

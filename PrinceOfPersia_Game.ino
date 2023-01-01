@@ -11,8 +11,8 @@
 
 void game_Init() {
 
-    gamePlay.init(arduboy, 3);
-    level.setLevel(3);
+    gamePlay.init(arduboy, 1);
+    level.setLevel(1);
     level.init_PositionChars(prince, enemy, true);
 
     gamePlay.gameState = GameState::Game;
