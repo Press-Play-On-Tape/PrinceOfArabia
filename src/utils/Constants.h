@@ -850,6 +850,9 @@ namespace Constants {
     constexpr uint8_t SpikeClosingDelay = 32;
     constexpr uint8_t FallingTileAbove = 96;
     constexpr uint8_t FallingTileSteppedOn = 24;
+    constexpr uint8_t Button2FaillingTime = 24;
+
+    
 
     const uint8_t StanceToImageXRef[] PROGMEM  = {
         0, 
