@@ -18,7 +18,7 @@ void renderChamberBG() {
 void renderChamberFG(uint8_t hourglassX = 0, uint8_t hourglassIdx = 0) {
 
     FX::drawBitmap(0, 0, Images::Chambers_FG, 0, dbmMasked);
-    if (hourglassX > 0) FX::drawBitmap(hourglassX, 40, Images::HourGlass_00 + (hourglassIdx * 118), 0, dbmMasked);
+    if (hourglassX > 0) FX::drawBitmap(hourglassX, 40, Images::HourGlasses, hourglassIdx, dbmMasked);
 
 }
 
@@ -185,10 +185,10 @@ void title() {
                 renderTorches(7, 119, 39);
                 renderTorches(14, 112, 34);
 
-                FX::drawBitmap(  0, 54, Images::Tile_Dungeon_12, 0, dbmMasked);
-                FX::drawBitmap( 12, 54, Images::Tile_Dungeon_13, 0, dbmMasked);
-                FX::drawBitmap(105, 54, Images::Tile_Dungeon_12, 0, dbmMasked);
-                FX::drawBitmap(117, 54, Images::Tile_Dungeon_13, 0, dbmMasked);
+                FX::drawBitmap(  0, 54, Images::Tiles_Dungeon, 12, dbmMasked);
+                FX::drawBitmap( 12, 54, Images::Tiles_Dungeon, 13, dbmMasked);
+                FX::drawBitmap(105, 54, Images::Tiles_Dungeon, 12, dbmMasked);
+                FX::drawBitmap(117, 54, Images::Tiles_Dungeon, 13, dbmMasked);
 
                 FX::drawBitmap(27, -titleScreenVars.count, Images::Title_Credits, 0, dbmNormal);
                 FX::drawBitmap(0, 0, Images::Title_PoP, 0, dbmMasked);
@@ -214,8 +214,8 @@ void title() {
             case TitleScreenMode::CutScene_1:
 
                 renderChamberBG();
-                FX::drawBitmap(titleScreenVars.princess.x, 28, Images::Princess_00 + (titleScreenVars.princess.image * 260), 0, dbmMasked);
-                FX::drawBitmap(titleScreenVars.zaffar.x, 28, Images::Zaffar_00 + (titleScreenVars.zaffar.image * 260), 0, dbmMasked);
+                FX::drawBitmap(titleScreenVars.princess.x, 28, Images::Princess, titleScreenVars.princess.image, dbmMasked);
+                FX::drawBitmap(titleScreenVars.zaffar.x, 28, Images::Zaffar, titleScreenVars.zaffar.image, dbmMasked);
                 renderChamberFG(titleScreenVars.count >= 169 ? 54 : 0);
 
                 if (titleScreenVars.update(arduboy.isFrameCount(3))) {
@@ -247,10 +247,10 @@ void title() {
                 renderChamberBG();
 
                 if (arduboy.getFrameCountHalf(24)) {
-                    FX::drawBitmap(titleScreenVars.princess.x, 28, Images::Princess_04, 0, dbmMasked);
+                    FX::drawBitmap(titleScreenVars.princess.x, 28, Images::Princess, 4, dbmMasked);
                 }
                 else {
-                    FX::drawBitmap(titleScreenVars.princess.x, 28, Images::Princess_09, 0, dbmMasked);
+                    FX::drawBitmap(titleScreenVars.princess.x, 28, Images::Princess, 9, dbmMasked);
                 }
 
                 renderChamberFG(53, 1);
@@ -275,19 +275,19 @@ void title() {
                     case 0 ... 30:
                     case 37 ... 67:
                     case 74 ... 255:
-                        FX::drawBitmap(52, 24, Images::Princess_10, 0, dbmMasked);
+                        FX::drawBitmap(52, 24, Images::Princess, 10, dbmMasked);
                         break;
 
                     case 31 ... 32:
                     case 35 ... 36:
                     case 68 ... 69:
                     case 72 ... 73:
-                        FX::drawBitmap(52, 24, Images::Princess_24, 0, dbmMasked);
+                        FX::drawBitmap(52, 24, Images::Princess, 24, dbmMasked);
                         break;
 
                     case 33 ... 34:
                     case 70 ... 71:
-                        FX::drawBitmap(52, 24, Images::Princess_25, 0, dbmMasked);
+                        FX::drawBitmap(52, 24, Images::Princess, 25, dbmMasked);
                         break;
 
                 }
@@ -307,7 +307,7 @@ void title() {
             case TitleScreenMode::CutScene_4:
 
                 renderChamberBG();
-                FX::drawBitmap(titleScreenVars.princess.x, 28, Images::Princess_Sleep_00 + ((titleScreenVars.count % 7) * 260), 0, dbmMasked);
+                FX::drawBitmap(titleScreenVars.princess.x, 28, Images::Princess, 26 + (titleScreenVars.count % 7), dbmMasked);
                 renderChamberFG(54);
 
                 if (titleScreenVars.update(arduboy.isFrameCount(12))) {
@@ -323,7 +323,7 @@ void title() {
             case TitleScreenMode::CutScene_5:
 
                 renderChamberBG();
-                FX::drawBitmap(titleScreenVars.princess.x, 28, Images::Princess_Bounce_00 + ((titleScreenVars.count % 16) * 388), 0, dbmMasked);
+                FX::drawBitmap(titleScreenVars.princess.x, 28, Images::Princess_Bounce, (titleScreenVars.count % 16), dbmMasked);
                 renderChamberFG(63, 1);
                 
                 if (titleScreenVars.update(arduboy.isFrameCount(3))) {
@@ -338,11 +338,10 @@ void title() {
 
             case TitleScreenMode::CutScene_9:
                 {
-                    uint24_t startPos = Images::Prince_Left_001 + ((static_cast<uint24_t>(titleScreenVars.prince.image) - 1) * static_cast<uint24_t>(364));
 
                     renderChamberBG();
-                    FX::drawBitmap(titleScreenVars.prince.x, 29, startPos, 0, dbmMasked);
-                    FX::drawBitmap(titleScreenVars.princess.x, 28, Images::Princess_00 + (titleScreenVars.princess.image * 260), 0, dbmMasked);
+                    FX::drawBitmap(titleScreenVars.prince.x, 29, Images::Prince_Left, titleScreenVars.prince.image - 1, dbmMasked);
+                    FX::drawBitmap(titleScreenVars.princess.x, 28, Images::Princess, titleScreenVars.princess.image, dbmMasked);
                     renderChamberFG();
 
                     if (titleScreenVars.update(arduboy.isFrameCount(4))) {
@@ -365,34 +364,34 @@ void title() {
 
                         case 190 ... 193:
                         case 198 ... 201:
-                            FX::drawBitmap(heart.x, heart.y, Images::Heart_02, 0, dbmNormal);
+                            FX::drawBitmap(heart.x, heart.y, Images::Hearts, 2, dbmNormal);
                             break;
 
                         case 194 ... 197:
                         case 202 ... 205:
-                            FX::drawBitmap(heart.x, heart.y, Images::Heart_03, 0, dbmNormal);
+                            FX::drawBitmap(heart.x, heart.y, Images::Hearts, 3, dbmNormal);
                             break;
 
                         case 206:
                         case 208:
                             heart.y--;
-                            FX::drawBitmap(heart.x, heart.y, Images::Heart_01, 0, dbmNormal);
+                            FX::drawBitmap(heart.x, heart.y, Images::Hearts, 1, dbmNormal);
                             break;
 
                         case 207:
                         case 209:
-                            FX::drawBitmap(heart.x, heart.y, Images::Heart_01, 0, dbmNormal);
+                            FX::drawBitmap(heart.x, heart.y, Images::Hearts, 1, dbmNormal);
                             break;
 
                         case 210:
                         case 212:
                             heart.y--;
-                            FX::drawBitmap(heart.x, heart.y, Images::Heart_00, 0, dbmNormal);
+                            FX::drawBitmap(heart.x, heart.y, Images::Hearts, 0, dbmNormal);
                             break;
 
                         case 211:
                         case 213:
-                            FX::drawBitmap(heart.x, heart.y, Images::Heart_00, 0, dbmNormal);
+                            FX::drawBitmap(heart.x, heart.y, Images::Hearts, 0, dbmNormal);
                             break;
 
 

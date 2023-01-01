@@ -1,7 +1,6 @@
 #include <Arduboy2.h>   
 #include <ArduboyFX.h>  
 #include "fxdata/Images.h"  
-#include "fxdata/Levels.h"  
 
 #include "src/utils/Constants.h"
 #include "src/utils/Stack.h"
@@ -22,12 +21,13 @@ void render(bool enemyIsVisible) {
 
             switch (bgTile) {
 
-                case 0 ... 126:
-                   FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon[Images::xTiles_Ref[bgTile]], 0, dbmMasked);
+                case 0 ... 123:
+                   FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tiles_Dungeon, Images::xTiles_Ref[bgTile], dbmMasked);
                    break;
 
+                case 124:
                 case 127:
-                   FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon_50_00 + ((arduboy.getFrameCount(15, (x + 2)) / 5) * 100), 0, dbmMasked);
+                   FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tiles_Dungeon_Torch, (arduboy.getFrameCount(15, (x + 2)) / 5), dbmMasked);
                    break;
 
             }
@@ -36,6 +36,37 @@ void render(bool enemyIsVisible) {
 
     }
 
+
+    // Draw foreground, collpased tiles ..
+
+    for (uint8_t y = 0; y < 4; y++) {
+
+        for (uint8_t x = 0; x < 10; x++) {
+
+            int8_t fgTile = level.getTile(Layer::Foreground, x, y - 1, TILE_NONE);
+
+            if (fgTile >= 0) {
+
+                switch (fgTile) {
+
+                    case 29:
+                        FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon_97, 0, dbmMasked);
+                        break;
+
+                    case 30:
+                        FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon_98, 0, dbmMasked);
+                        break;
+
+                    default:
+                        break;
+
+                }
+
+            }
+
+        }
+
+    }
 
     // Draw items ..
 
@@ -59,10 +90,17 @@ void render(bool enemyIsVisible) {
                 case ItemType::Spikes:
 
                     if (item.data.spikes.imageType == 1) {
-                        FX::drawBitmap(xLoc, yLoc + 14, Images::Spikes_BG_00 + (item.data.spikes.position * 118), 0, dbmMasked);
+                        FX::drawBitmap(xLoc, yLoc + 14, Images::Spikes_BG_Full, item.data.spikes.position, dbmMasked);
                     }
                     else {
-                        FX::drawBitmap(xLoc, yLoc + 14, Images::Spikes_BG_05 + (item.data.spikes.position * 70), 0, dbmMasked);
+                        FX::drawBitmap(xLoc, yLoc + 14, Images::Spikes_BG_Half, item.data.spikes.position, dbmMasked);
+                    }
+                    break;
+
+                case ItemType::Blade:
+
+                    if (item.data.blade.position <= 5) {
+                        FX::drawBitmap(xLoc, yLoc, Images::Blades, abs(item.data.blade.position), dbmMasked);
                     }
                     break;
 
@@ -70,16 +108,25 @@ void render(bool enemyIsVisible) {
                     FX::drawBitmap(xLoc + 5, yLoc + 14, Images::Skeleton, 0, dbmMasked);
                     break;
 
-                case ItemType::ExitDoor:
-                    FX::drawBitmap(xLoc + 1, yLoc - 14, Images::ExitDoor_00 + (item.data.exitDoor.position * 129), 0, dbmNormal);
+                case ItemType::ExitDoor_SelfOpen:
+                case ItemType::ExitDoor_ButtonOpen:
+                    FX::drawBitmap(xLoc + 1, yLoc - 14, Images::ExitDoors, item.data.exitDoor.position, dbmNormal);
                     break;
 
                 case ItemType::Gate:
-                    FX::drawBitmap(xLoc - 5, yLoc, Images::Gate_00 + (item.data.gate.position * 76), 0, dbmMasked);
+                    FX::drawBitmap(xLoc - 5, yLoc, Images::Gates, item.data.gate.position, dbmMasked);
+                    break;
+
+                case ItemType::EntryDoor:
+                    FX::drawBitmap(xLoc + 7, yLoc - 14, Images::ExitDoors, 1, dbmNormal);
+                    break;
+
+                case ItemType::EntryDoor_Cropped:
+                    FX::drawBitmap(xLoc + 1, yLoc - 14, Images::ExitDoors, Images::ExitDoorsFrames - 1, dbmNormal);
                     break;
 
                 case ItemType::CollapsingFloor:
-                    FX::drawBitmap(xLoc, yLoc + item.data.collapsingFloor.distanceFallen, Images::CollapsingFloor_01 + (item.data.collapsingFloor.frame * 172), 0, dbmMasked);
+                    FX::drawBitmap(xLoc, yLoc + item.data.collapsingFloor.distanceFallen, Images::CollapsingFloors, item.data.collapsingFloor.frame, dbmMasked);
                     break;
 
                 case ItemType::CollpasedFloor:
@@ -87,19 +134,24 @@ void render(bool enemyIsVisible) {
                     break;
 
                 case ItemType::Potion_Small:
-                    FX::drawBitmap(xLoc + 6, yLoc + 10, Images::Potion_Small_00 + (item.data.potion.frame * 28), 0, dbmMasked);
+                    FX::drawBitmap(xLoc + 6, yLoc + 10, Images::Potions_Small, item.data.potion.frame, dbmMasked);
                     break;
 
                 case ItemType::Potion_Large:
-                    FX::drawBitmap(xLoc + 6, yLoc + 10, Images::Potion_Large_00 + (item.data.potion.frame * 28), 0, dbmMasked);
+                    FX::drawBitmap(xLoc + 6, yLoc + 10, Images::Potions_Large, item.data.potion.frame, dbmMasked);
                     break;
 
                 case ItemType::Potion_Poison:
-                    FX::drawBitmap(xLoc + 6, yLoc + 10, Images::Potion_Poison_00 + (item.data.potion.frame * 28), 0, dbmMasked);
+                    FX::drawBitmap(xLoc + 6, yLoc + 10, Images::Potions_Poison, item.data.potion.frame, dbmMasked);
                     break;
 
                 case ItemType::FloorButton1:
+                case ItemType::ExitDoor_Button:
                     FX::drawBitmap(xLoc, yLoc + item.data.floorButton1.frame - 1, Images::FloorButton_0_00 + (item.data.floorButton1.frame * (Images::FloorButton_0_01 - Images::FloorButton_0_00)), 0, dbmMasked);
+                    break;
+
+                case ItemType::ExitDoor_Button_Cropped:
+                    FX::drawBitmap(xLoc, yLoc + item.data.floorButton1.frame - 1, Images::FloorButton_2_00 + (item.data.floorButton1.frame * (Images::FloorButton_2_01 - Images::FloorButton_2_00)), 0, dbmMasked);
                     break;
 
                 case ItemType::FloorButton2:
@@ -119,11 +171,8 @@ void render(bool enemyIsVisible) {
 
     uint16_t stance = prince.getStance();
     uint16_t imageIndex = static_cast<uint16_t>(pgm_read_byte(&Constants::StanceToImageXRef[stance]));
-    uint24_t startPos = 0;
 
     if (imageIndex != 0) {
-
-        startPos = Images::Prince_Left_001 + ((imageIndex - 1) * static_cast<uint24_t>(364));
 
         #if defined(DEBUG) && defined(DEBUG_PRINCE_RENDERING)
         DEBUG_PRINT(F("Stance: "));
@@ -132,13 +181,16 @@ void render(bool enemyIsVisible) {
         DEBUG_PRINTLN(imageIndex);
         #endif
 
-        if (prince.getDirection() != Direction::Left) {
+        if (prince.getDirection() == Direction::Left) {
             
-            startPos = startPos + Constants::LeftRightOffset;
+            FX::drawBitmap(prince.getXImage(), prince.getYImage() - level.getYOffset() + Constants::ScreenTopOffset, Images::Prince_Left, imageIndex - 1, dbmMasked);
 
         }
+        else {
+            
+            FX::drawBitmap(prince.getXImage(), prince.getYImage() - level.getYOffset() + Constants::ScreenTopOffset, Images::Prince_Right, imageIndex - 1, dbmMasked);
 
-        FX::drawBitmap(prince.getXImage(), prince.getYImage() - level.getYOffset() + Constants::ScreenTopOffset, startPos, 0, dbmMasked);
+        }
 
     }
 
@@ -150,8 +202,6 @@ void render(bool enemyIsVisible) {
 
     if (imageIndex != 0) {
 
-        startPos = Images::Prince_Left_001 + ((imageIndex - 1) * static_cast<uint24_t>(364));
-
         #if defined(DEBUG) && defined(DEBUG_PRINCE_RENDERING)
         DEBUG_PRINT(F("Stance: "));
         DEBUG_PRINT(prince.getStance());
@@ -159,13 +209,17 @@ void render(bool enemyIsVisible) {
         DEBUG_PRINTLN(imageIndex);
         #endif
 
-        if (enemy.getDirection() != Direction::Left) {
+        if (enemy.getDirection() == Direction::Left) {
             
-            startPos = startPos + Constants::LeftRightOffset;
+            FX::drawBitmap(enemy.getXImage() - (level.getXLocation() * Constants::TileWidth), enemy.getYImage() - (level.getYLocation() * Constants::TileHeight)- level.getYOffset() + Constants::ScreenTopOffset, Images::Prince_Left, imageIndex - 1, dbmMasked);
 
         }
+        else {
+            
+            FX::drawBitmap(enemy.getXImage() - (level.getXLocation() * Constants::TileWidth), enemy.getYImage() - (level.getYLocation() * Constants::TileHeight)- level.getYOffset() + Constants::ScreenTopOffset, Images::Prince_Right, 0, dbmMasked);
 
-        FX::drawBitmap(enemy.getXImage() - (level.getXLocation() * Constants::TileWidth), enemy.getYImage() - (level.getYLocation() * Constants::TileHeight)- level.getYOffset() + Constants::ScreenTopOffset, startPos, 0, dbmMasked);
+        }
+        
     }
 
 
@@ -183,10 +237,10 @@ void render(bool enemyIsVisible) {
 
                 case ItemType::Spikes:
                     if (item.data.spikes.imageType == 1) {
-                        FX::drawBitmap(xLoc, yLoc + 14, Images::Spikes_FG_00 + (item.data.spikes.position * 118), 0, dbmMasked);
+                        FX::drawBitmap(xLoc, yLoc + 14, Images::Spikes_FG_Full, item.data.spikes.position, dbmMasked);
                     }
                     else {
-                        FX::drawBitmap(xLoc, yLoc + 14, Images::Spikes_FG_05 + (item.data.spikes.position * 70), 0, dbmMasked);
+                        FX::drawBitmap(xLoc, yLoc + 14, Images::Spikes_FG_Half, item.data.spikes.position, dbmMasked);
                     }
                     break;
 
@@ -209,7 +263,17 @@ void render(bool enemyIsVisible) {
 
             if (fgTile >= 0) {
 
-                FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tile_Dungeon[Images::xTiles_Ref[fgTile]], 0, dbmMasked);
+                switch (fgTile) {
+
+                    case 29:
+                    case 30:
+                        break;
+
+                    default:
+                        FX::drawBitmap(x * Constants::TileWidth, (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset, Images::Tiles_Dungeon, Images::xTiles_Ref[fgTile], dbmMasked);
+                        break;
+
+                }
 
             }
 
@@ -227,7 +291,7 @@ void render(bool enemyIsVisible) {
 
         if (item.frame > 0 && item.frame < 5) {
 
-            FX::drawBitmap(xLoc - 3, yLoc + 12, Images::Flash_00 + ((item.frame - 1) * 136), 0, dbmMasked);
+            FX::drawBitmap(xLoc - 3, yLoc + 12, Images::Flashes, item.frame - 1, dbmMasked);
 
         }
     
@@ -236,24 +300,14 @@ void render(bool enemyIsVisible) {
 
     // Render health ..
 
-    arduboy.fillRect(120, 0, WIDTH, HEIGHT, BLACK);
-    arduboy.drawFastVLine(121, 0, HEIGHT, WHITE);
+    FX::drawBitmap(120, 0, Images::HUD_Backgrounds, enemyIsVisible, dbmNormal);
 
     for (uint8_t i = 0; i < prince.getHealthMax(); i++) {
 
-        if (prince.getHealth() > i) {
-
-            FX::drawBitmap(123, i * 4, Images::Health_00, 0, dbmNormal);
-
-        }
-        else {
-
-            FX::drawBitmap(123, i * 4, Images::Health_01, 0, dbmNormal);
-
-        }
+        FX::drawBitmap(123, i * 4, Images::Healths, prince.getHealth() <= i, dbmNormal);
         
     }
-// Serial.println(enemyIsVisible);    
+
 
     if (!enemyIsVisible) {
 
@@ -264,9 +318,6 @@ void render(bool enemyIsVisible) {
             FX::drawBitmap(123, 40, Images::Sword_HUD, 0, dbmNormal);
         }
 
-        arduboy.drawPixel(124, 55);
-        arduboy.drawPixel(126, 55);
-
     }
     else {
 
@@ -274,16 +325,7 @@ void render(bool enemyIsVisible) {
 
         for (uint8_t i = 0; i < enemy.getHealthMax(); i++) {
 
-            if (enemy.getHealth() > i) {
-
-                FX::drawBitmap(123, 60 - (i * 4), Images::Health_00, 0, dbmNormal);
-
-            }
-            else {
-
-                FX::drawBitmap(123, 60 - (i * 4), Images::Health_01, 0, dbmNormal);
-
-            }
+            FX::drawBitmap(123, 60 - (i * 4), Images::Healths, enemy.getHealth() <= i, dbmNormal);
             
         }
 
@@ -355,28 +397,26 @@ void renderMenu() {
 
 void renderNumber(uint8_t x, uint8_t y, uint8_t number) {
 
-    FX::drawBitmap(x, y, Images::Number_00 + ((number / 10) * 9), 0, dbmNormal);
-    FX::drawBitmap(x + 6, y, Images::Number_00 + ((number % 10) * 9), 0, dbmNormal);
+    FX::drawBitmap(x, y, Images::Numbers, number, dbmNormal);
 
 }
 
 void renderNumber_Small(uint8_t x, uint8_t y, uint8_t number) {
 
-    FX::drawBitmap(x, y, Images::Number_Small_00 + ((number / 10) * 9), 0, dbmNormal);
-    FX::drawBitmap(x, y + 4, Images::Number_Small_00 + ((number % 10) * 9), 0, dbmNormal);
+    FX::drawBitmap(x, y, Images::Numbers_Small, number, dbmNormal);
 
 }
 
 void renderNumber_Upright(uint8_t x, uint8_t y, uint8_t number) {
 
-    FX::drawBitmap(x, y, Images::Number_Upright_00 + ((number / 10) * 7), 0, dbmNormal);
-    FX::drawBitmap(x + 4, y, Images::Number_Upright_00 + ((number % 10) * 7), 0, dbmNormal);
+    FX::drawBitmap(x, y, Images::Numbers_Upright, number, dbmNormal);
 
 }
 
 void renderTorches(uint8_t x1, uint8_t x2, uint8_t y) {
 
-    FX::drawBitmap(x1, y, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
-    FX::drawBitmap(x2, y, Images::Torch_00 + ((arduboy.getFrameCount(15) / 5) * 16), 0, dbmMasked);
+    uint8_t frame = arduboy.getFrameCount(15) / 5;
+    FX::drawBitmap(x1, y, Images::Torches, frame, dbmMasked);
+    FX::drawBitmap(x2, y, Images::Torches, frame, dbmMasked);
 
 }

@@ -73,6 +73,7 @@ enum class StandingJumpResult : uint8_t {
     None,
     Normal,
     DropLevel,
+    Medium,
     Short, // Same level but a little shorter.
 };
 
@@ -81,6 +82,7 @@ enum class RunningJumpResult : uint8_t {
     Normal,
     Jump4_DropLevel,
     Jump3_KeepLevel,
+    Jump3_KeepLevel_Short,
     Jump3_DropLevel,
 };
 
@@ -90,15 +92,21 @@ enum class ItemType : uint8_t {
     /* 02 */ FloorButton1,
     /* 03 */ FloorButton2,
     /* 04 */ Spikes,
-    /* 04 */ InteractiveItemType_End = Spikes,
-    /* 05 */ Skeleton,
-    /* 06 */ ExitDoor,
-    /* 07 */ Gate,               
-    /* 08 */ Sword,
-    /* 09 */ CollpasedFloor,
-    /* 10 */ Potion_Small,
-    /* 11 */ Potion_Large,
-    /* 12 */ Potion_Poison,
+    /* 05 */ ExitDoor_Button,
+    /* 06 */ ExitDoor_Button_Cropped,
+    /* __ */ InteractiveItemType_End = ExitDoor_Button_Cropped,
+    /* 15 */ Skeleton = 15,
+    /* 16 */ ExitDoor_SelfOpen,
+    /* 17 */ Gate,               
+    /* 18 */ Sword,
+    /* 19 */ CollpasedFloor,
+    /* 20 */ Potion_Small,
+    /* 21 */ Potion_Large,
+    /* 22 */ Potion_Poison,
+    /* 23 */ EntryDoor,
+    /* 24 */ EntryDoor_Cropped,
+    /* 25 */ Blade,
+    /* 26 */ ExitDoor_ButtonOpen,
     /* 96 */ None = 96,
     /* 97 */ LoveHeart = 97,
     /* 98 */ Sign = 98,
@@ -147,5 +155,10 @@ enum class SignType : uint8_t {
 enum class FlashType : uint8_t {
     None,
     SwordFight,
+};
+
+enum class LevelUpdate : uint8_t {
+    NoAction,
+    FloorCollapsedOnPrince,
 };
 

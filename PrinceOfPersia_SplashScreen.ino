@@ -24,6 +24,6 @@ void splashScreen() {
 
     }
 
-    FX::drawBitmap(32, 16, Images::PPOT[arduboy.getFrameCount(48) / 12], 0, dbmWhite);
+    FX::drawBitmap(32, 16, Images::PPOT, arduboy.getFrameCount(48) / 12, dbmWhite);
 
 }

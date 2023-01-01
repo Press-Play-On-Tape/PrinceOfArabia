@@ -1,7 +1,6 @@
 #include "src/utils/Arduboy2Ext.h"  
 #include <ArduboyFX.h>  
 #include "fxdata/Images.h"  
-#include "fxdata/Levels.h"  
 
 #include "src/utils/Constants.h"
 #include "src/utils/Enums.h"
@@ -14,7 +13,7 @@ void game_Init() {
 
     gamePlay.init(arduboy, 1);
     level.setLevel(1);
-    game_PositionChars(true);
+    level.init_PositionChars(prince, enemy, true);
 
     gamePlay.gameState = GameState::Game;
     menu.init();
@@ -23,126 +22,10 @@ void game_Init() {
 
 }
 
-void game_PositionChars(bool clearSword) {
-
-    enemy.init();
-
-    #ifdef LEVEL_DATA_FROM_FX
-        
-        FX::seekData(Levels::level1_Data);
-
-        {
-            uint8_t xPixel = FX::readPendingUInt8();
-            uint8_t yPixel = FX::readPendingUInt8();
-            Direction direction = static_cast<Direction>(FX::readPendingUInt8());
-            uint16_t stance = static_cast<uint16_t>(FX::readPendingUInt8());
-            uint8_t health = FX::readPendingUInt8();
-
-            prince.init(xPixel, yPixel, direction, stance, health, clearSword);
-            
-        }
-
-        {
-            uint8_t xTile = FX::readPendingUInt8();
-            uint8_t yTile = FX::readPendingUInt8();
-            FX::readEnd();
-
-            level.init(prince, xTile, yTile);  
-            
-        }
-
-        FX::seekData(Levels::level1_Data + 7);
-
-        {
-            uint8_t xTile = FX::readPendingUInt8();
-
-            while (xTile != 255) {
-
-                uint8_t yTile = FX::readPendingUInt8();
-                uint8_t xPixel = FX::readPendingUInt8();
-                uint8_t yPixel = FX::readPendingUInt8();
-
-                Direction direction = static_cast<Direction>(FX::readPendingUInt8());
-                uint8_t health = FX::readPendingUInt8();
-                enemy.init((xTile * Constants::TileWidth) + xPixel, (yTile * Constants::TileHeight) + yPixel, direction, Stance::Upright, health);
-
-                xTile = FX::readPendingUInt8();
-
-            }
-            
-        }
-        
-        FX::readEnd();
-
-    #else
-
-        enemy.init(104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
-        enemy.init(80 + (40 * Constants::TileWidth), 25 + (0 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
-
-        prince.init(38-28+12+4, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Normal starting pos
-        // prince.init(38-24, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Gate Issue
-        // prince.init(38-24, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Sword Fight from Left
-        // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Sword Fight from Right
-        // prince.init(8+78+24, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     // Double collapisble
-        // prince.init(78 + 24 + 12, 25 + 31 + 31, Direction::Left, Stance:: Crouch_3_End, 3, clearSword);          // Spikes Upper
-        // prince.init(12, 25 + 31, Direction::Left, Stance:: Crouch_3_End, 3, clearSword);          // Spikes Lower
-        // prince.init(78 + 24, 25, Direction::Left, Stance:: Crouch_3_End, 3, clearSword);          // Jump 2
-        // prince.init(18, 25+31, Direction::Right,Stance:: Crouch_3_End, 3, clearSword);          // Sword fight
-        // prince.init(58, 25+31+31, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Second drink tonic
-        // prince.init(66, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Upper gate
-        // prince.init(70, 25 + 31, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // 2 leap
-        // prince.init(14, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Exit Seq
-        // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Both floor types
-        // prince.init(86, 87, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Normal starting pos but next to drop floor 3rd floor
-        // prince.init(86-36+4, 87, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Normal starting pos but next to drop floor 3rd floor
-        // prince.init(78, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Under collapsible floor
-        // prince.init(66, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);        // Get tonic
-        // prince.init(18, 25+31+31, Direction::Left, Stance::Upright, 3, clearSword);     // Column of climbs
-        // prince.init(78, 25, Direction::Left, Stance::Upright, 3, clearSword);     // Below column of climbs
-        // prince.init(80, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);     // Top Left
-        // prince.init(18, 25, Direction::Right,Stance:: Crouch_3_End, 3, clearSword);          // Long Fall
-        // prince.init(18, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // problem
-        // prince.init(98, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // At bottom of tthree level drop.
-        // prince.init(98, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // At bottom of tthree level drop.
-        // prince.init(18, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Long Run
-        // prince.init(78 - 10, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Fall Error Stading Jump
-        // prince.init(78 - 4, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Fall Error running Jump
-
-        level.init(prince, 60, 0);  // Normal starting posa
-        // level.init(prince, 37, 3);  // gate issuee
-        // level.init(prince, 60, 3);  // Fight from Left
-        // level.init(prince, 70, 3);  // Fight from Right
-        // level.init(prince, 10, 3);   // Double collapisble
-        // level.init(prince, 10, 0);   // Spikes Upper
-        // level.init(prince, 10, 6);   // Spikes Lower
-        // level.init(prince, 30, 3);  // Jump 2
-        // level.init(prince, 70, 3);  // Sword fight
-        // level.init(prince, 50, 0);  // Second drink tonic
-        // level.init(prince, 50, 0);  // Upper Gate
-        // level.init(prince, 40, 3);  // 2 leap
-        // level.init(prince, 80, 3);  // Exit Seq
-        // level.init(prince, 20, 3);  // Both floor types
-        // level.init(prince, 60, 0);  //Normal starting pos but next to drop floor 3rd floor
-        // level.init(prince, 50, 3);  // Under collapsible floor
-        // level.init(prince, Constants::TileHeight, 0);   // Get tonic
-        // level.init(prince, 0, 3);   // Column of climbs
-        // level.init(prince, 0, 6);   // Below Column of climbs
-        // level.init(prince, 0, 0);   // Top left
-        // level.init(prince, 40, 4);  // Long Fall
-        // level.init(prince, 60, 3);  // problem
-        // level.init(prince, 30, 6); // At bottom of tthree level drop.
-        // level.init(prince, 40, 0);  // Long run
-        // level.init(prince, 50, 3);  // Fall Error Stading Jump
-        // level.init(prince, 50, 3);  // Fall Error running Jump
-
-    #endif
-
-}
-
 void game_StartLevel() {
 
     gamePlay.restartLevel(arduboy);
-    game_PositionChars(false);
+    level.init_PositionChars(prince, enemy, false);
 
     gamePlay.gameState = GameState::Game;
     menu.init();
@@ -222,6 +105,23 @@ void game() {
     //     processRunJump(prince, level);
     //     // prince.pushSequence(Stance::Run_Start_1_Start, Stance::Run_Start_6_End, true);
     // }
+    if (justPressed & B_BUTTON) {
+    
+    // Serial.print(F("St"));
+    // Serial.print(prince.getStance());
+    // Serial.print(F(" px"));
+    // Serial.print(prince.getX());
+    // Serial.print(F(" x"));
+    // Serial.print(level.coordToTileIndexX((level.getXLocation() * Constants::TileWidth) + prince.getX()));
+    // Serial.print(F(" "));
+    // Serial.print((level.getXLocation() * Constants::TileWidth) + prince.getX());
+    // Serial.print(F(" y"));
+    // Serial.print(level.coordToTileIndexY((level.getYLocation() * Constants::TileHeight) + prince.getY()));
+    // Serial.print(F(" "));
+    // Serial.print(prince.getY());
+    // Serial.print(F(" D"));
+    // Serial.println(level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX()));
+    }
     #endif
 
     #ifdef GIVE_SWORD
@@ -235,7 +135,17 @@ void game() {
 
     prince.update(level.getXLocation(), level.getYLocation());
     enemy.update();
-    level.update(arduboy);
+    
+    LevelUpdate levelUpdate = level.update(arduboy, prince);
+
+    if (levelUpdate == LevelUpdate::FloorCollapsedOnPrince) {
+        
+        if (prince.decHealth(1) == 0) {
+            pushDead(prince, level, gamePlay, true);
+        }
+
+    }
+
     gamePlay.update(arduboy);
 
     if (menu.update()) gamePlay.gameState = GameState::Game;
@@ -667,7 +577,6 @@ void game() {
                                 #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
                                 DEBUG_PRINTLN(F("DOWN_BUTTON, Climb down Pos 2"));
                                 #endif
-
                                 prince.pushSequence(Stance::Step_Climbing_15_End, Stance::Step_Climbing_1_Start, Stance::Jump_Up_A_14_End, true);
                                 break;
 
@@ -717,6 +626,8 @@ void game() {
                     else if (pressed & UP_BUTTON) {
 
                         CanJumpUpResult jumpResult = level.canJumpUp(prince);
+                        int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x);
+                        int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y) - 1;
 
                         switch (jumpResult) {
 
@@ -730,14 +641,13 @@ void game() {
 
                             case CanJumpUpResult::JumpThenFall_CollapseFloor:
                                 {
-                                    int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x) + prince.getDirectionOffset(1);
-                                    int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y) - 1;
+                                    tileXIdx = tileXIdx + prince.getDirectionOffset(1);
                                     uint8_t itemIdx = level.getItem(ItemType::CollapsingFloor, tileXIdx, tileYIdx);
 
                                     if (itemIdx != Constants::NoItemFound) {
 
                                         Item &item = level.getItem(itemIdx);
-                                        item.data.collapsingFloor.timeToFall = 52;
+                                        item.data.collapsingFloor.timeToFall = Constants::FallingTileAbove;
 
                                     }
 
@@ -748,14 +658,12 @@ void game() {
 
                             case CanJumpUpResult::JumpThenFall_CollapseFloorAbove:
                                 {
-                                    int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x);
-                                    int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y) - 1;
                                     uint8_t itemIdx = level.getItem(ItemType::CollapsingFloor, tileXIdx, tileYIdx);
 
                                     if (itemIdx != Constants::NoItemFound) {
 
                                         Item &item = level.getItem(itemIdx);
-                                        item.data.collapsingFloor.timeToFall = 52;
+                                        item.data.collapsingFloor.timeToFall = Constants::FallingTileAbove;
 
                                     }
 
@@ -766,14 +674,13 @@ void game() {
 
                             case CanJumpUpResult::StepThenJumpThenFall_CollapseFloor:
                                 {
-                                    int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x) + prince.getDirectionOffset(1);
-                                    int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y) - 1;
+                                    tileXIdx = tileXIdx + prince.getDirectionOffset(1);
                                     uint8_t itemIdx = level.getItem(ItemType::CollapsingFloor, tileXIdx, tileYIdx);
 
                                     if (itemIdx != Constants::NoItemFound) {
 
                                         Item &item = level.getItem(itemIdx);
-                                        item.data.collapsingFloor.timeToFall = 52;
+                                        item.data.collapsingFloor.timeToFall = Constants::FallingTileAbove;
 
                                     }
 
@@ -930,7 +837,7 @@ void game() {
                             
                         if ((pressed & RIGHT_BUTTON) && (pressed & A_BUTTON)) {
 
-                            #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
+                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
                             DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jump from Run_Repeat_4"));
                             #endif
 
@@ -979,7 +886,7 @@ void game() {
 
                         if ((pressed & LEFT_BUTTON) && (pressed & A_BUTTON)) {
 
-                            #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
+                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
                             DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jump from Run_Repeat_4"));
                             #endif
 
@@ -1033,7 +940,7 @@ void game() {
                                         
                         if ((pressed & RIGHT_BUTTON) && (pressed & A_BUTTON)) {
 
-                            #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
+                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
                             DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jump from Run_Start_6_End, Run_Repeat_8_End or Run_Repeat_8_End_Turn"));
                             #endif
 
@@ -1082,7 +989,7 @@ void game() {
                                         
                         if ((pressed & LEFT_BUTTON) && (pressed & A_BUTTON)) {
 
-                            #if defined(DEBUG) && defined(DEBUG_ACTION_RUNJUMP)
+                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
                             DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jump from Run_Start_6_End, Run_Repeat_8_End or Run_Repeat_8_End_Turn"));
                             #endif
 
@@ -1145,24 +1052,8 @@ void game() {
 
                                 Item &item = level.getItem(itemIdx);
 
-                                switch (item.itemType) {
-
-                                    case ItemType::Potion_Small:
-                                        prince.pushSequence(Stance::Drink_Tonic_Small_1_Start, Stance::Drink_Tonic_Small_15_End, Stance::Upright, true);
-                                        break;
-
-                                    case ItemType::Potion_Large:
-                                        prince.pushSequence(Stance::Drink_Tonic_Large_1_Start, Stance::Drink_Tonic_Large_15_End, Stance::Upright, true);
-                                        break;
-
-                                    case ItemType::Potion_Poison:
-                                        prince.pushSequence(Stance::Drink_Tonic_Poison_1_Start, Stance::Drink_Tonic_Poison_15_End, Stance::Upright, true);
-                                        break;
-
-                                    default: break;
-
-                                }
-
+                                uint8_t idx = static_cast<uint8_t>(item.itemType) - static_cast<uint8_t>(ItemType::Potion_Small); 
+                                prince.pushSequence(Stance::Drink_Tonic_Small_1_Start + (idx * 15), Stance::Drink_Tonic_Small_15_End + (idx * 15), Stance::Upright, true);
                                 item.itemType = ItemType::None;
 
                                 break;
@@ -1470,17 +1361,15 @@ void game() {
                                     prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
                                     prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
 
-                                    if (prince.decHealth(1) == 0) {;
-
-                                        pushDead(prince, level, gamePlay, false);
-
+                                    if (prince.decHealth(1) == 0) {
+                                        pushDead(prince, level, gamePlay, true);
                                     }
 
                                     break;
 
                                 default:    // Dead!
 
-                                    pushDead(prince, level, gamePlay, false);
+                                    pushDead(prince, level, gamePlay, true);
                                     break;
 
                             }
@@ -1488,7 +1377,7 @@ void game() {
                         }
                         else {
 
-                            pushDead(prince, level, gamePlay, false);
+                            pushDead(prince, level, gamePlay, true);
 
                         }
                         
@@ -1512,7 +1401,7 @@ void game() {
                 case Stance::Collide_Wall_M2_Start_End:
 
                     if (level.canFallSomeMore(prince)) { // Fall some more
-
+// Serial.println("cfsm");
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
                         DEBUG_PRINTLN(F("Fall some more"));
                         #endif
@@ -1577,15 +1466,15 @@ void game() {
                                     prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
                                     prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
 
-                                    if (prince.decHealth(1) == 0) {;
-                                        pushDead(prince, level, gamePlay, false);
+                                    if (prince.decHealth(1) == 0) {
+                                        pushDead(prince, level, gamePlay, true);
                                     }
 
                                     break;
 
                                 default:    // Dead!
 
-                                    pushDead(prince, level, gamePlay, false);
+                                    pushDead(prince, level, gamePlay, true);
                                     break;
 
                             }
@@ -1593,7 +1482,7 @@ void game() {
                         }
                         else {
 
-                            pushDead(prince, level, gamePlay, false);
+                            pushDead(prince, level, gamePlay, true);
 
                         }
 
@@ -1698,8 +1587,17 @@ void game() {
 
 
             getStance_Offsets(prince.getDirection(), offset, prince.getStance());
+// Serial.print("X:");
+// Serial.print(prince.getX());
+// Serial.print(",Y");
+// Serial.print(prince.getY());
             prince.incX(offset.x * (newStance < 0 ? -1 : 1));
             prince.incY(offset.y * (newStance < 0 ? -1 : 1));
+// Serial.print("- X:");
+// Serial.print(prince.getX());
+// Serial.print(",Y");
+// Serial.println(prince.getY());
+
 
 
 
@@ -1741,7 +1639,7 @@ void game() {
 
                             if (item.x == tileXIdx && item.y == tileYIdx && item.data.collapsingFloor.timeToFall == 0) {
 
-                                item.data.collapsingFloor.timeToFall = 24;//12;
+                                item.data.collapsingFloor.timeToFall = Constants::FallingTileSteppedOn;
 
                             }
 
@@ -1756,7 +1654,7 @@ void game() {
                                 Item &gate = level.getItem(itemIdx);
 
                                 item.data.floorButton1.frame = 1;
-                                item.data.floorButton1.timeToFall = 24;
+                                item.data.floorButton1.timeToFall = Constants::FallingTileSteppedOn;
                                 gate.data.gate.closingDelay = 64;
                                 gate.data.gate.closingDelayMax = 64;
 
@@ -1773,9 +1671,26 @@ void game() {
                                 Item &gate = level.getItem(itemIdx);
 
                                 item.data.floorButton2.frame = 1;
-                                item.data.floorButton2.timeToFall = 24;
+                                item.data.floorButton2.timeToFall = Constants::FallingTileSteppedOn;
                                 gate.data.gate.closingDelay = 10;
                                 gate.data.gate.closingDelayMax = 255;
+
+                            }
+
+                            break;
+
+                        case ItemType::ExitDoor_Button:
+                        case ItemType::ExitDoor_Button_Cropped:
+                            {
+
+                                Item &exitDoor = level.getItem(Constants::Item_ExitDoor);
+                                
+                                if (exitDoor.data.exitDoor.direction != Direction::Up) {
+                                    
+                                    item.data.exitDoor_Button.frame = 1;
+                                    exitDoor.data.exitDoor.direction = Direction::Up;
+
+                                }
 
                             }
 
@@ -1819,6 +1734,7 @@ void game() {
             }
 
 
+
             #if defined(DEBUG) && defined(DEBUG_PRINCE_DETAILS)
             DEBUG_PRINT(F("Stance: "));
             DEBUG_PRINT(prince.getStance());
@@ -1842,6 +1758,38 @@ void game() {
 
     }
 
+    if (gamePlay.gameState == GameState::Game) {
+
+        // Blade?
+        
+        if (prince.getHealth() > 0) {
+
+            int8_t distToEdgeOfTile = level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX());
+// Serial.println(distToEdgeOfTile);
+            if (distToEdgeOfTile <= 4) {
+                
+                int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x) + ((prince.getDirection() == Direction::Right && distToEdgeOfTile <= 4) ? 1 : 0);
+                int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y);
+                
+                uint8_t itemIdx = level.getItem(ItemType::Blade, tileXIdx, tileYIdx);
+
+                if (itemIdx != Constants::NoItemFound) {
+
+                    Item &item = level.getItem(itemIdx);
+
+                    if (abs(item.data.blade.position) <= 5) {
+
+                        pushDead(prince, level, gamePlay, true);
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
 
 
     // ---------------------------------------------------------------------------------------------------------------------------------------
@@ -1878,7 +1826,7 @@ void game() {
 
                                     initFlash(prince, level, FlashType::SwordFight);
 
-                                    if (prince.decHealth(1) == 0) {
+                                    if (prince.decHealth(0) == 0) { //SJH
 
                                         pushDead(prince, level, gamePlay, true);
 
@@ -2184,7 +2132,7 @@ void game() {
 
         Item &item = level.getItem(Constants::Item_ExitDoor);
 
-        if (item.data.exitDoor.position == 0) {
+        if (item.itemType == ItemType::ExitDoor_SelfOpen && item.data.exitDoor.position == 0) {
 
             int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x);
             int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y);
