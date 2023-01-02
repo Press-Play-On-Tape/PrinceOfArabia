@@ -192,8 +192,8 @@ void initFlash(Enemy &enemy, Level &level, FlashType flashType) {
     Flash &flash = level.getFlash();
     flash.frame = 5;
     flash.type = flashType;
-    flash.x = level.coordToTileIndexX(enemy.getX());// + level.getXLocation();
-    flash.y = level.coordToTileIndexY(enemy.getY());// + level.getYLocation(); 
+    flash.x = level.coordToTileIndexX(enemy.getX());
+    flash.y = level.coordToTileIndexY(enemy.getY()); 
 
 }
 
@@ -209,10 +209,7 @@ uint8_t activateSpikes(Prince &prince, Level &level) {
     if (itemIdx != Constants::NoItemFound) {
 
         Item &spikes = level.getItem(itemIdx);
-
-        if (spikes.data.spikes.closingDelay == 0) {
-            spikes.data.spikes.closingDelay = Constants::SpikeClosingDelay;
-        }
+        activateSpikes_Helper(spikes);
 
     }
 
@@ -221,10 +218,7 @@ uint8_t activateSpikes(Prince &prince, Level &level) {
     if (itemIdx2 != Constants::NoItemFound) {
 
         Item &spikes = level.getItem(itemIdx2);
-
-        if (spikes.data.spikes.closingDelay == 0) {
-            spikes.data.spikes.closingDelay = Constants::SpikeClosingDelay;
-        }
+        activateSpikes_Helper(spikes);
 
     }
 
@@ -233,15 +227,20 @@ uint8_t activateSpikes(Prince &prince, Level &level) {
     if (itemIdx2 != Constants::NoItemFound) {
 
         Item &spikes = level.getItem(itemIdx2);
-
-        if (spikes.data.spikes.closingDelay == 0) {
-            spikes.data.spikes.closingDelay = Constants::SpikeClosingDelay;
-        }
+        activateSpikes_Helper(spikes);
 
     }
 
     return itemIdx;
     
+}
+
+void activateSpikes_Helper(Item &spikes) {
+
+    if (spikes.data.spikes.closingDelay == 0) {
+        spikes.data.spikes.closingDelay = Constants::SpikeClosingDelay;
+    }
+
 }
 
 void pushJumpUp_Drop(Prince &prince) {

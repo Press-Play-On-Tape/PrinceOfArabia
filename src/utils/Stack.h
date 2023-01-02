@@ -25,29 +25,29 @@ class Stack {
 	public:
 		Stack(void);
 
-		bool isEmpty(void) const; // O(1)
-		bool isFull(void) const; // O(1)
+		bool isEmpty(void) const;
+		bool isFull(void) const;
 
-		IndexType getCount(void) const; // O(1)
-		constexpr IndexType getCapacity(void) const; // O(1)
+		IndexType getCount(void) const;
+		constexpr IndexType getCapacity(void) const;
 
-		ItemType & peek(void); // O(1)
-		const ItemType & peek(void) const; // O(1)
-		bool insert(const ItemType & item); // O(1)
-		bool push(ItemType && item, bool resetFrame); // O(1)
-		bool push(ItemType && item1, ItemType && item2, bool resetFrame); // O(1)
-		bool push(ItemType && item1, ItemType && item2, ItemType && item3, bool resetFrame); // O(1)
-		ItemType & pop(void); // O(1)
+		ItemType & peek(void);
+		const ItemType & peek(void) const;
+		bool insert(const ItemType & item);
+		bool push(ItemType && item, bool resetFrame);
+		bool push(ItemType && item1, ItemType && item2, bool resetFrame);
+		bool push(ItemType && item1, ItemType && item2, ItemType && item3, bool resetFrame);
+		ItemType & pop(void);
 
-		void drop(void); // O(1)
-		void clear(void); // O(n)
-		bool contains(const ItemType & item) const; // O(n)
+		void drop(void);
+		void clear(void);
+		bool contains(const ItemType & item) const;
 
 		// Returns -1 if item not found
-		IndexOfType indexOf(const ItemType & item) const; // O(n)
+		IndexOfType indexOf(const ItemType & item) const;
 
-		ItemType & operator [] (const IndexType index); // O(1)
-		const ItemType & operator [] (const IndexType index) const; // O(1)
+		ItemType & operator [] (const IndexType index);
+		const ItemType & operator [] (const IndexType index) const;
 		void update();
 		uint8_t getFrame() const;
 		void setFrame(uint8_t val);

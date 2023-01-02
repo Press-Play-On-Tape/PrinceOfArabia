@@ -355,6 +355,8 @@ void title() {
                         heart.data.loveHeart.counter++;
                     }
 
+                    uint8_t imageIdx = 255;
+
                     switch (heart.data.loveHeart.counter) {
 
                         case 0 ... 189:
@@ -362,37 +364,43 @@ void title() {
 
                         case 190 ... 193:
                         case 198 ... 201:
-                            FX::drawBitmap(heart.x, heart.y, Images::Hearts, 2, dbmNormal);
+                            imageIdx = 2;
                             break;
 
                         case 194 ... 197:
                         case 202 ... 205:
-                            FX::drawBitmap(heart.x, heart.y, Images::Hearts, 3, dbmNormal);
+                            imageIdx = 3;
                             break;
 
                         case 206:
                         case 208:
                             heart.y--;
-                            FX::drawBitmap(heart.x, heart.y, Images::Hearts, 1, dbmNormal);
+                            imageIdx = 1;
                             break;
 
                         case 207:
                         case 209:
-                            FX::drawBitmap(heart.x, heart.y, Images::Hearts, 1, dbmNormal);
+                            imageIdx = 1;
                             break;
 
                         case 210:
                         case 212:
                             heart.y--;
-                            FX::drawBitmap(heart.x, heart.y, Images::Hearts, 0, dbmNormal);
+                            imageIdx = 0;
                             break;
 
                         case 211:
                         case 213:
-                            FX::drawBitmap(heart.x, heart.y, Images::Hearts, 0, dbmNormal);
+                            imageIdx = 0;
                             break;
 
 
+                    }
+
+                    if (imageIdx != 255) {
+
+                        FX::drawBitmap(heart.x, heart.y, Images::Hearts, imageIdx, dbmNormal);
+                        
                     }
                     
                 }
