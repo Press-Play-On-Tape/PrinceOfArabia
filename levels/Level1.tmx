@@ -130,7 +130,7 @@
 </chunk>
   </data>
  </layer>
- <layer id="4" name="fg" width="90" height="9" visible="0">
+ <layer id="4" name="fg" width="90" height="9">
   <data encoding="csv">
    <chunk x="0" y="0" width="10" height="6">
 83,0,0,0,0,108,0,0,0,0,

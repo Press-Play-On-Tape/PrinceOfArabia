@@ -1659,28 +1659,30 @@ void game() {
 
                             break;
 
-                        case ItemType::FloorButton3:
+                        case ItemType::FloorButton3_UpDown:
+                        case ItemType::FloorButton3_UpOnly:
+                        case ItemType::FloorButton3_DownOnly:
 
                             itemIdx = level.getItem(ItemType::Gate_StayOpen, item.data.floorButton.gateX, item.data.floorButton.gateY);
 
                             if (itemIdx != Constants::NoItemFound) {
 
                                 Item &gate = level.getItem(itemIdx);
-                              
+                          
                                 if (gate.data.gate.closingDelay == 0) {
                                     
-                                    if (gate.data.gate.position == 9) {
+                                    if (gate.data.gate.position == 9 && item.itemType != ItemType::FloorButton3_UpOnly) {
 
                                         gate.data.gate.direction = Direction::Down;
                                         
                                     }
-                                    else if (gate.data.gate.position == 0) {
+                                    else if (gate.data.gate.position == 0 && item.itemType != ItemType::FloorButton3_DownOnly) {
                                         
                                         gate.data.gate.direction = Direction::Up;
 
                                     }
 
-                                    gate.data.gate.closingDelay = 64;
+                                    gate.data.gate.closingDelay = 16;
                                     item.data.floorButton.frame = 1;
                                     item.data.floorButton.timeToFall = Constants::Button2FaillingTime;
 

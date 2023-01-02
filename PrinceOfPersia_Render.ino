@@ -126,6 +126,10 @@ void render(bool enemyIsVisible) {
                     FX::drawBitmap(xLoc + 1, yLoc - 14, Images::ExitDoors, Images::ExitDoorsFrames - 1, dbmNormal);
                     break;
 
+                case ItemType::EntryDoor_HalfTileLeft:
+                    FX::drawBitmap(xLoc + 1, yLoc - 14, Images::ExitDoors, 1, dbmNormal);
+                    break;
+
                 case ItemType::CollapsingFloor:
                     FX::drawBitmap(xLoc, yLoc + item.data.collapsingFloor.distanceFallen, Images::CollapsingFloors, item.data.collapsingFloor.frame, dbmMasked);
                     break;
@@ -147,7 +151,8 @@ void render(bool enemyIsVisible) {
                     break;
 
                 case ItemType::FloorButton1:
-                case ItemType::FloorButton3:
+                case ItemType::FloorButton3_UpDown:
+                case ItemType::FloorButton3_UpOnly:
                 case ItemType::ExitDoor_Button:
                     FX::drawBitmap(xLoc, yLoc + item.data.floorButton.frame - 1, Images::FloorButton_0_00 + (item.data.floorButton.frame * (Images::FloorButton_0_01 - Images::FloorButton_0_00)), 0, dbmMasked);
                     break;
@@ -157,6 +162,7 @@ void render(bool enemyIsVisible) {
                     break;
 
                 case ItemType::FloorButton2:
+                case ItemType::FloorButton3_DownOnly:
                     FX::drawBitmap(xLoc - item.data.floorButton.frame, yLoc + item.data.floorButton.frame, Images::FloorButton_1_00 + (item.data.floorButton.frame * (Images::FloorButton_1_01 - Images::FloorButton_1_00)), 0, dbmMasked);
                     break;
 

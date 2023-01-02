@@ -38,12 +38,14 @@
 #define TILE_FLOOR_GATE_FRONT_TRACK_1 115
 #define TILE_FLOOR_GATE_FRONT_TRACK_2 116
 #define TILE_FLOOR_GATE_FRONT_TRACK_3 117
+#define TILE_FLOOR_GATE_FRONT_TRACK_4 39 // Used on rug
 
 #define TILE_FLOOR_RH_END_1 98
 #define TILE_FLOOR_RH_END_2 85
 #define TILE_FLOOR_RH_END_3 103
 #define TILE_FLOOR_RH_END_4 94
 #define TILE_FLOOR_RH_END_5 111
+#define TILE_FLOOR_RH_PILLAR_END 52
 
 #define TILE_FLOOR_LH_WALL_1 83
 #define TILE_FLOOR_LH_WALL_2 109
@@ -66,6 +68,7 @@
 #define TILE_COLUMN_4 89
 #define TILE_COLUMN_5 101
 #define TILE_PILLAR_1 31
+#define TILE_PILLAR_2 51
 
 #define TILE_COLUMN_REAR_1 104
 #define TILE_COLUMN_REAR_2 90
@@ -118,7 +121,7 @@ struct Level {
 
         #ifndef LEVEL_DATA_FROM_FX
 
-            void init(Prince &prince, uint8_t width, uint8_t height, uint8_t xLoc, uint8_t yLoc) {
+            void init(GamePlay &gamePlay, Prince &prince, uint8_t width, uint8_t height, uint8_t xLoc, uint8_t yLoc) {
 
                 this->width = width;
                 this->height = height;
@@ -221,7 +224,7 @@ struct Level {
 
                 // Level 1
 
-                if (this->level == 1) {
+                if (gamePlay.level == 1) {
 
                     #ifndef SAVE_MEMORY_ENEMY
                         enemy.init(104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
@@ -257,38 +260,38 @@ struct Level {
                     // prince.init(78 - 10, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Fall Error Stading Jump
                     // prince.init(78 - 4, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Fall Error running Jump
 
-                    this->init(prince, 90, 9, 60, 0);  // Normal starting posa
-                    // this->init(prince, 90, 9,  37, 3);  // gate issuee
-                    // this->init(prince, 90, 9,  60, 3);  // Fight from Left
-                    // this->init(prince, 90, 9,  70, 3);  // Fight from Right
-                    // this->init(prince, 90, 9,  10, 3);   // Double collapisble
-                    // this->init(prince, 90, 9,  10, 0);   // Spikes Upper
-                    // this->init(prince, 90, 9,  10, 6);   // Spikes Lower
-                    // this->init(prince, 90, 9,  30, 3);  // Jump 2
-                    // this->init(prince, 90, 9,  70, 3);  // Sword fight
-                    // this->init(prince, 90, 9,  50, 0);  // Second drink tonic
-                    // this->init(prince, 90, 9,  50, 0);  // Upper Gate
-                    // this->init(prince, 90, 9,  40, 3);  // 2 leap
-                    // this->init(prince, 90, 9,  80, 3);  // Exit Seq
-                    // this->init(prince, 90, 9,  20, 3);  // Both floor types
-                    // this->init(prince, 90, 9,  60, 0);  //Normal starting pos but next to drop floor 3rd floor
-                    // this->init(prince, 90, 9,  50, 3);  // Under collapsible floor
-                    // this->init(prince, 90, 9,  Constants::TileHeight, 0);   // Get tonic
-                    // this->init(prince, 90, 9,  0, 3);   // Column of climbs
-                    // this->init(prince, 90, 9,  0, 6);   // Below Column of climbs
-                    // this->init(prince, 90, 9,  0, 0);   // Top left
-                    // this->init(prince, 90, 9,  40, 4);  // Long Fall
-                    // this->init(prince, 90, 9,  60, 3);  // problem
-                    // this->init(prince, 90, 9,  30, 6); // At bottom of tthree level drop.
-                    // this->init(prince, 90, 9,  40, 0);  // Long run
-                    // this->init(prince, 90, 9,  50, 3);  // Fall Error Stading Jump
-                    // this->init(prince, 90, 9,  50, 3);  // Fall Error running Jump
+                    this->init(gamePlay, prince, 90, 9, 60, 0);  // Normal starting posa
+                    // this->init(gamePlay, prince, 90, 9,  37, 3);  // gate issuee
+                    // this->init(gamePlay, prince, 90, 9,  60, 3);  // Fight from Left
+                    // this->init(gamePlay, prince, 90, 9,  70, 3);  // Fight from Right
+                    // this->init(gamePlay, prince, 90, 9,  10, 3);   // Double collapisble
+                    // this->init(gamePlay, prince, 90, 9,  10, 0);   // Spikes Upper
+                    // this->init(gamePlay, prince, 90, 9,  10, 6);   // Spikes Lower
+                    // this->init(gamePlay, prince, 90, 9,  30, 3);  // Jump 2
+                    // this->init(gamePlay, prince, 90, 9,  70, 3);  // Sword fight
+                    // this->init(gamePlay, prince, 90, 9,  50, 0);  // Second drink tonic
+                    // this->init(gamePlay, prince, 90, 9,  50, 0);  // Upper Gate
+                    // this->init(gamePlay, prince, 90, 9,  40, 3);  // 2 leap
+                    // this->init(gamePlay, prince, 90, 9,  80, 3);  // Exit Seq
+                    // this->init(gamePlay, prince, 90, 9,  20, 3);  // Both floor types
+                    // this->init(gamePlay, prince, 90, 9,  60, 0);  //Normal starting pos but next to drop floor 3rd floor
+                    // this->init(gamePlay, prince, 90, 9,  50, 3);  // Under collapsible floor
+                    // this->init(gamePlay, prince, 90, 9,  Constants::TileHeight, 0);   // Get tonic
+                    // this->init(gamePlay, prince, 90, 9,  0, 3);   // Column of climbs
+                    // this->init(gamePlay, prince, 90, 9,  0, 6);   // Below Column of climbs
+                    // this->init(gamePlay, prince, 90, 9,  0, 0);   // Top left
+                    // this->init(gamePlay, prince, 90, 9,  40, 4);  // Long Fall
+                    // this->init(gamePlay, prince, 90, 9,  60, 3);  // problem
+                    // this->init(gamePlay, prince, 90, 9,  30, 6); // At bottom of tthree level drop.
+                    // this->init(gamePlay, prince, 90, 9,  40, 0);  // Long run
+                    // this->init(gamePlay, prince, 90, 9,  50, 3);  // Fall Error Stading Jump
+                    // this->init(gamePlay, prince, 90, 9,  50, 3);  // Fall Error running Jump
 
                 }
 
                 // Level 2
 
-                if (this->level == 2) {
+                if (gamePlay.level == 2) {
 
                     #ifndef SAVE_MEMORY_ENEMY
                         // enemy.init(104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
@@ -297,41 +300,41 @@ struct Level {
 
                     // Normal starting pos
                     prince.init(40, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
-                    this->init(prince, 130, 12, 120, 6); 
+                    this->init(gamePlay, prince, 130, 12, 120, 6); 
 
                     // Top of climbm down showing 10 error.
                     // prince.init(10, 56, Direction::Left, Stance::Upright, 3, clearSword);  
-                    // this->init(prince, 130, 12, 100, 3);  
+                    // this->init(gamePlay, prince, 130, 12, 100, 3);  
 
                     // Jump error
                     // prince.init(70-24, 56 + 31, Direction::Left, Stance::Upright, 3, clearSword);  
-                    // this->init(prince, 130, 12, 100, 3);  
+                    // this->init(gamePlay, prince, 130, 12, 100, 3);  
 
                     // Enemy 2 Fight.
                     // prince.init(10, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);  
-                    // this->init(prince, 130, 12, 80, 3);  
+                    // this->init(gamePlay, prince, 130, 12, 80, 3);  
 
                     // Jump Up
                     // prince.init(22 + 84, 25, Direction::Left, Stance::Upright, 3, clearSword);  
-                    // this->init(prince, 130, 12, 90, 6);  
+                    // this->init(gamePlay, prince, 130, 12, 90, 6);  
 
                     // Jump Up
                     // prince.init(22, 25, Direction::Left, Stance::Upright, 3, clearSword);  
-                    // this->init(prince, 130, 12, 90, 6);  
+                    // this->init(gamePlay, prince, 130, 12, 90, 6);  
 
                     // Enemy 3
                     // prince.init(22+(12*6), 25, Direction::Left, Stance::Upright, 3, clearSword);  
-                    // this->init(prince, 130, 12, 60, 3);  
+                    // this->init(gamePlay, prince, 130, 12, 60, 3);  
 
                     // Enemy 3
                     // prince.init(22+(12*6), 56, Direction::Left, Stance::Upright, 3, clearSword);  
-                    // this->init(prince, 130, 12, 20, 3);  
+                    // this->init(gamePlay, prince, 130, 12, 20, 3);  
 
                 }
 
                 // Level 3
 
-                if (this->level == 3) {
+                if (gamePlay.level == 3) {
 
                     #ifndef SAVE_MEMORY_ENEMY
                         // enemy.init(104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
@@ -340,33 +343,33 @@ struct Level {
 
                     // Normal starting pos
                     prince.init(46, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
-                    this->init(prince, 90, 15, 40, 6); 
+                    this->init(gamePlay, prince, 90, 15, 40, 6); 
 
                     // Three blades
                     // prince.init(10, 87, Direction::Right, Stance::Crouch_3_End, 3, clearSword);     
-                    // this->init(prince, 90, 15, 80, 0); 
+                    // this->init(gamePlay, prince, 90, 15, 80, 0); 
 
                     // Three blades
                     // prince.init(10, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
-                    // this->init(prince, 90, 15, 60, 3); 
+                    // this->init(gamePlay, prince, 90, 15, 60, 3); 
 
                     // Top Left
                     // prince.init(10, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
-                    // this->init(prince, 90, 15, 20, 3); 
+                    // this->init(gamePlay, prince, 90, 15, 20, 3); 
 
                     // // Biggest jump
                     // prince.init(10 + (8*12), 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
-                    // this->init(prince, 90, 15, 20, 3); 
+                    // this->init(gamePlay, prince, 90, 15, 20, 3); 
 
                     // Exit Button
                     // prince.init(10 + (4*12), 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
-                    // this->init(prince, 90, 15, 0, 6); 
+                    // this->init(gamePlay, prince, 90, 15, 0, 6); 
 
                 }
 
                 // Level 4
 
-                if (this->level == 4) {
+                if (gamePlay.level == 4) {
 
                     #ifndef SAVE_MEMORY_ENEMY
                         // enemy.init(104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
@@ -375,27 +378,27 @@ struct Level {
 
                     // Normal starting pos
                     prince.init(46, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
-                    this->init(prince, 120, 9, 10, 0); 
+                    this->init(gamePlay, prince, 120, 9, 60, 6); 
 
                     // Three blades
                     // prince.init(10, 87, Direction::Right, Stance::Crouch_3_End, 3, clearSword);     
-                    // this->init(prince, 90, 15, 80, 0); 
+                    // this->init(gamePlay, prince, 90, 15, 80, 0); 
 
                     // Three blades
                     // prince.init(10, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
-                    // this->init(prince, 90, 15, 60, 3); 
+                    // this->init(gamePlay, prince, 90, 15, 60, 3); 
 
                     // Top Left
                     // prince.init(10, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
-                    // this->init(prince, 90, 15, 20, 3); 
+                    // this->init(gamePlay, prince, 90, 15, 20, 3); 
 
                     // // Biggest jump
                     // prince.init(10 + (8*12), 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
-                    // this->init(prince, 90, 15, 20, 3); 
+                    // this->init(gamePlay, prince, 90, 15, 20, 3); 
 
                     // Exit Button
                     // prince.init(10 + (4*12), 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
-                    // this->init(prince, 90, 15, 0, 6); 
+                    // this->init(gamePlay, prince, 90, 15, 0, 6); 
 
                 }
 
@@ -609,25 +612,28 @@ struct Level {
 
                         case ItemType::FloorButton1:
 
-                            if (arduboy.isFrameCount(4)) {
+                            // if (arduboy.isFrameCount(4)) {
 
-                                if (item.data.floorButton.timeToFall > 1) {
+                            //     if (item.data.floorButton.timeToFall > 1) {
 
-                                    item.data.floorButton.timeToFall--;
+                            //         item.data.floorButton.timeToFall--;
 
-                                }
+                            //     }
 
-                                if (item.data.floorButton.timeToFall == 1) {
+                            //     if (item.data.floorButton.timeToFall == 1) {
                                 
-                                    item.data.floorButton.frame = 0;
-                                    item.data.floorButton.timeToFall = 0;
+                            //         item.data.floorButton.frame = 0;
+                            //         item.data.floorButton.timeToFall = 0;
 
-                                }
+                            //     }
 
-                            }
-                            break;
+                            // }
+                            // break;
 
                         case ItemType::FloorButton2:
+                        case ItemType::FloorButton3_UpDown:
+                        case ItemType::FloorButton3_UpOnly:
+                        case ItemType::FloorButton3_DownOnly:
 
                             if (arduboy.isFrameCount(4)) {
 
@@ -950,7 +956,9 @@ struct Level {
 
                     case ItemType::FloorButton1:
                     case ItemType::FloorButton2:
-                    case ItemType::FloorButton3:
+                    case ItemType::FloorButton3_UpDown:
+                    case ItemType::FloorButton3_UpOnly:
+                    case ItemType::FloorButton3_DownOnly:
                         item.data.floorButton.frame = 0;
                         item.data.floorButton.gateX = FX::readPendingUInt8();
                         item.data.floorButton.gateY = FX::readPendingUInt8();
@@ -1113,6 +1121,7 @@ struct Level {
                 case TILE_FG_WALL_6:
                 case TILE_FG_WALL_7:
                 case TILE_FG_WALL_8:
+                case TILE_FLOOR_GATE_FRONT_TRACK_4:
                     return WallTileResults::Normal;
 
                 default: 
@@ -1172,6 +1181,7 @@ struct Level {
                 case TILE_COLUMN_4:
                 case TILE_COLUMN_5:
                 case TILE_PILLAR_1:
+                case TILE_PILLAR_2:
                 case TILE_COLUMN_REAR_1:
                 case TILE_COLUMN_REAR_2:
                 case TILE_PILLAR_REAR_1:
@@ -1218,6 +1228,7 @@ struct Level {
                 case TILE_FLOOR_RH_END_3:        
                 case TILE_FLOOR_RH_END_4:
                 case TILE_FLOOR_RH_END_5:
+                case TILE_FLOOR_RH_PILLAR_END:
                     return true;
 
             }
@@ -1257,6 +1268,7 @@ struct Level {
                 case TILE_FLOOR_RH_END_3:
                 case TILE_FLOOR_RH_END_4:
                 case TILE_FLOOR_RH_END_5:
+                case TILE_FLOOR_RH_PILLAR_END:
 
                     if (x != Constants::CoordNone && y != Constants::CoordNone) {
 
@@ -2762,6 +2774,7 @@ struct Level {
                                 case TILE_FLOOR_RH_END_GATE:
                                 case TILE_FLOOR_RH_END_GATE_RUG:
                                 case TILE_COLUMN_LH_WALL:
+                                case TILE_FLOOR_RH_PILLAR_END:
 
                                     if (midTile == TILE_COLLAPSING_FLOOR) {
                                         return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
@@ -2806,6 +2819,7 @@ struct Level {
                                 case TILE_FLOOR_RH_END_5:
                                 case TILE_FLOOR_RH_END_GATE:
                                 case TILE_FLOOR_RH_END_GATE_RUG:
+                                case TILE_FLOOR_RH_PILLAR_END:
                                 // case TILE_COLUMN_LH_WALL:                << SJH removed 29/12
 
                                     if (midTile == TILE_COLLAPSING_FLOOR) {
@@ -2866,6 +2880,7 @@ struct Level {
                                 case TILE_FLOOR_LH_END_PATTERN_1:
                                 case TILE_FLOOR_LH_END_PATTERN_2:
                                 case TILE_COLUMN_3:
+                                case TILE_PILLAR_2:
 
                                     if (midTile == TILE_COLLAPSING_FLOOR) {
 
@@ -2903,6 +2918,7 @@ struct Level {
                                 case TILE_FLOOR_LH_END_PATTERN_1:
                                 case TILE_FLOOR_LH_END_PATTERN_2:
                                 case TILE_COLUMN_3:
+                                case TILE_PILLAR_2:
 
                                     if (midTile == TILE_COLLAPSING_FLOOR) {
                                         return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
@@ -2993,6 +3009,7 @@ struct Level {
                                 case TILE_FLOOR_RH_END_GATE:
                                 case TILE_FLOOR_RH_END_GATE_RUG:
                                 case TILE_COLUMN_LH_WALL:
+                                case TILE_FLOOR_RH_PILLAR_END:
                                     return CanJumpUpResult::JumpDist10;
 
                                 default:                                
@@ -3018,6 +3035,7 @@ struct Level {
                                 case TILE_FLOOR_LH_END_PATTERN_1:
                                 case TILE_FLOOR_LH_END_PATTERN_2:
                                 case TILE_COLUMN_3:
+                                case TILE_PILLAR_2:
                                     return CanJumpUpResult::JumpDist10;
 
                                 default:                                
@@ -3332,6 +3350,7 @@ struct Level {
                                 case TILE_FLOOR_LH_END_PATTERN_1:
                                 case TILE_FLOOR_LH_END_PATTERN_2:
                                 case TILE_COLUMN_3:
+                                case TILE_PILLAR_2:
                                     return CanClimbDownResult::StepThenClimbDown;
 
                                 default:                                
@@ -3349,6 +3368,7 @@ struct Level {
                                 case TILE_FLOOR_LH_END_PATTERN_1:
                                 case TILE_FLOOR_LH_END_PATTERN_2:
                                 case TILE_COLUMN_3:
+                                case TILE_PILLAR_2:
                                     return CanClimbDownResult::ClimbDown;
 
                                 default:
@@ -3382,6 +3402,7 @@ struct Level {
                                 case TILE_FLOOR_RH_END_5:
                                 case TILE_FLOOR_RH_END_GATE:
                                 case TILE_FLOOR_RH_END_GATE_RUG:
+                                case TILE_FLOOR_RH_PILLAR_END:
                                     return CanClimbDownResult::StepThenClimbDown;
 
                                 default:                                
@@ -3403,6 +3424,7 @@ struct Level {
                                 case TILE_FLOOR_RH_END_5:
                                 case TILE_FLOOR_RH_END_GATE:
                                 case TILE_FLOOR_RH_END_GATE_RUG:
+                                case TILE_FLOOR_RH_PILLAR_END:
                                     return CanClimbDownResult::ClimbDown;
 
                                 default:

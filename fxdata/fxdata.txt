@@ -315,18 +315,18 @@ namespace Levels {
         4, 77, 1, 1, 0,         // Spikes                       
         4, 83, 4, 1, 0,         // Spikes                       
         4, 84, 4, 1, 0,         // Spikes                       
-        2, 28, 1, 20, 1,        // Floor Button 1 (gateX, gateY)             
-        3, 24, 1, 20, 1,        // Floor Button 2 (gateX, gateY)             
+        8, 28, 1, 20, 1,        // Floor Button 3 Up Only (gateX, gateY)             
+        9, 23, 1, 20, 1,        // Floor Button 3 Down Only (gateX, gateY)             
         2, 48, 1, 40, 1,        // Floor Button 1 (gateX, gateY)             
-        2, 37, 1, 30, 1,        // Floor Button 1 (gateX, gateY)             
+        7, 37, 1, 30, 1,        // Floor Button 1 (gateX, gateY)             
         2, 32, 2, 37, 3,        // Floor Button 1 (gateX, gateY)             
         2, 20, 3, 22, 3,        // Floor Button 1 (gateX, gateY)             
-        7, 10, 1, 10, 0,        // Floor Button 3 (gateX, gateY)             
+        7, 10, 1, 10, 0,        // Floor Button 3 Up Down (gateX, gateY)             
         27, 10, 0, 0, 4,        // Gate @ 60, 0 starting position 9 (top), falls in 32 frames. 3 Up, 4 Down                                                  
         17, 40, 1, 0, 0,        // Gate @ 60, 0 starting position 9 (top), falls in 32 frames.                                                   
         17, 50, 1, 0, 0,        // Gate @ 60, 0 starting position 9 (top), falls in 32 frames.                                                   
-        17, 30, 1, 0, 0,        // Gate @ 60, 0 starting position 9 (top), falls in 32 frames.                                                   
-        17, 20, 1, 0, 0,        // Gate @ 60, 0 starting position 9 (top), falls in 32 frames.   
+        27, 30, 1, 0, 0,        // Gate @ 60, 0 starting position 9 (top), falls in 32 frames.                                                   
+        27, 20, 1, 0, 0,        // Gate @ 60, 0 starting position 9 (top), falls in 32 frames.   
         17, 22, 3, 0, 0,        // Gate @ 60, 0 starting position 9 (top), falls in 32 frames.   
         17, 37, 3, 0, 0,        // Gate @ 60, 0 starting position 9 (top), falls in 32 frames.   
         1, 11, 1, 55,           // CollapsingTile (dist to fall)                                    
@@ -335,6 +335,53 @@ namespace Levels {
         255                     // End
     }
 
+    // *****************************************************************************************************************
+    //  Level 5
+    // *****************************************************************************************************************
+    
+    int8_t Level5_FG[] = {
+    include "../levels/Level5_FG.csv"
+    };
+
+    int8_t Level5_BG[] = {
+    include "../levels/Level5_BG.csv"
+    };
+
+    uint8_t level5_Data[] = {
+        // Prince
+        56,                         // Prince starting x pos
+        87,                         // Prince starting y pos (25, 56, 87)
+        2,                          // Prince starting direction, 1 Left and 2 Right
+        3,                          // Prince starting stance, 3 Crouch_3_End
+        3,                          // Prince starting health
+        // Level
+        90,                        // Width
+        15,                          // Height
+        60,                         // Level x starting position
+        6,                          // Level y starting position
+        // Enemy 1          
+        //70,                         // Enemy starting x tile
+        //3,                          // Enemy starting y tile
+        //92,                         // Enemy starting x pos
+        //56,                         // Enemy starting y pos (25, 56, 87)
+        //1,                          // Enemy starting direction, 1 Left and 2 Right
+        //3,                          // Enemy starting health
+        // Enemy 2          
+        //40,                         // Enemy starting x tile
+        //0,                          // Enemy starting y tile
+        //80,                         // Enemy starting x pos
+        //25,                         // Enemy starting y pos (25, 56, 87)
+        //1,                          // Enemy starting direction, 1 Left and 2 Right
+        //3,                          // Enemy starting health
+        // End
+        255,
+    };
+
+    uint8_t Level5_Items[] = {
+        26, 4, 8, 3, 5,         // Exit Gate, let position for open, right position, close button                                                        
+        28, 64, 8,              // Entry Gate   
+        255                     // End
+    }
 }
 namespace_end
 
