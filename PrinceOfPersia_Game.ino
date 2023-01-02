@@ -1268,7 +1268,6 @@ void game() {
                     gamePlay.gameState = GameState::Title;
                     titleScreenVars.setMode(static_cast<TitleScreenMode>(static_cast<uint8_t>(titleScreenVars.getMode()) + 1), level);
                     gamePlay.incLevel();
-// Serial.println("incLevel");                    
                     break;
 
                 case Stance::Upright_Turn:
@@ -1778,7 +1777,7 @@ void game() {
         if (prince.getHealth() > 0) {
 
             int8_t distToEdgeOfTile = level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX());
-// Serial.println(distToEdgeOfTile);
+
             if (distToEdgeOfTile <= 4) {
                 
                 int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x) + ((prince.getDirection() == Direction::Right && distToEdgeOfTile <= 4) ? 1 : 0);

@@ -226,7 +226,7 @@ void render(bool enemyIsVisible) {
             }
             else {
                 
-                FX::drawBitmap(enemy.getXImage() - (level.getXLocation() * Constants::TileWidth), enemy.getYImage() - (level.getYLocation() * Constants::TileHeight)- level.getYOffset() + Constants::ScreenTopOffset, Images::Prince_Right, 0, dbmMasked);
+                FX::drawBitmap(enemy.getXImage() - (level.getXLocation() * Constants::TileWidth), enemy.getYImage() - (level.getYLocation() * Constants::TileHeight)- level.getYOffset() + Constants::ScreenTopOffset, Images::Prince_Right, imageIndex - 1, dbmMasked);
 
             }
             
