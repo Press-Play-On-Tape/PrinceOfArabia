@@ -199,30 +199,34 @@ void render(bool enemyIsVisible) {
 
     // Draw enemy ..
 
-    stance = enemy.getStance();
-    imageIndex = static_cast<uint16_t>(pgm_read_byte(&Constants::StanceToImageXRef[stance]));
+    #ifndef SAVE_MEMORY_ENEMY
 
-    if (imageIndex != 0) {
+        stance = enemy.getStance();
+        imageIndex = static_cast<uint16_t>(pgm_read_byte(&Constants::StanceToImageXRef[stance]));
 
-        #if defined(DEBUG) && defined(DEBUG_PRINCE_RENDERING)
-        DEBUG_PRINT(F("Stance: "));
-        DEBUG_PRINT(prince.getStance());
-        DEBUG_PRINT(F(", ImageIndex: "));
-        DEBUG_PRINTLN(imageIndex);
-        #endif
+        if (imageIndex != 0) {
 
-        if (enemy.getDirection() == Direction::Left) {
+            #if defined(DEBUG) && defined(DEBUG_PRINCE_RENDERING)
+            DEBUG_PRINT(F("Stance: "));
+            DEBUG_PRINT(prince.getStance());
+            DEBUG_PRINT(F(", ImageIndex: "));
+            DEBUG_PRINTLN(imageIndex);
+            #endif
+
+            if (enemy.getDirection() == Direction::Left) {
+                
+                FX::drawBitmap(enemy.getXImage() - (level.getXLocation() * Constants::TileWidth), enemy.getYImage() - (level.getYLocation() * Constants::TileHeight)- level.getYOffset() + Constants::ScreenTopOffset, Images::Prince_Left, imageIndex - 1, dbmMasked);
+
+            }
+            else {
+                
+                FX::drawBitmap(enemy.getXImage() - (level.getXLocation() * Constants::TileWidth), enemy.getYImage() - (level.getYLocation() * Constants::TileHeight)- level.getYOffset() + Constants::ScreenTopOffset, Images::Prince_Right, 0, dbmMasked);
+
+            }
             
-            FX::drawBitmap(enemy.getXImage() - (level.getXLocation() * Constants::TileWidth), enemy.getYImage() - (level.getYLocation() * Constants::TileHeight)- level.getYOffset() + Constants::ScreenTopOffset, Images::Prince_Left, imageIndex - 1, dbmMasked);
-
         }
-        else {
-            
-            FX::drawBitmap(enemy.getXImage() - (level.getXLocation() * Constants::TileWidth), enemy.getYImage() - (level.getYLocation() * Constants::TileHeight)- level.getYOffset() + Constants::ScreenTopOffset, Images::Prince_Right, 0, dbmMasked);
 
-        }
-        
-    }
+    #endif
 
 
     // Draw items ..
@@ -325,11 +329,15 @@ void render(bool enemyIsVisible) {
 
         // Render enemy health ..
 
-        for (uint8_t i = 0; i < enemy.getHealthMax(); i++) {
+        #ifndef SAVE_MEMORY_ENEMY
 
-            FX::drawBitmap(123, 60 - (i * 4), Images::Healths, enemy.getHealth() <= i, dbmNormal);
-            
-        }
+            for (uint8_t i = 0; i < enemy.getHealthMax(); i++) {
+
+                FX::drawBitmap(123, 60 - (i * 4), Images::Healths, enemy.getHealth() <= i, dbmNormal);
+                
+            }
+
+        #endif
 
     }
 

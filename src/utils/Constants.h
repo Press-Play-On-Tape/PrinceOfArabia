@@ -6,6 +6,7 @@
 #define SAVE_MEMORY_USB
 #define _SAVE_MEMORY_OTHER
 #define _SAVE_MEMORY_SOUND
+#define _SAVE_MEMORY_ENEMY
 #define _ALT_B_BUTTON
 #define _GIVE_SWORD
 

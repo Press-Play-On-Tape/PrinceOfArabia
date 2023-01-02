@@ -31,7 +31,11 @@ Cookie cookie;
 Stack <int16_t, Constants::StackSize> princeStack;
 Prince &prince = cookie.prince;
 Stack <int16_t, Constants::StackSize> enemyStack;
+
+#ifndef SAVE_MEMORY_ENEMY
 Enemy &enemy = cookie.enemy;
+#endif
+
 Level &level = cookie.level;
 GamePlay &gamePlay = cookie.gamePlay;
 TitleScreenVars titleScreenVars = cookie.titleScreenVars;
@@ -57,7 +61,10 @@ void setup() {
     FX::begin(FX_DATA_PAGE);
 
     prince.setStack(&princeStack);
-    enemy.setStack(&enemyStack);
+
+    #ifndef SAVE_MEMORY_ENEMY
+        enemy.setStack(&enemyStack);
+    #endif
 
     #ifdef SAVE_MEMORY_OTHER
         gamePlay.gameState = GameState::Game_Init;

@@ -135,9 +135,14 @@ struct Level {
 
         #endif
 
+        #ifndef SAVE_MEMORY_ENEMY
         void init_PositionChars(GamePlay &gamePlay, Prince &prince, Enemy &enemy, bool clearSword) {
 
             enemy.init();
+        #else
+        void init_PositionChars(GamePlay &gamePlay, Prince &prince, bool clearSword) {
+
+        #endif
 
             #ifdef LEVEL_DATA_FROM_FX
                 
@@ -190,7 +195,10 @@ struct Level {
 
                         Direction direction = static_cast<Direction>(FX::readPendingUInt8());
                         uint8_t health = FX::readPendingUInt8();
-                        enemy.init((xTile * Constants::TileWidth) + xPixel, (yTile * Constants::TileHeight) + yPixel, direction, Stance::Upright, health);
+
+                        #ifndef SAVE_MEMORY_ENEMY
+                            enemy.init((xTile * Constants::TileWidth) + xPixel, (yTile * Constants::TileHeight) + yPixel, direction, Stance::Upright, health);
+                        #endif
 
                         xTile = FX::readPendingUInt8();
 
@@ -206,8 +214,10 @@ struct Level {
 
                 if (this->level == 1) {
 
-                    enemy.init(104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
-                    enemy.init(80 + (40 * Constants::TileWidth), 25 + (0 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
+                    #ifndef SAVE_MEMORY_ENEMY
+                        enemy.init(104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
+                        enemy.init(80 + (40 * Constants::TileWidth), 25 + (0 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
+                    #endif
 
                     prince.init(38-28+12+4, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Normal starting pos
                     // prince.init(38-24, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Gate Issue
@@ -271,8 +281,10 @@ struct Level {
 
                 if (this->level == 2) {
 
-                    // enemy.init(104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
-                    // enemy.init(80 + (40 * Constants::TileWidth), 25 + (0 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
+                    #ifndef SAVE_MEMORY_ENEMY
+                        // enemy.init(104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
+                        // enemy.init(80 + (40 * Constants::TileWidth), 25 + (0 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
+                    #endif
 
                     // Normal starting pos
                     prince.init(40, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
@@ -312,8 +324,10 @@ struct Level {
 
                 if (this->level == 3) {
 
-                    // enemy.init(104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
-                    // enemy.init(80 + (40 * Constants::TileWidth), 25 + (0 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
+                    #ifndef SAVE_MEMORY_ENEMY
+                        // enemy.init(104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
+                        // enemy.init(80 + (40 * Constants::TileWidth), 25 + (0 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
+                    #endif
 
                     // Normal starting pos
                     prince.init(46, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
@@ -345,8 +359,10 @@ struct Level {
 
                 if (this->level == 4) {
 
-                    // enemy.init(104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
-                    // enemy.init(80 + (40 * Constants::TileWidth), 25 + (0 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
+                    #ifndef SAVE_MEMORY_ENEMY
+                        // enemy.init(104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
+                        // enemy.init(80 + (40 * Constants::TileWidth), 25 + (0 * Constants::TileHeight), Direction::Left, Stance::Upright, 3);          // Sword fight from Left
+                    #endif
 
                     // Normal starting pos
                     prince.init(46, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     

@@ -12,7 +12,12 @@
 void game_Init() {
 // Serial.println("game_Init");
     gamePlay.init(arduboy, 1);
-    level.init_PositionChars(gamePlay, prince, enemy, true);
+
+    #ifndef SAVE_MEMORY_ENEMY
+        level.init_PositionChars(gamePlay, prince, enemy, true);
+    #else
+        level.init_PositionChars(gamePlay, prince, true);
+    #endif
 
     gamePlay.gameState = GameState::Game;
     menu.init();
@@ -24,7 +29,12 @@ void game_Init() {
 void game_StartLevel() {
 // Serial.println("game_StartLevel");
     gamePlay.restartLevel(arduboy);
-    level.init_PositionChars(gamePlay, prince, enemy, false);
+
+    #ifndef SAVE_MEMORY_ENEMY
+        level.init_PositionChars(gamePlay, prince, enemy, false);
+    #else
+        level.init_PositionChars(gamePlay, prince, false);
+    #endif
 
     gamePlay.gameState = GameState::Game;
     menu.init();
@@ -133,7 +143,10 @@ void game() {
     // Update the objects ..
 
     prince.update(level.getXLocation(), level.getYLocation());
+
+    #ifndef SAVE_MEMORY_ENEMY
     enemy.update();
+    #endif
     
     LevelUpdate levelUpdate = level.update(arduboy, prince);
 
@@ -155,313 +168,311 @@ void game() {
 
     // Is the prince within distance of the enemy (cycle through all enemies to find it any closest)?
 
-    // enemyIsVisible = false;
+    #ifndef SAVE_MEMORY_ENEMY
 
-    if (enemy.isEmpty()) {
+        if (enemy.isEmpty()) {
 
-        enemyIsVisible = isEnemyVisible(true);
+            enemyIsVisible = isEnemyVisible(true);
 
-    }
-    else {
+        }
+        else {
 
-        enemyIsVisible = isEnemyVisible(false);
+            enemyIsVisible = isEnemyVisible(false);
 
-    }
-
-
-
-    // If within distance, we can draw swords if we have one!
-
-    if (justPressed & B_BUTTON && enemyIsVisible && prince.getSword() && prince.getStance() == Stance::Upright && prince.isEmpty() && enemy.getHealth() > 0) {
-        
-        prince.pushSequence(Stance::Draw_Sword_01_Start, Stance::Draw_Sword_06_End, Stance::Sword_Normal, true);
-        justPressed = 0;
-
-    }
+        }
 
 
+        // If within distance, we can draw swords if we have one!
 
-    // ---------------------------------------------------------------------------------------------------------------------------------------
-    //  
-    //  If enemy queue is empty then determine next move ..
-    //
-    // ---------------------------------------------------------------------------------------------------------------------------------------
+        if (justPressed & B_BUTTON && enemyIsVisible && prince.getSword() && prince.getStance() == Stance::Upright && prince.isEmpty() && enemy.getHealth() > 0) {
+            
+            prince.pushSequence(Stance::Draw_Sword_01_Start, Stance::Draw_Sword_06_End, Stance::Sword_Normal, true);
+            justPressed = 0;
 
-    if (gamePlay.gameState == GameState::Game && enemy.isEmpty()) {
-
-        BaseEntity enemyBase = enemy.getActiveBase();
-
-        int16_t xDelta = prince.getPosition().x - enemy.getPosition().x;
-        int16_t yDelta = prince.getPosition().y - enemy.getPosition().y;
-
-        switch (enemy.getStance()) {
-
-            case Stance::Upright:
-
-                // Draw sword? Not if the prince is dead!
-
-                if (abs(xDelta) < 70 && yDelta == 0) {
-
-                    switch (prince.getStance()) {
-
-                        case Stance::Falling_Dead_1_Start ... Stance::Falling_Dead_3_End:
-                            break;
-
-                        default:
-                            enemy.pushSequence(Stance::Draw_Sword_01_Start, Stance::Draw_Sword_06_End, Stance::Sword_Normal, true);
-                            break;
-
-                    }                    
-
-                }
-
-                break;
+        }
 
 
-            // The enemy is at the end of the move sequence, what next?
+        // ---------------------------------------------------------------------------------------------------------------------------------------
+        //  
+        //  If enemy queue is empty then determine next move ..
+        //
+        // ---------------------------------------------------------------------------------------------------------------------------------------
 
-            case Stance::Sword_Step_03_End:
+        if (gamePlay.gameState == GameState::Game && enemy.isEmpty()) {
 
-                if (yDelta == 0) {
+            BaseEntity enemyBase = enemy.getActiveBase();
 
-                    switch(abs(xDelta)) {
+            int16_t xDelta = prince.getPosition().x - enemy.getPosition().x;
+            int16_t yDelta = prince.getPosition().y - enemy.getPosition().y;
 
-                        // If the enemy and prince are within striking distance then stop the enemy moving forward ..
+            switch (enemy.getStance()) {
 
-                        case 0 ... Constants::StrikeDistance:
+                case Stance::Upright:
 
-                            if (level.canMoveForward(enemyBase, Action::SmallStep)) {
-                                enemy.push(Stance::Sword_Normal, false);
-                            }
-                            break;
+                    // Draw sword? Not if the prince is dead!
+
+                    if (abs(xDelta) < 70 && yDelta == 0) {
+
+                        switch (prince.getStance()) {
+
+                            case Stance::Falling_Dead_1_Start ... Stance::Falling_Dead_3_End:
+                                break;
+
+                            default:
+                                enemy.pushSequence(Stance::Draw_Sword_01_Start, Stance::Draw_Sword_06_End, Stance::Sword_Normal, true);
+                                break;
+
+                        }                    
+
+                    }
+
+                    break;
 
 
-                        // If the enemy and prince are close to striking distance then the enemy should either get ready for combat or move forward ..
+                // The enemy is at the end of the move sequence, what next?
 
-                        case Constants::StrikeDistance + 1 ... 30:
+                case Stance::Sword_Step_03_End:
 
-                            if (prince.isSwordDrawn()) {
+                    if (yDelta == 0) {
 
-                                enemy.push(Stance::Sword_Normal, false);
+                        switch(abs(xDelta)) {
 
-                            }
-                            else {
+                            // If the enemy and prince are within striking distance then stop the enemy moving forward ..
+
+                            case 0 ... Constants::StrikeDistance:
+
+                                if (level.canMoveForward(enemyBase, Action::SmallStep)) {
+                                    enemy.push(Stance::Sword_Normal, false);
+                                }
+                                break;
+
+
+                            // If the enemy and prince are close to striking distance then the enemy should either get ready for combat or move forward ..
+
+                            case Constants::StrikeDistance + 1 ... 30:
+
+                                if (prince.isSwordDrawn()) {
+
+                                    enemy.push(Stance::Sword_Normal, false);
+
+                                }
+                                else {
+
+                                    if (level.canMoveForward(enemyBase, Action::SmallStep)) {
+                                        enemy.pushSequence(Stance::Sword_Step_01_Start, Stance::Sword_Step_03_End, true);
+                                    }
+                                    
+                                }
+
+                                break;
+
+                            default:
+
+
+                                // If the enemy and prince are far apart then the enemy should advance on the prince ..
 
                                 if (level.canMoveForward(enemyBase, Action::SmallStep)) {
                                     enemy.pushSequence(Stance::Sword_Step_01_Start, Stance::Sword_Step_03_End, true);
                                 }
+                                break;
+
+                        }
+
+
+                    }
+                    
+                    break;
+
+
+                // The enemy is ready to attack / move / retreat ..
+
+                case Stance::Sword_Normal:
+
+
+                    // Has the enemy gone past the prince?  If so, turn around ..
+
+                    if (xDelta > 0 && enemy.getDirection() == Direction::Left){
+
+                        enemy.setDirection(Direction::Right);
+                        moveBackwardsWithSword(enemyBase, enemy);
+
+                        if (prince.isSwordDrawn() && prince.getDirection() == Direction::Right) {
+
+                            prince.setDirection(Direction::Left);
+                            moveBackwardsWithSword(prince, prince);
+
+                        }
+                        else if (!prince.isSwordDrawn() && xDelta <= 24) {
+
+                            pushDead(prince, level, gamePlay, true);
+
+                        }
+
+                        break;
+
+                    }
+
+                    else if (xDelta < 0 && enemy.getDirection() == Direction::Right){
+
+                        enemy.setDirection(Direction::Left);
+                        moveBackwardsWithSword(enemyBase, enemy);
+
+                        if (prince.isSwordDrawn() && prince.getDirection() == Direction::Left) {
+
+                            prince.setDirection(Direction::Right);
+                            moveBackwardsWithSword(prince, prince);
+
+                        }
+                        else if (!prince.isSwordDrawn() && xDelta >= -24) {
+
+                            pushDead(prince, level, gamePlay, true);
+                            
+                        }
+
+                        break;
+
+                    }
+
+
+                    // Otherwise take action!
+
+                    switch (prince.getStance()) {
+
+
+                        // The prince is dying, put away the sword ..
+
+                        case Stance::Falling_Dead_1_Start ... Stance::Falling_Dead_3_End:
+
+                            enemy.pushSequence(Stance::Pickup_Sword_7_PutAway, Stance::Pickup_Sword_16_End, Stance::Upright, false);
+                            break;
+
+
+                        // The prince is attacking, can the enemy block the attack or move?
+
+                        case Stance::Sword_Attack_01_Start ... Stance::Sword_Attack_02:
+
+                            if (random(0, 12) == 0) {    
+
+                                prince.clear();
+                                prince.pushSequence(Stance::Attack_Block_01_Start, Stance::Attack_Block_03_End, Stance::Sword_Normal, false);
+                                enemy.pushSequence(Stance::Attack_Block_01_Start, Stance::Attack_Block_03_End, Stance::Sword_Normal, false);
+                                
+                            }
+                            else if (random(0, 12) == 0) {    
+
+                                moveBackwardsWithSword(enemyBase, enemy);
+                                
+                            } 
+
+                            break;
+
+
+                        // The prince is attacking but its too late to move back, can the enemy block the attack?
+
+                        case Stance::Sword_Attack_03 ... Stance::Sword_Attack_04:
+
+                            if (random(0, 8) == 0) {    
+
+                                prince.clear();
+                                prince.pushSequence(Stance::Attack_Block_01_Start, Stance::Attack_Block_03_End, Stance::Sword_Normal, false);
+                                enemy.pushSequence(Stance::Attack_Block_01_Start, Stance::Attack_Block_03_End, Stance::Sword_Normal, false);
                                 
                             }
 
                             break;
-
+                        
                         default:
 
+                            if (yDelta == 0) {
 
-                            // If the enemy and prince are far apart then the enemy should advance on the prince ..
-
-                            if (level.canMoveForward(enemyBase, Action::SmallStep)) {
-                                enemy.pushSequence(Stance::Sword_Step_01_Start, Stance::Sword_Step_03_End, true);
-                            }
-                            break;
-
-                    }
+                                switch(abs(xDelta)) {
 
 
-                }
-                
-                break;
+                                    // If the enemy and prince are within stirking distance then ..
+
+                                    case 0 ... Constants::StrikeDistance:
+
+                                        switch (prince.getStance()) {
 
 
-            // The enemy is ready to attack / move / retreat ..
+                                            // The prince is dying, do nothing ..
 
-            case Stance::Sword_Normal:
-
-
-                // Has the enemy gone past the prince?  If so, turn around ..
-
-                if (xDelta > 0 && enemy.getDirection() == Direction::Left){
-
-                    enemy.setDirection(Direction::Right);
-                    moveBackwardsWithSword(enemyBase, enemy);
-
-                    if (prince.isSwordDrawn() && prince.getDirection() == Direction::Right) {
-
-                        prince.setDirection(Direction::Left);
-                        moveBackwardsWithSword(prince, prince);
-
-                    }
-                    else if (!prince.isSwordDrawn() && xDelta <= 24) {
-
-                        pushDead(prince, level, gamePlay, true);
-
-                    }
-
-                    break;
-
-                }
-
-                else if (xDelta < 0 && enemy.getDirection() == Direction::Right){
-
-                    enemy.setDirection(Direction::Left);
-                    moveBackwardsWithSword(enemyBase, enemy);
-
-                    if (prince.isSwordDrawn() && prince.getDirection() == Direction::Left) {
-
-                        prince.setDirection(Direction::Right);
-                        moveBackwardsWithSword(prince, prince);
-
-                    }
-                    else if (!prince.isSwordDrawn() && xDelta >= -24) {
-
-                        pushDead(prince, level, gamePlay, true);
-                        
-                    }
-
-                    break;
-
-                }
+                                            case Stance::Falling_Dead_1_Start ... Stance::Falling_Dead_3_End: 
+                                                break;
 
 
-                // Otherwise take action!
+                                            // If the prince is ready for combat (but not attacking) then the enemy should attack ..
 
-                switch (prince.getStance()) {
+                                            case Stance::Attack_Block_01_Start ... Stance::Attack_Block_03_End:
+                                            case Stance::Draw_Sword_01_Start ... Stance::Draw_Sword_06_End:
+                                            case Stance::Sword_Step_01_Start ... Stance::Sword_Step_03_End:
+                                            case Stance::Sword_Normal:
 
-
-                    // The prince is dying, put away the sword ..
-
-                    case Stance::Falling_Dead_1_Start ... Stance::Falling_Dead_3_End:
-
-                        enemy.pushSequence(Stance::Pickup_Sword_7_PutAway, Stance::Pickup_Sword_16_End, Stance::Upright, false);
-                        break;
-
-
-                    // The prince is attacking, can the enemy block the attack or move?
-
-                    case Stance::Sword_Attack_01_Start ... Stance::Sword_Attack_02:
-
-                        if (random(0, 12) == 0) {    
-
-                            prince.clear();
-                            prince.pushSequence(Stance::Attack_Block_01_Start, Stance::Attack_Block_03_End, Stance::Sword_Normal, false);
-                            enemy.pushSequence(Stance::Attack_Block_01_Start, Stance::Attack_Block_03_End, Stance::Sword_Normal, false);
-                            
-                        }
-                        else if (random(0, 12) == 0) {    
-
-                            moveBackwardsWithSword(enemyBase, enemy);
-                            
-                        } 
-
-                        break;
+                                                if (random(0, 16) == 0) {
+                                                    enemy.pushSequence(Stance::Sword_Attack_01_Start, Stance::Sword_Attack_08_End, Stance::Sword_Normal, true);
+                                                }
+                                                break;
 
 
-                    // The prince is attacking but its too late to move back, can the enemy block the attack?
+                                            // The prince is not ready for combat, kill him immediately ..
 
-                    case Stance::Sword_Attack_03 ... Stance::Sword_Attack_04:
+                                            default:
 
-                        if (random(0, 8) == 0) {    
-
-                            prince.clear();
-                            prince.pushSequence(Stance::Attack_Block_01_Start, Stance::Attack_Block_03_End, Stance::Sword_Normal, false);
-                            enemy.pushSequence(Stance::Attack_Block_01_Start, Stance::Attack_Block_03_End, Stance::Sword_Normal, false);
-                            
-                        }
-
-                        break;
-                       
-                    default:
-
-                        if (yDelta == 0) {
-
-                            switch(abs(xDelta)) {
-
-
-                                // If the enemy and prince are within stirking distance then ..
-
-                                case 0 ... Constants::StrikeDistance:
-
-                                    switch (prince.getStance()) {
-
-
-                                        // The prince is dying, do nothing ..
-
-                                        case Stance::Falling_Dead_1_Start ... Stance::Falling_Dead_3_End: 
-                                            break;
-
-
-                                        // If the prince is ready for combat (but not attacking) then the enemy should attack ..
-
-                                        case Stance::Attack_Block_01_Start ... Stance::Attack_Block_03_End:
-                                        case Stance::Draw_Sword_01_Start ... Stance::Draw_Sword_06_End:
-                                        case Stance::Sword_Step_01_Start ... Stance::Sword_Step_03_End:
-                                        case Stance::Sword_Normal:
-
-                                            if (random(0, 16) == 0) {
                                                 enemy.pushSequence(Stance::Sword_Attack_01_Start, Stance::Sword_Attack_08_End, Stance::Sword_Normal, true);
+                                                break;
+
+                                        }
+
+                                        break;
+
+
+                                    // If the enemy and prince are close to striking distance then the enemy should either get ready for combat or move forward ..
+
+                                    case Constants::StrikeDistance + 1 ... Constants::StrikeDistance + 28:
+
+                                        if (random(0, 16) == 0) {
+
+                                            if (level.canMoveForward(enemyBase, Action::SmallStep)) {
+                                                enemy.pushSequence(Stance::Sword_Step_01_Start, Stance::Sword_Step_03_End, true); //, Stance::Sword_Normal, true);
                                             }
-                                            break;
 
+                                        }
+                                        else {
 
-                                        // The prince is not ready for combat, kill him immediately ..
+                                            if (enemy.getStance() == Stance::Sword_Step_03_End) {
+                                                enemy.push(Stance::Sword_Normal, false);
+                                            }
 
-                                        default:
+                                        }
 
-                                            enemy.pushSequence(Stance::Sword_Attack_01_Start, Stance::Sword_Attack_08_End, Stance::Sword_Normal, true);
-                                            break;
+                                        break;
 
-                                    }
+                                    default:
 
-                                    break;
-
-
-                                // If the enemy and prince are close to striking distance then the enemy should either get ready for combat or move forward ..
-
-                                case Constants::StrikeDistance + 1 ... Constants::StrikeDistance + 28:
-
-                                    if (random(0, 16) == 0) {
+                                        // Advance on prince ..
 
                                         if (level.canMoveForward(enemyBase, Action::SmallStep)) {
-                                            enemy.pushSequence(Stance::Sword_Step_01_Start, Stance::Sword_Step_03_End, true); //, Stance::Sword_Normal, true);
+                                        enemy.pushSequence(Stance::Sword_Step_01_Start, Stance::Sword_Step_03_End, true);
                                         }
 
-                                    }
-                                    else {
+                                        break;
 
-                                        if (enemy.getStance() == Stance::Sword_Step_03_End) {
-                                            enemy.push(Stance::Sword_Normal, false);
-                                        }
+                                }
 
-                                    }
-
-                                    break;
-
-                                default:
-
-                                    // Advance on prince ..
-
-                                    if (level.canMoveForward(enemyBase, Action::SmallStep)) {
-                                       enemy.pushSequence(Stance::Sword_Step_01_Start, Stance::Sword_Step_03_End, true);
-                                    }
-
-                                    break;
 
                             }
 
+                            break;
 
-                        }
+                    }                    
 
-                        break;
+                    break;
 
-                }                    
-
-                break;
+            }
 
         }
 
-    }
-
-
+    #endif
 
     // ---------------------------------------------------------------------------------------------------------------------------------------
     //  
@@ -1084,96 +1095,99 @@ void game() {
 
                 case Stance::Sword_Normal:
 
-                    if (pressed & B_BUTTON) {
+                    #ifndef SAVE_MEMORY_ENEMY
 
-                        prince.pushSequence(Stance::Pickup_Sword_7_PutAway, Stance::Pickup_Sword_16_End, Stance::Upright, true);
+                        if (pressed & B_BUTTON) {
 
-                    }
-
-                    else if (pressed & A_BUTTON) {
-
-                        prince.pushSequence(Stance::Sword_Attack_01_Start, Stance::Sword_Attack_08_End, Stance::Sword_Normal, true);
-
-                    }
-
-                    else if (pressed & UP_BUTTON) { // Block attack?
-
-                        switch (enemy.getStance()) {
-
-                            // Block attack from enemy only if not all the way through sequence ..
-
-                            case Stance::Sword_Attack_02 ... Stance::Sword_Attack_04:
-
-                                enemy.clear();
-                                enemy.pushSequence(Stance::Attack_Block_01_Start, Stance::Attack_Block_03_End, Stance::Sword_Normal, false);
-                                break;
-
-                            default: break;
+                            prince.pushSequence(Stance::Pickup_Sword_7_PutAway, Stance::Pickup_Sword_16_End, Stance::Upright, true);
 
                         }
 
-                        prince.pushSequence(Stance::Attack_Block_01_Start, Stance::Attack_Block_03_End, Stance::Sword_Normal, true);
+                        else if (pressed & A_BUTTON) {
 
-                    }
+                            prince.pushSequence(Stance::Sword_Attack_01_Start, Stance::Sword_Attack_08_End, Stance::Sword_Normal, true);
 
-                    else if (pressed & RIGHT_BUTTON) {
+                        }
 
-                        if (prince.getDirection() == Direction::Right) {
+                        else if (pressed & UP_BUTTON) { // Block attack?
 
-                            if (level.canMoveForward(prince, Action::SmallStep)) {
-                                prince.pushSequence(Stance::Sword_Step_01_Start, Stance::Sword_Step_03_End, Stance::Sword_Normal, true);
-                                break;
+                            switch (enemy.getStance()) {
+
+                                // Block attack from enemy only if not all the way through sequence ..
+
+                                case Stance::Sword_Attack_02 ... Stance::Sword_Attack_04:
+
+                                    enemy.clear();
+                                    enemy.pushSequence(Stance::Attack_Block_01_Start, Stance::Attack_Block_03_End, Stance::Sword_Normal, false);
+                                    break;
+
+                                default: break;
+
+                            }
+
+                            prince.pushSequence(Stance::Attack_Block_01_Start, Stance::Attack_Block_03_End, Stance::Sword_Normal, true);
+
+                        }
+
+                        else if (pressed & RIGHT_BUTTON) {
+
+                            if (prince.getDirection() == Direction::Right) {
+
+                                if (level.canMoveForward(prince, Action::SmallStep)) {
+                                    prince.pushSequence(Stance::Sword_Step_01_Start, Stance::Sword_Step_03_End, Stance::Sword_Normal, true);
+                                    break;
+                                }
+
+                            }
+                            else {
+
+                                if (level.canMoveForward(prince, Action::SmallStep, prince.getOppositeDirection())) {
+                                    prince.pushSequence(Stance::Sword_Step_03_End, Stance::Sword_Step_01_Start, Stance::Sword_Normal, true);
+                                    break;
+                                }
+                                
                             }
 
                         }
+                                
+                        else if (pressed & LEFT_BUTTON) {
+                            
+                            if (prince.getDirection() == Direction::Left) {
+
+                                if (level.canMoveForward(prince, Action::SmallStep)) {
+                                    prince.pushSequence(Stance::Sword_Step_01_Start, Stance::Sword_Step_03_End, Stance::Sword_Normal, true);
+                                    break;
+                                }
+
+                            }
+                            else {
+
+                                if (level.canMoveForward(prince, Action::SmallStep, prince.getOppositeDirection())) {
+                                    prince.pushSequence(Stance::Sword_Step_03_End, Stance::Sword_Step_01_Start, Stance::Sword_Normal, true);
+                                    break;
+                                }
+                                
+                            }
+
+                        }
+
                         else {
+                                
+                            if (pressed & LEFT_BUTTON) {
 
-                            if (level.canMoveForward(prince, Action::SmallStep, prince.getOppositeDirection())) {
-                                prince.pushSequence(Stance::Sword_Step_03_End, Stance::Sword_Step_01_Start, Stance::Sword_Normal, true);
-                                break;
-                            }
-                            
-                        }
-
-                    }
-                            
-                    else if (pressed & LEFT_BUTTON) {
-                        
-                        if (prince.getDirection() == Direction::Left) {
-
-                            if (level.canMoveForward(prince, Action::SmallStep)) {
                                 prince.pushSequence(Stance::Sword_Step_01_Start, Stance::Sword_Step_03_End, Stance::Sword_Normal, true);
-                                break;
+
                             }
+                                
+                            if (pressed & RIGHT_BUTTON) {
 
-                        }
-                        else {
-
-                            if (level.canMoveForward(prince, Action::SmallStep, prince.getOppositeDirection())) {
                                 prince.pushSequence(Stance::Sword_Step_03_End, Stance::Sword_Step_01_Start, Stance::Sword_Normal, true);
-                                break;
+
                             }
-                            
-                        }
-
-                    }
-
-                    else {
-                            
-                        if (pressed & LEFT_BUTTON) {
-
-                            prince.pushSequence(Stance::Sword_Step_01_Start, Stance::Sword_Step_03_End, Stance::Sword_Normal, true);
-
-                        }
-                            
-                        if (pressed & RIGHT_BUTTON) {
-
-                            prince.pushSequence(Stance::Sword_Step_03_End, Stance::Sword_Step_01_Start, Stance::Sword_Normal, true);
 
                         }
 
-                    }
-
+                    #endif
 
                     break;
                 
@@ -1556,32 +1570,38 @@ void game() {
 
                 case Stance::Sword_Attack_05:
                     {
-                        int16_t xDelta = prince.getPosition().x - enemy.getPosition().x;
-                        int16_t yDelta = prince.getPosition().y - enemy.getPosition().y;
+                        #ifndef SAVE_MEMORY_ENEMY
+                            
+                            int16_t xDelta = prince.getPosition().x - enemy.getPosition().x;
+                            int16_t yDelta = prince.getPosition().y - enemy.getPosition().y;
 
-                        if (abs(xDelta) <= Constants::StrikeDistance && yDelta == 0) {
+                            if (abs(xDelta) <= Constants::StrikeDistance && yDelta == 0) {
 
-                            initFlash(enemy, level, FlashType::SwordFight);
-                         
-                            if (enemy.decHealth(1) == 0) {
+                                initFlash(enemy, level, FlashType::SwordFight);
+                            
+                                if (enemy.decHealth(1) == 0) {
 
-                                pushDead(enemy, true);
-                                
-                                prince.clear();
-                                prince.pushSequence(Stance::Pickup_Sword_7_PutAway, Stance::Pickup_Sword_16_End, Stance::Upright, false);
-                                prince.pushSequence(Stance::Sword_Attack_06, Stance::Sword_Attack_08_End, Stance::Upright, false);
+                                    pushDead(enemy, true);
+                                    
+                                    prince.clear();
+                                    prince.pushSequence(Stance::Pickup_Sword_7_PutAway, Stance::Pickup_Sword_16_End, Stance::Upright, false);
+                                    prince.pushSequence(Stance::Sword_Attack_06, Stance::Sword_Attack_08_End, Stance::Upright, false);
+
+                                }
+                                else {
+
+                                    BaseEntity enemyBase = enemy.getActiveBase();
+                                    moveBackwardsWithSword(enemyBase, enemy);
+
+                                }
 
                             }
-                            else {
 
-                                BaseEntity enemyBase = enemy.getActiveBase();
-                                moveBackwardsWithSword(enemyBase, enemy);
-
-                            }
-
-                        }
+                        #endif
 
                     }
+
+                    break;
 
             }
 
@@ -1829,88 +1849,92 @@ void game() {
     //
     // ---------------------------------------------------------------------------------------------------------------------------------------
 
-    if (enemy.getStackFrame() == 0) {
+    #ifndef SAVE_MEMORY_ENEMY
+        
+        if (enemy.getStackFrame() == 0) {
 
-        if (!enemy.isEmpty()) {
+            if (!enemy.isEmpty()) {
 
-            Point offset;
+                Point offset;
 
-            int16_t newStance = enemy.pop();
-            enemy.setStance(abs(newStance));
+                int16_t newStance = enemy.pop();
+                enemy.setStance(abs(newStance));
 
-            switch (enemy.getStance()) {
+                switch (enemy.getStance()) {
 
-                case Stance::Sword_Attack_05:
-                    {
+                    case Stance::Sword_Attack_05:
+                        {
 
-                        int16_t xDelta = prince.getPosition().x - enemy.getPosition().x;
-                        int16_t yDelta = prince.getPosition().y - enemy.getPosition().y;
+                            int16_t xDelta = prince.getPosition().x - enemy.getPosition().x;
+                            int16_t yDelta = prince.getPosition().y - enemy.getPosition().y;
 
-                        switch (prince.getStance()) {
+                            switch (prince.getStance()) {
 
-                            case Stance::Sword_Normal:
-                            case Stance::Draw_Sword_01_Start ... Stance::Draw_Sword_06_End:
-                            case Stance::Sword_Attack_01_Start ... Stance::Sword_Attack_08_End:
-                            case Stance::Sword_Step_01_Start ... Stance::Sword_Step_03_End:
+                                case Stance::Sword_Normal:
+                                case Stance::Draw_Sword_01_Start ... Stance::Draw_Sword_06_End:
+                                case Stance::Sword_Attack_01_Start ... Stance::Sword_Attack_08_End:
+                                case Stance::Sword_Step_01_Start ... Stance::Sword_Step_03_End:
 
-                                if(abs(xDelta) < Constants::StrikeDistance && yDelta == 0) {
+                                    if(abs(xDelta) < Constants::StrikeDistance && yDelta == 0) {
 
-                                    initFlash(prince, level, FlashType::SwordFight);
+                                        initFlash(prince, level, FlashType::SwordFight);
 
-                                    if (prince.decHealth(1) == 0) {
+                                        if (prince.decHealth(1) == 0) {
 
-                                        pushDead(prince, level, gamePlay, true);
+                                            pushDead(prince, level, gamePlay, true);
 
-                                    }
-                                    else {
+                                        }
+                                        else {
 
-                                        if (level.canMoveForward(enemy.getActiveBase(), Action::SmallStep, enemy.getOppositeDirection())) {
+                                            if (level.canMoveForward(enemy.getActiveBase(), Action::SmallStep, enemy.getOppositeDirection())) {
 
-                                            prince.clear();
-                                            prince.pushSequence(Stance::Sword_Step_03_End, Stance::Sword_Step_01_Start, Stance::Sword_Normal, false);
-                                            break;
+                                                prince.clear();
+                                                prince.pushSequence(Stance::Sword_Step_03_End, Stance::Sword_Step_01_Start, Stance::Sword_Normal, false);
+                                                break;
+
+                                            }
 
                                         }
 
                                     }
 
-                                }
+                                    break;
 
-                                break;
+                                case Stance::Falling_Dead_1_Start ... Stance::Falling_Dead_3_End: // Already dying ..
 
-                            case Stance::Falling_Dead_1_Start ... Stance::Falling_Dead_3_End: // Already dying ..
+                                    break;
 
-                                break;
+                                default:
 
-                            default:
+                                    if(abs(xDelta) < Constants::StrikeDistance && yDelta == 0) {
 
-                                if(abs(xDelta) < Constants::StrikeDistance && yDelta == 0) {
+                                        pushDead(prince, level, gamePlay, true);
 
-                                    pushDead(prince, level, gamePlay, true);
+                                    }
 
-                                }
+                                    break;                            
 
-                                break;                            
+                            }
 
                         }
 
-                    }
+                        break;
 
-                    break;
 
+                }
+
+
+                // Move enemy .. 
+
+                getStance_Offsets(enemy.getDirection(), offset, enemy.getStance());
+                enemy.incX(offset.x * (newStance < 0 ? -1 : 1));
+                enemy.incY(offset.y * (newStance < 0 ? -1 : 1));
 
             }
 
-
-            // Move enemy .. 
-
-            getStance_Offsets(enemy.getDirection(), offset, enemy.getStance());
-            enemy.incX(offset.x * (newStance < 0 ? -1 : 1));
-            enemy.incY(offset.y * (newStance < 0 ? -1 : 1));
-
         }
 
-    }
+    #endif
 
 
     // ---------------------------------------------------------------------------------------------------------------------------------------

@@ -13,7 +13,11 @@ struct Cookie {
     GamePlay gamePlay;
     Level level;
     Prince prince;
+
+    #ifndef SAVE_MEMORY_ENEMY
     Enemy enemy;
+    #endif
+    
     TitleScreenVars titleScreenVars;
 
 };
