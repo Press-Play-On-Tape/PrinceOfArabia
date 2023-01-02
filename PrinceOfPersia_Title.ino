@@ -183,11 +183,7 @@ void title() {
                 renderTorches(7, 119, 39);
                 renderTorches(14, 112, 34);
 
-                FX::drawBitmap(  0, 54, Images::Tiles_Dungeon, 12, dbmMasked);
-                FX::drawBitmap( 12, 54, Images::Tiles_Dungeon, 13, dbmMasked);
-                FX::drawBitmap(105, 54, Images::Tiles_Dungeon, 12, dbmMasked);
-                FX::drawBitmap(117, 54, Images::Tiles_Dungeon, 13, dbmMasked);
-
+                FX::drawBitmap(0, 54, Images::Credits_BG, 0, dbmNormal);
                 FX::drawBitmap(27, -titleScreenVars.count, Images::Title_Credits, 0, dbmNormal);
                 FX::drawBitmap(0, 0, Images::Title_PoP, 0, dbmMasked);
                 
