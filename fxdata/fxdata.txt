@@ -316,7 +316,7 @@ namespace Levels {
         4, 83, 4, 1, 0,         // Spikes                       
         4, 84, 4, 1, 0,         // Spikes                       
         8, 28, 1, 20, 1,        // Floor Button 3 Up Only (gateX, gateY)             
-        9, 23, 1, 20, 1,        // Floor Button 3 Down Only (gateX, gateY)             
+        9, 24, 1, 20, 1,        // Floor Button 3 Down Only (gateX, gateY)             
         2, 48, 1, 40, 1,        // Floor Button 1 (gateX, gateY)             
         7, 37, 1, 30, 1,        // Floor Button 1 (gateX, gateY)             
         2, 32, 2, 37, 3,        // Floor Button 1 (gateX, gateY)             

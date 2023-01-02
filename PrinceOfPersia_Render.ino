@@ -154,16 +154,16 @@ void render(bool enemyIsVisible) {
                 case ItemType::FloorButton3_UpDown:
                 case ItemType::FloorButton3_UpOnly:
                 case ItemType::ExitDoor_Button:
-                    FX::drawBitmap(xLoc, yLoc + item.data.floorButton.frame - 1, Images::FloorButton_0_00 + (item.data.floorButton.frame * (Images::FloorButton_0_01 - Images::FloorButton_0_00)), 0, dbmMasked);
+                    FX::drawBitmap(xLoc, yLoc + item.data.floorButton.frame - 1, Images::FloorButtons_0and1, item.data.floorButton.frame, dbmMasked);
                     break;
 
                 case ItemType::ExitDoor_Button_Cropped:
-                    FX::drawBitmap(xLoc, yLoc + item.data.floorButton.frame - 1, Images::FloorButton_2_00 + (item.data.floorButton.frame * (Images::FloorButton_2_01 - Images::FloorButton_2_00)), 0, dbmMasked);
+                    FX::drawBitmap(xLoc, yLoc + item.data.floorButton.frame - 1, Images::FloorButtons_2, item.data.floorButton.frame, dbmMasked);
                     break;
 
                 case ItemType::FloorButton2:
                 case ItemType::FloorButton3_DownOnly:
-                    FX::drawBitmap(xLoc - item.data.floorButton.frame, yLoc + item.data.floorButton.frame, Images::FloorButton_1_00 + (item.data.floorButton.frame * (Images::FloorButton_1_01 - Images::FloorButton_1_00)), 0, dbmMasked);
+                    FX::drawBitmap(xLoc - item.data.floorButton.frame, yLoc + item.data.floorButton.frame, Images::FloorButtons_0and1, item.data.floorButton.frame + 2, dbmMasked);
                     break;
 
                 default: break;

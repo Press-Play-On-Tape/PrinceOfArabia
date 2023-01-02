@@ -41,12 +41,8 @@ namespace Images {
 
     image_t CollapsedFloor = "../images/items/CollapsedTile.png"
     image_t CollapsingFloors = "../images/items/CollapsingTiles_21x31_1.png"
-    image_t FloorButton_0_00 = "../images/items/FloorButton_0_00.png"
-    image_t FloorButton_0_01 = "../images/items/FloorButton_0_01.png"
-    image_t FloorButton_1_00 = "../images/items/FloorButton_1_00.png"
-    image_t FloorButton_1_01 = "../images/items/FloorButton_1_01.png"
-    image_t FloorButton_2_00 = "../images/items/FloorButton_2_00.png"
-    image_t FloorButton_2_01 = "../images/items/FloorButton_2_01.png"
+    image_t FloorButtons_0and1 = "../images/items/FloorButtons_0and1_21x32_1.png"
+    image_t FloorButtons_2 = "../images/items/FloorButtons_2_12x31_1.png"
 
     image_t Torches = "../images/items/Torches_3x11_1.png"
 

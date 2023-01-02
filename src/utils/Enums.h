@@ -148,7 +148,7 @@ enum class TitleScreenMode : uint8_t {
 
 enum class WallTileResults : uint8_t {
     None,
-    Normal,
+    SolidWall,
     GateClosed, 
 };
 

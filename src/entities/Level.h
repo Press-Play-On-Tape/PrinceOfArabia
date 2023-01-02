@@ -1122,7 +1122,7 @@ struct Level {
                 case TILE_FG_WALL_7:
                 case TILE_FG_WALL_8:
                 case TILE_FLOOR_GATE_FRONT_TRACK_4:
-                    return WallTileResults::Normal;
+                    return WallTileResults::SolidWall;
 
                 default: 
 
@@ -1135,6 +1135,20 @@ struct Level {
                     if (x != Constants::CoordNone && y != Constants::CoordNone) {
 
                         uint8_t idx = this->getItem(ItemType::Gate, x + this->getXLocation() + offset, y + this->getYLocation());
+
+                        if (idx != Constants::NoItemFound) {
+
+                            Item &item = this->getItem(idx);
+
+                            if (item.data.gate.position == 0) {
+
+                                return WallTileResults::GateClosed;
+
+                            }
+
+                        }
+
+                        idx = this->getItem(ItemType::Gate_StayOpen, x + this->getXLocation() + offset, y + this->getYLocation());
 
                         if (idx != Constants::NoItemFound) {
 
@@ -2410,7 +2424,7 @@ struct Level {
 // Serial.println("Normal");                                    
                                         return StandingJumpResult::Normal;
 
-                                    case WallTileResults::Normal:
+                                    case WallTileResults::SolidWall:
                                     case WallTileResults::GateClosed:
 // Serial.println("Short");                                    
                                         return StandingJumpResult::Short;
@@ -2492,7 +2506,7 @@ struct Level {
                                 switch (wallTile3_CurrLvl) {
 
                                     case WallTileResults::None:
-                                    case WallTileResults::Normal:
+                                    case WallTileResults::SolidWall:
                                         return StandingJumpResult::Normal;
 
                                     case WallTileResults::GateClosed:
