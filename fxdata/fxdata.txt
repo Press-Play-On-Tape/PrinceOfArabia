@@ -382,6 +382,42 @@ namespace Levels {
         28, 64, 8,              // Entry Gate   
         255                     // End
     }
+
+    uint24_t level_FG[] = {
+        0,         // dummy
+        Level1_FG,
+        Level2_FG,
+        Level3_FG,
+        Level4_FG,
+        Level5_FG
+    };
+
+    uint24_t Level_BG[] = {
+        0,         // dummy
+        Level1_BG,
+        Level2_BG,
+        Level3_BG,
+        Level4_BG,
+        Level5_BG
+    };
+
+    uint24_t level_Data[] = {
+        0,         // dummy
+        level1_Data,
+        level2_Data,
+        level3_Data,
+        level4_Data,
+        level5_Data
+    };
+
+    uint24_t Level_Items[] = {
+        0,         // dummy
+        Level1_Items,
+        Level2_Items,
+        Level3_Items,
+        Level4_Items,
+        Level5_Items
+    };
 }
 namespace_end
 
