@@ -12,6 +12,10 @@
 #define TILE_NONE -1
 #define TILE_FLOOR_NONE 75
 #define TILE_FLOOR_NONE_PATTERN 92
+#define TILE_WINDOW_LH 37
+#define TILE_WINDOW_RH 38
+#define TILE_RUG_1 40
+#define TILE_RUG_2 41
 
 #define TILE_FLOOR_NONE_LH_WALL_1 97
 #define TILE_FLOOR_NONE_LH_WALL_2 120
@@ -28,7 +32,9 @@
 #define TILE_FLOOR_LH_END_PATTERN_2 93
 #define TILE_FLOOR_RH_END 99
 #define TILE_FLOOR_RH_END_GATE 118
-#define TILE_FLOOR_GATE_REAR_TRACK 114
+#define TILE_FLOOR_RH_END_GATE_RUG 50
+#define TILE_FLOOR_GATE_REAR_TRACK_1 114    // Missing top pixels
+#define TILE_FLOOR_GATE_REAR_TRACK_2 49     // Full height
 #define TILE_FLOOR_GATE_FRONT_TRACK_1 115
 #define TILE_FLOOR_GATE_FRONT_TRACK_2 116
 #define TILE_FLOOR_GATE_FRONT_TRACK_3 117
@@ -42,6 +48,7 @@
 #define TILE_FLOOR_LH_WALL_1 83
 #define TILE_FLOOR_LH_WALL_2 109
 #define TILE_FLOOR_LH_WALL_3 113
+#define TILE_FLOOR_LH_RUG_1 42
 
 #define TILE_FG_WALL_1 80
 #define TILE_FG_WALL_2 81
@@ -58,9 +65,11 @@
 #define TILE_COLUMN_3 96
 #define TILE_COLUMN_4 89
 #define TILE_COLUMN_5 101
+#define TILE_PILLAR_1 31
 
 #define TILE_COLUMN_REAR_1 104
 #define TILE_COLUMN_REAR_2 90
+#define TILE_PILLAR_REAR_1 32
 
 
 #define TILE_COLLAPSING_FLOOR - 2
@@ -1155,15 +1164,19 @@ struct Level {
                 case TILE_FLOOR_LH_WALL_1:
                 case TILE_FLOOR_LH_WALL_2:
                 case TILE_FLOOR_LH_WALL_3:
+                case TILE_FLOOR_LH_RUG_1:
                 case TILE_COLUMN_LH_WALL:
                 case TILE_COLUMN_1:
                 case TILE_COLUMN_2:
                 case TILE_COLUMN_3:
                 case TILE_COLUMN_4:
                 case TILE_COLUMN_5:
+                case TILE_PILLAR_1:
                 case TILE_COLUMN_REAR_1:
                 case TILE_COLUMN_REAR_2:
-                case TILE_FLOOR_GATE_REAR_TRACK:
+                case TILE_PILLAR_REAR_1:
+                case TILE_FLOOR_GATE_REAR_TRACK_1:
+                case TILE_FLOOR_GATE_REAR_TRACK_2:
                 case TILE_FLOOR_GATE_FRONT_TRACK_1:
                     return true;
 
@@ -1229,6 +1242,10 @@ struct Level {
             switch (bgTile) {
 
                 case TILE_NONE:
+                case TILE_WINDOW_LH:
+                case TILE_WINDOW_RH:
+                case TILE_RUG_1:
+                case TILE_RUG_2:
                 case TILE_FLOOR_NONE:
                 case TILE_FLOOR_NONE_PATTERN:
                 case TILE_FLOOR_NONE_LH_WALL_1:
@@ -2743,6 +2760,7 @@ struct Level {
                                 case TILE_FLOOR_RH_END_4:
                                 case TILE_FLOOR_RH_END_5:
                                 case TILE_FLOOR_RH_END_GATE:
+                                case TILE_FLOOR_RH_END_GATE_RUG:
                                 case TILE_COLUMN_LH_WALL:
 
                                     if (midTile == TILE_COLLAPSING_FLOOR) {
@@ -2787,6 +2805,7 @@ struct Level {
                                 case TILE_FLOOR_RH_END_4:
                                 case TILE_FLOOR_RH_END_5:
                                 case TILE_FLOOR_RH_END_GATE:
+                                case TILE_FLOOR_RH_END_GATE_RUG:
                                 // case TILE_COLUMN_LH_WALL:                << SJH removed 29/12
 
                                     if (midTile == TILE_COLLAPSING_FLOOR) {
@@ -2972,6 +2991,7 @@ struct Level {
                                 case TILE_FLOOR_RH_END_4:
                                 case TILE_FLOOR_RH_END_5:
                                 case TILE_FLOOR_RH_END_GATE:
+                                case TILE_FLOOR_RH_END_GATE_RUG:
                                 case TILE_COLUMN_LH_WALL:
                                     return CanJumpUpResult::JumpDist10;
 
@@ -3361,6 +3381,7 @@ struct Level {
                                 case TILE_FLOOR_RH_END_4:
                                 case TILE_FLOOR_RH_END_5:
                                 case TILE_FLOOR_RH_END_GATE:
+                                case TILE_FLOOR_RH_END_GATE_RUG:
                                     return CanClimbDownResult::StepThenClimbDown;
 
                                 default:                                
@@ -3381,6 +3402,7 @@ struct Level {
                                 case TILE_FLOOR_RH_END_4:
                                 case TILE_FLOOR_RH_END_5:
                                 case TILE_FLOOR_RH_END_GATE:
+                                case TILE_FLOOR_RH_END_GATE_RUG:
                                     return CanClimbDownResult::ClimbDown;
 
                                 default:

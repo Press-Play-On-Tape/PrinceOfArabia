@@ -10,7 +10,7 @@
 
 
 void game_Init() {
-// Serial.println("game_Init");
+
     gamePlay.init(arduboy, 1);
 
     #ifndef SAVE_MEMORY_ENEMY
@@ -27,7 +27,7 @@ void game_Init() {
 }
 
 void game_StartLevel() {
-// Serial.println("game_StartLevel");
+
     gamePlay.restartLevel(arduboy);
 
     #ifndef SAVE_MEMORY_ENEMY
@@ -69,68 +69,22 @@ void game() {
 
 
     #ifdef ALT_B_BUTTON
-    // // Remove later !!!
-    // //
-    // if (justPressed & B_BUTTON) {
-
-    //     switch (level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX())) {
-
-    //         case 0:
-    //             prince.incX(2);
-    //             break;
-
-    //         case 1:
-    //         case 5:
-    //         case 9:
-    //             prince.incX(1);
-    //             break;
-
-    //         case 3:
-    //         case 7:
-    //         case 11:
-    //             prince.incX(-1);
-    //             break;
-
-    //         case 2:
-    //         case 6:
-    //         case 10:
-    //             break;
-
-    //         case 4:
-    //         case 8:
-    //             prince.incX(2);
-    //             break;
-
-    //     }
-
-    // }
-    // //
-    // // REmove later !!
-    // if (justPressed & B_BUTTON) {
-    //     prince.pushSequence(Stance::Draw_Sword_01_Start, Stance::Draw_Sword_06_End, Stance::Sword_Normal, true);
-    // }
-    
-    // if (justPressed & B_BUTTON) {
-    //     processRunJump(prince, level);
-    //     // prince.pushSequence(Stance::Run_Start_1_Start, Stance::Run_Start_6_End, true);
-    // }
-    if (justPressed & B_BUTTON) {
-    
-    // Serial.print(F("St"));
-    // Serial.print(prince.getStance());
-    // Serial.print(F(" px"));
-    // Serial.print(prince.getX());
-    // Serial.print(F(" x"));
-    // Serial.print(level.coordToTileIndexX((level.getXLocation() * Constants::TileWidth) + prince.getX()));
-    // Serial.print(F(" "));
-    // Serial.print((level.getXLocation() * Constants::TileWidth) + prince.getX());
-    // Serial.print(F(" y"));
-    // Serial.print(level.coordToTileIndexY((level.getYLocation() * Constants::TileHeight) + prince.getY()));
-    // Serial.print(F(" "));
-    // Serial.print(prince.getY());
-    // Serial.print(F(" D"));
-    // Serial.println(level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX()));
-    }
+        if (justPressed & B_BUTTON) { // echo out details
+            // Serial.print(F("St"));
+            // Serial.print(prince.getStance());
+            // Serial.print(F(" px"));
+            // Serial.print(prince.getX());
+            // Serial.print(F(" x"));
+            // Serial.print(level.coordToTileIndexX((level.getXLocation() * Constants::TileWidth) + prince.getX()));
+            // Serial.print(F(" "));
+            // Serial.print((level.getXLocation() * Constants::TileWidth) + prince.getX());
+            // Serial.print(F(" y"));
+            // Serial.print(level.coordToTileIndexY((level.getYLocation() * Constants::TileHeight) + prince.getY()));
+            // Serial.print(F(" "));
+            // Serial.print(prince.getY());
+            // Serial.print(F(" D"));
+            // Serial.println(level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX()));
+        }
     #endif
 
     #ifdef GIVE_SWORD
@@ -152,8 +106,24 @@ void game() {
 
     if (levelUpdate == LevelUpdate::FloorCollapsedOnPrince) {
         
-        if (prince.decHealth(1) == 0) {
-            pushDead(prince, level, gamePlay, true);
+        switch (prince.getStance()) {
+
+            // If the prince is falling as well then we do not lose health ..
+
+            case Stance::Falling_Down_M1_1_Start ... Stance::Falling_Down_M1_6_End:
+            case Stance::Falling_Down_M2_1_Start ... Stance::Falling_Down_M2_6_End:
+            case Stance::Falling_Down_P0_1_Start ... Stance::Falling_Down_P0_6_End:
+            case Stance::Falling_Down_P1_1_Start ... Stance::Falling_Down_P1_6_End:
+            case Stance::Falling_Down_P2_1_Start ... Stance::Falling_Down_P2_6_End:
+                break;
+
+            default:
+                if (prince.decHealth(1) == 0) {
+                    pushDead(prince, level, gamePlay, true);
+                }
+                break;
+
+        
         }
 
     }
@@ -1607,24 +1577,14 @@ void game() {
 
 
             getStance_Offsets(prince.getDirection(), offset, prince.getStance());
-// Serial.print("X:");
-// Serial.print(prince.getX());
-// Serial.print(",Y");
-// Serial.print(prince.getY());
             prince.incX(offset.x * (newStance < 0 ? -1 : 1));
             prince.incY(offset.y * (newStance < 0 ? -1 : 1));
-// Serial.print("- X:");
-// Serial.print(prince.getX());
-// Serial.print(",Y");
-// Serial.println(prince.getY());
-
-
 
 
             // Has the player stepped on anything ?
 
             if (prince.isFootDown()) {
-// Serial.println("Footdown");
+
 
                 // Check for floor buttons and collapsing floors ..
 
@@ -1959,23 +1919,15 @@ void game() {
         // If we are at the edge of a tile and their is an adjacent wall, then we need to fall straight down otherwise fall in an arc ..
 
         bool fallStraight = false;
-// Serial.print("distToEdgeOfCurrentTile:");
-// Serial.println(distToEdgeOfCurrentTile);        
+   
         if (distToEdgeOfCurrentTile <= 6) {
 
             int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x) + (prince.getDirection() == Direction::Left ? -1 : 1) - level.getXLocation();
             int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y) + 1 - level.getYLocation();
             int8_t fgTile = level.getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
-// Serial.print("Fall straight? x:");
-// Serial.print(tileXIdx);
-// Serial.print(" y:");
-// Serial.print(tileYIdx);
-// Serial.print(" fg:");
-// Serial.print(fgTile);
 
             WallTileResults wallTileResult = level.isWallTile(fgTile);
-// Serial.print(" wt:");
-// Serial.print((uint8_t)wallTileResult);
+
             if (wallTileResult != WallTileResults::None) {
 
                 fallStraight = true;

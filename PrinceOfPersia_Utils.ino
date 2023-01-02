@@ -77,7 +77,6 @@ void processRunJump(Prince &prince, Level &level) {
         if (jump_2_Result != RunningJumpResult::None) {
 
             RunningJumpResult jump_3_Result = level.canRunningJump(prince, Action::RunJump_3);
-// Serial.println((uint8_t)jump_3_Result);
 
             switch (jump_3_Result) {
 
@@ -472,21 +471,8 @@ void playGrab() {
             uint8_t tileXIdx = level.coordToTileIndexX(enemy.getPosition().x) + prince.getDirectionOffset(1);
             uint8_t tileYIdx = level.coordToTileIndexY(enemy.getPosition().y);
 
-    // Serial.print("Enemy #");
-    // Serial.print(i);
-    // Serial.print(": ");
-    // Serial.print(tileXIdx);
-    // Serial.print(",");
-    // Serial.print(tileYIdx);
-    // Serial.print(": ");
-    // Serial.print(level.getXLocation());
-    // Serial.print(",");
-    // Serial.print(level.getYLocation());
-    // Serial.print(" - ");
-
             if (tileXIdx >= level.getXLocation() && tileXIdx < level.getXLocation() + Constants::ScreenWidthInTiles && tileYIdx >= level.getYLocation() && tileYIdx < level.getYLocation() + Constants::ScreenHeightInTiles) {
 
-    // Serial.print(" true ");
                 enemyIsVisible = true;
 
             }
@@ -499,9 +485,7 @@ void playGrab() {
 
             if (enemyIsVisible) break;
             
-    // Serial.println("");
         }
-    // Serial.println("");
 
         if (!enemyIsVisible || !swapEnemies) enemy.setActiveEnemy(currentEnemy);
 
