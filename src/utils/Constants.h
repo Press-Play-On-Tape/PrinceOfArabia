@@ -852,6 +852,7 @@ namespace Constants {
     constexpr uint8_t FallingTileAbove = 96;
     constexpr uint8_t FallingTileSteppedOn = 24;
     constexpr uint8_t Button2FaillingTime = 24;
+    constexpr uint8_t Button3FaillingTime = 24;
 
     
 

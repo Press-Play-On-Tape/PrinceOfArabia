@@ -64,7 +64,7 @@ namespace Levels {
         2, 13, 3, 20, 3,        // Floor Button 1 (gateX, gateY)             
         2, 56, 0, 60, 0,        // Floor Button 1 (gateX, gateY)             
         17, 20, 3, 0, 0,        // Gate @ 50, 3 starting position 0 (bottom).
-        18, 2, 5,               // Sword
+        27, 2, 5,               // Sword
         15, 3, 5,               // Skeleton
         4, 53, 5, 1, 3,         // Spikes x,y, imageType = Fullview, RHS truncated, position
         4, 54, 5, 2, 3,         // Spikes
@@ -316,17 +316,17 @@ namespace Levels {
         4, 83, 4, 1, 0,         // Spikes                       
         4, 84, 4, 1, 0,         // Spikes                       
         8, 28, 1, 20, 1,        // Floor Button 3 Up Only (gateX, gateY)             
-        9, 24, 1, 20, 1,        // Floor Button 3 Down Only (gateX, gateY)             
+        9, 22, 1, 20, 1,        // Floor Button 3 Down Only (gateX, gateY)             
         2, 48, 1, 40, 1,        // Floor Button 1 (gateX, gateY)             
-        7, 37, 1, 30, 1,        // Floor Button 1 (gateX, gateY)             
-        2, 32, 2, 37, 3,        // Floor Button 1 (gateX, gateY)             
+        2, 37, 1, 40, 1,        // Floor Button 1 (gateX, gateY)             
+        7, 32, 2, 30, 1,        // Floor Button 1 (gateX, gateY)             
         2, 20, 3, 22, 3,        // Floor Button 1 (gateX, gateY)             
         7, 10, 1, 10, 0,        // Floor Button 3 Up Down (gateX, gateY)             
-        27, 10, 0, 0, 4,        // Gate @ 60, 0 starting position 9 (top), falls in 32 frames. 3 Up, 4 Down                                                  
+        18, 10, 0, 0, 4,        // Gate @ 60, 0 starting position 9 (top), falls in 32 frames. 3 Up, 4 Down                                                  
         17, 40, 1, 0, 0,        // Gate @ 60, 0 starting position 9 (top), falls in 32 frames.                                                   
         17, 50, 1, 0, 0,        // Gate @ 60, 0 starting position 9 (top), falls in 32 frames.                                                   
-        27, 30, 1, 0, 0,        // Gate @ 60, 0 starting position 9 (top), falls in 32 frames.                                                   
-        27, 20, 1, 0, 0,        // Gate @ 60, 0 starting position 9 (top), falls in 32 frames.   
+        18, 30, 1, 0, 0,        // Gate @ 60, 0 starting position 9 (top), falls in 32 frames.                                                   
+        18, 20, 1, 0, 0,        // Gate @ 60, 0 starting position 9 (top), falls in 32 frames.   
         17, 22, 3, 0, 0,        // Gate @ 60, 0 starting position 9 (top), falls in 32 frames.   
         17, 37, 3, 0, 0,        // Gate @ 60, 0 starting position 9 (top), falls in 32 frames.   
         1, 11, 1, 55,           // CollapsingTile (dist to fall)                                    

@@ -1132,27 +1132,13 @@ struct Level {
 
                     if (x != Constants::CoordNone && y != Constants::CoordNone) {
 
-                        uint8_t idx = this->getItem(ItemType::Gate, x + this->getXLocation() + offset, y + this->getYLocation());
+                        uint8_t idx = this->getItem(ItemType::Gate, ItemType::Gate_StayOpen, x + this->getXLocation() + offset, y + this->getYLocation());
 
                         if (idx != Constants::NoItemFound) {
 
                             Item &item = this->getItem(idx);
 
-                            if (item.data.gate.position == 0) {
-
-                                return WallTileResults::GateClosed;
-
-                            }
-
-                        }
-
-                        idx = this->getItem(ItemType::Gate_StayOpen, x + this->getXLocation() + offset, y + this->getYLocation());
-
-                        if (idx != Constants::NoItemFound) {
-
-                            Item &item = this->getItem(idx);
-
-                            if (item.data.gate.position == 0) {
+                            if (item.data.gate.position < 5) {
 
                                 return WallTileResults::GateClosed;
 
