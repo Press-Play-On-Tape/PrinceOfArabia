@@ -360,19 +360,33 @@ namespace Levels {
         60,                         // Level x starting position
         6,                          // Level y starting position
         // Enemy 1          
-        //70,                         // Enemy starting x tile
-        //3,                          // Enemy starting y tile
-        //92,                         // Enemy starting x pos
-        //56,                         // Enemy starting y pos (25, 56, 87)
-        //1,                          // Enemy starting direction, 1 Left and 2 Right
-        //3,                          // Enemy starting health
+        20,                         // Enemy starting x tile
+        3,                          // Enemy starting y tile
+        68,                         // Enemy starting x pos
+        56,                         // Enemy starting y pos (25, 56, 87)
+        1,                          // Enemy starting direction, 1 Left and 2 Right
+        3,                          // Enemy starting health
         // Enemy 2          
-        //40,                         // Enemy starting x tile
-        //0,                          // Enemy starting y tile
-        //80,                         // Enemy starting x pos
-        //25,                         // Enemy starting y pos (25, 56, 87)
-        //1,                          // Enemy starting direction, 1 Left and 2 Right
-        //3,                          // Enemy starting health
+        50,                         // Enemy starting x tile
+        0,                          // Enemy starting y tile
+        50,                         // Enemy starting x pos
+        56,                         // Enemy starting y pos (25, 56, 87)
+        2,                          // Enemy starting direction, 1 Left and 2 Right
+        3,                          // Enemy starting health
+        // Enemy 3          
+        50,                         // Enemy starting x tile
+        0,                          // Enemy starting y tile
+        98,                         // Enemy starting x pos
+        25,                         // Enemy starting y pos (25, 56, 87)
+        2,                          // Enemy starting direction, 1 Left and 2 Right
+        3,                          // Enemy starting health
+        // Enemy 4          
+        80,                         // Enemy starting x tile
+        0,                          // Enemy starting y tile
+        98,                         // Enemy starting x pos
+        56,                         // Enemy starting y pos (25, 56, 87)
+        2,                          // Enemy starting direction, 1 Left and 2 Right
+        3,                          // Enemy starting health
         // End
         255,
     };
@@ -380,6 +394,30 @@ namespace Levels {
     uint8_t Level5_Items[] = {
         26, 4, 8, 3, 5,         // Exit Gate, let position for open, right position, close button                                                        
         28, 64, 8,              // Entry Gate   
+        25, 15, 10,             // Blade      
+        25, 21, 10,             // Blade      
+        25, 24, 10,             // Blade      
+        25, 35, 9,              // Blade      
+        25, 84, 4,              // Blade      
+        25, 85, 4,              // Blade      
+        21, 88, 3,              // Potion Large      
+        20, 67, 6,              // Potion Small      
+        20, 54, 2,              // Potion Small      
+        20, 54, 3,              // Potion Small      
+        20, 36, 9,              // Potion Small      
+        20, 35, 8,              // Potion Small      
+
+        17, 69, 8, 0, 0,        // Gate @ 60, 0 starting position 9 (top), falls in 32 frames.                                                   
+        2, 69, 8, 69, 8,        // Floor Button 1 (gateX, gateY)             
+        2, 61, 8, 69, 8,        // Floor Button 1 (gateX, gateY)             
+
+        17, 50, 7, 0, 0,        // Gate @ 60, 0 starting position 9 (top), falls in 32 frames.                                                   
+        2, 53, 6, 50, 7,        // Floor Button 1 (gateX, gateY)             
+
+        1, 26, 7, 86,           // CollapsingTile (dist to fall)                                    
+        1, 52, 3, 55,           // CollapsingTile (dist to fall)                                    
+        1, 50, 2, 24,           // CollapsingTile (dist to fall)                                    
+
         255                     // End
     }
 
