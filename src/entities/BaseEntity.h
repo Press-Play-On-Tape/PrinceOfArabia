@@ -129,9 +129,9 @@ class BaseEntity {
             int8_t direction = this->getDirection() == Direction::Left ? -1 : 1;
 
             FX::seekData(startPos);
-            imageDetails.reach = static_cast<int8_t>(FX::readByte() * direction);
-            imageDetails.toe = static_cast<int8_t>(FX::readByte() * direction);
-            imageDetails.heel = static_cast<int8_t>(FX::readByte() * direction);
+            imageDetails.reach = static_cast<int8_t>(FX::readPendingUInt8() * direction);
+            imageDetails.toe = static_cast<int8_t>(FX::readPendingUInt8() * direction);
+            imageDetails.heel = static_cast<int8_t>(FX::readPendingUInt8() * direction);
             FX::readEnd();
 
             if (imageDetails.toe == -Constants::InAir)              imageDetails.toe = Constants::InAir;
