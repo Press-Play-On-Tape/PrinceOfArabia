@@ -42,7 +42,7 @@ class Enemy : public BaseStack {
 
         }
 
-        void init(int16_t x, int16_t y, Direction direction, uint16_t stance, uint8_t health) {
+        void init(int16_t x, int16_t y, Direction direction, uint16_t stance, uint8_t health, Status status) {
 
             this->base[this->count].setX(x);
             this->base[this->count].setY(y);
@@ -50,6 +50,7 @@ class Enemy : public BaseStack {
             this->base[this->count].setStance(stance);
             this->base[this->count].setHealth(health);
             this->base[this->count].setHealthMax(health);
+            this->base[this->count].setStatus(status);
             this->count++;
             
         }
@@ -74,8 +75,8 @@ class Enemy : public BaseStack {
         int16_t getYPrevious()                      { return this->base[this->activeEnemy].getYPrevious(); }
         int16_t getXImage()                         { return this->base[this->activeEnemy].getXImage(); }          
         int16_t getYImage()                         { return this->base[this->activeEnemy].getYImage(); }
-        uint8_t getHealth()                         { return this->base[this->activeEnemy].getHealth(); }
         uint8_t getHealthMax()                      { return this->base[this->activeEnemy].getHealthMax(); }
+        Status getStatus()                          { return this->base[this->activeEnemy].getStatus(); }
 
         Direction getDirection()                    { return this->base[this->activeEnemy].getDirection(); }
 
@@ -92,6 +93,7 @@ class Enemy : public BaseStack {
         void incHealth(int8_t val)                  { this->base[this->activeEnemy].incHealth(val); } 
 
         Point &getPosition()                        { return this->base[this->activeEnemy].getPosition(); }
+        uint8_t getHealth()                         { return this->base[this->activeEnemy].getHealth(); }
 
         BaseEntity &getActiveBase() {
 
@@ -141,6 +143,23 @@ class Enemy : public BaseStack {
 
         }
 
+        bool activateEnemy(uint8_t x, uint8_t y) {
+
+            for (uint8_t i = 0; i < this->getEnemyCount(); i++) {
+
+                if ((base[i].getStatus() == Status::Dormant) && (base[i].getX() / Constants::TileWidth == x) && (base[i].getY() / Constants::TileHeight == y)) {
+
+                    base[i].setStatus(Status::Active);
+                    return true;
+
+                }
+
+            }
+
+            return false;
+
+        }
+
 
         // ----------------------------------------------------------------------------------------------------------
 
@@ -163,13 +182,13 @@ class Enemy : public BaseStack {
         void getImageDetails(ImageDetails &imageDetails) {
 
             uint8_t imageIndex = static_cast<uint8_t>(pgm_read_byte(&Constants::StanceToImageXRef[this->base[this->activeEnemy].getStance()]));
-            uint24_t startPos = static_cast<uint24_t>(Constants::Prince_ImageDetails + ((imageIndex - 1) * 3)) - 1;
+            uint24_t startPos = static_cast<uint24_t>(Constants::Prince_ImageDetails + ((imageIndex - 1) * 3));
             int8_t direction = this->getDirection() == Direction::Left ? -1 : 1;
 
             FX::seekData(startPos);
-            imageDetails.reach = static_cast<int8_t>(FX::readByte() * direction);
-            imageDetails.toe = static_cast<int8_t>(FX::readByte() * direction);
-            imageDetails.heel = static_cast<int8_t>(FX::readByte() * direction);
+            imageDetails.reach = static_cast<int8_t>(FX::readPendingUInt8() * direction);
+            imageDetails.toe = static_cast<int8_t>(FX::readPendingUInt8() * direction);
+            imageDetails.heel = static_cast<int8_t>(FX::readPendingUInt8() * direction);
             FX::readEnd();
 
             if (imageDetails.toe == -Constants::InAir)              imageDetails.toe = Constants::InAir;

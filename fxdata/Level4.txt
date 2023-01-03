@@ -1,0 +1,76 @@
+int8_t Level4_FG[] = {
+    include "../levels/Level4_FG.csv"
+};
+
+int8_t Level4_BG[] = {
+    include "../levels/Level4_BG.csv"
+};
+
+uint8_t level4_Data[] = {
+    // Prince
+    56,                         // Prince starting x pos
+    56,                         // Prince starting y pos (25, 56, 87)
+    2,                          // Prince starting direction, 1 Left and 2 Right
+    3,                          // Prince starting stance, 3 Crouch_3_End
+    3,                          // Prince starting health
+    // Level
+    120,                        // Width
+    9,                          // Height
+    40,                         // Level x starting position
+    0,                          // Level y starting position
+    // Enemy 1          
+    //70,                         // Enemy starting x tile
+    //3,                          // Enemy starting y tile
+    //92,                         // Enemy starting x pos
+    //56,                         // Enemy starting y pos (25, 56, 87)
+    //1,                          // Enemy starting direction, 1 Left and 2 Right
+    //3,                          // Enemy starting health
+//    0,                          // Status 0 Alive, 1 Dead, 2 Dormant
+    // Enemy 2          
+    //40,                         // Enemy starting x tile
+    //0,                          // Enemy starting y tile
+    //80,                         // Enemy starting x pos
+    //25,                         // Enemy starting y pos (25, 56, 87)
+    //1,                          // Enemy starting direction, 1 Left and 2 Right
+    //3,                          // Enemy starting health
+//    0,                          // Status 0 Alive, 1 Dead, 2 Dormant
+    // End
+    255,
+};
+
+uint8_t Level4_Items[] = {
+    16, 4, 8, 3, 5,         // Exit Gate, let position for open, right position, close button                                                        
+    23, 45, 1,              // Entry Gate   
+    25, 7, 0,               // Blade      
+    25, 103, 3,             // Blade      
+    25, 111, 1,             // Blade      
+    25, 53, 3,              // Blade      
+    20, 46, 4,              // Potion Small      
+    20, 49, 4,              // Potion Small      
+    20, 97, 2,              // Potion Small      
+    20, 107, 4,             // Potion Small      
+    21, 5, 0,               // Potion Large      
+    4, 22, 5, 1, 0,         // Spikes
+    4, 23, 5, 1, 0,         // Spikes                       
+    4, 77, 1, 1, 0,         // Spikes                       
+    4, 83, 4, 1, 0,         // Spikes                       
+    4, 84, 4, 1, 0,         // Spikes                       
+    8, 28, 1, 20, 1,        // Floor Button 3 Up Only (gateX, gateY)             
+    9, 22, 1, 20, 1,        // Floor Button 3 Down Only (gateX, gateY)             
+    2, 48, 1, 40, 1,        // Floor Button 1 (gateX, gateY)             
+    2, 37, 1, 40, 1,        // Floor Button 1 (gateX, gateY)             
+    7, 32, 2, 30, 1,        // Floor Button 1 (gateX, gateY)             
+    2, 20, 3, 22, 3,        // Floor Button 1 (gateX, gateY)             
+    7, 10, 1, 10, 0,        // Floor Button 3 Up Down (gateX, gateY)             
+    18, 10, 0, 0, 4,        // Gate Stay Up        3 Up, 4 Down                                          
+    17, 40, 1, 0, 64,       // Gate                                          
+    17, 50, 1, 0, 64,       // Gate                                   
+    18, 30, 1, 0, 0,        // Gate Stay Up
+    18, 20, 1, 0, 0,        // Gate Stay Up
+    17, 22, 3, 0, 64,       // Gate
+    17, 37, 3, 0, 64,       // Gate
+    1, 11, 1, 55,           // CollapsingTile (dist to fall)                                    
+    1, 18, 1, 55,           // CollapsingTile (dist to fall)                                    
+    1, 20, 1, 55,           // CollapsingTile (dist to fall)                                    
+    255                     // End
+}

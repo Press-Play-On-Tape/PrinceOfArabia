@@ -20,10 +20,13 @@ struct Blade {
 };
 
 struct Gate {
+
     uint8_t position;
     uint8_t closingDelay;
     uint8_t closingDelayMax;
     Direction direction;
+    uint8_t defaultClosingDelay;
+
 };
  
 struct Sword {

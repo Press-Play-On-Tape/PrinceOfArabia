@@ -11,7 +11,7 @@
 
 void game_Init() {
 
-    gamePlay.init(arduboy, 5);
+    gamePlay.init(arduboy, 1);
 
     #ifndef SAVE_MEMORY_ENEMY
         level.init_PositionChars(gamePlay, prince, enemy, true);
@@ -168,7 +168,7 @@ void game() {
         //
         // ---------------------------------------------------------------------------------------------------------------------------------------
 
-        if (gamePlay.gameState == GameState::Game && enemy.isEmpty()) {
+        if (gamePlay.gameState == GameState::Game && enemy.isEmpty() && enemy.getStatus() == Status::Active) {
 
             BaseEntity enemyBase = enemy.getActiveBase();
 
@@ -1634,8 +1634,8 @@ void game() {
 
                                 item.data.floorButton.frame = 1;
                                 item.data.floorButton.timeToFall = Constants::FallingTileSteppedOn;
-                                gate.data.gate.closingDelay = 64;
-                                gate.data.gate.closingDelayMax = 64;
+                                gate.data.gate.closingDelay = gate.data.gate.defaultClosingDelay;
+                                gate.data.gate.closingDelayMax = gate.data.gate.defaultClosingDelay;
 
                             }
 
@@ -1698,9 +1698,28 @@ void game() {
                                 Item &exitDoor = level.getItem(Constants::Item_ExitDoor);
                                 
                                 if (exitDoor.data.exitDoor.direction != Direction::Up) {
-                                    
+
                                     item.data.exitDoor_Button.frame = 1;
                                     exitDoor.data.exitDoor.direction = Direction::Up;
+
+
+                                    // Turn skeletons into fighters ..
+
+                                    for (uint8_t i = 0; i < Constants::Items_Count; i++) {
+
+                                        Item &item = level.getItem(i);
+
+                                        if (item.itemType == ItemType::Skeleton) {
+
+                                            if (enemy.activateEnemy(item.x, item.y)) {
+
+                                                item.itemType = ItemType::None;
+
+                                            }
+
+                                        }
+
+                                    }
 
                                 }
 
@@ -1814,7 +1833,7 @@ void game() {
         
         if (enemy.getStackFrame() == 0) {
 
-            if (!enemy.isEmpty()) {
+            if (enemy.getStatus() == Status::Active && !enemy.isEmpty()) {
 
                 Point offset;
 

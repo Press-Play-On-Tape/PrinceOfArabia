@@ -167,3 +167,8 @@ enum class LevelUpdate : uint8_t {
     FloorCollapsedOnPrince,
 };
 
+enum class Status : uint8_t {
+    Active,
+    Dormant,
+};
+

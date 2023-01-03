@@ -211,32 +211,36 @@ void render(bool enemyIsVisible) {
 
     #ifndef SAVE_MEMORY_ENEMY
 
-        stance = enemy.getStance();
-        imageIndex = static_cast<uint16_t>(pgm_read_byte(&Constants::StanceToImageXRef[stance]));
-
-        if (imageIndex != 0) {
-
-            #if defined(DEBUG) && defined(DEBUG_PRINCE_RENDERING)
-            DEBUG_PRINT(F("Stance: "));
-            DEBUG_PRINT(prince.getStance());
-            DEBUG_PRINT(F(", ImageIndex: "));
-            DEBUG_PRINTLN(imageIndex);
-            #endif
-
-            int16_t xCoord = enemy.getXImage() - (level.getXLocation() * Constants::TileWidth);
-            int16_t yCoord = enemy.getYImage() - (level.getYLocation() * Constants::TileHeight)- level.getYOffset() + Constants::ScreenTopOffset;
-
-            if (enemy.getDirection() == Direction::Left) {
+        if (enemy.getStatus() == Status::Active) {
                 
-                FX::drawBitmap(xCoord, yCoord, Images::Prince_Left, imageIndex - 1, dbmMasked);
+            stance = enemy.getStance();
+            imageIndex = static_cast<uint16_t>(pgm_read_byte(&Constants::StanceToImageXRef[stance]));
 
-            }
-            else {
+            if (imageIndex != 0) {
+
+                #if defined(DEBUG) && defined(DEBUG_PRINCE_RENDERING)
+                DEBUG_PRINT(F("Stance: "));
+                DEBUG_PRINT(prince.getStance());
+                DEBUG_PRINT(F(", ImageIndex: "));
+                DEBUG_PRINTLN(imageIndex);
+                #endif
+
+                int16_t xCoord = enemy.getXImage() - (level.getXLocation() * Constants::TileWidth);
+                int16_t yCoord = enemy.getYImage() - (level.getYLocation() * Constants::TileHeight)- level.getYOffset() + Constants::ScreenTopOffset;
+
+                if (enemy.getDirection() == Direction::Left) {
+                    
+                    FX::drawBitmap(xCoord, yCoord, Images::Prince_Left, imageIndex - 1, dbmMasked);
+
+                }
+                else {
+                    
+                    FX::drawBitmap(xCoord, yCoord, Images::Prince_Right, imageIndex - 1, dbmMasked);
+
+                }
                 
-                FX::drawBitmap(xCoord, yCoord, Images::Prince_Right, imageIndex - 1, dbmMasked);
-
             }
-            
+
         }
 
     #endif

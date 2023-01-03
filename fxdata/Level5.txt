@@ -1,0 +1,91 @@
+int8_t Level5_FG[] = {
+    include "../levels/Level5_FG.csv"
+};
+
+int8_t Level5_BG[] = {
+    include "../levels/Level5_BG.csv"
+};
+
+uint8_t level5_Data[] = {
+    // Prince
+    56,                         // Prince starting x pos
+    87,                         // Prince starting y pos (25, 56, 87)
+    2,                          // Prince starting direction, 1 Left and 2 Right
+    3,                          // Prince starting stance, 3 Crouch_3_End
+    3,                          // Prince starting health
+    // Level
+    90,                         // Width
+    15,                         // Height
+    60,                         // Level x starting position
+    6,                          // Level y starting position
+    // Enemy 1          
+    20,                         // Enemy starting x tile
+    6,                          // Enemy starting y tile
+    68,                         // Enemy starting x pos
+    56,                         // Enemy starting y pos (25, 56, 87)
+    1,                          // Enemy starting direction, 1 Left and 2 Right
+    3,                          // Enemy starting health
+    0,                          // Status 0 Alive, 1 Dead, 2 Dormant
+    // Enemy 2          
+    40,                         // Enemy starting x tile
+    6,                          // Enemy starting y tile
+    50,                         // Enemy starting x pos
+    56,                         // Enemy starting y pos (25, 56, 87)
+    2,                          // Enemy starting direction, 1 Left and 2 Right
+    3,                          // Enemy starting health
+    0,                          // Status 0 Alive, 1 Dead, 2 Dormant
+    // Enemy 3          
+    50,                         // Enemy starting x tile
+    6,                          // Enemy starting y tile
+    98,                         // Enemy starting x pos
+    25,                         // Enemy starting y pos (25, 56, 87)
+    2,                          // Enemy starting direction, 1 Left and 2 Right
+    3,                          // Enemy starting health
+    0,                          // Status 0 Alive, 1 Dead, 2 Dormant
+    // Enemy 4          
+    70,                         // Enemy starting x tile
+    6,                          // Enemy starting y tile
+    62,                         // Enemy starting x pos
+    56,                         // Enemy starting y pos (25, 56, 87)
+    1,                          // Enemy starting direction, 1 Left and 2 Right
+    3,                          // Enemy starting health
+    0,                          // Status 0 Alive, 1 Dead, 2 Dormant
+    // End
+    255,
+};
+
+uint8_t Level5_Items[] = {
+    16, 4, 7, 3, 5,         // Exit Gate, let position for open, right position, close button                                                        
+    28, 64, 8,              // Entry Gate   
+    25, 15, 10,             // Blade      
+    25, 21, 10,             // Blade      
+    25, 24, 10,             // Blade      
+    25, 35, 9,              // Blade      
+    25, 84, 4,              // Blade      
+    25, 85, 4,              // Blade      
+    21, 83, 3,              // Potion Large      
+    20, 67, 6,              // Potion Small      
+    20, 54, 2,              // Potion Small      
+    20, 55, 2,              // Potion Small      
+    20, 36, 9,              // Potion Small      
+    20, 35, 8,              // Potion Small      
+
+    17, 69, 8, 0, 64,       // Gate
+    2, 69, 8, 69, 8,        // Floor Button 1 (gateX, gateY)             
+    2, 61, 8, 69, 8,        // Floor Button 1 (gateX, gateY)             
+
+    17, 50, 7, 0, 64,       // Gate
+    2, 53, 7, 50, 7,        // Floor Button 1 (gateX, gateY)             
+
+    17, 10, 7, 0, 96,       // Gate                                      
+    2, 22, 7, 10, 7,        // Floor Button 1 (gateX, gateY)             
+
+    17, 69, 6, 0, 0,        // Gate (Does not open)                                                 
+    17, 0, 7, 0, 0,         // Gate (Does not open)
+
+    1, 26, 7, 86,           // CollapsingTile (dist to fall)                                    
+    1, 52, 3, 55,           // CollapsingTile (dist to fall)                                    
+    1, 50, 2, 24,           // CollapsingTile (dist to fall)                                    
+
+    255                     // End
+}

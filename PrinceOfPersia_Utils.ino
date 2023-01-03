@@ -467,22 +467,26 @@ void playGrab() {
 
             enemy.setActiveEnemy(i);
 
-            uint8_t tileXIdx = level.coordToTileIndexX(enemy.getPosition().x) + prince.getDirectionOffset(1);
-            uint8_t tileYIdx = level.coordToTileIndexY(enemy.getPosition().y);
+            if (enemy.getStatus() == Status::Active) {
 
-            if (tileXIdx >= level.getXLocation() && tileXIdx < level.getXLocation() + Constants::ScreenWidthInTiles && tileYIdx >= level.getYLocation() && tileYIdx < level.getYLocation() + Constants::ScreenHeightInTiles) {
+                uint8_t tileXIdx = level.coordToTileIndexX(enemy.getPosition().x) + prince.getDirectionOffset(1);
+                uint8_t tileYIdx = level.coordToTileIndexY(enemy.getPosition().y);
 
-                enemyIsVisible = true;
+                if (tileXIdx >= level.getXLocation() && tileXIdx < level.getXLocation() + Constants::ScreenWidthInTiles && tileYIdx >= level.getYLocation() && tileYIdx < level.getYLocation() + Constants::ScreenHeightInTiles) {
+
+                    enemyIsVisible = true;
+
+                }
+
+                if (enemy.getHealth() == 0 && enemy.getMoveCount() > 0) {
+
+                    enemy.decMoveCount();
+
+                }
+
+                if (enemyIsVisible) break;
 
             }
-
-            if  (enemy.getHealth() == 0 && enemy.getMoveCount() > 0) {
-
-                enemy.decMoveCount();
-
-            }
-
-            if (enemyIsVisible) break;
             
         }
 

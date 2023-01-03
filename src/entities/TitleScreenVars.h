@@ -107,7 +107,7 @@ struct TitleScreenVars {
 
                 if (triggerFrame) {
                     this->count++;
-                    if (this->count == 190) this->count = 0;
+                    if (this->count == 201) this->count = 0;
                 }
 
                 return false;

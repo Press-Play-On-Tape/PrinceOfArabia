@@ -1,0 +1,97 @@
+int8_t Level2_FG[] = {
+    include "../levels/Level2_FG.csv"
+};
+
+int8_t Level2_BG[] = {
+    include "../levels/Level2_BG.csv"
+};
+
+uint8_t level2_Data[] = {
+    // Prince
+    40,                         // Prince starting x pos
+    56,                         // Prince starting y pos (25, 56, 87)
+    1,                          // Prince starting direction, 1 Left and 2 Right
+    3,                          // Prince starting stance, 3 Crouch_3_End
+    3,                          // Prince starting health
+    // Level
+    130,                        // Width
+    12,                         // Height
+    120,                        // Level x starting position
+    6,                          // Level y starting position
+    // Enemy 1          
+    20,                         // Enemy starting x tile
+    0,                          // Enemy starting y tile
+    10,                         // Enemy starting x pos
+    56,                         // Enemy starting y pos (25, 56, 87)
+    2,                          // Enemy starting direction, 1 Left and 2 Right
+    4,                          // Enemy starting health
+    0,                          // Status 0 Alive, 1 Dead, 2 Dormant
+    // Enemy 2          
+    40,                         // Enemy starting x tile
+    3,                          // Enemy starting y tile
+    14,                         // Enemy starting x pos
+    56,                         // Enemy starting y pos (25, 56, 87)
+    2,                          // Enemy starting direction, 1 Left and 2 Right
+    3,                          // Enemy starting health
+    0,                          // Status 0 Alive, 1 Dead, 2 Dormant
+    // Enemy 3          
+    60,                         // Enemy starting x tile
+    3,                          // Enemy starting y tile
+    14,                         // Enemy starting x pos
+    56,                         // Enemy starting y pos (25, 56, 87)
+    2,                          // Enemy starting direction, 1 Left and 2 Right
+    3,                          // Enemy starting health
+    0,                          // Status 0 Alive, 1 Dead, 2 Dormant
+    // Enemy 4
+    80,                         // Enemy starting x tile
+    3,                          // Enemy starting y tile
+    36,                         // Enemy starting x pos
+    56,                         // Enemy starting y pos (25, 56, 87)
+    2,                          // Enemy starting direction, 1 Left and 2 Right
+    3,                          // Enemy starting health
+    0,                          // Status 0 Alive, 1 Dead, 2 Dormant
+    // Enemy 5
+    110,                        // Enemy starting x tile
+    6,                          // Enemy starting y tile
+    22,                         // Enemy starting x pos
+    56,                         // Enemy starting y pos (25, 56, 87)
+    2,                          // Enemy starting direction, 1 Left and 2 Right
+    3,                          // Enemy starting health
+    0,                          // Status 0 Alive, 1 Dead, 2 Dormant
+    // End
+    255,
+};
+
+uint8_t Level2_Items[] = {
+    16, 14, 1, 13, 15,      // Exit Gate, let position for open, right position                                                        
+    23, 122, 7,             // Entry Gate
+    20, 105, 5,             // Potion Small                              
+    20, 107, 8,             // Potion Small      
+    20, 76, 5,              // Potion Small      
+    20, 58, 4,              // Potion Small      
+    22, 53, 4,              // Potion Poison      
+    20, 52, 2,              // Potion Small      
+    20, 46, 2,              // Potion Small      
+    21, 32, 1,              // Potion Large      
+    17, 56, 4, 9, 64,       // Gate
+    17, 70, 3, 0, 64,       // Gate
+    17, 80, 3, 0, 64,       // Gate
+    2, 81, 4, 80, 3,        // Floor Button 1 (gateX, gateY)             
+    2, 76, 3, 70, 3,        // Floor Button 1 (gateX, gateY)             
+    3, 53, 4, 56, 4,        // Floor Button 2 (gateX, gateY)             
+    4, 25, 4, 1, 0,         // Spikes
+    4, 36, 2, 1, 0,         // Spikes
+    4, 37, 2, 1, 0,         // Spikes
+    4, 67, 5, 1, 0,         // Spikes
+    4, 111, 11, 1, 0,       // Spikes
+    4, 112, 11, 1, 0,       // Spikes
+    4, 103, 7, 1, 0,        // Spikes
+    1, 74, 3, 55,           // CollapsingTile (dist to fall)                                    
+    1, 102, 5, 55,          // CollapsingTile (dist to fall)                                    
+    1, 105, 7, 24,          // CollapsingTile (dist to fall)                                    
+    1, 117, 7, 24,          // CollapsingTile (dist to fall)                                    
+    1, 118, 7, 24,          // CollapsingTile (dist to fall)                                    
+    1, 48, 2, 24,           // CollapsingTile (dist to fall)                                    
+    1, 6, 2, 24,            // CollapsingTile (dist to fall)                                    
+    255                     // End
+}
