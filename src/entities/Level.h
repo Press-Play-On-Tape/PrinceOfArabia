@@ -1043,45 +1043,26 @@ struct Level {
 
             // Background ..
 
+            for (uint8_t x = 0; x < 16; x++) {
+
+                bg[0][x] = TILE_NONE;
+            }
+
             for (int8_t y = this->yLoc - 1; y < yLoc + 4; y++) {
 
-                if (y < 0) {
+                if (y >= 0) {
 
-                    for (uint8_t x = 0; x < 16; x++) {
-
-                        bg[0][x] = TILE_NONE;                   // y - this->yLoc + 1 always evaluates to 0 here
-                    }
-
-                }
-                else {
-
-                    if (this->xLoc == 0) {
-
-                        FX::seekDataArray(FX::readIndexedUInt24(Levels::Level_BG, gamePlay.level), y, this->xLoc, this->width);
-
-                        for (uint8_t x = 0; x < 16; x++) {
-
-                            int8_t tileId = TILE_NONE;
-                            if (x >= 3) tileId = static_cast<int8_t>(FX::readPendingUInt8());
-                            bg[y - this->yLoc + 1][x] = tileId;
-
-                        }
-                        FX::readEnd();
-
-                    }
-                    else {
-
-                        FX::seekDataArray(FX::readIndexedUInt24(Levels::Level_BG, gamePlay.level), y, this->xLoc - 3, this->width);
+                    FX::seekDataArray(FX::readIndexedUInt24(Levels::Level_BG, gamePlay.level), y, this->xLoc -3, this->width);
 
                         for (uint8_t x = 0; x < 16; x++) {
 
                             int8_t tileId = static_cast<int8_t>(FX::readPendingUInt8());
+                            if (x < 3 && this->xLoc == 0) tileId = TILE_NONE;
                             bg[y - this->yLoc + 1][x] = tileId;
 
                         }
-                        FX::readEnd();
 
-                    }
+                    FX::readEnd();
                 }
 
             }
@@ -1089,48 +1070,27 @@ struct Level {
 
             // Foreground ..
 
+                for (uint8_t x = 0; x < 16; x++) {
+
+                    fg[0][x] = TILE_FG_WALL_1; // y - this->yLoc + 1 always evaluates to 0 here
+
+                }
+
             for (int8_t y = this->yLoc - 1; y < this->yLoc + 4; y++) {
 
-                if (y < 0) {
+                if (y >= 0) {
+
+                    FX::seekDataArray(FX::readIndexedUInt24(Levels::level_FG, gamePlay.level), y, this->xLoc - 3, this->width);
 
                     for (uint8_t x = 0; x < 16; x++) {
 
-                        fg[0][x] = TILE_FG_WALL_1; // y - this->yLoc + 1 always evaluates to 0 here
+                        int8_t tileId = static_cast<int8_t>(FX::readPendingUInt8());
+                        if (x < 3 && this->xLoc == 0) tileId = TILE_FG_WALL_1;
+                        fg[y - this->yLoc + 1][x] = tileId;
 
                     }
 
-                }
-                else {
-
-                    if (this->xLoc == 0) {
-                        FX::seekDataArray(FX::readIndexedUInt24(Levels::level_FG, gamePlay.level), y, this->xLoc, this->width);
-
-                        for (uint8_t x = 0; x < 16; x++) {
-
-                            int8_t tileId = TILE_FG_WALL_1;
-                            if (x >= 3) tileId = static_cast<int8_t>(FX::readPendingUInt8());
-                            fg[y - this->yLoc + 1][x] = tileId;
-
-                        }
-
-                        FX::readEnd();
-
-                    }
-                    else {
-
-                        FX::seekDataArray(FX::readIndexedUInt24(Levels::level_FG, gamePlay.level), y, this->xLoc - 3, this->width);
-
-                        for (uint8_t x = 0; x < 16; x++) {
-
-                            int8_t tileId = static_cast<int8_t>(FX::readPendingUInt8());
-                            fg[y - this->yLoc + 1][x] = tileId;
-
-                        }
-
-                        FX::readEnd();
-
-                    }
-
+                    FX::readEnd();
                 }
 
             }
