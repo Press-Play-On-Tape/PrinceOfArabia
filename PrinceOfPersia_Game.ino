@@ -11,7 +11,7 @@
 
 void game_Init() {
 
-    gamePlay.init(arduboy, 1);
+    gamePlay.init(arduboy, 4);
 
     #ifndef SAVE_MEMORY_ENEMY
         level.init_PositionChars(gamePlay, prince, enemy, true);
@@ -1683,10 +1683,10 @@ void game() {
 
                                     gate.data.gate.closingDelay = 16;
                                     item.data.floorButton.frame = 1;
-                                    item.data.floorButton.timeToFall = Constants::Button2FaillingTime;
+                                    item.data.floorButton.timeToFall = Constants::Button3FaillingTime;
 
                                 }
-
+ 
                             }
 
                             break;
