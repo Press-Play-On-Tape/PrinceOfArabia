@@ -57,6 +57,20 @@ uint8_t level5_Data[] = {
 uint8_t Level5_Items[] = {
     16, 4, 7, 3, 5,         // Exit Gate, let position for open, right position, close button                                                        
     28, 64, 8,              // Entry Gate   
+
+    17, 69, 8, 0, 64,       // Gate #1
+    2, 69, 8, 1, 0,         // Floor Button 1            
+    2, 61, 8, 1, 0,         // Floor Button 1             
+
+    17, 50, 7, 0, 64,       // Gate #2
+    2, 53, 7, 2, 0,         // Floor Button 1
+
+    17, 10, 7, 0, 96,       // Gate #3                                     
+    2, 22, 7, 3, 0,         // Floor Button 1
+
+    17, 69, 6, 0, 0,        // Gate (Does not open)                                                 
+    17, 0, 7, 0, 0,         // Gate (Does not open)
+
     25, 15, 10,             // Blade      
     25, 21, 10,             // Blade      
     25, 24, 10,             // Blade      
@@ -69,19 +83,6 @@ uint8_t Level5_Items[] = {
     20, 55, 2,              // Potion Small      
     20, 36, 9,              // Potion Small      
     20, 35, 8,              // Potion Small      
-
-    17, 69, 8, 0, 64,       // Gate
-    2, 69, 8, 69, 8,        // Floor Button 1 (gateX, gateY)             
-    2, 61, 8, 69, 8,        // Floor Button 1 (gateX, gateY)             
-
-    17, 50, 7, 0, 64,       // Gate
-    2, 53, 7, 50, 7,        // Floor Button 1 (gateX, gateY)             
-
-    17, 10, 7, 0, 96,       // Gate                                      
-    2, 22, 7, 10, 7,        // Floor Button 1 (gateX, gateY)             
-
-    17, 69, 6, 0, 0,        // Gate (Does not open)                                                 
-    17, 0, 7, 0, 0,         // Gate (Does not open)
 
     1, 26, 7, 86,           // CollapsingTile (dist to fall)                                    
     1, 52, 3, 55,           // CollapsingTile (dist to fall)                                    

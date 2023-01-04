@@ -116,7 +116,7 @@ void render(bool enemyIsVisible) {
                     break;
 
                 case ItemType::Gate:
-                case ItemType::Gate_StayOpen:
+                // case ItemType::Gate_StayOpen:
                     FX::drawBitmap(xLoc - 5, yLoc, Images::Gates, item.data.gate.position, dbmMasked);
                     break;
 

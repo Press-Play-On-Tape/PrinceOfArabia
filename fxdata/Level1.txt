@@ -41,25 +41,32 @@ uint8_t level1_Data[] = {
 
 uint8_t Level1_Items[] = {
     16, 84, 4, 82, 86,      // Exit Gate, let position for open, right position                                                        
-    17, 60, 0, 9, 32,       // Gate @ 60, 0 starting position 9 (top), falls in 32 frames.      
-    17, 56, 0, 0, 0,        // Gate @ 56, 0 starting position 9 (top), falls in 32 frames.      
+
+    17, 50, 3, 0, 64,       // Gate #1
+    2, 46, 3, 1, 0,         // Floor Button 1 
+    2, 52, 3, 1, 0,         // Floor Button 1 
+    
+    17, 40, 3, 0, 64,        // Gate #2
+    2, 32, 3, 2, 0,         // Floor Button 1 
+    2, 47, 4, 2, 0,         // Floor Button 1 
+
+    17, 20, 3, 0, 64,       // Gate #3
+    2, 27, 4, 3, 0,         // Floor Button 1 
+    3, 24, 4, 3, 0,         // Floor Button 2 
+    2, 13, 3, 3, 0,         // Floor Button 1 
+
+    17, 56, 0, 0, 64,        // Gate #4     
+    3, 54, 0, 4, 0,         // Floor Button 2 
+    2, 52, 0, 4, 0,         // Floor Button 1 
+
+    17, 60, 0, 9, 32,       // Gate #5    
+    2, 56, 0, 5, 0,         // Floor Button 1 
+
+
     20, 6, 0,               // Potion Small                              
     20, 35, 6,              // Potion Small                              
     20, 53, 2,              // Potion Small                              
     20, 33, 2,              // Potion Small                              
-    2, 46, 3, 50, 3,        // Floor Button 1 (gateX, gateY)             
-    2, 52, 3, 50, 3,        // Floor Button 1 (gateX, gateY)             
-    17, 50, 3, 0, 64,       // Gate
-    2, 47, 4, 40, 64,       // Floor Button (gateX, gateY)               
-    17, 40, 3, 0, 0,        // Gate
-    2, 32, 3, 40, 3,        // Floor Button 1 (gateX, gateY)             
-    2, 27, 4, 20, 3,        // Floor Button 1 (gateX, gateY)             
-    3, 24, 4, 20, 3,        // Floor Button 2 (gateX, gateY)             
-    3, 54, 0, 56, 0,        // Floor Button 2 (gateX, gateY)             
-    2, 52, 0, 56, 0,        // Floor Button 1 (gateX, gateY)             
-    2, 13, 3, 20, 3,        // Floor Button 1 (gateX, gateY)             
-    2, 56, 0, 60, 0,        // Floor Button 1 (gateX, gateY)             
-    17, 20, 3, 0, 64,       // Gate 
     27, 2, 5,               // Sword
     15, 3, 5,               // Skeleton
     4, 53, 5, 1, 3,         // Spikes x,y, imageType = Fullview, RHS truncated, position

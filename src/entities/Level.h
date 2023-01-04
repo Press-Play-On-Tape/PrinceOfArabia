@@ -232,59 +232,81 @@ struct Level {
                     #endif
 
                     prince.init(38-28+12+4, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Normal starting pos
-                    // prince.init(38-24, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Gate Issue
-                    // prince.init(38-24, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Sword Fight from Left
-                    // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Sword Fight from Right
-                    // prince.init(8+78+24, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     // Double collapisble
-                    // prince.init(78 + 24 + 12, 25 + 31 + 31, Direction::Left, Stance:: Crouch_3_End, 3, clearSword);          // Spikes Upper
-                    // prince.init(12, 25 + 31, Direction::Left, Stance:: Crouch_3_End, 3, clearSword);          // Spikes Lower
-                    // prince.init(78 + 24, 25, Direction::Left, Stance:: Crouch_3_End, 3, clearSword);          // Jump 2
-                    // prince.init(18, 25+31, Direction::Right,Stance:: Crouch_3_End, 3, clearSword);          // Sword fight
-                    // prince.init(58, 25+31+31, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Second drink tonic
-                    // prince.init(66, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Upper gate
-                    // prince.init(70, 25 + 31, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // 2 leap
-                    // prince.init(14, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Exit Seq
-                    // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Both floor types
-                    // prince.init(86, 87, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Normal starting pos but next to drop floor 3rd floor
-                    // prince.init(86-36+4, 87, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Normal starting pos but next to drop floor 3rd floor
-                    // prince.init(78, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Under collapsible floor
-                    // prince.init(66, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);        // Get tonic
-                    // prince.init(18, 25+31+31, Direction::Left, Stance::Upright, 3, clearSword);     // Column of climbs
-                    // prince.init(78, 25, Direction::Left, Stance::Upright, 3, clearSword);     // Below column of climbs
-                    // prince.init(80, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);     // Top Left
-                    // prince.init(18, 25, Direction::Right,Stance:: Crouch_3_End, 3, clearSword);          // Long Fall
-                    // prince.init(18, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // problem
-                    // prince.init(98, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // At bottom of tthree level drop.
-                    // prince.init(98, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // At bottom of tthree level drop.
-                    // prince.init(18, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Long Run
-                    // prince.init(78 - 10, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Fall Error Stading Jump
-                    // prince.init(78 - 4, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Fall Error running Jump
-
                     this->init(gamePlay, prince, 90, 9, 60, 0);  // Normal starting posa
+
+                    // prince.init(38-24, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Gate Issue
                     // this->init(gamePlay, prince, 90, 9,  37, 3);  // gate issuee
+
+                    // prince.init(38-24, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Sword Fight from Left
                     // this->init(gamePlay, prince, 90, 9,  60, 3);  // Fight from Left
+
+                    // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Sword Fight from Right
                     // this->init(gamePlay, prince, 90, 9,  70, 3);  // Fight from Right
+
+                    // prince.init(8+78+24, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     // Double collapisble
                     // this->init(gamePlay, prince, 90, 9,  10, 3);   // Double collapisble
+
+                    // prince.init(78 + 24 + 12, 25 + 31 + 31, Direction::Left, Stance:: Crouch_3_End, 3, clearSword);          // Spikes Upper
                     // this->init(gamePlay, prince, 90, 9,  10, 0);   // Spikes Upper
+
+                    // prince.init(12, 25 + 31, Direction::Left, Stance:: Crouch_3_End, 3, clearSword);          // Spikes Lower
                     // this->init(gamePlay, prince, 90, 9,  10, 6);   // Spikes Lower
+
+                    // prince.init(78 + 24, 25, Direction::Left, Stance:: Crouch_3_End, 3, clearSword);          // Jump 2
                     // this->init(gamePlay, prince, 90, 9,  30, 3);  // Jump 2
+
+                    // prince.init(18, 25+31, Direction::Right,Stance:: Crouch_3_End, 3, clearSword);          // Sword fight
                     // this->init(gamePlay, prince, 90, 9,  70, 3);  // Sword fight
+
+                    // prince.init(58, 25+31+31, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Second drink tonic
                     // this->init(gamePlay, prince, 90, 9,  50, 0);  // Second drink tonic
+
+                    // prince.init(66, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Upper gate
                     // this->init(gamePlay, prince, 90, 9,  50, 0);  // Upper Gate
+
+                    // prince.init(70, 25 + 31, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // 2 leap
                     // this->init(gamePlay, prince, 90, 9,  40, 3);  // 2 leap
+
+                    // prince.init(14, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Exit Seq
                     // this->init(gamePlay, prince, 90, 9,  80, 3);  // Exit Seq
+
+                    // prince.init(104, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Both floor types
                     // this->init(gamePlay, prince, 90, 9,  20, 3);  // Both floor types
+
+                    // prince.init(86, 87, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Normal starting pos but next to drop floor 3rd floor
                     // this->init(gamePlay, prince, 90, 9,  60, 0);  //Normal starting pos but next to drop floor 3rd floor
+
+                    // prince.init(78, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Under collapsible floor
                     // this->init(gamePlay, prince, 90, 9,  50, 3);  // Under collapsible floor
+
+                    // prince.init(66, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);        // Get tonic
                     // this->init(gamePlay, prince, 90, 9,  Constants::TileHeight, 0);   // Get tonic
+
+                    // prince.init(18, 25+31+31, Direction::Left, Stance::Upright, 3, clearSword);     // Column of climbs
                     // this->init(gamePlay, prince, 90, 9,  0, 3);   // Column of climbs
+
+                    // prince.init(78, 25, Direction::Left, Stance::Upright, 3, clearSword);     // Below column of climbs
                     // this->init(gamePlay, prince, 90, 9,  0, 6);   // Below Column of climbs
+
+                    // prince.init(80, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);     // Top Left
                     // this->init(gamePlay, prince, 90, 9,  0, 0);   // Top left
+
+                    // prince.init(18, 25, Direction::Right,Stance:: Crouch_3_End, 3, clearSword);          // Long Fall
                     // this->init(gamePlay, prince, 90, 9,  40, 4);  // Long Fall
+
+                    // prince.init(18, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // problem
                     // this->init(gamePlay, prince, 90, 9,  60, 3);  // problem
+
+                    // prince.init(98, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // At bottom of tthree level drop.
                     // this->init(gamePlay, prince, 90, 9,  30, 6); // At bottom of tthree level drop.
+
+                    // prince.init(18, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Long Run
                     // this->init(gamePlay, prince, 90, 9,  40, 0);  // Long run
+
+                    // prince.init(78 - 10, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Fall Error Stading Jump
                     // this->init(gamePlay, prince, 90, 9,  50, 3);  // Fall Error Stading Jump
+
+                    // prince.init(78 - 4, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Fall Error running Jump
                     // this->init(gamePlay, prince, 90, 9,  50, 3);  // Fall Error running Jump
 
                 }
@@ -318,9 +340,9 @@ struct Level {
                     // prince.init(22 + 84, 25, Direction::Left, Stance::Upright, 3, clearSword);  
                     // this->init(gamePlay, prince, 130, 12, 90, 6);  
 
-                    // Jump Up
-                    // prince.init(22, 25, Direction::Left, Stance::Upright, 3, clearSword);  
-                    // this->init(gamePlay, prince, 130, 12, 90, 6);  
+                    // Double door button
+                    // prince.init(22+(12*6), 56, Direction::Left, Stance::Upright, 3, clearSword);  
+                    // this->init(gamePlay, prince, 130, 12, 80, 3);  
 
                     // Enemy 3
                     // prince.init(22+(12*6), 25, Direction::Left, Stance::Upright, 3, clearSword);  
@@ -341,8 +363,8 @@ struct Level {
                     #endif
 
                     // Normal starting pos
-                    // prince.init(46, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
-                    // this->init(gamePlay, prince, 90, 15, 40, 6); 
+                    prince.init(46, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    this->init(gamePlay, prince, 90, 15, 40, 6); 
 
                     // Three blades
                     // prince.init(10, 87, Direction::Right, Stance::Crouch_3_End, 3, clearSword);     
@@ -365,8 +387,8 @@ struct Level {
                     // this->init(gamePlay, prince, 90, 15, 0, 6); 
 
                     // Skeleton
-                    prince.init(10, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);     
-                    this->init(gamePlay, prince, 90, 15, 10, 3); 
+                    // prince.init(10, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);     
+                    // this->init(gamePlay, prince, 90, 15, 10, 3); 
 
                 }
 
@@ -380,28 +402,16 @@ struct Level {
                     #endif
 
                     // Normal starting pos
-                    prince.init(46, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
-                    this->init(gamePlay, prince, 120, 9, 60, 6); 
+                    // prince.init(46, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    // this->init(gamePlay, prince, 120, 9, 40, 0); 
 
-                    // Three blades
-                    // prince.init(10, 87, Direction::Right, Stance::Crouch_3_End, 3, clearSword);     
-                    // this->init(gamePlay, prince, 90, 15, 80, 0); 
-
-                    // Three blades
-                    // prince.init(10, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
-                    // this->init(gamePlay, prince, 90, 15, 60, 3); 
-
-                    // Top Left
-                    // prince.init(10, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
-                    // this->init(gamePlay, prince, 90, 15, 20, 3); 
-
-                    // // Biggest jump
-                    // prince.init(10 + (8*12), 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
-                    // this->init(gamePlay, prince, 90, 15, 20, 3); 
-
-                    // Exit Button
+                    // Exit Sequence
                     // prince.init(10 + (4*12), 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
-                    // this->init(gamePlay, prince, 90, 15, 0, 6); 
+                    // this->init(gamePlay, prince, 120, 15, 70, 0); 
+
+                    // Enable mirror
+                    prince.init(10 + (4*12), 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    this->init(gamePlay, prince, 120, 15, 70, 0); 
 
                 }
 
@@ -580,29 +590,29 @@ struct Level {
                             }
                             break;
 
-                        case ItemType::Gate_StayOpen:
+                        // case ItemType::Gate_StayOpen:
 
-                            if (arduboy.isFrameCount(4)) {
+                        //     if (arduboy.isFrameCount(4)) {
 
-                                if (item.data.gate.direction == Direction::Up && item.data.gate.position < 9) {
+                        //         if (item.data.gate.direction == Direction::Up && item.data.gate.position < 9) {
 
-                                    item.data.gate.position++;
+                        //             item.data.gate.position++;
                                     
-                                }
-                                else if (item.data.gate.direction == Direction::Down && item.data.gate.position > 0) {
+                        //         }
+                        //         else if (item.data.gate.direction == Direction::Down && item.data.gate.position > 0) {
 
-                                    item.data.gate.position--;
+                        //             item.data.gate.position--;
 
-                                }
+                        //         }
 
-                                if (item.data.gate.closingDelay > 0) {
+                        //         if (item.data.gate.closingDelay > 0) {
 
-                                    item.data.gate.closingDelay--;
+                        //             item.data.gate.closingDelay--;
 
-                                }
+                        //         }
 
-                            }
-                            break;
+                        //     }
+                        //     break;
 
                         case ItemType::CollapsingFloor:
 
@@ -890,6 +900,36 @@ struct Level {
         }
 
 
+        // Get the nth Gate (these are 1based)
+
+        Item &getGate(uint8_t idx) {
+
+            uint8_t count = 0;
+
+            for (uint8_t i = 0; i < Constants::Items_Count; i++) {
+                
+                Item &item = this->items[i];
+
+                // if (item.itemType == ItemType::Gate || item.itemType == ItemType::Gate_StayOpen) {
+                if (item.itemType == ItemType::Gate) {
+                    
+                    count++;
+
+                    if (count == idx) {
+
+                        return this->items[i];
+
+                    }
+
+                }
+
+            }
+
+            return this->items[0];
+            
+        }
+
+
         bool isCollapsingFloor(int8_t x, int8_t y) {
 
             for (Item &item : this->items) {
@@ -995,11 +1035,11 @@ struct Level {
                         item.data.gate.closingDelayMax = 255;
                         break;
 
-                    case ItemType::Gate_StayOpen:
-                        item.data.gate.position = FX::readPendingUInt8();
-                        item.data.gate.direction = static_cast<Direction>(FX::readPendingUInt8());
-                        item.data.gate.closingDelay = 0;
-                        break;
+                    // case ItemType::Gate_StayOpen:
+                    //     item.data.gate.position = FX::readPendingUInt8();
+                    //     item.data.gate.direction = static_cast<Direction>(FX::readPendingUInt8());
+                    //     item.data.gate.closingDelay = 0;
+                    //     break;
 
                     case ItemType::CollapsingFloor:
                         item.data.collapsingFloor.timeToFall = 0;
@@ -1014,8 +1054,8 @@ struct Level {
                     case ItemType::FloorButton3_UpOnly:
                     case ItemType::FloorButton3_DownOnly:
                         item.data.floorButton.frame = 0;
-                        item.data.floorButton.gateX = FX::readPendingUInt8();
-                        item.data.floorButton.gateY = FX::readPendingUInt8();
+                        item.data.floorButton.gate1 = FX::readPendingUInt8();
+                        item.data.floorButton.gate2 = FX::readPendingUInt8();
                         item.data.floorButton.timeToFall = 0;
                         break;
                     
@@ -1130,7 +1170,8 @@ struct Level {
 
                     if (x != Constants::CoordNone && y != Constants::CoordNone) {
 
-                        uint8_t idx = this->getItem(ItemType::Gate, ItemType::Gate_StayOpen, x + this->getXLocation() + offset, y + this->getYLocation());
+                        // uint8_t idx = this->getItem(ItemType::Gate, ItemType::Gate_StayOpen, x + this->getXLocation() + offset, y + this->getYLocation());
+                        uint8_t idx = this->getItem(ItemType::Gate, x + this->getXLocation() + offset, y + this->getYLocation());
 
                         if (idx != Constants::NoItemFound) {
 

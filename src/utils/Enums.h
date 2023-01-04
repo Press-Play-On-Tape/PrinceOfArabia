@@ -94,9 +94,9 @@ enum class ItemType : uint8_t {
     /* 04 */ Spikes,
     /* 05 */ ExitDoor_Button,
     /* 06 */ ExitDoor_Button_Cropped,
-    /* 07 */ FloorButton3_UpDown,
-    /* 08 */ FloorButton3_UpOnly,
-    /* 09 */ FloorButton3_DownOnly,
+    /* 07 */ FloorButton3_UpDown,   // << needed?      
+    /* 08 */ FloorButton3_UpOnly,   // << needed?      
+    /* 09 */ FloorButton3_DownOnly,   // << needed?      
     /* __ */ InteractiveItemType_End = FloorButton3_DownOnly,
     /* 15 */ Skeleton = 15,
     /* 16 */ ExitDoor_SelfOpen,

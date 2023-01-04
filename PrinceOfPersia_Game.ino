@@ -11,7 +11,7 @@
 
 void game_Init() {
 
-    gamePlay.init(arduboy, 1);
+    gamePlay.init(arduboy, 4);
 
     #ifndef SAVE_MEMORY_ENEMY
         level.init_PositionChars(gamePlay, prince, enemy, true);
@@ -1625,71 +1625,98 @@ void game() {
                             break;
 
                         case ItemType::FloorButton1:
-
-                            itemIdx = level.getItem(ItemType::Gate, item.data.floorButton.gateX, item.data.floorButton.gateY);
-
-                            if (itemIdx != Constants::NoItemFound) {
-
-                                Item &gate = level.getItem(itemIdx);
+                            {
+                                Item &gate1 = level.getGate(item.data.floorButton.gate1);
 
                                 item.data.floorButton.frame = 1;
                                 item.data.floorButton.timeToFall = Constants::FallingTileSteppedOn;
-                                gate.data.gate.closingDelay = gate.data.gate.defaultClosingDelay;
-                                gate.data.gate.closingDelayMax = gate.data.gate.defaultClosingDelay;
+                                gate1.data.gate.closingDelay = gate1.data.gate.defaultClosingDelay;
+                                gate1.data.gate.closingDelayMax = gate1.data.gate.defaultClosingDelay;
+
+                                if (item.data.floorButton.gate2 != 0) {
+
+                                    Item &gate2 = level.getGate(item.data.floorButton.gate2);
+                                    gate2.data.gate.closingDelay = gate2.data.gate.defaultClosingDelay;
+                                    gate2.data.gate.closingDelayMax = gate2.data.gate.defaultClosingDelay;
+
+                                }
 
                             }
 
                             break;
 
                         case ItemType::FloorButton2:
-
-                            itemIdx = level.getItem(ItemType::Gate, item.data.floorButton.gateX, item.data.floorButton.gateY);
-
-                            if (itemIdx != Constants::NoItemFound) {
-
-                                Item &gate = level.getItem(itemIdx);
+                            {
+                                Item &gate1 = level.getGate(item.data.floorButton.gate1);
 
                                 item.data.floorButton.frame = 1;
                                 item.data.floorButton.timeToFall = Constants::Button2FaillingTime;
-                                gate.data.gate.closingDelay = 10;
-                                gate.data.gate.closingDelayMax = 255;
+                                gate1.data.gate.closingDelay = 10;
+                                gate1.data.gate.closingDelayMax = 255;
 
-                            }
-
-                            break;
-
-                        case ItemType::FloorButton3_UpDown:
-                        case ItemType::FloorButton3_UpOnly:
-                        case ItemType::FloorButton3_DownOnly:
-
-                            itemIdx = level.getItem(ItemType::Gate_StayOpen, item.data.floorButton.gateX, item.data.floorButton.gateY);
-
-                            if (itemIdx != Constants::NoItemFound) {
-
-                                Item &gate = level.getItem(itemIdx);
-                          
-                                if (gate.data.gate.closingDelay == 0) {
+                                if (item.data.floorButton.gate2 != 0) {
                                     
-                                    if (gate.data.gate.position == 9 && item.itemType != ItemType::FloorButton3_UpOnly) {
-
-                                        gate.data.gate.direction = Direction::Down;
-                                        
-                                    }
-                                    else if (gate.data.gate.position == 0 && item.itemType != ItemType::FloorButton3_DownOnly) {
-                                        
-                                        gate.data.gate.direction = Direction::Up;
-
-                                    }
-
-                                    gate.data.gate.closingDelay = 16;
-                                    item.data.floorButton.frame = 1;
-                                    item.data.floorButton.timeToFall = Constants::Button3FaillingTime;
+                                    Item &gate2 = level.getGate(item.data.floorButton.gate2);
+                                    gate2.data.gate.closingDelay = 10;
+                                    gate2.data.gate.closingDelayMax = 255;
 
                                 }
- 
+
                             }
 
                             break;
+
+                        // case ItemType::FloorButton3_UpDown:
+                        // case ItemType::FloorButton3_UpOnly:
+                        // case ItemType::FloorButton3_DownOnly:
+                        //    {
+                        //         Item &gate1 = level.getGate(item.data.floorButton.gate1);
+
+                        //         if (gate1.data.gate.closingDelay == 0) {
+                                    
+                        //             if (gate1.data.gate.position == 9 && item.itemType != ItemType::FloorButton3_UpOnly) {
+
+                        //                 gate1.data.gate.direction = Direction::Down;
+                                        
+                        //             }
+                        //             else if (gate1.data.gate.position == 0 && item.itemType != ItemType::FloorButton3_DownOnly) {
+                                        
+                        //                 gate1.data.gate.direction = Direction::Up;
+
+                        //             }
+
+                        //             gate1.data.gate.closingDelay = 16;
+                        //             item.data.floorButton.frame = 1;
+                        //             item.data.floorButton.timeToFall = Constants::Button3FaillingTime;
+
+                        //         }
+
+                        //         if (item.data.floorButton.gate2 != 0) {
+
+                        //             Item &gate2 = level.getGate(item.data.floorButton.gate2);
+
+                        //             if (gate2.data.gate.closingDelay == 0) {
+                                        
+                        //                 if (gate2.data.gate.position == 9 && item.itemType != ItemType::FloorButton3_UpOnly) {
+
+                        //                     gate2.data.gate.direction = Direction::Down;
+                                            
+                        //                 }
+                        //                 else if (gate2.data.gate.position == 0 && item.itemType != ItemType::FloorButton3_DownOnly) {
+                                            
+                        //                     gate2.data.gate.direction = Direction::Up;
+
+                        //                 }
+
+                        //                 gate2.data.gate.closingDelay = 16;
+
+                        //             }
+
+                        //         }
+
+                        //     }
+
+                        //     break;
 
                         case ItemType::ExitDoor_Button:
                         case ItemType::ExitDoor_Button_Cropped:
@@ -1705,21 +1732,25 @@ void game() {
 
                                     // Turn skeletons into fighters ..
 
-                                    for (uint8_t i = 0; i < Constants::Items_Count; i++) {
+                                    #ifndef SAVE_MEMORY_ENEMY
+                                        
+                                        for (uint8_t i = 0; i < Constants::Items_Count; i++) {
 
-                                        Item &item = level.getItem(i);
+                                            Item &item = level.getItem(i);
 
-                                        if (item.itemType == ItemType::Skeleton) {
+                                            if (item.itemType == ItemType::Skeleton) {
 
-                                            if (enemy.activateEnemy(item.x, item.y)) {
+                                                if (enemy.activateEnemy(item.x, item.y)) {
 
-                                                item.itemType = ItemType::None;
+                                                    item.itemType = ItemType::None;
+
+                                                }
 
                                             }
 
                                         }
 
-                                    }
+                                    #endif
 
                                 }
 
