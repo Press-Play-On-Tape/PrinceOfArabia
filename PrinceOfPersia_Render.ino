@@ -155,10 +155,34 @@ void render(bool enemyIsVisible) {
                     FX::drawBitmap(xLoc + 6, yLoc + 10, Images::Potions_Poison, item.data.potion.frame, dbmMasked);
                     break;
 
+                case ItemType::Mirror:
+
+                    if (item.data.mirror.status == Status::Active) {
+
+                        bool showShadow = false;
+
+                        uint8_t mirrorX = level.coordToTileIndexX(xLoc) + level.getXLocation();
+                        uint8_t mirrorY = level.coordToTileIndexY(yLoc) + level.getYLocation();
+                        
+                        int8_t princeX = level.coordToTileIndexX(prince.getPosition().x);
+                        int8_t princeY = level.coordToTileIndexY(prince.getPosition().y);
+
+                        if ((princeX == mirrorX || princeX == mirrorX + 1) && princeY == mirrorY) {
+
+                            showShadow = true;
+
+                        }
+
+                        FX::drawBitmap(xLoc, yLoc, Images::Mirrors, showShadow, dbmNormal);
+                        
+                    }
+                    break;
+
                 case ItemType::FloorButton1:
                 case ItemType::FloorButton3_UpDown:
                 case ItemType::FloorButton3_UpOnly:
                 case ItemType::ExitDoor_Button:
+                case ItemType::Mirror_Button:
                     FX::drawBitmap(xLoc, yLoc + item.data.floorButton.frame - 1, Images::FloorButtons_0and1, item.data.floorButton.frame, dbmMasked);
                     break;
 

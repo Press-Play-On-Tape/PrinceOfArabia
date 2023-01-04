@@ -73,6 +73,7 @@ uint8_t Level4_Items[] = {
     2, 96, 3, 9, 0,         // Floor Button 1
     2, 106, 3, 9, 0,        // Floor Button 1
 
+    10, 108, 1,             // Mirror Button
     25, 7, 0,               // Blade      
     25, 103, 3,             // Blade      
     25, 111, 1,             // Blade      
@@ -87,6 +88,7 @@ uint8_t Level4_Items[] = {
     4, 77, 1, 1, 0,         // Spikes                       
     4, 83, 4, 1, 0,         // Spikes                       
     4, 84, 4, 1, 0,         // Spikes                       
+    29, 104, 0,             // Mirror                       
 
     1, 11, 1, 55,           // CollapsingTile (dist to fall)                                    
     1, 18, 1, 55,           // CollapsingTile (dist to fall)                                    

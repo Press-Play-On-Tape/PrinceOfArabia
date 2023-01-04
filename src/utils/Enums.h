@@ -97,7 +97,8 @@ enum class ItemType : uint8_t {
     /* 07 */ FloorButton3_UpDown,   // << needed?      
     /* 08 */ FloorButton3_UpOnly,   // << needed?      
     /* 09 */ FloorButton3_DownOnly,   // << needed?      
-    /* __ */ InteractiveItemType_End = FloorButton3_DownOnly,
+    /* 10 */ Mirror_Button,
+    /* __ */ InteractiveItemType_End = Mirror_Button,
     /* 15 */ Skeleton = 15,
     /* 16 */ ExitDoor_SelfOpen,
     /* 17 */ Gate,               
@@ -112,6 +113,7 @@ enum class ItemType : uint8_t {
     /* 26 */ ExitDoor_ButtonOpen,
     /* 27 */ Sword,
     /* 28 */ EntryDoor_HalfTileLeft,
+    /* 29 */ Mirror,
     /* 96 */ None = 96,
     /* 97 */ LoveHeart = 97,
     /* 98 */ Sign = 98,

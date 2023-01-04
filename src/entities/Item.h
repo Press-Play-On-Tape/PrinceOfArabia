@@ -62,6 +62,10 @@ struct LoveHeart {
     uint8_t counter;
 };
 
+struct Mirror {
+    Status status;
+};
+
 struct Item {
 
     ItemType itemType;
@@ -80,6 +84,7 @@ struct Item {
         struct Spikes spikes;
         struct Blade blade;
         struct ExitDoor_Button exitDoor_Button;
+        struct Mirror mirror;
     } data; 
  
 };

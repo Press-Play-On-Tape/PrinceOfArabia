@@ -1626,7 +1626,7 @@ void game() {
 
                         case ItemType::FloorButton1:
                             {
-                                Item &gate1 = level.getGate(item.data.floorButton.gate1);
+                                Item &gate1 = level.getItemByIndex(ItemType::Gate, item.data.floorButton.gate1);
 
                                 item.data.floorButton.frame = 1;
                                 item.data.floorButton.timeToFall = Constants::FallingTileSteppedOn;
@@ -1635,7 +1635,7 @@ void game() {
 
                                 if (item.data.floorButton.gate2 != 0) {
 
-                                    Item &gate2 = level.getGate(item.data.floorButton.gate2);
+                                    Item &gate2 = level.getItemByIndex(ItemType::Gate, item.data.floorButton.gate2);
                                     gate2.data.gate.closingDelay = gate2.data.gate.defaultClosingDelay;
                                     gate2.data.gate.closingDelayMax = gate2.data.gate.defaultClosingDelay;
 
@@ -1647,7 +1647,7 @@ void game() {
 
                         case ItemType::FloorButton2:
                             {
-                                Item &gate1 = level.getGate(item.data.floorButton.gate1);
+                                Item &gate1 = level.getItemByIndex(ItemType::Gate, item.data.floorButton.gate1);
 
                                 item.data.floorButton.frame = 1;
                                 item.data.floorButton.timeToFall = Constants::Button2FaillingTime;
@@ -1656,7 +1656,7 @@ void game() {
 
                                 if (item.data.floorButton.gate2 != 0) {
                                     
-                                    Item &gate2 = level.getGate(item.data.floorButton.gate2);
+                                    Item &gate2 = level.getItemByIndex(ItemType::Gate, item.data.floorButton.gate2);
                                     gate2.data.gate.closingDelay = 10;
                                     gate2.data.gate.closingDelayMax = 255;
 
@@ -1670,7 +1670,7 @@ void game() {
                         // case ItemType::FloorButton3_UpOnly:
                         // case ItemType::FloorButton3_DownOnly:
                         //    {
-                        //         Item &gate1 = level.getGate(item.data.floorButton.gate1);
+                        //         Item &gate1 = level.level.getItemByIndex(ItemType::Gate, item.data.floorButton.gate1);
 
                         //         if (gate1.data.gate.closingDelay == 0) {
                                     
@@ -1693,7 +1693,7 @@ void game() {
 
                         //         if (item.data.floorButton.gate2 != 0) {
 
-                        //             Item &gate2 = level.getGate(item.data.floorButton.gate2);
+                        //             Item &gate2 = level.level.getItemByIndex(ItemType::Gate, item.data.floorButton.gate2);
 
                         //             if (gate2.data.gate.closingDelay == 0) {
                                         
@@ -1753,6 +1753,26 @@ void game() {
                                     #endif
 
                                 }
+
+                            }
+
+                            break;
+
+                        case ItemType::Mirror_Button:
+                            {
+                                Item &mirror = level.getItemByIndex(ItemType::Mirror, 1);
+
+                                if (mirror.data.mirror.status != Status::Active) {
+
+                                    mirror.data.mirror.status = Status::Active;
+
+                                    Flash &flash = level.getFlash();
+                                    flash.frame = 5;
+                                    flash.type = FlashType::SwordFight;
+                                    flash.x = mirror.x;
+                                    flash.y = mirror.y;       
+
+                                }                          
 
                             }
 

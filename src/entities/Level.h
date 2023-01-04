@@ -410,8 +410,8 @@ struct Level {
                     // this->init(gamePlay, prince, 120, 15, 70, 0); 
 
                     // Enable mirror
-                    prince.init(10 + (4*12), 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
-                    this->init(gamePlay, prince, 120, 15, 70, 0); 
+                    prince.init(10 + (6*12), 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);     
+                    this->init(gamePlay, prince, 120, 15, 100, 0); 
 
                 }
 
@@ -902,7 +902,7 @@ struct Level {
 
         // Get the nth Gate (these are 1based)
 
-        Item &getGate(uint8_t idx) {
+        Item &getItemByIndex(ItemType itemType, uint8_t idx) {
 
             uint8_t count = 0;
 
@@ -911,7 +911,7 @@ struct Level {
                 Item &item = this->items[i];
 
                 // if (item.itemType == ItemType::Gate || item.itemType == ItemType::Gate_StayOpen) {
-                if (item.itemType == ItemType::Gate) {
+                if (item.itemType == itemType) {
                     
                     count++;
 
@@ -1062,6 +1062,10 @@ struct Level {
                     case ItemType::Spikes:
                         item.data.spikes.imageType = FX::readPendingUInt8();
                         item.data.spikes.position = FX::readPendingUInt8();
+                        break;
+                    
+                    case ItemType::Mirror:
+                        item.data.mirror.status = Status::Dormant;
                         break;
 
                     default:

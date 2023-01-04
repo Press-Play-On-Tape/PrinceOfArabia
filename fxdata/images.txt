@@ -46,6 +46,7 @@ namespace Images {
     image_t FloorButtons_2 = "../images/items/FloorButtons_2_12x31_1.png"
 
     image_t Torches = "../images/items/Torches_3x11_1.png"
+    image_t Mirrors = "../images/items/Mirrors_12x31_1.png"
 
     image_t Spikes_FG_Full = "../images/items/Spikes_FG_19x18_1.png"
     image_t Spikes_BG_Full = "../images/items/Spikes_BG_19x18_1.png"
