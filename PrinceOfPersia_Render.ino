@@ -47,24 +47,27 @@ void render(bool enemyIsVisible) {
             int8_t fgTile = level.getTile(Layer::Foreground, x, y - 1, TILE_NONE);
             int16_t yCoord = (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset;
 
-            if (fgTile >= 0) {
+            if      (fgTile == 29) FX::drawBitmap(x * Constants::TileWidth, yCoord, Images::Tile_Dungeon_97, 0, dbmMasked);
+            else if (fgTile == 30) FX::drawBitmap(x * Constants::TileWidth, yCoord, Images::Tile_Dungeon_98, 0, dbmMasked);
 
-                switch (fgTile) {
-
-                    case 29:
-                        FX::drawBitmap(x * Constants::TileWidth, yCoord, Images::Tile_Dungeon_97, 0, dbmMasked);
-                        break;
-
-                    case 30:
-                        FX::drawBitmap(x * Constants::TileWidth, yCoord, Images::Tile_Dungeon_98, 0, dbmMasked);
-                        break;
-
-                    default:
-                        break;
-
-                }
-
-            }
+            //if (fgTile >= 0) {
+            //
+            //    switch (fgTile) {
+            //
+            //        case 29:
+            //            FX::drawBitmap(x * Constants::TileWidth, yCoord, Images::Tile_Dungeon_97, 0, dbmMasked);
+            //            break;
+            //
+            //        case 30:
+            //            FX::drawBitmap(x * Constants::TileWidth, yCoord, Images::Tile_Dungeon_98, 0, dbmMasked);
+            //            break;
+            //
+            //        default:
+            //            break;
+            //
+            //    }
+            //
+            //}
 
         }
 

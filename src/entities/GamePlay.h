@@ -46,11 +46,14 @@ struct GamePlay {
         if ((arduboy.getFrameCount() - this->frameCount) % Constants::FrameRate == 0) {
 
             if (this->timer_Sec == 0) {
-                this->timer_Sec = 60;
-                this->timer_Min--;
+                if (this->timer_Min > 0) {
+                    this->timer_Min--;
+                    this->timer_Sec = 59;
+                }
             }
-
-            this->timer_Sec--;
+            else {
+                this->timer_Sec--;
+            }
 
         }
 
