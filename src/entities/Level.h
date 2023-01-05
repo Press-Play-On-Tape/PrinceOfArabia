@@ -412,7 +412,7 @@ struct Level {
 
                     // Enable mirror
                     prince.init(10 + (6*12), 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);     
-                    this->init(gamePlay, prince, 120, 9, 80, 0); 
+                    this->init(gamePlay, prince, 120, 9, 100, 0); 
 
                 }
 

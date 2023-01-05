@@ -11,7 +11,7 @@
 
 void game_Init() {
 
-    gamePlay.init(arduboy, 4);
+    gamePlay.init(arduboy, 5);
 
     #ifndef SAVE_MEMORY_ENEMY
         level.init_PositionChars(gamePlay, prince, enemy, true);
@@ -186,6 +186,7 @@ void game() {
                         switch (prince.getStance()) {
 
                             case Stance::Falling_Dead_1_Start ... Stance::Falling_Dead_3_End:
+                            case Stance::Falling_Dead_Blade_1_Start ... Stance::Falling_Dead_Blade_2_End:
                                 break;
 
                             default:
@@ -261,7 +262,7 @@ void game() {
 
                     // Has the enemy gone past the prince?  If so, turn around ..
 
-                    if (xDelta > 0 && enemy.getDirection() == Direction::Left){
+                    if (xDelta > 0 && enemy.getDirection() == Direction::Left) {
 
                         enemy.setDirection(Direction::Right);
                         moveBackwardsWithSword(enemyBase, enemy);
@@ -312,6 +313,7 @@ void game() {
                         // The prince is dying, put away the sword ..
 
                         case Stance::Falling_Dead_1_Start ... Stance::Falling_Dead_3_End:
+                        case Stance::Falling_Dead_Blade_1_Start ... Stance::Falling_Dead_Blade_2_End:
 
                             enemy.pushSequence(Stance::Pickup_Sword_7_PutAway, Stance::Pickup_Sword_16_End, Stance::Upright, false);
                             break;
@@ -368,6 +370,7 @@ void game() {
                                             // The prince is dying, do nothing ..
 
                                             case Stance::Falling_Dead_1_Start ... Stance::Falling_Dead_3_End: 
+                                            case Stance::Falling_Dead_Blade_1_Start ... Stance::Falling_Dead_Blade_2_End:
                                                 break;
 
 
@@ -1450,6 +1453,7 @@ void game() {
                                     prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
 
                                     if (prince.decHealth(1) == 0) {
+
                                         pushDead(prince, level, gamePlay, true, DeathType::Falling);
                                     }
 
@@ -1975,6 +1979,7 @@ void game() {
                                     break;
 
                                 case Stance::Falling_Dead_1_Start ... Stance::Falling_Dead_3_End: // Already dying ..
+                                case Stance::Falling_Dead_Blade_1_Start ... Stance::Falling_Dead_Blade_2_End:
 
                                     break;
 

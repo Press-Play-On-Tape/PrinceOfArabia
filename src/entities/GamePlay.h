@@ -23,8 +23,8 @@ struct GamePlay {
         this->frameCount = 0;
 
         this->level = level;
-        this->timer_Sec = 0;
-        this->timer_Min = 60;
+        this->timer_Sec = 59;
+        this->timer_Min = 59;
 
         this->timeRemaining = 124;
         this->gameState = GameState::Game;

@@ -373,6 +373,7 @@ void pushDead(Prince &entity, Level &level, GamePlay &gamePlay, bool clear, Deat
 
         case DeathType::Blade:
         case DeathType::Spikes:
+        case DeathType::SwordFight:
             entity.pushSequence(Stance::Falling_Dead_Blade_1_Start, Stance::Falling_Dead_Blade_2_End, true);
             break;
     }
@@ -479,13 +480,25 @@ void playGrab() {
 
             enemy.setActiveEnemy(i);
 
-            if (enemy.getStatus() == Status::Active) {
+            //if (enemy.getStatus() == Status::Active) {
 
-                uint8_t tileXIdx = level.coordToTileIndexX(enemy.getPosition().x) + prince.getDirectionOffset(1);
+                uint8_t tileXIdx = level.coordToTileIndexX(enemy.getPosition().x);
                 uint8_t tileYIdx = level.coordToTileIndexY(enemy.getPosition().y);
 
-                if (tileXIdx >= level.getXLocation() && tileXIdx < level.getXLocation() + Constants::ScreenWidthInTiles && tileYIdx >= level.getYLocation() && tileYIdx < level.getYLocation() + Constants::ScreenHeightInTiles) {
+// Serial.print("Enemy: ");
+// Serial.print(i);
+// Serial.print("tile: ");
+// Serial.print(tileXIdx);
+// Serial.print(",");
+// Serial.print(tileYIdx);
+// Serial.print(", map: ");
+// Serial.print(level.getXLocation());
+// Serial.print(",");
+// Serial.print(level.getYLocation());
 
+                if (tileXIdx >= level.getXLocation() && tileXIdx < level.getXLocation() + Constants::ScreenWidthInTiles && tileYIdx >= level.getYLocation() && tileYIdx < level.getYLocation() + Constants::ScreenHeightInTiles) {
+// Serial.print("Enemy found ");
+// Serial.print(i);
                     enemyIsVisible = true;
 
                 }
@@ -495,10 +508,10 @@ void playGrab() {
                     enemy.decMoveCount();
 
                 }
-
+// Serial.println("");
                 if (enemyIsVisible) break;
 
-            }
+            //}
             
         }
 

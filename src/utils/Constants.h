@@ -5,10 +5,10 @@
 #define DEBUG_PRINTLN  Serial.println
 #define SAVE_MEMORY_USB
 #define _SAVE_MEMORY_OTHER
-#define _SAVE_MEMORY_SOUND
+#define SAVE_MEMORY_SOUND
 #define _SAVE_MEMORY_ENEMY
 #define _ALT_B_BUTTON
-#define _GIVE_SWORD
+#define GIVE_SWORD
 
 #define LEVEL_DATA_FROM_FX
 
