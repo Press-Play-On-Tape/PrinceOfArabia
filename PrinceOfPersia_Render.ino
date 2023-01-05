@@ -167,7 +167,7 @@ void render(bool enemyIsVisible) {
                         int8_t princeX = level.coordToTileIndexX(prince.getPosition().x);
                         int8_t princeY = level.coordToTileIndexY(prince.getPosition().y);
 
-                        if ((princeX == mirrorX || princeX == mirrorX + 1) && princeY == mirrorY) {
+                        if ((princeX == mirrorX || princeX == mirrorX + 1) && princeY == mirrorY && enemy.getStatus() == Status::Dormant_ActionReady) {
 
                             showShadow = true;
 
@@ -254,7 +254,7 @@ void render(bool enemyIsVisible) {
 
                 int16_t xCoord = enemy.getXImage() - (level.getXLocation() * Constants::TileWidth);
                 int16_t yCoord = enemy.getYImage() - (level.getYLocation() * Constants::TileHeight)- level.getYOffset() + Constants::ScreenTopOffset;
-                uint24_t imagePos;
+                uint24_t imagePos = 0;
 
                 switch (enemy.getEnemyType()) {
 
@@ -272,7 +272,7 @@ void render(bool enemyIsVisible) {
 
                 }
                     
-                FX::drawBitmap(xCoord, yCoord, Images::Prince_Left, imageIndex - 1, dbmMasked);
+                FX::drawBitmap(xCoord, yCoord, imagePos, imageIndex - 1, dbmMasked);
                 
             }
 

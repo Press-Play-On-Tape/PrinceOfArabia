@@ -41,7 +41,7 @@ uint8_t level4_Data[] = {
 };
 
 uint8_t Level4_Items[] = {
-    16, 4, 8, 3, 5,         // Exit Gate, let position for open, right position, close button                                                        
+    26, 82, 1, 81, 83,      // Exit Gate, let position for open, right position, close button                                                        
     23, 45, 1,              // Entry Gate   
 
     17, 40, 1, 0, 64,       // Gate 1                                         
@@ -95,5 +95,6 @@ uint8_t Level4_Items[] = {
     1, 11, 1, 55,           // CollapsingTile (dist to fall)                                    
     1, 18, 1, 55,           // CollapsingTile (dist to fall)                                    
     1, 20, 1, 55,           // CollapsingTile (dist to fall)                                    
+    1, 95, 1, 24,           // CollapsingTile (dist to fall)                                    
     255                     // End
 }

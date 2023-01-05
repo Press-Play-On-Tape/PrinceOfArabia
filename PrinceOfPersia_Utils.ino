@@ -357,14 +357,26 @@ bool leaveLevel(Prince &prince, Level &level) {
 
 }
 
-void pushDead(Prince &entity, Level &level, GamePlay &gamePlay, bool clear) {
+void pushDead(Prince &entity, Level &level, GamePlay &gamePlay, bool clear, DeathType deathType) {
 
     #ifndef SAVE_MEMORY_SOUND
         sound.tonesFromFX(Sounds::Dead);
     #endif
 
     if (clear) prince.clear();
-    entity.pushSequence(Stance::Falling_Dead_1_Start, Stance::Falling_Dead_3_End, true);
+
+    switch (deathType) {
+
+        case DeathType::Falling:
+            entity.pushSequence(Stance::Falling_Dead_1_Start, Stance::Falling_Dead_3_End, true);
+            break;
+
+        case DeathType::Blade:
+        case DeathType::Spikes:
+            entity.pushSequence(Stance::Falling_Dead_Blade_1_Start, Stance::Falling_Dead_Blade_2_End, true);
+            break;
+    }
+
     entity.setHealth(0);
 
     if (gamePlay.isGameOver()) {

@@ -398,7 +398,7 @@ struct Level {
                 if (gamePlay.level == 4) {
 
                     #ifndef SAVE_MEMORY_ENEMY
-                        enemy.init(EnemyType::Mirror, 52 + (100 * Constants::TileWidth), 25 + (0 * Constants::TileHeight), Direction::Right, Stance::Upright, 3, Status::Active);          // Sword fight from Left
+                        enemy.init(EnemyType::Mirror, 52 + (100 * Constants::TileWidth), 25 + (0 * Constants::TileHeight), Direction::Right, Stance::Upright, 3, Status::Dormant);         // Sword fight from Left
                         // enemy.init(EnemyType::Guard, 80 + (40 * Constants::TileWidth), 25 + (0 * Constants::TileHeight), Direction::Left, Stance::Upright, 3, Status::Active);          // Sword fight from Left
                     #endif
 
@@ -412,7 +412,7 @@ struct Level {
 
                     // Enable mirror
                     prince.init(10 + (6*12), 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);     
-                    this->init(gamePlay, prince, 120, 9, 100, 0); 
+                    this->init(gamePlay, prince, 120, 9, 80, 0); 
 
                 }
 

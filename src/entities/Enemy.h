@@ -90,6 +90,7 @@ class Enemy : public BaseStack {
         void setDirection(Direction val)            { this->base[this->activeEnemy].setDirection(val); }
         void setHealth(uint8_t val)                 { this->base[this->activeEnemy].setHealth(val); }
         void setHealthMax(uint8_t val)              { this->base[this->activeEnemy].setHealthMax(val); }
+        void setStatus(Status val)                  { this->base[this->activeEnemy].setStatus(val); }
         void setEnemyType(EnemyType val)            { this->base[this->activeEnemy].setEnemyType(val); }
 
         uint8_t decHealth(uint8_t val)              { return this->base[this->activeEnemy].decHealth(val); }

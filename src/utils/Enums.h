@@ -1,6 +1,41 @@
 
 #pragma once
 
+enum class ItemType : uint8_t {
+    /* 00 */ InteractiveItemType_Start,
+    /* 01 */ CollapsingFloor,
+    /* 02 */ FloorButton1,
+    /* 03 */ FloorButton2,
+    /* 04 */ Spikes,
+    /* 05 */ ExitDoor_Button,
+    /* 06 */ ExitDoor_Button_Cropped,
+    /* 07 */ FloorButton3_UpDown,   // << needed?      
+    /* 08 */ FloorButton3_UpOnly,   // << needed?      
+    /* 09 */ FloorButton3_DownOnly,   // << needed?      
+    /* 10 */ Mirror_Button,
+    /* __ */ InteractiveItemType_End = Mirror_Button,
+    /* 15 */ Skeleton = 15,
+    /* 16 */ ExitDoor_SelfOpen,
+    /* 17 */ Gate,               
+    /* 18 */ Gate_StayOpen,          
+    /* 19 */ CollpasedFloor,
+    /* 20 */ Potion_Small,
+    /* 21 */ Potion_Large,
+    /* 22 */ Potion_Poison,
+    /* 23 */ EntryDoor,
+    /* 24 */ EntryDoor_Cropped,
+    /* 25 */ Blade,
+    /* 26 */ ExitDoor_ButtonOpen,
+    /* 27 */ Sword,
+    /* 28 */ EntryDoor_HalfTileLeft,
+    /* 29 */ Mirror,
+    /* 96 */ None = 96,
+    /* 97 */ LoveHeart = 97,
+    /* 98 */ Sign = 98,
+    /* 99 */ Flash = 99,
+    /* 99 */ AllItemTypes_End = Flash,
+};
+
 enum GameState : uint8_t {
     SplashScreen_Init,
     SplashScreen,
@@ -86,41 +121,6 @@ enum class RunningJumpResult : uint8_t {
     Jump3_DropLevel,
 };
 
-enum class ItemType : uint8_t {
-    /* 00 */ InteractiveItemType_Start,
-    /* 01 */ CollapsingFloor,
-    /* 02 */ FloorButton1,
-    /* 03 */ FloorButton2,
-    /* 04 */ Spikes,
-    /* 05 */ ExitDoor_Button,
-    /* 06 */ ExitDoor_Button_Cropped,
-    /* 07 */ FloorButton3_UpDown,   // << needed?      
-    /* 08 */ FloorButton3_UpOnly,   // << needed?      
-    /* 09 */ FloorButton3_DownOnly,   // << needed?      
-    /* 10 */ Mirror_Button,
-    /* __ */ InteractiveItemType_End = Mirror_Button,
-    /* 15 */ Skeleton = 15,
-    /* 16 */ ExitDoor_SelfOpen,
-    /* 17 */ Gate,               
-    /* 18 */ Gate_StayOpen,          
-    /* 19 */ CollpasedFloor,
-    /* 20 */ Potion_Small,
-    /* 21 */ Potion_Large,
-    /* 22 */ Potion_Poison,
-    /* 23 */ EntryDoor,
-    /* 24 */ EntryDoor_Cropped,
-    /* 25 */ Blade,
-    /* 26 */ ExitDoor_ButtonOpen,
-    /* 27 */ Sword,
-    /* 28 */ EntryDoor_HalfTileLeft,
-    /* 29 */ Mirror,
-    /* 96 */ None = 96,
-    /* 97 */ LoveHeart = 97,
-    /* 98 */ Sign = 98,
-    /* 99 */ Flash = 99,
-    /* 99 */ AllItemTypes_End = Flash,
-};
-
 enum class MenuOption : uint8_t {
     Resume,
     Save,
@@ -172,6 +172,8 @@ enum class LevelUpdate : uint8_t {
 enum class Status : uint8_t {
     Active,
     Dormant,
+    Dormant_ActionReady,
+    Dormant_ActionDone,
 };
 
 enum class EnemyType : uint8_t {
@@ -181,3 +183,9 @@ enum class EnemyType : uint8_t {
     None = 255
 };
 
+enum class DeathType : uint8_t {
+    Falling,
+    Blade,
+    SwordFight,
+    Spikes,
+};
