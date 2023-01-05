@@ -15,11 +15,21 @@ void testScroll(GamePlay &gamePlay, Prince &prince, Level &level) {
 
     if (prince.getY() - level.getYOffset() >= 56 + Constants::TileHeight) {
 
-        prince.incY(- Constants::TileHeight * 3);
-        level.setYLocation(level.getYLocation() + 3);
-        level.loadMap(gamePlay);
-        level.setYOffset(0);
-        level.setYOffsetDir(Direction::None);
+        if (gamePlay.level == 6 && level.getYLocation() == 6) {
+
+            prince.clear();
+            prince.push(Stance::Leave_Gate_14_End, false);
+
+        }
+        else {
+
+            prince.incY(- Constants::TileHeight * 3);
+            level.setYLocation(level.getYLocation() + 3);
+            level.loadMap(gamePlay);
+            level.setYOffset(0);
+            level.setYOffsetDir(Direction::None);
+
+        }
 
     }
     else if (static_cast<int8_t>(prince.getY() - level.getYOffset()) < static_cast<int8_t>(0)) {

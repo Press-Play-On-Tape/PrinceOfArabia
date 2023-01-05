@@ -30,6 +30,7 @@ enum class ItemType : uint8_t {
     /* 27 */ Sword,
     /* 28 */ EntryDoor_HalfTileLeft,
     /* 29 */ Mirror,
+    /* 30 */ Gate_StayClosed,
     /* 96 */ None = 96,
     /* 97 */ LoveHeart = 97,
     /* 98 */ Sign = 98,

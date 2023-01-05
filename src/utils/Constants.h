@@ -514,9 +514,9 @@ constexpr uint16_t Falling_Injured_2_End                         = Stance::Falli
 /* 288 - 290                                                     01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define FALLING_DEAD_SEQ                                         125,   126,   142,
 #define FALLING_DEAD_OFFSETS                                     0,0,   0,0,   0,0,
-constexpr uint16_t Falling_Dead_1_Start                          = Stance::Falling_Injured_2_End + 1;  // Climbing down, fall to death
-constexpr uint16_t Falling_Dead_2                                = Stance::Falling_Dead_1_Start + 1;
-constexpr uint16_t Falling_Dead_3_End                            = Stance::Falling_Dead_2 + 1;
+constexpr uint16_t Falling_Dead_1_Start                         = Stance::Falling_Injured_2_End + 1;  // Climbing down, fall to death
+constexpr uint16_t Falling_Dead_2                               = Stance::Falling_Dead_1_Start + 1;
+constexpr uint16_t Falling_Dead_3_End                           = Stance::Falling_Dead_2 + 1;
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -778,53 +778,68 @@ constexpr uint16_t Sword_Normal                                  = Stance::Runni
 /* 432 - 437                                                     01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define DRAW_SWORD_SEQ                                           175,   176,   177,   178,   179,   180,
 #define DRAW_SWORD_OFFSETS                                       0,0,   0,0,   0,0,   0,0,   0,0,   0,0,
-constexpr uint16_t Draw_Sword_01_Start                           = Stance::Sword_Normal + 1;
-constexpr uint16_t Draw_Sword_02                                 = Stance::Draw_Sword_01_Start + 1;
-constexpr uint16_t Draw_Sword_03                                 = Stance::Draw_Sword_02 + 1;
-constexpr uint16_t Draw_Sword_04                                 = Stance::Draw_Sword_03 + 1;
-constexpr uint16_t Draw_Sword_05                                 = Stance::Draw_Sword_04 + 1;
-constexpr uint16_t Draw_Sword_06_End                             = Stance::Draw_Sword_05 + 1;
+constexpr uint16_t Draw_Sword_1_Start                            = Stance::Sword_Normal + 1;
+constexpr uint16_t Draw_Sword_2                                  = Stance::Draw_Sword_1_Start + 1;
+constexpr uint16_t Draw_Sword_3                                  = Stance::Draw_Sword_2 + 1;
+constexpr uint16_t Draw_Sword_4                                  = Stance::Draw_Sword_3 + 1;
+constexpr uint16_t Draw_Sword_5                                  = Stance::Draw_Sword_4 + 1;
+constexpr uint16_t Draw_Sword_6_End                              = Stance::Draw_Sword_5 + 1;
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /* 438 - 440                                                     01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define SWORD_STEP_SEQ                                           181,   182,   183,   
 #define SWORD_STEP_OFFSETS                                       3,0,   1,0,   0,0,  
-constexpr uint16_t Sword_Step_01_Start                           = Stance::Draw_Sword_06_End + 1;
-constexpr uint16_t Sword_Step_02                                 = Stance::Sword_Step_01_Start + 1;
-constexpr uint16_t Sword_Step_03_End                             = Stance::Sword_Step_02 + 1;
+constexpr uint16_t Sword_Step_1_Start                            = Stance::Draw_Sword_6_End + 1;
+constexpr uint16_t Sword_Step_2                                  = Stance::Sword_Step_1_Start + 1;
+constexpr uint16_t Sword_Step_3_End                              = Stance::Sword_Step_2 + 1;
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /* 441 - 448                                                     01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define SWORD_ATTACK_SEQ                                         186,   187,   188,   189,   190,   191,   192,   193,   
 #define SWORD_ATTACK_OFFSETS                                     2,0,   1,0,   2,0,   2,0,   -3,0,  -3,0,  -1,0,  0,0,
-constexpr uint16_t Sword_Attack_01_Start                         = Stance::Sword_Step_03_End + 1;
-constexpr uint16_t Sword_Attack_02                               = Stance::Sword_Attack_01_Start + 1;
-constexpr uint16_t Sword_Attack_03                               = Stance::Sword_Attack_02 + 1;
-constexpr uint16_t Sword_Attack_04                               = Stance::Sword_Attack_03 + 1;
-constexpr uint16_t Sword_Attack_05                               = Stance::Sword_Attack_04 + 1;
-constexpr uint16_t Sword_Attack_06                               = Stance::Sword_Attack_05 + 1;
-constexpr uint16_t Sword_Attack_07                               = Stance::Sword_Attack_06 + 1;
-constexpr uint16_t Sword_Attack_08_End                           = Stance::Sword_Attack_07 + 1;
+constexpr uint16_t Sword_Attack_1_Start                          = Stance::Sword_Step_3_End + 1;
+constexpr uint16_t Sword_Attack_2                                = Stance::Sword_Attack_1_Start + 1;
+constexpr uint16_t Sword_Attack_3                                = Stance::Sword_Attack_2 + 1;
+constexpr uint16_t Sword_Attack_4                                = Stance::Sword_Attack_3 + 1;
+constexpr uint16_t Sword_Attack_5                                = Stance::Sword_Attack_4 + 1;
+constexpr uint16_t Sword_Attack_6                                = Stance::Sword_Attack_5 + 1;
+constexpr uint16_t Sword_Attack_7                                = Stance::Sword_Attack_6 + 1;
+constexpr uint16_t Sword_Attack_8_End                            = Stance::Sword_Attack_7 + 1;
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /* 449 - 451                                                     01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define ATTACK_BLOCK_SEQ                                         194,   195,   194,   
 #define ATTACK_BLOCK_OFFSETS                                     0,0,   1,0,   -1,0,
-constexpr uint16_t Attack_Block_01_Start                         = Stance::Sword_Attack_08_End + 1;
-constexpr uint16_t Attack_Block_02                               = Stance::Attack_Block_01_Start + 1;
-constexpr uint16_t Attack_Block_03_End                           = Stance::Attack_Block_02 + 1;
-
+constexpr uint16_t Attack_Block_1_Start                          = Stance::Sword_Attack_8_End + 1;
+constexpr uint16_t Attack_Block_2                                = Stance::Attack_Block_1_Start + 1;
+constexpr uint16_t Attack_Block_3_End                            = Stance::Attack_Block_2 + 1;
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /* 452 - 453                                                     01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define FALLING_DEAD_BLADE_SEQ                                   126,   142,
 #define FALLING_DEAD_BLADE_OFFSETS                               0,0,   0,0,   0,0,
-constexpr uint16_t Falling_Dead_Blade_1_Start                    = Stance::Attack_Block_03_End + 1;  // Climbing down, fall to death
+constexpr uint16_t Falling_Dead_Blade_1_Start                    = Stance::Attack_Block_3_End + 1;  
 constexpr uint16_t Falling_Dead_Blade_2_End                      = Stance::Falling_Dead_Blade_1_Start + 1;
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* Used when mirror is closing button                                                                                                                                                                    */
+/* 452 - 453                                                     01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define DELAY_SEQ                                                15,    15,    15,    15,    15,    15,    15,    15,    
+#define DELAY_OFFSETS                                            0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   
+constexpr uint16_t Delay_1_Start                                 = Stance::Falling_Dead_Blade_2_End + 1;  
+constexpr uint16_t Delay_2                                       = Stance::Delay_1_Start + 1;
+constexpr uint16_t Delay_3                                       = Stance::Delay_2 + 1;
+constexpr uint16_t Delay_4                                       = Stance::Delay_3 + 1;
+constexpr uint16_t Delay_5                                       = Stance::Delay_4 + 1;
+constexpr uint16_t Delay_6                                       = Stance::Delay_5 + 1;
+constexpr uint16_t Delay_7                                       = Stance::Delay_6 + 1;
+constexpr uint16_t Delay_8_End                                   = Stance::Delay_7 + 1;
+
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -924,6 +939,7 @@ namespace Constants {
         SWORD_ATTACK_SEQ
         ATTACK_BLOCK_SEQ
         FALLING_DEAD_BLADE_SEQ
+        DELAY_SEQ
     };
 
     constexpr int8_t Stance_XYOffsets[] PROGMEM = {
@@ -981,6 +997,7 @@ namespace Constants {
         SWORD_ATTACK_OFFSETS
         ATTACK_BLOCK_OFFSETS
         FALLING_DEAD_BLADE_OFFSETS
+        DELAY_OFFSETS
     };
 
 

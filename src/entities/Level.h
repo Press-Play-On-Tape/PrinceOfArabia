@@ -443,7 +443,7 @@ struct Level {
                 if (gamePlay.level == 6) {
 
                     #ifndef SAVE_MEMORY_ENEMY
-                        enemy.init(EnemyType::Mirror, 6 + (0 * Constants::TileWidth), 56 + (0 * Constants::TileHeight), Direction::Right, Stance::Upright, 3, Status::Active);      
+                        enemy.init(EnemyType::Mirror, 10 + (0 * Constants::TileWidth), 56 + (0 * Constants::TileHeight), Direction::Right, Stance::Upright, 3, Status::Active);      
                     #endif
 
                     // Normal starting pos
@@ -451,7 +451,7 @@ struct Level {
                     // this->init(gamePlay, prince, 70, 9, 50, 0); 
 
                     // Mirror
-                    prince.init(98, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    prince.init(110, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
                     this->init(gamePlay, prince, 70, 9, 0, 0); 
 
                 }
@@ -543,6 +543,7 @@ struct Level {
                             break;
 
                         case ItemType::Gate:
+                        case ItemType::Gate_StayClosed:
 
                             if (arduboy.isFrameCount(4)) {
 
