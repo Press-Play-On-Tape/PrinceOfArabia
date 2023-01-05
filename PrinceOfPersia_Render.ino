@@ -167,11 +167,15 @@ void render(bool enemyIsVisible) {
                         int8_t princeX = level.coordToTileIndexX(prince.getPosition().x);
                         int8_t princeY = level.coordToTileIndexY(prince.getPosition().y);
 
-                        if ((princeX == mirrorX || princeX == mirrorX + 1) && princeY == mirrorY && enemy.getStatus() == Status::Dormant_ActionReady) {
+                        #ifndef SAVE_MEMORY_ENEMY
 
-                            showShadow = true;
+                            if ((princeX == mirrorX || princeX == mirrorX + 1) && princeY == mirrorY && enemy.getStatus() == Status::Dormant_ActionReady) {
 
-                        }
+                                showShadow = true;
+
+                            }
+
+                        #endif
 
                         FX::drawBitmap(xLoc, yLoc, Images::Mirrors, showShadow, dbmNormal);
                         
@@ -191,6 +195,7 @@ void render(bool enemyIsVisible) {
                     break;
 
                 case ItemType::FloorButton2:
+                case ItemType::FloorButton4:
                 case ItemType::FloorButton3_DownOnly:
                     FX::drawBitmap(xLoc - item.data.floorButton.frame, yLoc + item.data.floorButton.frame, Images::FloorButtons_0and1, item.data.floorButton.frame + 2, dbmMasked);
                     break;

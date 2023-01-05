@@ -61,8 +61,8 @@ void testScroll(GamePlay &gamePlay, Prince &prince, Level &level) {
 void getStance_Offsets(Direction direction, Point &offset, int16_t stance) {
 
     uint16_t idx = (stance - 1) * 2;
-    offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[idx])) * (direction == Direction::Left ? -1 : 1) * (stance < 0 ? -1 : 1);
-    offset.y = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[idx + 1])) * (stance < 0 ? -1 : 1);
+    offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Stance_XYOffsets[idx])) * (direction == Direction::Left ? -1 : 1) * (stance < 0 ? -1 : 1);
+    offset.y = static_cast<int8_t>(pgm_read_byte(&Constants::Stance_XYOffsets[idx + 1])) * (stance < 0 ? -1 : 1);
 
 }
 
@@ -558,3 +558,26 @@ void fixPosition() {
 }
 
 
+void openGate(Level &level, uint8_t gateIndex, uint8_t closingDelay, uint8_t closingDelayMax) {
+
+    if (gateIndex == 0) return;
+
+      //     gate2.data.gate.closingDelay = gate2.data.gate.defaultClosingDelay;
+                                //     gate2.data.gate.closingDelayMax = gate2.data.gate.defaultClosingDelay;
+
+    Item &gate = level.getItemByIndex(ItemType::Gate, gateIndex);
+
+    if (closingDelay != 255) {
+
+        gate.data.gate.closingDelay = closingDelay;
+        gate.data.gate.closingDelayMax = closingDelayMax;
+
+    }
+    else {
+
+        gate.data.gate.closingDelay = gate.data.gate.defaultClosingDelay;
+        gate.data.gate.closingDelayMax = gate.data.gate.defaultClosingDelay;
+
+    }
+
+}

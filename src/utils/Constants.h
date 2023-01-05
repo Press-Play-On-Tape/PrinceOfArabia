@@ -5,10 +5,10 @@
 #define DEBUG_PRINTLN  Serial.println
 #define SAVE_MEMORY_USB
 #define _SAVE_MEMORY_OTHER
-#define SAVE_MEMORY_SOUND
+#define _SAVE_MEMORY_SOUND
 #define _SAVE_MEMORY_ENEMY
 #define _ALT_B_BUTTON
-#define GIVE_SWORD
+#define _GIVE_SWORD
 
 #define LEVEL_DATA_FROM_FX
 
@@ -926,7 +926,7 @@ namespace Constants {
         FALLING_DEAD_BLADE_SEQ
     };
 
-    constexpr int8_t Prince_XOffset[] PROGMEM = {
+    constexpr int8_t Stance_XYOffsets[] PROGMEM = {
         CROUCH_OFFSETS
         RUN_START_OFFSETS
         RUN_REPEAT_OFFSETS

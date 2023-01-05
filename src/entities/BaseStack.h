@@ -34,7 +34,7 @@ class BaseStack {
 
             #if defined(DEBUG) && defined(DEBUG_PRINCE_STACK)
             Point offset;
-            offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[(item - 1) * 2]));
+            offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Stance_XYOffsets[(item - 1) * 2]));
             DEBUG_PRINT(F("Prince X: "));
             DEBUG_PRINT(this->x % 12);
             DEBUG_PRINT(F(", Item "));
@@ -67,7 +67,7 @@ class BaseStack {
             if (finalStance != Stance::None) {
 
                 #if defined(DEBUG) && defined(DEBUG_PRINCE_STACK)
-                offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[(finalStance - 1) * 2]));
+                offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Stance_XYOffsets[(finalStance - 1) * 2]));
                 xOffset = offset.x;
                 DEBUG_PRINT(F(", Final "));
                 DEBUG_PRINT(finalStance);
@@ -91,7 +91,7 @@ class BaseStack {
                     #if defined(DEBUG) && defined(DEBUG_PRINCE_STACK)
                     DEBUG_PRINT(x); 
                     DEBUG_PRINT(" ");        
-                    offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[(x - 1) * 2]));
+                    offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Stance_XYOffsets[(x - 1) * 2]));
                     xOffset = xOffset + offset.x;
                     #endif
 
@@ -110,7 +110,7 @@ class BaseStack {
                     #if defined(DEBUG) && defined(DEBUG_PRINCE_STACK)
                     DEBUG_PRINT(x); 
                     DEBUG_PRINT(" ");                         
-                    offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[(x - 1) * 2]));
+                    offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Stance_XYOffsets[(x - 1) * 2]));
                     xOffset = xOffset + offset.x;
                     #endif
 

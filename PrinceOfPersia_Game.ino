@@ -11,7 +11,7 @@
 
 void game_Init() {
 
-    gamePlay.init(arduboy, 5);
+    gamePlay.init(arduboy, 1);
 
     #ifndef SAVE_MEMORY_ENEMY
         level.init_PositionChars(gamePlay, prince, enemy, true);
@@ -1590,29 +1590,50 @@ void game() {
                             int16_t x = prince.getPosition().x / Constants::TileWidth;
                             int16_t y = prince.getPosition().y / Constants::TileHeight;
 
-                            if (x == 104 && y == 0 && enemy.getStatus() == Status::Dormant_ActionReady) {
-
-                                enemy.setStatus(Status::Active);
-                                enemy.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_8_End, Stance::Hide_Mirror, false);
-                                enemy.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_8_End, false);
-                                enemy.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_8_End, false);
-                                enemy.pushSequence(Stance::Run_Start_1_Start, Stance::Run_Start_6_End, false);
+                            #ifndef SAVE_MEMORY_ENEMY
                                 
-                                Item &exitDoor = level.getItem(Constants::Item_ExitDoor);
-                                
-                                if (exitDoor.data.exitDoor.direction != Direction::Up) {
+                                if (x == 104 && y == 0 && enemy.getStatus() == Status::Dormant_ActionReady) {
 
-                                    exitDoor.data.exitDoor.direction = Direction::Up;
+                                    enemy.setStatus(Status::Active);
+                                    enemy.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_8_End, Stance::Hide_Mirror, false);
+                                    enemy.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_8_End, false);
+                                    enemy.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_8_End, false);
+                                    enemy.pushSequence(Stance::Run_Start_1_Start, Stance::Run_Start_6_End, false);
+                                    
+                                    Item &exitDoor = level.getItem(Constants::Item_ExitDoor);
+                                    
+                                    if (exitDoor.data.exitDoor.direction != Direction::Up) {
+
+                                        exitDoor.data.exitDoor.direction = Direction::Up;
+
+                                    }
 
                                 }
 
-                            }
+                            #endif
 
                         }
                     }
                     break;
 
-                
+                case Stance::Falling_Dead_2:
+                    {
+                        if (gamePlay.level == 6) {
+
+                            int16_t x = prince.getPosition().x / Constants::TileWidth;
+                            int16_t y = prince.getPosition().y / Constants::TileHeight;
+
+                            if (x == 27 && y == 7) {
+
+                                openGate(level, 3, 0, 0);
+
+                            }
+
+                        }
+
+                    }
+                    break;
+
 
             }
 
@@ -1668,41 +1689,47 @@ void game() {
 
                         case ItemType::FloorButton1:
                             {
-                                Item &gate1 = level.getItemByIndex(ItemType::Gate, item.data.floorButton.gate1);
+                                // Item &gate1 = level.getItemByIndex(ItemType::Gate, item.data.floorButton.gate1);
 
+                                openGate(level, item.data.floorButton.gate1, 255, 255);
+                                openGate(level, item.data.floorButton.gate2, 255, 255);
                                 item.data.floorButton.frame = 1;
                                 item.data.floorButton.timeToFall = Constants::FallingTileSteppedOn;
-                                gate1.data.gate.closingDelay = gate1.data.gate.defaultClosingDelay;
-                                gate1.data.gate.closingDelayMax = gate1.data.gate.defaultClosingDelay;
+                                // gate1.data.gate.closingDelay = gate1.data.gate.defaultClosingDelay;
+                                // gate1.data.gate.closingDelayMax = gate1.data.gate.defaultClosingDelay;
 
-                                if (item.data.floorButton.gate2 != 0) {
+                                // if (item.data.floorButton.gate2 != 0) {
 
-                                    Item &gate2 = level.getItemByIndex(ItemType::Gate, item.data.floorButton.gate2);
-                                    gate2.data.gate.closingDelay = gate2.data.gate.defaultClosingDelay;
-                                    gate2.data.gate.closingDelayMax = gate2.data.gate.defaultClosingDelay;
+                                //     Item &gate2 = level.getItemByIndex(ItemType::Gate, item.data.floorButton.gate2);
+                                //     gate2.data.gate.closingDelay = gate2.data.gate.defaultClosingDelay;
+                                //     gate2.data.gate.closingDelayMax = gate2.data.gate.defaultClosingDelay;
 
-                                }
+                                // }
 
                             }
 
                             break;
 
                         case ItemType::FloorButton2:
+                        case ItemType::FloorButton4:
                             {
-                                Item &gate1 = level.getItemByIndex(ItemType::Gate, item.data.floorButton.gate1);
+                                openGate(level, item.data.floorButton.gate1, (item.itemType ==  ItemType::FloorButton2 ? 10 : 20), 255);
+                                openGate(level, item.data.floorButton.gate2, (item.itemType ==  ItemType::FloorButton2 ? 10 : 20), 255);
+
+                                // Item &gate1 = level.getItemByIndex(ItemType::Gate, item.data.floorButton.gate1);
 
                                 item.data.floorButton.frame = 1;
                                 item.data.floorButton.timeToFall = Constants::Button2FaillingTime;
-                                gate1.data.gate.closingDelay = 10;
-                                gate1.data.gate.closingDelayMax = 255;
+                                // gate1.data.gate.closingDelay = (item.itemType ==  ItemType::FloorButton2 ? 10 : 20);
+                                // gate1.data.gate.closingDelayMax = 255;
 
-                                if (item.data.floorButton.gate2 != 0) {
+                                // if (item.data.floorButton.gate2 != 0) {
                                     
-                                    Item &gate2 = level.getItemByIndex(ItemType::Gate, item.data.floorButton.gate2);
-                                    gate2.data.gate.closingDelay = 10;
-                                    gate2.data.gate.closingDelayMax = 255;
+                                //     Item &gate2 = level.getItemByIndex(ItemType::Gate, item.data.floorButton.gate2);
+                                //     gate2.data.gate.closingDelay = (item.itemType ==  ItemType::FloorButton2 ? 10 : 20);
+                                //     gate2.data.gate.closingDelayMax = 255;
 
-                                }
+                                // }
 
                             }
 
@@ -1807,7 +1834,9 @@ void game() {
                                 if (mirror.data.mirror.status != Status::Active) {
 
                                     mirror.data.mirror.status = Status::Active;
-                                    enemy.setStatus(Status::Dormant_ActionReady);
+                                    #ifndef SAVE_MEMORY_ENEMY
+                                        enemy.setStatus(Status::Dormant_ActionReady);
+                                    #endif
 
                                     Flash &flash = level.getFlash();
                                     flash.frame = 5;

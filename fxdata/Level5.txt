@@ -58,6 +58,7 @@ uint8_t level5_Data[] = {
     255,
 };
 
+
 uint8_t Level5_Items[] = {
     16, 4, 7, 3, 5,         // Exit Gate, let position for open, right position, close button                                                        
     28, 64, 8,              // Entry Gate   
@@ -74,19 +75,20 @@ uint8_t Level5_Items[] = {
     2, 86, 4, 3, 0,         // Floor Button 1
 
     17, 54, 5, 9, 0,        // Gate #4                                    
-    3, 52, 5, 4, 0,         // Floor Button 1
+    11, 52, 5, 4, 0,        // Floor Button 4 (Slow)
 
     17, 60, 4, 0, 64,       // Gate #5                                    
-    3, 50, 3, 5, 0,         // Floor Button 1
+    2, 50, 3, 5, 0,         // Floor Button 1
+    2, 67, 4, 5, 0,         // Floor Button 1
 
     17, 57, 8, 0, 64,       // Gate #6                                    
     3, 55, 8, 6, 0,         // Floor Button 1
 
     17, 50, 7, 0, 64,       // Gate #7                                    
-    3, 53, 7, 7, 0,         // Floor Button 1
+    2, 53, 7, 7, 0,         // Floor Button 1
 
     17, 10, 7, 0, 64,       // Gate #8                                   
-    3, 24, 7, 8, 0,         // Floor Button 1
+    2, 24, 7, 8, 0,         // Floor Button 1
 
     17, 69, 6, 0, 0,        // Gate (Does not open)                                                 
     17, 0, 7, 0, 0,         // Gate (Does not open)

@@ -30,7 +30,8 @@
 #define TILE_FLOOR_LH_END_PATTERN_1 102
 #define TILE_FLOOR_LH_END_PATTERN_2 93
 #define TILE_FLOOR_RH_END 99
-#define TILE_FLOOR_RH_END_GATE 118
+#define TILE_FLOOR_RH_END_GATE_1 118
+#define TILE_FLOOR_RH_END_GATE_2 55
 #define TILE_FLOOR_RH_END_GATE_RUG 50
 #define TILE_FLOOR_GATE_REAR_TRACK_1 114    // Missing top pixels
 #define TILE_FLOOR_GATE_REAR_TRACK_2 49     // Full height
@@ -421,39 +422,10 @@ struct Level {
                 if (gamePlay.level == 5) {
 
                     #ifndef SAVE_MEMORY_ENEMY
-//  // Enemy 1          
-//     20,                         // Enemy starting x tile
-//     6,                          // Enemy starting y tile
-//     68,                         // Enemy starting x pos
-//     56,                         // Enemy starting y pos (25, 56, 87)
-//     1,                          // Enemy starting direction, 1 Left and 2 Right
-//     3,                          // Enemy starting health
-//     // Enemy 2          
-//     40,                         // Enemy starting x tile
-//     6,                          // Enemy starting y tile
-//     50,                         // Enemy starting x pos
-//     56,                         // Enemy starting y pos (25, 56, 87)
-//     2,                          // Enemy starting direction, 1 Left and 2 Right
-//     3,                          // Enemy starting health
-//     // Enemy 3          
-//     50,                         // Enemy starting x tile
-//     6,                          // Enemy starting y tile
-//     98,                         // Enemy starting x pos
-//     25,                         // Enemy starting y pos (25, 56, 87)
-//     2,                          // Enemy starting direction, 1 Left and 2 Right
-//     3,                          // Enemy starting health
-//     // Enemy 4          
-//     70,                         // Enemy starting x tile
-//     6,                          // Enemy starting y tile
-//     62,                         // Enemy starting x pos
-//     56,                         // Enemy starting y pos (25, 56, 87)
-//     1,                          // Enemy starting direction, 1 Left and 2 Right
-//     3,                          // Enemy starting health
-
-                        enemy.init(EnemyType::Guard, 68 + (20 * Constants::TileWidth), 56 + (6 * Constants::TileHeight), Direction::Left, Stance::Upright, 3, Status::Active);          // Sword fight from Left
-                        enemy.init(EnemyType::Guard, 50 + (40 * Constants::TileWidth), 56 + (6 * Constants::TileHeight), Direction::Left, Stance::Upright, 3, Status::Active);          // Sword fight from Left
-                        enemy.init(EnemyType::Guard, 98 + (50 * Constants::TileWidth), 25 + (6 * Constants::TileHeight), Direction::Left, Stance::Upright, 3, Status::Active);          // Sword fight from Left
-                        enemy.init(EnemyType::Guard, 62 + (70 * Constants::TileWidth), 56 + (6 * Constants::TileHeight), Direction::Left, Stance::Upright, 3, Status::Active);          // Sword fight from Left
+                        enemy.init(EnemyType::Guard, 68 + (20 * Constants::TileWidth), 56 + (6 * Constants::TileHeight), Direction::Left, Stance::Upright, 3, Status::Active); 
+                        enemy.init(EnemyType::Guard, 50 + (40 * Constants::TileWidth), 56 + (6 * Constants::TileHeight), Direction::Left, Stance::Upright, 3, Status::Active); 
+                        enemy.init(EnemyType::Guard, 98 + (50 * Constants::TileWidth), 25 + (6 * Constants::TileHeight), Direction::Left, Stance::Upright, 3, Status::Active); 
+                        enemy.init(EnemyType::Guard, 62 + (70 * Constants::TileWidth), 56 + (6 * Constants::TileHeight), Direction::Left, Stance::Upright, 3, Status::Active); 
                     #endif
 
                     // Normal starting pos
@@ -463,6 +435,24 @@ struct Level {
                     
                     prince.init(10, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);     
                     this->init(gamePlay, prince, 90, 15, 10, 6); 
+
+                }
+
+                // Level 6
+
+                if (gamePlay.level == 6) {
+
+                    #ifndef SAVE_MEMORY_ENEMY
+                        enemy.init(EnemyType::Mirror, 6 + (0 * Constants::TileWidth), 56 + (0 * Constants::TileHeight), Direction::Right, Stance::Upright, 3, Status::Active);      
+                    #endif
+
+                    // Normal starting pos
+                    // prince.init(32, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    // this->init(gamePlay, prince, 70, 9, 50, 0); 
+
+                    // Mirror
+                    prince.init(98, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    this->init(gamePlay, prince, 70, 9, 0, 0); 
 
                 }
 
@@ -698,6 +688,7 @@ struct Level {
                         case ItemType::FloorButton3_UpDown:
                         case ItemType::FloorButton3_UpOnly:
                         case ItemType::FloorButton3_DownOnly:
+                        case ItemType::FloorButton4:
 
                             if (arduboy.isFrameCount(4)) {
 
@@ -1030,10 +1021,18 @@ struct Level {
                         break;
 
                     case ItemType::Gate:
-                        item.data.gate.position = FX::readPendingUInt8();
-                        item.data.gate.closingDelay = FX::readPendingUInt8();
-                        item.data.gate.defaultClosingDelay = item.data.gate.closingDelay;
-                        item.data.gate.closingDelayMax = 255;
+                        {
+                            uint8_t position = FX::readPendingUInt8();
+                            uint8_t closingDelay = FX::readPendingUInt8();
+
+                            if (!(gamePlay.level == 6 && itemIdx == 7 && item.data.gate.position == 9)) {
+                                item.data.gate.position = position;
+                                item.data.gate.closingDelay = closingDelay;
+                                item.data.gate.defaultClosingDelay = item.data.gate.closingDelay;
+                                item.data.gate.closingDelayMax = 255;
+                            }
+
+                        }
                         break;
 
                     // case ItemType::Gate_StayOpen:
@@ -1051,6 +1050,7 @@ struct Level {
 
                     case ItemType::FloorButton1:
                     case ItemType::FloorButton2:
+                    case ItemType::FloorButton4:
                     case ItemType::FloorButton3_UpDown:
                     case ItemType::FloorButton3_UpOnly:
                     case ItemType::FloorButton3_DownOnly:
@@ -2813,7 +2813,8 @@ struct Level {
                                 case TILE_FLOOR_RH_END_3:
                                 case TILE_FLOOR_RH_END_4:
                                 case TILE_FLOOR_RH_END_5:
-                                case TILE_FLOOR_RH_END_GATE:
+                                case TILE_FLOOR_RH_END_GATE_1:
+                                case TILE_FLOOR_RH_END_GATE_2:
                                 case TILE_FLOOR_RH_END_GATE_RUG:
                                 case TILE_COLUMN_LH_WALL:
                                 case TILE_FLOOR_RH_PILLAR_END:
@@ -2859,7 +2860,8 @@ struct Level {
                                 case TILE_FLOOR_RH_END_3:
                                 case TILE_FLOOR_RH_END_4:
                                 case TILE_FLOOR_RH_END_5:
-                                case TILE_FLOOR_RH_END_GATE:
+                                case TILE_FLOOR_RH_END_GATE_1:
+                                case TILE_FLOOR_RH_END_GATE_2:
                                 case TILE_FLOOR_RH_END_GATE_RUG:
                                 case TILE_FLOOR_RH_PILLAR_END:
                                 // case TILE_COLUMN_LH_WALL:                << SJH removed 29/12
@@ -3048,7 +3050,8 @@ struct Level {
                                 case TILE_FLOOR_RH_END_3:
                                 case TILE_FLOOR_RH_END_4:
                                 case TILE_FLOOR_RH_END_5:
-                                case TILE_FLOOR_RH_END_GATE:
+                                case TILE_FLOOR_RH_END_GATE_1:
+                                case TILE_FLOOR_RH_END_GATE_2:
                                 case TILE_FLOOR_RH_END_GATE_RUG:
                                 case TILE_COLUMN_LH_WALL:
                                 case TILE_FLOOR_RH_PILLAR_END:
@@ -3442,7 +3445,8 @@ struct Level {
                                 case TILE_FLOOR_RH_END_3:
                                 case TILE_FLOOR_RH_END_4:
                                 case TILE_FLOOR_RH_END_5:
-                                case TILE_FLOOR_RH_END_GATE:
+                                case TILE_FLOOR_RH_END_GATE_1:
+                                case TILE_FLOOR_RH_END_GATE_2:
                                 case TILE_FLOOR_RH_END_GATE_RUG:
                                 case TILE_FLOOR_RH_PILLAR_END:
                                     return CanClimbDownResult::StepThenClimbDown;
@@ -3464,7 +3468,8 @@ struct Level {
                                 case TILE_FLOOR_RH_END_3:
                                 case TILE_FLOOR_RH_END_4:
                                 case TILE_FLOOR_RH_END_5:
-                                case TILE_FLOOR_RH_END_GATE:
+                                case TILE_FLOOR_RH_END_GATE_1:
+                                case TILE_FLOOR_RH_END_GATE_2:
                                 case TILE_FLOOR_RH_END_GATE_RUG:
                                 case TILE_FLOOR_RH_PILLAR_END:
                                     return CanClimbDownResult::ClimbDown;

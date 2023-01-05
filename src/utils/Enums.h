@@ -13,7 +13,8 @@ enum class ItemType : uint8_t {
     /* 08 */ FloorButton3_UpOnly,   // << needed?      
     /* 09 */ FloorButton3_DownOnly,   // << needed?      
     /* 10 */ Mirror_Button,
-    /* __ */ InteractiveItemType_End = Mirror_Button,
+    /* 11 */ FloorButton4,
+    /* __ */ InteractiveItemType_End = FloorButton4,
     /* 15 */ Skeleton = 15,
     /* 16 */ ExitDoor_SelfOpen,
     /* 17 */ Gate,               
