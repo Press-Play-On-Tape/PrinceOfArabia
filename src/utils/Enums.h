@@ -174,3 +174,10 @@ enum class Status : uint8_t {
     Dormant,
 };
 
+enum class EnemyType : uint8_t {
+    Guard,
+    Skeleton,
+    Mirror,
+    None = 255
+};
+

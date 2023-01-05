@@ -254,17 +254,25 @@ void render(bool enemyIsVisible) {
 
                 int16_t xCoord = enemy.getXImage() - (level.getXLocation() * Constants::TileWidth);
                 int16_t yCoord = enemy.getYImage() - (level.getYLocation() * Constants::TileHeight)- level.getYOffset() + Constants::ScreenTopOffset;
+                uint24_t imagePos;
 
-                if (enemy.getDirection() == Direction::Left) {
-                    
-                    FX::drawBitmap(xCoord, yCoord, Images::Prince_Left, imageIndex - 1, dbmMasked);
+                switch (enemy.getEnemyType()) {
+
+                    case EnemyType::Guard:
+                    case EnemyType::Skeleton:
+                        imagePos = (enemy.getDirection() == Direction::Left ? Images::Prince_Left : Images::Prince_Right);
+                        break;
+
+                    case EnemyType::Mirror:
+                        imagePos = Images::Mirror_Right;
+                        break;
+
+                    default:
+                        break;
 
                 }
-                else {
                     
-                    FX::drawBitmap(xCoord, yCoord, Images::Prince_Right, imageIndex - 1, dbmMasked);
-
-                }
+                FX::drawBitmap(xCoord, yCoord, Images::Prince_Left, imageIndex - 1, dbmMasked);
                 
             }
 

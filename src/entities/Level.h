@@ -196,10 +196,11 @@ struct Level {
                 FX::seekData(FX::readIndexedUInt24(Levels::level_Data, gamePlay.level) + 9);
 
                 {
-                    uint8_t xTile = FX::readPendingUInt8();
+                    EnemyType enemyType = static_cast<EnemyType>(FX::readPendingUInt8());
 
-                    while (xTile != 255) {
+                    while (enemyType != EnemyType::None) {
 
+                        uint8_t xTile = FX::readPendingUInt8();
                         uint8_t yTile = FX::readPendingUInt8();
                         uint8_t xPixel = FX::readPendingUInt8();
                         uint8_t yPixel = FX::readPendingUInt8();
@@ -209,10 +210,10 @@ struct Level {
                         Status status = static_cast<Status>(FX::readPendingUInt8());
 
                         #ifndef SAVE_MEMORY_ENEMY
-                            enemy.init((xTile * Constants::TileWidth) + xPixel, (yTile * Constants::TileHeight) + yPixel, direction, Stance::Upright, health, status);
+                            enemy.init(enemyType, (xTile * Constants::TileWidth) + xPixel, (yTile * Constants::TileHeight) + yPixel, direction, Stance::Upright, health, status);
                         #endif
 
-                        xTile = FX::readPendingUInt8();
+                        enemyType = static_cast<EnemyType>(FX::readPendingUInt8());
 
                     }
                     
@@ -227,8 +228,8 @@ struct Level {
                 if (gamePlay.level == 1) {
 
                     #ifndef SAVE_MEMORY_ENEMY
-                        enemy.init(104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3, Status::Active);          // Sword fight from Left
-                        enemy.init(80 + (40 * Constants::TileWidth), 25 + (0 * Constants::TileHeight), Direction::Left, Stance::Upright, 3, Status::Active);          // Sword fight from Left
+                        enemy.init(EnemyType::Guard, 104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3, Status::Active);          // Sword fight from Left
+                        enemy.init(EnemyType::Guard, 80 + (40 * Constants::TileWidth), 25 + (0 * Constants::TileHeight), Direction::Left, Stance::Upright, 3, Status::Active);          // Sword fight from Left
                     #endif
 
                     prince.init(38-28+12+4, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Normal starting pos
@@ -316,8 +317,8 @@ struct Level {
                 if (gamePlay.level == 2) {
 
                     #ifndef SAVE_MEMORY_ENEMY
-                        // enemy.init(104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3, Status::Active);          // Sword fight from Left
-                        // enemy.init(80 + (40 * Constants::TileWidth), 25 + (0 * Constants::TileHeight), Direction::Left, Stance::Upright, 3, Status::Active);          // Sword fight from Left
+                        // enemy.init(EnemyType::Guard, 104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3, Status::Active);          // Sword fight from Left
+                        // enemy.init(EnemyType::Guard, 80 + (40 * Constants::TileWidth), 25 + (0 * Constants::TileHeight), Direction::Left, Stance::Upright, 3, Status::Active);          // Sword fight from Left
                     #endif
 
                     // Normal starting pos
@@ -359,7 +360,7 @@ struct Level {
                 if (gamePlay.level == 3) {
 
                     #ifndef SAVE_MEMORY_ENEMY
-                        enemy.init(70 + (10 * Constants::TileWidth), 56 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3, Status::Dormant);          // Sword fight from Left
+                        enemy.init(EnemyType::Guard, 70 + (10 * Constants::TileWidth), 56 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3, Status::Dormant);          // Sword fight from Left
                     #endif
 
                     // Normal starting pos
@@ -397,8 +398,8 @@ struct Level {
                 if (gamePlay.level == 4) {
 
                     #ifndef SAVE_MEMORY_ENEMY
-                        // enemy.init(104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3, Status::Active);          // Sword fight from Left
-                        // enemy.init(80 + (40 * Constants::TileWidth), 25 + (0 * Constants::TileHeight), Direction::Left, Stance::Upright, 3, Status::Active);          // Sword fight from Left
+                        enemy.init(EnemyType::Mirror, 52 + (100 * Constants::TileWidth), 25 + (0 * Constants::TileHeight), Direction::Right, Stance::Upright, 3, Status::Active);          // Sword fight from Left
+                        // enemy.init(EnemyType::Guard, 80 + (40 * Constants::TileWidth), 25 + (0 * Constants::TileHeight), Direction::Left, Stance::Upright, 3, Status::Active);          // Sword fight from Left
                     #endif
 
                     // Normal starting pos
@@ -411,7 +412,7 @@ struct Level {
 
                     // Enable mirror
                     prince.init(10 + (6*12), 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);     
-                    this->init(gamePlay, prince, 120, 15, 100, 0); 
+                    this->init(gamePlay, prince, 120, 9, 100, 0); 
 
                 }
 
@@ -449,10 +450,10 @@ struct Level {
 //     1,                          // Enemy starting direction, 1 Left and 2 Right
 //     3,                          // Enemy starting health
 
-                        enemy.init(68 + (20 * Constants::TileWidth), 56 + (6 * Constants::TileHeight), Direction::Left, Stance::Upright, 3, Status::Active);          // Sword fight from Left
-                        enemy.init(50 + (40 * Constants::TileWidth), 56 + (6 * Constants::TileHeight), Direction::Left, Stance::Upright, 3, Status::Active);          // Sword fight from Left
-                        enemy.init(98 + (50 * Constants::TileWidth), 25 + (6 * Constants::TileHeight), Direction::Left, Stance::Upright, 3, Status::Active);          // Sword fight from Left
-                        enemy.init(62 + (70 * Constants::TileWidth), 56 + (6 * Constants::TileHeight), Direction::Left, Stance::Upright, 3, Status::Active);          // Sword fight from Left
+                        enemy.init(EnemyType::Guard, 68 + (20 * Constants::TileWidth), 56 + (6 * Constants::TileHeight), Direction::Left, Stance::Upright, 3, Status::Active);          // Sword fight from Left
+                        enemy.init(EnemyType::Guard, 50 + (40 * Constants::TileWidth), 56 + (6 * Constants::TileHeight), Direction::Left, Stance::Upright, 3, Status::Active);          // Sword fight from Left
+                        enemy.init(EnemyType::Guard, 98 + (50 * Constants::TileWidth), 25 + (6 * Constants::TileHeight), Direction::Left, Stance::Upright, 3, Status::Active);          // Sword fight from Left
+                        enemy.init(EnemyType::Guard, 62 + (70 * Constants::TileWidth), 56 + (6 * Constants::TileHeight), Direction::Left, Stance::Upright, 3, Status::Active);          // Sword fight from Left
                     #endif
 
                     // Normal starting pos

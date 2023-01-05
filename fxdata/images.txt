@@ -82,6 +82,10 @@ namespace Images {
     image_t Prince_Left = "../images/prince/left/Prince_Left_36x36.png"
     image_t Prince_Right = "../images/prince/right/Prince_Right_36x36.png"
 
+    // Mirror images
+
+    image_t Mirror_Right = "../images/mirror/right/Mirror_Right_36x36.png"
+
 }
 
 namespace_end

@@ -20,15 +20,15 @@ class Enemy : public BaseStack {
 
     public:
 
-        uint8_t getEnemyCount()                     { return this->count; }
-        uint8_t getMoveCount()                      { return this->moveCount; }
-        uint8_t getActiveEnemy()                    { return this->activeEnemy; }
-        Direction getMoveDirection()                { return this->moveDirection; }
+        uint8_t getEnemyCount()                             { return this->count; }
+        uint8_t getMoveCount()                              { return this->moveCount; }
+        uint8_t getActiveEnemy()                            { return this->activeEnemy; }
+        Direction getMoveDirection()                        { return this->moveDirection; }
 
-        void setEnemyCount(uint8_t val)             { this->count = val; }
-        void setMoveCount(uint8_t val)              { this->moveCount = val; }
-        void setActiveEnemy(uint8_t val)            { this->activeEnemy = val; }
-        void setMoveDirection(Direction val)        { this->moveDirection = val; }
+        void setEnemyCount(uint8_t val)                     { this->count = val; }
+        void setMoveCount(uint8_t val)                      { this->moveCount = val; }
+        void setActiveEnemy(uint8_t val)                    { this->activeEnemy = val; }
+        void setMoveDirection(Direction val)                { this->moveDirection = val; }
 
         void decMoveCount() {
 
@@ -42,8 +42,9 @@ class Enemy : public BaseStack {
 
         }
 
-        void init(int16_t x, int16_t y, Direction direction, uint16_t stance, uint8_t health, Status status) {
+        void init(EnemyType enemyType, int16_t x, int16_t y, Direction direction, uint16_t stance, uint8_t health, Status status) {
 
+            this->base[this->count].setEnemyType(enemyType);
             this->base[this->count].setX(x);
             this->base[this->count].setY(y);
             this->base[this->count].setDirection(direction);
@@ -77,6 +78,7 @@ class Enemy : public BaseStack {
         int16_t getYImage()                         { return this->base[this->activeEnemy].getYImage(); }
         uint8_t getHealthMax()                      { return this->base[this->activeEnemy].getHealthMax(); }
         Status getStatus()                          { return this->base[this->activeEnemy].getStatus(); }
+        EnemyType getEnemyType()                    { return this->base[this->activeEnemy].getEnemyType(); }
 
         Direction getDirection()                    { return this->base[this->activeEnemy].getDirection(); }
 
@@ -88,6 +90,7 @@ class Enemy : public BaseStack {
         void setDirection(Direction val)            { this->base[this->activeEnemy].setDirection(val); }
         void setHealth(uint8_t val)                 { this->base[this->activeEnemy].setHealth(val); }
         void setHealthMax(uint8_t val)              { this->base[this->activeEnemy].setHealthMax(val); }
+        void setEnemyType(EnemyType val)            { this->base[this->activeEnemy].setEnemyType(val); }
 
         uint8_t decHealth(uint8_t val)              { return this->base[this->activeEnemy].decHealth(val); }
         void incHealth(int8_t val)                  { this->base[this->activeEnemy].incHealth(val); } 
