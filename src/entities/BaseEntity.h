@@ -19,7 +19,8 @@ class BaseEntity {
 
         uint8_t health = 0;
         uint8_t healthMax = 0;
-        Status status = Status::Active;             // Active or Dormant (for skeletons), can be active but dead (health = 0)
+        Status status;             // Active or Dormant (for skeletons), can be active but dead (health = 0)
+        EnemyType enemyType;
 
         Point location;
 
@@ -35,6 +36,7 @@ class BaseEntity {
         uint8_t getHealth()                         { return this->health; }
         uint8_t getHealthMax()                      { return this->healthMax; }
         Status getStatus()                          { return this->status; }
+        EnemyType getEnemyType()                    { return this->enemyType; }
 
         Direction getDirection()                    { return this->direction; }
 
@@ -46,7 +48,8 @@ class BaseEntity {
         void setDirection(Direction val)            { this->direction = val; }
         void setHealth(uint8_t val)                 { this->health = val; }
         void setHealthMax(uint8_t val)              { this->healthMax = val; }
-        void setStatus(Status val)                 { this->status = val; }
+        void setStatus(Status val)                  { this->status = val; }
+        void setEnemyType(EnemyType val)            { this->enemyType = val; }
 
         uint8_t decHealth(uint8_t val)              { this->health >= val ? this->health = this->health - val: 0; return this->health;}
         void incHealth(int8_t val)                  { this->health = this->health + val > this->healthMax ? this->healthMax : this->health + val; } 
@@ -136,6 +139,21 @@ class BaseEntity {
             imageDetails.toe = static_cast<int8_t>(FX::readPendingUInt8() * direction);
             imageDetails.heel = static_cast<int8_t>(FX::readPendingUInt8() * direction);
             FX::readEnd();
+
+            #ifdef DEBUG_IMAGE_DETAILS
+            DEBUG_PRINT("ImageIndex: ");
+            DEBUG_PRINT(imageIndex);
+            DEBUG_PRINT(", startPos: ");
+            DEBUG_PRINT((uint32_t)startPos);
+            DEBUG_PRINT(", direction: ");
+            DEBUG_PRINT((uint8_t)direction);
+            DEBUG_PRINT(", reach: ");
+            DEBUG_PRINT(imageDetails.reach);
+            DEBUG_PRINT(", toe: ");
+            DEBUG_PRINT(imageDetails.toe);
+            DEBUG_PRINT(", heel: ");
+            DEBUG_PRINTLN(imageDetails.heel);
+            #endif
 
             if (imageDetails.toe == -Constants::InAir)              imageDetails.toe = Constants::InAir;
             if (imageDetails.toe == -Constants::InAir_DoNotFall)    imageDetails.toe = Constants::InAir_DoNotFall;

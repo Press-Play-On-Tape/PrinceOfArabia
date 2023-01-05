@@ -61,8 +61,8 @@ void testScroll(GamePlay &gamePlay, Prince &prince, Level &level) {
 void getStance_Offsets(Direction direction, Point &offset, int16_t stance) {
 
     uint16_t idx = (stance - 1) * 2;
-    offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[idx])) * (direction == Direction::Left ? -1 : 1) * (stance < 0 ? -1 : 1);
-    offset.y = static_cast<int8_t>(pgm_read_byte(&Constants::Prince_XOffset[idx + 1])) * (stance < 0 ? -1 : 1);
+    offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Stance_XYOffsets[idx])) * (direction == Direction::Left ? -1 : 1) * (stance < 0 ? -1 : 1);
+    offset.y = static_cast<int8_t>(pgm_read_byte(&Constants::Stance_XYOffsets[idx + 1])) * (stance < 0 ? -1 : 1);
 
 }
 
@@ -357,14 +357,27 @@ bool leaveLevel(Prince &prince, Level &level) {
 
 }
 
-void pushDead(Prince &entity, Level &level, GamePlay &gamePlay, bool clear) {
+void pushDead(Prince &entity, Level &level, GamePlay &gamePlay, bool clear, DeathType deathType) {
 
     #ifndef SAVE_MEMORY_SOUND
         sound.tonesFromFX(Sounds::Dead);
     #endif
 
     if (clear) prince.clear();
-    entity.pushSequence(Stance::Falling_Dead_1_Start, Stance::Falling_Dead_3_End, true);
+
+    switch (deathType) {
+
+        case DeathType::Falling:
+            entity.pushSequence(Stance::Falling_Dead_1_Start, Stance::Falling_Dead_3_End, true);
+            break;
+
+        case DeathType::Blade:
+        case DeathType::Spikes:
+        case DeathType::SwordFight:
+            entity.pushSequence(Stance::Falling_Dead_Blade_1_Start, Stance::Falling_Dead_Blade_2_End, true);
+            break;
+    }
+
     entity.setHealth(0);
 
     if (gamePlay.isGameOver()) {
@@ -467,13 +480,25 @@ void playGrab() {
 
             enemy.setActiveEnemy(i);
 
-            if (enemy.getStatus() == Status::Active) {
+            //if (enemy.getStatus() == Status::Active) {
 
-                uint8_t tileXIdx = level.coordToTileIndexX(enemy.getPosition().x) + prince.getDirectionOffset(1);
+                uint8_t tileXIdx = level.coordToTileIndexX(enemy.getPosition().x);
                 uint8_t tileYIdx = level.coordToTileIndexY(enemy.getPosition().y);
 
-                if (tileXIdx >= level.getXLocation() && tileXIdx < level.getXLocation() + Constants::ScreenWidthInTiles && tileYIdx >= level.getYLocation() && tileYIdx < level.getYLocation() + Constants::ScreenHeightInTiles) {
+// Serial.print("Enemy: ");
+// Serial.print(i);
+// Serial.print("tile: ");
+// Serial.print(tileXIdx);
+// Serial.print(",");
+// Serial.print(tileYIdx);
+// Serial.print(", map: ");
+// Serial.print(level.getXLocation());
+// Serial.print(",");
+// Serial.print(level.getYLocation());
 
+                if (tileXIdx >= level.getXLocation() && tileXIdx < level.getXLocation() + Constants::ScreenWidthInTiles && tileYIdx >= level.getYLocation() && tileYIdx < level.getYLocation() + Constants::ScreenHeightInTiles) {
+// Serial.print("Enemy found ");
+// Serial.print(i);
                     enemyIsVisible = true;
 
                 }
@@ -483,10 +508,10 @@ void playGrab() {
                     enemy.decMoveCount();
 
                 }
-
+// Serial.println("");
                 if (enemyIsVisible) break;
 
-            }
+            //}
             
         }
 
@@ -533,3 +558,26 @@ void fixPosition() {
 }
 
 
+void openGate(Level &level, uint8_t gateIndex, uint8_t closingDelay, uint8_t closingDelayMax) {
+
+    if (gateIndex == 0) return;
+
+      //     gate2.data.gate.closingDelay = gate2.data.gate.defaultClosingDelay;
+                                //     gate2.data.gate.closingDelayMax = gate2.data.gate.defaultClosingDelay;
+
+    Item &gate = level.getItemByIndex(ItemType::Gate, gateIndex);
+
+    if (closingDelay != 255) {
+
+        gate.data.gate.closingDelay = closingDelay;
+        gate.data.gate.closingDelayMax = closingDelayMax;
+
+    }
+    else {
+
+        gate.data.gate.closingDelay = gate.data.gate.defaultClosingDelay;
+        gate.data.gate.closingDelayMax = gate.data.gate.defaultClosingDelay;
+
+    }
+
+}

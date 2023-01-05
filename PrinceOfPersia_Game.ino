@@ -11,7 +11,7 @@
 
 void game_Init() {
 
-    gamePlay.init(arduboy, 4);
+    gamePlay.init(arduboy, 1);
 
     #ifndef SAVE_MEMORY_ENEMY
         level.init_PositionChars(gamePlay, prince, enemy, true);
@@ -119,7 +119,7 @@ void game() {
 
             default:
                 if (prince.decHealth(1) == 0) {
-                    pushDead(prince, level, gamePlay, true);
+                    pushDead(prince, level, gamePlay, true, DeathType::Falling);
                 }
                 break;
 
@@ -168,7 +168,7 @@ void game() {
         //
         // ---------------------------------------------------------------------------------------------------------------------------------------
 
-        if (gamePlay.gameState == GameState::Game && enemy.isEmpty() && enemy.getStatus() == Status::Active) {
+        if (gamePlay.gameState == GameState::Game && enemy.isEmpty() && enemy.getStatus() == Status::Active && enemy.getEnemyType() != EnemyType::Mirror) {
 
             BaseEntity enemyBase = enemy.getActiveBase();
 
@@ -186,6 +186,7 @@ void game() {
                         switch (prince.getStance()) {
 
                             case Stance::Falling_Dead_1_Start ... Stance::Falling_Dead_3_End:
+                            case Stance::Falling_Dead_Blade_1_Start ... Stance::Falling_Dead_Blade_2_End:
                                 break;
 
                             default:
@@ -261,7 +262,7 @@ void game() {
 
                     // Has the enemy gone past the prince?  If so, turn around ..
 
-                    if (xDelta > 0 && enemy.getDirection() == Direction::Left){
+                    if (xDelta > 0 && enemy.getDirection() == Direction::Left) {
 
                         enemy.setDirection(Direction::Right);
                         moveBackwardsWithSword(enemyBase, enemy);
@@ -274,7 +275,7 @@ void game() {
                         }
                         else if (!prince.isSwordDrawn() && xDelta <= 24) {
 
-                            pushDead(prince, level, gamePlay, true);
+                            pushDead(prince, level, gamePlay, true, DeathType::SwordFight);
 
                         }
 
@@ -295,7 +296,7 @@ void game() {
                         }
                         else if (!prince.isSwordDrawn() && xDelta >= -24) {
 
-                            pushDead(prince, level, gamePlay, true);
+                            pushDead(prince, level, gamePlay, true, DeathType::SwordFight);
                             
                         }
 
@@ -312,6 +313,7 @@ void game() {
                         // The prince is dying, put away the sword ..
 
                         case Stance::Falling_Dead_1_Start ... Stance::Falling_Dead_3_End:
+                        case Stance::Falling_Dead_Blade_1_Start ... Stance::Falling_Dead_Blade_2_End:
 
                             enemy.pushSequence(Stance::Pickup_Sword_7_PutAway, Stance::Pickup_Sword_16_End, Stance::Upright, false);
                             break;
@@ -368,6 +370,7 @@ void game() {
                                             // The prince is dying, do nothing ..
 
                                             case Stance::Falling_Dead_1_Start ... Stance::Falling_Dead_3_End: 
+                                            case Stance::Falling_Dead_Blade_1_Start ... Stance::Falling_Dead_Blade_2_End:
                                                 break;
 
 
@@ -1345,14 +1348,14 @@ void game() {
                                     prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
 
                                     if (prince.decHealth(1) == 0) {
-                                        pushDead(prince, level, gamePlay, true);
+                                        pushDead(prince, level, gamePlay, true, DeathType::Falling);
                                     }
 
                                     break;
 
                                 default:    // Dead!
 
-                                    pushDead(prince, level, gamePlay, true);
+                                    pushDead(prince, level, gamePlay, true, DeathType::Falling);
                                     break;
 
                             }
@@ -1360,7 +1363,7 @@ void game() {
                         }
                         else {
 
-                            pushDead(prince, level, gamePlay, true);
+                            pushDead(prince, level, gamePlay, true, DeathType::Spikes);
 
                         }
                         
@@ -1450,14 +1453,15 @@ void game() {
                                     prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
 
                                     if (prince.decHealth(1) == 0) {
-                                        pushDead(prince, level, gamePlay, true);
+
+                                        pushDead(prince, level, gamePlay, true, DeathType::Falling);
                                     }
 
                                     break;
 
                                 default:    // Dead!
 
-                                    pushDead(prince, level, gamePlay, true);
+                                    pushDead(prince, level, gamePlay, true, DeathType::Falling);
                                     break;
 
                             }
@@ -1465,7 +1469,7 @@ void game() {
                         }
                         else {
 
-                            pushDead(prince, level, gamePlay, true);
+                            pushDead(prince, level, gamePlay, true, DeathType::Spikes);
 
                         }
 
@@ -1522,7 +1526,7 @@ void game() {
                     prince.incHealth(-1);
 
                     if (prince.getHealth() == 0) {
-                        pushDead(prince, level, gamePlay, true);
+                        pushDead(prince, level, gamePlay, true, DeathType::Falling);
                     }
                     break;
 
@@ -1571,6 +1575,65 @@ void game() {
                     }
 
                     break;
+
+                case Stance::Run_Start_1_Start ...Stance::Run_Start_6_End:
+                case Stance::Run_Repeat_1_Start ... Stance::Run_Repeat_8_End:
+                case Stance::Standing_Jump_1_Start ... Stance::Standing_Jump_11_Land_Point:
+                case Stance::Running_Jump_1_Start ... Stance::Running_Jump_11_End:
+                case Stance::Running_Jump_Short_1_Start ... Stance::Running_Jump_Short_7_End:
+                case Stance::Running_Jump_3_SameLvl_1_Start ... Stance::Running_Jump_3_SameLvl_8_End:
+                case Stance::Running_Jump_3_SameLvl_Short_1_Start ... Stance::Running_Jump_3_SameLvl_Short_8_End:
+                case Stance::Running_Jump_3_DropLvl_1_Start ... Stance::Running_Jump_3_DropLvl_14_End:
+                    {
+                        if (gamePlay.level == 4 && prince.getDirection() == Direction::Left) {
+
+                            int16_t x = prince.getPosition().x / Constants::TileWidth;
+                            int16_t y = prince.getPosition().y / Constants::TileHeight;
+
+                            #ifndef SAVE_MEMORY_ENEMY
+                                
+                                if (x == 104 && y == 0 && enemy.getStatus() == Status::Dormant_ActionReady) {
+
+                                    enemy.setStatus(Status::Active);
+                                    enemy.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_8_End, Stance::Hide_Mirror, false);
+                                    enemy.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_8_End, false);
+                                    enemy.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_8_End, false);
+                                    enemy.pushSequence(Stance::Run_Start_1_Start, Stance::Run_Start_6_End, false);
+                                    
+                                    Item &exitDoor = level.getItem(Constants::Item_ExitDoor);
+                                    
+                                    if (exitDoor.data.exitDoor.direction != Direction::Up) {
+
+                                        exitDoor.data.exitDoor.direction = Direction::Up;
+
+                                    }
+
+                                }
+
+                            #endif
+
+                        }
+                    }
+                    break;
+
+                case Stance::Falling_Dead_2:
+                    {
+                        if (gamePlay.level == 6) {
+
+                            int16_t x = prince.getPosition().x / Constants::TileWidth;
+                            int16_t y = prince.getPosition().y / Constants::TileHeight;
+
+                            if (x == 27 && y == 7) {
+
+                                openGate(level, 3, 0, 0);
+
+                            }
+
+                        }
+
+                    }
+                    break;
+
 
             }
 
@@ -1626,41 +1689,47 @@ void game() {
 
                         case ItemType::FloorButton1:
                             {
-                                Item &gate1 = level.getItemByIndex(ItemType::Gate, item.data.floorButton.gate1);
+                                // Item &gate1 = level.getItemByIndex(ItemType::Gate, item.data.floorButton.gate1);
 
+                                openGate(level, item.data.floorButton.gate1, 255, 255);
+                                openGate(level, item.data.floorButton.gate2, 255, 255);
                                 item.data.floorButton.frame = 1;
                                 item.data.floorButton.timeToFall = Constants::FallingTileSteppedOn;
-                                gate1.data.gate.closingDelay = gate1.data.gate.defaultClosingDelay;
-                                gate1.data.gate.closingDelayMax = gate1.data.gate.defaultClosingDelay;
+                                // gate1.data.gate.closingDelay = gate1.data.gate.defaultClosingDelay;
+                                // gate1.data.gate.closingDelayMax = gate1.data.gate.defaultClosingDelay;
 
-                                if (item.data.floorButton.gate2 != 0) {
+                                // if (item.data.floorButton.gate2 != 0) {
 
-                                    Item &gate2 = level.getItemByIndex(ItemType::Gate, item.data.floorButton.gate2);
-                                    gate2.data.gate.closingDelay = gate2.data.gate.defaultClosingDelay;
-                                    gate2.data.gate.closingDelayMax = gate2.data.gate.defaultClosingDelay;
+                                //     Item &gate2 = level.getItemByIndex(ItemType::Gate, item.data.floorButton.gate2);
+                                //     gate2.data.gate.closingDelay = gate2.data.gate.defaultClosingDelay;
+                                //     gate2.data.gate.closingDelayMax = gate2.data.gate.defaultClosingDelay;
 
-                                }
+                                // }
 
                             }
 
                             break;
 
                         case ItemType::FloorButton2:
+                        case ItemType::FloorButton4:
                             {
-                                Item &gate1 = level.getItemByIndex(ItemType::Gate, item.data.floorButton.gate1);
+                                openGate(level, item.data.floorButton.gate1, (item.itemType ==  ItemType::FloorButton2 ? 10 : 20), 255);
+                                openGate(level, item.data.floorButton.gate2, (item.itemType ==  ItemType::FloorButton2 ? 10 : 20), 255);
+
+                                // Item &gate1 = level.getItemByIndex(ItemType::Gate, item.data.floorButton.gate1);
 
                                 item.data.floorButton.frame = 1;
                                 item.data.floorButton.timeToFall = Constants::Button2FaillingTime;
-                                gate1.data.gate.closingDelay = 10;
-                                gate1.data.gate.closingDelayMax = 255;
+                                // gate1.data.gate.closingDelay = (item.itemType ==  ItemType::FloorButton2 ? 10 : 20);
+                                // gate1.data.gate.closingDelayMax = 255;
 
-                                if (item.data.floorButton.gate2 != 0) {
+                                // if (item.data.floorButton.gate2 != 0) {
                                     
-                                    Item &gate2 = level.getItemByIndex(ItemType::Gate, item.data.floorButton.gate2);
-                                    gate2.data.gate.closingDelay = 10;
-                                    gate2.data.gate.closingDelayMax = 255;
+                                //     Item &gate2 = level.getItemByIndex(ItemType::Gate, item.data.floorButton.gate2);
+                                //     gate2.data.gate.closingDelay = (item.itemType ==  ItemType::FloorButton2 ? 10 : 20);
+                                //     gate2.data.gate.closingDelayMax = 255;
 
-                                }
+                                // }
 
                             }
 
@@ -1765,6 +1834,9 @@ void game() {
                                 if (mirror.data.mirror.status != Status::Active) {
 
                                     mirror.data.mirror.status = Status::Active;
+                                    #ifndef SAVE_MEMORY_ENEMY
+                                        enemy.setStatus(Status::Dormant_ActionReady);
+                                    #endif
 
                                     Flash &flash = level.getFlash();
                                     flash.frame = 5;
@@ -1793,7 +1865,7 @@ void game() {
                                         case Stance::Standing_Jump_1_Start ... Stance::Standing_Jump_18_End:
                                         case Stance::Running_Jump_1_Start ... Stance::Running_Jump_11_End:
 
-                                            pushDead(prince, level, gamePlay, true);
+                                            pushDead(prince, level, gamePlay, true, DeathType::Spikes);
                                             break;
 
                                         default:
@@ -1861,7 +1933,7 @@ void game() {
 
                     if (abs(item.data.blade.position) <= 5) {
 
-                        pushDead(prince, level, gamePlay, true);
+                        pushDead(prince, level, gamePlay, true, DeathType::Blade);
 
                     }
 
@@ -1893,6 +1965,10 @@ void game() {
 
                 switch (enemy.getStance()) {
 
+                    case Stance::Hide_Mirror:
+                        enemy.setStatus(Status::Dormant_ActionDone);
+                        break;
+
                     case Stance::Sword_Attack_05:
                         {
 
@@ -1912,7 +1988,7 @@ void game() {
 
                                         if (prince.decHealth(1) == 0) {
 
-                                            pushDead(prince, level, gamePlay, true);
+                                            pushDead(prince, level, gamePlay, true, DeathType::SwordFight);
 
                                         }
                                         else {
@@ -1932,6 +2008,7 @@ void game() {
                                     break;
 
                                 case Stance::Falling_Dead_1_Start ... Stance::Falling_Dead_3_End: // Already dying ..
+                                case Stance::Falling_Dead_Blade_1_Start ... Stance::Falling_Dead_Blade_2_End:
 
                                     break;
 
@@ -1939,7 +2016,7 @@ void game() {
 
                                     if(abs(xDelta) < Constants::StrikeDistance && yDelta == 0) {
 
-                                        pushDead(prince, level, gamePlay, true);
+                                        pushDead(prince, level, gamePlay, true, DeathType::SwordFight);
 
                                     }
 
@@ -2123,9 +2200,9 @@ void game() {
 
         switch (prince.getX() % 12) {
 
-            case 0:
-                prince.push(Stance::Collide_Wall_P2_Start_End, false);
-                break;
+            // case 0:
+            //     prince.push(Stance::Collide_Wall_P2_Start_End, false);
+            //     break;
 
             case 1:
             case 5:
@@ -2146,6 +2223,7 @@ void game() {
                 prince.push(Stance::Collide_Wall_P1_Start_End, false);
                 break;
 
+            case 0:
             case 4:
             case 8:
             case 12:
@@ -2228,7 +2306,7 @@ void game() {
 
     // Is the prince dead?
 
-    if (prince.getStance() == Stance::Falling_Dead_3_End) {
+    if (prince.getStance() == Stance::Falling_Dead_3_End || prince.getStance() == Stance::Falling_Dead_Blade_2_End) {
 
         if (justPressed & A_BUTTON) {
 

@@ -167,11 +167,15 @@ void render(bool enemyIsVisible) {
                         int8_t princeX = level.coordToTileIndexX(prince.getPosition().x);
                         int8_t princeY = level.coordToTileIndexY(prince.getPosition().y);
 
-                        if ((princeX == mirrorX || princeX == mirrorX + 1) && princeY == mirrorY) {
+                        #ifndef SAVE_MEMORY_ENEMY
 
-                            showShadow = true;
+                            if ((princeX == mirrorX || princeX == mirrorX + 1) && princeY == mirrorY && enemy.getStatus() == Status::Dormant_ActionReady) {
 
-                        }
+                                showShadow = true;
+
+                            }
+
+                        #endif
 
                         FX::drawBitmap(xLoc, yLoc, Images::Mirrors, showShadow, dbmNormal);
                         
@@ -191,6 +195,7 @@ void render(bool enemyIsVisible) {
                     break;
 
                 case ItemType::FloorButton2:
+                case ItemType::FloorButton4:
                 case ItemType::FloorButton3_DownOnly:
                     FX::drawBitmap(xLoc - item.data.floorButton.frame, yLoc + item.data.floorButton.frame, Images::FloorButtons_0and1, item.data.floorButton.frame + 2, dbmMasked);
                     break;
@@ -254,17 +259,25 @@ void render(bool enemyIsVisible) {
 
                 int16_t xCoord = enemy.getXImage() - (level.getXLocation() * Constants::TileWidth);
                 int16_t yCoord = enemy.getYImage() - (level.getYLocation() * Constants::TileHeight)- level.getYOffset() + Constants::ScreenTopOffset;
+                uint24_t imagePos = 0;
 
-                if (enemy.getDirection() == Direction::Left) {
-                    
-                    FX::drawBitmap(xCoord, yCoord, Images::Prince_Left, imageIndex - 1, dbmMasked);
+                switch (enemy.getEnemyType()) {
+
+                    case EnemyType::Guard:
+                    case EnemyType::Skeleton:
+                        imagePos = (enemy.getDirection() == Direction::Left ? Images::Prince_Left : Images::Prince_Right);
+                        break;
+
+                    case EnemyType::Mirror:
+                        imagePos = Images::Mirror_Right;
+                        break;
+
+                    default:
+                        break;
 
                 }
-                else {
                     
-                    FX::drawBitmap(xCoord, yCoord, Images::Prince_Right, imageIndex - 1, dbmMasked);
-
-                }
+                FX::drawBitmap(xCoord, yCoord, imagePos, imageIndex - 1, dbmMasked);
                 
             }
 
