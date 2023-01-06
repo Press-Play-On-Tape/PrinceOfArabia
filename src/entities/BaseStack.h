@@ -33,17 +33,12 @@ class BaseStack {
         bool push(int16_t item, bool resetFrame) {
 
             #if defined(DEBUG) && defined(DEBUG_PRINCE_STACK)
-            Point offset;
-            offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Stance_XYOffsets[(item - 1) * 2]));
             DEBUG_PRINT(F("Prince X: "));
             DEBUG_PRINT(this->x % 12);
             DEBUG_PRINT(F(", Item "));
             DEBUG_PRINT(item);
             DEBUG_PRINT(F(", count "));
-            DEBUG_PRINT(this->stack->getCount());
-            DEBUG_PRINT(F(" ("));  
-            DEBUG_PRINT(offset.x);  
-            DEBUG_PRINTLN(F(")"));  
+            DEBUG_PRINTLN(this->stack->getCount());
             #endif
 
             return this->stack->push(static_cast<int16_t>(item), resetFrame);
@@ -67,9 +62,7 @@ class BaseStack {
             if (finalStance != Stance::None) {
 
                 #if defined(DEBUG) && defined(DEBUG_PRINCE_STACK)
-                offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Stance_XYOffsets[(finalStance - 1) * 2]));
-                xOffset = offset.x;
-                DEBUG_PRINT(F(", Final "));
+                DEBUG_PRINT(F("Final "));
                 DEBUG_PRINT(finalStance);
                 #endif
 
@@ -91,8 +84,6 @@ class BaseStack {
                     #if defined(DEBUG) && defined(DEBUG_PRINCE_STACK)
                     DEBUG_PRINT(x); 
                     DEBUG_PRINT(" ");        
-                    offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Stance_XYOffsets[(x - 1) * 2]));
-                    xOffset = xOffset + offset.x;
                     #endif
 
                     this->stack->push(static_cast<int16_t>(x), resetFrame);
@@ -110,8 +101,6 @@ class BaseStack {
                     #if defined(DEBUG) && defined(DEBUG_PRINCE_STACK)
                     DEBUG_PRINT(x); 
                     DEBUG_PRINT(" ");                         
-                    offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Stance_XYOffsets[(x - 1) * 2]));
-                    xOffset = xOffset + offset.x;
                     #endif
 
                     this->stack->push(static_cast<int16_t>(-x), resetFrame);

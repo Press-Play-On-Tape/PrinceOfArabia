@@ -212,7 +212,7 @@ void render(bool enemyIsVisible) {
     // Draw prince ..
 
     uint16_t stance = prince.getStance();
-    uint16_t imageIndex = static_cast<uint16_t>(pgm_read_byte(&Constants::StanceToImageXRef[stance]));
+    uint8_t imageIndex = getImageIndexFromStance(stance);
 
     if (imageIndex != 0) {
 
@@ -246,7 +246,7 @@ void render(bool enemyIsVisible) {
         if (enemy.getStatus() == Status::Active) {
                 
             stance = enemy.getStance();
-            imageIndex = static_cast<uint16_t>(pgm_read_byte(&Constants::StanceToImageXRef[stance]));
+            imageIndex = getImageIndexFromStance(stance);
 
             if (imageIndex != 0) {
 
@@ -488,3 +488,4 @@ void renderTorches(uint8_t x1, uint8_t x2, uint8_t y) {
     FX::drawBitmap(x2, y, Images::Torches, frame, dbmMasked);
 
 }
+
