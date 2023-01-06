@@ -11,6 +11,7 @@
 #define _GIVE_SWORD
 
 #define LEVEL_DATA_FROM_FX
+#define IMAGE_DATA_FROM_FX
 
 #define _DEBUG
 #define _DEBUG_ONSCREEN_DETAILS
@@ -867,6 +868,7 @@ namespace Constants {
     constexpr uint8_t Button3FaillingTime = 24;
 
     
+    #ifndef IMAGE_DATA_FROM_FX
 
     const uint8_t StanceToImageXRef[] PROGMEM  = {
         0, 
@@ -983,5 +985,6 @@ namespace Constants {
         FALLING_DEAD_BLADE_OFFSETS
     };
 
+    #endif
 
 }

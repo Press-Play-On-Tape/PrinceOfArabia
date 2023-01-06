@@ -6,8 +6,8 @@ using uint24_t = __uint24;
 
 // Initialize FX hardware using  FX::begin(FX_DATA_PAGE); in the setup() function.
 
-constexpr uint16_t FX_DATA_PAGE  = 0xfb05;
-constexpr uint24_t FX_DATA_BYTES = 326340;
+constexpr uint16_t FX_DATA_PAGE  = 0xfaff;
+constexpr uint24_t FX_DATA_BYTES = 327702;
 
 namespace Levels
 {
@@ -318,7 +318,9 @@ namespace Images
 
 namespace Constants
 {
-  constexpr uint24_t VertAdjustments = 0x04F7E5;
-  constexpr uint24_t Prince_ImageDetails = 0x04F87B;
+  constexpr uint24_t StanceToImageXRefFX = 0x04F7E5;
+  constexpr uint24_t Stance_XYOffsetsFX = 0x04F9AB;
+  constexpr uint24_t VertAdjustments = 0x04FD37;
+  constexpr uint24_t Prince_ImageDetails = 0x04FDCD;
 }
 
