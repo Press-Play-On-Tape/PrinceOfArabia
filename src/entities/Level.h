@@ -456,6 +456,21 @@ struct Level {
 
                 }
 
+                // Level 7
+
+                if (gamePlay.level == 7) {
+
+                    #ifndef SAVE_MEMORY_ENEMY
+                        // enemy.init(EnemyType::Mirror, 10 + (0 * Constants::TileWidth), 56 + (0 * Constants::TileHeight), Direction::Right, Stance::Upright, 3, Status::Active);      
+                    #endif
+
+                    // Normal starting pos
+                    prince.init(32, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);     
+                    this->init(gamePlay, prince, 90, 12, 60, 3); 
+
+                }
+
+
             #endif
 
         }
