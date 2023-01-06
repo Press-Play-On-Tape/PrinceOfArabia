@@ -130,8 +130,7 @@ class BaseEntity {
 
         void getImageDetails(ImageDetails &imageDetails) {
 
-//            uint8_t imageIndex = static_cast<uint8_t>(pgm_read_byte(&Constants::StanceToImageXRef[this->stance]));
-            uint8_t imageIndex = getImageIndexFromStance(this->stance);
+            uint8_t imageIndex = static_cast<uint8_t>(pgm_read_byte(&Constants::StanceToImageXRef[this->stance]));
             uint24_t startPos = static_cast<uint24_t>(Constants::Prince_ImageDetails + ((imageIndex - 1) * 3));
             int8_t direction = this->getDirection() == Direction::Left ? -1 : 1;
 
@@ -159,24 +158,6 @@ class BaseEntity {
             if (imageDetails.toe == -Constants::InAir)              imageDetails.toe = Constants::InAir;
             if (imageDetails.toe == -Constants::InAir_DoNotFall)    imageDetails.toe = Constants::InAir_DoNotFall;
 
-        }
-
-        uint8_t getImageIndexFromStance(uint16_t stance) {
-
-            #ifdef IMAGE_DATA_FROM_FX
-
-                FX::seekData(Constants::StanceToImageXRefFX + stance);
-                uint8_t image = FX::readPendingUInt8();
-                FX::readEnd();
-
-                return image;
-
-            #else
-
-                return static_cast<uint8_t>(pgm_read_byte(&Constants::StanceToImageXRef[stance]));
-
-            #endif
-            
         }
 
 };

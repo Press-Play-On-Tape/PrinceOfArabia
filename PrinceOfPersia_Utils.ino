@@ -58,6 +58,13 @@ void testScroll(GamePlay &gamePlay, Prince &prince, Level &level) {
 
 }
 
+void getStance_Offsets(Direction direction, Point &offset, int16_t stance) {
+
+    uint16_t idx = (stance - 1) * 2;
+    offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Stance_XYOffsets[idx])) * (direction == Direction::Left ? -1 : 1) * (stance < 0 ? -1 : 1);
+    offset.y = static_cast<int8_t>(pgm_read_byte(&Constants::Stance_XYOffsets[idx + 1])) * (stance < 0 ? -1 : 1);
+
+}
 
 void processRunJump(Prince &prince, Level &level) {
 
@@ -170,7 +177,6 @@ void processStandingJump(Prince &prince, Level &level) {
 
 }
 
-
 void initFlash(Prince &prince, Level &level, FlashType flashType) {
 
     Flash &flash = level.getFlash();
@@ -181,7 +187,6 @@ void initFlash(Prince &prince, Level &level, FlashType flashType) {
 
 }
 
-
 void initFlash(Enemy &enemy, Level &level, FlashType flashType) {
 
     Flash &flash = level.getFlash();
@@ -191,7 +196,6 @@ void initFlash(Enemy &enemy, Level &level, FlashType flashType) {
     flash.y = level.coordToTileIndexY(enemy.getY()); 
 
 }
-
 
 uint8_t activateSpikes(Prince &prince, Level &level) {
 
@@ -231,7 +235,6 @@ uint8_t activateSpikes(Prince &prince, Level &level) {
     
 }
 
-
 void activateSpikes_Helper(Item &spikes) {
 
     if (spikes.data.spikes.closingDelay == 0) {
@@ -240,14 +243,12 @@ void activateSpikes_Helper(Item &spikes) {
 
 }
 
-
 void pushJumpUp_Drop(Prince &prince) {
 
     prince.pushSequence(Stance::Jump_Up_Drop_A_1_Start, Stance::Jump_Up_Drop_A_5_End, Stance::Upright, false);
     prince.pushSequence(Stance::Jump_Up_A_1_Start, Stance::Jump_Up_A_14_End, true);
 
 }
-
 
 bool leaveLevel(Prince &prince, Level &level) {
 
@@ -356,7 +357,6 @@ bool leaveLevel(Prince &prince, Level &level) {
 
 }
 
-
 void pushDead(Prince &entity, Level &level, GamePlay &gamePlay, bool clear, DeathType deathType) {
 
     #ifndef SAVE_MEMORY_SOUND
@@ -393,7 +393,6 @@ void pushDead(Prince &entity, Level &level, GamePlay &gamePlay, bool clear, Deat
 
 }
 
-
 void pushDead(Enemy &entity, bool clear) {
 
     #ifndef SAVE_MEMORY_SOUND
@@ -406,7 +405,6 @@ void pushDead(Enemy &entity, bool clear) {
     entity.setMoveCount(64);
 
 }
-
 
 void showSign(Prince &prince, Level &level, SignType signType, uint8_t counter) {
 
@@ -525,7 +523,6 @@ void playGrab() {
 
 #endif
 
-
 void fixPosition() {
 
     switch (level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX())) {
@@ -565,6 +562,9 @@ void openGate(Level &level, uint8_t gateIndex, uint8_t closingDelay, uint8_t clo
 
     if (gateIndex == 0) return;
 
+      //     gate2.data.gate.closingDelay = gate2.data.gate.defaultClosingDelay;
+                                //     gate2.data.gate.closingDelayMax = gate2.data.gate.defaultClosingDelay;
+
     Item &gate = level.getItemByIndex(ItemType::Gate, gateIndex);
 
     if (closingDelay != 255) {
@@ -580,47 +580,4 @@ void openGate(Level &level, uint8_t gateIndex, uint8_t closingDelay, uint8_t clo
 
     }
 
-}
-
-
-uint8_t getImageIndexFromStance(uint16_t stance) {
-
-    #ifdef IMAGE_DATA_FROM_FX
-
-        FX::seekData(Constants::StanceToImageXRefFX + stance);
-        uint8_t image = FX::readPendingUInt8();
-        FX::readEnd();
-
-        return image;
-
-    #else
-
-        return static_cast<uint8_t>(pgm_read_byte(&Constants::StanceToImageXRef[stance]));
-
-    #endif
-    
-}
-
-
-void getStance_Offsets(Direction direction, Point &offset, int16_t stance) {
-
-    // getStanceXYOffsets(stance, offset);
-    // offset.x = offset.x * (direction == Direction::Left ? -1 : 1) * (stance < 0 ? -1 : 1);
-    // offset.y = offset.y * (stance < 0 ? -1 : 1);
-
-    #ifdef IMAGE_DATA_FROM_FX
-
-        FX::seekData(Constants::Stance_XYOffsetsFX + ((stance - 1) * 2));
-        offset.x = static_cast<int8_t>(FX::readPendingUInt8()) * (direction == Direction::Left ? -1 : 1) * (stance < 0 ? -1 : 1);;
-        offset.y = static_cast<int8_t>(FX::readPendingUInt8()) * (stance < 0 ? -1 : 1);
-        FX::readEnd();
-
-    #else
-
-        uint16_t idx = (stance - 1) * 2;
-        offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Stance_XYOffsets[idx])) * (direction == Direction::Left ? -1 : 1) * (stance < 0 ? -1 : 1);
-        offset.y = static_cast<int8_t>(pgm_read_byte(&Constants::Stance_XYOffsets[idx + 1])) * (stance < 0 ? -1 : 1);
-
-    #endif
-        
 }
