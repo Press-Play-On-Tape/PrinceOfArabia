@@ -7,17 +7,21 @@ void title_Init() {
 
 }
 
+void setRenderChamberBG() {
+
+    FX::setFrame(Chambers_BG_frame, 5-1);
+
+}
 
 void renderChamberBG() {
 
-    FX::drawBitmap(0, 0, Images::Chambers_BG, 0, dbmNormal);
-    renderTorches(10, 114, 37);
+    FX::drawFrame();
 
 }
 
 void renderChamberFG(uint8_t hourglassX = 0, uint8_t hourglassIdx = 0) {
 
-    FX::drawBitmap(0, 0, Images::Chambers_FG, 0, dbmMasked);
+    FX::drawFrame(Chambers_FG_frame);
     if (hourglassX > 0) FX::drawBitmap(hourglassX, 40, Images::HourGlasses, hourglassIdx, dbmMasked);
 
 }
@@ -89,11 +93,12 @@ void title() {
                         
                         if (justPressed & (A_BUTTON | B_BUTTON)) {
                             titleScreenVars.setMode(TitleScreenMode::Credits, level);
-                            titleScreenVars.count = 0;
+                            //titleScreenVars.count = 0;
+                            FX::setFrame(Title_Credits_Frame, 5-1);
                         }
 
                         break;
-                
+
                 #endif
 
                 default: break;
@@ -119,7 +124,7 @@ void title() {
                     #ifndef SAVE_MEMORY_SOUND
                         sound.tonesFromFX(Sounds::Seque);
                     #endif
-                    
+
                     titleScreenVars.setMode(TitleScreenMode::IntroGame_1B, level);
                     gamePlay.gameState = GameState::Game_Init; 
                     fadeEffect.reset();
@@ -179,15 +184,10 @@ void title() {
         #ifndef SAVE_MEMORY_OTHER
             
             case TitleScreenMode::Credits:
-                
-                renderTorches(7, 119, 39);
-                renderTorches(14, 112, 34);
 
-                FX::drawBitmap(0, 54, Images::Credits_BG, 0, dbmNormal);
-                FX::drawBitmap(27, -titleScreenVars.count, Images::Title_Credits, 0, dbmNormal);
-                FX::drawBitmap(0, 0, Images::Title_PoP, 0, dbmMasked);
-                
-                titleScreenVars.update(arduboy.isFrameCount(4));
+                FX::drawFrame();
+                // to return to main after credits leave the screen, comment line above and uncomment next line:
+                //if (!FX::drawFrame()) titleScreenVars.setMode(TitleScreenMode::Main, level);
 
                 break;
 
@@ -200,6 +200,7 @@ void title() {
                     titleScreenVars.setMode(TitleScreenMode::CutScene_1, level);
                     titleScreenVars.count = 0;
                     fadeEffect.reset();
+                    setRenderChamberBG();
 
                 }
 

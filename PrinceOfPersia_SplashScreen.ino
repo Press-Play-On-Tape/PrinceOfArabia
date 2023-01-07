@@ -7,7 +7,7 @@
 void splashScreen_Init() {
 
     gamePlay.gameState = GameState::SplashScreen;
-
+    FX::setFrame(splashScreen_Frame, 12-1);
 }
 
 
@@ -24,6 +24,5 @@ void splashScreen() {
 
     }
 
-    FX::drawBitmap(32, 16, Images::PPOT, arduboy.getFrameCount(48) / 12, dbmWhite);
-
+    FX::drawFrame();
 }

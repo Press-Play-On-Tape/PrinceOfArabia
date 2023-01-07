@@ -40,7 +40,7 @@ struct TitleScreenVars {
             
             case TitleScreenMode::Credits:
 
-                this->count = 88;
+                //this->count = 88;
                 break;
             
             case TitleScreenMode::IntroGame_1A:
@@ -103,14 +103,14 @@ struct TitleScreenVars {
                 if (this->count < Constants::TitleScreenScroll_Max) this->count = this->count + 1;
                 return false;
 
-            case TitleScreenMode::Credits:
-
-                if (triggerFrame) {
-                    this->count++;
-                    if (this->count == 201) this->count = 0;
-                }
-
-                return false;
+            //case TitleScreenMode::Credits:
+            //
+            //    if (triggerFrame) {
+            //        this->count++;
+            //        if (this->count == 201) this->count = 0;
+            //    }
+            //
+            //    return false;
 
             case TitleScreenMode::IntroGame_1A:
 
