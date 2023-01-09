@@ -26,6 +26,7 @@ struct TitleScreenVars {
         this->count = 0;
         this->option = TitleScreenOptions::Play;
         this->mode = TitleScreenMode::Intro;
+        FX::setFrame(Title_Intro_Frame,0);
 
     }
 
@@ -93,15 +94,15 @@ struct TitleScreenVars {
 
         switch (this->mode) {
 
-            case TitleScreenMode::Intro:
+            //case TitleScreenMode::Intro:
+            //
+            //    if (this->count < 64) this->count = this->count + 1;
+            //    return false;
 
-                if (this->count < 64) this->count = this->count + 1;
-                return false;
-
-            case TitleScreenMode::Main:
-
-                if (this->count < Constants::TitleScreenScroll_Max) this->count = this->count + 1;
-                return false;
+            //case TitleScreenMode::Main:
+            //
+            //    if (this->count < Constants::TitleScreenScroll_Max) this->count = this->count + 1;
+            //    return false;
 
             //case TitleScreenMode::Credits:
             //

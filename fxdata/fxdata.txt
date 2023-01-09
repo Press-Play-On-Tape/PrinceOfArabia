@@ -75,6 +75,23 @@ include "constants.txt"
         uint8_t  3, dbmWhite_last
     }
 
+    include 'Title_Intro_Frame.txt'
+    include 'Title_Main_Frame.txt'
+
+    Title_Main_Game_Frame[] = {
+
+        int16_t  0,-24, uint24_t Title_Main,   uint8_t 0, dbmNormal
+        int16_t 32, 57, uint24_t Title_Cursor, uint8_t 0, dbmNormal
+        int16_t  0,  0, uint24_t Title_PoP,    uint8_t 0, dbmMasked_last
+    }
+
+    Title_Main_Credits_Frame[] = {
+
+        int16_t  0,-24, uint24_t Title_Main,   uint8_t 0, dbmNormal
+        int16_t 61, 57, uint24_t Title_Cursor, uint8_t 0, dbmNormal
+        int16_t  0,  0, uint24_t Title_PoP,    uint8_t 0, dbmMasked_last
+    }
+
     include 'Title_Credits_Frame.txt'
 
 //// chamber animation ///////////////////

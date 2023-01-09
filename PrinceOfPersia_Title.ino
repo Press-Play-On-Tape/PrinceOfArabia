@@ -36,21 +36,21 @@ void title() {
 
     switch (titleScreenVars.getMode()) {
 
-        case TitleScreenMode::Intro:
-            
-            if (justPressed & (LEFT_BUTTON | RIGHT_BUTTON | A_BUTTON | B_BUTTON)) {
-                titleScreenVars.setMode(TitleScreenMode::Main, level);
-            }
-
-            if (justPressed & LEFT_BUTTON) {
-                titleScreenVars.option = TitleScreenOptions::Play;
-            }
-
-            if (justPressed & RIGHT_BUTTON) {
-                titleScreenVars.option = TitleScreenOptions::Credits;
-            }
-
-            break;
+        //case TitleScreenMode::Intro:
+        //
+        //    if (justPressed & (LEFT_BUTTON | RIGHT_BUTTON | A_BUTTON | B_BUTTON)) {
+        //        titleScreenVars.setMode(TitleScreenMode::Main, level);
+        //    }
+        //
+        //    if (justPressed & LEFT_BUTTON) {
+        //        titleScreenVars.option = TitleScreenOptions::Play;
+        //    }
+        //
+        //    if (justPressed & RIGHT_BUTTON) {
+        //        titleScreenVars.option = TitleScreenOptions::Credits;
+        //    }
+        //
+        //    break;
 
         case TitleScreenMode::Main:
 
@@ -113,6 +113,7 @@ void title() {
 
                 if (justPressed & (A_BUTTON | B_BUTTON)) {
                     titleScreenVars.setMode(TitleScreenMode::Main, level);
+                    FX::setFrame(Title_Main_Frame,2-1);
                 }
 
                 break;
@@ -172,12 +173,27 @@ void title() {
     switch (titleScreenVars.getMode()) {
 
         case TitleScreenMode::Intro:
-        case TitleScreenMode::Main:
+            if (!FX::drawFrame()) {
+                FX::setFrame(Title_Intro_Last_Frame,0);
+                if (justPressed /* & (LEFT_BUTTON | RIGHT_BUTTON | A_BUTTON | B_BUTTON)*/) {
+                    titleScreenVars.setMode(TitleScreenMode::Main, level);
+                    FX::setFrame(Title_Main_Frame,2-1);
+                }
+            }
+            break;
 
-            FX::drawBitmap(0, 64 - titleScreenVars.count, Images::Title_Main, 0, dbmNormal);
-            FX::drawBitmap(titleScreenVars.option == TitleScreenOptions::Play ? 32 : 61, 145 - titleScreenVars.count, Images::Title_Cursor, 0, dbmNormal);
-            FX::drawBitmap(0, (titleScreenVars.count > 64 ? 0 : -32 + (titleScreenVars.count / 2)), Images::Title_PoP, 0, dbmMasked);
-            titleScreenVars.update(arduboy.isFrameCount(4));
+        case TitleScreenMode::Main:
+            if (!FX::drawFrame()) {
+              if (titleScreenVars.option == TitleScreenOptions::Play) {
+                  FX::setFrame(Title_Main_Game_Frame,0);
+              } else {
+                  FX::setFrame(Title_Main_Credits_Frame,0);
+              }
+            }
+            //FX::drawBitmap(0, 64 - titleScreenVars.count, Images::Title_Main, 0, dbmNormal);
+            //FX::drawBitmap(titleScreenVars.option == TitleScreenOptions::Play ? 32 : 61, 145 - titleScreenVars.count, Images::Title_Cursor, 0, dbmNormal);
+            //FX::drawBitmap(0, (titleScreenVars.count > 64 ? 0 : -32 + (titleScreenVars.count / 2)), Images::Title_PoP, 0, dbmMasked);
+            //titleScreenVars.update(arduboy.isFrameCount(4));
 
             break;
 
