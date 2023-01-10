@@ -465,8 +465,12 @@ struct Level {
                     #endif
 
                     // Normal starting pos
-                    prince.init(26, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
-                    this->init(gamePlay, prince, 90, 12, 10, 0); 
+                    // prince.init(26, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    // this->init(gamePlay, prince, 90, 12, 10, 0); 
+
+                    // Drop and grab
+                    prince.init(28, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    this->init(gamePlay, prince, 90, 12, 80, 3); 
 
                 }
 
