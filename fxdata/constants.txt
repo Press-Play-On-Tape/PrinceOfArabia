@@ -57,7 +57,9 @@ namespace Constants {
         181,   182,   183,                                                                                                                  // SWORD_STEP_SEQ
         186,   187,   188,   189,   190,   191,   192,   193,                                                                               // SWORD_ATTACK_SEQ
         194,   195,   194,                                                                                                                  // ATTACK_BLOCK_SEQ
-        126,   142                                                                                                                          // FALLING_DEAD_BLADE_SEQ
+        126,   142,                                                                                                                         // FALLING_DEAD_BLADE_SEQ
+        15,    15,    15,    15,    15,    15,    15,    15,                                                                                // DELAY_SEQ
+        125,   125,   125,   125,   125,   103,                                                                                             // STRAIGHT_DROP_HANGON_SEQ
     };
 
     int8_t Stance_XYOffsetsFX[] = {
@@ -115,6 +117,8 @@ namespace Constants {
         2,0,   1,0,   2,0,   2,0,   -3,0,  -3,0,  -1,0,  0,0,                                                                               // SWORD_ATTACK_OFFSETS
         0,0,   1,0,   -1,0,                                                                                                                 // ATTACK_BLOCK_OFFSETS
         0,0,   0,0,   0,0,                                                                                                                  // FALLING_DEAD_BLADE_OFFSETS
+        0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,                                                                               // DELAY_OFFSETS
+        0,6,   0,6,   0,6,   0,6,   0,7,   0,7,                                                                                             // STRAIGHT_DROP_HANGON_OFFSETS
     };
 
 

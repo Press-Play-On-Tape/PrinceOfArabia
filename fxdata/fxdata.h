@@ -7,7 +7,7 @@ using uint24_t = __uint24;
 // Initialize FX hardware using  FX::begin(FX_DATA_PAGE); in the setup() function.
 
 constexpr uint16_t FX_DATA_PAGE  = 0xfac2;
-constexpr uint24_t FX_DATA_BYTES = 343301;
+constexpr uint24_t FX_DATA_BYTES = 343343;
 
 namespace Levels
 {
@@ -323,18 +323,18 @@ namespace Images
 namespace Constants
 {
   constexpr uint24_t StanceToImageXRefFX = 0x04FC79;
-  constexpr uint24_t Stance_XYOffsetsFX = 0x04FE3F;
-  constexpr uint24_t VertAdjustments = 0x0501CB;
-  constexpr uint24_t Prince_ImageDetails = 0x050261;
+  constexpr uint24_t Stance_XYOffsetsFX = 0x04FE4D;
+  constexpr uint24_t VertAdjustments = 0x0501F5;
+  constexpr uint24_t Prince_ImageDetails = 0x05028B;
 }
 
-constexpr uint24_t splashScreen_Frame = 0x0504AA;
-constexpr uint24_t Title_Intro_Frame = 0x0504CE;
-constexpr uint24_t Title_Intro_Last_Frame = 0x05094E;
-constexpr uint24_t Title_Main_Frame = 0x050960;
-constexpr uint24_t Title_Main_Last_Frame = 0x050AEC;
-constexpr uint24_t Title_Main_Game_Frame = 0x050AFE;
-constexpr uint24_t Title_Main_Credits_Frame = 0x050B19;
-constexpr uint24_t Title_Credits_Frame = 0x050B34;
-constexpr uint24_t Chambers_BG_frame = 0x053CAB;
-constexpr uint24_t Chambers_FG_frame = 0x053CFC;
+constexpr uint24_t splashScreen_Frame = 0x0504D4;
+constexpr uint24_t Title_Intro_Frame = 0x0504F8;
+constexpr uint24_t Title_Intro_Last_Frame = 0x050978;
+constexpr uint24_t Title_Main_Frame = 0x05098A;
+constexpr uint24_t Title_Main_Last_Frame = 0x050B16;
+constexpr uint24_t Title_Main_Game_Frame = 0x050B28;
+constexpr uint24_t Title_Main_Credits_Frame = 0x050B43;
+constexpr uint24_t Title_Credits_Frame = 0x050B5E;
+constexpr uint24_t Chambers_BG_frame = 0x053CD5;
+constexpr uint24_t Chambers_FG_frame = 0x053D26;

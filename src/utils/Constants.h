@@ -6,8 +6,8 @@
 #define _SAVE_MEMORY_USB
 #define SAVE_MEMORY_OTHER
 #define SAVE_MEMORY_SOUND
-#define _SAVE_MEMORY_ENEMY
-#define _ALT_B_BUTTON
+#define SAVE_MEMORY_ENEMY
+#define ALT_B_BUTTON
 #define _GIVE_SWORD
 
 #define _LEVEL_DATA_FROM_FX
@@ -842,6 +842,16 @@ constexpr uint16_t Delay_7                                       = Stance::Delay
 constexpr uint16_t Delay_8_End                                   = Stance::Delay_7 + 1;
 
 
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* 462 - 467                                                     01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define STRAIGHT_DROP_HANGON_SEQ                                 125,   125,   125,   125,   125,   103,
+#define STRAIGHT_DROP_HANGON_OFFSETS                             0,6,   0,6,   0,6,   0,6,   0,7,   0,7,
+constexpr uint16_t Straight_Drop_HangOn_1_Start                  = Stance::Delay_8_End + 1;  // Drop down to Pos 2 (two levels)
+constexpr uint16_t Straight_Drop_HangOn_2                        = Stance::Straight_Drop_HangOn_1_Start + 1;
+constexpr uint16_t Straight_Drop_HangOn_3                        = Stance::Straight_Drop_HangOn_2 + 1;
+constexpr uint16_t Straight_Drop_HangOn_4                        = Stance::Straight_Drop_HangOn_3 + 1;
+constexpr uint16_t Straight_Drop_HangOn_5                        = Stance::Straight_Drop_HangOn_4 + 1;
+constexpr uint16_t Straight_Drop_HangOn_6_End                    = Stance::Straight_Drop_HangOn_5 + 1;
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -942,6 +952,7 @@ namespace Constants {
         ATTACK_BLOCK_SEQ
         FALLING_DEAD_BLADE_SEQ
         DELAY_SEQ
+        STRAIGHT_DROP_HANGON_SEQ
     };
 
     constexpr int8_t Stance_XYOffsets[] PROGMEM = {
@@ -1000,6 +1011,7 @@ namespace Constants {
         ATTACK_BLOCK_OFFSETS
         FALLING_DEAD_BLADE_OFFSETS
         DELAY_OFFSETS
+        STRAIGHT_DROP_HANGON_OFFSETS
     };
 
     #endif

@@ -191,3 +191,9 @@ enum class DeathType : uint8_t {
     SwordFight,
     Spikes,
 };
+
+enum class CanFallResult : uint8_t {
+    CanFall,
+    CannotFall,
+    CanFallToHangingPosition,
+};

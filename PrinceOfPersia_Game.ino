@@ -700,7 +700,8 @@ void game() {
                     break;
 
                 case Stance::Jump_Up_A_14_End:     // Hanging on ledge  (dist 2)..
-                case Stance::Jump_Up_B_14_End:    
+                case Stance::Jump_Up_B_14_End: 
+                case Stance::Straight_Drop_HangOn_6_End:
               
                     if (pressed & DOWN_BUTTON) {
 
@@ -1306,72 +1307,87 @@ void game() {
                     break;
 
                 case Stance::Jump_Up_Drop_C_5_End: // Falling after climbing down ..
+                    {
 
-                    if (level.canFall(prince)) { // Fall some more
+                        CanFallResult canFall = level.canFall(prince);
 
-                        #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
-                        DEBUG_PRINT(F("FallSomMore at Jump_Up_Drop_C_5_End, incFalling() from "));
-                        DEBUG_PRINT(prince.getFalling());
-                        #endif
+                        switch (canFall) {
 
-                        prince.incFalling();
+                            case CanFallResult::CanFall:
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
+                                DEBUG_PRINT(F("FallSomMore at Jump_Up_Drop_C_5_End, incFalling() from "));
+                                DEBUG_PRINT(prince.getFalling());
+                                #endif
 
-                        #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
-                        DEBUG_PRINT(F(" to"));
-                        DEBUG_PRINTLN(prince.getFalling());
-                        #endif
+                                prince.incFalling();
 
-                        prince.pushSequence(Stance::Jump_Up_Drop_C_1_Start, Stance::Jump_Up_Drop_C_5_End, true);
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
+                                DEBUG_PRINT(F(" to"));
+                                DEBUG_PRINTLN(prince.getFalling());
+                                #endif
 
-                    }
-                    else {
+                                prince.pushSequence(Stance::Jump_Up_Drop_C_1_Start, Stance::Jump_Up_Drop_C_5_End, true);
+                                break;
 
-                        uint8_t itemIdx = activateSpikes(prince, level);
+                            case CanFallResult::CannotFall:
+                                {
+                                    uint8_t itemIdx = activateSpikes(prince, level);
 
-                        if (itemIdx == Constants::NoItemFound) {
+                                    if (itemIdx == Constants::NoItemFound) {
 
-                            switch (prince.getFalling()) {
+                                        switch (prince.getFalling()) {
 
-                                case 1:
+                                            case 1:
 
-                                    #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
-                                    DEBUG_PRINTLN(F("Land and enter crouch, falling = 1"));
-                                    #endif
+                                                #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
+                                                DEBUG_PRINTLN(F("Land and enter crouch, falling = 1"));
+                                                #endif
 
-                                    prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
-                                    break;
+                                                prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
+                                                break;
 
-                                case 2:
+                                            case 2:
 
-                                    #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
-                                    DEBUG_PRINTLN(F("Land and enter crouch, falling = 2"));
-                                    #endif
+                                                #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
+                                                DEBUG_PRINTLN(F("Land and enter crouch, falling = 2"));
+                                                #endif
 
-                                    initFlash(prince, level, FlashType::None);
+                                                initFlash(prince, level, FlashType::None);
 
-                                    prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
-                                    prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
+                                                prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
+                                                prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
 
-                                    if (prince.decHealth(1) == 0) {
-                                        pushDead(prince, level, gamePlay, true, DeathType::Falling);
+                                                if (prince.decHealth(1) == 0) {
+                                                    pushDead(prince, level, gamePlay, true, DeathType::Falling);
+                                                }
+
+                                                break;
+
+                                            default:    // Dead!
+
+                                                pushDead(prince, level, gamePlay, true, DeathType::Falling);
+                                                break;
+
+                                        }
+
                                     }
+                                    else {
 
-                                    break;
+                                        pushDead(prince, level, gamePlay, true, DeathType::Spikes);
 
-                                default:    // Dead!
+                                    }
+                                }
+                                break;
 
-                                    pushDead(prince, level, gamePlay, true, DeathType::Falling);
-                                    break;
+                            case CanFallResult::CanFallToHangingPosition:
 
-                            }
+                                prince.pushSequence(Stance::Straight_Drop_HangOn_1_Start, Stance::Straight_Drop_HangOn_6_End, false);
+                                prince.setHangingCounter(90);
+                                break;
+
 
                         }
-                        else {
 
-                            pushDead(prince, level, gamePlay, true, DeathType::Spikes);
-
-                        }
-                        
                     }
 
                     break;
@@ -1390,126 +1406,130 @@ void game() {
                 case Stance::Collide_Wall_P0_Start_End:
                 case Stance::Collide_Wall_M1_Start_End:
                 case Stance::Collide_Wall_M2_Start_End:
+                    {
+                        CanFallResult canFall = level.canFallSomeMore(prince);
 
-                    if (level.canFallSomeMore(prince)) { // Fall some more
-// Serial.println("cfsm");
-                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                        DEBUG_PRINTLN(F("Fall some more"));
-                        #endif
+                        if (canFall == CanFallResult::CanFall) { // Fall some more
 
-                        #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
-                        DEBUG_PRINT(F("FallSomMore at *_Check_CanFall, incFalling() from "));
-                        DEBUG_PRINT(prince.getFalling());
-                        #endif
+                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                            DEBUG_PRINTLN(F("Fall some more"));
+                            #endif
 
-                        prince.incFalling();
+                            #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
+                            DEBUG_PRINT(F("FallSomMore at *_Check_CanFall, incFalling() from "));
+                            DEBUG_PRINT(prince.getFalling());
+                            #endif
 
-                        #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
-                        DEBUG_PRINT(F(" to "));
-                        DEBUG_PRINTLN(prince.getFalling());
-                        #endif
+                            prince.incFalling();
 
-                        switch (prince.getStance()) {
+                            #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
+                            DEBUG_PRINT(F(" to "));
+                            DEBUG_PRINTLN(prince.getFalling());
+                            #endif
 
-                            case Stance::Collide_Wall_P2_Start_End:
-                            case Stance::Collide_Wall_P1_Start_End:
-                            case Stance::Collide_Wall_P0_Start_End:
-                            case Stance::Collide_Wall_M1_Start_End:
-                            case Stance::Collide_Wall_M2_Start_End: 
-                                prince.setPrevStance(Stance::None);
-                                break;
+                            switch (prince.getStance()) {
 
-                            default:
-                                prince.setPrevStance(prince.getStance());
-                                break;
-
-                        }
-
-                        prince.pushSequence(Stance::Falling_Down_P0_1_Start, Stance::Falling_Down_P0_5_Check_CanFall, true);
-                        prince.push(Stance::Falling_Down_P0_6_End, true);
-
-                    }
-                    else {
-
-                        uint8_t itemIdx = activateSpikes(prince, level);
-
-                        if (itemIdx == Constants::NoItemFound) {
-                                
-                            switch (prince.getFalling()) {
-
-                                case 1:
-                                    
-                                    #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
-                                    DEBUG_PRINTLN(F("Land and enter crouch, falling = 1"));
-                                    #endif
-
-                                    prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
+                                case Stance::Collide_Wall_P2_Start_End:
+                                case Stance::Collide_Wall_P1_Start_End:
+                                case Stance::Collide_Wall_P0_Start_End:
+                                case Stance::Collide_Wall_M1_Start_End:
+                                case Stance::Collide_Wall_M2_Start_End: 
+                                    prince.setPrevStance(Stance::None);
                                     break;
 
-                                case 2:     // OK but lose some health as well
-                                    
-                                    #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
-                                    DEBUG_PRINTLN(F("Land and enter crouch, falling = 2"));
-                                    #endif
-
-                                    initFlash(prince, level, FlashType::None);  
-
-                                    prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
-                                    prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
-
-                                    if (prince.decHealth(1) == 0) {
-
-                                        pushDead(prince, level, gamePlay, true, DeathType::Falling);
-                                    }
-
-                                    break;
-
-                                default:    // Dead!
-
-                                    pushDead(prince, level, gamePlay, true, DeathType::Falling);
+                                default:
+                                    prince.setPrevStance(prince.getStance());
                                     break;
 
                             }
 
+                            prince.pushSequence(Stance::Falling_Down_P0_1_Start, Stance::Falling_Down_P0_5_Check_CanFall, true);
+                            prince.push(Stance::Falling_Down_P0_6_End, true);
+
                         }
                         else {
 
-                            pushDead(prince, level, gamePlay, true, DeathType::Spikes);
+                            uint8_t itemIdx = activateSpikes(prince, level);
 
-                        }
+                            if (itemIdx == Constants::NoItemFound) {
+                                    
+                                switch (prince.getFalling()) {
 
-                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                        DEBUG_PRINT(F("End jump, stand up "));
-                        DEBUG_PRINTLN(prince.getFalling());
-                        #endif
+                                    case 1:
+                                        
+                                        #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
+                                        DEBUG_PRINTLN(F("Land and enter crouch, falling = 1"));
+                                        #endif
 
-                        switch (prince.getStance()) {
+                                        prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
+                                        break;
 
-                            case Stance::Falling_StepWalkRun_P2_6_10_5_Check_CanFall:
-                            case Stance::Falling_StepWalkRun_P0_4_8_5_Check_CanFall:
-                            case Stance::Falling_StepWalkRun_P1_5_9_5_Check_CanFall:
-                            case Stance::Falling_StepWalkRun_P3_7_11_5_Check_CanFall:
+                                    case 2:     // OK but lose some health as well
+                                        
+                                        #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
+                                        DEBUG_PRINTLN(F("Land and enter crouch, falling = 2"));
+                                        #endif
 
-                                prince.push(prince.getStance() + 1, true);
-                                break;
+                                        initFlash(prince, level, FlashType::None);  
 
-                            case Stance::Falling_Down_P2_5_Check_CanFall:
-                            case Stance::Falling_Down_P1_5_Check_CanFall:
-                            case Stance::Falling_Down_P0_5_Check_CanFall:
-                            case Stance::Falling_Down_M1_5_Check_CanFall:
-                            case Stance::Falling_Down_M2_5_Check_CanFall:
+                                        prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
+                                        prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
 
-                                if (prince.getPrevStance() != Stance::None) {
-                                    prince.push(prince.getPrevStance() + 1, true);
+                                        if (prince.decHealth(1) == 0) {
+
+                                            pushDead(prince, level, gamePlay, true, DeathType::Falling);
+                                        }
+
+                                        break;
+
+                                    default:    // Dead!
+
+                                        pushDead(prince, level, gamePlay, true, DeathType::Falling);
+                                        break;
+
                                 }
-                                break;
 
-                            default:  
-                                break;
+                            }
+                            else {
+
+                                pushDead(prince, level, gamePlay, true, DeathType::Spikes);
+
+                            }
+
+                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                            DEBUG_PRINT(F("End jump, stand up "));
+                            DEBUG_PRINTLN(prince.getFalling());
+                            #endif
+
+                            switch (prince.getStance()) {
+
+                                case Stance::Falling_StepWalkRun_P2_6_10_5_Check_CanFall:
+                                case Stance::Falling_StepWalkRun_P0_4_8_5_Check_CanFall:
+                                case Stance::Falling_StepWalkRun_P1_5_9_5_Check_CanFall:
+                                case Stance::Falling_StepWalkRun_P3_7_11_5_Check_CanFall:
+
+                                    prince.push(prince.getStance() + 1, true);
+                                    break;
+
+                                case Stance::Falling_Down_P2_5_Check_CanFall:
+                                case Stance::Falling_Down_P1_5_Check_CanFall:
+                                case Stance::Falling_Down_P0_5_Check_CanFall:
+                                case Stance::Falling_Down_M1_5_Check_CanFall:
+                                case Stance::Falling_Down_M2_5_Check_CanFall:
+
+                                    if (prince.getPrevStance() != Stance::None) {
+                                        prince.push(prince.getPrevStance() + 1, true);
+                                    }
+                                    break;
+
+                                default:  
+                                    break;
+
+                            }
+
+                            prince.setPrevStance(Stance::None);
 
                         }
-
-                        prince.setPrevStance(Stance::None);
 
                     }
 
@@ -1702,8 +1722,11 @@ void game() {
                             if (gamePlay.level == 6 && item.data.floorButton.gate1 == 4) {
 
                                 item.data.floorButton.gate1 = 0;
-                                enemy.pushSequence(Stance::Single_Step_1_Start, Stance::Single_Step_8_End, Stance::Upright, false);
-                                enemy.pushSequence(Stance::Delay_1_Start, Stance::Delay_8_End, false);
+
+                                #ifndef SAVE_MEMORY_ENEMY
+                                    enemy.pushSequence(Stance::Single_Step_1_Start, Stance::Single_Step_8_End, Stance::Upright, false);
+                                    enemy.pushSequence(Stance::Delay_1_Start, Stance::Delay_8_End, false);
+                                #endif
                                 
                             }
 
@@ -2060,118 +2083,123 @@ void game() {
     //
     // ---------------------------------------------------------------------------------------------------------------------------------------
 
-    if (!prince.getIgnoreWallCollisions() && prince.isFootDown() && level.canFall(prince) && prince.getFalling() == 0) {
+    {
+        CanFallResult canFall = level.canFall(prince);
 
-        uint8_t distToEdgeOfCurrentTile = level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX());
-                                            
-        #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
-        DEBUG_PRINTLN(F("Starting to fall, setFalling(1)"));
-        #endif
+        if (!prince.getIgnoreWallCollisions() && prince.isFootDown() && canFall == CanFallResult::CanFall && prince.getFalling() == 0) {
 
-        prince.clear();
-        prince.setFalling(1);
-        prince.setPrevStance(prince.getStance());
+            uint8_t distToEdgeOfCurrentTile = level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX());
+                                                
+            #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
+            DEBUG_PRINTLN(F("Starting to fall, setFalling(1)"));
+            #endif
+
+            prince.clear();
+            prince.setFalling(1);
+            prince.setPrevStance(prince.getStance());
 
 
-        // If we are at the edge of a tile and their is an adjacent wall, then we need to fall straight down otherwise fall in an arc ..
+            // If we are at the edge of a tile and their is an adjacent wall, then we need to fall straight down otherwise fall in an arc ..
 
-        bool fallStraight = false;
-   
-        if (distToEdgeOfCurrentTile <= 6) {
+            bool fallStraight = false;
+    
+            if (distToEdgeOfCurrentTile <= 6) {
 
-            int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x) + (prince.getDirection() == Direction::Left ? -1 : 1) - level.getXLocation();
-            int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y) + 1 - level.getYLocation();
-            int8_t fgTile = level.getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
+                int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x) + (prince.getDirection() == Direction::Left ? -1 : 1) - level.getXLocation();
+                int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y) + 1 - level.getYLocation();
+                int8_t fgTile = level.getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
 
-            WallTileResults wallTileResult = level.isWallTile(fgTile);
+                WallTileResults wallTileResult = level.isWallTile(fgTile);
 
-            if (wallTileResult != WallTileResults::None) {
+                if (wallTileResult != WallTileResults::None) {
 
-                fallStraight = true;
+                    fallStraight = true;
+
+                }
 
             }
 
-        }
+            if (fallStraight) {
 
-        if (fallStraight) {
+                #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
+                DEBUG_PRINT(F("Falling straight down, distToEdge: "));
+                DEBUG_PRINTLN(distToEdgeOfCurrentTile);
+                #endif
+                
+                switch (distToEdgeOfCurrentTile) {
 
-            #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
-            DEBUG_PRINT(F("Falling straight down, distToEdge: "));
-            DEBUG_PRINTLN(distToEdgeOfCurrentTile);
-            #endif
-            
-            switch (distToEdgeOfCurrentTile) {
+                    case 0:
+                        prince.pushSequence(Stance::Falling_Down_M2_1_Start, Stance::Falling_Down_M2_5_Check_CanFall, true);
+                        prince.setPrevStance(Stance::Falling_Down_M2_5_Check_CanFall);
+                        break;
 
-                case 0:
-                    prince.pushSequence(Stance::Falling_Down_M2_1_Start, Stance::Falling_Down_M2_5_Check_CanFall, true);
-                    prince.setPrevStance(Stance::Falling_Down_M2_5_Check_CanFall);
-                    break;
+                    case 1:
+                    case 5:
+                    case 9:
+                        prince.pushSequence(Stance::Falling_Down_M1_1_Start, Stance::Falling_Down_M1_5_Check_CanFall, true);
+                        prince.setPrevStance(Stance::Falling_Down_M1_5_Check_CanFall);
+                        break;
 
-                case 1:
-                case 5:
-                case 9:
-                    prince.pushSequence(Stance::Falling_Down_M1_1_Start, Stance::Falling_Down_M1_5_Check_CanFall, true);
-                    prince.setPrevStance(Stance::Falling_Down_M1_5_Check_CanFall);
-                    break;
+                    case 3:
+                    case 7:
+                        prince.pushSequence(Stance::Falling_Down_P1_1_Start, Stance::Falling_Down_P1_5_Check_CanFall, true);
+                        prince.setPrevStance(Stance::Falling_Down_P1_5_Check_CanFall);
+                        break;
 
-                case 3:
-                case 7:
-                    prince.pushSequence(Stance::Falling_Down_P1_1_Start, Stance::Falling_Down_P1_5_Check_CanFall, true);
-                    prince.setPrevStance(Stance::Falling_Down_P1_5_Check_CanFall);
-                    break;
+                    case 4:
+                    case 8:
+                        prince.pushSequence(Stance::Falling_Down_P2_1_Start, Stance::Falling_Down_P2_5_Check_CanFall, true);
+                        prince.setPrevStance(Stance::Falling_Down_P2_5_Check_CanFall);
+                        break;
 
-                case 4:
-                case 8:
-                    prince.pushSequence(Stance::Falling_Down_P2_1_Start, Stance::Falling_Down_P2_5_Check_CanFall, true);
-                    prince.setPrevStance(Stance::Falling_Down_P2_5_Check_CanFall);
-                    break;
+                    case 2:
+                    case 6:
+                    case 10:
+                        prince.pushSequence(Stance::Falling_Down_P0_1_Start, Stance::Falling_Down_P0_5_Check_CanFall, true);
+                        prince.setPrevStance(Stance::Falling_Down_P0_5_Check_CanFall);
+                        break;
 
-                case 2:
-                case 6:
-                case 10:
-                    prince.pushSequence(Stance::Falling_Down_P0_1_Start, Stance::Falling_Down_P0_5_Check_CanFall, true);
-                    prince.setPrevStance(Stance::Falling_Down_P0_5_Check_CanFall);
-                    break;
+                }
 
             }
+            else {
 
-        }
-        else {
+                #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
+                DEBUG_PRINT(F("Falling in arc, x % 12 ="));
+                DEBUG_PRINTLN(prince.getX() % 12);
+                #endif
 
-            #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
-            DEBUG_PRINT(F("Falling in arc, x % 12 ="));
-            DEBUG_PRINTLN(prince.getX() % 12);
-            #endif
+                switch (prince.getX() % 12) {
 
-            switch (prince.getX() % 12) {
+                    case 0:
+                    case 4:
+                    case 8:
+                        prince.pushSequence(Stance::Falling_StepWalkRun_P0_4_8_1_Start, Stance::Falling_StepWalkRun_P0_4_8_5_Check_CanFall, true);
+                        prince.setPrevStance(Stance::Falling_StepWalkRun_P0_4_8_5_Check_CanFall);
+                        break;
 
-                case 0:
-                case 4:
-                case 8:
-                    prince.pushSequence(Stance::Falling_StepWalkRun_P0_4_8_1_Start, Stance::Falling_StepWalkRun_P0_4_8_5_Check_CanFall, true);
-                    prince.setPrevStance(Stance::Falling_StepWalkRun_P0_4_8_5_Check_CanFall);
-                    break;
+                    case 1:
+                    case 5:
+                    case 9:
+                        prince.pushSequence(Stance::Falling_StepWalkRun_P1_5_9_1_Start, Stance::Falling_StepWalkRun_P1_5_9_5_Check_CanFall, true);
+                        prince.setPrevStance(Stance::Falling_StepWalkRun_P1_5_9_5_Check_CanFall);
+                        break;
 
-                case 1:
-                case 5:
-                case 9:
-                    prince.pushSequence(Stance::Falling_StepWalkRun_P1_5_9_1_Start, Stance::Falling_StepWalkRun_P1_5_9_5_Check_CanFall, true);
-                    prince.setPrevStance(Stance::Falling_StepWalkRun_P1_5_9_5_Check_CanFall);
-                    break;
+                    case 2:
+                    case 6:
+                    case 10:
+                        prince.pushSequence(Stance::Falling_StepWalkRun_P2_6_10_1_Start, Stance::Falling_StepWalkRun_P2_6_10_5_Check_CanFall, true);
+                        prince.setPrevStance(Stance::Falling_StepWalkRun_P2_6_10_5_Check_CanFall);
+                        break;
 
-                case 2:
-                case 6:
-                case 10:
-                    prince.pushSequence(Stance::Falling_StepWalkRun_P2_6_10_1_Start, Stance::Falling_StepWalkRun_P2_6_10_5_Check_CanFall, true);
-                    prince.setPrevStance(Stance::Falling_StepWalkRun_P2_6_10_5_Check_CanFall);
-                    break;
+                    case 3:
+                    case 7:
+                    case 11:
+                        prince.pushSequence(Stance::Falling_StepWalkRun_P3_7_11_1_Start, Stance::Falling_StepWalkRun_P3_7_11_5_Check_CanFall, true);
+                        prince.setPrevStance(Stance::Falling_StepWalkRun_P3_7_11_5_Check_CanFall);
+                        break;
 
-                case 3:
-                case 7:
-                case 11:
-                    prince.pushSequence(Stance::Falling_StepWalkRun_P3_7_11_1_Start, Stance::Falling_StepWalkRun_P3_7_11_5_Check_CanFall, true);
-                    prince.setPrevStance(Stance::Falling_StepWalkRun_P3_7_11_5_Check_CanFall);
-                    break;
+                }
 
             }
 

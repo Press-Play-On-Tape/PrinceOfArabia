@@ -468,8 +468,12 @@ struct Level {
                     // prince.init(26, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
                     // this->init(gamePlay, prince, 90, 12, 10, 0); 
 
+                    // Drop and grab #1
+                    // prince.init(28, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    // this->init(gamePlay, prince, 90, 12, 80, 3); 
+
                     // Drop and grab
-                    prince.init(28, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    prince.init((12*6) + 32, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);     
                     this->init(gamePlay, prince, 90, 12, 80, 3); 
 
                 }
@@ -1299,7 +1303,7 @@ struct Level {
 
         }
 
-        bool canFall(int8_t bgTile, int8_t fgTile, int8_t x = Constants::CoordNone, int8_t y = Constants::CoordNone) {
+        CanFallResult canFall(int8_t bgTile, int8_t fgTile, int8_t x = Constants::CoordNone, int8_t y = Constants::CoordNone) {
 
             WallTileResults wallTile = this->isWallTile(fgTile, x, y);
 
@@ -1309,7 +1313,7 @@ struct Level {
                 DEBUG_PRINTLN(" true (a wall tile)");
                 #endif                
 
-                return false;
+                return CanFallResult::CannotFall;
             }
 
             switch (bgTile) {
@@ -1346,7 +1350,7 @@ struct Level {
                                 DEBUG_PRINTLN(" false (on collapsing floor");
                                 #endif
 
-                                return false;
+                                return CanFallResult::CannotFall;
 
                             }
 
@@ -1358,14 +1362,14 @@ struct Level {
                     DEBUG_PRINTLN(" true");
                     #endif
 
-                    return true;
+                    return CanFallResult::CanFall;
 
                 default:
 
                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
                     DEBUG_PRINTLN(" false");
                     #endif
-                    return false;
+                    return CanFallResult::CannotFall;
 
             }
 
@@ -1373,13 +1377,13 @@ struct Level {
             DEBUG_PRINTLN(" false");
             #endif
 
-            return false;
+            return CanFallResult::CannotFall;
 
         }
 
-        bool canFall(Prince &prince, int8_t xOffset = 0) {
+        CanFallResult canFall(Prince &prince, int8_t xOffset = 0) {
 
-            bool canFall = false;
+            CanFallResult canFall = CanFallResult::CannotFall;
             Point newPos = prince.getPosition();
             newPos.x = newPos.x + prince.getDirectionOffset(xOffset);
 
@@ -1418,11 +1422,11 @@ struct Level {
                 canFall = this->canFall(bgTile1, fgTile1, tileXIdx, tileYIdx);
 
 
-                // If we the price cannot fall then return this now.  Ortherwise check the heel position ..
+                // If the price cannot fall then return this now.  Ortherwise check the heel position ..
 
-                if (!canFall) {
+                if (canFall == CanFallResult::CannotFall) {
 
-                    return false;
+                    return CanFallResult::CannotFall;
 
                 }
                 else {
@@ -1455,6 +1459,77 @@ struct Level {
 
                     canFall = this->canFall(bgTile1, fgTile1, tileXIdx, tileYIdx);
 
+                    if (canFall == CanFallResult::CannotFall) {
+
+                        return CanFallResult::CannotFall;
+
+                    }
+
+
+                    // If we can fall, check to see if we can hold on to a ledge below ..
+
+                    int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(prince.getDirection(), prince.getPosition().x);
+
+                    if (distToEdgeOfCurrentTile == 2) {
+
+                        int8_t tileXIdx = this->coordToTileIndexX(newPos.x + imageDetails.toe) - this->getXLocation() + (prince.getDirection() == Direction::Right ? 1 : 0);
+                        int8_t tileYIdx = this->coordToTileIndexY(newPos.y) - this->getYLocation();
+
+                        int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
+                        int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
+
+                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
+                        DEBUG_PRINT(F("Can Fall to Ledge?  tileXIdx:"));
+                        DEBUG_PRINT(tileXIdx);
+                        DEBUG_PRINT(F(", tileYIdx:"));
+                        DEBUG_PRINT(tileYIdx);
+                        DEBUG_PRINT(F(", bg "));
+                        DEBUG_PRINT(bgTile1);
+                        DEBUG_PRINT(F(", fg "));
+                        DEBUG_PRINTLN(fgTile1);
+                        #endif
+
+                        switch (prince.getDirection()) {
+
+                            case Direction::Left:
+
+                                switch (bgTile1) {
+
+                                    case TILE_FLOOR_RH_END_1:
+                                    case TILE_FLOOR_RH_END_2:
+                                    case TILE_FLOOR_RH_END_3:
+                                    case TILE_FLOOR_RH_END_4:
+                                    case TILE_FLOOR_RH_END_5:
+                                    case TILE_FLOOR_RH_END_GATE_1:
+                                    case TILE_FLOOR_RH_END_GATE_2:
+                                    case TILE_FLOOR_RH_END_GATE_RUG:
+                                    case TILE_FLOOR_RH_PILLAR_END:
+                                        return CanFallResult::CanFallToHangingPosition;
+
+                                    default:
+                                        return CanFallResult::CanFall;
+                                    
+                                }
+
+                            case Direction::Right:
+
+                                switch (bgTile1) {
+
+                                    case TILE_FLOOR_LH_END:
+                                    case TILE_COLUMN_3:
+                                    case TILE_FLOOR_LH_END_PATTERN_1:
+                                    case TILE_FLOOR_LH_END_PATTERN_2:
+                                        return CanFallResult::CanFallToHangingPosition;
+
+                                    default:
+                                        return CanFallResult::CanFall;
+                                    
+                                }
+
+                        }
+
+                    }
+
                     return canFall;
 
                 }
@@ -1468,13 +1543,13 @@ struct Level {
 
             }
 
-            return false;
+            return CanFallResult::CannotFall;
         
         }
 
-        bool canFallSomeMore(Prince &prince, int8_t xOffset = 0) {
+        CanFallResult canFallSomeMore(Prince &prince, int8_t xOffset = 0) {
 
-            bool canFall = false;
+            CanFallResult canFall = CanFallResult::CannotFall;
             Point newPos = prince.getPosition();
             newPos.x = newPos.x + prince.getDirectionOffset(xOffset);
 
