@@ -5,12 +5,12 @@
 #define DEBUG_PRINTLN  Serial.println
 #define SAVE_MEMORY_USB
 #define _SAVE_MEMORY_OTHER
-#define _SAVE_MEMORY_SOUND
+#define SAVE_MEMORY_SOUND
 #define _SAVE_MEMORY_ENEMY
 #define _ALT_B_BUTTON
 #define GIVE_SWORD
 
-#define _LEVEL_DATA_FROM_FX
+#define LEVEL_DATA_FROM_FX
 #define IMAGE_DATA_FROM_FX
 
 #define DEBUG
@@ -894,7 +894,7 @@ namespace Constants {
     
     constexpr uint8_t Item_ExitDoor = 0;
     constexpr uint8_t Item_LoveHeart = 1;           // Inside dynamic range as only used in cut scenes..
-    constexpr uint8_t Items_Count = 47;
+    constexpr uint8_t Items_Count = 48;
    
     constexpr uint8_t FrameRate = 45;
     constexpr uint8_t Animation_NumberOfFrames = 2;

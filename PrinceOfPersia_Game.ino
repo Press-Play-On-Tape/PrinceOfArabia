@@ -1200,13 +1200,15 @@ void game() {
             case GameState::Game:
 
                 #ifndef ALT_B_BUTTON
-                    if (justPressed & B_BUTTON) {
+
+                    if (justPressed & B_BUTTON && prince.isEmpty()) {
 
                         gamePlay.gameState = GameState::Menu;
                         menu.direction = Direction::Left;
                         menu.cursor = static_cast<uint8_t>(MenuOption::Resume);
 
                     }
+                    
                 #endif
 
                 break;
