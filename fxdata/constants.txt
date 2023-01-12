@@ -32,6 +32,7 @@ namespace Constants {
         127,   128,   129,   130,   131,   132,   133,   134,   135,   136,   137,   138,   139,   140,   141,                              // DRINK_TONIC_SMALL_SEQ
         127,   128,   129,   130,   131,   132,   133,   134,   135,   136,   137,   138,   139,   140,   141,                              // DRINK_TONIC_LARGE_SEQ
         127,   128,   129,   130,   131,   132,   133,   134,   135,   136,   137,   138,   139,   140,   141,                              // DRINK_TONIC_POISON_SEQ
+        127,   128,   129,   130,   131,   132,   133,   134,   135,   136,   137,   138,   139,   140,   141,                              // DRINK_TONIC_FLOAT_SEQ
         125,   126,                                                                                                                         // FALLING_INJURED_SEQ
         125,   126,   142,                                                                                                                  // FALLING_DEAD_SEQ
         14,                                                                                                                                 // RUN_REPEAT_8_END_SEQ
@@ -91,6 +92,7 @@ namespace Constants {
         0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,                              // DRINK_TONIC_SMALL_OFFSETS
         0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,                              // DRINK_TONIC_LARGE_OFFSETS
         0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,                              // DRINK_TONIC_POISON_OFFSETS
+        0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,                              // DRINK_TONIC_FLOAT_OFFSETS
         0,0,   0,0,                                                                                                                         // FALLING_INJURED_OFFSETS
         0,0,   0,0,   0,0,                                                                                                                  // FALLING_DEAD_OFFSETS
         4,0,                                                                                                                                // RUN_REPEAT_8_END_OFFSETS

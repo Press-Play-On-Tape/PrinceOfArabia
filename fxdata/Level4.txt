@@ -11,7 +11,8 @@ uint8_t level4_Data[] = {
     56,                         // Prince starting x pos
     56,                         // Prince starting y pos (25, 56, 87)
     2,                          // Prince starting direction, 1 Left and 2 Right
-    3,                          // Prince starting stance, 3 Crouch_3_End
+    3,                          // Prince starting stance Min, 3 Crouch_3_End
+    0,                          // Prince starting stance Maj
     3,                          // Prince starting health
     // Level
     120,                        // Width
@@ -69,7 +70,7 @@ uint8_t level4_Data[] = {
 
 uint8_t Level4_Items[] = {
     26, 82, 1, 81, 83,      // Exit Gate, let position for open, right position, close button                                                        
-    23, 45, 1,              // Entry Gate   
+    31, 45, 1,              // Entry Gate   
 
     17, 40, 1, 0, 64,       // Gate 1                                         
     2, 48, 1, 1, 0,         // Floor Button 1   

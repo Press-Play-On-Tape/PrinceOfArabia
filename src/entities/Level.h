@@ -24,7 +24,8 @@
 
 #define TILE_FLOOR_BASIC 77
 #define TILE_FLOOR_BASIC_TORCH 127
-#define TILE_FLOOR_LH_END 76
+#define TILE_FLOOR_LH_END_1 76
+#define TILE_FLOOR_LH_END_2 57
 #define TILE_FLOOR_PATTERN_1 78
 #define TILE_FLOOR_PATTERN_2 79
 #define TILE_FLOOR_LH_END_PATTERN_1 102
@@ -164,7 +165,9 @@ struct Level {
                     uint8_t xPixel = FX::readPendingUInt8();
                     uint8_t yPixel = FX::readPendingUInt8();
                     Direction direction = static_cast<Direction>(FX::readPendingUInt8());
-                    uint16_t stance = static_cast<uint16_t>(FX::readPendingUInt8());
+                    uint8_t stanceMin = FX::readPendingUInt8();
+                    uint8_t stanceMaj = FX::readPendingUInt8();
+                    uint16_t stance = static_cast<uint16_t>((stanceMaj * 256) + stanceMin);
                     uint8_t health = FX::readPendingUInt8();
 
                     prince.init(xPixel, yPixel, direction, stance, health, clearSword);
@@ -465,16 +468,24 @@ struct Level {
                     #endif
 
                     // Normal starting pos
-                    // prince.init(26, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
-                    // this->init(gamePlay, prince, 90, 12, 10, 0); 
+                    prince.init(26, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    this->init(gamePlay, prince, 90, 12, 10, 0); 
 
                     // Drop and grab #1
-                    // prince.init(28, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    // prince.init(16, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
                     // this->init(gamePlay, prince, 90, 12, 80, 3); 
 
-                    // Drop and grab
-                    prince.init((12*6) + 32, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);     
-                    this->init(gamePlay, prince, 90, 12, 80, 3); 
+                    // Jump spikes
+                    // prince.init((5*12) + 16, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    // this->init(gamePlay, prince, 90, 12, 70, 6); 
+
+                    // Double blades
+                    // prince.init((5*12) + 16, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    // this->init(gamePlay, prince, 90, 12, 40, 3); 
+
+                    // Droink Float
+                    // prince.init((5*12) + 16, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    // this->init(gamePlay, prince, 90, 12, 10, 3); 
 
                 }
 
@@ -605,30 +616,6 @@ struct Level {
                             }
                             break;
 
-                        // case ItemType::Gate_StayOpen:
-
-                        //     if (arduboy.isFrameCount(4)) {
-
-                        //         if (item.data.gate.direction == Direction::Up && item.data.gate.position < 9) {
-
-                        //             item.data.gate.position++;
-                                    
-                        //         }
-                        //         else if (item.data.gate.direction == Direction::Down && item.data.gate.position > 0) {
-
-                        //             item.data.gate.position--;
-
-                        //         }
-
-                        //         if (item.data.gate.closingDelay > 0) {
-
-                        //             item.data.gate.closingDelay--;
-
-                        //         }
-
-                        //     }
-                        //     break;
-
                         case ItemType::CollapsingFloor:
 
                             if (arduboy.isFrameCount(4) && item.data.collapsingFloor.frame > 0) {
@@ -688,26 +675,17 @@ struct Level {
                             }
                             break;
 
+                        case ItemType::Potion_Float:
+
+                            if (arduboy.isFrameCount(6)) {
+
+                                item.data.potion.frame++;
+                                if (item.data.potion.frame == 7) item.data.potion.frame = 0;
+
+                            }
+                            break;
+
                         case ItemType::FloorButton1:
-
-                            // if (arduboy.isFrameCount(4)) {
-
-                            //     if (item.data.floorButton.timeToFall > 1) {
-
-                            //         item.data.floorButton.timeToFall--;
-
-                            //     }
-
-                            //     if (item.data.floorButton.timeToFall == 1) {
-                                
-                            //         item.data.floorButton.frame = 0;
-                            //         item.data.floorButton.timeToFall = 0;
-
-                            //     }
-
-                            // }
-                            // break;
-
                         case ItemType::FloorButton2:
                         case ItemType::FloorButton3_UpDown:
                         case ItemType::FloorButton3_UpOnly:
@@ -1229,7 +1207,8 @@ struct Level {
 
                 case TILE_FLOOR_BASIC:
                 case TILE_FLOOR_BASIC_TORCH:
-                case TILE_FLOOR_LH_END:
+                case TILE_FLOOR_LH_END_1:
+                case TILE_FLOOR_LH_END_2:
                 case TILE_FLOOR_PATTERN_1:
                 case TILE_FLOOR_PATTERN_2:
                 case TILE_FLOOR_LH_END_PATTERN_1:
@@ -1515,7 +1494,8 @@ struct Level {
 
                                 switch (bgTile1) {
 
-                                    case TILE_FLOOR_LH_END:
+                                    case TILE_FLOOR_LH_END_1:
+                                    case TILE_FLOOR_LH_END_2:
                                     case TILE_COLUMN_3:
                                     case TILE_FLOOR_LH_END_PATTERN_1:
                                     case TILE_FLOOR_LH_END_PATTERN_2:
@@ -1548,7 +1528,7 @@ struct Level {
         }
 
         CanFallResult canFallSomeMore(Prince &prince, int8_t xOffset = 0) {
-
+//return canFall(prince, xOffset);
             CanFallResult canFall = CanFallResult::CannotFall;
             Point newPos = prince.getPosition();
             newPos.x = newPos.x + prince.getDirectionOffset(xOffset);
@@ -3015,7 +2995,8 @@ struct Level {
 
                             switch (bgTile2) {
 
-                                case TILE_FLOOR_LH_END:
+                                case TILE_FLOOR_LH_END_1:
+                                case TILE_FLOOR_LH_END_2:
                                 case TILE_FLOOR_LH_END_PATTERN_1:
                                 case TILE_FLOOR_LH_END_PATTERN_2:
                                 case TILE_COLUMN_3:
@@ -3053,7 +3034,8 @@ struct Level {
 
                             switch (bgTile2) {
 
-                                case TILE_FLOOR_LH_END:
+                                case TILE_FLOOR_LH_END_1:
+                                case TILE_FLOOR_LH_END_2:
                                 case TILE_FLOOR_LH_END_PATTERN_1:
                                 case TILE_FLOOR_LH_END_PATTERN_2:
                                 case TILE_COLUMN_3:
@@ -3171,7 +3153,8 @@ struct Level {
 
                             switch (bgTile2) {
 
-                                case TILE_FLOOR_LH_END:
+                                case TILE_FLOOR_LH_END_1:
+                                case TILE_FLOOR_LH_END_2:
                                 case TILE_FLOOR_LH_END_PATTERN_1:
                                 case TILE_FLOOR_LH_END_PATTERN_2:
                                 case TILE_COLUMN_3:
@@ -3486,7 +3469,8 @@ struct Level {
 
                             switch (bgTile1) {
 
-                                case TILE_FLOOR_LH_END:
+                                case TILE_FLOOR_LH_END_1:
+                                case TILE_FLOOR_LH_END_2:
                                 case TILE_FLOOR_LH_END_PATTERN_1:
                                 case TILE_FLOOR_LH_END_PATTERN_2:
                                 case TILE_COLUMN_3:
@@ -3504,7 +3488,8 @@ struct Level {
 
                             switch (bgTile1) {
 
-                                case TILE_FLOOR_LH_END:
+                                case TILE_FLOOR_LH_END_1:
+                                case TILE_FLOOR_LH_END_2:
                                 case TILE_FLOOR_LH_END_PATTERN_1:
                                 case TILE_FLOOR_LH_END_PATTERN_2:
                                 case TILE_COLUMN_3:
@@ -3689,7 +3674,7 @@ struct Level {
             DEBUG_PRINT(F(", isGroundTile() "));
             DEBUG_PRINT(this->isGroundTile(bgTile, fgTile));
             DEBUG_PRINT(F(", canFall() "));
-            DEBUG_PRINTLN(this->canFall(bgTile, fgTile));
+            DEBUG_PRINTLN((uint8_t)this->canFall(bgTile, fgTile));
         
         }
 

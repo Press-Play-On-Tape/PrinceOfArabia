@@ -50,28 +50,10 @@ void render(bool enemyIsVisible) {
             if      (fgTile == 29) FX::drawBitmap(x * Constants::TileWidth, yCoord, Images::Tile_Dungeon_97, 0, dbmMasked);
             else if (fgTile == 30) FX::drawBitmap(x * Constants::TileWidth, yCoord, Images::Tile_Dungeon_98, 0, dbmMasked);
 
-            //if (fgTile >= 0) {
-            //
-            //    switch (fgTile) {
-            //
-            //        case 29:
-            //            FX::drawBitmap(x * Constants::TileWidth, yCoord, Images::Tile_Dungeon_97, 0, dbmMasked);
-            //            break;
-            //
-            //        case 30:
-            //            FX::drawBitmap(x * Constants::TileWidth, yCoord, Images::Tile_Dungeon_98, 0, dbmMasked);
-            //            break;
-            //
-            //        default:
-            //            break;
-            //
-            //    }
-            //
-            //}
-
         }
 
     }
+
 
     // Draw items ..
 
@@ -154,6 +136,10 @@ void render(bool enemyIsVisible) {
 
                 case ItemType::Potion_Poison:
                     FX::drawBitmap(xLoc + 6, yLoc + 10, Images::Potions_Poison, item.data.potion.frame, dbmMasked);
+                    break;
+
+                case ItemType::Potion_Float:
+                    FX::drawBitmap(xLoc + 6, yLoc + 10, Images::Potions_Float, item.data.potion.frame, dbmMasked);
                     break;
 
                 case ItemType::Mirror:
@@ -376,11 +362,18 @@ void render(bool enemyIsVisible) {
 
     if (!enemyIsVisible) {
 
+        uint8_t hudY = 40;
+
         renderNumber_Small(123, 47, gamePlay.timer_Min);
         renderNumber_Small(123, 57, gamePlay.timer_Sec);
 
         if (prince.getSword()) {
-            FX::drawBitmap(123, 40, Images::Sword_HUD, 0, dbmNormal);
+            FX::drawBitmap(123, hudY, Images::Sword_HUD, 0, dbmNormal);
+            hudY = hudY - 7;
+        }
+
+        if (prince.getPotionFloat()) {
+            FX::drawBitmap(123, hudY, Images::Potion_Float_HUD, 0, dbmNormal);
         }
 
     }

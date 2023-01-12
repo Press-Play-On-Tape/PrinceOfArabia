@@ -11,7 +11,8 @@ uint8_t level5_Data[] = {
     56,                         // Prince starting x pos
     87,                         // Prince starting y pos (25, 56, 87)
     2,                          // Prince starting direction, 1 Left and 2 Right
-    3,                          // Prince starting stance, 3 Crouch_3_End
+    3,                          // Prince starting stance Min, 3 Crouch_3_End
+    0,                          // Prince starting stance Maj
     3,                          // Prince starting health
     // Level
     90,                         // Width

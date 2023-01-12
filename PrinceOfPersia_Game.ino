@@ -1035,7 +1035,7 @@ void game() {
                         }
                         else if (pressed & A_BUTTON) {
 
-                            uint8_t itemIdx = level.canReachItem(prince, ItemType::Potion_Small, ItemType::Potion_Poison);
+                            uint8_t itemIdx = level.canReachItem(prince, ItemType::Potion_Small, ItemType::Potion_Float);
 
                             if (itemIdx != Constants::NoItemFound) {
 
@@ -1352,20 +1352,35 @@ void game() {
                                                 DEBUG_PRINTLN(F("Land and enter crouch, falling = 2"));
                                                 #endif
 
-                                                initFlash(prince, level, FlashType::None);
-
                                                 prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
                                                 prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
 
-                                                if (prince.decHealth(1) == 0) {
+                                                if (!prince.getPotionFloat() && prince.decHealth(1) == 0) {
+
+                                                    initFlash(prince, level, FlashType::None);
                                                     pushDead(prince, level, gamePlay, true, DeathType::Falling);
+
                                                 }
+
+                                                prince.setPotionFloat(false);
 
                                                 break;
 
                                             default:    // Dead!
 
-                                                pushDead(prince, level, gamePlay, true, DeathType::Falling);
+                                                if (!prince.getPotionFloat()) {
+
+                                                    pushDead(prince, level, gamePlay, true, DeathType::Falling);
+
+                                                }
+                                                else {
+
+                                                    prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
+                                                    prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
+                                                    prince.setPotionFloat(false);
+
+                                                }
+
                                                 break;
 
                                         }
@@ -1470,21 +1485,35 @@ void game() {
                                         DEBUG_PRINTLN(F("Land and enter crouch, falling = 2"));
                                         #endif
 
-                                        initFlash(prince, level, FlashType::None);  
-
                                         prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
                                         prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
 
-                                        if (prince.decHealth(1) == 0) {
-
+                                        if (!prince.getPotionFloat() && prince.decHealth(1) == 0) {
+    
+                                            initFlash(prince, level, FlashType::None);  
                                             pushDead(prince, level, gamePlay, true, DeathType::Falling);
+                                        
                                         }
+
+                                        prince.setPotionFloat(false);
 
                                         break;
 
                                     default:    // Dead!
 
-                                        pushDead(prince, level, gamePlay, true, DeathType::Falling);
+                                        if (!prince.getPotionFloat()) {
+
+                                            pushDead(prince, level, gamePlay, true, DeathType::Falling);
+
+                                        }
+                                        else {
+
+                                            prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
+                                            prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
+                                            prince.setPotionFloat(false);
+
+                                        }
+
                                         break;
 
                                 }
@@ -1553,6 +1582,11 @@ void game() {
                     if (prince.getHealth() == 0) {
                         pushDead(prince, level, gamePlay, true, DeathType::Falling);
                     }
+                    break;
+
+
+                case Stance::Drink_Tonic_Float_14:
+                    prince.setPotionFloat(true);
                     break;
 
 

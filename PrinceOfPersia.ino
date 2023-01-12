@@ -179,6 +179,8 @@ void loop() {
             case Stance::Drink_Tonic_Large_14:
             case Stance::Drink_Tonic_Poison_12:
             case Stance::Drink_Tonic_Poison_14:
+            case Stance::Drink_Tonic_Float_12:
+            case Stance::Drink_Tonic_Float_14:
                 invert = true;
                 break;
 

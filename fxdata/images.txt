@@ -28,6 +28,7 @@ namespace Images {
     image_t Numbers_Small = "../images/hud/Numbers_Small_5x7_1.png"
     image_t Healths = "../images/hud/Health_5x3_1.png"
     image_t Sword_HUD = "../images/hud/Sword_HUD.png"
+    image_t Potion_Float_HUD = "../images/hud/Float.png"
 
     image_t Sword = "../images/items/Sword.png"
     image_t Skeleton = "../images/items/Skeleton.png"
@@ -38,7 +39,7 @@ namespace Images {
     image_t Potions_Small = "../images/items/Potions_Small_6x15_1.png"
     image_t Potions_Large = "../images/items/Potions_Large_6x15_1.png"
     image_t Potions_Poison = "../images/items/Potions_Poison_6x15_1.png"
-    image_t Potion_Poison_Skull = "../images/items/Potion_Poison_Skull.png"
+    image_t Potions_Float = "../images/items/Potions_Float_6x15_1.png"
 
     image_t CollapsedFloor = "../images/items/CollapsedTile.png"
     image_t CollapsingFloors = "../images/items/CollapsingTiles_21x31_1.png"

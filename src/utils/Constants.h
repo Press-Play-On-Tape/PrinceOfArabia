@@ -3,17 +3,17 @@
 
 #define DEBUG_PRINT    Serial.print
 #define DEBUG_PRINTLN  Serial.println
-#define _SAVE_MEMORY_USB
-#define SAVE_MEMORY_OTHER
-#define SAVE_MEMORY_SOUND
-#define SAVE_MEMORY_ENEMY
-#define ALT_B_BUTTON
-#define _GIVE_SWORD
+#define SAVE_MEMORY_USB
+#define _SAVE_MEMORY_OTHER
+#define _SAVE_MEMORY_SOUND
+#define _SAVE_MEMORY_ENEMY
+#define _ALT_B_BUTTON
+#define GIVE_SWORD
 
 #define _LEVEL_DATA_FROM_FX
 #define IMAGE_DATA_FROM_FX
 
-#define _DEBUG
+#define DEBUG
 #define _DEBUG_ONSCREEN_DETAILS
 #define _DEBUG_ONSCREEN_DETAILS_MIN
 
@@ -503,11 +503,34 @@ constexpr uint16_t Drink_Tonic_Poison_14                         = Stance::Drink
 constexpr uint16_t Drink_Tonic_Poison_15_End                     = Stance::Drink_Tonic_Poison_14 + 1;
 
 
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* Drink the tonic!  Drink_Tonic_Small_14 triggers a health increase.                                                                                                                                          */
+/* 241 - 255                                                     01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define DRINK_TONIC_FLOAT_SEQ                                    127,   128,   129,   130,   131,   132,   133,   134,   135,   136,   137,   138,   139,   140,   141,  
+#define DRINK_TONIC_FLOAT_OFFSETS                                0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,
+constexpr uint16_t Drink_Tonic_Float_1_Start                     = Stance::Drink_Tonic_Poison_15_End + 1; 
+constexpr uint16_t Drink_Tonic_Float_2                           = Stance::Drink_Tonic_Float_1_Start + 1;
+constexpr uint16_t Drink_Tonic_Float_3                           = Stance::Drink_Tonic_Float_2 + 1;
+constexpr uint16_t Drink_Tonic_Float_4                           = Stance::Drink_Tonic_Float_3 + 1;
+constexpr uint16_t Drink_Tonic_Float_5                           = Stance::Drink_Tonic_Float_4 + 1;
+constexpr uint16_t Drink_Tonic_Float_6                           = Stance::Drink_Tonic_Float_5 + 1;
+constexpr uint16_t Drink_Tonic_Float_7                           = Stance::Drink_Tonic_Float_6 + 1;
+constexpr uint16_t Drink_Tonic_Float_8                           = Stance::Drink_Tonic_Float_7 + 1;
+constexpr uint16_t Drink_Tonic_Float_9                           = Stance::Drink_Tonic_Float_8 + 1;
+constexpr uint16_t Drink_Tonic_Float_10                          = Stance::Drink_Tonic_Float_9 + 1;
+constexpr uint16_t Drink_Tonic_Float_11                          = Stance::Drink_Tonic_Float_10 + 1;
+constexpr uint16_t Drink_Tonic_Float_12                          = Stance::Drink_Tonic_Float_11 + 1;
+constexpr uint16_t Drink_Tonic_Float_13                          = Stance::Drink_Tonic_Float_12 + 1;
+constexpr uint16_t Drink_Tonic_Float_14                          = Stance::Drink_Tonic_Float_13 + 1;
+constexpr uint16_t Drink_Tonic_Float_15_End                      = Stance::Drink_Tonic_Float_14 + 1;
+
+
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /* 286 - 287                                                     01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define FALLING_INJURED_SEQ                                      125,   126, 
 #define FALLING_INJURED_OFFSETS                                  0,0,   0,0,
-constexpr uint16_t Falling_Injured_1_Start                       = Stance::Drink_Tonic_Poison_15_End + 1;  // Climbing down, falling two levels
+constexpr uint16_t Falling_Injured_1_Start                       = Stance::Drink_Tonic_Float_15_End + 1;  // Climbing down, falling two levels
 constexpr uint16_t Falling_Injured_2_End                         = Stance::Falling_Injured_1_Start + 1;
 
 
@@ -853,6 +876,9 @@ constexpr uint16_t Straight_Drop_HangOn_4                        = Stance::Strai
 constexpr uint16_t Straight_Drop_HangOn_5                        = Stance::Straight_Drop_HangOn_4 + 1;
 constexpr uint16_t Straight_Drop_HangOn_6_End                    = Stance::Straight_Drop_HangOn_5 + 1;
 
+
+
+
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 constexpr uint16_t  Upright_Turn             = 1255;
@@ -868,7 +894,7 @@ namespace Constants {
     
     constexpr uint8_t Item_ExitDoor = 0;
     constexpr uint8_t Item_LoveHeart = 1;           // Inside dynamic range as only used in cut scenes..
-    constexpr uint8_t Items_Count = 45;
+    constexpr uint8_t Items_Count = 47;
    
     constexpr uint8_t FrameRate = 45;
     constexpr uint8_t Animation_NumberOfFrames = 2;
@@ -925,6 +951,7 @@ namespace Constants {
         DRINK_TONIC_SMALL_SEQ
         DRINK_TONIC_LARGE_SEQ
         DRINK_TONIC_POISON_SEQ
+        DRINK_TONIC_FLOAT_SEQ
         FALLING_INJURED_SEQ
         FALLING_DEAD_SEQ
         RUN_REPEAT_8_END_SEQ
@@ -984,6 +1011,7 @@ namespace Constants {
         DRINK_TONIC_SMALL_OFFSETS
         DRINK_TONIC_LARGE_OFFSETS
         DRINK_TONIC_POISON_OFFSETS
+        DRINK_TONIC_FLOAT_OFFSETS
         FALLING_INJURED_OFFSETS
         FALLING_DEAD_OFFSETS
         RUN_REPEAT_8_END_OFFSETS
