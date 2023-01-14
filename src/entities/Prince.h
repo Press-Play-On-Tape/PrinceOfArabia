@@ -16,17 +16,20 @@ class Prince : public BaseEntity, public BaseStack {
 
         uint8_t falling = 0;
         bool sword = false;
+        bool potionFloat = false;
         bool ignoreWallCollisions = false;
 
     public:
 
         bool getSword()                             { return this->sword; }
+        bool getPotionFloat()                       { return this->potionFloat; }
         bool getIgnoreWallCollisions()              { return this->ignoreWallCollisions; }
         uint8_t getHangingCounter()                 { return this->hangingCounter; }
         uint8_t getCrouchingCounter()               { return this->crouchingCounter; }
         uint8_t getFalling()                        { return this->falling; }
 
         void setSword(bool val)                     { this->sword = val; }
+        void setPotionFloat(bool val)               { this->potionFloat = val; }
         void setIgnoreWallCollisions(bool val)      { this->ignoreWallCollisions = val; }
         void setFalling(uint8_t val)                { this->falling = val; }
         void setHangingCounter(uint8_t val)         { this->hangingCounter = val; }
@@ -46,6 +49,8 @@ class Prince : public BaseEntity, public BaseStack {
             this->healthMax = health;
             if (clearSword) this->sword = false;
             this->ignoreWallCollisions = false;
+
+            this->push(stance, true);
 
         }
 

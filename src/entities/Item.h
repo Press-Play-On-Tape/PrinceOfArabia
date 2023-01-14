@@ -51,6 +51,7 @@ struct FloorButton {
     uint8_t frame;              
     uint8_t gate1;
     uint8_t gate2;              
+    uint8_t gate3;              
     uint8_t timeToFall;         // How long does gate remain open for.
 };
  

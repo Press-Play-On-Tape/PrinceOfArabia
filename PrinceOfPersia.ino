@@ -31,6 +31,7 @@ Cookie cookie;
 Stack <int16_t, Constants::StackSize> princeStack;
 Prince &prince = cookie.prince;
 Stack <int16_t, Constants::StackSize> enemyStack;
+Mouse mouse;
 
 #ifndef SAVE_MEMORY_ENEMY
 Enemy &enemy = cookie.enemy;
@@ -179,6 +180,8 @@ void loop() {
             case Stance::Drink_Tonic_Large_14:
             case Stance::Drink_Tonic_Poison_12:
             case Stance::Drink_Tonic_Poison_14:
+            case Stance::Drink_Tonic_Float_12:
+            case Stance::Drink_Tonic_Float_14:
                 invert = true;
                 break;
 

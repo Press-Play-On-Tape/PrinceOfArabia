@@ -11,7 +11,7 @@
 
 void game_Init() {
 
-    gamePlay.init(arduboy, 7);
+    gamePlay.init(arduboy, 1);
 
     #ifndef SAVE_MEMORY_ENEMY
         level.init_PositionChars(gamePlay, prince, enemy, true);
@@ -38,6 +38,7 @@ void game_StartLevel() {
 
     gamePlay.gameState = GameState::Game;
     menu.init();
+    mouse.init();
 
     playGrab();
 
@@ -95,6 +96,16 @@ void game() {
 
 
     // Update the objects ..
+
+    if (mouse.update()) {
+
+        Item item = level.getItemByIndex(ItemType::FloorButton1, 6);
+        openGate(level, item.data.floorButton.gate1, 255, 255);
+
+        item.data.floorButton.frame = 1;
+        item.data.floorButton.timeToFall = Constants::FallingTileSteppedOn;
+
+    }
 
     prince.update(level.getXLocation(), level.getYLocation());
 
@@ -1035,7 +1046,7 @@ void game() {
                         }
                         else if (pressed & A_BUTTON) {
 
-                            uint8_t itemIdx = level.canReachItem(prince, ItemType::Potion_Small, ItemType::Potion_Poison);
+                            uint8_t itemIdx = level.canReachItem(prince, ItemType::Potion_Small, ItemType::Potion_Float);
 
                             if (itemIdx != Constants::NoItemFound) {
 
@@ -1200,13 +1211,15 @@ void game() {
             case GameState::Game:
 
                 #ifndef ALT_B_BUTTON
-                    if (justPressed & B_BUTTON) {
+
+                    if (justPressed & B_BUTTON && prince.isEmpty()) {
 
                         gamePlay.gameState = GameState::Menu;
                         menu.direction = Direction::Left;
                         menu.cursor = static_cast<uint8_t>(MenuOption::Resume);
 
                     }
+
                 #endif
 
                 break;
@@ -1276,6 +1289,7 @@ void game() {
                 case Stance::Leave_Gate_14_End:
                     gamePlay.gameState = GameState::Title;
                     titleScreenVars.setMode(static_cast<TitleScreenMode>(static_cast<uint8_t>(titleScreenVars.getMode()) + 1), level);
+                    setRenderChamberBG();
                     gamePlay.incLevel();
                     break;
 
@@ -1352,20 +1366,35 @@ void game() {
                                                 DEBUG_PRINTLN(F("Land and enter crouch, falling = 2"));
                                                 #endif
 
-                                                initFlash(prince, level, FlashType::None);
-
                                                 prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
                                                 prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
 
-                                                if (prince.decHealth(1) == 0) {
+                                                if (!prince.getPotionFloat() && prince.decHealth(1) == 0) {
+
+                                                    initFlash(prince, level, FlashType::None);
                                                     pushDead(prince, level, gamePlay, true, DeathType::Falling);
+
                                                 }
+
+                                                prince.setPotionFloat(false);
 
                                                 break;
 
                                             default:    // Dead!
 
-                                                pushDead(prince, level, gamePlay, true, DeathType::Falling);
+                                                if (!prince.getPotionFloat()) {
+
+                                                    pushDead(prince, level, gamePlay, true, DeathType::Falling);
+
+                                                }
+                                                else {
+
+                                                    prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
+                                                    prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
+                                                    prince.setPotionFloat(false);
+
+                                                }
+
                                                 break;
 
                                         }
@@ -1470,21 +1499,35 @@ void game() {
                                         DEBUG_PRINTLN(F("Land and enter crouch, falling = 2"));
                                         #endif
 
-                                        initFlash(prince, level, FlashType::None);  
-
                                         prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
                                         prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
 
-                                        if (prince.decHealth(1) == 0) {
-
+                                        if (!prince.getPotionFloat() && prince.decHealth(1) == 0) {
+    
+                                            initFlash(prince, level, FlashType::None);  
                                             pushDead(prince, level, gamePlay, true, DeathType::Falling);
+                                        
                                         }
+
+                                        prince.setPotionFloat(false);
 
                                         break;
 
                                     default:    // Dead!
 
-                                        pushDead(prince, level, gamePlay, true, DeathType::Falling);
+                                        if (!prince.getPotionFloat()) {
+
+                                            pushDead(prince, level, gamePlay, true, DeathType::Falling);
+
+                                        }
+                                        else {
+
+                                            prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
+                                            prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
+                                            prince.setPotionFloat(false);
+
+                                        }
+
                                         break;
 
                                 }
@@ -1553,6 +1596,11 @@ void game() {
                     if (prince.getHealth() == 0) {
                         pushDead(prince, level, gamePlay, true, DeathType::Falling);
                     }
+                    break;
+
+
+                case Stance::Drink_Tonic_Float_14:
+                    prince.setPotionFloat(true);
                     break;
 
 
@@ -1716,6 +1764,7 @@ void game() {
                         
                             openGate(level, item.data.floorButton.gate1, 255, 255);
                             openGate(level, item.data.floorButton.gate2, 255, 255);
+                            openGate(level, item.data.floorButton.gate3, 255, 255);
                             item.data.floorButton.frame = 1;
                             item.data.floorButton.timeToFall = Constants::FallingTileSteppedOn;
                             
@@ -1737,77 +1786,14 @@ void game() {
                             {
                                 openGate(level, item.data.floorButton.gate1, (item.itemType ==  ItemType::FloorButton2 ? 10 : 20), 255);
                                 openGate(level, item.data.floorButton.gate2, (item.itemType ==  ItemType::FloorButton2 ? 10 : 20), 255);
-
-                                // Item &gate1 = level.getItemByIndex(ItemType::Gate, item.data.floorButton.gate1);
+                                openGate(level, item.data.floorButton.gate3, (item.itemType ==  ItemType::FloorButton2 ? 10 : 20), 255);
 
                                 item.data.floorButton.frame = 1;
                                 item.data.floorButton.timeToFall = Constants::Button2FaillingTime;
-                                // gate1.data.gate.closingDelay = (item.itemType ==  ItemType::FloorButton2 ? 10 : 20);
-                                // gate1.data.gate.closingDelayMax = 255;
-
-                                // if (item.data.floorButton.gate2 != 0) {
-                                    
-                                //     Item &gate2 = level.getItemByIndex(ItemType::Gate, item.data.floorButton.gate2);
-                                //     gate2.data.gate.closingDelay = (item.itemType ==  ItemType::FloorButton2 ? 10 : 20);
-                                //     gate2.data.gate.closingDelayMax = 255;
-
-                                // }
 
                             }
 
                             break;
-
-                        // case ItemType::FloorButton3_UpDown:
-                        // case ItemType::FloorButton3_UpOnly:
-                        // case ItemType::FloorButton3_DownOnly:
-                        //    {
-                        //         Item &gate1 = level.level.getItemByIndex(ItemType::Gate, item.data.floorButton.gate1);
-
-                        //         if (gate1.data.gate.closingDelay == 0) {
-                                    
-                        //             if (gate1.data.gate.position == 9 && item.itemType != ItemType::FloorButton3_UpOnly) {
-
-                        //                 gate1.data.gate.direction = Direction::Down;
-                                        
-                        //             }
-                        //             else if (gate1.data.gate.position == 0 && item.itemType != ItemType::FloorButton3_DownOnly) {
-                                        
-                        //                 gate1.data.gate.direction = Direction::Up;
-
-                        //             }
-
-                        //             gate1.data.gate.closingDelay = 16;
-                        //             item.data.floorButton.frame = 1;
-                        //             item.data.floorButton.timeToFall = Constants::Button3FaillingTime;
-
-                        //         }
-
-                        //         if (item.data.floorButton.gate2 != 0) {
-
-                        //             Item &gate2 = level.level.getItemByIndex(ItemType::Gate, item.data.floorButton.gate2);
-
-                        //             if (gate2.data.gate.closingDelay == 0) {
-                                        
-                        //                 if (gate2.data.gate.position == 9 && item.itemType != ItemType::FloorButton3_UpOnly) {
-
-                        //                     gate2.data.gate.direction = Direction::Down;
-                                            
-                        //                 }
-                        //                 else if (gate2.data.gate.position == 0 && item.itemType != ItemType::FloorButton3_DownOnly) {
-                                            
-                        //                     gate2.data.gate.direction = Direction::Up;
-
-                        //                 }
-
-                        //                 gate2.data.gate.closingDelay = 16;
-
-                        //             }
-
-                        //         }
-
-                        //     }
-
-                        //     break;
 
                         case ItemType::ExitDoor_Button:
                         case ItemType::ExitDoor_Button_Cropped:
