@@ -303,6 +303,29 @@ void render(bool enemyIsVisible) {
     }
 
 
+    // Draw Mouse?
+
+    if (gamePlay.level == 8 && level.getXLocation() == 40 && level.getYLocation() == 3) {
+
+        switch (mouse.counter) {
+
+            case 1 ... 70:
+                FX::drawBitmap(120 - (mouse.counter / 2), 14, Images::Mouse, 0, dbmMasked);
+                break;
+
+            case 71 ... 80:
+                FX::drawBitmap(110 - 24, 14, Images::Mouse, 2, dbmMasked);
+                break;
+
+            case 81 ... 141:
+                FX::drawBitmap(50 + (mouse.counter / 2), 14, Images::Mouse, 1, dbmMasked);
+                break;
+                
+        }
+
+    }
+
+
     // Draw foreground ..
 
     for (uint8_t y = 0; y < 4; y++) {

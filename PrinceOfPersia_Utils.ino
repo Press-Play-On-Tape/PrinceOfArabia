@@ -54,6 +54,24 @@ void testScroll(GamePlay &gamePlay, Prince &prince, Level &level) {
         level.setXLocation(level.getXLocation() + 10);
         level.loadMap(gamePlay);
 
+        if (gamePlay.level == 8 && level.getXLocation() == 40 && level.getYLocation() == 3 && mouse.counter == 0) {
+
+            mouse.exits++;
+
+            if (mouse.exits > 2) {
+                    
+                Item gate = level.getItemByIndex(ItemType::Gate, 6);
+
+                if (gate.data.gate.position == 0) { 
+
+                    mouse.counter = random(170, 240);     
+
+                }
+
+            }
+
+        }
+
     }
 
 

@@ -19,6 +19,8 @@ namespace Images {
     image_t Chambers_FG = "../images/title/Chambers_FG.png"
     image_t Credits_BG = "../images/title/Credits_BG.png"
 
+    image_t Mouse = "../images/mouse/Mouse_16x16.png"
+
     image_t Numbers_Upright = "../images/title/Numbers_Upright_7x5_1.png"
 
     image_t Menu = "../images/hud/Menu.png"

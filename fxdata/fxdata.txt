@@ -7,6 +7,7 @@ namespace Levels {
     include "Level5.txt"
     include "Level6.txt"
     include "Level7.txt"
+    include "Level8.txt"
 
     uint24_t level_FG[] = {
         0,         // dummy
@@ -16,7 +17,9 @@ namespace Levels {
         Level4_FG,
         Level5_FG,
         Level6_FG,
-        Level7_FG
+        Level7_FG,
+        Level8_FG,
+        Level8_FG
     };
 
     uint24_t Level_BG[] = {
@@ -27,7 +30,9 @@ namespace Levels {
         Level4_BG,
         Level5_BG,
         Level6_BG,
-        Level7_BG
+        Level7_BG,
+        Level8_BG,
+        Level8_BG
     };
 
     uint24_t level_Data[] = {
@@ -38,7 +43,9 @@ namespace Levels {
         level4_Data,
         level5_Data,
         level6_Data,
-        level7_Data
+        level7_Data,
+        level8_Data,
+        level8_Data
     };
 
     uint24_t Level_Items[] = {
@@ -49,7 +56,9 @@ namespace Levels {
         Level4_Items,
         Level5_Items,
         Level6_Items,
-        Level7_Items
+        Level7_Items,
+        Level8_Items,
+        Level8_Items
     };
 }
 
@@ -60,65 +69,68 @@ include "sounds.txt"
 include "images.txt"
 include "constants.txt"
 
-//// splashscreen Animation ////
 
-    splashScreen_Frame[] = {
-        int16_t  32, 16,
-        uint24_t PPOT,
-        uint8_t  0, dbmWhite_end,
+// Slashscreen animation ..
 
-        int16_t  32, 16,
-        uint24_t PPOT,
-        uint8_t  1, dbmWhite_end
+splashScreen_Frame[] = {
+    int16_t  32, 16,
+    uint24_t PPOT,
+    uint8_t  0, dbmWhite_end,
 
-        int16_t  32, 16,
-        uint24_t PPOT,
-        uint8_t  2, dbmWhite_end,
+    int16_t  32, 16,
+    uint24_t PPOT,
+    uint8_t  1, dbmWhite_end
 
-        int16_t  32, 16,
-        uint24_t PPOT,
-        uint8_t  3, dbmWhite_last
-    }
+    int16_t  32, 16,
+    uint24_t PPOT,
+    uint8_t  2, dbmWhite_end,
 
-    include 'Title_Intro_Frame.txt'
-    include 'Title_Main_Frame.txt'
+    int16_t  32, 16,
+    uint24_t PPOT,
+    uint8_t  3, dbmWhite_last
+}
 
-    Title_Main_Game_Frame[] = {
+include 'Title_Intro_Frame.txt'
+include 'Title_Main_Frame.txt'
 
-        int16_t  0,-24, uint24_t Title_Main,   uint8_t 0, dbmNormal
-        int16_t 32, 57, uint24_t Title_Cursor, uint8_t 0, dbmNormal
-        int16_t  0,  0, uint24_t Title_PoP,    uint8_t 0, dbmMasked_last
-    }
+Title_Main_Game_Frame[] = {
 
-    Title_Main_Credits_Frame[] = {
+    int16_t  0,-24, uint24_t Title_Main,   uint8_t 0, dbmNormal
+    int16_t 32, 57, uint24_t Title_Cursor, uint8_t 0, dbmNormal
+    int16_t  0,  0, uint24_t Title_PoP,    uint8_t 0, dbmMasked_last
+}
 
-        int16_t  0,-24, uint24_t Title_Main,   uint8_t 0, dbmNormal
-        int16_t 61, 57, uint24_t Title_Cursor, uint8_t 0, dbmNormal
-        int16_t  0,  0, uint24_t Title_PoP,    uint8_t 0, dbmMasked_last
-    }
+Title_Main_Credits_Frame[] = {
 
-    include 'Title_Credits_Frame.txt'
+    int16_t  0,-24, uint24_t Title_Main,   uint8_t 0, dbmNormal
+    int16_t 61, 57, uint24_t Title_Cursor, uint8_t 0, dbmNormal
+    int16_t  0,  0, uint24_t Title_PoP,    uint8_t 0, dbmMasked_last
+}
 
-//// chamber animation ///////////////////
+include 'Title_Credits_Frame.txt'
 
-    Chambers_BG_frame[] = {
 
-        int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
-        int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
-        int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked_end
 
-        int16_t  0, 0,  uint24_t Chambers_BG, uint8_t 0, dbmNormal
-        int16_t  10, 37, uint24_t Torches,    uint8_t 1, dbmMasked
-        int16_t 114, 37, uint24_t Torches,    uint8_t 1, dbmMasked_end
+// Chamber animation ..
 
-        int16_t  0, 0,  uint24_t Chambers_BG, uint8_t 0, dbmNormal
-        int16_t  10, 37, uint24_t Torches,    uint8_t 2, dbmMasked
-        int16_t 114, 37, uint24_t Torches,    uint8_t 2, dbmMasked_last
-    }
+Chambers_BG_frame[] = {
 
-    Chambers_FG_frame[] = {
-        int16_t  0, 0,          // x, y
-        uint24_t Chambers_FG,   // image
-        uint8_t 0,              // frame
-        uint8_t dbmMasked_last
-    }
+    int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
+    int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
+    int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked_end
+
+    int16_t  0, 0,  uint24_t Chambers_BG, uint8_t 0, dbmNormal
+    int16_t  10, 37, uint24_t Torches,    uint8_t 1, dbmMasked
+    int16_t 114, 37, uint24_t Torches,    uint8_t 1, dbmMasked_end
+
+    int16_t  0, 0,  uint24_t Chambers_BG, uint8_t 0, dbmNormal
+    int16_t  10, 37, uint24_t Torches,    uint8_t 2, dbmMasked
+    int16_t 114, 37, uint24_t Torches,    uint8_t 2, dbmMasked_last
+}
+
+Chambers_FG_frame[] = {
+    int16_t  0, 0,          // x, y
+    uint24_t Chambers_FG,   // image
+    uint8_t 0,              // frame
+    uint8_t dbmMasked_last
+}

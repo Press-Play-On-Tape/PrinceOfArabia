@@ -490,6 +490,47 @@ struct Level {
                 }
 
 
+                // Level 8
+
+                if (gamePlay.level == 8) {
+
+                    #ifndef SAVE_MEMORY_ENEMY
+                        // enemy.init(EnemyType::Mirror, 10 + (0 * Constants::TileWidth), 56 + (0 * Constants::TileHeight), Direction::Right, Stance::Upright, 3, Status::Active);      
+                    #endif
+
+                    // Normal starting pos
+                    // prince.init(98, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    // this->init(gamePlay, prince, 110, 12, 20, 0); 
+
+                    // Jump to ledge far right
+                    // prince.init(98, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    // this->init(gamePlay, prince, 110, 12, 90, 3); 
+
+                    // After Jump to ledge far right
+                    // prince.init(98, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    // this->init(gamePlay, prince, 110, 12, 90, 3); 
+
+                    // Exit button
+                    prince.init(98, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    this->init(gamePlay, prince, 110, 12, 40, 3); 
+
+                }
+
+                // Level 9
+
+                if (gamePlay.level == 9) {
+
+                    #ifndef SAVE_MEMORY_ENEMY
+                        // enemy.init(EnemyType::Mirror, 10 + (0 * Constants::TileWidth), 56 + (0 * Constants::TileHeight), Direction::Right, Stance::Upright, 3, Status::Active);      
+                    #endif
+
+                    // Normal starting pos
+                    prince.init(98, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    this->init(gamePlay, prince, 110, 12, 20, 0); 
+
+                }
+
+
             #endif
 
         }
@@ -904,7 +945,6 @@ struct Level {
                 
                 Item &item = this->items[i];
 
-                // if (item.itemType == ItemType::Gate || item.itemType == ItemType::Gate_StayOpen) {
                 if (item.itemType == itemType) {
                     
                     count++;
@@ -1059,6 +1099,7 @@ struct Level {
                         item.data.floorButton.frame = 0;
                         item.data.floorButton.gate1 = FX::readPendingUInt8();
                         item.data.floorButton.gate2 = FX::readPendingUInt8();
+                        item.data.floorButton.gate3 = FX::readPendingUInt8();
                         item.data.floorButton.timeToFall = 0;
                         break;
                     
@@ -1455,9 +1496,9 @@ struct Level {
                         int8_t tileYIdx = this->coordToTileIndexY(newPos.y) - this->getYLocation();
 
                         int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
-                        int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
+                        int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
                         DEBUG_PRINT(F("Can Fall to Ledge?  tileXIdx:"));
                         DEBUG_PRINT(tileXIdx);
                         DEBUG_PRINT(F(", tileYIdx:"));
@@ -1505,6 +1546,8 @@ struct Level {
                                         return CanFallResult::CanFall;
                                     
                                 }
+
+                            default: break;
 
                         }
 
@@ -2427,7 +2470,7 @@ struct Level {
                         int8_t bgTile2_NextLvl = this->getTile(Layer::Background, tileXIdx - 1, tileYIdx + 1, TILE_FLOOR_BASIC);
                         int8_t fgTile2_NextLvl = this->getTile(Layer::Foreground, tileXIdx - 1, tileYIdx + 1, TILE_FLOOR_BASIC);
 
-                        int8_t bgTile4_CurrLvl = this->getTile(Layer::Background, tileXIdx - 3, tileYIdx, TILE_FLOOR_BASIC);
+                        //int8_t bgTile4_CurrLvl = this->getTile(Layer::Background, tileXIdx - 3, tileYIdx, TILE_FLOOR_BASIC);
                         int8_t fgTile4_CurrLvl = this->getTile(Layer::Foreground, tileXIdx - 3, tileYIdx, TILE_FLOOR_BASIC);
                         int8_t bgTile3_CurrLvl = this->getTile(Layer::Background, tileXIdx - 2, tileYIdx, TILE_FLOOR_BASIC);
                         int8_t fgTile3_CurrLvl = this->getTile(Layer::Foreground, tileXIdx - 2, tileYIdx, TILE_FLOOR_BASIC);
