@@ -6,8 +6,8 @@ using uint24_t = __uint24;
 
 // Initialize FX hardware using  FX::begin(FX_DATA_PAGE); in the setup() function.
 
-constexpr uint16_t FX_DATA_PAGE  = 0xfab5;
-constexpr uint24_t FX_DATA_BYTES = 346694;
+constexpr uint16_t FX_DATA_PAGE  = 0xfaaa;
+constexpr uint24_t FX_DATA_BYTES = 349682;
 
 namespace Levels
 {
@@ -350,5 +350,7 @@ constexpr uint24_t Title_Main_Last_Frame = 0x05182D;
 constexpr uint24_t Title_Main_Game_Frame = 0x05183F;
 constexpr uint24_t Title_Main_Credits_Frame = 0x05185A;
 constexpr uint24_t Title_Credits_Frame = 0x051875;
-constexpr uint24_t Chambers_BG_frame = 0x0549EC;
-constexpr uint24_t Chambers_FG_frame = 0x054A3D;
+constexpr uint24_t Title_IntroGame_1A_Frame = 0x0549EC;
+constexpr uint24_t Title_IntroGame_1B_Frame = 0x054FC2;
+constexpr uint24_t Chambers_BG_frame = 0x055598;
+constexpr uint24_t Chambers_FG_frame = 0x0555E9;

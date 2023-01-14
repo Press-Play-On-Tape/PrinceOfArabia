@@ -113,14 +113,14 @@ struct TitleScreenVars {
             //
             //    return false;
 
-            case TitleScreenMode::IntroGame_1A:
-
-                if (triggerFrame) {
-                    this->count++;
-                    if (this->count == 165) return true;
-                }
-
-                return false;
+            //case TitleScreenMode::IntroGame_1A:
+            //
+            //    if (triggerFrame) {
+            //        this->count++;
+            //        if (this->count == 165) return true;
+            //    }
+            //
+            //    return false;
 
             case TitleScreenMode::CutScene_1:
 
@@ -143,14 +143,14 @@ struct TitleScreenVars {
  
                 return false;
 
-            case TitleScreenMode::IntroGame_1B:
-
-                if (triggerFrame) {
-                    if (this->count < 165) this->count++;
-                    if (this->count == 165) return true;
-                }
-
-                return false;
+            //case TitleScreenMode::IntroGame_1B:
+            //
+            //    if (triggerFrame) {
+            //        if (this->count < 165) this->count++;
+            //        if (this->count == 165) return true;
+            //    }
+            //
+            //    return false;
        
             case TitleScreenMode::CutScene_2:
             case TitleScreenMode::CutScene_3:

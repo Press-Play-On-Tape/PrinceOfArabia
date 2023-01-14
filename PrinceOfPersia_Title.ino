@@ -36,22 +36,6 @@ void title() {
 
     switch (titleScreenVars.getMode()) {
 
-        //case TitleScreenMode::Intro:
-        //
-        //    if (justPressed & (LEFT_BUTTON | RIGHT_BUTTON | A_BUTTON | B_BUTTON)) {
-        //        titleScreenVars.setMode(TitleScreenMode::Main, level);
-        //    }
-        //
-        //    if (justPressed & LEFT_BUTTON) {
-        //        titleScreenVars.option = TitleScreenOptions::Play;
-        //    }
-        //
-        //    if (justPressed & RIGHT_BUTTON) {
-        //        titleScreenVars.option = TitleScreenOptions::Credits;
-        //    }
-        //
-        //    break;
-
         case TitleScreenMode::Main:
 
             if (justPressed & LEFT_BUTTON) {
@@ -62,49 +46,43 @@ void title() {
                 titleScreenVars.option = TitleScreenOptions::Credits;
             }
 
-            switch (titleScreenVars.option) {
+            if (justPressed & (A_BUTTON | B_BUTTON)) {
 
-                #ifdef SAVE_MEMORY_OTHER
-                    case TitleScreenOptions::Play:
+                switch (titleScreenVars.option) {
 
-                        if (justPressed & (A_BUTTON | B_BUTTON)) {
+                    #ifdef SAVE_MEMORY_OTHER
+                        case TitleScreenOptions::Play:
+
                             gamePlay.gameState = GameState::Game_Init;
-                        }
 
-                        break;
+                            break;
 
-                #else
-                
-                    case TitleScreenOptions::Play:
+                    #else
 
-                        if (justPressed & (A_BUTTON | B_BUTTON)) {
+                        case TitleScreenOptions::Play:
 
                             #ifndef SAVE_MEMORY_SOUND
                                 sound.tonesFromFX(Sounds::Seque);
                             #endif
 
                             titleScreenVars.setMode(TitleScreenMode::IntroGame_1A, level);
-                            titleScreenVars.count = 0;
-                        }
+                            FX::setFrame(Title_IntroGame_1A_Frame, 4 - 1);
 
-                        break;
-                
-                    case TitleScreenOptions::Credits:
-                        
-                        if (justPressed & (A_BUTTON | B_BUTTON)) {
+                            break;
+
+                        case TitleScreenOptions::Credits:
 
                             titleScreenVars.setMode(TitleScreenMode::Credits, level);
                             FX::setFrame(Title_Credits_Frame, 5 - 1);
 
-                        }
+                            break;
 
-                        break;
+                    #endif
 
-                #endif
+                    default: break;
 
-                default: break;
-
-            }        
+                }
+            }
 
             break;
 
@@ -177,11 +155,11 @@ void title() {
 
             if (!FX::drawFrame()) {
 
-                FX::setFrame(Title_Intro_Last_Frame,0);
+                FX::setFrame(Title_Intro_Last_Frame, 0);
 
                 if (justPressed) {
                     titleScreenVars.setMode(TitleScreenMode::Main, level);
-                    FX::setFrame(Title_Main_Frame,2-1);
+                    FX::setFrame(Title_Main_Frame, 2 - 1);
                 }
 
             }
@@ -214,9 +192,7 @@ void title() {
 
             case TitleScreenMode::IntroGame_1A:
 
-                FX::drawBitmap(5, 64 - titleScreenVars.count, Images::IntroGame_1A, 0, dbmNormal);
-                
-                if (titleScreenVars.update(arduboy.isFrameCount(4))) {
+                if (!FX::drawFrame()) {
 
                     titleScreenVars.setMode(TitleScreenMode::CutScene_1, level);
                     titleScreenVars.count = 0;
@@ -237,9 +213,7 @@ void title() {
                 if (titleScreenVars.update(arduboy.isFrameCount(3))) {
 
                     titleScreenVars.setMode(TitleScreenMode::IntroGame_1B, level);
-                    titleScreenVars.count = 0;
-                    fadeEffect.complete();
-
+                    FX::setFrame(Title_IntroGame_1B_Frame, 4 - 1);
 
                 }
 
@@ -247,12 +221,9 @@ void title() {
 
             case TitleScreenMode::IntroGame_1B:
 
-                FX::drawBitmap(2, 64 -titleScreenVars.count, Images::IntroGame_1B, 0, dbmNormal);
-                
-                if (titleScreenVars.update(arduboy.isFrameCount(4))) {
+                if (!FX::drawFrame()) {
 
                     gamePlay.gameState = GameState::Game_Init; 
-                    titleScreenVars.count = 0;
 
                 }
 

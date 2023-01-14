@@ -49,7 +49,7 @@ MenuItem menu;
 void setup() {
 
     arduboy.boot();
-    arduboy.display(CLEAR_BUFFER);
+    FX::display(CLEAR_BUFFER);
     arduboy.systemButtons();
 
     #ifndef SAVE_MEMORY_SOUND
@@ -58,7 +58,6 @@ void setup() {
 
     arduboy.setFrameRate(Constants::FrameRate);
 
-    FX::disableOLED();
     FX::begin(FX_DATA_PAGE);
 
     prince.setStack(&princeStack);
@@ -229,7 +228,6 @@ void loop() {
 
     #endif
 
-    arduboy.display(CLEAR_BUFFER);
-    FX::disableOLED();
+    FX::display(CLEAR_BUFFER);
 
 }

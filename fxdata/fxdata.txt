@@ -109,7 +109,8 @@ Title_Main_Credits_Frame[] = {
 
 include 'Title_Credits_Frame.txt'
 
-
+include 'Title_IntroGame_1A_Frame.txt'
+include 'Title_IntroGame_1B_Frame.txt'
 
 // Chamber animation ..
 
