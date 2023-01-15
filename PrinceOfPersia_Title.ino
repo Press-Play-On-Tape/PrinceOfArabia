@@ -117,6 +117,7 @@ void title() {
                 if (justPressed & (A_BUTTON | B_BUTTON)) {
                     titleScreenVars.setMode(TitleScreenMode::IntroGame_1B, level);
                     gamePlay.gameState = GameState::Game_Init; 
+                    fadeEffect.reset();
                 }
 
                 break;
@@ -185,8 +186,6 @@ void title() {
             case TitleScreenMode::Credits:
 
                 FX::drawFrame();
-                // to return to main after credits leave the screen, comment line above and uncomment next line:
-                //if (!FX::drawFrame()) titleScreenVars.setMode(TitleScreenMode::Main, level);
 
                 break;
 
@@ -195,9 +194,7 @@ void title() {
                 if (!FX::drawFrame()) {
 
                     titleScreenVars.setMode(TitleScreenMode::CutScene_1, level);
-                    titleScreenVars.count = 0;
-                    fadeEffect.reset();
-                    setRenderChamberBG();
+                    FX::setFrame(Title_CutScene_1_Frame, 3 - 1);
 
                 }
 
@@ -205,12 +202,7 @@ void title() {
 
             case TitleScreenMode::CutScene_1:
 
-                renderChamberBG();
-                FX::drawBitmap(titleScreenVars.princess.x, 28, Images::Princess, titleScreenVars.princess.image, dbmMasked);
-                FX::drawBitmap(titleScreenVars.zaffar.x, 28, Images::Zaffar, titleScreenVars.zaffar.image, dbmMasked);
-                renderChamberFG(titleScreenVars.count >= 169 ? 54 : 0);
-
-                if (titleScreenVars.update(arduboy.isFrameCount(3))) {
+                if (!FX::drawFrame()) {
 
                     titleScreenVars.setMode(TitleScreenMode::IntroGame_1B, level);
                     FX::setFrame(Title_IntroGame_1B_Frame, 4 - 1);

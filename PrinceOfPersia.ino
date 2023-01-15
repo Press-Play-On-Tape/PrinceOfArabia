@@ -198,17 +198,17 @@ void loop() {
 
         // Invert screen during sequence ?
 
-        if (titleScreenVars.getMode() == TitleScreenMode::CutScene_1) {
-
-            if (titleScreenVars.count == 168 && titleScreenVars.prevCount != 168) {
-                invert = true;
-            }
-
-            if (titleScreenVars.count == 171 && titleScreenVars.prevCount != 171) {
-                invert = true;
-            }
-        
-        }
+        //if (titleScreenVars.getMode() == TitleScreenMode::CutScene_1) {
+        //
+        //    if (titleScreenVars.count == 168 && titleScreenVars.prevCount != 168) {
+        //        invert = true;
+        //    }
+        //
+        //    if (titleScreenVars.count == 171 && titleScreenVars.prevCount != 171) {
+        //        invert = true;
+        //    }
+        //
+        //}
 
         arduboy.invert(invert);
 

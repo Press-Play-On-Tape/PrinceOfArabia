@@ -122,26 +122,26 @@ struct TitleScreenVars {
             //
             //    return false;
 
-            case TitleScreenMode::CutScene_1:
-
-                if (triggerFrame) {
-
-                    FX::seekData(static_cast<uint24_t>(CutScene::Scene1 + (this->count * 4)));
-
-                    zaffar.image = static_cast<int8_t>(FX::readPendingUInt8());
-                    zaffar.x = zaffar.x + static_cast<int8_t>(FX::readPendingUInt8());
-                    princess.image = static_cast<uint8_t>(FX::readPendingUInt8());
-                    princess.x = princess.x + static_cast<int8_t>(FX::readPendingUInt8());
-
-                    FX::readEnd();
-
-                    this->prevCount = this->count;
-                    this->count++;
-                    if (this->count == 249) return true;
-
-                }
- 
-                return false;
+            //case TitleScreenMode::CutScene_1:
+            //
+            //    if (triggerFrame) {
+            //
+            //        FX::seekData(static_cast<uint24_t>(CutScene::Scene1 + (this->count * 4)));
+            //
+            //        zaffar.image = static_cast<int8_t>(FX::readPendingUInt8());
+            //        zaffar.x = zaffar.x + static_cast<int8_t>(FX::readPendingUInt8());
+            //        princess.image = static_cast<uint8_t>(FX::readPendingUInt8());
+            //        princess.x = princess.x + static_cast<int8_t>(FX::readPendingUInt8());
+            //
+            //        FX::readEnd();
+            //
+            //        this->prevCount = this->count;
+            //        this->count++;
+            //        if (this->count == 249) return true;
+            //
+            //    }
+            //
+            //    return false;
 
             //case TitleScreenMode::IntroGame_1B:
             //
