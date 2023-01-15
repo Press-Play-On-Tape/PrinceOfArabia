@@ -75,6 +75,8 @@
 #define TILE_COLUMN_REAR_2 90
 #define TILE_PILLAR_REAR_1 32
 
+#define TILE_UPPER_COLUMN_FOREGROUND 33
+#define TILE_UPPER_COLUMN_BACKGROUND 34
 
 #define TILE_COLLAPSING_FLOOR - 2
 
@@ -524,9 +526,30 @@ struct Level {
                         // enemy.init(EnemyType::Mirror, 10 + (0 * Constants::TileWidth), 56 + (0 * Constants::TileHeight), Direction::Right, Stance::Upright, 3, Status::Active);      
                     #endif
 
-                    // Normal starting pos
-                    prince.init(98, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
-                    this->init(gamePlay, prince, 110, 12, 20, 0); 
+                    // Before Gate 3
+                    // prince.init(98, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    // this->init(gamePlay, prince, 80, 12, 50, 0); 
+
+                    // After Gate 3
+                    // prince.init(14, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    // this->init(gamePlay, prince, 80, 12, 50, 0); 
+
+                    // After Gate 4 / 5
+                    // prince.init(98, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    // this->init(gamePlay, prince, 80, 12, 20, 0); 
+
+                    // Double blades
+                    // prince.init(98, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    // this->init(gamePlay, prince, 80, 12, 10, 3); 
+
+                    // Exit level button
+                    // prince.init(6, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    // this->init(gamePlay, prince, 80, 12, 40, 6); 
+
+
+                    // Test
+                    prince.init(108, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    this->init(gamePlay, prince, 80, 12, 40, 6); 
 
                 }
 
@@ -1381,6 +1404,11 @@ struct Level {
                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
                     DEBUG_PRINTLN(" true");
                     #endif
+
+                    return CanFallResult::CanFall;
+
+                case TILE_UPPER_COLUMN_BACKGROUND:
+                case TILE_UPPER_COLUMN_FOREGROUND:
 
                     return CanFallResult::CanFall;
 

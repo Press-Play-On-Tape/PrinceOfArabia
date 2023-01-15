@@ -11,7 +11,7 @@
 
 void game_Init() {
 
-    gamePlay.init(arduboy, 1);
+    gamePlay.init(arduboy, 10);
 
     #ifndef SAVE_MEMORY_ENEMY
         level.init_PositionChars(gamePlay, prince, enemy, true);
@@ -49,6 +49,7 @@ void game() {
     auto justPressed = arduboy.justPressedButtons();
     auto pressed = arduboy.pressedButtons();
     bool enemyIsVisible = false;
+    bool sameLevelAsPrince = false;
 
     #if defined(DEBUG) && defined(DEBUG_PRINCE_DETAILS)
     DEBUG_PRINT(F("Stance: "));
@@ -129,6 +130,9 @@ void game() {
                 break;
 
             default:
+
+                initFlash(prince, level, FlashType::None);
+
                 if (prince.decHealth(1) == 0) {
                     pushDead(prince, level, gamePlay, true, DeathType::Falling);
                 }
@@ -153,19 +157,19 @@ void game() {
 
         if (enemy.isEmpty()) {
 
-            enemyIsVisible = isEnemyVisible(true);
+             isEnemyVisible(true, enemyIsVisible, sameLevelAsPrince);
 
         }
         else {
 
-            enemyIsVisible = isEnemyVisible(false);
+             isEnemyVisible(false, enemyIsVisible, sameLevelAsPrince);
 
         }
 
 
         // If within distance, we can draw swords if we have one!
 
-        if (justPressed & B_BUTTON && enemyIsVisible && prince.getSword() && prince.getStance() == Stance::Upright && prince.isEmpty() && enemy.getHealth() > 0) {
+        if (justPressed & B_BUTTON && sameLevelAsPrince && prince.getSword() && prince.getStance() == Stance::Upright && prince.isEmpty() && enemy.getHealth() > 0) {
             
             prince.pushSequence(Stance::Draw_Sword_1_Start, Stance::Draw_Sword_6_End, Stance::Sword_Normal, true);
             justPressed = 0;
@@ -1230,8 +1234,27 @@ void game() {
                     if (justPressed & B_BUTTON)                     menu.direction = Direction::Right;
                 #endif
 
-                if (justPressed & UP_BUTTON && menu.cursor > 0)     menu.cursor--;
-                if (justPressed & DOWN_BUTTON && menu.cursor < 3)   menu.cursor++;
+                if (justPressed & UP_BUTTON && menu.cursor > 0) {
+                    
+                    if (menu.cursor == 3 && !EEPROM_Utils::isSaved()) {
+                        menu.cursor-=2;
+                    }
+                    else {
+                        menu.cursor--;
+                    }
+
+                } 
+
+                if (justPressed & DOWN_BUTTON && menu.cursor < 3)   {
+
+                    if (menu.cursor == 1 && !EEPROM_Utils::isSaved()) {
+                        menu.cursor+=2;
+                    }
+                    else {
+                        menu.cursor++;
+                    }
+
+                }
 
                 if (justPressed & A_BUTTON) {
 
@@ -1369,10 +1392,15 @@ void game() {
                                                 prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
                                                 prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
 
-                                                if (!prince.getPotionFloat() && prince.decHealth(1) == 0) {
+                                                if (!prince.getPotionFloat()) {
 
                                                     initFlash(prince, level, FlashType::None);
-                                                    pushDead(prince, level, gamePlay, true, DeathType::Falling);
+
+                                                    if (prince.decHealth(1) == 0) {
+
+                                                        pushDead(prince, level, gamePlay, true, DeathType::Falling);
+
+                                                    }
 
                                                 }
 
@@ -1502,10 +1530,15 @@ void game() {
                                         prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
                                         prince.pushSequence(Stance::Falling_Injured_1_Start, Stance::Falling_Injured_2_End, true);
 
-                                        if (!prince.getPotionFloat() && prince.decHealth(1) == 0) {
-    
+                                        if (!prince.getPotionFloat()) {
+
                                             initFlash(prince, level, FlashType::None);  
-                                            pushDead(prince, level, gamePlay, true, DeathType::Falling);
+
+                                            if (prince.decHealth(1) == 0) {
+    
+                                                pushDead(prince, level, gamePlay, true, DeathType::Falling);
+
+                                            }
                                         
                                         }
 
@@ -2352,7 +2385,7 @@ void game() {
 
     // Render scene ..
 
-    render(enemyIsVisible);
+    render(enemyIsVisible, sameLevelAsPrince);
     
     #ifndef SAVE_MEMORY_OTHER
         if (gamePlay.gameState == GameState::Menu) {
