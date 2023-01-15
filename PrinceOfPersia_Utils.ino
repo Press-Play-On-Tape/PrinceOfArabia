@@ -501,10 +501,9 @@ void playGrab() {
 
 #ifndef SAVE_MEMORY_ENEMY
 
-    void isEnemyVisible(bool swapEnemies, bool &isVisible, bool &sameLevelAsPrince) { // Should we swap actrive enemies (no if stack is not empty)
+    bool isEnemyVisible(bool swapEnemies) { // Should we swap actrive enemies (no if stack is not empty)
 
         bool enemyIsVisible = false;
-        bool onSameLevelAsPrince = false;
         uint8_t currentEnemy = enemy.getActiveEnemy();
 
         for (uint8_t i = 0; i < enemy.getEnemyCount(); i++) {
@@ -532,14 +531,6 @@ void playGrab() {
 // Serial.print(i);
                     enemyIsVisible = true;
 
-                    int8_t princeTileYIdx = level.coordToTileIndexY(prince.getPosition().y);
-
-                    if (princeTileYIdx == tileYIdx) {
-                        
-                        onSameLevelAsPrince = true;
-
-                    }
-
                 }
 
                 if (enemy.getHealth() == 0 && enemy.getMoveCount() > 0) {
@@ -556,8 +547,7 @@ void playGrab() {
 
         if (!enemyIsVisible || !swapEnemies) enemy.setActiveEnemy(currentEnemy);
 
-        isVisible = enemyIsVisible;
-        sameLevelAsPrince = isVisible ? onSameLevelAsPrince : false;
+        return enemyIsVisible;
 
     }
 

@@ -8,7 +8,7 @@
 #include "src/fonts/Font3x5.h"
 
 
-void render(bool enemyVisible, bool sameLevelAsPrince) {
+void render(bool enemyIsVisible) {
 
 
     // Draw background ..
@@ -230,7 +230,7 @@ void render(bool enemyVisible, bool sameLevelAsPrince) {
 
     #ifndef SAVE_MEMORY_ENEMY
 
-        if (enemyVisible && enemy.getStatus() == Status::Active) {
+        if (enemy.getStatus() == Status::Active) {
                 
             stance = enemy.getStance();
             imageIndex = getImageIndexFromStance(stance);
@@ -374,7 +374,7 @@ void render(bool enemyVisible, bool sameLevelAsPrince) {
 
     // Render health ..
 
-    FX::drawBitmap(120, 0, Images::HUD_Backgrounds, sameLevelAsPrince, dbmNormal);
+    FX::drawBitmap(120, 0, Images::HUD_Backgrounds, enemyIsVisible, dbmNormal);
 
     for (uint8_t i = 0; i < prince.getHealthMax(); i++) {
 
@@ -383,7 +383,7 @@ void render(bool enemyVisible, bool sameLevelAsPrince) {
     }
 
 
-    if (!sameLevelAsPrince) {
+    if (!enemyIsVisible) {
 
         uint8_t hudY = 40;
 
@@ -465,14 +465,13 @@ void render(bool enemyVisible, bool sameLevelAsPrince) {
                 break;
 
         }
-
     }
 
 }
 
 void renderMenu() {
 
-    FX::drawBitmap(menu.x, 0, Images::Menu, !(EEPROM_Utils::isSaved()), dbmNormal);
+    FX::drawBitmap(menu.x, 0, Images::Menu, 0, dbmNormal);
     FX::drawBitmap(menu.x + 3, 22 + (menu.cursor * 10), Images::Sword_Cursor, 0, dbmNormal);
 
     renderNumber(menu.x + 27, 3, gamePlay.level);

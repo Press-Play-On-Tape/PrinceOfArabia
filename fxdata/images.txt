@@ -23,7 +23,7 @@ namespace Images {
 
     image_t Numbers_Upright = "../images/title/Numbers_Upright_7x5_1.png"
 
-    image_t Menu = "../images/hud/Menu_42x64.png"
+    image_t Menu = "../images/hud/Menu.png"
     image_t Sword_Cursor = "../images/hud/Sword.png"
     image_t HUD_Backgrounds = "../images/hud/HUD_Background_8x64_1.png"
     image_t Numbers = "../images/hud/Numbers_11x7_1.png"
