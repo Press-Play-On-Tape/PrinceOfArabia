@@ -552,9 +552,27 @@ struct Level {
                     prince.init(108, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
                     this->init(gamePlay, prince, 80, 12, 40, 6); 
 
+
+                    // Gates 7,8,9,10
+                    // prince.init(108, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    // this->init(gamePlay, prince, 80, 12, 30, 3); 
+
                 }
 
 
+                // Level 10
+
+                if (gamePlay.level == 10) {
+
+                    #ifndef SAVE_MEMORY_ENEMY
+                        // enemy.init(EnemyType::Mirror, 10 + (0 * Constants::TileWidth), 56 + (0 * Constants::TileHeight), Direction::Right, Stance::Upright, 3, Status::Active);      
+                    #endif
+
+                    // Gates 7,8,9,10
+                    prince.init(108, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    this->init(gamePlay, prince, 80, 9, 30, 3); 
+
+                }
             #endif
 
         }
@@ -1353,11 +1371,15 @@ struct Level {
             WallTileResults wallTile = this->isWallTile(fgTile, x, y);
 
             if (wallTile != WallTileResults::None) {
+Serial.print("wall tile ");
+Serial.println((uint8_t)wallTile);
+
 
                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
                 DEBUG_PRINTLN(" true (a wall tile)");
                 #endif                
 
+                // return CanFallResult::CannotFall;
                 return CanFallResult::CannotFall;
             }
 
@@ -1380,6 +1402,8 @@ struct Level {
                 case TILE_FLOOR_RH_END_4:
                 case TILE_FLOOR_RH_END_5:
                 case TILE_FLOOR_RH_PILLAR_END:
+                case TILE_FLOOR_RH_END_GATE_1:
+                case TILE_FLOOR_RH_END_GATE_2:
 
                     if (x != Constants::CoordNone && y != Constants::CoordNone) {
 
@@ -1473,7 +1497,8 @@ struct Level {
 
 
                 // If the price cannot fall then return this now.  Ortherwise check the heel position ..
-
+Serial.print("canFallResult ");
+Serial.println((uint8_t)canFall);
                 if (canFall == CanFallResult::CannotFall) {
 
                     return CanFallResult::CannotFall;
