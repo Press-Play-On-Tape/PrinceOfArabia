@@ -70,7 +70,7 @@ void setup() {
         gamePlay.gameState = GameState::Game_Init;
     #else
         gamePlay.gameState = GameState::SplashScreen_Init;
-        EEPROM_Utils::initEEPROM(cookie);
+//        EEPROM_Utils::initEEPROM(cookie);
     #endif
 
 }
