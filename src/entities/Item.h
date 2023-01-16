@@ -11,6 +11,10 @@ struct ExitDoor {
     uint8_t right;
 };
 
+struct AppearingFloor {
+    bool visible;
+};
+
 struct ExitDoor_Button {
     uint8_t frame;              
 };
@@ -86,6 +90,7 @@ struct Item {
         struct Blade blade;
         struct ExitDoor_Button exitDoor_Button;
         struct Mirror mirror;
+        struct AppearingFloor appearingFloor;
     } data; 
  
 };

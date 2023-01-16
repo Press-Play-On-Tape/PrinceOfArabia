@@ -47,7 +47,8 @@
 #define TILE_FLOOR_RH_END_3 103
 #define TILE_FLOOR_RH_END_4 94
 #define TILE_FLOOR_RH_END_5 111
-#define TILE_FLOOR_RH_PILLAR_END 52
+#define TILE_FLOOR_RH_PILLAR_END_1 52
+#define TILE_FLOOR_RH_PILLAR_END_2 60
 
 #define TILE_FLOOR_LH_WALL_1 83
 #define TILE_FLOOR_LH_WALL_2 109
@@ -573,6 +574,44 @@ struct Level {
                     this->init(gamePlay, prince, 80, 9, 30, 3); 
 
                 }
+
+
+                // Level 11
+
+                if (gamePlay.level == 11) {
+
+                    #ifndef SAVE_MEMORY_ENEMY
+                        // enemy.init(EnemyType::Mirror, 10 + (0 * Constants::TileWidth), 56 + (0 * Constants::TileHeight), Direction::Right, Stance::Upright, 3, Status::Active);      
+                    #endif
+
+                    // Normal
+                    prince.init(74, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword); 
+                    this->init(gamePlay, prince, 90, 12, 0, 3); 
+
+                    // Exit
+                    // prince.init(74, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword); 
+                    // this->init(gamePlay, prince, 90, 12, 60, 3); 
+
+                }
+
+                // Level 12
+
+                if (gamePlay.level == 12) {
+
+                    #ifndef SAVE_MEMORY_ENEMY
+                        // enemy.init(EnemyType::Mirror, 10 + (0 * Constants::TileWidth), 56 + (0 * Constants::TileHeight), Direction::Right, Stance::Upright, 3, Status::Active);      
+                    #endif
+
+                    // Normal
+                    // prince.init(74, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword); 
+                    // this->init(gamePlay, prince, 80, 21, 50, 3); 
+
+                    // Magic floor
+                    prince.init(98, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    this->init(gamePlay, prince, 80, 21, 40, 3); 
+
+                }
+
             #endif
 
         }
@@ -722,6 +761,10 @@ struct Level {
                                     item.y = item.y + ((item.data.collapsingFloor.distToFall / 31) + 1);
                                     item.itemType = ItemType::CollpasedFloor;
 
+
+
+                                    // Did the tile fall on the prince?
+
                                     Point newPos = prince.getPosition();
                                     int8_t tileXIdx = this->coordToTileIndexX(newPos.x);
                                     int8_t tileYIdx = this->coordToTileIndexY(newPos.y);
@@ -731,6 +774,19 @@ struct Level {
                                         levelUpdate = LevelUpdate::FloorCollapsedOnPrince;
 
                                     }
+
+
+                                    // Remvoe any buttons the tile may have landed on ..
+
+                                    for (Item &button : items) {
+
+                                        if ((button.itemType == ItemType::FloorButton1 || button.itemType == ItemType::FloorButton2) && button.x == item.x && button.y == item.y) {
+
+                                            button.itemType = ItemType::None;
+
+                                        } 
+                                    }
+
 
                                 }
 
@@ -928,7 +984,7 @@ struct Level {
 
                         // Substitute tiles if needed ..
 
-                        if (returnCollapsingTile != TILE_NONE && this->isCollapsingFloor(this->xLoc + x, this->yLoc + y)) {
+                        if (returnCollapsingTile != TILE_NONE && this->isCollapsingOrAppearingFloor(this->xLoc + x, this->yLoc + y)) {
 
                             return returnCollapsingTile;
 
@@ -1006,11 +1062,11 @@ struct Level {
         }
 
 
-        bool isCollapsingFloor(int8_t x, int8_t y) {
+        bool isCollapsingOrAppearingFloor(int8_t x, int8_t y) {
 
             for (Item &item : this->items) {
 
-                if (item.itemType == ItemType::CollapsingFloor && item.x == x && item.y == y && item.data.collapsingFloor.timeToFall == 0) {
+                if (((item.itemType == ItemType::CollapsingFloor && item.data.collapsingFloor.timeToFall == 0) || item.itemType == ItemType::AppearingFloor) && item.x == x && item.y == y) {
                     return true;
                 }
 
@@ -1095,6 +1151,10 @@ struct Level {
                 item.y = FX::readPendingUInt8();
 
                 switch (item.itemType) {
+
+                    case ItemType::AppearingFloor:
+                        item.data.appearingFloor.visible = false;
+                        break;
 
                     case ItemType::ExitDoor_SelfOpen:
                     case ItemType::ExitDoor_ButtonOpen:
@@ -1357,7 +1417,8 @@ struct Level {
                 case TILE_FLOOR_RH_END_3:        
                 case TILE_FLOOR_RH_END_4:
                 case TILE_FLOOR_RH_END_5:
-                case TILE_FLOOR_RH_PILLAR_END:
+                case TILE_FLOOR_RH_PILLAR_END_1:
+                case TILE_FLOOR_RH_PILLAR_END_2:
                     return true;
 
             }
@@ -1371,9 +1432,6 @@ struct Level {
             WallTileResults wallTile = this->isWallTile(fgTile, x, y);
 
             if (wallTile != WallTileResults::None) {
-Serial.print("wall tile ");
-Serial.println((uint8_t)wallTile);
-
 
                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
                 DEBUG_PRINTLN(" true (a wall tile)");
@@ -1401,13 +1459,14 @@ Serial.println((uint8_t)wallTile);
                 case TILE_FLOOR_RH_END_3:
                 case TILE_FLOOR_RH_END_4:
                 case TILE_FLOOR_RH_END_5:
-                case TILE_FLOOR_RH_PILLAR_END:
+                case TILE_FLOOR_RH_PILLAR_END_1:
+                case TILE_FLOOR_RH_PILLAR_END_2:
                 case TILE_FLOOR_RH_END_GATE_1:
                 case TILE_FLOOR_RH_END_GATE_2:
 
                     if (x != Constants::CoordNone && y != Constants::CoordNone) {
 
-                        uint8_t idx = this->getItem(ItemType::CollapsingFloor, x + this->getXLocation(), y + this->getYLocation());
+                        uint8_t idx = this->getItem(ItemType::AppearingFloor, ItemType::CollapsingFloor, x + this->getXLocation(), y + this->getYLocation());
 
                         if (idx != Constants::NoItemFound) {
 
@@ -1497,8 +1556,7 @@ Serial.println((uint8_t)wallTile);
 
 
                 // If the price cannot fall then return this now.  Ortherwise check the heel position ..
-Serial.print("canFallResult ");
-Serial.println((uint8_t)canFall);
+
                 if (canFall == CanFallResult::CannotFall) {
 
                     return CanFallResult::CannotFall;
@@ -1578,7 +1636,8 @@ Serial.println((uint8_t)canFall);
                                     case TILE_FLOOR_RH_END_GATE_1:
                                     case TILE_FLOOR_RH_END_GATE_2:
                                     case TILE_FLOOR_RH_END_GATE_RUG:
-                                    case TILE_FLOOR_RH_PILLAR_END:
+                                    case TILE_FLOOR_RH_PILLAR_END_1:
+                                    case TILE_FLOOR_RH_PILLAR_END_2:
                                         return CanFallResult::CanFallToHangingPosition;
 
                                     default:
@@ -2990,7 +3049,8 @@ Serial.println((uint8_t)canFall);
                                 case TILE_FLOOR_RH_END_GATE_2:
                                 case TILE_FLOOR_RH_END_GATE_RUG:
                                 case TILE_COLUMN_LH_WALL:
-                                case TILE_FLOOR_RH_PILLAR_END:
+                                case TILE_FLOOR_RH_PILLAR_END_1:
+                                case TILE_FLOOR_RH_PILLAR_END_2:
 
                                     if (midTile == TILE_COLLAPSING_FLOOR) {
                                         return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
@@ -3036,7 +3096,9 @@ Serial.println((uint8_t)canFall);
                                 case TILE_FLOOR_RH_END_GATE_1:
                                 case TILE_FLOOR_RH_END_GATE_2:
                                 case TILE_FLOOR_RH_END_GATE_RUG:
-                                case TILE_FLOOR_RH_PILLAR_END:
+                                case TILE_FLOOR_RH_PILLAR_END_1:
+                                case TILE_FLOOR_RH_PILLAR_END_2:
+
                                 // case TILE_COLUMN_LH_WALL:                << SJH removed 29/12
 
                                     if (midTile == TILE_COLLAPSING_FLOOR) {
@@ -3229,7 +3291,8 @@ Serial.println((uint8_t)canFall);
                                 case TILE_FLOOR_RH_END_GATE_2:
                                 case TILE_FLOOR_RH_END_GATE_RUG:
                                 case TILE_COLUMN_LH_WALL:
-                                case TILE_FLOOR_RH_PILLAR_END:
+                                case TILE_FLOOR_RH_PILLAR_END_1:
+                                case TILE_FLOOR_RH_PILLAR_END_2:
                                     return CanJumpUpResult::JumpDist10;
 
                                 default:                                
@@ -3626,7 +3689,8 @@ Serial.println((uint8_t)canFall);
                                 case TILE_FLOOR_RH_END_GATE_1:
                                 case TILE_FLOOR_RH_END_GATE_2:
                                 case TILE_FLOOR_RH_END_GATE_RUG:
-                                case TILE_FLOOR_RH_PILLAR_END:
+                                case TILE_FLOOR_RH_PILLAR_END_1:
+                                case TILE_FLOOR_RH_PILLAR_END_2:
                                     return CanClimbDownResult::StepThenClimbDown;
 
                                 default:                                
@@ -3649,7 +3713,8 @@ Serial.println((uint8_t)canFall);
                                 case TILE_FLOOR_RH_END_GATE_1:
                                 case TILE_FLOOR_RH_END_GATE_2:
                                 case TILE_FLOOR_RH_END_GATE_RUG:
-                                case TILE_FLOOR_RH_PILLAR_END:
+                                case TILE_FLOOR_RH_PILLAR_END_1:
+                                case TILE_FLOOR_RH_PILLAR_END_2:
                                     return CanClimbDownResult::ClimbDown;
 
                                 default:

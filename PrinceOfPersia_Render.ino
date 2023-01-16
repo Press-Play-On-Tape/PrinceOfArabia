@@ -187,6 +187,12 @@ void render(bool enemyVisible, bool sameLevelAsPrince) {
                     FX::drawBitmap(xLoc - item.data.floorButton.frame, yLoc + item.data.floorButton.frame, Images::FloorButtons_0and1, item.data.floorButton.frame + 2, dbmMasked);
                     break;
 
+                case ItemType::AppearingFloor:
+                    if (item.data.appearingFloor.visible) {
+                        FX::drawBitmap(xLoc, yLoc, Images::FloorButtons_0and1, 1, dbmMasked);
+                    }
+                    break;
+
                 default: break;
 
             }

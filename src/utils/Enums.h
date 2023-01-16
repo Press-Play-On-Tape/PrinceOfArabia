@@ -3,6 +3,7 @@
 
 enum class ItemType : uint8_t {
     /* 00 */ InteractiveItemType_Start,
+    /* 00 */ AppearingFloor = 0,
     /* 01 */ CollapsingFloor,
     /* 02 */ FloorButton1,
     /* 03 */ FloorButton2,

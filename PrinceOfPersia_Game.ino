@@ -11,7 +11,7 @@
 
 void game_Init() {
 
-    gamePlay.init(arduboy, 10);
+    gamePlay.init(arduboy, 1);
 
     #ifndef SAVE_MEMORY_ENEMY
         level.init_PositionChars(gamePlay, prince, enemy, true);
@@ -644,7 +644,7 @@ void game() {
                             case CanJumpUpResult::JumpThenFall_CollapseFloor:
                                 {
                                     tileXIdx = tileXIdx + prince.getDirectionOffset(1);
-                                    uint8_t itemIdx = level.getItem(ItemType::CollapsingFloor, tileXIdx, tileYIdx);
+                                    uint8_t itemIdx = level.getItem(ItemType::AppearingFloor, ItemType::CollapsingFloor, tileXIdx, tileYIdx);
 
                                     if (itemIdx != Constants::NoItemFound) {
 
@@ -660,7 +660,7 @@ void game() {
 
                             case CanJumpUpResult::JumpThenFall_CollapseFloorAbove:
                                 {
-                                    uint8_t itemIdx = level.getItem(ItemType::CollapsingFloor, tileXIdx, tileYIdx);
+                                    uint8_t itemIdx = level.getItem(ItemType::AppearingFloor, ItemType::CollapsingFloor, tileXIdx, tileYIdx);
 
                                     if (itemIdx != Constants::NoItemFound) {
 
@@ -677,7 +677,7 @@ void game() {
                             case CanJumpUpResult::StepThenJumpThenFall_CollapseFloor:
                                 {
                                     tileXIdx = tileXIdx + prince.getDirectionOffset(1);
-                                    uint8_t itemIdx = level.getItem(ItemType::CollapsingFloor, tileXIdx, tileYIdx);
+                                    uint8_t itemIdx = level.getItem(ItemType::AppearingFloor, ItemType::CollapsingFloor, tileXIdx, tileYIdx);
 
                                     if (itemIdx != Constants::NoItemFound) {
 
@@ -1765,7 +1765,10 @@ void game() {
                 int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x + imageDetails.toe);
                 int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y);
                 uint8_t itemIdx = level.getItem(ItemType::InteractiveItemType_Start, ItemType::InteractiveItemType_End, tileXIdx, tileYIdx);
-
+// Serial.print("xy ");
+// Serial.print(tileXIdx);
+// Serial.print(",");
+// Serial.println(tileYIdx);
 
                 // If no match, test with player's heel ..
 
@@ -1780,7 +1783,8 @@ void game() {
                 if (itemIdx != Constants::NoItemFound) {
 
                     Item &item = level.getItem(itemIdx);
-
+// Serial.print("item ");
+// Serial.println((uint8_t)item.itemType);
                     switch (item.itemType) {
                         
                         case ItemType::CollapsingFloor:
@@ -1791,6 +1795,11 @@ void game() {
 
                             }
 
+                            break;
+                        
+                        case ItemType::AppearingFloor:
+// Serial.println("Appea");
+                            item.data.appearingFloor.visible = true;
                             break;
 
                         case ItemType::FloorButton1:
