@@ -26,7 +26,7 @@ struct TitleScreenVars {
         this->count = 0;
         this->option = TitleScreenOptions::Play;
         this->mode = TitleScreenMode::Intro;
-        FX::setFrame(Title_Intro_Frame,0);
+        FX::setFrame(Title_Intro_Frame_NoHigh, 0); //SJH fix
 
     }
 
