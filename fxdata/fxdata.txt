@@ -12,6 +12,7 @@ namespace Levels {
     include "Level10.txt"
     include "Level11.txt"
     include "Level12.txt"
+    include "Level13.txt"
 
     uint24_t level_FG[] = {
         0,         // dummy
@@ -26,7 +27,8 @@ namespace Levels {
         Level9_FG,
         Level10_FG,
         Level11_FG,
-        Level12_FG
+        Level12_FG,
+        Level13_FG
     };
 
     uint24_t Level_BG[] = {
@@ -42,7 +44,8 @@ namespace Levels {
         Level9_BG,
         Level10_BG,
         Level11_BG,
-        Level12_BG
+        Level12_BG,
+        Level13_BG
     };
 
     uint24_t level_Data[] = {
@@ -58,7 +61,8 @@ namespace Levels {
         level9_Data,
         level10_Data,
         level11_Data,
-        level12_Data
+        level12_Data,
+        level13_Data
     };
 
     uint24_t Level_Items[] = {
@@ -74,7 +78,8 @@ namespace Levels {
         Level9_Items,
         Level10_Items,
         Level11_Items,
-        Level12_Items
+        Level12_Items,
+        Level13_Items
     };
 }
 

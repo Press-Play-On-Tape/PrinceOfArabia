@@ -47,6 +47,14 @@ void testScroll(GamePlay &gamePlay, Prince &prince, Level &level) {
         level.setXLocation(level.getXLocation() - 10);
         level.loadMap(gamePlay);
 
+        if (gamePlay.level == 13 && level.getXLocation() == 0 && level.getYLocation() == 0) {
+
+            gamePlay.gameState = GameState::Title;
+            titleScreenVars.setMode(TitleScreenMode::CutScene_9, level);
+            setRenderChamberBG();
+
+        }
+
     }
     else if (prince.getX() > Constants::TileWidth * Constants::ScreenWidthInTiles) {
 

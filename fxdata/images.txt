@@ -43,6 +43,8 @@ namespace Images {
     image_t Potions_Poison = "../images/items/Potions_Poison_6x15_1.png"
     image_t Potions_Float = "../images/items/Potions_Float_6x15_1.png"
 
+    image_t DecorativeDoor = "../images/items/DecorativeDoor.png"
+
     image_t CollapsedFloor = "../images/items/CollapsedTile.png"
     image_t CollapsingFloors = "../images/items/CollapsingTiles_21x31_1.png"
     image_t FloorButtons_0and1 = "../images/items/FloorButtons_0and1_21x32_1.png"

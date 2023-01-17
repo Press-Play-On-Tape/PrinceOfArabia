@@ -33,6 +33,7 @@ enum class ItemType : uint8_t {
     /* 29 */ Mirror,
     /* 30 */ Gate_StayClosed,
     /* 31 */ EntryDoor,
+    /* 32 */ DecorativeDoor,
     /* 96 */ None = 96,
     /* 97 */ LoveHeart = 97,
     /* 98 */ Sign = 98,

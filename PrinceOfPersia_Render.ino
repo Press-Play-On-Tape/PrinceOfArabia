@@ -193,6 +193,10 @@ void render(bool enemyVisible, bool sameLevelAsPrince) {
                     }
                     break;
 
+                case ItemType::DecorativeDoor:
+                    FX::drawBitmap(xLoc - 2, yLoc - 21, Images::DecorativeDoor, 0, dbmNormal);
+                    break;
+
                 default: break;
 
             }

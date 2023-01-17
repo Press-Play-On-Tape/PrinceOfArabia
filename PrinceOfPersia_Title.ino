@@ -171,10 +171,14 @@ void title() {
             if (!FX::drawFrame()) {
 
                 if (titleScreenVars.option == TitleScreenOptions::Play) {
-                    FX::setFrame(Title_Main_Game_Frame,0);
+
+                    FX::setFrame(Title_Main_Game_Frame, 0);
+
                 } 
                 else {
-                  FX::setFrame(Title_Main_Credits_Frame,0);
+
+                    FX::setFrame(Title_Main_Credits_Frame, 0);
+                    
                 }
 
             }
