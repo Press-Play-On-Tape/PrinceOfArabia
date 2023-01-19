@@ -32,6 +32,7 @@ void renderChamberFG(uint8_t hourglassX = 0, uint8_t hourglassIdx = 0) {
 //
 void title() { 
 
+    bool high = EEPROM_Utils::hasHighScore();
     auto justPressed = arduboy.justPressedButtons();
 
     switch (titleScreenVars.getMode()) {
@@ -39,11 +40,19 @@ void title() {
         case TitleScreenMode::Main:
 
             if (justPressed & LEFT_BUTTON) {
-                titleScreenVars.option = TitleScreenOptions::Play;
+
+                if (titleScreenVars.option != TitleScreenOptions::Play) {
+                    titleScreenVars.option = static_cast<TitleScreenOptions>(static_cast<uint8_t>(titleScreenVars.option) - 1);
+                }
+
             }
 
             if (justPressed & RIGHT_BUTTON) {
-                titleScreenVars.option = TitleScreenOptions::Credits;
+
+                if ((titleScreenVars.option == TitleScreenOptions::Play) || high) {
+                    titleScreenVars.option = static_cast<TitleScreenOptions>(static_cast<uint8_t>(titleScreenVars.option) + 1);
+                }
+
             }
 
             if (justPressed & (A_BUTTON | B_BUTTON)) {
@@ -77,6 +86,11 @@ void title() {
 
                             break;
 
+                        case TitleScreenOptions::High:
+
+                            titleScreenVars.setMode(TitleScreenMode::High, level);
+                            break;
+
                     #endif
 
                     default: break;
@@ -89,10 +103,19 @@ void title() {
         #ifndef SAVE_MEMORY_OTHER
 
             case TitleScreenMode::Credits:
+            case TitleScreenMode::High:
 
                 if (justPressed & (A_BUTTON | B_BUTTON)) {
+
                     titleScreenVars.setMode(TitleScreenMode::Main, level);
-                    FX::setFrame(Title_Main_Frame, 2 - 1);
+
+                    if (high) {
+                        FX::setFrame(Title_Main_Frame_WithHigh, 2 - 1);
+                    }
+                    else {
+                        FX::setFrame(Title_Main_Frame_NoHigh, 2 - 1);
+                    }
+
                 }
 
                 break;
@@ -140,6 +163,15 @@ void title() {
                 }
 
                 break;
+
+            case TitleScreenMode::CutScene_9:
+
+                if (justPressed & (A_BUTTON | B_BUTTON)) {
+                    gamePlay.gameState = GameState::Title_Init; 
+                }
+
+                break;
+
         #endif
 
         default: break;
@@ -156,11 +188,24 @@ void title() {
 
             if (!FX::drawFrame()) {
 
-                FX::setFrame(Title_Intro_Last_Frame, 0);
+                if (high) {
+                    FX::setFrame(Title_Intro_Last_Frame_WithHigh, 2 - 1);
+                }
+                else {
+                    FX::setFrame(Title_Intro_Last_Frame_NoHigh, 2 - 1);
+                }
 
                 if (justPressed) {
+                    
                     titleScreenVars.setMode(TitleScreenMode::Main, level);
-                    FX::setFrame(Title_Main_Frame, 2 - 1);
+
+                    if (high) {
+                        FX::setFrame(Title_Main_Frame_WithHigh, 2 - 1);
+                    }
+                    else {
+                        FX::setFrame(Title_Main_Frame_NoHigh, 2 - 1);
+                    }
+
                 }
 
             }
@@ -170,15 +215,35 @@ void title() {
 
             if (!FX::drawFrame()) {
 
-                if (titleScreenVars.option == TitleScreenOptions::Play) {
+                switch (titleScreenVars.option) {
 
-                    FX::setFrame(Title_Main_Game_Frame, 0);
+                    case TitleScreenOptions::Play:
+                        
+                        if (high) {
+                            FX::setFrame(Title_Main_Game_Frame_WithHigh, 2 - 1);
+                        }
+                        else {
+                            FX::setFrame(Title_Main_Game_Frame_NoHigh, 2 - 1);
+                        }
 
-                } 
-                else {
+                        break;
 
-                    FX::setFrame(Title_Main_Credits_Frame, 0);
-                    
+                    case TitleScreenOptions::Credits:
+                        
+                        if (high) {
+                            FX::setFrame(Title_Main_Credits_Frame_WithHigh, 2 - 1);
+                        }
+                        else {
+                            FX::setFrame(Title_Main_Credits_Frame_NoHigh, 2 - 1);
+                        }
+
+                        break;
+
+                    case TitleScreenOptions::High:
+
+                        FX::setFrame(Title_Main_High_Frame_WithHigh, 2 - 1);
+                        break;
+                        
                 }
 
             }
@@ -190,6 +255,19 @@ void title() {
             case TitleScreenMode::Credits:
 
                 FX::drawFrame();
+
+                break;
+            
+            case TitleScreenMode::High:
+                
+                FX::drawBitmap(0, 0, Images::Title_PoP, 0, dbmMasked);
+                FX::drawBitmap(38, 32, Images::HighScore, 0, dbmNormal);
+
+                FX::drawBitmap(38, 40, Images::Numbers_Large, EEPROM_Utils::getMin(), dbmNormal);
+                FX::drawBitmap(62, 42, Images::Numbers_Divider, 0, dbmNormal);
+                FX::drawBitmap(68, 40, Images::Numbers_Large, EEPROM_Utils::getSec(), dbmNormal);
+
+                renderTorches(10, 114, 40);
 
                 break;
 

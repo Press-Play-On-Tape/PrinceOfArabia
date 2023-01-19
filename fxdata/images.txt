@@ -3,7 +3,8 @@ namespace Images {
     image_t PPOT = "../images/splash/PPOT_65x31_1.png"
 
     image_t Title_PoP = "../images/title/Title_PoP.png"
-    image_t Title_Main = "../images/title/Title_Main.png"
+    image_t Title_Main_NoHigh = "../images/title/Title_Main_NoHigh.png"
+    image_t Title_Main_WithHigh = "../images/title/Title_Main_WithHigh.png"
     image_t Title_Cursor = "../images/title/Title_Cursor.png"
     image_t Title_Credits = "../images/title/Title_Credits.png"
 
@@ -27,10 +28,13 @@ namespace Images {
     image_t Sword_Cursor = "../images/hud/Sword.png"
     image_t HUD_Backgrounds = "../images/hud/HUD_Background_8x64_1.png"
     image_t Numbers = "../images/hud/Numbers_11x7_1.png"
+    image_t Numbers_Large = "../images/hud/Numbers_22x14_2.png"    
     image_t Numbers_Small = "../images/hud/Numbers_Small_5x7_1.png"
+    image_t Numbers_Divider = "../images/hud/Numbers_Divider.png"
     image_t Healths = "../images/hud/Health_5x3_1.png"
     image_t Sword_HUD = "../images/hud/Sword_HUD.png"
     image_t Potion_Float_HUD = "../images/hud/Float.png"
+    image_t HighScore = "../images/title/HighScore.png"
 
     image_t Sword = "../images/items/Sword.png"
     image_t Skeleton = "../images/items/Skeleton.png"
