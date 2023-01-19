@@ -33,8 +33,6 @@ void renderChamberFG(uint8_t hourglassX = 0, uint8_t hourglassIdx = 0) {
 void title() { 
 
     bool high = EEPROM_Utils::hasHighScore();
-    // high = false;
-
     auto justPressed = arduboy.justPressedButtons();
 
     switch (titleScreenVars.getMode()) {
