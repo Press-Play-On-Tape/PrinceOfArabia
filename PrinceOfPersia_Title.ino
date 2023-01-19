@@ -32,8 +32,8 @@ void renderChamberFG(uint8_t hourglassX = 0, uint8_t hourglassIdx = 0) {
 //
 void title() { 
 
-    bool high = !EEPROM_Utils::hasHighScore();
-    // high = true;
+    bool high = EEPROM_Utils::hasHighScore();
+    // high = false;
 
     auto justPressed = arduboy.justPressedButtons();
 
@@ -165,6 +165,15 @@ void title() {
                 }
 
                 break;
+
+            case TitleScreenMode::CutScene_9:
+
+                if (justPressed & (A_BUTTON | B_BUTTON)) {
+                    gamePlay.gameState = GameState::Title_Init; 
+                }
+
+                break;
+
         #endif
 
         default: break;

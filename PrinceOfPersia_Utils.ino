@@ -52,6 +52,11 @@ void testScroll(GamePlay &gamePlay, Prince &prince, Level &level) {
             gamePlay.gameState = GameState::Title;
             titleScreenVars.setMode(TitleScreenMode::CutScene_9, level);
             setRenderChamberBG();
+            EEPROM_Utils::saveHighScore(gamePlay.timer_Min, gamePlay.timer_Sec);
+
+            #ifndef SAVE_MEMORY_SOUND
+                sound.tonesFromFX(Sounds::Victory);
+            #endif
 
         }
 
