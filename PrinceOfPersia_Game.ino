@@ -11,7 +11,7 @@
 
 void game_Init() {
 
-    gamePlay.init(arduboy, 12);
+    gamePlay.init(12);
 
     #ifndef SAVE_MEMORY_ENEMY
         level.init_PositionChars(gamePlay, prince, enemy, true);
@@ -156,16 +156,7 @@ void game() {
 
     #ifndef SAVE_MEMORY_ENEMY
 
-        if (enemy.isEmpty()) {
-
-             isEnemyVisible(true, enemyIsVisible, sameLevelAsPrince);
-
-        }
-        else {
-
-             isEnemyVisible(false, enemyIsVisible, sameLevelAsPrince);
-
-        }
+        isEnemyVisible(enemy.isEmpty(), enemyIsVisible, sameLevelAsPrince);
 
 
         // If within distance, we can draw swords if we have one!

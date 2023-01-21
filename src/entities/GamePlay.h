@@ -17,9 +17,8 @@ struct GamePlay {
     uint8_t timeRemaining = 0;
 
 
-    void init(Arduboy2Ext & arduboy, uint8_t level) {
+    void init(uint8_t level) {
 
-        //this->frameCount = arduboy.getFrameCount();
         this->frameCount = 0;
 
         this->level = level;
@@ -33,7 +32,6 @@ struct GamePlay {
 
     void restartLevel(Arduboy2Ext & arduboy) {
 
-        //this->frameCount = arduboy.getFrameCount();
         this->frameCount = 0;
 
         this->timeRemaining = 124;
