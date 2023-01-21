@@ -17,7 +17,5 @@ struct Cookie {
     #ifndef SAVE_MEMORY_ENEMY
     Enemy enemy;
     #endif
-    
-    TitleScreenVars titleScreenVars;
 
 };

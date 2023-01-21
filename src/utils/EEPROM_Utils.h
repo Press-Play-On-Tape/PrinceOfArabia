@@ -65,7 +65,7 @@ bool EEPROM_Utils::isSaved() {
 
     if (eeprom_read_byte(EEPROM_START_C1) != letter1) return false;
     if (eeprom_read_byte(EEPROM_START_C2) != letter2) return false;
-    if (eeprom_read_byte(EEPROM_SAVED_LEVEL) != savedGame) return false;
+    return (eeprom_read_byte(EEPROM_SAVED_LEVEL) == savedGame);
 
 }
 

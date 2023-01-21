@@ -39,7 +39,7 @@ Enemy &enemy = cookie.enemy;
 
 Level &level = cookie.level;
 GamePlay &gamePlay = cookie.gamePlay;
-TitleScreenVars titleScreenVars = cookie.titleScreenVars;
+TitleScreenVars titleScreenVars;
 MenuItem menu;
 
 #ifndef SAVE_MEMORY_OTHER

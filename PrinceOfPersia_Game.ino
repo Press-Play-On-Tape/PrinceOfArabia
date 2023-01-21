@@ -28,7 +28,7 @@ void game_Init() {
 
 void game_StartLevel() {
 
-    gamePlay.restartLevel(arduboy);
+    gamePlay.restartLevel();
 
     #ifndef SAVE_MEMORY_ENEMY
         level.init_PositionChars(gamePlay, prince, enemy, false);
