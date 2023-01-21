@@ -8,7 +8,7 @@ int8_t Level13_BG[] = {
 
 uint8_t level13_Data[] = {
     // Prince
-    50,                         // Prince starting x pos
+    58,                         // Prince starting x pos
     56,                         // Prince starting y pos (25, 56, 87)
     1,                          // Prince starting direction, 1 Left and 2 Right
     3,                          // Prince starting stance Min, 3 Crouch_3_End
@@ -25,7 +25,7 @@ uint8_t level13_Data[] = {
 
 uint8_t Level13_Items[] = {
 
-    28, 44, 1,                  // Entry Gate 
+    31, 44, 1,                   // Entry Gate 
 
     17, 40, 1, 0, 48,            // Gate #1
     2, 52, 1, 1, 0, 0,           // Floor Button 1

@@ -8,7 +8,7 @@
 #define _SAVE_MEMORY_SOUND
 #define _SAVE_MEMORY_ENEMY
 #define _ALT_B_BUTTON
-#define GIVE_SWORD
+#define _GIVE_SWORD
 
 #define LEVEL_DATA_FROM_FX
 #define IMAGE_DATA_FROM_FX
