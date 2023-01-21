@@ -34,27 +34,44 @@ void title() {
 
     auto justPressed = arduboy.justPressedButtons();
 
-    switch (titleScreenVars.getMode()) {
+    if (titleScreenVars.getMode() == TitleScreenMode::Main) {
+
+        if (justPressed & LEFT_BUTTON) {
+
+            if (titleScreenVars.option != TitleScreenOptions::Play) {
+                titleScreenVars.option = static_cast<TitleScreenOptions>(static_cast<uint8_t>(titleScreenVars.option) - 1);
+            }
+
+        }
+
+        if (justPressed & RIGHT_BUTTON) {
+
+        #ifndef SAVE_MEMORY_TITLE
+
+            if ((titleScreenVars.option == TitleScreenOptions::Play) || cookie.hasSavedScore) {
+
+                titleScreenVars.option = static_cast<TitleScreenOptions>(static_cast<uint8_t>(titleScreenVars.option) + 1);
+            }
+
+        #else
+
+            if ((titleScreenVars.option != TitleScreenOptions::High)) {
+
+                titleScreenVars.option = static_cast<TitleScreenOptions>(static_cast<uint8_t>(titleScreenVars.option) + 1);
+            }
+
+        #endif
+
+        }
+    }
+
+    if (justPressed & (A_BUTTON | B_BUTTON)) {
+
+        switch (titleScreenVars.getMode()) {
 
         case TitleScreenMode::Main:
 
-            if (justPressed & LEFT_BUTTON) {
-
-                if (titleScreenVars.option != TitleScreenOptions::Play) {
-                    titleScreenVars.option = static_cast<TitleScreenOptions>(static_cast<uint8_t>(titleScreenVars.option) - 1);
-                }
-
-            }
-
-            if (justPressed & RIGHT_BUTTON) {
-
-                if ((titleScreenVars.option == TitleScreenOptions::Play) || cookie.hasSavedScore) {
-                    titleScreenVars.option = static_cast<TitleScreenOptions>(static_cast<uint8_t>(titleScreenVars.option) + 1);
-                }
-
-            }
-
-            if (justPressed & (A_BUTTON | B_BUTTON)) {
+            {
 
                 switch (titleScreenVars.option) {
 
@@ -88,6 +105,7 @@ void title() {
                         case TitleScreenOptions::High:
 
                             titleScreenVars.setMode(TitleScreenMode::High, level);
+                            FX::setFrame(Title_High_Frame, 5 - 1);
                             break;
 
                     #endif
@@ -104,7 +122,7 @@ void title() {
             case TitleScreenMode::Credits:
             case TitleScreenMode::High:
 
-                if (justPressed & (A_BUTTON | B_BUTTON)) {
+                {
 
                     titleScreenVars.setMode(TitleScreenMode::Main, level);
 
@@ -129,7 +147,7 @@ void title() {
 
             case TitleScreenMode::IntroGame_1A:
 
-                if (justPressed & (A_BUTTON | B_BUTTON)) {
+                {
 
                     #ifndef SAVE_MEMORY_SOUND
                         sound.tonesFromFX(Sounds::Seque);
@@ -144,7 +162,7 @@ void title() {
 
             case TitleScreenMode::CutScene_1:
 
-                if (justPressed & (A_BUTTON | B_BUTTON)) {
+                {
                     titleScreenVars.setMode(TitleScreenMode::IntroGame_1B, level);
                     gamePlay.gameState = GameState::Game_Init; 
                     fadeEffect.reset();
@@ -154,7 +172,7 @@ void title() {
 
             case TitleScreenMode::IntroGame_1B:
 
-                if (justPressed & (A_BUTTON | B_BUTTON)) {
+                {
                     gamePlay.gameState = GameState::Game_Init; 
                 }
 
@@ -165,7 +183,7 @@ void title() {
             case TitleScreenMode::CutScene_4:
             case TitleScreenMode::CutScene_5:
 
-                if (justPressed & (A_BUTTON | B_BUTTON)) {
+                {
                     gamePlay.gameState = GameState::Game_StartLevel; 
                 }
 
@@ -173,7 +191,7 @@ void title() {
 
             case TitleScreenMode::CutScene_9:
 
-                if (justPressed & (A_BUTTON | B_BUTTON)) {
+                {
                     gamePlay.gameState = GameState::Title_Init; 
                 }
 
@@ -183,6 +201,7 @@ void title() {
 
         default: break;
 
+    }
     }
 
 
@@ -299,14 +318,14 @@ void title() {
             
             case TitleScreenMode::High:
                 
-                FX::drawBitmap(0, 0, Images::Title_PoP, 0, dbmMasked);
-                FX::drawBitmap(38, 32, Images::HighScore, 0, dbmNormal);
-
+                //FX::drawBitmap(0, 0, Images::Title_PoP, 0, dbmMasked);
+                //FX::drawBitmap(38, 32, Images::HighScore, 0, dbmNormal);
+                FX::drawFrame();
                 FX::drawBitmap(38, 40, Images::Numbers_Large, cookie.highMin, dbmNormal);
-                FX::drawBitmap(62, 42, Images::Numbers_Divider, 0, dbmNormal);
+                //FX::drawBitmap(62, 42, Images::Numbers_Divider, 0, dbmNormal);
                 FX::drawBitmap(68, 40, Images::Numbers_Large, cookie.highSec, dbmNormal);
 
-                renderTorches(10, 114, 40);
+                //renderTorches(10, 114, 40);
 
                 break;
 

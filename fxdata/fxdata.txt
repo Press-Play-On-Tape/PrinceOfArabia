@@ -151,6 +151,26 @@ Title_Main_High_Frame_WithHigh[] = {
 
 include 'Title_Credits_Frame.txt'
 
+Title_High_Frame[] = {
+    int16_t  38, 32, uint24_t HighScore,       uint8_t 0, dbmNormal
+    int16_t  62, 42, uint24_t Numbers_Divider, uint8_t 0, dbmNormal
+    int16_t  10, 40, uint24_t Torches,         uint8_t 0, dbmMasked
+    int16_t 114, 40, uint24_t Torches,         uint8_t 0, dbmMasked
+    int16_t   0,  0, uint24_t Title_PoP,       uint8_t 0, dbmMasked_end
+    
+    int16_t  38, 32, uint24_t HighScore,       uint8_t 0, dbmNormal
+    int16_t  62, 42, uint24_t Numbers_Divider, uint8_t 0, dbmNormal
+    int16_t  10, 40, uint24_t Torches,         uint8_t 1, dbmMasked
+    int16_t 114, 40, uint24_t Torches,         uint8_t 1, dbmMasked
+    int16_t   0,  0, uint24_t Title_PoP,       uint8_t 0, dbmMasked_end
+
+    int16_t  38, 32, uint24_t HighScore,       uint8_t 0, dbmNormal
+    int16_t  62, 42, uint24_t Numbers_Divider, uint8_t 0, dbmNormal
+    int16_t  10, 40, uint24_t Torches,         uint8_t 2, dbmMasked
+    int16_t 114, 40, uint24_t Torches,         uint8_t 2, dbmMasked
+    int16_t   0,  0, uint24_t Title_PoP,       uint8_t 0, dbmMasked_last
+}
+
 include 'Title_IntroGame_1A_Frame.txt'
 include 'Title_CutScene_1_Frame.txt'
 include 'Title_IntroGame_1B_Frame.txt'
