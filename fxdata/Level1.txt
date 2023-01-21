@@ -43,7 +43,8 @@ uint8_t level1_Data[] = {
 };
 
 uint8_t Level1_Items[] = {
-    16, 84, 4, 82, 86,          // Exit Gate, let position for open, right position                                                        
+    26, 84, 4, 82, 86,          // Exit Gate, let position for open, right position                                                        
+    5, 80, 3,                   // Exit Button 
 
     17, 50, 3, 0, 64,           // Gate #1
     2, 46, 3, 1, 0, 0,          // Floor Button 1 

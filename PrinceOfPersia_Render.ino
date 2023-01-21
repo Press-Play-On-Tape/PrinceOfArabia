@@ -262,7 +262,7 @@ void render(bool enemyVisible, bool sameLevelAsPrince) {
 
                     case EnemyType::Guard:
                     case EnemyType::Skeleton:
-                        imagePos = (enemy.getDirection() == Direction::Left ? Images::Prince_Left : Images::Prince_Right);
+                        imagePos = (enemy.getDirection() == Direction::Left ? Images::Enemy_Left : Images::Enemy_Right);
                         break;
 
                     case EnemyType::Mirror:

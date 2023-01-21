@@ -135,7 +135,7 @@ struct Level {
                 this->yLoc = yLoc;
 
                 this->loadMap(gamePlay);
-                this->loadItems(gamePlay);
+                this->loadItems(gamePlay, prince);
 
                 if (prince.getY() > 56) {
 
@@ -186,7 +186,7 @@ struct Level {
                     FX::readEnd();
 
                     this->loadMap(gamePlay);
-                    this->loadItems(gamePlay);
+                    this->loadItems(gamePlay, prince);
 
                     if (prince.getY() > 56) {
 
@@ -1137,7 +1137,7 @@ struct Level {
 
         }
 
-        void loadItems(GamePlay &gamePlay) {
+        void loadItems(GamePlay &gamePlay, Prince &prince) {
 
 
             // Deactivate all items ..            
@@ -1188,12 +1188,6 @@ struct Level {
                         }
                         break;
 
-                    // case ItemType::Gate_StayOpen:
-                    //     item.data.gate.position = FX::readPendingUInt8();
-                    //     item.data.gate.direction = static_cast<Direction>(FX::readPendingUInt8());
-                    //     item.data.gate.closingDelay = 0;
-                    //     break;
-
                     case ItemType::CollapsingFloor:
                         item.data.collapsingFloor.timeToFall = 0;
                         item.data.collapsingFloor.frame = 0;
@@ -1234,6 +1228,8 @@ struct Level {
             }
 
             FX::readEnd();
+
+            prince.setSword(gamePlay.level > 0);
 
         }
 
