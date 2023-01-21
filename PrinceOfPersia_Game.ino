@@ -1034,7 +1034,7 @@ void game() {
                             prince.pushSequence(Stance::Crouch_Stand_3, Stance::Crouch_Stand_12_End, Stance::Upright, true);
 
                         }
-                        else if ((pressed & LEFT_BUTTON) || (pressed & RIGHT_BUTTON)) {
+                        else if ((prince.getDirection() == Direction::Left && (pressed & LEFT_BUTTON)) || (prince.getDirection() == Direction::Right && (pressed & RIGHT_BUTTON))) {
 
                             if (level.canMoveForward(prince, Action::CrouchHop)) {
                                 prince.pushSequence(Stance::Crouch_HOP_1_Start, Stance::Crouch_HOP_7_End, true);
