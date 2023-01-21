@@ -30,7 +30,7 @@ struct GamePlay {
 
     }
 
-    void restartLevel(Arduboy2Ext & arduboy) {
+    void restartLevel() {
 
         this->frameCount = 0;
 
