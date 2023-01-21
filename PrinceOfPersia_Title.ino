@@ -32,7 +32,6 @@ void renderChamberFG(uint8_t hourglassX = 0, uint8_t hourglassIdx = 0) {
 //
 void title() { 
 
-    bool high = EEPROM_Utils::hasHighScore();
     auto justPressed = arduboy.justPressedButtons();
 
     switch (titleScreenVars.getMode()) {
@@ -49,7 +48,7 @@ void title() {
 
             if (justPressed & RIGHT_BUTTON) {
 
-                if ((titleScreenVars.option == TitleScreenOptions::Play) || high) {
+                if ((titleScreenVars.option == TitleScreenOptions::Play) || cookie.hasSavedScore) {
                     titleScreenVars.option = static_cast<TitleScreenOptions>(static_cast<uint8_t>(titleScreenVars.option) + 1);
                 }
 
@@ -109,7 +108,7 @@ void title() {
 
                     titleScreenVars.setMode(TitleScreenMode::Main, level);
 
-                    if (high) {
+                    if (cookie.hasSavedScore) {
                         FX::setFrame(Title_Main_Frame_WithHigh, 2 - 1);
                     }
                     else {
@@ -188,7 +187,7 @@ void title() {
 
             if (!FX::drawFrame()) {
 
-                if (high) {
+                if (cookie.hasSavedScore) {
                     FX::setFrame(Title_Intro_Last_Frame_WithHigh, 2 - 1);
                 }
                 else {
@@ -199,7 +198,7 @@ void title() {
                     
                     titleScreenVars.setMode(TitleScreenMode::Main, level);
 
-                    if (high) {
+                    if (cookie.hasSavedScore) {
                         FX::setFrame(Title_Main_Frame_WithHigh, 2 - 1);
                     }
                     else {
@@ -219,7 +218,7 @@ void title() {
 
                     case TitleScreenOptions::Play:
                         
-                        if (high) {
+                        if (cookie.hasSavedScore) {
                             FX::setFrame(Title_Main_Game_Frame_WithHigh, 2 - 1);
                         }
                         else {
@@ -230,7 +229,7 @@ void title() {
 
                     case TitleScreenOptions::Credits:
                         
-                        if (high) {
+                        if (cookie.hasSavedScore) {
                             FX::setFrame(Title_Main_Credits_Frame_WithHigh, 2 - 1);
                         }
                         else {
@@ -263,9 +262,9 @@ void title() {
                 FX::drawBitmap(0, 0, Images::Title_PoP, 0, dbmMasked);
                 FX::drawBitmap(38, 32, Images::HighScore, 0, dbmNormal);
 
-                FX::drawBitmap(38, 40, Images::Numbers_Large, EEPROM_Utils::getMin(), dbmNormal);
+                FX::drawBitmap(38, 40, Images::Numbers_Large, cookie.highMin, dbmNormal);
                 FX::drawBitmap(62, 42, Images::Numbers_Divider, 0, dbmNormal);
-                FX::drawBitmap(68, 40, Images::Numbers_Large, EEPROM_Utils::getSec(), dbmNormal);
+                FX::drawBitmap(68, 40, Images::Numbers_Large, cookie.highSec, dbmNormal);
 
                 renderTorches(10, 114, 40);
 

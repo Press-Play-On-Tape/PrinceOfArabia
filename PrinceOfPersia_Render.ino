@@ -484,7 +484,7 @@ void render(bool enemyVisible, bool sameLevelAsPrince) {
 
 void renderMenu() {
 
-    FX::drawBitmap(menu.x, 0, Images::Menu, !(EEPROM_Utils::isSaved()), dbmNormal);
+    FX::drawBitmap(menu.x, 0, Images::Menu, !cookie.hasSavedLevel, dbmNormal);
     FX::drawBitmap(menu.x + 3, 22 + (menu.cursor * 10), Images::Sword_Cursor, 0, dbmNormal);
 
     renderNumber(menu.x + 27, 3, gamePlay.level);

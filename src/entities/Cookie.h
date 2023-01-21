@@ -10,6 +10,12 @@
 
 struct Cookie {
 
+    bool hasSavedLevel;
+    bool hasSavedScore;
+
+    uint8_t highMin;
+    uint8_t highSec;
+
     GamePlay gamePlay;
     Level level;
     Prince prince;

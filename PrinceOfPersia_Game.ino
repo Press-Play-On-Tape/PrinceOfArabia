@@ -11,7 +11,7 @@
 
 void game_Init() {
 
-    gamePlay.init(12);
+    gamePlay.init(13);
 
     #ifndef SAVE_MEMORY_ENEMY
         level.init_PositionChars(gamePlay, prince, enemy, true);
@@ -1248,7 +1248,7 @@ void game() {
 
                 if (justPressed & UP_BUTTON && menu.cursor > 0) {
                     
-                    if (menu.cursor == 3 && !EEPROM_Utils::isSaved()) {
+                    if (menu.cursor == 3 && !cookie.hasSavedLevel) {
                         menu.cursor-=2;
                     }
                     else {
@@ -1259,7 +1259,7 @@ void game() {
 
                 if (justPressed & DOWN_BUTTON && menu.cursor < 3)   {
 
-                    if (menu.cursor == 1 && !EEPROM_Utils::isSaved()) {
+                    if (menu.cursor == 1 && !cookie.hasSavedLevel) {
                         menu.cursor+=2;
                     }
                     else {
@@ -1277,12 +1277,12 @@ void game() {
                             break;
 
                         case MenuOption::Save:
-                            EEPROM_Utils::saveGame(cookie);
+                            EEPROM_Utils::saveCookie(cookie);
                             menu.direction = Direction::Right;  
                             break;
 
                         case MenuOption::Load:
-                            EEPROM_Utils::loadGame(cookie);
+                            EEPROM_Utils::loadCookie(cookie);
                             menu.direction = Direction::Right;  
                             break;
 
