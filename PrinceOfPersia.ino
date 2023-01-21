@@ -70,7 +70,6 @@ void setup() {
         gamePlay.gameState = GameState::Game_Init;
     #else
         gamePlay.gameState = GameState::SplashScreen_Init;
-//        EEPROM_Utils::initEEPROM(cookie);
     #endif
 
 }
@@ -191,12 +190,10 @@ void loop() {
     
         Flash &flash = level.getFlash();
     
-        if ((flash.frame == 2 || flash.frame == 4) && flash.type == FlashType::SwordFight) {
+        if ((flash.frame == 2 || flash.frame == 4) && (flash.type == FlashType::SwordFight || flash.type == FlashType::MirrorLevel12)) {
+
             invert = true;
-        }
-         
-        if ((flash.frame == 2 || flash.frame == 4) && flash.type == FlashType::MirrorLevel12) {
-            invert = true;
+
         }
 
         if (flash.frame == 1 && flash.type == FlashType::MirrorLevel12) {
