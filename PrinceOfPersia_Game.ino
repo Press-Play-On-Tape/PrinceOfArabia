@@ -11,7 +11,7 @@
 
 void game_Init() {
 
-    gamePlay.init(13);
+    gamePlay.init(1);
 
     #ifndef SAVE_MEMORY_ENEMY
         level.init_PositionChars(gamePlay, prince, enemy, true);
@@ -1277,6 +1277,7 @@ void game() {
                             break;
 
                         case MenuOption::Save:
+                            cookie.hasSavedLevel = true;
                             EEPROM_Utils::saveCookie(cookie);
                             menu.direction = Direction::Right;  
                             break;
