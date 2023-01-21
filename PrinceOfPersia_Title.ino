@@ -108,12 +108,20 @@ void title() {
 
                     titleScreenVars.setMode(TitleScreenMode::Main, level);
 
-                    if (cookie.hasSavedScore) {
+                    #ifndef SAVE_MEMORY_TITLE
+
+                        if (cookie.hasSavedScore) {
+                            FX::setFrame(Title_Main_Frame_WithHigh, 2 - 1);
+                        }
+                        else {
+                            FX::setFrame(Title_Main_Frame_NoHigh, 2 - 1);
+                        }
+
+                    #else
+
                         FX::setFrame(Title_Main_Frame_WithHigh, 2 - 1);
-                    }
-                    else {
-                        FX::setFrame(Title_Main_Frame_NoHigh, 2 - 1);
-                    }
+
+                    #endif
 
                 }
 
@@ -187,23 +195,39 @@ void title() {
 
             if (!FX::drawFrame()) {
 
-                if (cookie.hasSavedScore) {
+                #ifndef SAVE_MEMORY_TITLE
+
+                    if (cookie.hasSavedScore) {
+                        FX::setFrame(Title_Intro_Last_Frame_WithHigh, 2 - 1);
+                    }
+                    else {
+                        FX::setFrame(Title_Intro_Last_Frame_NoHigh, 2 - 1);
+                    }
+
+                #else
+
                     FX::setFrame(Title_Intro_Last_Frame_WithHigh, 2 - 1);
-                }
-                else {
-                    FX::setFrame(Title_Intro_Last_Frame_NoHigh, 2 - 1);
-                }
+
+                #endif
 
                 if (justPressed) {
                     
                     titleScreenVars.setMode(TitleScreenMode::Main, level);
 
-                    if (cookie.hasSavedScore) {
+                    #ifndef SAVE_MEMORY_TITLE
+
+                        if (cookie.hasSavedScore) {
+                            FX::setFrame(Title_Main_Frame_WithHigh, 2 - 1);
+                        }
+                        else {
+                            FX::setFrame(Title_Main_Frame_NoHigh, 2 - 1);
+                        }
+
+                    #else
+
                         FX::setFrame(Title_Main_Frame_WithHigh, 2 - 1);
-                    }
-                    else {
-                        FX::setFrame(Title_Main_Frame_NoHigh, 2 - 1);
-                    }
+
+                    #endif
 
                 }
 
@@ -217,24 +241,40 @@ void title() {
                 switch (titleScreenVars.option) {
 
                     case TitleScreenOptions::Play:
-                        
-                        if (cookie.hasSavedScore) {
+
+                        #ifndef SAVE_MEMORY_TITLE                        
+
+                            if (cookie.hasSavedScore) {
+                                FX::setFrame(Title_Main_Game_Frame_WithHigh, 2 - 1);
+                            }
+                            else {
+                                FX::setFrame(Title_Main_Game_Frame_NoHigh, 2 - 1);
+                            }
+
+                        #else
+
                             FX::setFrame(Title_Main_Game_Frame_WithHigh, 2 - 1);
-                        }
-                        else {
-                            FX::setFrame(Title_Main_Game_Frame_NoHigh, 2 - 1);
-                        }
+
+                        #endif
 
                         break;
 
                     case TitleScreenOptions::Credits:
-                        
-                        if (cookie.hasSavedScore) {
+
+                        #ifndef SAVE_MEMORY_TITLE                        
+
+                            if (cookie.hasSavedScore) {
+                                FX::setFrame(Title_Main_Credits_Frame_WithHigh, 2 - 1);
+                            }
+                            else {
+                                FX::setFrame(Title_Main_Credits_Frame_NoHigh, 2 - 1);
+                            }
+
+                        #else
+
                             FX::setFrame(Title_Main_Credits_Frame_WithHigh, 2 - 1);
-                        }
-                        else {
-                            FX::setFrame(Title_Main_Credits_Frame_NoHigh, 2 - 1);
-                        }
+
+                        #endif
 
                         break;
 
