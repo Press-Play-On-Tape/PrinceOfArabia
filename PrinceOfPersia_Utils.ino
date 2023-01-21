@@ -524,46 +524,29 @@ void playGrab() {
 
             enemy.setActiveEnemy(i);
 
-            //if (enemy.getStatus() == Status::Active) {
+            uint8_t tileXIdx = level.coordToTileIndexX(enemy.getPosition().x);
+            uint8_t tileYIdx = level.coordToTileIndexY(enemy.getPosition().y);
 
-                uint8_t tileXIdx = level.coordToTileIndexX(enemy.getPosition().x);
-                uint8_t tileYIdx = level.coordToTileIndexY(enemy.getPosition().y);
+            if (tileXIdx >= level.getXLocation() && tileXIdx < level.getXLocation() + Constants::ScreenWidthInTiles && tileYIdx >= level.getYLocation() && tileYIdx < level.getYLocation() + Constants::ScreenHeightInTiles) {
 
-// Serial.print("Enemy: ");
-// Serial.print(i);
-// Serial.print("tile: ");
-// Serial.print(tileXIdx);
-// Serial.print(",");
-// Serial.print(tileYIdx);
-// Serial.print(", map: ");
-// Serial.print(level.getXLocation());
-// Serial.print(",");
-// Serial.print(level.getYLocation());
+                enemyIsVisible = true;
 
-                if (tileXIdx >= level.getXLocation() && tileXIdx < level.getXLocation() + Constants::ScreenWidthInTiles && tileYIdx >= level.getYLocation() && tileYIdx < level.getYLocation() + Constants::ScreenHeightInTiles) {
-// Serial.print("Enemy found ");
-// Serial.print(i);
-                    enemyIsVisible = true;
+                int8_t princeTileYIdx = level.coordToTileIndexY(prince.getPosition().y);
 
-                    int8_t princeTileYIdx = level.coordToTileIndexY(prince.getPosition().y);
-
-                    if (princeTileYIdx == tileYIdx) {
-                        
-                        onSameLevelAsPrince = true;
-
-                    }
+                if (princeTileYIdx == tileYIdx) {
+                    
+                    onSameLevelAsPrince = true;
 
                 }
 
-                if (enemy.getHealth() == 0 && enemy.getMoveCount() > 0) {
+            }
 
-                    enemy.decMoveCount();
+            if (enemy.getHealth() == 0 && enemy.getMoveCount() > 0) {
 
-                }
-// Serial.println("");
-                if (enemyIsVisible) break;
+                enemy.decMoveCount();
 
-            //}
+            }
+            if (enemyIsVisible) break;
             
         }
 

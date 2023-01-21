@@ -52,6 +52,7 @@ class Enemy : public BaseStack {
             this->base[this->count].setHealth(health);
             this->base[this->count].setHealthMax(health);
             this->base[this->count].setStatus(status);
+            // this->base[this->count].setDrawnSword(0);
             this->count++;
             
         }

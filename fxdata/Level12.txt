@@ -20,6 +20,15 @@ uint8_t level12_Data[] = {
     50,                         // Level x starting position
     18,                         // Level y starting position
     // Enemy 1      
+    3,                          // Type 0 = Guard, 1 = Skeleton, 2 = Mirror, 3 MirrorAttackingL12, 4 NirrorL12          
+    50,                         // Enemy starting x tile
+    3,                          // Enemy starting y tile
+    2,                          // Enemy starting x pos
+    25,                         // Enemy starting y pos (25, 56, 87)
+    1,                          // Enemy starting direction, 1 Left and 2 Right
+    4,                          // Enemy starting health
+    0,                          // Status 0 Alive, 1 Dead, 2 Dormant
+    // Enemy 2      
     0,                          // Type 0 = Guard, 1 = Skeleton, 2 = Mirror          
     20,                         // Enemy starting x tile
     3,                          // Enemy starting y tile
@@ -34,11 +43,12 @@ uint8_t level12_Data[] = {
 
 uint8_t Level12_Items[] = {
 
-
-
-
     26, 4, 2, 1, 3,              // Exit Gate, left position for open, right position, close button     
     28, 54, 20,                  // Entry Gate   
+
+    17, 52, 6, 0, 64,            // Gate #1
+    2, 51, 5, 1, 0, 0,           // Floor Button 1
+    2, 49, 6, 1, 0, 0,           // Floor Button 1
 
     0, 36, 3,                   // Appearing Floor   
     0, 37, 3,                   // Appearing Floor   
@@ -64,4 +74,5 @@ uint8_t Level12_Items[] = {
     1, 64, 4,  24,               // CollapsingTile (dist to fall)                                    
 
     255                         // End
+
 }

@@ -23,6 +23,7 @@ class BaseEntity {
         EnemyType enemyType;
 
         Point location;
+        // uint8_t drawnSword = 0;                             // Counts prince draw and sheathed sword.
 
     public:
 
@@ -35,6 +36,8 @@ class BaseEntity {
         int16_t getYImage()                         { return this->y - 31; }                    // -31 moves the player up 5 pixels on the orthagonal tiles ?
         uint8_t getHealth()                         { return this->health; }
         uint8_t getHealthMax()                      { return this->healthMax; }
+        // uint8_t getDrawnSword()                     { return this->drawnSword; }
+       
         Status getStatus()                          { return this->status; }
         EnemyType getEnemyType()                    { return this->enemyType; }
 
@@ -48,6 +51,7 @@ class BaseEntity {
         void setDirection(Direction val)            { this->direction = val; }
         void setHealth(uint8_t val)                 { this->health = val; }
         void setHealthMax(uint8_t val)              { this->healthMax = val; }
+        // void setDrawnSword(uint8_t val)             { this->drawnSword = val; }
         void setStatus(Status val)                  { this->status = val; }
         void setEnemyType(EnemyType val)            { this->enemyType = val; }
 

@@ -169,6 +169,7 @@ enum class SignType : uint8_t {
 enum class FlashType : uint8_t {
     None,
     SwordFight,
+    MirrorLevel12,
 };
 
 enum class LevelUpdate : uint8_t {
@@ -187,6 +188,8 @@ enum class EnemyType : uint8_t {
     Guard,
     Skeleton,
     Mirror,
+    MirrorAttackingL12,
+    MirrorAfterChallengeL12,
     None = 255
 };
 

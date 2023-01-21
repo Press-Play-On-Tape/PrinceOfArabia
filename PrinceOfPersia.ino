@@ -194,21 +194,14 @@ void loop() {
         if ((flash.frame == 2 || flash.frame == 4) && flash.type == FlashType::SwordFight) {
             invert = true;
         }
+         
+        if ((flash.frame == 2 || flash.frame == 4) && flash.type == FlashType::MirrorLevel12) {
+            invert = true;
+        }
 
-
-        // Invert screen during sequence ?
-
-        //if (titleScreenVars.getMode() == TitleScreenMode::CutScene_1) {
-        //
-        //    if (titleScreenVars.count == 168 && titleScreenVars.prevCount != 168) {
-        //        invert = true;
-        //    }
-        //
-        //    if (titleScreenVars.count == 171 && titleScreenVars.prevCount != 171) {
-        //        invert = true;
-        //    }
-        //
-        //}
+        if (flash.frame == 1 && flash.type == FlashType::MirrorLevel12) {
+            enemy.setStatus(Status::Dormant);
+        }
 
         arduboy.invert(invert);
 

@@ -94,6 +94,7 @@ namespace Images {
     // Mirror images
 
     image_t Mirror_Right = "../images/mirror/right/Mirror_Right_36x36.png"
+    image_t Mirror_Left = "../images/mirror/left/Mirror_Left_36x36.png"
 
 }
 

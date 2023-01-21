@@ -266,7 +266,9 @@ void render(bool enemyVisible, bool sameLevelAsPrince) {
                         break;
 
                     case EnemyType::Mirror:
-                        imagePos = Images::Mirror_Right;
+                    case EnemyType::MirrorAttackingL12:
+                    case EnemyType::MirrorAfterChallengeL12:
+                        imagePos = (enemy.getDirection() == Direction::Left ? Images::Mirror_Left : Images::Mirror_Right);
                         break;
 
                     default:

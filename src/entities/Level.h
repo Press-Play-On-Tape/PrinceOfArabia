@@ -599,7 +599,7 @@ struct Level {
                 if (gamePlay.level == 12) {
 
                     #ifndef SAVE_MEMORY_ENEMY
-                        // enemy.init(EnemyType::Mirror, 10 + (0 * Constants::TileWidth), 56 + (0 * Constants::TileHeight), Direction::Right, Stance::Upright, 3, Status::Active);      
+                        enemy.init(EnemyType::MirrorAttackingL12, 2 + (50 * Constants::TileWidth), 25 + (3 * Constants::TileHeight), Direction::Right, Stance::Upright, 3, Status::Active);      
                     #endif
 
                     // Normal
@@ -607,8 +607,17 @@ struct Level {
                     // this->init(gamePlay, prince, 80, 21, 50, 3); 
 
                     // Magic floor
-                    prince.init(98, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
-                    this->init(gamePlay, prince, 80, 21, 40, 3); 
+                    // prince.init(98, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    // this->init(gamePlay, prince, 80, 21, 40, 3); 
+
+                    // Shadow fight
+                    prince.init(98, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    this->init(gamePlay, prince, 80, 21, 60, 3); 
+
+                    // Shadow fight
+                    prince.init(26, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    this->init(gamePlay, prince, 80, 21, 50, 3); 
+
 
                 }
 

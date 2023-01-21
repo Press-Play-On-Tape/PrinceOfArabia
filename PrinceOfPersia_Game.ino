@@ -11,7 +11,7 @@
 
 void game_Init() {
 
-    gamePlay.init(arduboy, 1);
+    gamePlay.init(arduboy, 12);
 
     #ifndef SAVE_MEMORY_ENEMY
         level.init_PositionChars(gamePlay, prince, enemy, true);
@@ -71,28 +71,29 @@ void game() {
 
 
     #ifdef ALT_B_BUTTON
+
         if (justPressed & B_BUTTON) { // echo out details
-            // Serial.print(F("St"));
-            // Serial.print(prince.getStance());
-            // Serial.print(F(" px"));
-            // Serial.print(prince.getX());
-            // Serial.print(F(" x"));
-            // Serial.print(level.coordToTileIndexX((level.getXLocation() * Constants::TileWidth) + prince.getX()));
-            // Serial.print(F(" "));
-            // Serial.print((level.getXLocation() * Constants::TileWidth) + prince.getX());
-            // Serial.print(F(" y"));
-            // Serial.print(level.coordToTileIndexY((level.getYLocation() * Constants::TileHeight) + prince.getY()));
-            // Serial.print(F(" "));
-            // Serial.print(prince.getY());
-            // Serial.print(F(" D"));
-            // Serial.println(level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX()));
+            DEBUG_PRINT(F("St"));
+            DEBUG_PRINT(prince.getStance());
+            DEBUG_PRINT(F(" px"));
+            DEBUG_PRINT(prince.getX());
+            DEBUG_PRINT(F(" x"));
+            DEBUG_PRINT(level.coordToTileIndexX((level.getXLocation() * Constants::TileWidth) + prince.getX()));
+            DEBUG_PRINT(F(" "));
+            DEBUG_PRINT((level.getXLocation() * Constants::TileWidth) + prince.getX());
+            DEBUG_PRINT(F(" y"));
+            DEBUG_PRINT(level.coordToTileIndexY((level.getYLocation() * Constants::TileHeight) + prince.getY()));
+            DEBUG_PRINT(F(" "));
+            DEBUG_PRINT(prince.getY());
+            DEBUG_PRINT(F(" D"));
+            DEBUG_PRINTLN(level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX()));
         }
+
     #endif
 
     #ifdef GIVE_SWORD
         prince.setSword(true);
     #endif
-
 
 
 
@@ -169,7 +170,7 @@ void game() {
 
         // If within distance, we can draw swords if we have one!
 
-        if (justPressed & B_BUTTON && sameLevelAsPrince && prince.getSword() && prince.getStance() == Stance::Upright && prince.isEmpty() && enemy.getHealth() > 0) {
+        if (justPressed & B_BUTTON && sameLevelAsPrince && prince.getSword() && prince.getStance() == Stance::Upright && prince.isEmpty() && enemy.getHealth() > 0 && enemy.getEnemyType() != EnemyType::MirrorAfterChallengeL12) {
             
             prince.pushSequence(Stance::Draw_Sword_1_Start, Stance::Draw_Sword_6_End, Stance::Sword_Normal, true);
             justPressed = 0;
@@ -183,7 +184,8 @@ void game() {
         //
         // ---------------------------------------------------------------------------------------------------------------------------------------
 
-        if (gamePlay.gameState == GameState::Game && enemy.isEmpty() && enemy.getStatus() == Status::Active && enemy.getEnemyType() != EnemyType::Mirror) {
+
+        if (gamePlay.gameState == GameState::Game && enemy.isEmpty() && enemy.getStatus() == Status::Active && enemy.getEnemyType() != EnemyType::Mirror && enemy.getEnemyType() != EnemyType::MirrorAfterChallengeL12) {
 
             BaseEntity enemyBase = enemy.getActiveBase();
 
@@ -1095,6 +1097,25 @@ void game() {
 
                             prince.pushSequence(Stance::Pickup_Sword_7_PutAway, Stance::Pickup_Sword_16_End, Stance::Upright, true);
 
+                            if (gamePlay.level == 12 && enemy.getEnemyType() == EnemyType::MirrorAttackingL12) {
+
+                                switch (enemy.getStance()) {
+
+                                    case Stance::Attack_Block_1_Start ... Stance::Attack_Block_3_End:
+                                    case Stance::Draw_Sword_1_Start ... Stance::Draw_Sword_6_End:
+                                    case Stance::Sword_Step_1_Start ... Stance::Sword_Step_3_End:
+                                    case Stance::Sword_Normal:
+
+                                        enemy.setEnemyType(EnemyType::MirrorAfterChallengeL12);
+                                        enemy.clear();
+                                        enemy.pushSequence(Stance::Pickup_Sword_7_PutAway, Stance::Pickup_Sword_16_End, Stance::Upright, true);
+                                        break;
+
+                                        
+                                }
+
+                            }
+
                         }
 
                         else if (pressed & A_BUTTON) {
@@ -1655,22 +1676,55 @@ void game() {
                             int16_t yDelta = prince.getPosition().y - enemy.getPosition().y;
 
                             if (abs(xDelta) <= Constants::StrikeDistance && yDelta == 0) {
-
-                                initFlash(enemy, level, FlashType::SwordFight);
                             
-                                if (enemy.decHealth(1) == 0) {
+                                if (enemy.getEnemyType() == EnemyType::MirrorAttackingL12) {
 
-                                    pushDead(enemy, true);
-                                    
-                                    prince.clear();
-                                    prince.pushSequence(Stance::Pickup_Sword_7_PutAway, Stance::Pickup_Sword_16_End, Stance::Upright, false);
-                                    prince.pushSequence(Stance::Sword_Attack_6, Stance::Sword_Attack_8_End, Stance::Upright, false);
+
+                                    // Take the health from the prince!
+
+                                    initFlash(prince, level, FlashType::SwordFight);
+
+                                    if (prince.decHealth(1) == 0) {
+
+                                        pushDead(prince, level, gamePlay, true, DeathType::SwordFight);
+                                        
+                                        enemy.clear();
+                                        enemy.pushSequence(Stance::Pickup_Sword_7_PutAway, Stance::Pickup_Sword_16_End, Stance::Upright, false);
+                                        enemy.pushSequence(Stance::Sword_Attack_6, Stance::Sword_Attack_8_End, Stance::Upright, false);
+
+                                    }
+                                    else {
+
+                                        if (level.canMoveForward(enemy.getActiveBase(), Action::SmallStep, enemy.getOppositeDirection())) {
+
+                                            prince.clear();
+                                            prince.pushSequence(Stance::Sword_Step_3_End, Stance::Sword_Step_1_Start, Stance::Sword_Normal, false);
+                                            break;
+
+                                        }
+
+                                    }
 
                                 }
                                 else {
 
-                                    BaseEntity enemyBase = enemy.getActiveBase();
-                                    moveBackwardsWithSword(enemyBase, enemy);
+                                    initFlash(enemy, level, FlashType::SwordFight);
+                                        
+                                    if (enemy.decHealth(1) == 0) {
+
+                                        pushDead(enemy, true);
+                                        
+                                        prince.clear();
+                                        prince.pushSequence(Stance::Pickup_Sword_7_PutAway, Stance::Pickup_Sword_16_End, Stance::Upright, false);
+                                        prince.pushSequence(Stance::Sword_Attack_6, Stance::Sword_Attack_8_End, Stance::Upright, false);
+
+                                    }
+                                    else {
+
+                                        BaseEntity enemyBase = enemy.getActiveBase();
+                                        moveBackwardsWithSword(enemyBase, enemy);
+
+                                    }
 
                                 }
 
@@ -1744,6 +1798,8 @@ void game() {
             }
 
 
+
+
             getStance_Offsets(prince.getDirection(), offset, prince.getStance());
             prince.incX(offset.x * (newStance < 0 ? -1 : 1));
             prince.incY(offset.y * (newStance < 0 ? -1 : 1));
@@ -1765,10 +1821,7 @@ void game() {
                 int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x + imageDetails.toe);
                 int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y);
                 uint8_t itemIdx = level.getItem(ItemType::InteractiveItemType_Start, ItemType::InteractiveItemType_End, tileXIdx, tileYIdx);
-// Serial.print("xy ");
-// Serial.print(tileXIdx);
-// Serial.print(",");
-// Serial.println(tileYIdx);
+
 
                 // If no match, test with player's heel ..
 
@@ -1780,11 +1833,37 @@ void game() {
                 }
 
 
+
+                // Level 12: are we passing the Mirror?
+
+                if (gamePlay.level == 12 && enemy.getEnemyType() == EnemyType::MirrorAfterChallengeL12 && enemy.getStatus() == Status::Active) {
+
+                    Flash &flash = level.getFlash();
+
+                    if (flash.frame == 0) {
+
+                        int8_t enemyTileXIdx = level.coordToTileIndexX(enemy.getPosition().x);
+                        int8_t enemyTileYIdx = level.coordToTileIndexY(enemy.getPosition().y);
+                        
+                        if (tileXIdx == enemyTileXIdx && tileYIdx == enemyTileYIdx) {
+
+                            initFlash(enemy, level, FlashType::MirrorLevel12);
+
+                            #ifndef SAVE_MEMORY_SOUND
+                                sound.tonesFromFX(Sounds::Tada);
+                            #endif
+
+                        }
+
+                    }
+
+                }
+
+
                 if (itemIdx != Constants::NoItemFound) {
 
                     Item &item = level.getItem(itemIdx);
-// Serial.print("item ");
-// Serial.println((uint8_t)item.itemType);
+
                     switch (item.itemType) {
                         
                         case ItemType::CollapsingFloor:
