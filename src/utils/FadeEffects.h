@@ -52,13 +52,13 @@ class FadeEffects {
                 "andi  r24, 0xAA            \n"
                 "st    X, r24               \n"
                 "dec   r25                  \n"
-                "brne  2b                   \n" // while --temp_fadeWidth == 0
+                "brne  2b                   \n" // while --temp_fadeWidth != 0
                 "ldi   r24, %[cols]         \n"
                 "sub   r24, %[width]        \n"
                 "add   r30, r24             \n" // Z += WIDTH - fadeWidth
                 "adc   r31, r1              \n"
                 "dec   r23                  \n"
-                "brne  1b                   \n" // while --r == 0
+                "brne  1b                   \n" // while --r != 0
                 :         "+&z" (buffer)
                 : [width] "r"   (this->fadeWidth),
                   [cols]  "i"   (WIDTH),
