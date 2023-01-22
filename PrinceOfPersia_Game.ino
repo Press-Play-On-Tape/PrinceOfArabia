@@ -11,7 +11,7 @@
 
 void game_Init() {
 
-    gamePlay.init(1);
+    gamePlay.init(2);
 
     #ifndef SAVE_MEMORY_ENEMY
         level.init_PositionChars(gamePlay, prince, enemy, true);
@@ -1828,28 +1828,32 @@ void game() {
 
                 // Level 12: are we passing the Mirror?
 
-                if (gamePlay.level == 12 && enemy.getEnemyType() == EnemyType::MirrorAfterChallengeL12 && enemy.getStatus() == Status::Active) {
+                #ifndef SAVE_MEMORY_ENEMY 
+                    
+                    if (gamePlay.level == 12 && enemy.getEnemyType() == EnemyType::MirrorAfterChallengeL12 && enemy.getStatus() == Status::Active) {
 
-                    Flash &flash = level.getFlash();
+                        Flash &flash = level.getFlash();
 
-                    if (flash.frame == 0) {
+                        if (flash.frame == 0) {
 
-                        int8_t enemyTileXIdx = level.coordToTileIndexX(enemy.getPosition().x);
-                        int8_t enemyTileYIdx = level.coordToTileIndexY(enemy.getPosition().y);
-                        
-                        if (tileXIdx == enemyTileXIdx && tileYIdx == enemyTileYIdx) {
+                            int8_t enemyTileXIdx = level.coordToTileIndexX(enemy.getPosition().x);
+                            int8_t enemyTileYIdx = level.coordToTileIndexY(enemy.getPosition().y);
+                            
+                            if (tileXIdx == enemyTileXIdx && tileYIdx == enemyTileYIdx) {
 
-                            initFlash(enemy, level, FlashType::MirrorLevel12);
+                                initFlash(enemy, level, FlashType::MirrorLevel12);
 
-                            #ifndef SAVE_MEMORY_SOUND
-                                sound.tonesFromFX(Sounds::Tada);
-                            #endif
+                                #ifndef SAVE_MEMORY_SOUND
+                                    sound.tonesFromFX(Sounds::Tada);
+                                #endif
+
+                            }
 
                         }
 
                     }
 
-                }
+                #endif
 
 
                 if (itemIdx != Constants::NoItemFound) {
@@ -1869,7 +1873,7 @@ void game() {
                             break;
                         
                         case ItemType::AppearingFloor:
-// Serial.println("Appea");
+
                             item.data.appearingFloor.visible = true;
                             break;
 

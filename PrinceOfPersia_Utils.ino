@@ -212,8 +212,26 @@ void processStandingJump(Prince &prince, Level &level) {
             prince.pushSequence(Stance::Standing_Jump_Med_1_Start, Stance::Standing_Jump_Med_16_End, Stance::Upright, true);
             break;
 
-        case StandingJumpResult::Short:
-            prince.pushSequence(Stance::Standing_Jump_Short_1_Start, Stance::Standing_Jump_Short_16_End, Stance::Upright, true);
+        case StandingJumpResult::Short_Pos2:
+            prince.pushSequence(Stance::Standing_Jump_Short_2_1_Start, Stance::Standing_Jump_Short_2_16_End, Stance::Upright, true);
+            break;
+
+        case StandingJumpResult::Short_Pos6:
+            prince.pushSequence(Stance::Standing_Jump_Short_6_1_Start, Stance::Standing_Jump_Short_6_16_End, Stance::Upright, true);
+            break;
+
+        case StandingJumpResult::Short_Pos10:
+            prince.pushSequence(Stance::Standing_Jump_Short_10_1_Start, Stance::Standing_Jump_Short_10_16_End, Stance::Upright, true);
+            break;
+
+        case StandingJumpResult::Normal_GrabLedge_Pos2:
+            prince.setHangingCounter(200);
+            prince.pushSequence(Stance::Standing_Jump_GL_2_1_Start, Stance::Standing_Jump_GL_2_18_End, Stance::Jump_Up_A_14_End, true);
+            break;
+
+        case StandingJumpResult::Normal_GrabLedge_Pos6:
+            prince.setHangingCounter(200);
+            prince.pushSequence(Stance::Standing_Jump_GL_6_1_Start, Stance::Standing_Jump_GL_6_18_End, Stance::Jump_Up_A_14_End, true);
             break;
         
         case StandingJumpResult::None:
@@ -664,6 +682,18 @@ void getStance_Offsets(Direction direction, Point &offset, int16_t stance) {
     #else
 
         uint16_t idx = (stance - 1) * 2;
+
+// Serial.print("St: ");
+// Serial.print(stance);
+// Serial.print(", idx: ");
+// Serial.print(idx);
+// Serial.print(", xinc: ");
+// Serial.print(static_cast<int8_t>(pgm_read_byte(&Constants::Stance_XYOffsets[idx])) * (direction == Direction::Left ? -1 : 1) * (stance < 0 ? -1 : 1));
+// Serial.print(", yinc: ");
+// Serial.print(static_cast<int8_t>(pgm_read_byte(&Constants::Stance_XYOffsets[idx + 1])) * (stance < 0 ? -1 : 1));
+// Serial.println("");
+
+
         offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Stance_XYOffsets[idx])) * (direction == Direction::Left ? -1 : 1) * (stance < 0 ? -1 : 1);
         offset.y = static_cast<int8_t>(pgm_read_byte(&Constants::Stance_XYOffsets[idx + 1])) * (stance < 0 ? -1 : 1);
 

@@ -196,9 +196,13 @@ void loop() {
 
         }
 
-        if (flash.frame == 1 && flash.type == FlashType::MirrorLevel12) {
-            enemy.setStatus(Status::Dormant);
-        }
+        #ifndef SAVE_MEMORY_ENEMY
+
+            if (flash.frame == 1 && flash.type == FlashType::MirrorLevel12) {
+                enemy.setStatus(Status::Dormant);
+            }
+
+        #endif
 
         arduboy.invert(invert);
 

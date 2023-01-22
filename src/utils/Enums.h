@@ -114,7 +114,11 @@ enum class StandingJumpResult : uint8_t {
     Normal,
     DropLevel,
     Medium,
-    Short, // Same level but a little shorter.
+    Short_Pos2, // Same level but a little shorter.
+    Short_Pos6, // Same level but a little shorter.
+    Short_Pos10, // Same level but a little shorter.
+    Normal_GrabLedge_Pos2,
+    Normal_GrabLedge_Pos6,
 };
 
 enum class RunningJumpResult : uint8_t {
