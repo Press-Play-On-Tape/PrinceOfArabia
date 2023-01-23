@@ -58,7 +58,15 @@ void setup() {
 
     arduboy.setFrameRate(Constants::FrameRate);
 
+  #ifdef SAVE_TO_FX
+
+    FX::begin(FX_DATA_PAGE, FX_SAVE_PAGE);
+
+  #else
+
     FX::begin(FX_DATA_PAGE);
+
+  #endif
 
     prince.setStack(&princeStack);
 
