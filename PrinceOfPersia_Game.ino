@@ -11,7 +11,7 @@
 
 void game_Init() {
 
-    gamePlay.init(2);
+    gamePlay.init(1);
 
     #ifndef SAVE_MEMORY_ENEMY
         level.init_PositionChars(gamePlay, prince, enemy, true);
@@ -1864,7 +1864,7 @@ void game() {
                         
                         case ItemType::CollapsingFloor:
 
-                            if (item.x == tileXIdx && item.y == tileYIdx && item.data.collapsingFloor.timeToFall == 0) {
+                            if (item.data.location.x == tileXIdx && item.data.location.y == tileYIdx && item.data.collapsingFloor.timeToFall == 0) {
 
                                 item.data.collapsingFloor.timeToFall = Constants::FallingTileSteppedOn;
 
@@ -1934,7 +1934,7 @@ void game() {
 
                                             if (item.itemType == ItemType::Skeleton) {
 
-                                                if (enemy.activateEnemy(item.x, item.y)) {
+                                                if (enemy.activateEnemy(item.data.location.x, item.data.location.y)) {
 
                                                     item.itemType = ItemType::None;
 
@@ -1966,8 +1966,8 @@ void game() {
                                     Flash &flash = level.getFlash();
                                     flash.frame = 5;
                                     flash.type = FlashType::SwordFight;
-                                    flash.x = mirror.x;
-                                    flash.y = mirror.y;       
+                                    flash.x = mirror.data.location.x;
+                                    flash.y = mirror.data.location.y;       
 
                                 }                          
 
@@ -2433,7 +2433,7 @@ void game() {
             int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x);
             int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y);
 
-            if (tileXIdx >= item.data.exitDoor.left && tileXIdx <= item.data.exitDoor.right && item.y == tileYIdx) {
+            if (tileXIdx >= item.data.exitDoor.left && tileXIdx <= item.data.exitDoor.right && item.data.location.y == tileYIdx) {
 
                 item.data.exitDoor.direction = Direction::Up;
 

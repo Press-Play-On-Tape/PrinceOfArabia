@@ -25,20 +25,20 @@ uint8_t level13_Data[] = {
 
 uint8_t Level13_Items[] = {
 
-    31, 44, 1,                   // Entry Gate 
+    31,  44,   1,   0,   0,   0,   0,   0,          // Entry Gate 
 
-    17, 40, 1, 0, 48,            // Gate #1
-    2, 52, 1, 1, 0, 0,           // Floor Button 1
-    2, 38, 1, 1, 0, 0,           // Floor Button 1
+    17,  40,   1,   0,  48,  48, 255,   0,          // Gate #1
+     2,  52,   1,   1,   0,   0,   0,   0,          // Floor Button 1
+     2,  38,   1,   1,   0,   0,   0,   0,          // Floor Button 1
 
-    17, 20, 1, 0, 48,            // Gate #2
-    2, 30, 1, 2, 3, 0,           // Floor Button 1
-    2, 18, 1, 2, 3, 0,            // Floor Button 1
+    17,  20,   1,   0,  48,  48, 255,   0,          // Gate #2
+     2,  30,   1,   2,   3,   0,   0,   0,          // Floor Button 1
+     2,  18,   1,   2,   3,   0,   0,   0,          // Floor Button 1
 
-    17, 10, 1, 0, 48,             // Gate #3
+    17,  10,   1,   0,  48,  48, 255,   0,          // Gate #3
     
-    32, 12, 1,                    // Decorative Door
-    32, 16, 1,                    // Decorative Door
+    32,  12,   1,   0,   0,   0,   0,   0,          // Decorative Door
+    32,  16,   1,   0,   0,   0,   0,   0,          // Decorative Door
     
-    255                         // End
+    255                                             // End
 }
