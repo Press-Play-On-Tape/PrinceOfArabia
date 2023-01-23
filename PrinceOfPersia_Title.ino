@@ -63,6 +63,7 @@ void title() {
         #endif
 
         }
+
     }
 
     if (justPressed & (A_BUTTON | B_BUTTON)) {
@@ -122,7 +123,7 @@ void title() {
             case TitleScreenMode::Credits:
             case TitleScreenMode::High:
 
-                {
+                if (justPressed & (A_BUTTON | B_BUTTON)) {
 
                     titleScreenVars.setMode(TitleScreenMode::Main, level);
 
@@ -147,16 +148,13 @@ void title() {
 
             case TitleScreenMode::IntroGame_1A:
 
-                {
+                #ifndef SAVE_MEMORY_SOUND
+                    sound.tonesFromFX(Sounds::Seque);
+                #endif
 
-                    #ifndef SAVE_MEMORY_SOUND
-                        sound.tonesFromFX(Sounds::Seque);
-                    #endif
-
-                    titleScreenVars.setMode(TitleScreenMode::IntroGame_1B, level);
-                    gamePlay.gameState = GameState::Game_Init; 
-                    fadeEffect.reset();
-                }
+                titleScreenVars.setMode(TitleScreenMode::IntroGame_1B, level);
+                gamePlay.gameState = GameState::Game_Init; 
+                fadeEffect.reset();
 
                 break;
 
@@ -172,10 +170,7 @@ void title() {
 
             case TitleScreenMode::IntroGame_1B:
 
-                {
-                    gamePlay.gameState = GameState::Game_Init; 
-                }
-
+                gamePlay.gameState = GameState::Game_Init; 
                 break;
 
             case TitleScreenMode::CutScene_2:
@@ -183,25 +178,20 @@ void title() {
             case TitleScreenMode::CutScene_4:
             case TitleScreenMode::CutScene_5:
 
-                {
-                    gamePlay.gameState = GameState::Game_StartLevel; 
-                }
-
+                gamePlay.gameState = GameState::Game_StartLevel; 
                 break;
 
             case TitleScreenMode::CutScene_9:
 
-                {
-                    gamePlay.gameState = GameState::Title_Init; 
-                }
-
+                gamePlay.gameState = GameState::Title_Init; 
                 break;
 
         #endif
 
-        default: break;
+            default: break;
 
-    }
+        }
+        
     }
 
 
@@ -495,7 +485,7 @@ void title() {
 
                         case 206:
                         case 208:
-                            heart.y--;
+                            heart.data.location.y--;
                             imageIdx = 1;
                             break;
 
@@ -506,7 +496,7 @@ void title() {
 
                         case 210:
                         case 212:
-                            heart.y--;
+                            heart.data.location.y--;
                             imageIdx = 0;
                             break;
 
@@ -520,7 +510,7 @@ void title() {
 
                     if (imageIdx != 255) {
 
-                        FX::drawBitmap(heart.x, heart.y, Images::Hearts, imageIdx, dbmNormal);
+                        FX::drawBitmap(heart.data.location.x, heart.data.location.y, Images::Hearts, imageIdx, dbmNormal);
                         
                     }
                     

@@ -1828,28 +1828,32 @@ void game() {
 
                 // Level 12: are we passing the Mirror?
 
-                if (gamePlay.level == 12 && enemy.getEnemyType() == EnemyType::MirrorAfterChallengeL12 && enemy.getStatus() == Status::Active) {
+                #ifndef SAVE_MEMORY_ENEMY 
+                    
+                    if (gamePlay.level == 12 && enemy.getEnemyType() == EnemyType::MirrorAfterChallengeL12 && enemy.getStatus() == Status::Active) {
 
-                    Flash &flash = level.getFlash();
+                        Flash &flash = level.getFlash();
 
-                    if (flash.frame == 0) {
+                        if (flash.frame == 0) {
 
-                        int8_t enemyTileXIdx = level.coordToTileIndexX(enemy.getPosition().x);
-                        int8_t enemyTileYIdx = level.coordToTileIndexY(enemy.getPosition().y);
-                        
-                        if (tileXIdx == enemyTileXIdx && tileYIdx == enemyTileYIdx) {
+                            int8_t enemyTileXIdx = level.coordToTileIndexX(enemy.getPosition().x);
+                            int8_t enemyTileYIdx = level.coordToTileIndexY(enemy.getPosition().y);
+                            
+                            if (tileXIdx == enemyTileXIdx && tileYIdx == enemyTileYIdx) {
 
-                            initFlash(enemy, level, FlashType::MirrorLevel12);
+                                initFlash(enemy, level, FlashType::MirrorLevel12);
 
-                            #ifndef SAVE_MEMORY_SOUND
-                                sound.tonesFromFX(Sounds::Tada);
-                            #endif
+                                #ifndef SAVE_MEMORY_SOUND
+                                    sound.tonesFromFX(Sounds::Tada);
+                                #endif
+
+                            }
 
                         }
 
                     }
 
-                }
+                #endif
 
 
                 if (itemIdx != Constants::NoItemFound) {
@@ -1860,7 +1864,7 @@ void game() {
                         
                         case ItemType::CollapsingFloor:
 
-                            if (item.x == tileXIdx && item.y == tileYIdx && item.data.collapsingFloor.timeToFall == 0) {
+                            if (item.data.location.x == tileXIdx && item.data.location.y == tileYIdx && item.data.collapsingFloor.timeToFall == 0) {
 
                                 item.data.collapsingFloor.timeToFall = Constants::FallingTileSteppedOn;
 
@@ -1869,7 +1873,7 @@ void game() {
                             break;
                         
                         case ItemType::AppearingFloor:
-// Serial.println("Appea");
+
                             item.data.appearingFloor.visible = true;
                             break;
 
@@ -1930,7 +1934,7 @@ void game() {
 
                                             if (item.itemType == ItemType::Skeleton) {
 
-                                                if (enemy.activateEnemy(item.x, item.y)) {
+                                                if (enemy.activateEnemy(item.data.location.x, item.data.location.y)) {
 
                                                     item.itemType = ItemType::None;
 
@@ -1962,8 +1966,8 @@ void game() {
                                     Flash &flash = level.getFlash();
                                     flash.frame = 5;
                                     flash.type = FlashType::SwordFight;
-                                    flash.x = mirror.x;
-                                    flash.y = mirror.y;       
+                                    flash.x = mirror.data.location.x;
+                                    flash.y = mirror.data.location.y;       
 
                                 }                          
 
@@ -2429,7 +2433,7 @@ void game() {
             int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x);
             int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y);
 
-            if (tileXIdx >= item.data.exitDoor.left && tileXIdx <= item.data.exitDoor.right && item.y == tileYIdx) {
+            if (tileXIdx >= item.data.exitDoor.left && tileXIdx <= item.data.exitDoor.right && item.data.location.y == tileYIdx) {
 
                 item.data.exitDoor.direction = Direction::Up;
 

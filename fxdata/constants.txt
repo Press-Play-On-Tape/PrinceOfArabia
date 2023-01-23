@@ -14,7 +14,7 @@ namespace Constants {
         32,    33,    34,    35,    36,    37,    38,    39,    40,    41,    42,    43,    44,                                             // RUNNING_TURN_SEQ
         45,    46,    47,    48,    49,    50,    51,    52,    53,    54,    55,    56,    57,    58,    59,    60,    61,    62,          // STANDING_JUMP_SEQ
         45,    46,    47,    48,    49,    50,    51,    52,    55,    56,    57,    58,    59,    60,    61,    62,                        // STANDING_JUMP_MED_SEQ
-        45,    46,    47,    48,    49,    50,    51,    52,    55,    56,    57,    58,    59,    60,    61,    62,                        // STANDING_JUMP_SHORT_SEQ
+        45,    46,    47,    48,    49,    50,    51,    52,    55,    56,    57,    58,    59,    60,    61,    62,                        // STANDING_JUMP_SHORT_2_SEQ
         45,    46,    47,    48,    49,    50,    51,    52,    53,    54,    121,   122,   123,   124,   125,   126,                       // STANDING_JUMP_DROPLVL_SEQ
         63,    64,    65,    66,    71,    72,    73,    74,                                                                                // SINGLE_STEP_SEQ
         5,     4,     3,     2,     1,                                                                                                      // STOPPING_SEQ
@@ -61,6 +61,10 @@ namespace Constants {
         126,   142,                                                                                                                         // FALLING_DEAD_BLADE_SEQ
         15,    15,    15,    15,    15,    15,    15,    15,                                                                                // DELAY_SEQ
         125,   125,   125,   125,   125,   103,                                                                                             // STRAIGHT_DROP_HANGON_SEQ
+        45,    46,    47,    48,    49,    50,    51,    52,    53,    54,    121,   122,   123,   124,   125,   101,   102,   103,         // STANDING_JUMP_GL_2_SEQ
+        45,    46,    47,    48,    49,    50,    51,    52,    53,    54,    121,   122,   123,   124,   125,   101,   102,   103,         // STANDING_JUMP_GL_3_SEQ
+        45,    46,    47,    48,    49,    50,    51,    52,    55,    56,    57,    58,    59,    60,    61,    62,                        // STANDING_JUMP_SHORT_6_SEQ   
+        45,    46,    47,    48,    49,    50,    51,    52,    55,    56,    57,    58,    59,    60,    61,    62,                        // STANDING_JUMP_SHORT_10_SEQ   
     };
 
     int8_t Stance_XYOffsetsFX[] = {
@@ -118,9 +122,13 @@ namespace Constants {
         3,0,   1,0,   0,0,                                                                                                                  // SWORD_STEP_OFFSETS
         2,0,   1,0,   2,0,   2,0,   -3,0,  -3,0,  -1,0,  0,0,                                                                               // SWORD_ATTACK_OFFSETS
         0,0,   1,0,   -1,0,                                                                                                                 // ATTACK_BLOCK_OFFSETS
-        0,0,   0,0,   0,0,                                                                                                                  // FALLING_DEAD_BLADE_OFFSETS
+        0,0,   0,0,                                                                                                                         // FALLING_DEAD_BLADE_OFFSETS
         0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,                                                                               // DELAY_OFFSETS
         0,6,   0,6,   0,6,   0,6,   0,7,   0,7,                                                                                             // STRAIGHT_DROP_HANGON_OFFSETS
+        0,0,   0,0,   2,0,   2,0,   2,0,   2,0,   2,0,   3,0,   3,1,   3,1,   7,3,   3,4,   2,4,   1,4,   1,4,   1,4,   1,3,   1,3,         // STANDING_JUMP_GL_2_OFFSETS
+        0,0,   0,0,   2,0,   2,0,   2,0,   2,0,   2,0,   3,0,   4,1,   4,1,   8,3,   4,4,   2,4,   1,4,   1,4,   1,4,   1,3,   1,3,         // STANDING_JUMP_GL_6_OFFSETS
+        0,0,   0,0,   2,0,   2,0,   2,0,   3,0,   2,0,   3,0,   3,0,   3,0,   3,0,   2,0,   1,0,   1,0,   1,0,   0,0,                       // STANDING_JUMP_SHORT_6_OFFSETS
+        0,0,   0,0,   2,0,   2,0,   3,0,   4,0,   2,0,   3,0,   3,0,   3,0,   3,0,   3,0,   2,0,   1,0,   1,0,   0,0,                       // STANDING_JUMP_SHORT_10_OFFSETS
     };
 
 

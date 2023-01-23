@@ -212,8 +212,26 @@ void processStandingJump(Prince &prince, Level &level) {
             prince.pushSequence(Stance::Standing_Jump_Med_1_Start, Stance::Standing_Jump_Med_16_End, Stance::Upright, true);
             break;
 
-        case StandingJumpResult::Short:
-            prince.pushSequence(Stance::Standing_Jump_Short_1_Start, Stance::Standing_Jump_Short_16_End, Stance::Upright, true);
+        case StandingJumpResult::Short_Pos2:
+            prince.pushSequence(Stance::Standing_Jump_Short_2_1_Start, Stance::Standing_Jump_Short_2_16_End, Stance::Upright, true);
+            break;
+
+        case StandingJumpResult::Short_Pos6:
+            prince.pushSequence(Stance::Standing_Jump_Short_6_1_Start, Stance::Standing_Jump_Short_6_16_End, Stance::Upright, true);
+            break;
+
+        case StandingJumpResult::Short_Pos10:
+            prince.pushSequence(Stance::Standing_Jump_Short_10_1_Start, Stance::Standing_Jump_Short_10_16_End, Stance::Upright, true);
+            break;
+
+        case StandingJumpResult::Normal_GrabLedge_Pos2:
+            prince.setHangingCounter(200);
+            prince.pushSequence(Stance::Standing_Jump_GL_2_1_Start, Stance::Standing_Jump_GL_2_18_End, Stance::Jump_Up_A_14_End, true);
+            break;
+
+        case StandingJumpResult::Normal_GrabLedge_Pos6:
+            prince.setHangingCounter(200);
+            prince.pushSequence(Stance::Standing_Jump_GL_6_1_Start, Stance::Standing_Jump_GL_6_18_End, Stance::Jump_Up_A_14_End, true);
             break;
         
         case StandingJumpResult::None:
@@ -312,7 +330,7 @@ bool leaveLevel(Prince &prince, Level &level) {
 
     // Are we close to the exist gate?  If so, exit scene ..
 
-    if (tileXIdx == exitGate.x - 1 && tileYIdx == exitGate.y && exitGate.data.exitDoor.direction == Direction::Up) {
+    if (tileXIdx == exitGate.data.location.x - 1 && tileYIdx == exitGate.data.location.y && exitGate.data.exitDoor.direction == Direction::Up) {
 
         switch (prince.getDirection()) {
 
@@ -353,7 +371,7 @@ bool leaveLevel(Prince &prince, Level &level) {
         return true;
 
     }
-    else if (tileXIdx == exitGate.x && tileYIdx == exitGate.y && exitGate.data.exitDoor.direction == Direction::Up) {
+    else if (tileXIdx == exitGate.data.location.x && tileYIdx == exitGate.data.location.y && exitGate.data.exitDoor.direction == Direction::Up) {
 
         prince.pushSequence(Stance::Standing_Turn_1_Start, Stance::Standing_Turn_5_End, Stance::Upright_Turn, true);
 

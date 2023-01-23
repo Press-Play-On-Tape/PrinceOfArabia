@@ -60,8 +60,8 @@ void render(bool enemyVisible, bool sameLevelAsPrince) {
     for (uint8_t i = 0; i < Constants::Items_Count; i++) {
 
         Item &item = level.getItem(i);
-        int16_t xLoc = (item.x - level.getXLocation()) * Constants::TileWidth;
-        int16_t yLoc = ((item.y - level.getYLocation()) * Constants::TileHeight) - level.getYOffset() + Constants::ScreenTopOffset;
+        int16_t xLoc = (item.data.location.x - level.getXLocation()) * Constants::TileWidth;
+        int16_t yLoc = ((item.data.location.y - level.getYLocation()) * Constants::TileHeight) - level.getYOffset() + Constants::ScreenTopOffset;
 
         if (item.itemType != ItemType::None) {
 
@@ -290,8 +290,8 @@ void render(bool enemyVisible, bool sameLevelAsPrince) {
     for (uint8_t i = 0; i < Constants::Items_Count; i++) {
 
         Item &item = level.getItem(i);
-        int16_t xLoc = (item.x - level.getXLocation()) * Constants::TileWidth;
-        int16_t yLoc = ((item.y - level.getYLocation()) * Constants::TileHeight) - level.getYOffset() + Constants::ScreenTopOffset;
+        int16_t xLoc = (item.data.location.x - level.getXLocation()) * Constants::TileWidth;
+        int16_t yLoc = ((item.data.location.y - level.getYLocation()) * Constants::TileHeight) - level.getYOffset() + Constants::ScreenTopOffset;
 
         if (item.itemType != ItemType::None) {
 
