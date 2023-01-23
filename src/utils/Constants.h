@@ -13,6 +13,7 @@
 
 #define LEVEL_DATA_FROM_FX
 #define IMAGE_DATA_FROM_FX
+#define _SAVE_TO_FX
 
 #define _DEBUG
 #define _DEBUG_ONSCREEN_DETAILS

@@ -198,3 +198,7 @@ Chambers_FG_frame[] = {
     uint8_t 0,              // frame
     uint8_t dbmMasked_last
 }
+
+    savesection  // Anything below here will be stored in the save block
+
+    uint16_t 0xFFFF // Save state  end marker

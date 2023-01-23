@@ -62,7 +62,16 @@ void testScroll(GamePlay &gamePlay, Prince &prince, Level &level) {
                 cookie.hasSavedScore = true;
                 cookie.highMin = gamePlay.timer_Min;
                 cookie.highSec = gamePlay.timer_Sec;
+
+              #ifdef SAVE_TO_FX
+
+                FX::saveGameState((uint8_t*)&cookie, sizeof(cookie));
+
+              #else
+
                 EEPROM_Utils::saveCookie(cookie);
+
+              #endif
 
             }
 

@@ -1278,12 +1278,31 @@ void game() {
 
                         case MenuOption::Save:
                             cookie.hasSavedLevel = true;
-                            EEPROM_Utils::saveCookie(cookie);
+                          #ifdef SAVE_TO_FX
+
+                             FX::saveGameState((uint8_t*)&cookie, sizeof(cookie));
+
+                           #else
+
+                             EEPROM_Utils::saveCookie(cookie);
+
+                           #endif
+
                             menu.direction = Direction::Right;  
                             break;
 
                         case MenuOption::Load:
+
+                          #ifdef SAVE_TO_FX
+
+                            FX::loadGameState((uint8_t*)&cookie, sizeof(cookie));
+
+                          #else
+
                             EEPROM_Utils::loadCookie(cookie);
+
+                          #endif
+
                             menu.direction = Direction::Right;  
                             break;
 
