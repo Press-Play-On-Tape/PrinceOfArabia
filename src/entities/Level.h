@@ -767,7 +767,7 @@ struct Level {
 
                                 if (item.data.collapsingFloor.distanceFallen >= item.data.collapsingFloor.distToFall) {
 
-                                    item.y = item.y + ((item.data.collapsingFloor.distToFall / 31) + 1);
+                                    item.data.location.y = item.data.location.y + ((item.data.collapsingFloor.distToFall / 31) + 1);
                                     item.itemType = ItemType::CollpasedFloor;
 
 
@@ -778,7 +778,7 @@ struct Level {
                                     int8_t tileXIdx = this->coordToTileIndexX(newPos.x);
                                     int8_t tileYIdx = this->coordToTileIndexY(newPos.y);
 
-                                    if (tileXIdx == item.x && tileYIdx == item.y) {
+                                    if (tileXIdx == item.data.location.x && tileYIdx == item.data.location.y) {
 
                                         levelUpdate = LevelUpdate::FloorCollapsedOnPrince;
 
@@ -789,7 +789,7 @@ struct Level {
 
                                     for (Item &button : items) {
 
-                                        if ((button.itemType == ItemType::FloorButton1 || button.itemType == ItemType::FloorButton2) && button.x == item.x && button.y == item.y) {
+                                        if ((button.itemType == ItemType::FloorButton1 || button.itemType == ItemType::FloorButton2) && button.data.location.x == item.data.location.x && button.data.location.y == item.data.location.y) {
 
                                             button.itemType = ItemType::None;
 
@@ -1029,7 +1029,7 @@ struct Level {
 
                 if (item.itemType >= itemType_Start && item.itemType <= itemType_End) {
 
-                    if (item.itemType != ItemType::None && item.x == x && item.y == y) {
+                    if (item.itemType != ItemType::None && item.data.location.x == x && item.data.location.y == y) {
                         return i;
                     }
 
@@ -1075,7 +1075,7 @@ struct Level {
 
             for (Item &item : this->items) {
 
-                if (((item.itemType == ItemType::CollapsingFloor && item.data.collapsingFloor.timeToFall == 0) || item.itemType == ItemType::AppearingFloor) && item.x == x && item.y == y) {
+                if (((item.itemType == ItemType::CollapsingFloor && item.data.collapsingFloor.timeToFall == 0) || item.itemType == ItemType::AppearingFloor) && item.data.location.x == x && item.data.location.y == y) {
                     return true;
                 }
 
@@ -1156,68 +1156,26 @@ struct Level {
 
                 Item &item = this->items[itemIdx];
                 item.itemType = static_cast<ItemType>(itemType);
-                item.x = FX::readPendingUInt8();
-                item.y = FX::readPendingUInt8();
-
+    
                 switch (item.itemType) {
-
-                    case ItemType::AppearingFloor:
-                        item.data.appearingFloor.visible = false;
-                        break;
-
-                    case ItemType::ExitDoor_SelfOpen:
-                    case ItemType::ExitDoor_ButtonOpen:
-                        item.data.exitDoor.position = 0;
-                        item.data.exitDoor.direction = Direction::None;
-                        item.data.exitDoor.left = FX::readPendingUInt8();
-                        item.data.exitDoor.right = FX::readPendingUInt8();
-                        break;
 
                     case ItemType::Gate:
                         {
-                            uint8_t position = FX::readPendingUInt8();
-                            uint8_t closingDelay = FX::readPendingUInt8();
+                            Gate gate;
+                            FX::readBytes((uint8_t*)&gate, sizeof(gate));
 
                             if (!(gamePlay.level == 6 && itemIdx == 7 && item.data.gate.position == 9)) {
-                                item.data.gate.position = position;
-                                item.data.gate.closingDelay = closingDelay;
-                                item.data.gate.defaultClosingDelay = item.data.gate.closingDelay;
-                                item.data.gate.closingDelayMax = 255;
+                                item.data.gate.position = gate.position;
+                                item.data.gate.closingDelay = gate.closingDelay;
+                                item.data.gate.defaultClosingDelay = gate.defaultClosingDelay;
+                                item.data.gate.closingDelayMax = gate.closingDelayMax;
                             }
 
                         }
                         break;
 
-                    case ItemType::CollapsingFloor:
-                        item.data.collapsingFloor.timeToFall = 0;
-                        item.data.collapsingFloor.frame = 0;
-                        item.data.collapsingFloor.distanceFallen = 0;
-                        item.data.collapsingFloor.distToFall = FX::readPendingUInt8();
-                        break;
-
-                    case ItemType::FloorButton1:
-                    case ItemType::FloorButton2:
-                    case ItemType::FloorButton4:
-                    case ItemType::FloorButton3_UpDown:
-                    case ItemType::FloorButton3_UpOnly:
-                    case ItemType::FloorButton3_DownOnly:
-                        item.data.floorButton.frame = 0;
-                        item.data.floorButton.gate1 = FX::readPendingUInt8();
-                        item.data.floorButton.gate2 = FX::readPendingUInt8();
-                        item.data.floorButton.gate3 = FX::readPendingUInt8();
-                        item.data.floorButton.timeToFall = 0;
-                        break;
-                    
-                    case ItemType::Spikes:
-                        item.data.spikes.imageType = FX::readPendingUInt8();
-                        item.data.spikes.position = FX::readPendingUInt8();
-                        break;
-                    
-                    case ItemType::Mirror:
-                        item.data.mirror.status = Status::Dormant;
-                        break;
-
                     default:
+                        FX::readBytes((uint8_t*)&item.data.rawData, sizeof(item.data.rawData));
                         break;
 
                 }
@@ -1826,7 +1784,7 @@ struct Level {
 
                 Item &item = this->items[i];
 
-                if ((item.itemType >= itemTypeStart && item.itemType <= itemTypeEnd) && item.x == tileXIdx && item.y == tileYIdx) {
+                if ((item.itemType >= itemTypeStart && item.itemType <= itemTypeEnd) && item.data.location.x == tileXIdx && item.data.location.y == tileYIdx) {
 
                     return i;
 
@@ -3524,7 +3482,7 @@ struct Level {
 
                 if (item.itemType == ItemType::Gate) {
 
-                    if (item.x == tileXIdx + this->xLoc && item.y == tileYIdx + this->yLoc) {
+                    if (item.data.location.x == tileXIdx + this->xLoc && item.data.location.y == tileYIdx + this->yLoc) {
 
                         gatePosition = item.data.gate.position;
                         break;

@@ -71,8 +71,8 @@ struct TitleScreenVars {
                     Item &heart = level.getItem(Constants::Item_LoveHeart);
                     heart.itemType = ItemType::LoveHeart;
                     heart.data.loveHeart.counter = 0;
-                    heart.x = 60;
-                    heart.y = 25;
+                    heart.data.location.x = 60;
+                    heart.data.location.y = 25;
 
                     this->princess.x = 30;
                     this->prince.x = 132;

@@ -476,7 +476,7 @@ void title() {
 
                         case 206:
                         case 208:
-                            heart.y--;
+                            heart.data.location.y--;
                             imageIdx = 1;
                             break;
 
@@ -487,7 +487,7 @@ void title() {
 
                         case 210:
                         case 212:
-                            heart.y--;
+                            heart.data.location.y--;
                             imageIdx = 0;
                             break;
 
@@ -501,7 +501,7 @@ void title() {
 
                     if (imageIdx != 255) {
 
-                        FX::drawBitmap(heart.x, heart.y, Images::Hearts, imageIdx, dbmNormal);
+                        FX::drawBitmap(heart.data.location.x, heart.data.location.y, Images::Hearts, imageIdx, dbmNormal);
                         
                     }
                     

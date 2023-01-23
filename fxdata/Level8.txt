@@ -61,53 +61,53 @@ uint8_t level8_Data[] = {
 
 uint8_t Level8_Items[] = {
 
-    26, 22, 5, 21, 23,          // Exit Gate, left position for open, right position, close button     
-    5, 27, 3,                   // Exit Button 
-    31, 27, 1,                  // Entry Gate   
+    26,  22,   5,  21,  23,   0,   0,   0,          // Exit Gate, left position for open, right position, close button     
+     5,  27,   3,   0,   0,   0,   0,   0,          // Exit Button 
+    31,  27,   1,   0,   0,   0,   0,   0,          // Entry Gate   
+ 
+    17,  10,   0,   0,  64,  64, 255,   0,          // Gate #1
+     2,  13,   0,   1,   0,   0,   0,   0,          // Floor Button 1
+     2,   8,   2,   1,   0,   0,   0,   0,          // Floor Button 1
 
-    17, 10, 0, 0, 64,           // Gate #1
-    2, 13, 0, 1, 0, 0,          // Floor Button 1
-    2, 8, 2, 1, 0, 0,           // Floor Button 1
+    17,  90,   3,   0,  64,  64, 255,   0,          // Gate #2
+     2,  94,   3,   2,   3,   4,   0,   0,          // Floor Button 1
+     2,  87,   3,   2,   0,   0,   0,   0,          // Floor Button 1
 
-    17, 90, 3, 0, 64,           // Gate #2
-    2, 94, 3, 2, 3, 4,          // Floor Button 1
-    2, 87, 3, 2, 0, 0,          // Floor Button 1
+    17,  80,   3,   0,  96,  96, 255,   0,          // Gate #3
 
-    17, 80, 3, 0, 96,           // Gate #3
+    17,  70,   3,   0, 128, 128, 255,   0,          // Gate #4
+     3,  68,   3,   2,   3,   4,   0,   0,          // Floor Button 2
 
-    17, 70, 3, 0, 128,          // Gate #4
-    3, 68, 3, 2, 3, 4,          // Floor Button 2
+    17,  50,   3,   0, 160, 160, 255,   0,          // Gate #5
+     2,  58,   3,   5,   0,   0,   0,   0,          // Floor Button 1
+ 
+    17,  44,   3,   0,  96,  96, 255,   0,          // Gate #6
+     2,  47,   3,   6,   0,   0,   0,   0,          // Floor Button 1
 
-    17, 50, 3, 0, 160,          // Gate #5
-    2, 58, 3, 5, 0, 0,          // Floor Button 1
+    20,  35,   1,   0,   0,   0,   0,   0,          // Potion Small  
+    20,   7,   1,   0,   0,   0,   0,   0,          // Potion Small  
+    20,  68,   2,   0,   0,   0,   0,   0,          // Potion Small  
+    20,  82,   4,   0,   0,   0,   0,   0,          // Potion Small  
+    20, 102,   2,   0,   0,   0,   0,   0,          // Potion Small  
+    25,   6,   4,   0,   0,   0,   0,   0,          // Blade     
+    25,  87,   3,   0,   0,   0,   0,   0,          // Blade     
+    25,  84,   3,   0,   0,   0,   0,   0,          // Blade     
+    25,  57,   3,   0,   0,   0,   0,   0,          // Blade     
+    25,  31,   3,   0,   0,   0,   0,   0,          // Blade     
+    25,  32,   3,   0,   0,   0,   0,   0,          // Blade     
+     4,  10,   2,   1,   0,   0,   0,   0,          // Spikes
+     4,  11,   2,   1,   0,   0,   0,   0,          // Spikes
+     4,  12,   2,   2,   0,   0,   0,   0,          // Spikes
+     4,  14,   4,   1,   0,   0,   0,   0,          // Spikes
+     4,  15,   4,   1,   0,   0,   0,   0,          // Spikes                                    
+     4,  32,   5,   1,   0,   0,   0,   0,          // Spikes
+     4,  34,   5,   1,   0,   0,   0,   0,          // Spikes
+     4,  63,   5,   1,   0,   0,   0,   0,          // Spikes
+     4,  84,   5,   1,   0,   0,   0,   0,          // Spikes
+     4,  85,   5,   1,   0,   0,   0,   0,          // Spikes
+     1,  63,   3,  55,   0,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
+     1,  73,   3,  55,   0,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
+     1,  24,   0, 148,   0,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
 
-    17, 44, 3, 0, 96,           // Gate #6
-    2, 47, 3, 6, 0, 0,          // Floor Button 1
-
-    20, 35, 1,                  // Potion Small  
-    20, 7, 1,                   // Potion Small  
-    20, 68, 2,                  // Potion Small  
-    20, 82, 4,                  // Potion Small  
-    20, 102, 2,                 // Potion Small  
-    25, 6, 4,                   // Blade     
-    25, 87, 3,                  // Blade     
-    25, 84, 3,                  // Blade     
-    25, 57, 3,                  // Blade     
-    25, 31, 3,                  // Blade     
-    25, 32, 3,                  // Blade     
-    4, 10, 2, 1, 0,             // Spikes
-    4, 11, 2, 1, 0,             // Spikes
-    4, 12, 2, 2, 0,             // Spikes
-    4, 14, 4, 1, 0,             // Spikes
-    4, 15, 4, 1, 0,             // Spikes                                    
-    4, 32, 5, 1, 0,             // Spikes
-    4, 34, 5, 1, 0,             // Spikes
-    4, 63, 5, 1, 0,             // Spikes
-    4, 84, 5, 1, 0,             // Spikes
-    4, 85, 5, 1, 0,             // Spikes
-    1, 63, 3, 55,               // CollapsingTile (dist to fall)                                    
-    1, 73, 3, 55,               // CollapsingTile (dist to fall)                                    
-    1, 24, 0, 148,              // CollapsingTile (dist to fall)                                    
-
-    255                         // End
+    255                                             // End
 }
