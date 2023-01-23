@@ -240,7 +240,7 @@ struct Level {
                         enemy.init(EnemyType::Guard, 80 + (40 * Constants::TileWidth), 25 + (0 * Constants::TileHeight), Direction::Left, Stance::Upright, 3, Status::Active);          // Sword fight from Left
                     #endif
 
-                    prince.init(38-28+12+4, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Normal starting pos
+                    prince.init(38-28+12+4, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Normal starting pos
                     this->init(gamePlay, prince, 90, 9, 60, 0);  // Normal starting posa
 
                     // prince.init(38-24, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Gate Issue
@@ -330,7 +330,7 @@ struct Level {
                     #endif
 
                     // Normal starting pos
-                    prince.init(76, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    prince.init(40, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
                     this->init(gamePlay, prince, 130, 12, 120, 6); 
 
                     // Top of climbm down showing 10 error.
@@ -1165,16 +1165,20 @@ struct Level {
                             FX::readBytes((uint8_t*)&gate, sizeof(gate));
 
                             if (!(gamePlay.level == 6 && itemIdx == 7 && item.data.gate.position == 9)) {
+                                item.data.gate.x = gate.x;
+                                item.data.gate.y = gate.y;
                                 item.data.gate.position = gate.position;
                                 item.data.gate.closingDelay = gate.closingDelay;
                                 item.data.gate.defaultClosingDelay = gate.defaultClosingDelay;
                                 item.data.gate.closingDelayMax = gate.closingDelayMax;
+                                item.data.gate.direction = gate.direction;
                             }
 
                         }
                         break;
 
                     default:
+
                         FX::readBytes((uint8_t*)&item.data.rawData, sizeof(item.data.rawData));
                         break;
 

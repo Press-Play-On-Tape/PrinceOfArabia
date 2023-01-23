@@ -11,7 +11,7 @@
 
 void game_Init() {
 
-    gamePlay.init(2);
+    gamePlay.init(1);
 
     #ifndef SAVE_MEMORY_ENEMY
         level.init_PositionChars(gamePlay, prince, enemy, true);
