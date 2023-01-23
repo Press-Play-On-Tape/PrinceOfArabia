@@ -372,8 +372,8 @@ struct Level {
                     #endif
 
                     // Normal starting pos
-                    prince.init(46, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
-                    this->init(gamePlay, prince, 90, 15, 40, 6); 
+                    // prince.init(46, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    // this->init(gamePlay, prince, 90, 15, 40, 6); 
 
                     // Three blades
                     // prince.init(10, 87, Direction::Right, Stance::Crouch_3_End, 3, clearSword);     
@@ -388,8 +388,8 @@ struct Level {
                     // this->init(gamePlay, prince, 90, 15, 20, 3); 
 
                     // // Biggest jump
-                    // prince.init(10 + (8*12), 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
-                    // this->init(gamePlay, prince, 90, 15, 20, 3); 
+                    prince.init(10 + (8*12), 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    this->init(gamePlay, prince, 90, 15, 30, 3); 
 
                     // Exit Button
                     // prince.init(10 + (4*12), 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     

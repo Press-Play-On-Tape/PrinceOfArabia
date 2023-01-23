@@ -36,7 +36,7 @@ uint8_t Level3_Items[] = {
     26,   4,   8,   3,   5,   0,   0,   0,          // Exit Gate, let position for open, right position, close button                                                        
     24,  44,   8,   0,   0,   0,   0,   0,          // Entry Gate                         
 
-    17,  31,   3,   0,  64,  64, 255,   0,          // Gate #1
+    17,  30,   3,   0,  64,  64, 255,   0,          // Gate #1
      2,  37,   3,   1,   0,   0,   0,   0,          // Floor Button 1
 
     17,  10,   3,   0,  64,  64, 255,   0,          // Gate #2
