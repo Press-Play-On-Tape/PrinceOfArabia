@@ -233,6 +233,16 @@ void processStandingJump(Prince &prince, Level &level) {
             prince.setHangingCounter(200);
             prince.pushSequence(Stance::Standing_Jump_GL_6_1_Start, Stance::Standing_Jump_GL_6_18_End, Stance::Jump_Up_A_14_End, true);
             break;
+
+        case StandingJumpResult::Short_GrabLedge_Pos6:
+            prince.setHangingCounter(200);
+            prince.pushSequence(Stance::Standing_Jump_Short_GL_6_1_Start, Stance::Standing_Jump_Short_GL_6_18_End, Stance::Jump_Up_A_14_End, true);
+            break;
+
+        case StandingJumpResult::Short_GrabLedge_Pos10:
+            prince.setHangingCounter(200);
+            prince.pushSequence(Stance::Standing_Jump_Short_GL_10_1_Start, Stance::Standing_Jump_Short_GL_10_18_End, Stance::Jump_Up_A_14_End, true);
+            break;
         
         case StandingJumpResult::None:
             break;

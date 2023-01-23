@@ -970,6 +970,57 @@ constexpr uint16_t Standing_Jump_Short_10_15                     = Stance::Stand
 constexpr uint16_t Standing_Jump_Short_10_16_End                 = Stance::Standing_Jump_Short_10_15 + 1;
 
 
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* 999 - 999                                                     01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define STANDING_JUMP_SHORT_GL_6_SEQ                             45,    46,    47,    48,    49,    50,    51,    52,    53,    54,    121,   122,   123,   124,   125,   101,   102,   103,
+#define STANDING_JUMP_SHORT_GL_6_OFFSETS                         0,0,   0,0,   2,0,   2,0,   2,0,   2,0,   2,0,   2,0,   3,1,   3,1,   6,3,   3,4,   1,4,   0,4,   0,4,   0,4,   0,3,   0,3,
+constexpr uint16_t Standing_Jump_Short_GL_6_1_Start              = Stance::Standing_Jump_Short_10_16_End + 1;
+constexpr uint16_t Standing_Jump_Short_GL_6_2                    = Stance::Standing_Jump_Short_GL_6_1_Start + 1;
+constexpr uint16_t Standing_Jump_Short_GL_6_3                    = Stance::Standing_Jump_Short_GL_6_2 + 1;
+constexpr uint16_t Standing_Jump_Short_GL_6_4                    = Stance::Standing_Jump_Short_GL_6_3 + 1;
+constexpr uint16_t Standing_Jump_Short_GL_6_5                    = Stance::Standing_Jump_Short_GL_6_4 + 1;
+constexpr uint16_t Standing_Jump_Short_GL_6_6                    = Stance::Standing_Jump_Short_GL_6_5 + 1;
+constexpr uint16_t Standing_Jump_Short_GL_6_7                    = Stance::Standing_Jump_Short_GL_6_6 + 1;
+constexpr uint16_t Standing_Jump_Short_GL_6_8                    = Stance::Standing_Jump_Short_GL_6_7 + 1;
+constexpr uint16_t Standing_Jump_Short_GL_6_9                    = Stance::Standing_Jump_Short_GL_6_8 + 1;
+constexpr uint16_t Standing_Jump_Short_GL_6_10                   = Stance::Standing_Jump_Short_GL_6_9 + 1;
+constexpr uint16_t Standing_Jump_Short_GL_6_11                   = Stance::Standing_Jump_Short_GL_6_10 + 1;
+constexpr uint16_t Standing_Jump_Short_GL_6_12                   = Stance::Standing_Jump_Short_GL_6_11 + 1;
+constexpr uint16_t Standing_Jump_Short_GL_6_13                   = Stance::Standing_Jump_Short_GL_6_12 + 1;
+constexpr uint16_t Standing_Jump_Short_GL_6_14                   = Stance::Standing_Jump_Short_GL_6_13 + 1;
+constexpr uint16_t Standing_Jump_Short_GL_6_15                   = Stance::Standing_Jump_Short_GL_6_14 + 1;
+constexpr uint16_t Standing_Jump_Short_GL_6_16                   = Stance::Standing_Jump_Short_GL_6_15 + 1;
+constexpr uint16_t Standing_Jump_Short_GL_6_17                   = Stance::Standing_Jump_Short_GL_6_16 + 1;
+constexpr uint16_t Standing_Jump_Short_GL_6_18_End               = Stance::Standing_Jump_Short_GL_6_17 + 1;
+
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/* 999 - 999                                                     01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define STANDING_JUMP_SHORT_GL_10_SEQ                            45,    46,    47,    48,    49,    50,    51,    52,    53,    54,    121,   122,   123,   124,   125,   101,   102,   103,
+#define STANDING_JUMP_SHORT_GL_10_OFFSETS                        0,0,   0,0,   2,0,   2,0,   2,0,   2,0,   2,0,   2,0,   3,1,   4,1,   6,3,   3,4,   2,4,   1,4,   1,4,   0,4,   0,3,   0,3,
+constexpr uint16_t Standing_Jump_Short_GL_10_1_Start             = Stance::Standing_Jump_Short_GL_6_18_End + 1;
+constexpr uint16_t Standing_Jump_Short_GL_10_2                   = Stance::Standing_Jump_Short_GL_10_1_Start + 1;
+constexpr uint16_t Standing_Jump_Short_GL_10_3                   = Stance::Standing_Jump_Short_GL_10_2 + 1;
+constexpr uint16_t Standing_Jump_Short_GL_10_4                   = Stance::Standing_Jump_Short_GL_10_3 + 1;
+constexpr uint16_t Standing_Jump_Short_GL_10_5                   = Stance::Standing_Jump_Short_GL_10_4 + 1;
+constexpr uint16_t Standing_Jump_Short_GL_10_6                   = Stance::Standing_Jump_Short_GL_10_5 + 1;
+constexpr uint16_t Standing_Jump_Short_GL_10_7                   = Stance::Standing_Jump_Short_GL_10_6 + 1;
+constexpr uint16_t Standing_Jump_Short_GL_10_8                   = Stance::Standing_Jump_Short_GL_10_7 + 1;
+constexpr uint16_t Standing_Jump_Short_GL_10_9                   = Stance::Standing_Jump_Short_GL_10_8 + 1;
+constexpr uint16_t Standing_Jump_Short_GL_10_10                  = Stance::Standing_Jump_Short_GL_10_9 + 1;
+constexpr uint16_t Standing_Jump_Short_GL_10_11                  = Stance::Standing_Jump_Short_GL_10_10 + 1;
+constexpr uint16_t Standing_Jump_Short_GL_10_12                  = Stance::Standing_Jump_Short_GL_10_11 + 1;
+constexpr uint16_t Standing_Jump_Short_GL_10_13                  = Stance::Standing_Jump_Short_GL_10_12 + 1;
+constexpr uint16_t Standing_Jump_Short_GL_10_14                  = Stance::Standing_Jump_Short_GL_10_13 + 1;
+constexpr uint16_t Standing_Jump_Short_GL_10_15                  = Stance::Standing_Jump_Short_GL_10_14 + 1;
+constexpr uint16_t Standing_Jump_Short_GL_10_16                  = Stance::Standing_Jump_Short_GL_10_15 + 1;
+constexpr uint16_t Standing_Jump_Short_GL_10_17                  = Stance::Standing_Jump_Short_GL_10_16 + 1;
+constexpr uint16_t Standing_Jump_Short_GL_10_18_End              = Stance::Standing_Jump_Short_GL_10_17 + 1;
+
+
+
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 constexpr uint16_t  Upright_Turn             = 1255;
@@ -1075,6 +1126,8 @@ namespace Constants {
         STANDING_JUMP_GL_6_SEQ
         STANDING_JUMP_SHORT_6_SEQ
         STANDING_JUMP_SHORT_10_SEQ
+        STANDING_JUMP_SHORT_GL_6_SEQ
+        STANDING_JUMP_SHORT_GL_10_SEQ
     };
 
     constexpr int8_t Stance_XYOffsets[] PROGMEM = {
@@ -1139,6 +1192,8 @@ namespace Constants {
         STANDING_JUMP_GL_6_OFFSETS
         STANDING_JUMP_SHORT_6_OFFSETS
         STANDING_JUMP_SHORT_10_OFFSETS
+        STANDING_JUMP_SHORT_GL_6_OFFSETS
+        STANDING_JUMP_SHORT_GL_10_OFFSETS
     };
 
     #endif
