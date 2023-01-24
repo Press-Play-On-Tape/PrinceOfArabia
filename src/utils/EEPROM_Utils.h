@@ -3,7 +3,7 @@
 #include "Arduboy2Ext.h"
 #include "../entities/Cookie.h"
 
-#define EEPROM_START                  ((uint8_t *)EEPROM_STORAGE_SPACE_START + 300)
+#define EEPROM_START                  ((uint8_t *)EEPROM_STORAGE_SPACE_START + 100)
 #define EEPROM_START_C1               ((uint8_t *)EEPROM_START)
 #define EEPROM_START_C2               ((uint8_t *)EEPROM_START + 1)
 #define EEPROM_TOP_START              ((uint8_t *)EEPROM_START + 2)
