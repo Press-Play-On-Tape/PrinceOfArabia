@@ -217,6 +217,12 @@ void processStandingJump(Prince &prince, Level &level) {
             prince.pushSequence(Stance::Standing_Jump_1_Start, Stance::Standing_Jump_18_End, Stance::Upright, true);
             break;
 
+        case StandingJumpResult::Normal_DropLevel_Pos2:
+            prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
+            prince.pushSequence(Stance::Standing_Jump_DropLvl_Pos2_1_Start, Stance::Standing_Jump_DropLvl_Pos2_16_End, true);
+            prince.setIgnoreWallCollisions(true);
+            break;
+
         case StandingJumpResult::Medium:
             prince.pushSequence(Stance::Standing_Jump_Med_1_Start, Stance::Standing_Jump_Med_16_End, Stance::Upright, true);
             break;

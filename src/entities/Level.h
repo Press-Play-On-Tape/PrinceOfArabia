@@ -2620,38 +2620,40 @@ struct Level {
                         bool isGroundTile3_NextLvl = this->isGroundTile_ByCoords(tileXIdx - 2, tileYIdx + 1);
                         bool isGroundTile4_NextLvl = this->isGroundTile_ByCoords(tileXIdx - 3, tileYIdx + 1);
 
-// Serial.print(isGroundTile5_CurrLvl);
-// Serial.print("/");
-// Serial.print((uint8_t)wallTile5_CurrLvl);
-// Serial.print(" ");
-// Serial.print((uint8_t)wallTile4_CurrLvl);
-// Serial.print(" ");
-// Serial.print((uint8_t)wallTile3_CurrLvl);
-// Serial.print(" ");
-// Serial.print((uint8_t)wallTile2_CurrLvl);
-// Serial.print(" ");
-// Serial.print((uint8_t)wallTile1_CurrLvl);
-// Serial.println(" ");
-// Serial.print("XX");
-// Serial.print((uint8_t)wallTile5_NextLvl);
-// Serial.print(" ");
-// Serial.print((uint8_t)wallTile4_NextLvl);
-// Serial.print(" ");
-// Serial.print((uint8_t)wallTile3_NextLvl);
-// Serial.print(" ");
-// Serial.print((uint8_t)wallTile2_NextLvl);
-// Serial.println(" 0");
-// Serial.print("XX");
-// Serial.print((uint8_t)isGroundTile5_CurrLvl);
-// Serial.print(" ");
-// Serial.print((uint8_t)isGroundTile4_CurrLvl);
-// Serial.print(" ");
-// Serial.print((uint8_t)isGroundTile3_CurrLvl);
-// Serial.print(" ");
-// Serial.print((uint8_t)isGroundTile2_CurrLvl);
-// Serial.println(" 0");
-// Serial.print("Dist ");
-// Serial.println(distToEdgeOfCurrentTile);
+                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP)
+                        DEBUG_PRINT(isGroundTile5_CurrLvl);
+                        DEBUG_PRINT("/");
+                        DEBUG_PRINT((uint8_t)wallTile5_CurrLvl);
+                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT((uint8_t)wallTile4_CurrLvl);
+                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT((uint8_t)wallTile3_CurrLvl);
+                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT((uint8_t)wallTile2_CurrLvl);
+                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT((uint8_t)wallTile1_CurrLvl);
+                        DEBUG_PRINTLN(" ");
+                        DEBUG_PRINT("NL");
+                        DEBUG_PRINT((uint8_t)wallTile5_NextLvl);
+                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT((uint8_t)wallTile4_NextLvl);
+                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT((uint8_t)wallTile3_NextLvl);
+                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT((uint8_t)wallTile2_NextLvl);
+                        DEBUG_PRINTLN(" _");
+                        DEBUG_PRINT("GT");
+                        DEBUG_PRINT((uint8_t)isGroundTile5_CurrLvl);
+                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT((uint8_t)isGroundTile4_CurrLvl);
+                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT((uint8_t)isGroundTile3_CurrLvl);
+                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT((uint8_t)isGroundTile2_CurrLvl);
+                        DEBUG_PRINTLN(" _");
+                        DEBUG_PRINT("Dist ");
+                        DEBUG_PRINTLN(distToEdgeOfCurrentTile);
+                        #endif
 
                         if (wallTile1_CurrLvl == WallTileResults::None && 
                             wallTile2_CurrLvl == WallTileResults::None && 
@@ -2691,6 +2693,19 @@ struct Level {
                             else {
                                 return StandingJumpResult::Normal_GrabLedge_Pos6;
                             }
+
+                        }
+                        else if (distToEdgeOfCurrentTile == 2 &&
+                            wallTile1_CurrLvl == WallTileResults::None && 
+                            wallTile2_CurrLvl == WallTileResults::None && 
+                            wallTile3_CurrLvl == WallTileResults::None && 
+                            wallTile4_CurrLvl == WallTileResults::None && 
+                            wallTile5_CurrLvl != WallTileResults::None && 
+                            wallTile4_NextLvl == WallTileResults::None && 
+                            wallTile5_NextLvl == WallTileResults::None 
+                            ) {
+
+                            return StandingJumpResult::Normal_DropLevel_Pos2;
 
                         }
                         else if (
@@ -2731,18 +2746,17 @@ struct Level {
 
                                     case 6:
                                     case 10:
-// Serial.println("dl");                                    
+                                   
                                         return StandingJumpResult::DropLevel;
 
                                     default:
-// Serial.println("default");                                    
+                                    
                                         return (wallTile1_CurrLvl == WallTileResults::None && wallTile2_CurrLvl == WallTileResults::None ? StandingJumpResult::Normal : StandingJumpResult::None);
                                     
                                 }
 
                         }
                         else {
-// Serial.println("else");                                    
                            
                             if (wallTile1_CurrLvl == WallTileResults::None && wallTile2_CurrLvl == WallTileResults::None) {
 
@@ -2755,28 +2769,27 @@ struct Level {
                                             switch (distToEdgeOfCurrentTile) {
                                                 
                                                 case 2:
-// Serial.println("Short");                                    
+                                  
                                                     return StandingJumpResult::Short_Pos2;
                                                 
                                                 case 6:
                                                 case 10:
-// Serial.println("Short");                                    
+                                   
                                                     return StandingJumpResult::Medium;
 
                                                 default:
-// Serial.println("Normal"); 
+
                                                     return StandingJumpResult::Normal;
 
                                             }
 
                                         }
 
-// Serial.println("Normal");                                    
                                         return StandingJumpResult::Normal;
 
                                     case WallTileResults::SolidWall:
                                     case WallTileResults::GateClosed:
-// Serial.println("Short");                                    
+
                                         return StandingJumpResult::Short_Pos2;
 
                                 }
@@ -2784,7 +2797,6 @@ struct Level {
                             }
                             else {
 
-// Serial.println("None");                                    
                                 return StandingJumpResult::None;
 
                             }
@@ -2818,6 +2830,41 @@ struct Level {
                         bool isGroundTile2_NextLvl = this->isGroundTile_ByCoords(tileXIdx + 2, tileYIdx + 1);
                         bool isGroundTile3_NextLvl = this->isGroundTile_ByCoords(tileXIdx + 3, tileYIdx + 1);
                         bool isGroundTile4_NextLvl = this->isGroundTile_ByCoords(tileXIdx + 4, tileYIdx + 1);
+
+
+                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP)
+                        DEBUG_PRINT((uint8_t)wallTile1_CurrLvl);
+                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT((uint8_t)wallTile2_CurrLvl);
+                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT((uint8_t)wallTile3_CurrLvl);
+                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT((uint8_t)wallTile4_CurrLvl);
+                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT((uint8_t)wallTile5_CurrLvl);
+                        DEBUG_PRINT("/");
+                        DEBUG_PRINT(isGroundTile5_CurrLvl);
+                        DEBUG_PRINTLN(" ");
+                        DEBUG_PRINT("NL _ ");
+                        DEBUG_PRINT((uint8_t)wallTile2_NextLvl);
+                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT((uint8_t)wallTile3_NextLvl);
+                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT((uint8_t)wallTile4_NextLvl);
+                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT((uint8_t)wallTile5_NextLvl);
+                        DEBUG_PRINT("GT _ ");
+                        DEBUG_PRINT((uint8_t)isGroundTile2_CurrLvl);
+                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT((uint8_t)isGroundTile3_CurrLvl);
+                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT((uint8_t)isGroundTile4_CurrLvl);
+                        DEBUG_PRINT(" ");
+                        DEBUG_PRINT((uint8_t)isGroundTile5_CurrLvl);
+                        DEBUG_PRINT("Dist ");
+                        DEBUG_PRINTLN(distToEdgeOfCurrentTile);
+                        #endif
+
 
                         if (wallTile1_CurrLvl == WallTileResults::None && 
                             wallTile2_CurrLvl == WallTileResults::None && 
@@ -2859,6 +2906,19 @@ struct Level {
                             }
 
                         }
+                        else if (distToEdgeOfCurrentTile == 2 &&
+                            wallTile1_CurrLvl == WallTileResults::None && 
+                            wallTile2_CurrLvl == WallTileResults::None && 
+                            wallTile3_CurrLvl == WallTileResults::None && 
+                            wallTile4_CurrLvl == WallTileResults::None && 
+                            wallTile5_CurrLvl != WallTileResults::None && 
+                            wallTile4_NextLvl == WallTileResults::None && 
+                            wallTile5_NextLvl == WallTileResults::None 
+                            ) {
+
+                            return StandingJumpResult::Normal_DropLevel_Pos2;
+
+                        }                        
                         else if (
 
                             wallTile1_CurrLvl == WallTileResults::None && 
