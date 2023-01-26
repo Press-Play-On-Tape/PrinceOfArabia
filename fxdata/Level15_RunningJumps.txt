@@ -1,12 +1,12 @@
-int8_t Level14_StandingJumps_FG[] = {
-    include "../levels/Level14_StandingJumps_FG.csv"
+int8_t Level15_RunningJumps_FG[] = {
+    include "../levels/Level15_RunningJumps_FG.csv"
 };
 
-int8_t Level14_StandingJumps_BG[] = {
-    include "../levels/Level14_StandingJumps_BG.csv"
+int8_t Level15_RunningJumps_BG[] = {
+    include "../levels/Level15_RunningJumps_BG.csv"
 };
 
-uint8_t Level14_StandingJumps_Data[] = {
+uint8_t Level15_RunningJumps_Data[] = {
     // Prince
     58,                         // Prince starting x pos
     56,                         // Prince starting y pos (25, 56, 87)
@@ -16,14 +16,14 @@ uint8_t Level14_StandingJumps_Data[] = {
     3,                          // Prince starting health
     // Level
     10,                         // Width
-    21,                         // Height
+    15,                         // Height
     0,                          // Level x starting position
-    12,                          // Level y starting position
+    3,                          // Level y starting position
     // End
     255,
 };
 
-uint8_t Level14_StandingJumps_Items[] = {
+uint8_t Level15_RunningJumps_Items[] = {
 
     255                                             // End
 }
