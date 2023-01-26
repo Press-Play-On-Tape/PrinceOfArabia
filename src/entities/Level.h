@@ -621,6 +621,24 @@ struct Level {
 
                 }
 
+
+                // Level 14 - Standing Jump
+
+                if (gamePlay.level == 14) {
+
+                    // Scenario 1
+
+                    prince.init(46, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword); 
+                    this->init(gamePlay, prince, 10, 12, 0, 0); 
+
+                    // Scenario 4
+
+                    // prince.init(46, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword); 
+                    // this->init(gamePlay, prince, 10, 12, 0, 9); 
+
+
+                }
+
             #endif
 
         }
