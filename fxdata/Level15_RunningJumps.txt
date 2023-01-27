@@ -16,7 +16,7 @@ uint8_t Level15_RunningJumps_Data[] = {
     3,                          // Prince starting health
     // Level
     10,                         // Width
-    18,                         // Height
+    21,                         // Height
     0,                          // Level x starting position
     3,                          // Level y starting position
     // End

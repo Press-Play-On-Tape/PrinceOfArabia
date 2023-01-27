@@ -6,7 +6,7 @@
  </editorsettings>
  <tileset firstgid="1" source="../../PrinceOfPersiaFX/Assets/TileSets/tile_dungeon.tsx"/>
  <tileset firstgid="126" source="../../PrinceOfPersiaFX/Assets/TileSets/tile_obj.tsx"/>
- <layer id="1" name="bg" width="90" height="9">
+ <layer id="1" name="BG" width="90" height="9">
   <data encoding="csv">
    <chunk x="0" y="0" width="10" height="6">
 0,120,76,76,76,97,91,78,78,79,
@@ -130,7 +130,7 @@
 </chunk>
   </data>
  </layer>
- <layer id="4" name="fg" width="90" height="9">
+ <layer id="4" name="FG" width="90" height="9">
   <data encoding="csv">
    <chunk x="0" y="0" width="10" height="6">
 83,0,0,0,0,108,0,0,0,0,
