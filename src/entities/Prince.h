@@ -91,4 +91,18 @@ class Prince : public BaseEntity, public BaseStack {
 
         }
 
+        void pushSequence(uint16_t fromStance, uint16_t toStance, bool resetFrame) {
+
+            this->ignoreWallCollisions = false;
+            BaseStack::pushSequence(fromStance, toStance, Stance::None, resetFrame);
+
+        }
+
+        void pushSequence(uint16_t fromStance, uint16_t toStance, uint16_t finalStance, bool resetFrame) {
+
+            this->ignoreWallCollisions = false;
+            BaseStack::pushSequence(fromStance, toStance, finalStance, resetFrame);
+
+        }
+
 };
