@@ -133,7 +133,43 @@ void processRunJump(Prince &prince, Level &level) {
 
             RunningJumpResult jump_3_Result = level.canRunningJump(prince, Action::RunJump_3);
 
+            #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
+                
+                switch (jump_3_Result) {
+
+                    case RunningJumpResult::None:
+                        break;
+
+                    default:
+
+                        DEBUG_PRINT(F("St"));
+                        DEBUG_PRINT(prince.getStance());
+                        DEBUG_PRINT(F(" px"));
+                        DEBUG_PRINT(prince.getX());
+                        DEBUG_PRINT(F(" x"));
+                        DEBUG_PRINT(level.coordToTileIndexX((level.getXLocation() * Constants::TileWidth) + prince.getX()));
+                        DEBUG_PRINT(F(" "));
+                        DEBUG_PRINT((level.getXLocation() * Constants::TileWidth) + prince.getX());
+                        DEBUG_PRINT(F(" y"));
+                        DEBUG_PRINT(level.coordToTileIndexY((level.getYLocation() * Constants::TileHeight) + prince.getY()));
+                        DEBUG_PRINT(F(" "));
+                        DEBUG_PRINT(prince.getY());
+                        DEBUG_PRINT(F(" D"));
+                        DEBUG_PRINTLN(level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX()));
+
+                        break;
+
+                }
+
+            #endif
+
             switch (jump_3_Result) {
+
+                case RunningJumpResult::Jump4_KeepLevel:
+                    prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
+                    prince.pushSequence(Stance::Running_Jump_4_SameLvl_1_Start, Stance::Running_Jump_4_SameLvl_8_End, true);
+                    prince.setIgnoreWallCollisions(true);
+                    break;
 
                 case RunningJumpResult::Jump4_DropLevel:
                     prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);

@@ -11,7 +11,7 @@
 
 void game_Init() {
 
-    gamePlay.init(1);
+    gamePlay.init(STARTING_LEVEL);      // Levels 1 - 13 normal game, 14 Standing Jumps, 15 Running Jumps
 
     #ifndef SAVE_MEMORY_ENEMY
         level.init_PositionChars(gamePlay, prince, enemy, true);
@@ -88,6 +88,13 @@ void game() {
             DEBUG_PRINT(F(" D"));
             DEBUG_PRINTLN(level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX()));
         }
+
+        // if (justPressed & B_BUTTON) { // echo out details
+
+        //     prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, true);
+        //     prince.pushSequence(Stance::Running_Jump_4_DropLvl_1_Start, Stance::Running_Jump_4_DropLvl_14_End, true);
+
+        // }
 
     #endif
 
