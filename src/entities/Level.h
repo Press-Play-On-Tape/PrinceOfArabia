@@ -1388,6 +1388,14 @@ struct Level {
 
         bool isGroundTile(int8_t bgTile, int8_t fgTile) {
 
+            #if defined(DEBUG) && defined(DEBUG_ISGROUNDTILE)
+            DEBUG_PRINT("isGroundTile: ");
+            DEBUG_PRINT(bgTile);
+            DEBUG_PRINT(",");
+            DEBUG_PRINT(fgTile);
+            DEBUG_PRINT(" ");
+            #endif
+
             switch (bgTile) {
 
                 case TILE_FLOOR_BASIC:
@@ -1399,7 +1407,6 @@ struct Level {
                 case TILE_FLOOR_LH_END_PATTERN_1:
                 case TILE_FLOOR_LH_END_PATTERN_2:
                 case TILE_FLOOR_RH_END:
-                // case TILE_FLOOR_RH_END_GATE:
                 case TILE_FLOOR_LH_WALL_1:
                 case TILE_FLOOR_LH_WALL_2:
                 case TILE_FLOOR_LH_WALL_3:
@@ -1418,12 +1425,18 @@ struct Level {
                 case TILE_FLOOR_GATE_REAR_TRACK_1:
                 case TILE_FLOOR_GATE_REAR_TRACK_2:
                 case TILE_FLOOR_GATE_FRONT_TRACK_1:
+
+                    #if defined(DEBUG) && defined(DEBUG_ISGROUNDTILE)
+                    DEBUG_PRINTLN("- BG True");
+                    #endif
+
                     return true;
 
                 default: break;
 
             }
 
+/*
             switch (fgTile) {
 
                 case TILE_FG_WALL_1:
@@ -1434,12 +1447,22 @@ struct Level {
                 case TILE_FG_WALL_6:
                 case TILE_FG_WALL_7:
                 case TILE_FG_WALL_8:
+
+                    #if defined(DEBUG) && defined(DEBUG_ISGROUNDTILE)
+                    DEBUG_PRINTLN("- FG False");
+                    #endif
+
                     return false;
 
                 // default:                     << Uncomment adds +32 bytes!
                 //     return true;
 
             }
+*/
+
+            #if defined(DEBUG) && defined(DEBUG_ISGROUNDTILE)
+            DEBUG_PRINTLN("- Default False");
+            #endif
 
             return false;
 
@@ -1472,15 +1495,15 @@ struct Level {
 
             WallTileResults wallTile = this->isWallTile(fgTile, x, y);
 
-            if (wallTile != WallTileResults::None) {
+            // if (wallTile != WallTileResults::None) {
 
-                #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
-                DEBUG_PRINTLN(" true (a wall tile)");
-                #endif                
+            //     #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
+            //     DEBUG_PRINTLN(" true (a wall tile)");
+            //     #endif                
 
-                // return CanFallResult::CannotFall;
-                return CanFallResult::CannotFall;
-            }
+            //     // return CanFallResult::CannotFall;
+            //     return CanFallResult::CannotFall;
+            // }
 
             switch (bgTile) {
 

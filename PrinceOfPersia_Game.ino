@@ -2215,6 +2215,18 @@ void game() {
     {
         CanFallResult canFall = level.canFall(prince);
 
+        #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
+        DEBUG_PRINT("Can Fall: Result ");
+        DEBUG_PRINT((uint8_t)canFall);
+        DEBUG_PRINT(", IgnoreCol ");
+        DEBUG_PRINT(prince.getIgnoreWallCollisions());
+        DEBUG_PRINT(", FootDown ");
+        DEBUG_PRINT(prince.isFootDown());
+        DEBUG_PRINT(", Falling ");
+        DEBUG_PRINT(prince.getFalling());
+        DEBUG_PRINTLN("");
+        #endif
+
         if (!prince.getIgnoreWallCollisions() && prince.isFootDown() && canFall == CanFallResult::CanFall && prince.getFalling() == 0) {
 
             uint8_t distToEdgeOfCurrentTile = level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX());

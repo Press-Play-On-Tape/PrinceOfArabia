@@ -1,7 +1,7 @@
 
 #pragma once
 
-#define PRODUCTION_SETTINGS
+#define _PRODUCTION_SETTINGS
 
 #ifdef PRODUCTION_SETTINGS
 
@@ -33,7 +33,7 @@
     #define _LEVEL_DATA_FROM_FX
     #define _IMAGE_DATA_FROM_FX
     #define _SAVE_TO_FX
-    #define STARTING_LEVEL 15
+    #define STARTING_LEVEL 1
 
     #define DEBUG
 
@@ -64,8 +64,9 @@
 #define _DEBUG_ACTION_FALLING
 #define _DEBUG_ACTION_CANSTANDINGJUMP
 #define _DEBUG_ACTION_CANSTANDINGJUMP_DETAIL
-#define DEBUG_ACTION_CANRUNNINGJUMP
-#define DEBUG_ACTION_CANRUNNINGJUMP_DETAIL
+#define _DEBUG_ACTION_CANRUNNINGJUMP
+#define _DEBUG_ACTION_CANRUNNINGJUMP_DETAIL
+#define _DEBUG_ISGROUNDTILE
 
 
 //-------------------------------------------------------------------------------------
