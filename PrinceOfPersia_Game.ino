@@ -1254,21 +1254,17 @@ void game() {
 
                 if (justPressed & UP_BUTTON && menu.cursor > 0) {
                     
-                    if (menu.cursor == 3 && !cookie.hasSavedLevel) {
-                        menu.cursor-=2;
-                    }
-                    else {
-                        menu.cursor--;
-                    }
+                    menu.cursor--;
 
                 } 
 
-                if (justPressed & DOWN_BUTTON && menu.cursor < 3)   {
+                if (justPressed & DOWN_BUTTON)   {
 
-                    if (menu.cursor == 1 && !cookie.hasSavedLevel) {
-                        menu.cursor+=2;
+                    if (!cookie.hasSavedLevel && menu.cursor < 2) {
+                        menu.cursor++;
                     }
-                    else {
+
+                    else if (cookie.hasSavedLevel && menu.cursor < 4) {
                         menu.cursor++;
                     }
 
@@ -1283,31 +1279,50 @@ void game() {
                             break;
 
                         case MenuOption::Save:
+
                             cookie.hasSavedLevel = true;
-                          #ifdef SAVE_TO_FX
+                            
+                            #ifdef SAVE_TO_FX
 
-                             FX::saveGameState((uint8_t*)&cookie, sizeof(cookie));
+                                FX::saveGameState((uint8_t*)&cookie, sizeof(cookie));
 
-                           #else
+                            #else
 
-                             EEPROM_Utils::saveCookie(cookie);
+                                EEPROM_Utils::saveCookie(cookie);
 
-                           #endif
+                            #endif
 
                             menu.direction = Direction::Right;  
                             break;
 
                         case MenuOption::Load:
 
-                          #ifdef SAVE_TO_FX
+                            #ifdef SAVE_TO_FX
 
-                            FX::loadGameState((uint8_t*)&cookie, sizeof(cookie));
+                                FX::loadGameState((uint8_t*)&cookie, sizeof(cookie));
 
-                          #else
+                            #else
 
-                            EEPROM_Utils::loadCookie(cookie);
+                                EEPROM_Utils::loadCookie(cookie);
 
-                          #endif
+                            #endif
+
+                            menu.direction = Direction::Right;  
+                            break;
+
+                        case MenuOption::Clear:
+
+                            cookie.hasSavedLevel = false;
+
+                            #ifdef SAVE_TO_FX
+
+                                FX::saveGameState((uint8_t*)&cookie, sizeof(cookie));
+
+                            #else
+
+                                EEPROM_Utils::saveCookie(cookie);
+
+                            #endif
 
                             menu.direction = Direction::Right;  
                             break;

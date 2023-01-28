@@ -1141,14 +1141,13 @@ struct Level {
 
         bool isGroundTile_ByCoords(int8_t x, int8_t y) {
 
-            int8_t fgTile = this->getTile(Layer::Foreground, x, y, TILE_FLOOR_BASIC);
             int8_t bgTile = this->getTile(Layer::Background, x, y, TILE_FLOOR_BASIC);
 
-            return isGroundTile(bgTile, fgTile);
+            return isGroundTile(bgTile);
 
         }
 
-        bool isGroundTile(int8_t bgTile, int8_t fgTile) {
+        bool isGroundTile(int8_t bgTile) {
 
             #if defined(DEBUG) && defined(DEBUG_ISGROUNDTILE)
             DEBUG_PRINT("isGroundTile: ");
@@ -1253,9 +1252,9 @@ struct Level {
 
         }
 
-        CanFallResult canFall(int8_t bgTile, int8_t fgTile, int8_t x = Constants::CoordNone, int8_t y = Constants::CoordNone) {
+        CanFallResult canFall(int8_t bgTile, int8_t x = Constants::CoordNone, int8_t y = Constants::CoordNone) {
 
-            WallTileResults wallTile = this->isWallTile(fgTile, x, y);
+            //WallTileResults wallTile = this->isWallTile(fgTile, x, y);
 
             // if (wallTile != WallTileResults::None) {
 
@@ -1353,7 +1352,6 @@ struct Level {
             int8_t tileYIdx = this->coordToTileIndexY(newPos.y) - this->getYLocation();
             
             int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
-            int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
             
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
             DEBUG_PRINT(F("canFall(toe) stance:"));
@@ -1370,15 +1368,13 @@ struct Level {
             DEBUG_PRINT(tileYIdx);
             DEBUG_PRINT(F(", bg "));
             DEBUG_PRINT(bgTile1);
-            DEBUG_PRINT(F(", fg "));
-            DEBUG_PRINT(fgTile1);
             DEBUG_PRINT(" = ");
             #endif
 
             
             if (imageDetails.toe != Constants::InAir) {
             
-                canFall = this->canFall(bgTile1, fgTile1, tileXIdx, tileYIdx);
+                canFall = this->canFall(bgTile1, tileXIdx, tileYIdx);
 
 
                 // If the price cannot fall then return this now.  Ortherwise check the heel position ..
@@ -1394,7 +1390,6 @@ struct Level {
                     int8_t tileYIdx = this->coordToTileIndexY(newPos.y) - this->getYLocation();
                     
                     int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
-                    int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
                     
                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
                     DEBUG_PRINT(F("canFall(heel) stance:"));
@@ -1411,12 +1406,10 @@ struct Level {
                     DEBUG_PRINT(tileYIdx);
                     DEBUG_PRINT(F(", bg "));
                     DEBUG_PRINT(bgTile1);
-                    DEBUG_PRINT(F(", fg "));
-                    DEBUG_PRINT(fgTile1);
                     DEBUG_PRINT(" = ");
                     #endif
 
-                    canFall = this->canFall(bgTile1, fgTile1, tileXIdx, tileYIdx);
+                    canFall = this->canFall(bgTile1, tileXIdx, tileYIdx);
 
                     if (canFall == CanFallResult::CannotFall) {
 
@@ -1519,19 +1512,15 @@ struct Level {
 
             int8_t tileXIdx = this->coordToTileIndexX(newPos.x) - this->getXLocation();
             int8_t tileYIdx = this->coordToTileIndexY(newPos.y) - this->getYLocation();
-            
             int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
-            int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
                         
-            canFall = this->canFall(bgTile1, fgTile1, tileXIdx, tileYIdx);
+            canFall = this->canFall(bgTile1, tileXIdx, tileYIdx);
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALLSOMEMORE)
             DEBUG_PRINT(F("canFallSomeMore() stance:"));
             DEBUG_PRINT(prince.getStance());
             DEBUG_PRINT(F(", bg "));
             DEBUG_PRINT(bgTile1);
-            DEBUG_PRINT(F(", fg "));
-            DEBUG_PRINT(fgTile1);
             DEBUG_PRINT(" = ");
             if (canFall) {
                 DEBUG_PRINTLN("true");
@@ -1583,7 +1572,7 @@ struct Level {
             DEBUG_PRINT(this->isGroundTile(bgTile, fgTile));
             #endif
 
-            bool isGroundTile = this->isGroundTile(bgTile, fgTile);
+            bool isGroundTile = this->isGroundTile(bgTile);
 
             if (isGroundTile) {
 
@@ -1598,7 +1587,7 @@ struct Level {
             bgTile = this->getTile(Layer::Background, tileXIdx + (prince.getDirection() == Direction::Left ? 0 : 1), tileYIdx, TILE_FLOOR_BASIC);
             fgTile = this->getTile(Layer::Foreground, tileXIdx + (prince.getDirection() == Direction::Left ? 0 : 1), tileYIdx, TILE_FLOOR_BASIC);
 
-            isGroundTile = this->isGroundTile(bgTile, fgTile);
+            isGroundTile = this->isGroundTile(bgTile);
             bool isEdgeTile = this->isEdgeTile(bgTile, fgTile);
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN_PART2)
