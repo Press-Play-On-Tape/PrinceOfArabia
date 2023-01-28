@@ -24,7 +24,7 @@
 
 
 #define TILE_FLOOR_BASIC 77
-#define TILE_FLOOR_BASIC_TORCH 127
+#define TILE_FLOOR_BASIC_TORCH 124
 #define TILE_FLOOR_LH_END_1 76
 #define TILE_FLOOR_LH_END_2 57
 #define TILE_FLOOR_PATTERN_1 78
@@ -565,27 +565,32 @@ struct Level {
                     // Scenario 1
 
                     prince.init(46, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword); 
-                    this->init(gamePlay, prince, 10, 21, 0, 0); 
+                    this->init(gamePlay, prince, 10, 24, 0, 0); 
 
                     // Scenario 4
 
                     // prince.init(46, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword); 
-                    // this->init(gamePlay, prince, 10, 21, 0, 9); 
+                    // this->init(gamePlay, prince, 10, 24, 0, 9); 
 
                     // Scenario 5
 
                     // prince.init(46, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword); 
-                    // this->init(gamePlay, prince, 10, 21, 0, 12); 
+                    // this->init(gamePlay, prince, 10, 24, 0, 12); 
 
                     // Scenario 6
 
                     // prince.init(46, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword); 
-                    // this->init(gamePlay, prince, 10, 21, 0, 15); 
+                    // this->init(gamePlay, prince, 10, 24, 0, 15); 
 
                     // Scenario 7
 
                     // prince.init(98, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
-                    // this->init(gamePlay, prince, 10, 21, 0, 18); 
+                    // this->init(gamePlay, prince, 10, 24, 0, 18); 
+
+                    // Scenario 7
+
+                    prince.init(98, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    this->init(gamePlay, prince, 10, 24, 0, 21); 
 
 
                 }
@@ -1156,8 +1161,6 @@ struct Level {
             #if defined(DEBUG) && defined(DEBUG_ISGROUNDTILE)
             DEBUG_PRINT("isGroundTile: ");
             DEBUG_PRINT(bgTile);
-            DEBUG_PRINT(",");
-            DEBUG_PRINT(fgTile);
             DEBUG_PRINT(" ");
             #endif
 

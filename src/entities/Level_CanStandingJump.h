@@ -654,10 +654,12 @@ StandingJumpResult canStandingJump(Prince &prince) {
     bool isGroundTile5_NextLvl = this->isGroundTile_ByCoords(tileXIdx + (4 * offset), tileYIdx + 1);
 
     if (prince.getDirection() == Direction::Left) {
+        DEBUG_PRINTLN("__  5  4  3  2  1 ");
+        DEBUG_PRINT("_");
         DEBUG_PRINT(isGroundTile5_CurrLvl);
         DEBUG_PRINT("/");
         DEBUG_PRINT((uint8_t)wallTile5_CurrLvl);
-        DEBUG_PRINT(" ");
+        DEBUG_PRINT("  ");
         DEBUG_PRINT((uint8_t)wallTile4_CurrLvl);
         DEBUG_PRINT(" ");
         DEBUG_PRINT((uint8_t)wallTile3_CurrLvl);
@@ -666,7 +668,7 @@ StandingJumpResult canStandingJump(Prince &prince) {
         DEBUG_PRINT(" ");
         DEBUG_PRINT((uint8_t)wallTile1_CurrLvl);
         DEBUG_PRINTLN(" ");
-        DEBUG_PRINT("NL");
+        DEBUG_PRINT("NL ");
         DEBUG_PRINT((uint8_t)wallTile5_NextLvl);
         DEBUG_PRINT(" ");
         DEBUG_PRINT((uint8_t)wallTile4_NextLvl);
@@ -675,7 +677,7 @@ StandingJumpResult canStandingJump(Prince &prince) {
         DEBUG_PRINT(" ");
         DEBUG_PRINT((uint8_t)wallTile2_NextLvl);
         DEBUG_PRINTLN(" _");
-        DEBUG_PRINT("GC");
+        DEBUG_PRINT("GC ");
         DEBUG_PRINT((uint8_t)isGroundTile5_CurrLvl);
         DEBUG_PRINT(" ");
         DEBUG_PRINT((uint8_t)isGroundTile4_CurrLvl);
@@ -684,7 +686,7 @@ StandingJumpResult canStandingJump(Prince &prince) {
         DEBUG_PRINT(" ");
         DEBUG_PRINT((uint8_t)isGroundTile2_CurrLvl);
         DEBUG_PRINTLN(" _");
-        DEBUG_PRINT("GC");
+        DEBUG_PRINT("GN ");
         DEBUG_PRINT((uint8_t)isGroundTile5_NextLvl);
         DEBUG_PRINT(" ");
         DEBUG_PRINT((uint8_t)isGroundTile4_NextLvl);
@@ -698,6 +700,7 @@ StandingJumpResult canStandingJump(Prince &prince) {
     }
     else {
 
+        DEBUG_PRINTLN("   1  2  3  4  5 ");
         DEBUG_PRINT("CL _ ");
         DEBUG_PRINT((uint8_t)wallTile1_CurrLvl);
         DEBUG_PRINT(" ");
