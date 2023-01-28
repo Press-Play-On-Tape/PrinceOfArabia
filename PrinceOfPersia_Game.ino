@@ -121,7 +121,7 @@ void game() {
     enemy.update();
     #endif
     
-    LevelUpdate levelUpdate = level.update(arduboy, prince);
+    LevelUpdate levelUpdate = level.update(arduboy, prince, gamePlay);
 
     if (levelUpdate == LevelUpdate::FloorCollapsedOnPrince) {
         

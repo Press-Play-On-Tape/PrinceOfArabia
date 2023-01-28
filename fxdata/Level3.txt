@@ -22,15 +22,16 @@ uint8_t level3_Data[] = {
     // Enemy 1          
     0,                          // Type 0 = Guard, 1 = Skeleton, 2 = Mirror          
     10,                         // Enemy starting x tile
-    4,                          // Enemy starting y tile
+    3,                          // Enemy starting y tile
     70,                         // Enemy starting x pos
     56,                         // Enemy starting y pos (25, 56, 87)
     1,                          // Enemy starting direction, 1 Left and 2 Right
     3,                          // Enemy starting health
-    2,                          // Status 0 Alive, 1 Dead, 2 Dormant
+    1,                          // Status 0 Alive, 1 Dormant
     // End
     255,
 };
+
 
 uint8_t Level3_Items[] = {
     26,   4,   8,   3,   5,   0,   0,   0,          // Exit Gate, let position for open, right position, close button                                                        

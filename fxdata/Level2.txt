@@ -69,7 +69,8 @@ uint8_t level2_Data[] = {
 };
 
 uint8_t Level2_Items[] = {
-    16,  14,   1,  13,  15,   0,   0,   0,      // Exit Gate, let position for open, right position                                                        
+    26,  14,   1,  13,  15,   0,   0,   0,      // Exit Gate, let position for open, right position                                                        
+     5,   0,   1,   0,   0,   0,   0,   0,      // Exit Button 
     31, 122,   7,   0,   0,   0,   0,   0,      // Entry Gate
 
     17,  80,   3,   0,  64,  64, 255,   0,      // Gate #1

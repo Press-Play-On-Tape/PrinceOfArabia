@@ -324,12 +324,12 @@ struct Level {
                     // this->init(gamePlay, prince, 90, 15, 20, 3); 
 
                     // // Biggest jump
-                    prince.init(10 + (8*12), 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
-                    this->init(gamePlay, prince, 90, 15, 30, 3); 
+                    // prince.init(10 + (8*12), 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    // this->init(gamePlay, prince, 90, 15, 30, 3); 
 
                     // Exit Button
-                    // prince.init(10 + (4*12), 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
-                    // this->init(gamePlay, prince, 90, 15, 0, 6); 
+                    prince.init(10 + (4*12), 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    this->init(gamePlay, prince, 90, 15, 0, 6); 
 
                     // Skeleton
                     // prince.init(10, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);     
@@ -623,7 +623,7 @@ struct Level {
         }
 
 
-        LevelUpdate update(Arduboy2Ext &arduboy, Prince &prince) { 
+        LevelUpdate update(Arduboy2Ext &arduboy, Prince &prince, GamePlay &gamePlay) { 
 
             LevelUpdate levelUpdate = LevelUpdate::NoAction;
 
@@ -777,17 +777,21 @@ struct Level {
                                     }
 
 
-                                    // Remvoe any buttons the tile may have landed on ..
+                                    // Remvoe any buttons the tile may have landed on (level 11 only)..
 
-                                    for (Item &button : items) {
+                                    if (gamePlay.level == 11) {
 
-                                        if ((button.itemType == ItemType::FloorButton1 || button.itemType == ItemType::FloorButton2) && button.data.location.x == item.data.location.x && button.data.location.y == item.data.location.y) {
+                                        for (Item &button : items) {
 
-                                            button.itemType = ItemType::None;
+                                            if ((button.itemType == ItemType::FloorButton1 || button.itemType == ItemType::FloorButton2) && button.data.location.x == item.data.location.x && button.data.location.y == item.data.location.y) {
 
-                                        } 
+                                                button.itemType = ItemType::None;
+
+                                            } 
+
+                                        }
+
                                     }
-
 
                                 }
 
