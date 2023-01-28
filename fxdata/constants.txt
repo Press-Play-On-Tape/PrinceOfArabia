@@ -130,7 +130,7 @@ namespace Constants {
         0,0,   1,0,   -1,0,                                                                                                                 // ATTACK_BLOCK_OFFSETS
         0,0,   0,0,                                                                                                                         // FALLING_DEAD_BLADE_OFFSETS
         0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,                                                                               // DELAY_OFFSETS
-        0,6,   0,6,   0,6,   0,6,   0,7,   0,7,                                                                                             // STRAIGHT_DROP_HANGON_OFFSETS
+        0,6,   0,5,   0,5,   0,5,   0,5,   0,5,                                                                                             // STRAIGHT_DROP_HANGON_OFFSETS
         0,0,   0,0,   2,0,   2,0,   2,0,   2,0,   2,0,   3,0,   3,1,   3,1,   7,3,   3,4,   2,4,   1,4,   1,4,   1,4,   1,3,   1,3,         // STANDING_JUMP_GL_2_OFFSETS
         0,0,   0,0,   2,0,   2,0,   2,0,   2,0,   2,0,   3,0,   4,1,   4,1,   8,3,   4,4,   2,4,   1,4,   1,4,   1,4,   1,3,   1,3,         // STANDING_JUMP_GL_6_OFFSETS
         0,0,   0,0,   2,0,   2,0,   2,0,   3,0,   2,0,   3,0,   3,0,   3,0,   3,0,   2,0,   1,0,   1,0,   1,0,   0,0,                       // STANDING_JUMP_SHORT_6_OFFSETS

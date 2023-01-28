@@ -1,7 +1,7 @@
 
 #pragma once
 
-#define _PRODUCTION_SETTINGS
+#define PRODUCTION_SETTINGS
 
 #ifdef PRODUCTION_SETTINGS
 
@@ -23,19 +23,19 @@
 #else
 
     #define _SAVE_MEMORY_USB
-    #define _SAVE_MEMORY_OTHER
+    #define SAVE_MEMORY_OTHER
     #define SAVE_MEMORY_SOUND
-    #define _SAVE_MEMORY_ENEMY
-    #define _SAVE_MEMORY_TITLE
+    #define SAVE_MEMORY_ENEMY
+    #define SAVE_MEMORY_TITLE
     #define _ALT_B_BUTTON
     #define _GIVE_SWORD
 
-    #define LEVEL_DATA_FROM_FX
-    #define IMAGE_DATA_FROM_FX
+    #define _LEVEL_DATA_FROM_FX
+    #define _IMAGE_DATA_FROM_FX
     #define _SAVE_TO_FX
     #define STARTING_LEVEL 7
 
-    #define _DEBUG
+    #define DEBUG
 
 #endif
 
@@ -898,7 +898,7 @@ constexpr uint16_t Delay_8_End                                   = Stance::Delay
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /*                                                               01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define STRAIGHT_DROP_HANGON_SEQ                                 125,   125,   125,   125,   125,   103,
-#define STRAIGHT_DROP_HANGON_OFFSETS                             0,6,   0,6,   0,6,   0,6,   0,7,   0,7,
+#define STRAIGHT_DROP_HANGON_OFFSETS                             0,6,   0,5,   0,5,   0,5,   0,5,   0,5,
 constexpr uint16_t Straight_Drop_HangOn_1_Start                  = Stance::Delay_8_End + 1;  // Drop down to Pos 2 (two levels)
 constexpr uint16_t Straight_Drop_HangOn_2                        = Stance::Straight_Drop_HangOn_1_Start + 1;
 constexpr uint16_t Straight_Drop_HangOn_3                        = Stance::Straight_Drop_HangOn_2 + 1;

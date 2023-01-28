@@ -412,12 +412,12 @@ struct Level {
                     // this->init(gamePlay, prince, 90, 12, 10, 0); 
 
                     // Drop and grab #1
-                    // prince.init(16, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
-                    // this->init(gamePlay, prince, 90, 12, 80, 3); 
+                    prince.init(16, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    this->init(gamePlay, prince, 90, 12, 80, 3); 
 
                     // Jump spikes
-                    prince.init((5*12) + 16, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
-                    this->init(gamePlay, prince, 90, 12, 70, 6); 
+                    // prince.init((5*12) + 16, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    // this->init(gamePlay, prince, 90, 12, 70, 6); 
 
                     // Double blades
                     // prince.init((5*12) + 16, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
