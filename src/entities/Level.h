@@ -318,6 +318,9 @@ struct Level {
                     // prince.init(78 - 4, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);          // Fall Error running Jump
                     // this->init(gamePlay, prince, 90, 9,  50, 3);  // Fall Error running Jump
 
+                    // prince.init(70, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          // Fall Error running Jump
+                    // this->init(gamePlay, prince, 90, 9,  40, 3);  // Fall Error running Jump
+
                 }
 
                 // Level 2
