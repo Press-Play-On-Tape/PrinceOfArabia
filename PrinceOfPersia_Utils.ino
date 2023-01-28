@@ -19,6 +19,7 @@ void testScroll(GamePlay &gamePlay, Prince &prince, Level &level) {
 
             prince.clear();
             prince.push(Stance::Leave_Gate_14_End);
+            level.setYLocation(12);
 
         }
         else {

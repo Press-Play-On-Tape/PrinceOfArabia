@@ -1363,6 +1363,7 @@ void game() {
             switch (prince.getStance()) {
 
                 case Stance::Leave_Gate_14_End:
+
                     gamePlay.gameState = GameState::Title;
                     titleScreenVars.setMode(static_cast<TitleScreenMode>(static_cast<uint8_t>(titleScreenVars.getMode()) + 1), level);
                     setRenderChamberBG();
