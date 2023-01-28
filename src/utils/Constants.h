@@ -1,7 +1,7 @@
 
 #pragma once
 
-#define PRODUCTION_SETTINGS
+#define _PRODUCTION_SETTINGS
 
 #ifdef PRODUCTION_SETTINGS
 
@@ -33,7 +33,7 @@
     #define LEVEL_DATA_FROM_FX
     #define IMAGE_DATA_FROM_FX
     #define _SAVE_TO_FX
-    #define STARTING_LEVEL 6
+    #define STARTING_LEVEL 7
 
     #define _DEBUG
 
