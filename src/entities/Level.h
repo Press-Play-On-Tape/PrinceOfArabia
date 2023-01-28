@@ -124,6 +124,12 @@ struct Level {
 
     public:
 
+        #include "Level_InitLevel.h"
+        #include "Level_Utils.h"
+        #include "Level_CanRunningJump.h"
+        #include "Level_CanStandingJump.h"
+
+
         #ifndef LEVEL_DATA_FROM_FX
 
             void init(GamePlay &gamePlay, Prince &prince, uint8_t width, uint8_t height, uint8_t xLoc, uint8_t yLoc) {
@@ -1144,181 +1150,7 @@ struct Level {
             
         }
 
-        void printMap() {
 
-            #if defined(DEBUG) && defined(DEBUG_LEVEL_LOAD_MAP)
-
-            DEBUG_PRINTLN(F("Map ---------------"));
-            DEBUG_PRINT(F("xLoc: "));
-            DEBUG_PRINT(xLoc);
-            DEBUG_PRINT(F(", yLoc: "));
-            DEBUG_PRINTLN(yLoc);
-            DEBUG_PRINTLN(F("BG ---------------"));
-
-            for (uint8_t y = 0; y < 5; y++) {
-
-                for (uint8_t x = 0; x < 16; x++) {
-
-                    DEBUG_PRINT(bg[y][x]);
-                    DEBUG_PRINT(" ");
-
-                    if (x == 2 || x == 12) {
-                    DEBUG_PRINT("| ");
-                    }
-
-                }
-
-                DEBUG_PRINTLN("");
-
-            }
-
-
-            DEBUG_PRINTLN(F("FG ---------------"));
-
-            for (uint8_t y = 0; y < 5; y++) {
-
-                for (uint8_t x = 0; x < 16; x++) {
-
-                    DEBUG_PRINT(fg[y][x]);
-                    DEBUG_PRINT(" ");
-
-                    if (x == 2 || x == 12) {
-                        DEBUG_PRINT("| ");
-                    }
-
-                }
-
-                DEBUG_PRINTLN("");
-
-            }
-
-            #endif
-
-        }
-
-        void loadItems(GamePlay &gamePlay, Prince &prince) {
-
-
-            // Deactivate all items ..            
-
-            for (Item &item : items) {
-                item.itemType = ItemType::None;
-            }
-
-            this->sign.counter = 0;
-
-            uint8_t itemIdx = 0;
-            FX::seekData(FX::readIndexedUInt24(Levels::Level_Items, gamePlay.level));
-            uint8_t itemType = FX::readPendingUInt8();
-
-            while (itemType != 255) {
-
-                Item &item = this->items[itemIdx];
-                item.itemType = static_cast<ItemType>(itemType);
-    
-                switch (item.itemType) {
-
-                    case ItemType::Gate:
-                        {
-                            Gate gate;
-                            FX::readBytes((uint8_t*)&gate, sizeof(gate));
-
-                            if (!(gamePlay.level == 6 && itemIdx == 7 && item.data.gate.position == 9)) {
-                                item.data.gate.x = gate.x;
-                                item.data.gate.y = gate.y;
-                                item.data.gate.position = gate.position;
-                                item.data.gate.closingDelay = gate.closingDelay;
-                                item.data.gate.defaultClosingDelay = gate.defaultClosingDelay;
-                                item.data.gate.closingDelayMax = gate.closingDelayMax;
-                                item.data.gate.direction = gate.direction;
-                            }
-
-                        }
-                        break;
-
-                    default:
-
-                        FX::readBytes((uint8_t*)&item.data.rawData, sizeof(item.data.rawData));
-                        break;
-
-                }
-
-                itemType = FX::readPendingUInt8();
-                itemIdx++;
-
-            }
-
-            FX::readEnd();
-
-            prince.setSword(gamePlay.level > 0);
-
-        }
-
-        void loadMap(GamePlay &gamePlay) {
-
-
-            uint8_t offset = 0;
-            if (this->xLoc) {
-                offset = this->xLoc - 3;
-            }
-
-            // Background ..
-
-            for (uint8_t x = 0; x < 5 * 16; x++) {
-
-                *(&bg[0][0] + x) = TILE_NONE;
-            }
-
-            for (int8_t y = this->yLoc - 1; y < (int8_t)(this->yLoc + 4); y++) {
-
-                if (y >= 0) {
-                    FX::seekDataArray(FX::readIndexedUInt24(Levels::Level_BG, gamePlay.level), y, offset, this->width);
-
-                    for (uint8_t x = 0; x < 16; x++) {
-
-                        if (x >= 3 || offset) {
-                            bg[y - this->yLoc + 1][x] = static_cast<int8_t>(FX::readPendingUInt8());
-                        }
-
-                    }
-
-                    FX::readEnd();
-                }
-
-            }
-
-
-            // Foreground ..
-
-            for (uint8_t x = 0; x < 5 * 16; x++) {
-
-                *(&fg[0][0] + x) = TILE_FG_WALL_1;
-
-            }
-
-            for (int8_t y = this->yLoc - 1; y < (int8_t)(this->yLoc + 4); y++) {
-
-                if (y >= 0) {
-
-                    FX::seekDataArray(FX::readIndexedUInt24(Levels::level_FG, gamePlay.level), y, offset, this->width);
-
-                    for (uint8_t x = 0; x < 16; x++) {
-
-                        if (x >= 3 || offset) {
-                            fg[y - this->yLoc + 1][x] = static_cast<int8_t>(FX::readPendingUInt8());
-                        }
-                    }
-
-                    FX::readEnd();
-                }
-
-            }
-
-            #if defined(DEBUG) && defined(DEBUG_LEVEL_LOAD_MAP)
-            printMap();
-            #endif
-
-        }
 
 
         WallTileResults isWallTile_ByCoords(int8_t x = Constants::CoordNone, int8_t y = Constants::CoordNone, Direction direction = Direction::Left) {
@@ -1751,8 +1583,9 @@ struct Level {
         
         }
 
+
         CanFallResult canFallSomeMore(Prince &prince, int8_t xOffset = 0) {
-//return canFall(prince, xOffset);
+
             CanFallResult canFall = CanFallResult::CannotFall;
             Point newPos = prince.getPosition();
             newPos.x = newPos.x + prince.getDirectionOffset(xOffset);
@@ -1807,8 +1640,6 @@ struct Level {
             printCoordToIndex(newPos, tileXIdx, tileYIdx);
             #endif
 
-            // int8_t bgTile = this->getTile(Layer::Background, tileXIdx + (prince.getDirection() == Direction::Left ? 1 : 0), tileYIdx, TILE_FLOOR_BASIC);
-            // int8_t fgTile = this->getTile(Layer::Foreground, tileXIdx + (prince.getDirection() == Direction::Left ? 1 : 0), tileYIdx, TILE_FLOOR_BASIC);
             int8_t bgTile = this->getTile(Layer::Background, tileXIdx + (prince.getDirection() == Direction::Left ? 0 : 0), tileYIdx, TILE_FLOOR_BASIC);
             int8_t fgTile = this->getTile(Layer::Foreground, tileXIdx + (prince.getDirection() == Direction::Left ? 0 : 0), tileYIdx, TILE_FLOOR_BASIC);
 
@@ -2126,10 +1957,6 @@ struct Level {
             return true;
 
         }
-
-
-        #include "Level_CanRunningJump.h"
-        #include "Level_CanStandingJump.h"
 
         CanJumpUpResult canJumpUp(Prince &prince) {
 
@@ -2747,14 +2574,9 @@ struct Level {
 
         }        
 
+
         CanClimbDownResult canClimbDown(Prince &prince) {
-// enum class CanClimbDownResult : uint8_t {
-//   0  None,
-//   1  ClimbDown,
-//   2  StepThenClimbDown,
-//   3  TurnThenClimbDown,
-//   4  StepThenTurnThenClimbDown,
-// };
+
             switch (prince.getDirection()) {
 
                 case Direction::Left:
@@ -3117,80 +2939,5 @@ struct Level {
             return (isWallTile(fgTile, Constants::CoordNone, Constants::CoordNone) != WallTileResults::None);
 
         }
-
-        #if defined(DEBUG)
-        void printAction(Action action) {
-
-            switch (action) {
-
-                case Action::SmallStep:
-                    DEBUG_PRINT(F("SmallStep"));
-                    break;
-
-                case Action::CrouchHop:
-                    DEBUG_PRINT(F("CrouchHop"));
-                    break;
-
-                case Action::Step:
-                    DEBUG_PRINT(F("Step"));
-                    break;
-
-                case Action::RunStart:
-                    DEBUG_PRINT(F("RunStart"));
-                    break;
-
-                case Action::RunRepeat:
-                    DEBUG_PRINT(F("RunRepeat"));
-                    break;
-
-                case Action::RunJump_3:
-                    DEBUG_PRINT(F("RunJump_3"));
-                    break;
-
-                case Action::RunJump_2:
-                    DEBUG_PRINT(F("RunJump_2"));
-                    break;
-
-                case Action::RunJump_1:
-                    DEBUG_PRINT(F("RunJump_1"));
-                    break;
-
-                case Action::StandingJump:
-                    DEBUG_PRINT(F("StandingJump"));
-                    break;
-
-            }
-
-        }
-
-        void printTileInfo(int8_t bgTile, int8_t fgTile) {
-
-            DEBUG_PRINT(F("isWallTile("));
-            DEBUG_PRINT(bgTile);
-            DEBUG_PRINT(F(","));
-            DEBUG_PRINT(fgTile);
-            DEBUG_PRINT(F(") "));
-            DEBUG_PRINT((uint8_t)this->isWallTile(fgTile, Constants::CoordNone, Constants::CoordNone));
-            DEBUG_PRINT(F(", isGroundTile() "));
-            DEBUG_PRINT(this->isGroundTile(bgTile, fgTile));
-            DEBUG_PRINT(F(", canFall() "));
-            DEBUG_PRINTLN((uint8_t)this->canFall(bgTile, fgTile));
-        
-        }
-
-        void printCoordToIndex(Point point, int tileXIdx, int8_t tileYIdx) {
-
-            DEBUG_PRINT(F("coordToTileIndexX "));
-            DEBUG_PRINT(point.x);
-            DEBUG_PRINT(F(" = "));
-            DEBUG_PRINT(tileXIdx);
-            DEBUG_PRINT(F(", coordToTileIndexY "));
-            DEBUG_PRINT(point.y);
-            DEBUG_PRINT(F(" = "));
-            DEBUG_PRINTLN(tileYIdx);
-
-        }
-        #endif
-
 
 };
