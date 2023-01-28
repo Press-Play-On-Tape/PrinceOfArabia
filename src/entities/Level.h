@@ -250,9 +250,9 @@ struct Level {
                     // prince.init(38-28+12+4, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          
                     // this->init(gamePlay, prince, 90, 9, 60, 0);  
 
-                    // Error with Spikes
-                    prince.init(38+36+4, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);        
-                    this->init(gamePlay, prince, 90, 9, 30, 6);  
+                    // Error falling
+                    prince.init(38+12+8, 56 + 31, Direction::Right, Stance::Crouch_3_End, 3, clearSword);        
+                    this->init(gamePlay, prince, 90, 9, 50, 0);  
 
                 }
 
@@ -1569,7 +1569,7 @@ struct Level {
             DEBUG_PRINT(F(", fg "));
             DEBUG_PRINT(fgTile);
             DEBUG_PRINT(F(", isGroundTile: "));
-            DEBUG_PRINT(this->isGroundTile(bgTile, fgTile));
+            DEBUG_PRINT(this->isGroundTile(bgTile));
             #endif
 
             bool isGroundTile = this->isGroundTile(bgTile);

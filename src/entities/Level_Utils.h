@@ -108,7 +108,7 @@ void printTileInfo(int8_t bgTile, int8_t fgTile) {
     DEBUG_PRINT(F(") "));
     DEBUG_PRINT((uint8_t)this->isWallTile(fgTile, Constants::CoordNone, Constants::CoordNone));
     DEBUG_PRINT(F(", isGroundTile() "));
-    DEBUG_PRINT(this->isGroundTile(bgTile, fgTile));
+    DEBUG_PRINT(this->isGroundTile(bgTile));
     DEBUG_PRINT(F(", canFall() "));
     DEBUG_PRINTLN((uint8_t)this->canFall(bgTile));
 

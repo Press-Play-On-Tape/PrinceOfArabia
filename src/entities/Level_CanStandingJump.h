@@ -651,6 +651,8 @@ StandingJumpResult canStandingJump(Prince &prince) {
 
     #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP)
 
+    bool isGroundTile5_NextLvl = this->isGroundTile_ByCoords(tileXIdx + (4 * offset), tileYIdx + 1);
+
     if (prince.getDirection() == Direction::Left) {
         DEBUG_PRINT(isGroundTile5_CurrLvl);
         DEBUG_PRINT("/");
@@ -673,7 +675,7 @@ StandingJumpResult canStandingJump(Prince &prince) {
         DEBUG_PRINT(" ");
         DEBUG_PRINT((uint8_t)wallTile2_NextLvl);
         DEBUG_PRINTLN(" _");
-        DEBUG_PRINT("GT");
+        DEBUG_PRINT("GC");
         DEBUG_PRINT((uint8_t)isGroundTile5_CurrLvl);
         DEBUG_PRINT(" ");
         DEBUG_PRINT((uint8_t)isGroundTile4_CurrLvl);
@@ -682,10 +684,59 @@ StandingJumpResult canStandingJump(Prince &prince) {
         DEBUG_PRINT(" ");
         DEBUG_PRINT((uint8_t)isGroundTile2_CurrLvl);
         DEBUG_PRINTLN(" _");
+        DEBUG_PRINT("GC");
+        DEBUG_PRINT((uint8_t)isGroundTile5_NextLvl);
+        DEBUG_PRINT(" ");
+        DEBUG_PRINT((uint8_t)isGroundTile4_NextLvl);
+        DEBUG_PRINT(" ");
+        DEBUG_PRINT((uint8_t)isGroundTile3_NextLvl);
+        DEBUG_PRINT(" ");
+        DEBUG_PRINT((uint8_t)isGroundTile2_NextLvl);
+        DEBUG_PRINTLN(" _");
         DEBUG_PRINT("Dist ");
         DEBUG_PRINTLN(distToEdgeOfCurrentTile);
     }
     else {
+
+        DEBUG_PRINT("CL _ ");
+        DEBUG_PRINT((uint8_t)wallTile1_CurrLvl);
+        DEBUG_PRINT(" ");
+        DEBUG_PRINT((uint8_t)wallTile2_CurrLvl);
+        DEBUG_PRINT(" ");
+        DEBUG_PRINT((uint8_t)wallTile3_CurrLvl);
+        DEBUG_PRINT(" ");
+        DEBUG_PRINT((uint8_t)wallTile4_CurrLvl);
+        DEBUG_PRINT(" ");
+        DEBUG_PRINT((uint8_t)wallTile5_CurrLvl);
+        DEBUG_PRINT("/");
+        DEBUG_PRINT(isGroundTile5_CurrLvl);
+        DEBUG_PRINTLN(" ");
+        DEBUG_PRINT("NL _ ");
+        DEBUG_PRINT((uint8_t)wallTile2_NextLvl);
+        DEBUG_PRINT(" ");
+        DEBUG_PRINT((uint8_t)wallTile3_NextLvl);
+        DEBUG_PRINT(" ");
+        DEBUG_PRINT((uint8_t)wallTile4_NextLvl);
+        DEBUG_PRINT(" ");
+        DEBUG_PRINTLN((uint8_t)wallTile5_NextLvl);
+        DEBUG_PRINT("GC _ ");
+        DEBUG_PRINT((uint8_t)isGroundTile2_CurrLvl);
+        DEBUG_PRINT(" ");
+        DEBUG_PRINT((uint8_t)isGroundTile3_CurrLvl);
+        DEBUG_PRINT(" ");
+        DEBUG_PRINT((uint8_t)isGroundTile4_CurrLvl);
+        DEBUG_PRINT(" ");
+        DEBUG_PRINTLN((uint8_t)isGroundTile5_CurrLvl);
+        DEBUG_PRINT("GN _ ");
+        DEBUG_PRINT((uint8_t)isGroundTile2_NextLvl);
+        DEBUG_PRINT(" ");
+        DEBUG_PRINT((uint8_t)isGroundTile3_NextLvl);
+        DEBUG_PRINT(" ");
+        DEBUG_PRINT((uint8_t)isGroundTile4_NextLvl);
+        DEBUG_PRINT(" ");
+        DEBUG_PRINTLN((uint8_t)isGroundTile5_NextLvl);
+        DEBUG_PRINT("Dist ");
+        DEBUG_PRINTLN(distToEdgeOfCurrentTile);
 
     }
     #endif
@@ -725,17 +776,18 @@ StandingJumpResult canStandingJump(Prince &prince) {
         }
 
     }
-    else if ((distToEdgeOfCurrentTile == 2 || distToEdgeOfCurrentTile == 6) &&
-                wallTile1_CurrLvl == WallTileResults::None && 
-                wallTile2_CurrLvl == WallTileResults::None && 
-                wallTile3_CurrLvl == WallTileResults::None && 
-                wallTile4_CurrLvl == WallTileResults::None && 
-                wallTile5_CurrLvl == WallTileResults::None && 
-                wallTile2_NextLvl == WallTileResults::None && 
-                wallTile3_NextLvl == WallTileResults::None && 
-                wallTile4_NextLvl == WallTileResults::None && 
-                !isGroundTile3_CurrLvl &&
-                (wallTile5_NextLvl != WallTileResults::None || isGroundTile5_CurrLvl)) {
+
+    if ((distToEdgeOfCurrentTile == 2 || distToEdgeOfCurrentTile == 6) &&
+         wallTile1_CurrLvl == WallTileResults::None && 
+         wallTile2_CurrLvl == WallTileResults::None && 
+         wallTile3_CurrLvl == WallTileResults::None && 
+         wallTile4_CurrLvl == WallTileResults::None && 
+         wallTile5_CurrLvl == WallTileResults::None && 
+         wallTile2_NextLvl == WallTileResults::None && 
+         wallTile3_NextLvl == WallTileResults::None && 
+         wallTile4_NextLvl == WallTileResults::None && 
+         !isGroundTile3_CurrLvl &&
+         (wallTile5_NextLvl != WallTileResults::None || isGroundTile5_CurrLvl)) {
 
         if (distToEdgeOfCurrentTile == 2) {
 
@@ -755,15 +807,18 @@ StandingJumpResult canStandingJump(Prince &prince) {
         }
 
     }
-    else if (distToEdgeOfCurrentTile == 2 &&
-                wallTile1_CurrLvl == WallTileResults::None && 
-                wallTile2_CurrLvl == WallTileResults::None && 
-                wallTile3_CurrLvl == WallTileResults::None && 
-                wallTile4_CurrLvl == WallTileResults::None && 
-                wallTile5_CurrLvl != WallTileResults::None && 
-                wallTile4_NextLvl == WallTileResults::None && 
-                wallTile5_NextLvl == WallTileResults::None 
-                ) {
+
+    if (distToEdgeOfCurrentTile == 2 &&
+        wallTile1_CurrLvl == WallTileResults::None && 
+        wallTile2_CurrLvl == WallTileResults::None && 
+        wallTile3_CurrLvl == WallTileResults::None && 
+        wallTile4_CurrLvl == WallTileResults::None && 
+        wallTile5_CurrLvl != WallTileResults::None && 
+        wallTile4_NextLvl == WallTileResults::None && 
+        wallTile5_NextLvl == WallTileResults::None &&
+        !isGroundTile3_CurrLvl &&
+        !isGroundTile4_CurrLvl
+        ) {
 
         #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP) && defined(DEBUG_ACTION_CANSTANDINGJUMP_DETAIL)
         DEBUG_PRINTLN("R6");
@@ -772,7 +827,8 @@ StandingJumpResult canStandingJump(Prince &prince) {
         return StandingJumpResult::Normal_DropLevel_Pos2;
 
     }
-    else if (
+
+    if (
 
         wallTile1_CurrLvl == WallTileResults::None && 
         wallTile2_CurrLvl == WallTileResults::None && 
@@ -809,17 +865,18 @@ StandingJumpResult canStandingJump(Prince &prince) {
         }                            
 
     }
-    else if (wallTile1_CurrLvl == WallTileResults::None && 
-                wallTile2_CurrLvl == WallTileResults::None && 
-                wallTile3_CurrLvl == WallTileResults::None && 
-                wallTile2_NextLvl == WallTileResults::None && 
-                wallTile3_NextLvl == WallTileResults::None && 
-                wallTile4_NextLvl == WallTileResults::None && 
-                !isGroundTile2_CurrLvl &&
-                !isGroundTile3_CurrLvl &&
-                !isGroundTile2_NextLvl &&
-                !isGroundTile3_NextLvl &&
-                isGroundTile4_NextLvl) {
+
+    if (wallTile1_CurrLvl == WallTileResults::None && 
+        wallTile2_CurrLvl == WallTileResults::None && 
+        wallTile3_CurrLvl == WallTileResults::None && 
+        wallTile2_NextLvl == WallTileResults::None && 
+        wallTile3_NextLvl == WallTileResults::None && 
+        wallTile4_NextLvl == WallTileResults::None && 
+        !isGroundTile2_CurrLvl &&
+        !isGroundTile3_CurrLvl &&
+        !isGroundTile2_NextLvl &&
+        !isGroundTile3_NextLvl &&
+        isGroundTile4_NextLvl) {
 
         switch (distToEdgeOfCurrentTile) {
 
