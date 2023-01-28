@@ -30,7 +30,7 @@ class BaseStack {
             return this->stack->insert(item);
         }
 
-        bool push(int16_t item, bool resetFrame) {
+        bool push(int16_t item) {
 
             #if defined(DEBUG) && defined(DEBUG_PRINCE_STACK)
             DEBUG_PRINT(F("Prince X: "));
@@ -41,17 +41,16 @@ class BaseStack {
             DEBUG_PRINTLN(this->stack->getCount());
             #endif
 
-            // return this->stack->push(static_cast<int16_t>(item), resetFrame);
             return this->stack->push(static_cast<int16_t>(item));
         }
 
-        void pushSequence(uint16_t fromStance, uint16_t toStance, bool resetFrame) {
+        void pushSequence(uint16_t fromStance, uint16_t toStance) {
 
-            this->pushSequence(fromStance, toStance, Stance::None, resetFrame);
+            this->pushSequence(fromStance, toStance, Stance::None);
 
         }
 
-        void pushSequence(uint16_t fromStance, uint16_t toStance, uint16_t finalStance, bool resetFrame) {
+        void pushSequence(uint16_t fromStance, uint16_t toStance, uint16_t finalStance) {
 
             #if defined(DEBUG) && defined(DEBUG_PRINCE_STACK)
             int8_t xOffset = 0;
@@ -67,7 +66,6 @@ class BaseStack {
                 DEBUG_PRINT(finalStance);
                 #endif
 
-//                this->stack->push(static_cast<int16_t>(finalStance), resetFrame);
                 this->stack->push(static_cast<int16_t>(finalStance));
             }
 
@@ -88,7 +86,6 @@ class BaseStack {
                     DEBUG_PRINT(" ");        
                     #endif
 
-                    // this->stack->push(static_cast<int16_t>(x), resetFrame);
                     this->stack->push(static_cast<int16_t>(x));
 
                 }
@@ -106,7 +103,6 @@ class BaseStack {
                     DEBUG_PRINT(" ");                         
                     #endif
 
-                    // this->stack->push(static_cast<int16_t>(-x), resetFrame);
                     this->stack->push(static_cast<int16_t>(-x));
                 }
 

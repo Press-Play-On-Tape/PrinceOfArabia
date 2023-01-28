@@ -120,9 +120,9 @@ uint8_t Level4_Items[] = {
      4,  84,   4,   1,   0,   0,   0,   0,           // Spikes                       
     29, 104,   0,   1,   0,   0,   0,   0,           // Mirror  1 = Dormant                     
     
-     1,  11,   1,  55,   0,   0,   0,   0,           // CollapsingTile (dist to fall)                                    
-     1,  18,   1,  55,   0,   0,   0,   0,           // CollapsingTile (dist to fall)                                    
-     1,  20,   1,  55,   0,   0,   0,   0,           // CollapsingTile (dist to fall)                                    
-     1,  95,   1,  24,   0,   0,   0,   0,           // CollapsingTile (dist to fall)                                    
+     1,  11,   1,  55,  24,   0,   0,   0,           // CollapsingTile (dist to fall)                                    
+     1,  18,   1,  55,  24,   0,   0,   0,           // CollapsingTile (dist to fall)                                    
+     1,  20,   1,  55,  24,   0,   0,   0,           // CollapsingTile (dist to fall)                                    
+     1,  95,   1,  24,  24,   0,   0,   0,           // CollapsingTile (dist to fall)                                    
     255                         // End
 }

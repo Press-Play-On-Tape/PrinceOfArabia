@@ -97,12 +97,12 @@ uint8_t Level2_Items[] = {
      4, 111,  11,   1,   0,   0,   0,   0,      // Spikes
      4, 112,  11,   1,   0,   0,   0,   0,      // Spikes
      4, 103,   7,   1,   0,   0,   0,   0,      // Spikes
-     1,  74,   3,  55,   0,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
-     1, 102,   5,  55,   0,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
-     1, 105,   7,  24,   0,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
-     1, 117,   7,  24,   0,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
-     1, 118,   7,  24,   0,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
-     1,  48,   2,  24,   0,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
-     1,   6,   2,  24,   0,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
+     1,  74,   3,  55,  24,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
+     1, 102,   5,  55,  24,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
+     1, 105,   7,  24,  24,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
+     1, 117,   7,  24,  24,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
+     1, 118,   7,  24,  24,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
+     1,  48,   2,  24,  24,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
+     1,   6,   2,  24,  24,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
     255                                         // End
 }

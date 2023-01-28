@@ -105,9 +105,9 @@ uint8_t Level8_Items[] = {
      4,  63,   5,   1,   0,   0,   0,   0,          // Spikes
      4,  84,   5,   1,   0,   0,   0,   0,          // Spikes
      4,  85,   5,   1,   0,   0,   0,   0,          // Spikes
-     1,  63,   3,  55,   0,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
-     1,  73,   3,  55,   0,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
-     1,  24,   0, 148,   0,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
+     1,  63,   3,  55,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
+     1,  73,   3,  55,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
+     1,  24,   0, 148,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
 
     255                                             // End
 }

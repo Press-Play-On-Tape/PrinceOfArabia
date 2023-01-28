@@ -455,6 +455,10 @@ void title() {
 
                     if (titleScreenVars.update(arduboy.isFrameCount(4))) {
 
+                        #ifndef SAVE_MEMORY_SOUND
+                            sound.tonesFromFX(Sounds::Ending);
+                        #endif
+                        
                         titleScreenVars.setMode(TitleScreenMode::IntroGame_9, level);
                         titleScreenVars.count = 0;
 

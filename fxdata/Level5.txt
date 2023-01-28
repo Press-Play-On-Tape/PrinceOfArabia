@@ -107,9 +107,9 @@ uint8_t Level5_Items[] = {
     20,  36,   9,   0,   0,   0,   0,   0,      // Potion Small      
     20,  35,   8,   0,   0,   0,   0,   0,      // Potion Small      
    
-     1,  26,   7,  86,   0,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
-     1,  52,   3,  55,   0,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
-     1,  50,   2,  24,   0,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
+     1,  26,   7,  86,  24,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
+     1,  52,   3,  55,  24,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
+     1,  50,   2,  24,  24,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
    
     255                                         // End
 }

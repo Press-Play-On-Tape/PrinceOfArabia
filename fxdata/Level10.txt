@@ -92,20 +92,20 @@ uint8_t Level10_Items[] = {
      4,  63,   5,   1,   0,   0,   0,   0,          // Spikes
      4,  64,   5,   1,   0,   0,   0,   0,          // Spikes
      4,  65,   5,   2,   0,   0,   0,   0,          // Spikes
-     1,  30,   5,  86,   0,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
-     1,  39,   5,  86,   0,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
-     1,   8,   3,  86,   0,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
-     1,  69,   2,  24,   0,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
-     1,  61,   2,  55,   0,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
-     1,  10,   2,  24,   0,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
-     1,  42,   2,  24,   0,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
-     1,  43,   2,  24,   0,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
-     1,  44,   2,  24,   0,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
-     1,  45,   2,  24,   0,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
-     1,  46,   2,  24,   0,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
-     1,  47,   2,  24,   0,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
-     1,  48,   2,  24,   0,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
-     1,  49,   2,  86,   0,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
+     1,  30,   5,  86,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
+     1,  39,   5,  86,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
+     1,   8,   3,  86,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
+     1,  69,   2,  24,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
+     1,  61,   2,  55,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
+     1,  10,   2,  24,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
+     1,  42,   2,  24,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
+     1,  43,   2,  24,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
+     1,  44,   2,  24,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
+     1,  45,   2,  24,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
+     1,  46,   2,  24,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
+     1,  47,   2,  24,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
+     1,  48,   2,  24,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
+     1,  49,   2,  86,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
 
     255                                             // End
 }

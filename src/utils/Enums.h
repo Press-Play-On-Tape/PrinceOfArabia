@@ -127,7 +127,8 @@ enum class StandingJumpResult : uint8_t {
 enum class RunningJumpResult : uint8_t {
     None,
     Normal,
-    Jump4_KeepLevel,
+    Jump4_GrabLedge_Pos2,
+    Jump4_GrabLedge_Pos6,
     Jump4_DropLevel,
     Jump3_KeepLevel,
     Jump3_KeepLevel_Short,

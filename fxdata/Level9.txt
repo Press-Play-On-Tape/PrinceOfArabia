@@ -106,14 +106,14 @@ uint8_t Level9_Items[] = {
     25,  25,   6,   0,   0,   0,   0,   0,      // Blade     
     25,  42,  10,   0,   0,   0,   0,   0,      // Blade     
 
-     1,  48,   6,  55,   0,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
-     1,  64,   3, 210,   0,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
-     1,  65,   3, 210,   0,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
-     1,  66,   3, 210,   0,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
-     1,  46,   1, 210,   0,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
-     1,  10,   0,  24,   0,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
-     1,  11,   0,  55,   0,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
-     1,   1,   2,  55,   0,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
+     1,  48,   6,  55,  24,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
+     1,  64,   3, 210,  24,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
+     1,  65,   3, 210,  24,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
+     1,  66,   3, 210,  24,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
+     1,  46,   1, 210,  24,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
+     1,  10,   0,  24,  24,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
+     1,  11,   0,  55,  24,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
+     1,   1,   2,  55,  24,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
 
     255                                         // End
 }

@@ -50,7 +50,7 @@ class Prince : public BaseEntity, public BaseStack {
             if (clearSword) this->sword = false;
             this->ignoreWallCollisions = false;
 
-            this->push(stance, true);
+            this->push(stance);
 
         }
 
@@ -91,17 +91,17 @@ class Prince : public BaseEntity, public BaseStack {
 
         }
 
-        void pushSequence(uint16_t fromStance, uint16_t toStance, bool resetFrame) {
+        void pushSequence(uint16_t fromStance, uint16_t toStance) {
 
             this->ignoreWallCollisions = false;
-            BaseStack::pushSequence(fromStance, toStance, Stance::None, resetFrame);
+            BaseStack::pushSequence(fromStance, toStance, Stance::None);
 
         }
 
-        void pushSequence(uint16_t fromStance, uint16_t toStance, uint16_t finalStance, bool resetFrame) {
+        void pushSequence(uint16_t fromStance, uint16_t toStance, uint16_t finalStance) {
 
             this->ignoreWallCollisions = false;
-            BaseStack::pushSequence(fromStance, toStance, finalStance, resetFrame);
+            BaseStack::pushSequence(fromStance, toStance, finalStance);
 
         }
 

@@ -63,14 +63,14 @@ uint8_t Level12_Items[] = {
      0,  46,   3,   0,   0,   0,   0,   0,           // Appearing Floor   
      0,  47,   3,   0,   0,   0,   0,   0,           // Appearing Floor   
 
-     1,  59,  15, 148,   0,   0,   0,   0,           // CollapsingTile (dist to fall)                                    
-     1,  60,  15, 148,   0,   0,   0,   0,           // CollapsingTile (dist to fall)                                    
-     1,  61,  15,  55,   0,   0,   0,   0,           // CollapsingTile (dist to fall)                                    
-     1,  60,   9, 148,   0,   0,   0,   0,           // CollapsingTile (dist to fall)                                    
-     1,  61,   9, 148,   0,   0,   0,   0,           // CollapsingTile (dist to fall)                                    
-     1,  62,   4,  55,   0,   0,   0,   0,           // CollapsingTile (dist to fall)                                    
-     1,  63,   4,  24,   0,   0,   0,   0,           // CollapsingTile (dist to fall)                                    
-     1,  64,   4,  24,   0,   0,   0,   0,           // CollapsingTile (dist to fall)                                    
+     1,  59,  15, 148,  24,   0,   0,   0,           // CollapsingTile (dist to fall)                                    
+     1,  60,  15, 148,  24,   0,   0,   0,           // CollapsingTile (dist to fall)                                    
+     1,  61,  15,  55,  24,   0,   0,   0,           // CollapsingTile (dist to fall)                                    
+     1,  60,   9, 148,  24,   0,   0,   0,           // CollapsingTile (dist to fall)                                    
+     1,  61,   9, 148,  24,   0,   0,   0,           // CollapsingTile (dist to fall)                                    
+     1,  62,   4,  55,  24,   0,   0,   0,           // CollapsingTile (dist to fall)                                    
+     1,  63,   4,  24,  24,   0,   0,   0,           // CollapsingTile (dist to fall)                                    
+     1,  64,   4,  24,  24,   0,   0,   0,           // CollapsingTile (dist to fall)                                    
 
     255                                             // End
 

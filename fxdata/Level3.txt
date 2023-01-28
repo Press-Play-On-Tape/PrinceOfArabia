@@ -54,9 +54,9 @@ uint8_t Level3_Items[] = {
     21,  85,   0,   0,   0,   0,   0,   0,          // Potion Large      
     15,  15,   4,   0,   0,   0,   0,   0,          // Skeleton
      6,   8,   6,   0,   0,   0,   0,   0,          // Exit Button          
-     1,  12,   7, 210,   0,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
-     1,  18,   3, 117,   0,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
-     1,  75,   2,  24,   0,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
-     1,  34,   3, 148,   0,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
+     1,  12,   7, 210,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
+     1,  18,   3, 117,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
+     1,  75,   2,  24,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
+     1,  34,   3, 148,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
     255                                             // End
 }
