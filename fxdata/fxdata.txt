@@ -161,6 +161,7 @@ Title_Main_High_Frame_WithHigh[] = {
 }
 
 include 'Title_Credits_Frame.txt'
+include 'Title_TimeOut_Frame.txt'
 
 Title_High_Frame[] = {
     int16_t  38, 32, uint24_t HighScore,       uint8_t 0, dbmNormal

@@ -19,6 +19,7 @@ namespace Images {
     image_t Chambers_BG = "../images/title/Chambers_BG.png"
     image_t Chambers_FG = "../images/title/Chambers_FG.png"
     image_t Credits_BG = "../images/title/Credits_BG.png"
+    image_t TimeOut = "../images/title/TimeOut.png"
 
     image_t Mouse = "../images/mouse/Mouse_16x16.png"
 

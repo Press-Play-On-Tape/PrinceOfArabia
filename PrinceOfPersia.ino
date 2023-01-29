@@ -158,11 +158,6 @@ void loop() {
             game();
             break;
 
-        case GameState::Game_Over:
-
-            // todo
-            break;
-
         default: break;
 
     }

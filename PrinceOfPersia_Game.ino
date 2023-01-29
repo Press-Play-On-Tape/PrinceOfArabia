@@ -150,7 +150,20 @@ void game() {
 
     }
 
-    gamePlay.update(arduboy);
+
+
+    // Decrease timer and got yo end of game if time out ..
+
+    bool gameOver = gamePlay.update(arduboy);
+
+    if (gameOver) {
+
+        gamePlay.gameState = GameState::Title;
+        titleScreenVars.setMode(TitleScreenMode::TimeOut, level);
+        fadeEffect.reset();
+        FX::setFrame(Title_TimeOut_Frame, 5 - 1);
+
+    }
 
     if (menu.update()) gamePlay.gameState = GameState::Game;
     
@@ -2510,7 +2523,10 @@ void game() {
             }
             else {
 
-                gamePlay.gameState = GameState::Game_Over;
+                gamePlay.gameState = GameState::Title;
+                titleScreenVars.setMode(TitleScreenMode::TimeOut, level);
+                fadeEffect.reset();
+                FX::setFrame(Title_TimeOut_Frame, 5 - 1);
 
             }
 

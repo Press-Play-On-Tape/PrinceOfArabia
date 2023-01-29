@@ -40,6 +40,7 @@ struct TitleScreenVars {
         switch (this->mode) {
             
             case TitleScreenMode::Credits:
+            case TitleScreenMode::TimeOut:
 
                 //this->count = 88;
                 break;
@@ -94,64 +95,6 @@ struct TitleScreenVars {
 
         switch (this->mode) {
 
-            //case TitleScreenMode::Intro:
-            //
-            //    if (this->count < 64) this->count = this->count + 1;
-            //    return false;
-
-            //case TitleScreenMode::Main:
-            //
-            //    if (this->count < Constants::TitleScreenScroll_Max) this->count = this->count + 1;
-            //    return false;
-
-            //case TitleScreenMode::Credits:
-            //
-            //    if (triggerFrame) {
-            //        this->count++;
-            //        if (this->count == 201) this->count = 0;
-            //    }
-            //
-            //    return false;
-
-            //case TitleScreenMode::IntroGame_1A:
-            //
-            //    if (triggerFrame) {
-            //        this->count++;
-            //        if (this->count == 165) return true;
-            //    }
-            //
-            //    return false;
-
-            //case TitleScreenMode::CutScene_1:
-            //
-            //    if (triggerFrame) {
-            //
-            //        FX::seekData(static_cast<uint24_t>(CutScene::Scene1 + (this->count * 4)));
-            //
-            //        zaffar.image = static_cast<int8_t>(FX::readPendingUInt8());
-            //        zaffar.x = zaffar.x + static_cast<int8_t>(FX::readPendingUInt8());
-            //        princess.image = static_cast<uint8_t>(FX::readPendingUInt8());
-            //        princess.x = princess.x + static_cast<int8_t>(FX::readPendingUInt8());
-            //
-            //        FX::readEnd();
-            //
-            //        this->prevCount = this->count;
-            //        this->count++;
-            //        if (this->count == 249) return true;
-            //
-            //    }
-            //
-            //    return false;
-
-            //case TitleScreenMode::IntroGame_1B:
-            //
-            //    if (triggerFrame) {
-            //        if (this->count < 165) this->count++;
-            //        if (this->count == 165) return true;
-            //    }
-            //
-            //    return false;
-       
             case TitleScreenMode::CutScene_2:
             case TitleScreenMode::CutScene_3:
 
@@ -196,6 +139,15 @@ struct TitleScreenVars {
                 return false;
 
             case TitleScreenMode::IntroGame_9:
+
+                if (triggerFrame) {
+                    if (this->count < 224) this->count++;
+                    if (this->count == 224) return true;
+                }
+
+                return false;                
+
+            case TitleScreenMode::TimeOut:
 
                 if (triggerFrame) {
                     if (this->count < 224) this->count++;

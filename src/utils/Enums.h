@@ -49,7 +49,8 @@ enum GameState : uint8_t {
     Game_Init,
     Game,
     Game_StartLevel,
-    Game_Over,
+    TimeOut_Init,
+    TimeOut,
     #ifndef SAVE_MEMORY_OTHER
     Menu,
     #endif
@@ -163,6 +164,7 @@ enum class TitleScreenMode : uint8_t {
     CutScene_5,
     CutScene_9,
     IntroGame_9,
+    TimeOut,
 };
 
 enum class WallTileResults : uint8_t {

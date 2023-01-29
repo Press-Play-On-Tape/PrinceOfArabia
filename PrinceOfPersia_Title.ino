@@ -72,48 +72,45 @@ void title() {
 
         case TitleScreenMode::Main:
 
-            {
+            switch (titleScreenVars.option) {
 
-                switch (titleScreenVars.option) {
+                #ifdef SAVE_MEMORY_OTHER
+                    case TitleScreenOptions::Play:
 
-                    #ifdef SAVE_MEMORY_OTHER
-                        case TitleScreenOptions::Play:
+                        gamePlay.gameState = GameState::Game_Init;
 
-                            gamePlay.gameState = GameState::Game_Init;
+                        break;
 
-                            break;
+                #else
 
-                    #else
+                    case TitleScreenOptions::Play:
 
-                        case TitleScreenOptions::Play:
+                        #ifndef SAVE_MEMORY_SOUND
+                            sound.tonesFromFX(Sounds::Seque);
+                        #endif
 
-                            #ifndef SAVE_MEMORY_SOUND
-                                sound.tonesFromFX(Sounds::Seque);
-                            #endif
+                        titleScreenVars.setMode(TitleScreenMode::IntroGame_1A, level);
+                        FX::setFrame(Title_IntroGame_1A_Frame, 4 - 1);
 
-                            titleScreenVars.setMode(TitleScreenMode::IntroGame_1A, level);
-                            FX::setFrame(Title_IntroGame_1A_Frame, 4 - 1);
+                        break;
 
-                            break;
+                    case TitleScreenOptions::Credits:
 
-                        case TitleScreenOptions::Credits:
+                        titleScreenVars.setMode(TitleScreenMode::Credits, level);
+                        FX::setFrame(Title_Credits_Frame, 5 - 1);
 
-                            titleScreenVars.setMode(TitleScreenMode::Credits, level);
-                            FX::setFrame(Title_Credits_Frame, 5 - 1);
+                        break;
 
-                            break;
+                    case TitleScreenOptions::High:
 
-                        case TitleScreenOptions::High:
+                        titleScreenVars.setMode(TitleScreenMode::High, level);
+                        FX::setFrame(Title_High_Frame, 5 - 1);
+                        break;
 
-                            titleScreenVars.setMode(TitleScreenMode::High, level);
-                            FX::setFrame(Title_High_Frame, 5 - 1);
-                            break;
+                #endif
 
-                    #endif
+                default: break;
 
-                    default: break;
-
-                }
             }
 
             break;
@@ -122,6 +119,7 @@ void title() {
 
             case TitleScreenMode::Credits:
             case TitleScreenMode::High:
+            case TitleScreenMode::TimeOut:
 
                 if (justPressed & (A_BUTTON | B_BUTTON)) {
 
@@ -160,11 +158,9 @@ void title() {
 
             case TitleScreenMode::CutScene_1:
 
-                {
-                    titleScreenVars.setMode(TitleScreenMode::IntroGame_1B, level);
-                    gamePlay.gameState = GameState::Game_Init; 
-                    fadeEffect.reset();
-                }
+                titleScreenVars.setMode(TitleScreenMode::IntroGame_1B, level);
+                gamePlay.gameState = GameState::Game_Init; 
+                fadeEffect.reset();
 
                 break;
 
@@ -301,21 +297,16 @@ void title() {
         #ifndef SAVE_MEMORY_OTHER
             
             case TitleScreenMode::Credits:
+            case TitleScreenMode::TimeOut:
 
                 FX::drawFrame();
-
                 break;
             
             case TitleScreenMode::High:
                 
-                //FX::drawBitmap(0, 0, Images::Title_PoP, 0, dbmMasked);
-                //FX::drawBitmap(38, 32, Images::HighScore, 0, dbmNormal);
                 FX::drawFrame();
                 FX::drawBitmap(38, 40, Images::Numbers_Large, cookie.highMin, dbmNormal);
-                //FX::drawBitmap(62, 42, Images::Numbers_Divider, 0, dbmNormal);
                 FX::drawBitmap(68, 40, Images::Numbers_Large, cookie.highSec, dbmNormal);
-
-                //renderTorches(10, 114, 40);
 
                 break;
 
