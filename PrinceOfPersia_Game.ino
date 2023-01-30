@@ -160,8 +160,16 @@ void game() {
 
         gamePlay.gameState = GameState::Title;
         titleScreenVars.setMode(TitleScreenMode::TimeOut, level);
-        fadeEffect.reset();
         FX::setFrame(Title_TimeOut_Frame, 5 - 1);
+
+        #ifndef SAVE_MEMORY_OTHER
+            fadeEffect.reset();
+        #endif
+
+        #ifndef SAVE_MEMORY_SOUND
+            sound.tonesFromFX(Sounds::OutOfTime);
+        #endif
+
 
     }
 
@@ -2525,8 +2533,11 @@ void game() {
 
                 gamePlay.gameState = GameState::Title;
                 titleScreenVars.setMode(TitleScreenMode::TimeOut, level);
-                fadeEffect.reset();
                 FX::setFrame(Title_TimeOut_Frame, 5 - 1);
+
+                #ifndef SAVE_MEMORY_OTHER
+                    fadeEffect.reset();
+                #endif
 
             }
 
