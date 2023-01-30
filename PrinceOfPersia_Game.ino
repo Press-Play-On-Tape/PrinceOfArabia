@@ -894,7 +894,8 @@ void game() {
                             DEBUG_PRINTLN(F("LEFT_BUTTON, Switch Directions"));
                             #endif
 
-                            prince.pushSequence(Stance::Running_Turn_1_Start, Stance::Running_Turn_13_End, Stance::Run_Repeat_8_End_Turn);
+                            processRunningTurn();
+
                         }
                         else if (!(pressed  & RIGHT_BUTTON)) {
 
@@ -942,7 +943,8 @@ void game() {
                             DEBUG_PRINTLN(F("RIGHT_BUTTON, Running Start"));
                             #endif
 
-                            prince.pushSequence(Stance::Running_Turn_1_Start, Stance::Running_Turn_13_End, Stance::Run_Repeat_8_End_Turn);
+                            processRunningTurn();
+
                         }
                         else if (!(pressed & LEFT_BUTTON)) {
 
@@ -997,7 +999,8 @@ void game() {
                             DEBUG_PRINTLN(F("LEFT_BUTTON, Running Turn"));
                             #endif
 
-                            prince.pushSequence(Stance::Running_Turn_1_Start, Stance::Running_Turn_13_End, Stance::Run_Repeat_8_End_Turn);
+                            processRunningTurn();
+
                         }
                         else if (!(pressed & RIGHT_BUTTON)) {
 
@@ -1038,7 +1041,7 @@ void game() {
                         }
                         else if (pressed & RIGHT_BUTTON) {
 
-                            prince.pushSequence(Stance::Running_Turn_1_Start, Stance::Running_Turn_13_End, Stance::Run_Repeat_8_End_Turn);
+                            processRunningTurn();
 
                         }
                         else if (!(pressed & LEFT_BUTTON)) {
@@ -1794,7 +1797,8 @@ void game() {
                 case Stance::Run_Repeat_1_Start ... Stance::Run_Repeat_8_End:
                 case Stance::Standing_Jump_1_Start ... Stance::Standing_Jump_11_Land_Point:
                 case Stance::Running_Jump_1_Start ... Stance::Running_Jump_11_End:
-                case Stance::Running_Jump_Short_1_Start ... Stance::Running_Jump_Short_7_End:
+                case Stance::Running_Jump_Short_2_1_Start ... Stance::Running_Jump_Short_2_7_End:
+                case Stance::Running_Jump_Short_6_1_Start ... Stance::Running_Jump_Short_6_7_End:
                 case Stance::Running_Jump_3_SameLvl_1_Start ... Stance::Running_Jump_3_SameLvl_8_End:
                 case Stance::Running_Jump_3_SameLvl_Short_1_Start ... Stance::Running_Jump_3_SameLvl_Short_8_End:
                 case Stance::Running_Jump_3_DropLvl_1_Start ... Stance::Running_Jump_3_DropLvl_14_End:
@@ -2392,13 +2396,13 @@ void game() {
         #if defined(DEBUG) && defined(DEBUG_ACTION_COLLIDEWITHWALL)
         DEBUG_PRINT(F("Collide with wall - X:"));
         DEBUG_PRINT(prince.getX());
-        DEBUG_PRINT(", Y:");
+        DEBUG_PRINT(F(", Y:"));
         DEBUG_PRINT(prince.getY());
-        DEBUG_PRINT(", inAir:");
+        DEBUG_PRINT(F(", inAir:"));
         DEBUG_PRINT(prince.inAir());
-        DEBUG_PRINT(", falling:");
+        DEBUG_PRINT(F(", falling:"));
         DEBUG_PRINT(prince.getFalling());
-        DEBUG_PRINT(", Coll:");
+        DEBUG_PRINT(F(", Coll:"));
         DEBUG_PRINTLN(level.collideWithWall(prince));
         #endif
 
@@ -2454,7 +2458,7 @@ void game() {
         #if defined(DEBUG) && defined(DEBUG_VERT_ADJ)
         DEBUG_PRINT(F("Vert AJD, prince.getY():"));
         DEBUG_PRINT(prince.getY());
-        SDEBUG_PRINT(", Adj:");
+        SDEBUG_PRINT(F(", Adj:"));
         DEBUG_PRINT(adj);
         #endif
 
@@ -2475,7 +2479,7 @@ void game() {
                     #if defined(DEBUG) && defined(DEBUG_VERT_ADJ)
                     DEBUG_PRINT(F(", adjustment: "));
                     DEBUG_PRINT(adjustment);
-                    SDEBUG_PRINT(", Base: ");
+                    SDEBUG_PRINT(F(", Base: "));
                     DEBUG_PRINT(Stance::Vert_Adjustment_1_Start_End);
                     #endif
 

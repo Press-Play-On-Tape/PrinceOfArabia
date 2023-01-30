@@ -145,17 +145,17 @@ class BaseEntity {
             FX::readEnd();
 
             #ifdef DEBUG_IMAGE_DETAILS
-            DEBUG_PRINT("ImageIndex: ");
+            DEBUG_PRINT(F("ImageIndex: "));
             DEBUG_PRINT(imageIndex);
-            DEBUG_PRINT(", startPos: ");
+            DEBUG_PRINT(F(", startPos: "));
             DEBUG_PRINT((uint32_t)startPos);
-            DEBUG_PRINT(", direction: ");
+            DEBUG_PRINT(F(", direction: "));
             DEBUG_PRINT((uint8_t)direction);
-            DEBUG_PRINT(", reach: ");
+            DEBUG_PRINT(F(", reach: "));
             DEBUG_PRINT(imageDetails.reach);
-            DEBUG_PRINT(", toe: ");
+            DEBUG_PRINT(F(", toe: "));
             DEBUG_PRINT(imageDetails.toe);
-            DEBUG_PRINT(", heel: ");
+            DEBUG_PRINT(F(", heel: "));
             DEBUG_PRINTLN(imageDetails.heel);
             #endif
 

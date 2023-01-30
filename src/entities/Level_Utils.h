@@ -95,6 +95,10 @@ void printAction(Action action) {
             DEBUG_PRINT(F("StandingJump"));
             break;
 
+        case Action::RunningTurn:
+            DEBUG_PRINT(F("RunningTurn"));
+            break;
+
     }
 
 }

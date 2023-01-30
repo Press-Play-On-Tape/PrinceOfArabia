@@ -91,8 +91,7 @@ StandingJumpResult canStandingJump(Prince &prince) {
     }
     else {
 
-        DEBUG_PRINTLN("   1  2  3  4  5 ");
-        DEBUG_PRINT("CL _ ");
+        DEBUG_PRINT(F("   1  2  3  4  5 \nCL _"));
         DEBUG_PRINT((uint8_t)wallTile1_CurrLvl);
         DEBUG_PRINT(" ");
         DEBUG_PRINT((uint8_t)wallTile2_CurrLvl);
@@ -104,24 +103,21 @@ StandingJumpResult canStandingJump(Prince &prince) {
         DEBUG_PRINT((uint8_t)wallTile5_CurrLvl);
         DEBUG_PRINT("/");
         DEBUG_PRINT(isGroundTile5_CurrLvl);
-        DEBUG_PRINTLN(" ");
-        DEBUG_PRINT("NL _ ");
+        DEBUG_PRINT(F("\nNL _ "));
         DEBUG_PRINT((uint8_t)wallTile2_NextLvl);
         DEBUG_PRINT(" ");
         DEBUG_PRINT((uint8_t)wallTile3_NextLvl);
         DEBUG_PRINT(" ");
         DEBUG_PRINT((uint8_t)wallTile4_NextLvl);
         DEBUG_PRINT(" ");
-        DEBUG_PRINTLN((uint8_t)wallTile5_NextLvl);
-        DEBUG_PRINT("GC _ ");
+        DEBUG_PRINT(F("\nGC _ "));
         DEBUG_PRINT((uint8_t)isGroundTile2_CurrLvl);
         DEBUG_PRINT(" ");
         DEBUG_PRINT((uint8_t)isGroundTile3_CurrLvl);
         DEBUG_PRINT(" ");
         DEBUG_PRINT((uint8_t)isGroundTile4_CurrLvl);
         DEBUG_PRINT(" ");
-        DEBUG_PRINTLN((uint8_t)isGroundTile5_CurrLvl);
-        DEBUG_PRINT("GN _ ");
+        DEBUG_PRINT(F("\nGN _ "));
         DEBUG_PRINT((uint8_t)isGroundTile2_NextLvl);
         DEBUG_PRINT(" ");
         DEBUG_PRINT((uint8_t)isGroundTile3_NextLvl);
@@ -129,7 +125,7 @@ StandingJumpResult canStandingJump(Prince &prince) {
         DEBUG_PRINT((uint8_t)isGroundTile4_NextLvl);
         DEBUG_PRINT(" ");
         DEBUG_PRINTLN((uint8_t)isGroundTile5_NextLvl);
-        DEBUG_PRINT("Dist ");
+        DEBUG_PRINTF(("Dist "));
         DEBUG_PRINTLN(distToEdgeOfCurrentTile);
 
     }

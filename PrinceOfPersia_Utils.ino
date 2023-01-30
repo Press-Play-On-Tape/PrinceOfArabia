@@ -200,13 +200,12 @@ void processRunJump(Prince &prince, Level &level) {
                     prince.setIgnoreWallCollisions(true);
                     break;
 
-                case RunningJumpResult::Normal:
-                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
-                    DEBUG_PRINTLN(F("RunningJump_3 true, Jump"));
-                    #endif
+                case RunningJumpResult::Normal_Pos2:
+                    prince.pushSequence(Stance::Running_Jump_Short_2_1_Start, Stance::Running_Jump_Short_2_7_End, Stance::Run_Repeat_4);
+                    break;
 
-                    prince.pushSequence(Stance::Running_Jump_Short_1_Start, Stance::Running_Jump_Short_7_End, Stance::Run_Repeat_4);
-
+                case RunningJumpResult::Normal_Pos6:
+                    prince.pushSequence(Stance::Running_Jump_Short_6_1_Start, Stance::Running_Jump_Short_6_7_End, Stance::Run_Repeat_4);
                     break;
 
                 case RunningJumpResult::None:
@@ -755,4 +754,19 @@ void getStance_Offsets(Direction direction, Point &offset, int16_t stance) {
 
     #endif
         
+}
+
+void processRunningTurn() {
+
+    if (level.canMoveForward(prince, Action::RunningTurn)) {
+
+        prince.pushSequence(Stance::Running_Turn_1_Start, Stance::Running_Turn_13_End, Stance::Run_Repeat_8_End_Turn);
+
+    }
+    else {
+
+        prince.pushSequence(Stance::Stopping_1_Start, Stance::Stopping_5_End, Stance::Upright);
+
+    }
+
 }

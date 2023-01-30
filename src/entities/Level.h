@@ -247,12 +247,12 @@ struct Level {
                     #endif
 
                     // Normal starting pos
-                    // prince.init(38-28+12+4, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          
-                    // this->init(gamePlay, prince, 90, 9, 60, 0);  
+                    prince.init(38-28+12+4, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          
+                    this->init(gamePlay, prince, 90, 9, 60, 0);  
 
                     // Error falling
-                    prince.init(38+12+8, 56 + 31, Direction::Right, Stance::Crouch_3_End, 3, clearSword);        
-                    this->init(gamePlay, prince, 90, 9, 50, 0);  
+                    // prince.init(38+12+8, 56 + 31, Direction::Right, Stance::Crouch_3_End, 3, clearSword);        
+                    // this->init(gamePlay, prince, 90, 9, 50, 0);  
 
                 }
 
@@ -1658,10 +1658,13 @@ struct Level {
 
             int8_t tileXIdx = this->coordToTileIndexX(entity.getPosition().x) - this->getXLocation();
             int8_t tileYIdx = this->coordToTileIndexY(entity.getPosition().y) - this->getYLocation();
+            int8_t offset;
 
             if (direction == Direction::None) {
                 direction = entity.getDirection();
             }
+
+            offset = entity.getDirection() == Direction::Left ? -1 : 1;
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
             DEBUG_PRINTLN(F("------------------------------"));
@@ -1681,10 +1684,10 @@ struct Level {
                 case Direction::Left:
                     {
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
-                        int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx - 1, tileYIdx, TILE_FLOOR_BASIC);
+                        int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx + offset, tileYIdx, TILE_FLOOR_BASIC);
                         #endif
 
-                        int8_t fgTile2 = this->getTile(Layer::Foreground, tileXIdx - 1, tileYIdx, TILE_FLOOR_BASIC);
+                        int8_t fgTile2 = this->getTile(Layer::Foreground, tileXIdx + offset, tileYIdx, TILE_FLOOR_BASIC);
                         int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(direction, entity.getPosition().x);
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
@@ -1730,6 +1733,7 @@ struct Level {
 
                             case Action::Step:
                             case Action::RunStart:
+                            case Action::RunningTurn:
 
                                 switch (distToEdgeOfCurrentTile) {
 
@@ -1775,10 +1779,10 @@ struct Level {
                 case Direction::Right:
                     {
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
-                        int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx + 1, tileYIdx, TILE_FLOOR_BASIC);
+                        int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx + offset, tileYIdx, TILE_FLOOR_BASIC);
                         #endif
 
-                        int8_t fgTile2 = this->getTile(Layer::Foreground, tileXIdx + 1, tileYIdx, TILE_FLOOR_BASIC);
+                        int8_t fgTile2 = this->getTile(Layer::Foreground, tileXIdx + offset, tileYIdx, TILE_FLOOR_BASIC);
                         int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(direction, entity.getPosition().x);
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
@@ -1826,6 +1830,7 @@ struct Level {
 
                             case Action::Step:
                             case Action::RunStart:
+                            case Action::RunningTurn:
                                 {
                                     WallTileResults wallTile = this->isWallTile(fgTile2, tileXIdx, tileYIdx, Direction::Right);
 
@@ -1881,6 +1886,99 @@ struct Level {
 
         }
 
+/*
+        CanJumpUpResult canJumpUp(Prince &prince) {
+
+            #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+            DEBUG_PRINTLN(F("-----------------------------------------------------"));
+            #endif
+
+            CanJumpUpResult resultLeft = this->canJumpUp_Test(prince, prince.getDirection());
+
+            switch (resultLeft) {
+
+                case CanJumpUpResult::Jump:
+                case CanJumpUpResult::StepThenJump:
+
+                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                    DEBUG_PRINT(F("L1 Test success, Return "));
+                    DEBUG_PRINTLN(static_cast<uint8_t>(resultLeft));
+                    #endif
+                                                        
+                    return resultLeft;
+
+                case CanJumpUpResult::JumpThenFall_CollapseFloor:
+
+                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                    DEBUG_PRINTLN(F("L2 Test success, Return JumpThenFall_CollapseFloor"));
+                    #endif                            
+
+                    return CanJumpUpResult::JumpThenFall_CollapseFloor;
+
+                case CanJumpUpResult::JumpThenFall_CollapseFloorAbove:
+
+                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                    DEBUG_PRINTLN(F("L3 Test success, Return JumpThenFall_CollapseFloorAbove"));
+                    #endif                            
+
+                    return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
+
+                case CanJumpUpResult::StepThenJumpThenFall_CollapseFloor:
+
+                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                    DEBUG_PRINTLN(F("L4 Test success, Return StepThenJumpThenFall_CollapseFloor"));
+                    #endif                            
+
+                    return CanJumpUpResult::StepThenJumpThenFall_CollapseFloor;
+
+                default:
+                    {
+                        CanJumpUpResult resultRight = this->canJumpUp_Test(prince, prince.getOppositeDirection());
+
+                        switch (resultRight) {
+
+                            case CanJumpUpResult::Jump:
+
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                DEBUG_PRINT(F("R1 Test success, Return TurnThenJump"));
+                                #endif
+
+                                return CanJumpUpResult::TurnThenJump;
+
+                            default:
+
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                DEBUG_PRINT(F("R2 Test failed, Return "));
+                                DEBUG_PRINTLN(static_cast<uint8_t>(resultLeft));
+                                #endif
+
+                                CanJumpUpResult result = this->canJumpUp_Test_Dist10(prince, Direction::Left);
+
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                DEBUG_PRINT(F("R3 canJumpUp_Test_Dist10 Return "));
+                                DEBUG_PRINTLN(static_cast<uint8_t>(result));
+                                #endif
+
+                                return result;
+
+                        }
+
+                    }
+
+                    break;
+
+            }
+           
+
+            #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+            DEBUG_PRINT(F("Return None"));
+            #endif
+
+            return CanJumpUpResult::None;            
+
+        }
+
+*/
         CanJumpUpResult canJumpUp(Prince &prince) {
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
@@ -2063,6 +2161,7 @@ struct Level {
             return CanJumpUpResult::None;            
 
         }
+        
 
         CanJumpUpResult canJumpUp_Test(Prince &prince, Direction direction) {
 
@@ -2325,6 +2424,7 @@ struct Level {
             return CanJumpUpResult::JumpThenFall;
 
         }
+
 
         CanJumpUpResult canJumpUp_Test_Dist10(Prince &prince, Direction direction) {
 

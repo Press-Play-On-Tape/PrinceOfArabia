@@ -74,7 +74,7 @@ class BaseStack {
             DEBUG_PRINT(toStance);
             DEBUG_PRINT(F(" to "));
             DEBUG_PRINT(fromStance);
-            DEBUG_PRINT(" - ");  
+            DEBUG_PRINT(F(" - "));  
             #endif
             
             if (fromStance < toStance) {

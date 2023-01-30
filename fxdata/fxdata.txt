@@ -102,7 +102,7 @@ include "images.txt"
 include "constants.txt"
 
 
-// Slashscreen animation ..
+// Splashscreen animation ..
 
 splashScreen_Frame[] = {
     int16_t  32, 16,

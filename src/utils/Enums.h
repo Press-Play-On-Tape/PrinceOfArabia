@@ -81,6 +81,7 @@ enum class Action : uint8_t {
     RunJump_1,
     StandingJump,
     CrouchHop,
+    RunningTurn
 };
 
 enum class CanJumpUpResult : uint8_t {
@@ -127,7 +128,8 @@ enum class StandingJumpResult : uint8_t {
 
 enum class RunningJumpResult : uint8_t {
     None,
-    Normal,
+    Normal_Pos2,
+    Normal_Pos6,
     Jump4_GrabLedge_Pos2,
     Jump4_GrabLedge_Pos6,
     Jump4_DropLevel,
