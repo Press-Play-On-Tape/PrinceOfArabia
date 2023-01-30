@@ -117,7 +117,19 @@ struct TitleScreenVars {
                 }
  
                 return false;
-                
+
+
+            case TitleScreenMode::CutScene_5:
+
+                if (triggerFrame) {
+                    
+                    this->count++;
+                    if (this->count == 102) return true;
+
+                }
+ 
+                return false;
+
             case TitleScreenMode::CutScene_9:
 
                 if (triggerFrame) {
