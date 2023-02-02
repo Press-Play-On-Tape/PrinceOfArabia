@@ -121,7 +121,12 @@ void game() {
     enemy.update();
     #endif
     
-    LevelUpdate levelUpdate = level.update(arduboy, prince, gamePlay);
+    #ifdef SAVE_MEMORY_SOUND
+        LevelUpdate levelUpdate = level.update(arduboy, prince, gamePlay);
+    #else 
+        LevelUpdate levelUpdate = level.update(arduboy, prince, gamePlay, sound);
+    #endif   
+
 
     if (levelUpdate == LevelUpdate::FloorCollapsedOnPrince) {
         
@@ -143,6 +148,11 @@ void game() {
                 if (prince.decHealth(1) == 0) {
                     pushDead(prince, level, gamePlay, true, DeathType::Falling);
                 }
+
+                #ifndef SAVE_MEMORY_SOUND
+                    sound.tonesFromFX(Sounds::Thump);
+                #endif 
+                                
                 break;
 
         
@@ -1472,6 +1482,10 @@ void game() {
 
                                                 if (!prince.getPotionFloat()) {
 
+                                                    #ifndef SAVE_MEMORY_SOUND
+                                                        sound.tonesFromFX(Sounds::Thump);
+                                                    #endif 
+
                                                     initFlash(prince, level, FlashType::None);
 
                                                     if (prince.decHealth(1) == 0) {
@@ -1610,6 +1624,10 @@ void game() {
 
                                         if (!prince.getPotionFloat()) {
 
+                                            #ifndef SAVE_MEMORY_SOUND
+                                                sound.tonesFromFX(Sounds::Thump);
+                                            #endif 
+
                                             initFlash(prince, level, FlashType::None);  
 
                                             if (prince.decHealth(1) == 0) {
@@ -1741,6 +1759,10 @@ void game() {
 
                                     initFlash(prince, level, FlashType::SwordFight);
 
+                                    #ifndef SAVE_MEMORY_SOUND
+                                        sound.tonesFromFX(Sounds::Strike);
+                                    #endif 
+
                                     if (prince.decHealth(1) == 0) {
 
                                         pushDead(prince, level, gamePlay, true, DeathType::SwordFight);
@@ -1766,8 +1788,28 @@ void game() {
                                 else {
 
                                     initFlash(enemy, level, FlashType::SwordFight);
-                                        
+
+                                    #ifndef SAVE_MEMORY_SOUND
+                                        sound.tonesFromFX(Sounds::Strike);
+                                    #endif 
+
                                     if (enemy.decHealth(1) == 0) {
+
+                                        
+                                        // If we just killed Jaffar then open the exit gate ..
+
+                                        if (gamePlay.level == 12 && enemy.getEnemyType() == EnemyType::Guard && enemy.getStatus() == Status::Active) {
+
+                                            Item &exitDoor = level.getItem(Constants::Item_ExitDoor);
+
+                                            if (exitDoor.data.exitDoor.direction != Direction::Up) {
+
+                                                exitDoor.data.exitDoor.direction = Direction::Up;
+
+                                            }
+
+                                        }
+
 
                                         pushDead(enemy, true);
                                         
@@ -2176,6 +2218,10 @@ void game() {
                                     if(abs(xDelta) < Constants::StrikeDistance && yDelta == 0) {
 
                                         initFlash(prince, level, FlashType::SwordFight);
+
+                                        #ifndef SAVE_MEMORY_SOUND
+                                            sound.tonesFromFX(Sounds::Strike);
+                                        #endif 
 
                                         if (prince.decHealth(1) == 0) {
 

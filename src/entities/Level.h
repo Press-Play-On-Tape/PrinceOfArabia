@@ -628,7 +628,11 @@ struct Level {
         }
 
 
+#ifdef SAVE_MEMORY_SOUND
         LevelUpdate update(Arduboy2Ext &arduboy, Prince &prince, GamePlay &gamePlay) { 
+#else 
+        LevelUpdate update(Arduboy2Ext &arduboy, Prince &prince, GamePlay &gamePlay, ArduboyTonesFX &sound) { 
+#endif   
 
             LevelUpdate levelUpdate = LevelUpdate::NoAction;
 
@@ -713,12 +717,28 @@ struct Level {
 
                                     if (item.data.gate.position < 9) {
 
+                                        if (item.data.gate.position == 0) {
+
+                                            #ifndef SAVE_MEMORY_SOUND
+                                                sound.tonesFromFX(Sounds::GateGoingUp);
+                                            #endif    
+
+                                        }
+
                                         item.data.gate.position++;
 
                                     }
 
                                 }
                                 else if (item.data.gate.closingDelay > 0 && item.data.gate.closingDelay <= 9) {
+
+                                    if (item.data.gate.position == 9) {
+
+                                        #ifndef SAVE_MEMORY_SOUND
+                                            sound.tonesFromFX(Sounds::GateGoingDown);
+                                        #endif    
+
+                                    }
 
                                     if (item.data.gate.position >= 3 ) {
 
@@ -764,35 +784,44 @@ struct Level {
 
                                 if (item.data.collapsingFloor.distanceFallen >= item.data.collapsingFloor.distToFall) {
 
-                                    item.data.location.y = item.data.location.y + ((item.data.collapsingFloor.distToFall / 31) + 1);
-                                    item.itemType = ItemType::CollpasedFloor;
+                                    if (item.data.collapsingFloor.distToFall == 254) {
 
-
-
-                                    // Did the tile fall on the prince?
-
-                                    Point newPos = prince.getPosition();
-                                    int8_t tileXIdx = this->coordToTileIndexX(newPos.x);
-                                    int8_t tileYIdx = this->coordToTileIndexY(newPos.y);
-
-                                    if (tileXIdx == item.data.location.x && tileYIdx == item.data.location.y) {
-
-                                        levelUpdate = LevelUpdate::FloorCollapsedOnPrince;
+                                        item.itemType = ItemType::None;
 
                                     }
+                                    else {
+
+                                        item.data.location.y = item.data.location.y + ((item.data.collapsingFloor.distToFall / 31) + 1);
+                                        item.itemType = ItemType::CollpasedFloor;
 
 
-                                    // Remvoe any buttons the tile may have landed on (level 11 only)..
 
-                                    if (gamePlay.level == 11) {
+                                        // Did the tile fall on the prince?
 
-                                        for (Item &button : items) {
+                                        Point newPos = prince.getPosition();
+                                        int8_t tileXIdx = this->coordToTileIndexX(newPos.x);
+                                        int8_t tileYIdx = this->coordToTileIndexY(newPos.y);
 
-                                            if ((button.itemType == ItemType::FloorButton1 || button.itemType == ItemType::FloorButton2) && button.data.location.x == item.data.location.x && button.data.location.y == item.data.location.y) {
+                                        if (tileXIdx == item.data.location.x && tileYIdx == item.data.location.y) {
 
-                                                button.itemType = ItemType::None;
+                                            levelUpdate = LevelUpdate::FloorCollapsedOnPrince;
 
-                                            } 
+                                        }
+
+
+                                        // Remvoe any buttons the tile may have landed on (level 11 only)..
+
+                                        if (gamePlay.level == 11) {
+
+                                            for (Item &button : items) {
+
+                                                if ((button.itemType == ItemType::FloorButton1 || button.itemType == ItemType::FloorButton2) && button.data.location.x == item.data.location.x && button.data.location.y == item.data.location.y) {
+
+                                                    button.itemType = ItemType::None;
+
+                                                } 
+
+                                            }
 
                                         }
 
