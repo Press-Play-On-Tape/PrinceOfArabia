@@ -67,7 +67,7 @@ void title() {
     }
 
     if (justPressed & (A_BUTTON | B_BUTTON)) {
-
+    
         switch (titleScreenVars.getMode()) {
 
         case TitleScreenMode::Main:
@@ -173,6 +173,7 @@ void title() {
             case TitleScreenMode::CutScene_3:
             case TitleScreenMode::CutScene_4:
             case TitleScreenMode::CutScene_5:
+            case TitleScreenMode::CutScene_6:
 
                 gamePlay.gameState = GameState::Game_StartLevel; 
                 break;
@@ -427,6 +428,18 @@ void title() {
                 renderChamberFG(63, 1);
                 
                 if (titleScreenVars.update(arduboy.isFrameCount(3))) {
+
+                    gamePlay.gameState = GameState::Game_StartLevel; 
+                    titleScreenVars.count = 0;
+                    fadeEffect.reset();
+
+                }
+
+                break;
+
+            case TitleScreenMode::CutScene_6:
+
+                if (!FX::drawFrame()) {
 
                     gamePlay.gameState = GameState::Game_StartLevel; 
                     titleScreenVars.count = 0;

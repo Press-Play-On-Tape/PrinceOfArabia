@@ -66,6 +66,11 @@ struct TitleScreenVars {
 
                 this->princess.x = 24;
                 break;
+            
+            case TitleScreenMode::CutScene_6:
+
+                FX::setFrame(Title_CutScene_6_Frame, 2 - 1);
+                break;
 
             case TitleScreenMode::CutScene_9:
                 {
@@ -117,7 +122,6 @@ struct TitleScreenVars {
                 }
  
                 return false;
-
 
             case TitleScreenMode::CutScene_5:
 
