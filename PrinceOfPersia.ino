@@ -61,6 +61,7 @@ void setup() {
   #ifdef SAVE_TO_FX
 
     FX::begin(FX_DATA_PAGE, FX_SAVE_PAGE);
+    FX::loadGameState((uint8_t*)&cookie, sizeof(cookie));
 
   #else
 

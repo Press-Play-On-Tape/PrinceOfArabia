@@ -272,6 +272,7 @@ with open(framename +'.txt','w') as file:
     zaffar_x = zaffar_x + Scene1[count][1]
     princess_image = Scene1[count][2]
     princess_x = princess_x + Scene1[count][3]
+    hourglass_image = 0 * 3 + ((frames // 2) % 3)
     #
     if count != 169 and count != 171:
       #background with torches
@@ -282,7 +283,7 @@ with open(framename +'.txt','w') as file:
       # princess, zaffar and hourglass
       file.write('        int16_t {:3d}, 28, uint24_t Princess     uint8_t {}, dbmMasked\n'.format(princess_x, princess_image))
       if zaffar_x < 128: file.write('        int16_t {:3d}, 28, uint24_t Zaffar       uint8_t {}, dbmMasked\n'.format(zaffar_x, zaffar_image))
-      if count >= 169: file.write('        int16_t  54, 40, uint24_t HourGlasses  uint8_t {}, dbmMasked\n'.format(0))
+      if count >= 169: file.write('        int16_t  54, 40, uint24_t HourGlasses  uint8_t {}, dbmMasked\n'.format(hourglass_image))
       #forground
       file.write('        int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked{}\n\n'.format('_last' if last else '_end'))
     else:
@@ -294,11 +295,10 @@ with open(framename +'.txt','w') as file:
       # princess, zaffar and hourglass
       file.write('        int16_t {:3d}, 28, uint24_t Princess     uint8_t {}, 0x18\n'.format(princess_x, princess_image))
       if zaffar_x < 128: file.write('        int16_t {:3d}, 28, uint24_t Zaffar       uint8_t {}, 0x18\n'.format(zaffar_x, zaffar_image))
-      if count >= 169: file.write('        int16_t  54, 40, uint24_t HourGlasses  uint8_t {}, 0x18\n'.format(0))
+      if count >= 169: file.write('        int16_t  54, 40, uint24_t HourGlasses  uint8_t {}, 0x18\n'.format(hourglass_image))
       #forground
       file.write('        int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t {}\n\n'.format('0x98' if last else '0x58'))
     count += 1
     frames += 1
   file.write(foot)
   file.close()
-print('{} bytes'.format(frames * 9))

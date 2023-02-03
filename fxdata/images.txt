@@ -31,7 +31,7 @@ namespace Images {
     image_t Eeek                    = "../images/title/Eeek.png"
 
     image_t Mouse                   = "../images/mouse/Mouse_16x16.png"
-    image_t HourGlasses             = "../images/hourGlass/HourGlasses_19x23_1.png"
+    image_t HourGlasses             = "../images/hourGlass/HourGlasses_19x23.png"
 
 
     // HUD

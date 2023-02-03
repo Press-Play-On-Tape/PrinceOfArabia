@@ -345,20 +345,7 @@ void title() {
 
             case TitleScreenMode::CutScene_2:
 
-                renderChamberBG();
-
-                if (arduboy.getFrameCountHalf(24)) {
-                    FX::drawBitmap(titleScreenVars.princess.x, 28, Images::Princess, 4, dbmMasked);
-                }
-                else {
-                    FX::drawBitmap(titleScreenVars.princess.x, 28, Images::Princess, 9, dbmMasked);
-                }
-
-                renderChamberFG(53, 1);
-                
-
-                if (titleScreenVars.update(arduboy.isFrameCount(3))) {
-
+                if (!FX::drawFrame()) {
                     gamePlay.gameState = GameState::Game_StartLevel; 
                     titleScreenVars.count = 0;
                     fadeEffect.reset();
@@ -369,33 +356,7 @@ void title() {
 
             case TitleScreenMode::CutScene_3:
 
-                renderChamberBG();
-
-                switch (titleScreenVars.count) {
-
-                    case 0 ... 30:
-                    case 37 ... 67:
-                    case 74 ... 255:
-                        FX::drawBitmap(52, 24, Images::Princess, 10, dbmMasked);
-                        break;
-
-                    case 31 ... 32:
-                    case 35 ... 36:
-                    case 68 ... 69:
-                    case 72 ... 73:
-                        FX::drawBitmap(52, 24, Images::Princess, 24, dbmMasked);
-                        break;
-
-                    case 33 ... 34:
-                    case 70 ... 71:
-                        FX::drawBitmap(52, 24, Images::Princess, 25, dbmMasked);
-                        break;
-
-                }
-
-                renderChamberFG(53, 1);
-                
-                if (titleScreenVars.update(arduboy.isFrameCount(3))) {
+                if (!FX::drawFrame()) {
 
                     gamePlay.gameState = GameState::Game_StartLevel; 
                     titleScreenVars.count = 0;
