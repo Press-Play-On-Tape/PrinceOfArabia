@@ -89,11 +89,11 @@ void game() {
         //     DEBUG_PRINTLN(level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX()));
         // }
 
-        if (justPressed & B_BUTTON) { // echo out details
+        // if (justPressed & B_BUTTON) { // echo out details
 
-            prince.init(14, 25, Direction::Right, Stance::Crouch_3_End, 3, true); 
-            level.init(gamePlay, prince, 10, 21, 0, 0); 
-        }
+        //     prince.init(14, 25, Direction::Right, Stance::Crouch_3_End, 3, true); 
+        //     level.init(gamePlay, prince, 10, 21, 0, 0); 
+        // }
 
     #endif
 

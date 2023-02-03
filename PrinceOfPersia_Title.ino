@@ -34,6 +34,17 @@ void title() {
 
     auto justPressed = arduboy.justPressedButtons();
 
+    #ifdef DEBUG_CUT_SCENES
+
+        if (justPressed & B_BUTTON) {
+
+            setRenderChamberBG();
+            titleScreenVars.setMode(TitleScreenMode::CutScene_4, level);
+            //FX::setFrame(Title_CutScene_4_Frame, 4 - 1);
+        }
+
+    #endif
+
     if (titleScreenVars.getMode() == TitleScreenMode::Main) {
 
         if (justPressed & LEFT_BUTTON) {
@@ -66,7 +77,11 @@ void title() {
 
     }
 
+    #ifdef DEBUG_CUT_SCENES
+    if (justPressed & (A_BUTTON)) {
+    #else
     if (justPressed & (A_BUTTON | B_BUTTON)) {
+    #endif
     
         switch (titleScreenVars.getMode()) {
 
@@ -121,7 +136,11 @@ void title() {
             case TitleScreenMode::High:
             case TitleScreenMode::TimeOut:
 
+                #ifdef DEBUG_CUT_SCENES
+                if (justPressed & (A_BUTTON)) {
+                #else
                 if (justPressed & (A_BUTTON | B_BUTTON)) {
+                #endif
 
                     titleScreenVars.setMode(TitleScreenMode::Main, level);
 

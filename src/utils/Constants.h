@@ -3,7 +3,7 @@
 
 #define PRODUCTION_SETTINGS
 
-#ifdef PRODUCTION_SETTINGS
+#ifdef _PRODUCTION_SETTINGS
 
     #define SAVE_MEMORY_USB
     #define _SAVE_MEMORY_OTHER
@@ -17,6 +17,7 @@
     #define IMAGE_DATA_FROM_FX
     #define _SAVE_TO_FX
     #define STARTING_LEVEL 1
+    #define _DEBUG_CUT_SCENES
 
     #define _DEBUG
 
@@ -34,6 +35,7 @@
     #define IMAGE_DATA_FROM_FX
     #define _SAVE_TO_FX
     #define STARTING_LEVEL 12
+    #define DEBUG_CUT_SCENES
 
     #define _DEBUG
 
