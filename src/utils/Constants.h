@@ -16,7 +16,7 @@
     #define LEVEL_DATA_FROM_FX
     #define IMAGE_DATA_FROM_FX
     #define _SAVE_TO_FX
-    #define STARTING_LEVEL 1
+    #define STARTING_LEVEL 8
     #define _DEBUG_CUT_SCENES
 
     #define _DEBUG
@@ -34,7 +34,7 @@
     #define LEVEL_DATA_FROM_FX
     #define IMAGE_DATA_FROM_FX
     #define _SAVE_TO_FX
-    #define STARTING_LEVEL 7
+    #define STARTING_LEVEL 1
     #define _DEBUG_CUT_SCENES
 
     #define _DEBUG
@@ -44,7 +44,7 @@
 #define DEBUG_PRINT    Serial.print
 #define DEBUG_PRINTLN  Serial.println
 
-#define DEBUG_ONSCREEN_DETAILS
+#define _DEBUG_ONSCREEN_DETAILS
 #define _DEBUG_ONSCREEN_DETAILS_MIN
 
 #define _DEBUG_PRINCE_DETAILS
@@ -56,7 +56,7 @@
 #define _DEBUG_IMAGE_DETAILS
 
 #define _DEBUG_ACTION_CANMOVEFORWARD
-#define DEBUG_ACTION_CANJUMPUP
+#define _DEBUG_ACTION_CANJUMPUP
 #define _DEBUG_ACTION_CANJUMPUP_PART2
 #define _DEBUG_ACTION_CANCLIMBDOWN
 #define _DEBUG_ACTION_CANCLIMBDOWN_PART2
@@ -1146,7 +1146,7 @@ namespace Constants {
     
     constexpr uint8_t Item_ExitDoor = 0;
     constexpr uint8_t Item_LoveHeart = 1;           // Inside dynamic range as only used in cut scenes..
-    constexpr uint8_t Items_Count = 48;
+    constexpr uint8_t Items_Count = 49;
    
     constexpr uint8_t FrameRate = 45;
     constexpr uint8_t Animation_NumberOfFrames = 2;

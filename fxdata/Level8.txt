@@ -11,8 +11,7 @@ uint8_t level8_Data[] = {
     98,                         // Prince starting x pos
     56,                         // Prince starting y pos (25, 56, 87)
     1,                          // Prince starting direction, 1 Left and 2 Right
-    3,                          // Prince starting stance Min, 3 Crouch_3_End
-    0,                          // Prince starting stance Maj
+    3,                          // Prince starting stance, 3 Crouch_3_End
     3,                          // Prince starting health
     // Level
     110,                        // Width
@@ -73,9 +72,9 @@ uint8_t Level8_Items[] = {
      2,  94,   3,   2,   3,   4,   0,   0,          // Floor Button 1
      2,  87,   3,   2,   0,   0,   0,   0,          // Floor Button 1
 
-    17,  80,   3,   0,  96,  96, 255,   0,          // Gate #3
+    17,  80,   3,   0, 128, 128, 255,   0,          // Gate #3
 
-    17,  70,   3,   0, 128, 128, 255,   0,          // Gate #4
+    17,  70,   3,   0, 160, 160, 255,   0,          // Gate #4
      3,  68,   3,   2,   3,   4,   0,   0,          // Floor Button 2
 
     17,  50,   3,   0, 160, 160, 255,   0,          // Gate #5

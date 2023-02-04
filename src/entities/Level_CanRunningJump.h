@@ -139,6 +139,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
                     wallTile4_CurrLvl == WallTileResults::None && 
                     wallTile5_CurrLvl == WallTileResults::None && 
                     wallTile6_CurrLvl == WallTileResults::None &&
+                    wallTile6_NextLvl != WallTileResults::None &&
                     !isGroundTile2_CurrLvl &&
                     !isGroundTile3_CurrLvl &&
                     !isGroundTile4_CurrLvl &&

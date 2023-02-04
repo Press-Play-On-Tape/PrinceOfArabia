@@ -175,9 +175,7 @@ struct Level {
                     uint8_t xPixel = FX::readPendingUInt8();
                     uint8_t yPixel = FX::readPendingUInt8();
                     Direction direction = static_cast<Direction>(FX::readPendingUInt8());
-                    uint8_t stanceMin = FX::readPendingUInt8();
-                    uint8_t stanceMaj = FX::readPendingUInt8();
-                    uint16_t stance = static_cast<uint16_t>((stanceMaj * 256) + stanceMin);
+                    uint16_t stance = static_cast<uint16_t>(FX::readPendingUInt8());
                     uint8_t health = FX::readPendingUInt8();
 
                     prince.init(xPixel, yPixel, direction, stance, health, clearSword);
@@ -207,7 +205,7 @@ struct Level {
 
                 }
 
-                FX::seekData(FX::readIndexedUInt24(Levels::level_Data, gamePlay.level) + 10);
+                FX::seekData(FX::readIndexedUInt24(Levels::level_Data, gamePlay.level) + 9);
 
                 {
                     EnemyType enemyType = static_cast<EnemyType>(FX::readPendingUInt8());
@@ -610,17 +608,22 @@ struct Level {
                     // Scenario 1
 
                     prince.init(98, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword); 
-                    this->init(gamePlay, prince, 10, 21, 0, 0); 
+                    this->init(gamePlay, prince, 10, 24, 0, 0); 
 
                     // Scenario 3
 
                     // prince.init(98, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword); 
-                    // this->init(gamePlay, prince, 10, 21, 0, 6); 
+                    // this->init(gamePlay, prince, 10, 24, 0, 6); 
 
                     // Scenario 7
 
                     // prince.init(94, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
-                    // this->init(gamePlay, prince, 10, 21, 0, 18); 
+                    // this->init(gamePlay, prince, 10, 24, 0, 18); 
+
+                    // Scenario 8
+
+                    prince.init(94, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    this->init(gamePlay, prince, 10, 24, 0, 21); 
 
 
                 }

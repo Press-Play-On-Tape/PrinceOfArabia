@@ -44,11 +44,25 @@ class Prince : public BaseEntity, public BaseStack {
             this->y = y;
             this->direction = direction;
             this->stance = stance;
-            this->crouchingCounter = 32;
             this->health = health;
             this->healthMax = health;
             if (clearSword) this->sword = false;
             this->ignoreWallCollisions = false;
+
+            if (stance != Stance::Jump_Up_A_14_End) {
+
+                this->crouchingCounter = 32;
+                this->hangingCounter = 0;
+
+            }
+            else {
+
+                // Level 7
+
+                this->crouchingCounter = 0;
+                this->hangingCounter = 128;
+
+            }
 
             this->push(stance);
 
