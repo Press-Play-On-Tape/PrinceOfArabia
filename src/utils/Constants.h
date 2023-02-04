@@ -1,9 +1,9 @@
 
 #pragma once
 
-#define PRODUCTION_SETTINGS
+#define _PRODUCTION_SETTINGS
 
-#ifdef _PRODUCTION_SETTINGS
+#ifdef PRODUCTION_SETTINGS
 
     #define SAVE_MEMORY_USB
     #define _SAVE_MEMORY_OTHER
