@@ -1883,7 +1883,7 @@ void game() {
                             int16_t x = prince.getPosition().x / Constants::TileWidth;
                             int16_t y = prince.getPosition().y / Constants::TileHeight;
 
-                            if (x == 27 && y == 7) {
+                            if (x == 27 && y == 5) {
 
                                 openGate(level, 3, 0, 0);
 
