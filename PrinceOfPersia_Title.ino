@@ -39,8 +39,8 @@ void title() {
         if (justPressed & B_BUTTON) {
 
             setRenderChamberBG();
-            titleScreenVars.setMode(TitleScreenMode::CutScene_2, level);
-            // FX::setFrame(Title_CutScene_2_Frame, 4 - 1);
+            titleScreenVars.setMode(TitleScreenMode::CutScene_9, level);
+            //FX::setFrame(Title_IntroGame_9_Frame, 4 - 1);
         }
 
     #endif
@@ -171,7 +171,7 @@ void title() {
 
                 titleScreenVars.setMode(TitleScreenMode::IntroGame_1B, level);
                 gamePlay.gameState = GameState::Game_Init; 
-                fadeEffect.reset();
+                //fadeEffect.reset();
 
                 break;
 
@@ -179,7 +179,7 @@ void title() {
 
                 titleScreenVars.setMode(TitleScreenMode::IntroGame_1B, level);
                 gamePlay.gameState = GameState::Game_Init; 
-                fadeEffect.reset();
+                //fadeEffect.reset();
 
                 break;
 
@@ -363,157 +363,144 @@ void title() {
                 break;
 
             case TitleScreenMode::CutScene_2:
-
-                if (!FX::drawFrame()) {
-                    gamePlay.gameState = GameState::Game_StartLevel; 
-                    titleScreenVars.count = 0;
-                    fadeEffect.reset();
-
-                }
-
-                break;
-
             case TitleScreenMode::CutScene_3:
-
-                if (!FX::drawFrame()) {
-
-                    gamePlay.gameState = GameState::Game_StartLevel; 
-                    titleScreenVars.count = 0;
-                    fadeEffect.reset();
-
-                }
-
-                break;
-
             case TitleScreenMode::CutScene_4:
-
-                renderChamberBG();
-                FX::drawBitmap(titleScreenVars.princess.x, 28, Images::Princess, 26 + (titleScreenVars.count % 7), dbmMasked);
-                renderChamberFG(54);
-
-                if (titleScreenVars.update(arduboy.isFrameCount(12))) {
-
-                    gamePlay.gameState = GameState::Game_StartLevel; 
-                    titleScreenVars.count = 0;
-                    fadeEffect.reset();
-
-                }
-
-                break;
-
             case TitleScreenMode::CutScene_5:
-
-                renderChamberBG();
-                FX::drawBitmap(titleScreenVars.princess.x, 28, Images::Princess_Bounce, (titleScreenVars.count % 16), dbmMasked);
-                renderChamberFG(63, 1);
-                
-                if (titleScreenVars.update(arduboy.isFrameCount(3))) {
-
-                    gamePlay.gameState = GameState::Game_StartLevel; 
-                    titleScreenVars.count = 0;
-                    fadeEffect.reset();
-
-                }
-
-                break;
-
             case TitleScreenMode::CutScene_6:
 
                 if (!FX::drawFrame()) {
 
                     gamePlay.gameState = GameState::Game_StartLevel; 
-                    titleScreenVars.count = 0;
-                    fadeEffect.reset();
 
                 }
 
                 break;
 
+            //case TitleScreenMode::CutScene_5:
+            //
+            //    renderChamberBG();
+            //    FX::drawBitmap(titleScreenVars.princess.x, 28, Images::Princess_Bounce, (titleScreenVars.count % 16), dbmMasked);
+            //    renderChamberFG(63, 1);
+            //    
+            //    if (titleScreenVars.update(arduboy.isFrameCount(3))) {
+            //
+            //        gamePlay.gameState = GameState::Game_StartLevel; 
+            //        titleScreenVars.count = 0;
+            //        fadeEffect.reset();
+            //
+            //    }
+            //
+            //    break;
+
+            //case TitleScreenMode::CutScene_6:
+            //
+            //    if (!FX::drawFrame()) {
+            //
+            //        gamePlay.gameState = GameState::Game_StartLevel; 
+            //        titleScreenVars.count = 0;
+            //        fadeEffect.reset();
+            //
+            //    }
+            //
+            //    break;
+
             case TitleScreenMode::CutScene_9:
                 {
 
-                    renderChamberBG();
-                    FX::drawBitmap(titleScreenVars.prince.x, 29, Images::Prince_Left, titleScreenVars.prince.image - 1, dbmMasked);
-                    FX::drawBitmap(titleScreenVars.princess.x, 28, Images::Princess, titleScreenVars.princess.image, dbmMasked);
-                    renderChamberFG();
-
-                    if (titleScreenVars.update(arduboy.isFrameCount(4))) {
-
-                        #ifndef SAVE_MEMORY_SOUND
-                            sound.tonesFromFX(Sounds::Ending);
-                        #endif
-                        
-                        titleScreenVars.setMode(TitleScreenMode::IntroGame_9, level);
-                        titleScreenVars.count = 0;
-
-                    }
-
-                    Item &heart = level.getItem(Constants::Item_LoveHeart);
-
-                    if (arduboy.isFrameCount(2)) {
-                        heart.data.loveHeart.counter++;
-                    }
-
-                    uint8_t imageIdx = 255;
-
-                    switch (heart.data.loveHeart.counter) {
-
-                        case 0 ... 189:
-                            break;
-
-                        case 190 ... 193:
-                        case 198 ... 201:
-                            imageIdx = 2;
-                            break;
-
-                        case 194 ... 197:
-                        case 202 ... 205:
-                            imageIdx = 3;
-                            break;
-
-                        case 206:
-                        case 208:
-                            heart.data.location.y--;
-                            imageIdx = 1;
-                            break;
-
-                        case 207:
-                        case 209:
-                            imageIdx = 1;
-                            break;
-
-                        case 210:
-                        case 212:
-                            heart.data.location.y--;
-                            imageIdx = 0;
-                            break;
-
-                        case 211:
-                        case 213:
-                            imageIdx = 0;
-                            break;
-
-
-                    }
-
-                    if (imageIdx != 255) {
-
-                        FX::drawBitmap(heart.data.location.x, heart.data.location.y, Images::Hearts, imageIdx, dbmNormal);
-                        
-                    }
+                    //renderChamberBG();
+                    //FX::drawBitmap(titleScreenVars.prince.x, 29, Images::Prince_Left, titleScreenVars.prince.image - 1, dbmMasked);
+                    //FX::drawBitmap(titleScreenVars.princess.x, 28, Images::Princess, titleScreenVars.princess.image, dbmMasked);
+                    //renderChamberFG();
+                    //
+                    //if (titleScreenVars.update(arduboy.isFrameCount(4))) {
+                    //
+                    //    #ifndef SAVE_MEMORY_SOUND
+                    //        sound.tonesFromFX(Sounds::Ending);
+                    //    #endif
+                    //    
+                    //    titleScreenVars.setMode(TitleScreenMode::IntroGame_9, level);
+                    //    FX::setFrame(Title_IntroGame_9_Frame, 5 - 1);
+                    //    //titleScreenVars.count = 0;
+                    //
+                    //}
+                    //
+                    //Item &heart = level.getItem(Constants::Item_LoveHeart);
+                    //
+                    //if (arduboy.isFrameCount(2)) {
+                    //    heart.data.loveHeart.counter++;
+                    //}
+                    //
+                    //uint8_t imageIdx = 255;
+                    //
+                    //switch (heart.data.loveHeart.counter) {
+                    //
+                    //    case 0 ... 189:
+                    //        break;
+                    //
+                    //    case 190 ... 193:
+                    //    case 198 ... 201:
+                    //        imageIdx = 2;
+                    //        break;
+                    //
+                    //    case 194 ... 197:
+                    //    case 202 ... 205:
+                    //        imageIdx = 3;
+                    //        break;
+                    //
+                    //    case 206:
+                    //    case 208:
+                    //        heart.data.location.y--;
+                    //        imageIdx = 1;
+                    //        break;
+                    //
+                    //    case 207:
+                    //    case 209:
+                    //        imageIdx = 1;
+                    //        break;
+                    //
+                    //    case 210:
+                    //    case 212:
+                    //        heart.data.location.y--;
+                    //        imageIdx = 0;
+                    //        break;
+                    //
+                    //    case 211:
+                    //    case 213:
+                    //        imageIdx = 0;
+                    //        break;
+                    //
+                    //
+                    //}
+                    //
+                    //if (imageIdx != 255) {
+                    //
+                    //    FX::drawBitmap(heart.data.location.x, heart.data.location.y, Images::Hearts, imageIdx, dbmNormal);
+                    //    
+                    //}
                     
+                    if (!FX::drawFrame()) {
+
+                        titleScreenVars.setMode(TitleScreenMode::IntroGame_9, level);
+                        FX::setFrame(Title_IntroGame_9_Frame, 5 - 1);
+
+                    }
                 }
 
                 break;
 
             case TitleScreenMode::IntroGame_9:
 
-                FX::drawBitmap(2, 64 - titleScreenVars.count, Images::IntroGame_9, 0, dbmNormal);
-                
-                if (titleScreenVars.update(arduboy.isFrameCount(4))) {
+            //    FX::drawBitmap(2, 64 - titleScreenVars.count, Images::IntroGame_9, 0, dbmNormal);
+            //    
+            //    if (titleScreenVars.update(arduboy.isFrameCount(4))) {
+            //
+            //        gamePlay.gameState = GameState::Title_Init; 
+            //        titleScreenVars.count = 0;
+            //
+            //    }
+                if (!FX::drawFrame()) {
 
                     gamePlay.gameState = GameState::Title_Init; 
-                    titleScreenVars.count = 0;
 
                 }
 

@@ -346,9 +346,38 @@ uint16_t ArduboyTonesFX::getNext()
   //
   //}
   //else {
-    uint16_t t = tonesBufferFX[tonesBufferFX_Tail];
-    tonesBufferFX_Tail = (tonesBufferFX_Tail + 1) % tonesBufferFX_Len;
+   #ifdef ARDUINO_ARCH_AVR
+     uint16_t t;
+     asm volatile(
+       "lds  r24, %[tail]       \n"
+       "mov  r0, r24            \n"
+       "add  r24, r24           \n"
+       "lds  r30, %[buffer]+0   \n"
+       "add  r30, r24           \n"
+       "lds  r31, %[buffer]+1   \n"
+       "adc  r31, r1            \n"
+       "ld   r24, Z             \n"
+       "ldd  r25, Z+1           \n"
+       "inc  r0                 \n"
+       "lds  r30, %[len]        \n"
+       "cp   r0, r30            \n"
+       "brcs .+2                \n"
+       "clr  r0                 \n"
+       "sts  %[tail], r0        \n"
+       :    "=&r" (t)
+       : [tail]   "" (&tonesBufferFX_Tail),
+         [len]    "" (&tonesBufferFX_Len),
+         [buffer] "" (tonesBufferFX)
+       :"r30", "r31"
+     );
+     return t;
+   #else
+    uint8_t tail = tonesBufferFX_Tail;
+    uint16_t t = tonesBufferFX[tail];
+    if (++tail >= tonesBufferFX_Len) tail = 0;
+    tonesBufferFX_Tail = tail;
     return t;
+   #endif
   //}
 
 }
@@ -357,10 +386,10 @@ ISR(TIMER3_COMPA_vect)
 {
   if (durationToggleCount != 0) {
     if (!toneSilent) {
-      *(&TONE_PIN_PORT) ^= TONE_PIN_MASK; // toggle the pin
+      *(&TONE_PIN_PIN) = TONE_PIN_MASK; // toggle the pin
 #ifdef TONES_VOLUME_CONTROL
       if (toneHighVol) {
-        *(&TONE_PIN2_PORT) ^= TONE_PIN2_MASK; // toggle pin 2
+        *(&TONE_PIN2_PIN) = TONE_PIN2_MASK; // toggle pin 2
       }
 #endif
     }

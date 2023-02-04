@@ -188,7 +188,11 @@ include 'Title_CutScene_1_Frame.txt'
 include 'Title_IntroGame_1B_Frame.txt'
 include 'Title_CutScene_2_Frame.txt'
 include 'Title_CutScene_3_Frame.txt'
+include 'Title_CutScene_4_Frame.txt'
+include 'Title_CutScene_5_Frame.txt'
 include 'Title_CutScene_6_Frame.txt'
+include 'Title_CutScene_9_Frame.txt'
+include 'Title_IntroGame_9_Frame.txt'
 
 
 // Chamber animation ..
