@@ -19,6 +19,8 @@ Copyright (c) 2017 Scott Allen
 
 Modified 2022 Simon Holmes
 
+optimized for FX only 2023 Mr.Blinky
+
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
@@ -44,7 +46,7 @@ THE SOFTWARE.
 static bool (*outputEnabled)();
 
 static volatile long durationToggleCount = 0;
-static volatile bool tonesPlaying = false;
+//static volatile bool tonesPlaying = false;
 static volatile bool toneSilent;
 #ifdef TONES_VOLUME_CONTROL
 static volatile bool toneHighVol;
@@ -52,25 +54,25 @@ static volatile bool forceHighVol = false;
 static volatile bool forceNormVol = false;
 #endif
 
-static volatile uint16_t *tonesStart;
-static volatile uint16_t *tonesIndex;
-static volatile uint16_t toneSequence[MAX_TONES * 2 + 1];
+//static volatile uint16_t *tonesStart;
+//static volatile uint16_t *tonesIndex;
+//static volatile uint16_t toneSequence[MAX_TONES * 2 + 1];
 
-static volatile bool inProgmem;
+//static volatile bool inProgmem;
 
 static volatile uint24_t tonesBufferFX_Start;
 static volatile uint24_t tonesBufferFX_Curr;
 static volatile uint16_t *tonesBufferFX;
 static uint8_t tonesBufferFX_Len;
 static uint8_t tonesBufferFX_Head;
-static int8_t tonesBufferFX_Tail;
-static volatile uint8_t toneMode;
+static uint8_t tonesBufferFX_Tail;
+//static volatile uint8_t toneMode;
 
 ArduboyTonesFX::ArduboyTonesFX(boolean (*outEn)())
 {
   outputEnabled = outEn;
 
-  toneSequence[MAX_TONES * 2] = TONES_END;
+  //toneSequence[MAX_TONES * 2] = TONES_END;
 
   bitClear(TONE_PIN_PORT, TONE_PIN); // set the pin low
   bitSet(TONE_PIN_DDR, TONE_PIN); // set the pin to output mode
@@ -86,7 +88,7 @@ ArduboyTonesFX::ArduboyTonesFX(boolean (*outEn)(), uint16_t *tonesArray, uint8_t
   tonesBufferFX = tonesArray;
   tonesBufferFX_Len = tonesArrayLen;
 
-  toneSequence[MAX_TONES * 2] = TONES_END;
+  //toneSequence[MAX_TONES * 2] = TONES_END;
 
   bitClear(TONE_PIN_PORT, TONE_PIN); // set the pin low
   bitSet(TONE_PIN_DDR, TONE_PIN); // set the pin to output mode
@@ -96,76 +98,76 @@ ArduboyTonesFX::ArduboyTonesFX(boolean (*outEn)(), uint16_t *tonesArray, uint8_t
 #endif
 }
 
-void ArduboyTonesFX::tone(uint16_t freq, uint16_t dur)
-{
-  bitWrite(TIMSK3, OCIE3A, 0); // disable the output compare match interrupt
-  inProgmem = false;
-  tonesStart = tonesIndex = toneSequence; // set to start of sequence array
-  toneSequence[0] = freq;
-  toneSequence[1] = dur;
-  toneSequence[2] = TONES_END; // set end marker
-  toneMode = TONES_MODE_NORMAL;
-  nextTone(); // start playing
-}
+//void ArduboyTonesFX::tone(uint16_t freq, uint16_t dur)
+//{
+//  bitWrite(TIMSK3, OCIE3A, 0); // disable the output compare match interrupt
+//  inProgmem = false;
+//  tonesStart = tonesIndex = toneSequence; // set to start of sequence array
+//  toneSequence[0] = freq;
+//  toneSequence[1] = dur;
+//  toneSequence[2] = TONES_END; // set end marker
+//  toneMode = TONES_MODE_NORMAL;
+//  nextTone(); // start playing
+//}
 
-void ArduboyTonesFX::tone(uint16_t freq1, uint16_t dur1,
-                        uint16_t freq2, uint16_t dur2)
-{
-  bitWrite(TIMSK3, OCIE3A, 0); // disable the output compare match interrupt
-  inProgmem = false;
-  tonesStart = tonesIndex = toneSequence; // set to start of sequence array
-  toneSequence[0] = freq1;
-  toneSequence[1] = dur1;
-  toneSequence[2] = freq2;
-  toneSequence[3] = dur2;
-  toneSequence[4] = TONES_END; // set end marker
-  toneMode = TONES_MODE_NORMAL;
-  nextTone(); // start playing
-}
+//void ArduboyTonesFX::tone(uint16_t freq1, uint16_t dur1,
+//                        uint16_t freq2, uint16_t dur2)
+//{
+//  bitWrite(TIMSK3, OCIE3A, 0); // disable the output compare match interrupt
+//  inProgmem = false;
+//  tonesStart = tonesIndex = toneSequence; // set to start of sequence array
+//  toneSequence[0] = freq1;
+//  toneSequence[1] = dur1;
+//  toneSequence[2] = freq2;
+//  toneSequence[3] = dur2;
+//  toneSequence[4] = TONES_END; // set end marker
+//  toneMode = TONES_MODE_NORMAL;
+//  nextTone(); // start playing
+//}
 
-void ArduboyTonesFX::tone(uint16_t freq1, uint16_t dur1,
-                        uint16_t freq2, uint16_t dur2,
-                        uint16_t freq3, uint16_t dur3)
-{
-  bitWrite(TIMSK3, OCIE3A, 0); // disable the output compare match interrupt
-  inProgmem = false;
-  tonesStart = tonesIndex = toneSequence; // set to start of sequence array
-  toneSequence[0] = freq1;
-  toneSequence[1] = dur1;
-  toneSequence[2] = freq2;
-  toneSequence[3] = dur2;
-  toneSequence[4] = freq3;
-  toneSequence[5] = dur3;
-  toneMode = TONES_MODE_NORMAL;
-  nextTone(); // start playing
-}
+//void ArduboyTonesFX::tone(uint16_t freq1, uint16_t dur1,
+//                        uint16_t freq2, uint16_t dur2,
+//                        uint16_t freq3, uint16_t dur3)
+//{
+//  bitWrite(TIMSK3, OCIE3A, 0); // disable the output compare match interrupt
+//  inProgmem = false;
+//  tonesStart = tonesIndex = toneSequence; // set to start of sequence array
+//  toneSequence[0] = freq1;
+//  toneSequence[1] = dur1;
+//  toneSequence[2] = freq2;
+//  toneSequence[3] = dur2;
+//  toneSequence[4] = freq3;
+//  toneSequence[5] = dur3;
+//  toneMode = TONES_MODE_NORMAL;
+//  nextTone(); // start playing
+//}
 
-void ArduboyTonesFX::tones(const uint16_t *tones)
-{
-  bitWrite(TIMSK3, OCIE3A, 0); // disable the output compare match interrupt
-  inProgmem = true;
-  tonesStart = tonesIndex = (uint16_t *)tones; // set to start of sequence array
-  toneMode = TONES_MODE_NORMAL;
-  nextTone(); // start playing
-}
+//void ArduboyTonesFX::tones(const uint16_t *tones)
+//{
+//  bitWrite(TIMSK3, OCIE3A, 0); // disable the output compare match interrupt
+//  inProgmem = true;
+//  tonesStart = tonesIndex = (uint16_t *)tones; // set to start of sequence array
+//  toneMode = TONES_MODE_NORMAL;
+//  nextTone(); // start playing
+//}
 
-void ArduboyTonesFX::tonesInRAM(uint16_t *tones)
-{
-  bitWrite(TIMSK3, OCIE3A, 0); // disable the output compare match interrupt
-  inProgmem = false;
-  tonesStart = tonesIndex = tones; // set to start of sequence array
-  toneMode = TONES_MODE_NORMAL;
-  nextTone(); // start playing
-}
+//void ArduboyTonesFX::tonesInRAM(uint16_t *tones)
+//{
+//  bitWrite(TIMSK3, OCIE3A, 0); // disable the output compare match interrupt
+//  inProgmem = false;
+//  tonesStart = tonesIndex = tones; // set to start of sequence array
+//  toneMode = TONES_MODE_NORMAL;
+//  nextTone(); // start playing
+//}
 
 void ArduboyTonesFX::tonesFromFX(uint24_t tones)
 {
-  inProgmem = false;
+  //inProgmem = false;
   tonesBufferFX_Start = tonesBufferFX_Curr = tones; // set to start of sequence array
-  toneMode = TONES_MODE_FX;
+  //toneMode = TONES_MODE_FX;
   tonesBufferFX_Head = 0;
-  tonesBufferFX_Tail = -1;
-  tonesPlaying = true;
+  tonesBufferFX_Tail = 255; // odd value to signal fill buffer
+  //tonesPlaying = true;
 
   fillBufferFromFX();
 
@@ -175,29 +177,28 @@ void ArduboyTonesFX::tonesFromFX(uint24_t tones)
 
 void ArduboyTonesFX::fillBufferFromFX()
 {
-    if (tonesPlaying && tonesBufferFX_Head != tonesBufferFX_Tail) {
+    if (/*tonesPlaying &&*/ tonesBufferFX_Head != tonesBufferFX_Tail) {
 
       uint8_t head = tonesBufferFX_Head;
-
       FX::seekData(tonesBufferFX_Curr);
 
-      while ((head % tonesBufferFX_Len) != tonesBufferFX_Tail) {
-        uint16_t t = FX::readPendingUInt16();
-        tonesBufferFX[head % tonesBufferFX_Len] = t;
-        head++;
-        tonesBufferFX_Curr = tonesBufferFX_Curr + 2;
+      while (head != tonesBufferFX_Tail) {
 
+        uint16_t t = FX::readPendingUInt16();
         if (t == TONES_REPEAT) {
           tonesBufferFX_Curr = tonesBufferFX_Start;
           FX::readEnd();
           FX::seekData(tonesBufferFX_Curr);
         }
-
-        if (tonesBufferFX_Tail == -1) tonesBufferFX_Tail = 0;
-
+        else {
+          tonesBufferFX[head] = t;
+          if (++head == tonesBufferFX_Len) head = 0;
+          tonesBufferFX_Curr = tonesBufferFX_Curr + 2;
+          if (tonesBufferFX_Tail == 255) tonesBufferFX_Tail = 0;
+        }
       }
 
-      tonesBufferFX_Head = head % tonesBufferFX_Len;
+      tonesBufferFX_Head = head;
       FX::readEnd();
 
     }
@@ -212,7 +213,7 @@ void ArduboyTonesFX::noTone()
 #ifdef TONES_VOLUME_CONTROL
   bitClear(TONE_PIN2_PORT, TONE_PIN2); // set pin 2 low
 #endif
-  tonesPlaying = false;
+  //tonesPlaying = false;
 }
 
 void ArduboyTonesFX::volumeMode(uint8_t mode)
@@ -232,7 +233,7 @@ void ArduboyTonesFX::volumeMode(uint8_t mode)
 
 bool ArduboyTonesFX::playing()
 {
-  return tonesPlaying;
+  return TCCR3A;
 }
 
 void ArduboyTonesFX::nextTone()
@@ -252,12 +253,12 @@ void ArduboyTonesFX::nextTone()
     return;
   }
 
-  tonesPlaying = true;
+  //tonesPlaying = true;
 
-  if (freq == TONES_REPEAT) { // if frequency is actually a "repeat" marker
-    tonesIndex = tonesStart; // reset to start of sequence
-    freq = getNext();
-  }
+  //if (freq == TONES_REPEAT) { // if frequency is actually a "repeat" marker
+  //  tonesIndex = tonesStart; // reset to start of sequence
+  //  freq = getNext();
+  //}
 
 #ifdef TONES_VOLUME_CONTROL
   if (((freq & TONE_HIGH_VOLUME) || forceHighVol) && !forceNormVol) {
@@ -336,20 +337,19 @@ void ArduboyTonesFX::nextTone()
 
 uint16_t ArduboyTonesFX::getNext()
 {
-  if (toneMode == TONES_MODE_NORMAL) {
-
-    if (inProgmem) {
-      return pgm_read_word(tonesIndex++);
-    }
-    return *tonesIndex++;
-
-  }
-  else {
+  //if (toneMode == TONES_MODE_NORMAL) {
+  //
+  //  if (inProgmem) {
+  //    return pgm_read_word(tonesIndex++);
+  //  }
+  //  return *tonesIndex++;
+  //
+  //}
+  //else {
     uint16_t t = tonesBufferFX[tonesBufferFX_Tail];
-    tonesBufferFX_Tail++;
-    tonesBufferFX_Tail = tonesBufferFX_Tail % tonesBufferFX_Len;
+    tonesBufferFX_Tail = (tonesBufferFX_Tail + 1) % tonesBufferFX_Len;
     return t;
-  }
+  //}
 
 }
 
