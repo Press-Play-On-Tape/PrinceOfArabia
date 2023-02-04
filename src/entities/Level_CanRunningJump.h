@@ -104,7 +104,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
                     DEBUG_PRINT((uint8_t)wallTile5_CurrLvl);
                     DEBUG_PRINT(" ");
                     DEBUG_PRINT((uint8_t)wallTile6_CurrLvl);
-                    DEBUG_PRINT(F("\nNL "));
+                    DEBUG_PRINT(F("\nNL _ "));
                     DEBUG_PRINT((uint8_t)wallTile2_NextLvl);
                     DEBUG_PRINT(" ");
                     DEBUG_PRINT((uint8_t)wallTile3_NextLvl);
@@ -114,7 +114,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
                     DEBUG_PRINT((uint8_t)wallTile5_NextLvl);
                     DEBUG_PRINT(" ");
                     DEBUG_PRINT((uint8_t)wallTile6_NextLvl);
-                    DEBUG_PRINT(F(" _\nGT "));
+                    DEBUG_PRINT(F("\nGT "));
                     DEBUG_PRINT((uint8_t)isGroundTile2_CurrLvl);
                     DEBUG_PRINT(" ");
                     DEBUG_PRINT((uint8_t)isGroundTile3_CurrLvl);
@@ -124,7 +124,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
                     DEBUG_PRINT((uint8_t)isGroundTile5_CurrLvl);
                     DEBUG_PRINT(" ");
                     DEBUG_PRINT((uint8_t)isGroundTile6_CurrLvl);
-                    DEBUG_PRINT(" _\nDist ");
+                    DEBUG_PRINT("\nDist ");
                     DEBUG_PRINTLN(distToEdgeOfCurrentTile);
 
                 }

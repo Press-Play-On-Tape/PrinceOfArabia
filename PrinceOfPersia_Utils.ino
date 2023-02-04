@@ -621,28 +621,32 @@ void playGrab() {
 
             enemy.setActiveEnemy(i);
 
-            uint8_t tileXIdx = level.coordToTileIndexX(enemy.getPosition().x);
-            uint8_t tileYIdx = level.coordToTileIndexY(enemy.getPosition().y);
+            if (enemy.getStatus() == Status::Active) {
 
-            if (tileXIdx >= level.getXLocation() && tileXIdx < level.getXLocation() + Constants::ScreenWidthInTiles && tileYIdx >= level.getYLocation() && tileYIdx < level.getYLocation() + Constants::ScreenHeightInTiles) {
+                uint8_t tileXIdx = level.coordToTileIndexX(enemy.getPosition().x);
+                uint8_t tileYIdx = level.coordToTileIndexY(enemy.getPosition().y);
 
-                enemyIsVisible = true;
+                if (tileXIdx >= level.getXLocation() && tileXIdx < level.getXLocation() + Constants::ScreenWidthInTiles && tileYIdx >= level.getYLocation() && tileYIdx < level.getYLocation() + Constants::ScreenHeightInTiles) {
 
-                int8_t princeTileYIdx = level.coordToTileIndexY(prince.getPosition().y);
+                    enemyIsVisible = true;
+                    int8_t princeTileYIdx = level.coordToTileIndexY(prince.getPosition().y);
 
-                if (princeTileYIdx == tileYIdx) {
-                    
-                    onSameLevelAsPrince = true;
+                    if (princeTileYIdx == tileYIdx) {
+                        
+                        onSameLevelAsPrince = true;
+
+                    }
+
+                }
+
+                if (enemy.getHealth() == 0 && enemy.getMoveCount() > 0) {
+
+                    enemy.decMoveCount();
 
                 }
 
             }
 
-            if (enemy.getHealth() == 0 && enemy.getMoveCount() > 0) {
-
-                enemy.decMoveCount();
-
-            }
             if (enemyIsVisible) break;
             
         }
