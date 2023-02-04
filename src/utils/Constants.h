@@ -23,21 +23,21 @@
 
 #else
 
-    #define SAVE_MEMORY_USB
-    #define _SAVE_MEMORY_OTHER
+    #define _SAVE_MEMORY_USB
+    #define SAVE_MEMORY_OTHER
     #define SAVE_MEMORY_SOUND
-    #define _SAVE_MEMORY_ENEMY
-    #define _SAVE_MEMORY_TITLE
+    #define SAVE_MEMORY_ENEMY
+    #define SAVE_MEMORY_TITLE
     #define _ALT_B_BUTTON
     #define _GIVE_SWORD
 
-    #define LEVEL_DATA_FROM_FX
+    #define _LEVEL_DATA_FROM_FX
     #define IMAGE_DATA_FROM_FX
     #define _SAVE_TO_FX
     #define STARTING_LEVEL 12
     #define DEBUG_CUT_SCENES
 
-    #define _DEBUG
+    #define DEBUG
 
 #endif
 
@@ -50,13 +50,13 @@
 #define _DEBUG_PRINCE_DETAILS
 #define _DEBUG_PRINCE_STACK
 #define _DEBUG_PRINT_ACTION
-#define _DEBUG_LEVEL_LOAD_MAP
+#define DEBUG_LEVEL_LOAD_MAP
 #define _DEBUG_GET_TILE
 #define _DEBUG_PRINCE_RENDERING
 #define _DEBUG_IMAGE_DETAILS
 
 #define _DEBUG_ACTION_CANMOVEFORWARD
-#define _DEBUG_ACTION_CANJUMPUP
+#define DEBUG_ACTION_CANJUMPUP
 #define _DEBUG_ACTION_CANJUMPUP_PART2
 #define _DEBUG_ACTION_CANCLIMBDOWN
 #define _DEBUG_ACTION_CANCLIMBDOWN_PART2

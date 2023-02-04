@@ -551,9 +551,16 @@ struct Level {
                     // this->init(gamePlay, prince, 80, 21, 60, 3); 
 
                     // Shadow fight
-                    prince.init(26, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
-                    this->init(gamePlay, prince, 80, 21, 50, 3); 
+                    // prince.init(26, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    // this->init(gamePlay, prince, 80, 21, 50, 3); 
 
+                    // Incorrect climb
+                    prince.init(54, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    this->init(gamePlay, prince, 80, 21, 60, 15); 
+
+                    // Incorrect climb 2
+                    prince.init(30, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword); 
+                    this->init(gamePlay, prince, 80, 21, 60, 18); 
 
                 }
 
@@ -2242,9 +2249,19 @@ struct Level {
                         case 7 ... 12:
 
                             if (midTile == TILE_COLLAPSING_FLOOR) {
+
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                DEBUG_PRINTLN(F("L1 JumpThenFall_CollapseFloorAbove"));
+                                #endif
+
                                 return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
                             }
                             else {
+
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                DEBUG_PRINTLN(F("L2  JumpThenFall"));
+                                #endif
+
                                 return CanJumpUpResult::JumpThenFall;
                             }
 
@@ -2263,14 +2280,24 @@ struct Level {
                                 case TILE_FLOOR_RH_END_GATE_1:
                                 case TILE_FLOOR_RH_END_GATE_2:
                                 case TILE_FLOOR_RH_END_GATE_RUG:
-                                case TILE_COLUMN_LH_WALL:
+                                // case TILE_COLUMN_LH_WALL:        Found this bug in level 12.
                                 case TILE_FLOOR_RH_PILLAR_END_1:
                                 case TILE_FLOOR_RH_PILLAR_END_2:
 
                                     if (midTile == TILE_COLLAPSING_FLOOR) {
+
+                                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                        DEBUG_PRINTLN(F("L3  JumpThenFall_CollapseFloorAbove"));
+                                        #endif
+                                                                                
                                         return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
                                     }
                                     else {
+
+                                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                        DEBUG_PRINTLN(F("L4  StepThenJump"));
+                                        #endif
+
                                         return CanJumpUpResult::StepThenJump;
                                     }                                
 
@@ -2281,14 +2308,29 @@ struct Level {
                                     switch (bgTile2) {
 
                                         case TILE_COLLAPSING_FLOOR:
+
+                                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                            DEBUG_PRINTLN(F("L5  StepThenJumpThenFall_CollapseFloor"));
+                                            #endif
+                                            
                                             return CanJumpUpResult::StepThenJumpThenFall_CollapseFloor;
 
                                         default:
 
                                             if (midTile == TILE_COLLAPSING_FLOOR) {
+
+                                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                                DEBUG_PRINTLN(F("L6  JumpThenFall_CollapseFloorAbove"));
+                                                #endif
+
                                                 return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
                                             }
                                             else {
+
+                                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                                DEBUG_PRINTLN(F("L7  JumpThenFall"));
+                                                #endif
+                                                
                                                 return CanJumpUpResult::JumpThenFall;
                                             }
 
@@ -2317,9 +2359,19 @@ struct Level {
                                 // case TILE_COLUMN_LH_WALL:                << SJH removed 29/12
 
                                     if (midTile == TILE_COLLAPSING_FLOOR) {
+
+                                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                        DEBUG_PRINTLN(F("L8  JumpThenFall_CollapseFloorAbove"));
+                                        #endif
+
                                         return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
                                     }
                                     else {
+
+                                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                        DEBUG_PRINTLN(F("L9  Jump"));
+                                        #endif
+                                        
                                         return CanJumpUpResult::Jump;
                                     }
 
@@ -2330,14 +2382,29 @@ struct Level {
                                     switch (bgTile2) {
 
                                         case TILE_COLLAPSING_FLOOR:
+
+                                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                            DEBUG_PRINTLN(F("L10  JumpThenFall_CollapseFloor"));
+                                            #endif
+
                                             return CanJumpUpResult::JumpThenFall_CollapseFloor;
 
                                         default:
 
                                             if (midTile == TILE_COLLAPSING_FLOOR) {
+
+                                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                                DEBUG_PRINTLN(F("L11  JumpThenFall_CollapseFloorAbove"));
+                                                #endif
+
                                                 return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
                                             }
                                             else {
+
+                                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                                DEBUG_PRINTLN(F("L12  JumpThenFall"));
+                                                #endif
+
                                                 return CanJumpUpResult::JumpThenFall;
                                             }
 
