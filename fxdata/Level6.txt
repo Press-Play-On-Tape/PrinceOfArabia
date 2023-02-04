@@ -42,7 +42,7 @@ uint8_t level6_Data[] = {
 };
 
 uint8_t Level6_Items[] = {
-    26,  15,   1,   3,   5,   0,   0,   0,          // Exit Gate, let position for open, right position, close button                                                        
+    32,  15,   1,   0,   0,   0,   0,   0,          // Decorative Gate
     28,  52,   1,   0,   0,   0,   0,   0,          // Entry Gate   
 
     17,  50,   1,   0,  64,  64, 255,   0,          // Gate #1
