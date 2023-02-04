@@ -31,7 +31,8 @@ void renderChamberFG(uint8_t hourglassX = 0, uint8_t hourglassIdx = 0) {
 //  Handle state updates .. 
 //
 void title() { 
-
+Serial.print("mode ");
+Serial.println((uint8_t)titleScreenVars.getMode());
     auto justPressed = arduboy.justPressedButtons();
 
     #ifdef DEBUG_CUT_SCENES
@@ -39,8 +40,8 @@ void title() {
         if (justPressed & B_BUTTON) {
 
             setRenderChamberBG();
-            titleScreenVars.setMode(TitleScreenMode::CutScene_4, level);
-            //FX::setFrame(Title_CutScene_4_Frame, 4 - 1);
+            titleScreenVars.setMode(TitleScreenMode::CutScene_2, level);
+            // FX::setFrame(Title_CutScene_2_Frame, 4 - 1);
         }
 
     #endif

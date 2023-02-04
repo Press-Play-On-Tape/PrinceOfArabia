@@ -153,21 +153,21 @@ enum class TitleScreenOptions : uint8_t {
 };
 
 enum class TitleScreenMode : uint8_t {
-    Intro,
-    Main,
-    Credits, 
-    High,
-    IntroGame_1A,
-    CutScene_1,
-    IntroGame_1B,
-    CutScene_2,
-    CutScene_3,
-    CutScene_4,
-    CutScene_5,
-    CutScene_6,
-    CutScene_9,
-    IntroGame_9,
-    TimeOut,
+    Intro,              // 0
+    Main,               // 1
+    Credits,            // 2
+    High,               // 3
+    IntroGame_1A,       // 4
+    CutScene_1,         // 5
+    IntroGame_1B,       // 6
+    CutScene_2,         // 7
+    CutScene_3,         // 8
+    CutScene_4,         // 9
+    CutScene_5,         // 10
+    CutScene_6,         // 11
+    CutScene_9,         // 12
+    IntroGame_9,        // 13
+    TimeOut,            // 14
 };
 
 enum class WallTileResults : uint8_t {

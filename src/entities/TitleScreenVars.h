@@ -26,7 +26,7 @@ struct TitleScreenVars {
         this->count = 0;
         this->option = TitleScreenOptions::Play;
         this->mode = TitleScreenMode::Intro;
-        FX::setFrame(Title_Intro_Frame_NoHigh, 0); //SJH fix
+        FX::setFrame(Title_Intro_Frame_NoHigh, 0); 
 
     }
 
@@ -39,23 +39,15 @@ struct TitleScreenVars {
 
         switch (this->mode) {
             
-           //case TitleScreenMode::Credits:
-           //case TitleScreenMode::TimeOut:
-           //
-           //    //this->count = 88;
-           //    break;
-           //
-           //case TitleScreenMode::IntroGame_1A:
-           //case TitleScreenMode::CutScene_1:
-           //case TitleScreenMode::IntroGame_1B:
-           //
-           //    this->count = 0;
-           //    break;
-           //
-           //case TitleScreenMode::CutScene_2:
-           //
-           //    this->princess.x = 63;
-           //    break;
+            case TitleScreenMode::CutScene_2:
+           
+                 FX::setFrame(Title_CutScene_2_Frame, 4 - 1);
+                 break;
+            
+            case TitleScreenMode::CutScene_3:
+           
+                 FX::setFrame(Title_CutScene_3_Frame, 4 - 1);
+                 break;
             
             case TitleScreenMode::CutScene_4:
 
@@ -99,18 +91,6 @@ struct TitleScreenVars {
     bool update(bool triggerFrame) {
 
         switch (this->mode) {
-
-            //case TitleScreenMode::CutScene_2:
-            //case TitleScreenMode::CutScene_3:
-            //
-            //    if (triggerFrame) {
-            //
-            //        this->count++;
-            //        if (this->count == 96) return true;
-            //
-            //    }
-            //
-            //    return false;
 
             case TitleScreenMode::CutScene_4:
 
@@ -162,15 +142,6 @@ struct TitleScreenVars {
                 }
 
                 return false;                
-
-            //case TitleScreenMode::TimeOut:
-            //
-            //    if (triggerFrame) {
-            //        if (this->count < 224) this->count++;
-            //        if (this->count == 224) return true;
-            //    }
-            //
-            //    return false;
 
             default: return false;
         }
