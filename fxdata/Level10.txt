@@ -103,7 +103,7 @@ uint8_t Level10_Items[] = {
      1,  45,   2,  24,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
      1,  46,   2,  24,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
      1,  47,   2,  24,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
-     1,  48,   2,  24,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
+     1,  48,   2,  86,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
      1,  49,   2,  86,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
 
     255                                             // End
