@@ -132,6 +132,7 @@ void game() {
         
         switch (prince.getStance()) {
 
+
             // If the prince is falling as well then we do not lose health ..
 
             case Stance::Falling_Down_M1_1_Start ... Stance::Falling_Down_M1_6_End:
@@ -161,7 +162,6 @@ void game() {
     }
 
 
-
     // Decrease timer and got yo end of game if time out ..
 
     bool gameOver = gamePlay.update(arduboy);
@@ -185,9 +185,6 @@ void game() {
 
     if (menu.update()) gamePlay.gameState = GameState::Game;
     
-
-
-
 
     // Is the prince within distance of the enemy (cycle through all enemies to find it any closest)?
 
