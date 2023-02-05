@@ -38,14 +38,12 @@ class Prince : public BaseEntity, public BaseStack {
         void incFalling()                           { this->falling++; }
 
 
-        void init(int16_t x, int16_t y, Direction direction, uint16_t stance, uint8_t health, bool clearSword) {
+        void init(int16_t x, int16_t y, Direction direction, uint16_t stance, bool clearSword) {
 
             this->x = x;
             this->y = y;
             this->direction = direction;
             this->stance = stance;
-            this->health = health;
-            this->healthMax = health;
             if (clearSword) this->sword = false;
             this->ignoreWallCollisions = false;
 

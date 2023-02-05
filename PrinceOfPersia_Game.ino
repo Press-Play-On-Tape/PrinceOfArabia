@@ -91,7 +91,7 @@ void game() {
 
         // if (justPressed & B_BUTTON) { // echo out details
 
-        //     prince.init(14, 25, Direction::Right, Stance::Crouch_3_End, 3, true); 
+        //     prince.init(14, 25, Direction::Right, Stance::Crouch_3_End, true); 
         //     level.init(gamePlay, prince, 10, 21, 0, 0); 
         // }
 

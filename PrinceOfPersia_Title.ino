@@ -104,6 +104,9 @@ void title() {
                             sound.tonesFromFX(Sounds::Seque);
                         #endif
 
+                        prince.setHealth(3);
+                        prince.setHealthMax(3);
+
                         titleScreenVars.setMode(TitleScreenMode::IntroGame_1A);
                         FX::setFrame(Title_IntroGame_1A_Frame, 4 - 1);
 

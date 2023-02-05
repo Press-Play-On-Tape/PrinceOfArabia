@@ -12,7 +12,6 @@ uint8_t level13_Data[] = {
     56,                         // Prince starting y pos (25, 56, 87)
     1,                          // Prince starting direction, 1 Left and 2 Right
     3,                          // Prince starting stance, 3 Crouch_3_End
-    3,                          // Prince starting health
     // Level
     60,                         // Width
     3,                          // Height

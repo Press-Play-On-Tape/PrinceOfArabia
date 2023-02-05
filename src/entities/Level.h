@@ -176,9 +176,8 @@ struct Level {
                     uint8_t yPixel = FX::readPendingUInt8();
                     Direction direction = static_cast<Direction>(FX::readPendingUInt8());
                     uint16_t stance = static_cast<uint16_t>(FX::readPendingUInt8());
-                    uint8_t health = FX::readPendingUInt8();
 
-                    prince.init(xPixel, yPixel, direction, stance, health, clearSword);
+                    prince.init(xPixel, yPixel, direction, stance, clearSword);
                     
                 }
 
@@ -205,7 +204,7 @@ struct Level {
 
                 }
 
-                FX::seekData(FX::readIndexedUInt24(Levels::level_Data, gamePlay.level) + 9);
+                FX::seekData(FX::readIndexedUInt24(Levels::level_Data, gamePlay.level) + 8);
 
                 {
                     EnemyType enemyType = static_cast<EnemyType>(FX::readPendingUInt8());
@@ -245,11 +244,11 @@ struct Level {
                     #endif
 
                     // Normal starting pos
-                    prince.init(38-28+12+4, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);          
+                    prince.init(38-28+12+4, 56, Direction::Right, Stance::Crouch_3_End, clearSword);          
                     this->init(gamePlay, prince, 90, 9, 60, 0);  
 
                     // Error falling
-                    // prince.init(38+12+8, 56 + 31, Direction::Right, Stance::Crouch_3_End, 3, clearSword);        
+                    // prince.init(38+12+8, 56 + 31, Direction::Right, Stance::Crouch_3_End, clearSword);        
                     // this->init(gamePlay, prince, 90, 9, 50, 0);  
 
                 }
@@ -264,7 +263,7 @@ struct Level {
                     #endif
 
                     // Normal starting pos
-                    // prince.init(40, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    // prince.init(40, 56, Direction::Left, Stance::Crouch_3_End, clearSword);     
                     // this->init(gamePlay, prince, 130, 12, 120, 6); 
 
                     // Top of climbm down showing 10 error.
@@ -276,7 +275,7 @@ struct Level {
                     // this->init(gamePlay, prince, 130, 12, 100, 3);  
 
                     // Enemy 2 Fight.
-                    // prince.init(10, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);  
+                    // prince.init(10, 56, Direction::Left, Stance::Crouch_3_End, clearSword);  
                     // this->init(gamePlay, prince, 130, 12, 80, 3);  
 
                     // Jump Up
@@ -306,31 +305,31 @@ struct Level {
                     #endif
 
                     // Normal starting pos
-                    // prince.init(46, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    // prince.init(46, 87, Direction::Left, Stance::Crouch_3_End, clearSword);     
                     // this->init(gamePlay, prince, 90, 15, 40, 6); 
 
                     // Three blades
-                    // prince.init(10, 87, Direction::Right, Stance::Crouch_3_End, 3, clearSword);     
+                    // prince.init(10, 87, Direction::Right, Stance::Crouch_3_End, clearSword);     
                     // this->init(gamePlay, prince, 90, 15, 80, 0); 
 
                     // Three blades
-                    // prince.init(10, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    // prince.init(10, 25, Direction::Left, Stance::Crouch_3_End, clearSword);     
                     // this->init(gamePlay, prince, 90, 15, 60, 3); 
 
                     // Top Left
-                    // prince.init(10, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    // prince.init(10, 25, Direction::Left, Stance::Crouch_3_End, clearSword);     
                     // this->init(gamePlay, prince, 90, 15, 20, 3); 
 
                     // // Biggest jump
-                    // prince.init(10 + (8*12), 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    // prince.init(10 + (8*12), 25, Direction::Left, Stance::Crouch_3_End, clearSword);     
                     // this->init(gamePlay, prince, 90, 15, 30, 3); 
 
                     // Exit Button
-                    prince.init(10 + (4*12), 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    prince.init(10 + (4*12), 25, Direction::Left, Stance::Crouch_3_End, clearSword);     
                     this->init(gamePlay, prince, 90, 15, 0, 6); 
 
                     // Skeleton
-                    // prince.init(10, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword);     
+                    // prince.init(10, 25, Direction::Right, Stance::Crouch_3_End, clearSword);     
                     // this->init(gamePlay, prince, 90, 15, 10, 3); 
 
                 }
@@ -345,15 +344,15 @@ struct Level {
                     #endif
 
                     // Normal starting pos
-                    // prince.init(46, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    // prince.init(46, 56, Direction::Left, Stance::Crouch_3_End, clearSword);     
                     // this->init(gamePlay, prince, 120, 9, 40, 0); 
 
                     // Exit Sequence
-                    // prince.init(10 + (4*12), 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    // prince.init(10 + (4*12), 25, Direction::Left, Stance::Crouch_3_End, clearSword);     
                     // this->init(gamePlay, prince, 120, 15, 70, 0); 
 
                     // Enable mirror
-                    prince.init(10 + (6*12), 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);     
+                    prince.init(10 + (6*12), 56, Direction::Right, Stance::Crouch_3_End, clearSword);     
                     this->init(gamePlay, prince, 120, 9, 100, 0); 
 
                 }
@@ -370,11 +369,11 @@ struct Level {
                     #endif
 
                     // Normal starting pos
-                    // prince.init(56, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    // prince.init(56, 87, Direction::Left, Stance::Crouch_3_End, clearSword);     
                     // this->init(gamePlay, prince, 90, 15, 60, 6); 
 
                     
-                    prince.init(10, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword);     
+                    prince.init(10, 56, Direction::Right, Stance::Crouch_3_End, clearSword);     
                     this->init(gamePlay, prince, 90, 15, 10, 6); 
 
                 }
@@ -388,11 +387,11 @@ struct Level {
                     #endif
 
                     // Normal starting pos
-                    // prince.init(32, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    // prince.init(32, 56, Direction::Left, Stance::Crouch_3_End, clearSword);     
                     // this->init(gamePlay, prince, 70, 9, 50, 0); 
 
                     // Mirror
-                    prince.init(110, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    prince.init(110, 56, Direction::Left, Stance::Crouch_3_End, clearSword);     
                     this->init(gamePlay, prince, 70, 9, 0, 0); 
 
                 }
@@ -406,23 +405,23 @@ struct Level {
                     #endif
 
                     // Normal starting pos
-                    // prince.init(26, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    // prince.init(26, 87, Direction::Left, Stance::Crouch_3_End, clearSword); 
                     // this->init(gamePlay, prince, 90, 12, 10, 0); 
 
                     // Drop and grab #1
-                    prince.init(16, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    prince.init(16, 25, Direction::Left, Stance::Crouch_3_End, clearSword);     
                     this->init(gamePlay, prince, 90, 12, 80, 3); 
 
                     // Jump spikes
-                    // prince.init((5*12) + 16, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    // prince.init((5*12) + 16, 56, Direction::Left, Stance::Crouch_3_End, clearSword);     
                     // this->init(gamePlay, prince, 90, 12, 70, 6); 
 
                     // Double blades
-                    // prince.init((5*12) + 16, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    // prince.init((5*12) + 16, 87, Direction::Left, Stance::Crouch_3_End, clearSword);     
                     // this->init(gamePlay, prince, 90, 12, 40, 3); 
 
                     // Droink Float
-                    // prince.init((5*12) + 16, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    // prince.init((5*12) + 16, 87, Direction::Left, Stance::Crouch_3_End, clearSword);     
                     // this->init(gamePlay, prince, 90, 12, 10, 3); 
 
                 }
@@ -437,19 +436,19 @@ struct Level {
                     #endif
 
                     // Normal starting pos
-                    // prince.init(98, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    // prince.init(98, 56, Direction::Left, Stance::Crouch_3_End, clearSword); 
                     // this->init(gamePlay, prince, 110, 12, 20, 0); 
 
                     // Jump to ledge far right
-                    // prince.init(98, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    // prince.init(98, 87, Direction::Left, Stance::Crouch_3_End, clearSword); 
                     // this->init(gamePlay, prince, 110, 12, 90, 3); 
 
                     // After Jump to ledge far right
-                    // prince.init(98, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    // prince.init(98, 25, Direction::Left, Stance::Crouch_3_End, clearSword); 
                     // this->init(gamePlay, prince, 110, 12, 90, 3); 
 
                     // Exit button
-                    prince.init(98, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    prince.init(98, 25, Direction::Left, Stance::Crouch_3_End, clearSword); 
                     this->init(gamePlay, prince, 110, 12, 40, 3); 
 
                 }
@@ -463,33 +462,33 @@ struct Level {
                     #endif
 
                     // Before Gate 3
-                    // prince.init(98, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    // prince.init(98, 87, Direction::Left, Stance::Crouch_3_End, clearSword); 
                     // this->init(gamePlay, prince, 80, 12, 50, 0); 
 
                     // After Gate 3
-                    // prince.init(14, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    // prince.init(14, 56, Direction::Left, Stance::Crouch_3_End, clearSword); 
                     // this->init(gamePlay, prince, 80, 12, 50, 0); 
 
                     // After Gate 4 / 5
-                    // prince.init(98, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    // prince.init(98, 25, Direction::Left, Stance::Crouch_3_End, clearSword); 
                     // this->init(gamePlay, prince, 80, 12, 20, 0); 
 
                     // Double blades
-                    // prince.init(98, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    // prince.init(98, 56, Direction::Left, Stance::Crouch_3_End, clearSword); 
                     // this->init(gamePlay, prince, 80, 12, 10, 3); 
 
                     // Exit level button
-                    // prince.init(6, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    // prince.init(6, 25, Direction::Left, Stance::Crouch_3_End, clearSword); 
                     // this->init(gamePlay, prince, 80, 12, 40, 6); 
 
 
                     // Test
-                    prince.init(108, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    prince.init(108, 25, Direction::Left, Stance::Crouch_3_End, clearSword); 
                     this->init(gamePlay, prince, 80, 12, 40, 6); 
 
 
                     // Gates 7,8,9,10
-                    // prince.init(108, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    // prince.init(108, 25, Direction::Left, Stance::Crouch_3_End, clearSword); 
                     // this->init(gamePlay, prince, 80, 12, 30, 3); 
 
                 }
@@ -504,7 +503,7 @@ struct Level {
                     #endif
 
                     // Gates 7,8,9,10
-                    prince.init(108, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    prince.init(108, 25, Direction::Left, Stance::Crouch_3_End, clearSword); 
                     this->init(gamePlay, prince, 80, 9, 30, 3); 
 
                 }
@@ -519,11 +518,11 @@ struct Level {
                     #endif
 
                     // Normal
-                    prince.init(74, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword); 
+                    prince.init(74, 56, Direction::Right, Stance::Crouch_3_End, clearSword); 
                     this->init(gamePlay, prince, 90, 12, 0, 3); 
 
                     // Exit
-                    // prince.init(74, 56, Direction::Right, Stance::Crouch_3_End, 3, clearSword); 
+                    // prince.init(74, 56, Direction::Right, Stance::Crouch_3_End, clearSword); 
                     // this->init(gamePlay, prince, 90, 12, 60, 3); 
 
                 }
@@ -537,27 +536,27 @@ struct Level {
                     #endif
 
                     // Normal
-                    // prince.init(74, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword); 
+                    // prince.init(74, 25, Direction::Right, Stance::Crouch_3_End, clearSword); 
                     // this->init(gamePlay, prince, 80, 21, 50, 3); 
 
                     // Magic floor
-                    // prince.init(98, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    // prince.init(98, 25, Direction::Left, Stance::Crouch_3_End, clearSword); 
                     // this->init(gamePlay, prince, 80, 21, 40, 3); 
 
                     // Shadow fight
-                    // prince.init(98, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    // prince.init(98, 56, Direction::Left, Stance::Crouch_3_End, clearSword); 
                     // this->init(gamePlay, prince, 80, 21, 60, 3); 
 
                     // Shadow fight
-                    // prince.init(26, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    // prince.init(26, 87, Direction::Left, Stance::Crouch_3_End, clearSword); 
                     // this->init(gamePlay, prince, 80, 21, 50, 3); 
 
                     // Incorrect climb
-                    prince.init(54, 87, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    prince.init(54, 87, Direction::Left, Stance::Crouch_3_End, clearSword); 
                     this->init(gamePlay, prince, 80, 21, 60, 15); 
 
                     // Incorrect climb 2
-                    prince.init(30, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword); 
+                    prince.init(30, 25, Direction::Right, Stance::Crouch_3_End, clearSword); 
                     this->init(gamePlay, prince, 80, 21, 60, 18); 
 
                 }
@@ -569,32 +568,32 @@ struct Level {
 
                     // Scenario 1
 
-                    prince.init(46, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword); 
+                    prince.init(46, 25, Direction::Right, Stance::Crouch_3_End, clearSword); 
                     this->init(gamePlay, prince, 10, 24, 0, 0); 
 
                     // Scenario 4
 
-                    // prince.init(46, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword); 
+                    // prince.init(46, 25, Direction::Right, Stance::Crouch_3_End, clearSword); 
                     // this->init(gamePlay, prince, 10, 24, 0, 9); 
 
                     // Scenario 5
 
-                    // prince.init(46, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword); 
+                    // prince.init(46, 25, Direction::Right, Stance::Crouch_3_End, clearSword); 
                     // this->init(gamePlay, prince, 10, 24, 0, 12); 
 
                     // Scenario 6
 
-                    // prince.init(46, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword); 
+                    // prince.init(46, 25, Direction::Right, Stance::Crouch_3_End, clearSword); 
                     // this->init(gamePlay, prince, 10, 24, 0, 15); 
 
                     // Scenario 7
 
-                    // prince.init(98, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    // prince.init(98, 25, Direction::Left, Stance::Crouch_3_End, clearSword); 
                     // this->init(gamePlay, prince, 10, 24, 0, 18); 
 
                     // Scenario 7
 
-                    prince.init(98, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    prince.init(98, 25, Direction::Left, Stance::Crouch_3_End, clearSword); 
                     this->init(gamePlay, prince, 10, 24, 0, 21); 
 
 
@@ -607,22 +606,22 @@ struct Level {
 
                     // Scenario 1
 
-                    prince.init(98, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword); 
+                    prince.init(98, 25, Direction::Right, Stance::Crouch_3_End, clearSword); 
                     this->init(gamePlay, prince, 10, 24, 0, 0); 
 
                     // Scenario 3
 
-                    // prince.init(98, 25, Direction::Right, Stance::Crouch_3_End, 3, clearSword); 
+                    // prince.init(98, 25, Direction::Right, Stance::Crouch_3_End, clearSword); 
                     // this->init(gamePlay, prince, 10, 24, 0, 6); 
 
                     // Scenario 7
 
-                    // prince.init(94, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    // prince.init(94, 25, Direction::Left, Stance::Crouch_3_End, clearSword); 
                     // this->init(gamePlay, prince, 10, 24, 0, 18); 
 
                     // Scenario 8
 
-                    prince.init(94, 25, Direction::Left, Stance::Crouch_3_End, 3, clearSword); 
+                    prince.init(94, 25, Direction::Left, Stance::Crouch_3_End, clearSword); 
                     this->init(gamePlay, prince, 10, 24, 0, 21); 
 
 
