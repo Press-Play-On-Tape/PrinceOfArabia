@@ -1,7 +1,7 @@
 
 #pragma once
 
-#define _PRODUCTION_SETTINGS
+#define PRODUCTION_SETTINGS
 
 #ifdef PRODUCTION_SETTINGS
 
@@ -23,17 +23,17 @@
 
 #else
 
-    #define SAVE_MEMORY_USB
-    #define _SAVE_MEMORY_OTHER
+    #define _SAVE_MEMORY_USB
+    #define SAVE_MEMORY_OTHER
     #define _SAVE_MEMORY_SOUND
-    #define _SAVE_MEMORY_ENEMY
-    #define _SAVE_MEMORY_TITLE
+    #define SAVE_MEMORY_ENEMY
+    #define SAVE_MEMORY_TITLE
     #define _ALT_B_BUTTON
     #define _GIVE_SWORD
 
     #define LEVEL_DATA_FROM_FX
     #define IMAGE_DATA_FROM_FX
-    #define SAVE_TO_FX
+    #define _SAVE_TO_FX
     #define STARTING_LEVEL 5
     #define _DEBUG_CUT_SCENES
 

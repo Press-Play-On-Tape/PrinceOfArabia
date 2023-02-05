@@ -51,7 +51,7 @@ class Prince : public BaseEntity, public BaseStack {
 
             if (stance != Stance::Jump_Up_A_14_End) {
 
-                this->crouchingCounter = 32;
+                this->crouchingCounter = 80;
                 this->hangingCounter = 0;
 
             }

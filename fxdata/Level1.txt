@@ -43,7 +43,7 @@ uint8_t Level1_Items[] = {
     26,  84,   4,  82,  86,   0,   0,   0,      // Exit Gate, let position for open, right position                                                        
      5,  80,   3,   0,   0,   0,   0,   0,      // Exit Button 
 
-    17,  50,   3,   0,  64,  64, 255,   0,      // Gate #1
+    17,  50,   3,   0,  64, 64, 255,   0,      // Gate #1
      2,  46,   3,   1,   0,   0,   0,   0,      // Floor Button 1 
      2,  52,   3,   1,   0,   0,   0,   0,      // Floor Button 1 
     
@@ -60,7 +60,7 @@ uint8_t Level1_Items[] = {
      3,  54,   0,   4,   0,   0,   0,   0,      // Floor Button 2 
      2,  52,   0,   4,   0,   0,   0,   0,      // Floor Button 1 
     
-    17,  60,   0,   9,  32,  32, 255,   0,      // Gate #5    
+    17,  60,   0,   9,  64,  64, 255,   0,      // Gate #5    
      2,  56,   0,   5,   0,   0,   0,   0,      // Floor Button 1 
 
     20,   6,   0,   0,   0,   0,   0,   0,      // Potion Small                              

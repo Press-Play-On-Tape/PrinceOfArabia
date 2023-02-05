@@ -87,14 +87,14 @@ void render(bool enemyVisible, bool sameLevelAsPrince) {
                 case ItemType::Blade:
 
                     if (item.data.blade.position <= 5) {
+                        FX::drawBitmap(xLoc, yLoc, Images::Blades, abs(item.data.blade.position), dbmMasked);
 
                         #ifndef SAVE_MEMORY_SOUND
-                            if (item.data.blade.position == 4) {
+                            if (xLoc > 0 && xLoc < 128 && yLoc>= 0 && yLoc < 64 && item.data.blade.position == 4) {
                                 sound.tonesFromFX(Sounds::ChopChop);
                             }
                         #endif 
 
-                        FX::drawBitmap(xLoc, yLoc, Images::Blades, abs(item.data.blade.position), dbmMasked);
                     }
                     break;
 
