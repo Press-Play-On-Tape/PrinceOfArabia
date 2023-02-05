@@ -13,17 +13,17 @@ struct TitleScreenVars {
     public:
 
         uint8_t prevCount;
-        uint8_t count;
+        //uint8_t count;
 
-        Character zaffar;
-        Character princess;
-        Character prince;
+        //Character zaffar;
+        //Character princess;
+        //Character prince;
 
         TitleScreenOptions option;
 
     void reset() {
 
-        this->count = 0;
+        //this->count = 0;
         this->option = TitleScreenOptions::Play;
         this->mode = TitleScreenMode::Intro;
         FX::setFrame(Title_Intro_Frame_NoHigh, 0);

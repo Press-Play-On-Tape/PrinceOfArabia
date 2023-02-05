@@ -7,24 +7,24 @@ void title_Init() {
 
 }
 
-void setRenderChamberBG() {
+//void setRenderChamberBG() {
+//
+//    FX::setFrame(Chambers_BG_frame, 5 - 1);
+//
+//}
 
-    FX::setFrame(Chambers_BG_frame, 5 - 1);
+//void renderChamberBG() {
+//
+//    FX::drawFrame();
+//
+//}
 
-}
-
-void renderChamberBG() {
-
-    FX::drawFrame();
-
-}
-
-void renderChamberFG(uint8_t hourglassX = 0, uint8_t hourglassIdx = 0) {
-
-    FX::drawFrame(Chambers_FG_frame);
-    if (hourglassX > 0) FX::drawBitmap(hourglassX, 40, Images::HourGlasses, hourglassIdx, dbmMasked);
-
-}
+//void renderChamberFG(uint8_t hourglassX = 0, uint8_t hourglassIdx = 0) {
+//
+//    FX::drawFrame(Chambers_FG_frame);
+//    if (hourglassX > 0) FX::drawBitmap(hourglassX, 40, Images::HourGlasses, hourglassIdx, dbmMasked);
+//
+//}
 
 
 // ----------------------------------------------------------------------------
@@ -38,9 +38,9 @@ void title() {
 
         if (justPressed & B_BUTTON) {
 
-            setRenderChamberBG();
+            //setRenderChamberBG();
             titleScreenVars.setMode(TitleScreenMode::CutScene_End);
-            //FX::setFrame(Title_IntroGame_9_Frame, 4 - 1);
+            //FX::setFrame(Title_IntroGame_End_Frame, 4 - 1);
         }
 
     #endif
