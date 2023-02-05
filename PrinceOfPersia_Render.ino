@@ -247,7 +247,8 @@ void render(bool enemyVisible, bool sameLevelAsPrince) {
 
     #ifndef SAVE_MEMORY_ENEMY
 
-        if (enemyVisible && enemy.getStatus() == Status::Active) {
+//        if (enemyVisible && enemy.getStatus() == Status::Active) {
+        if (enemy.getStatus() == Status::Active) {
                 
             stance = enemy.getStance();
             imageIndex = getImageIndexFromStance(stance);

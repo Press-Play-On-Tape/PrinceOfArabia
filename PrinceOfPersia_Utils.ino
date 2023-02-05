@@ -51,7 +51,7 @@ void testScroll(GamePlay &gamePlay, Prince &prince, Level &level) {
         if (gamePlay.level == 13 && level.getXLocation() == 0 && level.getYLocation() == 0) {
 
             gamePlay.gameState = GameState::Title;
-            titleScreenVars.setMode(TitleScreenMode::CutScene_9, level);
+            titleScreenVars.setMode(TitleScreenMode::CutScene_End);
             setRenderChamberBG();
 
 
@@ -208,14 +208,29 @@ void processRunJump(Prince &prince, Level &level) {
                     prince.pushSequence(Stance::Running_Jump_Short_6_1_Start, Stance::Running_Jump_Short_6_7_End, Stance::Run_Repeat_4);
                     break;
 
+                case RunningJumpResult::Jump2_Pos2:     // Do nothing as these are for Jump2 only.
+                case RunningJumpResult::Jump2_Pos6:
+                    break;
+
                 case RunningJumpResult::None:
 
-                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
-                    DEBUG_PRINTLN(F("RunningJump_3 false, RunRepeat"));
-                    #endif
+                    switch (jump_2_Result) {
 
-                    prince.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_4);
+                        case RunningJumpResult::Jump2_Pos2:
+                            prince.pushSequence(Stance::Running_Jump_Jump2_2_1_Start, Stance::Running_Jump_Jump2_2_7_End, Stance::Run_Repeat_4);
+                            break;
+
+                        case RunningJumpResult::Jump2_Pos6:
+                            prince.pushSequence(Stance::Running_Jump_Jump2_6_1_Start, Stance::Running_Jump_Jump2_6_7_End, Stance::Run_Repeat_4);
+                            break;
+
+                        default:
+                            break;
+
+                    }
+
                     break;
+
 
             }
 

@@ -1,7 +1,7 @@
 
 #pragma once
 
-#define PRODUCTION_SETTINGS
+#define _PRODUCTION_SETTINGS
 
 #ifdef PRODUCTION_SETTINGS
 
@@ -35,7 +35,7 @@
     #define IMAGE_DATA_FROM_FX
     #define _SAVE_TO_FX
     #define STARTING_LEVEL 4
-    #define _DEBUG_CUT_SCENES
+    #define DEBUG_CUT_SCENES
 
     #define _DEBUG
 
@@ -50,7 +50,7 @@
 #define _DEBUG_PRINCE_DETAILS
 #define _DEBUG_PRINCE_STACK
 #define _DEBUG_PRINT_ACTION
-#define DEBUG_LEVEL_LOAD_MAP
+#define _DEBUG_LEVEL_LOAD_MAP
 #define _DEBUG_GET_TILE
 #define _DEBUG_PRINCE_RENDERING
 #define _DEBUG_IMAGE_DETAILS
@@ -60,14 +60,14 @@
 #define _DEBUG_ACTION_CANJUMPUP_PART2
 #define _DEBUG_ACTION_CANCLIMBDOWN
 #define _DEBUG_ACTION_CANCLIMBDOWN_PART2
-#define _DEBUG_ACTION_CANFALL
+#define DEBUG_ACTION_CANFALL
 #define _DEBUG_ACTION_CANFALLSOMEMORE
 #define _DEBUG_ACTION_COLLIDEWITHWALL
 #define _DEBUG_ACTION_FALLING
 #define _DEBUG_ACTION_CANSTANDINGJUMP
 #define _DEBUG_ACTION_CANSTANDINGJUMP_DETAIL
-#define DEBUG_ACTION_CANRUNNINGJUMP
-#define DEBUG_ACTION_CANRUNNINGJUMP_DETAIL
+#define _DEBUG_ACTION_CANRUNNINGJUMP
+#define _DEBUG_ACTION_CANRUNNINGJUMP_DETAIL
 #define _DEBUG_ISGROUNDTILE
 
 
@@ -1131,6 +1131,34 @@ constexpr uint16_t Running_Jump_Short_2_6                        = Stance::Runni
 constexpr uint16_t Running_Jump_Short_2_7_End                    = Stance::Running_Jump_Short_2_6 + 1;
 
 
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*                                                               01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define RUNNING_JUMP_JUMP2_2_SEQ                                 20,    21,    22,    23,    24,    25,    26,
+#define RUNNING_JUMP_JUMP2_2_OFFSETS                             3,0,   3,0,   3,0,   3,-2,  4,-2,  4,3,   1,1,
+constexpr uint16_t Running_Jump_Jump2_2_1_Start                  = Stance::Running_Jump_Short_2_7_End + 1;
+constexpr uint16_t Running_Jump_Jump2_2_2                        = Stance::Running_Jump_Jump2_2_1_Start + 1;
+constexpr uint16_t Running_Jump_Jump2_2_3                        = Stance::Running_Jump_Jump2_2_2 + 1;
+constexpr uint16_t Running_Jump_Jump2_2_4                        = Stance::Running_Jump_Jump2_2_3 + 1;
+constexpr uint16_t Running_Jump_Jump2_2_5                        = Stance::Running_Jump_Jump2_2_4 + 1;
+constexpr uint16_t Running_Jump_Jump2_2_6                        = Stance::Running_Jump_Jump2_2_5 + 1;
+constexpr uint16_t Running_Jump_Jump2_2_7_End                    = Stance::Running_Jump_Jump2_2_6 + 1;
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*                                                               01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define RUNNING_JUMP_JUMP2_6_SEQ                                 20,    21,    22,    23,    24,    25,    26,
+#define RUNNING_JUMP_JUMP2_6_OFFSETS                             4,0,   4,0,   4,0,   4,-2,  4,-2,  4,3,   1,1,
+constexpr uint16_t Running_Jump_Jump2_6_1_Start                  = Stance::Running_Jump_Jump2_2_7_End + 1;
+constexpr uint16_t Running_Jump_Jump2_6_2                        = Stance::Running_Jump_Jump2_6_1_Start + 1;
+constexpr uint16_t Running_Jump_Jump2_6_3                        = Stance::Running_Jump_Jump2_6_2 + 1;
+constexpr uint16_t Running_Jump_Jump2_6_4                        = Stance::Running_Jump_Jump2_6_3 + 1;
+constexpr uint16_t Running_Jump_Jump2_6_5                        = Stance::Running_Jump_Jump2_6_4 + 1;
+constexpr uint16_t Running_Jump_Jump2_6_6                        = Stance::Running_Jump_Jump2_6_5 + 1;
+constexpr uint16_t Running_Jump_Jump2_6_7_End                    = Stance::Running_Jump_Jump2_6_6 + 1;
+
+
 /* --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 constexpr uint16_t  Upright_Turn             = 1255;
@@ -1242,6 +1270,8 @@ namespace Constants {
         RUNNING_JUMP_4_GL_2_SEQ
         RUNNING_JUMP_4_GL_6_SEQ
         RUNNING_JUMP_SHORT_2_SEQ
+        RUNNING_JUMP_JUMP2_2_SEQ
+        RUNNING_JUMP_JUMP2_6_SEQ        
     };
 
     constexpr int8_t Stance_XYOffsets[] PROGMEM = {
@@ -1312,6 +1342,8 @@ namespace Constants {
         RUNNING_JUMP_4_GL_2_OFFSETS
         RUNNING_JUMP_4_GL_6_OFFSETS
         RUNNING_JUMP_SHORT_2_OFFSETS
+        RUNNING_JUMP_JUMP2_2_OFFSETS
+        RUNNING_JUMP_JUMP2_6_OFFSETS        
     };
 
     #endif

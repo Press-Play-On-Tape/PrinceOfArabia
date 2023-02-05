@@ -128,6 +128,8 @@ enum class StandingJumpResult : uint8_t {
 
 enum class RunningJumpResult : uint8_t {
     None,
+    Jump2_Pos2,
+    Jump2_Pos6,
     Normal_Pos2,
     Normal_Pos6,
     Jump4_GrabLedge_Pos2,
@@ -165,9 +167,10 @@ enum class TitleScreenMode : uint8_t {
     CutScene_4,         // 9
     CutScene_5,         // 10
     CutScene_6,         // 11
-    CutScene_9,         // 12
-    IntroGame_9,        // 13
+    CutScene_End,       // 12
+    IntroGame_End,      // 13
     TimeOut,            // 14
+    MaxUniqueScenes     = CutScene_End - 1
 };
 
 enum class WallTileResults : uint8_t {

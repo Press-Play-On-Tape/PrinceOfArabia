@@ -260,12 +260,12 @@ struct Level {
 
                     #ifndef SAVE_MEMORY_ENEMY
                         // enemy.init(EnemyType::Guard, 104 - 12 + (70 * Constants::TileWidth), 25+31 + (3 * Constants::TileHeight), Direction::Left, Stance::Upright, 3, Status::Active);          // Sword fight from Left
-                        // enemy.init(EnemyType::Guard, 80 + (40 * Constants::TileWidth), 25 + (0 * Constants::TileHeight), Direction::Left, Stance::Upright, 3, Status::Active);          // Sword fight from Left
+                        enemy.init(EnemyType::Guard, 14 + (40 * Constants::TileWidth), 56 + (3 * Constants::TileHeight), Direction::Right, Stance::Upright, 3, Status::Active);          // Sword fight from Left
                     #endif
 
                     // Normal starting pos
-                    prince.init(40, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
-                    this->init(gamePlay, prince, 130, 12, 120, 6); 
+                    // prince.init(40, 56, Direction::Left, Stance::Crouch_3_End, 3, clearSword);     
+                    // this->init(gamePlay, prince, 130, 12, 120, 6); 
 
                     // Top of climbm down showing 10 error.
                     // prince.init(10, 56, Direction::Left, Stance::Upright, 3, clearSword);  
@@ -288,8 +288,8 @@ struct Level {
                     // this->init(gamePlay, prince, 130, 12, 80, 3);  
 
                     // Enemy 3
-                    // prince.init(22+(12*6), 25, Direction::Left, Stance::Upright, 3, clearSword);  
-                    // this->init(gamePlay, prince, 130, 12, 60, 3);  
+                    prince.init(22+(12*6), 25, Direction::Left, Stance::Upright, 3, clearSword);  
+                    this->init(gamePlay, prince, 130, 12, 40, 3);  
 
                     // Enemy 3
                     // prince.init(22+(12*6), 56, Direction::Left, Stance::Upright, 3, clearSword);  

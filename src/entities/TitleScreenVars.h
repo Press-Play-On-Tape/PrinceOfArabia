@@ -33,7 +33,7 @@ struct TitleScreenVars {
 
     TitleScreenMode getMode()               { return this->mode; }
 
-    void setMode(TitleScreenMode mode, Level &level) {
+    void setMode(TitleScreenMode mode) {
 
         this->mode = mode;
 
@@ -64,9 +64,12 @@ struct TitleScreenVars {
                 FX::setFrame(Title_CutScene_6_Frame, 2 - 1);
                 break;
 
-            case TitleScreenMode::CutScene_9:
+            case TitleScreenMode::CutScene_End:
 
-                FX::setFrame(Title_CutScene_9_Frame, 4 - 1);
+                FX::setFrame(Title_CutScene_End_Frame, 4 - 1);
+                break;
+
+            default:
                 break;
 
         }

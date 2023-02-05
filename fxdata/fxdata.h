@@ -7,7 +7,7 @@ using uint24_t = __uint24;
 // Initialize FX hardware using  FX::begin(FX_DATA_PAGE); in the setup() function.
 
 constexpr uint16_t FX_DATA_PAGE  = 0xf58d;
-constexpr uint24_t FX_DATA_BYTES = 680649;
+constexpr uint24_t FX_DATA_BYTES = 680691;
 
 constexpr uint16_t FX_SAVE_PAGE  = 0xfff0;
 constexpr uint24_t FX_SAVE_BYTES = 2;
@@ -415,37 +415,37 @@ namespace Images
 namespace Constants
 {
   constexpr uint24_t StanceToImageXRefFX = 0x09161F;
-  constexpr uint24_t Stance_XYOffsetsFX = 0x0918A1;
-  constexpr uint24_t VertAdjustments = 0x091DA3;
-  constexpr uint24_t Prince_ImageDetails = 0x091E39;
+  constexpr uint24_t Stance_XYOffsetsFX = 0x0918AF;
+  constexpr uint24_t VertAdjustments = 0x091DCD;
+  constexpr uint24_t Prince_ImageDetails = 0x091E63;
 }
 
-constexpr uint24_t splashScreen_Frame = 0x092082;
-constexpr uint24_t Title_Intro_Frame_NoHigh = 0x0920A6;
-constexpr uint24_t Title_Intro_Last_Frame_NoHigh = 0x092526;
-constexpr uint24_t Title_Intro_Frame_WithHigh = 0x092538;
-constexpr uint24_t Title_Intro_Last_Frame_WithHigh = 0x0929B8;
-constexpr uint24_t Title_Main_Frame_NoHigh = 0x0929CA;
-constexpr uint24_t Title_Main_Last_Frame_NoFrame = 0x092B56;
-constexpr uint24_t Title_Main_Frame_WithHigh = 0x092B68;
-constexpr uint24_t Title_Main_Last_Frame_WithHigh = 0x092CF4;
-constexpr uint24_t Title_Main_Game_Frame_NoHigh = 0x092D06;
-constexpr uint24_t Title_Main_Game_Frame_WithHigh = 0x092D21;
-constexpr uint24_t Title_Main_Credits_Frame_NoHigh = 0x092D3C;
-constexpr uint24_t Title_Main_Credits_Frame_WithHigh = 0x092D57;
-constexpr uint24_t Title_Main_High_Frame_WithHigh = 0x092D72;
-constexpr uint24_t Title_Credits_Frame = 0x092D8D;
-constexpr uint24_t Title_TimeOut_Frame = 0x095F04;
-constexpr uint24_t Title_High_Frame = 0x098B86;
-constexpr uint24_t Title_IntroGame_1A_Frame = 0x098C0D;
-constexpr uint24_t Title_CutScene_1_Frame = 0x0991E3;
-constexpr uint24_t Title_IntroGame_1B_Frame = 0x09C6F0;
-constexpr uint24_t Title_CutScene_2_Frame = 0x09CCC6;
-constexpr uint24_t Title_CutScene_3_Frame = 0x09E106;
-constexpr uint24_t Title_CutScene_4_Frame = 0x09F546;
-constexpr uint24_t Title_CutScene_5_Frame = 0x09FF66;
-constexpr uint24_t Title_CutScene_6_Frame = 0x0A14EA;
-constexpr uint24_t Title_CutScene_9_Frame = 0x0A3FB3;
-constexpr uint24_t Title_IntroGame_9_Frame = 0x0A5A23;
-constexpr uint24_t Chambers_BG_frame = 0x0A626F;
-constexpr uint24_t Chambers_FG_frame = 0x0A62C0;
+constexpr uint24_t splashScreen_Frame = 0x0920AC;
+constexpr uint24_t Title_Intro_Frame_NoHigh = 0x0920D0;
+constexpr uint24_t Title_Intro_Last_Frame_NoHigh = 0x092550;
+constexpr uint24_t Title_Intro_Frame_WithHigh = 0x092562;
+constexpr uint24_t Title_Intro_Last_Frame_WithHigh = 0x0929E2;
+constexpr uint24_t Title_Main_Frame_NoHigh = 0x0929F4;
+constexpr uint24_t Title_Main_Last_Frame_NoFrame = 0x092B80;
+constexpr uint24_t Title_Main_Frame_WithHigh = 0x092B92;
+constexpr uint24_t Title_Main_Last_Frame_WithHigh = 0x092D1E;
+constexpr uint24_t Title_Main_Game_Frame_NoHigh = 0x092D30;
+constexpr uint24_t Title_Main_Game_Frame_WithHigh = 0x092D4B;
+constexpr uint24_t Title_Main_Credits_Frame_NoHigh = 0x092D66;
+constexpr uint24_t Title_Main_Credits_Frame_WithHigh = 0x092D81;
+constexpr uint24_t Title_Main_High_Frame_WithHigh = 0x092D9C;
+constexpr uint24_t Title_Credits_Frame = 0x092DB7;
+constexpr uint24_t Title_TimeOut_Frame = 0x095F2E;
+constexpr uint24_t Title_High_Frame = 0x098BB0;
+constexpr uint24_t Title_IntroGame_1A_Frame = 0x098C37;
+constexpr uint24_t Title_CutScene_1_Frame = 0x09920D;
+constexpr uint24_t Title_IntroGame_1B_Frame = 0x09C71A;
+constexpr uint24_t Title_CutScene_2_Frame = 0x09CCF0;
+constexpr uint24_t Title_CutScene_3_Frame = 0x09E130;
+constexpr uint24_t Title_CutScene_4_Frame = 0x09F570;
+constexpr uint24_t Title_CutScene_5_Frame = 0x09FF90;
+constexpr uint24_t Title_CutScene_6_Frame = 0x0A1514;
+constexpr uint24_t Title_CutScene_End_Frame = 0x0A3FDD;
+constexpr uint24_t Title_IntroGame_End_Frame = 0x0A5A4D;
+constexpr uint24_t Chambers_BG_frame = 0x0A6299;
+constexpr uint24_t Chambers_FG_frame = 0x0A62EA;

@@ -169,7 +169,7 @@ void game() {
     if (gameOver) {
 
         gamePlay.gameState = GameState::Title;
-        titleScreenVars.setMode(TitleScreenMode::TimeOut, level);
+        titleScreenVars.setMode(TitleScreenMode::TimeOut);
         FX::setFrame(Title_TimeOut_Frame, 5 - 1);
 
         #ifndef SAVE_MEMORY_OTHER
@@ -1400,7 +1400,14 @@ void game() {
 
                     gamePlay.gameState = GameState::Title;
                     setRenderChamberBG();
-                    titleScreenVars.setMode(static_cast<TitleScreenMode>(static_cast<uint8_t>(titleScreenVars.getMode()) + 1), level);
+
+                    if (titleScreenVars.getMode() == TitleScreenMode::MaxUniqueScenes) {
+                        titleScreenVars.setMode(TitleScreenMode::CutScene_2);
+                    }
+                    else {  
+                        titleScreenVars.setMode(static_cast<TitleScreenMode>(static_cast<uint8_t>(titleScreenVars.getMode()) + 1));
+                    }
+
                     gamePlay.incLevel();
                     break;
 
@@ -1847,10 +1854,10 @@ void game() {
                     {
                         if (gamePlay.level == 4 && prince.getDirection() == Direction::Left) {
 
-                            int16_t x = prince.getPosition().x / Constants::TileWidth;
-                            int16_t y = prince.getPosition().y / Constants::TileHeight;
-
                             #ifndef SAVE_MEMORY_ENEMY
+
+                                int16_t x = prince.getPosition().x / Constants::TileWidth;
+                                int16_t y = prince.getPosition().y / Constants::TileHeight;
                                 
                                 if (x == 104 && y == 0 && enemy.getStatus() == Status::Dormant_ActionReady) {
 
@@ -2068,6 +2075,7 @@ void game() {
 
                                     mirror.data.mirror.status = Status::Active;
                                     #ifndef SAVE_MEMORY_ENEMY
+                                        enemy.setActiveEnemy(0);
                                         enemy.setStatus(Status::Dormant_ActionReady);
                                     #endif
 
@@ -2582,7 +2590,7 @@ void game() {
             else {
 
                 gamePlay.gameState = GameState::Title;
-                titleScreenVars.setMode(TitleScreenMode::TimeOut, level);
+                titleScreenVars.setMode(TitleScreenMode::TimeOut);
                 FX::setFrame(Title_TimeOut_Frame, 5 - 1);
 
                 #ifndef SAVE_MEMORY_OTHER

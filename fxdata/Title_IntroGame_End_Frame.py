@@ -1,5 +1,5 @@
 
-framename = 'Title_IntroGame_9_Frame'
+framename = 'Title_IntroGame_End_Frame'
 
 yPos = 0
 yStep = 1

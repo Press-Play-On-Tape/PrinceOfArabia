@@ -1,4 +1,4 @@
-    Title_CutScene_9_Frame[] = {
+    Title_CutScene_End_Frame[] = {
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked

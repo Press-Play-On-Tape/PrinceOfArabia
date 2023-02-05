@@ -1,4 +1,4 @@
-    Title_IntroGame_9_Frame[] = {
+    Title_IntroGame_End_Frame[] = {
 
         int16_t  2, 64, int24_t IntroGame_9,   uint8_t 0, dbmNormal_end
 
