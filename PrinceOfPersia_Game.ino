@@ -1396,7 +1396,7 @@ void game() {
                 case Stance::Leave_Gate_14_End:
 
                     gamePlay.gameState = GameState::Title;
-                    setRenderChamberBG();
+                    //setRenderChamberBG();
 
                     if (titleScreenVars.getMode() == TitleScreenMode::MaxUniqueScenes) {
                         titleScreenVars.setMode(TitleScreenMode::CutScene_2);

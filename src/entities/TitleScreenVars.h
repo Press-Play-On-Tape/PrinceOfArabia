@@ -12,7 +12,7 @@ struct TitleScreenVars {
 
     public:
 
-        uint8_t prevCount;
+        //uint8_t prevCount;
         //uint8_t count;
 
         //Character zaffar;
