@@ -170,7 +170,7 @@ with open(framename +'.txt','w') as file:
     file.write('        int16_t  10, 37, uint24_t Torches,     uint8_t {}, dbmMasked\n'.format(torch))
     file.write('        int16_t 114, 37, uint24_t Torches,     uint8_t {}, dbmMasked\n'.format(torch))
     # prince and princess
-    if prince_x < 128: file.write('        int16_t {:3d}, 28, uint24_t Prince_Left       uint8_t {}, dbmMasked\n'.format(prince_x, prince_image))
+    if prince_x < 128: file.write('        int16_t {:3d}, 29, uint24_t Prince_Left       uint8_t {}, dbmMasked\n'.format(prince_x, prince_image - 1))
     file.write('        int16_t {:3d}, 28, uint24_t Princess     uint8_t {}, dbmMasked\n'.format(princess_x, princess_image))
     if heart_image != 255: file.write('        int16_t {:3d},{:3d}, uint24_t Hearts       uint8_t {}, dbmNormal\n'.format(heart_x, heart_y, heart_image))
     #forground

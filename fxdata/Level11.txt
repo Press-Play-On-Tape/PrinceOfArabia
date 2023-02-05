@@ -62,7 +62,7 @@ uint8_t Level11_Items[] = {
      3,  35,   4,   1,   0,   0,   0,   0,          // Floor Button 2
      3,  36,   4,   1,   0,   0,   0,   0,          // Floor Button 2
 
-    17,  49,   4,   0,  64,  64, 255,   0,          // Gate #2
+    17,  49,   4,   0, 128, 128, 255,   0,          // Gate #2
     
     25,  23,   3,   0,   0,   0,   0,   0,          // Blade     
     21,   0,   3,   0,   0,   0,   0,   0,          // Potion Large  
@@ -100,8 +100,8 @@ uint8_t Level11_Items[] = {
      1,  53,   3,  55,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
      1,  54,   2,  24,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
      1,  83,   3,  24,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
-     1,  62,   4, 117,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
-     1,  63,   4,  24,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
+     1,  62,   4, 117,  64,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
+     1,  63,   4,  24,  64,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
 
     255                                             // End
 }
