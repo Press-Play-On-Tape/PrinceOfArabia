@@ -47,6 +47,8 @@ class Prince : public BaseEntity, public BaseStack {
             if (clearSword) this->sword = false;
             this->ignoreWallCollisions = false;
 
+            if (this->health < 3) this->health = 3;
+
             if (stance != Stance::Jump_Up_A_14_End) {
 
                 this->crouchingCounter = 32;
