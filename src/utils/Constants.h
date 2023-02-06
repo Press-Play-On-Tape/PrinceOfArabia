@@ -24,9 +24,9 @@
 
 #else
 
-    #define _SAVE_MEMORY_USB
+    #define SAVE_MEMORY_USB
     #define _SAVE_MEMORY_OTHER
-    #define SAVE_MEMORY_SOUND
+    #define _SAVE_MEMORY_SOUND
     #define _SAVE_MEMORY_ENEMY
     #define _SAVE_MEMORY_TITLE
     #define _ALT_B_BUTTON
@@ -46,7 +46,7 @@
 #define DEBUG_PRINT    Serial.print
 #define DEBUG_PRINTLN  Serial.println
 
-#define _DEBUG_ONSCREEN_DETAILS
+#define DEBUG_ONSCREEN_DETAILS
 #define _DEBUG_ONSCREEN_DETAILS_MIN
 
 #define _DEBUG_PRINCE_DETAILS
