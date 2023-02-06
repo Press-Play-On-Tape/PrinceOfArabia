@@ -27,6 +27,10 @@ Arduboy2Ext arduboy;
     Font3x5 font3x5 = Font3x5();
 #endif
 
+#ifdef DEBUG_LEVELS
+uint8_t startLevel = STARTING_LEVEL;
+#endif
+
 Cookie cookie;
 Stack <int16_t, Constants::StackSize> princeStack;
 Prince &prince = cookie.prince;

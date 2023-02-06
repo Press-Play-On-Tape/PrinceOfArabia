@@ -7,25 +7,6 @@ void title_Init() {
 
 }
 
-//void setRenderChamberBG() {
-//
-//    FX::setFrame(Chambers_BG_frame, 5 - 1);
-//
-//}
-
-//void renderChamberBG() {
-//
-//    FX::drawFrame();
-//
-//}
-
-//void renderChamberFG(uint8_t hourglassX = 0, uint8_t hourglassIdx = 0) {
-//
-//    FX::drawFrame(Chambers_FG_frame);
-//    if (hourglassX > 0) FX::drawBitmap(hourglassX, 40, Images::HourGlasses, hourglassIdx, dbmMasked);
-//
-//}
-
 
 // ----------------------------------------------------------------------------
 //  Handle state updates .. 
@@ -46,6 +27,25 @@ void title() {
     #endif
 
     if (titleScreenVars.getMode() == TitleScreenMode::Main) {
+
+        #ifdef DEBUG_LEVELS
+
+            auto pressed = arduboy.pressedButtons();
+
+            if ((justPressed & UP_BUTTON) && (pressed & A_BUTTON) && (startLevel < 13)) {
+
+                startLevel++;
+
+            }
+
+            if ((justPressed & DOWN_BUTTON) && (pressed & A_BUTTON) && (startLevel > 1)) {
+
+                startLevel--;
+
+            }
+
+        #endif
+
 
         if (justPressed & LEFT_BUTTON) {
 
@@ -314,6 +314,13 @@ void title() {
                 }
 
             }
+
+            #ifdef DEBUG_LEVELS
+
+                FX::drawBitmap(116, 0, Images::LevelRect, 0, dbmNormal);
+                renderNumber_Upright(118, 2, startLevel);
+
+            #endif
 
             break;
 
