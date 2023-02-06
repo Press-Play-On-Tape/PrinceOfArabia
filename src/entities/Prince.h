@@ -13,6 +13,7 @@ class Prince : public BaseEntity, public BaseStack {
         
         uint8_t hangingCounter = 0;
         uint8_t crouchingCounter = 0;
+        uint8_t drawSwordCounter = 0;
 
         uint8_t falling = 0;
         bool sword = false;
@@ -26,6 +27,7 @@ class Prince : public BaseEntity, public BaseStack {
         bool getIgnoreWallCollisions()              { return this->ignoreWallCollisions; }
         uint8_t getHangingCounter()                 { return this->hangingCounter; }
         uint8_t getCrouchingCounter()               { return this->crouchingCounter; }
+        uint8_t getDrawSwordCounter()               { return this->drawSwordCounter; }
         uint8_t getFalling()                        { return this->falling; }
 
         void setSword(bool val)                     { this->sword = val; }
@@ -34,6 +36,7 @@ class Prince : public BaseEntity, public BaseStack {
         void setFalling(uint8_t val)                { this->falling = val; }
         void setHangingCounter(uint8_t val)         { this->hangingCounter = val; }
         void setCrouchingCounter(uint8_t val)       { this->crouchingCounter = val; }
+        void setDrawSwordCounter(uint8_t val)       { this->drawSwordCounter = val; }
 
         void incFalling()                           { this->falling++; }
 
@@ -78,6 +81,10 @@ class Prince : public BaseEntity, public BaseStack {
 
             if (this->crouchingCounter > 0) {
                 this->crouchingCounter--;
+            }
+
+            if (this->drawSwordCounter > 0) {
+                this->drawSwordCounter--;
             }
 
             this->stack->update();

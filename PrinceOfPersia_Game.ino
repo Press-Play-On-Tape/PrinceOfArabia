@@ -202,6 +202,7 @@ void game() {
         if (justPressed & B_BUTTON && sameLevelAsPrince && prince.getSword() && prince.getStance() == Stance::Upright && prince.isEmpty() && enemy.getHealth() > 0 && enemy.getEnemyType() != EnemyType::MirrorAfterChallengeL12) {
             
             prince.pushSequence(Stance::Draw_Sword_1_Start, Stance::Draw_Sword_6_End, Stance::Sword_Normal);
+            prince.setDrawSwordCounter(32);
             justPressed = 0;
 
         }
@@ -1125,25 +1126,29 @@ void game() {
 
                     #ifndef SAVE_MEMORY_ENEMY
 
-                        if (pressed & B_BUTTON) {
+                        if ((pressed & B_BUTTON) ) {
+                        
+                            if (prince.getDrawSwordCounter() == 0) {
 
-                            prince.pushSequence(Stance::Pickup_Sword_7_PutAway, Stance::Pickup_Sword_16_End, Stance::Upright);
+                                prince.pushSequence(Stance::Pickup_Sword_7_PutAway, Stance::Pickup_Sword_16_End, Stance::Upright);
 
-                            if (gamePlay.level == 12 && enemy.getEnemyType() == EnemyType::MirrorAttackingL12) {
+                                if (gamePlay.level == 12 && enemy.getEnemyType() == EnemyType::MirrorAttackingL12) {
 
-                                switch (enemy.getStance()) {
+                                    switch (enemy.getStance()) {
 
-                                    case Stance::Attack_Block_1_Start ... Stance::Attack_Block_3_End:
-                                    case Stance::Draw_Sword_1_Start ... Stance::Draw_Sword_6_End:
-                                    case Stance::Sword_Step_1_Start ... Stance::Sword_Step_3_End:
-                                    case Stance::Sword_Normal:
+                                        case Stance::Attack_Block_1_Start ... Stance::Attack_Block_3_End:
+                                        case Stance::Draw_Sword_1_Start ... Stance::Draw_Sword_6_End:
+                                        case Stance::Sword_Step_1_Start ... Stance::Sword_Step_3_End:
+                                        case Stance::Sword_Normal:
 
-                                        enemy.setEnemyType(EnemyType::MirrorAfterChallengeL12);
-                                        enemy.clear();
-                                        enemy.pushSequence(Stance::Pickup_Sword_7_PutAway, Stance::Pickup_Sword_16_End, Stance::Upright);
-                                        break;
+                                            enemy.setEnemyType(EnemyType::MirrorAfterChallengeL12);
+                                            enemy.clear();
+                                            enemy.pushSequence(Stance::Pickup_Sword_7_PutAway, Stance::Pickup_Sword_16_End, Stance::Upright);
+                                            break;
 
-                                        
+                                            
+                                    }
+
                                 }
 
                             }
@@ -1442,7 +1447,7 @@ void game() {
                 case Stance::Jump_Up_Drop_C_5_End: // Falling after climbing down ..
                     {
 
-                        CanFallResult canFall = level.canFall(prince);
+                        CanFallResult canFall = level.canFall(prince, true);
 
                         switch (canFall) {
 
@@ -1564,6 +1569,7 @@ void game() {
                 case Stance::Collide_Wall_M1_Start_End:
                 case Stance::Collide_Wall_M2_Start_End:
                     {
+
                         CanFallResult canFall = level.canFallSomeMore(prince);
 
                         if (canFall == CanFallResult::CanFall) { // Fall some more
@@ -2308,7 +2314,7 @@ void game() {
     // ---------------------------------------------------------------------------------------------------------------------------------------
 
     {
-        CanFallResult canFall = level.canFall(prince);
+        CanFallResult canFall = level.canFall(prince, false);
 
         #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
         DEBUG_PRINT("Can Fall: Result ");

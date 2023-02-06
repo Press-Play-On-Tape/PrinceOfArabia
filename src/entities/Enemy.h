@@ -49,6 +49,7 @@ class Enemy : public BaseStack {
             this->base[this->count].setY(y);
             this->base[this->count].setDirection(direction);
             this->base[this->count].setStance(stance);
+            this->base[this->count].setPrevStance(stance);
             this->base[this->count].setHealth(health);
             this->base[this->count].setHealthMax(health);
             this->base[this->count].setStatus(status);

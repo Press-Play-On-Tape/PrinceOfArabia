@@ -1384,11 +1384,10 @@ struct Level {
 
         }
 
-        CanFallResult canFall(Prince &prince, int8_t xOffset = 0) {
+        CanFallResult canFall(Prince &prince, bool testForHoldon) {
 
             CanFallResult canFall = CanFallResult::CannotFall;
             Point newPos = prince.getPosition();
-            newPos.x = newPos.x + prince.getDirectionOffset(xOffset);
 
             ImageDetails imageDetails;
             prince.getImageDetails(imageDetails);
@@ -1465,73 +1464,82 @@ struct Level {
 
                     // If we can fall, check to see if we can hold on to a ledge below ..
 
-                    int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(prince.getDirection(), prince.getPosition().x);
+                    if (testForHoldon) {
 
-                    if (distToEdgeOfCurrentTile == 2) {
+                        int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(prince.getDirection(), prince.getPosition().x);
 
-                        int8_t tileXIdx = this->coordToTileIndexX(newPos.x + imageDetails.toe) - this->getXLocation() + (prince.getDirection() == Direction::Right ? 1 : 0);
-                        int8_t tileYIdx = this->coordToTileIndexY(newPos.y) - this->getYLocation();
+                        if (distToEdgeOfCurrentTile == 2) {
 
-                        int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
+                            int8_t tileXIdx = this->coordToTileIndexX(newPos.x + imageDetails.toe) - this->getXLocation() + (prince.getDirection() == Direction::Right ? 1 : 0);
+                            int8_t tileYIdx = this->coordToTileIndexY(newPos.y) - this->getYLocation();
 
-                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
-                        int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
-                        DEBUG_PRINT(F("Can Fall to Ledge?  tileXIdx:"));
-                        DEBUG_PRINT(tileXIdx);
-                        DEBUG_PRINT(F(", tileYIdx:"));
-                        DEBUG_PRINT(tileYIdx);
-                        DEBUG_PRINT(F(", bg "));
-                        DEBUG_PRINT(bgTile1);
-                        DEBUG_PRINT(F(", fg "));
-                        DEBUG_PRINTLN(fgTile1);
-                        #endif
+                            int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
 
-                        switch (prince.getDirection()) {
+                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
+                            int8_t fgTile1 = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
+                            DEBUG_PRINT(F("Can Fall to Ledge?  tileXIdx:"));
+                            DEBUG_PRINT(tileXIdx);
+                            DEBUG_PRINT(F(", tileYIdx:"));
+                            DEBUG_PRINT(tileYIdx);
+                            DEBUG_PRINT(F(", bg "));
+                            DEBUG_PRINT(bgTile1);
+                            DEBUG_PRINT(F(", fg "));
+                            DEBUG_PRINTLN(fgTile1);
+                            #endif
 
-                            case Direction::Left:
+                            switch (prince.getDirection()) {
 
-                                switch (bgTile1) {
+                                case Direction::Left:
 
-                                    case TILE_FLOOR_RH_END_1:
-                                    case TILE_FLOOR_RH_END_2:
-                                    case TILE_FLOOR_RH_END_3:
-                                    case TILE_FLOOR_RH_END_4:
-                                    case TILE_FLOOR_RH_END_5:
-                                    case TILE_FLOOR_RH_END_GATE_1:
-                                    case TILE_FLOOR_RH_END_GATE_2:
-                                    case TILE_FLOOR_RH_END_GATE_RUG:
-                                    case TILE_FLOOR_RH_PILLAR_END_1:
-                                    case TILE_FLOOR_RH_PILLAR_END_2:
-                                        return CanFallResult::CanFallToHangingPosition;
+                                    switch (bgTile1) {
 
-                                    default:
-                                        return CanFallResult::CanFall;
-                                    
-                                }
+                                        case TILE_FLOOR_RH_END_1:
+                                        case TILE_FLOOR_RH_END_2:
+                                        case TILE_FLOOR_RH_END_3:
+                                        case TILE_FLOOR_RH_END_4:
+                                        case TILE_FLOOR_RH_END_5:
+                                        case TILE_FLOOR_RH_END_GATE_1:
+                                        case TILE_FLOOR_RH_END_GATE_2:
+                                        case TILE_FLOOR_RH_END_GATE_RUG:
+                                        case TILE_FLOOR_RH_PILLAR_END_1:
+                                        case TILE_FLOOR_RH_PILLAR_END_2:
+                                            return CanFallResult::CanFallToHangingPosition;
 
-                            case Direction::Right:
+                                        default:
+                                            return CanFallResult::CanFall;
+                                        
+                                    }
 
-                                switch (bgTile1) {
+                                case Direction::Right:
 
-                                    case TILE_FLOOR_LH_END_1:
-                                    case TILE_FLOOR_LH_END_2:
-                                    case TILE_COLUMN_3:
-                                    case TILE_FLOOR_LH_END_PATTERN_1:
-                                    case TILE_FLOOR_LH_END_PATTERN_2:
-                                        return CanFallResult::CanFallToHangingPosition;
+                                    switch (bgTile1) {
 
-                                    default:
-                                        return CanFallResult::CanFall;
-                                    
-                                }
+                                        case TILE_FLOOR_LH_END_1:
+                                        case TILE_FLOOR_LH_END_2:
+                                        case TILE_COLUMN_3:
+                                        case TILE_FLOOR_LH_END_PATTERN_1:
+                                        case TILE_FLOOR_LH_END_PATTERN_2:
+                                            return CanFallResult::CanFallToHangingPosition;
 
-                            default: break;
+                                        default:
+                                            return CanFallResult::CanFall;
+                                        
+                                    }
+
+                                default: break;
+
+                            }
 
                         }
 
-                    }
+                        return canFall;
 
-                    return canFall;
+                    }
+                    else {
+
+                        return canFall;
+
+                    }
 
                 }
 
