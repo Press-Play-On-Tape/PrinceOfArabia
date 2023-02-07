@@ -777,7 +777,7 @@ void getStance_Offsets(Direction direction, Point &offset, int16_t stance) {
 
 void processRunningTurn() {
 
-    if (level.canMoveForward(prince, Action::RunningTurn)) {
+    if (level.canMoveForward(prince, Action::RunningTurn, prince.getDirection(), 0)) {
 
         prince.pushSequence(Stance::Running_Turn_1_Start, Stance::Running_Turn_13_End, Stance::Run_Repeat_8_End_Turn);
 

@@ -1700,23 +1700,26 @@ struct Level {
 
         }
 
-        bool canMoveForward(BaseEntity &entity, Action action, Direction direction = Direction::None) {
 
-            int8_t tileXIdx = this->coordToTileIndexX(entity.getPosition().x) - this->getXLocation();
+        bool canMoveForward(BaseEntity &entity, Action action, Direction direction, uint8_t xOffset) {
+
+            int8_t offset = (direction == Direction::Left ? -1 : 1);
+            int8_t tileXIdx = this->coordToTileIndexX(entity.getPosition().x + (xOffset * offset)) - this->getXLocation();
             int8_t tileYIdx = this->coordToTileIndexY(entity.getPosition().y) - this->getYLocation();
-            int8_t offset;
-
-            if (direction == Direction::None) {
-                direction = entity.getDirection();
-            }
-
-            offset = entity.getDirection() == Direction::Left ? -1 : 1;
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
             DEBUG_PRINTLN(F("------------------------------"));
             printAction(action);
-            DEBUG_PRINT(F(" coordToTileIndexX "));
+            DEBUG_PRINT(F(" direction "));
+            DEBUG_PRINT((uint8_t)direction);
+            DEBUG_PRINT(F(" xOffset "));
+            DEBUG_PRINT(xOffset);
+            DEBUG_PRINT(F(", offset "));
+            DEBUG_PRINT(offset);
+            DEBUG_PRINT(F(", coordToTileIndexX "));
             DEBUG_PRINT(entity.getPosition().x);
+            DEBUG_PRINT(F(", coordToTileIndexX + offset "));
+            DEBUG_PRINT(entity.getPosition().x + (xOffset * offset));
             DEBUG_PRINT(F(" = "));
             DEBUG_PRINT(tileXIdx);
             DEBUG_PRINT(F(", coordToTileIndexY "));
@@ -1730,11 +1733,11 @@ struct Level {
                 case Direction::Left:
                     {
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
-                        int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx + offset, tileYIdx, TILE_FLOOR_BASIC);
+                        int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx + (1 * offset), tileYIdx, TILE_FLOOR_BASIC);
                         #endif
 
-                        int8_t fgTile2 = this->getTile(Layer::Foreground, tileXIdx + offset, tileYIdx, TILE_FLOOR_BASIC);
-                        int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(direction, entity.getPosition().x);
+                        int8_t fgTile2 = this->getTile(Layer::Foreground, tileXIdx + (1 * offset), tileYIdx, TILE_FLOOR_BASIC);
+                        int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(direction, entity.getPosition().x + (xOffset * offset));
 
                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
                         int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);

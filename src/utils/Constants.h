@@ -1,7 +1,7 @@
 
 #pragma once
 
-#define _PRODUCTION_SETTINGS
+#define PRODUCTION_SETTINGS
 
 #ifdef PRODUCTION_SETTINGS
 
@@ -24,13 +24,13 @@
 
 #else
 
-    #define SAVE_MEMORY_USB
-    #define _SAVE_MEMORY_OTHER
-    #define _SAVE_MEMORY_SOUND
+    #define _SAVE_MEMORY_USB
+    #define SAVE_MEMORY_OTHER
+    #define SAVE_MEMORY_SOUND
     #define _SAVE_MEMORY_ENEMY
-    #define _SAVE_MEMORY_TITLE
+    #define SAVE_MEMORY_TITLE
     #define _ALT_B_BUTTON
-    #define _GIVE_SWORD
+    #define GIVE_SWORD
 
     #define LEVEL_DATA_FROM_FX
     #define IMAGE_DATA_FROM_FX
@@ -39,14 +39,14 @@
     #define _DEBUG_CUT_SCENES
     #define DEBUG_LEVELS
 
-    #define _DEBUG
+    #define DEBUG
 
 #endif
 
 #define DEBUG_PRINT    Serial.print
 #define DEBUG_PRINTLN  Serial.println
 
-#define DEBUG_ONSCREEN_DETAILS
+#define _DEBUG_ONSCREEN_DETAILS
 #define _DEBUG_ONSCREEN_DETAILS_MIN
 
 #define _DEBUG_PRINCE_DETAILS
@@ -57,12 +57,12 @@
 #define _DEBUG_PRINCE_RENDERING
 #define _DEBUG_IMAGE_DETAILS
 
-#define _DEBUG_ACTION_CANMOVEFORWARD
+#define DEBUG_ACTION_CANMOVEFORWARD
 #define _DEBUG_ACTION_CANJUMPUP
 #define _DEBUG_ACTION_CANJUMPUP_PART2
 #define _DEBUG_ACTION_CANCLIMBDOWN
 #define _DEBUG_ACTION_CANCLIMBDOWN_PART2
-#define DEBUG_ACTION_CANFALL
+#define _DEBUG_ACTION_CANFALL
 #define _DEBUG_ACTION_CANFALLSOMEMORE
 #define _DEBUG_ACTION_COLLIDEWITHWALL
 #define _DEBUG_ACTION_FALLING
@@ -1199,7 +1199,7 @@ namespace Constants {
     constexpr uint8_t FallingTileSteppedOn = 24;
     constexpr uint8_t Button2FaillingTime = 24;
     constexpr uint8_t Button3FaillingTime = 24;
-
+    constexpr uint8_t OppositeDirection_Offset = 4;
     
     #ifndef IMAGE_DATA_FROM_FX
 
