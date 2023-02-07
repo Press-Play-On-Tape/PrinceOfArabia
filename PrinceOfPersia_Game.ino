@@ -202,7 +202,6 @@ void game() {
         if (justPressed & B_BUTTON && sameLevelAsPrince && prince.getSword() && prince.getStance() == Stance::Upright && prince.isEmpty() && enemy.getHealth() > 0 && enemy.getEnemyType() != EnemyType::MirrorAfterChallengeL12) {
             
             prince.pushSequence(Stance::Draw_Sword_1_Start, Stance::Draw_Sword_6_End, Stance::Sword_Normal);
-            prince.setDrawSwordCounter(32);
             justPressed = 0;
 
         }
@@ -1126,36 +1125,32 @@ void game() {
 
                     #ifndef SAVE_MEMORY_ENEMY
 
-                        if ((pressed & B_BUTTON) ) {
-                        
-                            if (prince.getDrawSwordCounter() == 0) {
+                        if ((pressed & A_BUTTON) ) {
 
-                                prince.pushSequence(Stance::Pickup_Sword_7_PutAway, Stance::Pickup_Sword_16_End, Stance::Upright);
+                            prince.pushSequence(Stance::Pickup_Sword_7_PutAway, Stance::Pickup_Sword_16_End, Stance::Upright);
 
-                                if (gamePlay.level == 12 && enemy.getEnemyType() == EnemyType::MirrorAttackingL12) {
+                            if (gamePlay.level == 12 && enemy.getEnemyType() == EnemyType::MirrorAttackingL12) {
 
-                                    switch (enemy.getStance()) {
+                                switch (enemy.getStance()) {
 
-                                        case Stance::Attack_Block_1_Start ... Stance::Attack_Block_3_End:
-                                        case Stance::Draw_Sword_1_Start ... Stance::Draw_Sword_6_End:
-                                        case Stance::Sword_Step_1_Start ... Stance::Sword_Step_3_End:
-                                        case Stance::Sword_Normal:
+                                    case Stance::Attack_Block_1_Start ... Stance::Attack_Block_3_End:
+                                    case Stance::Draw_Sword_1_Start ... Stance::Draw_Sword_6_End:
+                                    case Stance::Sword_Step_1_Start ... Stance::Sword_Step_3_End:
+                                    case Stance::Sword_Normal:
 
-                                            enemy.setEnemyType(EnemyType::MirrorAfterChallengeL12);
-                                            enemy.clear();
-                                            enemy.pushSequence(Stance::Pickup_Sword_7_PutAway, Stance::Pickup_Sword_16_End, Stance::Upright);
-                                            break;
+                                        enemy.setEnemyType(EnemyType::MirrorAfterChallengeL12);
+                                        enemy.clear();
+                                        enemy.pushSequence(Stance::Pickup_Sword_7_PutAway, Stance::Pickup_Sword_16_End, Stance::Upright);
+                                        break;
 
-                                            
-                                    }
-
+                                        
                                 }
 
                             }
 
                         }
 
-                        else if (pressed & A_BUTTON) {
+                        else if (pressed & B_BUTTON) {
 
                             prince.pushSequence(Stance::Sword_Attack_1_Start, Stance::Sword_Attack_8_End, Stance::Sword_Normal);
 
