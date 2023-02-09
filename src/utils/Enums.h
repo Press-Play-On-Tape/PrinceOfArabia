@@ -34,6 +34,10 @@ enum class ItemType : uint8_t {
     /* 30 */ Gate_StayClosed,
     /* 31 */ EntryDoor,
     /* 32 */ DecorativeDoor,
+    /* 50 */ Invader_1 = 50,
+    /* 51 */ Invader_2,
+    /* 52 */ Invader_3,
+    /* 53 */ Player,
     /* 96 */ None = 96,
     /* 97 */ LoveHeart = 97,
     /* 98 */ Sign = 98,
@@ -155,22 +159,25 @@ enum class TitleScreenOptions : uint8_t {
 };
 
 enum class TitleScreenMode : uint8_t {
-    Intro,              // 0
-    Main,               // 1
-    Credits,            // 2
-    High,               // 3
-    IntroGame_1A,       // 4
-    CutScene_1,         // 5
-    IntroGame_1B,       // 6
-    CutScene_2,         // 7
-    CutScene_3,         // 8
-    CutScene_4,         // 9
-    CutScene_5,         // 10
-    CutScene_6,         // 11
-    CutScene_End,       // 12
-    IntroGame_End,      // 13
-    TimeOut,            // 14
-    MaxUniqueScenes     = CutScene_End - 1
+    Intro,                          // 0
+    Main,                           // 1
+    Credits,                        // 2
+    High,                           // 3
+    IntroGame_1A,                   // 4
+    CutScene_1,                     // 5
+    IntroGame_1B,                   // 6
+    CutScene_2,                     // 7
+    CutScene_3,                     // 8
+    CutScene_4,                     // 9
+    CutScene_5,                     // 10
+    CutScene_6,                     // 11
+    CutScene_7_RemoveArches,        // 12
+    CutScene_7_EnterPlayers,        // 13
+    CutScene_7_PlayGame,            // 13
+    CutScene_End,                   // 14
+    IntroGame_End,                  // 15
+    TimeOut,                        // 16
+    MaxUniqueScenes                 = CutScene_End - 1
 };
 
 enum class WallTileResults : uint8_t {

@@ -5,6 +5,56 @@
 #include "../utils/Stack.h"
 
 
+struct Invader_General {
+    uint8_t y;
+    Direction direction;
+    uint8_t byte1;
+    uint8_t byte2;
+    uint8_t byte3;
+    uint8_t byte4;
+    uint8_t byte5;
+};
+
+struct Invader_Enemy {
+    uint8_t x;
+    uint8_t y;
+    uint8_t byte1;
+    uint8_t byte2;
+    uint8_t byte3;
+    uint8_t byte4;
+    uint8_t byte5;
+};
+
+struct Invader_Player {
+    uint8_t x;
+    uint8_t y;
+    uint8_t byte1;
+    uint8_t byte2;
+    uint8_t byte3;
+    uint8_t byte4;
+    uint8_t byte5;
+};
+
+struct Invader_Player_Bullet {
+    uint8_t x;
+    int8_t y;
+    uint8_t byte1;
+    uint8_t byte2;
+    uint8_t byte3;
+    uint8_t byte4;
+    uint8_t byte5;
+};
+
+struct Invader_Barrier {
+    uint8_t x;
+    uint8_t y;
+    uint8_t byte1;
+    uint8_t byte2;
+    uint8_t byte3;
+    uint8_t byte4;
+    uint8_t byte5;
+};
+
 struct Location {
     uint8_t x;
     uint8_t y;
@@ -141,6 +191,11 @@ struct Item {
         struct ExitDoor_Button exitDoor_Button;
         struct Mirror mirror;
         struct AppearingFloor appearingFloor;
+        struct Invader_General invader_General;
+        struct Invader_Enemy invader_Enemy;
+        struct Invader_Player invader_Player;
+        struct Invader_Player_Bullet invader_Player_Bullet;
+        struct Invader_Barrier invader_Barrier;
     } data; 
  
 };

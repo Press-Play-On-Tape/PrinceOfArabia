@@ -121,6 +121,8 @@ namespace Images {
 
     image_t Invaders                = "../images/invaders/Enemies_9x7.png"
     image_t Barriers                = "../images/invaders/Barrier_4x2_1.png"
+    image_t Player                  = "../images/invaders/Player.png"
+    image_t Bullet                  = "../images/invaders/Bullet.png"
 
 }
 

@@ -25,7 +25,7 @@
 #else
 
     #define _SAVE_MEMORY_USB
-    #define SAVE_MEMORY_OTHER
+    #define _SAVE_MEMORY_OTHER
     #define SAVE_MEMORY_SOUND
     #define SAVE_MEMORY_ENEMY
     #define _SAVE_MEMORY_TITLE
@@ -1200,7 +1200,20 @@ namespace Constants {
     constexpr uint8_t Button2FaillingTime = 24;
     constexpr uint8_t Button3FaillingTime = 24;
     constexpr uint8_t OppositeDirection_Offset = 4;
-    
+
+    constexpr uint8_t Invaders_General = 0;
+    constexpr uint8_t Invaders_Enemy_Row_1_Start = 1;
+    constexpr uint8_t Invaders_Enemy_Row_1_End = 7;
+    constexpr uint8_t Invaders_Enemy_Row_2_Start = 8;
+    constexpr uint8_t Invaders_Enemy_Row_2_End = 14;
+    constexpr uint8_t Invaders_Enemy_Row_3_Start = 15;
+    constexpr uint8_t Invaders_Enemy_Row_3_End = 21;
+    constexpr uint8_t Invaders_Player = 22;
+    constexpr uint8_t Invaders_Barrier_Start = 23;
+    constexpr uint8_t Invaders_Barrier_End = 38;
+    constexpr uint8_t Invaders_Player_Bullet = 39;
+
+
     #ifndef IMAGE_DATA_FROM_FX
 
     const uint8_t StanceToImageXRef[] PROGMEM  = {

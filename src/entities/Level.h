@@ -141,7 +141,7 @@ struct Level {
                 this->yLoc = yLoc;
 
                 this->loadMap(gamePlay);
-                this->loadItems(gamePlay, prince);
+                this->loadItems(gamePlay.level, prince);
 
                 if (prince.getY() > 56) {
 
@@ -189,7 +189,7 @@ struct Level {
                     FX::readEnd();
 
                     this->loadMap(gamePlay);
-                    this->loadItems(gamePlay, prince);
+                    this->loadItems(gamePlay.level, prince);
 
                     if (prince.getY() > 56) {
 
