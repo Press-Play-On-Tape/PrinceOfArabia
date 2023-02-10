@@ -1202,16 +1202,19 @@ namespace Constants {
     constexpr uint8_t OppositeDirection_Offset = 4;
 
     constexpr uint8_t Invaders_General = 0;
-    constexpr uint8_t Invaders_Enemy_Row_1_Start = 1;
-    constexpr uint8_t Invaders_Enemy_Row_1_End = 7;
-    constexpr uint8_t Invaders_Enemy_Row_2_Start = 8;
-    constexpr uint8_t Invaders_Enemy_Row_2_End = 14;
-    constexpr uint8_t Invaders_Enemy_Row_3_Start = 15;
-    constexpr uint8_t Invaders_Enemy_Row_3_End = 21;
-    constexpr uint8_t Invaders_Player = 22;
-    constexpr uint8_t Invaders_Barrier_Start = 23;
-    constexpr uint8_t Invaders_Barrier_End = 38;
-    constexpr uint8_t Invaders_Player_Bullet = 39;
+    constexpr uint8_t Invaders_General2 = 1;
+    constexpr uint8_t Invaders_Enemy_Row_1_Start = 2;
+    constexpr uint8_t Invaders_Enemy_Row_1_End = 8;
+    constexpr uint8_t Invaders_Enemy_Row_2_Start = 9;
+    constexpr uint8_t Invaders_Enemy_Row_2_End = 15;
+    constexpr uint8_t Invaders_Enemy_Row_3_Start = 16;
+    constexpr uint8_t Invaders_Enemy_Row_3_End = 22;
+    constexpr uint8_t Invaders_Player = 23;
+    constexpr uint8_t Invaders_Barrier_Start = 24;
+    constexpr uint8_t Invaders_Barrier_End = 39;
+    constexpr uint8_t Invaders_Player_Bullet = 40;
+    constexpr uint8_t Invaders_Enemy_Bullet_Start = 41;
+    constexpr uint8_t Invaders_Enemy_Bullet_End = Constants::Items_Count - 1;
 
 
     #ifndef IMAGE_DATA_FROM_FX

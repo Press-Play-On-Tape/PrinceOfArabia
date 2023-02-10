@@ -8,17 +8,26 @@
 struct Invader_General {
     uint8_t y;
     Direction direction;
-    uint8_t byte1;
+    uint8_t initSpeed;
+    uint8_t speed;
+    uint8_t lives;
+    uint16_t score;
+};
+
+struct Invader_General2 {
+    uint8_t bulletCountdown;
     uint8_t byte2;
     uint8_t byte3;
     uint8_t byte4;
     uint8_t byte5;
+    uint8_t byte6;
+    uint8_t byte7;
 };
 
 struct Invader_Enemy {
     uint8_t x;
     uint8_t y;
-    uint8_t byte1;
+    Status status;
     uint8_t byte2;
     uint8_t byte3;
     uint8_t byte4;
@@ -28,7 +37,7 @@ struct Invader_Enemy {
 struct Invader_Player {
     uint8_t x;
     uint8_t y;
-    uint8_t byte1;
+    Status status;
     uint8_t byte2;
     uint8_t byte3;
     uint8_t byte4;
@@ -36,6 +45,16 @@ struct Invader_Player {
 };
 
 struct Invader_Player_Bullet {
+    uint8_t x;
+    int8_t y;
+    uint8_t byte1;
+    uint8_t byte2;
+    uint8_t byte3;
+    uint8_t byte4;
+    uint8_t byte5;
+};
+
+struct Invader_Enemy_Bullet {
     uint8_t x;
     int8_t y;
     uint8_t byte1;
@@ -192,7 +211,9 @@ struct Item {
         struct Mirror mirror;
         struct AppearingFloor appearingFloor;
         struct Invader_General invader_General;
+        struct Invader_General2 invader_General2;
         struct Invader_Enemy invader_Enemy;
+        struct Invader_Enemy_Bullet invader_Enemy_Bullet;
         struct Invader_Player invader_Player;
         struct Invader_Player_Bullet invader_Player_Bullet;
         struct Invader_Barrier invader_Barrier;
