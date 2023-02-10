@@ -451,7 +451,7 @@ void title() {
 
                     invader_RenderEnemies(-36 + y);
                     invader_RenderBarriers(36 - y);
-                    invader_RenderPlayer(player, 36 - y);
+                    invader_RenderPlayer(player, 36 - y, true);
 
 
                     // Increment counter and see if we should progress to the next phase ..
@@ -464,9 +464,7 @@ void title() {
 
                     }
 
-
                     FX::drawBitmap(120 + (36/4) - (general.y / 8), 0, Images::HUD_Backgrounds, 2, dbmNormal);
-
 
 
                 }

@@ -86,14 +86,20 @@ void invader_RenderBarriers(int yOffset = 0) {
 
 }
 
-void invader_RenderPlayer(Invader_Player &player, int yOffset = 0) {
+void invader_RenderPlayer(Invader_Player &player, int yOffset = 0, bool show = false) {
 
     uint8_t frame = 0;
-    
     switch (player.status) {
 
         case Status::Active:
             frame = 0;
+            break;
+
+        case Status::Safe:
+    // Serial.print(show);
+    // Serial.print(" ");
+    // Serial.println((uint8_t)player.status);
+            if (!show && arduboy.getFrameCountHalf(32)) return;
             break;
 
         case Status::Exploding1 ... Status::Exploding4:
@@ -130,7 +136,7 @@ void invader_RenderEnemyBullets() {
     
 }
 
-void invader_MoveInvaders_Left(Invader_General &general, uint8_t startPos, uint8_t endPos) {
+void invader_MoveInvaders_Left(Invader_General &general, Invader_Player &player, uint8_t startPos, uint8_t endPos) {
     
     for (uint8_t x = startPos; x <= endPos; x++) {
 
@@ -141,10 +147,14 @@ void invader_MoveInvaders_Left(Invader_General &general, uint8_t startPos, uint8
 
             general.direction = Direction::Right;
 
-            for (uint8_t x = Constants::Invaders_Enemy_Row_1_Start; x <= Constants::Invaders_Enemy_Row_3_End; x++) {
+            if (player.status == Status::Active) {
+                    
+                for (uint8_t x = Constants::Invaders_Enemy_Row_1_Start; x <= Constants::Invaders_Enemy_Row_3_End; x++) {
 
-                Item &enemy2 = level.getItem(x);
-                enemy2.data.invader_Enemy.y++;
+                    Item &enemy2 = level.getItem(x);
+                    enemy2.data.invader_Enemy.y++;
+
+                }
 
             }
 
@@ -154,7 +164,7 @@ void invader_MoveInvaders_Left(Invader_General &general, uint8_t startPos, uint8
 
 }
 
-void invader_MoveInvaders_Right(Invader_General &general, uint8_t startPos, uint8_t endPos) {
+void invader_MoveInvaders_Right(Invader_General &general, Invader_Player &player, uint8_t startPos, uint8_t endPos) {
     
     for (uint8_t x = startPos; x <= endPos; x++) {
 
@@ -165,10 +175,14 @@ void invader_MoveInvaders_Right(Invader_General &general, uint8_t startPos, uint
 
             general.direction = Direction::Left;
 
-            for (uint8_t x = Constants::Invaders_Enemy_Row_1_Start; x <= Constants::Invaders_Enemy_Row_3_End; x++) {
+            if (player.status == Status::Active) {
 
-                Item &enemy2 = level.getItem(x);
-                enemy2.data.invader_Enemy.y++;
+                for (uint8_t x = Constants::Invaders_Enemy_Row_1_Start; x <= Constants::Invaders_Enemy_Row_3_End; x++) {
+
+                    Item &enemy2 = level.getItem(x);
+                    enemy2.data.invader_Enemy.y++;
+
+                }
 
             }
             
@@ -178,7 +192,7 @@ void invader_MoveInvaders_Right(Invader_General &general, uint8_t startPos, uint
 
 }
 
-void invader_UpdateInvaders(Invader_General &general) {
+void invader_UpdateEnemy(Invader_General &general, Invader_Player &player) {
 
     uint8_t frameCount = arduboy.getFrameCount(invaders_getSpeed());
 
@@ -190,17 +204,17 @@ void invader_UpdateInvaders(Invader_General &general) {
 
                 case 0:
 
-                    invader_MoveInvaders_Left(general, Constants::Invaders_Enemy_Row_1_Start, Constants::Invaders_Enemy_Row_1_End);
+                    invader_MoveInvaders_Left(general, player, Constants::Invaders_Enemy_Row_1_Start, Constants::Invaders_Enemy_Row_1_End);
                     break;
 
                 case 3:
                     {   
                         Item &enemy = level.getItem(Constants::Invaders_Enemy_Row_1_End);
                         if (enemy.data.invader_Enemy.x == 103) {
-                            invader_MoveInvaders_Right(general, Constants::Invaders_Enemy_Row_2_Start, Constants::Invaders_Enemy_Row_2_End);
+                            invader_MoveInvaders_Right(general, player, Constants::Invaders_Enemy_Row_2_Start, Constants::Invaders_Enemy_Row_2_End);
                         }
                         else {
-                            invader_MoveInvaders_Left(general, Constants::Invaders_Enemy_Row_2_Start, Constants::Invaders_Enemy_Row_2_End);
+                            invader_MoveInvaders_Left(general, player, Constants::Invaders_Enemy_Row_2_Start, Constants::Invaders_Enemy_Row_2_End);
                         }
 
                     }
@@ -212,10 +226,10 @@ void invader_UpdateInvaders(Invader_General &general) {
                         Item &enemy = level.getItem(Constants::Invaders_Enemy_Row_1_End);
 
                         if (enemy.data.invader_Enemy.x == 103) {
-                            invader_MoveInvaders_Right(general, Constants::Invaders_Enemy_Row_3_Start, Constants::Invaders_Enemy_Row_3_End);
+                            invader_MoveInvaders_Right(general, player, Constants::Invaders_Enemy_Row_3_Start, Constants::Invaders_Enemy_Row_3_End);
                         }
                         else {
-                            invader_MoveInvaders_Left(general, Constants::Invaders_Enemy_Row_3_Start, Constants::Invaders_Enemy_Row_3_End);
+                            invader_MoveInvaders_Left(general, player, Constants::Invaders_Enemy_Row_3_Start, Constants::Invaders_Enemy_Row_3_End);
                         }
 
                     }
@@ -231,7 +245,7 @@ void invader_UpdateInvaders(Invader_General &general) {
 
                 case 0:
 
-                    invader_MoveInvaders_Right(general, Constants::Invaders_Enemy_Row_1_Start, Constants::Invaders_Enemy_Row_1_End);
+                    invader_MoveInvaders_Right(general, player, Constants::Invaders_Enemy_Row_1_Start, Constants::Invaders_Enemy_Row_1_End);
                     break;
 
                 case 3:
@@ -239,10 +253,10 @@ void invader_UpdateInvaders(Invader_General &general) {
                         Item &enemy = level.getItem(Constants::Invaders_Enemy_Row_1_Start);
 
                         if (enemy.data.invader_Enemy.x == 5) {
-                            invader_MoveInvaders_Left(general, Constants::Invaders_Enemy_Row_2_Start, Constants::Invaders_Enemy_Row_2_End);
+                            invader_MoveInvaders_Left(general, player, Constants::Invaders_Enemy_Row_2_Start, Constants::Invaders_Enemy_Row_2_End);
                         }
                         else {
-                            invader_MoveInvaders_Right(general, Constants::Invaders_Enemy_Row_2_Start, Constants::Invaders_Enemy_Row_2_End);
+                            invader_MoveInvaders_Right(general, player, Constants::Invaders_Enemy_Row_2_Start, Constants::Invaders_Enemy_Row_2_End);
                         }
 
                     }
@@ -254,10 +268,10 @@ void invader_UpdateInvaders(Invader_General &general) {
                         Item &enemy = level.getItem(Constants::Invaders_Enemy_Row_1_Start);
 
                         if (enemy.data.invader_Enemy.x == 5) {
-                            invader_MoveInvaders_Left(general, Constants::Invaders_Enemy_Row_3_Start, Constants::Invaders_Enemy_Row_3_End);
+                            invader_MoveInvaders_Left(general, player, Constants::Invaders_Enemy_Row_3_Start, Constants::Invaders_Enemy_Row_3_End);
                         }
                         else {
-                            invader_MoveInvaders_Right(general, Constants::Invaders_Enemy_Row_3_Start, Constants::Invaders_Enemy_Row_3_End);
+                            invader_MoveInvaders_Right(general, player, Constants::Invaders_Enemy_Row_3_Start, Constants::Invaders_Enemy_Row_3_End);
                         }
 
                     }
@@ -443,7 +457,7 @@ void invader_PlayGame() {
 
     // Update bullets ..
 
-    invader_UpdateInvaders(general);
+    invader_UpdateEnemy(general, player);
     invader_UpdatePlayer(general, player);
     invader_UpdateEnemyBullets(player);
     invader_EnemyDropsBullet(general2, player);
@@ -459,26 +473,32 @@ void invader_PlayGame() {
 
     // Handle movements ..
 
-    if (pressed & LEFT_BUTTON && player.x > 4) {
-        player.x--;
-    }
-
-    if (pressed & RIGHT_BUTTON && player.x < 104) {
-        player.x++;
-    }
-
-    if (pressed & A_BUTTON) {
-
-        if (bullet.y == -4) {
-
-            bullet.x = player.x + 4;
-            bullet.y = player.y - 10;
+    if (player.status <= Status::Safe) {
             
+        if (pressed & LEFT_BUTTON && player.x > 4) {
+            player.status = Status::Active;
+            player.x--;
+        }
+
+        if (pressed & RIGHT_BUTTON && player.x < 104) {
+            player.status = Status::Active;
+            player.x++;
+        }
+
+        if (pressed & A_BUTTON) {
+
+            player.status = Status::Active;
+
+            if (bullet.y == -4) {
+
+                bullet.x = player.x + 4;
+                bullet.y = player.y - 10;
+                
+            }
+
         }
 
     }
-
-
 
     invader_RenderEnemies();
     invader_RenderBarriers();
@@ -486,5 +506,12 @@ void invader_PlayGame() {
     invader_RenderPlayerBullet(bullet);
     invader_RenderEnemyBullets();
     invader_RenderHUD(general);
+
+
+    if (player.status == Status::Safe) {
+
+        FX::drawBitmap(32, 25, Images::Levels, general.lives, dbmMasked);
+
+    }
 
 }

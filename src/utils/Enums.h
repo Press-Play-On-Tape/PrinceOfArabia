@@ -208,6 +208,7 @@ enum class LevelUpdate : uint8_t {
 
 enum class Status : uint8_t {
     Active,
+    Safe,
     Dormant,
     Dormant_ActionReady,
     Dormant_ActionDone,
