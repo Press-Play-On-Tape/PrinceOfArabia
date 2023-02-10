@@ -8,15 +8,15 @@
 struct Invader_General {
     uint8_t y;
     Direction direction;
-    uint8_t initSpeed;
-    uint8_t speed;
+    uint8_t left;               // Enemy formation visible
+    uint8_t right;              // Enemy formation visible
     uint8_t lives;
     uint16_t score;
 };
 
 struct Invader_General2 {
     uint8_t bulletCountdown;
-    uint8_t byte2;
+    uint8_t deathCountdown;
     uint8_t byte3;
     uint8_t byte4;
     uint8_t byte5;

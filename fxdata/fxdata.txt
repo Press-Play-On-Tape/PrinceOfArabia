@@ -191,6 +191,7 @@ include 'Title_CutScene_3_Frame.txt'
 include 'Title_CutScene_4_Frame.txt'
 include 'Title_CutScene_5_Frame.txt'
 include 'Title_CutScene_6_Frame.txt'
+include 'Title_CutScene_7_Frame.txt'
 include 'Title_CutScene_End_Frame.txt'
 include 'Title_IntroGame_End_Frame.txt'
 

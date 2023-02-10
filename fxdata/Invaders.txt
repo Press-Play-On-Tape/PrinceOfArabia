@@ -1,6 +1,6 @@
 uint8_t Invaders_Items[] = {
 
-    50,   0,   1,  22,  22,   3,   0,   0,      // General (y, direction, initSpeed, speed, lives)
+    50,   0,   1,   0,   6,   3,   0,   0,      // General (y, direction, left, right, lives)
     58,   0,   0,   0,   0,   0,   0,   0,      // General2
 
     51,  17,   0,   0,   0,   0,   0,   0,      // Invader 1
