@@ -1,8 +1,6 @@
 #include <Arduboy2.h>
 
-void invader_LoadEnemies() {
-
-    arduboy.frameCount = 5;
+void invader_LoadEnemies(uint8_t launchOffset) {
 
     FX::seekData(FX::readIndexedUInt24(Levels::Level_Items, 0) + 16);
 
@@ -12,9 +10,24 @@ void invader_LoadEnemies() {
         item.itemType = static_cast<ItemType>(FX::readPendingUInt8());
         FX::readBytes((uint8_t*)&item.data.rawData, sizeof(item.data.rawData));
 
-        item.data.invader_Enemy.y = item.data.invader_Enemy.y - 24;
+        item.data.invader_Enemy.y = item.data.invader_Enemy.y - 24 + launchOffset;
 
     }
+
+    #ifdef DEBUG_INVADERS_EOE
+
+        for(uint8_t x = 0; x < 21; x++) {
+
+            Invader_Enemy &item = level.getItem(Constants::Invaders_Enemy_Row_1_Start + x).data.invader_Enemy;
+
+            if (random(0, 3) != 0) {
+                item.status = Status::Dead;
+            }
+
+        }
+        
+    #endif
+
 
     FX::readEnd();
 
@@ -35,10 +48,9 @@ uint8_t invader_EnemiesAlive() {
 
 }
 
-uint8_t invaders_getSpeed() {
+uint8_t invader_getSpeed() {
 
-    return 22;
-    // return 2 + (invader_EnemiesAlive() / 1);
+    return 1 + ((invader_EnemiesAlive() * 4) / 3);
 
 }
 
@@ -98,8 +110,8 @@ void invader_RenderBarriers(int yOffset = 0) {
 
     for (uint8_t x = Constants::Invaders_Barrier_Start; x <= Constants::Invaders_Barrier_End; x++) {
 
-        Item &barrier = level.getItem(x);
-        FX::drawBitmap(barrier.data.invader_Barrier.x, barrier.data.invader_Barrier.y + yOffset, Images::Barriers, 0, dbmMasked);
+        Invader_Barrier &barrier = level.getItem(x).data.invader_Barrier;
+        FX::drawBitmap(barrier.x, barrier.y + yOffset, Images::Barriers, barrier.value, dbmMasked);
 
     }
 
@@ -111,6 +123,7 @@ void invader_RenderPlayer(Invader_Player &player, int yOffset = 0, bool show = f
     switch (player.status) {
 
         case Status::Active:
+        case Status::EnemiesAppearing:
             frame = 0;
             break;
 
@@ -133,7 +146,7 @@ void invader_RenderPlayer(Invader_Player &player, int yOffset = 0, bool show = f
 
 }
 
-void invader_RenderPlayerBullet(Invader_Player_Bullet &bullet) {
+void invader_RenderPlayerBullet(Invader_Bullet &bullet) {
 
     FX::drawBitmap(bullet.x, bullet.y, Images::Bullet, 0, dbmNormal);
     
@@ -143,11 +156,11 @@ void invader_RenderEnemyBullets() {
 
     for (uint8_t x = Constants::Invaders_Enemy_Bullet_Start; x <= Constants::Invaders_Enemy_Bullet_End; x++) {
 
-        Item &bullet = level.getItem(x);
+        Invader_Bullet &bullet = level.getItem(x).data.invader_Bullet;
 
-        if (bullet.data.invader_Enemy_Bullet.y < 64) {
+        if (bullet.y < 64) {
 
-            FX::drawBitmap(bullet.data.invader_Enemy_Bullet.x, bullet.data.invader_Enemy_Bullet.y, Images::Bullet, 0, dbmNormal);
+            FX::drawBitmap(bullet.x, bullet.y, Images::Bullet, 0, dbmNormal);
             
         }
 
@@ -157,7 +170,7 @@ void invader_RenderEnemyBullets() {
 
 void invader_MoveEnemies_Down(Invader_Player &player) {
 
-    if (player.status == Status::Active) {
+    if (player.status == Status::Active || player.status == Status::EnemiesAppearing) {
 
         for (uint8_t x = Constants::Invaders_Enemy_Row_1_Start; x <= Constants::Invaders_Enemy_Row_3_End; x++) {
 
@@ -216,12 +229,12 @@ void invader_MoveEnemies_Right(Invader_General &general, Invader_Player &player,
 
 }
 
-void invader_UpdateEnemy(Invader_General &general, Invader_Player &player) {
+void invader_UpdateEnemy(Invader_General &general, Invader_General2 &general2, Invader_Player &player) {
 
-    uint8_t frameCount = arduboy.getFrameCount(invaders_getSpeed());
+    uint8_t frameCount = arduboy.getFrameCount(invader_getSpeed());
 
 
-    if (frameCount == 0) {
+    //if (frameCount == 0) {
 
         general.right = 0;
         general.left = 6;
@@ -246,12 +259,14 @@ void invader_UpdateEnemy(Invader_General &general, Invader_Player &player) {
         general.right = general.right - Constants::Invaders_Enemy_Row_1_Start;
         general.left = general.left - Constants::Invaders_Enemy_Row_1_Start;
 
-    }
+    //}
 
 
 
 
     // Move enemies ..
+
+    
 
     switch (general.direction) {
 
@@ -261,6 +276,7 @@ void invader_UpdateEnemy(Invader_General &general, Invader_Player &player) {
 
                 case 0:
 
+                    general2.speed = invader_getSpeed();
                     invader_MoveEnemies_Left(general, player, Constants::Invaders_Enemy_Row_1_Start, Constants::Invaders_Enemy_Row_1_End, Constants::Invaders_Enemy_Row_1_Start + general.left);
                     break;
 
@@ -302,6 +318,7 @@ void invader_UpdateEnemy(Invader_General &general, Invader_Player &player) {
 
                 case 0:
 
+                    general2.speed = invader_getSpeed();
                     invader_MoveEnemies_Right(general, player, Constants::Invaders_Enemy_Row_1_Start, Constants::Invaders_Enemy_Row_1_End, Constants::Invaders_Enemy_Row_1_Start + general.right);
                     break;
 
@@ -394,7 +411,7 @@ void invader_EnemyDropsBullet(Invader_General2 &general2, Invader_Player &player
 
     for (uint8_t x = Constants::Invaders_Enemy_Bullet_Start; x <= Constants::Invaders_Enemy_Bullet_End; x++) {
 
-        Invader_Enemy_Bullet &bullet = level.getItem(x).data.invader_Enemy_Bullet;
+        Invader_Bullet &bullet = level.getItem(x).data.invader_Bullet;
 
         if (bullet.y == 64) {
 
@@ -410,8 +427,7 @@ void invader_EnemyDropsBullet(Invader_General2 &general2, Invader_Player &player
 
     if (found != 255) {
 
-        // Invader_Player &player = level.getItem(Constants::Invaders_Player);
-        Invader_Enemy_Bullet &bullet = level.getItem(found).data.invader_Enemy_Bullet;
+        Invader_Bullet &bullet = level.getItem(found).data.invader_Bullet;
 
         for (uint8_t x = Constants::Invaders_Enemy_Row_3_End; x > Constants::Invaders_Enemy_Row_1_Start; x--) {
 
@@ -422,10 +438,8 @@ void invader_EnemyDropsBullet(Invader_General2 &general2, Invader_Player &player
                 bullet.x = enemy.x + 4;
                 bullet.y = enemy.y + 8;
 
-                uint8_t x = invaders_getSpeed();
-
-                general2.bulletCountdown = random(x, x * 2);
-                general2.bulletCountdown = random(x * 2, x * 4);
+                general2.bulletCountdown = random(general2.speed, general2.speed * 2);
+                general2.bulletCountdown = random(general2.speed * 2, general2.speed * 4);
 
             }
 
@@ -435,8 +449,80 @@ void invader_EnemyDropsBullet(Invader_General2 &general2, Invader_Player &player
 
 }
 
+void invader_HasBulletHitBarrier(Invader_General &general, Invader_General2 &general2, Invader_Bullet &bullet) {
 
-void invader_DetectPlayerBulletHit(Invader_General &general, Invader_Player_Bullet &bullet) {
+    // Hit barrier?
+
+    uint8_t barrier_X = 255;
+    uint8_t barrier_B = 255;
+    uint8_t barrier_Y = 255;
+
+    switch (bullet.x) {
+
+        case  26 ... 41:
+
+            switch (bullet.y) {
+
+                case 46 ... 48:
+                    
+                    barrier_X = (bullet.x - 26) / 4;
+                    barrier_B = (bullet.x - 26) % 4;
+                    barrier_Y = 0;
+                    break;
+
+                case 49 ... 51:
+                    
+                    barrier_X = (bullet.x - 26) / 4;
+                    barrier_B = (bullet.x - 26) % 4;
+                    barrier_Y = 1;
+                    break;
+
+            }
+
+            break;
+
+        case 78 ... 93:
+
+            switch (bullet.y) {
+
+                case 46 ... 48:
+                    
+                    barrier_X = ((bullet.x - 78) / 4) + 4;
+                    barrier_B = (bullet.x - 78) % 4;
+                    barrier_Y = 0;
+                    break;
+
+                case 49 ... 51:
+                    
+                    barrier_X = ((bullet.x - 78) / 4) + 4;
+                    barrier_B = (bullet.x - 78) % 4;
+                    barrier_Y = 1;
+                    break;
+
+            }
+
+            break;
+
+    }
+
+
+    if (barrier_X != 255) {
+
+        Invader_Barrier &barrier = level.getItem(Constants::Invaders_Barrier_Start + (barrier_X * 2) + barrier_Y).data.invader_Barrier;
+
+        if ((barrier.value & (1 << barrier_B)) == 0) {
+
+            barrier.value = (barrier.value | (1 << barrier_B));// | (1 << barrier_B);
+            bullet.y = -4;
+            general2.bulletPlayerCountdown = 5;
+
+        }
+
+    }
+
+}
+
+void invader_DetectPlayerBulletHit(Invader_General &general, Invader_General2 &general2, Invader_Bullet &bullet) {
 
     Point bulletPoint = { bullet.x, bullet.y };
 
@@ -456,25 +542,94 @@ void invader_DetectPlayerBulletHit(Invader_General &general, Invader_Player_Bull
 
             }
 
+            invader_HasBulletHitBarrier(general, general2, bullet);
+
+            // // Hit barrier?
+
+            // uint8_t barrier_X = 255;
+            // uint8_t barrier_B = 255;
+            // uint8_t barrier_Y = 255;
+
+            // switch (bullet.x) {
+
+            //     case  26 ... 41:
+
+            //         switch (bullet.y) {
+
+            //             case 46 ... 48:
+                            
+            //                 barrier_X = (bullet.x - 26) / 4;
+            //                 barrier_B = (bullet.x - 26) % 4;
+            //                 barrier_Y = 0;
+            //                 break;
+
+            //             case 49 ... 51:
+                            
+            //                 barrier_X = (bullet.x - 26) / 4;
+            //                 barrier_B = (bullet.x - 26) % 4;
+            //                 barrier_Y = 1;
+            //                 break;
+
+            //         }
+
+            //         break;
+
+            //     case 78 ... 93:
+
+            //         switch (bullet.y) {
+
+            //             case 46 ... 48:
+                            
+            //                 barrier_X = ((bullet.x - 78) / 4) + 4;
+            //                 barrier_B = (bullet.x - 78) % 4;
+            //                 barrier_Y = 0;
+            //                 break;
+
+            //             case 49 ... 51:
+                            
+            //                 barrier_X = ((bullet.x - 78) / 4) + 4;
+            //                 barrier_B = (bullet.x - 78) % 4;
+            //                 barrier_Y = 1;
+            //                 break;
+
+            //         }
+
+            //         break;
+
+            // }
+
+
+            // if (barrier_X != 255) {
+
+            //     Invader_Barrier &barrier = level.getItem(Constants::Invaders_Barrier_Start + (barrier_X * 2) + barrier_Y).data.invader_Barrier;
+
+            //     if ((barrier.value & (1 << barrier_B)) == 0) {
+
+            //         barrier.value = (barrier.value | (1 << barrier_B));// | (1 << barrier_B);
+            //         bullet.y = -4;
+            //         general2.bulletPlayerCountdown = 5;
+
+            //     }
+
+            // }
+
         }
 
     }
 
 }
 
-void invader_UpdateEnemyBullets(Invader_Player &player) {
+void invader_UpdateEnemyBullets(Invader_General &general, Invader_General2 &general2, Invader_Player &player) {
 
     for (uint8_t x = Constants::Invaders_Enemy_Bullet_Start; x <= Constants::Invaders_Enemy_Bullet_End; x++) {
 
-        Invader_Enemy_Bullet &bullet = level.getItem(x).data.invader_Enemy_Bullet;
+        Invader_Bullet &bullet = level.getItem(x).data.invader_Bullet;
 
-        if (bullet.y < 64) {
+        if (bullet.y >= -3 && bullet.y < 64) {
 
             bullet.y++;
 
             Point bulletPoint = { bullet.x, bullet.y };
-
-            // Item &player = level.getItem(Constants::Invaders_Player);
 
             if (player.status == Status::Active) {
 
@@ -484,6 +639,11 @@ void invader_UpdateEnemyBullets(Invader_Player &player) {
 
                     player.status = Status::Exploding1;
                     bullet.y = 64;
+
+                }
+                else {
+
+                    invader_HasBulletHitBarrier(general, general2, bullet);
 
                 }
 
@@ -503,14 +663,14 @@ void invader_PlayGame() {
     Invader_General &general = level.getItem(Constants::Invaders_General).data.invader_General;
     Invader_General2 &general2 = level.getItem(Constants::Invaders_General2).data.invader_General2;
     Invader_Player &player = level.getItem(Constants::Invaders_Player).data.invader_Player;
-    Invader_Player_Bullet &bullet = level.getItem(Constants::Invaders_Player_Bullet).data.invader_Player_Bullet;
+    Invader_Bullet &bullet = level.getItem(Constants::Invaders_Player_Bullet).data.invader_Bullet;
 
 
     // Update bullets ..
 
-    invader_UpdateEnemy(general, player);
+    invader_UpdateEnemy(general, general2, player);
     invader_UpdatePlayer(general, general2, player);
-    invader_UpdateEnemyBullets(player);
+    invader_UpdateEnemyBullets(general, general2, player);
     invader_EnemyDropsBullet(general2, player);
 
     if (bullet.y > -4) {
@@ -519,12 +679,33 @@ void invader_PlayGame() {
 
     }
 
-    invader_DetectPlayerBulletHit(general, bullet);
+    invader_DetectPlayerBulletHit(general, general2, bullet);
+
+
+    // if enemies reappearing, them move into position ..
+
+    if (general2.appearCountdown > 0) {
+
+        if (arduboy.getFrameCount(2) == 0) {
+
+            invader_MoveEnemies_Down(player);
+            general2.appearCountdown--;
+
+            if (general2.appearCountdown == 0) {
+
+                player.status = Status::Active;
+                arduboy.frameCount = 5;
+
+            }
+
+        }
+
+    }
 
 
     // Handle movements ..
 
-    if (player.status <= Status::Safe) {
+    if (player.status <= Status::Safe || player.status == Status::EnemiesAppearing) {
             
         if (pressed & LEFT_BUTTON && player.x > 4) {
             player.status = Status::Active;
@@ -536,14 +717,12 @@ void invader_PlayGame() {
             player.x++;
         }
 
-        if (pressed & A_BUTTON) {
-
-            player.status = Status::Active;
+        if (pressed & A_BUTTON && player.status != Status::EnemiesAppearing && general2.bulletPlayerCountdown == 0) {
 
             if (bullet.y == -4) {
 
                 bullet.x = player.x + 4;
-                bullet.y = player.y - 10;
+                bullet.y = player.y - 2;
                 
             }
 
@@ -551,8 +730,8 @@ void invader_PlayGame() {
 
     }
 
-    invader_RenderEnemies();
     invader_RenderBarriers();
+    invader_RenderEnemies();
 
     if (player.status != Status::Dead || general.lives != 0) {
         invader_RenderPlayer(player);
@@ -569,7 +748,11 @@ void invader_PlayGame() {
 
             if (invader_EnemiesAlive() == 0) {
 
-                invader_LoadEnemies();
+                if (general2.launchOffset < 20) general2.launchOffset = general2.launchOffset + 2;
+                invader_LoadEnemies(general2.launchOffset);
+                player.status = Status::EnemiesAppearing;
+                general2.appearCountdown = 24;
+                general2.speed = 17;
 
             }
 
@@ -602,6 +785,14 @@ void invader_PlayGame() {
 
             break;
 
+        default: break;
+
     }
+
+
+    // Housekeeping ..
+
+    if (general2.bulletPlayerCountdown > 0) general2.bulletPlayerCountdown--;
+
 
 }

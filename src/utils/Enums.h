@@ -40,8 +40,7 @@ enum class ItemType : uint8_t {
     /* 53 */ Invader_3,
     /* 54 */ Player,
     /* 55 */ Barrier,
-    /* 56 */ PlayerBullet,
-    /* 57 */ EnemyBullet,
+    /* 56 */ Bullet,
     /* 96 */ None = 96,
     /* 97 */ LoveHeart = 97,
     /* 98 */ Sign = 98,
@@ -216,6 +215,7 @@ enum class Status : uint8_t {
     Exploding3,
     Exploding4,
     Dead,
+    EnemiesAppearing,
 };
 
 enum class EnemyType : uint8_t {

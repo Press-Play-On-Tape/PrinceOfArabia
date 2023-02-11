@@ -421,6 +421,22 @@ void title() {
 
                     level.loadItems(0, prince);
                     titleScreenVars.setMode(TitleScreenMode::CutScene_7_PlayGame);
+                    arduboy.frameCount = 5;
+
+                    #ifdef DEBUG_INVADERS_EOE
+
+                        for(uint8_t x = 0; x < 21; x++) {
+
+                            Invader_Enemy &item = level.getItem(Constants::Invaders_Enemy_Row_1_Start + x).data.invader_Enemy;
+
+                            if (random(0, 3) != 0) {
+                                item.status = Status::Dead;
+                            }
+
+                        }
+                        
+                    #endif
+         
 
                 }
 
