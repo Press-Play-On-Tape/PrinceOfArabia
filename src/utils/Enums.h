@@ -175,8 +175,7 @@ enum class TitleScreenMode : uint8_t {
     CutScene_4,                     // 9
     CutScene_5,                     // 10
     CutScene_6,                     // 11
-    CutScene_7_RemoveArches,        // 12
-    CutScene_7_EnterPlayers,        // 13
+    CutScene_7_Transition,          // 12
     CutScene_7_PlayGame,            // 13
     CutScene_End,                   // 14
     IntroGame_End,                  // 15

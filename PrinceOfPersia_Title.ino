@@ -24,7 +24,7 @@ void title() {
         if (justPressed & B_BUTTON) {
 
             //setRenderChamberBG();
-            titleScreenVars.setMode(TitleScreenMode::CutScene_7_RemoveArches);
+            titleScreenVars.setMode(TitleScreenMode::CutScene_7_Transition);
 
             Invader_General &general = level.getItem(Constants::Invaders_General).data.invader_General;
             general.y = 0;
@@ -415,57 +415,12 @@ void title() {
 
                 break;
 
-            case TitleScreenMode::CutScene_7_RemoveArches:
-                {
-                    Invader_General &general = level.getItem(Constants::Invaders_General).data.invader_General;
-                  
-                    uint8_t topY = (general.y > 20 ? general.y - 20  : 0);
-                    uint8_t botY = (general.y > 25 ? (general.y - 25) / 4 : 0);
+            case TitleScreenMode::CutScene_7_Transition:
 
-                    FX::drawBitmap(0, 0 - topY, Images::Chambers_BG_01, 0, dbmNormal);
-                    FX::drawBitmap(0, 55 + botY, Images::Chambers_BG_02, 0, dbmNormal);
-                    FX::drawBitmap(0, 0 - topY, Images::Chambers_FG, 0, dbmMasked);
-                    
+                if (!FX::drawFrame()) {
 
-                    // Increment counter and see if we should progress to the next phase ..
-
-                    general.y = general.y + 1;
-
-                    if (general.y == 90) {
-
-                        level.loadItems(0, prince);
-                        titleScreenVars.setMode(TitleScreenMode::CutScene_7_EnterPlayers);
-
-                    }
-
-                }
-
-                break;
-
-            case TitleScreenMode::CutScene_7_EnterPlayers:
-                {
-                    Invader_General &general = level.getItem(Constants::Invaders_General).data.invader_General;
-                    Invader_Player &player = level.getItem(Constants::Invaders_Player).data.invader_Player;
-                  
-                    uint8_t y = (general.y ? general.y / 2 : 0);
-
-                    invader_RenderEnemies(-36 + y);
-                    invader_RenderBarriers(36 - y);
-                    invader_RenderPlayer(player, 36 - y, true);
-
-
-                    // Increment counter and see if we should progress to the next phase ..
-
-                    general.y = general.y + 1;
-
-                    if (general.y == 36 * 2) {
-
-                        titleScreenVars.setMode(TitleScreenMode::CutScene_7_PlayGame);
-
-                    }
-
-                    FX::drawBitmap(120 + (36/4) - (general.y / 8), 0, Images::HUD_Backgrounds, 2, dbmNormal);
-
+                    level.loadItems(0, prince);
+                    titleScreenVars.setMode(TitleScreenMode::CutScene_7_PlayGame);
 
                 }
 

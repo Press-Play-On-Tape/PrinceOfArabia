@@ -64,9 +64,9 @@ struct TitleScreenVars {
                 FX::setFrame(Title_CutScene_6_Frame, 2 - 1);
                 break;
 
-            case TitleScreenMode::CutScene_7_RemoveArches:
+            case TitleScreenMode::CutScene_7_Transition:
 
-                FX::setFrame(Title_CutScene_7_Frame, 2 - 1);
+                FX::setFrame(Title_CutScene_7_Frame, 1 - 1);
                 break;
 
             case TitleScreenMode::CutScene_End:
