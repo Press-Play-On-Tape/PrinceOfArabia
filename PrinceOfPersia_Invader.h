@@ -1,5 +1,9 @@
 #include <Arduboy2.h>
 
+
+                            //     0   1   2   3   4   5   6   7   8   9   0   1   2   3   4   5   6   7   8   9   0   1   2
+const uint8_t speed[] PROGMEM = {  2,  2,  3,  3,  3,  4,  4,  5,  6,  7,  8,  9, 10, 12, 13, 14, 15, 16, 17, 18, 20, 21, 22  };
+
 void invader_LoadEnemies(uint8_t launchOffset) {
 
     FX::seekData(FX::readIndexedUInt24(Levels::Level_Items, 0) + 16);
@@ -50,7 +54,8 @@ uint8_t invader_EnemiesAlive() {
 
 uint8_t invader_getSpeed() {
 
-    return 1 + ((invader_EnemiesAlive() * 4) / 3);
+    uint8_t x = invader_EnemiesAlive();
+    return pgm_read_byte(&speed[x]);
 
 }
 
@@ -183,11 +188,34 @@ void invader_MoveEnemies_Down(Invader_Player &player) {
 
 }
 
-void invader_MoveEnemies_Left(Invader_General &general, Invader_Player &player, uint8_t startPos, uint8_t endPos, uint8_t test) {
+// void invader_MoveEnemies_Left(Invader_General &general, Invader_Player &player, uint8_t startPos, uint8_t endPos, uint8_t test) {
+
+//     Invader_Enemy &testItem = level.getItem(test).data.invader_Enemy;
+
+//     for (uint8_t x = startPos; x <= endPos; x++) {
+
+//         Invader_Enemy &enemy = level.getItem(x).data.invader_Enemy;
+//         enemy.x = enemy.x - 2;
+
+//     }
+
+
+//     // Move enemies down ?
+
+//     if (startPos == Constants::Invaders_Enemy_Row_1_Start && testItem.x <= 5) {
+
+//         general.direction = Direction::Right;
+//         invader_MoveEnemies_Down(player);
+        
+//     }
+
+// }
+
+void invader_MoveEnemies_Left(Invader_General &general, Invader_Player &player, uint8_t test) {
 
     Invader_Enemy &testItem = level.getItem(test).data.invader_Enemy;
 
-    for (uint8_t x = startPos; x <= endPos; x++) {
+    for (uint8_t x = Constants::Invaders_Enemy_Row_1_Start; x <= Constants::Invaders_Enemy_Row_3_End; x++) {
 
         Invader_Enemy &enemy = level.getItem(x).data.invader_Enemy;
         enemy.x = enemy.x - 2;
@@ -197,7 +225,7 @@ void invader_MoveEnemies_Left(Invader_General &general, Invader_Player &player, 
 
     // Move enemies down ?
 
-    if (startPos == Constants::Invaders_Enemy_Row_1_Start && testItem.x <= 5) {
+    if (testItem.x <= 5) {
 
         general.direction = Direction::Right;
         invader_MoveEnemies_Down(player);
@@ -206,11 +234,34 @@ void invader_MoveEnemies_Left(Invader_General &general, Invader_Player &player, 
 
 }
 
-void invader_MoveEnemies_Right(Invader_General &general, Invader_Player &player, uint8_t startPos, uint8_t endPos, uint8_t test) {
+// void invader_MoveEnemies_Right(Invader_General &general, Invader_Player &player, uint8_t startPos, uint8_t endPos, uint8_t test) {
+    
+//     Invader_Enemy &testItem = level.getItem(test).data.invader_Enemy;
+
+//     for (uint8_t x = startPos; x <= endPos; x++) {
+
+//         Invader_Enemy &enemy = level.getItem(x).data.invader_Enemy;
+//         enemy.x = enemy.x + 2;
+
+//     }
+
+
+//     // Move enemies down ?
+
+//     if (startPos == Constants::Invaders_Enemy_Row_1_Start && testItem.x >= 103) {
+
+//         general.direction = Direction::Left;
+//         invader_MoveEnemies_Down(player);
+        
+//     }
+
+// }
+
+void invader_MoveEnemies_Right(Invader_General &general, Invader_Player &player, uint8_t test) {
     
     Invader_Enemy &testItem = level.getItem(test).data.invader_Enemy;
 
-    for (uint8_t x = startPos; x <= endPos; x++) {
+    for (uint8_t x = Constants::Invaders_Enemy_Row_1_Start; x <= Constants::Invaders_Enemy_Row_3_End; x++) {
 
         Invader_Enemy &enemy = level.getItem(x).data.invader_Enemy;
         enemy.x = enemy.x + 2;
@@ -220,12 +271,24 @@ void invader_MoveEnemies_Right(Invader_General &general, Invader_Player &player,
 
     // Move enemies down ?
 
-    if (startPos == Constants::Invaders_Enemy_Row_1_Start && testItem.x >= 103) {
+    if (testItem.x >= 103) {
 
         general.direction = Direction::Left;
         invader_MoveEnemies_Down(player);
         
     }
+
+}
+bool invader_HasActiveEnemeies(uint8_t startPos, uint8_t endPos) {
+
+    for (uint8_t x = startPos; x <= endPos; x++) {
+
+        Invader_Enemy &enemy = level.getItem(x).data.invader_Enemy;
+        if (enemy.status != Status::Dead) return true;
+
+    }
+
+    return false;
 
 }
 
@@ -259,14 +322,27 @@ void invader_UpdateEnemy(Invader_General &general, Invader_General2 &general2, I
         general.right = general.right - Constants::Invaders_Enemy_Row_1_Start;
         general.left = general.left - Constants::Invaders_Enemy_Row_1_Start;
 
-    //}
+// Serial.print(general.left);
+// Serial.print(" ");
+// Serial.println(general.right);
 
+
+    //}
+/*/
+
+    // Which rows have active enemies?
+
+    bool row1 = invader_HasActiveEnemeies(Constants::Invaders_Enemy_Row_1_Start, Constants::Invaders_Enemy_Row_1_End);
+    bool row2 = invader_HasActiveEnemeies(Constants::Invaders_Enemy_Row_2_Start, Constants::Invaders_Enemy_Row_2_End);
+    bool row3 = invader_HasActiveEnemeies(Constants::Invaders_Enemy_Row_3_Start, Constants::Invaders_Enemy_Row_3_End);
+
+    uint8_t row1_start = row1 ? Constants::Invaders_Enemy_Row_1_Start : (row2 ? Constants::Invaders_Enemy_Row_2_Start : (row3 ? Constants::Invaders_Enemy_Row_3_Start : 0));
+    uint8_t row2_start = (row1 && row2) ? Constants::Invaders_Enemy_Row_2_Start : (row3 ? Constants::Invaders_Enemy_Row_3_Start : 0);
+    uint8_t row3_start = (row1 && row2 && row3) ? Constants::Invaders_Enemy_Row_3_Start : 0;
 
 
 
     // Move enemies ..
-
-    
 
     switch (general.direction) {
 
@@ -276,18 +352,24 @@ void invader_UpdateEnemy(Invader_General &general, Invader_General2 &general2, I
 
                 case 0:
 
-                    general2.speed = invader_getSpeed();
-                    invader_MoveEnemies_Left(general, player, Constants::Invaders_Enemy_Row_1_Start, Constants::Invaders_Enemy_Row_1_End, Constants::Invaders_Enemy_Row_1_Start + general.left);
+                    if (row1_start > 0) { 
+                    
+                        general2.speed = invader_getSpeed();
+                        invader_MoveEnemies_Left(general, player, row1_start, row1_start + 6, row1_start + general.left);
+
+                    }
                     break;
 
                 case 2:
-                    {   
-                        Item &enemy = level.getItem(Constants::Invaders_Enemy_Row_1_Start + general.right);
+
+                    if (row2_start > 0) {   
+
+                        Item &enemy = level.getItem(row1_start + general.right);
                         if (enemy.data.invader_Enemy.x >= 103) {
-                            invader_MoveEnemies_Right(general, player, Constants::Invaders_Enemy_Row_2_Start, Constants::Invaders_Enemy_Row_2_End, Constants::Invaders_Enemy_Row_1_Start + general.right);
+                            invader_MoveEnemies_Right(general, player, row2_start, row2_start + 6, row1_start + general.right);
                         }
                         else {
-                            invader_MoveEnemies_Left(general, player, Constants::Invaders_Enemy_Row_2_Start, Constants::Invaders_Enemy_Row_2_End, Constants::Invaders_Enemy_Row_1_Start + general.left);
+                            invader_MoveEnemies_Left(general, player, row2_start, row2_start + 6, row1_start + general.left);
                         }
 
                     }
@@ -295,14 +377,16 @@ void invader_UpdateEnemy(Invader_General &general, Invader_General2 &general2, I
                     break;
 
                 case 4:
-                    {   
-                        Item &enemy = level.getItem(Constants::Invaders_Enemy_Row_1_Start + general.right);
+
+                    if (row3_start > 0) { 
+
+                        Item &enemy = level.getItem(row1_start + general.right);
 
                         if (enemy.data.invader_Enemy.x >= 103) {
-                            invader_MoveEnemies_Right(general, player, Constants::Invaders_Enemy_Row_3_Start, Constants::Invaders_Enemy_Row_3_End, Constants::Invaders_Enemy_Row_1_Start + general.right);
+                            invader_MoveEnemies_Right(general, player, row3_start, row3_start + 6, row1_start + general.right);
                         }
                         else {
-                            invader_MoveEnemies_Left(general, player, Constants::Invaders_Enemy_Row_3_Start, Constants::Invaders_Enemy_Row_3_End, Constants::Invaders_Enemy_Row_1_Start + general.left);
+                            invader_MoveEnemies_Left(general, player, row3_start, row3_start + 6, row1_start + general.left);
                         }
 
                     }
@@ -318,19 +402,26 @@ void invader_UpdateEnemy(Invader_General &general, Invader_General2 &general2, I
 
                 case 0:
 
-                    general2.speed = invader_getSpeed();
-                    invader_MoveEnemies_Right(general, player, Constants::Invaders_Enemy_Row_1_Start, Constants::Invaders_Enemy_Row_1_End, Constants::Invaders_Enemy_Row_1_Start + general.right);
+                    if (row1_start > 0) {   
+
+                        general2.speed = invader_getSpeed();
+                        invader_MoveEnemies_Right(general, player, row1_start, row1_start + 6, row1_start + general.right);
+
+                    }
+
                     break;
 
                 case 2:
-                    {   
-                        Item &enemy = level.getItem(Constants::Invaders_Enemy_Row_1_Start + general.left);
+                    
+                    if (row2_start > 0) {   
+
+                        Item &enemy = level.getItem(row1_start + general.left);
 
                         if (enemy.data.invader_Enemy.x <= 5) {
-                            invader_MoveEnemies_Left(general, player, Constants::Invaders_Enemy_Row_2_Start, Constants::Invaders_Enemy_Row_2_End, Constants::Invaders_Enemy_Row_1_Start + general.left);
+                            invader_MoveEnemies_Left(general, player, row2_start, row2_start + 6, row1_start + general.left);
                         }
                         else {
-                            invader_MoveEnemies_Right(general, player, Constants::Invaders_Enemy_Row_2_Start, Constants::Invaders_Enemy_Row_2_End, Constants::Invaders_Enemy_Row_1_Start + general.right);
+                            invader_MoveEnemies_Right(general, player, row2_start, row2_start + 6, row1_start + general.right);
                         }
 
                     }
@@ -338,14 +429,16 @@ void invader_UpdateEnemy(Invader_General &general, Invader_General2 &general2, I
                     break;
 
                 case 4:
-                    {   
-                        Item &enemy = level.getItem(Constants::Invaders_Enemy_Row_1_Start + general.left);
+                    
+                    if (row3_start > 0) { 
+
+                        Item &enemy = level.getItem(row1_start + general.left);
 
                         if (enemy.data.invader_Enemy.x <= 5) {
-                            invader_MoveEnemies_Left(general, player, Constants::Invaders_Enemy_Row_3_Start, Constants::Invaders_Enemy_Row_3_End, Constants::Invaders_Enemy_Row_1_Start + general.left);
+                            invader_MoveEnemies_Left(general, player, row3_start, row3_start + 6, row1_start + general.left);
                         }
                         else {
-                            invader_MoveEnemies_Right(general, player, Constants::Invaders_Enemy_Row_3_Start, Constants::Invaders_Enemy_Row_3_End, Constants::Invaders_Enemy_Row_1_Start + general.right);
+                            invader_MoveEnemies_Right(general, player, row3_start, row3_start + 6, row1_start + general.right);
                         }
 
                     }
@@ -358,8 +451,58 @@ void invader_UpdateEnemy(Invader_General &general, Invader_General2 &general2, I
         default: break;
 
     }
+*/
 
 
+    // Move enemies ..
+
+    if (player.status != Status::EnemiesAppearing) {
+
+        switch (general.direction) {
+
+            case Direction::Left:
+
+                switch (frameCount) {
+
+                    case 0:
+
+                        general2.speed = invader_getSpeed();
+                        invader_MoveEnemies_Left(general, player, Constants::Invaders_Enemy_Row_1_Start + general.left);
+                        // invader_MoveEnemies_Left(general, player, row1_start, row1_start + 6, row1_start + general.left);
+                        // invader_MoveEnemies_Left(general, player, row2_start, row2_start + 6, row1_start + general.left);
+                        // invader_MoveEnemies_Left(general, player, row3_start, row3_start + 6, row1_start + general.left);
+
+                        break;
+
+                }
+
+                break;
+
+            case Direction::Right:
+
+                switch (frameCount) {
+
+                    case 0:
+
+                        general2.speed = invader_getSpeed();
+                        invader_MoveEnemies_Right(general, player, Constants::Invaders_Enemy_Row_1_Start + general.right);
+                        // invader_MoveEnemies_Right(general, player, row1_start, row1_start + 6, row1_start + general.right);
+                        // invader_MoveEnemies_Right(general, player, row2_start, row2_start + 6, row1_start + general.right);
+                        // invader_MoveEnemies_Right(general, player, row3_start, row3_start + 6, row1_start + general.right);
+
+                        break;
+
+                }
+
+                break;
+
+            default: break;
+
+        }
+
+   }
+
+    
     // Update explosions, etc ..
 
     for (uint8_t x = Constants::Invaders_Enemy_Row_1_Start; x <= Constants::Invaders_Enemy_Row_3_End; x++) {
@@ -396,11 +539,14 @@ void invader_UpdatePlayer(Invader_General &general, Invader_General2 &general2, 
 
 void invader_EnemyDropsBullet(Invader_General2 &general2, Invader_Player &player) {
 
+
     // Are we still in the pause period between bullets ?
 
     if (general2.bulletCountdown > 0 || player.status != Status::Active) {
+
         general2.bulletCountdown--;
         return;
+
     }
 
 
@@ -429,17 +575,45 @@ void invader_EnemyDropsBullet(Invader_General2 &general2, Invader_Player &player
 
         Invader_Bullet &bullet = level.getItem(found).data.invader_Bullet;
 
-        for (uint8_t x = Constants::Invaders_Enemy_Row_3_End; x > Constants::Invaders_Enemy_Row_1_Start; x--) {
+        if (random(0, 2) == 0) {
 
-            Invader_Enemy &enemy = level.getItem(x).data.invader_Enemy;
-            
-            if (enemy.status == Status::Active && abs(enemy.x - player.x) < 16) {
 
-                bullet.x = enemy.x + 4;
-                bullet.y = enemy.y + 8;
+            // Drop overhead ..
 
-                general2.bulletCountdown = random(general2.speed, general2.speed * 2);
-                general2.bulletCountdown = random(general2.speed * 2, general2.speed * 4);
+            for (uint8_t x = Constants::Invaders_Enemy_Row_3_End; x > Constants::Invaders_Enemy_Row_1_Start; x--) {
+
+                Invader_Enemy &enemy = level.getItem(x).data.invader_Enemy;
+                
+                if (enemy.status == Status::Active && abs(enemy.x - player.x) < 16) {
+
+                    bullet.x = enemy.x + 4;
+                    bullet.y = enemy.y + 8;
+
+                    general2.bulletCountdown = random(general2.speed, general2.speed * 2);
+
+                    break;
+
+                }
+
+            }
+
+        }
+        else {
+
+            for (uint8_t x = 0; x < 42; x++) {
+
+                Invader_Enemy &enemy = level.getItem(Constants::Invaders_Enemy_Row_1_Start + random(0, 22)).data.invader_Enemy;
+                
+                if (enemy.status == Status::Active && abs(enemy.x - player.x) < 16) {
+
+                    bullet.x = enemy.x + 4;
+                    bullet.y = enemy.y + 8;
+
+                    general2.bulletCountdown = random(general2.speed, general2.speed * 2);
+
+                    break;
+
+                }
 
             }
 
