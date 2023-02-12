@@ -21,7 +21,7 @@ void title() {
 
     #ifdef DEBUG_CUT_SCENES
 
-        if (justPressed & B_BUTTON) {
+        if (justPressed & B_BUTTON && titleScreenVars.getMode() != TitleScreenMode::CutScene_7_PlayGame) {
 
             //setRenderChamberBG();
             titleScreenVars.setMode(TitleScreenMode::CutScene_7_Transition);
@@ -85,61 +85,61 @@ void title() {
 
     }
 
-    #ifdef DEBUG_CUT_SCENES
+//    #ifdef DEBUG_CUT_SCENES
     if (justPressed & (A_BUTTON)) {
-    #else
-    if (justPressed & (A_BUTTON | B_BUTTON)) {
-    #endif
+//    #else
+//    if (justPressed & (A_BUTTON | B_BUTTON)) {
+//    #endif
     
         switch (titleScreenVars.getMode()) {
 
-        case TitleScreenMode::Main:
+            case TitleScreenMode::Main:
 
-            switch (titleScreenVars.option) {
+                switch (titleScreenVars.option) {
 
-                #ifdef SAVE_MEMORY_OTHER
-                    case TitleScreenOptions::Play:
+                    #ifdef SAVE_MEMORY_OTHER
+                        case TitleScreenOptions::Play:
 
-                        gamePlay.gameState = GameState::Game_Init;
+                            gamePlay.gameState = GameState::Game_Init;
 
-                        break;
+                            break;
 
-                #else
+                    #else
 
-                    case TitleScreenOptions::Play:
+                        case TitleScreenOptions::Play:
 
-                        #ifndef SAVE_MEMORY_SOUND
-                            sound.tonesFromFX(Sounds::Seque);
-                        #endif
+                            #ifndef SAVE_MEMORY_SOUND
+                                sound.tonesFromFX(Sounds::Seque);
+                            #endif
 
-                        prince.setHealth(3);
-                        prince.setHealthMax(3);
+                            prince.setHealth(3);
+                            prince.setHealthMax(3);
 
-                        titleScreenVars.setMode(TitleScreenMode::IntroGame_1A);
-                        FX::setFrame(Title_IntroGame_1A_Frame, 4 - 1);
+                            titleScreenVars.setMode(TitleScreenMode::IntroGame_1A);
+                            FX::setFrame(Title_IntroGame_1A_Frame, 4 - 1);
 
-                        break;
+                            break;
 
-                    case TitleScreenOptions::Credits:
+                        case TitleScreenOptions::Credits:
 
-                        titleScreenVars.setMode(TitleScreenMode::Credits);
-                        FX::setFrame(Title_Credits_Frame, 5 - 1);
+                            titleScreenVars.setMode(TitleScreenMode::Credits);
+                            FX::setFrame(Title_Credits_Frame, 5 - 1);
 
-                        break;
+                            break;
 
-                    case TitleScreenOptions::High:
+                        case TitleScreenOptions::High:
 
-                        titleScreenVars.setMode(TitleScreenMode::High);
-                        FX::setFrame(Title_High_Frame, 5 - 1);
-                        break;
+                            titleScreenVars.setMode(TitleScreenMode::High);
+                            FX::setFrame(Title_High_Frame, 5 - 1);
+                            break;
 
-                #endif
+                    #endif
 
-                default: break;
+                    default: break;
 
-            }
+                }
 
-            break;
+                break;
 
         #ifndef SAVE_MEMORY_OTHER
 
@@ -147,11 +147,11 @@ void title() {
             case TitleScreenMode::High:
             case TitleScreenMode::TimeOut:
 
-                #ifdef DEBUG_CUT_SCENES
+//                #ifdef DEBUG_CUT_SCENES
                 if (justPressed & (A_BUTTON)) {
-                #else
-                if (justPressed & (A_BUTTON | B_BUTTON)) {
-                #endif
+//                #else
+//                if (justPressed & (A_BUTTON | B_BUTTON)) {
+//                #endif
 
                     titleScreenVars.setMode(TitleScreenMode::Main);
 
@@ -207,6 +207,18 @@ void title() {
 
                 gamePlay.gameState = GameState::Game_StartLevel; 
                 break;
+
+            #ifndef SAVE_MEMORY_INVADER
+
+                case TitleScreenMode::CutScene_7_Transition:
+                case TitleScreenMode::CutScene_7_PlayGame:
+
+                    titleScreenVars.setMode(TitleScreenMode::CutScene_7_PlayGame);
+                    gamePlay.gameState = GameState::Game_StartLevel; 
+                    arduboy.setFrameRate(Constants::FrameRate);
+                    break;
+
+            #endif
 
             case TitleScreenMode::CutScene_End:
 
@@ -415,37 +427,27 @@ void title() {
 
                 break;
 
-            case TitleScreenMode::CutScene_7_Transition:
+            #ifndef SAVE_MEMORY_INVADER
 
-                if (!FX::drawFrame()) {
+                case TitleScreenMode::CutScene_7_Transition:
 
-                    level.loadItems(0, prince);
-                    titleScreenVars.setMode(TitleScreenMode::CutScene_7_PlayGame);
-                    arduboy.frameCount = 5;
+                    if (!FX::drawFrame()) {
 
-                    #ifdef DEBUG_INVADERS_EOE
+                        level.loadItems(0, prince);
+                        titleScreenVars.setMode(TitleScreenMode::CutScene_7_PlayGame);
+                        arduboy.frameCount = 5;
+                        arduboy.setFrameRate(60);
 
-                        for(uint8_t x = 0; x < 21; x++) {
+                    }
 
-                            Invader_Enemy &item = level.getItem(Constants::Invaders_Enemy_Row_1_Start + x).data.invader_Enemy;
+                    break;
 
-                            if (random(0, 3) != 0) {
-                                item.status = Status::Dead;
-                            }
+                case TitleScreenMode::CutScene_7_PlayGame:
+                    
+                    invader_PlayGame();
+                    break;          
 
-                        }
-                        
-                    #endif
-         
-
-                }
-
-                break;
-
-            case TitleScreenMode::CutScene_7_PlayGame:
-                
-                invader_PlayGame();
-                break;                
+            #endif      
 
         #endif
 

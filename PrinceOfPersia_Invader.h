@@ -2,38 +2,34 @@
 
 
                             //     0   1   2   3   4   5   6   7   8   9   0   1   2   3   4   5   6   7   8   9   0   1   2
-const uint8_t speed[] PROGMEM = {  2,  2,  3,  3,  3,  4,  4,  5,  6,  7,  8,  9, 10, 12, 13, 14, 15, 16, 17, 18, 20, 21, 22  };
+const uint8_t speed[] PROGMEM = {  1,  1,  2,  3,  3,  4,  4,  5,  6,  7,  8,  9, 10, 12, 13, 14, 15, 16, 17, 18, 20, 21, 22  };
 
-void invader_LoadEnemies(uint8_t launchOffset) {
+
+// Load a new wave of enemies and replenish barriers.
+
+void invader_NewWave(Invader_General2 general2) {
 
     FX::seekData(FX::readIndexedUInt24(Levels::Level_Items, 0) + 16);
 
-    for(uint8_t x = 0; x < 21; x++) {
+    for(uint8_t x = 0; x < 21 + 16; x++) {  // enemies + barriers
 
         Item &item = level.getItem(Constants::Invaders_Enemy_Row_1_Start + x);
         item.itemType = static_cast<ItemType>(FX::readPendingUInt8());
         FX::readBytes((uint8_t*)&item.data.rawData, sizeof(item.data.rawData));
 
-        item.data.invader_Enemy.y = item.data.invader_Enemy.y - 24 + launchOffset;
+        if (x < 21) {
+            item.data.invader_Enemy.y = item.data.invader_Enemy.y - 24 + general2.launchOffset;
+        }
 
     }
 
-    #ifdef DEBUG_INVADERS_EOE
-
-        for(uint8_t x = 0; x < 21; x++) {
-
-            Invader_Enemy &item = level.getItem(Constants::Invaders_Enemy_Row_1_Start + x).data.invader_Enemy;
-
-            if (random(0, 3) != 0) {
-                item.status = Status::Dead;
-            }
-
-        }
-        
-    #endif
-
-
     FX::readEnd();
+
+    #ifndef SAVE_MEMORY_SOUND
+        sound.tonesFromFX(Sounds::Invader_Wave_Start);
+    #endif 
+
+    general2.bulletCountdown = 0;
 
 }
 
@@ -43,8 +39,8 @@ uint8_t invader_EnemiesAlive() {
 
     for (uint8_t x = Constants::Invaders_Enemy_Row_1_Start; x <= Constants::Invaders_Enemy_Row_3_End; x++) {
    
-        Item &enemy = level.getItem(x);
-        if (enemy.data.invader_Enemy.status == Status::Active)  count++;
+        Invader_Enemy &enemy = level.getItem(x).data.invader_Enemy;
+        if (enemy.status != Status::Dead)  count++;
 
     }
 
@@ -125,11 +121,11 @@ void invader_RenderBarriers(int yOffset = 0) {
 void invader_RenderPlayer(Invader_Player &player, int yOffset = 0, bool show = false) {
 
     uint8_t frame = 0;
+
     switch (player.status) {
 
         case Status::Active:
         case Status::EnemiesAppearing:
-            frame = 0;
             break;
 
         case Status::Safe:
@@ -188,29 +184,6 @@ void invader_MoveEnemies_Down(Invader_Player &player) {
 
 }
 
-// void invader_MoveEnemies_Left(Invader_General &general, Invader_Player &player, uint8_t startPos, uint8_t endPos, uint8_t test) {
-
-//     Invader_Enemy &testItem = level.getItem(test).data.invader_Enemy;
-
-//     for (uint8_t x = startPos; x <= endPos; x++) {
-
-//         Invader_Enemy &enemy = level.getItem(x).data.invader_Enemy;
-//         enemy.x = enemy.x - 2;
-
-//     }
-
-
-//     // Move enemies down ?
-
-//     if (startPos == Constants::Invaders_Enemy_Row_1_Start && testItem.x <= 5) {
-
-//         general.direction = Direction::Right;
-//         invader_MoveEnemies_Down(player);
-        
-//     }
-
-// }
-
 void invader_MoveEnemies_Left(Invader_General &general, Invader_Player &player, uint8_t test) {
 
     Invader_Enemy &testItem = level.getItem(test).data.invader_Enemy;
@@ -234,29 +207,6 @@ void invader_MoveEnemies_Left(Invader_General &general, Invader_Player &player, 
 
 }
 
-// void invader_MoveEnemies_Right(Invader_General &general, Invader_Player &player, uint8_t startPos, uint8_t endPos, uint8_t test) {
-    
-//     Invader_Enemy &testItem = level.getItem(test).data.invader_Enemy;
-
-//     for (uint8_t x = startPos; x <= endPos; x++) {
-
-//         Invader_Enemy &enemy = level.getItem(x).data.invader_Enemy;
-//         enemy.x = enemy.x + 2;
-
-//     }
-
-
-//     // Move enemies down ?
-
-//     if (startPos == Constants::Invaders_Enemy_Row_1_Start && testItem.x >= 103) {
-
-//         general.direction = Direction::Left;
-//         invader_MoveEnemies_Down(player);
-        
-//     }
-
-// }
-
 void invader_MoveEnemies_Right(Invader_General &general, Invader_Player &player, uint8_t test) {
     
     Invader_Enemy &testItem = level.getItem(test).data.invader_Enemy;
@@ -279,239 +229,67 @@ void invader_MoveEnemies_Right(Invader_General &general, Invader_Player &player,
     }
 
 }
-bool invader_HasActiveEnemeies(uint8_t startPos, uint8_t endPos) {
-
-    for (uint8_t x = startPos; x <= endPos; x++) {
-
-        Invader_Enemy &enemy = level.getItem(x).data.invader_Enemy;
-        if (enemy.status != Status::Dead) return true;
-
-    }
-
-    return false;
-
-}
 
 void invader_UpdateEnemy(Invader_General &general, Invader_General2 &general2, Invader_Player &player) {
 
     uint8_t frameCount = arduboy.getFrameCount(invader_getSpeed());
 
 
-    //if (frameCount == 0) {
+    // Work out left and right limits of enemies ..
 
-        general.right = 0;
-        general.left = 6;
+    general.right = 0;
+    general.left = 6;
 
-        for (uint8_t x = Constants::Invaders_Enemy_Row_1_Start; x <= Constants::Invaders_Enemy_Row_1_End; x++) {
+    for (uint8_t x = Constants::Invaders_Enemy_Row_1_Start; x <= Constants::Invaders_Enemy_Row_1_End; x++) {
 
-            for (uint8_t y = 0; y <= 2; y++) {
+        for (uint8_t y = 0; y < 3; y++) {
 
-                Item &enemy = level.getItem(x + (y * 7));
-                
-                if (enemy.data.invader_Enemy.status != Status::Dead) {
+            Invader_Enemy &enemy = level.getItem(x + (y * 7)).data.invader_Enemy;
+            
+            if (enemy.status == Status::Active) {
 
-                    if (x > general.right) general.right = x;
-                    if (x < general.left)  general.left  = x;
+                if (x > general.right) general.right = x;
+                if (x < general.left)  general.left  = x;
 
-                }
+            }
+
+
+            // Update explosions ..
+
+            if (enemy.status >= Status::Exploding1 && enemy.status < Status::Dead) {
+
+                enemy.status = static_cast<Status>(static_cast<uint8_t>(enemy.status) + 1);
 
             }
 
         }
 
-        general.right = general.right - Constants::Invaders_Enemy_Row_1_Start;
-        general.left = general.left - Constants::Invaders_Enemy_Row_1_Start;
-
-// Serial.print(general.left);
-// Serial.print(" ");
-// Serial.println(general.right);
-
-
-    //}
-/*/
-
-    // Which rows have active enemies?
-
-    bool row1 = invader_HasActiveEnemeies(Constants::Invaders_Enemy_Row_1_Start, Constants::Invaders_Enemy_Row_1_End);
-    bool row2 = invader_HasActiveEnemeies(Constants::Invaders_Enemy_Row_2_Start, Constants::Invaders_Enemy_Row_2_End);
-    bool row3 = invader_HasActiveEnemeies(Constants::Invaders_Enemy_Row_3_Start, Constants::Invaders_Enemy_Row_3_End);
-
-    uint8_t row1_start = row1 ? Constants::Invaders_Enemy_Row_1_Start : (row2 ? Constants::Invaders_Enemy_Row_2_Start : (row3 ? Constants::Invaders_Enemy_Row_3_Start : 0));
-    uint8_t row2_start = (row1 && row2) ? Constants::Invaders_Enemy_Row_2_Start : (row3 ? Constants::Invaders_Enemy_Row_3_Start : 0);
-    uint8_t row3_start = (row1 && row2 && row3) ? Constants::Invaders_Enemy_Row_3_Start : 0;
-
-
-
-    // Move enemies ..
-
-    switch (general.direction) {
-
-        case Direction::Left:
-
-            switch (frameCount) {
-
-                case 0:
-
-                    if (row1_start > 0) { 
-                    
-                        general2.speed = invader_getSpeed();
-                        invader_MoveEnemies_Left(general, player, row1_start, row1_start + 6, row1_start + general.left);
-
-                    }
-                    break;
-
-                case 2:
-
-                    if (row2_start > 0) {   
-
-                        Item &enemy = level.getItem(row1_start + general.right);
-                        if (enemy.data.invader_Enemy.x >= 103) {
-                            invader_MoveEnemies_Right(general, player, row2_start, row2_start + 6, row1_start + general.right);
-                        }
-                        else {
-                            invader_MoveEnemies_Left(general, player, row2_start, row2_start + 6, row1_start + general.left);
-                        }
-
-                    }
-
-                    break;
-
-                case 4:
-
-                    if (row3_start > 0) { 
-
-                        Item &enemy = level.getItem(row1_start + general.right);
-
-                        if (enemy.data.invader_Enemy.x >= 103) {
-                            invader_MoveEnemies_Right(general, player, row3_start, row3_start + 6, row1_start + general.right);
-                        }
-                        else {
-                            invader_MoveEnemies_Left(general, player, row3_start, row3_start + 6, row1_start + general.left);
-                        }
-
-                    }
-                    break;
-
-            }
-
-            break;
-
-        case Direction::Right:
-
-            switch (frameCount) {
-
-                case 0:
-
-                    if (row1_start > 0) {   
-
-                        general2.speed = invader_getSpeed();
-                        invader_MoveEnemies_Right(general, player, row1_start, row1_start + 6, row1_start + general.right);
-
-                    }
-
-                    break;
-
-                case 2:
-                    
-                    if (row2_start > 0) {   
-
-                        Item &enemy = level.getItem(row1_start + general.left);
-
-                        if (enemy.data.invader_Enemy.x <= 5) {
-                            invader_MoveEnemies_Left(general, player, row2_start, row2_start + 6, row1_start + general.left);
-                        }
-                        else {
-                            invader_MoveEnemies_Right(general, player, row2_start, row2_start + 6, row1_start + general.right);
-                        }
-
-                    }
-
-                    break;
-
-                case 4:
-                    
-                    if (row3_start > 0) { 
-
-                        Item &enemy = level.getItem(row1_start + general.left);
-
-                        if (enemy.data.invader_Enemy.x <= 5) {
-                            invader_MoveEnemies_Left(general, player, row3_start, row3_start + 6, row1_start + general.left);
-                        }
-                        else {
-                            invader_MoveEnemies_Right(general, player, row3_start, row3_start + 6, row1_start + general.right);
-                        }
-
-                    }
-                    break;
-
-            }
-
-            break;
-
-        default: break;
-
     }
-*/
+
+    general.right = general.right - Constants::Invaders_Enemy_Row_1_Start;
+    general.left = general.left - Constants::Invaders_Enemy_Row_1_Start;
+
 
 
     // Move enemies ..
 
-    if (player.status != Status::EnemiesAppearing) {
+    if (player.status != Status::EnemiesAppearing && frameCount == 0) {
+
+        general2.speed = invader_getSpeed();
 
         switch (general.direction) {
 
             case Direction::Left:
 
-                switch (frameCount) {
-
-                    case 0:
-
-                        general2.speed = invader_getSpeed();
-                        invader_MoveEnemies_Left(general, player, Constants::Invaders_Enemy_Row_1_Start + general.left);
-                        // invader_MoveEnemies_Left(general, player, row1_start, row1_start + 6, row1_start + general.left);
-                        // invader_MoveEnemies_Left(general, player, row2_start, row2_start + 6, row1_start + general.left);
-                        // invader_MoveEnemies_Left(general, player, row3_start, row3_start + 6, row1_start + general.left);
-
-                        break;
-
-                }
-
+                invader_MoveEnemies_Left(general, player, Constants::Invaders_Enemy_Row_1_Start + general.left);
                 break;
 
             case Direction::Right:
 
-                switch (frameCount) {
-
-                    case 0:
-
-                        general2.speed = invader_getSpeed();
-                        invader_MoveEnemies_Right(general, player, Constants::Invaders_Enemy_Row_1_Start + general.right);
-                        // invader_MoveEnemies_Right(general, player, row1_start, row1_start + 6, row1_start + general.right);
-                        // invader_MoveEnemies_Right(general, player, row2_start, row2_start + 6, row1_start + general.right);
-                        // invader_MoveEnemies_Right(general, player, row3_start, row3_start + 6, row1_start + general.right);
-
-                        break;
-
-                }
-
+                invader_MoveEnemies_Right(general, player, Constants::Invaders_Enemy_Row_1_Start + general.right);
                 break;
 
             default: break;
-
-        }
-
-   }
-
-    
-    // Update explosions, etc ..
-
-    for (uint8_t x = Constants::Invaders_Enemy_Row_1_Start; x <= Constants::Invaders_Enemy_Row_3_End; x++) {
-
-        Invader_Enemy &enemy = level.getItem(x).data.invader_Enemy;
-        
-        if (enemy.status >= Status::Exploding1 && enemy.status < Status::Dead) {
-
-            enemy.status = static_cast<Status>(static_cast<uint8_t>(enemy.status) + 1);
 
         }
 
@@ -528,8 +306,16 @@ void invader_UpdatePlayer(Invader_General &general, Invader_General2 &general2, 
 
         if (player.status == Status::Dead) {
 
-            general.lives--;
+            if (general.lives > 0) general.lives--;
             general2.deathCountdown = 48;
+
+            if (general.lives == 0) {
+                
+                #ifndef SAVE_MEMORY_SOUND
+                    sound.tonesFromFX(Sounds::Invader_End_of_Game);
+                #endif 
+
+            }
 
         }
 
@@ -553,13 +339,13 @@ void invader_EnemyDropsBullet(Invader_General2 &general2, Invader_Player &player
 
     // Do we have a spare bullet?
 
-    uint8_t found = 255;
+    uint8_t found = Constants::NoItemFound;
 
     for (uint8_t x = Constants::Invaders_Enemy_Bullet_Start; x <= Constants::Invaders_Enemy_Bullet_End; x++) {
 
         Invader_Bullet &bullet = level.getItem(x).data.invader_Bullet;
 
-        if (bullet.y == 64) {
+        if (bullet.y < 0 || bullet.y >= 64) {
 
             found = x;
             break;
@@ -571,8 +357,10 @@ void invader_EnemyDropsBullet(Invader_General2 &general2, Invader_Player &player
 
     // If we found a bullet then launch it!
 
-    if (found != 255) {
+    if (found != Constants::NoItemFound) {
 
+        bool dropped = false;
+      
         Invader_Bullet &bullet = level.getItem(found).data.invader_Bullet;
 
         if (random(0, 2) == 0) {
@@ -588,8 +376,12 @@ void invader_EnemyDropsBullet(Invader_General2 &general2, Invader_Player &player
 
                     bullet.x = enemy.x + 4;
                     bullet.y = enemy.y + 8;
-
-                    general2.bulletCountdown = random(general2.speed, general2.speed * 2);
+                    general2.bulletCountdown = 4 + random(general2.speed * 4, general2.speed * 8);
+                    dropped = true;
+                
+                    #ifndef SAVE_MEMORY_SOUND
+                        sound.tonesFromFX(Sounds::Invader_Enemy_Fires_Bullet);
+                    #endif 
 
                     break;
 
@@ -598,9 +390,13 @@ void invader_EnemyDropsBullet(Invader_General2 &general2, Invader_Player &player
             }
 
         }
-        else {
 
-            for (uint8_t x = 0; x < 42; x++) {
+
+        // If we did not drop an overhead bullet, then drop a random one ..
+
+        if (!dropped) {
+
+            for (uint8_t x = 0; x < 60; x++) {
 
                 Invader_Enemy &enemy = level.getItem(Constants::Invaders_Enemy_Row_1_Start + random(0, 22)).data.invader_Enemy;
                 
@@ -608,8 +404,11 @@ void invader_EnemyDropsBullet(Invader_General2 &general2, Invader_Player &player
 
                     bullet.x = enemy.x + 4;
                     bullet.y = enemy.y + 8;
+                    general2.bulletCountdown = 8 + random(general2.speed * 4, general2.speed * 6);
 
-                    general2.bulletCountdown = random(general2.speed, general2.speed * 2);
+                    #ifndef SAVE_MEMORY_SOUND
+                        sound.tonesFromFX(Sounds::Invader_Enemy_Fires_Bullet);
+                    #endif 
 
                     break;
 
@@ -627,9 +426,9 @@ void invader_HasBulletHitBarrier(Invader_General &general, Invader_General2 &gen
 
     // Hit barrier?
 
-    uint8_t barrier_X = 255;
-    uint8_t barrier_B = 255;
-    uint8_t barrier_Y = 255;
+    uint8_t barrier_X = Constants::NoItemFound;
+    uint8_t barrier_B;
+    uint8_t barrier_Y;
 
     switch (bullet.x) {
 
@@ -638,17 +437,11 @@ void invader_HasBulletHitBarrier(Invader_General &general, Invader_General2 &gen
             switch (bullet.y) {
 
                 case 46 ... 48:
-                    
-                    barrier_X = (bullet.x - 26) / 4;
-                    barrier_B = (bullet.x - 26) % 4;
-                    barrier_Y = 0;
-                    break;
-
                 case 49 ... 51:
                     
                     barrier_X = (bullet.x - 26) / 4;
                     barrier_B = (bullet.x - 26) % 4;
-                    barrier_Y = 1;
+                    barrier_Y = (bullet.y <= 48) ? 0 : 1;
                     break;
 
             }
@@ -660,17 +453,11 @@ void invader_HasBulletHitBarrier(Invader_General &general, Invader_General2 &gen
             switch (bullet.y) {
 
                 case 46 ... 48:
-                    
-                    barrier_X = ((bullet.x - 78) / 4) + 4;
-                    barrier_B = (bullet.x - 78) % 4;
-                    barrier_Y = 0;
-                    break;
-
                 case 49 ... 51:
                     
                     barrier_X = ((bullet.x - 78) / 4) + 4;
                     barrier_B = (bullet.x - 78) % 4;
-                    barrier_Y = 1;
+                    barrier_Y = (bullet.y <= 48) ? 0 : 1;
                     break;
 
             }
@@ -680,13 +467,17 @@ void invader_HasBulletHitBarrier(Invader_General &general, Invader_General2 &gen
     }
 
 
-    if (barrier_X != 255) {
+    if (barrier_X != Constants::NoItemFound) {
 
         Invader_Barrier &barrier = level.getItem(Constants::Invaders_Barrier_Start + (barrier_X * 2) + barrier_Y).data.invader_Barrier;
 
         if ((barrier.value & (1 << barrier_B)) == 0) {
 
-            barrier.value = (barrier.value | (1 << barrier_B));// | (1 << barrier_B);
+            #ifndef SAVE_MEMORY_SOUND
+                sound.tonesFromFX(Sounds::Invader_Hit_Barrier);
+            #endif 
+
+            barrier.value = (barrier.value | (1 << barrier_B));
             bullet.y = -4;
             general2.bulletPlayerCountdown = 5;
 
@@ -697,6 +488,11 @@ void invader_HasBulletHitBarrier(Invader_General &general, Invader_General2 &gen
 }
 
 void invader_DetectPlayerBulletHit(Invader_General &general, Invader_General2 &general2, Invader_Bullet &bullet) {
+
+
+    // Only test for active bullets ..
+
+    if (bullet.y == -4) return;
 
     Point bulletPoint = { bullet.x, bullet.y };
 
@@ -714,78 +510,13 @@ void invader_DetectPlayerBulletHit(Invader_General &general, Invader_General2 &g
                 bullet.y = -4;
                 general.score++;
 
+                #ifndef SAVE_MEMORY_SOUND
+                    sound.tonesFromFX(Sounds::Invader_Enemy_Explosion);
+                #endif                 
+
             }
 
             invader_HasBulletHitBarrier(general, general2, bullet);
-
-            // // Hit barrier?
-
-            // uint8_t barrier_X = 255;
-            // uint8_t barrier_B = 255;
-            // uint8_t barrier_Y = 255;
-
-            // switch (bullet.x) {
-
-            //     case  26 ... 41:
-
-            //         switch (bullet.y) {
-
-            //             case 46 ... 48:
-                            
-            //                 barrier_X = (bullet.x - 26) / 4;
-            //                 barrier_B = (bullet.x - 26) % 4;
-            //                 barrier_Y = 0;
-            //                 break;
-
-            //             case 49 ... 51:
-                            
-            //                 barrier_X = (bullet.x - 26) / 4;
-            //                 barrier_B = (bullet.x - 26) % 4;
-            //                 barrier_Y = 1;
-            //                 break;
-
-            //         }
-
-            //         break;
-
-            //     case 78 ... 93:
-
-            //         switch (bullet.y) {
-
-            //             case 46 ... 48:
-                            
-            //                 barrier_X = ((bullet.x - 78) / 4) + 4;
-            //                 barrier_B = (bullet.x - 78) % 4;
-            //                 barrier_Y = 0;
-            //                 break;
-
-            //             case 49 ... 51:
-                            
-            //                 barrier_X = ((bullet.x - 78) / 4) + 4;
-            //                 barrier_B = (bullet.x - 78) % 4;
-            //                 barrier_Y = 1;
-            //                 break;
-
-            //         }
-
-            //         break;
-
-            // }
-
-
-            // if (barrier_X != 255) {
-
-            //     Invader_Barrier &barrier = level.getItem(Constants::Invaders_Barrier_Start + (barrier_X * 2) + barrier_Y).data.invader_Barrier;
-
-            //     if ((barrier.value & (1 << barrier_B)) == 0) {
-
-            //         barrier.value = (barrier.value | (1 << barrier_B));// | (1 << barrier_B);
-            //         bullet.y = -4;
-            //         general2.bulletPlayerCountdown = 5;
-
-            //     }
-
-            // }
 
         }
 
@@ -813,6 +544,10 @@ void invader_UpdateEnemyBullets(Invader_General &general, Invader_General2 &gene
 
                     player.status = Status::Exploding1;
                     bullet.y = 64;
+                
+                    #ifndef SAVE_MEMORY_SOUND
+                        sound.tonesFromFX(Sounds::Invader_Player_Explosion);
+                    #endif 
 
                 }
                 else {
@@ -891,10 +626,14 @@ void invader_PlayGame() {
             player.x++;
         }
 
-        if (pressed & A_BUTTON && player.status != Status::EnemiesAppearing && general2.bulletPlayerCountdown == 0) {
+        if (pressed & B_BUTTON && player.status != Status::EnemiesAppearing && general2.bulletPlayerCountdown == 0) {
 
             if (bullet.y == -4) {
 
+                #ifndef SAVE_MEMORY_SOUND
+                    sound.tonesFromFX(Sounds::Invader_Player_Fires_Bullet);
+                #endif 
+                
                 bullet.x = player.x + 4;
                 bullet.y = player.y - 2;
                 
@@ -922,11 +661,15 @@ void invader_PlayGame() {
 
             if (invader_EnemiesAlive() == 0) {
 
-                if (general2.launchOffset < 20) general2.launchOffset = general2.launchOffset + 2;
-                invader_LoadEnemies(general2.launchOffset);
+                if (general2.launchOffset < 18) general2.launchOffset = general2.launchOffset + 2;
+                invader_NewWave(general2);
                 player.status = Status::EnemiesAppearing;
                 general2.appearCountdown = 24;
                 general2.speed = 17;
+
+                #ifndef SAVE_MEMORY_SOUND
+                    sound.tonesFromFX(Sounds::Invader_Wave_Success);
+                #endif 
 
             }
 
@@ -968,5 +711,34 @@ void invader_PlayGame() {
 
     if (general2.bulletPlayerCountdown > 0) general2.bulletPlayerCountdown--;
 
+    
+    // Has the enemy hit the player ?  If so, game over ..
+
+    Rect playerRect = { player.x, player.y, 9, 9 };
+
+    for (uint8_t x = Constants::Invaders_Enemy_Row_1_Start; x <= Constants::Invaders_Enemy_Row_3_End; x++) {
+
+        Invader_Enemy &enemy = level.getItem(x).data.invader_Enemy;
+
+        if (enemy.status == Status::Active) {
+
+            Rect enemyRect = { enemy.x, enemy.y, 8, 7 };
+
+            if (arduboy.collide(playerRect, enemyRect)) {
+
+                enemy.status = Status::Exploding1;
+                player.status = Status::Exploding1;
+
+                general.lives = 0;
+
+                #ifndef SAVE_MEMORY_SOUND
+                    sound.tonesFromFX(Sounds::Invader_End_of_Game);
+                #endif 
+
+            }
+
+        }
+
+    }
 
 }

@@ -1,7 +1,7 @@
 
 #pragma once
 
-#define _PRODUCTION_SETTINGS
+#define PRODUCTION_SETTINGS
 
 #ifdef PRODUCTION_SETTINGS
 
@@ -10,6 +10,7 @@
     #define _SAVE_MEMORY_SOUND
     #define _SAVE_MEMORY_ENEMY
     #define _SAVE_MEMORY_TITLE
+    #define _SAVE_MEMORY_INVADER
     #define _ALT_B_BUTTON
     #define _GIVE_SWORD
 
@@ -24,11 +25,12 @@
 
 #else
 
-    #define _SAVE_MEMORY_USB
+    #define SAVE_MEMORY_USB
     #define _SAVE_MEMORY_OTHER
-    #define SAVE_MEMORY_SOUND
-    #define SAVE_MEMORY_ENEMY
+    #define _SAVE_MEMORY_SOUND
+    #define _SAVE_MEMORY_ENEMY
     #define _SAVE_MEMORY_TITLE
+    #define _SAVE_MEMORY_INVADER
     #define _ALT_B_BUTTON
     #define _GIVE_SWORD
 
@@ -37,7 +39,7 @@
     #define SAVE_TO_FX
     #define STARTING_LEVEL 1
     #define DEBUG_CUT_SCENES
-    #define DEBUG_LEVELS
+    #define _DEBUG_LEVELS
 
     #define _DEBUG
 
@@ -1209,9 +1211,9 @@ namespace Constants {
     constexpr uint8_t Invaders_Enemy_Row_2_End = 15;
     constexpr uint8_t Invaders_Enemy_Row_3_Start = 16;
     constexpr uint8_t Invaders_Enemy_Row_3_End = 22;
-    constexpr uint8_t Invaders_Player = 23;
-    constexpr uint8_t Invaders_Barrier_Start = 24;
-    constexpr uint8_t Invaders_Barrier_End = 39;
+    constexpr uint8_t Invaders_Barrier_Start = 23;
+    constexpr uint8_t Invaders_Barrier_End = 38;
+    constexpr uint8_t Invaders_Player = 39;
     constexpr uint8_t Invaders_Player_Bullet = 40;
     constexpr uint8_t Invaders_Enemy_Bullet_Start = 41;
     constexpr uint8_t Invaders_Enemy_Bullet_End = Constants::Items_Count - 1;

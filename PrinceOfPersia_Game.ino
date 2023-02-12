@@ -1400,7 +1400,6 @@ void game() {
                 case Stance::Leave_Gate_14_End:
 
                     gamePlay.gameState = GameState::Title;
-                    //setRenderChamberBG();
 
                     if (titleScreenVars.getMode() == TitleScreenMode::MaxUniqueScenes) {
                         titleScreenVars.setMode(TitleScreenMode::CutScene_2);
@@ -1413,12 +1412,14 @@ void game() {
                     break;
 
                 case Stance::Upright_Turn:
+
                     newStance = Stance::Upright;
                     prince.setStance(Stance::Upright);
                     prince.changeDirection();
                     break;
 
                 case Stance::Run_Repeat_8_End_Turn:
+
                     prince.changeDirection();
                     break;
 
