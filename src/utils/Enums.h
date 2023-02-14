@@ -88,7 +88,8 @@ enum class Action : uint8_t {
     RunJump_1,
     StandingJump,
     CrouchHop,
-    RunningTurn
+    RunningTurn,
+    SwordStep
 };
 
 enum class CanJumpUpResult : uint8_t {

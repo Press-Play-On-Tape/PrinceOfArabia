@@ -52,7 +52,7 @@ void loadItems(uint8_t level, Prince &prince) {
 
     FX::readEnd();
 
-    prince.setSword(level > 0);
+    prince.setSword(level > 1);
 
 }
 

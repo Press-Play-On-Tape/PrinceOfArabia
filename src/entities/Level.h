@@ -213,15 +213,26 @@ struct Level {
 
                         uint8_t xTile = FX::readPendingUInt8();
                         uint8_t yTile = FX::readPendingUInt8();
-                        uint8_t xPixel = FX::readPendingUInt8();
+                        uint8_t xPixel_LeftEntry = FX::readPendingUInt8();
+                        uint8_t xPixel_RightEntry = FX::readPendingUInt8();
+                        uint8_t xPixel_LeftExtent = FX::readPendingUInt8();
+                        uint8_t xPixel_RightExtent = FX::readPendingUInt8();
                         uint8_t yPixel = FX::readPendingUInt8();
 
-                        Direction direction = static_cast<Direction>(FX::readPendingUInt8());
+//                        Direction direction = static_cast<Direction>(FX::readPendingUInt8());
                         uint8_t health = FX::readPendingUInt8();
                         Status status = static_cast<Status>(FX::readPendingUInt8());
 
                         #ifndef SAVE_MEMORY_ENEMY
-                            enemy.init(enemyType, (xTile * Constants::TileWidth) + xPixel, (yTile * Constants::TileHeight) + yPixel, direction, Stance::Upright, health, status);
+                            enemy.init(enemyType, 
+                                       (xTile * Constants::TileWidth) + xPixel_LeftEntry, 
+                                       xTile,
+                                       xPixel_LeftEntry,
+                                       xPixel_RightEntry,
+                                       xPixel_LeftExtent,
+                                       xPixel_RightExtent,
+                                       (yTile * Constants::TileHeight) + yPixel, 
+                                       Direction::None, Stance::Upright, health, status);
                         #endif
 
                         enemyType = static_cast<EnemyType>(FX::readPendingUInt8());
@@ -1757,6 +1768,9 @@ struct Level {
 
                         switch (action) {
 
+                            case Action::SwordStep:
+                                return (entity.getPosition().x + (xOffset * offset) - 4 >= (entity.getX_Tile() * Constants::TileWidth) + entity.getX_LeftExtent());
+
                             case Action::SmallStep:
                             case Action::CrouchHop:
 
@@ -1851,6 +1865,9 @@ struct Level {
                         #endif
 
                         switch (action) {
+
+                            case Action::SwordStep:
+                                return (entity.getPosition().x + (xOffset * offset) + 4 <= (entity.getX_Tile() * Constants::TileWidth) + entity.getX_LeftExtent());
 
                             case Action::SmallStep:
                             case Action::CrouchHop:

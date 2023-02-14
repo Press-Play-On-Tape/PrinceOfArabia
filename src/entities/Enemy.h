@@ -42,10 +42,15 @@ class Enemy : public BaseStack {
 
         }
 
-        void init(EnemyType enemyType, int16_t x, int16_t y, Direction direction, uint16_t stance, uint8_t health, Status status) {
+        void init(EnemyType enemyType, int16_t x, uint8_t x_Tile, uint8_t x_LeftEntry, uint8_t x_RightEntry, uint8_t x_LeftExtent, uint8_t x_RightExtent, int16_t y, Direction direction, uint16_t stance, uint8_t health, Status status) {
 
             this->base[this->count].setEnemyType(enemyType);
             this->base[this->count].setX(x);
+            this->base[this->count].setX_Tile(x_Tile);
+            this->base[this->count].setX_LeftEntry(x_LeftEntry);
+            this->base[this->count].setX_RightEntry(x_RightEntry);
+            this->base[this->count].setX_LeftExtent(x_LeftExtent);
+            this->base[this->count].setX_RightExtent(x_RightExtent);
             this->base[this->count].setY(y);
             this->base[this->count].setDirection(direction);
             this->base[this->count].setStance(stance);

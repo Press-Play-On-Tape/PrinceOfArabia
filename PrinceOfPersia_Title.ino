@@ -85,11 +85,11 @@ void title() {
 
     }
 
-//    #ifdef DEBUG_CUT_SCENES
+    #ifdef DEBUG_CUT_SCENES
     if (justPressed & (A_BUTTON)) {
-//    #else
-//    if (justPressed & (A_BUTTON | B_BUTTON)) {
-//    #endif
+    #else
+    if (justPressed & (A_BUTTON | B_BUTTON)) {
+    #endif
     
         switch (titleScreenVars.getMode()) {
 
@@ -147,11 +147,11 @@ void title() {
             case TitleScreenMode::High:
             case TitleScreenMode::TimeOut:
 
-//                #ifdef DEBUG_CUT_SCENES
+                #ifdef DEBUG_CUT_SCENES
                 if (justPressed & (A_BUTTON)) {
-//                #else
-//                if (justPressed & (A_BUTTON | B_BUTTON)) {
-//                #endif
+                #else
+                if (justPressed & (A_BUTTON | B_BUTTON)) {
+                #endif
 
                     titleScreenVars.setMode(TitleScreenMode::Main);
 

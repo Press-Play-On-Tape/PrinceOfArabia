@@ -422,7 +422,7 @@ void invader_EnemyDropsBullet(Invader_General2 &general2, Invader_Player &player
 
 }
 
-void invader_HasBulletHitBarrier(Invader_General &general, Invader_General2 &general2, Invader_Bullet &bullet) {
+void invader_HasBulletHitBarrier(Invader_General2 &general2, Invader_Bullet &bullet) {
 
     // Hit barrier?
 
@@ -516,7 +516,7 @@ void invader_DetectPlayerBulletHit(Invader_General &general, Invader_General2 &g
 
             }
 
-            invader_HasBulletHitBarrier(general, general2, bullet);
+            invader_HasBulletHitBarrier(general2, bullet);
 
         }
 
@@ -552,7 +552,7 @@ void invader_UpdateEnemyBullets(Invader_General &general, Invader_General2 &gene
                 }
                 else {
 
-                    invader_HasBulletHitBarrier(general, general2, bullet);
+                    invader_HasBulletHitBarrier(general2, bullet);
 
                 }
 
