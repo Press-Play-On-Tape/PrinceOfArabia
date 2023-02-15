@@ -26,6 +26,8 @@ namespace Images {
     image_t IntroGame_1B            = "../images/title/IntroGame_1B.png"
     image_t IntroGame_9             = "../images/title/IntroGame_9.png"
     image_t Chambers_BG             = "../images/title/Chambers_BG.png"
+    image_t Chambers_BG_01          = "../images/title/Chambers_BG_01.png"
+    image_t Chambers_BG_02          = "../images/title/Chambers_BG_02.png"
     image_t Chambers_FG             = "../images/title/Chambers_FG.png"
     image_t Credits_BG              = "../images/title/Credits_BG.png"
     image_t Eeek                    = "../images/title/Eeek.png"
@@ -113,6 +115,17 @@ namespace Images {
 
     image_t Enemy_Right             = "../images/enemy/right/Enemy_Right_36x36.png"
     image_t Enemy_Left              = "../images/enemy/left/Enemy_Left_36x36.png"
+
+
+    // Invaders
+
+    image_t Invaders                = "../images/invaders/Enemies_25x23_1.png"
+    image_t Barriers                = "../images/invaders/Barrier_4x2_1.png"
+    image_t Barrier                = "../images/invaders/Barrier_Whole.png"
+    image_t Player                  = "../images/invaders/Player_25x25_1.png"
+    image_t Bullet                  = "../images/invaders/Bullet.png"
+    image_t HUD_Spaceship           = "../images/invaders/HUD_Spaceship.png"
+    image_t Levels                  = "../images/invaders/Levels_57x13_1.png"
 
 }
 

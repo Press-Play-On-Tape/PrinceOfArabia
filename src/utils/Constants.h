@@ -10,12 +10,13 @@
     #define _SAVE_MEMORY_SOUND
     #define _SAVE_MEMORY_ENEMY
     #define _SAVE_MEMORY_TITLE
+    #define _SAVE_MEMORY_INVADER
     #define _ALT_B_BUTTON
     #define _GIVE_SWORD
 
     #define LEVEL_DATA_FROM_FX
     #define IMAGE_DATA_FROM_FX
-    #define SAVE_TO_FX
+    #define _SAVE_TO_FX
     #define STARTING_LEVEL 1
     #define _DEBUG_CUT_SCENES
     #define _DEBUG_LEVELS
@@ -29,15 +30,16 @@
     #define _SAVE_MEMORY_SOUND
     #define _SAVE_MEMORY_ENEMY
     #define _SAVE_MEMORY_TITLE
+    #define _SAVE_MEMORY_INVADER
     #define _ALT_B_BUTTON
     #define _GIVE_SWORD
 
     #define LEVEL_DATA_FROM_FX
     #define IMAGE_DATA_FROM_FX
     #define SAVE_TO_FX
-    #define STARTING_LEVEL 1
+    #define STARTING_LEVEL 2
     #define _DEBUG_CUT_SCENES
-    #define _DEBUG_LEVELS
+    #define DEBUG_LEVELS
 
     #define _DEBUG
 
@@ -1200,7 +1202,23 @@ namespace Constants {
     constexpr uint8_t Button2FaillingTime = 24;
     constexpr uint8_t Button3FaillingTime = 24;
     constexpr uint8_t OppositeDirection_Offset = 4;
-    
+
+    constexpr uint8_t Invaders_General = 0;
+    constexpr uint8_t Invaders_General2 = 1;
+    constexpr uint8_t Invaders_Enemy_Row_1_Start = 2;
+    constexpr uint8_t Invaders_Enemy_Row_1_End = 8;
+    constexpr uint8_t Invaders_Enemy_Row_2_Start = 9;
+    constexpr uint8_t Invaders_Enemy_Row_2_End = 15;
+    constexpr uint8_t Invaders_Enemy_Row_3_Start = 16;
+    constexpr uint8_t Invaders_Enemy_Row_3_End = 22;
+    constexpr uint8_t Invaders_Barrier_Start = 23;
+    constexpr uint8_t Invaders_Barrier_End = 38;
+    constexpr uint8_t Invaders_Player = 39;
+    constexpr uint8_t Invaders_Player_Bullet = 40;
+    constexpr uint8_t Invaders_Enemy_Bullet_Start = 41;
+    constexpr uint8_t Invaders_Enemy_Bullet_End = Constants::Items_Count - 1;
+
+
     #ifndef IMAGE_DATA_FROM_FX
 
     const uint8_t StanceToImageXRef[] PROGMEM  = {

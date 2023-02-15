@@ -34,6 +34,13 @@ enum class ItemType : uint8_t {
     /* 30 */ Gate_StayClosed,
     /* 31 */ EntryDoor,
     /* 32 */ DecorativeDoor,
+    /* 50 */ General = 50,
+    /* 51 */ Invader_1,
+    /* 52 */ Invader_2,
+    /* 53 */ Invader_3,
+    /* 54 */ Player,
+    /* 55 */ Barrier,
+    /* 56 */ Bullet,
     /* 96 */ None = 96,
     /* 97 */ LoveHeart = 97,
     /* 98 */ Sign = 98,
@@ -72,16 +79,18 @@ enum class Layer : uint8_t {
 };
 
 enum class Action : uint8_t {
-    Step,
-    SmallStep,
-    RunStart,
-    RunRepeat,
-    RunJump_3,
-    RunJump_2,
-    RunJump_1,
-    StandingJump,
-    CrouchHop,
-    RunningTurn
+    Step            = 0,
+    SmallStep       = 1,
+    RunStart        = 2,
+    RunRepeat       = 3,
+    SwordStep       = 4,        // Do not move from 4
+    RunJump_3       = 5,
+    RunJump_2       = 6,
+    RunJump_1       = 7,
+    SwordStep2      = 8,        // Do not move from 8
+    StandingJump    = 9,
+    CrouchHop       = 10,
+    RunningTurn     = 11
 };
 
 enum class CanJumpUpResult : uint8_t {
@@ -155,22 +164,24 @@ enum class TitleScreenOptions : uint8_t {
 };
 
 enum class TitleScreenMode : uint8_t {
-    Intro,              // 0
-    Main,               // 1
-    Credits,            // 2
-    High,               // 3
-    IntroGame_1A,       // 4
-    CutScene_1,         // 5
-    IntroGame_1B,       // 6
-    CutScene_2,         // 7
-    CutScene_3,         // 8
-    CutScene_4,         // 9
-    CutScene_5,         // 10
-    CutScene_6,         // 11
-    CutScene_End,       // 12
-    IntroGame_End,      // 13
-    TimeOut,            // 14
-    MaxUniqueScenes     = CutScene_End - 1
+    Intro,                          // 0
+    Main,                           // 1
+    Credits,                        // 2
+    High,                           // 3
+    IntroGame_1A,                   // 4
+    CutScene_1,                     // 5
+    IntroGame_1B,                   // 6
+    CutScene_2,                     // 7
+    CutScene_3,                     // 8
+    CutScene_4,                     // 9
+    CutScene_5,                     // 10
+    CutScene_6,                     // 11
+    CutScene_7_Transition,          // 12
+    CutScene_7_PlayGame,            // 13
+    CutScene_End,                   // 14
+    IntroGame_End,                  // 15
+    TimeOut,                        // 16
+    MaxUniqueScenes                 = CutScene_End - 1
 };
 
 enum class WallTileResults : uint8_t {
@@ -197,9 +208,16 @@ enum class LevelUpdate : uint8_t {
 
 enum class Status : uint8_t {
     Active,
+    Safe,
     Dormant,
     Dormant_ActionReady,
     Dormant_ActionDone,
+    Exploding1,
+    Exploding2,
+    Exploding3,
+    Exploding4,
+    Dead,
+    EnemiesAppearing,
 };
 
 enum class EnemyType : uint8_t {

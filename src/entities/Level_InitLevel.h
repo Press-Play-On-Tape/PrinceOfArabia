@@ -1,4 +1,4 @@
-void loadItems(GamePlay &gamePlay, Prince &prince) {
+void loadItems(uint8_t level, Prince &prince) {
 
 
     // Deactivate all items ..            
@@ -10,7 +10,7 @@ void loadItems(GamePlay &gamePlay, Prince &prince) {
     this->sign.counter = 0;
 
     uint8_t itemIdx = 0;
-    FX::seekData(FX::readIndexedUInt24(Levels::Level_Items, gamePlay.level));
+    FX::seekData(FX::readIndexedUInt24(Levels::Level_Items, level));
     uint8_t itemType = FX::readPendingUInt8();
 
     while (itemType != 255) {
@@ -25,7 +25,7 @@ void loadItems(GamePlay &gamePlay, Prince &prince) {
                     Gate gate;
                     FX::readBytes((uint8_t*)&gate, sizeof(gate));
 
-                    if (!(gamePlay.level == 6 && itemIdx == 7 && item.data.gate.position == 9)) {
+                    if (!(level == 6 && itemIdx == 7 && item.data.gate.position == 9)) {
                         item.data.gate.x = gate.x;
                         item.data.gate.y = gate.y;
                         item.data.gate.position = gate.position;
@@ -52,7 +52,7 @@ void loadItems(GamePlay &gamePlay, Prince &prince) {
 
     FX::readEnd();
 
-    prince.setSword(gamePlay.level > 0);
+    prince.setSword(level > 1);
 
 }
 

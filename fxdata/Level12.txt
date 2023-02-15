@@ -21,18 +21,22 @@ uint8_t level12_Data[] = {
     3,                          // Type 0 = Guard, 1 = Skeleton, 2 = Mirror, 3 MirrorAttackingL12, 4 NirrorL12          
     50,                         // Enemy starting x tile
     3,                          // Enemy starting y tile
-    2,                          // Enemy starting x pos
+    82,                         // Enemy starting x pos (left entry)
+    14,                         // Enemy starting x pos (right entry)
+    6,                          // Enemy starting x pos (left extent)
+    86,                         // Enemy starting x pos (right extent)
     25,                         // Enemy starting y pos (25, 56, 87)
-    2,                          // Enemy starting direction, 1 Left and 2 Right
     4,                          // Enemy starting health
     0,                          // Status 0 Alive, 1 Dead, 2 Dormant
     // Enemy 2      
     0,                          // Type 0 = Guard, 1 = Skeleton, 2 = Mirror          
     10,                         // Enemy starting x tile
     0,                          // Enemy starting y tile
-    110,                        // Enemy starting x pos
+    110,                        // Enemy starting x pos pos (left entry)
+    42,                         // Enemy starting x pos (right entry)
+    38,                         // Enemy starting x pos (left extent)
+    114,                        // Enemy starting x pos (right extent)
     25,                         // Enemy starting y pos (25, 56, 87)
-    1,                          // Enemy starting direction, 1 Left and 2 Right
     6,                          // Enemy starting health
     0,                          // Status 0 Alive, 1 Dead, 2 Dormant
     // End

@@ -21,18 +21,22 @@ uint8_t level1_Data[] = {
     0,                          // Type 0 = Guard, 1 = Skeleton, 2 = Mirror          
     70,                         // Enemy starting x tile
     3,                          // Enemy starting y tile
-    92,                         // Enemy starting x pos
+    92,                         // Enemy starting x pos (left entry)
+    14,                         // Enemy starting x pos (right entry)
+    6,                          // Enemy starting x pos (left extent)
+    114,                        // Enemy starting x pos (right extent)
     56,                         // Enemy starting y pos (25, 56, 87)
-    1,                          // Enemy starting direction, 1 Left and 2 Right
     3,                          // Enemy starting health
     0,                          // Status 0 Alive, 1 Dead, 2 Dormant
     // Enemy 2          
     0,                          // Type 0 = Guard, 1 = Skeleton, 2 = Mirror          
     40,                         // Enemy starting x tile
     0,                          // Enemy starting y tile
-    80,                         // Enemy starting x pos
+    80,                         // Enemy starting x pos (left entry)
+    14,                         // Enemy starting x pos (right entry)
+    6,                          // Enemy starting x pos (left extent)
+    114,                        // Enemy starting x pos (right extent)
     25,                         // Enemy starting y pos (25, 56, 87)
-    1,                          // Enemy starting direction, 1 Left and 2 Right
     3,                          // Enemy starting health
     0,                          // Status 0 Alive, 1 Dead, 2 Dormant
     // End
@@ -43,7 +47,7 @@ uint8_t Level1_Items[] = {
     26,  84,   4,  82,  86,   0,   0,   0,      // Exit Gate, let position for open, right position                                                        
      5,  80,   3,   0,   0,   0,   0,   0,      // Exit Button 
 
-    17,  50,   3,   0,  64, 64, 255,   0,      // Gate #1
+    17,  50,   3,   0,  64, 64, 255,   0,       // Gate #1
      2,  46,   3,   1,   0,   0,   0,   0,      // Floor Button 1 
      2,  52,   3,   1,   0,   0,   0,   0,      // Floor Button 1 
     
@@ -60,7 +64,7 @@ uint8_t Level1_Items[] = {
      3,  54,   0,   4,   0,   0,   0,   0,      // Floor Button 2 
      2,  52,   0,   4,   0,   0,   0,   0,      // Floor Button 1 
     
-    17,  60,   0,   9,  64,  64, 255,   0,      // Gate #5    
+    17,  60,   0,   9,  48,  48, 255,   0,      // Gate #5    
      2,  56,   0,   5,   0,   0,   0,   0,      // Floor Button 1 
 
     20,   6,   0,   0,   0,   0,   0,   0,      // Potion Small                              
