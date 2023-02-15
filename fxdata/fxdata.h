@@ -6,8 +6,8 @@ using uint24_t = __uint24;
 
 // Initialize FX hardware using  FX::begin(FX_DATA_PAGE); in the setup() function.
 
-constexpr uint16_t FX_DATA_PAGE  = 0xf594;
-constexpr uint24_t FX_DATA_BYTES = 678904;
+constexpr uint16_t FX_DATA_PAGE  = 0xf593;
+constexpr uint24_t FX_DATA_BYTES = 678961;
 
 constexpr uint16_t FX_SAVE_PAGE  = 0xfff0;
 constexpr uint24_t FX_SAVE_BYTES = 2;
@@ -419,35 +419,35 @@ namespace Images
 namespace Constants
 {
   constexpr uint24_t StanceToImageXRefFX = 0x090F7E;
-  constexpr uint24_t Stance_XYOffsetsFX = 0x09120E;
-  constexpr uint24_t VertAdjustments = 0x09172C;
-  constexpr uint24_t Prince_ImageDetails = 0x0917C2;
+  constexpr uint24_t Stance_XYOffsetsFX = 0x091221;
+  constexpr uint24_t VertAdjustments = 0x091765;
+  constexpr uint24_t Prince_ImageDetails = 0x0917FB;
 }
 
-constexpr uint24_t splashScreen_Frame = 0x091A0B;
-constexpr uint24_t Title_Intro_Frame_NoHigh = 0x091A2F;
-constexpr uint24_t Title_Intro_Last_Frame_NoHigh = 0x091EAF;
-constexpr uint24_t Title_Intro_Frame_WithHigh = 0x091EC1;
-constexpr uint24_t Title_Intro_Last_Frame_WithHigh = 0x092341;
-constexpr uint24_t Title_Main_Frame_NoHigh = 0x092353;
-constexpr uint24_t Title_Main_Last_Frame_NoFrame = 0x0924DF;
-constexpr uint24_t Title_Main_Frame_WithHigh = 0x0924F1;
-constexpr uint24_t Title_Main_Last_Frame_WithHigh = 0x09267D;
-constexpr uint24_t Title_Main_Game_Frame_NoHigh = 0x09268F;
-constexpr uint24_t Title_Main_Game_Frame_WithHigh = 0x0926AA;
-constexpr uint24_t Title_Main_Credits_Frame_NoHigh = 0x0926C5;
-constexpr uint24_t Title_Main_Credits_Frame_WithHigh = 0x0926E0;
-constexpr uint24_t Title_Main_High_Frame_WithHigh = 0x0926FB;
-constexpr uint24_t Title_Credits_Frame = 0x092716;
-constexpr uint24_t Title_TimeOut_Frame = 0x09588D;
-constexpr uint24_t Title_High_Frame = 0x09850F;
-constexpr uint24_t Title_IntroGame_1A_Frame = 0x098596;
-constexpr uint24_t Title_CutScene_1_Frame = 0x098B6C;
-constexpr uint24_t Title_IntroGame_1B_Frame = 0x09C079;
-constexpr uint24_t Title_CutScene_2_Frame = 0x09C64F;
-constexpr uint24_t Title_CutScene_3_Frame = 0x09DA8F;
-constexpr uint24_t Title_CutScene_4_Frame = 0x09EECF;
-constexpr uint24_t Title_CutScene_5_Frame = 0x09F8EF;
-constexpr uint24_t Title_CutScene_6_Frame = 0x0A0E73;
-constexpr uint24_t Title_CutScene_End_Frame = 0x0A393C;
-constexpr uint24_t Title_IntroGame_End_Frame = 0x0A53AC;
+constexpr uint24_t splashScreen_Frame = 0x091A44;
+constexpr uint24_t Title_Intro_Frame_NoHigh = 0x091A68;
+constexpr uint24_t Title_Intro_Last_Frame_NoHigh = 0x091EE8;
+constexpr uint24_t Title_Intro_Frame_WithHigh = 0x091EFA;
+constexpr uint24_t Title_Intro_Last_Frame_WithHigh = 0x09237A;
+constexpr uint24_t Title_Main_Frame_NoHigh = 0x09238C;
+constexpr uint24_t Title_Main_Last_Frame_NoFrame = 0x092518;
+constexpr uint24_t Title_Main_Frame_WithHigh = 0x09252A;
+constexpr uint24_t Title_Main_Last_Frame_WithHigh = 0x0926B6;
+constexpr uint24_t Title_Main_Game_Frame_NoHigh = 0x0926C8;
+constexpr uint24_t Title_Main_Game_Frame_WithHigh = 0x0926E3;
+constexpr uint24_t Title_Main_Credits_Frame_NoHigh = 0x0926FE;
+constexpr uint24_t Title_Main_Credits_Frame_WithHigh = 0x092719;
+constexpr uint24_t Title_Main_High_Frame_WithHigh = 0x092734;
+constexpr uint24_t Title_Credits_Frame = 0x09274F;
+constexpr uint24_t Title_TimeOut_Frame = 0x0958C6;
+constexpr uint24_t Title_High_Frame = 0x098548;
+constexpr uint24_t Title_IntroGame_1A_Frame = 0x0985CF;
+constexpr uint24_t Title_CutScene_1_Frame = 0x098BA5;
+constexpr uint24_t Title_IntroGame_1B_Frame = 0x09C0B2;
+constexpr uint24_t Title_CutScene_2_Frame = 0x09C688;
+constexpr uint24_t Title_CutScene_3_Frame = 0x09DAC8;
+constexpr uint24_t Title_CutScene_4_Frame = 0x09EF08;
+constexpr uint24_t Title_CutScene_5_Frame = 0x09F928;
+constexpr uint24_t Title_CutScene_6_Frame = 0x0A0EAC;
+constexpr uint24_t Title_CutScene_End_Frame = 0x0A3975;
+constexpr uint24_t Title_IntroGame_End_Frame = 0x0A53E5;

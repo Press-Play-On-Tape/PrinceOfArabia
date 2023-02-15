@@ -15,54 +15,54 @@
 
     #define LEVEL_DATA_FROM_FX
     #define IMAGE_DATA_FROM_FX
-    #define SAVE_TO_FX
+    #define _SAVE_TO_FX
     #define STARTING_LEVEL 1
     #define _DEBUG_CUT_SCENES
-    #define _DEBUG_LEVELS
+    #define DEBUG_LEVELS
 
     #define _DEBUG
 
 #else
 
-    #define SAVE_MEMORY_USB
-    #define _SAVE_MEMORY_OTHER
-    #define _SAVE_MEMORY_SOUND
-    #define _SAVE_MEMORY_ENEMY
-    #define _SAVE_MEMORY_TITLE
+    #define _SAVE_MEMORY_USB
+    #define SAVE_MEMORY_OTHER
+    #define SAVE_MEMORY_SOUND
+    #define SAVE_MEMORY_ENEMY
+    #define SAVE_MEMORY_TITLE
     #define _ALT_B_BUTTON
     #define _GIVE_SWORD
 
     #define LEVEL_DATA_FROM_FX
-    #define IMAGE_DATA_FROM_FX
+    #define _IMAGE_DATA_FROM_FX
     #define SAVE_TO_FX
     #define STARTING_LEVEL 1
     #define _DEBUG_CUT_SCENES
     #define _DEBUG_LEVELS
 
-    #define _DEBUG
+    #define DEBUG
 
 #endif
 
 #define DEBUG_PRINT    Serial.print
 #define DEBUG_PRINTLN  Serial.println
 
-#define _DEBUG_ONSCREEN_DETAILS
+#define DEBUG_ONSCREEN_DETAILS
 #define _DEBUG_ONSCREEN_DETAILS_MIN
 
 #define _DEBUG_PRINCE_DETAILS
 #define _DEBUG_PRINCE_STACK
 #define _DEBUG_PRINT_ACTION
-#define DEBUG_LEVEL_LOAD_MAP
+#define _DEBUG_LEVEL_LOAD_MAP
 #define _DEBUG_GET_TILE
 #define _DEBUG_PRINCE_RENDERING
 #define _DEBUG_IMAGE_DETAILS
 
 #define _DEBUG_ACTION_CANMOVEFORWARD
-#define _DEBUG_ACTION_CANJUMPUP
+#define DEBUG_ACTION_CANJUMPUP
 #define _DEBUG_ACTION_CANJUMPUP_PART2
 #define _DEBUG_ACTION_CANCLIMBDOWN
 #define _DEBUG_ACTION_CANCLIMBDOWN_PART2
-#define DEBUG_ACTION_CANFALL
+#define _DEBUG_ACTION_CANFALL
 #define _DEBUG_ACTION_CANFALLSOMEMORE
 #define _DEBUG_ACTION_COLLIDEWITHWALL
 #define _DEBUG_ACTION_FALLING
@@ -1161,6 +1161,32 @@ constexpr uint16_t Running_Jump_Jump2_6_6                        = Stance::Runni
 constexpr uint16_t Running_Jump_Jump2_6_7_End                    = Stance::Running_Jump_Jump2_6_6 + 1;
 
 
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*                                                               01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define JUMP_UP_DROP_HIDEHANDS_SEQ                               90,    91,    92,    93,    94,    95,    96,    97,    98,    99,    100,   101,   196,   197,   198,   199,   106,   107,   108,
+#define JUMP_UP_DROP_HIDEHANDS_OFFSETS                           0,0,   0,0,   0,0,   -1,0,  -1,0,  0,0,   0,0,   0,0,   0,0,   1,0,   1,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,                                          
+constexpr uint16_t Jump_Up_Drop_HideHands_1_Start                = Stance::Running_Jump_Jump2_6_7_End + 1; 
+constexpr uint16_t Jump_Up_Drop_HideHands_2                      = Stance::Jump_Up_Drop_HideHands_1_Start + 1;
+constexpr uint16_t Jump_Up_Drop_HideHands_3                      = Stance::Jump_Up_Drop_HideHands_2 + 1;
+constexpr uint16_t Jump_Up_Drop_HideHands_4                      = Stance::Jump_Up_Drop_HideHands_3 + 1;
+constexpr uint16_t Jump_Up_Drop_HideHands_5                      = Stance::Jump_Up_Drop_HideHands_4 + 1;
+constexpr uint16_t Jump_Up_Drop_HideHands_6                      = Stance::Jump_Up_Drop_HideHands_5 + 1;
+constexpr uint16_t Jump_Up_Drop_HideHands_7                      = Stance::Jump_Up_Drop_HideHands_6 + 1;
+constexpr uint16_t Jump_Up_Drop_HideHands_8                      = Stance::Jump_Up_Drop_HideHands_7 + 1;
+constexpr uint16_t Jump_Up_Drop_HideHands_9                      = Stance::Jump_Up_Drop_HideHands_8 + 1;
+constexpr uint16_t Jump_Up_Drop_HideHands_10                     = Stance::Jump_Up_Drop_HideHands_9 + 1;
+constexpr uint16_t Jump_Up_Drop_HideHands_11                     = Stance::Jump_Up_Drop_HideHands_10 + 1;
+constexpr uint16_t Jump_Up_Drop_HideHands_12                     = Stance::Jump_Up_Drop_HideHands_11 + 1;
+constexpr uint16_t Jump_Up_Drop_HideHands_13                     = Stance::Jump_Up_Drop_HideHands_12 + 1;
+constexpr uint16_t Jump_Up_Drop_HideHands_14                     = Stance::Jump_Up_Drop_HideHands_13 + 1;
+constexpr uint16_t Jump_Up_Drop_HideHands_15                     = Stance::Jump_Up_Drop_HideHands_14 + 1;
+constexpr uint16_t Jump_Up_Drop_HideHands_16                     = Stance::Jump_Up_Drop_HideHands_15 + 1;
+constexpr uint16_t Jump_Up_Drop_HideHands_17                     = Stance::Jump_Up_Drop_HideHands_16 + 1;
+constexpr uint16_t Jump_Up_Drop_HideHands_18                     = Stance::Jump_Up_Drop_HideHands_17 + 1;
+constexpr uint16_t Jump_Up_Drop_HideHands_19_End                 = Stance::Jump_Up_Drop_HideHands_18 + 1;
+
+
+
 /* --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 constexpr uint16_t  Upright_Turn             = 1255;
@@ -1273,7 +1299,8 @@ namespace Constants {
         RUNNING_JUMP_4_GL_6_SEQ
         RUNNING_JUMP_SHORT_2_SEQ
         RUNNING_JUMP_JUMP2_2_SEQ
-        RUNNING_JUMP_JUMP2_6_SEQ        
+        RUNNING_JUMP_JUMP2_6_SEQ   
+        JUMP_UP_DROP_HIDEHANDS_SEQ     
     };
 
     constexpr int8_t Stance_XYOffsets[] PROGMEM = {
@@ -1345,7 +1372,8 @@ namespace Constants {
         RUNNING_JUMP_4_GL_6_OFFSETS
         RUNNING_JUMP_SHORT_2_OFFSETS
         RUNNING_JUMP_JUMP2_2_OFFSETS
-        RUNNING_JUMP_JUMP2_6_OFFSETS        
+        RUNNING_JUMP_JUMP2_6_OFFSETS     
+        JUMP_UP_DROP_HIDEHANDS_OFFSETS   
     };
 
     #endif

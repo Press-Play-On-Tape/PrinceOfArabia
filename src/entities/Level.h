@@ -2261,21 +2261,31 @@ struct Level {
 
                         case 7 ... 12:
 
-                            if (midTile == TILE_COLLAPSING_FLOOR) {
+                            switch (midTile) {
 
-                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                DEBUG_PRINTLN(F("L1 JumpThenFall_CollapseFloorAbove"));
-                                #endif
+                                case TILE_COLLAPSING_FLOOR:
 
-                                return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
-                            }
-                            else {
+                                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                    DEBUG_PRINTLN(F("L1 JumpThenFall_CollapseFloorAbove"));
+                                    #endif
 
-                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                DEBUG_PRINTLN(F("L2  JumpThenFall"));
-                                #endif
+                                    return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
 
-                                return CanJumpUpResult::JumpThenFall;
+                                case TILE_FLOOR_NONE:
+                                case TILE_FLOOR_NONE_PATTERN:
+                                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                    DEBUG_PRINTLN(F("L1.1 JumpThenFall"));
+                                    #endif
+
+                                    return CanJumpUpResult::JumpThenFall;
+                                    
+                                default:
+
+                                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                    DEBUG_PRINTLN(F("L2  JumpThenFall_HideHands"));
+                                    #endif
+
+                                    return CanJumpUpResult::JumpThenFall_HideHands;
                             }
 
                             break;
@@ -2297,21 +2307,24 @@ struct Level {
                                 case TILE_FLOOR_RH_PILLAR_END_1:
                                 case TILE_FLOOR_RH_PILLAR_END_2:
 
-                                    if (midTile == TILE_COLLAPSING_FLOOR) {
+                                    switch (midTile) {
+                                    
+                                        case TILE_COLLAPSING_FLOOR:
 
-                                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                        DEBUG_PRINTLN(F("L3  JumpThenFall_CollapseFloorAbove"));
-                                        #endif
-                                                                                
-                                        return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
-                                    }
-                                    else {
+                                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                            DEBUG_PRINTLN(F("L3  JumpThenFall_CollapseFloorAbove"));
+                                            #endif
+                                                                                    
+                                            return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
 
-                                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                        DEBUG_PRINTLN(F("L4  StepThenJump"));
-                                        #endif
+                                        default:
 
-                                        return CanJumpUpResult::StepThenJump;
+                                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                            DEBUG_PRINTLN(F("L4  StepThenJump"));
+                                            #endif
+
+                                            return CanJumpUpResult::StepThenJump;
+
                                     }                                
 
                                     break;
@@ -2330,24 +2343,40 @@ struct Level {
 
                                         default:
 
-                                            if (midTile == TILE_COLLAPSING_FLOOR) {
+                                            switch (midTile) {
+                                            
+                                                case TILE_COLLAPSING_FLOOR:
 
-                                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                                DEBUG_PRINTLN(F("L6  JumpThenFall_CollapseFloorAbove"));
-                                                #endif
+                                                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                                    DEBUG_PRINTLN(F("L6  JumpThenFall_CollapseFloorAbove"));
+                                                    #endif
 
-                                                return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
+                                                    return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
+
+                                                case TILE_FLOOR_NONE:
+                                                case TILE_FLOOR_NONE_PATTERN:
+
+                                                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                                    DEBUG_PRINTLN(F("L61  JumpThenFall"));
+                                                    #endif
+
+                                                    return CanJumpUpResult::JumpThenFall;
+
+                                                default:
+
+                                                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                                    DEBUG_PRINTLN(F("L7  JumpThenFall_HideHands"));
+                                                    #endif
+                                                    
+                                                    return CanJumpUpResult::JumpThenFall_HideHands;
+
                                             }
-                                            else {
 
-                                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                                DEBUG_PRINTLN(F("L7  JumpThenFall"));
-                                                #endif
-                                                
-                                                return CanJumpUpResult::JumpThenFall;
-                                            }
+                                            break;
 
                                     }
+
+                                    break;
     
                             }
 
@@ -2404,21 +2433,33 @@ struct Level {
 
                                         default:
 
-                                            if (midTile == TILE_COLLAPSING_FLOOR) {
+                                            switch (midTile) {
 
-                                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                                DEBUG_PRINTLN(F("L11  JumpThenFall_CollapseFloorAbove"));
-                                                #endif
+                                                case TILE_COLLAPSING_FLOOR:
 
-                                                return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
-                                            }
-                                            else {
+                                                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                                    DEBUG_PRINTLN(F("L11  JumpThenFall_CollapseFloorAbove"));
+                                                    #endif
 
-                                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                                DEBUG_PRINTLN(F("L12  JumpThenFall"));
-                                                #endif
+                                                    return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
 
-                                                return CanJumpUpResult::JumpThenFall;
+                                                case TILE_FLOOR_NONE:
+                                                case TILE_FLOOR_NONE_PATTERN:
+
+                                                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                                    DEBUG_PRINTLN(F("L61  JumpThenFall"));
+                                                    #endif
+
+                                                    return CanJumpUpResult::JumpThenFall;
+
+                                                default: 
+
+                                                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                                    DEBUG_PRINTLN(F("L12  JumpThenFall_HideHands"));
+                                                    #endif
+
+                                                    return CanJumpUpResult::JumpThenFall_HideHands;
+
                                             }
 
                                     }
@@ -2591,13 +2632,32 @@ struct Level {
                                 case TILE_FLOOR_RH_PILLAR_END_2:
                                     return CanJumpUpResult::JumpDist10;
 
-                                default:                                
+                                case TILE_FLOOR_NONE:
+                                case TILE_FLOOR_NONE_PATTERN:
                                     return CanJumpUpResult::JumpThenFall;
+
+                                default:                                
+                                    return CanJumpUpResult::JumpThenFall_HideHands;
 
                             }
 
                             break;
 
+                        default:
+
+                            switch (bgTile2) {
+
+                                case TILE_FLOOR_NONE:
+                                case TILE_FLOOR_NONE_PATTERN:
+                                    return CanJumpUpResult::JumpThenFall;
+
+                                default:                                
+                                    return CanJumpUpResult::JumpThenFall_HideHands;
+
+                            }
+
+                            break;
+                            
                     }
 
                     break;
@@ -2618,8 +2678,27 @@ struct Level {
                                 case TILE_PILLAR_2:
                                     return CanJumpUpResult::JumpDist10;
 
-                                default:                                
+                                case TILE_FLOOR_NONE:
+                                case TILE_FLOOR_NONE_PATTERN:
                                     return CanJumpUpResult::JumpThenFall;
+
+                                default:                                
+                                    return CanJumpUpResult::JumpThenFall_HideHands;
+
+                            }
+
+                            break;
+
+                        default:
+
+                            switch (bgTile2) {
+
+                                case TILE_FLOOR_NONE:
+                                case TILE_FLOOR_NONE_PATTERN:
+                                    return CanJumpUpResult::JumpThenFall;
+
+                                default:                                
+                                    return CanJumpUpResult::JumpThenFall_HideHands;
 
                             }
 

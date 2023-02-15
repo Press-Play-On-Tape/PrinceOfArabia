@@ -89,6 +89,7 @@ enum class CanJumpUpResult : uint8_t {
     Jump,
     StepThenJump,
     JumpThenFall,
+    JumpThenFall_HideHands,
     TurnThenJump,
     JumpDist10,
     JumpThenFall_CollapseFloor,             
