@@ -672,7 +672,6 @@ void game() {
                                 break;
 
                             case CanJumpUpResult::JumpThenFall_HideHands:
-Serial.println("sdasdasdasdasdasda");                            
                                 prince.pushSequence(Stance::Jump_Up_Drop_HideHands_1_Start, Stance::Jump_Up_Drop_HideHands_19_End, Stance::Upright);
                                 break;
 
