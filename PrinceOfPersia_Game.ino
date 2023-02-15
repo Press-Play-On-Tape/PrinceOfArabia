@@ -1367,6 +1367,8 @@ void game() {
                             
                     }
 
+                    justPressed = 0;
+
                 }   
 
             default: break;
@@ -2670,10 +2672,18 @@ void moveBackwardsWithSword(Prince & prince) {
 
 void moveBackwardsWithSword(BaseEntity entity, BaseStack stack) { 
 
-    if (level.canMoveForward(entity, Action::SwordStep, entity.getOppositeDirection(), Constants::OppositeDirection_Offset)) {
+    if (level.canMoveForward(entity, Action::SwordStep2, entity.getOppositeDirection(), Constants::OppositeDirection_Offset)) {
 
         stack.clear();
         stack.pushSequence(Stance::Sword_Step_3_End, Stance::Sword_Step_1_Start, Stance::Sword_Normal);
+        stack.pushSequence(Stance::Sword_Step_3_End, Stance::Sword_Step_1_Start);
+
+        if (level.canMoveForward(entity, Action::SwordStep, entity.getOppositeDirection(), Constants::OppositeDirection_Offset)) {
+
+            stack.clear();
+            stack.pushSequence(Stance::Sword_Step_3_End, Stance::Sword_Step_1_Start, Stance::Sword_Normal);
+
+        }
 
     }
 

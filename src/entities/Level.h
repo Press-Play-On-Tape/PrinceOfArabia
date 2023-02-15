@@ -1769,7 +1769,8 @@ struct Level {
                         switch (action) {
 
                             case Action::SwordStep:
-                                return (entity.getPosition().x + (xOffset * offset) - 4 >= (entity.getX_Tile() * Constants::TileWidth) + entity.getX_LeftExtent());
+                            case Action::SwordStep2:
+                                return (entity.getPosition().x + (xOffset * offset) - static_cast<uint8_t>(action) >= (entity.getX_Tile() * Constants::TileWidth) + entity.getX_LeftExtent());
 
                             case Action::SmallStep:
                             case Action::CrouchHop:
@@ -1867,7 +1868,8 @@ struct Level {
                         switch (action) {
 
                             case Action::SwordStep:
-                                return (entity.getPosition().x + (xOffset * offset) + 4 <= (entity.getX_Tile() * Constants::TileWidth) + entity.getX_LeftExtent());
+                            case Action::SwordStep2:
+                                return (entity.getPosition().x + (xOffset * offset) + static_cast<uint8_t>(action) <= (entity.getX_Tile() * Constants::TileWidth) + entity.getX_RightExtent());
 
                             case Action::SmallStep:
                             case Action::CrouchHop:
@@ -1952,99 +1954,7 @@ struct Level {
 
         }
 
-/*
-        CanJumpUpResult canJumpUp(Prince &prince) {
 
-            #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-            DEBUG_PRINTLN(F("-----------------------------------------------------"));
-            #endif
-
-            CanJumpUpResult resultLeft = this->canJumpUp_Test(prince, prince.getDirection());
-
-            switch (resultLeft) {
-
-                case CanJumpUpResult::Jump:
-                case CanJumpUpResult::StepThenJump:
-
-                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                    DEBUG_PRINT(F("L1 Test success, Return "));
-                    DEBUG_PRINTLN(static_cast<uint8_t>(resultLeft));
-                    #endif
-                                                        
-                    return resultLeft;
-
-                case CanJumpUpResult::JumpThenFall_CollapseFloor:
-
-                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                    DEBUG_PRINTLN(F("L2 Test success, Return JumpThenFall_CollapseFloor"));
-                    #endif                            
-
-                    return CanJumpUpResult::JumpThenFall_CollapseFloor;
-
-                case CanJumpUpResult::JumpThenFall_CollapseFloorAbove:
-
-                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                    DEBUG_PRINTLN(F("L3 Test success, Return JumpThenFall_CollapseFloorAbove"));
-                    #endif                            
-
-                    return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
-
-                case CanJumpUpResult::StepThenJumpThenFall_CollapseFloor:
-
-                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                    DEBUG_PRINTLN(F("L4 Test success, Return StepThenJumpThenFall_CollapseFloor"));
-                    #endif                            
-
-                    return CanJumpUpResult::StepThenJumpThenFall_CollapseFloor;
-
-                default:
-                    {
-                        CanJumpUpResult resultRight = this->canJumpUp_Test(prince, prince.getOppositeDirection());
-
-                        switch (resultRight) {
-
-                            case CanJumpUpResult::Jump:
-
-                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                DEBUG_PRINT(F("R1 Test success, Return TurnThenJump"));
-                                #endif
-
-                                return CanJumpUpResult::TurnThenJump;
-
-                            default:
-
-                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                DEBUG_PRINT(F("R2 Test failed, Return "));
-                                DEBUG_PRINTLN(static_cast<uint8_t>(resultLeft));
-                                #endif
-
-                                CanJumpUpResult result = this->canJumpUp_Test_Dist10(prince, Direction::Left);
-
-                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                DEBUG_PRINT(F("R3 canJumpUp_Test_Dist10 Return "));
-                                DEBUG_PRINTLN(static_cast<uint8_t>(result));
-                                #endif
-
-                                return result;
-
-                        }
-
-                    }
-
-                    break;
-
-            }
-           
-
-            #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-            DEBUG_PRINT(F("Return None"));
-            #endif
-
-            return CanJumpUpResult::None;            
-
-        }
-
-*/
         CanJumpUpResult canJumpUp(Prince &prince) {
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
