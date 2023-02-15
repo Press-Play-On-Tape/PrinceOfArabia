@@ -1,4 +1,5 @@
 #include <Arduboy2.h>
+#include "PrinceOfPersia_Invader.h"
 
 void title_Init() {
 
@@ -8,19 +9,26 @@ void title_Init() {
 }
 
 
+
+
 // ----------------------------------------------------------------------------
 //  Handle state updates .. 
 //
 void title() { 
 
     auto justPressed = arduboy.justPressedButtons();
+    auto pressed = arduboy.pressedButtons();
 
     #ifdef DEBUG_CUT_SCENES
 
-        if (justPressed & B_BUTTON) {
+        if (justPressed & B_BUTTON && titleScreenVars.getMode() != TitleScreenMode::CutScene_7_PlayGame) {
 
             //setRenderChamberBG();
-            titleScreenVars.setMode(TitleScreenMode::CutScene_End);
+            titleScreenVars.setMode(TitleScreenMode::CutScene_7_Transition);
+
+            Invader_General &general = level.getItem(Constants::Invaders_General).data.invader_General;
+            general.y = 0;
+
             //FX::setFrame(Title_IntroGame_End_Frame, 4 - 1);
         }
 
@@ -85,53 +93,53 @@ void title() {
     
         switch (titleScreenVars.getMode()) {
 
-        case TitleScreenMode::Main:
+            case TitleScreenMode::Main:
 
-            switch (titleScreenVars.option) {
+                switch (titleScreenVars.option) {
 
-                #ifdef SAVE_MEMORY_OTHER
-                    case TitleScreenOptions::Play:
+                    #ifdef SAVE_MEMORY_OTHER
+                        case TitleScreenOptions::Play:
 
-                        gamePlay.gameState = GameState::Game_Init;
+                            gamePlay.gameState = GameState::Game_Init;
 
-                        break;
+                            break;
 
-                #else
+                    #else
 
-                    case TitleScreenOptions::Play:
+                        case TitleScreenOptions::Play:
 
-                        #ifndef SAVE_MEMORY_SOUND
-                            sound.tonesFromFX(Sounds::Seque);
-                        #endif
+                            #ifndef SAVE_MEMORY_SOUND
+                                sound.tonesFromFX(Sounds::Seque);
+                            #endif
 
-                        prince.setHealth(3);
-                        prince.setHealthMax(3);
+                            prince.setHealth(3);
+                            prince.setHealthMax(3);
 
-                        titleScreenVars.setMode(TitleScreenMode::IntroGame_1A);
-                        FX::setFrame(Title_IntroGame_1A_Frame, 4 - 1);
+                            titleScreenVars.setMode(TitleScreenMode::IntroGame_1A);
+                            FX::setFrame(Title_IntroGame_1A_Frame, 4 - 1);
 
-                        break;
+                            break;
 
-                    case TitleScreenOptions::Credits:
+                        case TitleScreenOptions::Credits:
 
-                        titleScreenVars.setMode(TitleScreenMode::Credits);
-                        FX::setFrame(Title_Credits_Frame, 5 - 1);
+                            titleScreenVars.setMode(TitleScreenMode::Credits);
+                            FX::setFrame(Title_Credits_Frame, 5 - 1);
 
-                        break;
+                            break;
 
-                    case TitleScreenOptions::High:
+                        case TitleScreenOptions::High:
 
-                        titleScreenVars.setMode(TitleScreenMode::High);
-                        FX::setFrame(Title_High_Frame, 5 - 1);
-                        break;
+                            titleScreenVars.setMode(TitleScreenMode::High);
+                            FX::setFrame(Title_High_Frame, 5 - 1);
+                            break;
 
-                #endif
+                    #endif
 
-                default: break;
+                    default: break;
 
-            }
+                }
 
-            break;
+                break;
 
         #ifndef SAVE_MEMORY_OTHER
 
@@ -199,6 +207,18 @@ void title() {
 
                 gamePlay.gameState = GameState::Game_StartLevel; 
                 break;
+
+            #ifndef SAVE_MEMORY_INVADER
+
+                case TitleScreenMode::CutScene_7_Transition:
+                case TitleScreenMode::CutScene_7_PlayGame:
+
+                    titleScreenVars.setMode(TitleScreenMode::CutScene_7_PlayGame);
+                    gamePlay.gameState = GameState::Game_StartLevel; 
+                    arduboy.setFrameRate(Constants::FrameRate);
+                    break;
+
+            #endif
 
             case TitleScreenMode::CutScene_End:
 
@@ -406,6 +426,28 @@ void title() {
                 }
 
                 break;
+
+            #ifndef SAVE_MEMORY_INVADER
+
+                case TitleScreenMode::CutScene_7_Transition:
+
+                    if (!FX::drawFrame()) {
+
+                        level.loadItems(0, prince);
+                        titleScreenVars.setMode(TitleScreenMode::CutScene_7_PlayGame);
+                        arduboy.frameCount = 5;
+                        arduboy.setFrameRate(60);
+
+                    }
+
+                    break;
+
+                case TitleScreenMode::CutScene_7_PlayGame:
+                    
+                    invader_PlayGame();
+                    break;          
+
+            #endif      
 
         #endif
 

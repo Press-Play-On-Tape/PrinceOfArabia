@@ -8,7 +8,12 @@
 #include "src/entities/Entities.h"
 #include "src/fonts/Font3x5.h"
 
-void testScroll(GamePlay &gamePlay, Prince &prince, Level &level) {
+
+// Returns true if we just entered a new room.
+
+bool testScroll(GamePlay &gamePlay, Prince &prince, Level &level) {
+
+    bool result = false;
 
 
     // Have we scrolled to another screen ?
@@ -30,6 +35,8 @@ void testScroll(GamePlay &gamePlay, Prince &prince, Level &level) {
             level.setYOffset(0);
             level.setYOffsetDir(Direction::None);
 
+            result = true;
+
         }
 
     }
@@ -41,6 +48,8 @@ void testScroll(GamePlay &gamePlay, Prince &prince, Level &level) {
         level.setYOffset(Constants::TileHeight);
         level.setYOffsetDir(Direction::None);
 
+        result = true;
+
     }
     else if (prince.getX() < 0) {
 
@@ -51,7 +60,6 @@ void testScroll(GamePlay &gamePlay, Prince &prince, Level &level) {
         if (gamePlay.level == 13 && level.getXLocation() == 0 && level.getYLocation() == 0) {
 
             gamePlay.gameState = GameState::Title;
-            //setRenderChamberBG();
             titleScreenVars.setMode(TitleScreenMode::CutScene_End);
 
 
@@ -82,6 +90,8 @@ void testScroll(GamePlay &gamePlay, Prince &prince, Level &level) {
 
         }
 
+        result = true;
+
     }
     else if (prince.getX() > Constants::TileWidth * Constants::ScreenWidthInTiles) {
 
@@ -107,6 +117,8 @@ void testScroll(GamePlay &gamePlay, Prince &prince, Level &level) {
 
         }
 
+        result = true;
+
     }
 
 
@@ -118,6 +130,8 @@ void testScroll(GamePlay &gamePlay, Prince &prince, Level &level) {
     else if (prince.getYPrevious() > 56 && prince.getY() <= 56) {
         level.setYOffsetDir(Direction::Up);
     }
+
+    return result;
 
 }
 
@@ -626,10 +640,11 @@ void playGrab() {
 
 #ifndef SAVE_MEMORY_ENEMY
 
-    void isEnemyVisible(bool swapEnemies, bool &isVisible, bool &sameLevelAsPrince) { // Should we swap actrive enemies (no if stack is not empty)
+    void isEnemyVisible(Prince &prince, bool swapEnemies, bool &isVisible, bool &sameLevelAsPrince, bool justEnteredRoom) { // Should we swap actrive enemies (no if stack is not empty)
 
         bool enemyIsVisible = false;
         bool onSameLevelAsPrince = false;
+
         uint8_t currentEnemy = enemy.getActiveEnemy();
 
         for (uint8_t i = 0; i < enemy.getEnemyCount(); i++) {
@@ -644,6 +659,7 @@ void playGrab() {
                 if (tileXIdx >= level.getXLocation() && tileXIdx < level.getXLocation() + Constants::ScreenWidthInTiles && tileYIdx >= level.getYLocation() && tileYIdx < level.getYLocation() + Constants::ScreenHeightInTiles) {
 
                     enemyIsVisible = true;
+
                     int8_t princeTileYIdx = level.coordToTileIndexY(prince.getPosition().y);
 
                     if (princeTileYIdx == tileYIdx) {
@@ -666,7 +682,38 @@ void playGrab() {
             
         }
 
-        if (!enemyIsVisible || !swapEnemies) enemy.setActiveEnemy(currentEnemy);
+        if (!enemyIsVisible || !swapEnemies) {
+            
+            enemy.setActiveEnemy(currentEnemy);
+
+        }
+        else {
+
+            // If we have just seen the enemy for the first time then we want to orientate it ..
+
+            if (justEnteredRoom) {
+
+                BaseEntity &base = enemy.getActiveBase();
+                int16_t xDelta = prince.getPosition().x - base.getPosition().x;
+
+                if (xDelta < 0) {
+
+                    enemy.setX((level.getXLocation() * Constants::TileWidth) + base.getX_LeftEntry());
+                    enemy.getPosition().x = enemy.getX();
+                    enemy.setDirection(Direction::Left);
+
+                }
+                else {
+
+                    enemy.setX((level.getXLocation() * Constants::TileWidth) + base.getX_RightEntry());
+                    enemy.getPosition().x = enemy.getX();
+                    enemy.setDirection(Direction::Right);
+
+                }
+
+            }
+
+        }
 
         isVisible = enemyIsVisible;
         sameLevelAsPrince = isVisible ? onSameLevelAsPrince : false;

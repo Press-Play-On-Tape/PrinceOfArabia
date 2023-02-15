@@ -21,45 +21,55 @@ uint8_t level4_Data[] = {
     2,                          // Type 0 = Guard, 1 = Skeleton, 2 = Mirror          
     100,                        // Enemy starting x tile
     0,                          // Enemy starting y tile
-    52,                         // Enemy starting x pos
+    52,                         // Enemy starting x pos (left entry)
+    52,                         // Enemy starting x pos (right entry)
+    52,                         // Enemy starting x pos (left extent)
+    52,                         // Enemy starting x pos (right extent)
     25,                         // Enemy starting y pos (25, 56, 87)
-    2,                          // Enemy starting direction, 1 Left and 2 Right
     3,                          // Enemy starting health
     2,                          // Status 0 Alive, 1 Dead, 2 Dormant
     // Enemy 2          
     0,                          // Type 0 = Guard, 1 = Skeleton, 2 = Mirror          
     20,                         // Enemy starting x tile
     3,                          // Enemy starting y tile
-    100,                        // Enemy starting x pos
+    62,                         // Enemy starting x pos (left entry)
+    100,                        // Enemy starting x pos (right entry)
+    54,                         // Enemy starting x pos (left extent)
+    116,                        // Enemy starting x pos (right extent)
     25,                         // Enemy starting y pos (25, 56, 87)
-    1,                          // Enemy starting direction, 1 Left and 2 Right
     3,                          // Enemy starting health
     0,                          // Status 0 Alive, 1 Dead, 2 Dormant
     // Enemy 3          
     0,                          // Type 0 = Guard, 1 = Skeleton, 2 = Mirror          
     50,                         // Enemy starting x tile
     3,                          // Enemy starting y tile
-    100,                        // Enemy starting x pos
-    25,                         // Enemy starting y pos (25, 56, 87)
-    1,                          // Enemy starting direction, 1 Left and 2 Right
+    100,                        // Enemy starting x pos (left entry)
+    28,                         // Enemy starting x pos (right entry)
+    54,                         // Enemy starting x pos (left extent)
+    108,                        // Enemy starting x pos (right extent)
+    34,                         // Enemy starting y pos (25, 56, 87)
     3,                          // Enemy starting health
     0,                          // Status 0 Alive, 1 Dead, 2 Dormant
     // Enemy 4          
     0,                          // Type 0 = Guard, 1 = Skeleton, 2 = Mirror          
     50,                         // Enemy starting x tile
     0,                          // Enemy starting y tile
-    14,                         // Enemy starting x pos
+    14,                         // Enemy starting x pos (left entry)
+    14,                         // Enemy starting x pos (right entry)
+    2,                          // Enemy starting x pos (left extent)
+    116,                        // Enemy starting x pos (right extent)
     56,                         // Enemy starting y pos (25, 56, 87)
-    2,                          // Enemy starting direction, 1 Left and 2 Right
     3,                          // Enemy starting health
     0,                          // Status 0 Alive, 1 Dead, 2 Dormant
     // Enemy 5          
     0,                          // Type 0 = Guard, 1 = Skeleton, 2 = Mirror          
     80,                         // Enemy starting x tile
     0,                          // Enemy starting y tile
-    88,                         // Enemy starting x pos
-    56,                         // Enemy starting y pos (25, 56, 87)
-    1,                          // Enemy starting direction, 1 Left and 2 Right
+    88,                         // Enemy starting x pos (left entry)
+    88,                         // Enemy starting x pos (right entry)
+    2,                          // Enemy starting x pos (left extent)
+    116,                        // Enemy starting x pos (right extent)
+    88,                         // Enemy starting y pos (25, 56, 87)
     3,                          // Enemy starting health
     0,                          // Status 0 Alive, 1 Dead, 2 Dormant
     // End

@@ -21,9 +21,11 @@ uint8_t level3_Data[] = {
     0,                          // Type 0 = Guard, 1 = Skeleton, 2 = Mirror          
     10,                         // Enemy starting x tile
     3,                          // Enemy starting y tile
-    70,                         // Enemy starting x pos
+    70,                         // Enemy starting x pos (left entry)
+    70,                         // Enemy starting x pos (right entry)
+    16,                         // Enemy starting x pos (left extent)
+    86,                         // Enemy starting x pos (right extent)
     56,                         // Enemy starting y pos (25, 56, 87)
-    1,                          // Enemy starting direction, 1 Left and 2 Right
     3,                          // Enemy starting health
     1,                          // Status 0 Alive, 1 Dormant
     // End

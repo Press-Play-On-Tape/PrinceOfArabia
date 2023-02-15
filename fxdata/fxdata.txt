@@ -1,5 +1,6 @@
 namespace Levels {
 
+    include "Invaders.txt"
     include "Level1.txt"
     include "Level2.txt"
     include "Level3.txt"
@@ -74,7 +75,7 @@ namespace Levels {
     };
 
     uint24_t Level_Items[] = {
-        0,         // dummy
+        Invaders_Items,         // Invaders game
         Level1_Items,
         Level2_Items,
         Level3_Items,
@@ -190,6 +191,7 @@ include 'Title_CutScene_3_Frame.txt'
 include 'Title_CutScene_4_Frame.txt'
 include 'Title_CutScene_5_Frame.txt'
 include 'Title_CutScene_6_Frame.txt'
+include 'Title_CutScene_7_Frame.txt'
 include 'Title_CutScene_End_Frame.txt'
 include 'Title_IntroGame_End_Frame.txt'
 
