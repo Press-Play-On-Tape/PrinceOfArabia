@@ -109,7 +109,7 @@ bool testScroll(GamePlay &gamePlay, Prince &prince, Level &level) {
 
                 if (gate.data.gate.position == 0) { 
 
-                    mouse.counter = random(170, 240);     
+                    mouse.counter = arduboy.randomLFSR(170, 240);     
 
                 }
 

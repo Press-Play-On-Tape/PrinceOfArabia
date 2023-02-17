@@ -363,7 +363,7 @@ void invader_EnemyDropsBullet(Invader_General2 &general2, Invader_Player &player
       
         Invader_Bullet &bullet = level.getItem(found).data.invader_Bullet;
 
-        if (random(0, 2) == 0) {
+        if (arduboy.randomLFSR(0, 2) == 0) {
 
 
             // Drop overhead ..
@@ -376,7 +376,7 @@ void invader_EnemyDropsBullet(Invader_General2 &general2, Invader_Player &player
 
                     bullet.x = enemy.x + 4;
                     bullet.y = enemy.y + 8;
-                    general2.bulletCountdown = 4 + random(general2.speed * 4, general2.speed * 8);
+                    general2.bulletCountdown = 4 + arduboy.randomLFSR(general2.speed * 4, general2.speed * 8);
                     dropped = true;
                 
                     #ifndef SAVE_MEMORY_SOUND
@@ -398,13 +398,13 @@ void invader_EnemyDropsBullet(Invader_General2 &general2, Invader_Player &player
 
             for (uint8_t x = 0; x < 60; x++) {
 
-                Invader_Enemy &enemy = level.getItem(Constants::Invaders_Enemy_Row_1_Start + random(0, 22)).data.invader_Enemy;
+                Invader_Enemy &enemy = level.getItem(Constants::Invaders_Enemy_Row_1_Start + arduboy.randomLFSR(0, 22)).data.invader_Enemy;
                 
                 if (enemy.status == Status::Active && abs(enemy.x - player.x) < 16) {
 
                     bullet.x = enemy.x + 4;
                     bullet.y = enemy.y + 8;
-                    general2.bulletCountdown = 8 + random(general2.speed * 4, general2.speed * 6);
+                    general2.bulletCountdown = 8 + arduboy.randomLFSR(general2.speed * 4, general2.speed * 6);
 
                     #ifndef SAVE_MEMORY_SOUND
                         sound.tonesFromFX(Sounds::Invader_Enemy_Fires_Bullet);

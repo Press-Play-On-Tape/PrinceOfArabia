@@ -368,14 +368,14 @@ void game() {
 
                         case Stance::Sword_Attack_1_Start ... Stance::Sword_Attack_2:
 
-                            if (random(0, 12) == 0) {    
+                            if (arduboy.randomLFSR(0, 12) == 0) {    
 
                                 prince.clear();
                                 prince.pushSequence(Stance::Attack_Block_1_Start, Stance::Attack_Block_3_End, Stance::Sword_Normal);
                                 enemy.pushSequence(Stance::Attack_Block_1_Start, Stance::Attack_Block_3_End, Stance::Sword_Normal);
                                 
                             }
-                            else if (random(0, 12) == 0) {    
+                            else if (arduboy.randomLFSR(0, 12) == 0) {    
 
                                 moveBackwardsWithSword(enemyBase, enemy);
                                 
@@ -388,7 +388,7 @@ void game() {
 
                         case Stance::Sword_Attack_3 ... Stance::Sword_Attack_4:
 
-                            if (random(0, 8) == 0) {    
+                            if (arduboy.randomLFSR(0, 8) == 0) {    
 
                                 prince.clear();
                                 prince.pushSequence(Stance::Attack_Block_1_Start, Stance::Attack_Block_3_End, Stance::Sword_Normal);
@@ -426,7 +426,7 @@ void game() {
                                             case Stance::Sword_Step_1_Start ... Stance::Sword_Step_3_End:
                                             case Stance::Sword_Normal:
 
-                                                if (random(0, 16) == 0) {
+                                                if (arduboy.randomLFSR(0, 16) == 0) {
                                                     enemy.pushSequence(Stance::Sword_Attack_1_Start, Stance::Sword_Attack_8_End, Stance::Sword_Normal);
                                                 }
                                                 break;
@@ -448,7 +448,7 @@ void game() {
 
                                     case Constants::StrikeDistance + 1 ... Constants::StrikeDistance + 28:
 
-                                        if (random(0, 16) == 0) {
+                                        if (arduboy.randomLFSR(0, 16) == 0) {
 
                                             if (level.canMoveForward(enemyBase, Action::SwordStep, enemyBase.getDirection(), 0)) {
                                                 enemy.pushSequence(Stance::Sword_Step_1_Start, Stance::Sword_Step_3_End); 

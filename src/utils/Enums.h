@@ -90,7 +90,8 @@ enum class Action : uint8_t {
     SwordStep2      = 8,        // Do not move from 8
     StandingJump    = 9,
     CrouchHop       = 10,
-    RunningTurn     = 11
+    RunningTurn     = 11,
+    RunJump_4       = 12,
 };
 
 enum class CanJumpUpResult : uint8_t {

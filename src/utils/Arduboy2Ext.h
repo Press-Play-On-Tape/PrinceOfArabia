@@ -20,5 +20,6 @@ class Arduboy2Ext : public Arduboy2Base {
     
     void clearButtonState();
     void resetFrameCount();
-    
+    uint8_t randomLFSR(uint8_t min, uint8_t max);
+        
 };
