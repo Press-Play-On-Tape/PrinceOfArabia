@@ -213,41 +213,10 @@ void render(bool enemyVisible, bool sameLevelAsPrince) {
     }
 
 
-    // Draw prince ..
-
-    uint16_t stance = prince.getStance();
-    uint8_t imageIndex = getImageIndexFromStance(stance);
-
-    if (imageIndex != 0) {
-
-        #if defined(DEBUG) && defined(DEBUG_PRINCE_RENDERING)
-        DEBUG_PRINT(F("Stance: "));
-        DEBUG_PRINT(prince.getStance());
-        DEBUG_PRINT(F(", ImageIndex: "));
-        DEBUG_PRINTLN(imageIndex);
-        #endif
-
-        int16_t yCoord = prince.getYImage() - level.getYOffset() + Constants::ScreenTopOffset;
-
-        if (prince.getDirection() == Direction::Left) {
-            
-            FX::drawBitmap(prince.getXImage(), yCoord, Images::Prince_Left, imageIndex - 1, dbmMasked);
-
-        }
-        else {
-            
-            FX::drawBitmap(prince.getXImage(), yCoord, Images::Prince_Right, imageIndex - 1, dbmMasked);
-
-        }
-
-    }
-
-
     // Draw enemy ..
 
     #ifndef SAVE_MEMORY_ENEMY
 
-//        if (enemyVisible && enemy.getStatus() == Status::Active) {
         if (enemy.getStatus() == Status::Active) {
                 
             stance = enemy.getStance();
@@ -291,6 +260,37 @@ void render(bool enemyVisible, bool sameLevelAsPrince) {
         }
 
     #endif
+
+
+    // Draw prince ..
+
+    uint16_t stance = prince.getStance();
+    uint8_t imageIndex = getImageIndexFromStance(stance);
+
+    if (imageIndex != 0) {
+
+        #if defined(DEBUG) && defined(DEBUG_PRINCE_RENDERING)
+        DEBUG_PRINT(F("Stance: "));
+        DEBUG_PRINT(prince.getStance());
+        DEBUG_PRINT(F(", ImageIndex: "));
+        DEBUG_PRINTLN(imageIndex);
+        #endif
+
+        int16_t yCoord = prince.getYImage() - level.getYOffset() + Constants::ScreenTopOffset;
+
+        if (prince.getDirection() == Direction::Left) {
+            
+            FX::drawBitmap(prince.getXImage(), yCoord, Images::Prince_Left, imageIndex - 1, dbmMasked);
+
+        }
+        else {
+            
+            FX::drawBitmap(prince.getXImage(), yCoord, Images::Prince_Right, imageIndex - 1, dbmMasked);
+
+        }
+
+    }
+
 
 
     // Draw items ..

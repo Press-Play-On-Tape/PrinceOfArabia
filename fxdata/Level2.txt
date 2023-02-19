@@ -47,7 +47,7 @@ uint8_t level2_Data[] = {
     14,                         // Enemy starting x pos (right entry)
     2,                          // Enemy starting x pos (left extent)
     60,                         // Enemy starting x pos (right extent)
-    62,                         // Enemy starting y pos (25, 56, 87)
+    56,                         // Enemy starting y pos (25, 56, 87)
     3,                          // Enemy starting health
     0,                          // Status 0 Alive, 1 Dead, 2 Dormant
     // Enemy 4

@@ -184,7 +184,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
                 _____ 6 5 4 3 2 1     _____ 1 2 3 4 5 6
                 WT CL 0 0 0 0 0 0     WT CL 0 0 0 0 0 0
                 WT NL x x x x x x     WT NL x x x x x x
-                GT CL 1 0 x x x _     GT CL _ x x x 0 1
+                GT CL 1 0 0 x x _     GT CL _ x x 0 0 1
                 GT NL x x x x x _     GT NL _ x x x x x
                 */
 
@@ -194,6 +194,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
                     wallTile4_CurrLvl == WallTileResults::None && 
                     wallTile5_CurrLvl == WallTileResults::None && 
                     wallTile6_CurrLvl == WallTileResults::None &&
+                    !isGroundTile4_CurrLvl && 
                     !isGroundTile5_CurrLvl && 
                     isGroundTile6_CurrLvl) {
 
