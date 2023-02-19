@@ -32,7 +32,7 @@ uint8_t level11_Data[] = {
     0,                          // Type 0 = Guard, 1 = Skeleton, 2 = Mirror          
     50,                         // Enemy starting x tile
     3,                          // Enemy starting y tile
-    98,                         // Enemy starting x pos (left entry)
+    94,                         // Enemy starting x pos (left entry)
     54,                         // Enemy starting x pos (right entry)
     50,                         // Enemy starting x pos (left extent)
     98,                         // Enemy starting x pos (right extent)
@@ -43,8 +43,8 @@ uint8_t level11_Data[] = {
     0,                          // Type 0 = Guard, 1 = Skeleton, 2 = Mirror          
     70,                         // Enemy starting x tile
     3,                          // Enemy starting y tile
-    42,                         // Enemy starting x pos (left entry)
-    98,                         // Enemy starting x pos (right entry)
+    98,                         // Enemy starting x pos (left entry)
+    42,                         // Enemy starting x pos (right entry)
     38,                         // Enemy starting x pos (left extent)
     114,                        // Enemy starting x pos (right extent)
     25,                         // Enemy starting y pos (25, 56, 87)

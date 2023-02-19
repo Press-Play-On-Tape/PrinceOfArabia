@@ -16,6 +16,15 @@ namespace Levels {
     include "Level13.txt"
     include "Level14_StandingJumps.txt"
     include "Level15_RunningJumps.txt"
+    include "Level16_RunningJumps.txt"
+    include "Level17_RunningJumps.txt"
+    include "Level18_RunningJumps.txt"
+    include "Level19_RunningJumps.txt"
+    include "Level20_RunningJumps.txt"
+    include "Level21_RunningJumps.txt"
+    include "Level22_RunningJumps.txt"
+    include "Level23_RunningJumps.txt"
+    include "Level24_RunningJumps.txt"
 
     uint24_t level_FG[] = {
         0,         // dummy
@@ -33,7 +42,17 @@ namespace Levels {
         Level12_FG,
         Level13_FG,
         Level14_StandingJumps_FG,
-        Level15_RunningJumps_FG
+        Level15_RunningJumps_FG,
+        Level16_RunningJumps_FG,
+        Level17_RunningJumps_FG,
+        Level18_RunningJumps_FG,
+        Level19_RunningJumps_FG,
+        Level20_RunningJumps_FG,
+        Level21_RunningJumps_FG,
+        Level22_RunningJumps_FG,
+        Level23_RunningJumps_FG,
+        Level24_RunningJumps_FG
+
     };
 
     uint24_t Level_BG[] = {
@@ -52,7 +71,17 @@ namespace Levels {
         Level12_BG,
         Level13_BG,
         Level14_StandingJumps_BG,
-        Level15_RunningJumps_BG
+        Level15_RunningJumps_BG,
+        Level16_RunningJumps_BG,
+        Level17_RunningJumps_BG,
+        Level18_RunningJumps_BG,
+        Level19_RunningJumps_BG,
+        Level20_RunningJumps_BG,
+        Level21_RunningJumps_BG,
+        Level22_RunningJumps_BG,
+        Level23_RunningJumps_BG,
+        Level24_RunningJumps_BG
+
     };
 
     uint24_t level_Data[] = {
@@ -71,7 +100,17 @@ namespace Levels {
         level12_Data,
         level13_Data,
         Level14_StandingJumps_Data,
-        Level15_RunningJumps_Data
+        Level15_RunningJumps_Data,
+        Level16_RunningJumps_Data,
+        Level17_RunningJumps_Data,
+        Level18_RunningJumps_Data,
+        Level19_RunningJumps_Data,
+        Level20_RunningJumps_Data,
+        Level21_RunningJumps_Data,
+        Level22_RunningJumps_Data,
+        Level23_RunningJumps_Data,
+        Level24_RunningJumps_Data
+
     };
 
     uint24_t Level_Items[] = {
@@ -90,7 +129,16 @@ namespace Levels {
         Level12_Items,
         Level13_Items,
         Level14_StandingJumps_Items,
-        Level15_RunningJumps_Items
+        Level15_RunningJumps_Items,
+        Level16_RunningJumps_Items,
+        Level17_RunningJumps_Items,
+        Level18_RunningJumps_Items,
+        Level19_RunningJumps_Items,
+        Level20_RunningJumps_Items,
+        Level21_RunningJumps_Items,
+        Level22_RunningJumps_Items,
+        Level23_RunningJumps_Items,
+        Level24_RunningJumps_Items
 
     };
 }

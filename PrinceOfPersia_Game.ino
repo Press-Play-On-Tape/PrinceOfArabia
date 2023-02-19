@@ -75,22 +75,22 @@ void game() {
 
     #ifdef ALT_B_BUTTON
 
-        // if (justPressed & B_BUTTON) { // echo out details
-        //     DEBUG_PRINT(F("St"));
-        //     DEBUG_PRINT(prince.getStance());
-        //     DEBUG_PRINT(F(" px"));
-        //     DEBUG_PRINT(prince.getX());
-        //     DEBUG_PRINT(F(" x"));
-        //     DEBUG_PRINT(level.coordToTileIndexX((level.getXLocation() * Constants::TileWidth) + prince.getX()));
-        //     DEBUG_PRINT(F(" "));
-        //     DEBUG_PRINT((level.getXLocation() * Constants::TileWidth) + prince.getX());
-        //     DEBUG_PRINT(F(" y"));
-        //     DEBUG_PRINT(level.coordToTileIndexY((level.getYLocation() * Constants::TileHeight) + prince.getY()));
-        //     DEBUG_PRINT(F(" "));
-        //     DEBUG_PRINT(prince.getY());
-        //     DEBUG_PRINT(F(" D"));
-        //     DEBUG_PRINTLN(level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX()));
-        // }
+        if (justPressed & B_BUTTON) { // echo out details
+            DEBUG_PRINT(F("St"));
+            DEBUG_PRINT(prince.getStance());
+            DEBUG_PRINT(F(" px"));
+            DEBUG_PRINT(prince.getX());
+            DEBUG_PRINT(F(" x"));
+            DEBUG_PRINT(level.coordToTileIndexX((level.getXLocation() * Constants::TileWidth) + prince.getX()));
+            DEBUG_PRINT(F(" "));
+            DEBUG_PRINT((level.getXLocation() * Constants::TileWidth) + prince.getX());
+            DEBUG_PRINT(F(" y"));
+            DEBUG_PRINT(level.coordToTileIndexY((level.getYLocation() * Constants::TileHeight) + prince.getY()));
+            DEBUG_PRINT(F(" "));
+            DEBUG_PRINT(prince.getY());
+            DEBUG_PRINT(F(" D"));
+            DEBUG_PRINTLN(level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX()));
+        }
 
         // if (justPressed & B_BUTTON) { // echo out details
 
@@ -558,6 +558,7 @@ void game() {
                         if ((pressed & LEFT_BUTTON) && (pressed & DOWN_BUTTON)) {
 
                             if (level.canMoveForward(prince, Action::SmallStep, prince.getDirection(), 0)) {
+
                                 prince.pushSequence(Stance::Small_Step_1_Start, Stance::Small_Step_6_End, Stance::Upright);
                                 break;
                             }

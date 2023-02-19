@@ -87,6 +87,13 @@ class Prince : public BaseEntity, public BaseStack {
 
         }
 
+    	void updateLocation(uint8_t xLoc, uint8_t yLoc) {
+
+            location.x = (xLoc * Constants::TileWidth) + this->x;
+            location.y = (yLoc * Constants::TileHeight) + this->y;
+
+        }
+
         bool isSwordDrawn() {
 
             switch (this->stance) {
