@@ -226,7 +226,7 @@ void game() {
 
                     // Draw sword? Not if the prince is dead!
 
-                    if (abs(xDelta) < 70 && yDelta == 0) {
+                    if (abs(xDelta) < 70 && yDelta == 0 && enemyIsVisible && sameLevelAsPrince) {
 
                         switch (prince.getStance()) {
 

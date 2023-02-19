@@ -192,7 +192,6 @@ class Enemy : public BaseStack {
 
         void getImageDetails(ImageDetails &imageDetails) {
 
-//            uint8_t imageIndex = static_cast<uint8_t>(pgm_read_byte(&Constants::StanceToImageXRef[this->base[this->activeEnemy].getStance()]));
             uint8_t imageIndex = this->base[this->activeEnemy].getImageIndexFromStance(this->base[this->activeEnemy].getStance());
             uint24_t startPos = static_cast<uint24_t>(Constants::Prince_ImageDetails + ((imageIndex - 1) * 3));
             int8_t direction = this->getDirection() == Direction::Left ? -1 : 1;

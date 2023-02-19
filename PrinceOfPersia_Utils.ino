@@ -152,160 +152,120 @@ void processRunJump(Prince &prince, Level &level) {
 
                 RunningJumpResult jump_4_Result = level.canRunningJump(prince, Action::RunJump_4);
 
-                #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
-                    
-                    switch (jump_4_Result) {
+                if (jump_4_Result != RunningJumpResult::None) {
 
-                        case RunningJumpResult::None:
-                            break;
-
-                        default:
-
-                            DEBUG_PRINT(F("St"));
-                            DEBUG_PRINT(prince.getStance());
-                            DEBUG_PRINT(F(" px"));
-                            DEBUG_PRINT(prince.getX());
-                            DEBUG_PRINT(F(" x"));
-                            DEBUG_PRINT(level.coordToTileIndexX((level.getXLocation() * Constants::TileWidth) + prince.getX()));
-                            DEBUG_PRINT(F(" "));
-                            DEBUG_PRINT((level.getXLocation() * Constants::TileWidth) + prince.getX());
-                            DEBUG_PRINT(F(" y"));
-                            DEBUG_PRINT(level.coordToTileIndexY((level.getYLocation() * Constants::TileHeight) + prince.getY()));
-                            DEBUG_PRINT(F(" "));
-                            DEBUG_PRINT(prince.getY());
-                            DEBUG_PRINT(F(" D"));
-                            DEBUG_PRINTLN(level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX()));
-
-                            break;
-
-                    }
-
-                #endif
-
-
-                switch (jump_4_Result) {
-
-                    case RunningJumpResult::Jump4_GrabLedge_Pos2:
-                        prince.pushSequence(Stance::Running_Jump_4_GL_2_1_Start, Stance::Running_Jump_4_GL_2_16_End, Stance::Jump_Up_A_14_End);
-                        prince.setIgnoreWallCollisions(true);
-                        prince.setHangingCounter(200);
-                        break;
-
-                    case RunningJumpResult::Jump4_GrabLedge_Pos6:
-                        prince.pushSequence(Stance::Running_Jump_4_GL_6_1_Start, Stance::Running_Jump_4_GL_6_16_End, Stance::Jump_Up_A_14_End);
-                        prince.setIgnoreWallCollisions(true);
-                        prince.setHangingCounter(200);
-                        break;
-
-                    case RunningJumpResult::Jump4_GrabLedge_Pos10:
-                        prince.pushSequence(Stance::Running_Jump_4_GL_10_1_Start, Stance::Running_Jump_4_GL_10_16_End, Stance::Jump_Up_A_14_End);
-                        prince.setIgnoreWallCollisions(true);
-                        prince.setHangingCounter(200);
-                        break;
-
-                    case RunningJumpResult::Jump4_DropLevel:
-                        prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright);
-                        prince.pushSequence(Stance::Running_Jump_4_DropLvl_1_Start, Stance::Running_Jump_4_DropLvl_14_End);
-                        prince.setIgnoreWallCollisions(true);
-                        break;
-
-                    case RunningJumpResult::Jump4_DropLevel_Pos10:
-                        prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright);
-                        prince.pushSequence(Stance::Running_Jump_4_DropLvl_10_1_Start, Stance::Running_Jump_4_DropLvl_10_13);
-                        prince.setIgnoreWallCollisions(true);
-                        break;
-
-                    case RunningJumpResult::None:
-
-                        switch (jump_3_Result) {
-
-                            case RunningJumpResult::Jump3_DropLevel:
-                                prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright);
-                                prince.pushSequence(Stance::Running_Jump_3_DropLvl_1_Start, Stance::Running_Jump_3_DropLvl_14_End);
-                                prince.setIgnoreWallCollisions(true);
-                                break;
-
-                            case RunningJumpResult::Jump3_DropLevel_Pos10:
-                                prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright);
-                                prince.pushSequence(Stance::Running_Jump_3_DropLvl_10_1_Start, Stance::Running_Jump_3_DropLvl_10_14_End);
-                                prince.setIgnoreWallCollisions(true);
-                                break;
-
-                            case RunningJumpResult::Jump3_KeepLevel_Pos2:
-                            case RunningJumpResult::Jump3_KeepLevel_Pos6:
-                                prince.pushSequence(Stance::Running_Jump_3_SameLvl_Short_1_Start, Stance::Running_Jump_3_SameLvl_Short_8_End, Stance::Run_Repeat_4);
-                                prince.setIgnoreWallCollisions(true);
-                                break;
-
-                            case RunningJumpResult::Jump3_KeepLevel_Pos10:
-                                prince.pushSequence(Stance::Run_Repeat_5_Mid, Stance::Run_Repeat_8_End);
-                                prince.pushSequence(Stance::Running_Jump_3_SameLvl_1_Start, Stance::Running_Jump_3_SameLvl_8_End);
-                                prince.setIgnoreWallCollisions(true);
-                                break;
-
-                            case RunningJumpResult::Normal_Pos2:
-                                prince.pushSequence(Stance::Running_Jump_Short_2_1_Start, Stance::Running_Jump_Short_2_7_End, Stance::Run_Repeat_4);
-                                break;
-
-                            case RunningJumpResult::Normal_Pos6:
-                                prince.pushSequence(Stance::Running_Jump_Short_6_1_Start, Stance::Running_Jump_Short_6_7_End, Stance::Run_Repeat_4);
-                                break;
-
-                            case RunningJumpResult::None:
-
-                                switch (jump_2_Result) {
-
-                                    case RunningJumpResult::Jump2_Pos2:
-                                        prince.pushSequence(Stance::Running_Jump_Jump2_2_1_Start, Stance::Running_Jump_Jump2_2_7_End, Stance::Run_Repeat_4);
-                                        break;
-
-                                    case RunningJumpResult::Jump2_Pos6:
-                                        prince.pushSequence(Stance::Running_Jump_Jump2_6_1_Start, Stance::Running_Jump_Jump2_6_7_End, Stance::Run_Repeat_4);
-                                        break;
-
-                                    default:
-                                        break;
-
-                                }
-
-                                break;
-
-                            default:
-                                break;
-
-                        }
-
-                        break;
-
-                    default: break;
+                    processRunJump_Jump(prince, jump_4_Result);
 
                 }
+                else {
+
+                    processRunJump_Jump(prince, jump_3_Result);
+
+                }
+
+            }
+            else {
+                
+                processRunJump_Jump(prince, jump_2_Result);
 
             }
 
         }
         else {
 
-            #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
-            DEBUG_PRINTLN(F("RunningJump_2 false, RunRepeat"));
-            #endif
-
-            prince.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_4);
+            processRunJump_Jump(prince, jump_1_Result);
 
         }
 
     }
     else {
 
-        #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
-        DEBUG_PRINTLN(F("RunningJump_1 false, Stopping"));
-        #endif
-
         prince.pushSequence(Stance::Stopping_1_Start, Stance::Stopping_5_End, Stance::Upright);
+        
     }
 
 }
 
+
+void processRunJump_Jump(Prince &prince, RunningJumpResult jumpResult) {
+
+    switch (jumpResult) {
+
+        case RunningJumpResult::Jump4_GrabLedge_Pos2:
+            prince.pushSequence(Stance::Running_Jump_4_GL_2_1_Start, Stance::Running_Jump_4_GL_2_16_End, Stance::Jump_Up_A_14_End);
+            prince.setIgnoreWallCollisions(true);
+            prince.setHangingCounter(200);
+            break;
+
+        case RunningJumpResult::Jump4_GrabLedge_Pos6:
+            prince.pushSequence(Stance::Running_Jump_4_GL_6_1_Start, Stance::Running_Jump_4_GL_6_16_End, Stance::Jump_Up_A_14_End);
+            prince.setIgnoreWallCollisions(true);
+            prince.setHangingCounter(200);
+            break;
+
+        case RunningJumpResult::Jump4_GrabLedge_Pos10:
+            prince.pushSequence(Stance::Running_Jump_4_GL_10_1_Start, Stance::Running_Jump_4_GL_10_16_End, Stance::Jump_Up_A_14_End);
+            prince.setIgnoreWallCollisions(true);
+            prince.setHangingCounter(200);
+            break;
+
+        case RunningJumpResult::Jump4_DropLevel:
+            prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright);
+            prince.pushSequence(Stance::Running_Jump_4_DropLvl_1_Start, Stance::Running_Jump_4_DropLvl_14_End);
+            prince.setIgnoreWallCollisions(true);
+            break;
+
+        case RunningJumpResult::Jump4_DropLevel_Pos10:
+            prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright);
+            prince.pushSequence(Stance::Running_Jump_4_DropLvl_10_1_Start, Stance::Running_Jump_4_DropLvl_10_13);
+            prince.setIgnoreWallCollisions(true);
+            break;
+
+        case RunningJumpResult::Jump3_DropLevel:
+            prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright);
+            prince.pushSequence(Stance::Running_Jump_3_DropLvl_1_Start, Stance::Running_Jump_3_DropLvl_14_End);
+            prince.setIgnoreWallCollisions(true);
+            break;
+
+        case RunningJumpResult::Jump3_DropLevel_Pos10:
+            prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright);
+            prince.pushSequence(Stance::Running_Jump_3_DropLvl_10_1_Start, Stance::Running_Jump_3_DropLvl_10_14_End);
+            prince.setIgnoreWallCollisions(true);
+            break;
+
+        case RunningJumpResult::Jump3_KeepLevel_Pos2:
+        case RunningJumpResult::Jump3_KeepLevel_Pos6:
+            prince.pushSequence(Stance::Running_Jump_3_SameLvl_Short_1_Start, Stance::Running_Jump_3_SameLvl_Short_8_End, Stance::Run_Repeat_4);
+            prince.setIgnoreWallCollisions(true);
+            break;
+
+        case RunningJumpResult::Jump3_KeepLevel_Pos10:
+            prince.pushSequence(Stance::Run_Repeat_5_Mid, Stance::Run_Repeat_8_End);
+            prince.pushSequence(Stance::Running_Jump_3_SameLvl_1_Start, Stance::Running_Jump_3_SameLvl_8_End);
+            prince.setIgnoreWallCollisions(true);
+            break;
+
+        case RunningJumpResult::Normal_Pos2:
+            prince.pushSequence(Stance::Running_Jump_Short_2_1_Start, Stance::Running_Jump_Short_2_7_End, Stance::Run_Repeat_4);
+            break;
+
+        case RunningJumpResult::Normal_Pos6:
+            prince.pushSequence(Stance::Running_Jump_Short_6_1_Start, Stance::Running_Jump_Short_6_7_End, Stance::Run_Repeat_4);
+            break;
+
+        case RunningJumpResult::Jump2_Pos2:
+            prince.pushSequence(Stance::Running_Jump_Jump2_2_1_Start, Stance::Running_Jump_Jump2_2_7_End, Stance::Run_Repeat_4);
+            break;
+
+        case RunningJumpResult::Jump2_Pos6:
+            prince.pushSequence(Stance::Running_Jump_Jump2_6_1_Start, Stance::Running_Jump_Jump2_6_7_End, Stance::Run_Repeat_4);
+            break;
+
+        default: break;
+
+    }
+
+}
 
 void processStandingJump(Prince &prince, Level &level) {
 
@@ -675,7 +635,7 @@ void playGrab() {
 
 #ifndef SAVE_MEMORY_ENEMY
 
-    void isEnemyVisible(Prince &prince, bool swapEnemies, bool &isVisible, bool &sameLevelAsPrince, bool justEnteredRoom) { // Should we swap actrive enemies (no if stack is not empty)
+    void isEnemyVisible(Prince &prince, bool swapEnemies, bool &isVisible, bool &sameLevelAsPrince, bool justEnteredRoom) { // Should we swap active enemies (no if stack is not empty)
 
         bool enemyIsVisible = false;
         bool onSameLevelAsPrince = false;

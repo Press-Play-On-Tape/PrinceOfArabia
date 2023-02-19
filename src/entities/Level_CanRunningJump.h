@@ -154,11 +154,11 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
 
 
                 /* ----------------------------------------------------------------------------------- */
-                /* If the far side are both walls then we cannot jump ..
+                /* 4. If the far side are both walls then we cannot jump ..
                 
                 Left                   Right
                 _____ 6 5 4 3 2 1      _____ 1 2 3 4 5 6
-                WT CL 1 0 0 0 0 0      WT CL 0 0 0 0 0 1
+                WT CL 1 x x x x x      WT CL x x x x x 1
                 WT NL 1 x x x x x      WT CL x x x x x 1
                 GT CL x x x x x _      GT CL _ x x x x x
                 GT NL x x x x x _      GT NL _ x x x x x 
@@ -176,7 +176,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
                 }
 
                 /* ----------------------------------------------------------------------------------- */
-                /* Can we jump four blanks to the same level? Results in a player hanging on.
+                /* 4. Can we jump four blanks to the same level? Results in a player hanging on.
                 
                 Positions 2, 6, 10.
                 
@@ -230,7 +230,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
 
 
                 /* ----------------------------------------------------------------------------------- */
-                /*  Can we jump four levels to a lower level ?
+                /* 4.  Can we jump four levels to a lower level ?
                 
                 Positions 2, 6, 10.
                 
@@ -424,7 +424,30 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
 
 
                 /* ----------------------------------------------------------------------------------- */
-                /*  Can we jump three blanks to the same level?
+                /* 3. If the far side are both walls then we cannot jump ..
+                
+                Left                   Right
+                _____ 6 5 4 3 2 1      _____ 1 2 3 4 5 6
+                WT CL x 1 x x x x      WT CL x x x x 1 x
+                WT NL x 1 x x x x      WT CL x x x x 1 x
+                GT CL x x x x x _      GT CL _ x x x x x
+                GT NL x x x x x _      GT NL _ x x x x x 
+                */
+
+                if (wallTile5_CurrLvl != WallTileResults::None &&
+                    wallTile5_NextLvl != WallTileResults::None ) {
+
+                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_4)
+                    DEBUG_PRINTLN(F("J3-1 None"));
+                    #endif
+
+                    return RunningJumpResult::None;
+
+                }
+
+
+                /* ----------------------------------------------------------------------------------- */
+                /*  3. Can we jump three blanks to the same level?
                 
                 Positions 2, 6, 10.
                 
@@ -447,7 +470,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
                         case 2:
 
                             #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
-                            DEBUG_PRINTLN(F("J3-1 Jump3_KeepLevel_Pos2"));
+                            DEBUG_PRINTLN(F("J3-2 Jump3_KeepLevel_Pos2"));
                             #endif
 
                             return RunningJumpResult::Jump3_KeepLevel_Pos2;
@@ -455,7 +478,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
                         case 6:
 
                             #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
-                            DEBUG_PRINTLN(F("J3-1 Jump3_KeepLevel_Pos6"));
+                            DEBUG_PRINTLN(F("J3-3 Jump3_KeepLevel_Pos6"));
                             #endif
 
                             return RunningJumpResult::Jump3_KeepLevel_Pos6;
@@ -463,7 +486,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
                         default:
 
                             #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
-                            DEBUG_PRINTLN(F("J3-2 Jump3_KeepLevel_Pos10"));
+                            DEBUG_PRINTLN(F("J3-4 Jump3_KeepLevel_Pos10"));
                             #endif
 
                             return RunningJumpResult::Jump3_KeepLevel_Pos10;
@@ -485,7 +508,6 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
                 GT CL x x x x x _     GT CL _ x x x x x
                 GT NL x 1 x x x _     GT NL _ x x x 1 x
                 */
-
 
                 if (wallTile2_CurrLvl == WallTileResults::None && 
                     wallTile3_CurrLvl == WallTileResults::None && 
@@ -509,7 +531,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
                         case 6:
 
                             #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
-                            DEBUG_PRINTLN(F("J3-3 Jump3_DropLevel"));
+                            DEBUG_PRINTLN(F("J3-5 Jump3_DropLevel"));
                             #endif
 
                             return RunningJumpResult::Jump3_DropLevel;
@@ -517,7 +539,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
                         case 10:
 
                             #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
-                            DEBUG_PRINTLN(F("J3-4 Jump3_DropLevel"));
+                            DEBUG_PRINTLN(F("J3-6 Jump3_DropLevel"));
                             #endif
 
                             return RunningJumpResult::Jump3_DropLevel_Pos10;
@@ -527,16 +549,23 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
                 }
 
 
-                // Three levels to nothing ..
+                /* ----------------------------------------------------------------------------------- */
+                /*  3. Three levels to nothing ..
+                
+                Positions 2, 6, 10.
+                
+                Left                  Right
+                _____ 6 5 4 3 2 1     _____ 1 2 3 4 5 6
+                WT CL x 0 0 0 0 0     WT CL 0 0 0 0 0 x
+                WT NL x x x x x x     WT NL x x x x x x
+                GT CL x x x x x _     GT CL _ x x x x x
+                GT NL x x x x x _     GT NL _ x x x x x
+                */
 
                 if (wallTile2_CurrLvl == WallTileResults::None && 
                     wallTile3_CurrLvl == WallTileResults::None &&
                     wallTile4_CurrLvl == WallTileResults::None && 
-                    wallTile5_CurrLvl == WallTileResults::None  
-                    // wallTile2_NextLvl == WallTileResults::None && 
-                    // wallTile3_NextLvl == WallTileResults::None && 
-                    // wallTile4_NextLvl == WallTileResults::None && 
-                    // wallTile5_NextLvl != WallTileResults::None 
+                    wallTile5_CurrLvl != WallTileResults::None  
                     ) {
 
                     switch (distToEdgeOfCurrentTile) {
@@ -544,7 +573,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
                         case 2:
 
                             #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
-                            DEBUG_PRINTLN(F("J3-5 Normal_Pos2"));
+                            DEBUG_PRINTLN(F("J3-7 Normal_Pos2"));
                             #endif
 
                             return RunningJumpResult::Normal_Pos2;
@@ -553,7 +582,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
                         case 10:
 
                             #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
-                            DEBUG_PRINTLN(F("J3-6 Normal_Pos6"));
+                            DEBUG_PRINTLN(F("J3-8 Normal_Pos6"));
                             #endif
 
                             return RunningJumpResult::Normal_Pos6;
@@ -563,29 +592,55 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
                 }
 
 
-                // if (wallTile4_CurrLvl == WallTileResults::None) {
+                /* ----------------------------------------------------------------------------------- */
+                /*  3. Three levels to nothing ..
+                
+                Positions 2, 6, 10.
+                
+                Left                  Right
+                _____ 6 5 4 3 2 1     _____ 1 2 3 4 5 6
+                WT CL x 1 0 0 0 0     WT CL 0 0 0 0 1 x
+                WT NL x x x x x x     WT NL x x x x x x
+                GT CL x x 1 1 1 _     GT CL _ 1 1 1 x x
+                GT NL x x x x x _     GT NL _ x x x x x
+                */
 
-                //     #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL)
-                //     DEBUG_PRINTLN("R3-7");
-                //     #endif
+                if (wallTile2_CurrLvl == WallTileResults::None && 
+                    wallTile3_CurrLvl == WallTileResults::None &&
+                    wallTile4_CurrLvl == WallTileResults::None && 
+                    wallTile5_CurrLvl != WallTileResults::None &&
+                    isGroundTile2_CurrLvl &&
+                    isGroundTile3_CurrLvl &&
+                    isGroundTile4_CurrLvl
+                    ) {
 
-                //     return RunningJumpResult::Normal;
+                    switch (distToEdgeOfCurrentTile) {
 
-                // }
-                else {
+                        case 2:
 
-                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
-                    DEBUG_PRINTLN(F("J3-7 None"));
-                    #endif
+                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
+                            DEBUG_PRINTLN(F("J3-9 Normal_Pos2"));
+                            #endif
 
-                    return RunningJumpResult::None;
+                            return RunningJumpResult::Normal_Pos2;
+
+                        case 6:
+                        case 10:
+
+                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
+                            DEBUG_PRINTLN(F("J3-10 Normal_Pos6"));
+                            #endif
+
+                            return RunningJumpResult::Normal_Pos6;
+
+                    }
 
                 }
 
             }
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
-            DEBUG_PRINTLN(F("J3-6 Normal_Pos6"));
+            DEBUG_PRINTLN(F("J3-12 Normal_Pos6"));
             #endif
 
             return RunningJumpResult::Normal_Pos6;     

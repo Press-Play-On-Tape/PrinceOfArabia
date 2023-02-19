@@ -1,7 +1,7 @@
 
 #pragma once
 
-#define PRODUCTION_SETTINGS
+#define _PRODUCTION_SETTINGS
 
 #ifdef PRODUCTION_SETTINGS
 
@@ -34,12 +34,12 @@
     #define ALT_B_BUTTON
     #define _GIVE_SWORD
 
-    #define LEVEL_DATA_FROM_FX
-    #define _IMAGE_DATA_FROM_FX
+    #define _LEVEL_DATA_FROM_FX
+    #define IMAGE_DATA_FROM_FX
     #define _SAVE_TO_FX
-    #define STARTING_LEVEL 1
+    #define STARTING_LEVEL 26
     #define _DEBUG_CUT_SCENES
-    #define DEBUG_LEVELS
+    #define _DEBUG_LEVELS
 
     #define DEBUG
 

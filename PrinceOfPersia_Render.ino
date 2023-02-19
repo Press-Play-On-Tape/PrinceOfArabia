@@ -219,8 +219,8 @@ void render(bool enemyVisible, bool sameLevelAsPrince) {
 
         if (enemy.getStatus() == Status::Active) {
                 
-            stance = enemy.getStance();
-            imageIndex = getImageIndexFromStance(stance);
+            uint16_t stance = enemy.getStance();
+            uint8_t imageIndex = getImageIndexFromStance(stance);
 
             if (imageIndex != 0) {
 
