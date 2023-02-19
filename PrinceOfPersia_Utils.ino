@@ -181,7 +181,7 @@ void processRunJump(Prince &prince, Level &level) {
     else {
 
         prince.pushSequence(Stance::Stopping_1_Start, Stance::Stopping_5_End, Stance::Upright);
-        
+
     }
 
 }
@@ -254,11 +254,15 @@ void processRunJump_Jump(Prince &prince, RunningJumpResult jumpResult) {
             break;
 
         case RunningJumpResult::Jump2_Pos2:
-            prince.pushSequence(Stance::Running_Jump_Jump2_2_1_Start, Stance::Running_Jump_Jump2_2_7_End, Stance::Run_Repeat_4);
+            prince.pushSequence(Stance::Running_Jump_2_2_1_Start, Stance::Running_Jump_2_2_7_End, Stance::Run_Repeat_4);
             break;
 
         case RunningJumpResult::Jump2_Pos6:
-            prince.pushSequence(Stance::Running_Jump_Jump2_6_1_Start, Stance::Running_Jump_Jump2_6_7_End, Stance::Run_Repeat_4);
+            prince.pushSequence(Stance::Running_Jump_2_6_1_Start, Stance::Running_Jump_2_6_7_End, Stance::Run_Repeat_4);
+            break;
+
+        case RunningJumpResult::Jump2_Pos10:
+            prince.pushSequence(Stance::Running_Jump_2_10_1_Start, Stance::Running_Jump_2_10_7_End, Stance::Run_Repeat_4);
             break;
 
         default: break;

@@ -753,7 +753,6 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
                             return RunningJumpResult::Jump2_Pos2;
 
                         case 6:
-                        case 10:
 
                             #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_2)
                             DEBUG_PRINTLN(F("J2-2 Jump2_Pos6"));
@@ -761,10 +760,18 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
 
                             return RunningJumpResult::Jump2_Pos6;
 
+                        case 10:
+
+                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_2)
+                            DEBUG_PRINTLN(F("J2-3 Jump2_Pos10"));
+                            #endif
+
+                            return RunningJumpResult::Jump2_Pos10;
+
                     }
 
                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_2)
-                    DEBUG_PRINTLN(F("J2-3 Jump2_Pos6"));
+                    DEBUG_PRINTLN(F("J2-4 Jump2_Pos6"));
                     #endif
 
                     return RunningJumpResult::Jump2_Pos6;
@@ -773,7 +780,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
                 else {
 
                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_2)
-                    DEBUG_PRINTLN(F("J2-4 None"));
+                    DEBUG_PRINTLN(F("J2-5 None"));
                     #endif
 
                     return RunningJumpResult::None;
@@ -782,7 +789,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
             }
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_2)
-            DEBUG_PRINTLN(F("J2-5 Normal_Pos6"));
+            DEBUG_PRINTLN(F("J2-6 Normal_Pos6"));
             #endif
 
             return RunningJumpResult::Normal_Pos6;

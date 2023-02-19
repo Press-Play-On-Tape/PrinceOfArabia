@@ -139,8 +139,6 @@ enum class StandingJumpResult : uint8_t {
 
 enum class RunningJumpResult : uint8_t {
     None,
-    Jump2_Pos2,
-    Jump2_Pos6,
     Normal_Pos2,
     Normal_Pos6,
     Jump4_GrabLedge_Pos2,
@@ -152,7 +150,10 @@ enum class RunningJumpResult : uint8_t {
     Jump3_KeepLevel_Pos6,
     Jump3_KeepLevel_Pos10,
     Jump3_DropLevel,
-    Jump3_DropLevel_Pos10
+    Jump3_DropLevel_Pos10,
+    Jump2_Pos2,
+    Jump2_Pos6,
+    Jump2_Pos10,
 };
 
 enum class MenuOption : uint8_t {
