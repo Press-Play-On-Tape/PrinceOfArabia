@@ -6,8 +6,8 @@ using uint24_t = __uint24;
 
 // Initialize FX hardware using  FX::begin(FX_DATA_PAGE); in the setup() function.
 
-constexpr uint16_t FX_DATA_PAGE  = 0xf4f1;
-constexpr uint24_t FX_DATA_BYTES = 720484;
+constexpr uint16_t FX_DATA_PAGE  = 0xf4f0;
+constexpr uint24_t FX_DATA_BYTES = 720820;
 
 constexpr uint16_t FX_SAVE_PAGE  = 0xfff0;
 constexpr uint24_t FX_SAVE_BYTES = 2;
@@ -258,255 +258,255 @@ namespace Images
   constexpr uint24_t Menu = 0x011759;
   constexpr uint16_t MenuWidth  = 42;
   constexpr uint16_t MenuHeight = 64;
-  constexpr uint8_t  MenuFrames = 3;
+  constexpr uint8_t  MenuFrames = 4;
 
-  constexpr uint24_t Sword_Cursor = 0x011B4D;
+  constexpr uint24_t Sword_Cursor = 0x011C9D;
   constexpr uint16_t Sword_Cursor_width  = 8;
   constexpr uint16_t Sword_Cursor_height = 10;
 
-  constexpr uint24_t HUD_Backgrounds = 0x011B61;
+  constexpr uint24_t HUD_Backgrounds = 0x011CB1;
   constexpr uint16_t HUD_Backgrounds_width  = 8;
   constexpr uint16_t HUD_Backgrounds_height = 64;
   constexpr uint8_t  HUD_Backgrounds_frames = 3;
 
-  constexpr uint24_t Numbers_Upright = 0x011C25;
+  constexpr uint24_t Numbers_Upright = 0x011D75;
   constexpr uint16_t Numbers_Upright_width  = 7;
   constexpr uint16_t Numbers_Upright_height = 5;
   constexpr uint8_t  Numbers_Upright_frames = 60;
 
-  constexpr uint24_t Numbers = 0x011DCD;
+  constexpr uint24_t Numbers = 0x011F1D;
   constexpr uint16_t NumbersWidth  = 11;
   constexpr uint16_t NumbersHeight = 7;
   constexpr uint8_t  NumbersFrames = 60;
 
-  constexpr uint24_t Numbers_Large = 0x012065;
+  constexpr uint24_t Numbers_Large = 0x0121B5;
   constexpr uint16_t Numbers_Large_width  = 22;
   constexpr uint16_t Numbers_Large_height = 14;
   constexpr uint8_t  Numbers_Large_frames = 60;
 
-  constexpr uint24_t Numbers_Small = 0x012AB9;
+  constexpr uint24_t Numbers_Small = 0x012C09;
   constexpr uint16_t Numbers_Small_width  = 5;
   constexpr uint16_t Numbers_Small_height = 7;
   constexpr uint8_t  Numbers_Small_frames = 100;
 
-  constexpr uint24_t Numbers_Divider = 0x012CB1;
+  constexpr uint24_t Numbers_Divider = 0x012E01;
   constexpr uint16_t Numbers_Divider_width  = 4;
   constexpr uint16_t Numbers_Divider_height = 8;
 
-  constexpr uint24_t Healths = 0x012CB9;
+  constexpr uint24_t Healths = 0x012E09;
   constexpr uint16_t HealthsWidth  = 5;
   constexpr uint16_t HealthsHeight = 3;
   constexpr uint8_t  HealthsFrames = 2;
 
-  constexpr uint24_t Sword_HUD = 0x012CC7;
+  constexpr uint24_t Sword_HUD = 0x012E17;
   constexpr uint16_t Sword_HUD_width  = 5;
   constexpr uint16_t Sword_HUD_height = 5;
 
-  constexpr uint24_t Potion_Float_HUD = 0x012CD0;
+  constexpr uint24_t Potion_Float_HUD = 0x012E20;
   constexpr uint16_t Potion_Float_HUD_width  = 5;
   constexpr uint16_t Potion_Float_HUD_height = 5;
 
-  constexpr uint24_t HighScore = 0x012CD9;
+  constexpr uint24_t HighScore = 0x012E29;
   constexpr uint16_t HighScoreWidth  = 52;
   constexpr uint16_t HighScoreHeight = 5;
 
-  constexpr uint24_t Sword = 0x012D11;
+  constexpr uint24_t Sword = 0x012E61;
   constexpr uint16_t SwordWidth  = 14;
   constexpr uint16_t SwordHeight = 5;
 
-  constexpr uint24_t Skeleton = 0x012D31;
+  constexpr uint24_t Skeleton = 0x012E81;
   constexpr uint16_t SkeletonWidth  = 15;
   constexpr uint16_t SkeletonHeight = 12;
 
-  constexpr uint24_t Gates = 0x012D71;
+  constexpr uint24_t Gates = 0x012EC1;
   constexpr uint16_t GatesWidth  = 9;
   constexpr uint16_t GatesHeight = 28;
   constexpr uint8_t  GatesFrames = 10;
 
-  constexpr uint24_t Blades = 0x013045;
+  constexpr uint24_t Blades = 0x013195;
   constexpr uint16_t BladesWidth  = 9;
   constexpr uint16_t BladesHeight = 28;
   constexpr uint8_t  BladesFrames = 6;
 
-  constexpr uint24_t ExitDoors = 0x0131F9;
+  constexpr uint24_t ExitDoors = 0x013349;
   constexpr uint16_t ExitDoorsWidth  = 25;
   constexpr uint16_t ExitDoorsHeight = 33;
   constexpr uint8_t  ExitDoorsFrames = 13;
 
-  constexpr uint24_t Potions_Small = 0x013856;
+  constexpr uint24_t Potions_Small = 0x0139A6;
   constexpr uint16_t Potions_Small_width  = 6;
   constexpr uint16_t Potions_Small_height = 15;
   constexpr uint8_t  Potions_Small_frames = 2;
 
-  constexpr uint24_t Potions_Large = 0x01388A;
+  constexpr uint24_t Potions_Large = 0x0139DA;
   constexpr uint16_t Potions_Large_width  = 6;
   constexpr uint16_t Potions_Large_height = 15;
   constexpr uint8_t  Potions_Large_frames = 2;
 
-  constexpr uint24_t Potions_Poison = 0x0138BE;
+  constexpr uint24_t Potions_Poison = 0x013A0E;
   constexpr uint16_t Potions_Poison_width  = 6;
   constexpr uint16_t Potions_Poison_height = 15;
   constexpr uint8_t  Potions_Poison_frames = 6;
 
-  constexpr uint24_t Potions_Float = 0x013952;
+  constexpr uint24_t Potions_Float = 0x013AA2;
   constexpr uint16_t Potions_Float_width  = 6;
   constexpr uint16_t Potions_Float_height = 15;
   constexpr uint8_t  Potions_Float_frames = 7;
 
-  constexpr uint24_t DecorativeDoor = 0x0139FE;
+  constexpr uint24_t DecorativeDoor = 0x013B4E;
   constexpr uint16_t DecorativeDoorWidth  = 23;
   constexpr uint16_t DecorativeDoorHeight = 40;
 
-  constexpr uint24_t CollapsedFloor = 0x013A75;
+  constexpr uint24_t CollapsedFloor = 0x013BC5;
   constexpr uint16_t CollapsedFloorWidth  = 21;
   constexpr uint16_t CollapsedFloorHeight = 13;
 
-  constexpr uint24_t CollapsingFloors = 0x013ACD;
+  constexpr uint24_t CollapsingFloors = 0x013C1D;
   constexpr uint16_t CollapsingFloorsWidth  = 21;
   constexpr uint16_t CollapsingFloorsHeight = 31;
   constexpr uint8_t  CollapsingFloorsFrames = 4;
 
-  constexpr uint24_t FloorButtons_0and1 = 0x013D71;
+  constexpr uint24_t FloorButtons_0and1 = 0x013EC1;
   constexpr uint16_t FloorButtons_0and1_width  = 21;
   constexpr uint16_t FloorButtons_0and1_height = 32;
   constexpr uint8_t  FloorButtons_0and1_frames = 4;
 
-  constexpr uint24_t FloorButtons_2 = 0x014015;
+  constexpr uint24_t FloorButtons_2 = 0x014165;
   constexpr uint16_t FloorButtons_2_width  = 12;
   constexpr uint16_t FloorButtons_2_height = 31;
   constexpr uint8_t  FloorButtons_2_frames = 2;
 
-  constexpr uint24_t Torches = 0x0140D9;
+  constexpr uint24_t Torches = 0x014229;
   constexpr uint16_t TorchesWidth  = 3;
   constexpr uint16_t TorchesHeight = 11;
   constexpr uint8_t  TorchesFrames = 5;
 
-  constexpr uint24_t Mirrors = 0x014119;
+  constexpr uint24_t Mirrors = 0x014269;
   constexpr uint16_t MirrorsWidth  = 12;
   constexpr uint16_t MirrorsHeight = 31;
   constexpr uint8_t  MirrorsFrames = 2;
 
-  constexpr uint24_t Spikes_FG_Full = 0x01417D;
+  constexpr uint24_t Spikes_FG_Full = 0x0142CD;
   constexpr uint16_t Spikes_FG_Full_width  = 19;
   constexpr uint16_t Spikes_FG_Full_height = 18;
   constexpr uint8_t  Spikes_FG_Full_frames = 5;
 
-  constexpr uint24_t Spikes_BG_Full = 0x0143BB;
+  constexpr uint24_t Spikes_BG_Full = 0x01450B;
   constexpr uint16_t Spikes_BG_Full_width  = 19;
   constexpr uint16_t Spikes_BG_Full_height = 18;
   constexpr uint8_t  Spikes_BG_Full_frames = 5;
 
-  constexpr uint24_t Spikes_FG_Half = 0x0145F9;
+  constexpr uint24_t Spikes_FG_Half = 0x014749;
   constexpr uint16_t Spikes_FG_Half_width  = 11;
   constexpr uint16_t Spikes_FG_Half_height = 18;
   constexpr uint8_t  Spikes_FG_Half_frames = 5;
 
-  constexpr uint24_t Spikes_BG_Half = 0x014747;
+  constexpr uint24_t Spikes_BG_Half = 0x014897;
   constexpr uint16_t Spikes_BG_Half_width  = 11;
   constexpr uint16_t Spikes_BG_Half_height = 18;
   constexpr uint8_t  Spikes_BG_Half_frames = 5;
 
-  constexpr uint24_t Flashes = 0x014895;
+  constexpr uint24_t Flashes = 0x0149E5;
   constexpr uint16_t FlashesWidth  = 22;
   constexpr uint16_t FlashesHeight = 20;
   constexpr uint8_t  FlashesFrames = 4;
 
-  constexpr uint24_t Tiles_Dungeon = 0x014AA9;
+  constexpr uint24_t Tiles_Dungeon = 0x014BF9;
   constexpr uint16_t Tiles_Dungeon_width  = 12;
   constexpr uint16_t Tiles_Dungeon_height = 31;
   constexpr uint8_t  Tiles_Dungeon_frames = 100;
 
-  constexpr uint24_t Tile_Dungeon_97 = 0x01702D;
+  constexpr uint24_t Tile_Dungeon_97 = 0x01717D;
   constexpr uint16_t Tile_Dungeon_97_width  = 21;
   constexpr uint16_t Tile_Dungeon_97_height = 31;
 
-  constexpr uint24_t Tile_Dungeon_98 = 0x0170D9;
+  constexpr uint24_t Tile_Dungeon_98 = 0x017229;
   constexpr uint16_t Tile_Dungeon_98_width  = 12;
   constexpr uint16_t Tile_Dungeon_98_height = 31;
 
-  constexpr uint24_t Tiles_Dungeon_Torch = 0x01713D;
+  constexpr uint24_t Tiles_Dungeon_Torch = 0x01728D;
   constexpr uint16_t Tiles_Dungeon_Torch_width  = 12;
   constexpr uint16_t Tiles_Dungeon_Torch_height = 31;
   constexpr uint8_t  Tiles_Dungeon_Torch_frames = 60;
 
-  constexpr uint24_t Princess = 0x0187C1;
+  constexpr uint24_t Princess = 0x018911;
   constexpr uint16_t PrincessWidth  = 32;
   constexpr uint16_t PrincessHeight = 32;
   constexpr uint8_t  PrincessFrames = 40;
 
-  constexpr uint24_t Princess_Bounce = 0x01AFC5;
+  constexpr uint24_t Princess_Bounce = 0x01B115;
   constexpr uint16_t Princess_Bounce_width  = 48;
   constexpr uint16_t Princess_Bounce_height = 32;
   constexpr uint8_t  Princess_Bounce_frames = 20;
 
-  constexpr uint24_t Hearts = 0x01CDC9;
+  constexpr uint24_t Hearts = 0x01CF19;
   constexpr uint16_t HeartsWidth  = 7;
   constexpr uint16_t HeartsHeight = 6;
   constexpr uint8_t  HeartsFrames = 4;
 
-  constexpr uint24_t Zaffar = 0x01CDE9;
+  constexpr uint24_t Zaffar = 0x01CF39;
   constexpr uint16_t ZaffarWidth  = 32;
   constexpr uint16_t ZaffarHeight = 32;
   constexpr uint8_t  ZaffarFrames = 30;
 
-  constexpr uint24_t Prince_Left = 0x01EBED;
+  constexpr uint24_t Prince_Left = 0x01ED3D;
   constexpr uint16_t Prince_Left_width  = 36;
   constexpr uint16_t Prince_Left_height = 36;
   constexpr uint8_t  Prince_Left_frames = 225;
 
-  constexpr uint24_t Prince_Right = 0x032859;
+  constexpr uint24_t Prince_Right = 0x0329A9;
   constexpr uint16_t Prince_Right_width  = 36;
   constexpr uint16_t Prince_Right_height = 36;
   constexpr uint8_t  Prince_Right_frames = 225;
 
-  constexpr uint24_t Mirror_Right = 0x0464C5;
+  constexpr uint24_t Mirror_Right = 0x046615;
   constexpr uint16_t Mirror_Right_width  = 36;
   constexpr uint16_t Mirror_Right_height = 36;
   constexpr uint8_t  Mirror_Right_frames = 225;
 
-  constexpr uint24_t Mirror_Left = 0x05A131;
+  constexpr uint24_t Mirror_Left = 0x05A281;
   constexpr uint16_t Mirror_Left_width  = 36;
   constexpr uint16_t Mirror_Left_height = 36;
   constexpr uint8_t  Mirror_Left_frames = 225;
 
-  constexpr uint24_t Enemy_Right = 0x06DD9D;
+  constexpr uint24_t Enemy_Right = 0x06DEED;
   constexpr uint16_t Enemy_Right_width  = 36;
   constexpr uint16_t Enemy_Right_height = 36;
   constexpr uint8_t  Enemy_Right_frames = 225;
 
-  constexpr uint24_t Enemy_Left = 0x081A09;
+  constexpr uint24_t Enemy_Left = 0x081B59;
   constexpr uint16_t Enemy_Left_width  = 36;
   constexpr uint16_t Enemy_Left_height = 36;
   constexpr uint8_t  Enemy_Left_frames = 225;
 
-  constexpr uint24_t Invaders = 0x095675;
+  constexpr uint24_t Invaders = 0x0957C5;
   constexpr uint16_t InvadersWidth  = 25;
   constexpr uint16_t InvadersHeight = 23;
   constexpr uint8_t  InvadersFrames = 18;
 
-  constexpr uint24_t Barriers = 0x096105;
+  constexpr uint24_t Barriers = 0x096255;
   constexpr uint16_t BarriersWidth  = 4;
   constexpr uint16_t BarriersHeight = 2;
   constexpr uint8_t  BarriersFrames = 16;
 
-  constexpr uint24_t Barrier = 0x096189;
+  constexpr uint24_t Barrier = 0x0962D9;
   constexpr uint16_t BarrierWidth  = 16;
   constexpr uint16_t BarrierHeight = 4;
 
-  constexpr uint24_t Player = 0x09619D;
+  constexpr uint24_t Player = 0x0962ED;
   constexpr uint16_t PlayerWidth  = 25;
   constexpr uint16_t PlayerHeight = 25;
   constexpr uint8_t  PlayerFrames = 5;
 
-  constexpr uint24_t Bullet = 0x096589;
+  constexpr uint24_t Bullet = 0x0966D9;
   constexpr uint16_t BulletWidth  = 1;
   constexpr uint16_t BulletHeight = 3;
 
-  constexpr uint24_t HUD_Spaceship = 0x09658E;
+  constexpr uint24_t HUD_Spaceship = 0x0966DE;
   constexpr uint16_t HUD_Spaceship_width  = 4;
   constexpr uint16_t HUD_Spaceship_height = 5;
 
-  constexpr uint24_t Levels = 0x096596;
+  constexpr uint24_t Levels = 0x0966E6;
   constexpr uint16_t LevelsWidth  = 57;
   constexpr uint16_t LevelsHeight = 13;
   constexpr uint8_t  LevelsFrames = 4;
@@ -515,37 +515,37 @@ namespace Images
 
 namespace Constants
 {
-  constexpr uint24_t StanceToImageXRefFX = 0x09692A;
-  constexpr uint24_t Stance_XYOffsetsFX = 0x096C00;
-  constexpr uint24_t VertAdjustments = 0x0971AA;
-  constexpr uint24_t Prince_ImageDetails = 0x097240;
+  constexpr uint24_t StanceToImageXRefFX = 0x096A7A;
+  constexpr uint24_t Stance_XYOffsetsFX = 0x096D50;
+  constexpr uint24_t VertAdjustments = 0x0972FA;
+  constexpr uint24_t Prince_ImageDetails = 0x097390;
 }
 
-constexpr uint24_t splashScreen_Frame = 0x097489;
-constexpr uint24_t Title_Intro_Frame_NoHigh = 0x0974AD;
-constexpr uint24_t Title_Intro_Last_Frame_NoHigh = 0x09792D;
-constexpr uint24_t Title_Intro_Frame_WithHigh = 0x09793F;
-constexpr uint24_t Title_Intro_Last_Frame_WithHigh = 0x097DBF;
-constexpr uint24_t Title_Main_Frame_NoHigh = 0x097DD1;
-constexpr uint24_t Title_Main_Last_Frame_NoFrame = 0x097F5D;
-constexpr uint24_t Title_Main_Frame_WithHigh = 0x097F6F;
-constexpr uint24_t Title_Main_Last_Frame_WithHigh = 0x0980FB;
-constexpr uint24_t Title_Main_Game_Frame_NoHigh = 0x09810D;
-constexpr uint24_t Title_Main_Game_Frame_WithHigh = 0x098128;
-constexpr uint24_t Title_Main_Credits_Frame_NoHigh = 0x098143;
-constexpr uint24_t Title_Main_Credits_Frame_WithHigh = 0x09815E;
-constexpr uint24_t Title_Main_High_Frame_WithHigh = 0x098179;
-constexpr uint24_t Title_Credits_Frame = 0x098194;
-constexpr uint24_t Title_TimeOut_Frame = 0x09B30B;
-constexpr uint24_t Title_High_Frame = 0x09DF8D;
-constexpr uint24_t Title_IntroGame_1A_Frame = 0x09E014;
-constexpr uint24_t Title_CutScene_1_Frame = 0x09E5EA;
-constexpr uint24_t Title_IntroGame_1B_Frame = 0x0A1AF7;
-constexpr uint24_t Title_CutScene_2_Frame = 0x0A20CD;
-constexpr uint24_t Title_CutScene_3_Frame = 0x0A350D;
-constexpr uint24_t Title_CutScene_4_Frame = 0x0A494D;
-constexpr uint24_t Title_CutScene_5_Frame = 0x0A536D;
-constexpr uint24_t Title_CutScene_6_Frame = 0x0A68F1;
-constexpr uint24_t Title_CutScene_7_Frame = 0x0A93BA;
-constexpr uint24_t Title_CutScene_End_Frame = 0x0ADBA8;
-constexpr uint24_t Title_IntroGame_End_Frame = 0x0AF618;
+constexpr uint24_t splashScreen_Frame = 0x0975D9;
+constexpr uint24_t Title_Intro_Frame_NoHigh = 0x0975FD;
+constexpr uint24_t Title_Intro_Last_Frame_NoHigh = 0x097A7D;
+constexpr uint24_t Title_Intro_Frame_WithHigh = 0x097A8F;
+constexpr uint24_t Title_Intro_Last_Frame_WithHigh = 0x097F0F;
+constexpr uint24_t Title_Main_Frame_NoHigh = 0x097F21;
+constexpr uint24_t Title_Main_Last_Frame_NoFrame = 0x0980AD;
+constexpr uint24_t Title_Main_Frame_WithHigh = 0x0980BF;
+constexpr uint24_t Title_Main_Last_Frame_WithHigh = 0x09824B;
+constexpr uint24_t Title_Main_Game_Frame_NoHigh = 0x09825D;
+constexpr uint24_t Title_Main_Game_Frame_WithHigh = 0x098278;
+constexpr uint24_t Title_Main_Credits_Frame_NoHigh = 0x098293;
+constexpr uint24_t Title_Main_Credits_Frame_WithHigh = 0x0982AE;
+constexpr uint24_t Title_Main_High_Frame_WithHigh = 0x0982C9;
+constexpr uint24_t Title_Credits_Frame = 0x0982E4;
+constexpr uint24_t Title_TimeOut_Frame = 0x09B45B;
+constexpr uint24_t Title_High_Frame = 0x09E0DD;
+constexpr uint24_t Title_IntroGame_1A_Frame = 0x09E164;
+constexpr uint24_t Title_CutScene_1_Frame = 0x09E73A;
+constexpr uint24_t Title_IntroGame_1B_Frame = 0x0A1C47;
+constexpr uint24_t Title_CutScene_2_Frame = 0x0A221D;
+constexpr uint24_t Title_CutScene_3_Frame = 0x0A365D;
+constexpr uint24_t Title_CutScene_4_Frame = 0x0A4A9D;
+constexpr uint24_t Title_CutScene_5_Frame = 0x0A54BD;
+constexpr uint24_t Title_CutScene_6_Frame = 0x0A6A41;
+constexpr uint24_t Title_CutScene_7_Frame = 0x0A950A;
+constexpr uint24_t Title_CutScene_End_Frame = 0x0ADCF8;
+constexpr uint24_t Title_IntroGame_End_Frame = 0x0AF768;

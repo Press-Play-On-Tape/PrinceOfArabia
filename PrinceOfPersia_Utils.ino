@@ -542,6 +542,7 @@ void pushDead(Prince &entity, Level &level, GamePlay &gamePlay, bool clear, Deat
         case DeathType::SwordFight:
             entity.pushSequence(Stance::Falling_Dead_Blade_1_Start, Stance::Falling_Dead_Blade_2_End);
             break;
+            
     }
 
     entity.setHealth(0);

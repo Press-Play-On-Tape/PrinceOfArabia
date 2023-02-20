@@ -157,11 +157,13 @@ enum class RunningJumpResult : uint8_t {
 };
 
 enum class MenuOption : uint8_t {
-    Resume,
-    MainMenu,
-    Save,
-    Load,
-    Clear,
+    Resume = 0,
+    MainMenu = 1,
+    Save = 2,
+    Load_PrinceDead = 2,
+    Load = 3,
+    Clear_PrinceDead = 3,
+    Clear = 4,
 };
 
 enum class TitleScreenOptions : uint8_t {

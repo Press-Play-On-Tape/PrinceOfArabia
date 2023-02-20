@@ -1329,7 +1329,11 @@ void game() {
                         menu.cursor++;
                     }
 
-                    else if (cookie.hasSavedLevel && menu.cursor < 4) {
+                    else if (cookie.hasSavedLevel && menu.cursor < 3 && prince.isDead()) {
+                        menu.cursor++;
+                    }
+
+                    else if (cookie.hasSavedLevel && menu.cursor < 4 && !prince.isDead()) {
                         menu.cursor++;
                     }
 
@@ -1337,65 +1341,116 @@ void game() {
 
                 if (justPressed & A_BUTTON) {
 
-                    switch (static_cast<MenuOption>(menu.cursor)) {
-
-                        case MenuOption::Resume:
-                            menu.direction = Direction::Right;  
-                            break;
-
-                        case MenuOption::Save:
-
-                            cookie.hasSavedLevel = true;
+                    if (!prince.isDead()) {
                             
-                            #ifdef SAVE_TO_FX
+                        switch (static_cast<MenuOption>(menu.cursor)) {
 
-                                FX::saveGameState((uint8_t*)&cookie, sizeof(cookie));
+                            case MenuOption::Resume:
+                                menu.direction = Direction::Right;  
+                                break;
 
-                            #else
+                            case MenuOption::Save:
 
-                                EEPROM_Utils::saveCookie(cookie);
+                                cookie.hasSavedLevel = true;
+                                
+                                #ifdef SAVE_TO_FX
 
-                            #endif
+                                    FX::saveGameState((uint8_t*)&cookie, sizeof(cookie));
 
-                            menu.direction = Direction::Right;  
-                            break;
+                                #else
 
-                        case MenuOption::Load:
+                                    EEPROM_Utils::saveCookie(cookie);
 
-                            #ifdef SAVE_TO_FX
+                                #endif
 
-                                FX::loadGameState((uint8_t*)&cookie, sizeof(cookie));
+                                menu.direction = Direction::Right;  
+                                break;
 
-                            #else
+                            case MenuOption::Load:
 
-                                EEPROM_Utils::loadCookie(cookie);
+                                #ifdef SAVE_TO_FX
 
-                            #endif
+                                    FX::loadGameState((uint8_t*)&cookie, sizeof(cookie));
 
-                            menu.direction = Direction::Right;  
-                            break;
+                                #else
 
-                        case MenuOption::Clear:
+                                    EEPROM_Utils::loadCookie(cookie);
 
-                            cookie.hasSavedLevel = false;
+                                #endif
 
-                            #ifdef SAVE_TO_FX
+                                menu.direction = Direction::Right;  
+                                break;
 
-                                FX::saveGameState((uint8_t*)&cookie, sizeof(cookie));
+                            case MenuOption::Clear:
 
-                            #else
+                                cookie.hasSavedLevel = false;
 
-                                EEPROM_Utils::saveCookie(cookie);
+                                #ifdef SAVE_TO_FX
 
-                            #endif
+                                    FX::saveGameState((uint8_t*)&cookie, sizeof(cookie));
 
-                            menu.direction = Direction::Right;  
-                            break;
+                                #else
 
-                        case MenuOption::MainMenu:
-                            gamePlay.gameState = GameState::Title_Init;  
-                            break;
-                            
+                                    EEPROM_Utils::saveCookie(cookie);
+
+                                #endif
+
+                                menu.direction = Direction::Right;  
+                                break;
+
+                            case MenuOption::MainMenu:
+                                gamePlay.gameState = GameState::Title_Init;  
+                                break;
+                                
+                        }
+
+                    }
+                    else {
+
+                        switch (static_cast<MenuOption>(menu.cursor)) {
+
+                            case MenuOption::Resume:
+                                menu.direction = Direction::Right;  
+                                break;
+
+                            case MenuOption::Load_PrinceDead:
+
+                                #ifdef SAVE_TO_FX
+
+                                    FX::loadGameState((uint8_t*)&cookie, sizeof(cookie));
+
+                                #else
+
+                                    EEPROM_Utils::loadCookie(cookie);
+
+                                #endif
+
+                                menu.direction = Direction::Right;  
+                                break;
+
+                            case MenuOption::Clear_PrinceDead:
+
+                                cookie.hasSavedLevel = false;
+
+                                #ifdef SAVE_TO_FX
+
+                                    FX::saveGameState((uint8_t*)&cookie, sizeof(cookie));
+
+                                #else
+
+                                    EEPROM_Utils::saveCookie(cookie);
+
+                                #endif
+
+                                menu.direction = Direction::Right;  
+                                break;
+
+                            case MenuOption::MainMenu:
+                                gamePlay.gameState = GameState::Title_Init;  
+                                break;
+                                
+                        }
+
                     }
 
                     justPressed = 0;
@@ -2649,7 +2704,7 @@ void game() {
     
     #ifndef SAVE_MEMORY_OTHER
         if (gamePlay.gameState == GameState::Menu) {
-            renderMenu();
+            renderMenu(prince);
         }
     #endif
 

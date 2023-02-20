@@ -490,18 +490,28 @@ void render(bool enemyVisible, bool sameLevelAsPrince) {
 
 }
 
-void renderMenu() {
+void renderMenu(Prince &prince) {
 
-    if (menu.cursor < 4) {
+    if (!prince.isDead()) {
 
-        FX::drawBitmap(menu.x, 0, Images::Menu, !cookie.hasSavedLevel, dbmNormal);
-        FX::drawBitmap(menu.x + 3, 22 + (menu.cursor * 10), Images::Sword_Cursor, 0, dbmNormal);
+        if (menu.cursor < 4) {
+
+            FX::drawBitmap(menu.x, 0, Images::Menu, !cookie.hasSavedLevel, dbmNormal);
+            FX::drawBitmap(menu.x + 3, 22 + (menu.cursor * 10), Images::Sword_Cursor, 0, dbmNormal);
+
+        }
+        else {
+
+            FX::drawBitmap(menu.x, 0, Images::Menu, 2, dbmNormal);
+            FX::drawBitmap(menu.x + 3, 12 + (menu.cursor * 10), Images::Sword_Cursor, 0, dbmNormal);
+
+        }
 
     }
     else {
 
-        FX::drawBitmap(menu.x, 0, Images::Menu, 2, dbmNormal);
-        FX::drawBitmap(menu.x + 3, 12 + (menu.cursor * 10), Images::Sword_Cursor, 0, dbmNormal);
+        FX::drawBitmap(menu.x, 0, Images::Menu, cookie.hasSavedLevel ? 3 : 0, dbmNormal);
+        FX::drawBitmap(menu.x + 3, 22 + (menu.cursor * 10), Images::Sword_Cursor, 0, dbmNormal);
 
     }
 

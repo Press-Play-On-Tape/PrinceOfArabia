@@ -126,4 +126,23 @@ class Prince : public BaseEntity, public BaseStack {
 
         }
 
+        bool isDead() {
+
+            switch (this->stance) {
+
+                case Stance::Falling_Dead_3_End:
+                case Stance::Falling_Dead_Blade_2_End:
+
+                    return true;
+
+                default:
+
+                    return false;
+                    
+            }
+            
+            return false;
+            
+        }
+
 };
