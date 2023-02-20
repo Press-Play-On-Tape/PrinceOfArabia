@@ -739,6 +739,20 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
                 }
                 #endif
 
+
+                /* ----------------------------------------------------------------------------------- */
+                /*  2. Basic jump ..
+                
+                Positions 2, 6, 10.
+                
+                Left                  Right
+                _____ 6 5 4 3 2 1     _____ 1 2 3 4 5 6
+                WT CL x x 0 0 x x     WT CL x x 0 0 x x
+                WT NL x x x x x x     WT NL x x x x x x
+                GT CL x x x x x _     GT CL _ x x x x x
+                GT NL x x x x x _     GT NL _ x x x x x
+                */
+
                 if (wallTile3_CurrLvl == WallTileResults::None &&
                     wallTile4_CurrLvl == WallTileResults::None) {
 
@@ -789,16 +803,27 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
             }
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_2)
-            DEBUG_PRINTLN(F("J2-6 Normal_Pos6"));
+            DEBUG_PRINTLN(F("J2-6 None"));
             #endif
 
-            return RunningJumpResult::Normal_Pos6;
+            return RunningJumpResult::None;
 
         case Action::RunJump_1:
             {
-                WallTileResults wallTile2_CurrLvl = this->isWallTile_ByCoords(tileXIdx + (1 * offset), tileYIdx, prince.getDirection());
+                WallTileResults wallTile3_CurrLvl = this->isWallTile_ByCoords(tileXIdx + (2 * offset), tileYIdx, prince.getDirection());
 
-                if (wallTile2_CurrLvl == WallTileResults::None) {
+                /* ----------------------------------------------------------------------------------- */
+                /* 1. Can we jump straight ahead?
+                
+                Left                   Right
+                _____ 6 5 4 3 2 1      _____ 1 2 3 4 5 6
+                WT CL x x x 1 x x      WT CL x x 1 x x x
+                WT NL x x x x x x      WT CL x x x x x x
+                GT CL x x x x x _      GT CL _ x x x x x
+                GT NL x x x x x _      GT NL _ x x x x x 
+                */
+
+                if (wallTile3_CurrLvl == WallTileResults::None) {
 
                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_1)
                     DEBUG_PRINTLN(F("J1-1 Normal_Pos6"));

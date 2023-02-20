@@ -121,6 +121,7 @@ void game() {
     prince.update(level.getXLocation(), level.getYLocation());
 
     #ifndef SAVE_MEMORY_ENEMY
+    // Serial.println("enemy.update() ");
     enemy.update();
     #endif
     
@@ -198,7 +199,7 @@ void game() {
 
         // If within distance, we can draw swords if we have one!
 
-        if (justPressed & B_BUTTON && sameLevelAsPrince && prince.getSword() && prince.getStance() == Stance::Upright && prince.isEmpty() && enemy.getHealth() > 0 && enemy.getEnemyType() != EnemyType::MirrorAfterChallengeL12) {
+        if (justPressed & B_BUTTON && enemyIsVisible && sameLevelAsPrince && prince.getSword() && prince.getStance() == Stance::Upright && prince.isEmpty() && enemy.getHealth() > 0 && enemy.getEnemyType() != EnemyType::MirrorAfterChallengeL12) {
             
             prince.pushSequence(Stance::Draw_Sword_1_Start, Stance::Draw_Sword_6_End, Stance::Sword_Normal);
             justPressed = 0;
@@ -211,8 +212,33 @@ void game() {
         //  If enemy queue is empty then determine next move ..
         //
         // ---------------------------------------------------------------------------------------------------------------------------------------
+            
+// Serial.print("enemyIsVisible ");
+// Serial.print((enemyIsVisible));
+// Serial.print(", sameLevelAsPrince ");
+// Serial.print((sameLevelAsPrince));
+// Serial.print(", activeEnemy ");
+// Serial.print((enemy.getActiveEnemy()));
+// Serial.print(", status ");
+// Serial.println((uint8_t)enemy.getStatus());
 
+        if (enemy.isEmpty() && enemyIsVisible && !sameLevelAsPrince) {
 
+// Serial.print("??? ");
+// Serial.println((uint8_t)enemy.getStance());
+
+            switch (enemy.getStance()) {
+
+                case Stance::Sword_Normal:
+                case Stance::Sword_Step_3_End:
+// Serial.println("put sword away");
+                    enemy.pushSequence(Stance::Pickup_Sword_7_PutAway, Stance::Pickup_Sword_16_End, Stance::Upright);
+                    break;
+
+            }
+
+        }
+        
         if (gamePlay.gameState == GameState::Game && enemy.isEmpty() && enemy.getStatus() == Status::Active && enemy.getDirection() != Direction::None && enemy.getEnemyType() != EnemyType::Mirror && enemy.getEnemyType() != EnemyType::MirrorAfterChallengeL12) {
 
             BaseEntity enemyBase = enemy.getActiveBase();
@@ -2203,6 +2229,8 @@ void game() {
     // ---------------------------------------------------------------------------------------------------------------------------------------
 
     #ifndef SAVE_MEMORY_ENEMY
+// Serial.print("enemy.getStackFrame() ");
+// Serial.println(enemy.getStackFrame());
         
         if (enemy.getStackFrame() == 0) {
 
@@ -2212,7 +2240,8 @@ void game() {
 
                 int16_t newStance = enemy.pop();
                 enemy.setStance(abs(newStance));
-
+// Serial.print("Pop ");
+// Serial.println(newStance);
                 switch (enemy.getStance()) {
 
                     case Stance::Hide_Mirror:

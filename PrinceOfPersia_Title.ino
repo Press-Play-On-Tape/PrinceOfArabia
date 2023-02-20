@@ -40,7 +40,7 @@ void title() {
 
             auto pressed = arduboy.pressedButtons();
 
-            if ((justPressed & UP_BUTTON) && (pressed & A_BUTTON) && (startLevel < 19)) {
+            if ((justPressed & UP_BUTTON) && (pressed & A_BUTTON) && (startLevel < 27)) {
 
                 startLevel++;
 
