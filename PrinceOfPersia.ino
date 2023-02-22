@@ -82,7 +82,11 @@ void setup() {
     #ifdef SAVE_MEMORY_OTHER
         gamePlay.gameState = GameState::Game_Init;
     #else
-        gamePlay.gameState = GameState::SplashScreen_Init;
+        #ifdef SAVE_MEMORY_PPOT
+            gamePlay.gameState = GameState::Title_Init;
+        #else
+            gamePlay.gameState = GameState::SplashScreen_Init;
+        #endif
     #endif
 
 }
@@ -98,7 +102,7 @@ void loop() {
 
     switch (gamePlay.gameState) {
 
-        #ifndef SAVE_MEMORY_OTHER
+        #ifndef SAVE_MEMORY_PPOT
             
             case GameState::SplashScreen_Init:
 
@@ -109,6 +113,9 @@ void loop() {
 
                 splashScreen();
                 break;
+        #endif
+        
+        #ifndef SAVE_MEMORY_OTHER
 
             case GameState::Title_Init:
 

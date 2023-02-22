@@ -33,6 +33,7 @@ void invader_NewWave(Invader_General2 general2) {
 
 }
 
+
 uint8_t invader_EnemiesAlive() {
 
     uint8_t count = 0;
@@ -48,12 +49,14 @@ uint8_t invader_EnemiesAlive() {
 
 }
 
+
 uint8_t invader_getSpeed() {
 
     uint8_t x = invader_EnemiesAlive();
     return pgm_read_byte(&speed[x]);
 
 }
+
 
 void invader_RenderHUD(Invader_General &general) {
 
@@ -70,6 +73,7 @@ void invader_RenderHUD(Invader_General &general) {
     FX::drawBitmap(123, 56, Images::Numbers_Small, general.score % 100, dbmNormal);
 
 }
+
 
 void invader_RenderEnemies(int yOffset = 0) {
 
@@ -107,6 +111,7 @@ void invader_RenderEnemies(int yOffset = 0) {
 
 }
 
+
 void invader_RenderBarriers(int yOffset = 0) {
 
     for (uint8_t x = Constants::Invaders_Barrier_Start; x <= Constants::Invaders_Barrier_End; x++) {
@@ -117,6 +122,7 @@ void invader_RenderBarriers(int yOffset = 0) {
     }
 
 }
+
 
 void invader_RenderPlayer(Invader_Player &player, int yOffset = 0, bool show = false) {
 
@@ -147,11 +153,13 @@ void invader_RenderPlayer(Invader_Player &player, int yOffset = 0, bool show = f
 
 }
 
+
 void invader_RenderPlayerBullet(Invader_Bullet &bullet) {
 
     FX::drawBitmap(bullet.x, bullet.y, Images::Bullet, 0, dbmNormal);
     
 }
+
 
 void invader_RenderEnemyBullets() {
 

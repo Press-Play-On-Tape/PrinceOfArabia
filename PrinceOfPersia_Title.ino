@@ -413,6 +413,10 @@ void title() {
                     titleScreenVars.setMode(TitleScreenMode::IntroGame_End);
                     FX::setFrame(Title_IntroGame_End_Frame, 5 - 1);
 
+                    #ifndef SAVE_MEMORY_SOUND
+                        sound.tonesFromFX(Sounds::Ending);
+                    #endif
+
                 }
 
                 break;

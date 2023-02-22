@@ -6,6 +6,7 @@
 #ifdef PRODUCTION_SETTINGS
 
     #define SAVE_MEMORY_USB
+    #define SAVE_MEMORY_PPOT
     #define _SAVE_MEMORY_OTHER
     #define _SAVE_MEMORY_SOUND
     #define _SAVE_MEMORY_ENEMY
@@ -19,13 +20,14 @@
     #define _SAVE_TO_FX
     #define STARTING_LEVEL 1
     #define _DEBUG_CUT_SCENES
-    #define _DEBUG_LEVELS
+    #define DEBUG_LEVELS
 
     #define _DEBUG
 
 #else
 
     #define _SAVE_MEMORY_USB
+    #define SAVE_MEMORY_PPOT
     #define SAVE_MEMORY_OTHER
     #define SAVE_MEMORY_SOUND
     #define _SAVE_MEMORY_ENEMY
@@ -43,23 +45,6 @@
 
     #define DEBUG
 
-    // #define _SAVE_MEMORY_USB
-    // #define _SAVE_MEMORY_OTHER
-    // #define SAVE_MEMORY_SOUND
-    // #define _SAVE_MEMORY_ENEMY
-    // #define _SAVE_MEMORY_TITLE
-    // #define SAVE_MEMORY_INVADER
-    // #define _ALT_B_BUTTON
-    // #define _GIVE_SWORD
-
-    // #define LEVEL_DATA_FROM_FX
-    // #define MOVEMENT_DATA_FROM_FX
-    // #define _SAVE_TO_FX
-    // #define STARTING_LEVEL 6
-    // #define _DEBUG_CUT_SCENES
-    // #define _DEBUG_LEVELS
-
-    // #define _DEBUG
 #endif
 
 #define DEBUG_PRINT    Serial.print

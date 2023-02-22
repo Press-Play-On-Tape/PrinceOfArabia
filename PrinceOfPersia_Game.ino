@@ -212,30 +212,18 @@ void game() {
         //  If enemy queue is empty then determine next move ..
         //
         // ---------------------------------------------------------------------------------------------------------------------------------------
-            
-// Serial.print("enemyIsVisible ");
-// Serial.print((enemyIsVisible));
-// Serial.print(", sameLevelAsPrince ");
-// Serial.print((sameLevelAsPrince));
-// Serial.print(", activeEnemy ");
-// Serial.print((enemy.getActiveEnemy()));
-// Serial.print(", status ");
-// Serial.println((uint8_t)enemy.getStatus());
 
         if (enemy.isEmpty() && enemyIsVisible && !sameLevelAsPrince) {
-
-// Serial.print("??? ");
-// Serial.println((uint8_t)enemy.getStance());
 
             switch (enemy.getStance()) {
 
                 case Stance::Sword_Normal:
                 case Stance::Sword_Step_3_End:
-// Serial.println("put sword away");
                     enemy.pushSequence(Stance::Pickup_Sword_7_PutAway, Stance::Pickup_Sword_16_End, Stance::Upright);
                     break;
 
             }
+
 
         }
         
@@ -319,7 +307,6 @@ void game() {
                                 break;
 
                         }
-
 
                     }
                     
@@ -1385,6 +1372,8 @@ void game() {
                             case MenuOption::MainMenu:
                                 gamePlay.gameState = GameState::Title_Init;  
                                 break;
+
+                            default: break;
                                 
                         }
 
@@ -1449,7 +1438,9 @@ void game() {
                             case MenuOption::MainMenu:
                                 gamePlay.gameState = GameState::Title_Init;  
                                 break;
-                                
+
+                            default: break;
+
                         }
 
                     }

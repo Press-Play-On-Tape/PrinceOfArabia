@@ -490,38 +490,42 @@ void render(bool enemyVisible, bool sameLevelAsPrince) {
 
 }
 
+
 void renderMenu(Prince &prince) {
+
+    uint8_t imageIdx;
+    uint8_t cursorY = 22;
 
     if (!prince.isDead()) {
 
         if (menu.cursor < 4) {
 
-            FX::drawBitmap(menu.x, 0, Images::Menu, !cookie.hasSavedLevel, dbmNormal);
-            FX::drawBitmap(menu.x + 3, 22 + (menu.cursor * 10), Images::Sword_Cursor, 0, dbmNormal);
+            imageIdx = !cookie.hasSavedLevel;
 
         }
         else {
 
-            FX::drawBitmap(menu.x, 0, Images::Menu, 2, dbmNormal);
-            FX::drawBitmap(menu.x + 3, 12 + (menu.cursor * 10), Images::Sword_Cursor, 0, dbmNormal);
+            imageIdx = 2;
+            cursorY = 12;
 
         }
 
     }
     else {
 
-        FX::drawBitmap(menu.x, 0, Images::Menu, cookie.hasSavedLevel ? 3 : 1, dbmNormal);
-        FX::drawBitmap(menu.x + 3, 22 + (menu.cursor * 10), Images::Sword_Cursor, 0, dbmNormal);
+        imageIdx = cookie.hasSavedLevel ? 3 : 1;
 
     }
+
+    FX::drawBitmap(menu.x, 0, Images::Menu, imageIdx, dbmNormal);
+    FX::drawBitmap(menu.x + 3, 22 + (menu.cursor * 10), Images::Sword_Cursor, 0, dbmNormal);
 
     renderNumber(menu.x + 27, 3, gamePlay.level);
     renderNumber(menu.x + 7, 13, gamePlay.timer_Min);
     renderNumber(menu.x + 24, 13, gamePlay.timer_Sec);
 
-
-
 }
+
 
 void renderNumber(uint8_t x, uint8_t y, uint8_t number) {
 

@@ -74,3 +74,4 @@ uint8_t Arduboy2Ext::randomLFSR(uint8_t min, uint8_t max) {
   rnd = r;
   return r % (max - min) + min;
 }
+
