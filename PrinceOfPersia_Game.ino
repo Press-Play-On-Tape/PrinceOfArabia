@@ -518,6 +518,7 @@ void game() {
 
     #endif
 
+
     // ---------------------------------------------------------------------------------------------------------------------------------------
     //  
     //  If prince queue is empty then accept input from player ..
@@ -1341,8 +1342,55 @@ void game() {
 
                 if (justPressed & A_BUTTON) {
 
-                    if (!prince.isDead()) {
-                            
+                    if (prince.isDead() && cookie.hasSavedLevel) {
+                                                
+                        switch (static_cast<MenuOption>(menu.cursor)) {
+
+                            case MenuOption::Resume:
+                                menu.direction = Direction::Right;  
+                                break;
+
+                            case MenuOption::Load_PrinceDead:
+
+                                #ifdef SAVE_TO_FX
+
+                                    FX::loadGameState((uint8_t*)&cookie, sizeof(cookie));
+
+                                #else
+
+                                    EEPROM_Utils::loadCookie(cookie);
+
+                                #endif
+
+                                menu.direction = Direction::Right;  
+                                break;
+
+                            case MenuOption::Clear_PrinceDead:
+
+                                cookie.hasSavedLevel = false;
+
+                                #ifdef SAVE_TO_FX
+
+                                    FX::saveGameState((uint8_t*)&cookie, sizeof(cookie));
+
+                                #else
+
+                                    EEPROM_Utils::saveCookie(cookie);
+
+                                #endif
+
+                                menu.direction = Direction::Right;  
+                                break;
+
+                            case MenuOption::MainMenu:
+                                gamePlay.gameState = GameState::Title_Init;  
+                                break;
+                                
+                        }
+
+                    }
+                    else {
+    
                         switch (static_cast<MenuOption>(menu.cursor)) {
 
                             case MenuOption::Resume:
@@ -1382,53 +1430,6 @@ void game() {
                                 break;
 
                             case MenuOption::Clear:
-
-                                cookie.hasSavedLevel = false;
-
-                                #ifdef SAVE_TO_FX
-
-                                    FX::saveGameState((uint8_t*)&cookie, sizeof(cookie));
-
-                                #else
-
-                                    EEPROM_Utils::saveCookie(cookie);
-
-                                #endif
-
-                                menu.direction = Direction::Right;  
-                                break;
-
-                            case MenuOption::MainMenu:
-                                gamePlay.gameState = GameState::Title_Init;  
-                                break;
-                                
-                        }
-
-                    }
-                    else {
-
-                        switch (static_cast<MenuOption>(menu.cursor)) {
-
-                            case MenuOption::Resume:
-                                menu.direction = Direction::Right;  
-                                break;
-
-                            case MenuOption::Load_PrinceDead:
-
-                                #ifdef SAVE_TO_FX
-
-                                    FX::loadGameState((uint8_t*)&cookie, sizeof(cookie));
-
-                                #else
-
-                                    EEPROM_Utils::loadCookie(cookie);
-
-                                #endif
-
-                                menu.direction = Direction::Right;  
-                                break;
-
-                            case MenuOption::Clear_PrinceDead:
 
                                 cookie.hasSavedLevel = false;
 
@@ -1934,13 +1935,16 @@ void game() {
 
                 case Stance::Run_Start_1_Start ...Stance::Run_Start_6_End:
                 case Stance::Run_Repeat_1_Start ... Stance::Run_Repeat_8_End:
-                case Stance::Standing_Jump_1_Start ... Stance::Standing_Jump_11_Land_Point:
+                case Stance::Standing_Jump_36_1_Start ... Stance::Standing_Jump_36_11_Land_Point:
                 case Stance::Running_Jump_1_Start ... Stance::Running_Jump_11_End:
                 case Stance::Running_Jump_Short_2_1_Start ... Stance::Running_Jump_Short_2_7_End:
                 case Stance::Running_Jump_Short_6_1_Start ... Stance::Running_Jump_Short_6_7_End:
-                case Stance::Running_Jump_3_SameLvl_1_Start ... Stance::Running_Jump_3_SameLvl_8_End:
-                case Stance::Running_Jump_3_SameLvl_Short_1_Start ... Stance::Running_Jump_3_SameLvl_Short_8_End:
+                case Stance::Running_Jump_3_2_1_Start ... Stance::Running_Jump_3_2_8_End:
+                case Stance::Running_Jump_3_6_1_Start ... Stance::Running_Jump_3_6_8_End:
+                case Stance::Running_Jump_3_10_1_Start ... Stance::Running_Jump_3_10_8_End:
                 case Stance::Running_Jump_3_DropLvl_1_Start ... Stance::Running_Jump_3_DropLvl_14_End:
+
+                //SJH more here
                     {
                         if (gamePlay.level == 4 && prince.getDirection() == Direction::Left) {
 
@@ -2193,8 +2197,11 @@ void game() {
 
                                         case Stance::Run_Start_1_Start ... Stance::Run_Start_6_End:
                                         case Stance::Run_Repeat_1_Start ... Stance::Run_Repeat_8_End:
-                                        case Stance::Standing_Jump_1_Start ... Stance::Standing_Jump_18_End:
+                                        case Stance::Standing_Jump_36_1_Start ... Stance::Standing_Jump_36_18_End:
                                         case Stance::Running_Jump_1_Start ... Stance::Running_Jump_11_End:
+
+
+                                        //SJH more here!
 
                                             pushDead(prince, level, gamePlay, true, DeathType::Spikes);
                                             break;

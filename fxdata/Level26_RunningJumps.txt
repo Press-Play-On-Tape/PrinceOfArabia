@@ -14,7 +14,7 @@ uint8_t Level26_RunningJumps_Data[] = {
     3,                          // Prince starting stance, 3 Crouch_3_End
     // Level
     30,                         // Width
-    15,                         // Height
+    27,                         // Height
     10,                         // Level x starting position
     18,                         // Level y starting position
     // End

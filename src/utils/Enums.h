@@ -124,17 +124,18 @@ enum class CanClimbDownPart2Result : uint8_t {
 
 enum class StandingJumpResult : uint8_t {
     None,
-    Normal,
-    DropLevel,
-    Normal_DropLevel_Pos2,
-    Medium,
-    Short_Pos2, // Same level but a little shorter.
-    Short_Pos6, // Same level but a little shorter.
-    Short_Pos10, // Same level but a little shorter.
-    Short_GrabLedge_Pos6, 
-    Short_GrabLedge_Pos10, 
-    Normal_GrabLedge_Pos2,
-    Normal_GrabLedge_Pos6,
+    Normal_20,
+    Normal_24,
+    Normal_28,
+    Normal_32,
+    Normal_36,
+    DropLevel_36,
+    DropLevel_40,
+    //Short_Pos6, // Same level but a little shorter.
+    GrabLedge_28, 
+    GrabLedge_32, 
+    GrabLedge_36,
+    GrabLedge_40,
 };
 
 enum class RunningJumpResult : uint8_t {
@@ -146,14 +147,20 @@ enum class RunningJumpResult : uint8_t {
     Jump4_GrabLedge_Pos10,
     Jump4_DropLevel,
     Jump4_DropLevel_Pos10,
-    Jump3_KeepLevel_Pos2,
-    Jump3_KeepLevel_Pos6,
-    Jump3_KeepLevel_Pos10,
+    Jump3_Pos2,
+    Jump3_Pos6,
+    Jump3_Pos10,
     Jump3_DropLevel,
     Jump3_DropLevel_Pos10,
     Jump2_Pos2,
     Jump2_Pos6,
+    Jump2_DropLevel,
+    Jump2_DropLevel_Pos10,
     Jump2_Pos10,
+    Jump1_Pos0,
+    Jump1_Pos2,
+    Jump1_Pos6,
+    Jump1_Pos10,
 };
 
 enum class MenuOption : uint8_t {

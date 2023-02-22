@@ -510,7 +510,7 @@ void renderMenu(Prince &prince) {
     }
     else {
 
-        FX::drawBitmap(menu.x, 0, Images::Menu, cookie.hasSavedLevel ? 3 : 0, dbmNormal);
+        FX::drawBitmap(menu.x, 0, Images::Menu, cookie.hasSavedLevel ? 3 : 1, dbmNormal);
         FX::drawBitmap(menu.x + 3, 22 + (menu.cursor * 10), Images::Sword_Cursor, 0, dbmNormal);
 
     }

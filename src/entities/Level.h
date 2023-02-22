@@ -41,6 +41,7 @@
 #define TILE_FLOOR_GATE_FRONT_TRACK_2 116
 #define TILE_FLOOR_GATE_FRONT_TRACK_3 117
 #define TILE_FLOOR_GATE_FRONT_TRACK_4 39 // Used on rug
+#define TILE_FLOOR_GATE_FRONT_TRACK_5 48 // Used below rug
 
 #define TILE_FLOOR_RH_END_1 98
 #define TILE_FLOOR_RH_END_2 85
@@ -1154,16 +1155,17 @@ struct Level {
 
 
 
-        WallTileResults isWallTile_ByCoords(int8_t x = Constants::CoordNone, int8_t y = Constants::CoordNone, Direction direction = Direction::Left) {
+        WallTileResults isWallTile_ByCoords(int8_t x = Constants::CoordNone, int8_t y = Constants::CoordNone, Direction direction = Direction::Left, bool addOffsets = true) {
 
+            int8_t bgTile = this->getTile(Layer::Background, x, y, TILE_FLOOR_BASIC);
             int8_t fgTile = this->getTile(Layer::Foreground, x, y, TILE_FLOOR_BASIC);
 
-            return isWallTile(fgTile, x, y, direction);
+            return isWallTile(fgTile, x, y, direction, addOffsets);
 
         }
 
 
-        WallTileResults isWallTile(int8_t fgTile, int8_t x = Constants::CoordNone, int8_t y = Constants::CoordNone, Direction direction = Direction::Left) {
+        WallTileResults isWallTile(int8_t fgTile, int8_t x = Constants::CoordNone, int8_t y = Constants::CoordNone, Direction direction = Direction::Left, bool addOffsets = true) {
 
             switch (fgTile) {
 
@@ -1179,29 +1181,100 @@ struct Level {
                 case TILE_RUG_FRONT_TRACK:
                     return WallTileResults::SolidWall;
 
-                default: 
+                case TILE_FLOOR_GATE_FRONT_TRACK_1:
+                case TILE_FLOOR_GATE_FRONT_TRACK_2:
+                case TILE_FLOOR_GATE_FRONT_TRACK_3:
+                case TILE_FLOOR_GATE_FRONT_TRACK_5:
+                    
+                    if (direction == Direction::Left) {
 
-                    int8_t offset = 0;
+                        int8_t offset = (addOffsets ? 1 : 0);
 
-                    if (direction == Direction::Right) {
-                        offset = 2;
-                    }
+                        if (x != Constants::CoordNone && y != Constants::CoordNone) {
+// Serial.print("Left Offset ");
+// Serial.print(offset);
+// Serial.print(", x ");
+// Serial.print(x);
+// Serial.print(", y ");
+// Serial.print(y);
+// Serial.print(", xLoc ");
+// Serial.print(this->getXLocation() );
+// Serial.print(" ");
+// Serial.print(x + this->getXLocation() + offset);
+// Serial.print(",");
+// Serial.print(y + this->getYLocation());
 
-                    if (x != Constants::CoordNone && y != Constants::CoordNone) {
+                            uint8_t idx = this->getItem(ItemType::Gate, x + this->getXLocation() + offset, y + this->getYLocation());
 
-                        // uint8_t idx = this->getItem(ItemType::Gate, ItemType::Gate_StayOpen, x + this->getXLocation() + offset, y + this->getYLocation());
-                        uint8_t idx = this->getItem(ItemType::Gate, x + this->getXLocation() + offset, y + this->getYLocation());
+                            if (idx != Constants::NoItemFound) {
+// Serial.print(" found");
 
-                        if (idx != Constants::NoItemFound) {
+                                Item &item = this->getItem(idx);
+// Serial.print(item.data.gate.closingDelay);
+// Serial.print(" ");
+// Serial.print(item.data.gate.closingDelayMax);
+// Serial.print(" ");
+// Serial.println(item.data.gate.position);
+                                // if (item.data.gate.position < 5) {
+                                if (item.data.gate.position == 0 ||
+                                    (item.data.gate.closingDelay + 9 > item.data.gate.closingDelayMax && item.data.gate.closingDelayMax != 0 && item.data.gate.position > 2) ||
+                                    (item.data.gate.closingDelay > 0 && item.data.gate.closingDelay <= 9 && item.data.gate.position < 8)) {
+// Serial.println("");
+                                    return WallTileResults::GateClosed;
 
-                            Item &item = this->getItem(idx);
-
-                            if (item.data.gate.position < 5) {
-
-                                return WallTileResults::GateClosed;
+                                }
 
                             }
 
+                        }
+// Serial.println("");
+
+                    }
+
+                    return WallTileResults::None;
+
+                default:
+                    
+                    if (direction == Direction::Right) {
+
+                        int8_t offset = (addOffsets ? 0 : 1);
+
+                        if (x != Constants::CoordNone && y != Constants::CoordNone) {
+
+// Serial.print("Right Offset ");
+// Serial.print(offset);
+// Serial.print(", x ");
+// Serial.print(x);
+// Serial.print(", y ");
+// Serial.print(y);
+// Serial.print(", xLoc ");
+// Serial.print(this->getXLocation() );
+// Serial.print(" ");
+// Serial.print(x + this->getXLocation() + offset);
+// Serial.print(",");
+// Serial.print(y + this->getYLocation());
+
+                            uint8_t idx = this->getItem(ItemType::Gate, x + this->getXLocation() + offset, y + this->getYLocation());
+
+                            if (idx != Constants::NoItemFound) {
+// Serial.print(" found");
+                                Item &item = this->getItem(idx);
+// Serial.print(item.data.gate.closingDelay);
+// Serial.print(" ");
+// Serial.print(item.data.gate.closingDelayMax);
+// Serial.print(" ");
+// Serial.println(item.data.gate.position);
+
+                                if (item.data.gate.position == 0 ||
+                                    (item.data.gate.closingDelay + 9 > item.data.gate.closingDelayMax && item.data.gate.closingDelayMax != 0 && item.data.gate.position > 2) ||
+                                    (item.data.gate.closingDelay > 0 && item.data.gate.closingDelay <= 9 && item.data.gate.position < 8)) {
+// Serial.println("");
+                                    return WallTileResults::GateClosed;
+
+                                }
+
+                            }
+// Serial.println("");
                         }
 
                     }
@@ -1325,18 +1398,6 @@ struct Level {
         }
 
         CanFallResult canFall(int8_t bgTile, int8_t x = Constants::CoordNone, int8_t y = Constants::CoordNone) {
-
-            //WallTileResults wallTile = this->isWallTile(fgTile, x, y);
-
-            // if (wallTile != WallTileResults::None) {
-
-            //     #if defined(DEBUG) && defined(DEBUG_ACTION_CANFALL)
-            //     DEBUG_PRINTLN(" true (a wall tile)");
-            //     #endif                
-
-            //     // return CanFallResult::CannotFall;
-            //     return CanFallResult::CannotFall;
-            // }
 
             switch (bgTile) {
 
@@ -1799,7 +1860,7 @@ struct Level {
                                             printTileInfo(bgTile2, fgTile2);
                                             #endif
                                             
-                                            WallTileResults wallTile = this->isWallTile(fgTile2, tileXIdx, tileYIdx, Direction::Left);
+                                            WallTileResults wallTile = this->isWallTile(fgTile2, tileXIdx, tileYIdx, Direction::Left, false);
                                             return (wallTile == WallTileResults::None);
                                         }
                                         return false;
@@ -1823,7 +1884,7 @@ struct Level {
                                             printTileInfo(bgTile2, fgTile2);
                                             #endif
 
-                                            WallTileResults wallTile = this->isWallTile(fgTile2, tileXIdx, tileYIdx, Direction::Left);
+                                            WallTileResults wallTile = this->isWallTile(fgTile2, tileXIdx, tileYIdx, Direction::Left, false);
                                             return (wallTile == WallTileResults::None);
                                         }
                                         return false;
@@ -1841,7 +1902,7 @@ struct Level {
                                     printTileInfo(bgTile2, fgTile2);
                                     #endif
                                     
-                                    WallTileResults wallTile = this->isWallTile(fgTile2, tileXIdx, tileYIdx, Direction::Left);
+                                    WallTileResults wallTile = this->isWallTile(fgTile2, tileXIdx, tileYIdx, Direction::Left, false);
                                     return wallTile == WallTileResults::None;
 
                                 }
@@ -1890,7 +1951,7 @@ struct Level {
                             case Action::SmallStep:
                             case Action::CrouchHop:
                                 {
-                                    WallTileResults wallTile = this->isWallTile(fgTile2, tileXIdx, tileYIdx, Direction::Right);
+                                    WallTileResults wallTile = this->isWallTile(fgTile2, tileXIdx, tileYIdx, Direction::Right, false);
 
                                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
                                     printTileInfo(bgTile2, fgTile2);
@@ -1916,7 +1977,7 @@ struct Level {
                             case Action::RunStart:
                             case Action::RunningTurn:
                                 {
-                                    WallTileResults wallTile = this->isWallTile(fgTile2, tileXIdx, tileYIdx, Direction::Right);
+                                    WallTileResults wallTile = this->isWallTile(fgTile2, tileXIdx, tileYIdx, Direction::Right, false);
 
                                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
                                     printTileInfo(bgTile2, fgTile2);
@@ -1947,7 +2008,7 @@ struct Level {
                                     printTileInfo(bgTile2, fgTile2);
                                     #endif
                                     
-                                    WallTileResults wallTile = this->isWallTile(fgTile2, tileXIdx, tileYIdx, Direction::Right);
+                                    WallTileResults wallTile = this->isWallTile(fgTile2, tileXIdx, tileYIdx, Direction::Right, false);
                                     return wallTile == WallTileResults::None;
 
                                 }

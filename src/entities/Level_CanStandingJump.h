@@ -28,10 +28,6 @@ StandingJumpResult canStandingJump(Prince &prince) {
     WallTileResults wallTile4_NextLvl = this->isWallTile_ByCoords(tileXIdx + (3 * offset), tileYIdx + 1, prince.getDirection());
     WallTileResults wallTile5_NextLvl = this->isWallTile_ByCoords(tileXIdx + (4 * offset), tileYIdx + 1, prince.getDirection());
 
-
-
-    // WallTileResults, 0 None, 1 Normal, 2 GateClosed
-
     bool isGroundTile2_CurrLvl = this->isGroundTile_ByCoords(tileXIdx + (1 * offset), tileYIdx);
     bool isGroundTile3_CurrLvl = this->isGroundTile_ByCoords(tileXIdx + (2 * offset), tileYIdx);
     bool isGroundTile4_CurrLvl = this->isGroundTile_ByCoords(tileXIdx + (3 * offset), tileYIdx);
@@ -39,10 +35,11 @@ StandingJumpResult canStandingJump(Prince &prince) {
     bool isGroundTile2_NextLvl = this->isGroundTile_ByCoords(tileXIdx + (1 * offset), tileYIdx + 1);
     bool isGroundTile3_NextLvl = this->isGroundTile_ByCoords(tileXIdx + (2 * offset), tileYIdx + 1);
     bool isGroundTile4_NextLvl = this->isGroundTile_ByCoords(tileXIdx + (3 * offset), tileYIdx + 1);
+    bool isGroundTile5_NextLvl = this->isGroundTile_ByCoords(tileXIdx + (4 * offset), tileYIdx + 1);
 
+/*
     #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP)
 
-    bool isGroundTile5_NextLvl = this->isGroundTile_ByCoords(tileXIdx + (4 * offset), tileYIdx + 1);
 
     if (prince.getDirection() == Direction::Left) {
         DEBUG_PRINTLN("__  5  4  3  2  1 ");
@@ -130,9 +127,127 @@ StandingJumpResult canStandingJump(Prince &prince) {
 
     }
     #endif
+*/
 
-    if (wallTile1_CurrLvl == WallTileResults::None && 
-        wallTile2_CurrLvl == WallTileResults::None && 
+    #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP)
+
+        // switch (action) {
+
+        //     case Action::RunJump_4:
+        //         DEBUG_PRINTLN(F("-- Standing Jump 4 ------"));
+        //         break;
+
+        //     case Action::RunJump_3:
+        //         DEBUG_PRINTLN(F("-- Standing Jump 3 ------"));
+        //         break;
+
+        //     case Action::RunJump_2:
+        //         DEBUG_PRINTLN(F("-- Standing Jump 2 ------"));
+        //         break;
+
+        //     case Action::RunJump_1:
+        //         DEBUG_PRINTLN(F("-- Standing Jump 1 ------"));
+        //         break;
+        
+        // }
+
+        if (prince.getDirection() == Direction::Left) {
+            DEBUG_PRINT(F("______5 4 3 2 1\nWT CL "));
+            DEBUG_PRINT((uint8_t)wallTile5_CurrLvl);
+            DEBUG_PRINT(" ");
+            DEBUG_PRINT((uint8_t)wallTile4_CurrLvl);
+            DEBUG_PRINT(" ");
+            DEBUG_PRINT((uint8_t)wallTile3_CurrLvl);
+            DEBUG_PRINT(" ");
+            DEBUG_PRINT((uint8_t)wallTile2_CurrLvl);
+            DEBUG_PRINT(" ");
+            DEBUG_PRINT((uint8_t)wallTile1_CurrLvl);
+            DEBUG_PRINT(F("\nWT NL "));
+            DEBUG_PRINT((uint8_t)wallTile5_NextLvl);
+            DEBUG_PRINT(" ");
+            DEBUG_PRINT((uint8_t)wallTile4_NextLvl);
+            DEBUG_PRINT(" ");
+            DEBUG_PRINT((uint8_t)wallTile3_NextLvl);
+            DEBUG_PRINT(" ");
+            DEBUG_PRINT((uint8_t)wallTile2_NextLvl);
+            DEBUG_PRINT(F(" _\nGT CL "));
+            DEBUG_PRINT((uint8_t)isGroundTile5_CurrLvl);
+            DEBUG_PRINT(" ");
+            DEBUG_PRINT((uint8_t)isGroundTile4_CurrLvl);
+            DEBUG_PRINT(" ");
+            DEBUG_PRINT((uint8_t)isGroundTile3_CurrLvl);
+            DEBUG_PRINT(" ");
+            DEBUG_PRINT((uint8_t)isGroundTile2_CurrLvl);
+            DEBUG_PRINT(F(" _\nGT NL "));
+            DEBUG_PRINT((uint8_t)isGroundTile5_NextLvl);
+            DEBUG_PRINT(" ");
+            DEBUG_PRINT((uint8_t)isGroundTile4_NextLvl);
+            DEBUG_PRINT(" ");
+            DEBUG_PRINT((uint8_t)isGroundTile3_NextLvl);
+            DEBUG_PRINT(" ");
+            DEBUG_PRINT((uint8_t)isGroundTile2_NextLvl);
+            DEBUG_PRINT(F(" _\nDist "));
+            DEBUG_PRINTLN(distToEdgeOfCurrentTile);
+
+        }
+        else {
+
+            DEBUG_PRINT(F("______1 2 3 4 5\nWT CL "));
+            DEBUG_PRINT((uint8_t)wallTile1_CurrLvl);
+            DEBUG_PRINT(" ");
+            DEBUG_PRINT((uint8_t)wallTile2_CurrLvl);
+            DEBUG_PRINT(" ");
+            DEBUG_PRINT((uint8_t)wallTile3_CurrLvl);
+            DEBUG_PRINT(" ");
+            DEBUG_PRINT((uint8_t)wallTile4_CurrLvl);
+            DEBUG_PRINT(" ");
+            DEBUG_PRINT((uint8_t)wallTile5_CurrLvl);
+            DEBUG_PRINT(F("\nWT NL _ "));
+            DEBUG_PRINT((uint8_t)wallTile2_NextLvl);
+            DEBUG_PRINT(" ");
+            DEBUG_PRINT((uint8_t)wallTile3_NextLvl);
+            DEBUG_PRINT(" ");
+            DEBUG_PRINT((uint8_t)wallTile4_NextLvl);
+            DEBUG_PRINT(" ");
+            DEBUG_PRINT((uint8_t)wallTile5_NextLvl);
+            DEBUG_PRINT(F("\nGT CL _ "));
+            DEBUG_PRINT((uint8_t)isGroundTile2_CurrLvl);
+            DEBUG_PRINT(" ");
+            DEBUG_PRINT((uint8_t)isGroundTile3_CurrLvl);
+            DEBUG_PRINT(" ");
+            DEBUG_PRINT((uint8_t)isGroundTile4_CurrLvl);
+            DEBUG_PRINT(" ");
+            DEBUG_PRINT((uint8_t)isGroundTile5_CurrLvl);
+            DEBUG_PRINT(F("\nGT NL _ "));
+            DEBUG_PRINT((uint8_t)isGroundTile2_NextLvl);
+            DEBUG_PRINT(" ");
+            DEBUG_PRINT((uint8_t)isGroundTile3_NextLvl);
+            DEBUG_PRINT(" ");
+            DEBUG_PRINT((uint8_t)isGroundTile4_NextLvl);
+            DEBUG_PRINT(" ");
+            DEBUG_PRINT((uint8_t)isGroundTile5_NextLvl);
+            DEBUG_PRINT("\nDist ");
+            DEBUG_PRINTLN(distToEdgeOfCurrentTile);
+
+        }
+
+    #endif
+
+
+
+    /* ----------------------------------------------------------------------------------- */
+    /*  Jump to 4th position / land normally or grab ledge ..
+    
+    Left                   Right
+    _____ 6 5 4 3 2 1      _____ 1 2 3 4 5 6
+    WT CL x x x 0 0 x      WT CL x 0 0 x x x
+    WT NL x x 1 0 x x      WT CL x x 0 1 x x
+    GT CL x x x x x _      GT CL _ x x x x x
+    GT NL x x x x x _      GT NL _ x x x x x 
+    */
+
+    //if (wallTile1_CurrLvl == WallTileResults::None &&   removed as curent tile might be a gate
+    if (wallTile2_CurrLvl == WallTileResults::None && 
         wallTile3_CurrLvl == WallTileResults::None && 
         !isGroundTile3_CurrLvl &&
         isGroundTile4_CurrLvl) {
@@ -142,33 +257,91 @@ StandingJumpResult canStandingJump(Prince &prince) {
             case 2:
                 
                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP) && defined(DEBUG_ACTION_CANSTANDINGJUMP_DETAIL)
-                DEBUG_PRINTLN("R1");
+                DEBUG_PRINTLN(F("R1 Normal_36"));
                 #endif
 
-                return StandingJumpResult::Normal;
+                return StandingJumpResult::Normal_36;
 
             case 6:
 
                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP) && defined(DEBUG_ACTION_CANSTANDINGJUMP_DETAIL)
-                DEBUG_PRINTLN("R2");
+                DEBUG_PRINTLN(F("R2 GrabLedge_28"));
                 #endif
 
-                return StandingJumpResult::Short_GrabLedge_Pos6;
+                return StandingJumpResult::GrabLedge_28;
 
             case 10:
 
                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP) && defined(DEBUG_ACTION_CANSTANDINGJUMP_DETAIL)
-                DEBUG_PRINTLN("R3");
+                DEBUG_PRINTLN(F("R3 GrabLedge_32"));
                 #endif
 
-                return StandingJumpResult::Short_GrabLedge_Pos10;
+                return StandingJumpResult::GrabLedge_32;
 
         }
 
     }
 
+
+    /* ----------------------------------------------------------------------------------- */
+    /*  Jump to 5th position and grab wall tile ..
+    
+    Left                   Right
+    _____ 6 5 4 3 2 1      _____ 1 2 3 4 5 6
+    WT CL x 0 0 0 0 x      WT CL x 0 0 0 0 x
+    WT NL x 1 0 0 0 x      WT CL x 0 0 0 1 x
+    GT CL x x 0 0 x _      GT CL _ x 0 0 x x
+    GT NL x x x x x _      GT NL _ x x x x x 
+    */
+
     if ((distToEdgeOfCurrentTile == 2 || distToEdgeOfCurrentTile == 6) &&
-         wallTile1_CurrLvl == WallTileResults::None && 
+         // wallTile1_CurrLvl == WallTileResults::None && removed as current tile might be a gate
+         wallTile2_CurrLvl == WallTileResults::None && 
+         wallTile3_CurrLvl == WallTileResults::None && 
+         wallTile4_CurrLvl == WallTileResults::None && 
+         wallTile5_CurrLvl == WallTileResults::None && 
+         wallTile2_NextLvl == WallTileResults::None && 
+         wallTile3_NextLvl == WallTileResults::None && 
+         wallTile4_NextLvl == WallTileResults::None && 
+         wallTile5_NextLvl != WallTileResults::None &&
+         !isGroundTile3_CurrLvl &&
+         !isGroundTile4_CurrLvl) {
+
+        if (distToEdgeOfCurrentTile == 2) {
+
+            #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP) && defined(DEBUG_ACTION_CANSTANDINGJUMP_DETAIL)
+            DEBUG_PRINTLN(F("R4 GrabLedge_36"));
+            #endif
+
+            return StandingJumpResult::GrabLedge_36;
+        }
+        else {
+
+            #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP) && defined(DEBUG_ACTION_CANSTANDINGJUMP_DETAIL)
+            DEBUG_PRINTLN(F("R5 GrabLedge_40"));
+            #endif
+
+            return StandingJumpResult::GrabLedge_40;
+
+        }
+
+    }
+
+
+
+    /* ----------------------------------------------------------------------------------- */
+    /*  Jump to 5th position and grab ground tile ..
+    
+    Left                   Right
+    _____ 6 5 4 3 2 1      _____ 1 2 3 4 5 6
+    WT CL x 0 0 0 0 x      WT CL x 0 0 0 0 x
+    WT NL x 0 0 0 0 x      WT CL x 0 0 0 0 x
+    GT CL x 1 0 0 x _      GT CL _ x 0 0 1 x
+    GT NL x x x x x _      GT NL _ x x x x x 
+    */
+
+    if ((distToEdgeOfCurrentTile == 2 || distToEdgeOfCurrentTile == 6) &&
+         // wallTile1_CurrLvl == WallTileResults::None && removed as current tile might be a gate
          wallTile2_CurrLvl == WallTileResults::None && 
          wallTile3_CurrLvl == WallTileResults::None && 
          wallTile4_CurrLvl == WallTileResults::None && 
@@ -177,29 +350,42 @@ StandingJumpResult canStandingJump(Prince &prince) {
          wallTile3_NextLvl == WallTileResults::None && 
          wallTile4_NextLvl == WallTileResults::None && 
          !isGroundTile3_CurrLvl &&
-         (wallTile5_NextLvl != WallTileResults::None || isGroundTile5_CurrLvl)) {
+         !isGroundTile4_CurrLvl &&
+         isGroundTile5_CurrLvl) {
 
         if (distToEdgeOfCurrentTile == 2) {
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP) && defined(DEBUG_ACTION_CANSTANDINGJUMP_DETAIL)
-            DEBUG_PRINTLN("R4");
+            DEBUG_PRINTLN(F("R6 GrabLedge_36"));
             #endif
 
-            return StandingJumpResult::Normal_GrabLedge_Pos2;
+            return StandingJumpResult::GrabLedge_36;
         }
         else {
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP) && defined(DEBUG_ACTION_CANSTANDINGJUMP_DETAIL)
-            DEBUG_PRINTLN("R5");
+            DEBUG_PRINTLN(F("R7 GrabLedge_40"));
             #endif
 
-            return StandingJumpResult::Normal_GrabLedge_Pos6;
+            return StandingJumpResult::GrabLedge_40;
         }
 
     }
 
+
+    /* ----------------------------------------------------------------------------------- */
+    /*  Jump and drop a level?
+    
+    Left                   Right
+    _____ 6 5 4 3 2 1      _____ 1 2 3 4 5 6
+    WT CL x 1 0 0 0 x      WT CL x 0 0 0 1 x
+    WT NL x 0 0 x x x      WT CL x x x 0 0 x
+    GT CL x x 0 0 x _      GT CL _ x 0 0 x x
+    GT NL x x x x x _      GT NL _ x x x x x 
+    */
+
     if (distToEdgeOfCurrentTile == 2 &&
-        wallTile1_CurrLvl == WallTileResults::None && 
+        // wallTile1_CurrLvl == WallTileResults::None &&  removed as current tile might be a gate
         wallTile2_CurrLvl == WallTileResults::None && 
         wallTile3_CurrLvl == WallTileResults::None && 
         wallTile4_CurrLvl == WallTileResults::None && 
@@ -211,16 +397,26 @@ StandingJumpResult canStandingJump(Prince &prince) {
         ) {
 
         #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP) && defined(DEBUG_ACTION_CANSTANDINGJUMP_DETAIL)
-        DEBUG_PRINTLN("R6");
+        DEBUG_PRINTLN(F("R8 DropLevel_40"));
         #endif
 
-        return StandingJumpResult::Normal_DropLevel_Pos2;
+        return StandingJumpResult::DropLevel_40;
 
     }
 
-    if (
 
-        wallTile1_CurrLvl == WallTileResults::None && 
+    /* ----------------------------------------------------------------------------------- */
+    /*  Jump to Position 2?
+    
+    Left                   Right
+    _____ 6 5 4 3 2 1      _____ 1 2 3 4 5 6
+    WT CL x x x 0 0 x      WT CL x 0 0 x x x
+    WT NL x x x 1 0 x      WT CL x 0 1 x x x
+    GT CL x x x x x _      GT CL _ x x x x x
+    GT NL x x x x x _      GT NL _ x x x x x 
+    */
+
+    if (//wallTile1_CurrLvl == WallTileResults::None &&  removed as current tile might be a gate
         wallTile2_CurrLvl == WallTileResults::None && 
         wallTile3_CurrLvl == WallTileResults::None && 
         wallTile2_NextLvl == WallTileResults::None && 
@@ -231,32 +427,44 @@ StandingJumpResult canStandingJump(Prince &prince) {
             case 2:
 
                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP) && defined(DEBUG_ACTION_CANSTANDINGJUMP_DETAIL)
-                DEBUG_PRINTLN("R7");
+                DEBUG_PRINTLN(F("R9 Normal_24"));
                 #endif
 
-                return StandingJumpResult::Short_Pos2;
+                return StandingJumpResult::Normal_24;
 
             case 6:
 
                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP) && defined(DEBUG_ACTION_CANSTANDINGJUMP_DETAIL)
-                DEBUG_PRINTLN("R8");
+                DEBUG_PRINTLN(F("R10 Normal_28"));
                 #endif
 
-                return StandingJumpResult::Short_Pos6;
+                return StandingJumpResult::Normal_28;   // Short_Pos6
 
             case 10:
 
                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP) && defined(DEBUG_ACTION_CANSTANDINGJUMP_DETAIL)
-                DEBUG_PRINTLN("R9");
+                DEBUG_PRINTLN(F("R11 Normal_28"));
                 #endif
 
-                return StandingJumpResult::Short_Pos10;
+                return StandingJumpResult::Normal_32;
 
         }                            
 
     }
 
-    if (wallTile1_CurrLvl == WallTileResults::None && 
+
+    /* ----------------------------------------------------------------------------------- */
+    /*  Jimp to position 3 and drop a level?
+    
+    Left                   Right
+    _____ 6 5 4 3 2 1      _____ 1 2 3 4 5 6
+    WT CL x x x 0 0 x      WT CL x 0 0 x x x
+    WT NL x x 0 0 0 x      WT CL x 0 0 0 x x
+    GT CL x x 0 0 x _      GT CL _ x 0 0 x x
+    GT NL x x 1 0 x _      GT NL _ x 0 1 x x 
+    */
+
+    if (//wallTile1_CurrLvl == WallTileResults::None &&  removed as current tile might be a gate
         wallTile2_CurrLvl == WallTileResults::None && 
         wallTile3_CurrLvl == WallTileResults::None && 
         wallTile2_NextLvl == WallTileResults::None && 
@@ -274,25 +482,28 @@ StandingJumpResult canStandingJump(Prince &prince) {
             case 10:
 
                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP) && defined(DEBUG_ACTION_CANSTANDINGJUMP_DETAIL)
-                DEBUG_PRINTLN("L10");
+                DEBUG_PRINTLN(F("L12 DropLevel_36"));
                 #endif
             
-                return StandingJumpResult::DropLevel;
+                return StandingJumpResult::DropLevel_36;
 
             default:
 
                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP) && defined(DEBUG_ACTION_CANSTANDINGJUMP_DETAIL)
-                DEBUG_PRINTLN("L11");
+                DEBUG_PRINT(F("L13 "));
+                DEBUG_PRINTLN(wallTile2_CurrLvl == WallTileResults::None ? "Normal_36" : "None");
                 #endif
             
-                return (wallTile1_CurrLvl == WallTileResults::None && wallTile2_CurrLvl == WallTileResults::None ? StandingJumpResult::Normal : StandingJumpResult::None);
+//                return (wallTile1_CurrLvl == WallTileResults::None && wallTile2_CurrLvl == WallTileResults::None ? StandingJumpResult::Normal : StandingJumpResult::None);  removed as current wall might be a gate
+                return (wallTile2_CurrLvl == WallTileResults::None ? StandingJumpResult::Normal_36 : StandingJumpResult::None);
             
         }
 
     }
     else {
         
-        if (wallTile1_CurrLvl == WallTileResults::None && wallTile2_CurrLvl == WallTileResults::None) {
+//        if (wallTile1_CurrLvl == WallTileResults::None && wallTile2_CurrLvl == WallTileResults::None) {   removed as current wall might be a gate
+        if (wallTile2_CurrLvl == WallTileResults::None) {
 
             switch (wallTile3_CurrLvl) {
 
@@ -305,46 +516,53 @@ StandingJumpResult canStandingJump(Prince &prince) {
                             case 2:
 
                                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP) && defined(DEBUG_ACTION_CANSTANDINGJUMP_DETAIL)
-                                DEBUG_PRINTLN("L12");
+                                DEBUG_PRINTLN(F("L14 Normal_20"));
                                 #endif
                 
-                                return StandingJumpResult::Short_Pos2;
+                                return StandingJumpResult::Normal_20;
                             
                             case 6:
+
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP) && defined(DEBUG_ACTION_CANSTANDINGJUMP_DETAIL)
+                                DEBUG_PRINTLN(F("L15 Normal_24"));
+                                #endif
+                
+                                return StandingJumpResult::Normal_24;
+
                             case 10:
 
                                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP) && defined(DEBUG_ACTION_CANSTANDINGJUMP_DETAIL)
-                                DEBUG_PRINTLN("L13");
+                                DEBUG_PRINTLN(F("L16 Normal_28"));
                                 #endif
                 
-                                return StandingJumpResult::Medium;
+                                return StandingJumpResult::Normal_28;
 
-                            default:
+                            // default:
 
-                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP) && defined(DEBUG_ACTION_CANSTANDINGJUMP_DETAIL)
-                                DEBUG_PRINTLN("L14");
-                                #endif
+                            //     #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP) && defined(DEBUG_ACTION_CANSTANDINGJUMP_DETAIL)
+                            //     DEBUG_PRINTLN(F("L16 Normal_36"));
+                            //     #endif
 
-                                return StandingJumpResult::Normal;
+                            //     return StandingJumpResult::Normal_36;
 
                         }
 
                     }
 
                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP) && defined(DEBUG_ACTION_CANSTANDINGJUMP_DETAIL)
-                    DEBUG_PRINTLN("L15");
+                    DEBUG_PRINTLN(F("L17 Normal_36"));
                     #endif
 
-                    return StandingJumpResult::Normal;
+                    return StandingJumpResult::Normal_36;
 
                 case WallTileResults::SolidWall:
                 case WallTileResults::GateClosed:
 
                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP) && defined(DEBUG_ACTION_CANSTANDINGJUMP_DETAIL)
-                    DEBUG_PRINTLN("L16");
+                    DEBUG_PRINTLN(F("L18 None"));
                     #endif
 
-                    return StandingJumpResult::Short_Pos2;
+                    return StandingJumpResult::None;
 
             }
 
@@ -352,7 +570,7 @@ StandingJumpResult canStandingJump(Prince &prince) {
         else {
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP) && defined(DEBUG_ACTION_CANSTANDINGJUMP_DETAIL)
-            DEBUG_PRINTLN("L17");
+            DEBUG_PRINTLN(F("L19 None"));
             #endif
 
             return StandingJumpResult::None;
@@ -362,9 +580,9 @@ StandingJumpResult canStandingJump(Prince &prince) {
     }
 
     #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP) && defined(DEBUG_ACTION_CANSTANDINGJUMP_DETAIL)
-    DEBUG_PRINTLN("LR18");
+    DEBUG_PRINTLN(F("L20 Normal_36"));
     #endif
 
-    return StandingJumpResult::Normal;
+    return StandingJumpResult::Normal_36;
 
 }

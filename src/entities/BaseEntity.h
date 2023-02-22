@@ -182,7 +182,7 @@ class BaseEntity {
 
         uint8_t getImageIndexFromStance(uint16_t stance) {
 
-            #ifdef IMAGE_DATA_FROM_FX
+            #ifdef MOVEMENT_DATA_FROM_FX
 
                 FX::seekData(Constants::StanceToImageXRefFX + stance);
                 uint8_t image = FX::readPendingUInt8();
