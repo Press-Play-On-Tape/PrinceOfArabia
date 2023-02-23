@@ -1198,7 +1198,7 @@ struct Level {
                                 Item &item = this->getItem(idx);
 
                                 if (item.data.gate.position == 0 ||
-                                    (item.data.gate.closingDelay + 9 > item.data.gate.closingDelayMax && item.data.gate.closingDelayMax != 0 && item.data.gate.position > 2) ||
+                                    (item.data.gate.closingDelay + 2 >= item.data.gate.closingDelayMax && item.data.gate.closingDelayMax != 0 && item.data.gate.position > 2) ||
                                     (item.data.gate.closingDelay > 0 && item.data.gate.closingDelay <= 9 && item.data.gate.position < 8)) {
 
                                     return WallTileResults::GateClosed;
@@ -1229,7 +1229,7 @@ struct Level {
                                 Item &item = this->getItem(idx);
 
                                 if (item.data.gate.position == 0 ||
-                                    (item.data.gate.closingDelay + 9 > item.data.gate.closingDelayMax && item.data.gate.closingDelayMax != 0 && item.data.gate.position > 2) ||
+                                    (item.data.gate.closingDelay + 2 >= item.data.gate.closingDelayMax && item.data.gate.closingDelayMax != 0 && item.data.gate.position > 2) ||
                                     (item.data.gate.closingDelay > 0 && item.data.gate.closingDelay <= 9 && item.data.gate.position < 8)) {
 
                                     return WallTileResults::GateClosed;

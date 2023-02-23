@@ -175,16 +175,16 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
         GT NL x x x x x _      GT NL _ x x x x x 
         */
 
-        if (wallTile6_CurrLvl != WallTileResults::None &&
-            wallTile6_NextLvl != WallTileResults::None ) {
+        // if (wallTile6_CurrLvl != WallTileResults::None &&
+        //     wallTile6_NextLvl != WallTileResults::None ) {
 
-            #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_4)
-            DEBUG_PRINTLN(F("R4-1 None"));
-            #endif
+        //     #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_4)
+        //     DEBUG_PRINTLN(F("R4-1 None"));
+        //     #endif
 
-            return RunningJumpResult::None;
+        //     return RunningJumpResult::None;
 
-        }
+        // }
 
         /* ----------------------------------------------------------------------------------- */
         /* 4. Can we jump four blanks to the same level? Results in a player hanging on.
@@ -305,16 +305,16 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
     GT NL x x x x x _      GT NL _ x x x x x 
     */
 
-    if (wallTile5_CurrLvl != WallTileResults::None &&
-        wallTile5_NextLvl != WallTileResults::None ) {
+    // if (wallTile5_CurrLvl != WallTileResults::None &&
+    //     wallTile5_NextLvl != WallTileResults::None ) {
 
-        #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_4)
-        DEBUG_PRINTLN(F("J3-1 None"));
-        #endif
+    //     #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_4)
+    //     DEBUG_PRINTLN(F("J3-1 None"));
+    //     #endif
 
-        return RunningJumpResult::None;
+    //     return RunningJumpResult::None;
 
-    }
+    // }
 
 
     /* ----------------------------------------------------------------------------------- */
