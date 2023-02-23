@@ -1190,35 +1190,17 @@ struct Level {
                         int8_t offset = (addOffsets ? 1 : 0);
 
                         if (x != Constants::CoordNone && y != Constants::CoordNone) {
-// Serial.print("Left Offset ");
-// Serial.print(offset);
-// Serial.print(", x ");
-// Serial.print(x);
-// Serial.print(", y ");
-// Serial.print(y);
-// Serial.print(", xLoc ");
-// Serial.print(this->getXLocation() );
-// Serial.print(" ");
-// Serial.print(x + this->getXLocation() + offset);
-// Serial.print(",");
-// Serial.print(y + this->getYLocation());
 
                             uint8_t idx = this->getItem(ItemType::Gate, x + this->getXLocation() + offset, y + this->getYLocation());
 
                             if (idx != Constants::NoItemFound) {
-// Serial.print(" found");
 
                                 Item &item = this->getItem(idx);
-// Serial.print(item.data.gate.closingDelay);
-// Serial.print(" ");
-// Serial.print(item.data.gate.closingDelayMax);
-// Serial.print(" ");
-// Serial.println(item.data.gate.position);
-                                // if (item.data.gate.position < 5) {
+
                                 if (item.data.gate.position == 0 ||
                                     (item.data.gate.closingDelay + 9 > item.data.gate.closingDelayMax && item.data.gate.closingDelayMax != 0 && item.data.gate.position > 2) ||
                                     (item.data.gate.closingDelay > 0 && item.data.gate.closingDelay <= 9 && item.data.gate.position < 8)) {
-// Serial.println("");
+
                                     return WallTileResults::GateClosed;
 
                                 }
@@ -1226,7 +1208,7 @@ struct Level {
                             }
 
                         }
-// Serial.println("");
+
 
                     }
 
@@ -1240,40 +1222,22 @@ struct Level {
 
                         if (x != Constants::CoordNone && y != Constants::CoordNone) {
 
-// Serial.print("Right Offset ");
-// Serial.print(offset);
-// Serial.print(", x ");
-// Serial.print(x);
-// Serial.print(", y ");
-// Serial.print(y);
-// Serial.print(", xLoc ");
-// Serial.print(this->getXLocation() );
-// Serial.print(" ");
-// Serial.print(x + this->getXLocation() + offset);
-// Serial.print(",");
-// Serial.print(y + this->getYLocation());
-
                             uint8_t idx = this->getItem(ItemType::Gate, x + this->getXLocation() + offset, y + this->getYLocation());
 
                             if (idx != Constants::NoItemFound) {
-// Serial.print(" found");
+
                                 Item &item = this->getItem(idx);
-// Serial.print(item.data.gate.closingDelay);
-// Serial.print(" ");
-// Serial.print(item.data.gate.closingDelayMax);
-// Serial.print(" ");
-// Serial.println(item.data.gate.position);
 
                                 if (item.data.gate.position == 0 ||
                                     (item.data.gate.closingDelay + 9 > item.data.gate.closingDelayMax && item.data.gate.closingDelayMax != 0 && item.data.gate.position > 2) ||
                                     (item.data.gate.closingDelay > 0 && item.data.gate.closingDelay <= 9 && item.data.gate.position < 8)) {
-// Serial.println("");
+
                                     return WallTileResults::GateClosed;
 
                                 }
 
                             }
-// Serial.println("");
+
                         }
 
                     }

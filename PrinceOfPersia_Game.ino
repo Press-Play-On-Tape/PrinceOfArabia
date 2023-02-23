@@ -121,7 +121,6 @@ void game() {
     prince.update(level.getXLocation(), level.getYLocation());
 
     #ifndef SAVE_MEMORY_ENEMY
-    // Serial.println("enemy.update() ");
     enemy.update();
     #endif
     
