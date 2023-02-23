@@ -16,10 +16,10 @@
 
     #define LEVEL_DATA_FROM_FX
     #define MOVEMENT_DATA_FROM_FX
-    #define SAVE_TO_FX
+    #define _SAVE_TO_FX
     #define STARTING_LEVEL 1
     #define _DEBUG_CUT_SCENES
-    #define _DEBUG_LEVELS
+    #define DEBUG_LEVELS
 
     #define _DEBUG
 
@@ -29,7 +29,7 @@
     #define SAVE_MEMORY_PPOT
     #define SAVE_MEMORY_OTHER
     #define SAVE_MEMORY_SOUND
-    #define _SAVE_MEMORY_ENEMY
+    #define SAVE_MEMORY_ENEMY
     #define SAVE_MEMORY_TITLE
     #define SAVE_MEMORY_INVADER
     #define _ALT_B_BUTTON
@@ -38,7 +38,7 @@
     #define LEVEL_DATA_FROM_FX
     #define MOVEMENT_DATA_FROM_FX
     #define _SAVE_TO_FX
-    #define STARTING_LEVEL 6
+    #define STARTING_LEVEL 30
     #define _DEBUG_CUT_SCENES
     #define _DEBUG_LEVELS
 
@@ -65,7 +65,7 @@
 #define _DEBUG_ACTION_CANJUMPUP_PART2
 #define _DEBUG_ACTION_CANCLIMBDOWN
 #define _DEBUG_ACTION_CANCLIMBDOWN_PART2
-#define _DEBUG_ACTION_CANFALL
+#define DEBUG_ACTION_CANFALL
 #define _DEBUG_ACTION_CANFALLSOMEMORE
 #define _DEBUG_ACTION_COLLIDEWITHWALL
 #define _DEBUG_ACTION_FALLING

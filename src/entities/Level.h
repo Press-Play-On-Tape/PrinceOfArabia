@@ -1420,6 +1420,7 @@ struct Level {
                 case TILE_FLOOR_RH_PILLAR_END_2:
                 case TILE_FLOOR_RH_END_GATE_1:
                 case TILE_FLOOR_RH_END_GATE_2:
+                case TILE_FLOOR_RH_END_GATE_RUG:
 
                     if (x != Constants::CoordNone && y != Constants::CoordNone) {
 

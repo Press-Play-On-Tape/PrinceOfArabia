@@ -2063,9 +2063,11 @@ void game() {
 
             if (distToEdgeOfTile <= 4) {
                 
-                int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x) + ((prince.getDirection() == Direction::Right && distToEdgeOfTile <= 4) ? 1 : 0);
+                int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x) + ((prince.getDirection() == Direction::Right && distToEdgeOfTile == 2) ? 1 : 0);
+         
+                tileXIdx = tileXIdx + ((prince.getDirection() == Direction::Right && distToEdgeOfTile == 2) ? 1 : 0);
                 int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y);
-                
+              
                 uint8_t itemIdx = level.getItem(ItemType::Blade, tileXIdx, tileYIdx);
 
                 if (itemIdx != Constants::NoItemFound) {

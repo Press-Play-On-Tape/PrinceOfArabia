@@ -394,735 +394,735 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t 127, 28, uint24_t Zaffar       uint8_t 4, dbmMasked
+        int16_t 127, 28, uint24_t Jaffar       uint8_t 4, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t 126, 28, uint24_t Zaffar       uint8_t 0, dbmMasked
+        int16_t 126, 28, uint24_t Jaffar       uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t 125, 28, uint24_t Zaffar       uint8_t 1, dbmMasked
+        int16_t 125, 28, uint24_t Jaffar       uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t 124, 28, uint24_t Zaffar       uint8_t 2, dbmMasked
+        int16_t 124, 28, uint24_t Jaffar       uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t 123, 28, uint24_t Zaffar       uint8_t 3, dbmMasked
+        int16_t 123, 28, uint24_t Jaffar       uint8_t 3, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t 122, 28, uint24_t Zaffar       uint8_t 4, dbmMasked
+        int16_t 122, 28, uint24_t Jaffar       uint8_t 4, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t 121, 28, uint24_t Zaffar       uint8_t 0, dbmMasked
+        int16_t 121, 28, uint24_t Jaffar       uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t 120, 28, uint24_t Zaffar       uint8_t 1, dbmMasked
+        int16_t 120, 28, uint24_t Jaffar       uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t 119, 28, uint24_t Zaffar       uint8_t 2, dbmMasked
+        int16_t 119, 28, uint24_t Jaffar       uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t 118, 28, uint24_t Zaffar       uint8_t 3, dbmMasked
+        int16_t 118, 28, uint24_t Jaffar       uint8_t 3, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t 117, 28, uint24_t Zaffar       uint8_t 4, dbmMasked
+        int16_t 117, 28, uint24_t Jaffar       uint8_t 4, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t 116, 28, uint24_t Zaffar       uint8_t 0, dbmMasked
+        int16_t 116, 28, uint24_t Jaffar       uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t 115, 28, uint24_t Zaffar       uint8_t 1, dbmMasked
+        int16_t 115, 28, uint24_t Jaffar       uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t 114, 28, uint24_t Zaffar       uint8_t 2, dbmMasked
+        int16_t 114, 28, uint24_t Jaffar       uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t 113, 28, uint24_t Zaffar       uint8_t 3, dbmMasked
+        int16_t 113, 28, uint24_t Jaffar       uint8_t 3, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t 112, 28, uint24_t Zaffar       uint8_t 4, dbmMasked
+        int16_t 112, 28, uint24_t Jaffar       uint8_t 4, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t 111, 28, uint24_t Zaffar       uint8_t 0, dbmMasked
+        int16_t 111, 28, uint24_t Jaffar       uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t 110, 28, uint24_t Zaffar       uint8_t 1, dbmMasked
+        int16_t 110, 28, uint24_t Jaffar       uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t 109, 28, uint24_t Zaffar       uint8_t 2, dbmMasked
+        int16_t 109, 28, uint24_t Jaffar       uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t 108, 28, uint24_t Zaffar       uint8_t 3, dbmMasked
+        int16_t 108, 28, uint24_t Jaffar       uint8_t 3, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t 107, 28, uint24_t Zaffar       uint8_t 4, dbmMasked
+        int16_t 107, 28, uint24_t Jaffar       uint8_t 4, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t 106, 28, uint24_t Zaffar       uint8_t 0, dbmMasked
+        int16_t 106, 28, uint24_t Jaffar       uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t 105, 28, uint24_t Zaffar       uint8_t 1, dbmMasked
+        int16_t 105, 28, uint24_t Jaffar       uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t 104, 28, uint24_t Zaffar       uint8_t 2, dbmMasked
+        int16_t 104, 28, uint24_t Jaffar       uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t 103, 28, uint24_t Zaffar       uint8_t 3, dbmMasked
+        int16_t 103, 28, uint24_t Jaffar       uint8_t 3, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t 102, 28, uint24_t Zaffar       uint8_t 4, dbmMasked
+        int16_t 102, 28, uint24_t Jaffar       uint8_t 4, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t 101, 28, uint24_t Zaffar       uint8_t 0, dbmMasked
+        int16_t 101, 28, uint24_t Jaffar       uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t 100, 28, uint24_t Zaffar       uint8_t 1, dbmMasked
+        int16_t 100, 28, uint24_t Jaffar       uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  99, 28, uint24_t Zaffar       uint8_t 2, dbmMasked
+        int16_t  99, 28, uint24_t Jaffar       uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  98, 28, uint24_t Zaffar       uint8_t 3, dbmMasked
+        int16_t  98, 28, uint24_t Jaffar       uint8_t 3, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  97, 28, uint24_t Zaffar       uint8_t 4, dbmMasked
+        int16_t  97, 28, uint24_t Jaffar       uint8_t 4, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  96, 28, uint24_t Zaffar       uint8_t 0, dbmMasked
+        int16_t  96, 28, uint24_t Jaffar       uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  95, 28, uint24_t Zaffar       uint8_t 1, dbmMasked
+        int16_t  95, 28, uint24_t Jaffar       uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  94, 28, uint24_t Zaffar       uint8_t 2, dbmMasked
+        int16_t  94, 28, uint24_t Jaffar       uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  93, 28, uint24_t Zaffar       uint8_t 3, dbmMasked
+        int16_t  93, 28, uint24_t Jaffar       uint8_t 3, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  92, 28, uint24_t Zaffar       uint8_t 4, dbmMasked
+        int16_t  92, 28, uint24_t Jaffar       uint8_t 4, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  91, 28, uint24_t Zaffar       uint8_t 0, dbmMasked
+        int16_t  91, 28, uint24_t Jaffar       uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  90, 28, uint24_t Zaffar       uint8_t 1, dbmMasked
+        int16_t  90, 28, uint24_t Jaffar       uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  89, 28, uint24_t Zaffar       uint8_t 2, dbmMasked
+        int16_t  89, 28, uint24_t Jaffar       uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  88, 28, uint24_t Zaffar       uint8_t 3, dbmMasked
+        int16_t  88, 28, uint24_t Jaffar       uint8_t 3, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  87, 28, uint24_t Zaffar       uint8_t 4, dbmMasked
+        int16_t  87, 28, uint24_t Jaffar       uint8_t 4, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  86, 28, uint24_t Zaffar       uint8_t 0, dbmMasked
+        int16_t  86, 28, uint24_t Jaffar       uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  85, 28, uint24_t Zaffar       uint8_t 1, dbmMasked
+        int16_t  85, 28, uint24_t Jaffar       uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  84, 28, uint24_t Zaffar       uint8_t 2, dbmMasked
+        int16_t  84, 28, uint24_t Jaffar       uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  83, 28, uint24_t Zaffar       uint8_t 3, dbmMasked
+        int16_t  83, 28, uint24_t Jaffar       uint8_t 3, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  82, 28, uint24_t Zaffar       uint8_t 4, dbmMasked
+        int16_t  82, 28, uint24_t Jaffar       uint8_t 4, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  81, 28, uint24_t Zaffar       uint8_t 0, dbmMasked
+        int16_t  81, 28, uint24_t Jaffar       uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  80, 28, uint24_t Zaffar       uint8_t 1, dbmMasked
+        int16_t  80, 28, uint24_t Jaffar       uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  79, 28, uint24_t Zaffar       uint8_t 2, dbmMasked
+        int16_t  79, 28, uint24_t Jaffar       uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  78, 28, uint24_t Zaffar       uint8_t 3, dbmMasked
+        int16_t  78, 28, uint24_t Jaffar       uint8_t 3, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  77, 28, uint24_t Zaffar       uint8_t 4, dbmMasked
+        int16_t  77, 28, uint24_t Jaffar       uint8_t 4, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  76, 28, uint24_t Zaffar       uint8_t 0, dbmMasked
+        int16_t  76, 28, uint24_t Jaffar       uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  75, 28, uint24_t Zaffar       uint8_t 1, dbmMasked
+        int16_t  75, 28, uint24_t Jaffar       uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  74, 28, uint24_t Zaffar       uint8_t 2, dbmMasked
+        int16_t  74, 28, uint24_t Jaffar       uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  73, 28, uint24_t Zaffar       uint8_t 3, dbmMasked
+        int16_t  73, 28, uint24_t Jaffar       uint8_t 3, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  72, 28, uint24_t Zaffar       uint8_t 4, dbmMasked
+        int16_t  72, 28, uint24_t Jaffar       uint8_t 4, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  71, 28, uint24_t Zaffar       uint8_t 0, dbmMasked
+        int16_t  71, 28, uint24_t Jaffar       uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  70, 28, uint24_t Zaffar       uint8_t 1, dbmMasked
+        int16_t  70, 28, uint24_t Jaffar       uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  69, 28, uint24_t Zaffar       uint8_t 2, dbmMasked
+        int16_t  69, 28, uint24_t Jaffar       uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  68, 28, uint24_t Zaffar       uint8_t 3, dbmMasked
+        int16_t  68, 28, uint24_t Jaffar       uint8_t 3, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  67, 28, uint24_t Zaffar       uint8_t 4, dbmMasked
+        int16_t  67, 28, uint24_t Jaffar       uint8_t 4, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  67, 28, uint24_t Zaffar       uint8_t 5, dbmMasked
+        int16_t  67, 28, uint24_t Jaffar       uint8_t 5, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  67, 28, uint24_t Zaffar       uint8_t 5, dbmMasked
+        int16_t  67, 28, uint24_t Jaffar       uint8_t 5, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  67, 28, uint24_t Zaffar       uint8_t 5, dbmMasked
+        int16_t  67, 28, uint24_t Jaffar       uint8_t 5, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  67, 28, uint24_t Zaffar       uint8_t 5, dbmMasked
+        int16_t  67, 28, uint24_t Jaffar       uint8_t 5, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  67, 28, uint24_t Zaffar       uint8_t 5, dbmMasked
+        int16_t  67, 28, uint24_t Jaffar       uint8_t 5, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  67, 28, uint24_t Zaffar       uint8_t 5, dbmMasked
+        int16_t  67, 28, uint24_t Jaffar       uint8_t 5, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  67, 28, uint24_t Zaffar       uint8_t 5, dbmMasked
+        int16_t  67, 28, uint24_t Jaffar       uint8_t 5, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  67, 28, uint24_t Zaffar       uint8_t 5, dbmMasked
+        int16_t  67, 28, uint24_t Jaffar       uint8_t 5, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  67, 28, uint24_t Zaffar       uint8_t 5, dbmMasked
+        int16_t  67, 28, uint24_t Jaffar       uint8_t 5, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  67, 28, uint24_t Zaffar       uint8_t 5, dbmMasked
+        int16_t  67, 28, uint24_t Jaffar       uint8_t 5, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  67, 28, uint24_t Zaffar       uint8_t 5, dbmMasked
+        int16_t  67, 28, uint24_t Jaffar       uint8_t 5, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  67, 28, uint24_t Zaffar       uint8_t 5, dbmMasked
+        int16_t  67, 28, uint24_t Jaffar       uint8_t 5, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  67, 28, uint24_t Zaffar       uint8_t 5, dbmMasked
+        int16_t  67, 28, uint24_t Jaffar       uint8_t 5, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  67, 28, uint24_t Zaffar       uint8_t 5, dbmMasked
+        int16_t  67, 28, uint24_t Jaffar       uint8_t 5, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  67, 28, uint24_t Zaffar       uint8_t 5, dbmMasked
+        int16_t  67, 28, uint24_t Jaffar       uint8_t 5, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  67, 28, uint24_t Zaffar       uint8_t 5, dbmMasked
+        int16_t  67, 28, uint24_t Jaffar       uint8_t 5, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 6, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 6, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 6, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 6, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 6, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 6, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  34, 28, uint24_t Princess     uint8_t 4, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 7, dbmMasked
-        int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
-
-        int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
-        int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
-        int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
-        int16_t  33, 28, uint24_t Princess     uint8_t 5, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 7, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 7, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  33, 28, uint24_t Princess     uint8_t 5, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 7, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 7, dbmMasked
+        int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
+
+        int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
+        int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
+        int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
+        int16_t  33, 28, uint24_t Princess     uint8_t 5, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 7, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  32, 28, uint24_t Princess     uint8_t 6, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 8, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 8, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  32, 28, uint24_t Princess     uint8_t 6, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 8, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 8, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  31, 28, uint24_t Princess     uint8_t 7, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 8, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 8, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  31, 28, uint24_t Princess     uint8_t 7, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 8, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 8, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 8, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 8, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 8, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 8, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 8, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 8, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 8, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 8, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 8, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 8, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 8, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 8, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 8, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 8, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 8, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 8, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 8, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 8, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 8, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 8, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 9, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 9, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 9, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 9, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 10, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 10, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 10, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 10, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 11, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 11, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 11, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 11, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmNormal
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 12, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 12, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
         int16_t  0, 0,   uint24_t Chambers_BG, uint8_t 0, dbmReverse
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, 0x18
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, 0x18
         int16_t  30, 28, uint24_t Princess     uint8_t 8, 0x18
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 12, 0x18
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 12, 0x18
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 0, 0x18
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t 0x58
 
@@ -1130,7 +1130,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 11, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 11, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1138,7 +1138,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, 0x18
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, 0x18
         int16_t  30, 28, uint24_t Princess     uint8_t 8, 0x18
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 12, 0x18
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 12, 0x18
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 1, 0x18
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t 0x58
 
@@ -1146,7 +1146,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 12, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 12, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1154,7 +1154,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 11, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 11, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1162,7 +1162,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 10, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 10, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1170,7 +1170,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 9, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 9, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1178,7 +1178,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 8, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 8, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1186,7 +1186,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 7, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 7, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1194,7 +1194,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 6, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 6, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1202,7 +1202,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 13, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 13, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1210,7 +1210,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 13, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 13, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1218,7 +1218,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 13, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 13, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1226,7 +1226,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 14, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 14, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1234,7 +1234,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 15, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 15, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1242,7 +1242,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 16, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 16, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1250,7 +1250,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 17, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 17, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1258,7 +1258,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 18, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 18, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1266,7 +1266,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  66, 28, uint24_t Zaffar       uint8_t 19, dbmMasked
+        int16_t  66, 28, uint24_t Jaffar       uint8_t 19, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1274,7 +1274,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  67, 28, uint24_t Zaffar       uint8_t 20, dbmMasked
+        int16_t  67, 28, uint24_t Jaffar       uint8_t 20, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1282,7 +1282,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  68, 28, uint24_t Zaffar       uint8_t 21, dbmMasked
+        int16_t  68, 28, uint24_t Jaffar       uint8_t 21, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1290,7 +1290,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  69, 28, uint24_t Zaffar       uint8_t 22, dbmMasked
+        int16_t  69, 28, uint24_t Jaffar       uint8_t 22, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1298,7 +1298,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  70, 28, uint24_t Zaffar       uint8_t 23, dbmMasked
+        int16_t  70, 28, uint24_t Jaffar       uint8_t 23, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1306,7 +1306,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  71, 28, uint24_t Zaffar       uint8_t 24, dbmMasked
+        int16_t  71, 28, uint24_t Jaffar       uint8_t 24, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1314,7 +1314,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  72, 28, uint24_t Zaffar       uint8_t 25, dbmMasked
+        int16_t  72, 28, uint24_t Jaffar       uint8_t 25, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1322,7 +1322,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  73, 28, uint24_t Zaffar       uint8_t 21, dbmMasked
+        int16_t  73, 28, uint24_t Jaffar       uint8_t 21, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1330,7 +1330,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  74, 28, uint24_t Zaffar       uint8_t 22, dbmMasked
+        int16_t  74, 28, uint24_t Jaffar       uint8_t 22, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1338,7 +1338,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  75, 28, uint24_t Zaffar       uint8_t 23, dbmMasked
+        int16_t  75, 28, uint24_t Jaffar       uint8_t 23, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1346,7 +1346,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  76, 28, uint24_t Zaffar       uint8_t 24, dbmMasked
+        int16_t  76, 28, uint24_t Jaffar       uint8_t 24, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1354,7 +1354,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  77, 28, uint24_t Zaffar       uint8_t 25, dbmMasked
+        int16_t  77, 28, uint24_t Jaffar       uint8_t 25, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1362,7 +1362,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  78, 28, uint24_t Zaffar       uint8_t 21, dbmMasked
+        int16_t  78, 28, uint24_t Jaffar       uint8_t 21, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1370,7 +1370,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  79, 28, uint24_t Zaffar       uint8_t 22, dbmMasked
+        int16_t  79, 28, uint24_t Jaffar       uint8_t 22, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1378,7 +1378,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  80, 28, uint24_t Zaffar       uint8_t 23, dbmMasked
+        int16_t  80, 28, uint24_t Jaffar       uint8_t 23, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1386,7 +1386,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  81, 28, uint24_t Zaffar       uint8_t 24, dbmMasked
+        int16_t  81, 28, uint24_t Jaffar       uint8_t 24, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1394,7 +1394,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  82, 28, uint24_t Zaffar       uint8_t 25, dbmMasked
+        int16_t  82, 28, uint24_t Jaffar       uint8_t 25, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1402,7 +1402,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  83, 28, uint24_t Zaffar       uint8_t 21, dbmMasked
+        int16_t  83, 28, uint24_t Jaffar       uint8_t 21, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1410,7 +1410,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  84, 28, uint24_t Zaffar       uint8_t 22, dbmMasked
+        int16_t  84, 28, uint24_t Jaffar       uint8_t 22, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1418,7 +1418,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  85, 28, uint24_t Zaffar       uint8_t 23, dbmMasked
+        int16_t  85, 28, uint24_t Jaffar       uint8_t 23, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1426,7 +1426,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  86, 28, uint24_t Zaffar       uint8_t 24, dbmMasked
+        int16_t  86, 28, uint24_t Jaffar       uint8_t 24, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1434,7 +1434,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  87, 28, uint24_t Zaffar       uint8_t 25, dbmMasked
+        int16_t  87, 28, uint24_t Jaffar       uint8_t 25, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1442,7 +1442,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  88, 28, uint24_t Zaffar       uint8_t 21, dbmMasked
+        int16_t  88, 28, uint24_t Jaffar       uint8_t 21, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1450,7 +1450,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  89, 28, uint24_t Zaffar       uint8_t 22, dbmMasked
+        int16_t  89, 28, uint24_t Jaffar       uint8_t 22, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1458,7 +1458,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  90, 28, uint24_t Zaffar       uint8_t 23, dbmMasked
+        int16_t  90, 28, uint24_t Jaffar       uint8_t 23, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1466,7 +1466,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  91, 28, uint24_t Zaffar       uint8_t 24, dbmMasked
+        int16_t  91, 28, uint24_t Jaffar       uint8_t 24, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1474,7 +1474,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  92, 28, uint24_t Zaffar       uint8_t 25, dbmMasked
+        int16_t  92, 28, uint24_t Jaffar       uint8_t 25, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1482,7 +1482,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  93, 28, uint24_t Zaffar       uint8_t 21, dbmMasked
+        int16_t  93, 28, uint24_t Jaffar       uint8_t 21, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1490,7 +1490,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  94, 28, uint24_t Zaffar       uint8_t 22, dbmMasked
+        int16_t  94, 28, uint24_t Jaffar       uint8_t 22, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1498,7 +1498,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  95, 28, uint24_t Zaffar       uint8_t 23, dbmMasked
+        int16_t  95, 28, uint24_t Jaffar       uint8_t 23, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1506,7 +1506,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  96, 28, uint24_t Zaffar       uint8_t 24, dbmMasked
+        int16_t  96, 28, uint24_t Jaffar       uint8_t 24, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1514,7 +1514,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  97, 28, uint24_t Zaffar       uint8_t 25, dbmMasked
+        int16_t  97, 28, uint24_t Jaffar       uint8_t 25, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1522,7 +1522,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  98, 28, uint24_t Zaffar       uint8_t 21, dbmMasked
+        int16_t  98, 28, uint24_t Jaffar       uint8_t 21, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1530,7 +1530,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t  99, 28, uint24_t Zaffar       uint8_t 22, dbmMasked
+        int16_t  99, 28, uint24_t Jaffar       uint8_t 22, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1538,7 +1538,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t 100, 28, uint24_t Zaffar       uint8_t 23, dbmMasked
+        int16_t 100, 28, uint24_t Jaffar       uint8_t 23, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1546,7 +1546,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t 101, 28, uint24_t Zaffar       uint8_t 24, dbmMasked
+        int16_t 101, 28, uint24_t Jaffar       uint8_t 24, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1554,7 +1554,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t 102, 28, uint24_t Zaffar       uint8_t 25, dbmMasked
+        int16_t 102, 28, uint24_t Jaffar       uint8_t 25, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1562,7 +1562,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t 103, 28, uint24_t Zaffar       uint8_t 21, dbmMasked
+        int16_t 103, 28, uint24_t Jaffar       uint8_t 21, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1570,7 +1570,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t 104, 28, uint24_t Zaffar       uint8_t 22, dbmMasked
+        int16_t 104, 28, uint24_t Jaffar       uint8_t 22, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1578,7 +1578,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t 105, 28, uint24_t Zaffar       uint8_t 23, dbmMasked
+        int16_t 105, 28, uint24_t Jaffar       uint8_t 23, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1586,7 +1586,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t 106, 28, uint24_t Zaffar       uint8_t 24, dbmMasked
+        int16_t 106, 28, uint24_t Jaffar       uint8_t 24, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1594,7 +1594,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t 107, 28, uint24_t Zaffar       uint8_t 25, dbmMasked
+        int16_t 107, 28, uint24_t Jaffar       uint8_t 25, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1602,7 +1602,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t 108, 28, uint24_t Zaffar       uint8_t 21, dbmMasked
+        int16_t 108, 28, uint24_t Jaffar       uint8_t 21, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1610,7 +1610,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t 109, 28, uint24_t Zaffar       uint8_t 22, dbmMasked
+        int16_t 109, 28, uint24_t Jaffar       uint8_t 22, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1618,7 +1618,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t 110, 28, uint24_t Zaffar       uint8_t 23, dbmMasked
+        int16_t 110, 28, uint24_t Jaffar       uint8_t 23, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1626,7 +1626,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t 111, 28, uint24_t Zaffar       uint8_t 24, dbmMasked
+        int16_t 111, 28, uint24_t Jaffar       uint8_t 24, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1634,7 +1634,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t 112, 28, uint24_t Zaffar       uint8_t 25, dbmMasked
+        int16_t 112, 28, uint24_t Jaffar       uint8_t 25, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1642,7 +1642,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t 113, 28, uint24_t Zaffar       uint8_t 21, dbmMasked
+        int16_t 113, 28, uint24_t Jaffar       uint8_t 21, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1650,7 +1650,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t 114, 28, uint24_t Zaffar       uint8_t 22, dbmMasked
+        int16_t 114, 28, uint24_t Jaffar       uint8_t 22, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1658,7 +1658,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t 115, 28, uint24_t Zaffar       uint8_t 23, dbmMasked
+        int16_t 115, 28, uint24_t Jaffar       uint8_t 23, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1666,7 +1666,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t 116, 28, uint24_t Zaffar       uint8_t 24, dbmMasked
+        int16_t 116, 28, uint24_t Jaffar       uint8_t 24, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1674,7 +1674,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t 117, 28, uint24_t Zaffar       uint8_t 25, dbmMasked
+        int16_t 117, 28, uint24_t Jaffar       uint8_t 25, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1682,7 +1682,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t 118, 28, uint24_t Zaffar       uint8_t 21, dbmMasked
+        int16_t 118, 28, uint24_t Jaffar       uint8_t 21, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1690,7 +1690,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t 119, 28, uint24_t Zaffar       uint8_t 22, dbmMasked
+        int16_t 119, 28, uint24_t Jaffar       uint8_t 22, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1698,7 +1698,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t 120, 28, uint24_t Zaffar       uint8_t 23, dbmMasked
+        int16_t 120, 28, uint24_t Jaffar       uint8_t 23, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1706,7 +1706,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t 121, 28, uint24_t Zaffar       uint8_t 24, dbmMasked
+        int16_t 121, 28, uint24_t Jaffar       uint8_t 24, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1714,7 +1714,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t 122, 28, uint24_t Zaffar       uint8_t 25, dbmMasked
+        int16_t 122, 28, uint24_t Jaffar       uint8_t 25, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1722,7 +1722,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t 123, 28, uint24_t Zaffar       uint8_t 21, dbmMasked
+        int16_t 123, 28, uint24_t Jaffar       uint8_t 21, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1730,7 +1730,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 2, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t 124, 28, uint24_t Zaffar       uint8_t 22, dbmMasked
+        int16_t 124, 28, uint24_t Jaffar       uint8_t 22, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 2, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1738,7 +1738,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t 125, 28, uint24_t Zaffar       uint8_t 23, dbmMasked
+        int16_t 125, 28, uint24_t Jaffar       uint8_t 23, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1746,7 +1746,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 0, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t 126, 28, uint24_t Zaffar       uint8_t 24, dbmMasked
+        int16_t 126, 28, uint24_t Jaffar       uint8_t 24, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 0, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_end
 
@@ -1754,7 +1754,7 @@
         int16_t  10, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t 114, 37, uint24_t Torches,     uint8_t 1, dbmMasked
         int16_t  30, 28, uint24_t Princess     uint8_t 8, dbmMasked
-        int16_t 127, 28, uint24_t Zaffar       uint8_t 25, dbmMasked
+        int16_t 127, 28, uint24_t Jaffar       uint8_t 25, dbmMasked
         int16_t  54, 40, uint24_t HourGlasses  uint8_t 1, dbmMasked
         int16_t  0, 0,   uint24_t Chambers_FG, uint8_t 0, uint8_t dbmMasked_last
 

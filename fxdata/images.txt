@@ -94,9 +94,9 @@ namespace Images {
     image_t Hearts                  = "../images/princess/Hearts_7x6_1.png"
 
 
-    // Zaffar Images 
+    // Jaffar Images 
 
-    image_t Zaffar                  = "../images/zaffar/Zaffar_32x32_1.png"
+    image_t Jaffar                  = "../images/jaffar/Jaffar_32x32_1.png"
 
 
     // Prince Images

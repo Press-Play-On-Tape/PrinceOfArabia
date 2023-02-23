@@ -306,12 +306,22 @@ void render(bool sameLevelAsPrince) {
             switch (item.itemType) {
 
                 case ItemType::Spikes:
+
                     if (item.data.spikes.imageType == 1) {
                         FX::drawBitmap(xLoc, yLoc + 14, Images::Spikes_FG_Full, item.data.spikes.position, dbmMasked);
                     }
                     else {
                         FX::drawBitmap(xLoc, yLoc + 14, Images::Spikes_FG_Half, item.data.spikes.position, dbmMasked);
                     }
+
+                    break;
+
+                case ItemType::Blade:
+
+                    if (item.data.blade.position <= 5) {
+                        FX::drawBitmap(xLoc, yLoc, Images::Blades, abs(item.data.blade.position) + 6, dbmMasked);
+                    }
+
                     break;
 
                 default: break;

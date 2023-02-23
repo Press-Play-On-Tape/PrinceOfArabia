@@ -79,16 +79,12 @@ void printAction(Action action) {
             DEBUG_PRINT(F("RunRepeat"));
             break;
 
-        case Action::RunJump_3:
-            DEBUG_PRINT(F("RunJump_3"));
+        case Action::RunJump_4to1:
+            DEBUG_PRINT(F("RunJump_4to1"));
             break;
 
-        case Action::RunJump_2:
-            DEBUG_PRINT(F("RunJump_2"));
-            break;
-
-        case Action::RunJump_1:
-            DEBUG_PRINT(F("RunJump_1"));
+        case Action::RunJump_3to1:
+            DEBUG_PRINT(F("RunJump_3to1"));
             break;
 
         case Action::StandingJump:

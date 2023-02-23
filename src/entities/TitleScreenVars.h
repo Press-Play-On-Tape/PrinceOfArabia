@@ -15,7 +15,7 @@ struct TitleScreenVars {
         //uint8_t prevCount;
         //uint8_t count;
 
-        //Character zaffar;
+        //Character jaffar;
         //Character princess;
         //Character prince;
 

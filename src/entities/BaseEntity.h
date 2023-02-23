@@ -164,7 +164,7 @@ class BaseEntity {
             DEBUG_PRINT(F("ImageIndex: "));
             DEBUG_PRINT(imageIndex);
             DEBUG_PRINT(F(", startPos: "));
-            DEBUG_PRINT((uint32_t)startPos);
+            DEBUG_PRINT((int32_t)startPos);
             DEBUG_PRINT(F(", direction: "));
             DEBUG_PRINT((uint8_t)direction);
             DEBUG_PRINT(F(", reach: "));
