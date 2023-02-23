@@ -532,7 +532,7 @@ void invader_DetectPlayerBulletHit(Invader_General &general, Invader_General2 &g
 
 }
 
-void invader_UpdateEnemyBullets(Invader_General &general, Invader_General2 &general2, Invader_Player &player) {
+void invader_UpdateEnemyBullets(Invader_General2 &general2, Invader_Player &player) {
 
     for (uint8_t x = Constants::Invaders_Enemy_Bullet_Start; x <= Constants::Invaders_Enemy_Bullet_End; x++) {
 
@@ -574,7 +574,6 @@ void invader_UpdateEnemyBullets(Invader_General &general, Invader_General2 &gene
 
 void invader_PlayGame() {
 
-    auto justPressed = arduboy.justPressedButtons();
     auto pressed = arduboy.pressedButtons();
 
     Invader_General &general = level.getItem(Constants::Invaders_General).data.invader_General;
@@ -587,7 +586,7 @@ void invader_PlayGame() {
 
     invader_UpdateEnemy(general, general2, player);
     invader_UpdatePlayer(general, general2, player);
-    invader_UpdateEnemyBullets(general, general2, player);
+    invader_UpdateEnemyBullets(general2, player);
     invader_EnemyDropsBullet(general2, player);
 
     if (bullet.y > -4) {

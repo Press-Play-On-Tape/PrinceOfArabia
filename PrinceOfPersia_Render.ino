@@ -8,7 +8,7 @@
 #include "src/fonts/Font3x5.h"
 
 
-void render(bool enemyVisible, bool sameLevelAsPrince) {
+void render(bool sameLevelAsPrince) {
 
 
     // Draw background ..
@@ -518,7 +518,7 @@ void renderMenu(Prince &prince) {
     }
 
     FX::drawBitmap(menu.x, 0, Images::Menu, imageIdx, dbmNormal);
-    FX::drawBitmap(menu.x + 3, 22 + (menu.cursor * 10), Images::Sword_Cursor, 0, dbmNormal);
+    FX::drawBitmap(menu.x + 3, cursorY + (menu.cursor * 10), Images::Sword_Cursor, 0, dbmNormal);
 
     renderNumber(menu.x + 27, 3, gamePlay.level);
     renderNumber(menu.x + 7, 13, gamePlay.timer_Min);

@@ -17,7 +17,6 @@ void title_Init() {
 void title() { 
 
     auto justPressed = arduboy.justPressedButtons();
-    auto pressed = arduboy.pressedButtons();
 
     #ifdef DEBUG_CUT_SCENES
 

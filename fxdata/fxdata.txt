@@ -1,35 +1,35 @@
 namespace Levels {
 
-    include "Invaders.txt"
-    include "Level1.txt"
-    include "Level2.txt"
-    include "Level3.txt"
-    include "Level4.txt"
-    include "Level5.txt"
-    include "Level6.txt"
-    include "Level7.txt"
-    include "Level8.txt"
-    include "Level9.txt"
-    include "Level10.txt"
-    include "Level11.txt"
-    include "Level12.txt"
-    include "Level13.txt"
-    include "Level14_StandingJumps.txt"
-    include "Level15_RunningJumps.txt"
-    include "Level16_RunningJumps.txt"
-    include "Level17_RunningJumps.txt"
-    include "Level18_RunningJumps.txt"
-    include "Level19_RunningJumps.txt"
-    include "Level20_RunningJumps.txt"
-    include "Level21_RunningJumps.txt"
-    include "Level22_RunningJumps.txt"
-    include "Level23_RunningJumps.txt"
-    include "Level24_RunningJumps.txt"
-    include "Level25_RunningJumps.txt"
-    include "Level26_RunningJumps.txt"
-    include "Level27_RunningJumps.txt"
-    include "Level28_RunningJumps.txt"
-    include "Level29_RunningJumps.txt"
+    include "levels/Invaders.txt"
+    include "levels/Level1.txt"
+    include "levels/Level2.txt"
+    include "levels/Level3.txt"
+    include "levels/Level4.txt"
+    include "levels/Level5.txt"
+    include "levels/Level6.txt"
+    include "levels/Level7.txt"
+    include "levels/Level8.txt"
+    include "levels/Level9.txt"
+    include "levels/Level10.txt"
+    include "levels/Level11.txt"
+    include "levels/Level12.txt"
+    include "levels/Level13.txt"
+    include "levels/test/Level14_StandingJumps.txt"
+    include "levels/test/Level15_RunningJumps.txt"
+    include "levels/test/Level16_RunningJumps.txt"
+    include "levels/test/Level17_RunningJumps.txt"
+    include "levels/test/Level18_RunningJumps.txt"
+    include "levels/test/Level19_RunningJumps.txt"
+    include "levels/test/Level20_RunningJumps.txt"
+    include "levels/test/Level21_RunningJumps.txt"
+    include "levels/test/Level22_RunningJumps.txt"
+    include "levels/test/Level23_RunningJumps.txt"
+    include "levels/test/Level24_RunningJumps.txt"
+    include "levels/test/Level25_RunningJumps.txt"
+    include "levels/test/Level26_RunningJumps.txt"
+    include "levels/test/Level27_RunningJumps.txt"
+    include "levels/test/Level28_RunningJumps.txt"
+    include "levels/test/Level29_RunningJumps.txt"
 
     uint24_t level_FG[] = {
         0,         // dummy
@@ -197,9 +197,6 @@ splashScreen_Frame[] = {
     uint8_t  3, dbmWhite_last
 }
 
-include 'Title_Intro_Frame.txt'
-include 'Title_Main_Frame.txt'
-
 Title_Main_Game_Frame_NoHigh[] = {
 
     int16_t  0,-24, uint24_t Title_Main_NoHigh,   uint8_t 0, dbmNormal
@@ -235,9 +232,6 @@ Title_Main_High_Frame_WithHigh[] = {
     int16_t  0,  0, uint24_t Title_PoP,    uint8_t 0, dbmMasked_last
 }
 
-include 'Title_Credits_Frame.txt'
-include 'Title_TimeOut_Frame.txt'
-
 Title_High_Frame[] = {
     int16_t  38, 32, uint24_t HighScore,       uint8_t 0, dbmNormal
     int16_t  62, 42, uint24_t Numbers_Divider, uint8_t 0, dbmNormal
@@ -258,19 +252,23 @@ Title_High_Frame[] = {
     int16_t   0,  0, uint24_t Title_PoP,       uint8_t 0, dbmMasked_last
 }
 
-include 'Title_IntroGame_1A_Frame.txt'
-include 'Title_CutScene_1_Frame.txt'
-include 'Title_IntroGame_1B_Frame.txt'
-include 'Title_CutScene_2_Frame.txt'
-include 'Title_CutScene_3_Frame.txt'
-include 'Title_CutScene_4_Frame.txt'
-include 'Title_CutScene_5_Frame.txt'
-include 'Title_CutScene_6_Frame.txt'
-include 'Title_CutScene_7_Frame.txt'
-include 'Title_CutScene_End_Frame.txt'
-include 'Title_IntroGame_End_Frame.txt'
+include 'cutscenes/Title_Intro_Frame.txt'
+include 'cutscenes/Title_Main_Frame.txt'
+include 'cutscenes/Title_Credits_Frame.txt'
+include 'cutscenes/Title_TimeOut_Frame.txt'
+include 'cutscenes/Title_IntroGame_1A_Frame.txt'
+include 'cutscenes/Title_CutScene_1_Frame.txt'
+include 'cutscenes/Title_IntroGame_1B_Frame.txt'
+include 'cutscenes/Title_CutScene_2_Frame.txt'
+include 'cutscenes/Title_CutScene_3_Frame.txt'
+include 'cutscenes/Title_CutScene_4_Frame.txt'
+include 'cutscenes/Title_CutScene_5_Frame.txt'
+include 'cutscenes/Title_CutScene_6_Frame.txt'
+include 'cutscenes/Title_CutScene_7_Frame.txt'
+include 'cutscenes/Title_CutScene_End_Frame.txt'
+include 'cutscenes/Title_IntroGame_End_Frame.txt'
 
 
-    savesection  // Anything below here will be stored in the save block
+savesection  // Anything below here will be stored in the save block
 
-    uint16_t 0xFFFF // Save state  end marker
+uint16_t 0xFFFF // Save state  end marker

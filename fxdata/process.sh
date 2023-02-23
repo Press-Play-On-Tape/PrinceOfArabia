@@ -1,8 +1,8 @@
 #!/bin/bash
 
-Python3 createMovements.py ../src/utils/Constants.h movements.txt
-Python3 createSEQData.py ../src/utils/Constants.h ../src/utils/movements_SEQData.h
-Python3 createOFFSETSData.py ../src/utils/Constants.h ../src/utils/movements_OFFSETSData.h
+Python3 scripts/createMovements.py ../src/utils/Constants.h movements.txt
+Python3 scripts/createSEQData.py ../src/utils/Constants.h ../src/utils/movements_SEQData.h
+Python3 scripts/createOFFSETSData.py ../src/utils/Constants.h ../src/utils/movements_OFFSETSData.h
 
 python3 ./Arduboy-Python-Utilities-master/fxdata-build.py fxdata.txt
 

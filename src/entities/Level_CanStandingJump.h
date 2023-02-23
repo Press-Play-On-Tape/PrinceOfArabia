@@ -18,7 +18,6 @@ StandingJumpResult canStandingJump(Prince &prince) {
     #endif
 
 
-    WallTileResults wallTile1_CurrLvl = this->isWallTile_ByCoords(tileXIdx, tileYIdx,prince.getDirection());
     WallTileResults wallTile2_CurrLvl = this->isWallTile_ByCoords(tileXIdx + (1 * offset), tileYIdx, prince.getDirection());
     WallTileResults wallTile3_CurrLvl = this->isWallTile_ByCoords(tileXIdx + (2 * offset), tileYIdx, prince.getDirection());
     WallTileResults wallTile4_CurrLvl = this->isWallTile_ByCoords(tileXIdx + (3 * offset), tileYIdx, prince.getDirection());
@@ -35,123 +34,14 @@ StandingJumpResult canStandingJump(Prince &prince) {
     bool isGroundTile2_NextLvl = this->isGroundTile_ByCoords(tileXIdx + (1 * offset), tileYIdx + 1);
     bool isGroundTile3_NextLvl = this->isGroundTile_ByCoords(tileXIdx + (2 * offset), tileYIdx + 1);
     bool isGroundTile4_NextLvl = this->isGroundTile_ByCoords(tileXIdx + (3 * offset), tileYIdx + 1);
-    bool isGroundTile5_NextLvl = this->isGroundTile_ByCoords(tileXIdx + (4 * offset), tileYIdx + 1);
-
-/*
-    #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP)
-
-
-    if (prince.getDirection() == Direction::Left) {
-        DEBUG_PRINTLN("__  5  4  3  2  1 ");
-        DEBUG_PRINT("_");
-        DEBUG_PRINT(isGroundTile5_CurrLvl);
-        DEBUG_PRINT("/");
-        DEBUG_PRINT((uint8_t)wallTile5_CurrLvl);
-        DEBUG_PRINT("  ");
-        DEBUG_PRINT((uint8_t)wallTile4_CurrLvl);
-        DEBUG_PRINT(" ");
-        DEBUG_PRINT((uint8_t)wallTile3_CurrLvl);
-        DEBUG_PRINT(" ");
-        DEBUG_PRINT((uint8_t)wallTile2_CurrLvl);
-        DEBUG_PRINT(" ");
-        DEBUG_PRINT((uint8_t)wallTile1_CurrLvl);
-        DEBUG_PRINTLN(" ");
-        DEBUG_PRINT("NL ");
-        DEBUG_PRINT((uint8_t)wallTile5_NextLvl);
-        DEBUG_PRINT(" ");
-        DEBUG_PRINT((uint8_t)wallTile4_NextLvl);
-        DEBUG_PRINT(" ");
-        DEBUG_PRINT((uint8_t)wallTile3_NextLvl);
-        DEBUG_PRINT(" ");
-        DEBUG_PRINT((uint8_t)wallTile2_NextLvl);
-        DEBUG_PRINTLN(" _");
-        DEBUG_PRINT("GC ");
-        DEBUG_PRINT((uint8_t)isGroundTile5_CurrLvl);
-        DEBUG_PRINT(" ");
-        DEBUG_PRINT((uint8_t)isGroundTile4_CurrLvl);
-        DEBUG_PRINT(" ");
-        DEBUG_PRINT((uint8_t)isGroundTile3_CurrLvl);
-        DEBUG_PRINT(" ");
-        DEBUG_PRINT((uint8_t)isGroundTile2_CurrLvl);
-        DEBUG_PRINTLN(" _");
-        DEBUG_PRINT("GN ");
-        DEBUG_PRINT((uint8_t)isGroundTile5_NextLvl);
-        DEBUG_PRINT(" ");
-        DEBUG_PRINT((uint8_t)isGroundTile4_NextLvl);
-        DEBUG_PRINT(" ");
-        DEBUG_PRINT((uint8_t)isGroundTile3_NextLvl);
-        DEBUG_PRINT(" ");
-        DEBUG_PRINT((uint8_t)isGroundTile2_NextLvl);
-        DEBUG_PRINTLN(" _");
-        DEBUG_PRINT("Dist ");
-        DEBUG_PRINTLN(distToEdgeOfCurrentTile);
-    }
-    else {
-
-        DEBUG_PRINT(F("   1  2  3  4  5 \nCL _"));
-        DEBUG_PRINT((uint8_t)wallTile1_CurrLvl);
-        DEBUG_PRINT(" ");
-        DEBUG_PRINT((uint8_t)wallTile2_CurrLvl);
-        DEBUG_PRINT(" ");
-        DEBUG_PRINT((uint8_t)wallTile3_CurrLvl);
-        DEBUG_PRINT(" ");
-        DEBUG_PRINT((uint8_t)wallTile4_CurrLvl);
-        DEBUG_PRINT(" ");
-        DEBUG_PRINT((uint8_t)wallTile5_CurrLvl);
-        DEBUG_PRINT("/");
-        DEBUG_PRINT(isGroundTile5_CurrLvl);
-        DEBUG_PRINT(F("\nNL _ "));
-        DEBUG_PRINT((uint8_t)wallTile2_NextLvl);
-        DEBUG_PRINT(" ");
-        DEBUG_PRINT((uint8_t)wallTile3_NextLvl);
-        DEBUG_PRINT(" ");
-        DEBUG_PRINT((uint8_t)wallTile4_NextLvl);
-        DEBUG_PRINT(" ");
-        DEBUG_PRINT(F("\nGC _ "));
-        DEBUG_PRINT((uint8_t)isGroundTile2_CurrLvl);
-        DEBUG_PRINT(" ");
-        DEBUG_PRINT((uint8_t)isGroundTile3_CurrLvl);
-        DEBUG_PRINT(" ");
-        DEBUG_PRINT((uint8_t)isGroundTile4_CurrLvl);
-        DEBUG_PRINT(" ");
-        DEBUG_PRINT(F("\nGN _ "));
-        DEBUG_PRINT((uint8_t)isGroundTile2_NextLvl);
-        DEBUG_PRINT(" ");
-        DEBUG_PRINT((uint8_t)isGroundTile3_NextLvl);
-        DEBUG_PRINT(" ");
-        DEBUG_PRINT((uint8_t)isGroundTile4_NextLvl);
-        DEBUG_PRINT(" ");
-        DEBUG_PRINTLN((uint8_t)isGroundTile5_NextLvl);
-        DEBUG_PRINTF(("Dist "));
-        DEBUG_PRINTLN(distToEdgeOfCurrentTile);
-
-    }
-    #endif
-*/
 
     #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP)
 
-        // switch (action) {
-
-        //     case Action::RunJump_4:
-        //         DEBUG_PRINTLN(F("-- Standing Jump 4 ------"));
-        //         break;
-
-        //     case Action::RunJump_3:
-        //         DEBUG_PRINTLN(F("-- Standing Jump 3 ------"));
-        //         break;
-
-        //     case Action::RunJump_2:
-        //         DEBUG_PRINTLN(F("-- Standing Jump 2 ------"));
-        //         break;
-
-        //     case Action::RunJump_1:
-        //         DEBUG_PRINTLN(F("-- Standing Jump 1 ------"));
-        //         break;
-        
-        // }
+        WallTileResults wallTile1_CurrLvl = this->isWallTile_ByCoords(tileXIdx, tileYIdx,prince.getDirection());
+        bool isGroundTile5_NextLvl = this->isGroundTile_ByCoords(tileXIdx + (4 * offset), tileYIdx + 1);
 
         if (prince.getDirection() == Direction::Left) {
+
             DEBUG_PRINT(F("______5 4 3 2 1\nWT CL "));
             DEBUG_PRINT((uint8_t)wallTile5_CurrLvl);
             DEBUG_PRINT(" ");

@@ -1157,7 +1157,6 @@ struct Level {
 
         WallTileResults isWallTile_ByCoords(int8_t x = Constants::CoordNone, int8_t y = Constants::CoordNone, Direction direction = Direction::Left, bool addOffsets = true) {
 
-            int8_t bgTile = this->getTile(Layer::Background, x, y, TILE_FLOOR_BASIC);
             int8_t fgTile = this->getTile(Layer::Foreground, x, y, TILE_FLOOR_BASIC);
 
             return isWallTile(fgTile, x, y, direction, addOffsets);

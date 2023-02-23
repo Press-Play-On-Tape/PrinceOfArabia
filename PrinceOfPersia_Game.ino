@@ -519,93 +519,51 @@ void game() {
 
         if (!leaveLevel(prince, level)) {
 
+            uint8_t btnFacingDirection = (prince.getDirection() == Direction::Right ? RIGHT_BUTTON : LEFT_BUTTON);
+            uint8_t btnOppositeDirection = (prince.getDirection() == Direction::Right ? LEFT_BUTTON : RIGHT_BUTTON);
+
             switch (prince.getStance()) {
 
                 case Stance::Upright:
 
                     fixPosition();  // Fix the position if we are not in positions 2, 6 or 10.
 
-                    if (prince.getDirection() == Direction::Right) {
+                    if ((pressed & btnFacingDirection) && (pressed & DOWN_BUTTON)) {
 
-                        if ((pressed & RIGHT_BUTTON) && (pressed & DOWN_BUTTON)) {
+                        if (level.canMoveForward(prince, Action::SmallStep, prince.getDirection(), 0)) {
 
-                            if (level.canMoveForward(prince, Action::SmallStep, prince.getDirection(), 0)) {
-
-                                prince.pushSequence(Stance::Small_Step_1_Start, Stance::Small_Step_6_End, Stance::Upright);
-                                break;
-
-                            }
-
-                        }
-                        else if (pressed & RIGHT_BUTTON) {
-
-                            if (level.canMoveForward(prince, Action::Step, prince.getDirection(), 0)) {
-
-                                prince.push(Stance::Single_Step_1_Start);
-                                break;
-
-                            }
-                            else if (level.canMoveForward(prince, Action::SmallStep, prince.getDirection(), 0)) {
-
-                                prince.pushSequence(Stance::Small_Step_1_Start, Stance::Small_Step_6_End, Stance::Upright);
-                                break;
-
-                            }
-
-                        }
-                        else if (pressed & LEFT_BUTTON) {
-
-                            prince.pushSequence(Stance::Standing_Turn_1_Start, Stance::Standing_Turn_5_End, Stance::Upright_Turn);
+                            prince.pushSequence(Stance::Small_Step_1_Start, Stance::Small_Step_6_End, Stance::Upright);
                             break;
 
                         }
-                        else if (pressed & A_BUTTON) {
 
-                            processStandingJump(prince, level);
-                            break;
-
-                        }
-                        
                     }
-                    else {
+                    else if (pressed & btnFacingDirection) {
 
-                        if ((pressed & LEFT_BUTTON) && (pressed & DOWN_BUTTON)) {
+                        if (level.canMoveForward(prince, Action::Step, prince.getDirection(), 0)) {
 
-                            if (level.canMoveForward(prince, Action::SmallStep, prince.getDirection(), 0)) {
-
-                                prince.pushSequence(Stance::Small_Step_1_Start, Stance::Small_Step_6_End, Stance::Upright);
-                                break;
-                            }
-
-                        }
-                        else if (pressed & LEFT_BUTTON) {
-
-                            if (level.canMoveForward(prince, Action::Step, prince.getDirection(), 0)) {
-
-                                prince.push(Stance::Single_Step_1_Start);
-                                break;
-
-                            }
-                            else if (level.canMoveForward(prince, Action::SmallStep, prince.getDirection(), 0)) {
-
-                                prince.pushSequence(Stance::Small_Step_1_Start, Stance::Small_Step_6_End, Stance::Upright);
-                                break;
-
-                            }
-                            
-                        }
-                        else if (pressed & RIGHT_BUTTON) {
-
-                            prince.pushSequence(Stance::Standing_Turn_1_Start, Stance::Standing_Turn_5_End, Stance::Upright_Turn);
+                            prince.push(Stance::Single_Step_1_Start);
                             break;
 
                         }
-                        else if (pressed & A_BUTTON) {
+                        else if (level.canMoveForward(prince, Action::SmallStep, prince.getDirection(), 0)) {
 
-                            processStandingJump(prince, level);
+                            prince.pushSequence(Stance::Small_Step_1_Start, Stance::Small_Step_6_End, Stance::Upright);
                             break;
 
                         }
+
+                    }
+                    else if (pressed & btnOppositeDirection) {
+
+                        prince.pushSequence(Stance::Standing_Turn_1_Start, Stance::Standing_Turn_5_End, Stance::Upright_Turn);
+                        break;
+
+                    }
+                    else if (pressed & A_BUTTON) {
+
+                        processStandingJump(prince, level);
+                        break;
 
                     }
 
@@ -848,190 +806,97 @@ void game() {
 
                     // If the user is still holding the left / right button then escalate the movement to a run ..
 
-                    if (prince.getDirection() == Direction::Right) {
+                    if (pressed & btnFacingDirection) {
 
-                        if (pressed & RIGHT_BUTTON) {
-
-                            if (level.canMoveForward(prince, Action::RunStart, prince.getDirection(), 0)) {
-                                prince.pushSequence(Stance::Run_Start_2, Stance::Run_Start_6_End);
-                            }
-                            else {
-                                prince.pushSequence(Stance::Single_Step_2, Stance::Single_Step_8_End, Stance::Upright);
-                            }
-
+                        if (level.canMoveForward(prince, Action::RunStart, prince.getDirection(), 0)) {
+                            prince.pushSequence(Stance::Run_Start_2, Stance::Run_Start_6_End);
                         }
-                        else if (!(pressed & RIGHT_BUTTON)) {
+                        else {
                             prince.pushSequence(Stance::Single_Step_2, Stance::Single_Step_8_End, Stance::Upright);
                         }
 
                     }
-                    else {
-
-                        if (pressed & LEFT_BUTTON) {
-
-                            if (level.canMoveForward(prince, Action::RunStart, prince.getDirection(), 0)) {
-                                prince.pushSequence(Stance::Run_Start_2, Stance::Run_Start_6_End);
-                            }
-                            else {
-                                prince.pushSequence(Stance::Single_Step_2, Stance::Single_Step_8_End, Stance::Upright);
-                            }     
-                                                
-                        }
-                        else if (!(pressed & LEFT_BUTTON)) {
-                            prince.pushSequence(Stance::Single_Step_2, Stance::Single_Step_8_End, Stance::Upright);
-                        }
-
+                    else if (!(pressed & btnFacingDirection)) {
+                        prince.pushSequence(Stance::Single_Step_2, Stance::Single_Step_8_End, Stance::Upright);
                     }
+
                     break;
 
                 case Stance::Run_Repeat_4:
-
-                    if (prince.getDirection() == Direction::Right) {
                             
-                        if ((pressed & RIGHT_BUTTON) && (pressed & A_BUTTON)) {
+                    if ((pressed & btnFacingDirection) && (pressed & A_BUTTON)) {
 
-                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
-                            DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jump from Run_Repeat_4"));
-                            #endif
+                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
+                        DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jump from Run_Repeat_4"));
+                        #endif
 
-                            processRunJump(prince, level);
+                        processRunJump(prince, level);
 
-                        }
-                        else if (pressed & RIGHT_BUTTON) {
+                    }
+                    else if (pressed & btnFacingDirection) {
 
-                            if (level.canMoveForward(prince, Action::RunRepeat, prince.getDirection(), 0)) {
-
-                                #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
-                                DEBUG_PRINTLN(F("RIGHT_BUTTON, Run Repeat (1)"));
-                                #endif
-
-                                prince.pushSequence(Stance::Run_Repeat_5_Mid, Stance::Run_Repeat_8_End);
-                            }
-                            else {
-
-                                #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
-                                DEBUG_PRINTLN(F("RIGHT_BUTTON, Run Stop (1)"));
-                                #endif
-
-                                prince.pushSequence(Stance::Stopping_1_Start, Stance::Stopping_5_End, Stance::Upright);
-                            }
-
-                        }
-                        else if (pressed & LEFT_BUTTON) {
+                        if (level.canMoveForward(prince, Action::RunRepeat, prince.getDirection(), 0)) {
 
                             #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
-                            DEBUG_PRINTLN(F("LEFT_BUTTON, Switch Directions"));
+                            DEBUG_PRINTLN(F("RIGHT_BUTTON, Run Repeat (1)"));
                             #endif
 
-                            processRunningTurn();
-
+                            prince.pushSequence(Stance::Run_Repeat_5_Mid, Stance::Run_Repeat_8_End);
                         }
-                        else if (!(pressed  & RIGHT_BUTTON)) {
+                        else {
 
                             #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
-                            DEBUG_PRINTLN(F("RIGHT_BUTTON, Run Stop (2)"));
+                            DEBUG_PRINTLN(F("RIGHT_BUTTON, Run Stop (1)"));
                             #endif
 
                             prince.pushSequence(Stance::Stopping_1_Start, Stance::Stopping_5_End, Stance::Upright);
                         }
 
                     }
-                    else {
+                    else if (pressed & btnOppositeDirection) {
 
-                        if ((pressed & LEFT_BUTTON) && (pressed & A_BUTTON)) {
+                        #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
+                        DEBUG_PRINTLN(F("LEFT_BUTTON, Switch Directions"));
+                        #endif
 
-                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
-                            DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jump from Run_Repeat_4"));
-                            #endif
-
-                            processRunJump(prince, level);
-
-                        }
-                        else if (pressed & LEFT_BUTTON) {
-
-                            if (level.canMoveForward(prince, Action::RunRepeat, prince.getDirection(), 0)) {
-
-                                #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
-                                DEBUG_PRINTLN(F("LEFT_BUTTON, Running Repeat"));
-                                #endif
-
-                                prince.pushSequence(Stance::Run_Repeat_5_Mid, Stance::Run_Repeat_8_End);
-                            }
-                            else {
-
-                                #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
-                                DEBUG_PRINTLN(F("LEFT_BUTTON, Running Stop"));
-                                #endif
-
-                                prince.pushSequence(Stance::Stopping_1_Start,Stance:: Stopping_5_End, Stance::Upright);
-                            }                        
-                        }
-                        else if (pressed & RIGHT_BUTTON) {
-
-                            #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
-                            DEBUG_PRINTLN(F("RIGHT_BUTTON, Running Start"));
-                            #endif
-
-                            processRunningTurn();
-
-                        }
-                        else if (!(pressed & LEFT_BUTTON)) {
-
-                            #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
-                            DEBUG_PRINTLN(F("LEFT_BUTTON, Running Stop (4)"));
-                            #endif
-
-                            prince.pushSequence(Stance::Stopping_1_Start, Stance::Stopping_5_End, Stance::Upright);
-                        }
+                        processRunningTurn();
 
                     }
+                    else if (!(pressed & btnFacingDirection)) {
+
+                        #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
+                        DEBUG_PRINTLN(F("RIGHT_BUTTON, Run Stop (2)"));
+                        #endif
+
+                        prince.pushSequence(Stance::Stopping_1_Start, Stance::Stopping_5_End, Stance::Upright);
+                    }
+
                     break;
 
                 case Stance::Run_Start_6_End:
                 case Stance::Run_Repeat_8_End:
                 case Stance::Run_Repeat_8_End_Turn:
+    
+                    if ((pressed & btnFacingDirection) && (pressed & A_BUTTON)) {
 
-                    if (prince.getDirection() == Direction::Right) {
-                                        
-                        if ((pressed & RIGHT_BUTTON) && (pressed & A_BUTTON)) {
+                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
+                        DEBUG_PRINTLN(F("RIGHT_BUTTON & A_BUTTON, Running Jump from Run_Start_6_End, Run_Repeat_8_End or Run_Repeat_8_End_Turn"));
+                        #endif
 
-                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
-                            DEBUG_PRINTLN(F("RIGHT_BUTTON & A_BUTTON, Running Jump from Run_Start_6_End, Run_Repeat_8_End or Run_Repeat_8_End_Turn"));
-                            #endif
+                        processRunJump(prince, level);
 
-                            processRunJump(prince, level);
+                    }
+                    else if (pressed & btnFacingDirection) {
 
-                        }
-                        else if (pressed & RIGHT_BUTTON) {
-
-                            if (level.canMoveForward(prince, Action::RunRepeat, prince.getDirection(), 0)) {
-
-                                #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
-                                DEBUG_PRINTLN(F("RIGHT_BUTTON, Running Repeat"));
-                                #endif
-                                
-                                prince.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_4);
-                            }
-                            else {
-
-                                #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
-                                DEBUG_PRINTLN(F("RIGHT_BUTTON, Running Stop"));
-                                #endif
-
-                                prince.pushSequence(Stance::Stopping_1_Start, Stance::Stopping_5_End, Stance::Upright);
-                            }
-
-                        }
-                        else if (pressed & LEFT_BUTTON) {
+                        if (level.canMoveForward(prince, Action::RunRepeat, prince.getDirection(), 0)) {
 
                             #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
-                            DEBUG_PRINTLN(F("LEFT_BUTTON, Running Turn"));
+                            DEBUG_PRINTLN(F("RIGHT_BUTTON, Running Repeat"));
                             #endif
-
-                            processRunningTurn();
-
+                            
+                            prince.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_4);
                         }
-                        else if (!(pressed & RIGHT_BUTTON)) {
+                        else {
 
                             #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
                             DEBUG_PRINTLN(F("RIGHT_BUTTON, Running Stop"));
@@ -1041,44 +906,22 @@ void game() {
                         }
 
                     }
-                    else {
-                                        
-                        if ((pressed & LEFT_BUTTON) && (pressed & A_BUTTON)) {
+                    else if (pressed & btnOppositeDirection) {
 
-                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
-                            DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jump from Run_Start_6_End, Run_Repeat_8_End or Run_Repeat_8_End_Turn"));
-                            #endif
+                        #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
+                        DEBUG_PRINTLN(F("LEFT_BUTTON, Running Turn"));
+                        #endif
 
-                            processRunJump(prince, level);
+                        processRunningTurn();
 
-                        }
-                        else if (pressed & LEFT_BUTTON) {
+                    }
+                    else if (!(pressed & btnFacingDirection)) {
 
-                            if (level.canMoveForward(prince, Action::RunRepeat, prince.getDirection(), 0)) {
+                        #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
+                        DEBUG_PRINTLN(F("RIGHT_BUTTON, Running Stop"));
+                        #endif
 
-                                #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
-                                DEBUG_PRINTLN(F("LEFT_BUTTON, Running Repeat"));
-                                #endif
-
-                                prince.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_4);
-
-                            }
-                            else {
-                                prince.pushSequence(Stance::Stopping_1_Start, Stance::Stopping_5_End, Stance::Upright);
-                            }         
-
-                        }
-                        else if (pressed & RIGHT_BUTTON) {
-
-                            processRunningTurn();
-
-                        }
-                        else if (!(pressed & LEFT_BUTTON)) {
-
-                            prince.pushSequence(Stance::Stopping_1_Start, Stance::Stopping_5_End, Stance::Upright);
-
-                        }
-
+                        prince.pushSequence(Stance::Stopping_1_Start, Stance::Stopping_5_End, Stance::Upright);
                     }
 
                     break;
@@ -1194,30 +1037,10 @@ void game() {
 
                         }
 
-                        else if (pressed & RIGHT_BUTTON) {
-
-                            if (prince.getDirection() == Direction::Right) {
-
-                                if (level.canMoveForward(prince, Action::SmallStep, prince.getDirection(), 0)) {
-                                    prince.pushSequence(Stance::Sword_Step_1_Start, Stance::Sword_Step_3_End, Stance::Sword_Normal);
-                                    break;
-                                }
-
-                            }
-                            else {
-
-                                if (level.canMoveForward(prince, Action::SmallStep, prince.getOppositeDirection(), Constants::OppositeDirection_Offset)) {
-                                    prince.pushSequence(Stance::Sword_Step_3_End, Stance::Sword_Step_1_Start, Stance::Sword_Normal);
-                                    break;
-                                }
-                                
-                            }
-
-                        }
-                                
-                        else if (pressed & LEFT_BUTTON) {
+                        else if ((pressed & btnFacingDirection) || (pressed & btnOppositeDirection)) {
                             
-                            if (prince.getDirection() == Direction::Left) {
+                            if (((pressed & RIGHT_BUTTON) && (prince.getDirection() == Direction::Right)) ||
+                                 ((pressed & LEFT_BUTTON) &&  (prince.getDirection() == Direction::Left))) {
 
                                 if (level.canMoveForward(prince, Action::SmallStep, prince.getDirection(), 0)) {
                                     prince.pushSequence(Stance::Sword_Step_1_Start, Stance::Sword_Step_3_End, Stance::Sword_Normal);
@@ -1238,13 +1061,13 @@ void game() {
 
                         else {
                                 
-                            if (pressed & LEFT_BUTTON) {
+                            if (pressed & btnOppositeDirection) {
 
                                 prince.pushSequence(Stance::Sword_Step_1_Start, Stance::Sword_Step_3_End, Stance::Sword_Normal);
 
                             }
                                 
-                            if (pressed & RIGHT_BUTTON) {
+                            if (pressed & btnFacingDirection) {
 
                                 prince.pushSequence(Stance::Sword_Step_3_End, Stance::Sword_Step_1_Start, Stance::Sword_Normal);
 
@@ -2282,8 +2105,6 @@ void game() {
     // ---------------------------------------------------------------------------------------------------------------------------------------
 
     #ifndef SAVE_MEMORY_ENEMY
-// Serial.print("enemy.getStackFrame() ");
-// Serial.println(enemy.getStackFrame());
         
         if (enemy.getStackFrame() == 0) {
 
@@ -2293,8 +2114,7 @@ void game() {
 
                 int16_t newStance = enemy.pop();
                 enemy.setStance(abs(newStance));
-// Serial.print("Pop ");
-// Serial.println(newStance);
+
                 switch (enemy.getStance()) {
 
                     case Stance::Hide_Mirror:
@@ -2698,7 +2518,7 @@ void game() {
 
     // Render scene ..
 
-    render(enemyIsVisible, sameLevelAsPrince);
+    render(sameLevelAsPrince);
     
     #ifndef SAVE_MEMORY_OTHER
         if (gamePlay.gameState == GameState::Menu) {
