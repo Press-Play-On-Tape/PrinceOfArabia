@@ -138,64 +138,24 @@ bool testScroll(GamePlay &gamePlay, Prince &prince, Level &level) {
 
 void processRunJump(Prince &prince, Level &level) {
 
-    RunningJumpResult jump_1_Result = level.canRunningJump(prince, Action::RunJump_1);
+    RunningJumpResult jumpResult = RunningJumpResult::None;
 
-    if (jump_1_Result != RunningJumpResult::None) {
+    if (gamePlay.level != 6 || level.getXLocation() > 0) {
 
-        RunningJumpResult jump_2_Result = level.canRunningJump(prince, Action::RunJump_2);
-
-        if (jump_2_Result != RunningJumpResult::None) {
-
-            RunningJumpResult jump_3_Result = level.canRunningJump(prince, Action::RunJump_3);
-
-            if (jump_3_Result != RunningJumpResult::None) {
-
-                RunningJumpResult jump_4_Result = RunningJumpResult::None;
-                
-                // Fudge to prevent jumping onto the shadow ..
-
-                if (gamePlay.level != 6 || level.getXLocation() > 0) {
-                    jump_4_Result = level.canRunningJump(prince, Action::RunJump_4);
-                }
-
-                if (jump_4_Result != RunningJumpResult::None) {
-
-                    processRunJump_Jump(prince, jump_4_Result);
-
-                }
-                else {
-
-                    processRunJump_Jump(prince, jump_3_Result);
-
-                }
-
-            }
-            else {
-                
-                processRunJump_Jump(prince, jump_2_Result);
-
-            }
-
-        }
-        else {
-
-            processRunJump_Jump(prince, jump_1_Result);
-
-        }
+        jumpResult = level.canRunningJump(prince, Action::RunJump_3to1);
 
     }
     else {
 
-        prince.pushSequence(Stance::Stopping_1_Start, Stance::Stopping_5_End, Stance::Upright);
+        jumpResult = level.canRunningJump(prince, Action::RunJump_4to1);
 
     }
 
-}
-
-
-void processRunJump_Jump(Prince &prince, RunningJumpResult jumpResult) {
-
     switch (jumpResult) {
+
+        case RunningJumpResult::None:
+            prince.pushSequence(Stance::Stopping_1_Start, Stance::Stopping_5_End, Stance::Upright);
+            break;
 
         case RunningJumpResult::Jump4_GrabLedge_Pos2:
             prince.pushSequence(Stance::Running_Jump_4_GL_2_1_Start, Stance::Running_Jump_4_GL_2_16_End, Stance::Jump_Up_A_14_End);
