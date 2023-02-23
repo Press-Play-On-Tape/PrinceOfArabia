@@ -1,4 +1,3 @@
-
 #pragma once
 
 #define PRODUCTION_SETTINGS
@@ -160,11 +159,14 @@ constexpr uint16_t Running_Turn_12                               = Stance::Runni
 constexpr uint16_t Running_Turn_13_End                           = Stance::Running_Turn_12 + 1;
 
 
+constexpr uint16_t Standing_Jumps_Start                          = Stance::Running_Turn_13_End + 1;
+
+
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /*  Dist: 36                                                     01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define STANDING_JUMP_36_SEQ                                     45,    46,    47,    48,    49,    50,    51,    52,    53,    54,    55,    56,    57,    58,    59,    60,    61,    62,
 #define STANDING_JUMP_36_OFFSETS                                 0,0,   0,0,   2,0,   2,0,   2,0,   2,0,   2,0,   3,0,   3,0,   3,0,   3,0,   4,0,   2,0,   2,0,   2,0,   2,0,   1,0,   1,0, 
-constexpr uint16_t Standing_Jump_36_1_Start                      = Stance::Running_Turn_13_End + 1;
+constexpr uint16_t Standing_Jump_36_1_Start                      = Stance::Standing_Jumps_Start;
 constexpr uint16_t Standing_Jump_36_2                            = Stance::Standing_Jump_36_1_Start + 1;
 constexpr uint16_t Standing_Jump_36_3                            = Stance::Standing_Jump_36_2 + 1;
 constexpr uint16_t Standing_Jump_36_4                            = Stance::Standing_Jump_36_3 + 1;
@@ -414,6 +416,10 @@ constexpr uint16_t Standing_Jump_GL_28_17                        = Stance::Stand
 constexpr uint16_t Standing_Jump_GL_28_18_End                    = Stance::Standing_Jump_GL_28_17 + 1;
 
 
+constexpr uint16_t Standing_Jumps_End                            = Stance::Standing_Jump_GL_28_18_End;
+constexpr uint16_t Running_Jumps_Start                           = Stance::Standing_Jumps_End + 1;
+
+
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /*  Dist: 28                                                     01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 // #define STANDING_JUMP_SHORT_6_SEQ                                45,    46,    47,    48,    49,    50,    51,    52,    55,    56,    57,    58,    59,    60,    61,    62,
@@ -437,10 +443,370 @@ constexpr uint16_t Standing_Jump_GL_28_18_End                    = Stance::Stand
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*  Dist 46                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define RUNNING_JUMP_SEQ                                         16,    17,    18,    19,    20,    21,    22,    23,    24,    25,    26,
+#define RUNNING_JUMP_OFFSETS                                     2,0,   3,0,   4,0,   4,0,   5,0,   6,0,   6,0,   6,-2,  5,0,   3,1,   2,1,
+constexpr uint16_t Running_Jump_1_Start                          = Stance::Running_Jumps_Start;
+constexpr uint16_t Running_Jump_2                                = Stance::Running_Jump_1_Start + 1;
+constexpr uint16_t Running_Jump_3                                = Stance::Running_Jump_2 + 1;
+constexpr uint16_t Running_Jump_4                                = Stance::Running_Jump_3 + 1;
+constexpr uint16_t Running_Jump_5                                = Stance::Running_Jump_4 + 1;
+constexpr uint16_t Running_Jump_6                                = Stance::Running_Jump_5 + 1;
+constexpr uint16_t Running_Jump_7                                = Stance::Running_Jump_6 + 1;
+constexpr uint16_t Running_Jump_8                                = Stance::Running_Jump_7 + 1;
+constexpr uint16_t Running_Jump_9                                = Stance::Running_Jump_8 + 1;
+constexpr uint16_t Running_Jump_10                               = Stance::Running_Jump_9 + 1;
+constexpr uint16_t Running_Jump_11_End                           = Stance::Running_Jump_10 + 1;
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*  Dist 33                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define RUNNING_JUMP_SHORT_2_SEQ                                 20,    21,    22,    23,    24,    25,    26,
+#define RUNNING_JUMP_SHORT_2_OFFSETS                             5,0,   5,0,   5,0,   5,-2,  6,-2,  5,3,   2,1,
+constexpr uint16_t Running_Jump_Short_2_1_Start                  = Stance::Running_Jump_11_End + 1;
+constexpr uint16_t Running_Jump_Short_2_2                        = Stance::Running_Jump_Short_2_1_Start + 1;
+constexpr uint16_t Running_Jump_Short_2_3                        = Stance::Running_Jump_Short_2_2 + 1;
+constexpr uint16_t Running_Jump_Short_2_4                        = Stance::Running_Jump_Short_2_3 + 1;
+constexpr uint16_t Running_Jump_Short_2_5                        = Stance::Running_Jump_Short_2_4 + 1;
+constexpr uint16_t Running_Jump_Short_2_6                        = Stance::Running_Jump_Short_2_5 + 1;
+constexpr uint16_t Running_Jump_Short_2_7_End                    = Stance::Running_Jump_Short_2_6 + 1;
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*  Dist 37                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define RUNNING_JUMP_SHORT_6_SEQ                                 20,    21,    22,    23,    24,    25,    26,
+#define RUNNING_JUMP_SHORT_6_OFFSETS                             6,0,   6,0,   6,0,   6,-2,  6,-2,  5,3,   2,1,
+constexpr uint16_t Running_Jump_Short_6_1_Start                  = Stance::Running_Jump_Short_2_7_End + 1;
+constexpr uint16_t Running_Jump_Short_6_2                        = Stance::Running_Jump_Short_6_1_Start + 1;
+constexpr uint16_t Running_Jump_Short_6_3                        = Stance::Running_Jump_Short_6_2 + 1;
+constexpr uint16_t Running_Jump_Short_6_4                        = Stance::Running_Jump_Short_6_3 + 1;
+constexpr uint16_t Running_Jump_Short_6_5                        = Stance::Running_Jump_Short_6_4 + 1;
+constexpr uint16_t Running_Jump_Short_6_6                        = Stance::Running_Jump_Short_6_5 + 1;
+constexpr uint16_t Running_Jump_Short_6_7_End                    = Stance::Running_Jump_Short_6_6 + 1;
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*  Dist 16                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define RUNNING_JUMP_1_2_SEQ                                     20,    21,    25,    26,    59,    60,    61,    62,    
+#define RUNNING_JUMP_1_2_OFFSETS                                 2,0,   3,0,   4,-3,  3,3,   2,0,   1,0,   0,0,   1,0,   
+constexpr uint16_t Running_Jump_1_2_1_Start                      = Stance::Running_Jump_Short_6_7_End + 1;
+constexpr uint16_t Running_Jump_1_2_2                            = Stance::Running_Jump_1_2_1_Start + 1;
+constexpr uint16_t Running_Jump_1_2_3                            = Stance::Running_Jump_1_2_2 + 1;
+constexpr uint16_t Running_Jump_1_2_4                            = Stance::Running_Jump_1_2_3 + 1;
+constexpr uint16_t Running_Jump_1_2_5                            = Stance::Running_Jump_1_2_4 + 1;
+constexpr uint16_t Running_Jump_1_2_6                            = Stance::Running_Jump_1_2_5 + 1;
+constexpr uint16_t Running_Jump_1_2_7                            = Stance::Running_Jump_1_2_6 + 1;
+constexpr uint16_t Running_Jump_1_2_8_End                        = Stance::Running_Jump_1_2_7 + 1;
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*  Dist 20                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define RUNNING_JUMP_1_6_SEQ                                     20,    21,    23,    25,    26,    59,    60,    61,    62,    
+#define RUNNING_JUMP_1_6_OFFSETS                                 2,0,   3,0,   3,0,   4,-3,  3,3,   2,0,   2,0,   0,0,   1,0,   
+constexpr uint16_t Running_Jump_1_6_1_Start                      = Stance::Running_Jump_1_2_8_End + 1;
+constexpr uint16_t Running_Jump_1_6_2                            = Stance::Running_Jump_1_6_1_Start + 1;
+constexpr uint16_t Running_Jump_1_6_3                            = Stance::Running_Jump_1_6_2 + 1;
+constexpr uint16_t Running_Jump_1_6_4                            = Stance::Running_Jump_1_6_3 + 1;
+constexpr uint16_t Running_Jump_1_6_5                            = Stance::Running_Jump_1_6_4 + 1;
+constexpr uint16_t Running_Jump_1_6_6                            = Stance::Running_Jump_1_6_5 + 1;
+constexpr uint16_t Running_Jump_1_6_7                            = Stance::Running_Jump_1_6_6 + 1;
+constexpr uint16_t Running_Jump_1_6_8                            = Stance::Running_Jump_1_6_7 + 1;
+constexpr uint16_t Running_Jump_1_6_9_End                        = Stance::Running_Jump_1_6_8 + 1;
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*  Dist 24                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define RUNNING_JUMP_1_10_SEQ                                    20,    21,    22,    23,    25,    26,    59,    60,    61,    62,    
+#define RUNNING_JUMP_1_10_OFFSETS                                2,0,   3,0,   3,0,   3,0,   4,-3,  3,3,   3,0,   2,0,   0,0,  1,0,   
+constexpr uint16_t Running_Jump_1_10_1_Start                     = Stance::Running_Jump_1_6_9_End + 1;
+constexpr uint16_t Running_Jump_1_10_2                           = Stance::Running_Jump_1_10_1_Start + 1;
+constexpr uint16_t Running_Jump_1_10_3                           = Stance::Running_Jump_1_10_2 + 1;
+constexpr uint16_t Running_Jump_1_10_4                           = Stance::Running_Jump_1_10_3 + 1;
+constexpr uint16_t Running_Jump_1_10_5                           = Stance::Running_Jump_1_10_4 + 1;
+constexpr uint16_t Running_Jump_1_10_6                           = Stance::Running_Jump_1_10_5 + 1;
+constexpr uint16_t Running_Jump_1_10_7                           = Stance::Running_Jump_1_10_6 + 1;
+constexpr uint16_t Running_Jump_1_10_8                           = Stance::Running_Jump_1_10_7 + 1;
+constexpr uint16_t Running_Jump_1_10_9                           = Stance::Running_Jump_1_10_8 + 1;
+constexpr uint16_t Running_Jump_1_10_10_End                      = Stance::Running_Jump_1_10_9 + 1;
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*  Dist 25                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define RUNNING_JUMP_2_2_SEQ                                     20,    21,    22,    23,    24,    25,    26,
+#define RUNNING_JUMP_2_2_OFFSETS                                 3,0,   3,0,   4,0,   4,-2,  5,-2,  4,3,   2,1,
+constexpr uint16_t Running_Jump_2_2_1_Start                      = Stance::Running_Jump_1_10_10_End + 1;
+constexpr uint16_t Running_Jump_2_2_2                            = Stance::Running_Jump_2_2_1_Start + 1;
+constexpr uint16_t Running_Jump_2_2_3                            = Stance::Running_Jump_2_2_2 + 1;
+constexpr uint16_t Running_Jump_2_2_4                            = Stance::Running_Jump_2_2_3 + 1;
+constexpr uint16_t Running_Jump_2_2_5                            = Stance::Running_Jump_2_2_4 + 1;
+constexpr uint16_t Running_Jump_2_2_6                            = Stance::Running_Jump_2_2_5 + 1;
+constexpr uint16_t Running_Jump_2_2_7_End                        = Stance::Running_Jump_2_2_6 + 1;
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*  Dist 29                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define RUNNING_JUMP_2_6_SEQ                                     20,    21,    22,    23,    24,    25,    26,
+#define RUNNING_JUMP_2_6_OFFSETS                                 4,0,   4,0,   5,0,   5,-2,  5,-2,  4,3,   2,1,
+constexpr uint16_t Running_Jump_2_6_1_Start                      = Stance::Running_Jump_2_2_7_End + 1;
+constexpr uint16_t Running_Jump_2_6_2                            = Stance::Running_Jump_2_6_1_Start + 1;
+constexpr uint16_t Running_Jump_2_6_3                            = Stance::Running_Jump_2_6_2 + 1;
+constexpr uint16_t Running_Jump_2_6_4                            = Stance::Running_Jump_2_6_3 + 1;
+constexpr uint16_t Running_Jump_2_6_5                            = Stance::Running_Jump_2_6_4 + 1;
+constexpr uint16_t Running_Jump_2_6_6                            = Stance::Running_Jump_2_6_5 + 1;
+constexpr uint16_t Running_Jump_2_6_7_End                        = Stance::Running_Jump_2_6_6 + 1;
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*  Dist 33                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define RUNNING_JUMP_2_10_SEQ                                    20,    21,    22,    23,    24,    25,    26,
+#define RUNNING_JUMP_2_10_OFFSETS                                4,0,   5,0,   6,0,   6,-2,  6,-2,  4,3,   2,1,
+constexpr uint16_t Running_Jump_2_10_1_Start                     = Stance::Running_Jump_2_6_7_End + 1;
+constexpr uint16_t Running_Jump_2_10_2                           = Stance::Running_Jump_2_10_1_Start + 1;
+constexpr uint16_t Running_Jump_2_10_3                           = Stance::Running_Jump_2_10_2 + 1;
+constexpr uint16_t Running_Jump_2_10_4                           = Stance::Running_Jump_2_10_3 + 1;
+constexpr uint16_t Running_Jump_2_10_5                           = Stance::Running_Jump_2_10_4 + 1;
+constexpr uint16_t Running_Jump_2_10_6                           = Stance::Running_Jump_2_10_5 + 1;
+constexpr uint16_t Running_Jump_2_10_7_End                       = Stance::Running_Jump_2_10_6 + 1;
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*  Dist 37                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define RUNNING_JUMP_2_DROPLVL_SEQ                               19,    20,    21,    22,    23,    24,    25,    26,    121,   122,   123,   124,   125,   126,
+#define RUNNING_JUMP_2_DROPLVL_OFFSETS                           3,0,   3,0,   3,0,   3,0,   4,-2,  4,-1,  3,3,   3,2,   2,4,   2,5,   2,5,   2,5,   2,5,   1,5,
+constexpr uint16_t Running_Jump_2_DropLvl_1_Start                = Stance::Running_Jump_2_10_7_End + 1;
+constexpr uint16_t Running_Jump_2_DropLvl_2                      = Stance::Running_Jump_2_DropLvl_1_Start + 1;
+constexpr uint16_t Running_Jump_2_DropLvl_3                      = Stance::Running_Jump_2_DropLvl_2 + 1;
+constexpr uint16_t Running_Jump_2_DropLvl_4                      = Stance::Running_Jump_2_DropLvl_3 + 1;
+constexpr uint16_t Running_Jump_2_DropLvl_5                      = Stance::Running_Jump_2_DropLvl_4 + 1;
+constexpr uint16_t Running_Jump_2_DropLvl_6                      = Stance::Running_Jump_2_DropLvl_5 + 1;
+constexpr uint16_t Running_Jump_2_DropLvl_7                      = Stance::Running_Jump_2_DropLvl_6 + 1;
+constexpr uint16_t Running_Jump_2_DropLvl_8                      = Stance::Running_Jump_2_DropLvl_7 + 1;
+constexpr uint16_t Running_Jump_2_DropLvl_9                      = Stance::Running_Jump_2_DropLvl_8 + 1;
+constexpr uint16_t Running_Jump_2_DropLvl_10                     = Stance::Running_Jump_2_DropLvl_9 + 1;
+constexpr uint16_t Running_Jump_2_DropLvl_11                     = Stance::Running_Jump_2_DropLvl_10 + 1;
+constexpr uint16_t Running_Jump_2_DropLvl_12                     = Stance::Running_Jump_2_DropLvl_11 + 1;
+constexpr uint16_t Running_Jump_2_DropLvl_13                     = Stance::Running_Jump_2_DropLvl_12 + 1;
+constexpr uint16_t Running_Jump_2_DropLvl_14_End                 = Stance::Running_Jump_2_DropLvl_13 + 1;
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*  Dist 45                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define RUNNING_JUMP_2_DROPLVL_10_SEQ                            19,    20,    21,    22,    23,    24,    25,    26,    121,   122,   123,   124,   125,   126,
+#define RUNNING_JUMP_2_DROPLVL_10_OFFSETS                        3,0,   3,0,   3,0,   3,0,   4,-2,  4,-1,  4,3,   4,2,   4,4,   4,5,   3,5,   2,5,   2,5,   2,5,
+constexpr uint16_t Running_Jump_2_DropLvl_10_1_Start             = Stance::Running_Jump_2_DropLvl_14_End + 1;
+constexpr uint16_t Running_Jump_2_DropLvl_10_2                   = Stance::Running_Jump_2_DropLvl_10_1_Start + 1;
+constexpr uint16_t Running_Jump_2_DropLvl_10_3                   = Stance::Running_Jump_2_DropLvl_10_2 + 1;
+constexpr uint16_t Running_Jump_2_DropLvl_10_4                   = Stance::Running_Jump_2_DropLvl_10_3 + 1;
+constexpr uint16_t Running_Jump_2_DropLvl_10_5                   = Stance::Running_Jump_2_DropLvl_10_4 + 1;
+constexpr uint16_t Running_Jump_2_DropLvl_10_6                   = Stance::Running_Jump_2_DropLvl_10_5 + 1;
+constexpr uint16_t Running_Jump_2_DropLvl_10_7                   = Stance::Running_Jump_2_DropLvl_10_6 + 1;
+constexpr uint16_t Running_Jump_2_DropLvl_10_8                   = Stance::Running_Jump_2_DropLvl_10_7 + 1;
+constexpr uint16_t Running_Jump_2_DropLvl_10_9                   = Stance::Running_Jump_2_DropLvl_10_8 + 1;
+constexpr uint16_t Running_Jump_2_DropLvl_10_10                  = Stance::Running_Jump_2_DropLvl_10_9 + 1;
+constexpr uint16_t Running_Jump_2_DropLvl_10_11                  = Stance::Running_Jump_2_DropLvl_10_10 + 1;
+constexpr uint16_t Running_Jump_2_DropLvl_10_12                  = Stance::Running_Jump_2_DropLvl_10_11 + 1;
+constexpr uint16_t Running_Jump_2_DropLvl_10_13                  = Stance::Running_Jump_2_DropLvl_10_12 + 1;
+constexpr uint16_t Running_Jump_2_DropLvl_10_14_End              = Stance::Running_Jump_2_DropLvl_10_13 + 1;
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*  Dist 28                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define RUNNING_JUMP_3_2_SEQ                                     20,    21,    22,    23,    169,   24,    25,    26,
+#define RUNNING_JUMP_3_2_OFFSETS                                 4,0,   5,0,   4,0,   4,-2,  4,0,   3,-2,  3,3,   2,1,
+constexpr uint16_t Running_Jump_3_2_1_Start                      = Stance::Running_Jump_2_DropLvl_10_14_End + 1;
+constexpr uint16_t Running_Jump_3_2_2                            = Stance::Running_Jump_3_2_1_Start + 1;
+constexpr uint16_t Running_Jump_3_2_3                            = Stance::Running_Jump_3_2_2 + 1;
+constexpr uint16_t Running_Jump_3_2_4                            = Stance::Running_Jump_3_2_3 + 1;
+constexpr uint16_t Running_Jump_3_2_5                            = Stance::Running_Jump_3_2_4 + 1;
+constexpr uint16_t Running_Jump_3_2_6                            = Stance::Running_Jump_3_2_5 + 1;
+constexpr uint16_t Running_Jump_3_2_7                            = Stance::Running_Jump_3_2_6 + 1;
+constexpr uint16_t Running_Jump_3_2_8_End                        = Stance::Running_Jump_3_2_7 + 1;
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*  Dist 32                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define RUNNING_JUMP_3_6_SEQ                                     20,    21,    22,    23,    169,   24,    25,    26,
+#define RUNNING_JUMP_3_6_OFFSETS                                 4,0,   5,0,   5,0,   5,-2,  4,0,   4,-2,  4,3,   2,1,
+constexpr uint16_t Running_Jump_3_6_1_Start                      = Stance::Running_Jump_3_2_8_End + 1;
+constexpr uint16_t Running_Jump_3_6_2                            = Stance::Running_Jump_3_6_1_Start + 1;
+constexpr uint16_t Running_Jump_3_6_3                            = Stance::Running_Jump_3_6_2 + 1;
+constexpr uint16_t Running_Jump_3_6_4                            = Stance::Running_Jump_3_6_3 + 1;
+constexpr uint16_t Running_Jump_3_6_5                            = Stance::Running_Jump_3_6_4 + 1;
+constexpr uint16_t Running_Jump_3_6_6                            = Stance::Running_Jump_3_6_5 + 1;
+constexpr uint16_t Running_Jump_3_6_7                            = Stance::Running_Jump_3_6_6 + 1;
+constexpr uint16_t Running_Jump_3_6_8_End                        = Stance::Running_Jump_3_6_7 + 1;
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*  Dist 36                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define RUNNING_JUMP_3_10_SEQ                                    20,    21,    22,    23,    169,   24,    25,    26,
+#define RUNNING_JUMP_3_10_OFFSETS                                5,0,   6,0,   6,0,   6,-2,  6,0,   5,-2,  4,3,   2,1,
+constexpr uint16_t Running_Jump_3_10_1_Start                     = Stance::Running_Jump_3_6_8_End + 1;
+constexpr uint16_t Running_Jump_3_10_2                           = Stance::Running_Jump_3_10_1_Start + 1;
+constexpr uint16_t Running_Jump_3_10_3                           = Stance::Running_Jump_3_10_2 + 1;
+constexpr uint16_t Running_Jump_3_10_4                           = Stance::Running_Jump_3_10_3 + 1;
+constexpr uint16_t Running_Jump_3_10_5                           = Stance::Running_Jump_3_10_4 + 1;
+constexpr uint16_t Running_Jump_3_10_6                           = Stance::Running_Jump_3_10_5 + 1;
+constexpr uint16_t Running_Jump_3_10_7                           = Stance::Running_Jump_3_10_6 + 1;
+constexpr uint16_t Running_Jump_3_10_8_End                       = Stance::Running_Jump_3_10_7 + 1;
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*  Dist 47                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define RUNNING_JUMP_3_DROPLVL_SEQ                               19,    20,    21,    22,    23,    24,    25,    26,    121,   122,   123,   124,   125,   126,
+#define RUNNING_JUMP_3_DROPLVL_OFFSETS                           3,0,   3,0,   3,0,   3,0,   4,-2,  4,-1,  4,3,   4,2,   4,4,   4,5,   3,5,   2,5,   2,5,   2,5,
+constexpr uint16_t Running_Jump_3_DropLvl_1_Start                = Stance::Running_Jump_3_10_8_End + 1;
+constexpr uint16_t Running_Jump_3_DropLvl_2                      = Stance::Running_Jump_3_DropLvl_1_Start + 1;
+constexpr uint16_t Running_Jump_3_DropLvl_3                      = Stance::Running_Jump_3_DropLvl_2 + 1;
+constexpr uint16_t Running_Jump_3_DropLvl_4                      = Stance::Running_Jump_3_DropLvl_3 + 1;
+constexpr uint16_t Running_Jump_3_DropLvl_5                      = Stance::Running_Jump_3_DropLvl_4 + 1;
+constexpr uint16_t Running_Jump_3_DropLvl_6                      = Stance::Running_Jump_3_DropLvl_5 + 1;
+constexpr uint16_t Running_Jump_3_DropLvl_7                      = Stance::Running_Jump_3_DropLvl_6 + 1;
+constexpr uint16_t Running_Jump_3_DropLvl_8                      = Stance::Running_Jump_3_DropLvl_7 + 1;
+constexpr uint16_t Running_Jump_3_DropLvl_9                      = Stance::Running_Jump_3_DropLvl_8 + 1;
+constexpr uint16_t Running_Jump_3_DropLvl_10                     = Stance::Running_Jump_3_DropLvl_9 + 1;
+constexpr uint16_t Running_Jump_3_DropLvl_11                     = Stance::Running_Jump_3_DropLvl_10 + 1;
+constexpr uint16_t Running_Jump_3_DropLvl_12                     = Stance::Running_Jump_3_DropLvl_11 + 1;
+constexpr uint16_t Running_Jump_3_DropLvl_13                     = Stance::Running_Jump_3_DropLvl_12 + 1;
+constexpr uint16_t Running_Jump_3_DropLvl_14_End                 = Stance::Running_Jump_3_DropLvl_13 + 1;
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*  Dist 49                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define RUNNING_JUMP_3_DROPLVL_10_SEQ                            19,    20,    21,    22,    23,    24,    25,    26,    121,   122,   123,   124,   125,   126,
+#define RUNNING_JUMP_3_DROPLVL_10_OFFSETS                        3,0,   3,0,   3,0,   3,0,   4,-2,  5,-1,  5,3,   5,2,   5,4,   4,5,   3,5,   2,5,   2,5,   2,5,
+constexpr uint16_t Running_Jump_3_DropLvl_10_1_Start             = Stance::Running_Jump_3_DropLvl_14_End + 1;
+constexpr uint16_t Running_Jump_3_DropLvl_10_2                   = Stance::Running_Jump_3_DropLvl_10_1_Start + 1;
+constexpr uint16_t Running_Jump_3_DropLvl_10_3                   = Stance::Running_Jump_3_DropLvl_10_2 + 1;
+constexpr uint16_t Running_Jump_3_DropLvl_10_4                   = Stance::Running_Jump_3_DropLvl_10_3 + 1;
+constexpr uint16_t Running_Jump_3_DropLvl_10_5                   = Stance::Running_Jump_3_DropLvl_10_4 + 1;
+constexpr uint16_t Running_Jump_3_DropLvl_10_6                   = Stance::Running_Jump_3_DropLvl_10_5 + 1;
+constexpr uint16_t Running_Jump_3_DropLvl_10_7                   = Stance::Running_Jump_3_DropLvl_10_6 + 1;
+constexpr uint16_t Running_Jump_3_DropLvl_10_8                   = Stance::Running_Jump_3_DropLvl_10_7 + 1;
+constexpr uint16_t Running_Jump_3_DropLvl_10_9                   = Stance::Running_Jump_3_DropLvl_10_8 + 1;
+constexpr uint16_t Running_Jump_3_DropLvl_10_10                  = Stance::Running_Jump_3_DropLvl_10_9 + 1;
+constexpr uint16_t Running_Jump_3_DropLvl_10_11                  = Stance::Running_Jump_3_DropLvl_10_10 + 1;
+constexpr uint16_t Running_Jump_3_DropLvl_10_12                  = Stance::Running_Jump_3_DropLvl_10_11 + 1;
+constexpr uint16_t Running_Jump_3_DropLvl_10_13                  = Stance::Running_Jump_3_DropLvl_10_12 + 1;
+constexpr uint16_t Running_Jump_3_DropLvl_10_14_End              = Stance::Running_Jump_3_DropLvl_10_13 + 1;
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*  Dist 48                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define RUNNING_JUMP_4_GL_2_SEQ                                  19,    20,    21,    22,    23,    24,    25,    26,    121,   122,   123,   124,   125,   101,   102,   103,
+#define RUNNING_JUMP_4_GL_2_OFFSETS                              3,0,   3,0,   3,0,   4,0,   4,-2,  4,-1,  4,3,   4,2,   7,3,   4,4,   3,4,   1,4,   1,4,   1,4,   1,3,   1,3,
+constexpr uint16_t Running_Jump_4_GL_2_1_Start                   = Stance::Running_Jump_3_DropLvl_10_14_End + 1;
+constexpr uint16_t Running_Jump_4_GL_2_2                         = Stance::Running_Jump_4_GL_2_1_Start + 1;
+constexpr uint16_t Running_Jump_4_GL_2_3                         = Stance::Running_Jump_4_GL_2_2 + 1;
+constexpr uint16_t Running_Jump_4_GL_2_4                         = Stance::Running_Jump_4_GL_2_3 + 1;
+constexpr uint16_t Running_Jump_4_GL_2_5                         = Stance::Running_Jump_4_GL_2_4 + 1;
+constexpr uint16_t Running_Jump_4_GL_2_6                         = Stance::Running_Jump_4_GL_2_5 + 1;
+constexpr uint16_t Running_Jump_4_GL_2_7                         = Stance::Running_Jump_4_GL_2_6 + 1;
+constexpr uint16_t Running_Jump_4_GL_2_8                         = Stance::Running_Jump_4_GL_2_7 + 1;
+constexpr uint16_t Running_Jump_4_GL_2_9                         = Stance::Running_Jump_4_GL_2_8 + 1;
+constexpr uint16_t Running_Jump_4_GL_2_10                        = Stance::Running_Jump_4_GL_2_9 + 1;
+constexpr uint16_t Running_Jump_4_GL_2_11                        = Stance::Running_Jump_4_GL_2_10 + 1;
+constexpr uint16_t Running_Jump_4_GL_2_12                        = Stance::Running_Jump_4_GL_2_11 + 1;
+constexpr uint16_t Running_Jump_4_GL_2_13                        = Stance::Running_Jump_4_GL_2_12 + 1;
+constexpr uint16_t Running_Jump_4_GL_2_14                        = Stance::Running_Jump_4_GL_2_13 + 1;
+constexpr uint16_t Running_Jump_4_GL_2_15                        = Stance::Running_Jump_4_GL_2_14 + 1;
+constexpr uint16_t Running_Jump_4_GL_2_16_End                    = Stance::Running_Jump_4_GL_2_15 + 1;
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*  Dist 52                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define RUNNING_JUMP_4_GL_6_SEQ                                  19,    20,    21,    22,    23,    24,    25,    26,    121,   122,   123,   124,   125,   101,   102,   103,
+#define RUNNING_JUMP_4_GL_6_OFFSETS                              3,0,   3,0,   3,0,   4,0,   5,-2,  5,-1,  5,3,   5,2,   7,3,   4,4,   3,4,   1,4,   1,4,   1,4,   1,3,   1,3,
+constexpr uint16_t Running_Jump_4_GL_6_1_Start                   = Stance::Running_Jump_4_GL_2_16_End + 1;
+constexpr uint16_t Running_Jump_4_GL_6_2                         = Stance::Running_Jump_4_GL_6_1_Start + 1;
+constexpr uint16_t Running_Jump_4_GL_6_3                         = Stance::Running_Jump_4_GL_6_2 + 1;
+constexpr uint16_t Running_Jump_4_GL_6_4                         = Stance::Running_Jump_4_GL_6_3 + 1;
+constexpr uint16_t Running_Jump_4_GL_6_5                         = Stance::Running_Jump_4_GL_6_4 + 1;
+constexpr uint16_t Running_Jump_4_GL_6_6                         = Stance::Running_Jump_4_GL_6_5 + 1;
+constexpr uint16_t Running_Jump_4_GL_6_7                         = Stance::Running_Jump_4_GL_6_6 + 1;
+constexpr uint16_t Running_Jump_4_GL_6_8                         = Stance::Running_Jump_4_GL_6_7 + 1;
+constexpr uint16_t Running_Jump_4_GL_6_9                         = Stance::Running_Jump_4_GL_6_8 + 1;
+constexpr uint16_t Running_Jump_4_GL_6_10                        = Stance::Running_Jump_4_GL_6_9 + 1;
+constexpr uint16_t Running_Jump_4_GL_6_11                        = Stance::Running_Jump_4_GL_6_10 + 1;
+constexpr uint16_t Running_Jump_4_GL_6_12                        = Stance::Running_Jump_4_GL_6_11 + 1;
+constexpr uint16_t Running_Jump_4_GL_6_13                        = Stance::Running_Jump_4_GL_6_12 + 1;
+constexpr uint16_t Running_Jump_4_GL_6_14                        = Stance::Running_Jump_4_GL_6_13 + 1;
+constexpr uint16_t Running_Jump_4_GL_6_15                        = Stance::Running_Jump_4_GL_6_14 + 1;
+constexpr uint16_t Running_Jump_4_GL_6_16_End                    = Stance::Running_Jump_4_GL_6_15 + 1;
+
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*  Dist 56                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define RUNNING_JUMP_4_GL_10_SEQ                                 19,    20,    21,    22,    23,    24,    25,    26,    121,   122,   123,   124,   125,   101,   102,   103,
+#define RUNNING_JUMP_4_GL_10_OFFSETS                             3,0,   3,0,   3,0,   4,0,   5,-2,  6,-1,  6,3,   6,2,   7,3,   5,4,   3,4,   1,4,   1,4,   1,4,   1,3,   1,3,
+constexpr uint16_t Running_Jump_4_GL_10_1_Start                  = Stance::Running_Jump_4_GL_6_16_End + 1;
+constexpr uint16_t Running_Jump_4_GL_10_2                        = Stance::Running_Jump_4_GL_10_1_Start + 1;
+constexpr uint16_t Running_Jump_4_GL_10_3                        = Stance::Running_Jump_4_GL_10_2 + 1;
+constexpr uint16_t Running_Jump_4_GL_10_4                        = Stance::Running_Jump_4_GL_10_3 + 1;
+constexpr uint16_t Running_Jump_4_GL_10_5                        = Stance::Running_Jump_4_GL_10_4 + 1;
+constexpr uint16_t Running_Jump_4_GL_10_6                        = Stance::Running_Jump_4_GL_10_5 + 1;
+constexpr uint16_t Running_Jump_4_GL_10_7                        = Stance::Running_Jump_4_GL_10_6 + 1;
+constexpr uint16_t Running_Jump_4_GL_10_8                        = Stance::Running_Jump_4_GL_10_7 + 1;
+constexpr uint16_t Running_Jump_4_GL_10_9                        = Stance::Running_Jump_4_GL_10_8 + 1;
+constexpr uint16_t Running_Jump_4_GL_10_10                       = Stance::Running_Jump_4_GL_10_9 + 1;
+constexpr uint16_t Running_Jump_4_GL_10_11                       = Stance::Running_Jump_4_GL_10_10 + 1;
+constexpr uint16_t Running_Jump_4_GL_10_12                       = Stance::Running_Jump_4_GL_10_11 + 1;
+constexpr uint16_t Running_Jump_4_GL_10_13                       = Stance::Running_Jump_4_GL_10_12 + 1;
+constexpr uint16_t Running_Jump_4_GL_10_14                       = Stance::Running_Jump_4_GL_10_13 + 1;
+constexpr uint16_t Running_Jump_4_GL_10_15                       = Stance::Running_Jump_4_GL_10_14 + 1;
+constexpr uint16_t Running_Jump_4_GL_10_16_End                   = Stance::Running_Jump_4_GL_10_15 + 1;
+
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*  Dist 55                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define RUNNING_JUMP_4_DROPLVL_SEQ                               19,    20,    21,    22,    23,    24,    25,    26,    121,   122,   123,   124,   125,   126,
+#define RUNNING_JUMP_4_DROPLVL_OFFSETS                           3,0,   3,0,   4,0,   4,0,   5,-2,  5,-1,  6,3,   6,2,   7,5,   4,5,   3,5,   3,5,   3,5,   2,4,
+constexpr uint16_t Running_Jump_4_DropLvl_1_Start                = Stance::Running_Jump_4_GL_10_16_End + 1;
+constexpr uint16_t Running_Jump_4_DropLvl_2                      = Stance::Running_Jump_4_DropLvl_1_Start + 1;
+constexpr uint16_t Running_Jump_4_DropLvl_3                      = Stance::Running_Jump_4_DropLvl_2 + 1;
+constexpr uint16_t Running_Jump_4_DropLvl_4                      = Stance::Running_Jump_4_DropLvl_3 + 1;
+constexpr uint16_t Running_Jump_4_DropLvl_5                      = Stance::Running_Jump_4_DropLvl_4 + 1;
+constexpr uint16_t Running_Jump_4_DropLvl_6                      = Stance::Running_Jump_4_DropLvl_5 + 1;
+constexpr uint16_t Running_Jump_4_DropLvl_7                      = Stance::Running_Jump_4_DropLvl_6 + 1;
+constexpr uint16_t Running_Jump_4_DropLvl_8                      = Stance::Running_Jump_4_DropLvl_7 + 1;
+constexpr uint16_t Running_Jump_4_DropLvl_9                      = Stance::Running_Jump_4_DropLvl_8 + 1;
+constexpr uint16_t Running_Jump_4_DropLvl_10                     = Stance::Running_Jump_4_DropLvl_9 + 1;
+constexpr uint16_t Running_Jump_4_DropLvl_11                     = Stance::Running_Jump_4_DropLvl_10 + 1;
+constexpr uint16_t Running_Jump_4_DropLvl_12                     = Stance::Running_Jump_4_DropLvl_11 + 1;
+constexpr uint16_t Running_Jump_4_DropLvl_13                     = Stance::Running_Jump_4_DropLvl_12 + 1;
+constexpr uint16_t Running_Jump_4_DropLvl_14_End                 = Stance::Running_Jump_4_DropLvl_13 + 1;
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*  Dist 62                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define RUNNING_JUMP_4_DROPLVL_10_SEQ                            19,    20,    21,    22,    23,    24,    25,    26,    121,   122,   123,   124,   125,   126,
+#define RUNNING_JUMP_4_DROPLVL_10_OFFSETS                        3,0,   3,0,   4,0,   5,0,   5,-2,  6,-1,  7,3,   7,3,   7,6,   4,6,   3,6,   3,5,   3,5,   2,5,
+
+constexpr uint16_t Running_Jump_4_DropLvl_10_1_Start             = Stance::Running_Jump_4_DropLvl_14_End + 1;
+constexpr uint16_t Running_Jump_4_DropLvl_10_2                   = Stance::Running_Jump_4_DropLvl_10_1_Start + 1;
+constexpr uint16_t Running_Jump_4_DropLvl_10_3                   = Stance::Running_Jump_4_DropLvl_10_2 + 1;
+constexpr uint16_t Running_Jump_4_DropLvl_10_4                   = Stance::Running_Jump_4_DropLvl_10_3 + 1;
+constexpr uint16_t Running_Jump_4_DropLvl_10_5                   = Stance::Running_Jump_4_DropLvl_10_4 + 1;
+constexpr uint16_t Running_Jump_4_DropLvl_10_6                   = Stance::Running_Jump_4_DropLvl_10_5 + 1;
+constexpr uint16_t Running_Jump_4_DropLvl_10_7                   = Stance::Running_Jump_4_DropLvl_10_6 + 1;
+constexpr uint16_t Running_Jump_4_DropLvl_10_8                   = Stance::Running_Jump_4_DropLvl_10_7 + 1;
+constexpr uint16_t Running_Jump_4_DropLvl_10_9                   = Stance::Running_Jump_4_DropLvl_10_8 + 1;
+constexpr uint16_t Running_Jump_4_DropLvl_10_10                  = Stance::Running_Jump_4_DropLvl_10_9 + 1;
+constexpr uint16_t Running_Jump_4_DropLvl_10_11                  = Stance::Running_Jump_4_DropLvl_10_10 + 1;
+constexpr uint16_t Running_Jump_4_DropLvl_10_12                  = Stance::Running_Jump_4_DropLvl_10_11 + 1;
+constexpr uint16_t Running_Jump_4_DropLvl_10_13                  = Stance::Running_Jump_4_DropLvl_10_12 + 1;
+constexpr uint16_t Running_Jump_4_DropLvl_10_14_End              = Stance::Running_Jump_4_DropLvl_10_13 + 1;
+
+constexpr uint16_t Running_Jumps_End                             = Stance::Running_Jump_4_DropLvl_10_14_End;
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /*                                                               01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define SINGLE_STEP_SEQ                                          63,    64,    65,    66,    71,    72,    73,    74,
 #define SINGLE_STEP_OFFSETS                                      1,0,   1,0,   1,0,   1,0,   1,0,   1,0,   1,0,   1,0, 
-constexpr uint16_t Single_Step_1_Start                           = Stance::Standing_Jump_GL_28_18_End + 1;
+constexpr uint16_t Single_Step_1_Start                           = Stance::Running_Jumps_End + 1;
 constexpr uint16_t Single_Step_2                                 = Stance::Single_Step_1_Start + 1;
 constexpr uint16_t Single_Step_3                                 = Stance::Single_Step_2 + 1;
 constexpr uint16_t Single_Step_4                                 = Stance::Single_Step_3 + 1;
@@ -922,368 +1288,10 @@ constexpr uint16_t Vert_Adjustment_6_Start_End                   = Stance::Vert_
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*  Dist 46                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
-#define RUNNING_JUMP_SEQ                                         16,    17,    18,    19,    20,    21,    22,    23,    24,    25,    26,
-#define RUNNING_JUMP_OFFSETS                                     2,0,   3,0,   4,0,   4,0,   5,0,   6,0,   6,0,   6,-2,  5,0,   3,1,   2,1,
-constexpr uint16_t Running_Jump_1_Start                          = Stance::Vert_Adjustment_6_Start_End + 1;
-constexpr uint16_t Running_Jump_2                                = Stance::Running_Jump_1_Start + 1;
-constexpr uint16_t Running_Jump_3                                = Stance::Running_Jump_2 + 1;
-constexpr uint16_t Running_Jump_4                                = Stance::Running_Jump_3 + 1;
-constexpr uint16_t Running_Jump_5                                = Stance::Running_Jump_4 + 1;
-constexpr uint16_t Running_Jump_6                                = Stance::Running_Jump_5 + 1;
-constexpr uint16_t Running_Jump_7                                = Stance::Running_Jump_6 + 1;
-constexpr uint16_t Running_Jump_8                                = Stance::Running_Jump_7 + 1;
-constexpr uint16_t Running_Jump_9                                = Stance::Running_Jump_8 + 1;
-constexpr uint16_t Running_Jump_10                               = Stance::Running_Jump_9 + 1;
-constexpr uint16_t Running_Jump_11_End                           = Stance::Running_Jump_10 + 1;
-
-
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*  Dist 33                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
-#define RUNNING_JUMP_SHORT_2_SEQ                                 20,    21,    22,    23,    24,    25,    26,
-#define RUNNING_JUMP_SHORT_2_OFFSETS                             5,0,   5,0,   5,0,   5,-2,  6,-2,  5,3,   2,1,
-constexpr uint16_t Running_Jump_Short_2_1_Start                  = Stance::Running_Jump_11_End + 1;
-constexpr uint16_t Running_Jump_Short_2_2                        = Stance::Running_Jump_Short_2_1_Start + 1;
-constexpr uint16_t Running_Jump_Short_2_3                        = Stance::Running_Jump_Short_2_2 + 1;
-constexpr uint16_t Running_Jump_Short_2_4                        = Stance::Running_Jump_Short_2_3 + 1;
-constexpr uint16_t Running_Jump_Short_2_5                        = Stance::Running_Jump_Short_2_4 + 1;
-constexpr uint16_t Running_Jump_Short_2_6                        = Stance::Running_Jump_Short_2_5 + 1;
-constexpr uint16_t Running_Jump_Short_2_7_End                    = Stance::Running_Jump_Short_2_6 + 1;
-
-
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*  Dist 37                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
-#define RUNNING_JUMP_SHORT_6_SEQ                                 20,    21,    22,    23,    24,    25,    26,
-#define RUNNING_JUMP_SHORT_6_OFFSETS                             6,0,   6,0,   6,0,   6,-2,  6,-2,  5,3,   2,1,
-constexpr uint16_t Running_Jump_Short_6_1_Start                  = Stance::Running_Jump_Short_2_7_End + 1;
-constexpr uint16_t Running_Jump_Short_6_2                        = Stance::Running_Jump_Short_6_1_Start + 1;
-constexpr uint16_t Running_Jump_Short_6_3                        = Stance::Running_Jump_Short_6_2 + 1;
-constexpr uint16_t Running_Jump_Short_6_4                        = Stance::Running_Jump_Short_6_3 + 1;
-constexpr uint16_t Running_Jump_Short_6_5                        = Stance::Running_Jump_Short_6_4 + 1;
-constexpr uint16_t Running_Jump_Short_6_6                        = Stance::Running_Jump_Short_6_5 + 1;
-constexpr uint16_t Running_Jump_Short_6_7_End                    = Stance::Running_Jump_Short_6_6 + 1;
-
-
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*  Dist 16                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
-#define RUNNING_JUMP_1_2_SEQ                                     20,    21,    25,    26,    59,    60,    61,    62,    
-#define RUNNING_JUMP_1_2_OFFSETS                                 2,0,   3,0,   4,-3,  3,3,   2,0,   1,0,   0,0,   1,0,   
-constexpr uint16_t Running_Jump_1_2_1_Start                      = Stance::Running_Jump_Short_6_7_End + 1;
-constexpr uint16_t Running_Jump_1_2_2                            = Stance::Running_Jump_1_2_1_Start + 1;
-constexpr uint16_t Running_Jump_1_2_3                            = Stance::Running_Jump_1_2_2 + 1;
-constexpr uint16_t Running_Jump_1_2_4                            = Stance::Running_Jump_1_2_3 + 1;
-constexpr uint16_t Running_Jump_1_2_5                            = Stance::Running_Jump_1_2_4 + 1;
-constexpr uint16_t Running_Jump_1_2_6                            = Stance::Running_Jump_1_2_5 + 1;
-constexpr uint16_t Running_Jump_1_2_7                            = Stance::Running_Jump_1_2_6 + 1;
-constexpr uint16_t Running_Jump_1_2_8_End                        = Stance::Running_Jump_1_2_7 + 1;
-
-
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*  Dist 20                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
-#define RUNNING_JUMP_1_6_SEQ                                     20,    21,    23,    25,    26,    59,    60,    61,    62,    
-#define RUNNING_JUMP_1_6_OFFSETS                                 2,0,   3,0,   3,0,   4,-3,  3,3,   2,0,   2,0,   0,0,   1,0,   
-constexpr uint16_t Running_Jump_1_6_1_Start                      = Stance::Running_Jump_1_2_8_End + 1;
-constexpr uint16_t Running_Jump_1_6_2                            = Stance::Running_Jump_1_6_1_Start + 1;
-constexpr uint16_t Running_Jump_1_6_3                            = Stance::Running_Jump_1_6_2 + 1;
-constexpr uint16_t Running_Jump_1_6_4                            = Stance::Running_Jump_1_6_3 + 1;
-constexpr uint16_t Running_Jump_1_6_5                            = Stance::Running_Jump_1_6_4 + 1;
-constexpr uint16_t Running_Jump_1_6_6                            = Stance::Running_Jump_1_6_5 + 1;
-constexpr uint16_t Running_Jump_1_6_7                            = Stance::Running_Jump_1_6_6 + 1;
-constexpr uint16_t Running_Jump_1_6_8                            = Stance::Running_Jump_1_6_7 + 1;
-constexpr uint16_t Running_Jump_1_6_9_End                        = Stance::Running_Jump_1_6_8 + 1;
-
-
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*  Dist 24                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
-#define RUNNING_JUMP_1_10_SEQ                                    20,    21,    22,    23,    25,    26,    59,    60,    61,    62,    
-#define RUNNING_JUMP_1_10_OFFSETS                                2,0,   3,0,   3,0,   3,0,   4,-3,  3,3,   3,0,   2,0,   0,0,  1,0,   
-constexpr uint16_t Running_Jump_1_10_1_Start                     = Stance::Running_Jump_1_6_9_End + 1;
-constexpr uint16_t Running_Jump_1_10_2                           = Stance::Running_Jump_1_10_1_Start + 1;
-constexpr uint16_t Running_Jump_1_10_3                           = Stance::Running_Jump_1_10_2 + 1;
-constexpr uint16_t Running_Jump_1_10_4                           = Stance::Running_Jump_1_10_3 + 1;
-constexpr uint16_t Running_Jump_1_10_5                           = Stance::Running_Jump_1_10_4 + 1;
-constexpr uint16_t Running_Jump_1_10_6                           = Stance::Running_Jump_1_10_5 + 1;
-constexpr uint16_t Running_Jump_1_10_7                           = Stance::Running_Jump_1_10_6 + 1;
-constexpr uint16_t Running_Jump_1_10_8                           = Stance::Running_Jump_1_10_7 + 1;
-constexpr uint16_t Running_Jump_1_10_9                           = Stance::Running_Jump_1_10_8 + 1;
-constexpr uint16_t Running_Jump_1_10_10_End                      = Stance::Running_Jump_1_10_9 + 1;
-
-
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*  Dist 25                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
-#define RUNNING_JUMP_2_2_SEQ                                     20,    21,    22,    23,    24,    25,    26,
-#define RUNNING_JUMP_2_2_OFFSETS                                 3,0,   3,0,   4,0,   4,-2,  5,-2,  4,3,   2,1,
-constexpr uint16_t Running_Jump_2_2_1_Start                      = Stance::Running_Jump_1_10_10_End + 1;
-constexpr uint16_t Running_Jump_2_2_2                            = Stance::Running_Jump_2_2_1_Start + 1;
-constexpr uint16_t Running_Jump_2_2_3                            = Stance::Running_Jump_2_2_2 + 1;
-constexpr uint16_t Running_Jump_2_2_4                            = Stance::Running_Jump_2_2_3 + 1;
-constexpr uint16_t Running_Jump_2_2_5                            = Stance::Running_Jump_2_2_4 + 1;
-constexpr uint16_t Running_Jump_2_2_6                            = Stance::Running_Jump_2_2_5 + 1;
-constexpr uint16_t Running_Jump_2_2_7_End                        = Stance::Running_Jump_2_2_6 + 1;
-
-
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*  Dist 29                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
-#define RUNNING_JUMP_2_6_SEQ                                     20,    21,    22,    23,    24,    25,    26,
-#define RUNNING_JUMP_2_6_OFFSETS                                 4,0,   4,0,   5,0,   5,-2,  5,-2,  4,3,   2,1,
-constexpr uint16_t Running_Jump_2_6_1_Start                      = Stance::Running_Jump_2_2_7_End + 1;
-constexpr uint16_t Running_Jump_2_6_2                            = Stance::Running_Jump_2_6_1_Start + 1;
-constexpr uint16_t Running_Jump_2_6_3                            = Stance::Running_Jump_2_6_2 + 1;
-constexpr uint16_t Running_Jump_2_6_4                            = Stance::Running_Jump_2_6_3 + 1;
-constexpr uint16_t Running_Jump_2_6_5                            = Stance::Running_Jump_2_6_4 + 1;
-constexpr uint16_t Running_Jump_2_6_6                            = Stance::Running_Jump_2_6_5 + 1;
-constexpr uint16_t Running_Jump_2_6_7_End                        = Stance::Running_Jump_2_6_6 + 1;
-
-
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*  Dist 33                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
-#define RUNNING_JUMP_2_10_SEQ                                    20,    21,    22,    23,    24,    25,    26,
-#define RUNNING_JUMP_2_10_OFFSETS                                4,0,   5,0,   6,0,   6,-2,  6,-2,  4,3,   2,1,
-constexpr uint16_t Running_Jump_2_10_1_Start                     = Stance::Running_Jump_2_6_7_End + 1;
-constexpr uint16_t Running_Jump_2_10_2                           = Stance::Running_Jump_2_10_1_Start + 1;
-constexpr uint16_t Running_Jump_2_10_3                           = Stance::Running_Jump_2_10_2 + 1;
-constexpr uint16_t Running_Jump_2_10_4                           = Stance::Running_Jump_2_10_3 + 1;
-constexpr uint16_t Running_Jump_2_10_5                           = Stance::Running_Jump_2_10_4 + 1;
-constexpr uint16_t Running_Jump_2_10_6                           = Stance::Running_Jump_2_10_5 + 1;
-constexpr uint16_t Running_Jump_2_10_7_End                       = Stance::Running_Jump_2_10_6 + 1;
-
-
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*  Dist 37                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
-#define RUNNING_JUMP_2_DROPLVL_SEQ                               19,    20,    21,    22,    23,    24,    25,    26,    121,   122,   123,   124,   125,   126,
-#define RUNNING_JUMP_2_DROPLVL_OFFSETS                           3,0,   3,0,   3,0,   3,0,   4,-2,  4,-1,  3,3,   3,2,   2,4,   2,5,   2,5,   2,5,   2,5,   1,5,
-constexpr uint16_t Running_Jump_2_DropLvl_1_Start                = Stance::Running_Jump_2_10_7_End + 1;
-constexpr uint16_t Running_Jump_2_DropLvl_2                      = Stance::Running_Jump_2_DropLvl_1_Start + 1;
-constexpr uint16_t Running_Jump_2_DropLvl_3                      = Stance::Running_Jump_2_DropLvl_2 + 1;
-constexpr uint16_t Running_Jump_2_DropLvl_4                      = Stance::Running_Jump_2_DropLvl_3 + 1;
-constexpr uint16_t Running_Jump_2_DropLvl_5                      = Stance::Running_Jump_2_DropLvl_4 + 1;
-constexpr uint16_t Running_Jump_2_DropLvl_6                      = Stance::Running_Jump_2_DropLvl_5 + 1;
-constexpr uint16_t Running_Jump_2_DropLvl_7                      = Stance::Running_Jump_2_DropLvl_6 + 1;
-constexpr uint16_t Running_Jump_2_DropLvl_8                      = Stance::Running_Jump_2_DropLvl_7 + 1;
-constexpr uint16_t Running_Jump_2_DropLvl_9                      = Stance::Running_Jump_2_DropLvl_8 + 1;
-constexpr uint16_t Running_Jump_2_DropLvl_10                     = Stance::Running_Jump_2_DropLvl_9 + 1;
-constexpr uint16_t Running_Jump_2_DropLvl_11                     = Stance::Running_Jump_2_DropLvl_10 + 1;
-constexpr uint16_t Running_Jump_2_DropLvl_12                     = Stance::Running_Jump_2_DropLvl_11 + 1;
-constexpr uint16_t Running_Jump_2_DropLvl_13                     = Stance::Running_Jump_2_DropLvl_12 + 1;
-constexpr uint16_t Running_Jump_2_DropLvl_14_End                 = Stance::Running_Jump_2_DropLvl_13 + 1;
-
-
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*  Dist 45                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
-#define RUNNING_JUMP_2_DROPLVL_10_SEQ                            19,    20,    21,    22,    23,    24,    25,    26,    121,   122,   123,   124,   125,   126,
-#define RUNNING_JUMP_2_DROPLVL_10_OFFSETS                        3,0,   3,0,   3,0,   3,0,   4,-2,  4,-1,  4,3,   4,2,   4,4,   4,5,   3,5,   2,5,   2,5,   2,5,
-constexpr uint16_t Running_Jump_2_DropLvl_10_1_Start             = Stance::Running_Jump_2_DropLvl_14_End + 1;
-constexpr uint16_t Running_Jump_2_DropLvl_10_2                   = Stance::Running_Jump_2_DropLvl_10_1_Start + 1;
-constexpr uint16_t Running_Jump_2_DropLvl_10_3                   = Stance::Running_Jump_2_DropLvl_10_2 + 1;
-constexpr uint16_t Running_Jump_2_DropLvl_10_4                   = Stance::Running_Jump_2_DropLvl_10_3 + 1;
-constexpr uint16_t Running_Jump_2_DropLvl_10_5                   = Stance::Running_Jump_2_DropLvl_10_4 + 1;
-constexpr uint16_t Running_Jump_2_DropLvl_10_6                   = Stance::Running_Jump_2_DropLvl_10_5 + 1;
-constexpr uint16_t Running_Jump_2_DropLvl_10_7                   = Stance::Running_Jump_2_DropLvl_10_6 + 1;
-constexpr uint16_t Running_Jump_2_DropLvl_10_8                   = Stance::Running_Jump_2_DropLvl_10_7 + 1;
-constexpr uint16_t Running_Jump_2_DropLvl_10_9                   = Stance::Running_Jump_2_DropLvl_10_8 + 1;
-constexpr uint16_t Running_Jump_2_DropLvl_10_10                  = Stance::Running_Jump_2_DropLvl_10_9 + 1;
-constexpr uint16_t Running_Jump_2_DropLvl_10_11                  = Stance::Running_Jump_2_DropLvl_10_10 + 1;
-constexpr uint16_t Running_Jump_2_DropLvl_10_12                  = Stance::Running_Jump_2_DropLvl_10_11 + 1;
-constexpr uint16_t Running_Jump_2_DropLvl_10_13                  = Stance::Running_Jump_2_DropLvl_10_12 + 1;
-constexpr uint16_t Running_Jump_2_DropLvl_10_14_End              = Stance::Running_Jump_2_DropLvl_10_13 + 1;
-
-
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*  Dist 28                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
-#define RUNNING_JUMP_3_2_SEQ                                     20,    21,    22,    23,    169,   24,    25,    26,
-#define RUNNING_JUMP_3_2_OFFSETS                                 4,0,   5,0,   4,0,   4,-2,  4,0,   3,-2,  3,3,   2,1,
-constexpr uint16_t Running_Jump_3_2_1_Start                      = Stance::Running_Jump_2_DropLvl_10_14_End + 1;
-constexpr uint16_t Running_Jump_3_2_2                            = Stance::Running_Jump_3_2_1_Start + 1;
-constexpr uint16_t Running_Jump_3_2_3                            = Stance::Running_Jump_3_2_2 + 1;
-constexpr uint16_t Running_Jump_3_2_4                            = Stance::Running_Jump_3_2_3 + 1;
-constexpr uint16_t Running_Jump_3_2_5                            = Stance::Running_Jump_3_2_4 + 1;
-constexpr uint16_t Running_Jump_3_2_6                            = Stance::Running_Jump_3_2_5 + 1;
-constexpr uint16_t Running_Jump_3_2_7                            = Stance::Running_Jump_3_2_6 + 1;
-constexpr uint16_t Running_Jump_3_2_8_End                        = Stance::Running_Jump_3_2_7 + 1;
-
-
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*  Dist 32                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
-#define RUNNING_JUMP_3_6_SEQ                                     20,    21,    22,    23,    169,   24,    25,    26,
-#define RUNNING_JUMP_3_6_OFFSETS                                 4,0,   5,0,   5,0,   5,-2,  4,0,   4,-2,  4,3,   2,1,
-constexpr uint16_t Running_Jump_3_6_1_Start                      = Stance::Running_Jump_3_2_8_End + 1;
-constexpr uint16_t Running_Jump_3_6_2                            = Stance::Running_Jump_3_6_1_Start + 1;
-constexpr uint16_t Running_Jump_3_6_3                            = Stance::Running_Jump_3_6_2 + 1;
-constexpr uint16_t Running_Jump_3_6_4                            = Stance::Running_Jump_3_6_3 + 1;
-constexpr uint16_t Running_Jump_3_6_5                            = Stance::Running_Jump_3_6_4 + 1;
-constexpr uint16_t Running_Jump_3_6_6                            = Stance::Running_Jump_3_6_5 + 1;
-constexpr uint16_t Running_Jump_3_6_7                            = Stance::Running_Jump_3_6_6 + 1;
-constexpr uint16_t Running_Jump_3_6_8_End                        = Stance::Running_Jump_3_6_7 + 1;
-
-
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*  Dist 36                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
-#define RUNNING_JUMP_3_10_SEQ                                    20,    21,    22,    23,    169,   24,    25,    26,
-#define RUNNING_JUMP_3_10_OFFSETS                                5,0,   6,0,   6,0,   6,-2,  6,0,   5,-2,  4,3,   2,1,
-constexpr uint16_t Running_Jump_3_10_1_Start                     = Stance::Running_Jump_3_6_8_End + 1;
-constexpr uint16_t Running_Jump_3_10_2                           = Stance::Running_Jump_3_10_1_Start + 1;
-constexpr uint16_t Running_Jump_3_10_3                           = Stance::Running_Jump_3_10_2 + 1;
-constexpr uint16_t Running_Jump_3_10_4                           = Stance::Running_Jump_3_10_3 + 1;
-constexpr uint16_t Running_Jump_3_10_5                           = Stance::Running_Jump_3_10_4 + 1;
-constexpr uint16_t Running_Jump_3_10_6                           = Stance::Running_Jump_3_10_5 + 1;
-constexpr uint16_t Running_Jump_3_10_7                           = Stance::Running_Jump_3_10_6 + 1;
-constexpr uint16_t Running_Jump_3_10_8_End                       = Stance::Running_Jump_3_10_7 + 1;
-
-
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*  Dist 47                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
-#define RUNNING_JUMP_3_DROPLVL_SEQ                               19,    20,    21,    22,    23,    24,    25,    26,    121,   122,   123,   124,   125,   126,
-#define RUNNING_JUMP_3_DROPLVL_OFFSETS                           3,0,   3,0,   3,0,   3,0,   4,-2,  4,-1,  4,3,   4,2,   4,4,   4,5,   3,5,   2,5,   2,5,   2,5,
-constexpr uint16_t Running_Jump_3_DropLvl_1_Start                = Stance::Running_Jump_3_10_8_End + 1;
-constexpr uint16_t Running_Jump_3_DropLvl_2                      = Stance::Running_Jump_3_DropLvl_1_Start + 1;
-constexpr uint16_t Running_Jump_3_DropLvl_3                      = Stance::Running_Jump_3_DropLvl_2 + 1;
-constexpr uint16_t Running_Jump_3_DropLvl_4                      = Stance::Running_Jump_3_DropLvl_3 + 1;
-constexpr uint16_t Running_Jump_3_DropLvl_5                      = Stance::Running_Jump_3_DropLvl_4 + 1;
-constexpr uint16_t Running_Jump_3_DropLvl_6                      = Stance::Running_Jump_3_DropLvl_5 + 1;
-constexpr uint16_t Running_Jump_3_DropLvl_7                      = Stance::Running_Jump_3_DropLvl_6 + 1;
-constexpr uint16_t Running_Jump_3_DropLvl_8                      = Stance::Running_Jump_3_DropLvl_7 + 1;
-constexpr uint16_t Running_Jump_3_DropLvl_9                      = Stance::Running_Jump_3_DropLvl_8 + 1;
-constexpr uint16_t Running_Jump_3_DropLvl_10                     = Stance::Running_Jump_3_DropLvl_9 + 1;
-constexpr uint16_t Running_Jump_3_DropLvl_11                     = Stance::Running_Jump_3_DropLvl_10 + 1;
-constexpr uint16_t Running_Jump_3_DropLvl_12                     = Stance::Running_Jump_3_DropLvl_11 + 1;
-constexpr uint16_t Running_Jump_3_DropLvl_13                     = Stance::Running_Jump_3_DropLvl_12 + 1;
-constexpr uint16_t Running_Jump_3_DropLvl_14_End                 = Stance::Running_Jump_3_DropLvl_13 + 1;
-
-
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*  Dist 49                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
-#define RUNNING_JUMP_3_DROPLVL_10_SEQ                            19,    20,    21,    22,    23,    24,    25,    26,    121,   122,   123,   124,   125,   126,
-#define RUNNING_JUMP_3_DROPLVL_10_OFFSETS                        3,0,   3,0,   3,0,   3,0,   4,-2,  5,-1,  5,3,   5,2,   5,4,   4,5,   3,5,   2,5,   2,5,   2,5,
-constexpr uint16_t Running_Jump_3_DropLvl_10_1_Start             = Stance::Running_Jump_3_DropLvl_14_End + 1;
-constexpr uint16_t Running_Jump_3_DropLvl_10_2                   = Stance::Running_Jump_3_DropLvl_10_1_Start + 1;
-constexpr uint16_t Running_Jump_3_DropLvl_10_3                   = Stance::Running_Jump_3_DropLvl_10_2 + 1;
-constexpr uint16_t Running_Jump_3_DropLvl_10_4                   = Stance::Running_Jump_3_DropLvl_10_3 + 1;
-constexpr uint16_t Running_Jump_3_DropLvl_10_5                   = Stance::Running_Jump_3_DropLvl_10_4 + 1;
-constexpr uint16_t Running_Jump_3_DropLvl_10_6                   = Stance::Running_Jump_3_DropLvl_10_5 + 1;
-constexpr uint16_t Running_Jump_3_DropLvl_10_7                   = Stance::Running_Jump_3_DropLvl_10_6 + 1;
-constexpr uint16_t Running_Jump_3_DropLvl_10_8                   = Stance::Running_Jump_3_DropLvl_10_7 + 1;
-constexpr uint16_t Running_Jump_3_DropLvl_10_9                   = Stance::Running_Jump_3_DropLvl_10_8 + 1;
-constexpr uint16_t Running_Jump_3_DropLvl_10_10                  = Stance::Running_Jump_3_DropLvl_10_9 + 1;
-constexpr uint16_t Running_Jump_3_DropLvl_10_11                  = Stance::Running_Jump_3_DropLvl_10_10 + 1;
-constexpr uint16_t Running_Jump_3_DropLvl_10_12                  = Stance::Running_Jump_3_DropLvl_10_11 + 1;
-constexpr uint16_t Running_Jump_3_DropLvl_10_13                  = Stance::Running_Jump_3_DropLvl_10_12 + 1;
-constexpr uint16_t Running_Jump_3_DropLvl_10_14_End              = Stance::Running_Jump_3_DropLvl_10_13 + 1;
-
-
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*  Dist 48                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
-#define RUNNING_JUMP_4_GL_2_SEQ                                  19,    20,    21,    22,    23,    24,    25,    26,    121,   122,   123,   124,   125,   101,   102,   103,
-#define RUNNING_JUMP_4_GL_2_OFFSETS                              3,0,   3,0,   3,0,   4,0,   4,-2,  4,-1,  4,3,   4,2,   7,3,   4,4,   3,4,   1,4,   1,4,   1,4,   1,3,   1,3,
-constexpr uint16_t Running_Jump_4_GL_2_1_Start                   = Stance::Running_Jump_3_DropLvl_10_14_End + 1;
-constexpr uint16_t Running_Jump_4_GL_2_2                         = Stance::Running_Jump_4_GL_2_1_Start + 1;
-constexpr uint16_t Running_Jump_4_GL_2_3                         = Stance::Running_Jump_4_GL_2_2 + 1;
-constexpr uint16_t Running_Jump_4_GL_2_4                         = Stance::Running_Jump_4_GL_2_3 + 1;
-constexpr uint16_t Running_Jump_4_GL_2_5                         = Stance::Running_Jump_4_GL_2_4 + 1;
-constexpr uint16_t Running_Jump_4_GL_2_6                         = Stance::Running_Jump_4_GL_2_5 + 1;
-constexpr uint16_t Running_Jump_4_GL_2_7                         = Stance::Running_Jump_4_GL_2_6 + 1;
-constexpr uint16_t Running_Jump_4_GL_2_8                         = Stance::Running_Jump_4_GL_2_7 + 1;
-constexpr uint16_t Running_Jump_4_GL_2_9                         = Stance::Running_Jump_4_GL_2_8 + 1;
-constexpr uint16_t Running_Jump_4_GL_2_10                        = Stance::Running_Jump_4_GL_2_9 + 1;
-constexpr uint16_t Running_Jump_4_GL_2_11                        = Stance::Running_Jump_4_GL_2_10 + 1;
-constexpr uint16_t Running_Jump_4_GL_2_12                        = Stance::Running_Jump_4_GL_2_11 + 1;
-constexpr uint16_t Running_Jump_4_GL_2_13                        = Stance::Running_Jump_4_GL_2_12 + 1;
-constexpr uint16_t Running_Jump_4_GL_2_14                        = Stance::Running_Jump_4_GL_2_13 + 1;
-constexpr uint16_t Running_Jump_4_GL_2_15                        = Stance::Running_Jump_4_GL_2_14 + 1;
-constexpr uint16_t Running_Jump_4_GL_2_16_End                    = Stance::Running_Jump_4_GL_2_15 + 1;
-
-
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*  Dist 52                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
-#define RUNNING_JUMP_4_GL_6_SEQ                                  19,    20,    21,    22,    23,    24,    25,    26,    121,   122,   123,   124,   125,   101,   102,   103,
-#define RUNNING_JUMP_4_GL_6_OFFSETS                              3,0,   3,0,   3,0,   4,0,   5,-2,  5,-1,  5,3,   5,2,   7,3,   4,4,   3,4,   1,4,   1,4,   1,4,   1,3,   1,3,
-constexpr uint16_t Running_Jump_4_GL_6_1_Start                   = Stance::Running_Jump_4_GL_2_16_End + 1;
-constexpr uint16_t Running_Jump_4_GL_6_2                         = Stance::Running_Jump_4_GL_6_1_Start + 1;
-constexpr uint16_t Running_Jump_4_GL_6_3                         = Stance::Running_Jump_4_GL_6_2 + 1;
-constexpr uint16_t Running_Jump_4_GL_6_4                         = Stance::Running_Jump_4_GL_6_3 + 1;
-constexpr uint16_t Running_Jump_4_GL_6_5                         = Stance::Running_Jump_4_GL_6_4 + 1;
-constexpr uint16_t Running_Jump_4_GL_6_6                         = Stance::Running_Jump_4_GL_6_5 + 1;
-constexpr uint16_t Running_Jump_4_GL_6_7                         = Stance::Running_Jump_4_GL_6_6 + 1;
-constexpr uint16_t Running_Jump_4_GL_6_8                         = Stance::Running_Jump_4_GL_6_7 + 1;
-constexpr uint16_t Running_Jump_4_GL_6_9                         = Stance::Running_Jump_4_GL_6_8 + 1;
-constexpr uint16_t Running_Jump_4_GL_6_10                        = Stance::Running_Jump_4_GL_6_9 + 1;
-constexpr uint16_t Running_Jump_4_GL_6_11                        = Stance::Running_Jump_4_GL_6_10 + 1;
-constexpr uint16_t Running_Jump_4_GL_6_12                        = Stance::Running_Jump_4_GL_6_11 + 1;
-constexpr uint16_t Running_Jump_4_GL_6_13                        = Stance::Running_Jump_4_GL_6_12 + 1;
-constexpr uint16_t Running_Jump_4_GL_6_14                        = Stance::Running_Jump_4_GL_6_13 + 1;
-constexpr uint16_t Running_Jump_4_GL_6_15                        = Stance::Running_Jump_4_GL_6_14 + 1;
-constexpr uint16_t Running_Jump_4_GL_6_16_End                    = Stance::Running_Jump_4_GL_6_15 + 1;
-
-
-
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*  Dist 56                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
-#define RUNNING_JUMP_4_GL_10_SEQ                                 19,    20,    21,    22,    23,    24,    25,    26,    121,   122,   123,   124,   125,   101,   102,   103,
-#define RUNNING_JUMP_4_GL_10_OFFSETS                             3,0,   3,0,   3,0,   4,0,   5,-2,  6,-1,  6,3,   6,2,   7,3,   5,4,   3,4,   1,4,   1,4,   1,4,   1,3,   1,3,
-constexpr uint16_t Running_Jump_4_GL_10_1_Start                  = Stance::Running_Jump_4_GL_6_16_End + 1;
-constexpr uint16_t Running_Jump_4_GL_10_2                        = Stance::Running_Jump_4_GL_10_1_Start + 1;
-constexpr uint16_t Running_Jump_4_GL_10_3                        = Stance::Running_Jump_4_GL_10_2 + 1;
-constexpr uint16_t Running_Jump_4_GL_10_4                        = Stance::Running_Jump_4_GL_10_3 + 1;
-constexpr uint16_t Running_Jump_4_GL_10_5                        = Stance::Running_Jump_4_GL_10_4 + 1;
-constexpr uint16_t Running_Jump_4_GL_10_6                        = Stance::Running_Jump_4_GL_10_5 + 1;
-constexpr uint16_t Running_Jump_4_GL_10_7                        = Stance::Running_Jump_4_GL_10_6 + 1;
-constexpr uint16_t Running_Jump_4_GL_10_8                        = Stance::Running_Jump_4_GL_10_7 + 1;
-constexpr uint16_t Running_Jump_4_GL_10_9                        = Stance::Running_Jump_4_GL_10_8 + 1;
-constexpr uint16_t Running_Jump_4_GL_10_10                       = Stance::Running_Jump_4_GL_10_9 + 1;
-constexpr uint16_t Running_Jump_4_GL_10_11                       = Stance::Running_Jump_4_GL_10_10 + 1;
-constexpr uint16_t Running_Jump_4_GL_10_12                       = Stance::Running_Jump_4_GL_10_11 + 1;
-constexpr uint16_t Running_Jump_4_GL_10_13                       = Stance::Running_Jump_4_GL_10_12 + 1;
-constexpr uint16_t Running_Jump_4_GL_10_14                       = Stance::Running_Jump_4_GL_10_13 + 1;
-constexpr uint16_t Running_Jump_4_GL_10_15                       = Stance::Running_Jump_4_GL_10_14 + 1;
-constexpr uint16_t Running_Jump_4_GL_10_16_End                   = Stance::Running_Jump_4_GL_10_15 + 1;
-
-
-
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*  Dist 55                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
-#define RUNNING_JUMP_4_DROPLVL_SEQ                               19,    20,    21,    22,    23,    24,    25,    26,    121,   122,   123,   124,   125,   126,
-#define RUNNING_JUMP_4_DROPLVL_OFFSETS                           3,0,   3,0,   4,0,   4,0,   5,-2,  5,-1,  6,3,   6,2,   7,5,   4,5,   3,5,   3,5,   3,5,   2,4,
-constexpr uint16_t Running_Jump_4_DropLvl_1_Start                = Stance::Running_Jump_4_GL_10_16_End + 1;
-constexpr uint16_t Running_Jump_4_DropLvl_2                      = Stance::Running_Jump_4_DropLvl_1_Start + 1;
-constexpr uint16_t Running_Jump_4_DropLvl_3                      = Stance::Running_Jump_4_DropLvl_2 + 1;
-constexpr uint16_t Running_Jump_4_DropLvl_4                      = Stance::Running_Jump_4_DropLvl_3 + 1;
-constexpr uint16_t Running_Jump_4_DropLvl_5                      = Stance::Running_Jump_4_DropLvl_4 + 1;
-constexpr uint16_t Running_Jump_4_DropLvl_6                      = Stance::Running_Jump_4_DropLvl_5 + 1;
-constexpr uint16_t Running_Jump_4_DropLvl_7                      = Stance::Running_Jump_4_DropLvl_6 + 1;
-constexpr uint16_t Running_Jump_4_DropLvl_8                      = Stance::Running_Jump_4_DropLvl_7 + 1;
-constexpr uint16_t Running_Jump_4_DropLvl_9                      = Stance::Running_Jump_4_DropLvl_8 + 1;
-constexpr uint16_t Running_Jump_4_DropLvl_10                     = Stance::Running_Jump_4_DropLvl_9 + 1;
-constexpr uint16_t Running_Jump_4_DropLvl_11                     = Stance::Running_Jump_4_DropLvl_10 + 1;
-constexpr uint16_t Running_Jump_4_DropLvl_12                     = Stance::Running_Jump_4_DropLvl_11 + 1;
-constexpr uint16_t Running_Jump_4_DropLvl_13                     = Stance::Running_Jump_4_DropLvl_12 + 1;
-constexpr uint16_t Running_Jump_4_DropLvl_14_End                 = Stance::Running_Jump_4_DropLvl_13 + 1;
-
-
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*  Dist 62                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
-#define RUNNING_JUMP_4_DROPLVL_10_SEQ                            19,    20,    21,    22,    23,    24,    25,    26,    121,   122,   123,   124,   125,   126,
-#define RUNNING_JUMP_4_DROPLVL_10_OFFSETS                        3,0,   3,0,   4,0,   5,0,   5,-2,  6,-1,  7,3,   7,3,   7,6,   4,6,   3,6,   3,5,   3,5,   2,5,
-
-constexpr uint16_t Running_Jump_4_DropLvl_10_1_Start             = Stance::Running_Jump_4_DropLvl_14_End + 1;
-constexpr uint16_t Running_Jump_4_DropLvl_10_2                   = Stance::Running_Jump_4_DropLvl_10_1_Start + 1;
-constexpr uint16_t Running_Jump_4_DropLvl_10_3                   = Stance::Running_Jump_4_DropLvl_10_2 + 1;
-constexpr uint16_t Running_Jump_4_DropLvl_10_4                   = Stance::Running_Jump_4_DropLvl_10_3 + 1;
-constexpr uint16_t Running_Jump_4_DropLvl_10_5                   = Stance::Running_Jump_4_DropLvl_10_4 + 1;
-constexpr uint16_t Running_Jump_4_DropLvl_10_6                   = Stance::Running_Jump_4_DropLvl_10_5 + 1;
-constexpr uint16_t Running_Jump_4_DropLvl_10_7                   = Stance::Running_Jump_4_DropLvl_10_6 + 1;
-constexpr uint16_t Running_Jump_4_DropLvl_10_8                   = Stance::Running_Jump_4_DropLvl_10_7 + 1;
-constexpr uint16_t Running_Jump_4_DropLvl_10_9                   = Stance::Running_Jump_4_DropLvl_10_8 + 1;
-constexpr uint16_t Running_Jump_4_DropLvl_10_10                  = Stance::Running_Jump_4_DropLvl_10_9 + 1;
-constexpr uint16_t Running_Jump_4_DropLvl_10_11                  = Stance::Running_Jump_4_DropLvl_10_10 + 1;
-constexpr uint16_t Running_Jump_4_DropLvl_10_12                  = Stance::Running_Jump_4_DropLvl_10_11 + 1;
-constexpr uint16_t Running_Jump_4_DropLvl_10_13                  = Stance::Running_Jump_4_DropLvl_10_12 + 1;
-constexpr uint16_t Running_Jump_4_DropLvl_10_14_End              = Stance::Running_Jump_4_DropLvl_10_13 + 1;
-
-
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /*                                                               01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define JUMP_UP_DROP_HIDEHANDS_SEQ                               90,    91,    92,    93,    94,    95,    96,    97,    98,    99,    100,   101,   196,   197,   198,   199,   106,   107,   108,
 #define JUMP_UP_DROP_HIDEHANDS_OFFSETS                           0,0,   0,0,   0,0,   -1,0,  -1,0,  0,0,   0,0,   0,0,   0,0,   1,0,   1,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,   0,0,                                          
-constexpr uint16_t Jump_Up_Drop_HideHands_1_Start                = Stance::Running_Jump_4_DropLvl_10_14_End + 1; 
+constexpr uint16_t Jump_Up_Drop_HideHands_1_Start                = Stance::Vert_Adjustment_6_Start_End + 1; 
 constexpr uint16_t Jump_Up_Drop_HideHands_2                      = Stance::Jump_Up_Drop_HideHands_1_Start + 1;
 constexpr uint16_t Jump_Up_Drop_HideHands_3                      = Stance::Jump_Up_Drop_HideHands_2 + 1;
 constexpr uint16_t Jump_Up_Drop_HideHands_4                      = Stance::Jump_Up_Drop_HideHands_3 + 1;

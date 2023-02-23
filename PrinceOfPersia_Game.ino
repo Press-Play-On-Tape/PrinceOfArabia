@@ -1749,16 +1749,9 @@ void game() {
 
                 case Stance::Run_Start_1_Start ...Stance::Run_Start_6_End:
                 case Stance::Run_Repeat_1_Start ... Stance::Run_Repeat_8_End:
-                case Stance::Standing_Jump_36_1_Start ... Stance::Standing_Jump_36_11_Land_Point:
-                case Stance::Running_Jump_1_Start ... Stance::Running_Jump_11_End:
-                case Stance::Running_Jump_Short_2_1_Start ... Stance::Running_Jump_Short_2_7_End:
-                case Stance::Running_Jump_Short_6_1_Start ... Stance::Running_Jump_Short_6_7_End:
-                case Stance::Running_Jump_3_2_1_Start ... Stance::Running_Jump_3_2_8_End:
-                case Stance::Running_Jump_3_6_1_Start ... Stance::Running_Jump_3_6_8_End:
-                case Stance::Running_Jump_3_10_1_Start ... Stance::Running_Jump_3_10_8_End:
-                case Stance::Running_Jump_3_DropLvl_1_Start ... Stance::Running_Jump_3_DropLvl_14_End:
+                case Stance::Standing_Jumps_Start ... Stance::Standing_Jumps_End:
+                case Stance::Running_Jumps_Start ... Stance::Running_Jumps_End:
 
-                //SJH more here
                     {
                         if (gamePlay.level == 4 && prince.getDirection() == Direction::Left) {
 
@@ -1811,7 +1804,6 @@ void game() {
 
 
             }
-
 
 
 
@@ -2011,11 +2003,8 @@ void game() {
 
                                         case Stance::Run_Start_1_Start ... Stance::Run_Start_6_End:
                                         case Stance::Run_Repeat_1_Start ... Stance::Run_Repeat_8_End:
-                                        case Stance::Standing_Jump_36_1_Start ... Stance::Standing_Jump_36_18_End:
-                                        case Stance::Running_Jump_1_Start ... Stance::Running_Jump_11_End:
-
-
-                                        //SJH more here!
+                                        case Stance::Standing_Jumps_Start ... Stance::Standing_Jumps_End:
+                                        case Stance::Running_Jumps_Start ... Stance::Running_Jumps_End:
 
                                             pushDead(prince, level, gamePlay, true, DeathType::Spikes);
                                             break;
