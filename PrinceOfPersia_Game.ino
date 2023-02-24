@@ -32,6 +32,8 @@ void game_Init() {
 
 void game_StartLevel() {
 
+    prince.setHealth(gamePlay.startOfLevelHealth);
+    prince.setHealthMax(gamePlay.startOfLevelHealthMax);
     gamePlay.restartLevel();
 
     #ifndef SAVE_MEMORY_ENEMY
@@ -1308,6 +1310,10 @@ void game() {
                     else {  
                         titleScreenVars.setMode(static_cast<TitleScreenMode>(static_cast<uint8_t>(titleScreenVars.getMode()) + 1));
                     }
+
+                    gamePlay.startOfLevelHealth = prince.getHealth();
+                    gamePlay.startOfLevelHealthMax = prince.getHealthMax();
+
 
                     gamePlay.incLevel();
                     break;

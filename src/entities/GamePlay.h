@@ -16,6 +16,9 @@ struct GamePlay {
     uint8_t crouchTimer = 0;
     uint8_t timeRemaining = 0;
 
+    uint8_t startOfLevelHealth = 3;
+    uint8_t startOfLevelHealthMax = 3;
+
 
     void init(uint8_t level) {
 
