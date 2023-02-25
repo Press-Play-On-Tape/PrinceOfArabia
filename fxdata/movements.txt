@@ -63,8 +63,9 @@ namespace Constants {
         143, 144, 145, 145, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156,                                         // PICKUP_SWORD_SEQ
         121, 122, 123, 124, 125, 126,                                                                                           // FALLING_STEPWALKRUN_P0_4_8_SEQ
         121, 122, 123, 124, 125, 126,                                                                                           // FALLING_STEPWALKRUN_P1_5_9_SEQ
-        121, 122, 123, 124, 125, 126,                                                                                           // FALLING_STEPWALKRUN_P2_6_10_SEQ
+        121, 122, 123, 124, 125, 126,                                                                                           // FALLING_STEPWALKRUN_P2_10_SEQ
         121, 122, 123, 124, 125, 126,                                                                                           // FALLING_STEPWALKRUN_P3_7_11_SEQ
+        121, 122, 123, 124, 125, 126,                                                                                           // FALLING_STEPWALKRUN_P6_SEQ
         125, 125, 125, 125, 125, 125,                                                                                           // FALLING_DOWN_P2_SEQ
         125, 125, 125, 125, 125, 125,                                                                                           // FALLING_DOWN_P1_SEQ
         125, 125, 125, 125, 125, 125,                                                                                           // FALLING_DOWN_P0_SEQ
@@ -147,8 +148,9 @@ namespace Constants {
         0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0,                                         // PICKUP_SWORD_OFFSETS
         2,6, 2,5, 1,5, 1,5, 0,5, 0,5,                                                                                           // FALLING_STEPWALKRUN_P0_4_8_OFFSETS
         2,6, 2,5, 2,5, 1,5, 0,5, 0,5,                                                                                           // FALLING_STEPWALKRUN_P1_5_9_OFFSETS
-        2,6, 2,5, 2,5, 1,5, 1,5, 0,5,                                                                                           // FALLING_STEPWALKRUN_P2_6_10_OFFSETS
+        2,6, 2,5, 2,5, 1,5, 1,5, 0,5,                                                                                           // FALLING_STEPWALKRUN_P2_10_OFFSETS
         2,6, 2,5, 2,5, 2,5, 1,5, 0,5,                                                                                           // FALLING_STEPWALKRUN_P3_7_11_OFFSETS
+        2,6, 1,5, 1,5, 0,5, 0,5, 0,5,                                                                                           // FALLING_STEPWALKRUN_P6_OFFSETS
         0,6, 1,5, 0,5, 1,5, 0,5, 0,5,                                                                                           // FALLING_DOWN_P2_OFFSETS
         0,6, 0,5, 0,5, 1,5, 0,5, 0,5,                                                                                           // FALLING_DOWN_P1_OFFSETS
         0,6, 0,5, 0,5, 0,5, 0,5, 0,5,                                                                                           // FALLING_DOWN_P0_OFFSETS

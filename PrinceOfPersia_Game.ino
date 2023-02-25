@@ -1464,8 +1464,9 @@ void game() {
                 case Stance::Falling_Down_M2_5_Check_CanFall:
                 case Stance::Falling_StepWalkRun_P0_4_8_5_Check_CanFall:
                 case Stance::Falling_StepWalkRun_P1_5_9_5_Check_CanFall:
-                case Stance::Falling_StepWalkRun_P2_6_10_5_Check_CanFall:
+                case Stance::Falling_StepWalkRun_P2_10_5_Check_CanFall:
                 case Stance::Falling_StepWalkRun_P3_7_11_5_Check_CanFall:
+                case Stance::Falling_StepWalkRun_P6_5_Check_CanFall:
                 case Stance::Collide_Wall_P2_Start_End:
                 case Stance::Collide_Wall_P1_Start_End:
                 case Stance::Collide_Wall_P0_Start_End:
@@ -1592,10 +1593,11 @@ void game() {
 
                             switch (prince.getStance()) {
 
-                                case Stance::Falling_StepWalkRun_P2_6_10_5_Check_CanFall:
+                                case Stance::Falling_StepWalkRun_P2_10_5_Check_CanFall:
                                 case Stance::Falling_StepWalkRun_P0_4_8_5_Check_CanFall:
                                 case Stance::Falling_StepWalkRun_P1_5_9_5_Check_CanFall:
                                 case Stance::Falling_StepWalkRun_P3_7_11_5_Check_CanFall:
+                                case Stance::Falling_StepWalkRun_P6_5_Check_CanFall:
 
                                     prince.push(prince.getStance() + 1);
                                     break;
@@ -1790,8 +1792,6 @@ void game() {
                     break;
 
             }
-
-
 
             getStance_Offsets(prince.getDirection(), offset, prince.getStance());
             prince.incX(offset.x * (newStance < 0 ? -1 : 1));
@@ -2314,28 +2314,32 @@ void game() {
                     case 0:
                     case 4:
                     case 8:
-                        prince.pushSequence(Stance::Falling_StepWalkRun_P0_4_8_1_Start, Stance::Falling_StepWalkRun_P0_4_8_5_Check_CanFall);
+                        prince.pushSequence(Stance::Falling_StepWalkRun_P0_4_8_1_Start, Stance::Falling_StepWalkRun_P0_4_8_5_Check_CanFall);  // Dist 6,31
                         prince.setPrevStance(Stance::Falling_StepWalkRun_P0_4_8_5_Check_CanFall);
                         break;
 
                     case 1:
                     case 5:
                     case 9:
-                        prince.pushSequence(Stance::Falling_StepWalkRun_P1_5_9_1_Start, Stance::Falling_StepWalkRun_P1_5_9_5_Check_CanFall);
+                        prince.pushSequence(Stance::Falling_StepWalkRun_P1_5_9_1_Start, Stance::Falling_StepWalkRun_P1_5_9_5_Check_CanFall);  // Dist 7,31
                         prince.setPrevStance(Stance::Falling_StepWalkRun_P1_5_9_5_Check_CanFall);
                         break;
 
                     case 2:
-                    case 6:
                     case 10:
-                        prince.pushSequence(Stance::Falling_StepWalkRun_P2_6_10_1_Start, Stance::Falling_StepWalkRun_P2_6_10_5_Check_CanFall);
-                        prince.setPrevStance(Stance::Falling_StepWalkRun_P2_6_10_5_Check_CanFall);
+                        prince.pushSequence(Stance::Falling_StepWalkRun_P2_10_1_Start, Stance::Falling_StepWalkRun_P2_10_5_Check_CanFall);  // Dist 8,31
+                        prince.setPrevStance(Stance::Falling_StepWalkRun_P2_10_5_Check_CanFall);
+                        break;
+
+                    case 6:
+                        prince.pushSequence(Stance::Falling_StepWalkRun_P6_1_Start, Stance::Falling_StepWalkRun_P6_5_Check_CanFall);  // Dist 4,31
+                        prince.setPrevStance(Stance::Falling_StepWalkRun_P6_5_Check_CanFall);
                         break;
 
                     case 3:
                     case 7:
                     case 11:
-                        prince.pushSequence(Stance::Falling_StepWalkRun_P3_7_11_1_Start, Stance::Falling_StepWalkRun_P3_7_11_5_Check_CanFall);
+                        prince.pushSequence(Stance::Falling_StepWalkRun_P3_7_11_1_Start, Stance::Falling_StepWalkRun_P3_7_11_5_Check_CanFall);  // Dist 9,31
                         prince.setPrevStance(Stance::Falling_StepWalkRun_P3_7_11_5_Check_CanFall);
                         break;
 
