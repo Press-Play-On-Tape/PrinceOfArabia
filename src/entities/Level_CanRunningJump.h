@@ -100,7 +100,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
         }
         else {
 
-            DEBUG_PRINT(F("______1 2 3 4 5 6\nWT CL "));
+            DEBUG_PRINT(F("\n______1 2 3 4 5 6\nWT CL "));
             DEBUG_PRINT((uint8_t)wallTile1_CurrLvl);
             DEBUG_PRINT(" ");
             DEBUG_PRINT((uint8_t)wallTile2_CurrLvl);
@@ -514,13 +514,14 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
     
     Left                  Right
     _____ 6 5 4 3 2 1     _____ 1 2 3 4 5 6
-    WT CL x x 0 0 x x     WT CL x x 0 0 x x
+    WT CL x x 0 0 0 x     WT CL x 0 0 0 x x
     WT NL x x 0 0 x x     WT NL x x 0 0 x x
     GT CL x x 0 0 x _     GT CL _ x 0 0 x x
     GT NL x x 1 x x _     GT NL _ x x 1 x x
     */
 
-    if (wallTile3_CurrLvl == WallTileResults::None &&
+    if (wallTile2_CurrLvl == WallTileResults::None &&
+        wallTile3_CurrLvl == WallTileResults::None &&
         wallTile4_CurrLvl == WallTileResults::None &&
         wallTile3_NextLvl == WallTileResults::None &&
         wallTile4_NextLvl == WallTileResults::None &&
