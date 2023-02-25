@@ -440,7 +440,7 @@ void game() {
                                             case Stance::Sword_Step_1_Start ... Stance::Sword_Step_3_End:
                                             case Stance::Sword_Normal:
 
-                                                if (arduboy.randomLFSR(0, 16) == 0) {
+                                                if (arduboy.randomLFSR(0, 16) == 0 || enemy.getDirection() == prince.getDirection()) {
                                                     enemy.pushSequence(Stance::Sword_Attack_1_Start, Stance::Sword_Attack_8_End, Stance::Sword_Normal);
                                                 }
                                                 break;
@@ -1682,6 +1682,9 @@ void game() {
                                         sound.tonesFromFX(Sounds::Strike);
                                     #endif 
 
+
+                                    // Decrease the health of the prince and see if he has died ..
+
                                     if (prince.decHealth(1) == 0) {
 
                                         pushDead(prince, level, gamePlay, true, DeathType::SwordFight);
@@ -2061,10 +2064,7 @@ void game() {
                         if (distToEdgeOfTile <= 4) {
                             
                             int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x) + ((prince.getDirection() == Direction::Right && distToEdgeOfTile == 2) ? 1 : 0);
-                    
-                            tileXIdx = tileXIdx + ((prince.getDirection() == Direction::Right && distToEdgeOfTile == 2) ? 1 : 0);
                             int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y);
-                        
                             uint8_t itemIdx = level.getItem(ItemType::Blade, tileXIdx, tileYIdx);
 
                             if (itemIdx != Constants::NoItemFound) {
@@ -2136,7 +2136,18 @@ void game() {
                                             sound.tonesFromFX(Sounds::Strike);
                                         #endif 
 
-                                        if (prince.decHealth(1) == 0) {
+
+                                        // If they are facing the same direction then the prince has been stabbed in the back .. immediate death.
+
+                                        uint8_t healthToLose = 1;
+
+                                        if (prince.getDirection() == enemy.getDirection()) {
+
+                                            healthToLose = prince.getHealth();
+
+                                        }
+
+                                        if (prince.decHealth(healthToLose) == 0) {
 
                                             pushDead(prince, level, gamePlay, true, DeathType::SwordFight);
 
