@@ -725,7 +725,6 @@ void game() {
                 case Stance::Jump_Up_A_14_End:     // Hanging on ledge  (dist 2)..
                 case Stance::Jump_Up_B_14_End: 
                 case Stance::Straight_Drop_HangOn_6_End:
-Serial.println("Drop Down");
               
                     if (pressed & DOWN_BUTTON) {
 
