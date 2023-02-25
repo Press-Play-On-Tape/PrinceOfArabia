@@ -580,7 +580,7 @@ void game() {
                                 DEBUG_PRINTLN(F("DOWN_BUTTON, Climb down Pos 2"));
                                 #endif
                                 prince.pushSequence(Stance::Step_Climbing_15_End, Stance::Step_Climbing_1_Start, Stance::Jump_Up_A_14_End);
-                                prince.setHangingCounter(90);
+                                prince.setHangingCounter(150);
                                 break;
 
                             case CanClimbDownResult::StepThenClimbDown:
@@ -590,7 +590,7 @@ void game() {
 
                                 prince.pushSequence(Stance::Step_Climbing_15_End, Stance::Step_Climbing_1_Start, Stance::Jump_Up_A_14_End);
                                 prince.pushSequence(Stance::Small_Step_6_End, Stance::Small_Step_1_Start, Stance::Upright);
-                                prince.setHangingCounter(120);
+                                prince.setHangingCounter(150);
                                 break;
 
                             case CanClimbDownResult::TurnThenClimbDown:
@@ -600,7 +600,7 @@ void game() {
 
                                 prince.pushSequence(Stance::Step_Climbing_15_End, Stance::Step_Climbing_1_Start, Stance::Jump_Up_A_14_End);
                                 prince.pushSequence(Stance::Standing_Turn_1_Start, Stance::Standing_Turn_5_End, Stance::Upright_Turn);
-                                prince.setHangingCounter(120);
+                                prince.setHangingCounter(150);
                                 break;
 
                             case CanClimbDownResult::StepThenTurnThenClimbDown:
@@ -725,6 +725,7 @@ void game() {
                 case Stance::Jump_Up_A_14_End:     // Hanging on ledge  (dist 2)..
                 case Stance::Jump_Up_B_14_End: 
                 case Stance::Straight_Drop_HangOn_6_End:
+Serial.println("Drop Down");
               
                     if (pressed & DOWN_BUTTON) {
 
