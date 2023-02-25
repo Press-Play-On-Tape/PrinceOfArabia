@@ -32,7 +32,7 @@ void game_Init() {
 
 void game_StartLevel() {
 
-    prince.setHealth(gamePlay.startOfLevelHealth);
+    prince.setHealth(gamePlay.startOfLevelHealth < 3 ? 3 : gamePlay.startOfLevelHealth);
     prince.setHealthMax(gamePlay.startOfLevelHealthMax);
     gamePlay.restartLevel();
 
@@ -113,7 +113,7 @@ void game() {
     if (mouse.update()) {
 
         Item item = level.getItemByIndex(ItemType::FloorButton1, 6);
-        openGate(level, item.data.floorButton.gate1, 255, 255);
+        level.openGate(item.data.floorButton.gate1, 255, 255);
 
         item.data.floorButton.frame = 1;
         item.data.floorButton.timeToFall = Constants::FallingTileSteppedOn;
@@ -1789,25 +1789,6 @@ void game() {
                     }
                     break;
 
-                case Stance::Falling_Dead_2:
-                    {
-                        if (gamePlay.level == 6) {
-
-                            int16_t x = prince.getPosition().x / Constants::TileWidth;
-                            int16_t y = prince.getPosition().y / Constants::TileHeight;
-
-                            if (x == 27 && y == 5) {
-
-                                openGate(level, 3, 0, 0);
-
-                            }
-
-                        }
-
-                    }
-                    break;
-
-
             }
 
 
@@ -1899,11 +1880,14 @@ void game() {
 
                         case ItemType::FloorButton1:
                         
-                            openGate(level, item.data.floorButton.gate1, 255, 255);
-                            openGate(level, item.data.floorButton.gate2, 255, 255);
-                            openGate(level, item.data.floorButton.gate3, 255, 255);
+                            level.openGate(item.data.floorButton.gate1, 255, 255);
+                            level.openGate(item.data.floorButton.gate2, 255, 255);
+                            level.openGate(item.data.floorButton.gate3, 255, 255);
                             item.data.floorButton.frame = 1;
                             item.data.floorButton.timeToFall = item.data.collapsingFloor.defaultTimeToFall;
+                            
+
+                            // Does the shadow step forward?
                             
                             if (gamePlay.level == 6 && item.data.floorButton.gate1 == 4) {
 
@@ -1921,9 +1905,9 @@ void game() {
                         case ItemType::FloorButton2:
                         case ItemType::FloorButton4:
                             {
-                                openGate(level, item.data.floorButton.gate1, (item.itemType ==  ItemType::FloorButton2 ? 10 : 20), 255);
-                                openGate(level, item.data.floorButton.gate2, (item.itemType ==  ItemType::FloorButton2 ? 10 : 20), 255);
-                                openGate(level, item.data.floorButton.gate3, (item.itemType ==  ItemType::FloorButton2 ? 10 : 20), 255);
+                                level.openGate(item.data.floorButton.gate1, (item.itemType ==  ItemType::FloorButton2 ? 10 : 20), 255);
+                                level.openGate(item.data.floorButton.gate2, (item.itemType ==  ItemType::FloorButton2 ? 10 : 20), 255);
+                                level.openGate(item.data.floorButton.gate3, (item.itemType ==  ItemType::FloorButton2 ? 10 : 20), 255);
 
                                 item.data.floorButton.frame = 1;
                                 item.data.floorButton.timeToFall = Constants::Button2FaillingTime;

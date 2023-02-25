@@ -135,6 +135,7 @@ struct Level {
 
             void init(GamePlay &gamePlay, Prince &prince, uint8_t width, uint8_t height, uint8_t xLoc, uint8_t yLoc) {
 
+                //this->level = gamePlay.level;
                 this->width = width;
                 this->height = height;
 
@@ -862,6 +863,23 @@ struct Level {
 
                                         }
 
+
+                                        // Open the gate on level 6 ..
+
+                                        if (gamePlay.level == 6) {
+
+                                            for (Item &button : items) {
+
+                                                if (button.itemType == ItemType::FloorButton1 && button.data.location.x == item.data.location.x && abs(button.data.location.y - item.data.location.y) <= 2) {
+
+                                                    this->openGate(3, 0, 0);
+
+                                                } 
+
+                                            }
+
+                                        }                                        
+
                                     }
 
                                 }
@@ -1191,13 +1209,33 @@ struct Level {
 
                         if (x != Constants::CoordNone && y != Constants::CoordNone) {
 
-                            uint8_t idx = this->getItem(ItemType::Gate, x + this->getXLocation() + offset, y + this->getYLocation());
+                            uint8_t idx = this->getItem(ItemType::Gate, ItemType::Gate_StayClosed, x + this->getXLocation() + offset, y + this->getYLocation());
 
                             if (idx != Constants::NoItemFound) {
 
                                 Item &item = this->getItem(idx);
+// Serial.print("found gate ");
+// Serial.print(item.data.gate.x);
+// Serial.print(",");
+// Serial.print(item.data.gate.y);
+// Serial.print(", ");
+// Serial.print(item.data.gate.position);
+// Serial.print(" ");
+// Serial.print(item.data.gate.closingDelay);
+// Serial.print(" ");
+// Serial.print(item.data.gate.closingDelayMax);
+// Serial.print(" ");
+// Serial.print((uint8_t)item.data.gate.gateType);
+// Serial.print(" ");
+// Serial.println("");
 
-                                if (item.data.gate.position == 0 ||
+                                // if (this->level == 6 && item.data.gate.x == 3 && item.data.gate.y == 1) {
+
+                                //     return WallTileResults::GateClosed;
+
+                                // }
+
+                                if (item.data.gate.position == 0 || item.data.gate.gateType == GateType::Level6Exit ||
                                     (item.data.gate.closingDelay + 2 >= item.data.gate.closingDelayMax && item.data.gate.closingDelayMax != 0 && item.data.gate.position > 2) ||
                                     (item.data.gate.closingDelay > 0 && item.data.gate.closingDelay <= 9 && item.data.gate.position < 8)) {
 
@@ -2733,7 +2771,7 @@ struct Level {
 
                 Item &item = this->items[i];
 
-                if (item.itemType == ItemType::Gate) {
+                if (item.itemType == ItemType::Gate || item.itemType == ItemType::Gate_StayClosed) {
 
                     if (item.data.location.x == tileXIdx + this->xLoc && item.data.location.y == tileYIdx + this->yLoc) {
 
@@ -3119,4 +3157,27 @@ struct Level {
 
         }
 
+
+        void openGate(uint8_t gateIndex, uint8_t closingDelay, uint8_t closingDelayMax) {
+
+            if (gateIndex == 0) return;
+
+            Item &gate = this->getItemByIndex(ItemType::Gate, gateIndex);
+
+            if (closingDelay != 255) {
+
+                gate.data.gate.closingDelay = closingDelay;
+                gate.data.gate.closingDelayMax = closingDelayMax;
+
+            }
+            else {
+
+                gate.data.gate.closingDelay = gate.data.gate.defaultClosingDelay;
+                gate.data.gate.closingDelayMax = gate.data.gate.defaultClosingDelay;
+
+            }
+
+        }
+
 };
+

@@ -140,14 +140,14 @@ void processRunJump(Prince &prince, Level &level) {
 
     RunningJumpResult jumpResult = RunningJumpResult::None;
 
-    if (gamePlay.level != 6 || level.getXLocation() > 0) {
+    if (gamePlay.level == 6 && level.getXLocation() == 0) {
 
-        jumpResult = level.canRunningJump(prince, Action::RunJump_3to1);
+        jumpResult = level.canRunningJump(prince, Action::RunJump_Level6Exit);
 
     }
     else {
 
-        jumpResult = level.canRunningJump(prince, Action::RunJump_4to1);
+        jumpResult = level.canRunningJump(prince, Action::RunJump_Normal);
 
     }
 
@@ -756,28 +756,6 @@ void fixPosition() {
     }
 
     prince.updateLocation(level.getXLocation(), level.getYLocation());
-
-}
-
-
-void openGate(Level &level, uint8_t gateIndex, uint8_t closingDelay, uint8_t closingDelayMax) {
-
-    if (gateIndex == 0) return;
-
-    Item &gate = level.getItemByIndex(ItemType::Gate, gateIndex);
-
-    if (closingDelay != 255) {
-
-        gate.data.gate.closingDelay = closingDelay;
-        gate.data.gate.closingDelayMax = closingDelayMax;
-
-    }
-    else {
-
-        gate.data.gate.closingDelay = gate.data.gate.defaultClosingDelay;
-        gate.data.gate.closingDelayMax = gate.data.gate.defaultClosingDelay;
-
-    }
 
 }
 

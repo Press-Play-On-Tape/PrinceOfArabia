@@ -49,19 +49,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
         bool isGroundTile1_CurrLvl = this->isGroundTile_ByCoords(tileXIdx, tileYIdx);
         bool isGroundTile1_NextLvl = this->isGroundTile_ByCoords(tileXIdx, tileYIdx + 1);
 
-        switch (action) {
-
-            case Action::RunJump_4to1:
-                DEBUG_PRINTLN(F("-- Jump 4 to 1 ------"));
-                break;
-
-            case Action::RunJump_3to 1:
-                DEBUG_PRINTLN(F("-- Jump 3 to 1 ------"));
-                break;
-            
-            default: break;
-
-        }
+        printAction(action)
 
         if (prince.getDirection() == Direction::Left) {
             DEBUG_PRINT(F("______6 5 4 3 2 1\nWT CL "));
@@ -162,29 +150,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
     #endif
 
 
-    if (action == Action::RunJump_4to1) {
 
-        /* ----------------------------------------------------------------------------------- */
-        /* 4. If the far side are both walls then we cannot jump ..
-        
-        Left                   Right
-        _____ 6 5 4 3 2 1      _____ 1 2 3 4 5 6
-        WT CL 1 x x x x x      WT CL x x x x x 1
-        WT NL 1 x x x x x      WT CL x x x x x 1
-        GT CL x x x x x _      GT CL _ x x x x x
-        GT NL x x x x x _      GT NL _ x x x x x 
-        */
-
-        // if (wallTile6_CurrLvl != WallTileResults::None &&
-        //     wallTile6_NextLvl != WallTileResults::None ) {
-
-        //     #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_4)
-        //     DEBUG_PRINTLN(F("R4-1 None"));
-        //     #endif
-
-        //     return RunningJumpResult::None;
-
-        // }
 
         /* ----------------------------------------------------------------------------------- */
         /* 4. Can we jump four blanks to the same level? Results in a player hanging on.
@@ -199,12 +165,11 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
         GT NL x x x x x _     GT NL _ x x x x x
         */
 
-        // if (wallTile1_CurrLvl == WallTileResults::None && 
-        if (wallTile2_CurrLvl == WallTileResults::None &&   // removed as current tile could be gate
+        if (wallTile2_CurrLvl == WallTileResults::None && 
             wallTile3_CurrLvl == WallTileResults::None && 
             wallTile4_CurrLvl == WallTileResults::None && 
             wallTile5_CurrLvl == WallTileResults::None && 
-            wallTile6_CurrLvl == WallTileResults::None &&
+            (wallTile6_CurrLvl == WallTileResults::None || action == Action::RunJump_Level6Exit) &&
             !isGroundTile4_CurrLvl && 
             !isGroundTile5_CurrLvl && 
             isGroundTile6_CurrLvl) {
@@ -239,6 +204,8 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
 
         }
 
+
+    if (action == Action::RunJump_Normal) {
 
         /* ----------------------------------------------------------------------------------- */
         /* 4.  Can we jump four levels to a lower level ?
@@ -291,219 +258,198 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
 
         }
 
-    }
+        
 
 
-    /* ----------------------------------------------------------------------------------- */
-    /* 3. If the far side are both walls then we cannot jump ..
-    
-    Left                   Right
-    _____ 6 5 4 3 2 1      _____ 1 2 3 4 5 6
-    WT CL x 1 x x x x      WT CL x x x x 1 x
-    WT NL x 1 x x x x      WT CL x x x x 1 x
-    GT CL x x x x x _      GT CL _ x x x x x
-    GT NL x x x x x _      GT NL _ x x x x x 
-    */
+        /* ----------------------------------------------------------------------------------- */
+        /*  3. Can we jump three blanks to the same level?
+        
+        Positions 2, 6, 10.
+        
+        Left                  Right
+        _____ 6 5 4 3 2 1     _____ 1 2 3 4 5 6
+        WT CL x 0 0 0 0 0     WT CL 0 0 0 0 0 x
+        WT NL x x x x x x     WT NL x x x x x x
+        GT CL x 1 x x x _     GT CL _ x x x 1 x
+        GT NL x x x x x _     GT NL _ x x x x x
+        */
 
-    // if (wallTile5_CurrLvl != WallTileResults::None &&
-    //     wallTile5_NextLvl != WallTileResults::None ) {
+        if (wallTile2_CurrLvl == WallTileResults::None && 
+            wallTile3_CurrLvl == WallTileResults::None && 
+            wallTile4_CurrLvl == WallTileResults::None && 
+            wallTile5_CurrLvl == WallTileResults::None && 
+            isGroundTile5_CurrLvl) {
 
-    //     #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_4)
-    //     DEBUG_PRINTLN(F("J3-1 None"));
-    //     #endif
+            switch (distToEdgeOfCurrentTile) {
 
-    //     return RunningJumpResult::None;
+                case 2:
 
-    // }
+                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
+                    DEBUG_PRINTLN(F("J3-2 Jump3_Pos2"));
+                    #endif
 
+                    return RunningJumpResult::Jump3_Pos2;
+                    
+                case 6:
 
-    /* ----------------------------------------------------------------------------------- */
-    /*  3. Can we jump three blanks to the same level?
-    
-    Positions 2, 6, 10.
-    
-    Left                  Right
-    _____ 6 5 4 3 2 1     _____ 1 2 3 4 5 6
-    WT CL x 0 0 0 0 0     WT CL 0 0 0 0 0 x
-    WT NL x x x x x x     WT NL x x x x x x
-    GT CL x 1 x x x _     GT CL _ x x x 1 x
-    GT NL x x x x x _     GT NL _ x x x x x
-    */
+                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
+                    DEBUG_PRINTLN(F("J3-3 Jump3_Pos6"));
+                    #endif
 
-    if (wallTile2_CurrLvl == WallTileResults::None && 
-        wallTile3_CurrLvl == WallTileResults::None && 
-        wallTile4_CurrLvl == WallTileResults::None && 
-        wallTile5_CurrLvl == WallTileResults::None && 
-        isGroundTile5_CurrLvl) {
+                    return RunningJumpResult::Jump3_Pos6;
 
-        switch (distToEdgeOfCurrentTile) {
+                default:
 
-            case 2:
+                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
+                    DEBUG_PRINTLN(F("J3-4 Jump3_Pos10"));
+                    #endif
 
-                #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
-                DEBUG_PRINTLN(F("J3-2 Jump3_Pos2"));
-                #endif
+                    return RunningJumpResult::Jump3_Pos10;
 
-                return RunningJumpResult::Jump3_Pos2;
-                
-            case 6:
-
-                #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
-                DEBUG_PRINTLN(F("J3-3 Jump3_Pos6"));
-                #endif
-
-                return RunningJumpResult::Jump3_Pos6;
-
-            default:
-
-                #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
-                DEBUG_PRINTLN(F("J3-4 Jump3_Pos10"));
-                #endif
-
-                return RunningJumpResult::Jump3_Pos10;
+            }
 
         }
 
-    }
 
+        /* ----------------------------------------------------------------------------------- */
+        /*  Can we jump three blanks to a lower level?  
+        
+        Positions 2, 6, 10.
+        
+        Left                  Right
+        _____ 6 5 4 3 2 1     _____ 1 2 3 4 5 6
+        WT CL x 1 0 0 0 0     WT CL 0 0 0 0 1 x
+        WT NL x 0 0 0 0 x     WT NL x 0 0 0 0 x
+        GT CL x x x x x _     GT CL _ x x x x x
+        GT NL x 1 x x x _     GT NL _ x x x 1 x
+        */
 
-    /* ----------------------------------------------------------------------------------- */
-    /*  Can we jump three blanks to a lower level?  
-    
-    Positions 2, 6, 10.
-    
-    Left                  Right
-    _____ 6 5 4 3 2 1     _____ 1 2 3 4 5 6
-    WT CL x 1 0 0 0 0     WT CL 0 0 0 0 1 x
-    WT NL x 0 0 0 0 x     WT NL x 0 0 0 0 x
-    GT CL x x x x x _     GT CL _ x x x x x
-    GT NL x 1 x x x _     GT NL _ x x x 1 x
-    */
+        if (wallTile2_CurrLvl == WallTileResults::None && 
+            wallTile3_CurrLvl == WallTileResults::None && 
+            wallTile4_CurrLvl == WallTileResults::None && 
+            wallTile5_CurrLvl != WallTileResults::None && 
+            wallTile2_NextLvl == WallTileResults::None && 
+            wallTile3_NextLvl == WallTileResults::None && 
+            wallTile4_NextLvl == WallTileResults::None && 
+            wallTile5_NextLvl == WallTileResults::None && 
+            !isGroundTile2_CurrLvl &&
+            !isGroundTile3_CurrLvl &&
+            !isGroundTile4_CurrLvl &&
+            !isGroundTile2_NextLvl &&
+            !isGroundTile3_NextLvl &&
+            !isGroundTile4_NextLvl &&
+            isGroundTile5_NextLvl) {
 
-    if (wallTile2_CurrLvl == WallTileResults::None && 
-        wallTile3_CurrLvl == WallTileResults::None && 
-        wallTile4_CurrLvl == WallTileResults::None && 
-        wallTile5_CurrLvl != WallTileResults::None && 
-        wallTile2_NextLvl == WallTileResults::None && 
-        wallTile3_NextLvl == WallTileResults::None && 
-        wallTile4_NextLvl == WallTileResults::None && 
-        wallTile5_NextLvl == WallTileResults::None && 
-        !isGroundTile2_CurrLvl &&
-        !isGroundTile3_CurrLvl &&
-        !isGroundTile4_CurrLvl &&
-        !isGroundTile2_NextLvl &&
-        !isGroundTile3_NextLvl &&
-        !isGroundTile4_NextLvl &&
-        isGroundTile5_NextLvl) {
+            switch (distToEdgeOfCurrentTile) {
 
-        switch (distToEdgeOfCurrentTile) {
+                case 2:
+                case 6:
 
-            case 2:
-            case 6:
+                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
+                    DEBUG_PRINTLN(F("J3-5 Jump3_DropLevel"));
+                    #endif
 
-                #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
-                DEBUG_PRINTLN(F("J3-5 Jump3_DropLevel"));
-                #endif
+                    return RunningJumpResult::Jump3_DropLevel;
 
-                return RunningJumpResult::Jump3_DropLevel;
+                case 10:
 
-            case 10:
+                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
+                    DEBUG_PRINTLN(F("J3-6 Jump3_DropLevel"));
+                    #endif
 
-                #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
-                DEBUG_PRINTLN(F("J3-6 Jump3_DropLevel"));
-                #endif
+                    return RunningJumpResult::Jump3_DropLevel_Pos10;
 
-                return RunningJumpResult::Jump3_DropLevel_Pos10;
-
-        }
-
-    }
-
-
-    /* ----------------------------------------------------------------------------------- */
-    /*  3. Three levels to nothing ..
-    
-    Positions 2, 6, 10.
-    
-    Left                  Right
-    _____ 6 5 4 3 2 1     _____ 1 2 3 4 5 6
-    WT CL x 0 0 0 0 0     WT CL 0 0 0 0 0 x
-    WT NL x x x x x x     WT NL x x x x x x
-    GT CL x x x x x _     GT CL _ x x x x x
-    GT NL x x x x x _     GT NL _ x x x x x
-    */
-
-    if (wallTile2_CurrLvl == WallTileResults::None && 
-        wallTile3_CurrLvl == WallTileResults::None &&
-        wallTile4_CurrLvl == WallTileResults::None && 
-        wallTile5_CurrLvl != WallTileResults::None  
-        ) {
-
-        switch (distToEdgeOfCurrentTile) {
-
-            case 2:
-
-                #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
-                DEBUG_PRINTLN(F("J3-7 Normal_Pos2"));
-                #endif
-
-                return RunningJumpResult::Normal_Pos2;
-
-            case 6:
-            case 10:
-
-                #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
-                DEBUG_PRINTLN(F("J3-8 Normal_Pos6"));
-                #endif
-
-                return RunningJumpResult::Normal_Pos6;
+            }
 
         }
 
-    }
+
+        /* ----------------------------------------------------------------------------------- */
+        /*  3. Three levels to nothing ..
+        
+        Positions 2, 6, 10.
+        
+        Left                  Right
+        _____ 6 5 4 3 2 1     _____ 1 2 3 4 5 6
+        WT CL x 0 0 0 0 0     WT CL 0 0 0 0 0 x
+        WT NL x x x x x x     WT NL x x x x x x
+        GT CL x x x x x _     GT CL _ x x x x x
+        GT NL x x x x x _     GT NL _ x x x x x
+        */
+
+        if (wallTile2_CurrLvl == WallTileResults::None && 
+            wallTile3_CurrLvl == WallTileResults::None &&
+            wallTile4_CurrLvl == WallTileResults::None && 
+            wallTile5_CurrLvl != WallTileResults::None  
+            ) {
+
+            switch (distToEdgeOfCurrentTile) {
+
+                case 2:
+
+                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
+                    DEBUG_PRINTLN(F("J3-7 Normal_Pos2"));
+                    #endif
+
+                    return RunningJumpResult::Normal_Pos2;
+
+                case 6:
+                case 10:
+
+                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
+                    DEBUG_PRINTLN(F("J3-8 Normal_Pos6"));
+                    #endif
+
+                    return RunningJumpResult::Normal_Pos6;
+
+            }
+
+        }
 
 
-    /* ----------------------------------------------------------------------------------- */
-    /*  3. Three levels to nothing ..
-    
-    Positions 2, 6, 10.
-    
-    Left                  Right
-    _____ 6 5 4 3 2 1     _____ 1 2 3 4 5 6
-    WT CL x 1 0 0 0 0     WT CL 0 0 0 0 1 x
-    WT NL x x x x x x     WT NL x x x x x x
-    GT CL x x 1 1 1 _     GT CL _ 1 1 1 x x
-    GT NL x x x x x _     GT NL _ x x x x x
-    */
+        /* ----------------------------------------------------------------------------------- */
+        /*  3. Three levels to lower floor ..
+        
+        Positions 2, 6, 10.
+        
+        Left                  Right
+        _____ 6 5 4 3 2 1     _____ 1 2 3 4 5 6
+        WT CL x 1 0 0 0 0     WT CL 0 0 0 0 1 x
+        WT NL x x x x x x     WT NL x x x x x x
+        GT CL x x 1 1 1 _     GT CL _ 1 1 1 x x
+        GT NL x x x x x _     GT NL _ x x x x x
+        */
 
-    if (wallTile2_CurrLvl == WallTileResults::None && 
-        wallTile3_CurrLvl == WallTileResults::None &&
-        wallTile4_CurrLvl == WallTileResults::None && 
-        wallTile5_CurrLvl != WallTileResults::None &&
-        isGroundTile2_CurrLvl &&
-        isGroundTile3_CurrLvl &&
-        isGroundTile4_CurrLvl
-        ) {
+        if (wallTile2_CurrLvl == WallTileResults::None && 
+            wallTile3_CurrLvl == WallTileResults::None &&
+            wallTile4_CurrLvl == WallTileResults::None && 
+            wallTile5_CurrLvl != WallTileResults::None &&
+            isGroundTile2_CurrLvl &&
+            isGroundTile3_CurrLvl &&
+            isGroundTile4_CurrLvl
+            ) {
 
-        switch (distToEdgeOfCurrentTile) {
+            switch (distToEdgeOfCurrentTile) {
 
-            case 2:
+                case 2:
 
-                #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
-                DEBUG_PRINTLN(F("J3-9 Normal_Pos2"));
-                #endif
+                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
+                    DEBUG_PRINTLN(F("J3-9 Normal_Pos2"));
+                    #endif
 
-                return RunningJumpResult::Normal_Pos2;
+                    return RunningJumpResult::Normal_Pos2;
 
-            case 6:
+                case 6:
 
-            case 10:
+                case 10:
 
-                #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
-                DEBUG_PRINTLN(F("J3-10 Normal_Pos6"));
-                #endif
+                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
+                    DEBUG_PRINTLN(F("J3-10 Normal_Pos6"));
+                    #endif
 
-                return RunningJumpResult::Normal_Pos6;
+                    return RunningJumpResult::Normal_Pos6;
+
+            }
 
         }
 

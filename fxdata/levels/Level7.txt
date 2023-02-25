@@ -11,12 +11,12 @@ uint8_t level7_Data[] = {
     26,                         // Prince starting x pos
     56,                         // Prince starting y pos (25, 56, 87)
     1,                          // Prince starting direction, 1 Left and 2 Right
-    168,                        // Prince starting stance, 3 Crouch_3_End, 168 Jump_Up_A_14_End
+    32,                         // Prince starting stance, 3 Crouch_3_End, 32 Jump_Up_A_14_End
     // Level
     90,                         // Width
     12,                         // Height
     10,                         // Level x starting position
-    3,                          // Level y starting position
+    0,                          // Level y starting position
     // Enemy 1      
     0,                          // Type 0 = Guard, 1 = Skeleton, 2 = Mirror          
     20                          // Enemy starting x tile

@@ -79,12 +79,12 @@ void printAction(Action action) {
             DEBUG_PRINT(F("RunRepeat"));
             break;
 
-        case Action::RunJump_4to1:
-            DEBUG_PRINT(F("RunJump_4to1"));
+        case Action::RunJump_Noraml:
+            DEBUG_PRINT(F("RunJump_Normal"));
             break;
 
-        case Action::RunJump_3to1:
-            DEBUG_PRINT(F("RunJump_3to1"));
+        case Action::RunJump_Level6Exit:
+            DEBUG_PRINT(F("RunJump_Level6Exi"));
             break;
 
         case Action::StandingJump:

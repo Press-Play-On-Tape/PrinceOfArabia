@@ -79,17 +79,17 @@ enum class Layer : uint8_t {
 };
 
 enum class Action : uint8_t {
-    Step            = 0,
-    SmallStep       = 1,
-    RunStart        = 2,
-    RunRepeat       = 3,
-    SwordStep       = 4,        // Do not move from 4
-    RunJump_4to1    = 5,
-    RunJump_3to1    = 6,
-    StandingJump    = 7,
-    SwordStep2      = 8,        // Do not move from 8
-    CrouchHop       = 9,
-    RunningTurn     = 10,
+    Step                    = 0,
+    SmallStep               = 1,
+    RunStart                = 2,
+    RunRepeat               = 3,
+    SwordStep               = 4,        // Do not move from 4
+    RunJump_Normal          = 5,
+    RunJump_Level6Exit      = 6,
+    StandingJump            = 7,
+    SwordStep2              = 8,        // Do not move from 8
+    CrouchHop               = 9,
+    RunningTurn             = 10,
 };
 
 enum class CanJumpUpResult : uint8_t {
@@ -254,4 +254,9 @@ enum class CanFallResult : uint8_t {
     CanFall,
     CannotFall,
     CanFallToHangingPosition,
+};
+
+enum class GateType : uint8_t {
+    Normal,
+    Level6Exit,
 };

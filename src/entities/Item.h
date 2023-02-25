@@ -119,7 +119,7 @@ struct Gate {                   // 0, x, x, 255, 0
     uint8_t closingDelay;
     uint8_t defaultClosingDelay;
     uint8_t closingDelayMax;
-    Direction direction;
+    GateType gateType;
 };
  
 struct Sword {

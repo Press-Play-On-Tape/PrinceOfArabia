@@ -1,5 +1,7 @@
 void loadItems(uint8_t level, Prince &prince) {
 
+    //this->level = level;
+
 
     // Deactivate all items ..            
 
@@ -17,34 +19,7 @@ void loadItems(uint8_t level, Prince &prince) {
 
         Item &item = this->items[itemIdx];
         item.itemType = static_cast<ItemType>(itemType);
-
-        switch (item.itemType) {
-
-            case ItemType::Gate:
-                {
-                    Gate gate;
-                    FX::readBytes((uint8_t*)&gate, sizeof(gate));
-
-                    if (!(level == 6 && itemIdx == 7 && item.data.gate.position == 9)) {
-                        item.data.gate.x = gate.x;
-                        item.data.gate.y = gate.y;
-                        item.data.gate.position = gate.position;
-                        item.data.gate.closingDelay = gate.closingDelay;
-                        item.data.gate.defaultClosingDelay = gate.defaultClosingDelay;
-                        item.data.gate.closingDelayMax = gate.closingDelayMax;
-                        item.data.gate.direction = gate.direction;
-                    }
-
-                }
-                break;
-
-            default:
-
-                FX::readBytes((uint8_t*)&item.data.rawData, sizeof(item.data.rawData));
-                break;
-
-        }
-
+        FX::readBytes((uint8_t*)&item.data.rawData, sizeof(item.data.rawData));
         itemType = FX::readPendingUInt8();
         itemIdx++;
 
@@ -58,8 +33,8 @@ void loadItems(uint8_t level, Prince &prince) {
 
 void loadMap(GamePlay &gamePlay) {
 
-
     uint8_t offset = 0;
+    
     if (this->xLoc) {
         offset = this->xLoc - 3;
     }
