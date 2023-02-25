@@ -79,7 +79,7 @@ void printAction(Action action) {
             DEBUG_PRINT(F("RunRepeat"));
             break;
 
-        case Action::RunJump_Noraml:
+        case Action::RunJump_Normal:
             DEBUG_PRINT(F("RunJump_Normal"));
             break;
 

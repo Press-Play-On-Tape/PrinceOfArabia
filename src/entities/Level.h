@@ -1214,26 +1214,6 @@ struct Level {
                             if (idx != Constants::NoItemFound) {
 
                                 Item &item = this->getItem(idx);
-// Serial.print("found gate ");
-// Serial.print(item.data.gate.x);
-// Serial.print(",");
-// Serial.print(item.data.gate.y);
-// Serial.print(", ");
-// Serial.print(item.data.gate.position);
-// Serial.print(" ");
-// Serial.print(item.data.gate.closingDelay);
-// Serial.print(" ");
-// Serial.print(item.data.gate.closingDelayMax);
-// Serial.print(" ");
-// Serial.print((uint8_t)item.data.gate.gateType);
-// Serial.print(" ");
-// Serial.println("");
-
-                                // if (this->level == 6 && item.data.gate.x == 3 && item.data.gate.y == 1) {
-
-                                //     return WallTileResults::GateClosed;
-
-                                // }
 
                                 if (item.data.gate.position == 0 || item.data.gate.gateType == GateType::Level6Exit ||
                                     (item.data.gate.closingDelay + 2 >= item.data.gate.closingDelayMax && item.data.gate.closingDelayMax != 0 && item.data.gate.position > 2) ||

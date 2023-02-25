@@ -2048,28 +2048,42 @@ void game() {
         
         if (prince.getHealth() > 0) {
 
-            int8_t distToEdgeOfTile = level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX());
+            switch (prince.getStance()) {
 
-            if (distToEdgeOfTile <= 4) {
-                
-                int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x) + ((prince.getDirection() == Direction::Right && distToEdgeOfTile == 2) ? 1 : 0);
-         
-                tileXIdx = tileXIdx + ((prince.getDirection() == Direction::Right && distToEdgeOfTile == 2) ? 1 : 0);
-                int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y);
-              
-                uint8_t itemIdx = level.getItem(ItemType::Blade, tileXIdx, tileYIdx);
+                case Stance::Climbing_1_Start ... Stance::Climbing_15_End:
+                case Stance::Step_Climbing_1_Start ... Stance::Step_Climbing_15_End:
+                    break;
 
-                if (itemIdx != Constants::NoItemFound) {
+                default:
+                    {
+                        int8_t distToEdgeOfTile = level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX());
 
-                    Item &item = level.getItem(itemIdx);
+                        if (distToEdgeOfTile <= 4) {
+                            
+                            int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x) + ((prince.getDirection() == Direction::Right && distToEdgeOfTile == 2) ? 1 : 0);
+                    
+                            tileXIdx = tileXIdx + ((prince.getDirection() == Direction::Right && distToEdgeOfTile == 2) ? 1 : 0);
+                            int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y);
+                        
+                            uint8_t itemIdx = level.getItem(ItemType::Blade, tileXIdx, tileYIdx);
 
-                    if (abs(item.data.blade.position) <= 5) {
+                            if (itemIdx != Constants::NoItemFound) {
 
-                        pushDead(prince, level, gamePlay, true, DeathType::Blade);
+                                Item &item = level.getItem(itemIdx);
+
+                                if (abs(item.data.blade.position) <= 5) {
+
+                                    pushDead(prince, level, gamePlay, true, DeathType::Blade);
+
+                                }
+
+                            }
+
+                        }
 
                     }
 
-                }
+                    break;
 
             }
 

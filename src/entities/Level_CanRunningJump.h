@@ -49,7 +49,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
         bool isGroundTile1_CurrLvl = this->isGroundTile_ByCoords(tileXIdx, tileYIdx);
         bool isGroundTile1_NextLvl = this->isGroundTile_ByCoords(tileXIdx, tileYIdx + 1);
 
-        printAction(action)
+        printAction(action);
 
         if (prince.getDirection() == Direction::Left) {
             DEBUG_PRINT(F("______6 5 4 3 2 1\nWT CL "));
@@ -150,59 +150,57 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
     #endif
 
 
+    /* ----------------------------------------------------------------------------------- */
+    /* 4. Can we jump four blanks to the same level? Results in a player hanging on.
+    
+    Positions 2, 6, 10.
+    
+    Left                  Right
+    _____ 6 5 4 3 2 1     _____ 1 2 3 4 5 6
+    WT CL 0 0 0 0 0 0     WT CL 0 0 0 0 0 0
+    WT NL x x x x x x     WT NL x x x x x x
+    GT CL 1 0 0 x x _     GT CL _ x x 0 0 1
+    GT NL x x x x x _     GT NL _ x x x x x
+    */
 
+    if (wallTile2_CurrLvl == WallTileResults::None && 
+        wallTile3_CurrLvl == WallTileResults::None && 
+        wallTile4_CurrLvl == WallTileResults::None && 
+        wallTile5_CurrLvl == WallTileResults::None && 
+        (wallTile6_CurrLvl == WallTileResults::None || action == Action::RunJump_Level6Exit) &&
+        !isGroundTile4_CurrLvl && 
+        !isGroundTile5_CurrLvl && 
+        isGroundTile6_CurrLvl) {
 
-        /* ----------------------------------------------------------------------------------- */
-        /* 4. Can we jump four blanks to the same level? Results in a player hanging on.
-        
-        Positions 2, 6, 10.
-        
-        Left                  Right
-        _____ 6 5 4 3 2 1     _____ 1 2 3 4 5 6
-        WT CL 0 0 0 0 0 0     WT CL 0 0 0 0 0 0
-        WT NL x x x x x x     WT NL x x x x x x
-        GT CL 1 0 0 x x _     GT CL _ x x 0 0 1
-        GT NL x x x x x _     GT NL _ x x x x x
-        */
+        switch (distToEdgeOfCurrentTile) {
 
-        if (wallTile2_CurrLvl == WallTileResults::None && 
-            wallTile3_CurrLvl == WallTileResults::None && 
-            wallTile4_CurrLvl == WallTileResults::None && 
-            wallTile5_CurrLvl == WallTileResults::None && 
-            (wallTile6_CurrLvl == WallTileResults::None || action == Action::RunJump_Level6Exit) &&
-            !isGroundTile4_CurrLvl && 
-            !isGroundTile5_CurrLvl && 
-            isGroundTile6_CurrLvl) {
+            case 2:
 
-            switch (distToEdgeOfCurrentTile) {
+                #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_4)
+                DEBUG_PRINTLN(F("R4-2 Jump4_GrabLedge_Pos2"));
+                #endif
 
-                case 2:
+                return RunningJumpResult::Jump4_GrabLedge_Pos2;
 
-                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_4)
-                    DEBUG_PRINTLN(F("R4-2 Jump4_GrabLedge_Pos2"));
-                    #endif
+            case 6:
 
-                    return RunningJumpResult::Jump4_GrabLedge_Pos2;
+                #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_4)
+                DEBUG_PRINTLN(F("R4-3 Jump4_GrabLedge_Pos6"));
+                #endif
 
-                case 6:
+                return RunningJumpResult::Jump4_GrabLedge_Pos6;
 
-                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_4)
-                    DEBUG_PRINTLN(F("R4-3 Jump4_GrabLedge_Pos6"));
-                    #endif
+            case 10:
 
-                    return RunningJumpResult::Jump4_GrabLedge_Pos6;
+                #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_4)
+                DEBUG_PRINTLN(F("R4-4 Jump4_GrabLedge_Pos10"));
+                #endif
 
-                case 10:
-
-                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_4)
-                    DEBUG_PRINTLN(F("R4-4 Jump4_GrabLedge_Pos10"));
-                    #endif
-
-                    return RunningJumpResult::Jump4_GrabLedge_Pos10;
-
-            }
+                return RunningJumpResult::Jump4_GrabLedge_Pos10;
 
         }
+
+    }
 
 
     if (action == Action::RunJump_Normal) {
@@ -472,7 +470,6 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
     if (wallTile2_CurrLvl == WallTileResults::None &&
         wallTile3_CurrLvl == WallTileResults::None &&
         wallTile4_CurrLvl == WallTileResults::None &&
-        // wallTile5_CurrLvl == WallTileResults::None &&
         isGroundTile5_CurrLvl) {
 
         switch (distToEdgeOfCurrentTile) {
