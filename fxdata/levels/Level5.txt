@@ -111,6 +111,12 @@ uint8_t Level5_Items[] = {
     20,  55,   2,   0,   0,   0,   0,   0,      // Potion Small      
     20,  36,   9,   0,   0,   0,   0,   0,      // Potion Small      
     20,  35,   8,   0,   0,   0,   0,   0,      // Potion Small      
+
+     4,  72,  11,   1,   0,   0,   0,   0,      // Spikes      
+     4,  73,  11,   1,   0,   0,   0,   0,      // Spikes      
+     4,  74,  11,   2,   0,   0,   0,   0,      // Spikes      
+     4,  77,  11,   1,   0,   0,   0,   0,      // Spikes      
+     4,  78,  11,   2,   0,   0,   0,   0,      // Spikes      
    
      1,  26,   7,  86,  24,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
      1,  52,   3,  55,  24,   0,   0,   0,      // CollapsingTile (dist to fall)                                    
