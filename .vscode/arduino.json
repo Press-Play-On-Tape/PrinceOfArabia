@@ -1,5 +1,5 @@
 {
-    "board": "arduboy-homemade:avr:arduboy",
+    "board": "arduboy-homemade:avr:arduboy-fx",
     "output": "/Users/simonholmes/projects/build",
     "sketch": "PrinceOfPersia.ino",
     "port": "/dev/tty.usbmodem14601",

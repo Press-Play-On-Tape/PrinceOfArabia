@@ -189,7 +189,6 @@ void title() {
 
                 titleScreenVars.setMode(TitleScreenMode::IntroGame_1B);
                 gamePlay.gameState = GameState::Game_Init; 
-                //fadeEffect.reset();
 
                 break;
 
