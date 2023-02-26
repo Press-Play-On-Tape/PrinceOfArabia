@@ -747,6 +747,7 @@ struct Level {
                             break;
 
                         case ItemType::Gate:
+                        case ItemType::Gate_StayOpen:
                         case ItemType::Gate_StayClosed:
 
                             if (arduboy.isFrameCount(4)) {
@@ -768,7 +769,11 @@ struct Level {
                                     }
 
                                 }
-                                else if (item.data.gate.closingDelay > 0 && item.data.gate.closingDelay <= 9) {
+
+
+                                // Close gate ..
+
+                                else if (item.data.gate.closingDelay > 0 && item.data.gate.closingDelay <= 9 && item.itemType != ItemType::Gate_StayOpen) {
 
                                     if (item.data.gate.position == 9) {
 
@@ -1129,7 +1134,7 @@ struct Level {
 
         // Get the nth Gate (these are 1based)
 
-        Item &getItemByIndex(ItemType itemType, uint8_t idx) {
+        Item &getItemByIndex(ItemType itemType_One, ItemType itemType_Two, uint8_t idx) {
 
             uint8_t count = 0;
 
@@ -1137,7 +1142,7 @@ struct Level {
                 
                 Item &item = this->items[i];
 
-                if (item.itemType == itemType) {
+                if (item.itemType >= itemType_One && item.itemType <= itemType_Two) {
                     
                     count++;
 
@@ -1209,7 +1214,11 @@ struct Level {
 
                         if (x != Constants::CoordNone && y != Constants::CoordNone) {
 
-                            uint8_t idx = this->getItem(ItemType::Gate, ItemType::Gate_StayClosed, x + this->getXLocation() + offset, y + this->getYLocation());
+                            uint8_t idx = this->getItem(ItemType::Gate, ItemType::Gate_StayOpen, x + this->getXLocation() + offset, y + this->getYLocation());
+
+                            if (idx != Constants::NoItemFound) {
+                                idx = this->getItem(ItemType::Gate_StayClosed, x + this->getXLocation() + offset, y + this->getYLocation());
+                            }
 
                             if (idx != Constants::NoItemFound) {
 
@@ -1240,7 +1249,7 @@ struct Level {
 
                         if (x != Constants::CoordNone && y != Constants::CoordNone) {
 
-                            uint8_t idx = this->getItem(ItemType::Gate, x + this->getXLocation() + offset, y + this->getYLocation());
+                            uint8_t idx = this->getItem(ItemType::Gate, ItemType::Gate_StayOpen, x + this->getXLocation() + offset, y + this->getYLocation());
 
                             if (idx != Constants::NoItemFound) {
 
@@ -3142,7 +3151,7 @@ struct Level {
 
             if (gateIndex == 0) return;
 
-            Item &gate = this->getItemByIndex(ItemType::Gate, gateIndex);
+            Item &gate = this->getItemByIndex(ItemType::Gate, ItemType::Gate_StayOpen, gateIndex);
 
             if (closingDelay != 255) {
 

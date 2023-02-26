@@ -105,7 +105,7 @@ bool testScroll(GamePlay &gamePlay, Prince &prince, Level &level) {
 
             if (mouse.exits > 2) {
                     
-                Item gate = level.getItemByIndex(ItemType::Gate, 6);
+                Item gate = level.getItemByIndex(ItemType::Gate, ItemType::Gate_StayOpen, 6);
 
                 if (gate.data.gate.position == 0) { 
 

@@ -112,7 +112,7 @@ void game() {
 
     if (mouse.update()) {
 
-        Item item = level.getItemByIndex(ItemType::FloorButton1, 6);
+        Item item = level.getItemByIndex(ItemType::FloorButton1, ItemType::None, 6);
         level.openGate(item.data.floorButton.gate1, 255, 255);
 
         item.data.floorButton.frame = 1;
@@ -1961,7 +1961,7 @@ void game() {
 
                         case ItemType::Mirror_Button:
                             {
-                                Item &mirror = level.getItemByIndex(ItemType::Mirror, 1);
+                                Item &mirror = level.getItemByIndex(ItemType::Mirror, ItemType::None, 1);
 
                                 if (mirror.data.mirror.status != Status::Active) {
 
@@ -2202,7 +2202,7 @@ void game() {
 
                     case Stance::Delay_8_End:
                         {
-                            Item &gate = level.getItemByIndex(ItemType::Gate, 4);
+                            Item &gate = level.getItemByIndex(ItemType::Gate, ItemType::Gate_StayOpen, 4);
 
                             gate.data.gate.closingDelay = 10;
                             gate.data.gate.closingDelayMax = 255;
