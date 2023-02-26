@@ -1993,10 +1993,21 @@ void game() {
                                         
                                     switch (prince.getStance()) {
 
-                                        case Stance::Run_Start_1_Start ... Stance::Run_Start_6_End:
+                                        case Stance::Run_Start_2 ... Stance::Run_Start_6_End:  // Skip starting run ..
                                         case Stance::Run_Repeat_1_Start ... Stance::Run_Repeat_8_End:
-                                        case Stance::Standing_Jumps_Start ... Stance::Standing_Jumps_End:
                                         case Stance::Running_Jumps_Start ... Stance::Running_Jumps_End:
+                                        // case Stance::Standing_Jumps_Start ... Stance::Standing_Jumps_End:
+                                        case Stance::Standing_Jump_36_7 ... Stance::Standing_Jump_36_18_End:
+                                        case Stance::Standing_Jump_32_7 ... Stance::Standing_Jump_32_16_End:
+                                        case Stance::Standing_Jump_28_7 ... Stance::Standing_Jump_28_16_End:
+                                        case Stance::Standing_Jump_24_7 ... Stance::Standing_Jump_24_16_End:
+                                        case Stance::Standing_Jump_20_7 ... Stance::Standing_Jump_20_16_End:
+                                        case Stance::Standing_Jump_DL_40_7 ... Stance::Standing_Jump_DL_40_16_End:
+                                        case Stance::Standing_Jump_DL_36_7 ... Stance::Standing_Jump_DL_36_16_End:
+                                        case Stance::Standing_Jump_GL_40_7 ... Stance::Standing_Jump_GL_40_18_End:
+                                        case Stance::Standing_Jump_GL_36_7 ... Stance::Standing_Jump_GL_36_18_End:
+                                        case Stance::Standing_Jump_GL_32_7 ... Stance::Standing_Jump_GL_32_18_End:
+                                        case Stance::Standing_Jump_GL_28_7 ... Stance::Standing_Jump_GL_28_18_End:
 
                                             pushDead(prince, level, gamePlay, true, DeathType::Spikes);
                                             break;
