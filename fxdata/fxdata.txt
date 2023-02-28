@@ -257,6 +257,11 @@ Title_High_Frame[] = {
     int16_t   0,  0, uint24_t Title_PoP,       uint8_t 0, dbmMasked_last
 }
 
+Invaders_HUD_frame[] = {
+    int16_t 120,  0, uint24_t HUD_Backgrounds,  uint8_t 1, dbmNormal
+    int16_t 123, 40, uint24_t Numbers_Small,    uint8_t 0, dbmNormal_last
+}
+
 include 'cutscenes/Title_Intro_Frame.txt'
 include 'cutscenes/Title_Main_Frame.txt'
 include 'cutscenes/Title_Credits_Frame.txt'
