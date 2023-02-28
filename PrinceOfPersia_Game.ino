@@ -71,10 +71,25 @@ void game() {
     #endif
 
 
-    // Have we scrolled to another screen ?
+    // Have we scrolled to another screen ?  Ignore if we are attacking right on the edge of the screen ..
 
-    bool justEnteredRoom = testScroll(gamePlay, prince, level);
+    bool justEnteredRoom = false;
+    
+    switch (prince.getStance()) {
 
+        case Stance::Sword_Attack_1_Start ... Stance::Sword_Attack_8_End:
+            break;
+
+        default:
+            justEnteredRoom = testScroll(gamePlay, prince, level);
+            break;
+
+    }
+
+
+
+    // Handle debugging actions ..
+     
     #ifdef ALT_B_BUTTON
 
         if (justPressed & B_BUTTON) { // echo out details
