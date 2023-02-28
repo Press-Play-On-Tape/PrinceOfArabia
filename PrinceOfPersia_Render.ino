@@ -18,7 +18,6 @@ void render(bool sameLevelAsPrince) {
         for (uint8_t x = 0; x < 10; x++) {
 
             int8_t bgTile = level.getTile(Layer::Background, x, y - 1, TILE_NONE);
-            int8_t fgTile = level.getTile(Layer::Foreground, x, y - 1, TILE_NONE);
             int16_t yCoord = (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset;
 
             switch (bgTile) {
@@ -33,9 +32,24 @@ void render(bool sameLevelAsPrince) {
                    break;
 
             }
+            
+        }
 
-            if      (fgTile == 29) FX::drawBitmap(x * Constants::TileWidth, yCoord, Images::Tile_Dungeon_97, 0, dbmMasked);
-            else if (fgTile == 30) FX::drawBitmap(x * Constants::TileWidth, yCoord, Images::Tile_Dungeon_98, 0, dbmMasked);
+    }
+
+
+    // // Draw foreground, collpased tiles ..
+
+    for (uint8_t y = 0; y < 4; y++) {
+
+        for (uint8_t x = 0; x < 10; x++) {
+
+            int8_t fgTile = level.getTile(Layer::Foreground, x, y - 1, TILE_NONE);
+            int16_t yCoord1 = (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset;            
+
+            if      (fgTile == 29) FX::drawBitmap(x * Constants::TileWidth, yCoord1, Images::Tile_Dungeon_97, 0, dbmMasked);
+            else if (fgTile == 30) FX::drawBitmap(x * Constants::TileWidth, yCoord1, Images::Tile_Dungeon_98, 0, dbmMasked);
+
 
         }
 

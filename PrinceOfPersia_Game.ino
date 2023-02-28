@@ -735,6 +735,14 @@ void game() {
               
                     if (pressed & DOWN_BUTTON) {
 
+
+                        // If on level 7, remove time remaining label as it jumps around as you drop ..
+
+                        if (gamePlay.level == 7 && level.getXLocation() == 10 && level.getYLocation() == 0) {
+                            gamePlay.timeRemaining = 0;
+                        }
+
+
                         CanClimbDownPart2Result climbDownResult = level.canClimbDown_Part2(prince, 0);
 
                         switch (climbDownResult) {

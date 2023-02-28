@@ -752,6 +752,8 @@ struct Level {
 
                             if (arduboy.isFrameCount(4)) {
 
+                                // Open Gate ..
+
                                 if (item.data.gate.closingDelay + 9 > item.data.gate.closingDelayMax) {
 
                                     if (item.data.gate.position < 9) {
@@ -1142,7 +1144,7 @@ struct Level {
                 
                 Item &item = this->items[i];
 
-                if (item.itemType >= itemType_One && item.itemType <= itemType_Two) {
+                if (item.itemType >= itemType_One && item.itemType <= (itemType_Two == ItemType::None ? itemType_One : itemType_Two)) {
                     
                     count++;
 
@@ -1224,9 +1226,20 @@ struct Level {
 
                                 Item &item = this->getItem(idx);
 
-                                if (item.data.gate.position == 0 || item.data.gate.gateType == GateType::Level6Exit ||
-                                    (item.data.gate.closingDelay + 2 >= item.data.gate.closingDelayMax && item.data.gate.closingDelayMax != 0 && item.data.gate.position > 2) ||
-                                    (item.data.gate.closingDelay > 0 && item.data.gate.closingDelay <= 9 && item.data.gate.position < 8)) {
+                                // if (item.data.gate.position != 9) {
+
+                                //     if (item.data.gate.position == 0 || item.data.gate.gateType == GateType::Level6Exit ||
+                                //         (item.data.gate.closingDelay + 2 >= item.data.gate.closingDelayMax && item.data.gate.closingDelayMax != 0 && item.data.gate.closingDelay != item.data.gate.closingDelayMax && item.data.gate.position > 2) || // If the closing delay is within 2 of the CDM then we are opening
+                                //         (item.data.gate.closingDelay > 0 && item.data.gate.closingDelay <= 9 && item.data.gate.position < 9))  // If closing delay is almost done (we are closing) and gate is not fully open ..
+                                //         {
+
+                                //         return WallTileResults::GateClosed;
+
+                                //     }
+
+                                // }
+
+                                if (item.data.gate.position <= 7) {
 
                                     return WallTileResults::GateClosed;
 
@@ -1255,13 +1268,23 @@ struct Level {
 
                                 Item &item = this->getItem(idx);
 
-                                if (item.data.gate.position == 0 ||
-                                    (item.data.gate.closingDelay + 2 >= item.data.gate.closingDelayMax && item.data.gate.closingDelayMax != 0 && item.data.gate.position > 2) ||
-                                    (item.data.gate.closingDelay > 0 && item.data.gate.closingDelay <= 9 && item.data.gate.position < 8)) {
+                                // if (item.data.gate.position != 9) {
+
+                                //     if (item.data.gate.position == 0 ||
+                                //         (item.data.gate.closingDelay + 2 >= item.data.gate.closingDelayMax && item.data.gate.closingDelayMax != 0 && item.data.gate.closingDelay != item.data.gate.closingDelayMax && item.data.gate.position > 2) ||
+                                //         (item.data.gate.closingDelay > 0 && item.data.gate.closingDelay <= 9 && item.data.gate.position < 8)) {
+
+                                //         return WallTileResults::GateClosed;
+
+                                //     }
+
+                                // }
+                                if (item.data.gate.position <= 7) {
 
                                     return WallTileResults::GateClosed;
 
                                 }
+
 
                             }
 
