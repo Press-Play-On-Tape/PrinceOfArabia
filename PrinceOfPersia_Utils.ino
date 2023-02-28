@@ -60,7 +60,7 @@ bool testScroll(GamePlay &gamePlay, Prince &prince, Level &level) {
         if (gamePlay.level == 13 && level.getXLocation() == 0 && level.getYLocation() == 0) {
 
             gamePlay.gameState = GameState::Title;
-            titleScreenVars.setMode(TitleScreenMode::CutScene_End);
+            cookie.setMode(TitleScreenMode::CutScene_End);
 
 
 

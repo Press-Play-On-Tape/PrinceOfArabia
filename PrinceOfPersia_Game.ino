@@ -174,7 +174,7 @@ void game() {
     if (gameOver) {
 
         gamePlay.gameState = GameState::Title;
-        titleScreenVars.setMode(TitleScreenMode::TimeOut);
+        cookie.setMode(TitleScreenMode::TimeOut);
         FX::setFrame(Title_TimeOut_Frame, 5 - 1);
 
         #ifndef SAVE_MEMORY_OTHER
@@ -1311,11 +1311,11 @@ void game() {
 
                     gamePlay.gameState = GameState::Title;
 
-                    if (titleScreenVars.getMode() == TitleScreenMode::MaxUniqueScenes) {
-                        titleScreenVars.setMode(TitleScreenMode::CutScene_2);
+                    if (cookie.getMode() == TitleScreenMode::MaxUniqueScenes) {
+                        cookie.setMode(TitleScreenMode::CutScene_2);
                     }
                     else {  
-                        titleScreenVars.setMode(static_cast<TitleScreenMode>(static_cast<uint8_t>(titleScreenVars.getMode()) + 1));
+                        cookie.setMode(static_cast<TitleScreenMode>(static_cast<uint8_t>(cookie.getMode()) + 1));
                     }
 
                     gamePlay.startOfLevelHealth = prince.getHealth();
@@ -2528,7 +2528,7 @@ void game() {
             else {
 
                 gamePlay.gameState = GameState::Title;
-                titleScreenVars.setMode(TitleScreenMode::TimeOut);
+                cookie.setMode(TitleScreenMode::TimeOut);
                 FX::setFrame(Title_TimeOut_Frame, 5 - 1);
 
                 #ifndef SAVE_MEMORY_OTHER

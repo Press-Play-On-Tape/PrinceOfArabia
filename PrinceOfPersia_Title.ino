@@ -5,10 +5,9 @@ void title_Init() {
 
     gamePlay.gameState = GameState::Title;
     titleScreenVars.reset();
+    cookie.setMode(TitleScreenMode::Intro);
 
 }
-
-
 
 
 // ----------------------------------------------------------------------------
@@ -20,10 +19,10 @@ void title() {
 
     #ifdef DEBUG_CUT_SCENES
 
-        if (justPressed & B_BUTTON && titleScreenVars.getMode() != TitleScreenMode::CutScene_7_PlayGame) {
+        if (justPressed & B_BUTTON && cookie.getMode() != TitleScreenMode::CutScene_7_PlayGame) {
 
             //setRenderChamberBG();
-            titleScreenVars.setMode(TitleScreenMode::CutScene_7_Transition);
+            cookie.setMode(TitleScreenMode::CutScene_7_Transition);
 
             Invader_General &general = level.getItem(Constants::Invaders_General).data.invader_General;
             general.y = 0;
@@ -33,7 +32,7 @@ void title() {
 
     #endif
 
-    if (titleScreenVars.getMode() == TitleScreenMode::Main) {
+    if (cookie.getMode() == TitleScreenMode::Main) {
 
         #ifdef DEBUG_LEVELS
 
@@ -90,7 +89,7 @@ void title() {
     if (justPressed & (A_BUTTON | B_BUTTON)) {
     #endif
     
-        switch (titleScreenVars.getMode()) {
+        switch (cookie.getMode()) {
 
             case TitleScreenMode::Main:
 
@@ -114,21 +113,21 @@ void title() {
                             prince.setHealth(3);
                             prince.setHealthMax(3);
 
-                            titleScreenVars.setMode(TitleScreenMode::IntroGame_1A);
+                            cookie.setMode(TitleScreenMode::IntroGame_1A);
                             FX::setFrame(Title_IntroGame_1A_Frame, 4 - 1);
 
                             break;
 
                         case TitleScreenOptions::Credits:
 
-                            titleScreenVars.setMode(TitleScreenMode::Credits);
+                            cookie.setMode(TitleScreenMode::Credits);
                             FX::setFrame(Title_Credits_Frame, 5 - 1);
 
                             break;
 
                         case TitleScreenOptions::High:
 
-                            titleScreenVars.setMode(TitleScreenMode::High);
+                            cookie.setMode(TitleScreenMode::High);
                             FX::setFrame(Title_High_Frame, 5 - 1);
                             break;
 
@@ -152,7 +151,7 @@ void title() {
                 if (justPressed & (A_BUTTON | B_BUTTON)) {
                 #endif
 
-                    titleScreenVars.setMode(TitleScreenMode::Main);
+                    cookie.setMode(TitleScreenMode::Main);
 
                     #ifndef SAVE_MEMORY_TITLE
 
@@ -179,7 +178,7 @@ void title() {
                     sound.tonesFromFX(Sounds::Seque);
                 #endif
 
-                titleScreenVars.setMode(TitleScreenMode::IntroGame_1B);
+                cookie.setMode(TitleScreenMode::IntroGame_1B);
                 gamePlay.gameState = GameState::Game_Init; 
                 //fadeEffect.reset();
 
@@ -187,7 +186,7 @@ void title() {
 
             case TitleScreenMode::CutScene_1:
 
-                titleScreenVars.setMode(TitleScreenMode::IntroGame_1B);
+                cookie.setMode(TitleScreenMode::IntroGame_1B);
                 gamePlay.gameState = GameState::Game_Init; 
 
                 break;
@@ -210,7 +209,7 @@ void title() {
 
                 case TitleScreenMode::CutScene_7_Transition:
 
-                    titleScreenVars.setMode(TitleScreenMode::CutScene_7_PlayGame);
+                    cookie.setMode(TitleScreenMode::CutScene_7_PlayGame);
                     gamePlay.gameState = GameState::Game_StartLevel; 
                     arduboy.setFrameRate(Constants::FrameRate);
                     break;
@@ -218,7 +217,7 @@ void title() {
                 case TitleScreenMode::CutScene_7_PlayGame:
 
                     if (justPressed & (A_BUTTON)) {
-                        titleScreenVars.setMode(TitleScreenMode::CutScene_7_PlayGame);
+                        cookie.setMode(TitleScreenMode::CutScene_7_PlayGame);
                         gamePlay.gameState = GameState::Game_StartLevel; 
                         arduboy.setFrameRate(Constants::FrameRate);
                     }
@@ -244,7 +243,7 @@ void title() {
 
     // Render ..
 
-    switch (titleScreenVars.getMode()) {
+    switch (cookie.getMode()) {
 
         case TitleScreenMode::Intro:
 
@@ -267,7 +266,7 @@ void title() {
 
                 if (justPressed) {
                     
-                    titleScreenVars.setMode(TitleScreenMode::Main);
+                    cookie.setMode(TitleScreenMode::Main);
 
                     #ifndef SAVE_MEMORY_TITLE
 
@@ -371,7 +370,7 @@ void title() {
 
                 if (!FX::drawFrame()) {
 
-                    titleScreenVars.setMode(TitleScreenMode::CutScene_1);
+                    cookie.setMode(TitleScreenMode::CutScene_1);
                     FX::setFrame(Title_CutScene_1_Frame, 3 - 1);
 
                 }
@@ -382,7 +381,7 @@ void title() {
 
                 if (!FX::drawFrame()) {
 
-                    titleScreenVars.setMode(TitleScreenMode::IntroGame_1B);
+                    cookie.setMode(TitleScreenMode::IntroGame_1B);
                     FX::setFrame(Title_IntroGame_1B_Frame, 4 - 1);
 
                 }
@@ -417,7 +416,7 @@ void title() {
                 
                 if (!FX::drawFrame()) {
 
-                    titleScreenVars.setMode(TitleScreenMode::IntroGame_End);
+                    cookie.setMode(TitleScreenMode::IntroGame_End);
                     FX::setFrame(Title_IntroGame_End_Frame, 5 - 1);
 
                     #ifndef SAVE_MEMORY_SOUND
@@ -445,7 +444,7 @@ void title() {
                     if (!FX::drawFrame()) {
 
                         level.loadItems(0, prince);
-                        titleScreenVars.setMode(TitleScreenMode::CutScene_7_PlayGame);
+                        cookie.setMode(TitleScreenMode::CutScene_7_PlayGame);
                         arduboy.frameCount = 5;
                         arduboy.setFrameRate(60);
 
