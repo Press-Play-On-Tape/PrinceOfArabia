@@ -44,7 +44,7 @@ uint8_t invader_EnemiesAlive() {
         if (enemy.status != Status::Dead)  count++;
 
     }
-    //return count++; function returns before ++ is applied
+
     return count;
 
 }
