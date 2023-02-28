@@ -124,7 +124,7 @@ namespace Images {
     image_t Barrier                = "../images/invaders/Barrier_Whole.png"
     image_t Player                  = "../images/invaders/Player_25x25_1.png"
     image_t Bullet                  = "../images/invaders/Bullet.png"
-    image_t HUD_Spaceship           = "../images/invaders/HUD_Spaceship.png"
+    image_t HUD_Spaceship           = "../images/invaders/HUD_lives_4x17.png"
     image_t Levels                  = "../images/invaders/Levels_57x13_1.png"
 
 }

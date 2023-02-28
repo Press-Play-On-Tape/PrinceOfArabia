@@ -45,7 +45,7 @@ uint8_t invader_EnemiesAlive() {
 
     }
 
-    return count++;
+    return count;
 
 }
 
@@ -60,15 +60,17 @@ uint8_t invader_getSpeed() {
 
 void invader_RenderHUD(Invader_General &general) {
 
-    FX::drawBitmap(120, 0, Images::HUD_Backgrounds, 1, dbmNormal);
+    //FX::drawBitmap(120, 0, Images::HUD_Backgrounds, 1, dbmNormal);
 
-    for (uint8_t i = 0; i < general.lives; i++) {
+    //for (uint8_t i = 0; i < general.lives; i++) {
+    //
+    //    FX::drawBitmap(123, 1 + (i * 6), Images::HUD_Spaceship, 0, dbmNormal);
+    //
+    //}
+    FX::drawFrame(Invaders_HUD_frame);
+    FX::drawBitmap(123, 1 , Images::HUD_Spaceship, general.lives, dbmNormal);
 
-        FX::drawBitmap(123, 1 + (i * 6), Images::HUD_Spaceship, 0, dbmNormal);
-
-    }
-
-    FX::drawBitmap(123, 40, Images::Numbers_Small, 0, dbmNormal);
+    //FX::drawBitmap(123, 40, Images::Numbers_Small, 0, dbmNormal);
     FX::drawBitmap(123, 48, Images::Numbers_Small, general.score / 100, dbmNormal);
     FX::drawBitmap(123, 56, Images::Numbers_Small, general.score % 100, dbmNormal);
 
@@ -684,7 +686,18 @@ void invader_PlayGame() {
 
         case Status::Safe:
 
-            FX::drawBitmap(35, 25, Images::Levels, general.lives, dbmMasked);
+            switch (general.lives) {
+
+                case 3:
+                    FX::drawBitmap(35, 25, Images::Levels, arduboy.getFrameCountHalf(96) ? 3 : 4, dbmMasked);
+                    break;
+
+                default:
+                    FX::drawBitmap(35, 25, Images::Levels, general.lives, dbmMasked);
+                    break;
+
+            }
+
             break;
 
         case Status::Dead:
