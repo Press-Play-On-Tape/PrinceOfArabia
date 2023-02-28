@@ -1216,7 +1216,7 @@ struct Level {
 
                             uint8_t idx = this->getItem(ItemType::Gate, ItemType::Gate_StayOpen, x + this->getXLocation() + offset, y + this->getYLocation());
 
-                            if (idx != Constants::NoItemFound) {
+                            if (idx == Constants::NoItemFound) {
                                 idx = this->getItem(ItemType::Gate_StayClosed, x + this->getXLocation() + offset, y + this->getYLocation());
                             }
 

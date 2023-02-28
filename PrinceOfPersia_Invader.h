@@ -684,7 +684,18 @@ void invader_PlayGame() {
 
         case Status::Safe:
 
-            FX::drawBitmap(35, 25, Images::Levels, general.lives, dbmMasked);
+            switch (general.lives) {
+
+                case 3:
+                    FX::drawBitmap(35, 25, Images::Levels, arduboy.getFrameCountHalf(96) ? 3 : 4, dbmMasked);
+                    break;
+
+                default:
+                    FX::drawBitmap(35, 25, Images::Levels, general.lives, dbmMasked);
+                    break;
+
+            }
+
             break;
 
         case Status::Dead:
