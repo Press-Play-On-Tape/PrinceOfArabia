@@ -292,6 +292,9 @@ void game() {
                                     if (level.canMoveForward(enemyBase, Action::SwordStep, enemyBase.getDirection(), 0)) {
                                         enemy.pushSequence(Stance::Sword_Step_1_Start, Stance::Sword_Step_3_End);
                                     }
+                                    else {
+                                        enemy.push(Stance::Sword_Normal);  
+                                    }
                                     
                                 }
 
@@ -305,6 +308,10 @@ void game() {
                                 if (level.canMoveForward(enemyBase, Action::SwordStep, enemyBase.getDirection(), 0)) {
                                     enemy.pushSequence(Stance::Sword_Step_1_Start, Stance::Sword_Step_3_End);
                                 }
+                                else {
+                                    enemy.push(Stance::Sword_Normal);  
+                                } 
+
                                 break;
 
                         }
@@ -756,7 +763,7 @@ void game() {
                         }
 
                     }
-                    else if (pressed & UP_BUTTON) {
+                    else if (pressed & UP_BUTTON && !(gamePlay.level == 7 && level.getXLocation() == 10 && level.getYLocation() == 0)) {
 
                         if (level.canJumpUp_Part2(prince)) {
                             prince.pushSequence(Stance::Step_Climbing_1_Start, Stance::Step_Climbing_15_End, Stance::Upright);
