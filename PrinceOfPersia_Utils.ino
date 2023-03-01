@@ -330,7 +330,7 @@ void processStandingJump(Prince &prince, Level &level) {
             prince.pushSequence(Stance::Standing_Jump_GL_40_1_Start, Stance::Standing_Jump_GL_40_18_End, Stance::Jump_Up_A_14_End);
             break;
         
-        case StandingJumpResult::None:
+        default: // StandingJumpResult::None
             break;
 
     }
@@ -538,9 +538,7 @@ void pushDead(Prince &entity, Level &level, GamePlay &gamePlay, bool clear, Deat
             entity.pushSequence(Stance::Falling_Dead_1_Start, Stance::Falling_Dead_3_End);
             break;
 
-        case DeathType::Blade:
-        case DeathType::Spikes:
-        case DeathType::SwordFight:
+        default: // case DeathType::Blade, Spikes, SwordFight
             entity.pushSequence(Stance::Falling_Dead_Blade_1_Start, Stance::Falling_Dead_Blade_2_End);
             break;
             
