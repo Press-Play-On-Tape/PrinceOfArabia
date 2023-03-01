@@ -1,6 +1,19 @@
 #include <Arduboy2.h>
 #include "PrinceOfPersia_Invader.h"
 
+void setTitleFrame(TitleFrameIndex index) {
+
+   #ifdef POP_OR_SOS
+    uint8_t idx = 2 * (uint8_t)(index) + (cookie.pop & 1);
+   #else
+    uint8_t idx = 2 * (uint8_t)(index) + 1;
+   #endif
+    FX::seekDataArray(TitleFrameIndexTable, idx, 0, sizeof(uint24_t) + sizeof(uint8_t));
+    uint32_t data = FX::readPendingLastUInt32();
+    FX::setFrame((uint24_t)(data >> 8) , (uint8_t)data);
+
+}
+
 void title_Init() {
 
     gamePlay.gameState = GameState::Title;
@@ -165,22 +178,23 @@ void title() {
 
                             cookie.setMode(TitleScreenMode::Credits);
 
-                            #ifdef POP_OR_SOS
-                                if (cookie.pop) {
-                                    FX::setFrame(Title_Credits_PoP_Frame, 5 - 1);
-                                }
-                                else {
-                                    FX::setFrame(Title_Credits_SoS_Frame, 5 - 1);
-                                }
-                            #endif
-
-                            #ifdef POP_ONLY
-                                FX::setFrame(Title_Credits_PoP_Frame, 5 - 1);
-                            #endif
-
-                            #ifdef SOS_ONLY
-                                FX::setFrame(Title_Credits_SoS_Frame, 5 - 1);
-                            #endif
+                            //#ifdef POP_OR_SOS
+                            //    if (cookie.pop) {
+                            //        FX::setFrame(Title_Credits_PoP_Frame, 5 - 1);
+                            //    }
+                            //    else {
+                            //        FX::setFrame(Title_Credits_SoS_Frame, 5 - 1);
+                            //    }
+                            //#endif
+                            //
+                            //#ifdef POP_ONLY
+                            //    FX::setFrame(Title_Credits_PoP_Frame, 5 - 1);
+                            //#endif
+                            //
+                            //#ifdef SOS_ONLY
+                            //    FX::setFrame(Title_Credits_SoS_Frame, 5 - 1);
+                            //#endif
+                            setTitleFrame(TitleFrameIndex::Credits_PoP);
 
                             break;
 
@@ -188,22 +202,23 @@ void title() {
 
                             cookie.setMode(TitleScreenMode::High);
 
-                            #ifdef POP_OR_SOS
-                                if (cookie.pop) {
-                                    FX::setFrame(Title_High_PoP_Frame, 5 - 1);
-                                }
-                                else {
-                                    FX::setFrame(Title_High_SoS_Frame, 5 - 1);
-                                }
-                            #endif
-
-                            #ifdef POP_ONLY
-                                FX::setFrame(Title_High_PoP_Frame, 5 - 1);
-                            #endif
-
-                            #ifdef SOS_ONLY
-                                FX::setFrame(Title_High_SoS_Frame, 5 - 1);
-                            #endif
+                            //#ifdef POP_OR_SOS
+                            //    if (cookie.pop) {
+                            //        FX::setFrame(Title_High_PoP_Frame, 5 - 1);
+                            //    }
+                            //    else {
+                            //        FX::setFrame(Title_High_SoS_Frame, 5 - 1);
+                            //    }
+                            //#endif
+                            //
+                            //#ifdef POP_ONLY
+                            //    FX::setFrame(Title_High_PoP_Frame, 5 - 1);
+                            //#endif
+                            //
+                            //#ifdef SOS_ONLY
+                            //    FX::setFrame(Title_High_SoS_Frame, 5 - 1);
+                            //#endif
+                            setTitleFrame(TitleFrameIndex::High_PoP_Frame);
 
                             break;
 
@@ -233,63 +248,66 @@ void title() {
 
                         if (cookie.hasSavedScore) {
 
-                            #ifdef POP_OR_SOS
-                                if (cookie.pop) {
-                                    FX::setFrame(Title_Main_PoP_Frame_WithHigh, 2 - 1);
-                                }
-                                else {
-                                    FX::setFrame(Title_Main_SoS_Frame_WithHigh, 2 - 1);
-                                }
-                            #endif
-
-                            #ifdef POP_ONLY
-                                FX::setFrame(Title_Main_PoP_Frame_WithHigh, 2 - 1);
-                            #endif
-
-                            #ifdef SOS_ONLY
-                                FX::setFrame(Title_Main_SoS_Frame_WithHigh, 2 - 1);
-                            #endif
+                            //#ifdef POP_OR_SOS
+                            //    if (cookie.pop) {
+                            //        FX::setFrame(Title_Main_PoP_Frame_WithHigh, 2 - 1);
+                            //    }
+                            //    else {
+                            //        FX::setFrame(Title_Main_SoS_Frame_WithHigh, 2 - 1);
+                            //    }
+                            //#endif
+                            //
+                            //#ifdef POP_ONLY
+                            //    FX::setFrame(Title_Main_PoP_Frame_WithHigh, 2 - 1);
+                            //#endif
+                            //
+                            //#ifdef SOS_ONLY
+                            //    FX::setFrame(Title_Main_SoS_Frame_WithHigh, 2 - 1);
+                            //#endif
+                            setTitleFrame(TitleFrameIndex::Main_PoP_Frame_WithHigh);
 
                         }
                         else {
 
-                            #ifdef POP_OR_SOS
-                                if (cookie.pop) {
-                                    FX::setFrame(Title_Main_PoP_Frame_NoHigh, 2 - 1);
-                                }
-                                else {
-                                    FX::setFrame(Title_Main_SoS_Frame_NoHigh, 2 - 1);
-                                }
-                            #endif
-
-                            #ifdef POP_ONLY
-                                FX::setFrame(Title_Main_PoP_Frame_NoHigh, 2 - 1);
-                            #endif
-
-                            #ifdef SOS_ONLY
-                                FX::setFrame(Title_Main_SoS_Frame_NoHigh, 2 - 1);
-                            #endif
+                            //#ifdef POP_OR_SOS
+                            //    if (cookie.pop) {
+                            //        FX::setFrame(Title_Main_PoP_Frame_NoHigh, 2 - 1);
+                            //    }
+                            //    else {
+                            //        FX::setFrame(Title_Main_SoS_Frame_NoHigh, 2 - 1);
+                            //    }
+                            //#endif
+                            //
+                            //#ifdef POP_ONLY
+                            //    FX::setFrame(Title_Main_PoP_Frame_NoHigh, 2 - 1);
+                            //#endif
+                            //
+                            //#ifdef SOS_ONLY
+                            //    FX::setFrame(Title_Main_SoS_Frame_NoHigh, 2 - 1);
+                            //#endif
+                            setTitleFrame(TitleFrameIndex::Main_PoP_Frame_NoHigh);
 
                         }
 
                     #else
 
-                        #ifdef POP_OR_SOS
-                            if (cookie.pop) {
-                                FX::setFrame(Title_Main_PoP_Frame_WithHigh, 2 - 1);
-                            }
-                            else {
-                                FX::setFrame(Title_Main_SoS_Frame_WithHigh, 2 - 1);
-                            }
-                        #endif
-
-                        #ifdef POP_ONLY
-                            FX::setFrame(Title_Main_PoP_Frame_WithHigh, 2 - 1);
-                        #endif
-
-                        #ifdef SOS_ONLY
-                            FX::setFrame(Title_Main_SoS_Frame_WithHigh, 2 - 1);
-                        #endif
+                        //#ifdef POP_OR_SOS
+                        //    if (cookie.pop) {
+                        //        FX::setFrame(Title_Main_PoP_Frame_WithHigh, 2 - 1);
+                        //    }
+                        //    else {
+                        //        FX::setFrame(Title_Main_SoS_Frame_WithHigh, 2 - 1);
+                        //    }
+                        //#endif
+                        //
+                        //#ifdef POP_ONLY
+                        //    FX::setFrame(Title_Main_PoP_Frame_WithHigh, 2 - 1);
+                        //#endif
+                        //
+                        //#ifdef SOS_ONLY
+                        //    FX::setFrame(Title_Main_SoS_Frame_WithHigh, 2 - 1);
+                        //#endif
+                        setTitleFrame(TitleFrameIndex::Main_PoP_Frame_WithHigh);
 
                     #endif
 
@@ -378,63 +396,66 @@ void title() {
 
                     if (cookie.hasSavedScore) {
 
-                        #ifdef POP_OR_SOS
-                            if (cookie.pop) {
-                                FX::setFrame(Title_Intro_Last_PoP_Frame_WithHigh, 2 - 1);
-                            }
-                            else {
-                                FX::setFrame(Title_Intro_Last_SoS_Frame_WithHigh, 2 - 1);
-                            }
-                        #endif
-
-                        #ifdef POP_ONLY
-                            FX::setFrame(Title_Intro_Last_PoP_Frame_WithHigh, 2 - 1);
-                        #endif
-
-                        #ifdef SOS_ONLY
-                            FX::setFrame(Title_Intro_Last_SoS_Frame_WithHigh, 2 - 1);
-                        #endif
+                        //#ifdef POP_OR_SOS
+                        //    if (cookie.pop) {
+                        //        FX::setFrame(Title_Intro_Last_PoP_Frame_WithHigh, 2 - 1);
+                        //    }
+                        //    else {
+                        //        FX::setFrame(Title_Intro_Last_SoS_Frame_WithHigh, 2 - 1);
+                        //    }
+                        //#endif
+                        //
+                        //#ifdef POP_ONLY
+                        //    FX::setFrame(Title_Intro_Last_PoP_Frame_WithHigh, 2 - 1);
+                        //#endif
+                        //
+                        //#ifdef SOS_ONLY
+                        //    FX::setFrame(Title_Intro_Last_SoS_Frame_WithHigh, 2 - 1);
+                        //#endif
+                        setTitleFrame(TitleFrameIndex::Intro_Last_PoP_Frame_WithHigh);
 
                     }
                     else {
 
-                        #ifdef POP_OR_SOS
-                            if (cookie.pop) {
-                                FX::setFrame(Title_Intro_Last_PoP_Frame_NoHigh, 2 - 1);
-                            }
-                            else {
-                                FX::setFrame(Title_Intro_Last_SoS_Frame_NoHigh, 2 - 1);
-                            }                        
-                        #endif
-
-                        #ifdef POP_ONLY
-                            FX::setFrame(Title_Intro_Last_PoP_Frame_NoHigh, 2 - 1);
-                        #endif
-
-                        #ifdef SOS_ONLY
-                            FX::setFrame(Title_Intro_Last_SoS_Frame_NoHigh, 2 - 1);
-                        #endif
+                        //#ifdef POP_OR_SOS
+                        //    if (cookie.pop) {
+                        //        FX::setFrame(Title_Intro_Last_PoP_Frame_NoHigh, 2 - 1);
+                        //    }
+                        //    else {
+                        //        FX::setFrame(Title_Intro_Last_SoS_Frame_NoHigh, 2 - 1);
+                        //    }
+                        //#endif
+                        //
+                        //#ifdef POP_ONLY
+                        //    FX::setFrame(Title_Intro_Last_PoP_Frame_NoHigh, 2 - 1);
+                        //#endif
+                        //
+                        //#ifdef SOS_ONLY
+                        //    FX::setFrame(Title_Intro_Last_SoS_Frame_NoHigh, 2 - 1);
+                        //#endif
+                        setTitleFrame(TitleFrameIndex::Intro_Last_PoP_Frame_NoHigh);
 
                     }
 
                 #else
 
-                    #ifdef POP_OR_SOS
-                        if (cookie.pop) {
-                            FX::setFrame(Title_Intro_Last_PoP_Frame_WithHigh, 2 - 1);
-                        }
-                        else {
-                            FX::setFrame(Title_Intro_Last_SoS_Frame_WithHigh, 2 - 1);
-                        }
-                    #endif
-
-                    #ifdef POP_OMLY
-                        FX::setFrame(Title_Intro_Last_PoP_Frame_WithHigh, 2 - 1);
-                    #endif
-
-                    #ifdef SOS_ONLY
-                        FX::setFrame(Title_Intro_Last_SoS_Frame_WithHigh, 2 - 1);
-                    #endif
+                    //#ifdef POP_OR_SOS
+                    //    if (cookie.pop) {
+                    //        FX::setFrame(Title_Intro_Last_PoP_Frame_WithHigh, 2 - 1);
+                    //    }
+                    //    else {
+                    //        FX::setFrame(Title_Intro_Last_SoS_Frame_WithHigh, 2 - 1);
+                    //    }
+                    //#endif
+                    //
+                    //#ifdef POP_OMLY
+                    //    FX::setFrame(Title_Intro_Last_PoP_Frame_WithHigh, 2 - 1);
+                    //#endif
+                    //
+                    //#ifdef SOS_ONLY
+                    //    FX::setFrame(Title_Intro_Last_SoS_Frame_WithHigh, 2 - 1);
+                    //#endif
+                    setTitleFrame(TitleFrameIndex::Intro_Last_PoP_Frame_WithHigh);
 
                 #endif
 
@@ -446,63 +467,66 @@ void title() {
 
                         if (cookie.hasSavedScore) {
 
-                            #ifdef POP_OR_SOS
-                                if (cookie.pop) {
-                                    FX::setFrame(Title_Main_PoP_Frame_WithHigh, 2 - 1);
-                                }
-                                else {
-                                    FX::setFrame(Title_Main_SoS_Frame_WithHigh, 2 - 1);
-                                }                                   
-                            #endif
-
-                            #ifdef POP_ONLY
-                                FX::setFrame(Title_Main_PoP_Frame_WithHigh, 2 - 1);
-                            #endif
-
-                            #ifdef SOS_ONLY
-                                FX::setFrame(Title_Main_SoS_Frame_WithHigh, 2 - 1);
-                            #endif
+                            //#ifdef POP_OR_SOS
+                            //    if (cookie.pop) {
+                            //        FX::setFrame(Title_Main_PoP_Frame_WithHigh, 2 - 1);
+                            //    }
+                            //    else {
+                            //        FX::setFrame(Title_Main_SoS_Frame_WithHigh, 2 - 1);
+                            //    }
+                            //#endif
+                            //
+                            //#ifdef POP_ONLY
+                            //    FX::setFrame(Title_Main_PoP_Frame_WithHigh, 2 - 1);
+                            //#endif
+                            //
+                            //#ifdef SOS_ONLY
+                            //    FX::setFrame(Title_Main_SoS_Frame_WithHigh, 2 - 1);
+                            //#endif
+                            setTitleFrame(TitleFrameIndex::Main_PoP_Frame_WithHigh);
 
                         }
                         else {
 
-                            #ifdef POP_OR_SOS
-                                if (cookie.pop) {
-                                    FX::setFrame(Title_Main_PoP_Frame_NoHigh, 2 - 1);
-                                }
-                                else {
-                                    FX::setFrame(Title_Main_SoS_Frame_NoHigh, 2 - 1);
-                                }                                   
-                            #endif
-
-                            #ifdef POP_ONLY
-                                FX::setFrame(Title_Main_PoP_Frame_NoHigh, 2 - 1);
-                            #endif
-
-                            #ifdef SOS_ONLY
-                                FX::setFrame(Title_Main_SoS_Frame_NoHigh, 2 - 1);
-                            #endif
+                            //#ifdef POP_OR_SOS
+                            //    if (cookie.pop) {
+                            //        FX::setFrame(Title_Main_PoP_Frame_NoHigh, 2 - 1);
+                            //    }
+                            //    else {
+                            //        FX::setFrame(Title_Main_SoS_Frame_NoHigh, 2 - 1);
+                            //    }
+                            //#endif
+                            //
+                            //#ifdef POP_ONLY
+                            //    FX::setFrame(Title_Main_PoP_Frame_NoHigh, 2 - 1);
+                            //#endif
+                            //
+                            //#ifdef SOS_ONLY
+                            //    FX::setFrame(Title_Main_SoS_Frame_NoHigh, 2 - 1);
+                            //#endif
+                            setTitleFrame(TitleFrameIndex::Main_PoP_Frame_NoHigh);
 
                         }
 
                     #else
 
-                        #ifdef POP_OR_SOS
-                            if (cookie.pop) {
-                                FX::setFrame(Title_Main_PoP_Frame_WithHigh, 2 - 1);
-                            }
-                            else {
-                                FX::setFrame(Title_Main_SoS_Frame_WithHigh, 2 - 1);
-                            }
-                        #endif
-
-                        #ifdef POP_ONLY
-                            FX::setFrame(Title_Main_PoP_Frame_WithHigh, 2 - 1);
-                        #endif
-
-                        #ifdef SOS_ONLY
-                            FX::setFrame(Title_Main_SoS_Frame_WithHigh, 2 - 1);
-                        #endif
+                        //#ifdef POP_OR_SOS
+                        //    if (cookie.pop) {
+                        //        FX::setFrame(Title_Main_PoP_Frame_WithHigh, 2 - 1);
+                        //    }
+                        //    else {
+                        //        FX::setFrame(Title_Main_SoS_Frame_WithHigh, 2 - 1);
+                        //    }
+                        //#endif
+                        //
+                        //#ifdef POP_ONLY
+                        //    FX::setFrame(Title_Main_PoP_Frame_WithHigh, 2 - 1);
+                        //#endif
+                        //
+                        //#ifdef SOS_ONLY
+                        //    FX::setFrame(Title_Main_SoS_Frame_WithHigh, 2 - 1);
+                        //#endif
+                        setTitleFrame(TitleFrameIndex::Main_PoP_Frame_WithHigh);
 
                     #endif
 
@@ -523,63 +547,66 @@ void title() {
 
                             if (cookie.hasSavedScore) {
 
-                                #ifdef POP_OR_SOS
-                                    if (cookie.pop) {
-                                        FX::setFrame(Title_Main_Game_PoP_Frame_WithHigh, 2 - 1);
-                                    }
-                                    else {
-                                        FX::setFrame(Title_Main_Game_SoS_Frame_WithHigh, 2 - 1);
-                                    }
-                                #endif
-
-                                #ifdef POP_ONLY
-                                    FX::setFrame(Title_Main_Game_PoP_Frame_WithHigh, 2 - 1);
-                                #endif
-
-                                #ifdef SOS_ONLY
-                                    FX::setFrame(Title_Main_Game_SoS_Frame_WithHigh, 2 - 1);
-                                #endif
+                                //#ifdef POP_OR_SOS
+                                //    if (cookie.pop) {
+                                //        FX::setFrame(Title_Main_Game_PoP_Frame_WithHigh, 2 - 1);
+                                //    }
+                                //    else {
+                                //        FX::setFrame(Title_Main_Game_SoS_Frame_WithHigh, 2 - 1);
+                                //    }
+                                //#endif
+                                //
+                                //#ifdef POP_ONLY
+                                //    FX::setFrame(Title_Main_Game_PoP_Frame_WithHigh, 2 - 1);
+                                //#endif
+                                //
+                                //#ifdef SOS_ONLY
+                                //    FX::setFrame(Title_Main_Game_SoS_Frame_WithHigh, 2 - 1);
+                                //#endif
+                                setTitleFrame(TitleFrameIndex::Main_Game_PoP_Frame_WithHigh);
 
                             }
                             else {
 
-                                #ifdef POP_OR_SOS
-                                    if (cookie.pop) {
-                                        FX::setFrame(Title_Main_Game_PoP_Frame_NoHigh, 2 - 1);
-                                    }
-                                    else {
-                                        FX::setFrame(Title_Main_Game_SoS_Frame_NoHigh, 2 - 1);
-                                    }
-                                #endif
-
-                                #ifdef POP_ONLY
-                                    FX::setFrame(Title_Main_Game_PoP_Frame_NoHigh, 2 - 1);
-                                #endif
-
-                                #ifdef SOS_ONLY
-                                    FX::setFrame(Title_Main_Game_SoS_Frame_NoHigh, 2 - 1);
-                                #endif
+                                //#ifdef POP_OR_SOS
+                                //    if (cookie.pop) {
+                                //        FX::setFrame(Title_Main_Game_PoP_Frame_NoHigh, 2 - 1);
+                                //    }
+                                //    else {
+                                //        FX::setFrame(Title_Main_Game_SoS_Frame_NoHigh, 2 - 1);
+                                //    }
+                                //#endif
+                                //
+                                //#ifdef POP_ONLY
+                                //    FX::setFrame(Title_Main_Game_PoP_Frame_NoHigh, 2 - 1);
+                                //#endif
+                                //
+                                //#ifdef SOS_ONLY
+                                //    FX::setFrame(Title_Main_Game_SoS_Frame_NoHigh, 2 - 1);
+                                //#endif
+                                setTitleFrame(TitleFrameIndex::Main_Game_PoP_Frame_NoHigh);
 
                             }
 
                         #else
 
-                            #ifdef POP_OR_SOS
-                                if (cookie.pop) {
-                                    FX::setFrame(Title_Main_Game_PoP_Frame_WithHigh, 2 - 1);
-                                }
-                                else {
-                                    FX::setFrame(Title_Main_Game_SoS_Frame_WithHigh, 2 - 1);
-                                }
-                            #endif
-
-                            #ifdef POP_ONLY
-                                FX::setFrame(Title_Main_Game_PoP_Frame_WithHigh, 2 - 1);
-                            #endif
-
-                            #ifdef SOS_ONLY
-                                FX::setFrame(Title_Main_Game_SoS_Frame_WithHigh, 2 - 1);
-                            #endif
+                            //#ifdef POP_OR_SOS
+                            //    if (cookie.pop) {
+                            //        FX::setFrame(Title_Main_Game_PoP_Frame_WithHigh, 2 - 1);
+                            //    }
+                            //    else {
+                            //        FX::setFrame(Title_Main_Game_SoS_Frame_WithHigh, 2 - 1);
+                            //    }
+                            //#endif
+                            //
+                            //#ifdef POP_ONLY
+                            //    FX::setFrame(Title_Main_Game_PoP_Frame_WithHigh, 2 - 1);
+                            //#endif
+                            //
+                            //#ifdef SOS_ONLY
+                            //    FX::setFrame(Title_Main_Game_SoS_Frame_WithHigh, 2 - 1);
+                            //#endif
+                            setTitleFrame(TitleFrameIndex::Main_Game_PoP_Frame_WithHigh);
 
                         #endif
 
@@ -591,63 +618,66 @@ void title() {
 
                             if (cookie.hasSavedScore) {
 
-                                #ifdef POP_OR_SOS
-                                    if (cookie.pop) {
-                                        FX::setFrame(Title_Main_Credits_PoP_Frame_WithHigh, 2 - 1);
-                                    }
-                                    else {
-                                        FX::setFrame(Title_Main_Credits_SoS_Frame_WithHigh, 2 - 1);
-                                    }
-                                #endif
-
-                                #ifdef POP_ONLY
-                                    FX::setFrame(Title_Main_Credits_PoP_Frame_WithHigh, 2 - 1);
-                                #endif
-
-                                #ifdef SOS_ONLY
-                                    FX::setFrame(Title_Main_Credits_SoS_Frame_WithHigh, 2 - 1);
-                                #endif
+                                //#ifdef POP_OR_SOS
+                                //    if (cookie.pop) {
+                                //        FX::setFrame(Title_Main_Credits_PoP_Frame_WithHigh, 2 - 1);
+                                //    }
+                                //    else {
+                                //        FX::setFrame(Title_Main_Credits_SoS_Frame_WithHigh, 2 - 1);
+                                //    }
+                                //#endif
+                                //
+                                //#ifdef POP_ONLY
+                                //    FX::setFrame(Title_Main_Credits_PoP_Frame_WithHigh, 2 - 1);
+                                //#endif
+                                //
+                                //#ifdef SOS_ONLY
+                                //    FX::setFrame(Title_Main_Credits_SoS_Frame_WithHigh, 2 - 1);
+                                //#endif
+                                setTitleFrame(TitleFrameIndex::Main_Credits_PoP_Frame_WithHigh);
 
                             }
                             else {
 
-                                #ifdef POP_OR_SOS
-                                    if (cookie.pop) {
-                                        FX::setFrame(Title_Main_Credits_PoP_Frame_NoHigh, 2 - 1);
-                                    }
-                                    else {
-                                        FX::setFrame(Title_Main_Credits_SoS_Frame_NoHigh, 2 - 1);
-                                    }
-                                #endif
-
-                                #ifdef POP_ONLY
-                                    FX::setFrame(Title_Main_Credits_PoP_Frame_NoHigh, 2 - 1);
-                                #endif
-
-                                #ifdef SOS_ONLY
-                                    FX::setFrame(Title_Main_Credits_SoS_Frame_NoHigh, 2 - 1);
-                                #endif
+                                //#ifdef POP_OR_SOS
+                                //    if (cookie.pop) {
+                                //        FX::setFrame(Title_Main_Credits_PoP_Frame_NoHigh, 2 - 1);
+                                //    }
+                                //    else {
+                                //        FX::setFrame(Title_Main_Credits_SoS_Frame_NoHigh, 2 - 1);
+                                //    }
+                                //#endif
+                                //
+                                //#ifdef POP_ONLY
+                                //    FX::setFrame(Title_Main_Credits_PoP_Frame_NoHigh, 2 - 1);
+                                //#endif
+                                //
+                                //#ifdef SOS_ONLY
+                                //    FX::setFrame(Title_Main_Credits_SoS_Frame_NoHigh, 2 - 1);
+                                //#endif
+                                setTitleFrame(TitleFrameIndex::Main_Credits_PoP_Frame_NoHigh);
 
                             }
 
                         #else
 
-                            #ifdef POP_OR_SOS
-                                if (cookie.pop) {
-                                    FX::setFrame(Title_Main_Credits_PoP_Frame_WithHigh, 2 - 1);
-                                }
-                                else {
-                                    FX::setFrame(Title_Main_Credits_SoS_Frame_WithHigh, 2 - 1);
-                                }
-                            #endif
-
-                            #ifdef POP_ONLY
-                                FX::setFrame(Title_Main_Credits_PoP_Frame_WithHigh, 2 - 1);
-                            #endif
-
-                            #ifdef SOS_ONLY
-                                FX::setFrame(Title_Main_Credits_SoS_Frame_WithHigh, 2 - 1);
-                            #endif
+                            //#ifdef POP_OR_SOS
+                            //    if (cookie.pop) {
+                            //        FX::setFrame(Title_Main_Credits_PoP_Frame_WithHigh, 2 - 1);
+                            //    }
+                            //    else {
+                            //        FX::setFrame(Title_Main_Credits_SoS_Frame_WithHigh, 2 - 1);
+                            //    }
+                            //#endif
+                            //
+                            //#ifdef POP_ONLY
+                            //    FX::setFrame(Title_Main_Credits_PoP_Frame_WithHigh, 2 - 1);
+                            //#endif
+                            //
+                            //#ifdef SOS_ONLY
+                            //    FX::setFrame(Title_Main_Credits_SoS_Frame_WithHigh, 2 - 1);
+                            //#endif
+                            setTitleFrame(TitleFrameIndex::Main_Credits_PoP_Frame_WithHigh);
 
                         #endif
 
@@ -655,22 +685,23 @@ void title() {
 
                     case TitleScreenOptions::High:
 
-                        #ifdef POP_OR_SOS
-                            if (cookie.pop) {
-                                FX::setFrame(Title_Main_High_PoP_Frame_WithHigh, 2 - 1);
-                            }
-                            else {
-                                FX::setFrame(Title_Main_High_SoS_Frame_WithHigh, 2 - 1);
-                            }
-                        #endif
-
-                        #ifdef POP_ONLY
-                            FX::setFrame(Title_Main_High_PoP_Frame_WithHigh, 2 - 1);
-                        #endif
-
-                        #ifdef SOS_ONLY
-                            FX::setFrame(Title_Main_High_SoS_Frame_WithHigh, 2 - 1);
-                        #endif
+                        //#ifdef POP_OR_SOS
+                        //    if (cookie.pop) {
+                        //        FX::setFrame(Title_Main_High_PoP_Frame_WithHigh, 2 - 1);
+                        //    }
+                        //    else {
+                        //        FX::setFrame(Title_Main_High_SoS_Frame_WithHigh, 2 - 1);
+                        //    }
+                        //#endif
+                        //
+                        //#ifdef POP_ONLY
+                        //    FX::setFrame(Title_Main_High_PoP_Frame_WithHigh, 2 - 1);
+                        //#endif
+                        //
+                        //#ifdef SOS_ONLY
+                        //    FX::setFrame(Title_Main_High_SoS_Frame_WithHigh, 2 - 1);
+                        //#endif
+                        setTitleFrame(TitleFrameIndex::Main_High_PoP_Frame_WithHigh);
                         
                         break;
                         
@@ -758,22 +789,23 @@ void title() {
 
                     cookie.setMode(TitleScreenMode::IntroGame_End);
 
-                    #ifdef POP_OR_SOS
-                        if (cookie.pop) {
-                            FX::setFrame(Title_IntroGame_End_PoP_Frame, 5 - 1);
-                        }
-                        else {
-                            FX::setFrame(Title_IntroGame_End_SoS_Frame, 5 - 1);
-                        }
-                    #endif
-
-                    #ifdef POP_ONLY
-                        FX::setFrame(Title_IntroGame_End_PoP_Frame, 5 - 1);
-                    #endif
-
-                    #ifdef SOS_ONLY
-                        FX::setFrame(Title_IntroGame_End_SoS_Frame, 5 - 1);
-                    #endif
+                    //#ifdef POP_OR_SOS
+                    //    if (cookie.pop) {
+                    //        FX::setFrame(Title_IntroGame_End_PoP_Frame, 5 - 1);
+                    //    }
+                    //    else {
+                    //        FX::setFrame(Title_IntroGame_End_SoS_Frame, 5 - 1);
+                    //    }
+                    //#endif
+                    //
+                    //#ifdef POP_ONLY
+                    //    FX::setFrame(Title_IntroGame_End_PoP_Frame, 5 - 1);
+                    //#endif
+                    //
+                    //#ifdef SOS_ONLY
+                    //    FX::setFrame(Title_IntroGame_End_SoS_Frame, 5 - 1);
+                    //#endif
+                    setTitleFrame(TitleFrameIndex::IntroGame_End_PoP_Frame);
 
                     #ifndef SAVE_MEMORY_SOUND
                         sound.tonesFromFX(Sounds::Ending);

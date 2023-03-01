@@ -279,7 +279,7 @@ Title_High_PoP_Frame[] = {
     int16_t 114, 40, uint24_t Torches,         uint8_t 0, dbmMasked
     int16_t   0, 59, uint24_t Saves,           uint8_t 0, dbmNormal
     int16_t   0,  0, uint24_t Title_PoP,       uint8_t 0, dbmMasked_end
-    
+
     int16_t  38, 29, uint24_t HighScore,       uint8_t 0, dbmNormal
     int16_t  62, 40, uint24_t Numbers_Divider, uint8_t 0, dbmNormal
     int16_t  10, 40, uint24_t Torches,         uint8_t 1, dbmMasked
@@ -302,7 +302,7 @@ Title_High_SoS_Frame[] = {
     int16_t 114, 40, uint24_t Torches,         uint8_t 0, dbmMasked
     int16_t   0, 59, uint24_t Saves,           uint8_t 0, dbmNormal
     int16_t   0,  0, uint24_t Title_SoS,       uint8_t 0, dbmMasked_end
-    
+
     int16_t  38, 29, uint24_t HighScore,       uint8_t 0, dbmNormal
     int16_t  62, 42, uint24_t Numbers_Divider, uint8_t 0, dbmNormal
     int16_t  10, 40, uint24_t Torches,         uint8_t 1, dbmMasked
@@ -339,6 +339,46 @@ include 'cutscenes/Title_CutScene_7_Frame.txt'
 include 'cutscenes/Title_CutScene_End_Frame.txt'
 include 'cutscenes/Title_IntroGame_End_Frame.txt'
 
+TitleFrameIndexTable[] = {
+    uint24_t Title_Credits_SoS_Frame, uint8_t 4
+    uint24_t Title_Credits_PoP_Frame, uint8_t 4
+
+    uint24_t Title_High_SoS_Frame, uint8_t 4
+    uint24_t Title_High_PoP_Frame, uint8_t 4
+
+    uint24_t Title_Main_SoS_Frame_WithHigh, uint8_t 1
+    uint24_t Title_Main_PoP_Frame_WithHigh, uint8_t 1
+
+    uint24_t Title_Main_SoS_Frame_NoHigh, uint8_t 1
+    uint24_t Title_Main_PoP_Frame_NoHigh, uint8_t 1
+
+    uint24_t Title_Intro_Last_SoS_Frame_WithHigh, uint8_t 1
+    uint24_t Title_Intro_Last_PoP_Frame_WithHigh, uint8_t 1
+
+    uint24_t Title_Intro_Last_SoS_Frame_NoHigh, uint8_t 1
+    uint24_t Title_Intro_Last_PoP_Frame_NoHigh, uint8_t 1
+
+    uint24_t Title_Main_Game_SoS_Frame_WithHigh, uint8_t 1
+    uint24_t Title_Main_Game_PoP_Frame_WithHigh, uint8_t 1
+
+    uint24_t Title_Main_Game_SoS_Frame_NoHigh, uint8_t 1
+    uint24_t Title_Main_Game_PoP_Frame_NoHigh, uint8_t 1
+
+    uint24_t Title_Main_Credits_SoS_Frame_WithHigh, uint8_t 1
+    uint24_t Title_Main_Credits_PoP_Frame_WithHigh, uint8_t 1
+
+    uint24_t Title_Main_Credits_SoS_Frame_NoHigh, uint8_t 1
+    uint24_t Title_Main_Credits_PoP_Frame_NoHigh, uint8_t 1
+
+    uint24_t Title_Main_High_SoS_Frame_WithHigh, uint8_t 1
+    uint24_t Title_Main_High_PoP_Frame_WithHigh, uint8_t 1
+
+    uint24_t Title_IntroGame_End_SoS_Frame, uint8_t 4
+    uint24_t Title_IntroGame_End_PoP_Frame, uint8_t 4
+
+    uint24_t Title_Intro_SoS_Frame_NoHigh, uint8_t 0
+    uint24_t Title_Intro_PoP_Frame_NoHigh, uint8_t 0
+}
 
 savesection  // Anything below here will be stored in the save block
 

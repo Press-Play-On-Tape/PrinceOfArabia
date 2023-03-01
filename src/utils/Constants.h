@@ -16,14 +16,14 @@
 
     #define LEVEL_DATA_FROM_FX
     #define MOVEMENT_DATA_FROM_FX
-    #define _SAVE_TO_FX
+    #define SAVE_TO_FX
     #define STARTING_LEVEL 1
     #define MAX_LEVEL 13
     #define _DEBUG_CUT_SCENES
-    #define DEBUG_LEVELS
+    #define _DEBUG_LEVELS
 
-    #define _POP_OR_SOS
-    #define POP_ONLY
+    #define POP_OR_SOS
+    #define _POP_ONLY
     #define _SOS_ONLY
 
     #define _DEBUG

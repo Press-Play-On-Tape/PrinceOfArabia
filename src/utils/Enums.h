@@ -260,3 +260,19 @@ enum class GateType : uint8_t {
     Normal,
     Level6Exit,
 };
+
+enum class TitleFrameIndex : uint8_t {
+    Credits_PoP,
+    High_PoP_Frame,
+    Main_PoP_Frame_WithHigh,
+    Main_PoP_Frame_NoHigh,
+    Intro_Last_PoP_Frame_WithHigh,
+    Intro_Last_PoP_Frame_NoHigh,
+    Main_Game_PoP_Frame_WithHigh,
+    Main_Game_PoP_Frame_NoHigh,
+    Main_Credits_PoP_Frame_WithHigh,
+    Main_Credits_PoP_Frame_NoHigh,
+    Main_High_PoP_Frame_WithHigh,
+    IntroGame_End_PoP_Frame,
+    Intro_PoP_Frame_NoHigh
+};
