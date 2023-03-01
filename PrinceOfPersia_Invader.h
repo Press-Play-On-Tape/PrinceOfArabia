@@ -446,8 +446,7 @@ void invader_HasBulletHitBarrier(Invader_General2 &general2, Invader_Bullet &bul
 
             switch (bullet.y) {
 
-                case 46 ... 48:
-                case 49 ... 51:
+                case 46 ... 51:
                     
                     barrier_X = (bullet.x - 26) / 4;
                     barrier_B = (bullet.x - 26) % 4;
@@ -462,8 +461,7 @@ void invader_HasBulletHitBarrier(Invader_General2 &general2, Invader_Bullet &bul
 
             switch (bullet.y) {
 
-                case 46 ... 48:
-                case 49 ... 51:
+                case 46 ... 51:
                     
                     barrier_X = ((bullet.x - 78) / 4) + 4;
                     barrier_B = (bullet.x - 78) % 4;
