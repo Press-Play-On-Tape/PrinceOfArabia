@@ -38,7 +38,7 @@ void render(bool sameLevelAsPrince) {
     }
 
 
-    // // Draw foreground, collpased tiles ..
+    // Draw foreground, collapased tiles ..
 
     for (uint8_t y = 0; y < 4; y++) {
 

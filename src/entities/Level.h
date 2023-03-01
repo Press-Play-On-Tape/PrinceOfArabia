@@ -2614,6 +2614,7 @@ struct Level {
 
             int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx + 1, tileYIdx - 1, TILE_FLOOR_BASIC);
             int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx, tileYIdx - 1, TILE_FLOOR_BASIC);
+            int8_t bgTile3 = this->getTile(Layer::Background, tileXIdx - 1, tileYIdx - 1, TILE_FLOOR_BASIC);
             int8_t distToEdge = distToEdgeOfTile(direction, prince.getPosition().x);
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
@@ -2623,6 +2624,8 @@ struct Level {
             DEBUG_PRINT(bgTile1);
             DEBUG_PRINT(F(" "));
             DEBUG_PRINT(bgTile2);
+            DEBUG_PRINT(F(" "));
+            DEBUG_PRINT(bgTile3);
             DEBUG_PRINTLN("");
             #endif
 
@@ -2648,6 +2651,11 @@ struct Level {
                                 case TILE_COLUMN_LH_WALL:
                                 case TILE_FLOOR_RH_PILLAR_END_1:
                                 case TILE_FLOOR_RH_PILLAR_END_2:
+
+                                    if (this->isGroundTile(bgTile1)) {
+                                        return CanJumpUpResult::JumpThenFall_HideHands;
+                                    }
+
                                     return CanJumpUpResult::JumpDist10;
 
                                 case TILE_FLOOR_NONE:
@@ -2694,6 +2702,10 @@ struct Level {
                                 case TILE_FLOOR_LH_END_PATTERN_2:
                                 case TILE_COLUMN_3:
                                 case TILE_PILLAR_2:
+
+                                    if (this->isGroundTile(bgTile3)) {
+                                        return CanJumpUpResult::JumpThenFall_HideHands;
+                                    }                                
                                     return CanJumpUpResult::JumpDist10;
 
                                 case TILE_FLOOR_NONE:

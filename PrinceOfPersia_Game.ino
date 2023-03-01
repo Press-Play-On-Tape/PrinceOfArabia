@@ -2570,6 +2570,10 @@ void game() {
                 gamePlay.gameState = GameState::Title;
                 cookie.setMode(TitleScreenMode::TimeOut);
 
+                #ifndef SAVE_MEMORY_SOUND
+                    sound.tonesFromFX(Sounds::OutOfTime);
+                #endif
+
                 #ifdef POP_OR_SOS
 
                     if (cookie.pop) {

@@ -47,7 +47,7 @@ void title() {
 
             auto pressed = arduboy.pressedButtons();
 
-            if ((justPressed & UP_BUTTON) && (pressed & A_BUTTON) && (startLevel < MAX_LEVEL - 1)) {
+            if ((justPressed & UP_BUTTON) && (pressed & A_BUTTON) && (startLevel < MAX_LEVEL)) {
 
                 startLevel++;
 
@@ -274,7 +274,22 @@ void title() {
 
                     #else
 
-                        FX::setFrame(Title_Main_Frame_WithHigh, 2 - 1);
+                        #ifdef POP_OR_SOS
+                            if (cookie.pop) {
+                                FX::setFrame(Title_Main_PoP_Frame_WithHigh, 2 - 1);
+                            }
+                            else {
+                                FX::setFrame(Title_Main_SoS_Frame_WithHigh, 2 - 1);
+                            }
+                        #endif
+
+                        #ifdef POP_ONLY
+                            FX::setFrame(Title_Main_PoP_Frame_WithHigh, 2 - 1);
+                        #endif
+
+                        #ifdef SOS_ONLY
+                            FX::setFrame(Title_Main_SoS_Frame_WithHigh, 2 - 1);
+                        #endif
 
                     #endif
 
@@ -686,8 +701,8 @@ void title() {
                 FX::drawBitmap(38, 38, Images::Numbers_Large, cookie.highMin, dbmNormal);
                 FX::drawBitmap(68, 38, Images::Numbers_Large, cookie.highSec, dbmNormal);
 
-                renderNumber_Upright(68, 59, gamePlay.saves / 100);
-                renderNumber_Upright(76, 59, gamePlay.saves % 100);
+                renderNumber_Upright(68, 59, cookie.highSaves / 100);
+                renderNumber_Upright(76, 59, cookie.highSaves % 100);
 
                 break;
 
