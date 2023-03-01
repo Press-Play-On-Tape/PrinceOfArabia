@@ -1,7 +1,5 @@
 void loadItems(uint8_t level, Prince &prince) {
 
-    //this->level = level;
-
 
     // Deactivate all items ..            
 
@@ -15,7 +13,7 @@ void loadItems(uint8_t level, Prince &prince) {
     FX::seekData(FX::readIndexedUInt24(Levels::Level_Items, level));
     uint8_t itemType = FX::readPendingUInt8();
 
-    while (itemType != 255) {
+    while (itemType != Constants::NoItemFound) {
 
         Item &item = this->items[itemIdx];
         item.itemType = static_cast<ItemType>(itemType);
@@ -44,6 +42,7 @@ void loadMap(GamePlay &gamePlay) {
     for (uint8_t x = 0; x < 5 * 16; x++) {
 
         *(&bg[0][0] + x) = TILE_NONE;
+        
     }
 
     for (int8_t y = this->yLoc - 1; y < (int8_t)(this->yLoc + 4); y++) {

@@ -1355,30 +1355,6 @@ struct Level {
 
             }
 
-/*
-            switch (fgTile) {
-
-                case TILE_FG_WALL_1:
-                case TILE_FG_WALL_2:
-                case TILE_FG_WALL_3:
-                case TILE_FG_WALL_4:
-                case TILE_FG_WALL_5:
-                case TILE_FG_WALL_6:
-                case TILE_FG_WALL_7:
-                case TILE_FG_WALL_8:
-
-                    #if defined(DEBUG) && defined(DEBUG_ISGROUNDTILE)
-                    DEBUG_PRINTLN("- FG False");
-                    #endif
-
-                    return false;
-
-                // default:                     << Uncomment adds +32 bytes!
-                //     return true;
-
-            }
-*/
-
             #if defined(DEBUG) && defined(DEBUG_ISGROUNDTILE)
             DEBUG_PRINTLN("- Default False");
             #endif
