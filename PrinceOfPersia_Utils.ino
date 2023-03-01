@@ -626,7 +626,7 @@ void playGrab() {
                 sound.tonesFromFX(Sounds::Grab3);
                 break;
 
-            case 3:
+            default:
                 sound.tonesFromFX(Sounds::Grab4);
                 break;
 
