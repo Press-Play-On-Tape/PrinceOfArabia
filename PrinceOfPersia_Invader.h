@@ -7,7 +7,7 @@ const uint8_t speed[] PROGMEM = {  1,  1,  2,  3,  3,  4,  4,  5,  6,  7,  8,  9
 
 // Load a new wave of enemies and replenish barriers.
 
-void invader_NewWave(Invader_General2 general2) {
+void invader_NewWave(Invader_General2 &general2) {
 
     FX::seekData(FX::readIndexedUInt24(Levels::Level_Items, 0) + 16);
 
@@ -544,10 +544,9 @@ void invader_UpdateEnemyBullets(Invader_General2 &general2, Invader_Player &play
 
             bullet.y++;
 
-            Point bulletPoint = { bullet.x, bullet.y };
-
             if (player.status == Status::Active) {
 
+                Point bulletPoint = { bullet.x, bullet.y };
                 Rect playerRect = { player.x, player.y + 2, 9, 7 };
 
                 if (arduboy.collide(bulletPoint, playerRect)) {

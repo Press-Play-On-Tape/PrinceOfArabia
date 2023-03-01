@@ -12,6 +12,7 @@ struct GamePlay {
     uint8_t level = 1;
     uint8_t timer_Sec = 0;
     uint8_t timer_Min = 60;
+    uint8_t saves = 0;
 
     uint8_t crouchTimer = 0;
     uint8_t timeRemaining = 0;
@@ -27,6 +28,7 @@ struct GamePlay {
         this->level = level;
         this->timer_Sec = 59;
         this->timer_Min = 59;
+        this->saves = 0;
 
         this->timeRemaining = 124;
         this->gameState = GameState::Game;
