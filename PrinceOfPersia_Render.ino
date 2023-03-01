@@ -15,7 +15,7 @@ void render(bool sameLevelAsPrince) {
 
     for (uint8_t y = 0; y < 4; y++) {
 
-        for (uint8_t x = 0; x < 10; x++) {
+        for (int8_t x = 9; x >= 0; x--) {
 
             int8_t bgTile = level.getTile(Layer::Background, x, y - 1, TILE_NONE);
             int16_t yCoord = (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset;
@@ -33,28 +33,16 @@ void render(bool sameLevelAsPrince) {
 
             }
             
-        }
-
-    }
-
-
-    // Draw foreground, collapased tiles ..
-
-    for (uint8_t y = 0; y < 4; y++) {
-
-        for (uint8_t x = 0; x < 10; x++) {
+            // Draw foreground, collapased tiles ..
 
             int8_t fgTile = level.getTile(Layer::Foreground, x, y - 1, TILE_NONE);
-            int16_t yCoord1 = (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset;            
 
-            if      (fgTile == 29) FX::drawBitmap(x * Constants::TileWidth, yCoord1, Images::Tile_Dungeon_97, 0, dbmMasked);
-            else if (fgTile == 30) FX::drawBitmap(x * Constants::TileWidth, yCoord1, Images::Tile_Dungeon_98, 0, dbmMasked);
-
+            if      (fgTile == 29) FX::drawBitmap(x * Constants::TileWidth, yCoord, Images::Tile_Dungeon_97, 0, dbmMasked);
+            else if (fgTile == 30) FX::drawBitmap(x * Constants::TileWidth, yCoord, Images::Tile_Dungeon_98, 0, dbmMasked);
 
         }
 
     }
-
 
     // Draw items ..
 
@@ -276,17 +264,25 @@ void render(bool sameLevelAsPrince) {
 
         int16_t yCoord = prince.getYImage() - level.getYOffset() + Constants::ScreenTopOffset;
 
+        //if (prince.getDirection() == Direction::Left) {
+        //
+        //    FX::drawBitmap(prince.getXImage(), yCoord, Images::Prince_Left, imageIndex - 1, dbmMasked);
+        //
+        //}
+        //else {
+        //
+        //    FX::drawBitmap(prince.getXImage(), yCoord, Images::Prince_Right, imageIndex - 1, dbmMasked);
+        //
+        //}
+        uint24_t princeImage = Images::Prince_Right;
+
         if (prince.getDirection() == Direction::Left) {
             
-            FX::drawBitmap(prince.getXImage(), yCoord, Images::Prince_Left, imageIndex - 1, dbmMasked);
-
-        }
-        else {
+            princeImage = Images::Prince_Left;
             
-            FX::drawBitmap(prince.getXImage(), yCoord, Images::Prince_Right, imageIndex - 1, dbmMasked);
-
         }
 
+        FX::drawBitmap(prince.getXImage(), yCoord, princeImage, imageIndex - 1, dbmMasked);
     }
 
 
@@ -482,17 +478,26 @@ void render(bool sameLevelAsPrince) {
 
     if (sign.counter == 1) {
 
-        switch (sign.type) {
+        //switch (sign.type) {
+        //
+        //    case SignType::GameOver:
+        //        FX::drawBitmap(sign.x, sign.y, Images::GameOver, 0, dbmMasked);
+        //        break;
+        //
+        //    case SignType::PressA:
+        //        FX::drawBitmap(sign.x, sign.y, Images::PressA, 0, dbmMasked);
+        //        break;
+        //
+        //}
+        uint24_t signImage = Images::PressA;
 
-            case SignType::GameOver:
-                FX::drawBitmap(sign.x, sign.y, Images::GameOver, 0, dbmMasked);
-                break;
+        if (sign.type == SignType::GameOver) {
 
-            case SignType::PressA:
-                FX::drawBitmap(sign.x, sign.y, Images::PressA, 0, dbmMasked);
-                break;
+            signImage = Images::GameOver;
 
         }
+
+        FX::drawBitmap(sign.x, sign.y, signImage, 0, dbmMasked);
 
     }
 
