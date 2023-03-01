@@ -159,8 +159,7 @@ void loop() {
                 fadeEffect.reset();
             #endif
             game_StartLevel();
-            game();
-            break;
+            [[fallthrough]];
 
         case GameState::Game:
         #ifndef SAVE_MEMORY_OTHER
