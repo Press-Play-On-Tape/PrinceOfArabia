@@ -132,10 +132,6 @@ void invader_RenderPlayer(Invader_Player &player, int yOffset = 0, bool show = f
 
     switch (player.status) {
 
-        case Status::Active:
-        case Status::EnemiesAppearing:
-            break;
-
         case Status::Safe:
             if (!show && arduboy.getFrameCountHalf(32)) return;
             break;
@@ -147,7 +143,8 @@ void invader_RenderPlayer(Invader_Player &player, int yOffset = 0, bool show = f
         case Status::Dead:
             return;
 
-        default: break;
+        default: // case Status::Active, EnemiesAppearing
+            break;
 
     }
     
