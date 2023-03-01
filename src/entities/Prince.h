@@ -98,10 +98,10 @@ class Prince : public BaseEntity, public BaseStack {
 
             switch (this->stance) {
 
-                case Stance::Sword_Attack_1_Start ... Stance::Sword_Attack_8_End:
-                case Stance::Attack_Block_1_Start ... Stance::Attack_Block_3_End:
-                case Stance::Draw_Sword_1_Start ... Stance::Draw_Sword_6_End:
-                case Stance::Sword_Step_1_Start ... Stance::Sword_Step_3_End:
+                case Stance::Sword_Attack_1_Start ... Stance::Sword_Attack_8_End:       // 768 ... 775
+                case Stance::Attack_Block_1_Start ... Stance::Attack_Block_3_End:       // 776 ... 778
+                case Stance::Draw_Sword_1_Start ... Stance::Draw_Sword_6_End:           // 759 ... 764
+                case Stance::Sword_Step_1_Start ... Stance::Sword_Step_3_End:           // 765 ... 767
                 case Stance::Sword_Normal:
                     return true;
 

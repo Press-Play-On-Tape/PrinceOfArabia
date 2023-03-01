@@ -4,7 +4,13 @@
 void title_Init() {
 
     gamePlay.gameState = GameState::Title;
-    titleScreenVars.reset();
+
+    #ifdef POP_OR_SOS
+        titleScreenVars.reset(cookie.pop);
+    #else
+        titleScreenVars.reset();
+    #endif
+    
     cookie.setMode(TitleScreenMode::Intro);
 
 }
@@ -17,6 +23,10 @@ void title() {
 
     auto justPressed = arduboy.justPressedButtons();
 
+    #ifdef POP_OR_SOS
+    auto pressed = arduboy.pressedButtons();
+    #endif
+
     #ifdef DEBUG_CUT_SCENES
 
         if (justPressed & B_BUTTON && cookie.getMode() != TitleScreenMode::CutScene_7_PlayGame) {
@@ -27,7 +37,6 @@ void title() {
             Invader_General &general = level.getItem(Constants::Invaders_General).data.invader_General;
             general.y = 0;
 
-            //FX::setFrame(Title_IntroGame_End_Frame, 4 - 1);
         }
 
     #endif
@@ -38,7 +47,7 @@ void title() {
 
             auto pressed = arduboy.pressedButtons();
 
-            if ((justPressed & UP_BUTTON) && (pressed & A_BUTTON) && (startLevel < 27)) {
+            if ((justPressed & UP_BUTTON) && (pressed & A_BUTTON) && (startLevel < MAX_LEVEL - 1)) {
 
                 startLevel++;
 
@@ -52,6 +61,40 @@ void title() {
 
         #endif
 
+
+        // Switch between POP and SOS ..
+
+        #ifdef POP_OR_SOS
+        if (pressed & (LEFT_BUTTON | RIGHT_BUTTON)) {
+
+            titleScreenVars.counter++;
+
+            if (titleScreenVars.counter == 96) {
+
+                cookie.pop = !cookie.pop;
+
+                #ifdef SAVE_TO_FX
+
+                    FX::saveGameState((uint8_t*)&cookie, sizeof(cookie));
+
+                #else
+
+                    EEPROM_Utils::saveCookie(cookie);
+
+                #endif
+
+            }
+
+            pressed = 0;
+
+        }
+        else {
+            titleScreenVars.counter = 0;
+        }
+        #endif
+
+
+        // Swa; options ..
 
         if (justPressed & LEFT_BUTTON) {
 
@@ -121,14 +164,47 @@ void title() {
                         case TitleScreenOptions::Credits:
 
                             cookie.setMode(TitleScreenMode::Credits);
-                            FX::setFrame(Title_Credits_Frame, 5 - 1);
+
+                            #ifdef POP_OR_SOS
+                                if (cookie.pop) {
+                                    FX::setFrame(Title_Credits_PoP_Frame, 5 - 1);
+                                }
+                                else {
+                                    FX::setFrame(Title_Credits_SoS_Frame, 5 - 1);
+                                }
+                            #endif
+
+                            #ifdef POP_ONLY
+                                FX::setFrame(Title_Credits_PoP_Frame, 5 - 1);
+                            #endif
+
+                            #ifdef SOS_ONLY
+                                FX::setFrame(Title_Credits_SoS_Frame, 5 - 1);
+                            #endif
 
                             break;
 
                         case TitleScreenOptions::High:
 
                             cookie.setMode(TitleScreenMode::High);
-                            FX::setFrame(Title_High_Frame, 5 - 1);
+
+                            #ifdef POP_OR_SOS
+                                if (cookie.pop) {
+                                    FX::setFrame(Title_High_PoP_Frame, 5 - 1);
+                                }
+                                else {
+                                    FX::setFrame(Title_High_SoS_Frame, 5 - 1);
+                                }
+                            #endif
+
+                            #ifdef POP_ONLY
+                                FX::setFrame(Title_High_PoP_Frame, 5 - 1);
+                            #endif
+
+                            #ifdef SOS_ONLY
+                                FX::setFrame(Title_High_SoS_Frame, 5 - 1);
+                            #endif
+
                             break;
 
                     #endif
@@ -156,10 +232,44 @@ void title() {
                     #ifndef SAVE_MEMORY_TITLE
 
                         if (cookie.hasSavedScore) {
-                            FX::setFrame(Title_Main_Frame_WithHigh, 2 - 1);
+
+                            #ifdef POP_OR_SOS
+                                if (cookie.pop) {
+                                    FX::setFrame(Title_Main_PoP_Frame_WithHigh, 2 - 1);
+                                }
+                                else {
+                                    FX::setFrame(Title_Main_SoS_Frame_WithHigh, 2 - 1);
+                                }
+                            #endif
+
+                            #ifdef POP_ONLY
+                                FX::setFrame(Title_Main_PoP_Frame_WithHigh, 2 - 1);
+                            #endif
+
+                            #ifdef SOS_ONLY
+                                FX::setFrame(Title_Main_SoS_Frame_WithHigh, 2 - 1);
+                            #endif
+
                         }
                         else {
-                            FX::setFrame(Title_Main_Frame_NoHigh, 2 - 1);
+
+                            #ifdef POP_OR_SOS
+                                if (cookie.pop) {
+                                    FX::setFrame(Title_Main_PoP_Frame_NoHigh, 2 - 1);
+                                }
+                                else {
+                                    FX::setFrame(Title_Main_SoS_Frame_NoHigh, 2 - 1);
+                                }
+                            #endif
+
+                            #ifdef POP_ONLY
+                                FX::setFrame(Title_Main_PoP_Frame_NoHigh, 2 - 1);
+                            #endif
+
+                            #ifdef SOS_ONLY
+                                FX::setFrame(Title_Main_SoS_Frame_NoHigh, 2 - 1);
+                            #endif
+
                         }
 
                     #else
@@ -252,15 +362,64 @@ void title() {
                 #ifndef SAVE_MEMORY_TITLE
 
                     if (cookie.hasSavedScore) {
-                        FX::setFrame(Title_Intro_Last_Frame_WithHigh, 2 - 1);
+
+                        #ifdef POP_OR_SOS
+                            if (cookie.pop) {
+                                FX::setFrame(Title_Intro_Last_PoP_Frame_WithHigh, 2 - 1);
+                            }
+                            else {
+                                FX::setFrame(Title_Intro_Last_SoS_Frame_WithHigh, 2 - 1);
+                            }
+                        #endif
+
+                        #ifdef POP_ONLY
+                            FX::setFrame(Title_Intro_Last_PoP_Frame_WithHigh, 2 - 1);
+                        #endif
+
+                        #ifdef SOS_ONLY
+                            FX::setFrame(Title_Intro_Last_SoS_Frame_WithHigh, 2 - 1);
+                        #endif
+
                     }
                     else {
-                        FX::setFrame(Title_Intro_Last_Frame_NoHigh, 2 - 1);
+
+                        #ifdef POP_OR_SOS
+                            if (cookie.pop) {
+                                FX::setFrame(Title_Intro_Last_PoP_Frame_NoHigh, 2 - 1);
+                            }
+                            else {
+                                FX::setFrame(Title_Intro_Last_SoS_Frame_NoHigh, 2 - 1);
+                            }                        
+                        #endif
+
+                        #ifdef POP_ONLY
+                            FX::setFrame(Title_Intro_Last_PoP_Frame_NoHigh, 2 - 1);
+                        #endif
+
+                        #ifdef SOS_ONLY
+                            FX::setFrame(Title_Intro_Last_SoS_Frame_NoHigh, 2 - 1);
+                        #endif
+
                     }
 
                 #else
 
-                    FX::setFrame(Title_Intro_Last_Frame_WithHigh, 2 - 1);
+                    #ifdef POP_OR_SOS
+                        if (cookie.pop) {
+                            FX::setFrame(Title_Intro_Last_PoP_Frame_WithHigh, 2 - 1);
+                        }
+                        else {
+                            FX::setFrame(Title_Intro_Last_SoS_Frame_WithHigh, 2 - 1);
+                        }
+                    #endif
+
+                    #ifdef POP_OMLY
+                        FX::setFrame(Title_Intro_Last_PoP_Frame_WithHigh, 2 - 1);
+                    #endif
+
+                    #ifdef SOS_ONLY
+                        FX::setFrame(Title_Intro_Last_SoS_Frame_WithHigh, 2 - 1);
+                    #endif
 
                 #endif
 
@@ -271,15 +430,64 @@ void title() {
                     #ifndef SAVE_MEMORY_TITLE
 
                         if (cookie.hasSavedScore) {
-                            FX::setFrame(Title_Main_Frame_WithHigh, 2 - 1);
+
+                            #ifdef POP_OR_SOS
+                                if (cookie.pop) {
+                                    FX::setFrame(Title_Main_PoP_Frame_WithHigh, 2 - 1);
+                                }
+                                else {
+                                    FX::setFrame(Title_Main_SoS_Frame_WithHigh, 2 - 1);
+                                }                                   
+                            #endif
+
+                            #ifdef POP_ONLY
+                                FX::setFrame(Title_Main_PoP_Frame_WithHigh, 2 - 1);
+                            #endif
+
+                            #ifdef SOS_ONLY
+                                FX::setFrame(Title_Main_SoS_Frame_WithHigh, 2 - 1);
+                            #endif
+
                         }
                         else {
-                            FX::setFrame(Title_Main_Frame_NoHigh, 2 - 1);
+
+                            #ifdef POP_OR_SOS
+                                if (cookie.pop) {
+                                    FX::setFrame(Title_Main_PoP_Frame_NoHigh, 2 - 1);
+                                }
+                                else {
+                                    FX::setFrame(Title_Main_SoS_Frame_NoHigh, 2 - 1);
+                                }                                   
+                            #endif
+
+                            #ifdef POP_ONLY
+                                FX::setFrame(Title_Main_PoP_Frame_NoHigh, 2 - 1);
+                            #endif
+
+                            #ifdef SOS_ONLY
+                                FX::setFrame(Title_Main_SoS_Frame_NoHigh, 2 - 1);
+                            #endif
+
                         }
 
                     #else
 
-                        FX::setFrame(Title_Main_Frame_WithHigh, 2 - 1);
+                        #ifdef POP_OR_SOS
+                            if (cookie.pop) {
+                                FX::setFrame(Title_Main_PoP_Frame_WithHigh, 2 - 1);
+                            }
+                            else {
+                                FX::setFrame(Title_Main_SoS_Frame_WithHigh, 2 - 1);
+                            }
+                        #endif
+
+                        #ifdef POP_ONLY
+                            FX::setFrame(Title_Main_PoP_Frame_WithHigh, 2 - 1);
+                        #endif
+
+                        #ifdef SOS_ONLY
+                            FX::setFrame(Title_Main_SoS_Frame_WithHigh, 2 - 1);
+                        #endif
 
                     #endif
 
@@ -299,15 +507,64 @@ void title() {
                         #ifndef SAVE_MEMORY_TITLE                        
 
                             if (cookie.hasSavedScore) {
-                                FX::setFrame(Title_Main_Game_Frame_WithHigh, 2 - 1);
+
+                                #ifdef POP_OR_SOS
+                                    if (cookie.pop) {
+                                        FX::setFrame(Title_Main_Game_PoP_Frame_WithHigh, 2 - 1);
+                                    }
+                                    else {
+                                        FX::setFrame(Title_Main_Game_SoS_Frame_WithHigh, 2 - 1);
+                                    }
+                                #endif
+
+                                #ifdef POP_ONLY
+                                    FX::setFrame(Title_Main_Game_PoP_Frame_WithHigh, 2 - 1);
+                                #endif
+
+                                #ifdef SOS_ONLY
+                                    FX::setFrame(Title_Main_Game_SoS_Frame_WithHigh, 2 - 1);
+                                #endif
+
                             }
                             else {
-                                FX::setFrame(Title_Main_Game_Frame_NoHigh, 2 - 1);
+
+                                #ifdef POP_OR_SOS
+                                    if (cookie.pop) {
+                                        FX::setFrame(Title_Main_Game_PoP_Frame_NoHigh, 2 - 1);
+                                    }
+                                    else {
+                                        FX::setFrame(Title_Main_Game_SoS_Frame_NoHigh, 2 - 1);
+                                    }
+                                #endif
+
+                                #ifdef POP_ONLY
+                                    FX::setFrame(Title_Main_Game_PoP_Frame_NoHigh, 2 - 1);
+                                #endif
+
+                                #ifdef SOS_ONLY
+                                    FX::setFrame(Title_Main_Game_SoS_Frame_NoHigh, 2 - 1);
+                                #endif
+
                             }
 
                         #else
 
-                            FX::setFrame(Title_Main_Game_Frame_WithHigh, 2 - 1);
+                            #ifdef POP_OR_SOS
+                                if (cookie.pop) {
+                                    FX::setFrame(Title_Main_Game_PoP_Frame_WithHigh, 2 - 1);
+                                }
+                                else {
+                                    FX::setFrame(Title_Main_Game_SoS_Frame_WithHigh, 2 - 1);
+                                }
+                            #endif
+
+                            #ifdef POP_ONLY
+                                FX::setFrame(Title_Main_Game_PoP_Frame_WithHigh, 2 - 1);
+                            #endif
+
+                            #ifdef SOS_ONLY
+                                FX::setFrame(Title_Main_Game_SoS_Frame_WithHigh, 2 - 1);
+                            #endif
 
                         #endif
 
@@ -318,15 +575,64 @@ void title() {
                         #ifndef SAVE_MEMORY_TITLE                        
 
                             if (cookie.hasSavedScore) {
-                                FX::setFrame(Title_Main_Credits_Frame_WithHigh, 2 - 1);
+
+                                #ifdef POP_OR_SOS
+                                    if (cookie.pop) {
+                                        FX::setFrame(Title_Main_Credits_PoP_Frame_WithHigh, 2 - 1);
+                                    }
+                                    else {
+                                        FX::setFrame(Title_Main_Credits_SoS_Frame_WithHigh, 2 - 1);
+                                    }
+                                #endif
+
+                                #ifdef POP_ONLY
+                                    FX::setFrame(Title_Main_Credits_PoP_Frame_WithHigh, 2 - 1);
+                                #endif
+
+                                #ifdef SOS_ONLY
+                                    FX::setFrame(Title_Main_Credits_SoS_Frame_WithHigh, 2 - 1);
+                                #endif
+
                             }
                             else {
-                                FX::setFrame(Title_Main_Credits_Frame_NoHigh, 2 - 1);
+
+                                #ifdef POP_OR_SOS
+                                    if (cookie.pop) {
+                                        FX::setFrame(Title_Main_Credits_PoP_Frame_NoHigh, 2 - 1);
+                                    }
+                                    else {
+                                        FX::setFrame(Title_Main_Credits_SoS_Frame_NoHigh, 2 - 1);
+                                    }
+                                #endif
+
+                                #ifdef POP_ONLY
+                                    FX::setFrame(Title_Main_Credits_PoP_Frame_NoHigh, 2 - 1);
+                                #endif
+
+                                #ifdef SOS_ONLY
+                                    FX::setFrame(Title_Main_Credits_SoS_Frame_NoHigh, 2 - 1);
+                                #endif
+
                             }
 
                         #else
 
-                            FX::setFrame(Title_Main_Credits_Frame_WithHigh, 2 - 1);
+                            #ifdef POP_OR_SOS
+                                if (cookie.pop) {
+                                    FX::setFrame(Title_Main_Credits_PoP_Frame_WithHigh, 2 - 1);
+                                }
+                                else {
+                                    FX::setFrame(Title_Main_Credits_SoS_Frame_WithHigh, 2 - 1);
+                                }
+                            #endif
+
+                            #ifdef POP_ONLY
+                                FX::setFrame(Title_Main_Credits_PoP_Frame_WithHigh, 2 - 1);
+                            #endif
+
+                            #ifdef SOS_ONLY
+                                FX::setFrame(Title_Main_Credits_SoS_Frame_WithHigh, 2 - 1);
+                            #endif
 
                         #endif
 
@@ -334,7 +640,23 @@ void title() {
 
                     case TitleScreenOptions::High:
 
-                        FX::setFrame(Title_Main_High_Frame_WithHigh, 2 - 1);
+                        #ifdef POP_OR_SOS
+                            if (cookie.pop) {
+                                FX::setFrame(Title_Main_High_PoP_Frame_WithHigh, 2 - 1);
+                            }
+                            else {
+                                FX::setFrame(Title_Main_High_SoS_Frame_WithHigh, 2 - 1);
+                            }
+                        #endif
+
+                        #ifdef POP_ONLY
+                            FX::setFrame(Title_Main_High_PoP_Frame_WithHigh, 2 - 1);
+                        #endif
+
+                        #ifdef SOS_ONLY
+                            FX::setFrame(Title_Main_High_SoS_Frame_WithHigh, 2 - 1);
+                        #endif
+                        
                         break;
                         
                 }
@@ -361,8 +683,11 @@ void title() {
             case TitleScreenMode::High:
                 
                 FX::drawFrame();
-                FX::drawBitmap(38, 40, Images::Numbers_Large, cookie.highMin, dbmNormal);
-                FX::drawBitmap(68, 40, Images::Numbers_Large, cookie.highSec, dbmNormal);
+                FX::drawBitmap(38, 38, Images::Numbers_Large, cookie.highMin, dbmNormal);
+                FX::drawBitmap(68, 38, Images::Numbers_Large, cookie.highSec, dbmNormal);
+
+                renderNumber_Upright(68, 59, gamePlay.saves / 100);
+                renderNumber_Upright(76, 59, gamePlay.saves % 100);
 
                 break;
 
@@ -417,7 +742,23 @@ void title() {
                 if (!FX::drawFrame()) {
 
                     cookie.setMode(TitleScreenMode::IntroGame_End);
-                    FX::setFrame(Title_IntroGame_End_Frame, 5 - 1);
+
+                    #ifdef POP_OR_SOS
+                        if (cookie.pop) {
+                            FX::setFrame(Title_IntroGame_End_PoP_Frame, 5 - 1);
+                        }
+                        else {
+                            FX::setFrame(Title_IntroGame_End_SoS_Frame, 5 - 1);
+                        }
+                    #endif
+
+                    #ifdef POP_ONLY
+                        FX::setFrame(Title_IntroGame_End_PoP_Frame, 5 - 1);
+                    #endif
+
+                    #ifdef SOS_ONLY
+                        FX::setFrame(Title_IntroGame_End_SoS_Frame, 5 - 1);
+                    #endif
 
                     #ifndef SAVE_MEMORY_SOUND
                         sound.tonesFromFX(Sounds::Ending);

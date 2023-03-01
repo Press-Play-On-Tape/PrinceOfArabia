@@ -68,9 +68,6 @@ void render(bool sameLevelAsPrince) {
 
             switch (item.itemType) {
 
-                case ItemType::Flash:
-                    break;
-
                 case ItemType::Sword:
                     FX::drawBitmap(xLoc + 1, yLoc + 20, Images::Sword, 0, dbmMasked);
                     break;

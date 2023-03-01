@@ -8,10 +8,12 @@ namespace Images {
     // Title Screen ..
 
     image_t Title_PoP               = "../images/title/Title_PoP.png"
+    image_t Title_SoS               = "../images/title/Title_SoS.png"
     image_t Title_Main_NoHigh       = "../images/title/Title_Main_NoHigh.png"
     image_t Title_Main_WithHigh     = "../images/title/Title_Main_WithHigh.png"
     image_t Title_Cursor            = "../images/title/Title_Cursor.png"
     image_t Title_Credits           = "../images/title/Title_Credits.png"
+    image_t Saves                   = "../images/title/Saves.png"
 
 
     // Cut scenes ..
@@ -20,11 +22,13 @@ namespace Images {
     image_t LevelNumber             = "../images/title/LevelNumber.png"
     image_t GameOver                = "../images/title/GameOver.png"
     image_t PressA                  = "../images/title/PressA.png"
-    image_t TimeOut                 = "../images/title/TimeOut.png"
+    image_t TimeOut_PoP             = "../images/title/TimeOut_PoP.png"
+    image_t TimeOut_SoS             = "../images/title/TimeOut_SoS.png"
 
     image_t IntroGame_1A            = "../images/title/IntroGame_1A.png"
     image_t IntroGame_1B            = "../images/title/IntroGame_1B.png"
-    image_t IntroGame_9             = "../images/title/IntroGame_9.png"
+    image_t IntroGame_9_PoP         = "../images/title/IntroGame_9_PoP.png"
+    image_t IntroGame_9_SoS         = "../images/title/IntroGame_9_SoS.png"
     image_t Chambers_BG             = "../images/title/Chambers_BG.png"
     image_t Chambers_BG_01          = "../images/title/Chambers_BG_01.png"
     image_t Chambers_BG_02          = "../images/title/Chambers_BG_02.png"

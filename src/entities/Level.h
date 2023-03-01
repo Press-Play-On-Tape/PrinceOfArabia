@@ -1711,8 +1711,8 @@ struct Level {
             printCoordToIndex(newPos, tileXIdx, tileYIdx);
             #endif
 
-            int8_t bgTile = this->getTile(Layer::Background, tileXIdx + (prince.getDirection() == Direction::Left ? 0 : 0), tileYIdx, TILE_FLOOR_BASIC);
-            int8_t fgTile = this->getTile(Layer::Foreground, tileXIdx + (prince.getDirection() == Direction::Left ? 0 : 0), tileYIdx, TILE_FLOOR_BASIC);
+            int8_t bgTile = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
+            int8_t fgTile = this->getTile(Layer::Foreground, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN_PART2)
             DEBUG_PRINT(F("canClimbDown_Part2() Test can land 1 level below ("));

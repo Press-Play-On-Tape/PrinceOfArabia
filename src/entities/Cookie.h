@@ -13,6 +13,10 @@ struct Cookie {
     bool hasSavedLevel;
     bool hasSavedScore;
 
+    #ifdef POP_OR_SOS
+    bool pop = false;
+    #endif
+
     uint8_t highMin;
     uint8_t highSec;
 
