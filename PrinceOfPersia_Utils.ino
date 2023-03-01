@@ -581,18 +581,17 @@ void showSign(Prince &prince, Level &level, SignType signType, uint8_t counter) 
     switch (signType) {
 
         case SignType::GameOver:
-            sign.counter = counter;
             sign.type = SignType::GameOver;
             sign.x = 39;
             break;
 
-        case SignType::PressA:
-            sign.counter = counter;
+        default:
             sign.type = SignType::PressA;
             sign.x = 24;
             break;
 
     }
+    sign.counter = counter;
 
     switch (prince.getY()) {
 
