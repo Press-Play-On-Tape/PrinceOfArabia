@@ -209,11 +209,11 @@ Title_Main_Game_PoP_Frame_NoHigh[] = {
     int16_t  0,  0, uint24_t Title_PoP,    uint8_t 0, dbmMasked_last
 }
 
-Title_Main_Game_SoS_Frame_NoHigh[] = {
+Title_Main_Game_PoA_Frame_NoHigh[] = {
 
     int16_t  0,-24, uint24_t Title_Main_NoHigh,   uint8_t 0, dbmNormal
     int16_t 32, 57, uint24_t Title_Cursor, uint8_t 0, dbmNormal
-    int16_t  0,  0, uint24_t Title_SoS,    uint8_t 0, dbmMasked_last
+    int16_t  0,  0, uint24_t Title_PoA,    uint8_t 0, dbmMasked_last
 }
 
 Title_Main_Game_PoP_Frame_WithHigh[] = {
@@ -223,11 +223,11 @@ Title_Main_Game_PoP_Frame_WithHigh[] = {
     int16_t  0,  0, uint24_t Title_PoP,    uint8_t 0, dbmMasked_last
 }
 
-Title_Main_Game_SoS_Frame_WithHigh[] = {
+Title_Main_Game_PoA_Frame_WithHigh[] = {
 
     int16_t  0,-24, uint24_t Title_Main_WithHigh,   uint8_t 0, dbmNormal
     int16_t 17, 57, uint24_t Title_Cursor, uint8_t 0, dbmNormal
-    int16_t  0,  0, uint24_t Title_SoS,    uint8_t 0, dbmMasked_last
+    int16_t  0,  0, uint24_t Title_PoA,    uint8_t 0, dbmMasked_last
 }
 
 Title_Main_Credits_PoP_Frame_NoHigh[] = {
@@ -237,11 +237,11 @@ Title_Main_Credits_PoP_Frame_NoHigh[] = {
     int16_t  0,  0, uint24_t Title_PoP,    uint8_t 0, dbmMasked_last
 }
 
-Title_Main_Credits_SoS_Frame_NoHigh[] = {
+Title_Main_Credits_PoA_Frame_NoHigh[] = {
 
     int16_t  0,-24, uint24_t Title_Main_NoHigh,   uint8_t 0, dbmNormal
     int16_t 62, 57, uint24_t Title_Cursor, uint8_t 0, dbmNormal
-    int16_t  0,  0, uint24_t Title_SoS,    uint8_t 0, dbmMasked_last
+    int16_t  0,  0, uint24_t Title_PoA,    uint8_t 0, dbmMasked_last
 }
 
 Title_Main_Credits_PoP_Frame_WithHigh[] = {
@@ -251,11 +251,11 @@ Title_Main_Credits_PoP_Frame_WithHigh[] = {
     int16_t  0,  0, uint24_t Title_PoP,    uint8_t 0, dbmMasked_last
 }
 
-Title_Main_Credits_SoS_Frame_WithHigh[] = {
+Title_Main_Credits_PoA_Frame_WithHigh[] = {
 
     int16_t  0,-24, uint24_t Title_Main_WithHigh,   uint8_t 0, dbmNormal
     int16_t 47, 57, uint24_t Title_Cursor, uint8_t 0, dbmNormal
-    int16_t  0,  0, uint24_t Title_SoS,    uint8_t 0, dbmMasked_last
+    int16_t  0,  0, uint24_t Title_PoA,    uint8_t 0, dbmMasked_last
 }
 
 Title_Main_High_PoP_Frame_WithHigh[] = {
@@ -265,11 +265,11 @@ Title_Main_High_PoP_Frame_WithHigh[] = {
     int16_t  0,  0, uint24_t Title_PoP,    uint8_t 0, dbmMasked_last
 }
 
-Title_Main_High_SoS_Frame_WithHigh[] = {
+Title_Main_High_PoA_Frame_WithHigh[] = {
 
     int16_t  0,-24, uint24_t Title_Main_WithHigh,   uint8_t 0, dbmNormal
     int16_t 85, 57, uint24_t Title_Cursor, uint8_t 0, dbmNormal
-    int16_t  0,  0, uint24_t Title_SoS,    uint8_t 0, dbmMasked_last
+    int16_t  0,  0, uint24_t Title_PoA,    uint8_t 0, dbmMasked_last
 }
 
 Title_High_PoP_Frame[] = {
@@ -295,27 +295,27 @@ Title_High_PoP_Frame[] = {
     int16_t   0,  0, uint24_t Title_PoP,       uint8_t 0, dbmMasked_last
 }
 
-Title_High_SoS_Frame[] = {
+Title_High_PoA_Frame[] = {
     int16_t  38, 29, uint24_t HighScore,       uint8_t 0, dbmNormal
     int16_t  62, 42, uint24_t Numbers_Divider, uint8_t 0, dbmNormal
     int16_t  10, 40, uint24_t Torches,         uint8_t 0, dbmMasked
     int16_t 114, 40, uint24_t Torches,         uint8_t 0, dbmMasked
     int16_t   0, 59, uint24_t Saves,           uint8_t 0, dbmNormal
-    int16_t   0,  0, uint24_t Title_SoS,       uint8_t 0, dbmMasked_end
+    int16_t   0,  0, uint24_t Title_PoA,       uint8_t 0, dbmMasked_end
 
     int16_t  38, 29, uint24_t HighScore,       uint8_t 0, dbmNormal
     int16_t  62, 42, uint24_t Numbers_Divider, uint8_t 0, dbmNormal
     int16_t  10, 40, uint24_t Torches,         uint8_t 1, dbmMasked
     int16_t 114, 40, uint24_t Torches,         uint8_t 1, dbmMasked
     int16_t   0, 59, uint24_t Saves,           uint8_t 0, dbmNormal
-    int16_t   0,  0, uint24_t Title_SoS,       uint8_t 0, dbmMasked_end
+    int16_t   0,  0, uint24_t Title_PoA,       uint8_t 0, dbmMasked_end
 
     int16_t  38, 29, uint24_t HighScore,       uint8_t 0, dbmNormal
     int16_t  62, 42, uint24_t Numbers_Divider, uint8_t 0, dbmNormal
     int16_t  10, 40, uint24_t Torches,         uint8_t 2, dbmMasked
     int16_t 114, 40, uint24_t Torches,         uint8_t 2, dbmMasked
     int16_t   0, 59, uint24_t Saves,           uint8_t 0, dbmNormal
-    int16_t   0,  0, uint24_t Title_SoS,       uint8_t 0, dbmMasked_last
+    int16_t   0,  0, uint24_t Title_PoA,       uint8_t 0, dbmMasked_last
 }
 
 Invaders_HUD_frame[] = {
@@ -340,46 +340,46 @@ include 'cutscenes/Title_CutScene_End_Frame.txt'
 include 'cutscenes/Title_IntroGame_End_Frame.txt'
 
 TitleFrameIndexTable[] = {
-    uint24_t Title_Credits_SoS_Frame, uint8_t 4
+    uint24_t Title_Credits_PoA_Frame, uint8_t 4
     uint24_t Title_Credits_PoP_Frame, uint8_t 4
 
-    uint24_t Title_High_SoS_Frame, uint8_t 4
+    uint24_t Title_High_PoA_Frame, uint8_t 4
     uint24_t Title_High_PoP_Frame, uint8_t 4
 
-    uint24_t Title_Main_SoS_Frame_WithHigh, uint8_t 1
+    uint24_t Title_Main_PoA_Frame_WithHigh, uint8_t 1
     uint24_t Title_Main_PoP_Frame_WithHigh, uint8_t 1
 
-    uint24_t Title_Main_SoS_Frame_NoHigh, uint8_t 1
+    uint24_t Title_Main_PoA_Frame_NoHigh, uint8_t 1
     uint24_t Title_Main_PoP_Frame_NoHigh, uint8_t 1
 
-    uint24_t Title_Intro_Last_SoS_Frame_WithHigh, uint8_t 1
+    uint24_t Title_Intro_Last_PoA_Frame_WithHigh, uint8_t 1
     uint24_t Title_Intro_Last_PoP_Frame_WithHigh, uint8_t 1
 
-    uint24_t Title_Intro_Last_SoS_Frame_NoHigh, uint8_t 1
+    uint24_t Title_Intro_Last_PoA_Frame_NoHigh, uint8_t 1
     uint24_t Title_Intro_Last_PoP_Frame_NoHigh, uint8_t 1
 
-    uint24_t Title_Main_Game_SoS_Frame_WithHigh, uint8_t 1
+    uint24_t Title_Main_Game_PoA_Frame_WithHigh, uint8_t 1
     uint24_t Title_Main_Game_PoP_Frame_WithHigh, uint8_t 1
 
-    uint24_t Title_Main_Game_SoS_Frame_NoHigh, uint8_t 1
+    uint24_t Title_Main_Game_PoA_Frame_NoHigh, uint8_t 1
     uint24_t Title_Main_Game_PoP_Frame_NoHigh, uint8_t 1
 
-    uint24_t Title_Main_Credits_SoS_Frame_WithHigh, uint8_t 1
+    uint24_t Title_Main_Credits_PoA_Frame_WithHigh, uint8_t 1
     uint24_t Title_Main_Credits_PoP_Frame_WithHigh, uint8_t 1
 
-    uint24_t Title_Main_Credits_SoS_Frame_NoHigh, uint8_t 1
+    uint24_t Title_Main_Credits_PoA_Frame_NoHigh, uint8_t 1
     uint24_t Title_Main_Credits_PoP_Frame_NoHigh, uint8_t 1
 
-    uint24_t Title_Main_High_SoS_Frame_WithHigh, uint8_t 1
+    uint24_t Title_Main_High_PoA_Frame_WithHigh, uint8_t 1
     uint24_t Title_Main_High_PoP_Frame_WithHigh, uint8_t 1
 
-    uint24_t Title_IntroGame_End_SoS_Frame, uint8_t 4
+    uint24_t Title_IntroGame_End_PoA_Frame, uint8_t 4
     uint24_t Title_IntroGame_End_PoP_Frame, uint8_t 4
 
-    uint24_t Title_Intro_SoS_Frame_NoHigh, uint8_t 0
+    uint24_t Title_Intro_PoA_Frame_NoHigh, uint8_t 0
     uint24_t Title_Intro_PoP_Frame_NoHigh, uint8_t 0
 
-    uint24_t Title_TimeOut_SoS_Frame, uint8_t 4
+    uint24_t Title_TimeOut_PoA_Frame, uint8_t 4
     uint24_t Title_TimeOut_PoP_Frame, uint8_t 4
 }
 

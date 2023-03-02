@@ -22,7 +22,7 @@
     #define _DEBUG_CUT_SCENES
     #define _DEBUG_LEVELS
 
-    #define POP_OR_SOS
+    #define POP_OR_POA
     #define _POP_ONLY
     #define _SOS_ONLY
 
@@ -48,7 +48,7 @@
     #define _DEBUG_CUT_SCENES
     #define _DEBUG_LEVELS
 
-    #define _POP_OR_SOS
+    #define _POP_OR_POA
     #define POP_ONLY
     #define _SOS_ONLY
 

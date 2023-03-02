@@ -13,7 +13,7 @@ struct Cookie {
     bool hasSavedLevel;
     bool hasSavedScore;
 
-    #ifdef POP_OR_SOS
+    #ifdef POP_OR_POA
     bool pop = false;
     #endif
 

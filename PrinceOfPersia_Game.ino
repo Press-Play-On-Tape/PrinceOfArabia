@@ -191,22 +191,6 @@ void game() {
         gamePlay.gameState = GameState::Title;
         cookie.setMode(TitleScreenMode::TimeOut);
 
-        //#ifdef POP_OR_SOS
-        //    if (cookie.pop) {
-        //        FX::setFrame(Title_TimeOut_PoP_Frame, 5 - 1);
-        //    }
-        //    else {
-        //        FX::setFrame(Title_TimeOut_SoS_Frame, 5 - 1);
-        //    }
-        //#endif
-        //
-        //#ifdef POP_ONLY
-        //    FX::setFrame(Title_TimeOut_PoP_Frame, 5 - 1);
-        //#endif
-        //
-        //#ifdef SOS_ONLY
-        //    FX::setFrame(Title_TimeOut_SoS_Frame, 5 - 1);
-        //#endif
         setTitleFrame(TitleFrameIndex::TimeOut_PoP_Frame);
 
         #ifndef SAVE_MEMORY_OTHER
@@ -2575,24 +2559,6 @@ void game() {
                     sound.tonesFromFX(Sounds::OutOfTime);
                 #endif
 
-                //#ifdef POP_OR_SOS
-                //
-                //    if (cookie.pop) {
-                //        FX::setFrame(Title_TimeOut_PoP_Frame, 5 - 1);
-                //    }
-                //    else {
-                //        FX::setFrame(Title_TimeOut_SoS_Frame, 5 - 1);
-                //    }
-                //
-                //#endif
-                //
-                //#ifdef POP_ONLY
-                //        FX::setFrame(Title_TimeOut_PoP_Frame, 5 - 1);
-                //#endif
-                //
-                //#ifdef SOS_ONLY
-                //        FX::setFrame(Title_TimeOutSoS_Frame, 5 - 1);
-                //#endif
                 setTitleFrame(TitleFrameIndex::TimeOut_PoP_Frame);
 
                 #ifndef SAVE_MEMORY_OTHER
