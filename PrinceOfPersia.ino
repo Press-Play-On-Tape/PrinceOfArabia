@@ -150,8 +150,7 @@ void loop() {
             #endif
 
             game_Init();
-            game();
-            break;
+            [[fallthrough]];
 
         case GameState::Game_StartLevel:
 
