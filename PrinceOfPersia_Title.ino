@@ -3,10 +3,12 @@
 
 void setTitleFrame(TitleFrameIndex index) {
 
-    #ifdef POP_OR_POA
+    #if defined (POP_OR_POA)
         uint8_t idx = 2 * (uint8_t)(index) + (cookie.pop & 1);
-    #else
+    #elif defined (POP_ONLY)
         uint8_t idx = 2 * (uint8_t)(index) + 1;
+    #elif defined (POA_ONLY)
+        uint8_t idx = 2 * (uint8_t)(index);
     #endif
 
     FX::seekDataArray(TitleFrameIndexTable, idx, 0, sizeof(uint24_t) + sizeof(uint8_t));
