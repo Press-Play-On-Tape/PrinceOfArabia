@@ -330,7 +330,7 @@ void processStandingJump(Prince &prince, Level &level) {
             prince.pushSequence(Stance::Standing_Jump_GL_40_1_Start, Stance::Standing_Jump_GL_40_18_End, Stance::Jump_Up_A_14_End);
             break;
         
-        case StandingJumpResult::None:
+        default: // StandingJumpResult::None
             break;
 
     }
@@ -538,9 +538,7 @@ void pushDead(Prince &entity, Level &level, GamePlay &gamePlay, bool clear, Deat
             entity.pushSequence(Stance::Falling_Dead_1_Start, Stance::Falling_Dead_3_End);
             break;
 
-        case DeathType::Blade:
-        case DeathType::Spikes:
-        case DeathType::SwordFight:
+        default: // case DeathType::Blade, Spikes, SwordFight
             entity.pushSequence(Stance::Falling_Dead_Blade_1_Start, Stance::Falling_Dead_Blade_2_End);
             break;
             
@@ -583,18 +581,17 @@ void showSign(Prince &prince, Level &level, SignType signType, uint8_t counter) 
     switch (signType) {
 
         case SignType::GameOver:
-            sign.counter = counter;
             sign.type = SignType::GameOver;
             sign.x = 39;
             break;
 
-        case SignType::PressA:
-            sign.counter = counter;
+        default:
             sign.type = SignType::PressA;
             sign.x = 24;
             break;
 
     }
+    sign.counter = counter;
 
     switch (prince.getY()) {
 
@@ -629,7 +626,7 @@ void playGrab() {
                 sound.tonesFromFX(Sounds::Grab3);
                 break;
 
-            case 3:
+            default:
                 sound.tonesFromFX(Sounds::Grab4);
                 break;
 

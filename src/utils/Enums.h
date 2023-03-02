@@ -56,8 +56,8 @@ enum GameState : uint8_t {
     Game_Init,
     Game,
     Game_StartLevel,
-    TimeOut_Init,
-    TimeOut,
+    // TimeOut_Init, // Unused
+    // TimeOut, // Unused
     #ifndef SAVE_MEMORY_OTHER
     Menu,
     #endif

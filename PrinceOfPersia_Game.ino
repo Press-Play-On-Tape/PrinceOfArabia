@@ -2390,9 +2390,7 @@ void game() {
                         prince.setPrevStance(Stance::Falling_StepWalkRun_P6_5_Check_CanFall);
                         break;
 
-                    case 3:
-                    case 7:
-                    case 11:
+                    default: // case 3, 7, 11
                         prince.pushSequence(Stance::Falling_StepWalkRun_P3_7_11_1_Start, Stance::Falling_StepWalkRun_P3_7_11_5_Check_CanFall);  // Dist 9,31
                         prince.setPrevStance(Stance::Falling_StepWalkRun_P3_7_11_5_Check_CanFall);
                         break;
@@ -2452,16 +2450,13 @@ void game() {
                 prince.push(Stance::Collide_Wall_P0_Start_End);
                 break;
 
-            // case 3:
-            case 7:
-            case 11:
+            default: // case 7, 11
                 prince.push(Stance::Collide_Wall_P1_Start_End);
                 break;
 
             case 0:
             case 4:
             case 8:
-            case 12:
                 prince.push(Stance::Collide_Wall_P2_Start_End);
                 break;
 

@@ -132,10 +132,6 @@ void invader_RenderPlayer(Invader_Player &player, int yOffset = 0, bool show = f
 
     switch (player.status) {
 
-        case Status::Active:
-        case Status::EnemiesAppearing:
-            break;
-
         case Status::Safe:
             if (!show && arduboy.getFrameCountHalf(32)) return;
             break;
@@ -147,7 +143,8 @@ void invader_RenderPlayer(Invader_Player &player, int yOffset = 0, bool show = f
         case Status::Dead:
             return;
 
-        default: break;
+        default: // case Status::Active, EnemiesAppearing
+            break;
 
     }
     
@@ -446,8 +443,7 @@ void invader_HasBulletHitBarrier(Invader_General2 &general2, Invader_Bullet &bul
 
             switch (bullet.y) {
 
-                case 46 ... 48:
-                case 49 ... 51:
+                case 46 ... 51:
                     
                     barrier_X = (bullet.x - 26) / 4;
                     barrier_B = (bullet.x - 26) % 4;
@@ -462,8 +458,7 @@ void invader_HasBulletHitBarrier(Invader_General2 &general2, Invader_Bullet &bul
 
             switch (bullet.y) {
 
-                case 46 ... 48:
-                case 49 ... 51:
+                case 46 ... 51:
                     
                     barrier_X = ((bullet.x - 78) / 4) + 4;
                     barrier_B = (bullet.x - 78) % 4;

@@ -273,7 +273,7 @@ void title() {
 
                     cookie.setMode(TitleScreenMode::CutScene_7_PlayGame);
                     gamePlay.gameState = GameState::Game_StartLevel; 
-                    arduboy.setFrameRate(Constants::FrameRate);
+                    // arduboy.setFrameRate(Constants::FrameRate);
                     break;
 
                 case TitleScreenMode::CutScene_7_PlayGame:
@@ -281,7 +281,7 @@ void title() {
                     if (justPressed & (A_BUTTON)) {
                         cookie.setMode(TitleScreenMode::CutScene_7_PlayGame);
                         gamePlay.gameState = GameState::Game_StartLevel; 
-                        arduboy.setFrameRate(Constants::FrameRate);
+                        // arduboy.setFrameRate(Constants::FrameRate);
                     }
                     
                     break;
@@ -528,7 +528,7 @@ void title() {
                         level.loadItems(0, prince);
                         cookie.setMode(TitleScreenMode::CutScene_7_PlayGame);
                         arduboy.frameCount = 5;
-                        arduboy.setFrameRate(60);
+                        // arduboy.setFrameRate(60); // Do you need to a seperate Frame Rate?
 
                     }
 
