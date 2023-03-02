@@ -378,6 +378,9 @@ TitleFrameIndexTable[] = {
 
     uint24_t Title_Intro_SoS_Frame_NoHigh, uint8_t 0
     uint24_t Title_Intro_PoP_Frame_NoHigh, uint8_t 0
+
+    uint24_t Title_TimeOut_SoS_Frame, uint8_t 4
+    uint24_t Title_TimeOut_PoP_Frame, uint8_t 4
 }
 
 savesection  // Anything below here will be stored in the save block

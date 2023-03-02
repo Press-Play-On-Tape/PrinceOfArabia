@@ -274,5 +274,6 @@ enum class TitleFrameIndex : uint8_t {
     Main_Credits_PoP_Frame_NoHigh,
     Main_High_PoP_Frame_WithHigh,
     IntroGame_End_PoP_Frame,
-    Intro_PoP_Frame_NoHigh
+    Intro_PoP_Frame_NoHigh,
+    TimeOut_PoP_Frame,
 };
