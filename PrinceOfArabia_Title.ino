@@ -20,13 +20,7 @@ void setTitleFrame(TitleFrameIndex index) {
 void title_Init() {
 
     gamePlay.gameState = GameState::Title;
-
-    #ifdef POP_OR_POA
-        titleScreenVars.reset(cookie.pop);
-    #else
-        titleScreenVars.reset();
-    #endif
-    
+    titleScreenVars.reset();
     cookie.setMode(TitleScreenMode::Intro);
 
 }

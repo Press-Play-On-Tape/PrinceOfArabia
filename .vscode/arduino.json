@@ -1,7 +1,7 @@
 {
     "board": "arduboy-homemade:avr:arduboy-fx",
     "output": "/Users/simonholmes/projects/build",
-    "sketch": "PrinceOfPersia.ino",
+    "sketch": "PrinceOfArabia.ino",
     "port": "/dev/tty.usbmodem14601",
     "configuration": "core=arduboy-core,boot=cathy3k"
 }

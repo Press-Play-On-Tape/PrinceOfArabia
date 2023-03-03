@@ -93,9 +93,6 @@ class BaseStack {
             }
             else {
 
-
-                // this->stack->clear();
-
                 for (uint16_t x = toStance; x <= fromStance; x++) {
 
                     #if defined(DEBUG) && defined(DEBUG_PRINCE_STACK)

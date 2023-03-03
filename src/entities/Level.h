@@ -87,7 +87,6 @@ struct Level {
 
     private:
 
-        //uint8_t level = 0;
         uint8_t width = 60;
         uint8_t height = 0;
         uint8_t xLoc = 60;
@@ -103,7 +102,6 @@ struct Level {
 
     public:
 
-        //uint8_t getLevel()                      { return this->level; }
         uint8_t getWidth()                      { return this->width; }
         uint8_t getHeight()                     { return this->height; }
         uint8_t getXLocation()                  { return this->xLoc; }
@@ -114,7 +112,6 @@ struct Level {
         Item &getItem(uint8_t idx)              { return this->items[idx]; }
         Direction getYDirection()               { return this->yOffsetDir; }
 
-        //void setLevel(uint8_t val)              { this->level = val; }
         void setWidth(uint8_t val)              { this->width = val; }
         void setHeight(uint8_t val)             { this->height = val; }
         void setXLocation(uint8_t val)          { this->xLoc = val; }
@@ -1178,8 +1175,6 @@ struct Level {
         }
 
 
-
-
         WallTileResults isWallTile_ByCoords(int8_t x = Constants::CoordNone, int8_t y = Constants::CoordNone, Direction direction = Direction::Left, bool addOffsets = true) {
 
             int8_t fgTile = this->getTile(Layer::Foreground, x, y, TILE_FLOOR_BASIC);
@@ -1226,19 +1221,6 @@ struct Level {
 
                                 Item &item = this->getItem(idx);
 
-                                // if (item.data.gate.position != 9) {
-
-                                //     if (item.data.gate.position == 0 || item.data.gate.gateType == GateType::Level6Exit ||
-                                //         (item.data.gate.closingDelay + 2 >= item.data.gate.closingDelayMax && item.data.gate.closingDelayMax != 0 && item.data.gate.closingDelay != item.data.gate.closingDelayMax && item.data.gate.position > 2) || // If the closing delay is within 2 of the CDM then we are opening
-                                //         (item.data.gate.closingDelay > 0 && item.data.gate.closingDelay <= 9 && item.data.gate.position < 9))  // If closing delay is almost done (we are closing) and gate is not fully open ..
-                                //         {
-
-                                //         return WallTileResults::GateClosed;
-
-                                //     }
-
-                                // }
-
                                 if (item.data.gate.position <= 7) {
 
                                     return WallTileResults::GateClosed;
@@ -1268,17 +1250,6 @@ struct Level {
 
                                 Item &item = this->getItem(idx);
 
-                                // if (item.data.gate.position != 9) {
-
-                                //     if (item.data.gate.position == 0 ||
-                                //         (item.data.gate.closingDelay + 2 >= item.data.gate.closingDelayMax && item.data.gate.closingDelayMax != 0 && item.data.gate.closingDelay != item.data.gate.closingDelayMax && item.data.gate.position > 2) ||
-                                //         (item.data.gate.closingDelay > 0 && item.data.gate.closingDelay <= 9 && item.data.gate.position < 8)) {
-
-                                //         return WallTileResults::GateClosed;
-
-                                //     }
-
-                                // }
                                 if (item.data.gate.position <= 7) {
 
                                     return WallTileResults::GateClosed;

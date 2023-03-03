@@ -58,7 +58,6 @@ class Enemy : public BaseStack {
             this->base[this->count].setHealth(health);
             this->base[this->count].setHealthMax(health);
             this->base[this->count].setStatus(status);
-            // this->base[this->count].setDrawnSword(0);
             this->count++;
             
         }
@@ -114,43 +113,31 @@ class Enemy : public BaseStack {
 
         Direction getOppositeDirection() {
 
-            switch (this->base[this->activeEnemy].getDirection()) {
-
-                case Direction::Left:       return Direction::Right;
-                case Direction::Right:      return Direction::Left;
-                default:                    return this->base[this->activeEnemy].getDirection();
-                
-            }
+            return this->base[this->activeEnemy].getOppositeDirection();
             
         }
 
         int8_t getDirectionOffset(int8_t val) {
 
-            if (this->base[this->activeEnemy].getDirection() == Direction::Left) {
-                return -val;
-            }
-            else {
-                return val;
-            }
+            return this->base[this->activeEnemy].getDirectionOffset(val);
             
         }
 
         void incX(int8_t inc) {
-
-            this->base[this->activeEnemy].setX(this->base[this->activeEnemy].getX() + inc);
+            
+            this->base[this->activeEnemy].incX(inc);
             
         }
 
         void incY(int8_t inc) {
 
-            this->base[this->activeEnemy].setYPrevious(this->base[this->activeEnemy].getY());
-            this->base[this->activeEnemy].setY(this->base[this->activeEnemy].getY() + inc);
+            this->base[this->activeEnemy].incY(inc);
             
         }
 
         void changeDirection() {
 
-           this->base[this->activeEnemy].setDirection(this->base[this->activeEnemy].getDirection() == Direction::Left ? Direction::Right : Direction::Left);
+           this->base[this->activeEnemy].changeDirection();
 
         }
 
@@ -158,9 +145,9 @@ class Enemy : public BaseStack {
 
             for (uint8_t i = 0; i < this->getEnemyCount(); i++) {
 
-                if ((base[i].getStatus() == Status::Dormant) && (base[i].getX() / Constants::TileWidth == x) && (base[i].getY() / Constants::TileHeight == y)) {
+                if ((this->base[i].getStatus() == Status::Dormant) && (this->base[i].getX() / Constants::TileWidth == x) && (this->base[i].getY() / Constants::TileHeight == y)) {
 
-                    base[i].setStatus(Status::Active);
+                    this->base[i].setStatus(Status::Active);
                     return true;
 
                 }
@@ -171,40 +158,5 @@ class Enemy : public BaseStack {
 
         }
 
-
-        // ----------------------------------------------------------------------------------------------------------
-
-        bool isFootDown() {
-
-            ImageDetails imageDetails;
-            this->getImageDetails(imageDetails);
-            return (imageDetails.toe != Constants::InAir && imageDetails.toe != Constants::InAir_DoNotFall);
-
-        }
-
-        bool inAir() {
-
-            ImageDetails imageDetails;
-            this->getImageDetails(imageDetails);
-            return (imageDetails.toe == Constants::InAir);
-
-        }
-
-        void getImageDetails(ImageDetails &imageDetails) {
-
-            uint8_t imageIndex = this->base[this->activeEnemy].getImageIndexFromStance(this->base[this->activeEnemy].getStance());
-            uint24_t startPos = static_cast<uint24_t>(Constants::Prince_ImageDetails + ((imageIndex - 1) * 3));
-            int8_t direction = this->getDirection() == Direction::Left ? -1 : 1;
-
-            FX::seekData(startPos);
-            imageDetails.reach = static_cast<int8_t>(FX::readPendingUInt8() * direction);
-            imageDetails.toe = static_cast<int8_t>(FX::readPendingUInt8() * direction);
-            imageDetails.heel = static_cast<int8_t>(FX::readPendingUInt8() * direction);
-            FX::readEnd();
-
-            if (imageDetails.toe == -Constants::InAir)              imageDetails.toe = Constants::InAir;
-            if (imageDetails.toe == -Constants::InAir_DoNotFall)    imageDetails.toe = Constants::InAir_DoNotFall;
-
-        }
 
 };
