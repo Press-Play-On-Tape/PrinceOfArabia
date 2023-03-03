@@ -1999,51 +1999,65 @@ struct Level {
             DEBUG_PRINTLN(F("-----------------------------------------------------"));
             #endif
 
-            switch (prince.getDirection()) {
+            // switch (prince.getDirection()) {
 
-                case Direction::Left:
-                    {
-                        CanJumpUpResult resultLeft = this->canJumpUp_Test(prince, Direction::Left);
+            //     case Direction::Left:
+            //         {
+                        CanJumpUpResult resultLeft = this->canJumpUp_Test(prince, prince.getDirection());
 
                         switch (resultLeft) {
 
-                            case CanJumpUpResult::Jump:
-                            case CanJumpUpResult::StepThenJump:
+                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                
+                                case CanJumpUpResult::Jump:
+                                case CanJumpUpResult::StepThenJump:
 
-                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                DEBUG_PRINT(F("L1 Test success, Return "));
-                                DEBUG_PRINTLN(static_cast<uint8_t>(resultLeft));
-                                #endif
-                                                                    
-                                return resultLeft;
+                                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                    DEBUG_PRINT(F("L1 Test success, Return "));
+                                    DEBUG_PRINTLN(static_cast<uint8_t>(resultLeft));
+                                    #endif
+                                                                        
+                                    return resultLeft;
 
-                            case CanJumpUpResult::JumpThenFall_CollapseFloor:
+                                case CanJumpUpResult::JumpThenFall_CollapseFloor:
 
-                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                DEBUG_PRINTLN(F("L2 Test success, Return JumpThenFall_CollapseFloor"));
-                                #endif                            
+                                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                    DEBUG_PRINTLN(F("L2 Test success, Return JumpThenFall_CollapseFloor"));
+                                    #endif                            
 
-                                return CanJumpUpResult::JumpThenFall_CollapseFloor;
+                                    return CanJumpUpResult::JumpThenFall_CollapseFloor;
 
-                            case CanJumpUpResult::JumpThenFall_CollapseFloorAbove:
+                                case CanJumpUpResult::JumpThenFall_CollapseFloorAbove:
 
-                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                DEBUG_PRINTLN(F("L3 Test success, Return JumpThenFall_CollapseFloorAbove"));
-                                #endif                            
+                                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                    DEBUG_PRINTLN(F("L3 Test success, Return JumpThenFall_CollapseFloorAbove"));
+                                    #endif                            
 
-                                return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
+                                    return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
 
-                            case CanJumpUpResult::StepThenJumpThenFall_CollapseFloor:
+                                case CanJumpUpResult::StepThenJumpThenFall_CollapseFloor:
 
-                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                DEBUG_PRINTLN(F("L4 Test success, Return StepThenJumpThenFall_CollapseFloor"));
-                                #endif                            
+                                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                    DEBUG_PRINTLN(F("L4 Test success, Return StepThenJumpThenFall_CollapseFloor"));
+                                    #endif                            
 
-                                return CanJumpUpResult::StepThenJumpThenFall_CollapseFloor;
+                                    return CanJumpUpResult::StepThenJumpThenFall_CollapseFloor;
+
+                            #else
+
+                                case CanJumpUpResult::Jump:
+                                case CanJumpUpResult::StepThenJump:
+                                case CanJumpUpResult::JumpThenFall_CollapseFloor:
+                                case CanJumpUpResult::JumpThenFall_CollapseFloorAbove:
+                                case CanJumpUpResult::StepThenJumpThenFall_CollapseFloor:
+                                    return resultLeft;
+
+                            #endif
+
 
                             default:
                                 {
-                                    CanJumpUpResult resultRight = this->canJumpUp_Test(prince, Direction::Right);
+                                    CanJumpUpResult resultRight = this->canJumpUp_Test(prince, prince.getOppositeDirection());
 
                                     switch (resultRight) {
 
@@ -2062,7 +2076,7 @@ struct Level {
                                             DEBUG_PRINTLN(static_cast<uint8_t>(resultLeft));
                                             #endif
 
-                                            CanJumpUpResult result = this->canJumpUp_Test_Dist10(prince, Direction::Left);
+                                            CanJumpUpResult result = this->canJumpUp_Test_Dist10(prince, prince.getDirection());
 
                                             #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
                                             DEBUG_PRINT(F("R3 canJumpUp_Test_Dist10 Return "));
@@ -2079,94 +2093,94 @@ struct Level {
 
                         }
                         
-                    }
+            //         }
 
-                    break;
+            //         break;
 
-                case Direction::Right:
-                    {
-                        CanJumpUpResult resultRight = this->canJumpUp_Test(prince, Direction::Right);
+            //     case Direction::Right:
+            //         {
+            //             CanJumpUpResult resultRight = this->canJumpUp_Test(prince, Direction::Right);
 
-                        switch (resultRight) {
+            //             switch (resultRight) {
 
-                            case CanJumpUpResult::Jump:
-                            case CanJumpUpResult::StepThenJump:
+            //                 case CanJumpUpResult::Jump:
+            //                 case CanJumpUpResult::StepThenJump:
 
-                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                DEBUG_PRINT(F("R1 Test success, Return "));
-                                DEBUG_PRINTLN(static_cast<uint8_t>(resultRight));
-                                #endif                            
+            //                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+            //                     DEBUG_PRINT(F("R1 Test success, Return "));
+            //                     DEBUG_PRINTLN(static_cast<uint8_t>(resultRight));
+            //                     #endif                            
 
-                                return resultRight;
+            //                     return resultRight;
 
-                            case CanJumpUpResult::JumpThenFall_CollapseFloor:
+            //                 case CanJumpUpResult::JumpThenFall_CollapseFloor:
 
-                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                DEBUG_PRINTLN(F("R2 Test success, Return JumpThenFall_CollapseFloor"));
-                                #endif                            
+            //                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+            //                     DEBUG_PRINTLN(F("R2 Test success, Return JumpThenFall_CollapseFloor"));
+            //                     #endif                            
 
-                                return CanJumpUpResult::JumpThenFall_CollapseFloor;
+            //                     return CanJumpUpResult::JumpThenFall_CollapseFloor;
 
-                            case CanJumpUpResult::JumpThenFall_CollapseFloorAbove:
+            //                 case CanJumpUpResult::JumpThenFall_CollapseFloorAbove:
 
-                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                DEBUG_PRINTLN(F("R3 Test success, Return JumpThenFall_CollapseFloorAbove"));
-                                #endif                            
+            //                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+            //                     DEBUG_PRINTLN(F("R3 Test success, Return JumpThenFall_CollapseFloorAbove"));
+            //                     #endif                            
 
-                                return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
+            //                     return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
 
-                            case CanJumpUpResult::StepThenJumpThenFall_CollapseFloor:
+            //                 case CanJumpUpResult::StepThenJumpThenFall_CollapseFloor:
 
-                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                DEBUG_PRINTLN(F("R4 Test success, Return StepThenJumpThenFall_CollapseFloor"));
-                                #endif                            
+            //                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+            //                     DEBUG_PRINTLN(F("R4 Test success, Return StepThenJumpThenFall_CollapseFloor"));
+            //                     #endif                            
 
-                                return CanJumpUpResult::StepThenJumpThenFall_CollapseFloor;
+            //                     return CanJumpUpResult::StepThenJumpThenFall_CollapseFloor;
 
-                            default:
-                                {
-                                    CanJumpUpResult resultLeft = this->canJumpUp_Test(prince, Direction::Left);
+            //                 default:
+            //                     {
+            //                         CanJumpUpResult resultLeft = this->canJumpUp_Test(prince, Direction::Left);
 
-                                    switch (resultLeft) {
+            //                         switch (resultLeft) {
 
-                                        case CanJumpUpResult::Jump:
+            //                             case CanJumpUpResult::Jump:
 
-                                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                            DEBUG_PRINT(F("L1 Test success, Return TurnThenJump"));
-                                            #endif     
+            //                                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+            //                                 DEBUG_PRINT(F("L1 Test success, Return TurnThenJump"));
+            //                                 #endif     
 
-                                            return CanJumpUpResult::TurnThenJump;
+            //                                 return CanJumpUpResult::TurnThenJump;
 
-                                        default:
+            //                             default:
 
-                                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                            DEBUG_PRINT(F("L2 Test failed, Return "));
-                                            DEBUG_PRINTLN(static_cast<uint8_t>(resultRight));
-                                            #endif     
+            //                                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+            //                                 DEBUG_PRINT(F("L2 Test failed, Return "));
+            //                                 DEBUG_PRINTLN(static_cast<uint8_t>(resultRight));
+            //                                 #endif     
 
-                                            CanJumpUpResult result = this->canJumpUp_Test_Dist10(prince, Direction::Right);
+            //                                 CanJumpUpResult result = this->canJumpUp_Test_Dist10(prince, Direction::Right);
                                             
-                                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                            DEBUG_PRINT(F("L3 canJumpUp_Test_Dist10 Return "));
-                                            DEBUG_PRINTLN(static_cast<uint8_t>(result));
-                                            #endif
+            //                                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+            //                                 DEBUG_PRINT(F("L3 canJumpUp_Test_Dist10 Return "));
+            //                                 DEBUG_PRINTLN(static_cast<uint8_t>(result));
+            //                                 #endif
 
-                                            return result;
+            //                                 return result;
 
-                                    }
+            //                         }
 
-                                }
+            //                     }
 
-                                break;
-                        }
+            //                     break;
+            //             }
                         
-                    }
+            //         }
 
-                    break;
+            //         break;
 
-                default:  break;
+            //     default:  break;
 
-            }
+            // }
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
             DEBUG_PRINT(F("Return None"));
@@ -2765,11 +2779,11 @@ struct Level {
 
         CanClimbDownResult canClimbDown(Prince &prince) {
 
-            switch (prince.getDirection()) {
+            // switch (prince.getDirection()) {
 
-                case Direction::Left:
-                    {
-                        CanClimbDownResult resultRight = canClimbDown_Test(prince, Direction::Right);
+            //     case Direction::Left:
+            //         {
+                        CanClimbDownResult resultRight = canClimbDown_Test(prince, prince.getOppositeDirection());
 
                         switch (resultRight) {
 
@@ -2782,11 +2796,15 @@ struct Level {
                                 #endif
 
                                 return resultRight;
-                                break;
 
                             default:
                                 {
-                                    CanClimbDownResult resultLeft = canClimbDown_Test(prince, Direction::Left);
+                                    CanClimbDownResult resultLeft = canClimbDown_Test(prince, prince.getDirection());
+
+                                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
+                                    DEBUG_PRINT(F("canClimbDown: check right, result "));
+                                    DEBUG_PRINTLN(static_cast<uint8_t>(resultLeft));
+                                    #endif
 
                                     switch (resultLeft) {
 
@@ -2797,7 +2815,6 @@ struct Level {
                                             #endif
 
                                             return CanClimbDownResult::TurnThenClimbDown;
-                                            break;
 
                                         case CanClimbDownResult::StepThenClimbDown:
 
@@ -2806,7 +2823,6 @@ struct Level {
                                             #endif
 
                                             return CanClimbDownResult::StepThenTurnThenClimbDown;
-                                            break;
 
                                         default:
 
@@ -2816,7 +2832,6 @@ struct Level {
                                             #endif
                                             
                                             return resultRight;
-                                            break;
 
                                     }
 
@@ -2831,108 +2846,107 @@ struct Level {
 
                         }
                         
-                    }
+                    // }
 
                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
                     DEBUG_PRINTLN(F("L6 Return: None"));
                     #endif
 
                     return CanClimbDownResult::None;
-                    break;
 
-                case Direction::Right:
-                    {
-                        CanClimbDownResult resultLeft = canClimbDown_Test(prince, Direction::Left);
+            //     case Direction::Right:
+            //         {
+            //             CanClimbDownResult resultLeft = canClimbDown_Test(prince, Direction::Left);
 
-                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
-                        DEBUG_PRINT(F("canClimbDown: facing right, initial result "));
-                        DEBUG_PRINTLN(static_cast<uint8_t>(resultLeft));
-                        #endif
+            //             #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
+            //             DEBUG_PRINT(F("canClimbDown: facing right, initial result "));
+            //             DEBUG_PRINTLN(static_cast<uint8_t>(resultLeft));
+            //             #endif
 
-                        switch (resultLeft) {
+            //             switch (resultLeft) {
 
-                            case CanClimbDownResult::ClimbDown:
-                            case CanClimbDownResult::StepThenClimbDown:
+            //                 case CanClimbDownResult::ClimbDown:
+            //                 case CanClimbDownResult::StepThenClimbDown:
 
-                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
-                                DEBUG_PRINT(F("R1 Return: "));
-                                DEBUG_PRINTLN(static_cast<uint8_t>(resultLeft));
-                                #endif
+            //                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
+            //                     DEBUG_PRINT(F("R1 Return: "));
+            //                     DEBUG_PRINTLN(static_cast<uint8_t>(resultLeft));
+            //                     #endif
 
-                                return resultLeft;
-                                break;
+            //                     return resultLeft;
+            //                     break;
 
-                            default:
-                                {
-                                    CanClimbDownResult resultRight = canClimbDown_Test(prince, Direction::Right);
+            //                 default:
+            //                     {
+            //                         CanClimbDownResult resultRight = canClimbDown_Test(prince, Direction::Right);
 
-                                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
-                                    DEBUG_PRINT(F("canClimbDown: check left, result "));
-                                    DEBUG_PRINTLN(static_cast<uint8_t>(resultLeft));
-                                    #endif
+            //                         #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
+            //                         DEBUG_PRINT(F("canClimbDown: check left, result "));
+            //                         DEBUG_PRINTLN(static_cast<uint8_t>(resultLeft));
+            //                         #endif
 
-                                    switch (resultRight) {
+            //                         switch (resultRight) {
 
-                                        case CanClimbDownResult::ClimbDown:
+            //                             case CanClimbDownResult::ClimbDown:
 
-                                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
-                                            DEBUG_PRINTLN(F("R2 Return: TurnThenClimbDown"));
-                                            #endif
+            //                                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
+            //                                 DEBUG_PRINTLN(F("R2 Return: TurnThenClimbDown"));
+            //                                 #endif
 
-                                            return CanClimbDownResult::TurnThenClimbDown;
-                                            break;
+            //                                 return CanClimbDownResult::TurnThenClimbDown;
+            //                                 break;
 
-                                        case CanClimbDownResult::StepThenClimbDown:
+            //                             case CanClimbDownResult::StepThenClimbDown:
 
-                                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
-                                            DEBUG_PRINTLN(F("R3 Return: StepThenTurnThenClimbDown"));
-                                            #endif
+            //                                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
+            //                                 DEBUG_PRINTLN(F("R3 Return: StepThenTurnThenClimbDown"));
+            //                                 #endif
 
-                                            return CanClimbDownResult::StepThenTurnThenClimbDown;
-                                            break;
+            //                                 return CanClimbDownResult::StepThenTurnThenClimbDown;
+            //                                 break;
 
-                                        default:
+            //                             default:
 
-                                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
-                                            DEBUG_PRINT(F("R4 Return: "));
-                                            DEBUG_PRINTLN(static_cast<uint8_t>(resultLeft));
-                                            #endif
+            //                                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
+            //                                 DEBUG_PRINT(F("R4 Return: "));
+            //                                 DEBUG_PRINTLN(static_cast<uint8_t>(resultLeft));
+            //                                 #endif
                                             
-                                            return resultLeft;
-                                            break;
+            //                                 return resultLeft;
+            //                                 break;
 
-                                    }
+            //                         }
 
-                                }
+            //                     }
                                 
-                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
-                                DEBUG_PRINTLN(F("R5 Return: None"));
-                                #endif
+            //                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
+            //                     DEBUG_PRINTLN(F("R5 Return: None"));
+            //                     #endif
 
-                                return CanClimbDownResult::None;
-                                break;
+            //                     return CanClimbDownResult::None;
+            //                     break;
 
-                        }
+            //             }
                         
-                    }
+            //         }
 
-                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
-                    DEBUG_PRINTLN(F("R^ Return: None"));
-                    #endif
+            //         #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
+            //         DEBUG_PRINTLN(F("R^ Return: None"));
+            //         #endif
 
-                    return CanClimbDownResult::None;
-                    break;
+            //         return CanClimbDownResult::None;
+            //         break;
 
-                default: 
+            //     default: 
 
-                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
-                    DEBUG_PRINTLN(F("Return: None"));
-                    #endif
+            //         #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
+            //         DEBUG_PRINTLN(F("Return: None"));
+            //         #endif
 
-                    return CanClimbDownResult::None;
-                    break;
+            //         return CanClimbDownResult::None;
+            //         break;
 
-            }
+            // }
 
             return CanClimbDownResult::None;
             
