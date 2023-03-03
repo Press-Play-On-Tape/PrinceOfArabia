@@ -1,5 +1,5 @@
 #include <Arduboy2.h>
-#include "PrinceOfPersia_Invader.h"
+#include "PrinceOfArabia_Invader.h"
 
 void setTitleFrame(TitleFrameIndex index) {
 
