@@ -40,7 +40,7 @@ bool testScroll(GamePlay &gamePlay, Prince &prince, Level &level) {
         }
 
     }
-    else if (static_cast<int8_t>(prince.getY() - level.getYOffset()) < static_cast<int8_t>(0)) {
+    else if (static_cast<int8_t>(prince.getY() - level.getYOffset()) < 0) {
 
         prince.incY(Constants::TileHeight * 3);
         level.setYLocation(level.getYLocation() - 3);
@@ -297,10 +297,6 @@ void processStandingJump(Prince &prince, Level &level) {
         case StandingJumpResult::Normal_28:
             prince.pushSequence(Stance::Standing_Jump_28_1_Start, Stance::Standing_Jump_28_16_End, Stance::Upright);
             break;
-
-        // case StandingJumpResult::Short_Pos6:
-        //     prince.pushSequence(Stance::Standing_Jump_Short_6_1_Start, Stance::Standing_Jump_Short_6_16_End, Stance::Upright);
-        //     break;
 
         case StandingJumpResult::Normal_32:
             prince.pushSequence(Stance::Standing_Jump_32_1_Start, Stance::Standing_Jump_32_16_End, Stance::Upright);
@@ -591,6 +587,7 @@ void showSign(Prince &prince, Level &level, SignType signType, uint8_t counter) 
             break;
 
     }
+
     sign.counter = counter;
 
     switch (prince.getY()) {
@@ -778,10 +775,6 @@ uint8_t getImageIndexFromStance(uint16_t stance) {
 
 
 void getStance_Offsets(Direction direction, Point &offset, int16_t stance) {
-
-    // getStanceXYOffsets(stance, offset);
-    // offset.x = offset.x * (direction == Direction::Left ? -1 : 1) * (stance < 0 ? -1 : 1);
-    // offset.y = offset.y * (stance < 0 ? -1 : 1);
 
     #ifdef MOVEMENT_DATA_FROM_FX
 

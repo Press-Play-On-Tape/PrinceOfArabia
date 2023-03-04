@@ -44,6 +44,7 @@ void render(bool sameLevelAsPrince) {
 
     }
 
+
     // Draw items ..
 
     for (uint8_t i = 0; i < Constants::Items_Count; i++) {
@@ -263,17 +264,6 @@ void render(bool sameLevelAsPrince) {
         #endif
 
         int16_t yCoord = prince.getYImage() - level.getYOffset() + Constants::ScreenTopOffset;
-
-        //if (prince.getDirection() == Direction::Left) {
-        //
-        //    FX::drawBitmap(prince.getXImage(), yCoord, Images::Prince_Left, imageIndex - 1, dbmMasked);
-        //
-        //}
-        //else {
-        //
-        //    FX::drawBitmap(prince.getXImage(), yCoord, Images::Prince_Right, imageIndex - 1, dbmMasked);
-        //
-        //}
         uint24_t princeImage = Images::Prince_Right;
 
         if (prince.getDirection() == Direction::Left) {
@@ -478,17 +468,6 @@ void render(bool sameLevelAsPrince) {
 
     if (sign.counter == 1) {
 
-        //switch (sign.type) {
-        //
-        //    case SignType::GameOver:
-        //        FX::drawBitmap(sign.x, sign.y, Images::GameOver, 0, dbmMasked);
-        //        break;
-        //
-        //    case SignType::PressA:
-        //        FX::drawBitmap(sign.x, sign.y, Images::PressA, 0, dbmMasked);
-        //        break;
-        //
-        //}
         uint24_t signImage = Images::PressA;
 
         if (sign.type == SignType::GameOver) {

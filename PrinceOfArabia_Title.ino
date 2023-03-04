@@ -72,7 +72,7 @@ void title() {
         #endif
 
 
-        // Switch between POP and SOS ..
+        // Switch between POP and POA ..
 
         #ifdef POP_OR_POA
         if (pressed & (LEFT_BUTTON | RIGHT_BUTTON)) {
@@ -104,7 +104,7 @@ void title() {
         #endif
 
 
-        // Swa; options ..
+        // Swap options ..
 
         if (justPressed & LEFT_BUTTON) {
 

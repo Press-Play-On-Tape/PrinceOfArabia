@@ -60,17 +60,8 @@ uint8_t invader_getSpeed() {
 
 void invader_RenderHUD(Invader_General &general) {
 
-    //FX::drawBitmap(120, 0, Images::HUD_Backgrounds, 1, dbmNormal);
-
-    //for (uint8_t i = 0; i < general.lives; i++) {
-    //
-    //    FX::drawBitmap(123, 1 + (i * 6), Images::HUD_Spaceship, 0, dbmNormal);
-    //
-    //}
     FX::drawFrame(Invaders_HUD_frame);
     FX::drawBitmap(123, 1 , Images::HUD_Spaceship, general.lives, dbmNormal);
-
-    //FX::drawBitmap(123, 40, Images::Numbers_Small, 0, dbmNormal);
     FX::drawBitmap(123, 48, Images::Numbers_Small, general.score / 100, dbmNormal);
     FX::drawBitmap(123, 56, Images::Numbers_Small, general.score % 100, dbmNormal);
 
