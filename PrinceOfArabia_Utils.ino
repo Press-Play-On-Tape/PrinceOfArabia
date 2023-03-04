@@ -690,19 +690,23 @@ void playGrab() {
 
                 BaseEntity &base = enemy.getActiveBase();
                 int16_t xDelta = prince.getPosition().x - base.getPosition().x;
+                
+                if (base.getHealth() > 0) {
 
-                if (xDelta < 0) {
+                    if (xDelta < 0) {
 
-                    enemy.setX((level.getXLocation() * Constants::TileWidth) + base.getX_LeftEntry());
-                    enemy.getPosition().x = enemy.getX();
-                    enemy.setDirection(Direction::Left);
+                        enemy.setX((level.getXLocation() * Constants::TileWidth) + base.getX_LeftEntry());
+                        enemy.getPosition().x = enemy.getX();
+                        enemy.setDirection(Direction::Left);
 
-                }
-                else {
+                    }
+                    else {
 
-                    enemy.setX((level.getXLocation() * Constants::TileWidth) + base.getX_RightEntry());
-                    enemy.getPosition().x = enemy.getX();
-                    enemy.setDirection(Direction::Right);
+                        enemy.setX((level.getXLocation() * Constants::TileWidth) + base.getX_RightEntry());
+                        enemy.getPosition().x = enemy.getX();
+                        enemy.setDirection(Direction::Right);
+
+                    }
 
                 }
 

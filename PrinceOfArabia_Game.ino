@@ -204,8 +204,17 @@ void game() {
 
     }
 
-    if (menu.update()) gamePlay.gameState = GameState::Game;
+    if (menu.update()) {
+        
+        #ifdef USE_LED
+        arduboy.setRGBled(RED_LED, 0);
+        arduboy.setRGBled(GREEN_LED, 0);
+        arduboy.setRGBled(BLUE_LED, 0);
+        #endif
+
+        gamePlay.gameState = GameState::Game;
     
+    }
 
     // Is the prince within distance of the enemy (cycle through all enemies to find it any closest)?
 
@@ -1156,10 +1165,6 @@ void game() {
 
             case GameState::Menu:
 
-                #ifndef ALT_B_BUTTON
-                    if (justPressed & B_BUTTON)                     menu.direction = Direction::Right;
-                #endif
-
                 if (justPressed & UP_BUTTON && menu.cursor > 0) {
                     
                     menu.cursor--;
@@ -1182,7 +1187,7 @@ void game() {
 
                 }
 
-                if (justPressed & A_BUTTON) {
+                if (justPressed & (A_BUTTON | B_BUTTON)) {
 
                     if (prince.isDead() && cookie.hasSavedLevel) {
                                                 
@@ -1245,6 +1250,12 @@ void game() {
 
                                 cookie.hasSavedLevel = true;
                                 
+                                #ifdef USE_LED
+                                arduboy.setRGBled(RED_LED, 32);
+                                arduboy.setRGBled(GREEN_LED, 0);
+                                arduboy.setRGBled(BLUE_LED, 0);
+                                #endif
+
                                 #ifdef SAVE_TO_FX
 
                                     FX::saveGameState((uint8_t*)&cookie, sizeof(cookie));
@@ -1254,6 +1265,12 @@ void game() {
                                     gamePlay.saves++;
                                     EEPROM_Utils::saveCookie(cookie);
 
+                                #endif
+
+                                #ifdef USE_LED
+                                arduboy.setRGBled(RED_LED, 0);
+                                arduboy.setRGBled(GREEN_LED, 32);
+                                arduboy.setRGBled(BLUE_LED, 0);
                                 #endif
 
                                 menu.direction = Direction::Right;  

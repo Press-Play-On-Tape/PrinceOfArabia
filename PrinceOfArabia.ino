@@ -56,6 +56,8 @@ void setup() {
     FX::display(CLEAR_BUFFER);
     arduboy.systemButtons();
 
+    arduboy.setRGBled(0, 0, 0);
+
     #ifndef SAVE_MEMORY_SOUND
         arduboy.audio.begin();
     #endif
@@ -70,6 +72,7 @@ void setup() {
   #else
 
     FX::begin(FX_DATA_PAGE);
+    EEPROM_Utils::loadCookie(cookie);
 
   #endif
 

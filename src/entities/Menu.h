@@ -35,6 +35,7 @@ struct MenuItem {
                 this->x = this->x + 4;
 
                 if (this->x == 130) {
+
                     this->direction = Direction::None;
                     return true;
                 }
