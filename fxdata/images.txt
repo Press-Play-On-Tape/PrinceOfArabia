@@ -119,6 +119,8 @@ namespace Images {
 
     image_t Enemy_Right             = "../images/enemy/right/Enemy_Right_36x36.png"
     image_t Enemy_Left              = "../images/enemy/left/Enemy_Left_36x36.png"
+    image_t Skeleton_Right          = "../images/skeleton/right/Skeleton_Right_36x36.png"
+    image_t Skeleton_Left           = "../images/skeleton/left/Skeleton_Left_36x36.png"
 
 
     // Invaders
