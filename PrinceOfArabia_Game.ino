@@ -17,16 +17,16 @@ void game_Init() {
         gamePlay.init(STARTING_LEVEL);      // Levels 1 - 13 normal game, 14 Standing Jumps, 15 Running Jumps
     #endif
 
-    #ifndef SAVE_MEMORY_ENEMY
-        level.init_PositionChars(gamePlay, prince, enemy, true);
-    #else
-        level.init_PositionChars(gamePlay, prince, true);
-    #endif
+    // #ifndef SAVE_MEMORY_ENEMY
+    //     level.init_PositionChars(gamePlay, prince, enemy, true);
+    // #else
+    //     level.init_PositionChars(gamePlay, prince, true);
+    // #endif
 
-    gamePlay.gameState = GameState::Game;
-    menu.init();
+    // gamePlay.gameState = GameState::Game;
+    // menu.init();
 
-    playGrab();
+    // playGrab();
 
 }
 
@@ -155,11 +155,11 @@ void game() {
 
             // If the prince is falling as well then we do not lose health ..
 
+            case Stance::Falling_Down_P2_1_Start ... Stance::Falling_Down_P2_6_End:
+            case Stance::Falling_Down_P1_1_Start ... Stance::Falling_Down_P1_6_End:
+            case Stance::Falling_Down_P0_1_Start ... Stance::Falling_Down_P0_6_End:
             case Stance::Falling_Down_M1_1_Start ... Stance::Falling_Down_M1_6_End:
             case Stance::Falling_Down_M2_1_Start ... Stance::Falling_Down_M2_6_End:
-            case Stance::Falling_Down_P0_1_Start ... Stance::Falling_Down_P0_6_End:
-            case Stance::Falling_Down_P1_1_Start ... Stance::Falling_Down_P1_6_End:
-            case Stance::Falling_Down_P2_1_Start ... Stance::Falling_Down_P2_6_End:
                 break;
 
             default:
