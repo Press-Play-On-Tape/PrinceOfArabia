@@ -3164,5 +3164,22 @@ struct Level {
 
         }
 
+
+        void rippleCollapsingFloors() {
+
+            for (uint8_t i =0; i < Constants::Items_Count; i++) {
+                
+                Item &item = this->getItem(i);
+
+                if (item.itemType == ItemType::CollapsingFloor && item.data.collapsingFloor.frame == 0) {
+
+                    item.data.collapsingFloor.frame = 3;
+
+                }
+
+            }
+            
+        }
+
 };
 

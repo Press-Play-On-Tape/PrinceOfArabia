@@ -1349,6 +1349,13 @@ void game() {
 
             switch (prince.getStance()) {
 
+                case Stance::Crouch_Stand_1_Start:
+                case Stance::Jump_Up_Drop_A_5_End:
+                case Stance::Jump_Up_Drop_B_5_End:
+                case Stance::Jump_Up_Drop_HideHands_19_End:
+                    level.rippleCollapsingFloors();
+                    break;
+
                 case Stance::Leave_Gate_14_End:
 
                     gamePlay.gameState = GameState::Title;
@@ -1382,18 +1389,7 @@ void game() {
                 case Stance::Jump_Up_Drop_A_4: // Ripple collapsible floors.
                 case Stance::Jump_Up_Drop_B_4: 
 
-                    for (uint8_t i =0; i < Constants::Items_Count; i++) {
-                        
-                        Item &item = level.getItem(i);
-
-                        if (item.itemType == ItemType::CollapsingFloor && item.data.collapsingFloor.frame == 0) {
-
-                            item.data.collapsingFloor.frame = 3;
-
-                        }
-
-                    }
-
+                    level.rippleCollapsingFloors();
                     break;
 
                 case Stance::Jump_Up_Drop_C_5_End: // Falling after climbing down ..
