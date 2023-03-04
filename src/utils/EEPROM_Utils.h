@@ -36,8 +36,6 @@ void EEPROM_Utils::saveCookie(Cookie &cookie) {
 
 void EEPROM_Utils::loadCookie(Cookie &cookie) {
 
-    eeprom_read_block(&cookie, EEPROM_TOP_START, sizeof(cookie));
-
     byte c1 = eeprom_read_byte(EEPROM_START_C1);
     byte c2 = eeprom_read_byte(EEPROM_START_C2);
 
@@ -45,6 +43,11 @@ void EEPROM_Utils::loadCookie(Cookie &cookie) {
 
         cookie.hasSavedLevel = false;
         cookie.hasSavedScore = false;
+
+    }
+    else {
+
+        eeprom_read_block(&cookie, EEPROM_TOP_START, sizeof(cookie));
 
     }
 
