@@ -196,6 +196,22 @@ void title() {
         #ifndef SAVE_MEMORY_OTHER
 
             case TitleScreenMode::Credits:
+
+                #ifdef DEBUG_CUT_SCENES
+                if (justPressed & (A_BUTTON)) {
+                #else
+                if (justPressed & (A_BUTTON | B_BUTTON)) {
+                #endif
+
+                #ifndef SAVE_MEMORY_SOUND
+                    sound.tonesFromFX(Sounds::Theme);
+                #endif
+
+                }
+
+                [[fallthrough]];
+
+
             case TitleScreenMode::High:
             case TitleScreenMode::TimeOut:
 

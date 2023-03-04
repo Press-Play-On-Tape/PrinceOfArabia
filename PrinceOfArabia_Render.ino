@@ -388,13 +388,20 @@ void render(bool sameLevelAsPrince) {
 
     // Render health ..
 
+    #ifndef SAVE_MEMORY_ENEMY
 
-    if (!sameLevelAsPrince || enemy.getHealth() == 0) {
+        if (!sameLevelAsPrince || enemy.getHealth() == 0) {
+            FX::drawBitmap(120, 0, Images::HUD_Backgrounds, 0, dbmNormal);
+        }
+        else {
+            FX::drawBitmap(120, 0, Images::HUD_Backgrounds, 1, dbmNormal);
+        }
+
+    #else
+
         FX::drawBitmap(120, 0, Images::HUD_Backgrounds, 0, dbmNormal);
-    }
-    else {
-        FX::drawBitmap(120, 0, Images::HUD_Backgrounds, 1, dbmNormal);
-    }
+
+    #endif
 
     for (uint8_t i = 0; i < prince.getHealthMax(); i++) {
 
@@ -402,8 +409,11 @@ void render(bool sameLevelAsPrince) {
         
     }
 
-
+    #ifndef SAVE_MEMORY_ENEMY
     if (!sameLevelAsPrince || enemy.getHealth() == 0) {
+    #else
+    if (!sameLevelAsPrince) {
+    #endif
 
         uint8_t hudY = 40;
 
