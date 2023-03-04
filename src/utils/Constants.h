@@ -1,6 +1,6 @@
 #pragma once
 
-#define _PRODUCTION_SETTINGS
+#define PRODUCTION_SETTINGS
 
 #ifdef PRODUCTION_SETTINGS
 
