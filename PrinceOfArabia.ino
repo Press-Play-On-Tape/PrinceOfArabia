@@ -110,9 +110,8 @@ void loop() {
             case GameState::SplashScreen_Init:
 
                 splashScreen_Init();
-                //[[fallthrough]];
-                splashScreen();
-                break;
+                titleScreenVars.counter = 0;
+                [[fallthrough]];
 
             case GameState::SplashScreen:
 

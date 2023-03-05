@@ -16,13 +16,33 @@ void splashScreen_Init() {
 //
 void splashScreen() { 
 
-    auto justPressed = arduboy.justPressedButtons();
 
-    if (justPressed > 0) {
-        
-        gamePlay.gameState = GameState::Title_Init; 
+    #ifdef POP_OR_POA
 
-    }
+        auto pressed = arduboy.pressedButtons();
+
+        if (titleScreenVars.counter < 16) {
+            titleScreenVars.counter++;
+        }
+
+        if (pressed > 0 && titleScreenVars.counter == 16) {
+            
+            gamePlay.gameState = GameState::Title_Init; 
+
+        }
+
+    #else
+
+        auto justPressed = arduboy.justPressedButtons();
+
+        if (justPressed > 0) {
+            
+            gamePlay.gameState = GameState::Title_Init; 
+
+        }
+
+    #endif
 
     FX::drawFrame();
+
 }
