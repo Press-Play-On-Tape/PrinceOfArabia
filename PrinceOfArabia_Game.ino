@@ -1872,6 +1872,8 @@ void game() {
                                     enemy.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_8_End);
                                     enemy.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_8_End);
                                     enemy.pushSequence(Stance::Run_Start_1_Start, Stance::Run_Start_6_End);
+
+                                    prince.setHealth(1);
                                     
                                     Item &exitDoor = level.getItem(Constants::Item_ExitDoor);
                                     
