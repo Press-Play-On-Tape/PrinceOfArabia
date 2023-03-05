@@ -539,7 +539,7 @@ void renderMenu(Prince &prince) {
 
         case GameState::Menu_Confirm:
 
-            cursorY = 42;
+            cursorY = 40;
             FX::drawBitmap(menu.x, 0, Images::Menu, 4, dbmNormal);
             FX::drawBitmap(menu.x + 3, cursorY + (menu.cursor * 10), Images::Sword_Cursor, 0, dbmNormal);
             break;

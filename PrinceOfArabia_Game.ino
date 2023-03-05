@@ -1334,6 +1334,12 @@ void game() {
 
                         case 0:
 
+                            #ifdef USE_LED
+                            arduboy.setRGBled(RED_LED, 32);
+                            arduboy.setRGBled(GREEN_LED, 0);
+                            arduboy.setRGBled(BLUE_LED, 0);
+                            #endif
+                            
                             cookie.hasSavedLevel = false;
 
                             #ifdef SAVE_TO_FX
@@ -1346,6 +1352,12 @@ void game() {
 
                             #endif
 
+                            #ifdef USE_LED
+                            arduboy.setRGBled(RED_LED, 0);
+                            arduboy.setRGBled(GREEN_LED, 32);
+                            arduboy.setRGBled(BLUE_LED, 0);
+                            #endif
+                            
                             menu.direction = Direction::Right;  
                             break;
 
