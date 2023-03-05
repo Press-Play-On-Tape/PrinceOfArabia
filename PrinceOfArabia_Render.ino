@@ -504,54 +504,57 @@ void render(bool sameLevelAsPrince) {
 
 void renderMenu(Prince &prince) {
 
-    uint8_t imageIdx;
-    uint8_t cursorY = 22;
+    #ifndef SAVE_MEMORY_OTHER
+    
+        uint8_t imageIdx;
+        uint8_t cursorY = 22;
 
-    switch (gamePlay.gameState) {
+        switch (gamePlay.gameState) {
 
-        case GameState::Menu:
+            case GameState::Menu:
 
-            if (!prince.isDead()) {
+                if (!prince.isDead()) {
 
-                if (menu.cursor < 4) {
+                    if (menu.cursor < 4) {
 
-                    imageIdx = !cookie.hasSavedLevel;
+                        imageIdx = !cookie.hasSavedLevel;
+
+                    }
+                    else {
+
+                        imageIdx = 2;
+                        cursorY = 12;
+
+                    }
 
                 }
                 else {
 
-                    imageIdx = 2;
-                    cursorY = 12;
+                    imageIdx = cookie.hasSavedLevel ? 3 : 1;
 
                 }
 
-            }
-            else {
+                FX::drawBitmap(menu.x, 0, Images::Menu, imageIdx, dbmNormal);
+                FX::drawBitmap(menu.x + 3, cursorY + (menu.cursor * 10), Images::Sword_Cursor, 0, dbmNormal);
 
-                imageIdx = cookie.hasSavedLevel ? 3 : 1;
+                break;
 
-            }
+            case GameState::Menu_Confirm:
 
-            FX::drawBitmap(menu.x, 0, Images::Menu, imageIdx, dbmNormal);
-            FX::drawBitmap(menu.x + 3, cursorY + (menu.cursor * 10), Images::Sword_Cursor, 0, dbmNormal);
+                cursorY = 40;
+                FX::drawBitmap(menu.x, 0, Images::Menu, 4, dbmNormal);
+                FX::drawBitmap(menu.x + 3, cursorY + (menu.cursor * 10), Images::Sword_Cursor, 0, dbmNormal);
+                break;
 
-            break;
+            default: break;
 
-        case GameState::Menu_Confirm:
+        }
 
-            cursorY = 40;
-            FX::drawBitmap(menu.x, 0, Images::Menu, 4, dbmNormal);
-            FX::drawBitmap(menu.x + 3, cursorY + (menu.cursor * 10), Images::Sword_Cursor, 0, dbmNormal);
-            break;
+        renderNumber(menu.x + 27, 3, gamePlay.level);
+        renderNumber(menu.x + 7, 13, gamePlay.timer_Min);
+        renderNumber(menu.x + 24, 13, gamePlay.timer_Sec);
 
-        default: break;
-
-    }
-
-    renderNumber(menu.x + 27, 3, gamePlay.level);
-    renderNumber(menu.x + 7, 13, gamePlay.timer_Min);
-    renderNumber(menu.x + 24, 13, gamePlay.timer_Sec);
-
+    #endif
 
 }
 
