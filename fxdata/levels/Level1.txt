@@ -39,6 +39,11 @@ uint8_t level1_Data[] = {
     25,                         // Enemy starting y pos (25, 56, 87)
     3,                          // Enemy starting health
     0,                          // Status 0 Alive, 1 Dead, 2 Dormant
+
+    0,200,0,0,0,0,0,0,0,1,
+    0,200,0,0,0,0,0,0,0,1,
+    0,200,0,0,0,0,0,0,0,1,
+
     // End
     255,
 };
