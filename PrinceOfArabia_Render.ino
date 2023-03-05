@@ -406,7 +406,7 @@ void render(bool sameLevelAsPrince) {
 
     #endif
 
-    for (uint8_t i = 0; i < prince.getHealthMax(); i++) {
+    for (uint8_t i = 0; i < prince.getHealthMax(); i++) { 
 
         FX::drawBitmap(123, i * 4, Images::Healths, prince.getHealth() <= i, dbmNormal);
         
@@ -507,33 +507,51 @@ void renderMenu(Prince &prince) {
     uint8_t imageIdx;
     uint8_t cursorY = 22;
 
-    if (!prince.isDead()) {
+    switch (gamePlay.gameState) {
 
-        if (menu.cursor < 4) {
+        case GameState::Menu:
 
-            imageIdx = !cookie.hasSavedLevel;
+            if (!prince.isDead()) {
 
-        }
-        else {
+                if (menu.cursor < 4) {
 
-            imageIdx = 2;
-            cursorY = 12;
+                    imageIdx = !cookie.hasSavedLevel;
 
-        }
+                }
+                else {
+
+                    imageIdx = 2;
+                    cursorY = 12;
+
+                }
+
+            }
+            else {
+
+                imageIdx = cookie.hasSavedLevel ? 3 : 1;
+
+            }
+
+            FX::drawBitmap(menu.x, 0, Images::Menu, imageIdx, dbmNormal);
+            FX::drawBitmap(menu.x + 3, cursorY + (menu.cursor * 10), Images::Sword_Cursor, 0, dbmNormal);
+
+            break;
+
+        case GameState::Menu_Confirm:
+
+            cursorY = 42;
+            FX::drawBitmap(menu.x, 0, Images::Menu, 4, dbmNormal);
+            FX::drawBitmap(menu.x + 3, cursorY + (menu.cursor * 10), Images::Sword_Cursor, 0, dbmNormal);
+            break;
+
+        default: break;
 
     }
-    else {
-
-        imageIdx = cookie.hasSavedLevel ? 3 : 1;
-
-    }
-
-    FX::drawBitmap(menu.x, 0, Images::Menu, imageIdx, dbmNormal);
-    FX::drawBitmap(menu.x + 3, cursorY + (menu.cursor * 10), Images::Sword_Cursor, 0, dbmNormal);
 
     renderNumber(menu.x + 27, 3, gamePlay.level);
     renderNumber(menu.x + 7, 13, gamePlay.timer_Min);
     renderNumber(menu.x + 24, 13, gamePlay.timer_Sec);
+
 
 }
 
