@@ -75,7 +75,7 @@ bool testScroll(GamePlay &gamePlay, Prince &prince, Level &level) {
 
                 #ifdef SAVE_TO_FX
 
-                    FX::saveGameState((uint8_t*)&cookie, sizeof(cookie));
+                    FX::saveGameState(cookie);
 
                 #else
 
