@@ -56,7 +56,9 @@ void setup() {
     FX::display(CLEAR_BUFFER);
     arduboy.systemButtons();
 
+    #ifdef USE_LED
     arduboy.setRGBled(0, 0, 0);
+    #endif
 
     #ifndef SAVE_MEMORY_SOUND
         arduboy.audio.begin();
@@ -178,9 +180,6 @@ void loop() {
 
     }
 
-    FX::enableOLED();
-
-
     // Invert screen during play ?
     
     { 
@@ -223,6 +222,7 @@ void loop() {
 
         #endif
 
+        FX::enableOLED();
         arduboy.invert(invert);
 
     }

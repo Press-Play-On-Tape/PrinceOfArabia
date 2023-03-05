@@ -1201,7 +1201,7 @@ void game() {
 
                                 #ifdef SAVE_TO_FX
 
-                                    FX::loadGameState((uint8_t*)&cookie, sizeof(cookie));
+                                    FX::loadGameState(cookie);
 
                                 #else
 
@@ -1218,7 +1218,7 @@ void game() {
 
                                 #ifdef SAVE_TO_FX
 
-                                    FX::saveGameState((uint8_t*)&cookie, sizeof(cookie));
+                                    FX::saveGameState(cookie);
 
                                 #else
 
@@ -1250,19 +1250,19 @@ void game() {
 
                                 cookie.hasSavedLevel = true;
                                 
+                                gamePlay.saves++;
                                 #ifdef USE_LED
                                 arduboy.setRGBled(RED_LED, 32);
-                                arduboy.setRGBled(GREEN_LED, 0);
-                                arduboy.setRGBled(BLUE_LED, 0);
+                                //arduboy.setRGBled(GREEN_LED, 0);
+                                //arduboy.setRGBled(BLUE_LED, 0);
                                 #endif
 
                                 #ifdef SAVE_TO_FX
 
-                                    FX::saveGameState((uint8_t*)&cookie, sizeof(cookie));
+                                    FX::saveGameState(cookie);
 
                                 #else
 
-                                    gamePlay.saves++;
                                     EEPROM_Utils::saveCookie(cookie);
 
                                 #endif
@@ -1270,7 +1270,7 @@ void game() {
                                 #ifdef USE_LED
                                 arduboy.setRGBled(RED_LED, 0);
                                 arduboy.setRGBled(GREEN_LED, 32);
-                                arduboy.setRGBled(BLUE_LED, 0);
+                                //arduboy.setRGBled(BLUE_LED, 0);
                                 #endif
 
                                 menu.direction = Direction::Right;  
@@ -1280,7 +1280,7 @@ void game() {
 
                                 #ifdef SAVE_TO_FX
 
-                                    FX::loadGameState((uint8_t*)&cookie, sizeof(cookie));
+                                    FX::loadGameState(cookie);
 
                                 #else
 
@@ -1337,14 +1337,14 @@ void game() {
                             #ifdef USE_LED
                             arduboy.setRGBled(RED_LED, 32);
                             arduboy.setRGBled(GREEN_LED, 0);
-                            arduboy.setRGBled(BLUE_LED, 0);
+                            //arduboy.setRGBled(BLUE_LED, 0);
                             #endif
                             
                             cookie.hasSavedLevel = false;
 
                             #ifdef SAVE_TO_FX
 
-                                FX::saveGameState((uint8_t*)&cookie, sizeof(cookie));
+                                FX::saveGameState(cookie);
 
                             #else
 
@@ -1355,7 +1355,7 @@ void game() {
                             #ifdef USE_LED
                             arduboy.setRGBled(RED_LED, 0);
                             arduboy.setRGBled(GREEN_LED, 32);
-                            arduboy.setRGBled(BLUE_LED, 0);
+                            //arduboy.setRGBled(BLUE_LED, 0);
                             #endif
                             
                             menu.direction = Direction::Right;  
