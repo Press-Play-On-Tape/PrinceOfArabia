@@ -18,7 +18,7 @@ uint8_t level3_Data[] = {
     40,                         // Level x starting position
     6,                          // Level y starting position
     // Enemy 1          
-    0,                          // Type 0 = Guard, 1 = Skeleton, 2 = Mirror          
+    1,                          // Type 0 = Guard, 1 = Skeleton, 2 = Mirror          
     10,                         // Enemy starting x tile
     3,                          // Enemy starting y tile
     70,                         // Enemy starting x pos (left entry)
