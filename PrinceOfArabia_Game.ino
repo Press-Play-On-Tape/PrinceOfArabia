@@ -278,7 +278,7 @@ void game() {
                                 enemy.pushSequence(Stance::Draw_Sword_1_Start, Stance::Draw_Sword_6_End, Stance::Sword_Normal);
                                 break;
 
-                        }                    
+                        }
 
                     }
 
@@ -451,7 +451,7 @@ void game() {
                                 switch(abs(xDelta)) {
 
 
-                                    // If the enemy and prince are within stirking distance then ..
+                                    // If the enemy and prince are within striking distance then ..
 
                                     case 0 ... Constants::StrikeDistance:
 
@@ -528,7 +528,7 @@ void game() {
 
                             break;
 
-                    }                    
+                    }
 
                     break;
 
@@ -548,7 +548,7 @@ void game() {
     if (gamePlay.gameState == GameState::Game && prince.isEmpty()) {
 
 
-        // Check to see if we can leave the level, otherise 
+        // Check to see if we can leave the level, otherwise 
 
         if (!leaveLevel(prince, level)) {
 
@@ -603,64 +603,35 @@ void game() {
                     if (pressed & DOWN_BUTTON) {
                     
                         CanClimbDownResult canClimbDownResult = level.canClimbDown(prince);
+                        
+                        if (canClimbDownResult == CanClimbDownResult::None) {
 
-                        switch (canClimbDownResult) {
+                            gamePlay.crouchTimer++;
+                            if (gamePlay.crouchTimer == 4) {
+                                prince.pushSequence(Stance::Crouch_1_Start, Stance::Crouch_3_End);
+                            }
 
-                            case CanClimbDownResult::ClimbDown:
+                        } else {
 
-                                #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
-                                DEBUG_PRINTLN(F("DOWN_BUTTON, Climb down Pos 2"));
-                                #endif
-                                prince.pushSequence(Stance::Step_Climbing_15_End, Stance::Step_Climbing_1_Start, Stance::Jump_Up_A_14_End);
-                                prince.setHangingCounter(150);
-                                break;
+                            prince.pushSequence(Stance::Step_Climbing_15_End, Stance::Step_Climbing_1_Start, Stance::Jump_Up_A_14_End);
+                            switch (canClimbDownResult) {
 
-                            case CanClimbDownResult::StepThenClimbDown:
-                                #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
-                                DEBUG_PRINTLN(F("DOWN_BUTTON, Step then climb down Pos 2"));
-                                #endif
+                                case CanClimbDownResult::TurnThenClimbDown:
+                                    prince.pushSequence(Stance::Standing_Turn_1_Start, Stance::Standing_Turn_5_End, Stance::Upright_Turn);
+                                    break;
 
-                                prince.pushSequence(Stance::Step_Climbing_15_End, Stance::Step_Climbing_1_Start, Stance::Jump_Up_A_14_End);
-                                prince.pushSequence(Stance::Small_Step_6_End, Stance::Small_Step_1_Start, Stance::Upright);
-                                prince.setHangingCounter(150);
-                                break;
+                                case CanClimbDownResult::StepThenTurnThenClimbDown:
+                                    prince.pushSequence(Stance::Standing_Turn_1_Start, Stance::Standing_Turn_5_End, Stance::Upright_Turn);
+                                    [[fallthrough]];
 
-                            case CanClimbDownResult::TurnThenClimbDown:
-                                #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
-                                DEBUG_PRINTLN(F("DOWN_BUTTON, Step then climb down Pos 2"));
-                                #endif
-
-                                prince.pushSequence(Stance::Step_Climbing_15_End, Stance::Step_Climbing_1_Start, Stance::Jump_Up_A_14_End);
-                                prince.pushSequence(Stance::Standing_Turn_1_Start, Stance::Standing_Turn_5_End, Stance::Upright_Turn);
-                                prince.setHangingCounter(150);
-                                break;
-
-                            case CanClimbDownResult::StepThenTurnThenClimbDown:
-                                #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
-                                DEBUG_PRINTLN(F("DOWN_BUTTON, Step then turn then climb down Pos 2"));
-                                #endif
-
-                                prince.pushSequence(Stance::Step_Climbing_15_End, Stance::Step_Climbing_1_Start, Stance::Jump_Up_A_14_End);
-                                prince.pushSequence(Stance::Standing_Turn_1_Start, Stance::Standing_Turn_5_End, Stance::Upright_Turn);
-                                prince.pushSequence(Stance::Small_Step_1_Start, Stance::Small_Step_6_End, Stance::Upright);
-                                prince.setHangingCounter(150);
-                                break;
-
-                            default:
-                                #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
-                                DEBUG_PRINTLN(F("DOWN_BUTTON, Cannot climb down, squat"));
-                                #endif
-
-                                gamePlay.crouchTimer++;
-                                
-                                if (gamePlay.crouchTimer == 4) {
-                                    prince.pushSequence(Stance::Crouch_1_Start, Stance::Crouch_3_End);
-                                }
-                                break;
-
+                                case CanClimbDownResult::StepThenClimbDown:
+                                    prince.pushSequence(Stance::Small_Step_6_End, Stance::Small_Step_1_Start, Stance::Upright);
+                                    break;
+                            }
+                            prince.setHangingCounter(150);
                         }
-
                     }
+
                     else if (pressed & UP_BUTTON) {
 
                         CanJumpUpResult jumpResult = level.canJumpUp(prince);
@@ -802,7 +773,7 @@ void game() {
                             prince.pushSequence(Stance::Step_Climbing_1_Start, Stance::Step_Climbing_15_End, Stance::Upright);
                         }
                         else {
-                            prince.pushSequence(Stance::Step_Climbing_Block_1_Start, Stance::Step_Climbing_Block_9_End, Stance::Upright);                        
+                            prince.pushSequence(Stance::Step_Climbing_Block_1_Start, Stance::Step_Climbing_Block_9_End, Stance::Upright);
                         }
 
                     }
