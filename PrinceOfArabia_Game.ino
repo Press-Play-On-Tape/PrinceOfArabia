@@ -1979,29 +1979,25 @@ void game() {
                             break;
 
                         case ItemType::FloorButton1:
-    
-                            if (item.data.floorButton.timeToFall == 0) {
-                                                    
-                                level.openGate(item.data.floorButton.gate1, 255, 255);
-                                level.openGate(item.data.floorButton.gate2, 255, 255);
-                                level.openGate(item.data.floorButton.gate3, 255, 255);
-                                item.data.floorButton.frame = 1;
-                                item.data.floorButton.timeToFall = Constants::Button2FaillingTime;
+                                                
+                            level.openGate(item.data.floorButton.gate1, 255, 255);
+                            level.openGate(item.data.floorButton.gate2, 255, 255);
+                            level.openGate(item.data.floorButton.gate3, 255, 255);
+                            item.data.floorButton.frame = 1;
+                            item.data.floorButton.timeToFall = Constants::Button2FaillingTime;
+                            
+
+                            // Does the shadow step forward?
+                            
+                            if (gamePlay.level == 6 && item.data.floorButton.gate1 == 4) {
+
+                                item.data.floorButton.gate1 = 0;
+
+                                #ifndef SAVE_MEMORY_ENEMY
+                                    enemy.pushSequence(Stance::Single_Step_1_Start, Stance::Single_Step_8_End, Stance::Upright);
+                                    enemy.pushSequence(Stance::Delay_1_Start, Stance::Delay_8_End);
+                                #endif
                                 
-
-                                // Does the shadow step forward?
-                                
-                                if (gamePlay.level == 6 && item.data.floorButton.gate1 == 4) {
-
-                                    item.data.floorButton.gate1 = 0;
-
-                                    #ifndef SAVE_MEMORY_ENEMY
-                                        enemy.pushSequence(Stance::Single_Step_1_Start, Stance::Single_Step_8_End, Stance::Upright);
-                                        enemy.pushSequence(Stance::Delay_1_Start, Stance::Delay_8_End);
-                                    #endif
-                                    
-                                }
-
                             }
 
                             break;
@@ -2009,16 +2005,12 @@ void game() {
                         case ItemType::FloorButton2:
                         case ItemType::FloorButton4:
 
-                            if (item.data.floorButton.timeToFall == 0) {
-    
-                                level.openGate(item.data.floorButton.gate1, (item.itemType == ItemType::FloorButton2 ? 10 : 20), 255);
-                                level.openGate(item.data.floorButton.gate2, (item.itemType == ItemType::FloorButton2 ? 10 : 20), 255);
-                                level.openGate(item.data.floorButton.gate3, (item.itemType == ItemType::FloorButton2 ? 10 : 20), 255);
+                            level.openGate(item.data.floorButton.gate1, (item.itemType == ItemType::FloorButton2 ? 10 : 20), 255);
+                            level.openGate(item.data.floorButton.gate2, (item.itemType == ItemType::FloorButton2 ? 10 : 20), 255);
+                            level.openGate(item.data.floorButton.gate3, (item.itemType == ItemType::FloorButton2 ? 10 : 20), 255);
 
-                                item.data.floorButton.frame = 1;
-                                item.data.floorButton.timeToFall = Constants::Button2FaillingTime;
-
-                            }
+                            item.data.floorButton.frame = 1;
+                            item.data.floorButton.timeToFall = Constants::Button2FaillingTime;
 
                             break;
 

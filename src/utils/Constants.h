@@ -1461,6 +1461,7 @@ namespace Constants {
     constexpr uint8_t Button2FaillingTime = 24;
     constexpr uint8_t Button3FaillingTime = 24;
     constexpr uint8_t OppositeDirection_Offset = 4;
+    constexpr uint8_t Gate_FallingDelayNotSpecified = 255;
 
     constexpr uint8_t Invaders_General = 0;
     constexpr uint8_t Invaders_General2 = 1;

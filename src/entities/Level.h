@@ -3149,7 +3149,7 @@ struct Level {
 
             Item &gate = this->getItemByIndex(ItemType::Gate, ItemType::Gate_StayOpen, gateIndex);
 
-            if (closingDelay != 255) {
+            if (closingDelay != Constants::Gate_FallingDelayNotSpecified) {
 
                 gate.data.gate.closingDelay = closingDelay;
                 gate.data.gate.closingDelayMax = closingDelayMax;
