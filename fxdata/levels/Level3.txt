@@ -23,7 +23,7 @@ uint8_t level3_Data[] = {
     3,                          // Enemy starting y tile
     70,                         // Enemy starting x pos (left entry)
     70,                         // Enemy starting x pos (right entry)
-    16,                         // Enemy starting x pos (left extent)
+    18,                         // Enemy starting x pos (left extent)
     82,                         // Enemy starting x pos (right extent)
     56,                         // Enemy starting y pos (25, 56, 87)
     3,                          // Enemy starting health

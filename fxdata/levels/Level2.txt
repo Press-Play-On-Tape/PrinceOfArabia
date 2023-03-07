@@ -22,8 +22,8 @@ uint8_t level2_Data[] = {
     20,                         // Enemy starting x tile
     0,                          // Enemy starting y tile
     58,                         // Enemy starting x pos (left entry)
-    10,                         // Enemy starting x pos (right entry)
-    6,                          // Enemy starting x pos (left extent)
+    22,                         // Enemy starting x pos (right entry)
+    18,                         // Enemy starting x pos (left extent)
     62,                         // Enemy starting x pos (right extent)
     56,                         // Enemy starting y pos (25, 56, 87)
     4,                          // Enemy starting health
@@ -33,8 +33,8 @@ uint8_t level2_Data[] = {
     40,                         // Enemy starting x tile
     3,                          // Enemy starting y tile
     34,                         // Enemy starting x pos (left entry)
-    6,                          // Enemy starting x pos (right entry)
-    2,                          // Enemy starting x pos (left extent)
+    22,                         // Enemy starting x pos (right entry)
+    18,                         // Enemy starting x pos (left extent)
     50,                         // Enemy starting x pos (right extent)
     56,                         // Enemy starting y pos (25, 56, 87)
     3,                          // Enemy starting health
@@ -44,8 +44,8 @@ uint8_t level2_Data[] = {
     60,                         // Enemy starting x tile
     3,                          // Enemy starting y tile
     58,                         // Enemy starting x pos (left entry)
-    14,                         // Enemy starting x pos (right entry)
-    2,                          // Enemy starting x pos (left extent)
+    22,                         // Enemy starting x pos (right entry)
+    18,                         // Enemy starting x pos (left extent)
     60,                         // Enemy starting x pos (right extent)
     56,                         // Enemy starting y pos (25, 56, 87)
     3,                          // Enemy starting health
@@ -56,7 +56,7 @@ uint8_t level2_Data[] = {
     3,                          // Enemy starting y tile
     98,                         // Enemy starting x pos (left entry)
     34,                         // Enemy starting x pos (right entry)
-    2,                          // Enemy starting x pos (left extent)
+    18,                         // Enemy starting x pos (left extent)
     114,                        // Enemy starting x pos (right extent)
     56,                         // Enemy starting y pos (25, 56, 87)
     3,                          // Enemy starting health
@@ -66,8 +66,8 @@ uint8_t level2_Data[] = {
     110,                        // Enemy starting x tile
     6,                          // Enemy starting y tile
     54,                         // Enemy starting x pos (left entry)
-    20,                         // Enemy starting x pos (right entry)
-    2,                          // Enemy starting x pos (left extent)
+    22,                         // Enemy starting x pos (right entry)
+    18,                         // Enemy starting x pos (left extent)
     62,                         // Enemy starting x pos (right extent)
     56,                         // Enemy starting y pos (25, 56, 87)
     3,                          // Enemy starting health

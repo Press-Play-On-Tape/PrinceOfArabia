@@ -17,17 +17,6 @@ void game_Init() {
         gamePlay.init(STARTING_LEVEL);      // Levels 1 - 13 normal game, 14 Standing Jumps, 15 Running Jumps
     #endif
 
-    // #ifndef SAVE_MEMORY_ENEMY
-    //     level.init_PositionChars(gamePlay, prince, enemy, true);
-    // #else
-    //     level.init_PositionChars(gamePlay, prince, true);
-    // #endif
-
-    // gamePlay.gameState = GameState::Game;
-    // menu.init();
-
-    // playGrab();
-
 }
 
 void game_StartLevel() {
