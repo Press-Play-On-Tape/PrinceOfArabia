@@ -622,6 +622,8 @@ void invader_PlayGame() {
 
         if (pressed & B_BUTTON && player.status != Status::EnemiesAppearing && general2.bulletPlayerCountdown == 0) {
 
+            player.status = Status::Active;
+            
             if (bullet.y == -4) {
 
                 #ifndef SAVE_MEMORY_SOUND
