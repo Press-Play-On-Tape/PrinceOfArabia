@@ -12,7 +12,7 @@
     #define _SAVE_MEMORY_TITLE
     #define _SAVE_MEMORY_INVADER
     #define _ALT_B_BUTTON
-    #define _GIVE_SWORD
+    #define GIVE_SWORD
 
     #define LEVEL_DATA_FROM_FX
     #define MOVEMENT_DATA_FROM_FX
@@ -35,7 +35,7 @@
     #define SAVE_MEMORY_PPOT
     #define SAVE_MEMORY_OTHER
     #define SAVE_MEMORY_SOUND
-    #define SAVE_MEMORY_ENEMY
+    #define _SAVE_MEMORY_ENEMY
     #define SAVE_MEMORY_TITLE
     #define SAVE_MEMORY_INVADER
     #define _ALT_B_BUTTON

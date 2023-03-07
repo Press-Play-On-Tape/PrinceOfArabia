@@ -677,36 +677,34 @@ void playGrab() {
             
         }
 
+
         if (!enemyIsVisible || !swapEnemies) {
             
             enemy.setActiveEnemy(currentEnemy);
 
         }
-        else {
 
-            // If we have just seen the enemy for the first time then we want to orientate it ..
+        if (justEnteredRoom && enemyIsVisible) {
 
-            if (justEnteredRoom) {
+            BaseEntity &base = enemy.getActiveBase();
+            int16_t xDelta = prince.getPosition().x - base.getPosition().x;
+            
+            if (base.getHealth() > 0) {
 
-                BaseEntity &base = enemy.getActiveBase();
-                int16_t xDelta = prince.getPosition().x - base.getPosition().x;
-                
-                if (base.getHealth() > 0) {
+                enemy.getPosition().x = enemy.getX();
+                enemy.clear();
+                enemy.setStance(Stance::Upright);
 
-                    if (xDelta < 0) {
+                if (xDelta < 0) {
 
-                        enemy.setX((level.getXLocation() * Constants::TileWidth) + base.getX_LeftEntry());
-                        enemy.getPosition().x = enemy.getX();
-                        enemy.setDirection(Direction::Left);
+                    enemy.setX((level.getXLocation() * Constants::TileWidth) + base.getX_LeftEntry());
+                    enemy.setDirection(Direction::Left);
 
-                    }
-                    else {
+                }
+                else {
 
-                        enemy.setX((level.getXLocation() * Constants::TileWidth) + base.getX_RightEntry());
-                        enemy.getPosition().x = enemy.getX();
-                        enemy.setDirection(Direction::Right);
-
-                    }
+                    enemy.setX((level.getXLocation() * Constants::TileWidth) + base.getX_RightEntry());
+                    enemy.setDirection(Direction::Right);
 
                 }
 

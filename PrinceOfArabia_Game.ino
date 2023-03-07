@@ -296,10 +296,7 @@ void game() {
                             // If the enemy and prince are within striking distance then stop the enemy moving forward ..
 
                             case 0 ... Constants::StrikeDistance:
-
-                                if (level.canMoveForward(enemyBase, Action::SwordStep, enemyBase.getDirection(), 0)) {
-                                    enemy.push(Stance::Sword_Normal);
-                                }
+                                enemy.push(Stance::Sword_Normal);
                                 break;
 
 
@@ -499,6 +496,9 @@ void game() {
                                             if (level.canMoveForward(enemyBase, Action::SwordStep, enemyBase.getDirection(), 0)) {
                                                 enemy.pushSequence(Stance::Sword_Step_1_Start, Stance::Sword_Step_3_End); 
                                             }
+                                            else {
+                                                enemy.push(Stance::Sword_Normal);
+                                            }
 
                                         }
                                         else {
@@ -517,6 +517,9 @@ void game() {
 
                                         if (level.canMoveForward(enemyBase, Action::SwordStep, enemyBase.getDirection(), 0)) {
                                             enemy.pushSequence(Stance::Sword_Step_1_Start, Stance::Sword_Step_3_End);
+                                        }
+                                        else {
+                                            enemy.push(Stance::Sword_Normal);
                                         }
 
                                         break;
@@ -1764,7 +1767,7 @@ void game() {
                             int16_t xDelta = prince.getPosition().x - enemy.getPosition().x;
                             int16_t yDelta = prince.getPosition().y - enemy.getPosition().y;
 
-                            if (abs(xDelta) <= Constants::StrikeDistance && yDelta == 0) {
+                            if (abs(xDelta) <= Constants::StrikeDistance && yDelta == 0 && enemyIsVisible) {
                             
                                 if (enemy.getEnemyType() == EnemyType::MirrorAttackingL12) {
 
