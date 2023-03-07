@@ -607,7 +607,8 @@ void game() {
 
                                 case CanClimbDownResult::StepThenTurnThenClimbDown:
                                     prince.pushSequence(Stance::Standing_Turn_1_Start, Stance::Standing_Turn_5_End, Stance::Upright_Turn);
-                                    [[fallthrough]];
+                                    prince.pushSequence(Stance::Small_Step_1_Start, Stance::Small_Step_6_End, Stance::Upright);
+                                    break;
 
                                 case CanClimbDownResult::StepThenClimbDown:
                                     prince.pushSequence(Stance::Small_Step_6_End, Stance::Small_Step_1_Start, Stance::Upright);
