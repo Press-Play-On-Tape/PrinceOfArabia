@@ -107,7 +107,7 @@ void game() {
     #endif
 
     #ifdef GIVE_SWORD
-        prince.setSword(true);
+    prince.setSword(true);
     #endif
 
 
@@ -131,9 +131,9 @@ void game() {
     #endif
     
     #ifdef SAVE_MEMORY_SOUND
-        LevelUpdate levelUpdate = level.update(arduboy, prince, gamePlay);
+    LevelUpdate levelUpdate = level.update(arduboy, prince, gamePlay);
     #else 
-        LevelUpdate levelUpdate = level.update(arduboy, prince, gamePlay, sound);
+    LevelUpdate levelUpdate = level.update(arduboy, prince, gamePlay, sound);
     #endif   
 
 
@@ -141,9 +141,7 @@ void game() {
         
         switch (prince.getStance()) {
 
-
             // If the prince is falling as well then we do not lose health ..
-
             case Stance::Falling_Down_P2_1_Start ... Stance::Falling_Down_P2_6_End:
             case Stance::Falling_Down_P1_1_Start ... Stance::Falling_Down_P1_6_End:
             case Stance::Falling_Down_P0_1_Start ... Stance::Falling_Down_P0_6_End:
@@ -160,7 +158,7 @@ void game() {
                 }
 
                 #ifndef SAVE_MEMORY_SOUND
-                    sound.tonesFromFX(Sounds::Thump);
+                sound.tonesFromFX(Sounds::Thump);
                 #endif 
                                 
                 break;
@@ -183,22 +181,19 @@ void game() {
         setTitleFrame(TitleFrameIndex::TimeOut_PoP_Frame);
 
         #ifndef SAVE_MEMORY_OTHER
-            fadeEffect.reset();
+        fadeEffect.reset();
         #endif
 
         #ifndef SAVE_MEMORY_SOUND
-            sound.tonesFromFX(Sounds::OutOfTime);
+        sound.tonesFromFX(Sounds::OutOfTime);
         #endif
-
 
     }
 
     if (menu.update()) {
         
         #ifdef USE_LED
-        arduboy.setRGBled(RED_LED, 0);
-        arduboy.setRGBled(GREEN_LED, 0);
-        arduboy.setRGBled(BLUE_LED, 0);
+        arduboy.setRGBled(0, 0, 0);
         #endif
 
         gamePlay.gameState = GameState::Game;
@@ -267,7 +262,7 @@ void game() {
                                 enemy.pushSequence(Stance::Draw_Sword_1_Start, Stance::Draw_Sword_6_End, Stance::Sword_Normal);
                                 break;
 
-                        }                    
+                        }
 
                     }
 
@@ -312,7 +307,6 @@ void game() {
                                 break;
 
                             default:
-
 
                                 // If the enemy and prince are far apart then the enemy should advance on the prince ..
 
@@ -437,7 +431,7 @@ void game() {
                                 switch(abs(xDelta)) {
 
 
-                                    // If the enemy and prince are within stirking distance then ..
+                                    // If the enemy and prince are within striking distance then ..
 
                                     case 0 ... Constants::StrikeDistance:
 
@@ -520,7 +514,7 @@ void game() {
 
                             break;
 
-                    }                    
+                    }
 
                     break;
 
@@ -540,7 +534,7 @@ void game() {
     if (gamePlay.gameState == GameState::Game && prince.isEmpty()) {
 
 
-        // Check to see if we can leave the level, otherise 
+        // Check to see if we can leave the level, otherwise 
 
         if (!leaveLevel(prince, level)) {
 
@@ -595,64 +589,34 @@ void game() {
                     if (pressed & DOWN_BUTTON) {
                     
                         CanClimbDownResult canClimbDownResult = level.canClimbDown(prince);
+                        
+                        if (canClimbDownResult == CanClimbDownResult::None) {
+                            gamePlay.crouchTimer++;
+                            if (gamePlay.crouchTimer == 4) {
+                                prince.pushSequence(Stance::Crouch_1_Start, Stance::Crouch_3_End);
+                            }
+                        } else {
+                            // Basic climbing sequence for all, incuding CanClimbDownResult::ClimbDown
+                            prince.pushSequence(Stance::Step_Climbing_15_End, Stance::Step_Climbing_1_Start, Stance::Jump_Up_A_14_End);
+                            
+                            switch (canClimbDownResult) {
 
-                        switch (canClimbDownResult) {
+                                case CanClimbDownResult::TurnThenClimbDown:
+                                    prince.pushSequence(Stance::Standing_Turn_1_Start, Stance::Standing_Turn_5_End, Stance::Upright_Turn);
+                                    break;
 
-                            case CanClimbDownResult::ClimbDown:
+                                case CanClimbDownResult::StepThenTurnThenClimbDown:
+                                    prince.pushSequence(Stance::Standing_Turn_1_Start, Stance::Standing_Turn_5_End, Stance::Upright_Turn);
+                                    [[fallthrough]];
 
-                                #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
-                                DEBUG_PRINTLN(F("DOWN_BUTTON, Climb down Pos 2"));
-                                #endif
-                                prince.pushSequence(Stance::Step_Climbing_15_End, Stance::Step_Climbing_1_Start, Stance::Jump_Up_A_14_End);
-                                prince.setHangingCounter(150);
-                                break;
-
-                            case CanClimbDownResult::StepThenClimbDown:
-                                #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
-                                DEBUG_PRINTLN(F("DOWN_BUTTON, Step then climb down Pos 2"));
-                                #endif
-
-                                prince.pushSequence(Stance::Step_Climbing_15_End, Stance::Step_Climbing_1_Start, Stance::Jump_Up_A_14_End);
-                                prince.pushSequence(Stance::Small_Step_6_End, Stance::Small_Step_1_Start, Stance::Upright);
-                                prince.setHangingCounter(150);
-                                break;
-
-                            case CanClimbDownResult::TurnThenClimbDown:
-                                #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
-                                DEBUG_PRINTLN(F("DOWN_BUTTON, Step then climb down Pos 2"));
-                                #endif
-
-                                prince.pushSequence(Stance::Step_Climbing_15_End, Stance::Step_Climbing_1_Start, Stance::Jump_Up_A_14_End);
-                                prince.pushSequence(Stance::Standing_Turn_1_Start, Stance::Standing_Turn_5_End, Stance::Upright_Turn);
-                                prince.setHangingCounter(150);
-                                break;
-
-                            case CanClimbDownResult::StepThenTurnThenClimbDown:
-                                #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
-                                DEBUG_PRINTLN(F("DOWN_BUTTON, Step then turn then climb down Pos 2"));
-                                #endif
-
-                                prince.pushSequence(Stance::Step_Climbing_15_End, Stance::Step_Climbing_1_Start, Stance::Jump_Up_A_14_End);
-                                prince.pushSequence(Stance::Standing_Turn_1_Start, Stance::Standing_Turn_5_End, Stance::Upright_Turn);
-                                prince.pushSequence(Stance::Small_Step_1_Start, Stance::Small_Step_6_End, Stance::Upright);
-                                prince.setHangingCounter(150);
-                                break;
-
-                            default:
-                                #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
-                                DEBUG_PRINTLN(F("DOWN_BUTTON, Cannot climb down, squat"));
-                                #endif
-
-                                gamePlay.crouchTimer++;
-                                
-                                if (gamePlay.crouchTimer == 4) {
-                                    prince.pushSequence(Stance::Crouch_1_Start, Stance::Crouch_3_End);
-                                }
-                                break;
-
+                                case CanClimbDownResult::StepThenClimbDown:
+                                    prince.pushSequence(Stance::Small_Step_6_End, Stance::Small_Step_1_Start, Stance::Upright);
+                                    break;
+                            }
+                            prince.setHangingCounter(150);
                         }
-
                     }
+
                     else if (pressed & UP_BUTTON) {
 
                         CanJumpUpResult jumpResult = level.canJumpUp(prince);
@@ -2488,10 +2452,6 @@ void game() {
 
         switch (prince.getX() % 12) {
 
-            // case 0:
-            //     prince.push(Stance::Collide_Wall_P2_Start_End);
-            //     break;
-
             case 1:
             case 5:
             case 9:
@@ -2606,13 +2566,13 @@ void game() {
                 cookie.setMode(TitleScreenMode::TimeOut);
 
                 #ifndef SAVE_MEMORY_SOUND
-                    sound.tonesFromFX(Sounds::OutOfTime);
+                sound.tonesFromFX(Sounds::OutOfTime);
                 #endif
 
                 setTitleFrame(TitleFrameIndex::TimeOut_PoP_Frame);
 
                 #ifndef SAVE_MEMORY_OTHER
-                    fadeEffect.reset();
+                fadeEffect.reset();
                 #endif
 
             }
@@ -2628,9 +2588,9 @@ void game() {
     render(sameLevelAsPrince);
     
     #ifndef SAVE_MEMORY_OTHER
-        if (gamePlay.gameState == GameState::Menu || gamePlay.gameState == GameState::Menu_Confirm) {
-            renderMenu(prince);
-        }
+    if (gamePlay.gameState == GameState::Menu || gamePlay.gameState == GameState::Menu_Confirm) {
+        renderMenu(prince);
+    }
     #endif
 
     #if defined(DEBUG) && defined(DEBUG_ONSCREEN_DETAILS)
