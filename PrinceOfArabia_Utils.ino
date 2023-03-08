@@ -72,16 +72,7 @@ bool testScroll(GamePlay &gamePlay, Prince &prince, Level &level) {
                 cookie.highMin = gamePlay.timer_Min;
                 cookie.highSec = gamePlay.timer_Sec;
                 cookie.highSaves = gamePlay.saves;
-
-                #ifdef SAVE_TO_FX
-
-                    FX::saveGameState(cookie);
-
-                #else
-
-                    EEPROM_Utils::saveCookie(cookie);
-
-                #endif
+                saveCookie();
 
             }
 
@@ -807,5 +798,28 @@ void processRunningTurn() {
         prince.pushSequence(Stance::Stopping_1_Start, Stance::Stopping_5_End, Stance::Upright);
 
     }
+
+}
+
+void saveCookie() {
+
+    #ifdef USE_LED
+    arduboy.setRGBled(RED_LED, 32);
+    #endif
+
+    #ifdef SAVE_TO_FX
+
+        FX::saveGameState(cookie);
+
+    #else
+
+        EEPROM_Utils::saveCookie(cookie);
+
+    #endif
+
+    #ifdef USE_LED
+    arduboy.setRGBled(RED_LED, 0);
+    arduboy.setRGBled(GREEN_LED, 32);
+    #endif
 
 }
