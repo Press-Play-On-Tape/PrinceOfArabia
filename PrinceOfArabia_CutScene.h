@@ -1,8 +1,8 @@
 #include <Arduboy2.h>
 
 
-                            //     0   1   2   3   4   5   6   7   8   9   0   1   2   3   4   5   6   7   8   9   0   1   2
-const uint8_t speed[] PROGMEM = {  1,  1,  2,  3,  3,  4,  4,  5,  6,  7,  8,  9, 10, 12, 13, 14, 15, 16, 17, 18, 20, 21, 22  };
+                            //     0   1   2   3   4   5   6   7   8   9   0   1   2   3   4   5   6   7   8   9   0   1   2  3
+const uint8_t speed[] PROGMEM = {  1,  1,  2,  3,  4,  4,  5,  5,  6,  6,  7,  8,  9, 10, 12, 13, 14, 15, 16, 17, 18, 20, 21, 22  };
 
 
 // Load a new wave of enemies and replenish barriers.

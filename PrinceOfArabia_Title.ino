@@ -281,13 +281,6 @@ void title() {
 
             #ifndef SAVE_MEMORY_INVADER
 
-                case TitleScreenMode::CutScene_7_Transition:
-
-                    cookie.setMode(TitleScreenMode::CutScene_7_PlayGame);
-                    gamePlay.gameState = GameState::Game_StartLevel; 
-                    arduboy.setFrameRate(Constants::FrameRate);
-                    break;
-
                 case TitleScreenMode::CutScene_7_PlayGame:
 
                     if (justPressed & (A_BUTTON)) {

@@ -6,8 +6,8 @@ using uint24_t = __uint24;
 
 // Initialize FX hardware using  FX::begin(FX_DATA_PAGE); in the setup() function.
 
-constexpr uint16_t FX_DATA_PAGE  = 0xf1b8;
-constexpr uint24_t FX_DATA_BYTES = 931785;
+constexpr uint16_t FX_DATA_PAGE  = 0xf1b3;
+constexpr uint24_t FX_DATA_BYTES = 932865;
 
 constexpr uint16_t FX_SAVE_PAGE  = 0xfff0;
 constexpr uint24_t FX_SAVE_BYTES = 2;
@@ -611,7 +611,7 @@ constexpr uint24_t Title_CutScene_4_Frame = 0x0D79F6;
 constexpr uint24_t Title_CutScene_5_Frame = 0x0D8416;
 constexpr uint24_t Title_CutScene_6_Frame = 0x0D999A;
 constexpr uint24_t Title_CutScene_7_Frame = 0x0DC463;
-constexpr uint24_t Title_CutScene_End_Frame = 0x0E0C51;
-constexpr uint24_t Title_IntroGame_End_PoP_Frame = 0x0E26C1;
-constexpr uint24_t Title_IntroGame_End_PoA_Frame = 0x0E2F0D;
-constexpr uint24_t TitleFrameIndexTable = 0x0E3759;
+constexpr uint24_t Title_CutScene_End_Frame = 0x0E1089;
+constexpr uint24_t Title_IntroGame_End_PoP_Frame = 0x0E2AF9;
+constexpr uint24_t Title_IntroGame_End_PoA_Frame = 0x0E3345;
+constexpr uint24_t TitleFrameIndexTable = 0x0E3B91;
