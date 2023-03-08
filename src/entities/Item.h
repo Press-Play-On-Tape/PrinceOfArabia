@@ -103,6 +103,9 @@ struct AppearingFloor {
 struct ExitDoor_Button {
     uint8_t x;
     uint8_t y;
+    uint8_t junk1;
+    uint8_t junk2;
+    uint8_t junk3;
     uint8_t frame;              
 };
 
