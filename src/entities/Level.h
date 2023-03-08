@@ -171,20 +171,14 @@ struct Level {
                 FX::seekData(FX::readIndexedUInt24(Levels::level_Data, gamePlay.level));
 
                 {
-                    uint8_t xPixel = FX::readPendingUInt8();
-                    uint8_t yPixel = FX::readPendingUInt8();
-                    Direction direction = static_cast<Direction>(FX::readPendingUInt8());
-                    uint16_t stance = static_cast<uint16_t>(FX::readPendingUInt8());
+                    uint8_t data[8];
 
-                    prince.init(xPixel, yPixel, direction, stance, clearSword);
-                    
-                }
-
-                {
-                    this->width = FX::readPendingUInt8();
-                    this->height = FX::readPendingUInt8();
-                    this->xLoc = FX::readPendingUInt8();
-                    this->yLoc = FX::readPendingUInt8();
+                    FX::readBytes((uint8_t*)&data, sizeof(data));
+                    prince.init(data[0], data[1], static_cast<Direction>(data[2]), static_cast<uint16_t>(data[3]), clearSword);
+                    this->width = data[4];
+                    this->height = data[5];
+                    this->xLoc = data[6];
+                    this->yLoc = data[7];
                     FX::readEnd();
 
                     this->loadMap(gamePlay);
@@ -210,27 +204,19 @@ struct Level {
 
                     while (enemyType != EnemyType::None) {
 
-                        uint8_t xTile = FX::readPendingUInt8();
-                        uint8_t yTile = FX::readPendingUInt8();
-                        uint8_t xPixel_LeftEntry = FX::readPendingUInt8();
-                        uint8_t xPixel_RightEntry = FX::readPendingUInt8();
-                        uint8_t xPixel_LeftExtent = FX::readPendingUInt8();
-                        uint8_t xPixel_RightExtent = FX::readPendingUInt8();
-                        uint8_t yPixel = FX::readPendingUInt8();
-
-                        uint8_t health = FX::readPendingUInt8();
-                        Status status = static_cast<Status>(FX::readPendingUInt8());
+                        uint8_t data[9];
+                        FX::readBytes((uint8_t*)data, sizeof(data));
 
                         #ifndef SAVE_MEMORY_ENEMY
                             enemy.init(enemyType, 
-                                       (xTile * Constants::TileWidth) + xPixel_LeftEntry, 
-                                       xTile,
-                                       xPixel_LeftEntry,
-                                       xPixel_RightEntry,
-                                       xPixel_LeftExtent,
-                                       xPixel_RightExtent,
-                                       (yTile * Constants::TileHeight) + yPixel, 
-                                       Direction::None, Stance::Upright, health, status);
+                                       (data[0] * Constants::TileWidth) + data[2], 
+                                       data[0],
+                                       data[2],
+                                       data[3],
+                                       data[4],
+                                       data[5],
+                                       (data[1] * Constants::TileHeight) + data[6], 
+                                       Direction::None, Stance::Upright, data[7], static_cast<Status>(data[8]));
                         #endif
 
                         enemyType = static_cast<EnemyType>(FX::readPendingUInt8());

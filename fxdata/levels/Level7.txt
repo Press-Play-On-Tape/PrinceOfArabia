@@ -64,8 +64,40 @@ uint8_t level7_Data[] = {
 
 
 
-uint8_t Level7_Items[] = {
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+uint8_t Level7_Items[] = {
     26,  13,   8,   7,   9,   0,   0,   0,          // Exit Gate, left position for open, right position, close button     
      5,  18,   8,   0,   0,   0,   0,   0,          // Exit Button 
     17,  72,   3,   0,  64,  64, 255,   0,          // Gate #1
@@ -115,6 +147,4 @@ uint8_t Level7_Items[] = {
      1,  32,   2,  24,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
      1,  31,   7,  24,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
      1,  32,   7,  24,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
-
-    255                                             // End
 }

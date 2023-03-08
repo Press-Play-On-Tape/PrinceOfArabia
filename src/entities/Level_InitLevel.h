@@ -1,28 +1,7 @@
 void loadItems(uint8_t level, Prince &prince) {
 
-
-    // Deactivate all items ..            
-
-    for (Item &item : items) {
-        item.itemType = ItemType::None;
-    }
-
-    this->sign.counter = 0;
-
-    uint8_t itemIdx = 0;
     FX::seekData(FX::readIndexedUInt24(Levels::Level_Items, level));
-    uint8_t itemType = FX::readPendingUInt8();
-
-    while (itemType != Constants::NoItemFound) {
-
-        Item &item = this->items[itemIdx];
-        item.itemType = static_cast<ItemType>(itemType);
-        FX::readBytes((uint8_t*)&item.data.rawData, sizeof(item.data.rawData));
-        itemType = FX::readPendingUInt8();
-        itemIdx++;
-
-    }
-
+    FX::readBytes((uint8_t*)&this->items, Constants::Items_Count * sizeof(Item));
     FX::readEnd();
 
     prince.setSword(level > 1);

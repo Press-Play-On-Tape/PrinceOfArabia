@@ -39,17 +39,72 @@ uint8_t level3_Data[] = {
 };
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 uint8_t Level3_Items[] = {
     26,   4,   8,   3,   5,   0,   0,   0,          // Exit Gate, let position for open, right position, close button                                                        
-    24,  44,   8,   0,   0,   0,   0,   0,          // Entry Gate                         
-
+    24,  44,   8,   0,   0,   0,   0,   0,          // Entry Gate
     17,  30,   3,   0,  64,  64, 255,   0,          // Gate #1
      2,  37,   3,   1,   0,   0,   0,   0,          // Floor Button 1
-
     17,  10,   3,   0,  64,  64, 255,   0,          // Gate #2
      2,   1,   3,   2,   0,   0,   0,   0,          // Floor Button 1
      2,  11,   3,   2,   0,   0,   0,   0,          // Floor Button 1
-
     25,  36,   8,   0,   0,   0,   0,   0,          // Blade                         
     25,  83,   2,   0,   0,   0,   0,   0,          // Blade                         
     25,  84,   2,   0,   0,   0,   0,   0,          // Blade                         
@@ -65,5 +120,30 @@ uint8_t Level3_Items[] = {
      1,  18,   3, 117,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
      1,  75,   2,  24,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
      1,  34,   3, 148,  24,   0,   0,   0,          // CollapsingTile (dist to fall)                                    
-    255                                             // End
+    96,   0,   0,   0,   0,   0,   0,   0,          // Nothing!
+    96,   0,   0,   0,   0,   0,   0,   0,          // Nothing!
+    96,   0,   0,   0,   0,   0,   0,   0,          // Nothing!
+    96,   0,   0,   0,   0,   0,   0,   0,          // Nothing!
+    96,   0,   0,   0,   0,   0,   0,   0,          // Nothing!
+    96,   0,   0,   0,   0,   0,   0,   0,          // Nothing!
+    96,   0,   0,   0,   0,   0,   0,   0,          // Nothing!
+    96,   0,   0,   0,   0,   0,   0,   0,          // Nothing!
+    96,   0,   0,   0,   0,   0,   0,   0,          // Nothing!
+    96,   0,   0,   0,   0,   0,   0,   0,          // Nothing!
+    96,   0,   0,   0,   0,   0,   0,   0,          // Nothing!
+    96,   0,   0,   0,   0,   0,   0,   0,          // Nothing!
+    96,   0,   0,   0,   0,   0,   0,   0,          // Nothing!
+    96,   0,   0,   0,   0,   0,   0,   0,          // Nothing!
+    96,   0,   0,   0,   0,   0,   0,   0,          // Nothing!
+    96,   0,   0,   0,   0,   0,   0,   0,          // Nothing!
+    96,   0,   0,   0,   0,   0,   0,   0,          // Nothing!
+    96,   0,   0,   0,   0,   0,   0,   0,          // Nothing!
+    96,   0,   0,   0,   0,   0,   0,   0,          // Nothing!
+    96,   0,   0,   0,   0,   0,   0,   0,          // Nothing!
+    96,   0,   0,   0,   0,   0,   0,   0,          // Nothing!
+    96,   0,   0,   0,   0,   0,   0,   0,          // Nothing!
+    96,   0,   0,   0,   0,   0,   0,   0,          // Nothing!
+    96,   0,   0,   0,   0,   0,   0,   0,          // Nothing!
+    96,   0,   0,   0,   0,   0,   0,   0,          // Nothing!
+    96,   0,   0,   0,   0,   0,   0,   0,          // Nothing!
 }
