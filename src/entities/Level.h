@@ -1002,6 +1002,12 @@ struct Level {
 
         }
 
+        void clearSign() {
+
+            sign.counter = 0;
+            
+        }
+
         int8_t coordToTileIndexX(int16_t x) {
 
             return (x / 12);                

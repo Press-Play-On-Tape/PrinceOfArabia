@@ -34,6 +34,7 @@ void game_StartLevel() {
     gamePlay.gameState = GameState::Game;
     menu.init();
     mouse.init();
+    level.clearSign();
 
     playGrab();
 
@@ -721,7 +722,9 @@ void game() {
                         // If on level 7, remove time remaining label as it jumps around as you drop ..
 
                         if (gamePlay.level == 7 && level.getXLocation() == 10 && level.getYLocation() == 0) {
+
                             gamePlay.timeRemaining = 0;
+
                         }
 
 

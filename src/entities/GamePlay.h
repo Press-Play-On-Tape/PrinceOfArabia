@@ -30,7 +30,7 @@ struct GamePlay {
         this->timer_Min = 59;
         this->saves = 0;
 
-        this->timeRemaining = 124;
+        this->timeRemaining = 144;
         this->gameState = GameState::Game;
 
     }
@@ -39,7 +39,7 @@ struct GamePlay {
 
         this->frameCount = 0;
 
-        this->timeRemaining = 124;
+        this->timeRemaining = 144;
         this->gameState = GameState::Game;
 
     }
