@@ -1311,6 +1311,10 @@ void game() {
                 case Stance::Leave_Gate_14_End:
 
                     gamePlay.gameState = GameState::Title;
+                    
+                    #ifndef SAVE_MEMORY_SOUND
+                        sound.tonesFromFX(Sounds::Theme);
+                    #endif
 
                     if (cookie.getMode() == TitleScreenMode::MaxUniqueScenes) {
                         cookie.setMode(TitleScreenMode::CutScene_2);
