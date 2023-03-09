@@ -801,10 +801,12 @@ void processRunningTurn() {
 
 }
 
-void saveCookie(bool turnOffLED) {
+void saveCookie(bool enableLEDs) {
 
     #ifdef USE_LED
-    arduboy.setRGBled(RED_LED, 32);
+    if (enableLEDs) {
+        arduboy.setRGBled(RED_LED, 32);
+    }
     #endif
 
     #ifdef SAVE_TO_FX
@@ -818,12 +820,9 @@ void saveCookie(bool turnOffLED) {
     #endif
 
     #ifdef USE_LED
-    if (turnOffLED) {
+    if (enableLEDs) {
         arduboy.setRGBled(RED_LED, 0);
         arduboy.setRGBled(GREEN_LED, 32);
-    }
-    else {
-        arduboy.setRGBled(0, 0, 0);
     }
     #endif
 
