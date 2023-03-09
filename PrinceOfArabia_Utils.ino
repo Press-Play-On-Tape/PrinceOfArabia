@@ -72,7 +72,7 @@ bool testScroll(GamePlay &gamePlay, Prince &prince, Level &level) {
                 cookie.highMin = gamePlay.timer_Min;
                 cookie.highSec = gamePlay.timer_Sec;
                 cookie.highSaves = gamePlay.saves;
-                saveCookie();
+                saveCookie(true);
 
             }
 
@@ -801,7 +801,7 @@ void processRunningTurn() {
 
 }
 
-void saveCookie() {
+void saveCookie(bool turnOffLED) {
 
     #ifdef USE_LED
     arduboy.setRGBled(RED_LED, 32);
@@ -818,8 +818,13 @@ void saveCookie() {
     #endif
 
     #ifdef USE_LED
-    arduboy.setRGBled(RED_LED, 0);
-    arduboy.setRGBled(GREEN_LED, 32);
+    if (turnOffLED) {
+        arduboy.setRGBled(RED_LED, 0);
+        arduboy.setRGBled(GREEN_LED, 32);
+    }
+    else {
+        arduboy.setRGBled(0, 0, 0);
+    }
     #endif
 
 }
