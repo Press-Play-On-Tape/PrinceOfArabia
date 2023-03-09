@@ -16,11 +16,11 @@
 
     #define LEVEL_DATA_FROM_FX
     #define MOVEMENT_DATA_FROM_FX
-    #define SAVE_TO_FX
+    #define _SAVE_TO_FX
     #define STARTING_LEVEL 1
     #define MAX_LEVEL 13
     #define _DEBUG_CUT_SCENES
-    #define _DEBUG_LEVELS
+    #define DEBUG_LEVELS
 
     #define POP_OR_POA
     #define _POP_ONLY
@@ -35,7 +35,7 @@
     #define SAVE_MEMORY_PPOT
     #define SAVE_MEMORY_OTHER
     #define SAVE_MEMORY_SOUND
-    #define _SAVE_MEMORY_ENEMY
+    #define SAVE_MEMORY_ENEMY
     #define SAVE_MEMORY_TITLE
     #define SAVE_MEMORY_INVADER
     #define _ALT_B_BUTTON
@@ -54,14 +54,14 @@
     #define _SOS_ONLY
     #define USE_LED
 
-    #define _DEBUG
+    #define DEBUG
 
 #endif
 
 #define DEBUG_PRINT    Serial.print
 #define DEBUG_PRINTLN  Serial.println
 
-#define _DEBUG_ONSCREEN_DETAILS
+#define DEBUG_ONSCREEN_DETAILS
 #define _DEBUG_ONSCREEN_DETAILS_MIN
 
 #define _DEBUG_PRINCE_DETAILS
@@ -184,7 +184,7 @@ constexpr uint16_t Jump_Up_B_14_End                              = Stance::Jump_
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /*                                                               01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define STANDING_TURN_SEQ                                        27,    28,    29,    30,    31,
-#define STANDING_TURN_OFFSETS                                    0,0,   -1,0,  -1,0,  2,0,   0,0,
+#define STANDING_TURN_OFFSETS                                    0,0,   0,0,   2,0,  -1,0,   -1,0,
 constexpr uint16_t Standing_Turn_1_Start                         = Stance::Jump_Up_B_14_End + 1; 
 constexpr uint16_t Standing_Turn_2                               = Stance::Standing_Turn_1_Start + 1;
 constexpr uint16_t Standing_Turn_3                               = Stance::Standing_Turn_2 + 1;
@@ -882,7 +882,7 @@ constexpr uint16_t Stopping_5_End                                = Stance::Stopp
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /*                                                               01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define CLIMBING_SEQ                                             75,    76,    77,    78,    79,    80,    81,    82,    83,    84,    85,    86,    87,    88,    89,
-#define CLIMBING_OFFSETS                                         0,0,   0,0,   0,0,   -1,-1, 0,0,   0,0,   0,0,   0,0,   1,0,   0,0,   1,0,   0,0,   0,0,   0,0,   0,0, 
+#define CLIMBING_OFFSETS                                         0,0,   0,0,   0,0,   -1,-1, 0,0,   0,0,   0,0,   0,-1,  1,1,   0,0,   1,0,   0,0,   0,0,   0,0,   0,0, 
 constexpr uint16_t Climbing_1_Start                              = Stance::Stopping_5_End + 1;
 constexpr uint16_t Climbing_2                                    = Stance::Climbing_1_Start + 1;
 constexpr uint16_t Climbing_3                                    = Stance::Climbing_2 + 1;
