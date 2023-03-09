@@ -72,7 +72,7 @@ bool testScroll(GamePlay &gamePlay, Prince &prince, Level &level) {
                 cookie.highMin = gamePlay.timer_Min;
                 cookie.highSec = gamePlay.timer_Sec;
                 cookie.highSaves = gamePlay.saves;
-                saveCookie(true);
+                saveCookie(false);
 
             }
 
