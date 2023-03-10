@@ -1174,9 +1174,8 @@ void game() {
 
                             case MenuOption::Clear_PrinceDead:
 
-                                cookie.hasSavedLevel = false;
-                                saveCookie(true);
-                                menu.direction = Direction::Right;  
+                                gamePlay.gameState = GameState::Menu_Confirm;
+                                menu.cursor = 0; 
                                 break;
 
                             case MenuOption::MainMenu:
@@ -1262,6 +1261,7 @@ void game() {
 
                         case 0:
 
+                            cookie.hasSavedLevel = false;
                             saveCookie(true);
                             menu.direction = Direction::Right;  
                             break;
