@@ -386,6 +386,36 @@ TitleFrameIndexTable[] = {
 
     uint24_t Title_TimeOut_PoA_Frame, uint8_t 4
     uint24_t Title_TimeOut_PoP_Frame, uint8_t 4
+
+    uint24_t Title_IntroGame_1A_Frame, uint8_t 3
+    uint24_t Title_IntroGame_1A_Frame, uint8_t 3
+
+    uint24_t Title_CutScene_1_Frame, uint8_t 2
+    uint24_t Title_CutScene_1_Frame, uint8_t 2
+
+    uint24_t Title_IntroGame_1B_Frame, uint8_t 3
+    uint24_t Title_IntroGame_1B_Frame, uint8_t 3
+
+    uint24_t Title_CutScene_2_Frame, uint8_t 3
+    uint24_t Title_CutScene_2_Frame, uint8_t 3
+
+    uint24_t Title_CutScene_3_Frame, uint8_t 3
+    uint24_t Title_CutScene_3_Frame, uint8_t 3
+
+    uint24_t Title_CutScene_4_Frame, uint8_t 5
+    uint24_t Title_CutScene_4_Frame, uint8_t 5
+
+    uint24_t Title_CutScene_5_Frame, uint8_t 2
+    uint24_t Title_CutScene_5_Frame, uint8_t 2
+
+    uint24_t Title_CutScene_6_Frame, uint8_t 1
+    uint24_t Title_CutScene_6_Frame, uint8_t 1
+
+    uint24_t Title_CutScene_7_Frame, uint8_t 0
+    uint24_t Title_CutScene_7_Frame, uint8_t 0
+
+    uint24_t Title_CutScene_End_Frame, uint8_t 3
+    uint24_t Title_CutScene_End_Frame, uint8_t 3
 }
 
 savesection  // Anything below here will be stored in the save block

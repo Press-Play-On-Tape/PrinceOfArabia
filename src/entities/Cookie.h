@@ -8,6 +8,8 @@
 #include "Enemy.h"
 #include "TitleScreenVars.h"
 
+extern void setTitleFrame(TitleFrameIndex index);
+
 struct Cookie {
 
     bool hasSavedLevel;
@@ -42,37 +44,44 @@ struct Cookie {
 
             case TitleScreenMode::CutScene_2:
 
-                 FX::setFrame(Title_CutScene_2_Frame, 4 - 1);
+                 //FX::setFrame(Title_CutScene_2_Frame, 4 - 1);
+                 setTitleFrame(TitleFrameIndex::CutScene_2_Frame);
                  break;
 
             case TitleScreenMode::CutScene_3:
 
-                 FX::setFrame(Title_CutScene_3_Frame, 4 - 1);
+                 //FX::setFrame(Title_CutScene_3_Frame, 4 - 1);
+                 setTitleFrame(TitleFrameIndex::CutScene_3_Frame);
                  break;
 
             case TitleScreenMode::CutScene_4:
 
-                FX::setFrame(Title_CutScene_4_Frame, 6 - 1);
+                //FX::setFrame(Title_CutScene_4_Frame, 6 - 1);
+                setTitleFrame(TitleFrameIndex::CutScene_4_Frame);
                 break;
 
             case TitleScreenMode::CutScene_5:
 
-                FX::setFrame(Title_CutScene_5_Frame, 3 - 1);
+                //FX::setFrame(Title_CutScene_5_Frame, 3 - 1);
+                setTitleFrame(TitleFrameIndex::CutScene_5_Frame);
                 break;
 
             case TitleScreenMode::CutScene_6:
 
-                FX::setFrame(Title_CutScene_6_Frame, 2 - 1);
+                //FX::setFrame(Title_CutScene_6_Frame, 2 - 1);
+                setTitleFrame(TitleFrameIndex::CutScene_6_Frame);
                 break;
 
             case TitleScreenMode::CutScene_7_Transition:
 
-                FX::setFrame(Title_CutScene_7_Frame, 1 - 1);
+                //FX::setFrame(Title_CutScene_7_Frame, 1 - 1);
+                setTitleFrame(TitleFrameIndex::CutScene_7_Frame);
                 break;
 
             case TitleScreenMode::CutScene_End:
 
-                FX::setFrame(Title_CutScene_End_Frame, 4 - 1);
+                //FX::setFrame(Title_CutScene_End_Frame, 4 - 1);
+                setTitleFrame(TitleFrameIndex::CutScene_End_Frame);
                 break;
 
             default:

@@ -275,4 +275,14 @@ enum class TitleFrameIndex : uint8_t {
     IntroGame_End_PoP_Frame,
     Intro_PoP_Frame_NoHigh,
     TimeOut_PoP_Frame,
+    IntroGame_1A_Frame,
+    CutScene_1_Frame,
+    IntroGame_1B_Frame,
+    CutScene_2_Frame,
+    CutScene_3_Frame,
+    CutScene_4_Frame,
+    CutScene_5_Frame,
+    CutScene_6_Frame,
+    CutScene_7_Frame,
+    CutScene_End_Frame
 };
