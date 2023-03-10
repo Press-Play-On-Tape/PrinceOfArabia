@@ -357,17 +357,17 @@ TitleFrameIndexTable[] = {
     uint24_t Title_Main_PoA_Frame_NoHigh, uint8_t 1
     uint24_t Title_Main_PoP_Frame_NoHigh, uint8_t 1
 
-    uint24_t Title_Intro_Last_PoA_Frame_WithHigh, uint8_t 1
-    uint24_t Title_Intro_Last_PoP_Frame_WithHigh, uint8_t 1
+    uint24_t Title_Intro_Last_PoA_Frame_WithHigh, uint8_t 0
+    uint24_t Title_Intro_Last_PoP_Frame_WithHigh, uint8_t 0
 
-    uint24_t Title_Intro_Last_PoA_Frame_NoHigh, uint8_t 1
-    uint24_t Title_Intro_Last_PoP_Frame_NoHigh, uint8_t 1
+    uint24_t Title_Intro_Last_PoA_Frame_NoHigh, uint8_t 0
+    uint24_t Title_Intro_Last_PoP_Frame_NoHigh, uint8_t 0
 
-    uint24_t Title_Main_Game_PoA_Frame_WithHigh, uint8_t 1
-    uint24_t Title_Main_Game_PoP_Frame_WithHigh, uint8_t 1
+    uint24_t Title_Main_Game_PoA_Frame_WithHigh, uint8_t 0
+    uint24_t Title_Main_Game_PoP_Frame_WithHigh, uint8_t 0
 
-    uint24_t Title_Main_Game_PoA_Frame_NoHigh, uint8_t 1
-    uint24_t Title_Main_Game_PoP_Frame_NoHigh, uint8_t 1
+    uint24_t Title_Main_Game_PoA_Frame_NoHigh, uint8_t 0
+    uint24_t Title_Main_Game_PoP_Frame_NoHigh, uint8_t 0
 
     uint24_t Title_Main_Credits_PoA_Frame_WithHigh, uint8_t 1
     uint24_t Title_Main_Credits_PoP_Frame_WithHigh, uint8_t 1
