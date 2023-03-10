@@ -47,10 +47,10 @@
     #define STARTING_LEVEL 1
     #define MAX_LEVEL 31
     #define _DEBUG_CUT_SCENES
-    #define _DEBUG_LEVELS
+    #define DEBUG_LEVELS
 
-    #define _POP_OR_POA
-    #define POP_ONLY
+    #define POP_OR_POA
+    #define _POP_ONLY
     #define _SOS_ONLY
     #define USE_LED
 

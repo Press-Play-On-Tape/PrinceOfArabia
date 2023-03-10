@@ -21,6 +21,11 @@ Arduboy2Ext arduboy;
 #ifndef SAVE_MEMORY_SOUND
     uint16_t buffer[16]; 
     ArduboyTonesFX sound(arduboy.audio.enabled, buffer);
+    
+    void setSound(SoundIndex index) {
+        sound.tonesFromFX(FX::readIndexedUInt24(Sounds::Table,(uint8_t)index));
+    }
+    
 #endif
 
 #if (defined(DEBUG) && defined(DEBUG_ONSCREEN_DETAILS)) or (defined(DEBUG) && defined(DEBUG_ONSCREEN_DETAILS_MIN))
@@ -126,7 +131,8 @@ void loop() {
             case GameState::Title_Init:
 
                 #ifndef SAVE_MEMORY_SOUND
-                    sound.tonesFromFX(Sounds::Theme);
+                    //sound.tonesFromFX(Sounds::Theme);
+                    setSound(SoundIndex::Theme);
                 #endif
 
                 #ifndef SAVE_MEMORY_OTHER

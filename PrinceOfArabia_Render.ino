@@ -78,7 +78,8 @@ void render(bool sameLevelAsPrince) {
 
                         #ifndef SAVE_MEMORY_SOUND
                             if (xLoc > 0 && xLoc < 128 && yLoc>= 0 && yLoc < 64 && item.data.blade.position == 4) {
-                                sound.tonesFromFX(Sounds::ChopChop);
+                                //sound.tonesFromFX(Sounds::ChopChop);
+                                setSound(SoundIndex::ChopChop);
                             }
                         #endif 
 

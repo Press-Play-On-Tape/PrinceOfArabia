@@ -160,7 +160,8 @@ void title() {
                         case TitleScreenOptions::Play:
 
                             #ifndef SAVE_MEMORY_SOUND
-                                sound.tonesFromFX(Sounds::Seque);
+                                //sound.tonesFromFX(Sounds::Seque);
+                                setSound(SoundIndex::Seque);
                             #endif
 
                             prince.setHealth(3);
@@ -205,7 +206,8 @@ void title() {
                 #endif
 
                 #ifndef SAVE_MEMORY_SOUND
-                    sound.tonesFromFX(Sounds::Theme);
+                    //sound.tonesFromFX(Sounds::Theme);
+                    setSound(SoundIndex::Theme);
                 #endif
 
                 }
@@ -250,7 +252,8 @@ void title() {
             case TitleScreenMode::IntroGame_1A:
 
                 #ifndef SAVE_MEMORY_SOUND
-                    sound.tonesFromFX(Sounds::Seque);
+                    //sound.tonesFromFX(Sounds::Seque);
+                    setSound(SoundIndex::Seque);
                 #endif
 
                 cookie.setMode(TitleScreenMode::IntroGame_1B);
@@ -510,7 +513,8 @@ void title() {
                     setTitleFrame(TitleFrameIndex::IntroGame_End_PoP_Frame);
 
                     #ifndef SAVE_MEMORY_SOUND
-                        sound.tonesFromFX(Sounds::Ending);
+                        //sound.tonesFromFX(Sounds::Ending);
+                        setSound(SoundIndex::Ending);
                     #endif
 
                 }

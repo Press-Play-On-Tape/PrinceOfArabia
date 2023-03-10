@@ -286,3 +286,31 @@ enum class TitleFrameIndex : uint8_t {
     CutScene_7_Frame,
     CutScene_End_Frame
 };
+
+enum class SoundIndex : uint8_t {
+    Dead,
+    Grab1,
+    Grab2,
+    Grab3,
+    Grab4,
+    Seque,
+    Tada,
+    Theme,
+    Triumph,
+    Victory,
+    Ending,
+    OutOfTime,
+    GateGoingDown,
+    GateGoingUp,
+    ChopChop,
+    Thump,
+    Strike,
+    Invader_Wave_Start,
+    Invader_Wave_Success,
+    Invader_End_of_Game,
+    Invader_Player_Fires_Bullet,
+    Invader_Enemy_Fires_Bullet,
+    Invader_Player_Explosion,
+    Invader_Enemy_Explosion,
+    Invader_Hit_Barrier,
+};
