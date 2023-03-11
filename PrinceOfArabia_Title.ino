@@ -305,6 +305,7 @@ void title() {
 
                     cookie.setMode(TitleScreenMode::Main);
                     setTitleFrame(TitleFrameIndex::Main_PoP_Frame_NC, frameIndex);
+                    setSound(SoundIndex::Theme);
 
                 }
 
