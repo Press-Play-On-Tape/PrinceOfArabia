@@ -235,6 +235,34 @@ Title_Main_Game_PoA_Frame_NCH[] = {
 
 }
 
+Title_Main_Game_PoP_Frame_NRC[] = {
+
+    int16_t  0,-24, uint24_t Title_Main_NRC,   uint8_t 0, dbmNormal
+    int16_t  0,  0, uint24_t Title_PoP,    uint8_t 0, dbmMasked_last
+
+}
+
+Title_Main_Game_PoA_Frame_NRC[] = {
+
+    int16_t  0,-24, uint24_t Title_Main_NRC,   uint8_t 0, dbmNormal
+    int16_t  0,  0, uint24_t Title_PoA,    uint8_t 0, dbmMasked_last
+
+}
+
+Title_Main_Game_PoP_Frame_NRCH[] = {
+
+    int16_t  0,-24, uint24_t Title_Main_NRCH,   uint8_t 0, dbmNormal
+    int16_t  0,  0, uint24_t Title_PoP,    uint8_t 0, dbmMasked_last
+
+}
+
+Title_Main_Game_PoA_Frame_NRCH[] = {
+
+    int16_t  0,-24, uint24_t Title_Main_NRCH,   uint8_t 0, dbmNormal
+    int16_t  0,  0, uint24_t Title_PoA,    uint8_t 0, dbmMasked_last
+
+}
+
 Title_High_PoP_Frame[] = {
     int16_t  38, 29, uint24_t HighScore,       uint8_t 0, dbmNormal
     int16_t  62, 40, uint24_t Numbers_Divider, uint8_t 0, dbmNormal
@@ -309,15 +337,17 @@ TitleFrameIndexTable[] = {
     uint24_t Title_High_PoA_Frame, uint8_t 4
     uint24_t Title_High_PoP_Frame, uint8_t 4
 
-    uint24_t Title_Main_PoA_Frame_NCH, uint8_t 1
-    uint24_t Title_Main_PoP_Frame_NCH, uint8_t 1
-
     uint24_t Title_Main_PoA_Frame_NC, uint8_t 1
     uint24_t Title_Main_PoP_Frame_NC, uint8_t 1
 
+    uint24_t Title_Main_PoA_Frame_NCH, uint8_t 1
+    uint24_t Title_Main_PoP_Frame_NCH, uint8_t 1
 
+    uint24_t Title_Main_PoA_Frame_NRC, uint8_t 1
+    uint24_t Title_Main_PoP_Frame_NRC, uint8_t 1
 
-
+    uint24_t Title_Main_PoA_Frame_NRCH, uint8_t 1
+    uint24_t Title_Main_PoP_Frame_NRCH, uint8_t 1
 
     uint24_t Title_Intro_Last_PoA_Frame_NC, uint8_t 0
     uint24_t Title_Intro_Last_PoP_Frame_NC, uint8_t 0
@@ -325,8 +355,11 @@ TitleFrameIndexTable[] = {
     uint24_t Title_Intro_Last_PoA_Frame_NCH, uint8_t 0
     uint24_t Title_Intro_Last_PoP_Frame_NCH, uint8_t 0
 
+    uint24_t Title_Intro_Last_PoA_Frame_NRC, uint8_t 0
+    uint24_t Title_Intro_Last_PoP_Frame_NRC, uint8_t 0
 
-
+    uint24_t Title_Intro_Last_PoA_Frame_NRCH, uint8_t 0
+    uint24_t Title_Intro_Last_PoP_Frame_NRCH, uint8_t 0
 
     uint24_t Title_Main_Game_PoA_Frame_NC, uint8_t 0
     uint24_t Title_Main_Game_PoP_Frame_NC, uint8_t 0
@@ -334,15 +367,26 @@ TitleFrameIndexTable[] = {
     uint24_t Title_Main_Game_PoA_Frame_NCH, uint8_t 0
     uint24_t Title_Main_Game_PoP_Frame_NCH, uint8_t 0
 
+    uint24_t Title_Main_Game_PoA_Frame_NRC, uint8_t 0
+    uint24_t Title_Main_Game_PoP_Frame_NRC, uint8_t 0
 
-
-
+    uint24_t Title_Main_Game_PoA_Frame_NRCH, uint8_t 0
+    uint24_t Title_Main_Game_PoP_Frame_NRCH, uint8_t 0
 
     uint24_t Title_IntroGame_End_PoA_Frame, uint8_t 4
     uint24_t Title_IntroGame_End_PoP_Frame, uint8_t 4
 
     uint24_t Title_Intro_PoA_Frame_NC, uint8_t 0
     uint24_t Title_Intro_PoP_Frame_NC, uint8_t 0
+
+    uint24_t Title_Intro_PoA_Frame_NCH, uint8_t 0
+    uint24_t Title_Intro_PoP_Frame_NCH, uint8_t 0
+
+    uint24_t Title_Intro_PoA_Frame_NRC, uint8_t 0
+    uint24_t Title_Intro_PoP_Frame_NRC, uint8_t 0
+
+    uint24_t Title_Intro_PoA_Frame_NRCH, uint8_t 0
+    uint24_t Title_Intro_PoP_Frame_NRCH, uint8_t 0
 
     uint24_t Title_TimeOut_PoA_Frame, uint8_t 4
     uint24_t Title_TimeOut_PoP_Frame, uint8_t 4
@@ -376,7 +420,20 @@ TitleFrameIndexTable[] = {
 
     uint24_t Title_CutScene_End_Frame, uint8_t 3
     uint24_t Title_CutScene_End_Frame, uint8_t 3
+
+    // uint24_t Title_Main_Last_PoA_Frame_NC, uint8_t 0
+    // uint24_t Title_Main_Last_PoP_Frame_NC, uint8_t 0
+
+    // uint24_t Title_Main_Last_PoA_Frame_NCH, uint8_t 0
+    // uint24_t Title_Main_Last_PoP_Frame_NCH, uint8_t 0
+
+    // uint24_t Title_Main_Last_PoA_Frame_NRC, uint8_t 0
+    // uint24_t Title_Main_Last_PoP_Frame_NRC, uint8_t 0
+
+    // uint24_t Title_Main_Last_PoA_Frame_NRCH, uint8_t 0
+    // uint24_t Title_Main_Last_PoP_Frame_NRCH, uint8_t 0
 }
+
 
 savesection  // Anything below here will be stored in the save block
 
