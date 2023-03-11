@@ -1773,6 +1773,7 @@ void game() {
                 case Stance::Run_Repeat_1_Start ... Stance::Run_Repeat_8_End:
                 case Stance::Standing_Jumps_Start ... Stance::Standing_Jumps_End:
                 case Stance::Running_Jumps_Start ... Stance::Running_Jumps_End:
+                case Stance::Crouch_HOP_1_Start ... Stance::Crouch_HOP_7_End:
 
                     {
                         if (gamePlay.level == 4 && prince.getDirection() == Direction::Left) {
