@@ -805,7 +805,12 @@ void saveCookie(bool enableLEDs) {
 
     #ifdef USE_LED
     if (enableLEDs) {
+        #ifndef MICROCADE
         arduboy.setRGBled(RED_LED, 32);
+        #else
+        arduboy.setRGBledGreenOff();
+        arduboy.setRGBledBlueOff();
+        #endif
     }
     #endif
 
@@ -821,8 +826,13 @@ void saveCookie(bool enableLEDs) {
 
     #ifdef USE_LED
     if (enableLEDs) {
+        #ifndef MICROCADE
         arduboy.setRGBled(RED_LED, 0);
         arduboy.setRGBled(GREEN_LED, 32);
+        #else
+        arduboy.setRGBledRedOff();
+        arduboy.setRGBledGreenOn();
+        #endif
     }
     #endif
 
