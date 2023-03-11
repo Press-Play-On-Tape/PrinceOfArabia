@@ -19,12 +19,10 @@ ARDUBOY_NO_USB
 Arduboy2Ext arduboy;
 
 #ifndef SAVE_MEMORY_SOUND
-    uint16_t buffer[16]; 
-    ArduboyTonesFX sound(arduboy.audio.enabled, buffer);
     
-    void setSound(SoundIndex index) {
-        sound.tonesFromFX(FX::readIndexedUInt24(Sounds::Table,(uint8_t)index));
-    }
+    uint16_t buffer[16]; 
+
+    ArduboyTonesFX sound(arduboy.audio.enabled, buffer);
     
 #endif
 
