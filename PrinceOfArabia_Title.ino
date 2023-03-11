@@ -160,14 +160,16 @@ void title() {
                         case TitleScreenOptions::Play:
 
                             #ifndef SAVE_MEMORY_SOUND
-                                sound.tonesFromFX(Sounds::Seque);
+                                //sound.tonesFromFX(Sounds::Seque);
+                                setSound(SoundIndex::Seque);
                             #endif
 
                             prince.setHealth(3);
                             prince.setHealthMax(3);
 
                             cookie.setMode(TitleScreenMode::IntroGame_1A);
-                            FX::setFrame(Title_IntroGame_1A_Frame, 4 - 1);
+                            //FX::setFrame(Title_IntroGame_1A_Frame, 4 - 1);
+                            setTitleFrame(TitleFrameIndex::IntroGame_1A_Frame);
 
                             break;
 
@@ -204,7 +206,8 @@ void title() {
                 #endif
 
                 #ifndef SAVE_MEMORY_SOUND
-                    sound.tonesFromFX(Sounds::Theme);
+                    //sound.tonesFromFX(Sounds::Theme);
+                    setSound(SoundIndex::Theme);
                 #endif
 
                 }
@@ -249,7 +252,8 @@ void title() {
             case TitleScreenMode::IntroGame_1A:
 
                 #ifndef SAVE_MEMORY_SOUND
-                    sound.tonesFromFX(Sounds::Seque);
+                    //sound.tonesFromFX(Sounds::Seque);
+                    setSound(SoundIndex::Seque);
                 #endif
 
                 cookie.setMode(TitleScreenMode::IntroGame_1B);
@@ -458,7 +462,8 @@ void title() {
                 if (!FX::drawFrame()) {
 
                     cookie.setMode(TitleScreenMode::CutScene_1);
-                    FX::setFrame(Title_CutScene_1_Frame, 3 - 1);
+                    //FX::setFrame(Title_CutScene_1_Frame, 3 - 1);
+                    setTitleFrame(TitleFrameIndex::CutScene_1_Frame);
 
                 }
 
@@ -469,7 +474,8 @@ void title() {
                 if (!FX::drawFrame()) {
 
                     cookie.setMode(TitleScreenMode::IntroGame_1B);
-                    FX::setFrame(Title_IntroGame_1B_Frame, 4 - 1);
+                    //FX::setFrame(Title_IntroGame_1B_Frame, 4 - 1);
+                    setTitleFrame(TitleFrameIndex::IntroGame_1B_Frame);
 
                 }
 
@@ -507,7 +513,8 @@ void title() {
                     setTitleFrame(TitleFrameIndex::IntroGame_End_PoP_Frame);
 
                     #ifndef SAVE_MEMORY_SOUND
-                        sound.tonesFromFX(Sounds::Ending);
+                        //sound.tonesFromFX(Sounds::Ending);
+                        setSound(SoundIndex::Ending);
                     #endif
 
                 }

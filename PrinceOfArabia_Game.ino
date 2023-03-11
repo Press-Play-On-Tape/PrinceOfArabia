@@ -159,7 +159,8 @@ void game() {
                 }
 
                 #ifndef SAVE_MEMORY_SOUND
-                sound.tonesFromFX(Sounds::Thump);
+                //sound.tonesFromFX(Sounds::Thump);
+                setSound(SoundIndex::Thump);
                 #endif 
                                 
                 break;
@@ -186,7 +187,8 @@ void game() {
         #endif
 
         #ifndef SAVE_MEMORY_SOUND
-        sound.tonesFromFX(Sounds::OutOfTime);
+        //sound.tonesFromFX(Sounds::OutOfTime);
+        setSound(SoundIndex::OutOfTime);
         #endif
 
     }
@@ -965,7 +967,8 @@ void game() {
                             if (itemIdx != Constants::NoItemFound) {
 
                                 #ifndef SAVE_MEMORY_SOUND
-                                    sound.tonesFromFX(Sounds::Tada);
+                                    //sound.tonesFromFX(Sounds::Tada);
+                                    setSound(SoundIndex::Tada);
                                 #endif
 
                                 Item &item = level.getItem(itemIdx);
@@ -1316,7 +1319,8 @@ void game() {
                     gamePlay.gameState = GameState::Title;
                     
                     #ifndef SAVE_MEMORY_SOUND
-                        sound.tonesFromFX(Sounds::Theme);
+                        //sound.tonesFromFX(Sounds::Theme);
+                        setSound(SoundIndex::Theme);
                     #endif
 
                     if (cookie.getMode() == TitleScreenMode::MaxUniqueScenes) {
@@ -1403,7 +1407,8 @@ void game() {
                                                 if (!prince.getPotionFloat()) {
 
                                                     #ifndef SAVE_MEMORY_SOUND
-                                                        sound.tonesFromFX(Sounds::Thump);
+                                                        //sound.tonesFromFX(Sounds::Thump);
+                                                        setSound(SoundIndex::Thump);
                                                     #endif 
 
                                                     initFlash(prince, level, FlashType::None);
@@ -1547,7 +1552,8 @@ void game() {
                                         if (!prince.getPotionFloat()) {
 
                                             #ifndef SAVE_MEMORY_SOUND
-                                                sound.tonesFromFX(Sounds::Thump);
+                                                //sound.tonesFromFX(Sounds::Thump);
+                                                setSound(SoundIndex::Thump);
                                             #endif 
 
                                             initFlash(prince, level, FlashType::None);  
@@ -1683,7 +1689,8 @@ void game() {
                                     initFlash(prince, level, FlashType::SwordFight);
 
                                     #ifndef SAVE_MEMORY_SOUND
-                                        sound.tonesFromFX(Sounds::Strike);
+                                        //sound.tonesFromFX(Sounds::Strike);
+                                        setSound(SoundIndex::Strike);
                                     #endif 
 
 
@@ -1716,7 +1723,8 @@ void game() {
                                     initFlash(enemy, level, FlashType::SwordFight);
 
                                     #ifndef SAVE_MEMORY_SOUND
-                                        sound.tonesFromFX(Sounds::Strike);
+                                        //sound.tonesFromFX(Sounds::Strike);
+                                        setSound(SoundIndex::Strike);
                                     #endif 
 
                                     if (enemy.decHealth(1) == 0) {
@@ -1854,7 +1862,8 @@ void game() {
                                 initFlash(enemy, level, FlashType::MirrorLevel12);
 
                                 #ifndef SAVE_MEMORY_SOUND
-                                    sound.tonesFromFX(Sounds::Tada);
+                                    //sound.tonesFromFX(Sounds::Tada);
+                                    setSound(SoundIndex::Tada);
                                 #endif
 
                             }
@@ -2148,7 +2157,8 @@ void game() {
                                         initFlash(prince, level, FlashType::SwordFight);
 
                                         #ifndef SAVE_MEMORY_SOUND
-                                            sound.tonesFromFX(Sounds::Strike);
+                                            //sound.tonesFromFX(Sounds::Strike);
+                                            setSound(SoundIndex::Strike);
                                         #endif 
 
 
@@ -2519,7 +2529,8 @@ void game() {
                 cookie.setMode(TitleScreenMode::TimeOut);
 
                 #ifndef SAVE_MEMORY_SOUND
-                sound.tonesFromFX(Sounds::OutOfTime);
+                //sound.tonesFromFX(Sounds::OutOfTime);
+                setSound(SoundIndex::OutOfTime);
                 #endif
 
                 setTitleFrame(TitleFrameIndex::TimeOut_PoP_Frame);
