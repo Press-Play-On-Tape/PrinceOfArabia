@@ -218,6 +218,7 @@ void title() {
                             gamePlay.gameState = GameState::Game;
                             fadeEffect.reset();
                             titleScreenVars.counter = 16;
+                            menu.init();
                             return;
 
                     #endif
