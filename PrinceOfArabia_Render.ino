@@ -168,11 +168,11 @@ void render(bool sameLevelAsPrince) {
                 case ItemType::FloorButton3_UpOnly:
                 case ItemType::ExitDoor_Button:
                 case ItemType::Mirror_Button:
-                    FX::drawBitmap(xLoc, yLoc + item.data.floorButton.frame - 1, Images::FloorButtons_0and1, item.data.floorButton.frame, dbmMasked);
+                    FX::drawBitmap(xLoc, yLoc, Images::FloorButtons_0and1, item.data.floorButton.frame, dbmMasked);
                     break;
 
                 case ItemType::ExitDoor_Button_Cropped:
-                    FX::drawBitmap(xLoc, yLoc + item.data.floorButton.frame - 1, Images::FloorButtons_2, item.data.floorButton.frame, dbmMasked);
+                    FX::drawBitmap(xLoc, yLoc, Images::FloorButtons_2, item.data.floorButton.frame, dbmMasked);
                     break;
 
                 case ItemType::FloorButton2:
