@@ -8,7 +8,7 @@
 #include "Enemy.h"
 #include "TitleScreenVars.h"
 
-extern void setTitleFrame(TitleFrameIndex index);
+extern void setTitleFrame(TitleFrameIndex index, uint8_t frame = 0);
 
 struct Cookie {
 

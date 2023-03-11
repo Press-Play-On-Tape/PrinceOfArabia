@@ -9,8 +9,10 @@ namespace Images {
 
     image_t Title_PoP               = "../images/title/Title_PoP.png"
     image_t Title_PoA               = "../images/title/Title_PoA.png"
-    image_t Title_Main_NoHigh       = "../images/title/Title_Main_NoHigh.png"
-    image_t Title_Main_WithHigh     = "../images/title/Title_Main_WithHigh.png"
+    image_t Title_Main_NC           = "../images/title/Title_Main_NC.png"
+    image_t Title_Main_NRC          = "../images/title/Title_Main_NRC.png"
+    image_t Title_Main_NCH          = "../images/title/Title_Main_NCH.png"
+    image_t Title_Main_NRCH         = "../images/title/Title_Main_NRCH.png"
     image_t Title_Cursor            = "../images/title/Title_Cursor.png"
     image_t Title_Credits           = "../images/title/Title_Credits.png"
     image_t Title_Select            = "../images/title/Title_Select.png"
