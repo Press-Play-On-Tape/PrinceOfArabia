@@ -10,9 +10,18 @@ This game is only compatible with an *FX* enabled Arduboy.
 
 ## Controls
 
+<kbd>🅐</kbd>
+<kbd>🅑</kbd>
+<kbd>▲</kbd>
+<kbd>▼</kbd>
+<kbd>◄</kbd>
+<kbd>►</kbd>
+
 ### Running
 
 ### Jumping
+Press <kbd>🅐</kbd> to jump over obstacles.   
+For longer jumps, run and jump <kbd>🅐</kbd>+<kbd>◄</kbd>/<kbd>►</kbd>.
 
 ### Climbing
 
@@ -20,13 +29,18 @@ This game is only compatible with an *FX* enabled Arduboy.
 Drop and pull-up.
 
 ### Squatting
+Ducking down.
+Shuffling along.
 
+### In game menu
+Press <kbd>🅑</kbd> to select the in game menu. This allows you to... 
 
 ## Objects
 
 ### Sword
-Crouch down and pickup with 'A' to collect the sword.
-When an enemy appears, press 'B' to unsheathe the sword and start fighting.
+Crouch down and pickup with <kbd>🅐</kbd> to collect the sword.
+When an enemy appears, press <kbd>🅑</kbd> to unsheathe the sword and start fighting. It is not possible to bring-up the menu (or save the game!) during a fight.
+During a fight, press <kbd>🅐</kbd> to sheath sword. It is not possible to jump while the sword is drawn. 
 
 
 ### Potions
@@ -38,6 +52,8 @@ Crouch down and pickup with 'A' to drink. Some give life, but some may take life
 Open/ closing. To activate stand on a tile, or some weight must be applied. Switches may reset after a certain amount of time.
 
 ### Falling tiles
+Step on (from above).
+Can be triggered from below.
 
 ### Deadly spikes
 Jump over these traps or move very carefully to avoid a spiky end!
