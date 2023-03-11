@@ -1,14 +1,17 @@
 #include <Arduboy2.h>
 #include "PrinceOfArabia_CutScene.h"
 
-void setTitleFrame(TitleFrameIndex index) {
+
+void setTitleFrame(TitleFrameIndex index, uint8_t offset = 0) {
+
+    index = static_cast<TitleFrameIndex>(static_cast<uint8_t>(index) + offset);
 
     #if defined (POP_OR_POA)
-        uint8_t idx = 2 * (uint8_t)(index) + (cookie.pop & 1);
+        uint8_t idx = 2 * static_cast<uint8_t>(index) + (cookie.pop & 1);
     #elif defined (POP_ONLY)
-        uint8_t idx = 2 * (uint8_t)(index) + 1;
+        uint8_t idx = 2 * static_cast<uint8_t>(index) + 1;
     #elif defined (POA_ONLY)
-        uint8_t idx = 2 * (uint8_t)(index);
+        uint8_t idx = 2 * static_cast<uint8_t>(index);
     #endif
 
     FX::seekDataArray(TitleFrameIndexTable, idx, 0, sizeof(uint24_t) + sizeof(uint8_t));
@@ -32,6 +35,11 @@ void title_Init() {
 void title() { 
 
     auto justPressed = arduboy.justPressedButtons();
+
+    uint8_t frameIndex = 0;
+
+    if (cookie.hasSavedScore)   frameIndex = frameIndex + 1;
+    if (cookie.hasSavedLevel)   frameIndex = frameIndex + 2;
 
     #ifdef POP_OR_POA
     auto pressed = arduboy.pressedButtons();
@@ -258,17 +266,7 @@ void title() {
                 #endif
 
                     cookie.setMode(TitleScreenMode::Main);
-
-                    if (cookie.hasSavedScore) {
-
-                        setTitleFrame(TitleFrameIndex::Main_PoP_Frame_WithHigh);
-
-                    }
-                    else {
-
-                        setTitleFrame(TitleFrameIndex::Main_PoP_Frame_NoHigh);
-
-                    }
+                    setTitleFrame(TitleFrameIndex::Main_PoP_Frame_NC, frameIndex);
 
                 }
 
@@ -343,31 +341,12 @@ void title() {
 
             if (!FX::drawFrame()) {
 
-                if (cookie.hasSavedScore) {
-
-                    setTitleFrame(TitleFrameIndex::Intro_Last_PoP_Frame_WithHigh);
-
-                }
-                else {
-
-                    setTitleFrame(TitleFrameIndex::Intro_Last_PoP_Frame_NoHigh);
-
-                }
+                setTitleFrame(TitleFrameIndex::Intro_Last_PoP_Frame_NC, frameIndex);
 
                 if (justPressed) {
                     
                     cookie.setMode(TitleScreenMode::Main);
-
-                    if (cookie.hasSavedScore) {
-
-                        setTitleFrame(TitleFrameIndex::Main_PoP_Frame_WithHigh);
-
-                    }
-                    else {
-
-                        setTitleFrame(TitleFrameIndex::Main_PoP_Frame_NoHigh);
-
-                    }
+                    setTitleFrame(TitleFrameIndex::Main_PoP_Frame_NC, frameIndex);
 
                 }
 
@@ -378,18 +357,20 @@ void title() {
 
             if (!FX::drawFrame()) {
 
+                setTitleFrame(TitleFrameIndex::Main_Game_PoP_Frame_NC, frameIndex);
+
                 switch (titleScreenVars.option) {
 
                     case TitleScreenOptions::Play:
 
                         if (cookie.hasSavedScore) {
 
-                            setTitleFrame(TitleFrameIndex::Main_Game_PoP_Frame_WithHigh);
+                            FX::drawBitmap(17, 57, Images::Title_Cursor, 0, dbmNormal);
 
                         }
                         else {
 
-                            setTitleFrame(TitleFrameIndex::Main_Game_PoP_Frame_NoHigh);
+                            FX::drawBitmap(32, 57, Images::Title_Cursor, 0, dbmNormal);
 
                         }
 
@@ -399,12 +380,12 @@ void title() {
 
                         if (cookie.hasSavedScore) {
 
-                            setTitleFrame(TitleFrameIndex::Main_Credits_PoP_Frame_WithHigh);
+                            FX::drawBitmap(47, 57, Images::Title_Cursor, 0, dbmNormal);
 
                         }
                         else {
 
-                            setTitleFrame(TitleFrameIndex::Main_Credits_PoP_Frame_NoHigh);
+                            FX::drawBitmap(61, 57, Images::Title_Cursor, 0, dbmNormal);
 
                         }
 
@@ -412,23 +393,23 @@ void title() {
 
                     case TitleScreenOptions::High:
 
-                        setTitleFrame(TitleFrameIndex::Main_High_PoP_Frame_WithHigh);
+                        FX::drawBitmap(85, 57, Images::Title_Cursor, 0, dbmNormal);
                         
                         break;
 
                     case TitleScreenOptions::Select_NewGame:
                     case TitleScreenOptions::Select_ResumeGame:
 
-                        if (cookie.hasSavedScore) {
+                        // if (cookie.hasSavedScore) {
 
-                            setTitleFrame(TitleFrameIndex::Main_Game_PoP_Frame_WithHigh);
+                        //     setTitleFrame(TitleFrameIndex::Main_Game_PoP_Frame_WithHigh);
 
-                        }
-                        else {
+                        // }
+                        // else {
 
-                            setTitleFrame(TitleFrameIndex::Main_Game_PoP_Frame_NoHigh);
+                        //     setTitleFrame(TitleFrameIndex::Main_Game_PoP_Frame_NoHigh);
 
-                        }
+                        // }
 
                         FX::drawBitmap(32, 20, Images::Title_Select, 0, dbmMasked);
                         FX::drawBitmap(38, 24 + ((static_cast<uint8_t>(titleScreenVars.option) - static_cast<uint8_t>(TitleScreenOptions::Select_NewGame)) * 8), Images::Title_Cursor, 0, dbmMasked);

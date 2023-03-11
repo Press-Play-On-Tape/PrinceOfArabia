@@ -5,7 +5,7 @@
 #include "../../fxdata/fxdata.h"
 #include "Level.h"
 
-extern void setTitleFrame(TitleFrameIndex index);
+extern void setTitleFrame(TitleFrameIndex index, uint8_t frame = 0);
 
 struct TitleScreenVars {
     
@@ -20,7 +20,7 @@ struct TitleScreenVars {
     void reset() {
 
         this->option = TitleScreenOptions::Play;
-        setTitleFrame(TitleFrameIndex::Intro_PoP_Frame_NoHigh);
+        setTitleFrame(TitleFrameIndex::Intro_PoP_Frame_NC);
 
     }
 
