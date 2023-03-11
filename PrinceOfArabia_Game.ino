@@ -2286,7 +2286,7 @@ void game() {
 
             bool fallStraight = false;
     
-            if (distToEdgeOfCurrentTile <= 6) {
+            if (distToEdgeOfCurrentTile <= 7) {
 
                 int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x) + (prince.getDirection() == Direction::Left ? -1 : 1) - level.getXLocation();
                 int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y) + 1 - level.getYLocation();

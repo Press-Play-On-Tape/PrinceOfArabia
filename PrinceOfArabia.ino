@@ -88,8 +88,6 @@ void setup() {
     #endif
 
     #ifdef SAVE_MEMORY_OTHER
-erial.println("Game_Init 6");
-     
         gamePlay.gameState = GameState::Game_Init;
     #else
         #ifdef SAVE_MEMORY_PPOT
