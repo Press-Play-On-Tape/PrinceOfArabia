@@ -9,6 +9,9 @@ princess_x = 63
 head = '    {}[] = {{\n\n'.format(framename)
 foot = '    }\n'
 frames = 0
+ix = -8
+iy = 28- 24
+ii = 6
 with open(framename +'.txt','w') as file:
   file.write(head)
   while count <= countEnd:
@@ -29,21 +32,24 @@ with open(framename +'.txt','w') as file:
     file.write('        int16_t  10, 37, uint24_t Torches,     uint8_t {}, dbmMasked\n'.format(torch))
     file.write('        int16_t 114, 37, uint24_t Torches,     uint8_t {}, dbmMasked\n'.format(torch))
     #invader
+    file.write('        int16_t {:3d},{:3d}, uint24_t Invaders     uint8_t {}, dbmMasked\n'.format(ix,iy,ii))
     ii = 6 + ((frames // 4) & 1)
-    if frames < 60:
-      ix = -6 + (frames % 60) * 2;
-      iy = 28 - 24
-    elif frames < 120:
-      ix = -6 + 29 * 4 - (frames % 60) * 2;
-      iy = 28 - 16
-    elif frames < 150:
-      ix = -6 + (frames % 60) * 2;
-      iy = 28 - 8
-    else:
+    if frames < 59:
+      ix += 2
+    elif frames < 63:
+      iy += 2
+    elif frames < 122:
+      ix -= 2
+    elif frames < 126:
+      iy += 2
+    elif frames < 155:
+      ix += 2;
+    elif frames < 159:
       ix = 51
+      iy += 2
+    else:
       iy = 28
       ii = 6
-    file.write('        int16_t {:3d},{:3d}, uint24_t Invaders     uint8_t {}, dbmMasked\n'.format(ix,iy,ii))
     # princess, and hourglass
     file.write('        int16_t {:3d}, 28, uint24_t Princess     uint8_t {}, dbmMasked\n'.format(princess_x, princess_image))
     file.write('        int16_t  54, 40, uint24_t HourGlasses  uint8_t {}, dbmMasked\n'.format(hourglass_image))
