@@ -246,11 +246,25 @@ void title() {
 
                         case TitleScreenOptions::Resume:
 
-                            EEPROM_Utils::loadCookie(cookie);
+                            #ifdef SAVE_TO_FX
+
+                                FX::loadGameState(cookie);
+
+                            #else
+
+                                EEPROM_Utils::loadCookie(cookie);
+
+                            #endif
+                            
                             gamePlay.gameState = GameState::Game;
                             fadeEffect.reset();
                             titleScreenVars.counter = 16;
                             menu.init();
+
+                            #ifndef SAVE_MEMORY_SOUND
+                                sound.noTone();
+                            #endif
+
                             return;;
 
                         case TitleScreenOptions::Credits:
