@@ -172,10 +172,9 @@ enum class MenuOption : uint8_t {
 
 enum class TitleScreenOptions : uint8_t {
     Play,
+    Resume,
     Credits, 
     High,
-    Select_NewGame,
-    Select_ResumeGame,
 };
 
 enum class TitleScreenMode : uint8_t {
@@ -262,20 +261,31 @@ enum class GateType : uint8_t {
     Level6Exit,
 };
 
+
+
+
+
+
 enum class TitleFrameIndex : uint8_t {
     Credits_PoP,
     High_PoP_Frame,
-    Main_PoP_Frame_WithHigh,
-    Main_PoP_Frame_NoHigh,
-    Intro_Last_PoP_Frame_WithHigh,
-    Intro_Last_PoP_Frame_NoHigh,
-    Main_Game_PoP_Frame_WithHigh,
-    Main_Game_PoP_Frame_NoHigh,
-    Main_Credits_PoP_Frame_WithHigh,
-    Main_Credits_PoP_Frame_NoHigh,
-    Main_High_PoP_Frame_WithHigh,
+    Main_PoP_Frame_NC,
+    Main_PoP_Frame_NCH,
+    Main_PoP_Frame_NRC,
+    Main_PoP_Frame_NRCH,
+    Intro_Last_PoP_Frame_NC,
+    Intro_Last_PoP_Frame_NCH,
+    Intro_Last_PoP_Frame_NRC,
+    Intro_Last_PoP_Frame_NRCH,
+    Main_Game_PoP_Frame_NC,
+    Main_Game_PoP_Frame_NCH,
+    Main_Game_PoP_Frame_NRC,
+    Main_Game_PoP_Frame_NRCH,
     IntroGame_End_PoP_Frame,
-    Intro_PoP_Frame_NoHigh,
+    Intro_PoP_Frame_NC,
+    Intro_PoP_Frame_NCH,
+    Intro_PoP_Frame_NRC,
+    Intro_PoP_Frame_NRCH,
     TimeOut_PoP_Frame,
     IntroGame_1A_Frame,
     CutScene_1_Frame,

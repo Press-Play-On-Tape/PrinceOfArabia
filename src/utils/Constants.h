@@ -31,7 +31,7 @@
 #else
 
     #define _SAVE_MEMORY_USB
-    #define SAVE_MEMORY_PPOT
+    #define _SAVE_MEMORY_PPOT
     #define _SAVE_MEMORY_OTHER
     #define SAVE_MEMORY_SOUND
     #define SAVE_MEMORY_ENEMY
@@ -1476,6 +1476,11 @@ namespace Constants {
     constexpr uint8_t Invaders_Enemy_Bullet_Start = 41;
     constexpr uint8_t Invaders_Enemy_Bullet_End = Constants::Items_Count - 1;
 
+
+    constexpr uint8_t FrameIndex_NC = 0;
+    constexpr uint8_t FrameIndex_NCH = 1;
+    constexpr uint8_t FrameIndex_NRC = 2;
+    constexpr uint8_t FrameIndex_NRCH = 3;
 
     #ifndef MOVEMENT_DATA_FROM_FX
 
