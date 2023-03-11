@@ -216,6 +216,8 @@ void title() {
 
                             EEPROM_Utils::loadCookie(cookie);
                             gamePlay.gameState = GameState::Game;
+                            fadeEffect.reset();
+                            titleScreenVars.counter = 16;
                             return;
 
                     #endif

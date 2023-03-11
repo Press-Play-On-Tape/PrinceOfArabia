@@ -119,6 +119,8 @@ void game() {
 
     // Update the objects ..
 
+    if (titleScreenVars.counter > 0) titleScreenVars.counter--;
+
     if (mouse.update()) {
 
         Item item = level.getItemByIndex(ItemType::FloorButton1, ItemType::None, 6);
@@ -536,7 +538,7 @@ void game() {
     //
     // ---------------------------------------------------------------------------------------------------------------------------------------
 
-    if (gamePlay.gameState == GameState::Game && prince.isEmpty()) {
+    if (titleScreenVars.counter == 0 && gamePlay.gameState == GameState::Game && prince.isEmpty()) {
 
 
         // Check to see if we can leave the level, otherwise 
@@ -596,12 +598,19 @@ void game() {
                         CanClimbDownResult canClimbDownResult = level.canClimbDown(prince);
                         
                         if (canClimbDownResult == CanClimbDownResult::None) {
+
                             gamePlay.crouchTimer++;
+
                             if (gamePlay.crouchTimer == 4) {
                                 prince.pushSequence(Stance::Crouch_1_Start, Stance::Crouch_3_End);
                             }
-                        } else {
+
+                        } 
+                        
+                        else {
+
                             // Basic climbing sequence for all, incuding CanClimbDownResult::ClimbDown
+
                             prince.pushSequence(Stance::Step_Climbing_15_End, Stance::Step_Climbing_1_Start, Stance::Jump_Up_A_14_End);
                             
                             switch (canClimbDownResult) {
@@ -619,8 +628,11 @@ void game() {
                                     prince.pushSequence(Stance::Small_Step_6_End, Stance::Small_Step_1_Start, Stance::Upright);
                                     break;
                             }
+
                             prince.setHangingCounter(150);
+
                         }
+
                     }
 
                     else if (pressed & UP_BUTTON) {
