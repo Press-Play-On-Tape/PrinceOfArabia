@@ -309,6 +309,14 @@ Title_High_PoA_Frame[] = {
     int16_t   0,  0, uint24_t Title_PoA,       uint8_t 0, dbmMasked_last
 }
 
+uint8_t Title_Cursor_XPos[] = {
+//  N     R    C    H
+    32,   0,  61,   0,          // NC
+    15,   0,  47,  87,          // NCH
+    13,  40,  78,   0,          // NRC
+     3,  26,  62, 101,          // NRCH
+};
+
 Invaders_HUD_frame[] = {
     int16_t 120,  0, uint24_t HUD_Backgrounds,  uint8_t 1, dbmNormal
     int16_t 123, 40, uint24_t Numbers_Small,    uint8_t 0, dbmNormal_last
