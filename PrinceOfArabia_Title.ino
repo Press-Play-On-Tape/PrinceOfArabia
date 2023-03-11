@@ -106,32 +106,40 @@ void title() {
 
         // Swap options ..
 
-        if (justPressed & LEFT_BUTTON) {
+        if (titleScreenVars.option < TitleScreenOptions::Select_NewGame) {
+                
+            if (justPressed & LEFT_BUTTON) {
 
-            if (titleScreenVars.option != TitleScreenOptions::Play) {
-                titleScreenVars.option = static_cast<TitleScreenOptions>(static_cast<uint8_t>(titleScreenVars.option) - 1);
+                if (titleScreenVars.option != TitleScreenOptions::Play) {
+                    titleScreenVars.option = static_cast<TitleScreenOptions>(static_cast<uint8_t>(titleScreenVars.option) - 1);
+                }
+
+            }
+
+            if (justPressed & RIGHT_BUTTON) {
+
+                if ((titleScreenVars.option == TitleScreenOptions::Play) || cookie.hasSavedScore) {
+
+                    titleScreenVars.option = static_cast<TitleScreenOptions>(static_cast<uint8_t>(titleScreenVars.option) + 1);
+                }
+
             }
 
         }
+        else {
+                
+            if (justPressed & UP_BUTTON && titleScreenVars.option != TitleScreenOptions::Select_NewGame) {
 
-        if (justPressed & RIGHT_BUTTON) {
+                titleScreenVars.option = TitleScreenOptions::Select_NewGame;
 
-        #ifndef SAVE_MEMORY_TITLE
-
-            if ((titleScreenVars.option == TitleScreenOptions::Play) || cookie.hasSavedScore) {
-
-                titleScreenVars.option = static_cast<TitleScreenOptions>(static_cast<uint8_t>(titleScreenVars.option) + 1);
             }
+                
+            if (justPressed & DOWN_BUTTON && titleScreenVars.option != TitleScreenOptions::Select_ResumeGame) {
 
-        #else
+                titleScreenVars.option = TitleScreenOptions::Select_ResumeGame;
 
-            if ((titleScreenVars.option != TitleScreenOptions::High)) {
-
-                titleScreenVars.option = static_cast<TitleScreenOptions>(static_cast<uint8_t>(titleScreenVars.option) + 1);
             }
-
-        #endif
-
+            
         }
 
     }
@@ -160,16 +168,23 @@ void title() {
                         case TitleScreenOptions::Play:
 
                             #ifndef SAVE_MEMORY_SOUND
-                                //sound.tonesFromFX(Sounds::Seque);
                                 setSound(SoundIndex::Seque);
                             #endif
 
-                            prince.setHealth(3);
-                            prince.setHealthMax(3);
+                            if (cookie.hasSavedLevel) {
 
-                            cookie.setMode(TitleScreenMode::IntroGame_1A);
-                            //FX::setFrame(Title_IntroGame_1A_Frame, 4 - 1);
-                            setTitleFrame(TitleFrameIndex::IntroGame_1A_Frame);
+                                titleScreenVars.option = TitleScreenOptions::Select_ResumeGame;
+
+                            }
+                            else {
+
+                                prince.setHealth(3);
+                                prince.setHealthMax(3);
+
+                                cookie.setMode(TitleScreenMode::IntroGame_1A);
+                                setTitleFrame(TitleFrameIndex::IntroGame_1A_Frame);
+                            
+                            }
 
                             break;
 
@@ -186,6 +201,22 @@ void title() {
                             setTitleFrame(TitleFrameIndex::High_PoP_Frame);
 
                             break;
+
+                        case TitleScreenOptions::Select_NewGame:
+
+                            prince.setHealth(3);
+                            prince.setHealthMax(3);
+
+                            cookie.setMode(TitleScreenMode::IntroGame_1A);
+                            setTitleFrame(TitleFrameIndex::IntroGame_1A_Frame);
+                            break;
+
+
+                        case TitleScreenOptions::Select_ResumeGame:
+
+                            EEPROM_Utils::loadCookie(cookie);
+                            gamePlay.gameState = GameState::Game;
+                            return;
 
                     #endif
 
@@ -206,7 +237,6 @@ void title() {
                 #endif
 
                 #ifndef SAVE_MEMORY_SOUND
-                    //sound.tonesFromFX(Sounds::Theme);
                     setSound(SoundIndex::Theme);
                 #endif
 
@@ -226,24 +256,16 @@ void title() {
 
                     cookie.setMode(TitleScreenMode::Main);
 
-                    #ifndef SAVE_MEMORY_TITLE
-
-                        if (cookie.hasSavedScore) {
-
-                            setTitleFrame(TitleFrameIndex::Main_PoP_Frame_WithHigh);
-
-                        }
-                        else {
-
-                            setTitleFrame(TitleFrameIndex::Main_PoP_Frame_NoHigh);
-
-                        }
-
-                    #else
+                    if (cookie.hasSavedScore) {
 
                         setTitleFrame(TitleFrameIndex::Main_PoP_Frame_WithHigh);
 
-                    #endif
+                    }
+                    else {
+
+                        setTitleFrame(TitleFrameIndex::Main_PoP_Frame_NoHigh);
+
+                    }
 
                 }
 
@@ -252,25 +274,23 @@ void title() {
             case TitleScreenMode::IntroGame_1A:
 
                 #ifndef SAVE_MEMORY_SOUND
-                    //sound.tonesFromFX(Sounds::Seque);
                     setSound(SoundIndex::Seque);
                 #endif
 
                 cookie.setMode(TitleScreenMode::IntroGame_1B);
                 gamePlay.gameState = GameState::Game_Init; 
-                //fadeEffect.reset();
-
+ 
                 break;
 
             case TitleScreenMode::CutScene_1:
 
                 cookie.setMode(TitleScreenMode::IntroGame_1B);
                 gamePlay.gameState = GameState::Game_Init; 
-
+ 
                 break;
 
             case TitleScreenMode::IntroGame_1B:
-
+ 
                 gamePlay.gameState = GameState::Game_Init; 
                 break;
 
@@ -288,6 +308,7 @@ void title() {
                 case TitleScreenMode::CutScene_7_PlayGame:
 
                     if (justPressed & (A_BUTTON)) {
+
                         cookie.setMode(TitleScreenMode::CutScene_7_PlayGame);
                         gamePlay.gameState = GameState::Game_StartLevel; 
                         arduboy.setFrameRate(Constants::FrameRate);
@@ -311,7 +332,6 @@ void title() {
     }
 
 
-
     // Render ..
 
     switch (cookie.getMode()) {
@@ -320,53 +340,37 @@ void title() {
 
             if (!FX::drawFrame()) {
 
-                #ifndef SAVE_MEMORY_TITLE
-
-                    if (cookie.hasSavedScore) {
-
-                        setTitleFrame(TitleFrameIndex::Intro_Last_PoP_Frame_WithHigh);
-
-                    }
-                    else {
-
-                        setTitleFrame(TitleFrameIndex::Intro_Last_PoP_Frame_NoHigh);
-
-                    }
-
-                #else
+                if (cookie.hasSavedScore) {
 
                     setTitleFrame(TitleFrameIndex::Intro_Last_PoP_Frame_WithHigh);
 
-                #endif
+                }
+                else {
+
+                    setTitleFrame(TitleFrameIndex::Intro_Last_PoP_Frame_NoHigh);
+
+                }
 
                 if (justPressed) {
                     
                     cookie.setMode(TitleScreenMode::Main);
 
-                    #ifndef SAVE_MEMORY_TITLE
-
-                        if (cookie.hasSavedScore) {
-
-                            setTitleFrame(TitleFrameIndex::Main_PoP_Frame_WithHigh);
-
-                        }
-                        else {
-
-                            setTitleFrame(TitleFrameIndex::Main_PoP_Frame_NoHigh);
-
-                        }
-
-                    #else
+                    if (cookie.hasSavedScore) {
 
                         setTitleFrame(TitleFrameIndex::Main_PoP_Frame_WithHigh);
 
-                    #endif
+                    }
+                    else {
+
+                        setTitleFrame(TitleFrameIndex::Main_PoP_Frame_NoHigh);
+
+                    }
 
                 }
 
             }
             break;
-
+        
         case TitleScreenMode::Main:
 
             if (!FX::drawFrame()) {
@@ -375,47 +379,31 @@ void title() {
 
                     case TitleScreenOptions::Play:
 
-                        #ifndef SAVE_MEMORY_TITLE                        
-
-                            if (cookie.hasSavedScore) {
-
-                                setTitleFrame(TitleFrameIndex::Main_Game_PoP_Frame_WithHigh);
-
-                            }
-                            else {
-
-                                setTitleFrame(TitleFrameIndex::Main_Game_PoP_Frame_NoHigh);
-
-                            }
-
-                        #else
+                        if (cookie.hasSavedScore) {
 
                             setTitleFrame(TitleFrameIndex::Main_Game_PoP_Frame_WithHigh);
 
-                        #endif
+                        }
+                        else {
+
+                            setTitleFrame(TitleFrameIndex::Main_Game_PoP_Frame_NoHigh);
+
+                        }
 
                         break;
 
                     case TitleScreenOptions::Credits:
 
-                        #ifndef SAVE_MEMORY_TITLE                        
-
-                            if (cookie.hasSavedScore) {
-
-                                setTitleFrame(TitleFrameIndex::Main_Credits_PoP_Frame_WithHigh);
-
-                            }
-                            else {
-
-                                setTitleFrame(TitleFrameIndex::Main_Credits_PoP_Frame_NoHigh);
-
-                            }
-
-                        #else
+                        if (cookie.hasSavedScore) {
 
                             setTitleFrame(TitleFrameIndex::Main_Credits_PoP_Frame_WithHigh);
 
-                        #endif
+                        }
+                        else {
+
+                            setTitleFrame(TitleFrameIndex::Main_Credits_PoP_Frame_NoHigh);
+
+                        }
 
                         break;
 
@@ -424,6 +412,25 @@ void title() {
                         setTitleFrame(TitleFrameIndex::Main_High_PoP_Frame_WithHigh);
                         
                         break;
+
+                    case TitleScreenOptions::Select_NewGame:
+                    case TitleScreenOptions::Select_ResumeGame:
+
+                        if (cookie.hasSavedScore) {
+
+                            setTitleFrame(TitleFrameIndex::Main_Game_PoP_Frame_WithHigh);
+
+                        }
+                        else {
+
+                            setTitleFrame(TitleFrameIndex::Main_Game_PoP_Frame_NoHigh);
+
+                        }
+
+                        FX::drawBitmap(32, 20, Images::Title_Select, 0, dbmMasked);
+                        FX::drawBitmap(38, 24 + ((static_cast<uint8_t>(titleScreenVars.option) - static_cast<uint8_t>(TitleScreenOptions::Select_NewGame)) * 8), Images::Title_Cursor, 0, dbmMasked);
+                        break;
+
                         
                 }
 
@@ -462,7 +469,6 @@ void title() {
                 if (!FX::drawFrame()) {
 
                     cookie.setMode(TitleScreenMode::CutScene_1);
-                    //FX::setFrame(Title_CutScene_1_Frame, 3 - 1);
                     setTitleFrame(TitleFrameIndex::CutScene_1_Frame);
 
                 }
@@ -474,7 +480,6 @@ void title() {
                 if (!FX::drawFrame()) {
 
                     cookie.setMode(TitleScreenMode::IntroGame_1B);
-                    //FX::setFrame(Title_IntroGame_1B_Frame, 4 - 1);
                     setTitleFrame(TitleFrameIndex::IntroGame_1B_Frame);
 
                 }
@@ -484,7 +489,7 @@ void title() {
             case TitleScreenMode::IntroGame_1B:
 
                 if (!FX::drawFrame()) {
-
+ 
                     gamePlay.gameState = GameState::Game_Init; 
 
                 }
@@ -513,7 +518,6 @@ void title() {
                     setTitleFrame(TitleFrameIndex::IntroGame_End_PoP_Frame);
 
                     #ifndef SAVE_MEMORY_SOUND
-                        //sound.tonesFromFX(Sounds::Ending);
                         setSound(SoundIndex::Ending);
                     #endif
 

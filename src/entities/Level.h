@@ -165,7 +165,6 @@ struct Level {
         void init_PositionChars(GamePlay &gamePlay, Prince &prince, bool clearSword) {
 
         #endif
-
             #ifdef LEVEL_DATA_FROM_FX
                 
                 FX::seekData(FX::readIndexedUInt24(Levels::level_Data, gamePlay.level));

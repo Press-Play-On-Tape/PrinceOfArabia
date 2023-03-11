@@ -88,6 +88,8 @@ void setup() {
     #endif
 
     #ifdef SAVE_MEMORY_OTHER
+erial.println("Game_Init 6");
+     
         gamePlay.gameState = GameState::Game_Init;
     #else
         #ifdef SAVE_MEMORY_PPOT
@@ -129,7 +131,6 @@ void loop() {
             case GameState::Title_Init:
 
                 #ifndef SAVE_MEMORY_SOUND
-                    //sound.tonesFromFX(Sounds::Theme);
                     setSound(SoundIndex::Theme);
                 #endif
 
@@ -155,18 +156,10 @@ void loop() {
                 sound.noTone();
             #endif
             
-            #ifndef SAVE_MEMORY_OTHER
-                fadeEffect.reset();
-            #endif
-
             game_Init();
             [[fallthrough]];
 
         case GameState::Game_StartLevel:
-
-            #ifndef SAVE_MEMORY_OTHER
-            fadeEffect.reset();
-            #endif
             game_StartLevel();
             game();
             break;
@@ -179,6 +172,7 @@ void loop() {
 
             game();
             break;
+
 
         default: break;
 

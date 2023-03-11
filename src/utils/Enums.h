@@ -173,7 +173,9 @@ enum class MenuOption : uint8_t {
 enum class TitleScreenOptions : uint8_t {
     Play,
     Credits, 
-    High
+    High,
+    Select_NewGame,
+    Select_ResumeGame,
 };
 
 enum class TitleScreenMode : uint8_t {

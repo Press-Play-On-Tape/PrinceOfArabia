@@ -77,7 +77,6 @@ bool testScroll(GamePlay &gamePlay, Prince &prince, Level &level) {
             }
 
             #ifndef SAVE_MEMORY_SOUND
-                //sound.tonesFromFX(Sounds::Victory);
                 setSound(SoundIndex::Victory);
             #endif
 
@@ -515,7 +514,6 @@ bool leaveLevel(Prince &prince, Level &level) {
 void pushDead(Prince &entity, Level &level, GamePlay &gamePlay, bool clear, DeathType deathType) {
 
     #ifndef SAVE_MEMORY_SOUND
-        //sound.tonesFromFX(Sounds::Dead);
         setSound(SoundIndex::Dead);
     #endif
 
@@ -552,7 +550,6 @@ void pushDead(Prince &entity, Level &level, GamePlay &gamePlay, bool clear, Deat
 void pushDead(Enemy &entity, bool clear) {
 
     #ifndef SAVE_MEMORY_SOUND
-        //sound.tonesFromFX(Sounds::Triumph);
         setSound(SoundIndex::Triumph);
     #endif
 
@@ -606,22 +603,18 @@ void playGrab() {
         switch (gamePlay.getGrab()) {
 
             case 0:
-                //sound.tonesFromFX(Sounds::Grab1);
                 setSound(SoundIndex::Grab1);
                 break;
 
             case 1:
-                //sound.tonesFromFX(Sounds::Grab2);
                 setSound(SoundIndex::Grab2);
                 break;
 
             case 2:
-                //sound.tonesFromFX(Sounds::Grab3);
                 setSound(SoundIndex::Grab3);
                 break;
 
             default:
-                //sound.tonesFromFX(Sounds::Grab4);
                 setSound(SoundIndex::Grab4);
                 break;
 

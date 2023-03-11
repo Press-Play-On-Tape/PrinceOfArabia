@@ -26,7 +26,6 @@ void invader_NewWave(Invader_General2 &general2) {
     FX::readEnd();
 
     #ifndef SAVE_MEMORY_SOUND
-        //sound.tonesFromFX(Sounds::Invader_Wave_Start);
         setSound(SoundIndex::Invader_Wave_Start);
     #endif 
 
@@ -311,7 +310,6 @@ void invader_UpdatePlayer(Invader_General &general, Invader_General2 &general2, 
             if (general.lives == 0) {
                 
                 #ifndef SAVE_MEMORY_SOUND
-                    //sound.tonesFromFX(Sounds::Invader_End_of_Game);
                     setSound(SoundIndex::Invader_End_of_Game);
                 #endif 
 
@@ -380,7 +378,6 @@ void invader_EnemyDropsBullet(Invader_General2 &general2, Invader_Player &player
                     dropped = true;
                 
                     #ifndef SAVE_MEMORY_SOUND
-                        //sound.tonesFromFX(Sounds::Invader_Enemy_Fires_Bullet);
                         setSound(SoundIndex::Invader_Enemy_Fires_Bullet);
                     #endif 
 
@@ -408,7 +405,6 @@ void invader_EnemyDropsBullet(Invader_General2 &general2, Invader_Player &player
                     general2.bulletCountdown = 8 + arduboy.randomLFSR(general2.speed * 4, general2.speed * 6);
 
                     #ifndef SAVE_MEMORY_SOUND
-                        //sound.tonesFromFX(Sounds::Invader_Enemy_Fires_Bullet);
                         setSound(SoundIndex::Invader_Enemy_Fires_Bullet);
                     #endif 
 
@@ -474,7 +470,6 @@ void invader_HasBulletHitBarrier(Invader_General2 &general2, Invader_Bullet &bul
         if ((barrier.value & (1 << barrier_B)) == 0) {
 
             #ifndef SAVE_MEMORY_SOUND
-                //sound.tonesFromFX(Sounds::Invader_Hit_Barrier);
                 setSound(SoundIndex::Invader_Hit_Barrier);
             #endif 
 
@@ -512,7 +507,6 @@ void invader_DetectPlayerBulletHit(Invader_General &general, Invader_General2 &g
                 general.score++;
 
                 #ifndef SAVE_MEMORY_SOUND
-                    //sound.tonesFromFX(Sounds::Invader_Enemy_Explosion);
                     setSound(SoundIndex::Invader_Enemy_Explosion);
                 #endif                 
 
@@ -547,7 +541,6 @@ void invader_UpdateEnemyBullets(Invader_General2 &general2, Invader_Player &play
                     bullet.y = 64;
                 
                     #ifndef SAVE_MEMORY_SOUND
-                        //sound.tonesFromFX(Sounds::Invader_Player_Explosion);
                         setSound(SoundIndex::Invader_Player_Explosion);
                     #endif 
 
@@ -634,7 +627,6 @@ void invader_PlayGame() {
             if (bullet.y == -4) {
 
                 #ifndef SAVE_MEMORY_SOUND
-                    //sound.tonesFromFX(Sounds::Invader_Player_Fires_Bullet);
                     setSound(SoundIndex::Invader_Player_Fires_Bullet);
                 #endif 
                 
@@ -672,7 +664,6 @@ void invader_PlayGame() {
                 general2.speed = 17;
 
                 #ifndef SAVE_MEMORY_SOUND
-                    //sound.tonesFromFX(Sounds::Invader_Wave_Success);
                     setSound(SoundIndex::Invader_Wave_Success);
                 #endif 
 
@@ -748,7 +739,6 @@ void invader_PlayGame() {
                 general.lives = 0;
 
                 #ifndef SAVE_MEMORY_SOUND
-                    //sound.tonesFromFX(Sounds::Invader_End_of_Game);
                     setSound(SoundIndex::Invader_End_of_Game);
                 #endif 
 
