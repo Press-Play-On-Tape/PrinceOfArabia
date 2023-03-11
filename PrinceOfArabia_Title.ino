@@ -353,6 +353,7 @@ void title() {
             case TitleScreenMode::CutScene_4:
             case TitleScreenMode::CutScene_5:
             case TitleScreenMode::CutScene_6:
+            case TitleScreenMode::CutScene_7_Hint:
 
                 gamePlay.gameState = GameState::Game_StartLevel; 
                 break;
@@ -481,6 +482,7 @@ void title() {
             case TitleScreenMode::CutScene_4:
             case TitleScreenMode::CutScene_5:
             case TitleScreenMode::CutScene_6:
+            case TitleScreenMode::CutScene_7_Hint:
 
                 if (!FX::drawFrame()) {
 

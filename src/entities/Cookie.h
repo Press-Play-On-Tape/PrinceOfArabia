@@ -67,6 +67,11 @@ struct Cookie {
                 setTitleFrame(TitleFrameIndex::CutScene_6_Frame);
                 break;
 
+            case TitleScreenMode::CutScene_7_Hint:
+
+                setTitleFrame(TitleFrameIndex::CutScene_2B_Frame);
+                break;
+
             case TitleScreenMode::CutScene_7_Transition:
 
                 setTitleFrame(TitleFrameIndex::CutScene_7_Frame);
