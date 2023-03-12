@@ -1303,7 +1303,7 @@ void game() {
                             break;
 
                     }
-                    menu.cursor++;
+                    //menu.cursor++;
 
                 } 
 
