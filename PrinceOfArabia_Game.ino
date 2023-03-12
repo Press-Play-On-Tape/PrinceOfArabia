@@ -1297,9 +1297,9 @@ void game() {
                             break;
 
                         case 1:
-
-                            gamePlay.gameState = GameState::Menu;
-                            menu.cursor = 3;
+                            menu.direction = Direction::Right;
+                            //gamePlay.gameState = GameState::Menu;
+                            //menu.cursor = 3;
                             break;
 
                     }
