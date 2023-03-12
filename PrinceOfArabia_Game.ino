@@ -464,8 +464,11 @@ void game() {
                                             case Stance::Sword_Step_1_Start ... Stance::Sword_Step_3_End:
                                             case Stance::Sword_Normal:
 
-                                                if (arduboy.randomLFSR(0, 16) == 0 || enemy.getDirection() == prince.getDirection()) {
+                                                if ((enemy.getX() >= level.getXLocation() * Constants::TileWidth && enemy.getX() <= (level.getXLocation() + 12) * Constants::TileWidth) && 
+                                                    (arduboy.randomLFSR(0, 16) == 0 || enemy.getDirection() == prince.getDirection())) {
+                                                  
                                                     enemy.pushSequence(Stance::Sword_Attack_1_Start, Stance::Sword_Attack_8_End, Stance::Sword_Normal);
+                                                    
                                                 }
                                                 break;
 
@@ -474,7 +477,9 @@ void game() {
 
                                             default:
 
-                                                enemy.pushSequence(Stance::Sword_Attack_1_Start, Stance::Sword_Attack_8_End, Stance::Sword_Normal);
+                                                if (enemy.getX() >= level.getXLocation() * Constants::TileWidth && enemy.getX() <= (level.getXLocation() + 12) * Constants::TileWidth) {
+                                                    enemy.pushSequence(Stance::Sword_Attack_1_Start, Stance::Sword_Attack_8_End, Stance::Sword_Normal);
+                                                }
                                                 break;
 
                                         }

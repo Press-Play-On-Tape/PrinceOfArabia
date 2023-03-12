@@ -32,10 +32,10 @@ uint8_t level4_Data[] = {
     0,                          // Type 0 = Guard, 1 = Skeleton, 2 = Mirror          
     20,                         // Enemy starting x tile
     3,                          // Enemy starting y tile
-    100,                        // Enemy starting x pos (left entry)
+    92,                         // Enemy starting x pos (left entry)
     60,                         // Enemy starting x pos (right entry)
     54,                         // Enemy starting x pos (left extent)
-    100,                        // Enemy starting x pos (right extent)
+    92,                         // Enemy starting x pos (right extent)
     25,                         // Enemy starting y pos (25, 56, 87)
     3,                          // Enemy starting health
     0,                          // Status 0 Alive, 1 Dead, 2 Dormant
@@ -43,10 +43,10 @@ uint8_t level4_Data[] = {
     0,                          // Type 0 = Guard, 1 = Skeleton, 2 = Mirror          
     50,                         // Enemy starting x tile
     3,                          // Enemy starting y tile
-    100,                        // Enemy starting x pos (left entry)
+    104,                        // Enemy starting x pos (left entry)
     38,                         // Enemy starting x pos (right entry)
     34,                         // Enemy starting x pos (left extent)
-    108,                        // Enemy starting x pos (right extent)
+    104,                        // Enemy starting x pos (right extent)
     25,                         // Enemy starting y pos (25, 56, 87)
     3,                          // Enemy starting health
     0,                          // Status 0 Alive, 1 Dead, 2 Dormant
@@ -54,7 +54,7 @@ uint8_t level4_Data[] = {
     0,                          // Type 0 = Guard, 1 = Skeleton, 2 = Mirror          
     50,                         // Enemy starting x tile
     0,                          // Enemy starting y tile
-    100,                        // Enemy starting x pos (left entry)
+    108,                        // Enemy starting x pos (left entry)
     22,                         // Enemy starting x pos (right entry)
     18,                         // Enemy starting x pos (left extent)
     108,                        // Enemy starting x pos (right extent)
@@ -68,7 +68,7 @@ uint8_t level4_Data[] = {
     88,                         // Enemy starting x pos (left entry)
     88,                         // Enemy starting x pos (right entry)
     18,                         // Enemy starting x pos (left extent)
-    104,                        // Enemy starting x pos (right extent)
+    92,                         // Enemy starting x pos (right extent)
     56,                         // Enemy starting y pos (25, 56, 87)
     3,                          // Enemy starting health
     0,                          // Status 0 Alive, 1 Dead, 2 Dormant
