@@ -1364,9 +1364,18 @@ constexpr uint16_t Sword_Step_3_End                              = Stance::Sword
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /*                                                               01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+#define SWORD_STEP_SEQ                                           183,   182,   181,   
+#define SWORD_STEP_OFFSETS                                       0,0,   -1,0,  -3,0,  
+constexpr uint16_t Sword_Step_Back_1_Start                       = Stance::Sword_Step_3_End + 1;
+constexpr uint16_t Sword_Step_Back_2                             = Stance::Sword_Step_Back_1_Start + 1;
+constexpr uint16_t Sword_Step_Back_3_End                         = Stance::Sword_Step_Back_2 + 1;
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*                                                               01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define SWORD_ATTACK_SEQ                                         186,   187,   188,   189,   190,   191,   192,   193,   
 #define SWORD_ATTACK_OFFSETS                                     2,0,   1,0,   2,0,   2,0,   -3,0,  -3,0,  -1,0,  0,0,
-constexpr uint16_t Sword_Attack_1_Start                          = Stance::Sword_Step_3_End + 1;
+constexpr uint16_t Sword_Attack_1_Start                          = Stance::Sword_Step_Back_3_End + 1;
 constexpr uint16_t Sword_Attack_2                                = Stance::Sword_Attack_1_Start + 1;
 constexpr uint16_t Sword_Attack_3                                = Stance::Sword_Attack_2 + 1;
 constexpr uint16_t Sword_Attack_4                                = Stance::Sword_Attack_3 + 1;

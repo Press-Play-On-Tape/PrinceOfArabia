@@ -241,6 +241,7 @@ void game() {
 
                 case Stance::Sword_Normal:
                 case Stance::Sword_Step_3_End:
+                case Stance::Sword_Step_Back_3_End:
                     enemy.pushSequence(Stance::Pickup_Sword_7_PutAway, Stance::Pickup_Sword_16_End, Stance::Upright);
                     break;
 
@@ -284,6 +285,7 @@ void game() {
                 // The enemy is at the end of the move sequence, what next?
 
                 case Stance::Sword_Step_3_End:
+                case Stance::Sword_Step_Back_3_End:
 
                     if (yDelta == 0) {
 
@@ -462,13 +464,14 @@ void game() {
                                             case Stance::Attack_Block_1_Start ... Stance::Attack_Block_3_End:
                                             case Stance::Draw_Sword_1_Start ... Stance::Draw_Sword_6_End:
                                             case Stance::Sword_Step_1_Start ... Stance::Sword_Step_3_End:
+                                            case Stance::Sword_Step_Back_1_Start ... Stance::Sword_Step_Back_3_End:
                                             case Stance::Sword_Normal:
 
                                                 if ((enemy.getX() >= level.getXLocation() * Constants::TileWidth && enemy.getX() <= (level.getXLocation() + 12) * Constants::TileWidth) && 
                                                     (arduboy.randomLFSR(0, 16) == 0 || enemy.getDirection() == prince.getDirection())) {
                                                   
                                                     enemy.pushSequence(Stance::Sword_Attack_1_Start, Stance::Sword_Attack_8_End, Stance::Sword_Normal);
-                                                    
+
                                                 }
                                                 break;
 
@@ -1024,6 +1027,7 @@ void game() {
                                     case Stance::Attack_Block_1_Start ... Stance::Attack_Block_3_End:
                                     case Stance::Draw_Sword_1_Start ... Stance::Draw_Sword_6_End:
                                     case Stance::Sword_Step_1_Start ... Stance::Sword_Step_3_End:
+                                    case Stance::Sword_Step_Back_1_Start ... Stance::Sword_Step_Back_3_End:
                                     case Stance::Sword_Normal:
 
                                         enemy.setEnemyType(EnemyType::MirrorAfterChallengeL12);
@@ -1078,7 +1082,7 @@ void game() {
                             else {
 
                                 if (level.canMoveForward(prince, Action::SmallStep, prince.getOppositeDirection(), Constants::OppositeDirection_Offset)) {
-                                    prince.pushSequence(Stance::Sword_Step_3_End, Stance::Sword_Step_1_Start, Stance::Sword_Normal);
+                                    prince.pushSequence(Stance::Sword_Step_Back_1_Start, Stance::Sword_Step_Back_3_End, Stance::Sword_Normal);
                                     break;
                                 }
                                 
@@ -1096,7 +1100,7 @@ void game() {
                                 
                             if (pressed & btnFacingDirection) {
 
-                                prince.pushSequence(Stance::Sword_Step_3_End, Stance::Sword_Step_1_Start, Stance::Sword_Normal);
+                                prince.pushSequence(Stance::Sword_Step_Back_1_Start, Stance::Sword_Step_Back_3_End, Stance::Sword_Normal);
 
                             }
 
@@ -1729,7 +1733,7 @@ void game() {
                                         if (level.canMoveForward(enemy.getActiveBase(), Action::SmallStep, enemy.getOppositeDirection(), Constants::OppositeDirection_Offset)) {
 
                                             prince.clear();
-                                            prince.pushSequence(Stance::Sword_Step_3_End, Stance::Sword_Step_1_Start, Stance::Sword_Normal);
+                                            prince.pushSequence(Stance::Sword_Step_Back_1_Start, Stance::Sword_Step_Back_3_End, Stance::Sword_Normal);
                                             break;
 
                                         }
@@ -2105,7 +2109,17 @@ void game() {
 
                         if (distToEdgeOfTile <= 4) {
                             
-                            int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x) + ((prince.getDirection() == Direction::Right && distToEdgeOfTile == 2) ? 1 : 0);
+                            int8_t tileXIdx = 0;
+
+                            if (((prince.getStance() >= Stance::Sword_Step_Back_1_Start && prince.getStance() <= Stance::Sword_Step_Back_3_End) || prince.getStance() >= Stance::Sword_Normal) && distToEdgeOfTile > 2) {
+                                
+                                tileXIdx = level.coordToTileIndexX(prince.getPosition().x);
+ 
+                            }
+                            else {
+                                tileXIdx = level.coordToTileIndexX(prince.getPosition().x) + ((prince.getDirection() == Direction::Right && distToEdgeOfTile == 2) ? 1 : 0);
+                            }
+
                             int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y);
                             uint8_t itemIdx = level.getItem(ItemType::Blade, tileXIdx, tileYIdx);
 
@@ -2169,6 +2183,7 @@ void game() {
                                 case Stance::Draw_Sword_1_Start ... Stance::Draw_Sword_6_End:
                                 case Stance::Sword_Attack_1_Start ... Stance::Sword_Attack_8_End:
                                 case Stance::Sword_Step_1_Start ... Stance::Sword_Step_3_End:
+                                case Stance::Sword_Step_Back_1_Start ... Stance::Sword_Step_Back_3_End:
 
                                     if(abs(xDelta) < Constants::StrikeDistance && yDelta == 0) {
 
@@ -2199,7 +2214,7 @@ void game() {
                                             if (level.canMoveForward(enemy.getActiveBase(), Action::SmallStep, enemy.getOppositeDirection(), Constants::OppositeDirection_Offset)) {
 
                                                 prince.clear();
-                                                prince.pushSequence(Stance::Sword_Step_3_End, Stance::Sword_Step_1_Start, Stance::Sword_Normal);
+                                                prince.pushSequence(Stance::Sword_Step_Back_1_Start, Stance::Sword_Step_Back_3_End, Stance::Sword_Normal);
                                                 break;
 
                                             }
@@ -2610,14 +2625,14 @@ void moveBackwardsWithSword(Prince & prince) {
     if (level.canMoveForward(prince, Action::Step, prince.getOppositeDirection(), Constants::OppositeDirection_Offset * 2)) {
 
         prince.clear();
-        prince.pushSequence(Stance::Sword_Step_3_End, Stance::Sword_Step_1_Start, Stance::Sword_Normal);
-        prince.pushSequence(Stance::Sword_Step_3_End, Stance::Sword_Step_1_Start);
+        prince.pushSequence(Stance::Sword_Step_Back_1_Start, Stance::Sword_Step_Back_3_End, Stance::Sword_Normal);
+        prince.pushSequence(Stance::Sword_Step_Back_1_Start, Stance::Sword_Step_Back_3_End);
 
     }
     else if (level.canMoveForward(prince, Action::SmallStep, prince.getOppositeDirection(), Constants::OppositeDirection_Offset)) {
 
         prince.clear();
-        prince.pushSequence(Stance::Sword_Step_3_End, Stance::Sword_Step_1_Start, Stance::Sword_Normal);
+        prince.pushSequence(Stance::Sword_Step_Back_1_Start, Stance::Sword_Step_Back_3_End, Stance::Sword_Normal);
 
     }
 
@@ -2629,13 +2644,13 @@ void moveBackwardsWithSword(BaseEntity entity, BaseStack stack) {
     if (level.canMoveForward(entity, Action::SwordStep2, entity.getOppositeDirection(), Constants::OppositeDirection_Offset)) {
 
         stack.clear();
-        stack.pushSequence(Stance::Sword_Step_3_End, Stance::Sword_Step_1_Start, Stance::Sword_Normal);
-        stack.pushSequence(Stance::Sword_Step_3_End, Stance::Sword_Step_1_Start);
+        stack.pushSequence(Stance::Sword_Step_Back_1_Start, Stance::Sword_Step_Back_3_End, Stance::Sword_Normal);
+        stack.pushSequence(Stance::Sword_Step_Back_1_Start, Stance::Sword_Step_Back_3_End);
 
         if (level.canMoveForward(entity, Action::SwordStep, entity.getOppositeDirection(), Constants::OppositeDirection_Offset)) {
 
             stack.clear();
-            stack.pushSequence(Stance::Sword_Step_3_End, Stance::Sword_Step_1_Start, Stance::Sword_Normal);
+            stack.pushSequence(Stance::Sword_Step_Back_1_Start, Stance::Sword_Step_Back_3_End, Stance::Sword_Normal);
 
         }
 

@@ -78,6 +78,7 @@ namespace Constants {
         174,                                                                                                                    // SWORD_NORMAL_SEQ
         175, 176, 177, 178, 179, 180,                                                                                           // DRAW_SWORD_SEQ
         181, 182, 183,                                                                                                          // SWORD_STEP_SEQ
+        183, 182, 181,                                                                                                          // SWORD_STEP_SEQ
         186, 187, 188, 189, 190, 191, 192, 193,                                                                                 // SWORD_ATTACK_SEQ
         194, 195, 194,                                                                                                          // ATTACK_BLOCK_SEQ
         126, 142,                                                                                                               // FALLING_DEAD_BLADE_SEQ
@@ -163,6 +164,7 @@ namespace Constants {
         0,0,                                                                                                                    // SWORD_NORMAL_OFFSETS
         0,0, 0,0, 0,0, 0,0, 0,0, 0,0,                                                                                           // DRAW_SWORD_OFFSETS
         3,0, 1,0, 0,0,                                                                                                          // SWORD_STEP_OFFSETS
+        0,0, -1,0, -3,0,                                                                                                        // SWORD_STEP_OFFSETS
         2,0, 1,0, 2,0, 2,0, -3,0, -3,0, -1,0, 0,0,                                                                              // SWORD_ATTACK_OFFSETS
         0,0, 1,0, -1,0,                                                                                                         // ATTACK_BLOCK_OFFSETS
         0,0, 0,0,                                                                                                               // FALLING_DEAD_BLADE_OFFSETS
