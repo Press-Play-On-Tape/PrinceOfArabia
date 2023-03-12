@@ -8,15 +8,19 @@ int8_t Level9_BG[] = {
 
 uint8_t level9_Data[] = {
     // Prince
-    98,                         // Prince starting x pos
-    56,                         // Prince starting y pos (25, 56, 87)
+//    98,                         // Prince starting x pos
+//    56,                         // Prince starting y pos (25, 56, 87)
+    90,                         // Prince starting x pos
+    25,                         // Prince starting y pos (25, 56, 87)
     1,                          // Prince starting direction, 1 Left and 2 Right
     3,                          // Prince starting stance, 3 Crouch_3_End
     // Level
     80,                         // Width
     12,                         // Height
-    50,                         // Level x starting position
-    9,                          // Level y starting position
+//    50,                         // Level x starting position
+//    9,                          // Level y starting position
+    60,                         // Level x starting position
+    3,                          // Level y starting position
     // Enemy 1      
     0,                          // Type 0 = Guard, 1 = Skeleton, 2 = Mirror          
     30,                         // Enemy starting x tile
