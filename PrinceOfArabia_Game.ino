@@ -200,7 +200,12 @@ void game() {
     if (menu.update()) {
         
         #ifdef USE_LED
+        #ifndef MICROCADE
         arduboy.setRGBled(0, 0, 0);
+        #else
+        arduboy.setRGBledRedOn();
+        arduboy.setRGBledBlueOn();
+        #endif
         #endif
 
         gamePlay.gameState = GameState::Game;

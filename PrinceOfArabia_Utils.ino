@@ -67,11 +67,11 @@ bool testScroll(GamePlay &gamePlay, Prince &prince, Level &level) {
             // Has a new high score been set?  If so, save it.
 
             if ((cookie.highMin * 60) + cookie.highSec < (gamePlay.timer_Min * 60) + gamePlay.timer_Sec) {
-
                 cookie.hasSavedScore = true;
                 cookie.highMin = gamePlay.timer_Min;
                 cookie.highSec = gamePlay.timer_Sec;
                 cookie.highSaves = gamePlay.saves;
+                cookie.hasSavedLevel = false;
                 saveCookie(false);
 
             }
@@ -805,7 +805,12 @@ void saveCookie(bool enableLEDs) {
 
     #ifdef USE_LED
     if (enableLEDs) {
+        #ifndef MICROCADE
         arduboy.setRGBled(RED_LED, 32);
+        #else
+        arduboy.setRGBledGreenOff();
+        arduboy.setRGBledBlueOff();
+        #endif
     }
     #endif
 
@@ -821,8 +826,13 @@ void saveCookie(bool enableLEDs) {
 
     #ifdef USE_LED
     if (enableLEDs) {
+        #ifndef MICROCADE
         arduboy.setRGBled(RED_LED, 0);
         arduboy.setRGBled(GREEN_LED, 32);
+        #else
+        arduboy.setRGBledRedOff();
+        arduboy.setRGBledGreenOn();
+        #endif
     }
     #endif
 

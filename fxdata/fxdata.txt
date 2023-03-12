@@ -309,6 +309,14 @@ Title_High_PoA_Frame[] = {
     int16_t   0,  0, uint24_t Title_PoA,       uint8_t 0, dbmMasked_last
 }
 
+uint8_t Title_Cursor_XPos[] = {
+//  N     R    C    H
+    32,   0,  61,   0,          // NC
+    15,   0,  47,  87,          // NCH
+    13,  40,  78,   0,          // NRC
+     3,  26,  62, 101,          // NRCH
+};
+
 Invaders_HUD_frame[] = {
     int16_t 120,  0, uint24_t HUD_Backgrounds,  uint8_t 1, dbmNormal
     int16_t 123, 40, uint24_t Numbers_Small,    uint8_t 0, dbmNormal_last
@@ -322,6 +330,7 @@ include 'cutscenes/Title_IntroGame_1A_Frame.txt'
 include 'cutscenes/Title_CutScene_1_Frame.txt'
 include 'cutscenes/Title_IntroGame_1B_Frame.txt'
 include 'cutscenes/Title_CutScene_2_Frame.txt'
+include 'cutscenes/Title_CutScene_2B_Frame.txt'
 include 'cutscenes/Title_CutScene_3_Frame.txt'
 include 'cutscenes/Title_CutScene_4_Frame.txt'
 include 'cutscenes/Title_CutScene_5_Frame.txt'
@@ -414,6 +423,9 @@ TitleFrameIndexTable[] = {
 
     uint24_t Title_CutScene_6_Frame, uint8_t 1
     uint24_t Title_CutScene_6_Frame, uint8_t 1
+
+    uint24_t Title_CutScene_2B_Frame, uint8_t 1
+    uint24_t Title_CutScene_2B_Frame, uint8_t 1
 
     uint24_t Title_CutScene_7_Frame, uint8_t 0
     uint24_t Title_CutScene_7_Frame, uint8_t 0

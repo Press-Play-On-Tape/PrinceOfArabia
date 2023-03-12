@@ -60,7 +60,9 @@ void setup() {
     arduboy.systemButtons();
 
     #ifdef USE_LED
+    #ifndef MICROCADE
     arduboy.setRGBled(0, 0, 0);
+    #endif
     #endif
 
     #ifndef SAVE_MEMORY_SOUND

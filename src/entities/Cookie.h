@@ -8,7 +8,7 @@
 #include "Enemy.h"
 #include "TitleScreenVars.h"
 
-extern void setTitleFrame(TitleFrameIndex index, uint8_t frame = 0);
+extern void setTitleFrame(TitleFrameIndex index/*, uint8_t frame = 0*/);
 
 struct Cookie {
 
@@ -65,6 +65,11 @@ struct Cookie {
             case TitleScreenMode::CutScene_6:
 
                 setTitleFrame(TitleFrameIndex::CutScene_6_Frame);
+                break;
+
+            case TitleScreenMode::CutScene_7_Hint:
+
+                setTitleFrame(TitleFrameIndex::CutScene_2B_Frame);
                 break;
 
             case TitleScreenMode::CutScene_7_Transition:
