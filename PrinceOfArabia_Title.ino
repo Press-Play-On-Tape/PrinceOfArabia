@@ -319,7 +319,10 @@ void title() {
 
                     cookie.setMode(TitleScreenMode::Main);
                     setTitleFrame((TitleFrameIndex)((uint8_t)TitleFrameIndex::Main_PoP_Frame_NC + frameIndex));
-                    setSound(SoundIndex::Theme);
+                    
+                    #ifndef SAVE_MEMORY_SOUND
+                        setSound(SoundIndex::Theme);
+                    #endif
 
                 }
 
