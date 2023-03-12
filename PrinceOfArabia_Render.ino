@@ -521,22 +521,19 @@ void renderMenu(Prince &prince) {
 
             case GameState::Menu:
 
-                if (!prince.isDead()) {
+                 if (menu.cursor < 4) {
 
-                    if (menu.cursor < 4) {
+                     imageIdx = !cookie.hasSavedLevel;
 
-                        imageIdx = !cookie.hasSavedLevel;
+                 }
+                 else {
 
-                    }
-                    else {
+                     imageIdx = 2;
+                     cursorY = 12;
 
-                        imageIdx = 2;
-                        cursorY = 12;
+                 }
 
-                    }
-
-                }
-                else {
+                if (prince.isDead()) {
 
                     imageIdx = cookie.hasSavedLevel ? 3 : 1;
 
