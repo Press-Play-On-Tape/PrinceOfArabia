@@ -21,7 +21,7 @@ struct Cookie {
 
     uint8_t highMin;
     uint8_t highSec;
-    uint8_t highSaves;
+    uint16_t highSaves;
 
     GamePlay gamePlay;
     Level level;

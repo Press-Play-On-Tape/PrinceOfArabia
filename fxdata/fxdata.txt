@@ -447,6 +447,82 @@ TitleFrameIndexTable[] = {
 }
 
 
+uint16_t RunningJumpStances[] = {
+
+    // None                         Stance::Stopping_1_Start, Stance::Stopping_5_End, Stance::Upright, Stance::None, Stance::None, Stance::None, 
+                                    488,                      492,                    18,              0,            0,            0,                                                                                   0, 0,                                                                     
+    // Normal_Pos2                  Stance::Running_Jump_Short_2_1_Start, Stance::Running_Jump_Short_2_7_End, Stance::Run_Repeat_4, Stance::None, Stance::None, Stance::None, 
+                                    262,                                  268,                                13,                   0,            0,            0,                                                      0, 0, 
+    // Normal_Pos6                  Stance::Running_Jump_Short_6_1_Start, Stance::Running_Jump_Short_6_7_End, Stance::Run_Repeat_4, Stance::None, Stance::None, Stance::None, 
+                                    269,                                  275,                                13,                   0,            0,            0,                                                      0, 0,     
+    // Jump4_GrabLedge_Pos2         Stance::Running_Jump_4_GL_2_1_Start, Stance::Running_Jump_4_GL_2_16_End, Stance::Jump_Up_A_14_End, Stance::None, Stance::None, Stance::None, 
+                                    404,                                 419,                                32,                       0,            0,            0,                                                   1, 200,
+    // Jump4_GrabLedge_Pos6         Stance::Running_Jump_4_GL_6_1_Start, Stance::Running_Jump_4_GL_6_16_End, Stance::Jump_Up_A_14_End, Stance::None, Stance::None, Stance::None, 
+                                    420,                                 435,                                32,                       0,            0,            0,                                                   1, 200,
+    // Jump4_GrabLedge_Pos10        Stance::Running_Jump_4_GL_10_1_Start, Stance::Running_Jump_4_GL_10_16_End, Stance::Jump_Up_A_14_End, Stance::None, Stance::None, Stance::None, 
+                                    436,                                  451,                                 32,                       0,            0,            0,                                                 1, 200,
+    // Jump4_DropLevel              Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, Stance::Running_Jump_4_DropLvl_1_Start, Stance::Running_Jump_4_DropLvl_14_End, Stance::None, 
+                                    544,                          555,                         18,              452,                                    465,                                   0,                       1, 0, 
+    // Jump4_DropLevel_Pos10        Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, Stance::Running_Jump_4_DropLvl_10_1_Start, Stance::Running_Jump_4_DropLvl_10_13, Stance::None, 
+                                    544,                          555,                         18,              466,                                       479,                                  0,                     1, 0, 
+    // Jump3_Pos2                   Stance::Run_Repeat_5_Mid, Stance::Run_Repeat_8_End, Stance::None, Stance::Running_Jump_3_2_1_Start, Stance::Running_Jump_3_2_8_End, Stance::Run_Repeat_4, 
+                                    14,                       17,                       0,            352,                              359,                            13,                                             1, 0, 
+    // Jump3_Pos6                   Stance::Run_Repeat_5_Mid, Stance::Run_Repeat_8_End, Stance::None, Stance::Running_Jump_3_6_1_Start, Stance::Running_Jump_3_6_8_End, Stance::Run_Repeat_4, 
+                                    14,                       17,                       0,            360,                              367,                            13,                                             1, 0, 
+    // Jump3_Pos10                  Stance::Run_Repeat_5_Mid, Stance::Run_Repeat_8_End, Stance::None, Stance::Running_Jump_3_10_1_Start, Stance::Running_Jump_3_10_8_End, Stance::Run_Repeat_4, 
+                                    14,                       17,                       0,            368,                               375,                             13,                                           1, 0, 
+    // Jump3_DropLevel              Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, Stance::Running_Jump_3_DropLvl_1_Start, Stance::Running_Jump_3_DropLvl_14_End, Stance::None, 
+                                    544,                          555,                         18,              376,                                    389,                                   0,                       1, 0, 
+    // Jump3_DropLevel_Pos10        Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, Stance::Running_Jump_3_DropLvl_10_1_Start, Stance::Running_Jump_3_DropLvl_10_14_End, Stance::None, 
+                                    544,                          555,                         18,              390,                                       403,                                      0,                 1, 0, 
+    // Jump2_Pos2                   Stance::Running_Jump_2_2_1_Start, Stance::Running_Jump_2_2_7_End, Stance::Run_Repeat_4, Stance::None, Stance::None, Stance::None, 
+                                    303,                              309,                            13,                   0,            0,            0,                                                              0, 0,
+    // Jump2_Pos6                   Stance::Running_Jump_Short_6_1_Start, Stance::Running_Jump_Short_6_7_End, Stance::Run_Repeat_4, Stance::None, Stance::None, Stance::None, 
+                                    269,                                  275,                                13,                   0,            0,            0,                                                      0, 0,
+    // Jump2_DropLevel              Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, Stance::Running_Jump_2_DropLvl_1_Start, Stance::Running_Jump_2_DropLvl_14_End, Stance::None, 
+                                    544,                          555,                         18,              324,                                    337,                                   0,                       1, 0,
+    // Jump2_DropLevel_Pos10        Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, Stance::Running_Jump_2_DropLvl_10_1_Start, Stance::Running_Jump_2_DropLvl_10_14_End, Stance::None, 
+                                    544,                          555,                         18,              338,                                       351,                                      0,                 1, 0,
+    // Jump2_Pos10                  Stance::Running_Jump_2_10_1_Start, Stance::Running_Jump_2_10_7_End, Stance::Run_Repeat_4, Stance::None, Stance::None, Stance::None, 
+                                    317,                               323,                             13,                   0,            0,            0,                                                            0, 0,
+    // Jump1_Pos2                   Stance::Running_Jump_1_2_1_Start, Stance::Running_Jump_1_2_8_End, Stance::Upright, Stance::None, Stance::None, Stance::None, 
+                                    276,                              283,                            18,              0,            0,            0,                                                                   0, 0,
+    // Jump1_Pos6                   Stance::Running_Jump_1_6_1_Start, Stance::Running_Jump_1_6_9_End, Stance::Upright, Stance::None, Stance::None, Stance::None, 
+                                    284,                              292,                            18,              0,            0,            0,                                                                   0, 0,
+    // Jump1_Pos10                  Stance::Running_Jump_1_10_1_Start, Stance::Running_Jump_1_10_10_End, Stance::Upright, Stance::None, Stance::None, Stance::None, 
+                                    293,                               302,                              18,              0,            0,            0,                                                                0, 0,
+
+}
+
+
+
+uint16_t StandingJumpStances[] = {
+    // None                 Stance::None, Stance::None, Stance::None, Stance::None, Stance::None, Stance::None, 0, 0, 
+                            0,            0,            0,            0,            0,            0,                                                                                                                    0, 0, 
+    // Normal_20            Stance::Standing_Jump_20_1_Start, Stance::Standing_Jump_20_16_End, Stance::Upright, Stance::None, Stance::None, Stance::None, 0, 0,
+                            131,                              146,                             18,              0,            0,            0,                                                                          0, 0, 
+    // Normal_24            Stance::Standing_Jump_24_1_Start, Stance::Standing_Jump_24_16_End, Stance::Upright, Stance::None, Stance::None, Stance::None, 0, 0,
+                            115,                              130,                             18,              0,            0,            0,                                                                          0, 0, 
+    // Normal_28            Stance::Standing_Jump_28_1_Start, Stance::Standing_Jump_28_16_End, Stance::Upright, Stance::None, Stance::None, Stance::None, 0, 0,
+                            99,                               114,                             18,              0,            0,            0,                                                                          0, 0, 
+    // Normal_32            Stance::Standing_Jump_32_1_Start, Stance::Standing_Jump_32_16_End, Stance::Upright, Stance::None, Stance::None, Stance::None, 0, 0,
+                            83,                               98,                              18,              0,            0,            0,                                                                          0, 0, 
+    // Normal_36            Stance::Standing_Jump_36_1_Start, Stance::Standing_Jump_36_16_End, Stance::Upright, Stance::None, Stance::None, Stance::None, 0, 0,
+                            65,                               82,                              18,              0,            0,            0,                                                                          0, 0, 
+    // DropLevel_36         Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, Stance::Standing_Jump_DL_36_1_Start, Stance::Standing_Jump_DL_36_16_End, Stance::None, 1, 0
+                            544,                          555,                         18,              163,                                 178,                                0,                                     0, 0, 
+    // DropLevel_40         Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, Stance::Standing_Jump_DL_40_1_Start, Stance::Standing_Jump_DL_40_16_End, Stance::None, 1, 0
+                            544,                          555,                         18,              147,                                 162,                                0,                                     0, 0, 
+    // GrabLedge_28         Stance::Standing_Jump_GL_28_1_Start, Stance::Standing_Jump_GL_28_18_End, Stance::Jump_Up_A_14_End, Stance::None, Stance::None, Stance::None, 0, 200,
+                            233,                                 250,                                32,                       0,            0,            0,            0, 200, 
+    // GrabLedge_32         Stance::Standing_Jump_GL_32_1_Start, Stance::Standing_Jump_GL_32_18_End, Stance::Jump_Up_A_14_End, Stance::None, Stance::None, Stance::None, 0, 200,
+                            215,                                 232,                                32,                       0,            0,            0,            0, 200, 
+    // GrabLedge_36         Stance::Standing_Jump_GL_36_1_Start, Stance::Standing_Jump_GL_36_18_End, Stance::Jump_Up_A_14_End, Stance::None, Stance::None, Stance::None, 0, 200,
+                            197,                                 214,                                32,                       0,            0,            0,            0, 200, 
+    // GrabLedge_40         Stance::Standing_Jump_GL_40_1_Start, Stance::Standing_Jump_GL_40_18_End, Stance::Jump_Up_A_14_End, Stance::None, Stance::None, Stance::None, 0, 200,
+                            179,                                 196,                                32,                       0,            0,            0,            0, 200, 
+}
+
 savesection  // Anything below here will be stored in the save block
 
 uint16_t 0xFFFF // Save state  end marker

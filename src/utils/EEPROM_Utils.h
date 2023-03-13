@@ -24,7 +24,7 @@ class EEPROM_Utils {
 /* ---------------------------------------------------------------------------- */
 
 const uint8_t letter1 = 80; 
-const uint8_t letter2 = 80; 
+const uint8_t letter2 = 81; 
 
 void EEPROM_Utils::saveCookie(Cookie &cookie) {
 

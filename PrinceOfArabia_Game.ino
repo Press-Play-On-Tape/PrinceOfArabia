@@ -103,12 +103,6 @@ void game() {
             DEBUG_PRINTLN(level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX()));
         }
 
-        // if (justPressed & B_BUTTON) { // echo out details
-
-        //     prince.init(14, 25, Direction::Right, Stance::Crouch_3_End, true); 
-        //     level.init(gamePlay, prince, 10, 21, 0, 0); 
-        // }
-
     #endif
 
     #ifdef GIVE_SWORD
@@ -860,7 +854,7 @@ void game() {
                         DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jump from Run_Repeat_4"));
                         #endif
 
-                        processRunJump(prince, level);
+                        processRunJump(prince, level, enemyIsVisible & sameLevelAsPrince);
 
                     }
                     else if (pressed & btnFacingDirection) {
@@ -913,7 +907,7 @@ void game() {
                         DEBUG_PRINTLN(F("RIGHT_BUTTON & A_BUTTON, Running Jump from Run_Start_6_End, Run_Repeat_8_End or Run_Repeat_8_End_Turn"));
                         #endif
 
-                        processRunJump(prince, level);
+                        processRunJump(prince, level, enemyIsVisible & sameLevelAsPrince);
 
                     }
                     else if (pressed & btnFacingDirection) {

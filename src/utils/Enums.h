@@ -128,12 +128,12 @@ enum class StandingJumpResult : uint8_t {
     Normal_36,
     DropLevel_36,
     DropLevel_40,
-    //Short_Pos6, // Same level but a little shorter.
     GrabLedge_28, 
     GrabLedge_32, 
     GrabLedge_36,
     GrabLedge_40,
 };
+
 
 enum class RunningJumpResult : uint8_t {
     None,
@@ -154,7 +154,6 @@ enum class RunningJumpResult : uint8_t {
     Jump2_DropLevel,
     Jump2_DropLevel_Pos10,
     Jump2_Pos10,
-    Jump1_Pos0,
     Jump1_Pos2,
     Jump1_Pos6,
     Jump1_Pos10,
