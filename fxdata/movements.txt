@@ -135,7 +135,7 @@ namespace Constants {
         0,0, 0,0, 0,0, 0,0, 0,0,                                                                                                // JUMP_UP_DROP_A_OFFSETS
         1,0, 1,0, 1,0, 1,0, 0,0,                                                                                                // JUMP_UP_DROP_B_OFFSETS
         0,6, 0,6, 0,6, 0,6, 0,7,                                                                                                // JUMP_UP_DROP_C_OFFSETS
-        0,-4, 0,-4, 0,-2, 0,-3, 0,-6, 0,-3, 0,-3, 0,-3, 0,0, 1,-1, 1,0, 0,-1, 1,-1, 1,0, 0,0,                                   // STEP_CLIMBING_OFFSETS
+        0,-4, 0,-4, 0,-2, 0,-4, 0,-3, 0,-3, 0,-3, 0,-3, 0,-2, 1,-1, 1,0, 0,-1, 1,-1, 1,0, 0,0,                                  // STEP_CLIMBING_OFFSETS
         0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0,                                                             // CROUCH_STAND_OFFSETS
         0,0, 1,0, 1,0, 1,0, 1,0, 0,0, 0,0,                                                                                      // CROUCH_HOP_OFFSETS
         0,-4, 0,-4, 0,-2, 0,-3, 0,0, 0,3, 0,2, 0,4, 0,4,                                                                        // STEP_CLIMBINB_BLOCK_OFFSETS
