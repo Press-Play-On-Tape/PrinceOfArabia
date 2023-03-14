@@ -1,6 +1,6 @@
 #pragma once
 
-#define _PRODUCTION_SETTINGS
+#define PRODUCTION_SETTINGS
 
 #ifdef PRODUCTION_SETTINGS
 
@@ -23,7 +23,7 @@
 
     #define POP_OR_POA
     #define _POP_ONLY
-    #define _SOS_ONLY
+    #define _POA_ONLY
     #define _USE_LED
 
     #define _DEBUG
@@ -34,7 +34,7 @@
     #define SAVE_MEMORY_PPOT
     #define SAVE_MEMORY_OTHER
     #define SAVE_MEMORY_SOUND
-    #define SAVE_MEMORY_ENEMY
+    #define _SAVE_MEMORY_ENEMY
     #define SAVE_MEMORY_INVADER
     #define _ALT_B_BUTTON
     #define _GIVE_SWORD
@@ -42,14 +42,14 @@
     #define LEVEL_DATA_FROM_FX
     #define MOVEMENT_DATA_FROM_FX
     #define _SAVE_TO_FX
-    #define STARTING_LEVEL 1
+    #define STARTING_LEVEL 4
     #define MAX_LEVEL 31
     #define _DEBUG_CUT_SCENES
     #define DEBUG_LEVELS
 
     #define POP_OR_POA
     #define _POP_ONLY
-    #define _SOS_ONLY
+    #define _POA_ONLY
     #define USE_LED
 
     #define DEBUG

@@ -2,17 +2,9 @@
 #include "PrinceOfArabia_CutScene.h"
 
 
-//const uint8_t Title_Cursor_XPos[] PROGMEM = {
-////  N     R    C    H
-//    32,   0,  61,   0,          // NC
-//    15,   0,  47,  87,          // NCH
-//    13,  40,  78,   0,          // NRC
-//     3,  26,  62, 101,          // NRCH
-//};
 
-void setTitleFrame(TitleFrameIndex index /*, uint8_t offset = 0*/) {
+void setTitleFrame(TitleFrameIndex index) {
 
-    //index = static_cast<TitleFrameIndex>(static_cast<uint8_t>(index) + offset);
 
     #if defined (POP_OR_POA)
         uint8_t idx = 2 * static_cast<uint8_t>(index) + (cookie.pop & 1);
@@ -415,7 +407,6 @@ void title() {
             if (!FX::drawFrame()) {
 
                 setTitleFrame((TitleFrameIndex)((uint8_t)TitleFrameIndex::Main_Game_PoP_Frame_NC + frameIndex));
-                //uint8_t x = static_cast<uint8_t>(pgm_read_byte(&Title_Cursor_XPos[ (frameIndex * 4) + static_cast<uint8_t>(titleScreenVars.option) ]));
                 FX::seekDataArray(Title_Cursor_XPos, frameIndex, (uint8_t)titleScreenVars.option, 4);
                 uint8_t x = FX::readEnd();
                 

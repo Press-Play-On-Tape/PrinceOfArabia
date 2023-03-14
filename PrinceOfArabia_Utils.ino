@@ -978,3 +978,22 @@ void saveCookie(bool enableLEDs) {
     }
     
 #endif
+
+
+void handleBlades(int8_t tileXIdx, int8_t tileYIdx) {
+
+    uint8_t itemIdx = level.getItem(ItemType::Blade, tileXIdx, tileYIdx);
+
+    if (itemIdx != Constants::NoItemFound) {
+
+        Item &item = level.getItem(itemIdx);
+
+        if (abs(item.data.blade.position) <= 5) {
+
+            pushDead(prince, level, gamePlay, true, DeathType::Blade);
+
+        }
+
+    }
+
+}

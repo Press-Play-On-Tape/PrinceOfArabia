@@ -16,7 +16,6 @@ void splashScreen_Init() {
 //
 void splashScreen() { 
 
-
     #ifdef POP_OR_POA
 
         auto pressed = arduboy.pressedButtons();

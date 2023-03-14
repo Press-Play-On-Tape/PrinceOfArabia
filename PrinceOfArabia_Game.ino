@@ -1287,17 +1287,16 @@ void game() {
 
                             cookie.hasSavedLevel = false;
                             saveCookie(true);
-                            menu.direction = Direction::Right;  
+                            gamePlay.gameState = GameState::Menu;
+                            menu.cursor = 0;
                             break;
 
                         case 1:
-                            menu.direction = Direction::Right;
-                            //gamePlay.gameState = GameState::Menu;
-                            //menu.cursor = 3;
+                            gamePlay.gameState = GameState::Menu;
+                            menu.cursor = 0;
                             break;
 
                     }
-                    //menu.cursor++;
 
                 } 
 
@@ -2097,37 +2096,64 @@ void game() {
                 case Stance::Step_Climbing_1_Start ... Stance::Step_Climbing_15_End:
                     break;
 
+                case Stance::Sword_Step_Back_1_Start ... Stance::Sword_Step_Back_3_End:
+                    {
+                        int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x);
+                        int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y);
+
+                        handleBlades(tileXIdx, tileYIdx);
+
+                    }
+
+
+                    break;
+
+                case Stance::Sword_Step_1_Start ... Stance::Sword_Step_3_End:
+                    {
+                        int8_t distToEdgeOfTile = level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX());
+
+                        if (distToEdgeOfTile > 2) {
+
+                            int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x + prince.getDirectionOffset(4));
+                            int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y);
+
+                            handleBlades(tileXIdx, tileYIdx);
+
+                        }
+
+                    }
+
+
+                    break;
+
+                case Stance::Sword_Normal:
+                    {
+                        int8_t distToEdgeOfTile = level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX());
+
+                        if (distToEdgeOfTile > 2) {
+
+                            int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x);
+                            int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y);
+    
+                            handleBlades(tileXIdx, tileYIdx);
+
+                        }
+
+                    }
+
+
+                    break;
+
                 default:
                     {
                         int8_t distToEdgeOfTile = level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX());
 
                         if (distToEdgeOfTile <= 4) {
-                            
-                            int8_t tileXIdx = 0;
 
-                            if (((prince.getStance() >= Stance::Sword_Step_Back_1_Start && prince.getStance() <= Stance::Sword_Step_Back_3_End) || prince.getStance() >= Stance::Sword_Normal) && distToEdgeOfTile > 2) {
-                                
-                                tileXIdx = level.coordToTileIndexX(prince.getPosition().x);
- 
-                            }
-                            else {
-                                tileXIdx = level.coordToTileIndexX(prince.getPosition().x) + ((prince.getDirection() == Direction::Right && distToEdgeOfTile == 2) ? 1 : 0);
-                            }
-
+                            int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x) + ((prince.getDirection() == Direction::Right && distToEdgeOfTile == 2) ? 1 : 0);
                             int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y);
-                            uint8_t itemIdx = level.getItem(ItemType::Blade, tileXIdx, tileYIdx);
-
-                            if (itemIdx != Constants::NoItemFound) {
-
-                                Item &item = level.getItem(itemIdx);
-
-                                if (abs(item.data.blade.position) <= 5) {
-
-                                    pushDead(prince, level, gamePlay, true, DeathType::Blade);
-
-                                }
-
-                            }
+                            
+                            handleBlades(tileXIdx, tileYIdx);
 
                         }
 
