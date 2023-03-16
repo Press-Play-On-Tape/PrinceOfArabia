@@ -1,9 +1,9 @@
 int8_t Level14_StandingJumps_FG[] = {
-    include "../levels/Level14_StandingJumps_FG.csv"
+    include "../levels/Level14_StandingJumps_fg.csv"
 };
 
 int8_t Level14_StandingJumps_BG[] = {
-    include "../levels/Level14_StandingJumps_BG.csv"
+    include "../levels/Level14_StandingJumps_bg.csv"
 };
 
 uint8_t Level14_StandingJumps_Data[] = {

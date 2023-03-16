@@ -41,7 +41,7 @@ namespace Images {
     image_t LevelRect               = "../images/title/LevelRect.png"
 
     image_t Mouse                   = "../images/mouse/Mouse_16x16.png"
-    image_t HourGlasses             = "../images/hourGlass/HourGlasses_19x23.png"
+    image_t HourGlasses             = "../images/hourglass/HourGlasses_19x23.png"
 
 
     // HUD
@@ -59,7 +59,7 @@ namespace Images {
     image_t Potion_Float_HUD        = "../images/hud/Float.png"
     image_t HighScore               = "../images/title/HighScore.png"
 
-    image_t Sword                   = "../images/items/Sword.png"
+    image_t Sword                   = "../images/items/sword.png"
     image_t Skeleton                = "../images/items/Skeleton.png"
     image_t Gates                   = "../images/items/Gates_9x28_1.png"
 
