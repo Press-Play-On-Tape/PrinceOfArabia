@@ -15,7 +15,7 @@ python3 scripts/createOFFSETSData.py ../src/utils/Constants.h ../src/utils/movem
 
 python3 ./Arduboy-Python-Utilities-master/fxdata-build.py fxdata.txt
 
-cp fxdata.bin ../build/fxdata.bin
+cp fxdata.bin ../../build/fxdata.bin
 
 
 
