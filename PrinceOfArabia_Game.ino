@@ -148,6 +148,11 @@ void game() {
             case Stance::Falling_Down_P0_1_Start ... Stance::Falling_Down_P0_6_End:
             case Stance::Falling_Down_M1_1_Start ... Stance::Falling_Down_M1_6_End:
             case Stance::Falling_Down_M2_1_Start ... Stance::Falling_Down_M2_6_End:
+            case Stance::Falling_StepWalkRun_P0_4_8_1_Start ... Stance::Falling_StepWalkRun_P0_4_8_6_End:
+            case Stance::Falling_StepWalkRun_P1_5_9_1_Start ... Stance::Falling_StepWalkRun_P1_5_9_6_End:
+            case Stance::Falling_StepWalkRun_P2_10_1_Start ... Stance::Falling_StepWalkRun_P2_10_6_End:
+            case Stance::Falling_StepWalkRun_P3_7_11_1_Start ... Stance::Falling_StepWalkRun_P3_7_11_6_End:
+            case Stance::Falling_StepWalkRun_P6_1_Start ... Stance::Falling_StepWalkRun_P6_6_End:
                 break;
 
             default:
