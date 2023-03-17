@@ -9,9 +9,7 @@ extern void setTitleFrame(TitleFrameIndex index/*, uint8_t frame = 0*/);
 
 struct TitleScreenVars {
     
-    #ifdef POP_OR_POA
-        uint8_t counter;
-    #endif
+    uint8_t counter;
     
     public:
 
