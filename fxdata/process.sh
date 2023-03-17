@@ -9,9 +9,9 @@ montage ../images/enemy/right/Backup/???_*.png -geometry 36x36+0+0 -background n
 montage ../images/skeleton/left/Backup/???_*.png -geometry 36x36+0+0 -background none -tile 15x15 ../images/skeleton/left/Skeleton_Left_36x36.png
 montage ../images/skeleton/right/Backup/???_*.png -geometry 36x36+0+0 -background none -tile 15x15 ../images/skeleton/right/Skeleton_Right_36x36.png
 
-Python3 scripts/createMovements.py ../src/utils/Constants.h movements.txt
-Python3 scripts/createSEQData.py ../src/utils/Constants.h ../src/utils/movements_SEQData.h
-Python3 scripts/createOFFSETSData.py ../src/utils/Constants.h ../src/utils/movements_OFFSETSData.h
+python3 scripts/createMovements.py ../src/utils/Constants.h movements.txt
+python3 scripts/createSEQData.py ../src/utils/Constants.h ../src/utils/movements_SEQData.h
+python3 scripts/createOFFSETSData.py ../src/utils/Constants.h ../src/utils/movements_OFFSETSData.h
 
 python3 ./Arduboy-Python-Utilities-master/fxdata-build.py fxdata.txt
 
