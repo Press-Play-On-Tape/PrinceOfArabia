@@ -43,7 +43,7 @@ uint8_t level7_Data[] = {
     0,                          // Type 0 = Guard, 1 = Skeleton, 2 = Mirror          
     50,                         // Enemy starting x tile
     3,                          // Enemy starting y tile
-    70,                         // Enemy starting x pos (left entry)
+    26,                         // Enemy starting x pos (left entry)
     26,                         // Enemy starting x pos (right entry)
     18,                         // Enemy starting x pos (left extent)
     74,                         // Enemy starting x pos (right extent)

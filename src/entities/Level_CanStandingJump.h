@@ -344,50 +344,56 @@ StandingJumpResult canStandingJump(Prince &prince) {
 
 
     /* ----------------------------------------------------------------------------------- */
-    /*  Jimp to position 3 and drop a level?
+    /*  Jump to position 3 and drop a level?
     
     Left                   Right
     _____ 6 5 4 3 2 1      _____ 1 2 3 4 5 6
     WT CL x x x 0 0 x      WT CL x 0 0 x x x
     WT NL x x 0 0 0 x      WT CL x 0 0 0 x x
     GT CL x x 0 0 x _      GT CL _ x 0 0 x x
-    GT NL x x 1 0 x _      GT NL _ x 0 1 x x 
+    GT NL x x 1 x x _      GT NL _ x x 1 x x 
+
     */
 
-    if (//wallTile1_CurrLvl == WallTileResults::None &&  removed as current tile might be a gate
-        wallTile2_CurrLvl == WallTileResults::None && 
+    if (wallTile2_CurrLvl == WallTileResults::None && 
         wallTile3_CurrLvl == WallTileResults::None && 
         wallTile2_NextLvl == WallTileResults::None && 
         wallTile3_NextLvl == WallTileResults::None && 
         wallTile4_NextLvl == WallTileResults::None && 
         !isGroundTile2_CurrLvl &&
         !isGroundTile3_CurrLvl &&
-        !isGroundTile2_NextLvl &&
-        !isGroundTile3_NextLvl &&
+        // !isGroundTile2_NextLvl &&
+        // !isGroundTile3_NextLvl &&
         isGroundTile4_NextLvl) {
 
-        switch (distToEdgeOfCurrentTile) {
+        // switch (distToEdgeOfCurrentTile) {
 
-            case 6:
-            case 10:
+        //     case 6:
+        //     case 10:
 
-                #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP) && defined(DEBUG_ACTION_CANSTANDINGJUMP_DETAIL)
-                DEBUG_PRINTLN(F("L12 DropLevel_36"));
-                #endif
+        //         #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP) && defined(DEBUG_ACTION_CANSTANDINGJUMP_DETAIL)
+        //         DEBUG_PRINTLN(F("L12 DropLevel_36"));
+        //         #endif
             
-                return StandingJumpResult::DropLevel_36;
+        //         return StandingJumpResult::DropLevel_36;
 
-            default:
+        //     default:
 
-                #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP) && defined(DEBUG_ACTION_CANSTANDINGJUMP_DETAIL)
-                DEBUG_PRINT(F("L13 "));
-                DEBUG_PRINTLN(wallTile2_CurrLvl == WallTileResults::None ? "Normal_36" : "None");
-                #endif
+        //         #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP) && defined(DEBUG_ACTION_CANSTANDINGJUMP_DETAIL)
+        //         DEBUG_PRINT(F("L13 "));
+        //         DEBUG_PRINTLN(wallTile2_CurrLvl == WallTileResults::None ? "Normal_36" : "None");
+        //         #endif
             
-//                return (wallTile1_CurrLvl == WallTileResults::None && wallTile2_CurrLvl == WallTileResults::None ? StandingJumpResult::Normal : StandingJumpResult::None);  removed as current wall might be a gate
-                return (wallTile2_CurrLvl == WallTileResults::None ? StandingJumpResult::Normal_36 : StandingJumpResult::None);
+        //         return (wallTile2_CurrLvl == WallTileResults::None ? StandingJumpResult::Normal_36 : StandingJumpResult::None);
             
-        }
+        // }
+
+        #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP) && defined(DEBUG_ACTION_CANSTANDINGJUMP_DETAIL)
+        DEBUG_PRINTLN(F("L12 DropLevel_36"));
+        #endif
+    
+        return StandingJumpResult::DropLevel_36;
+
 
     }
     else {
