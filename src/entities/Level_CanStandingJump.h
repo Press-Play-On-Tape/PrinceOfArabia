@@ -362,31 +362,7 @@ StandingJumpResult canStandingJump(Prince &prince) {
         wallTile4_NextLvl == WallTileResults::None && 
         !isGroundTile2_CurrLvl &&
         !isGroundTile3_CurrLvl &&
-        // !isGroundTile2_NextLvl &&
-        // !isGroundTile3_NextLvl &&
         isGroundTile4_NextLvl) {
-
-        // switch (distToEdgeOfCurrentTile) {
-
-        //     case 6:
-        //     case 10:
-
-        //         #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP) && defined(DEBUG_ACTION_CANSTANDINGJUMP_DETAIL)
-        //         DEBUG_PRINTLN(F("L12 DropLevel_36"));
-        //         #endif
-            
-        //         return StandingJumpResult::DropLevel_36;
-
-        //     default:
-
-        //         #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP) && defined(DEBUG_ACTION_CANSTANDINGJUMP_DETAIL)
-        //         DEBUG_PRINT(F("L13 "));
-        //         DEBUG_PRINTLN(wallTile2_CurrLvl == WallTileResults::None ? "Normal_36" : "None");
-        //         #endif
-            
-        //         return (wallTile2_CurrLvl == WallTileResults::None ? StandingJumpResult::Normal_36 : StandingJumpResult::None);
-            
-        // }
 
         #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP) && defined(DEBUG_ACTION_CANSTANDINGJUMP_DETAIL)
         DEBUG_PRINTLN(F("L12 DropLevel_36"));
@@ -398,7 +374,6 @@ StandingJumpResult canStandingJump(Prince &prince) {
     }
     else {
         
-//        if (wallTile1_CurrLvl == WallTileResults::None && wallTile2_CurrLvl == WallTileResults::None) {   removed as current wall might be a gate
         if (wallTile2_CurrLvl == WallTileResults::None) {
 
             switch (wallTile3_CurrLvl) {
@@ -433,13 +408,7 @@ StandingJumpResult canStandingJump(Prince &prince) {
                 
                                 return StandingJumpResult::Normal_28;
 
-                            // default:
-
-                            //     #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP) && defined(DEBUG_ACTION_CANSTANDINGJUMP_DETAIL)
-                            //     DEBUG_PRINTLN(F("L16 Normal_36"));
-                            //     #endif
-
-                            //     return StandingJumpResult::Normal_36;
+                            default: break;
 
                         }
 

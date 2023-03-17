@@ -85,43 +85,43 @@ void Stack< Type, Capacity >::setFrame(uint8_t val) {
 }
 
 template< typename Type, uint8_t Capacity >
-bool Stack< Type, Capacity >::isEmpty(void) const { // O(1)
+bool Stack< Type, Capacity >::isEmpty(void) const {   
 	return (this->next == FirstIndex);
 }
 
 template< typename Type, uint8_t Capacity >
-bool Stack< Type, Capacity >::isFull(void) const { // O(1)
+bool Stack< Type, Capacity >::isFull(void) const {   
 	return (this->next == this->getCapacity());
 }
 
 template< typename Type, uint8_t Capacity >
-typename Stack< Type, Capacity >::IndexType Stack< Type, Capacity >::getCount(void) const { // O(1)
+typename Stack< Type, Capacity >::IndexType Stack< Type, Capacity >::getCount(void) const {   
 	return this->next;
 }
 
 template< typename Type, uint8_t Capacity >
-constexpr typename Stack< Type, Capacity >::IndexType Stack< Type, Capacity >::getCapacity(void) const { // O(1)
+constexpr typename Stack< Type, Capacity >::IndexType Stack< Type, Capacity >::getCapacity(void) const {   
 	return static_cast<IndexType>(Capacity);
 }
 
 template< typename Type, uint8_t Capacity >
-typename Stack< Type, Capacity >::ItemType & Stack< Type, Capacity >::peek(void) { // O(1)
+typename Stack< Type, Capacity >::ItemType & Stack< Type, Capacity >::peek(void) {   
 	return this->items[this->next - 1];
 }
 
 template< typename Type, uint8_t Capacity >
-const typename Stack< Type, Capacity >::ItemType & Stack< Type, Capacity >::peek(void) const { // O(1)
+const typename Stack< Type, Capacity >::ItemType & Stack< Type, Capacity >::peek(void) const {   
 	return this->items[this->next - 1];
 }
 
 template< typename Type, uint8_t Capacity >
-typename Stack< Type, Capacity >::ItemType & Stack< Type, Capacity >::pop(void) { // O(1)
+typename Stack< Type, Capacity >::ItemType & Stack< Type, Capacity >::pop(void) {   
 	--this->next;
 	return this->items[this->next];
 }
 
 template< typename Type, uint8_t Capacity >
-bool Stack< Type, Capacity >::insert(const typename Stack< Type, Capacity >::ItemType & item) {// O(1)
+bool Stack< Type, Capacity >::insert(const typename Stack< Type, Capacity >::ItemType & item) {  
 
 	if (this->isFull()) return false;
 
@@ -138,7 +138,7 @@ bool Stack< Type, Capacity >::insert(const typename Stack< Type, Capacity >::Ite
 }
 
 template< typename Type, uint8_t Capacity >
-bool Stack< Type, Capacity >::push(typename Stack< Type, Capacity >::ItemType && item) { // O(1)
+bool Stack< Type, Capacity >::push(typename Stack< Type, Capacity >::ItemType && item) {   
 
 	this->frame = Constants::Animation_NumberOfFrames;
 
@@ -151,7 +151,7 @@ bool Stack< Type, Capacity >::push(typename Stack< Type, Capacity >::ItemType &&
 }
 
 template< typename Type, uint8_t Capacity >
-bool Stack< Type, Capacity >::push(typename Stack< Type, Capacity >::ItemType && item1, typename Stack< Type, Capacity >::ItemType && item2) {// O(1)
+bool Stack< Type, Capacity >::push(typename Stack< Type, Capacity >::ItemType && item1, typename Stack< Type, Capacity >::ItemType && item2) {  
 
 	this->frame = Constants::Animation_NumberOfFrames;
 	if (this->isFull()) return false;
@@ -167,7 +167,7 @@ bool Stack< Type, Capacity >::push(typename Stack< Type, Capacity >::ItemType &&
 }
 
 template< typename Type, uint8_t Capacity >
-bool Stack< Type, Capacity >::push(typename Stack< Type, Capacity >::ItemType && item1, typename Stack< Type, Capacity >::ItemType && item2, typename Stack< Type, Capacity >::ItemType && item3) { // O(1)
+bool Stack< Type, Capacity >::push(typename Stack< Type, Capacity >::ItemType && item1, typename Stack< Type, Capacity >::ItemType && item2, typename Stack< Type, Capacity >::ItemType && item3) {   
 
 	this->frame = Constants::Animation_NumberOfFrames;
 	if (this->isFull()) return false;
@@ -185,7 +185,7 @@ bool Stack< Type, Capacity >::push(typename Stack< Type, Capacity >::ItemType &&
 }
 
 template< typename Type, uint8_t Capacity >
-void Stack< Type, Capacity >::drop(void) { // O(1)
+void Stack< Type, Capacity >::drop(void) {   
 
 	--this->next;
 	this->items[this->next].~ItemType();
@@ -212,11 +212,11 @@ typename Stack< Type, Capacity >::IndexOfType Stack< Type, Capacity >::indexOf(c
 }
 
 template< typename Type, uint8_t Capacity >
-typename Stack< Type, Capacity >::ItemType & Stack< Type, Capacity >::operator [] (const typename Stack< Type, Capacity >::IndexType index) { // O(1)
+typename Stack< Type, Capacity >::ItemType & Stack< Type, Capacity >::operator [] (const typename Stack< Type, Capacity >::IndexType index) {   
 	return this->items[index];
 }
 
 template< typename Type, uint8_t Capacity >
-const typename Stack< Type, Capacity >::ItemType & Stack< Type, Capacity >::operator [] (const typename Stack< Type, Capacity >::IndexType index) const { // O(1)
+const typename Stack< Type, Capacity >::ItemType & Stack< Type, Capacity >::operator [] (const typename Stack< Type, Capacity >::IndexType index) const {   
 	return this->items[index];
 }
