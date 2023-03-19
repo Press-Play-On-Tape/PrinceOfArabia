@@ -1313,7 +1313,8 @@ void game() {
                             break;
 
                         case 1:
-                            menu.direction = Direction::Right;  
+                            gamePlay.gameState = GameState::Menu; 
+                            menu.cursor = static_cast<uint8_t>(MenuOption::Clear);
                             break;
 
                     }
