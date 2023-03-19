@@ -3,7 +3,7 @@
  <editorsettings>
   <export target="Level12.csv" format="csv"/>
  </editorsettings>
- <tileset firstgid="1" source="../../PrinceOfPersiaFX/Assets/TileSets/tile_dungeon.tsx"/>
+ <tileset firstgid="1" source="LevelMaster.tsx"/>
  <layer id="1" name="BG" width="80" height="21">
   <data encoding="csv">
 0,0,98,76,76,76,76,77,95,77,78,78,99,77,78,78,78,78,78,78,78,78,99,76,76,76,76,76,77,78,78,78,99,76,76,76,76,76,76,76,76,76,76,76,76,76,76,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
