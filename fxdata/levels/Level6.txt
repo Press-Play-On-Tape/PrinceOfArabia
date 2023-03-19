@@ -1,9 +1,9 @@
 int8_t Level6_FG[] = {
-    include "../levels/Level6_FG.csv"
+    include "../levels/Level6_FG_convert.csv"
 };
 
 int8_t Level6_BG[] = {
-    include "../levels/Level6_BG.csv"
+    include "../levels/Level6_BG_convert.csv"
 };
 
 uint8_t level6_Data[] = {
