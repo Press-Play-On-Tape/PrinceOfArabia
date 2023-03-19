@@ -4,8 +4,7 @@
   <chunksize width="10" height="6"/>
   <export target="Level14_StandingJumps.csv" format="csv"/>
  </editorsettings>
- <tileset firstgid="1" source="../../PrinceOfPersiaFX/Assets/TileSets/tile_dungeon.tsx"/>
- <tileset firstgid="126" source="../../PrinceOfPersiaFX/Assets/TileSets/tile_obj.tsx"/>
+ <tileset firstgid="1" source="LevelMaster.tsx"/>
  <layer id="1" name="BG" width="10" height="12">
   <data encoding="csv">
    <chunk x="0" y="0" width="10" height="6">
