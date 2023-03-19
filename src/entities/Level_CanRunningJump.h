@@ -260,6 +260,44 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
 
 
         /* ----------------------------------------------------------------------------------- */
+        /*  3. Can we jump three blanks to the same level? Unique case where there first tile
+               is a floor tile.
+        
+        Positions 2, 6, 10.
+        
+        Left                  Right
+        _____ 6 5 4 3 2 1     _____ 1 2 3 4 5 6
+        WT CL x 0 0 0 0 0     WT CL 0 0 0 0 0 x
+        WT NL x 1 0 0 1 x     WT NL x 1 0 0 1 x
+        GT CL x 1 x x 1 _     GT CL _ 1 x x 1 x
+        GT NL x x x x x _     GT NL _ x x x x x
+        */
+
+        if (wallTile2_CurrLvl == WallTileResults::None && 
+            wallTile3_CurrLvl == WallTileResults::None && 
+            wallTile4_CurrLvl == WallTileResults::None && 
+            wallTile5_CurrLvl == WallTileResults::None && 
+            wallTile2_NextLvl != WallTileResults::None && 
+            wallTile3_NextLvl == WallTileResults::None && 
+            wallTile4_NextLvl == WallTileResults::None && 
+            wallTile5_NextLvl != WallTileResults::None && 
+            isGroundTile2_CurrLvl &&
+            !isGroundTile3_CurrLvl &&
+            !isGroundTile4_CurrLvl &&
+            isGroundTile5_CurrLvl && 
+            distToEdgeOfCurrentTile == 2) {
+
+            #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
+            DEBUG_PRINTLN(F("J3-4 Jump3_Pos10 Special"));
+            #endif
+
+            return RunningJumpResult::Jump3_Pos10;
+
+        }
+        
+
+
+        /* ----------------------------------------------------------------------------------- */
         /*  3. Can we jump three blanks to the same level?
         
         Positions 2, 6, 10.

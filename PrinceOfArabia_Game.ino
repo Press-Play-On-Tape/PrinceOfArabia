@@ -979,6 +979,24 @@ void game() {
                             if (itemIdx != Constants::NoItemFound) {
 
                                 Item &item = level.getItem(itemIdx);
+                                
+                                switch (item.itemType) {
+
+                                    case ItemType::Potion_Small:
+                                    case ItemType::Potion_Large:
+                                    case ItemType::Potion_Float:
+                                        #ifndef SAVE_MEMORY_SOUND
+                                            setSound(SoundIndex::Tada);
+                                        #endif
+                                        break;
+
+                                    default:
+                                        #ifndef SAVE_MEMORY_SOUND
+                                            setSound(SoundIndex::Dead);
+                                        #endif
+                                        break;
+                                    
+                                }
 
                                 uint8_t idx = static_cast<uint8_t>(item.itemType) - static_cast<uint8_t>(ItemType::Potion_Small); 
                                 prince.pushSequence(Stance::Drink_Tonic_Small_1_Start + (idx * 15), Stance::Drink_Tonic_Small_15_End + (idx * 15), Stance::Upright);
