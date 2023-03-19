@@ -1309,13 +1309,11 @@ void game() {
 
                             cookie.hasSavedLevel = false;
                             saveCookie(true);
-                            gamePlay.gameState = GameState::Menu;
-                            menu.cursor = 0;
+                            menu.direction = Direction::Right;  
                             break;
 
                         case 1:
-                            gamePlay.gameState = GameState::Menu;
-                            menu.cursor = 0;
+                            menu.direction = Direction::Right;  
                             break;
 
                     }
