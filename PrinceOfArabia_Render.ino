@@ -23,7 +23,7 @@ void render(bool sameLevelAsPrince) {
             switch (bgTile) {
 
                 case 0 ... 123:
-                   FX::drawBitmap(x * Constants::TileWidth, yCoord, Images::Tiles_Dungeon, Images::xTiles_Ref[bgTile], dbmMasked);
+                   FX::drawBitmap(x * Constants::TileWidth, yCoord, Images::Tiles_Dungeon, bgTile, dbmMasked);
                    break;
 
                 case 124:
@@ -369,7 +369,7 @@ void render(bool sameLevelAsPrince) {
                         break;
 
                     default:
-                        FX::drawBitmap(x * Constants::TileWidth, yCoord, Images::Tiles_Dungeon, Images::xTiles_Ref[fgTile], dbmMasked);
+                        FX::drawBitmap(x * Constants::TileWidth, yCoord, Images::Tiles_Dungeon, fgTile, dbmMasked);
                         break;
 
                 }

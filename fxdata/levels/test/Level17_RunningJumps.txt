@@ -1,9 +1,9 @@
 int8_t Level17_RunningJumps_FG[] = {
-    include "../levels/Level15_RunningJumps_FG.csv"
+    include "../levels/Level15_RunningJumps_FG_convert.csv"
 };
 
 int8_t Level17_RunningJumps_BG[] = {
-    include "../levels/Level15_RunningJumps_BG.csv"
+    include "../levels/Level15_RunningJumps_BG_convert.csv"
 };
 
 uint8_t Level17_RunningJumps_Data[] = {
