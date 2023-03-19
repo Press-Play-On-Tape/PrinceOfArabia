@@ -136,6 +136,27 @@ namespace Images {
     image_t HUD_Spaceship           = "../images/invaders/HUD_lives_4x17.png"
     image_t Levels                  = "../images/invaders/Levels_57x13_1.png"
 
+
+    // Dithers
+
+    image_t BayerDither00          = "../images/fade/BayerDither00.png"
+    image_t BayerDither01          = "../images/fade/BayerDither01.png"
+    image_t BayerDither02          = "../images/fade/BayerDither02.png"
+    image_t BayerDither03          = "../images/fade/BayerDither03.png"
+    image_t BayerDither04          = "../images/fade/BayerDither04.png"
+    image_t BayerDither05          = "../images/fade/BayerDither05.png"
+    image_t BayerDither06          = "../images/fade/BayerDither06.png"
+    image_t BayerDither07          = "../images/fade/BayerDither07.png"
+    image_t BayerDither08          = "../images/fade/BayerDither08.png"
+    image_t BayerDither09          = "../images/fade/BayerDither09.png"
+    image_t BayerDither10          = "../images/fade/BayerDither10.png"
+    image_t BayerDither11          = "../images/fade/BayerDither11.png"
+    image_t BayerDither12          = "../images/fade/BayerDither12.png"
+    image_t BayerDither13          = "../images/fade/BayerDither13.png"
+    image_t BayerDither14          = "../images/fade/BayerDither14.png"
+    image_t BayerDither15          = "../images/fade/BayerDither15.png"
+    image_t BayerDither16          = "../images/fade/BayerDither16.png"
+
 }
 
 namespace_end

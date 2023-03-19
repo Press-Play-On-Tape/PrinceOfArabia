@@ -336,6 +336,7 @@ include 'cutscenes/Title_CutScene_4_Frame.txt'
 include 'cutscenes/Title_CutScene_5_Frame.txt'
 include 'cutscenes/Title_CutScene_6_Frame.txt'
 include 'cutscenes/Title_CutScene_7_Frame.txt'
+include 'cutscenes/Title_CutScene_8_Frame.txt'
 include 'cutscenes/Title_CutScene_End_Frame.txt'
 include 'cutscenes/Title_IntroGame_End_Frame.txt'
 
@@ -429,6 +430,9 @@ TitleFrameIndexTable[] = {
 
     uint24_t Title_CutScene_7_Frame, uint8_t 0
     uint24_t Title_CutScene_7_Frame, uint8_t 0
+
+    uint24_t Title_CutScene_8_Frame, uint8_t 0
+    uint24_t Title_CutScene_8_Frame, uint8_t 0
 
     uint24_t Title_CutScene_End_Frame, uint8_t 3
     uint24_t Title_CutScene_End_Frame, uint8_t 3

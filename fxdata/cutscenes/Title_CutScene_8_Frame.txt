@@ -1,0 +1,38 @@
+    Title_CutScene_8_Frame[] = {
+
+
+int16_t 0, 0, uint24_t BayerDither00, uint8_t 0, uint8_t dbmNormal_end
+int16_t 0, 0, uint24_t BayerDither01, uint8_t 0, uint8_t dbmNormal_end
+int16_t 0, 0, uint24_t BayerDither02, uint8_t 0, uint8_t dbmNormal_end
+int16_t 0, 0, uint24_t BayerDither03, uint8_t 0, uint8_t dbmNormal_end
+int16_t 0, 0, uint24_t BayerDither04, uint8_t 0, uint8_t dbmNormal_end
+int16_t 0, 0, uint24_t BayerDither05, uint8_t 0, uint8_t dbmNormal_end
+int16_t 0, 0, uint24_t BayerDither06, uint8_t 0, uint8_t dbmNormal_end
+int16_t 0, 0, uint24_t BayerDither07, uint8_t 0, uint8_t dbmNormal_end
+int16_t 0, 0, uint24_t BayerDither08, uint8_t 0, uint8_t dbmNormal_end
+int16_t 0, 0, uint24_t BayerDither09, uint8_t 0, uint8_t dbmNormal_end
+int16_t 0, 0, uint24_t BayerDither10, uint8_t 0, uint8_t dbmNormal_end
+int16_t 0, 0, uint24_t BayerDither11, uint8_t 0, uint8_t dbmNormal_end
+int16_t 0, 0, uint24_t BayerDither12, uint8_t 0, uint8_t dbmNormal_end
+int16_t 0, 0, uint24_t BayerDither13, uint8_t 0, uint8_t dbmNormal_end
+int16_t 0, 0, uint24_t BayerDither14, uint8_t 0, uint8_t dbmNormal_end
+int16_t 0, 0, uint24_t BayerDither15, uint8_t 0, uint8_t dbmNormal_end
+int16_t 0, 0, uint24_t BayerDither16, uint8_t 0, uint8_t dbmNormal_end
+int16_t 0, 0, uint24_t BayerDither15, uint8_t 0, uint8_t dbmNormal_end
+int16_t 0, 0, uint24_t BayerDither14, uint8_t 0, uint8_t dbmNormal_end
+int16_t 0, 0, uint24_t BayerDither13, uint8_t 0, uint8_t dbmNormal_end
+int16_t 0, 0, uint24_t BayerDither12, uint8_t 0, uint8_t dbmNormal_end
+int16_t 0, 0, uint24_t BayerDither11, uint8_t 0, uint8_t dbmNormal_end
+int16_t 0, 0, uint24_t BayerDither10, uint8_t 0, uint8_t dbmNormal_end
+int16_t 0, 0, uint24_t BayerDither09, uint8_t 0, uint8_t dbmNormal_end
+int16_t 0, 0, uint24_t BayerDither08, uint8_t 0, uint8_t dbmNormal_end
+int16_t 0, 0, uint24_t BayerDither07, uint8_t 0, uint8_t dbmNormal_end
+int16_t 0, 0, uint24_t BayerDither06, uint8_t 0, uint8_t dbmNormal_end
+int16_t 0, 0, uint24_t BayerDither05, uint8_t 0, uint8_t dbmNormal_end
+int16_t 0, 0, uint24_t BayerDither04, uint8_t 0, uint8_t dbmNormal_end
+int16_t 0, 0, uint24_t BayerDither03, uint8_t 0, uint8_t dbmNormal_end
+int16_t 0, 0, uint24_t BayerDither02, uint8_t 0, uint8_t dbmNormal_end
+int16_t 0, 0, uint24_t BayerDither01, uint8_t 0, uint8_t dbmNormal_end
+int16_t 0, 0, uint24_t BayerDither00, uint8_t 0, uint8_t dbmNormal_last
+
+    }
