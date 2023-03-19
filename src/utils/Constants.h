@@ -1492,6 +1492,9 @@ namespace Constants {
     constexpr uint8_t FrameIndex_NRC = 2;
     constexpr uint8_t FrameIndex_NRCH = 3;
 
+    constexpr uint8_t Tile_CollapsedTile_Full = 51;
+    constexpr uint8_t Tile_CollapsedTile_Half = 52;
+
     #ifndef MOVEMENT_DATA_FROM_FX
 
     const uint8_t StanceToImageXRef[] PROGMEM  = {

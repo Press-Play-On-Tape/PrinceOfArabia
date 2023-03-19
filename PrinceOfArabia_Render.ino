@@ -1,6 +1,5 @@
 #include <Arduboy2.h>   
 #include <ArduboyFX.h>  
-#include "fxdata/Images.h"  
 
 #include "src/utils/Constants.h"
 #include "src/utils/Stack.h"
@@ -33,12 +32,12 @@ void render(bool sameLevelAsPrince) {
 
             }
             
-            // Draw foreground, collapased tiles ..
+            // Draw foreground, collapsed tiles ..
 
             int8_t fgTile = level.getTile(Layer::Foreground, x, y - 1, TILE_NONE);
 
-            if      (fgTile == 29) FX::drawBitmap(x * Constants::TileWidth, yCoord, Images::Tile_Dungeon_97, 0, dbmMasked);
-            else if (fgTile == 30) FX::drawBitmap(x * Constants::TileWidth, yCoord, Images::Tile_Dungeon_98, 0, dbmMasked);
+            if      (fgTile == Constants::Tile_CollapsedTile_Full) FX::drawBitmap(x * Constants::TileWidth, yCoord, Images::Tile_Dungeon_97, 0, dbmMasked);
+            else if (fgTile == Constants::Tile_CollapsedTile_Half) FX::drawBitmap(x * Constants::TileWidth, yCoord, Images::Tile_Dungeon_98, 0, dbmMasked);
 
         }
 
@@ -364,8 +363,8 @@ void render(bool sameLevelAsPrince) {
 
                 switch (fgTile) {
 
-                    case 29:
-                    case 30:
+                    case Constants::Tile_CollapsedTile_Full:
+                    case Constants::Tile_CollapsedTile_Half:
                         break;
 
                     default:
