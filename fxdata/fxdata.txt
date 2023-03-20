@@ -431,8 +431,8 @@ TitleFrameIndexTable[] = {
     uint24_t Title_CutScene_7_Frame, uint8_t 0
     uint24_t Title_CutScene_7_Frame, uint8_t 0
 
-    uint24_t Title_CutScene_8_Frame, uint8_t 0
-    uint24_t Title_CutScene_8_Frame, uint8_t 0
+    uint24_t Title_CutScene_8_Frame, uint8_t 2
+    uint24_t Title_CutScene_8_Frame, uint8_t 2
 
     uint24_t Title_CutScene_End_Frame, uint8_t 3
     uint24_t Title_CutScene_End_Frame, uint8_t 3

@@ -263,6 +263,13 @@ namespace Images {
     image_t Falling_121            = "../images/falling/Falling_121.png"
     image_t Falling_122            = "../images/falling/Falling_122.png"
     image_t Falling_123            = "../images/falling/Falling_123.png"
+    image_t Falling_124            = "../images/falling/Falling_124.png"
+    image_t Falling_125            = "../images/falling/Falling_125.png"
+    image_t Falling_126            = "../images/falling/Falling_126.png"
+    image_t Falling_127            = "../images/falling/Falling_127.png"
+    image_t Falling_128            = "../images/falling/Falling_128.png"
+    image_t Falling_129            = "../images/falling/Falling_129.png"
+    image_t Falling_130            = "../images/falling/Falling_130.png"
 
 }
 
