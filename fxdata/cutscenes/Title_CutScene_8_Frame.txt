@@ -117,21 +117,7 @@ int16_t 0, 0, uint24_t Falling_112, uint8_t 0, uint8_t dbmNormal_end
 int16_t 0, 0, uint24_t Falling_113, uint8_t 0, uint8_t dbmNormal_end
 int16_t 0, 0, uint24_t Falling_114, uint8_t 0, uint8_t dbmNormal_end
 int16_t 0, 0, uint24_t Falling_115, uint8_t 0, uint8_t dbmNormal_end
-int16_t 0, 0, uint24_t Falling_116, uint8_t 0, uint8_t dbmNormal_end
-int16_t 0, 0, uint24_t Falling_117, uint8_t 0, uint8_t dbmNormal_end
-int16_t 0, 0, uint24_t Falling_118, uint8_t 0, uint8_t dbmNormal_end
-int16_t 0, 0, uint24_t Falling_119, uint8_t 0, uint8_t dbmNormal_end
-int16_t 0, 0, uint24_t Falling_120, uint8_t 0, uint8_t dbmNormal_end
-int16_t 0, 0, uint24_t Falling_121, uint8_t 0, uint8_t dbmNormal_end
-int16_t 0, 0, uint24_t Falling_122, uint8_t 0, uint8_t dbmNormal_end
-int16_t 0, 0, uint24_t Falling_123, uint8_t 0, uint8_t dbmNormal_end
-int16_t 0, 0, uint24_t Falling_124, uint8_t 0, uint8_t dbmNormal_end
-int16_t 0, 0, uint24_t Falling_125, uint8_t 0, uint8_t dbmNormal_end
-int16_t 0, 0, uint24_t Falling_126, uint8_t 0, uint8_t dbmNormal_end
-int16_t 0, 0, uint24_t Falling_127, uint8_t 0, uint8_t dbmNormal_end
-int16_t 0, 0, uint24_t Falling_128, uint8_t 0, uint8_t dbmNormal_end
-int16_t 0, 0, uint24_t Falling_129, uint8_t 0, uint8_t dbmNormal_end
-int16_t 0, 0, uint24_t Falling_130, uint8_t 0, uint8_t dbmNormal_end
-int16_t 0, 0, uint24_t Falling_130, uint8_t 0, uint8_t dbmNormal_last
+int16_t 0, 0, uint24_t Falling_000, uint8_t 0, uint8_t dbmNormal_end
+int16_t 0, 0, uint24_t Falling_000, uint8_t 0, uint8_t dbmNormal_last
 
     }
