@@ -189,12 +189,13 @@ enum class TitleScreenMode : uint8_t {
     CutScene_4,                     // 9
     CutScene_5,                     // 10
     CutScene_6,                     // 11
+    CutScene_8,                     // 15
     CutScene_7_Hint,                // 12
     CutScene_7_Transition,          // 13
     CutScene_7_PlayGame,            // 14
-    CutScene_End,                   // 15
-    IntroGame_End,                  // 16
-    TimeOut,                        // 17
+    CutScene_End,                   // 16
+    IntroGame_End,                  // 17
+    TimeOut,                        // 18
     MaxUniqueScenes                 = CutScene_End - 1
 };
 
@@ -297,6 +298,7 @@ enum class TitleFrameIndex : uint8_t {
     CutScene_6_Frame,
     CutScene_2B_Frame,
     CutScene_7_Frame,
+    CutScene_8_Frame,
     CutScene_End_Frame
 };
 

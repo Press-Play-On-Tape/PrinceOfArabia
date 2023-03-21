@@ -5,7 +5,6 @@
 
 void setTitleFrame(TitleFrameIndex index) {
 
-
     #if defined (POP_OR_POA)
         uint8_t idx = 2 * static_cast<uint8_t>(index) + (cookie.pop & 1);
     #elif defined (POP_ONLY)
@@ -349,6 +348,7 @@ void title() {
             case TitleScreenMode::CutScene_5:
             case TitleScreenMode::CutScene_6:
             case TitleScreenMode::CutScene_7_Hint:
+            case TitleScreenMode::CutScene_8:
 
                 gamePlay.gameState = GameState::Game_StartLevel; 
                 break;
@@ -480,6 +480,7 @@ void title() {
             case TitleScreenMode::CutScene_5:
             case TitleScreenMode::CutScene_6:
             case TitleScreenMode::CutScene_7_Hint:
+            case TitleScreenMode::CutScene_8:
 
                 if (!FX::drawFrame()) {
 
