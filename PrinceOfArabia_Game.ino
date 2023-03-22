@@ -1179,15 +1179,12 @@ void game() {
 
                 if (justPressed & DOWN_BUTTON)   {
 
-                    if (!cookie.hasSavedLevel && menu.cursor < 2) {
-                        menu.cursor++;
+                    if (prince.isDead()) {
+                        if (menu.cursor == 0 || (menu.cursor == 1 && cookie.hasSavedLevel)) {
+                            menu.cursor++;
+                        }
                     }
-
-                    else if (cookie.hasSavedLevel && menu.cursor < 3 && prince.isDead()) {
-                        menu.cursor++;
-                    }
-
-                    else if (cookie.hasSavedLevel && menu.cursor < 4 && !prince.isDead()) {
+                    else if (menu.cursor < 2 || (menu.cursor < 4 && cookie.hasSavedLevel)) {
                         menu.cursor++;
                     }
 
