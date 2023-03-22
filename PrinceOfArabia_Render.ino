@@ -520,23 +520,20 @@ void renderMenu(Prince &prince) {
 
             case GameState::Menu:
 
-                 if (menu.cursor < 4) {
+                 if (menu.cursor == 4) {
 
-                     imageIdx = !cookie.hasSavedLevel;
+                     imageIdx = 4;
+                     cursorY = 12;
 
                  }
                  else {
 
-                     imageIdx = 2;
-                     cursorY = 12;
+                     imageIdx = cookie.hasSavedLevel;
+                     if (!prince.isDead()) {
 
+                         imageIdx += 2;
+                     }
                  }
-
-                if (prince.isDead()) {
-
-                    imageIdx = cookie.hasSavedLevel ? 3 : 1;
-
-                }
 
                 FX::drawBitmap(menu.x, 0, Images::Menu, imageIdx, dbmNormal);
                 FX::drawBitmap(menu.x + 3, cursorY + (menu.cursor * 10), Images::Sword_Cursor, 0, dbmNormal);
@@ -546,7 +543,7 @@ void renderMenu(Prince &prince) {
             case GameState::Menu_Confirm:
 
                 cursorY = 40;
-                FX::drawBitmap(menu.x, 0, Images::Menu, 4, dbmNormal);
+                FX::drawBitmap(menu.x, 0, Images::Menu, 5, dbmNormal);
                 FX::drawBitmap(menu.x + 3, cursorY + (menu.cursor * 10), Images::Sword_Cursor, 0, dbmNormal);
                 break;
 
