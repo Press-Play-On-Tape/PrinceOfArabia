@@ -489,32 +489,37 @@ struct Level {
 
                         case ItemType::Potion_Small:
                         case ItemType::Potion_Large:
-
-                            if (arduboy.isFrameCount(6)) {
-
-                                item.data.potion.frame = !item.data.potion.frame;
-
-                            }
-                            break;
-
                         case ItemType::Potion_Poison:
-
-                            if (arduboy.isFrameCount(6)) {
-
-                                item.data.potion.frame++;
-                                if (item.data.potion.frame == 6) item.data.potion.frame = 0;
-
-                            }
-                            break;
-
                         case ItemType::Potion_Float:
 
                             if (arduboy.isFrameCount(6)) {
 
-                                item.data.potion.frame++;
-                                if (item.data.potion.frame == 7) item.data.potion.frame = 0;
+                                switch (item.itemType) {
+
+                                    case ItemType::Potion_Small:
+                                    case ItemType::Potion_Large:
+
+                                        item.data.potion.frame = !item.data.potion.frame;
+                                        break;
+
+                                    case ItemType::Potion_Poison:
+
+                                        item.data.potion.frame++;
+                                        if (item.data.potion.frame == 6) item.data.potion.frame = 0;
+                                        break;
+
+                                    case ItemType::Potion_Float:
+
+                                        item.data.potion.frame++;
+                                        if (item.data.potion.frame == 7) item.data.potion.frame = 0;
+                                        break;
+
+                                    default: break;
+
+                                }
 
                             }
+
                             break;
 
                         case ItemType::FloorButton1:

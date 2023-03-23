@@ -15,7 +15,7 @@ void printMap() {
 
     for (uint8_t y = 0; y < 5; y++) {
 
-        for (uint8_t x = 0; x < 16; x++) {
+        for (uint8_t x = 0; x < 22; x++) {
 
             DEBUG_PRINT(bg[y][x]);
             DEBUG_PRINT(" ");
