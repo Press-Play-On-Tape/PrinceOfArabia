@@ -380,6 +380,49 @@ void render(bool sameLevelAsPrince) {
     }
 
 
+    // Draw edge tiles ..
+
+    for (uint8_t i = 0; i < Constants::Items_Count; i++) {
+
+        Item &item = level.getItem(i);
+        int16_t xLoc = (item.data.location.x - level.getXLocation()) * Constants::TileWidth;
+        int16_t yLoc = ((item.data.location.y - level.getYLocation()) * Constants::TileHeight) - level.getYOffset() + Constants::ScreenTopOffset;
+
+        if (item.itemType != ItemType::None) {
+
+            switch (item.itemType) {
+
+                case ItemType::CollapsingFloor:
+                    FX::drawBitmap(xLoc, yLoc + item.data.collapsingFloor.distanceFallen, Images::CollapsingFloors_FG, item.data.collapsingFloor.frame, dbmMasked);
+                    break;
+
+                case ItemType::FloorButton1:
+                case ItemType::FloorButton3_UpDown:
+                case ItemType::FloorButton3_UpOnly:
+                case ItemType::ExitDoor_Button:
+                case ItemType::Mirror_Button:
+                    FX::drawBitmap(xLoc, yLoc, Images::FloorButtons_0and1_FG, item.data.floorButton.frame, dbmMasked);
+                    break;
+
+                case ItemType::ExitDoor_Button_Cropped:
+                    FX::drawBitmap(xLoc, yLoc, Images::FloorButtons_2_FG, item.data.floorButton.frame, dbmMasked);
+                    break;
+
+                case ItemType::FloorButton2:
+                case ItemType::FloorButton4:
+                case ItemType::FloorButton3_DownOnly:
+                    FX::drawBitmap(xLoc - item.data.floorButton.frame, yLoc + item.data.floorButton.frame, Images::FloorButtons_0and1_FG, item.data.floorButton.frame + 2, dbmMasked);
+                    break;
+
+                default: break;
+
+            }
+
+        }
+
+    }
+
+
     // Draw flash ..
 
     {

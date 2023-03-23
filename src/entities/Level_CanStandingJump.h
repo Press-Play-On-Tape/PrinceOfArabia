@@ -184,8 +184,7 @@ StandingJumpResult canStandingJump(Prince &prince) {
     GT NL x x x x x _      GT NL _ x x x x x 
     */
 
-    if ((distToEdgeOfCurrentTile == 2 || distToEdgeOfCurrentTile == 6) &&
-         // wallTile1_CurrLvl == WallTileResults::None && removed as current tile might be a gate
+    if ((distToEdgeOfCurrentTile <= 6) &&
          wallTile2_CurrLvl == WallTileResults::None && 
          wallTile3_CurrLvl == WallTileResults::None && 
          wallTile4_CurrLvl == WallTileResults::None && 
@@ -230,8 +229,7 @@ StandingJumpResult canStandingJump(Prince &prince) {
     GT NL x x x x x _      GT NL _ x x x x x 
     */
 
-    if ((distToEdgeOfCurrentTile == 2 || distToEdgeOfCurrentTile == 6) &&
-         // wallTile1_CurrLvl == WallTileResults::None && removed as current tile might be a gate
+    if ((distToEdgeOfCurrentTile <= 6) &&
          wallTile2_CurrLvl == WallTileResults::None && 
          wallTile3_CurrLvl == WallTileResults::None && 
          wallTile4_CurrLvl == WallTileResults::None && 
@@ -275,7 +273,6 @@ StandingJumpResult canStandingJump(Prince &prince) {
     */
 
     if (distToEdgeOfCurrentTile == 2 &&
-        // wallTile1_CurrLvl == WallTileResults::None &&  removed as current tile might be a gate
         wallTile2_CurrLvl == WallTileResults::None && 
         wallTile3_CurrLvl == WallTileResults::None && 
         wallTile4_CurrLvl == WallTileResults::None && 
@@ -306,8 +303,7 @@ StandingJumpResult canStandingJump(Prince &prince) {
     GT NL x x x x x _      GT NL _ x x x x x 
     */
 
-    if (//wallTile1_CurrLvl == WallTileResults::None &&  removed as current tile might be a gate
-        wallTile2_CurrLvl == WallTileResults::None && 
+    if (wallTile2_CurrLvl == WallTileResults::None && 
         wallTile3_CurrLvl == WallTileResults::None && 
         wallTile2_NextLvl == WallTileResults::None && 
         wallTile3_NextLvl != WallTileResults::None) {

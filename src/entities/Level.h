@@ -95,8 +95,8 @@ struct Level {
         uint8_t yOffset = 0;                        // Ofset when rendering.
         Direction yOffsetDir = Direction::None;     // Ofset movement
 
-        int8_t bg[5][16];
-        int8_t fg[5][16];
+        int8_t bg[5][22]; // 6 + 10 + 6
+        int8_t fg[5][22];
         Flash flash;
         Sign sign;
         Item items[Constants::Items_Count];
@@ -650,7 +650,7 @@ struct Level {
 
         int8_t getTile(Layer layer, int8_t x, int8_t y, int8_t returnCollapsingTile) { 
 
-            if (x <= -3 || x > 12) return TILE_NONE;
+            if (x <= -6 || x > 15) return TILE_NONE;
 
             switch (layer) {
 
@@ -665,11 +665,11 @@ struct Level {
                     DEBUG_PRINTLN(fg[y + 1][x + 3]);
                     #endif
 
-                    return fg[y + 1][x + 3];
+                    return fg[y + 1][x + 6];
 
                 case Layer::Background:
                     {
-                        int8_t tile = bg[y + 1][x + 3];
+                        int8_t tile = bg[y + 1][x + 6];
 
                         #if defined(DEBUG) && defined(DEBUG_GET_TILE)
                         DEBUG_PRINT(F("getTile(BG, "));

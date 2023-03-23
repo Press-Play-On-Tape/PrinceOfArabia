@@ -79,6 +79,10 @@ namespace Images {
     image_t FloorButtons_0and1      = "../images/items/FloorButtons_0and1_21x32_1.png"
     image_t FloorButtons_2          = "../images/items/FloorButtons_2_12x31_1.png"
 
+    image_t CollapsingFloors_FG     = "../images/items/CollapsingTiles_FG_21x31_1.png"
+    image_t FloorButtons_0and1_FG   = "../images/items/FloorButtons_0and1_FG_21x32_1.png"
+    image_t FloorButtons_2_FG       = "../images/items/FloorButtons_2_FG_12x31_1.png"
+
     image_t Torches                 = "../images/items/Torches_3x11_1.png"
     image_t Mirrors                 = "../images/items/Mirrors_12x31_1.png"
 

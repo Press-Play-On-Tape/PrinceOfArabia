@@ -13,12 +13,12 @@ void loadMap(GamePlay &gamePlay) {
     uint8_t offset = 0;
     
     if (this->xLoc) {
-        offset = this->xLoc - 3;
+        offset = this->xLoc - 6;
     }
 
     // Background ..
 
-    for (uint8_t x = 0; x < 5 * 16; x++) {
+    for (uint8_t x = 0; x < 5 * 22; x++) {
 
         *(&bg[0][0] + x) = TILE_NONE;
         
@@ -29,9 +29,9 @@ void loadMap(GamePlay &gamePlay) {
         if (y >= 0) {
             FX::seekDataArray(FX::readIndexedUInt24(Levels::Level_BG, gamePlay.level), y, offset, this->width);
 
-            for (uint8_t x = 0; x < 16; x++) {
+            for (uint8_t x = 0; x < 22; x++) {
 
-                if (x >= 3 || offset) {
+                if (x >= 6 || offset) {
                     bg[y - this->yLoc + 1][x] = static_cast<int8_t>(FX::readPendingUInt8());
                 }
 
@@ -45,7 +45,7 @@ void loadMap(GamePlay &gamePlay) {
 
     // Foreground ..
 
-    for (uint8_t x = 0; x < 5 * 16; x++) {
+    for (uint8_t x = 0; x < 5 * 22; x++) {
 
         *(&fg[0][0] + x) = TILE_FG_WALL_1;
 
@@ -57,9 +57,9 @@ void loadMap(GamePlay &gamePlay) {
 
             FX::seekDataArray(FX::readIndexedUInt24(Levels::level_FG, gamePlay.level), y, offset, this->width);
 
-            for (uint8_t x = 0; x < 16; x++) {
+            for (uint8_t x = 0; x < 22; x++) {
 
-                if (x >= 3 || offset) {
+                if (x >= 6 || offset) {
                     fg[y - this->yLoc + 1][x] = static_cast<int8_t>(FX::readPendingUInt8());
                 }
             }

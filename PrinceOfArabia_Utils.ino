@@ -149,6 +149,9 @@ void processRunJump(Prince &prince, Level &level, bool testEnemy) {
 
     #endif
 
+
+    // Level 6 exit ..
+
     if (gamePlay.level == 6 && level.getXLocation() == 0) {
 
         jumpResult = level.canRunningJump(prince, Action::RunJump_Level6Exit);
@@ -166,21 +169,26 @@ void processRunJump(Prince &prince, Level &level, bool testEnemy) {
 
     {
         uint16_t s1 = FX::readPendingUInt16();
-        uint16_t s2 = FX::readPendingUInt16();
-        uint16_t s3 = FX::readPendingUInt16();
 
         if (s1 != Stance::None) {
+
+            uint16_t s2 = FX::readPendingUInt16();
+            uint16_t s3 = FX::readPendingUInt16();
+
             prince.pushSequence(s1, s2, s3);
+
         }
 
     }
 
     {
         uint16_t s1 = FX::readPendingUInt16();
-        uint16_t s2 = FX::readPendingUInt16();
-        uint16_t s3 = FX::readPendingUInt16();
 
         if (s1 != Stance::None) {
+
+            uint16_t s2 = FX::readPendingUInt16();
+            uint16_t s3 = FX::readPendingUInt16();
+
             prince.pushSequence(s1, s2, s3);
         }
 
@@ -200,123 +208,6 @@ void processRunJump(Prince &prince, Level &level, bool testEnemy) {
     }
 
     FX::readEnd();
-
-
-    // switch (jumpResult) {
-
-    //     case RunningJumpResult::None:
-    //         prince.pushSequence(Stance::Stopping_1_Start, Stance::Stopping_5_End, Stance::Upright);
-    //         break;
-
-    //     case RunningJumpResult::Jump4_GrabLedge_Pos2:
-    //         prince.pushSequence(Stance::Running_Jump_4_GL_2_1_Start, Stance::Running_Jump_4_GL_2_16_End, Stance::Jump_Up_A_14_End);
-    //         prince.setIgnoreWallCollisions(true);
-    //         prince.setHangingCounter(200);
-    //         break;
-
-    //     case RunningJumpResult::Jump4_GrabLedge_Pos6:
-    //         prince.pushSequence(Stance::Running_Jump_4_GL_6_1_Start, Stance::Running_Jump_4_GL_6_16_End, Stance::Jump_Up_A_14_End);
-    //         prince.setIgnoreWallCollisions(true);
-    //         prince.setHangingCounter(200);
-    //         break;
-
-    //     case RunningJumpResult::Jump4_GrabLedge_Pos10:
-    //         prince.pushSequence(Stance::Running_Jump_4_GL_10_1_Start, Stance::Running_Jump_4_GL_10_16_End, Stance::Jump_Up_A_14_End);
-    //         prince.setIgnoreWallCollisions(true);
-    //         prince.setHangingCounter(200);
-    //         break;
-
-    //     case RunningJumpResult::Jump4_DropLevel:
-    //         prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright);
-    //         prince.pushSequence(Stance::Running_Jump_4_DropLvl_1_Start, Stance::Running_Jump_4_DropLvl_14_End);
-    //         prince.setIgnoreWallCollisions(true);
-    //         break;
-
-    //     case RunningJumpResult::Jump4_DropLevel_Pos10:
-    //         prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright);
-    //         prince.pushSequence(Stance::Running_Jump_4_DropLvl_10_1_Start, Stance::Running_Jump_4_DropLvl_10_13);
-    //         prince.setIgnoreWallCollisions(true);
-    //         break;
-
-    //     case RunningJumpResult::Jump3_DropLevel:
-    //         prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright);
-    //         prince.pushSequence(Stance::Running_Jump_3_DropLvl_1_Start, Stance::Running_Jump_3_DropLvl_14_End);
-    //         prince.setIgnoreWallCollisions(true);
-    //         break;
-
-    //     case RunningJumpResult::Jump3_DropLevel_Pos10:
-    //         prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright);
-    //         prince.pushSequence(Stance::Running_Jump_3_DropLvl_10_1_Start, Stance::Running_Jump_3_DropLvl_10_14_End);
-    //         prince.setIgnoreWallCollisions(true);
-    //         break;
-
-    //     case RunningJumpResult::Jump3_Pos2:
-    //         prince.pushSequence(Stance::Run_Repeat_5_Mid, Stance::Run_Repeat_8_End);
-    //         prince.pushSequence(Stance::Running_Jump_3_2_1_Start, Stance::Running_Jump_3_2_8_End, Stance::Run_Repeat_4);
-    //         prince.setIgnoreWallCollisions(true);
-    //         break;
-
-    //     case RunningJumpResult::Jump3_Pos6:
-    //         prince.pushSequence(Stance::Run_Repeat_5_Mid, Stance::Run_Repeat_8_End);
-    //         prince.pushSequence(Stance::Running_Jump_3_6_1_Start, Stance::Running_Jump_3_6_8_End, Stance::Run_Repeat_4);
-    //         prince.setIgnoreWallCollisions(true);
-    //         break;
-
-    //     case RunningJumpResult::Jump3_Pos10:
-    //         prince.pushSequence(Stance::Run_Repeat_5_Mid, Stance::Run_Repeat_8_End);
-    //         prince.pushSequence(Stance::Running_Jump_3_10_1_Start, Stance::Running_Jump_3_10_8_End);
-    //         prince.setIgnoreWallCollisions(true);
-    //         break;
-
-    //     case RunningJumpResult::Normal_Pos2:
-    //         prince.pushSequence(Stance::Running_Jump_Short_2_1_Start, Stance::Running_Jump_Short_2_7_End, Stance::Run_Repeat_4);
-    //         break;
-
-    //     case RunningJumpResult::Normal_Pos6:
-    //         prince.pushSequence(Stance::Running_Jump_Short_6_1_Start, Stance::Running_Jump_Short_6_7_End, Stance::Run_Repeat_4);
-    //         break;
-
-    //     case RunningJumpResult::Jump2_Pos2:
-    //         prince.pushSequence(Stance::Running_Jump_2_2_1_Start, Stance::Running_Jump_2_2_7_End, Stance::Run_Repeat_4);
-    //         break;
-
-    //     case RunningJumpResult::Jump2_Pos6:
-    //         prince.pushSequence(Stance::Running_Jump_2_6_1_Start, Stance::Running_Jump_2_6_7_End, Stance::Run_Repeat_4);
-    //         break;
-
-    //     case RunningJumpResult::Jump2_Pos10:
-    //         prince.pushSequence(Stance::Running_Jump_2_10_1_Start, Stance::Running_Jump_2_10_7_End, Stance::Run_Repeat_4);
-    //         break;
-
-    //     case RunningJumpResult::Jump2_DropLevel:
-    //         prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright);
-    //         prince.pushSequence(Stance::Running_Jump_2_DropLvl_1_Start, Stance::Running_Jump_2_DropLvl_14_End);
-    //         prince.setIgnoreWallCollisions(true);
-    //         break;
-
-    //     case RunningJumpResult::Jump2_DropLevel_Pos10:
-    //         prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright);
-    //         prince.pushSequence(Stance::Running_Jump_2_DropLvl_10_1_Start, Stance::Running_Jump_2_DropLvl_10_14_End);
-    //         prince.setIgnoreWallCollisions(true);
-    //         break;
-
-    //     case RunningJumpResult::Jump1_Pos2:
-    //         prince.pushSequence(Stance::Running_Jump_1_2_1_Start, Stance::Running_Jump_1_2_8_End, Stance::Upright);
-    //         break;
-
-    //     case RunningJumpResult::Jump1_Pos6:
-    //         prince.pushSequence(Stance::Running_Jump_1_6_1_Start, Stance::Running_Jump_1_6_9_End, Stance::Upright);
-    //         break;
-
-    //     case RunningJumpResult::Jump1_Pos10:
-    //         prince.pushSequence(Stance::Running_Jump_1_10_1_Start, Stance::Running_Jump_1_10_10_End, Stance::Upright);
-    //         break;
-
-    //     default: break;
-
-    // }
-
-
 
 }
 
@@ -324,28 +215,31 @@ void processStandingJump(Prince &prince, Level &level) {
 
     StandingJumpResult standingJumpResult = level.canStandingJump(prince);
 
-
-
     uint24_t pos = StandingJumpStances + static_cast<uint24_t>(static_cast<uint16_t>(standingJumpResult) * 16);
     FX::seekData(pos);
 
     {
         uint16_t s1 = FX::readPendingUInt16();
-        uint16_t s2 = FX::readPendingUInt16();
-        uint16_t s3 = FX::readPendingUInt16();
 
         if (s1 != Stance::None) {
+
+            uint16_t s2 = FX::readPendingUInt16();
+            uint16_t s3 = FX::readPendingUInt16();
+
             prince.pushSequence(s1, s2, s3);
+
         }
 
     }
 
     {
         uint16_t s1 = FX::readPendingUInt16();
-        uint16_t s2 = FX::readPendingUInt16();
-        uint16_t s3 = FX::readPendingUInt16();
 
         if (s1 != Stance::None) {
+
+            uint16_t s2 = FX::readPendingUInt16();
+            uint16_t s3 = FX::readPendingUInt16();
+
             prince.pushSequence(s1, s2, s3);
         }
 
@@ -365,65 +259,6 @@ void processStandingJump(Prince &prince, Level &level) {
     }
 
     FX::readEnd();
-
-    // switch (standingJumpResult) {
-
-    //     case StandingJumpResult::DropLevel_36:
-    //         prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright);
-    //         prince.pushSequence(Stance::Standing_Jump_DL_36_1_Start, Stance::Standing_Jump_DL_36_16_End);
-    //         prince.setIgnoreWallCollisions(true);
-    //         break;
-
-    //     case StandingJumpResult::DropLevel_40:
-    //         prince.pushSequence(Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright);
-    //         prince.pushSequence(Stance::Standing_Jump_DL_40_1_Start, Stance::Standing_Jump_DL_40_16_End);
-    //         prince.setIgnoreWallCollisions(true);
-    //         break;
-
-    //     case StandingJumpResult::Normal_20:
-    //         prince.pushSequence(Stance::Standing_Jump_20_1_Start, Stance::Standing_Jump_20_16_End, Stance::Upright);
-    //         break;
-
-    //     case StandingJumpResult::Normal_24:
-    //         prince.pushSequence(Stance::Standing_Jump_24_1_Start, Stance::Standing_Jump_24_16_End, Stance::Upright);
-    //         break;
-
-    //     case StandingJumpResult::Normal_28:
-    //         prince.pushSequence(Stance::Standing_Jump_28_1_Start, Stance::Standing_Jump_28_16_End, Stance::Upright);
-    //         break;
-
-    //     case StandingJumpResult::Normal_32:
-    //         prince.pushSequence(Stance::Standing_Jump_32_1_Start, Stance::Standing_Jump_32_16_End, Stance::Upright);
-    //         break;
-
-    //     case StandingJumpResult::Normal_36:
-    //         prince.pushSequence(Stance::Standing_Jump_36_1_Start, Stance::Standing_Jump_36_18_End, Stance::Upright);
-    //         break;
-
-    //     case StandingJumpResult::GrabLedge_28:
-    //         prince.setHangingCounter(200);
-    //         prince.pushSequence(Stance::Standing_Jump_GL_28_1_Start, Stance::Standing_Jump_GL_28_18_End, Stance::Jump_Up_A_14_End);
-    //         break;
-
-    //     case StandingJumpResult::GrabLedge_32:
-    //         prince.setHangingCounter(200);
-    //         prince.pushSequence(Stance::Standing_Jump_GL_32_1_Start, Stance::Standing_Jump_GL_32_18_End, Stance::Jump_Up_A_14_End);
-    //         break;
-
-    //     case StandingJumpResult::GrabLedge_36:
-    //         prince.setHangingCounter(200);
-    //         prince.pushSequence(Stance::Standing_Jump_GL_36_1_Start, Stance::Standing_Jump_GL_36_18_End, Stance::Jump_Up_A_14_End);
-    //         break;
-
-    //     case StandingJumpResult::GrabLedge_40:
-    //         prince.setHangingCounter(200);
-    //         prince.pushSequence(Stance::Standing_Jump_GL_40_1_Start, Stance::Standing_Jump_GL_40_18_End, Stance::Jump_Up_A_14_End);
-    //         break;
-        
-    //     default: // StandingJumpResult::None
-    //         break;
-
-    // }
 
 }
 
@@ -702,27 +537,7 @@ void showSign(Prince &prince, Level &level, SignType signType, uint8_t counter) 
 void playGrab() {
 
     #ifndef SAVE_MEMORY_SOUND
-
-        switch (gamePlay.getGrab()) {
-
-            case 0:
-                setSound(SoundIndex::Grab1);
-                break;
-
-            case 1:
-                setSound(SoundIndex::Grab2);
-                break;
-
-            case 2:
-                setSound(SoundIndex::Grab3);
-                break;
-
-            default:
-                setSound(SoundIndex::Grab4);
-                break;
-
-        }
-
+    setSound(static_cast<SoundIndex>(gamePlay.getGrab() + 1));
     #endif
     
 }

@@ -72,10 +72,12 @@ struct Cookie {
                 setTitleFrame(TitleFrameIndex::CutScene_2B_Frame);
                 break;
 
+            #ifndef SAVE_MEMORY_INVADER
             case TitleScreenMode::CutScene_7_Transition:
 
                 setTitleFrame(TitleFrameIndex::CutScene_7_Frame);
                 break;
+            #endif
 
             case TitleScreenMode::CutScene_8:
 
