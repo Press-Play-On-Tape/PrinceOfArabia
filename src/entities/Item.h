@@ -4,6 +4,7 @@
 #include "../utils/Constants.h"
 #include "../utils/Stack.h"
 
+#pragma pack(push, 1)
 
 struct Invader_General {
     uint8_t y;
@@ -212,3 +213,5 @@ struct Item {
     } data; 
  
 };
+
+#pragma pack(pop)
