@@ -332,4 +332,5 @@ enum class SoundIndex : uint8_t {
     Invader_Player_Explosion,
     Invader_Enemy_Explosion,
     Invader_Hit_Barrier,
+    Step,
 };

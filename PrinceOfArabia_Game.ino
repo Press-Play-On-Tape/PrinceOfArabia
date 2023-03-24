@@ -1808,38 +1808,47 @@ void game() {
                 case Stance::Running_Jumps_Start ... Stance::Running_Jumps_End:
                 case Stance::Crouch_HOP_1_Start ... Stance::Crouch_HOP_7_End:
 
-                    {
-                        if (gamePlay.level == 4 && prince.getDirection() == Direction::Left) {
+                    if (gamePlay.level == 4 && prince.getDirection() == Direction::Left) {
 
-                            #ifndef SAVE_MEMORY_ENEMY
+                        #ifndef SAVE_MEMORY_ENEMY
 
-                                int16_t x = prince.getPosition().x / Constants::TileWidth;
-                                int16_t y = prince.getPosition().y / Constants::TileHeight;
+                            int16_t x = prince.getPosition().x / Constants::TileWidth;
+                            int16_t y = prince.getPosition().y / Constants::TileHeight;
+                            
+                            if (x == 104 && y == 0 && enemy.getStatus() == Status::Dormant_ActionReady) {
+
+                                enemy.setStatus(Status::Active);
+                                enemy.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_8_End, Stance::Hide_Mirror);
+                                enemy.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_8_End);
+                                enemy.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_8_End);
+                                enemy.pushSequence(Stance::Run_Start_1_Start, Stance::Run_Start_6_End);
+
+                                prince.setHealth(1);
                                 
-                                if (x == 104 && y == 0 && enemy.getStatus() == Status::Dormant_ActionReady) {
+                                Item &exitDoor = level.getItem(Constants::Item_ExitDoor);
+                                
+                                if (exitDoor.data.exitDoor.direction != Direction::Up) {
 
-                                    enemy.setStatus(Status::Active);
-                                    enemy.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_8_End, Stance::Hide_Mirror);
-                                    enemy.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_8_End);
-                                    enemy.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_8_End);
-                                    enemy.pushSequence(Stance::Run_Start_1_Start, Stance::Run_Start_6_End);
-
-                                    prince.setHealth(1);
-                                    
-                                    Item &exitDoor = level.getItem(Constants::Item_ExitDoor);
-                                    
-                                    if (exitDoor.data.exitDoor.direction != Direction::Up) {
-
-                                        exitDoor.data.exitDoor.direction = Direction::Up;
-
-                                    }
+                                    exitDoor.data.exitDoor.direction = Direction::Up;
 
                                 }
 
-                            #endif
+                            }
 
-                        }
+                        #endif
+
                     }
+
+                    if (prince.getStance() == Stance::Run_Repeat_3 || prince.getStance() == Stance::Run_Repeat_7) {
+
+                        #ifndef SAVE_MEMORY_SOUND
+                            if (!sound.playing()) {
+                                setSound(SoundIndex::Step);
+                            }
+                        #endif
+
+                    }
+
                     break;
 
             }

@@ -772,7 +772,7 @@ void saveCookie(bool enableLEDs) {
         }
 
         if (playSound) {
-            sound.tonesFromFX(FX::readIndexedUInt24(Sounds::Table,(uint8_t)index));
+            sound.tonesFromFX(FX::readIndexedUInt24(Sounds::Table, (uint8_t)index));
         }
         
     }

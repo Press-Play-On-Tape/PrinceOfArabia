@@ -194,6 +194,10 @@ namespace Sounds {
         131, 40, 0, 500, 32768
     };
 
+    const uint16_t Step[] = {
+        100, 10, 32768
+    };
+
     uint24_t Table = {
         Dead,
         Grab1,
@@ -220,6 +224,7 @@ namespace Sounds {
         Invader_Player_Explosion,
         Invader_Enemy_Explosion,
         Invader_Hit_Barrier,
+        Step
     };
 }
 namespace_end
