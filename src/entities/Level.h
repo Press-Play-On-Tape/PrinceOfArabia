@@ -453,7 +453,7 @@ struct Level {
 
                                             for (Item &button : items) {
 
-                                                if ((button.itemType == ItemType::FloorButton1 || button.itemType == ItemType::FloorButton2) && button.data.location.x == item.data.location.x && button.data.location.y == item.data.location.y) {
+                                                if ((button.itemType == ItemType::FloorButton1 || button.itemType == ItemType::FloorButton2 || button.itemType == ItemType::FloorButton_NoEdgeTile) && button.data.location.x == item.data.location.x && button.data.location.y == item.data.location.y) {
 
                                                     button.itemType = ItemType::None;
 
@@ -470,7 +470,7 @@ struct Level {
 
                                             for (Item &button : items) {
 
-                                                if (button.itemType == ItemType::FloorButton1 && button.data.location.x == item.data.location.x && abs(button.data.location.y - item.data.location.y) <= 2) {
+                                                if ((button.itemType == ItemType::FloorButton1 || button.itemType == ItemType::FloorButton_NoEdgeTile) && button.data.location.x == item.data.location.x && abs(button.data.location.y - item.data.location.y) <= 2) {
 
                                                     this->openGate(3, 0, 0);
 
@@ -525,7 +525,7 @@ struct Level {
 
                         case ItemType::FloorButton1:
                         case ItemType::FloorButton2:
-                        case ItemType::FloorButton3_UpDown:
+                        case ItemType::FloorButton_NoEdgeTile:
                         case ItemType::FloorButton3_UpOnly:
                         case ItemType::FloorButton3_DownOnly:
                         case ItemType::FloorButton4:

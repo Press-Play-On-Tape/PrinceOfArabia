@@ -10,7 +10,7 @@ enum class ItemType : uint8_t {
     /* 04 */ Spikes,
     /* 05 */ ExitDoor_Button,
     /* 06 */ ExitDoor_Button_Cropped,
-    /* 07 */ FloorButton3_UpDown,   // << needed?      
+    /* 07 */ FloorButton_NoEdgeTile,
     /* 08 */ FloorButton3_UpOnly,   // << needed?      
     /* 09 */ FloorButton3_DownOnly,   // << needed?      
     /* 10 */ Mirror_Button,

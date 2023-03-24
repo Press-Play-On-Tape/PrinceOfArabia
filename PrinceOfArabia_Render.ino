@@ -163,7 +163,7 @@ void render(bool sameLevelAsPrince) {
                     break;
 
                 case ItemType::FloorButton1:
-                case ItemType::FloorButton3_UpDown:
+                case ItemType::FloorButton_NoEdgeTile:
                 case ItemType::FloorButton3_UpOnly:
                 case ItemType::ExitDoor_Button:
                 case ItemType::Mirror_Button:
@@ -392,12 +392,11 @@ void render(bool sameLevelAsPrince) {
 
             switch (item.itemType) {
 
-                case ItemType::CollapsingFloor:
-                    FX::drawBitmap(xLoc, yLoc + item.data.collapsingFloor.distanceFallen, Images::CollapsingFloors_FG, item.data.collapsingFloor.frame, dbmMasked);
-                    break;
+                // case ItemType::CollapsingFloor:
+                //     FX::drawBitmap(xLoc, yLoc + item.data.collapsingFloor.distanceFallen, Images::CollapsingFloors_FG, item.data.collapsingFloor.frame, dbmMasked);
+                //     break;
 
                 case ItemType::FloorButton1:
-                case ItemType::FloorButton3_UpDown:
                 case ItemType::FloorButton3_UpOnly:
                 case ItemType::ExitDoor_Button:
                 case ItemType::Mirror_Button:

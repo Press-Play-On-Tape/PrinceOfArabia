@@ -1930,6 +1930,7 @@ void game() {
                             break;
 
                         case ItemType::FloorButton1:
+                        case ItemType::FloorButton_NoEdgeTile:
                                                 
                             level.openGate(item.data.floorButton.gate1, 255, 255);
                             level.openGate(item.data.floorButton.gate2, 255, 255);

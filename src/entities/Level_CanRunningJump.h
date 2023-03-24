@@ -334,6 +334,38 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
 
         }
         
+        
+        /* ----------------------------------------------------------------------------------- */
+        /*  3. Can we jump three blanks to the same level? Level 8 issue.
+        
+                Positions 2, 6, 10.
+
+        Left                  Right
+        _____ 6 5 4 3 2 1     _____ 1 2 3 4 5 6
+        WT CL 1 0 0 0 0 0     WT CL 0 0 0 0 0 1
+        WT NL x x x x x x     WT NL x x x x x x
+        GT CL x 1 0 0 0 _     GT CL _ 0 0 0 1 x
+        GT NL x x x x x _     GT NL _ x x x x x
+        */
+
+        if (wallTile2_CurrLvl == WallTileResults::None && 
+            wallTile3_CurrLvl == WallTileResults::None && 
+            wallTile4_CurrLvl == WallTileResults::None && 
+            wallTile5_CurrLvl == WallTileResults::None && 
+            wallTile6_CurrLvl != WallTileResults::None && 
+            !isGroundTile2_CurrLvl &&
+            !isGroundTile3_CurrLvl &&
+            !isGroundTile4_CurrLvl &&
+            isGroundTile5_CurrLvl && 
+            distToEdgeOfCurrentTile == 2) {
+
+            #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
+            DEBUG_PRINTLN(F("J3-3 Jump3_Pos6"));
+            #endif
+
+            return RunningJumpResult::Jump3_Pos6;
+
+        }
 
 
         /* ----------------------------------------------------------------------------------- */
@@ -361,7 +393,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
                 case 2:
 
                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
-                    DEBUG_PRINTLN(F("J3-3 Jump3_Pos10"));
+                    DEBUG_PRINTLN(F("J3-4 Jump3_Pos10"));
                     #endif
 
                     return RunningJumpResult::Jump3_Pos10;
@@ -369,7 +401,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
                 case 6:
 
                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
-                    DEBUG_PRINTLN(F("J3-4 Jump3_Pos6"));
+                    DEBUG_PRINTLN(F("J3-5 Jump3_Pos6"));
                     #endif
 
                     return RunningJumpResult::Jump3_Pos6;
@@ -377,7 +409,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
                 default:
 
                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
-                    DEBUG_PRINTLN(F("J3-5 Jump3_Pos10"));
+                    DEBUG_PRINTLN(F("J3-6 Jump3_Pos10"));
                     #endif
 
                     return RunningJumpResult::Jump3_Pos10;
@@ -412,7 +444,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
                 case 2:
 
                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
-                    DEBUG_PRINTLN(F("J3-6 Jump3_Pos2"));
+                    DEBUG_PRINTLN(F("J3-7 Jump3_Pos2"));
                     #endif
 
                     return RunningJumpResult::Jump3_Pos2;
@@ -420,7 +452,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
                 case 6:
 
                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
-                    DEBUG_PRINTLN(F("J3-7 Jump3_Pos6"));
+                    DEBUG_PRINTLN(F("J3-8 Jump3_Pos6"));
                     #endif
 
                     return RunningJumpResult::Jump3_Pos6;
@@ -428,7 +460,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
                 default:
 
                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
-                    DEBUG_PRINTLN(F("J3-8 Jump3_Pos10"));
+                    DEBUG_PRINTLN(F("J3-9 Jump3_Pos10"));
                     #endif
 
                     return RunningJumpResult::Jump3_Pos10;
@@ -473,7 +505,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
                 case 6:
 
                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
-                    DEBUG_PRINTLN(F("J3-9 Jump3_DropLevel"));
+                    DEBUG_PRINTLN(F("J3-10 Jump3_DropLevel"));
                     #endif
 
                     return RunningJumpResult::Jump3_DropLevel;
@@ -481,7 +513,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
                 case 10:
 
                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
-                    DEBUG_PRINTLN(F("J3-10 Jump3_DropLevel"));
+                    DEBUG_PRINTLN(F("J3-11 Jump3_DropLevel"));
                     #endif
 
                     return RunningJumpResult::Jump3_DropLevel_Pos10;
@@ -516,7 +548,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
         //         case 2:
 
         //             #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
-        //             DEBUG_PRINTLN(F("J3-11 Normal_Pos2"));
+        //             DEBUG_PRINTLN(F("J3-12 Normal_Pos2"));
         //             #endif
 
         //             return RunningJumpResult::Normal_Pos2;
@@ -526,7 +558,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
         //         case 10:
 
         //             #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
-        //             DEBUG_PRINTLN(F("J3-12 Normal_Pos6"));
+        //             DEBUG_PRINTLN(F("J3-13 Normal_Pos6"));
         //             #endif
 
         //             return RunningJumpResult::Normal_Pos6;
@@ -560,7 +592,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
                 case 2:
 
                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
-                    DEBUG_PRINTLN(F("J3-13 Normal_Pos2"));
+                    DEBUG_PRINTLN(F("J3-14 Normal_Pos2"));
                     #endif
 
                     return RunningJumpResult::Normal_Pos2;
@@ -569,7 +601,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
                 case 10:
 
                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
-                    DEBUG_PRINTLN(F("J3-14 Normal_Pos6"));
+                    DEBUG_PRINTLN(F("J3-15 Normal_Pos6"));
                     #endif
 
                     return RunningJumpResult::Normal_Pos6;
