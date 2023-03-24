@@ -20,9 +20,10 @@
 #define TILE_FLOOR_NONE_LH_WALL_1 23
 #define TILE_FLOOR_NONE_LH_WALL_2 46
 #define TILE_FLOOR_NONE_LH_WALL_3 17
-#define TILE_FLOOR_NONE_LH_WALL_4 145
+#define TILE_FLOOR_NONE_LH_WALL_4 45
 #define TILE_FLOOR_NONE_LH_WALL_5 75
 #define TILE_FLOOR_NONE_LH_WALL_6 81
+#define TILE_FLOOR_NONE_LH_WALL_7 62
 
 #define TILE_FLOOR_BASIC 3
 #define TILE_FLOOR_BASIC_TORCH 124
@@ -978,6 +979,9 @@ struct Level {
                 case TILE_FLOOR_NONE_LH_WALL_2:
                 case TILE_FLOOR_NONE_LH_WALL_3:
                 case TILE_FLOOR_NONE_LH_WALL_4:
+                case TILE_FLOOR_NONE_LH_WALL_5:
+                case TILE_FLOOR_NONE_LH_WALL_6:
+                case TILE_FLOOR_NONE_LH_WALL_7:
                 case TILE_FLOOR_RH_END_1:
                 case TILE_FLOOR_RH_END_2:
                 case TILE_FLOOR_RH_END_3:
