@@ -8,7 +8,6 @@ struct Sign {
 
     SignType type;
     uint8_t counter;
-    uint8_t x;
     uint8_t y;
     
 };

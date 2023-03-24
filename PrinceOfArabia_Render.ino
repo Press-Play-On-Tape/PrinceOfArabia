@@ -544,7 +544,7 @@ void render(bool sameLevelAsPrince) {
 
         }
 
-        FX::drawBitmap(sign.x, sign.y, signImage, 0, dbmMasked);
+        FX::drawBitmap(24, sign.y, signImage, 0, dbmMasked);
 
     }
 

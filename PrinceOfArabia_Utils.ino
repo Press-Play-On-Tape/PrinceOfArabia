@@ -473,12 +473,12 @@ void pushDead(Prince &entity, Level &level, GamePlay &gamePlay, bool clear, Deat
 
     if (gamePlay.isGameOver()) {
 
-        showSign(entity, level, SignType::GameOver, 20);
+        showSign(entity, level, SignType::GameOver);
 
     }
     else {
 
-        showSign(entity, level, SignType::PressA, 20);
+        showSign(entity, level, SignType::PressA);
 
     }
 
@@ -499,25 +499,11 @@ void pushDead(Enemy &entity, bool clear) {
 }
 
 
-void showSign(Prince &prince, Level &level, SignType signType, uint8_t counter) {
+void showSign(Prince &prince, Level &level, SignType signType) {
 
     Sign &sign = level.getSign();
-
-    switch (signType) {
-
-        case SignType::GameOver:
-            sign.type = SignType::GameOver;
-            sign.x = 39;
-            break;
-
-        default:
-            sign.type = SignType::PressA;
-            sign.x = 24;
-            break;
-
-    }
-
-    sign.counter = counter;
+    sign.type = signType;
+    sign.counter = 20;
 
     switch (prince.getY()) {
 
