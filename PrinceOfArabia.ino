@@ -56,7 +56,9 @@ void setup() {
 
     arduboy.boot();
     FX::display(CLEAR_BUFFER);
+    #ifndef SAVE_MEMORY_SYSTEM_BUTTONS
     arduboy.systemButtons();
+    #endif
 
     #ifdef USE_LED
     #ifndef MICROCADE
@@ -205,12 +207,6 @@ void loop() {
     
         Flash &flash = level.getFlash();
     
-        if ((flash.frame == 2 || flash.frame == 4) && (flash.type == FlashType::SwordFight || flash.type == FlashType::MirrorLevel12)) {
-
-            invert = true;
-
-        }
-
         #ifndef SAVE_MEMORY_ENEMY
 
             if (flash.frame == 1 && flash.type == FlashType::MirrorLevel12) {
@@ -218,6 +214,12 @@ void loop() {
             }
 
         #endif
+
+        if ((flash.frame == 2 || flash.frame == 4) && (flash.type == FlashType::SwordFight || flash.type == FlashType::MirrorLevel12)) {
+
+            invert = true;
+
+        }
 
         FX::enableOLED();
         arduboy.invert(invert);

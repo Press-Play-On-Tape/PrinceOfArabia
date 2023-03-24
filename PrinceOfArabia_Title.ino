@@ -117,86 +117,19 @@ void title() {
 
 
         // Move cursor ..
-            
+        TitleScreenOptions option;
+        FX::seekDataArray(Title_Select_Option, frameIndex, (uint8_t)titleScreenVars.option * 2, 8);
+        option = (TitleScreenOptions)FX::readPendingUInt8();
         if (justPressed & LEFT_BUTTON) {
-
-            switch (titleScreenVars.option) {
-
-                case TitleScreenOptions::Resume:
-
-                    titleScreenVars.option = TitleScreenOptions::Play;
-                    break;
-
-                case TitleScreenOptions::Credits:
-
-                    switch (frameIndex) {
-                        
-                        case Constants::FrameIndex_NC:
-                        case Constants::FrameIndex_NCH:
-                            titleScreenVars.option = TitleScreenOptions::Play;
-                            break;
-
-                        default:
-                            titleScreenVars.option = TitleScreenOptions::Resume;
-                            break;
-
-                    }
-
-                    break;
-
-                case TitleScreenOptions::High:
-
-                    titleScreenVars.option = TitleScreenOptions::Credits;
-                    break;
-
-                default: break;
-
-            }
-
+            
+            titleScreenVars.option = option;
         }
-
+        option = (TitleScreenOptions)FX::readEnd();
+        
         if (justPressed & RIGHT_BUTTON) {
-
-            switch (titleScreenVars.option) {
-
-                case TitleScreenOptions::Play:
-
-                    switch (frameIndex) {
-                        
-                        case Constants::FrameIndex_NC:
-                        case Constants::FrameIndex_NCH:
-                            titleScreenVars.option = TitleScreenOptions::Credits;
-                            break;
-
-                        default:
-                            titleScreenVars.option = TitleScreenOptions::Resume;
-                            break;
-
-                    }
-
-                    break;
-
-                case TitleScreenOptions::Resume:
-
-                    titleScreenVars.option = TitleScreenOptions::Credits;
-                    break;
-
-                case TitleScreenOptions::Credits:
-
-                    switch (frameIndex) {
-                        
-                        case Constants::FrameIndex_NCH:
-                        case Constants::FrameIndex_NRCH:
-                            titleScreenVars.option = TitleScreenOptions::High;
-                            break;
-
-                    }
-
-                    break;
-
-            }
-
-        }   
+            
+            titleScreenVars.option = option;
+        }
 
     }
 
