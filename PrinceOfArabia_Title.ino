@@ -370,8 +370,8 @@ void title() {
                 FX::drawBitmap(38, 38, Images::Numbers_Large, cookie.highMin, dbmNormal);
                 FX::drawBitmap(68, 38, Images::Numbers_Large, cookie.highSec, dbmNormal);
 
-                renderNumber_Upright(68, 59, cookie.highSaves / 100);
-                renderNumber_Upright(76, 59, cookie.highSaves % 100);
+                renderNumber_Upright(70, 59, cookie.highSaves / 100);
+                renderNumber_Upright(78, 59, cookie.highSaves % 100);
 
                 break;
 
