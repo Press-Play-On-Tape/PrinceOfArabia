@@ -17,7 +17,8 @@ struct TitleScreenVars {
 
     void reset(uint8_t frameIndex) {
 
-        this->option = TitleScreenOptions::Play;
+        //this->option = TitleScreenOptions::Play;
+        this->option = (TitleScreenOptions)(frameIndex >> 1);
         setTitleFrame((TitleFrameIndex)((uint8_t)TitleFrameIndex::Intro_PoP_Frame_NC + frameIndex));
 
     }
