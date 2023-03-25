@@ -128,6 +128,39 @@ bool testScroll(GamePlay &gamePlay, Prince &prince, Level &level) {
 
 }
 
+void pushSequence() {
+
+    uint16_t s1 = FX::readPendingUInt16();
+
+    if (s1 != Stance::None) {
+
+        uint16_t s2 = FX::readPendingUInt16();
+        uint16_t s3 = FX::readPendingUInt16();
+
+        prince.pushSequence(s1, s2, s3);
+
+    }
+
+}
+
+void processJump(uint24_t pos) {
+
+    FX::seekData(pos);
+    pushSequence();
+    pushSequence();
+    uint16_t collision = FX::readPendingUInt16();
+
+    if (collision == 1) {
+        prince.setIgnoreWallCollisions(true);
+    }
+
+    uint16_t counter = FX::readPendingLastUInt16();
+
+    if (counter > 0) {
+        prince.setHangingCounter(static_cast<uint8_t>(counter));
+    }
+
+}
 
 void processRunJump(Prince &prince, Level &level, bool testEnemy) {
 
@@ -165,49 +198,7 @@ void processRunJump(Prince &prince, Level &level, bool testEnemy) {
 
 
     uint24_t pos = RunningJumpStances + static_cast<uint24_t>(static_cast<uint16_t>(jumpResult) * 16);
-    FX::seekData(pos);
-
-    {
-        uint16_t s1 = FX::readPendingUInt16();
-
-        if (s1 != Stance::None) {
-
-            uint16_t s2 = FX::readPendingUInt16();
-            uint16_t s3 = FX::readPendingUInt16();
-
-            prince.pushSequence(s1, s2, s3);
-
-        }
-
-    }
-
-    {
-        uint16_t s1 = FX::readPendingUInt16();
-
-        if (s1 != Stance::None) {
-
-            uint16_t s2 = FX::readPendingUInt16();
-            uint16_t s3 = FX::readPendingUInt16();
-
-            prince.pushSequence(s1, s2, s3);
-        }
-
-    }
-
-    {
-        uint16_t collision = FX::readPendingUInt16();
-        uint16_t counter = FX::readPendingUInt16();
-
-        if (collision == 1) {
-            prince.setIgnoreWallCollisions(true);
-        }
-        if (counter > 0) {
-            prince.setHangingCounter(static_cast<uint8_t>(counter));
-        }
-
-    }
-
-    FX::readEnd();
+    processJump(pos);
 
 }
 
@@ -216,50 +207,7 @@ void processStandingJump(Prince &prince, Level &level) {
     StandingJumpResult standingJumpResult = level.canStandingJump(prince);
 
     uint24_t pos = StandingJumpStances + static_cast<uint24_t>(static_cast<uint16_t>(standingJumpResult) * 16);
-    FX::seekData(pos);
-
-    {
-        uint16_t s1 = FX::readPendingUInt16();
-
-        if (s1 != Stance::None) {
-
-            uint16_t s2 = FX::readPendingUInt16();
-            uint16_t s3 = FX::readPendingUInt16();
-
-            prince.pushSequence(s1, s2, s3);
-
-        }
-
-    }
-
-    {
-        uint16_t s1 = FX::readPendingUInt16();
-
-        if (s1 != Stance::None) {
-
-            uint16_t s2 = FX::readPendingUInt16();
-            uint16_t s3 = FX::readPendingUInt16();
-
-            prince.pushSequence(s1, s2, s3);
-        }
-
-    }
-
-    {
-        uint16_t collision = FX::readPendingUInt16();
-        uint16_t counter = FX::readPendingUInt16();
-
-        if (collision == 1) {
-            prince.setIgnoreWallCollisions(true);
-        }
-        if (counter > 0) {
-            prince.setHangingCounter(static_cast<uint8_t>(counter));
-        }
-
-    }
-
-    FX::readEnd();
-
+    processJump(pos);
 }
 
 
@@ -657,8 +605,7 @@ uint8_t getImageIndexFromStance(uint16_t stance) {
     #ifdef MOVEMENT_DATA_FROM_FX
 
         FX::seekData(Constants::StanceToImageXRefFX + stance);
-        uint8_t image = FX::readPendingUInt8();
-        FX::readEnd();
+        uint8_t image = FX::readEnd();
 
         return image;
 
@@ -677,8 +624,7 @@ void getStance_Offsets(Direction direction, Point &offset, int16_t stance) {
 
         FX::seekData(Constants::Stance_XYOffsetsFX + ((stance - 1) * 2));
         offset.x = static_cast<int8_t>(FX::readPendingUInt8()) * (direction == Direction::Left ? -1 : 1) * (stance < 0 ? -1 : 1);;
-        offset.y = static_cast<int8_t>(FX::readPendingUInt8()) * (stance < 0 ? -1 : 1);
-        FX::readEnd();
+        offset.y = static_cast<int8_t>(FX::readEnd()) * (stance < 0 ? -1 : 1);
 
     #else
 

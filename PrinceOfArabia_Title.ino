@@ -190,7 +190,7 @@ void title() {
                                 sound.noTone();
                             #endif
 
-                            return;;
+                            return;
 
                         case TitleScreenOptions::Credits:
 
