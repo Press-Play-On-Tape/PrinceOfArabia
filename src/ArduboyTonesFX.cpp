@@ -68,17 +68,6 @@ struct TonesBufferFX {
 
 static TonesBufferFX tonesBufferFX;
 
-ArduboyTonesFX::ArduboyTonesFX(boolean (*outEn)())
-{
-  outputEnabled = outEn;
-  bitClear(TONE_PIN_PORT, TONE_PIN); // set the pin low
-  bitSet(TONE_PIN_DDR, TONE_PIN); // set the pin to output mode
-#ifdef TONES_2_SPEAKER_PINS
-  bitClear(TONE_PIN2_PORT, TONE_PIN2); // set pin 2 low
-  bitSet(TONE_PIN2_DDR, TONE_PIN2); // set pin 2 to output mode
-#endif
-}
-
 ArduboyTonesFX::ArduboyTonesFX(boolean (*outEn)(), uint16_t *tonesArray, uint8_t tonesArrayLen)
 {
   outputEnabled = outEn;

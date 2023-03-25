@@ -131,12 +131,17 @@ void title() {
             titleScreenVars.option =  (TitleScreenOptions)(options);
         }
 
+        if (justPressed & B_BUTTON) {
+
+        arduboy.audio.toggle();
+
+        }
+
     }
 
     #ifdef DEBUG_CUT_SCENES
     if (justPressed & (A_BUTTON)) {
     #else
-    //if (justPressed & (A_BUTTON | B_BUTTON)) {
     if ((justPressed & A_BUTTON) || (justPressed & B_BUTTON)) {
     #endif
     
@@ -144,6 +149,7 @@ void title() {
 
             case TitleScreenMode::Main:
 
+                if (justPressed & B_BUTTON) break; // B button controls sound on main
                 switch (titleScreenVars.option) {
 
                     #ifdef SAVE_MEMORY_OTHER
@@ -345,6 +351,7 @@ void title() {
                 uint8_t x = FX::readEnd();
                 
                 FX::drawBitmap(x, 57, Images::Title_Cursor, 0, dbmNormal);
+                FX::drawBitmap(120, 56, Images::Title_SoundIcon, arduboy.audio.enabled(), dbmNormal);
 
             }
 

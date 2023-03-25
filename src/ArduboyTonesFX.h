@@ -168,16 +168,6 @@ class ArduboyTonesFX
 {
  public:
   /** \brief
-   * The ArduboyTones class constructor.
-   *
-   * \param outEn A function which returns a boolean value of `true` if sound
-   * should be played or `false` if sound should be muted. This function will
-   * be called from the timer interrupt service routine, at the start of each
-   * tone, so it should be as fast as possible.
-   */
-  ArduboyTonesFX(bool (*outEn)());
-
-  /** \brief
    * The ArduboyTones class constructor for use when using FX data.
    *
    * \param outEn A function which returns a boolean value of `true` if sound
@@ -206,96 +196,6 @@ class ArduboyTonesFX
   {
     static_assert(size < 256, "Buffer too large");
   }
-
-  /** \brief
-   * Play a single tone.
-   *
-   * \param freq The frequency of the tone, in hertz.
-   * \param dur The duration to play the tone for, in 1024ths of a
-   * second (very close to milliseconds). A duration of 0, or if not provided,
-   * means play forever, or until `noTone()` is called or a new tone or
-   * sequence is started.
-   */
-  static void tone(uint16_t freq, uint16_t dur = 0);
-
-  /** \brief
-   * Play two tones in sequence.
-   *
-   * \param freq1,freq2 The frequency of the tone in hertz.
-   * \param dur1,dur2 The duration to play the tone for, in 1024ths of a
-   * second (very close to milliseconds).
-   */
-  static void tone(uint16_t freq1, uint16_t dur1,
-                   uint16_t freq2, uint16_t dur2);
-
-  /** \brief
-   * Play three tones in sequence.
-   *
-   * \param freq1,freq2,freq3 The frequency of the tone, in hertz.
-   * \param dur1,dur2,dur3 The duration to play the tone for, in 1024ths of a
-   * second (very close to milliseconds).
-   */
-  static void tone(uint16_t freq1, uint16_t dur1,
-                   uint16_t freq2, uint16_t dur2,
-                   uint16_t freq3, uint16_t dur3);
-
-  /** \brief
-   * Play a tone sequence from frequency/duration pairs in a PROGMEM array.
-   *
-   * \param tones A pointer to an array of frequency/duration pairs.
-   * The array must be placed in code space using `PROGMEM`.
-   *
-   * \details 
-   * \parblock
-   * See the `tone()` function for details on the frequency and duration values.
-   * A frequency of 0 for any tone means silence (a musical rest).
-   *
-   * The last element of the array must be `TONES_END` or `TONES_REPEAT`.
-   *
-   * Example:
-   *
-   * \code
-   * const uint16_t sound1[] PROGMEM = {
-   *   220,1000, 0,250, 440,500, 880,2000,
-   *   TONES_END
-   * };
-   * \endcode
-   *
-   * \endparblock
-   */
-  static void tones(const uint16_t *tones);
-
-  /** \brief
-   * Play a tone sequence from frequency/duration pairs in an array in RAM.
-   *
-   * \param tones A pointer to an array of frequency/duration pairs.
-   * The array must be located in RAM.
-   *
-   * \see tones()
-   *
-   * \details 
-   * \parblock
-   * See the `tone()` function for details on the frequency and duration values.
-   * A frequency of 0 for any tone means silence (a musical rest).
-   *
-   * The last element of the array must be `TONES_END` or `TONES_REPEAT`.
-   *
-   * Example:
-   *
-   * \code
-   * uint16_t sound2[] = {
-   *   220,1000, 0,250, 440,500, 880,2000,
-   *   TONES_END
-   * };
-   * \endcode
-   *
-   * \endparblock
-   *
-   * \note Using `tones()`, with the data in PROGMEM, is normally a better
-   * choice. The only reason to use tonesInRAM() would be if dynamically
-   * altering the contents of the array is required.
-   */
-  static void tonesInRAM(uint16_t *tones);
 
   /** \brief
    * Play a tone sequence from the FX chip.
