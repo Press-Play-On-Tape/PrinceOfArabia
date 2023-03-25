@@ -221,21 +221,21 @@ Title_High_PoA_Frame[] = {
 
 uint8_t Title_Select_Option[] = {
 //  N     R     C     H
-    0,2,  0,2,  0,2,  0,2, // NC left, righ
+    0,2,  0,0,  0,2,  0,0, // NC left, righ
 
-    0,2,  0,2,  0,3,  2,3, // NCH left, righ
+    0,2,  0,0,  0,3,  2,3, // NCH left, righ
 
-    0,1,  0,2,  1,2,  2,2, // NRC left, righ
+    1,2,  1,0,  0,2,  0,0, // NRC left, righ
 
-    0,1,  0,2,  1,3,  2,3,  // NRCH left, righ
+    1,2,  1,0,  0,3,  2,3,  // NRCH left, righ
 };
 
 uint8_t Title_Cursor_XPos[] = {
 //  N     R    C    H
-    32,   0,  61,   0,          // NC
-    15,   0,  47,  87,          // NCH
-    13,  40,  78,   0,          // NRC
-     3,  26,  62, 101,          // NRCH
+    33,   0,  62,   0,          // NC
+    20,   0,  48,  84,          // NCH
+    52,  20,  72,   0,          // NRC
+    41,  10,  60,  95,          // NRCH
 };
 
 Invaders_HUD_frame[] = {
