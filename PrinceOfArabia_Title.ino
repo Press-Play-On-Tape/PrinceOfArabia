@@ -117,18 +117,18 @@ void title() {
 
 
         // Move cursor ..
-        TitleScreenOptions option;
+
         FX::seekDataArray(Title_Select_Option, frameIndex, (uint8_t)titleScreenVars.option * 2, 8);
-        option = (TitleScreenOptions)FX::readPendingUInt8();
+        uint16_t options = FX::readPendingLastUInt16();
+
         if (justPressed & LEFT_BUTTON) {
-            
-            titleScreenVars.option = option;
+
+            titleScreenVars.option = (TitleScreenOptions)(options >> 8);
         }
-        option = (TitleScreenOptions)FX::readEnd();
-        
+
         if (justPressed & RIGHT_BUTTON) {
-            
-            titleScreenVars.option = option;
+
+            titleScreenVars.option =  (TitleScreenOptions)(options);
         }
 
     }
@@ -136,7 +136,8 @@ void title() {
     #ifdef DEBUG_CUT_SCENES
     if (justPressed & (A_BUTTON)) {
     #else
-    if (justPressed & (A_BUTTON | B_BUTTON)) {
+    //if (justPressed & (A_BUTTON | B_BUTTON)) {
+    if ((justPressed & A_BUTTON) || (justPressed & B_BUTTON)) {
     #endif
     
         switch (cookie.getMode()) {
