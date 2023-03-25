@@ -301,10 +301,10 @@ void title() {
 
             #endif
 
-            case TitleScreenMode::CutScene_End:
-
-                gamePlay.gameState = GameState::Title_Init; 
-                break;
+            //case TitleScreenMode::CutScene_End:
+            //
+            //    gamePlay.gameState = GameState::Title_Init;
+            //    break;
 
         #endif
 
