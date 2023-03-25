@@ -230,7 +230,7 @@ void ArduboyTonesFX::volumeMode(uint8_t mode)
 
 bool ArduboyTonesFX::playing()
 {
-  return TCCR3A;
+  return TCCR3B;
 }
 
 void ArduboyTonesFX::nextTone()
