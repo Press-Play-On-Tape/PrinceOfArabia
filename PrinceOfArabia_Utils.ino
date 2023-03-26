@@ -205,7 +205,7 @@ void processStandingJump(Prince &prince, Level &level) {
 
     uint24_t pos = StandingJumpStances + static_cast<uint24_t>(static_cast<uint16_t>(standingJumpResult) * 16);
     processJump(pos);
-    
+
 }
 
 
@@ -600,37 +600,19 @@ void fixPosition() {
 
 uint8_t getImageIndexFromStance(uint16_t stance) {
 
-    #ifdef MOVEMENT_DATA_FROM_FX
+    FX::seekData(Constants::StanceToImageXRefFX + stance);
+    uint8_t image = FX::readEnd();
 
-        FX::seekData(Constants::StanceToImageXRefFX + stance);
-        uint8_t image = FX::readEnd();
-
-        return image;
-
-    #else
-
-        return static_cast<uint8_t>(pgm_read_byte(&Constants::StanceToImageXRef[stance]));
-
-    #endif
+    return image;
     
 }
 
 
 void getStance_Offsets(Direction direction, Point &offset, int16_t stance) {
 
-    #ifdef MOVEMENT_DATA_FROM_FX
-
-        FX::seekData(Constants::Stance_XYOffsetsFX + ((stance - 1) * 2));
-        offset.x = static_cast<int8_t>(FX::readPendingUInt8()) * (direction == Direction::Left ? -1 : 1) * (stance < 0 ? -1 : 1);;
-        offset.y = static_cast<int8_t>(FX::readEnd()) * (stance < 0 ? -1 : 1);
-
-    #else
-
-        uint16_t idx = (stance - 1) * 2;
-        offset.x = static_cast<int8_t>(pgm_read_byte(&Constants::Stance_XYOffsets[idx])) * (direction == Direction::Left ? -1 : 1) * (stance < 0 ? -1 : 1);
-        offset.y = static_cast<int8_t>(pgm_read_byte(&Constants::Stance_XYOffsets[idx + 1])) * (stance < 0 ? -1 : 1);
-
-    #endif
+    FX::seekData(Constants::Stance_XYOffsetsFX + ((stance - 1) * 2));
+    offset.x = static_cast<int8_t>(FX::readPendingUInt8()) * (direction == Direction::Left ? -1 : 1) * (stance < 0 ? -1 : 1);;
+    offset.y = static_cast<int8_t>(FX::readEnd()) * (stance < 0 ? -1 : 1);
         
 }
 
