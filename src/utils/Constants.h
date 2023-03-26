@@ -14,7 +14,6 @@
     #define _GIVE_SWORD
 
     #define LEVEL_DATA_FROM_FX
-    #define MOVEMENT_DATA_FROM_FX
     #define SAVE_TO_FX
     #define STARTING_LEVEL 1
     #define MAX_LEVEL 13
@@ -40,7 +39,6 @@
     #define _GIVE_SWORD
 
     #define LEVEL_DATA_FROM_FX
-    #define MOVEMENT_DATA_FROM_FX
     #define _SAVE_TO_FX
     #define STARTING_LEVEL 8
     #define MAX_LEVEL 13
@@ -1494,22 +1492,5 @@ namespace Constants {
 
     constexpr uint8_t Tile_CollapsedTile_Full = 51;
     constexpr uint8_t Tile_CollapsedTile_Half = 52;
-
-    #ifndef MOVEMENT_DATA_FROM_FX
-
-    const uint8_t StanceToImageXRef[] PROGMEM  = {
-
-        0, 
-        #include "movements_SEQData.h"
-
-    };
-
-    constexpr int8_t Stance_XYOffsets[] PROGMEM = {
- 
-        #include "movements_OFFSETSData.h"
-
-    };
-
-    #endif
 
 }

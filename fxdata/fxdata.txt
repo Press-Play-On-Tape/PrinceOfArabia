@@ -93,7 +93,19 @@ namespace_end
 
 include "sounds.txt"
 include "images.txt"
-include "movements.txt"
+
+
+namespace Constants {
+
+    uint8_t StanceToImageXRefFX[] = {
+        0,
+include "movements_convert.txt"
+    };
+
+namespace_end
+
+
+include "movements2.txt"
 include "constants.txt"
 
 
