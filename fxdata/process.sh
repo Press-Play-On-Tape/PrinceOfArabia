@@ -45,6 +45,10 @@ montage ../images/enemy/right/Backup/???_*.png -geometry 36x36+0+0 -background n
 montage ../images/skeleton/left/Backup/???_*.png -geometry 36x36+0+0 -background none -tile 10x4 ../images/skeleton/left/Skeleton_Left_36x36.png
 montage ../images/skeleton/right/Backup/???_*.png -geometry 36x36+0+0 -background none -tile 10x4 ../images/skeleton/right/Skeleton_Right_36x36.png
 
+python3 scripts/img2sheet.py ../images/princess/Hearts
+python3 scripts/img2sheet.py ../images/princess/Princess/Princess
+python3 scripts/img2sheet.py ../images/princess/Princess/Princess_Bounce
+
 python3 scripts/createMovements.py ../src/utils/Constants.h movements.txt
 python3 scripts/createMovements2.py ../src/utils/Constants.h movements2.txt
 python3 scripts/createSEQData.py ../src/utils/Constants.h ../src/utils/movements_SEQData.h
