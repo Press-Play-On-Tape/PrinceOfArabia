@@ -101,9 +101,9 @@ namespace Images {
 
     // Princess Images
 
-    image_t Princess                = "../images/princess/Princess_32x32_1.png"
-    image_t Princess_Bounce         = "../images/princess/Princess_Bounce_48x32_1.png"
-    image_t Hearts                  = "../images/princess/Hearts_7x6_1.png"
+    image_t Princess                = "../images/princess/Princess_32x32.png"
+    image_t Princess_Bounce         = "../images/princess/Princess_Bounce_48x32.png"
+    image_t Hearts                  = "../images/princess/Hearts_7x6.png"
 
 
     // Jaffar Images 
