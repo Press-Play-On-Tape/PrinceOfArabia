@@ -131,14 +131,11 @@ bool testScroll(GamePlay &gamePlay, Prince &prince, Level &level) {
 void pushSequence() {
 
     uint16_t s1 = FX::readPendingUInt16();
+    uint16_t s2 = FX::readPendingUInt16();
+    uint16_t s3 = FX::readPendingUInt16();
 
     if (s1 != Stance::None) {
-
-        uint16_t s2 = FX::readPendingUInt16();
-        uint16_t s3 = FX::readPendingUInt16();
-
         prince.pushSequence(s1, s2, s3);
-
     }
 
 }
@@ -196,8 +193,8 @@ void processRunJump(Prince &prince, Level &level, bool testEnemy) {
 
     }
 
-
     uint24_t pos = RunningJumpStances + static_cast<uint24_t>(static_cast<uint16_t>(jumpResult) * 16);
+
     processJump(pos);
 
 }
@@ -208,6 +205,7 @@ void processStandingJump(Prince &prince, Level &level) {
 
     uint24_t pos = StandingJumpStances + static_cast<uint24_t>(static_cast<uint16_t>(standingJumpResult) * 16);
     processJump(pos);
+    
 }
 
 
