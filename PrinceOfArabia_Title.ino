@@ -133,7 +133,7 @@ void title() {
 
         if (justPressed & B_BUTTON) {
 
-        arduboy.audio.toggle();
+            arduboy.audio.toggle();
 
         }
 
