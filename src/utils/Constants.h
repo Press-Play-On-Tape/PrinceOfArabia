@@ -1,6 +1,6 @@
 #pragma once
 
-#define _PRODUCTION_SETTINGS
+#define PRODUCTION_SETTINGS
 
 #ifdef PRODUCTION_SETTINGS
 
@@ -15,14 +15,14 @@
     #define _GIVE_SWORD
 
     #define LEVEL_DATA_FROM_FX
-    #define _SAVE_TO_FX
+    #define SAVE_TO_FX
     #define STARTING_LEVEL 1
     #define MAX_LEVEL 13
     #define _DEBUG_CUT_SCENES
-    #define _DEBUG_LEVELS
+    #define DEBUG_LEVELS
 
-    #define POP_OR_POA
-    #define _POP_ONLY
+    #define _POP_OR_POA
+    #define POP_ONLY
     #define _POA_ONLY
     #define USE_LED
 
