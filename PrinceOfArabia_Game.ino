@@ -116,7 +116,8 @@ void game() {
 
     if (mouse.update()) {
 
-        Item item = level.getItemByIndex(ItemType::FloorButton1, ItemType::None, 6);
+        Item item = level.getItemByIndex(ItemType::FloorButton1, ItemType::None, 5);
+
         level.openGate(item.data.floorButton.gate1, 255, 255);
 
         item.data.floorButton.frame = 1;
