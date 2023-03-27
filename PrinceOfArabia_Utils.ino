@@ -674,25 +674,39 @@ void saveCookie(bool enableLEDs) {
 
         bool playSound = true;
 
-        switch (prince.getStance()) {
+        switch (index) {
 
-            case Stance::Falling_Dead_1_Start ... Stance::Falling_Dead_3_End:
-            case Stance::Falling_Dead_Blade_1_Start ... Stance::Falling_Dead_Blade_2_End:
-
-                switch (index) {
-
-                    case SoundIndex::ChopChop:
-                    case SoundIndex::GateGoingDown:
-                    case SoundIndex::GateGoingUp:
-                        playSound = false;
-
-                    default:
-                        break;
-
-                }
-
-            default:
+            case SoundIndex::Override_Start ... SoundIndex::Overrride_End:
                 break;
+
+            case SoundIndex::Suppress_Start ... SoundIndex::Suppress_End:
+
+                playSound = !sound.playing();
+                break;
+
+        }
+
+        if (playSound) {
+
+            switch (prince.getStance()) {
+
+                case Stance::Falling_Dead_1_Start ... Stance::Falling_Dead_3_End:
+                case Stance::Falling_Dead_Blade_1_Start ... Stance::Falling_Dead_Blade_2_End:
+
+                    switch (index) {
+
+                        case SoundIndex::Suppress_Start ... SoundIndex::Suppress_End:
+                            playSound = false;
+
+                        default:
+                            break;
+
+                    }
+
+                default:
+                    break;
+
+            }
 
         }
 

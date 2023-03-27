@@ -218,7 +218,7 @@ namespace Sounds {
     };
 
     uint24_t Table = {
-        Dead,
+        Dead,                         
         Grab1,
         Grab2,
         Grab3,
@@ -230,11 +230,6 @@ namespace Sounds {
         Victory,
         Ending,
         OutOfTime,
-        GateGoingDown,
-        GateGoingUp,
-        ChopChop,
-        Thump,
-        Strike,
         Invader_Wave_Start,
         Invader_Wave_Success,
         Invader_End_of_Game,
@@ -243,6 +238,11 @@ namespace Sounds {
         Invader_Player_Explosion,
         Invader_Enemy_Explosion,
         Invader_Hit_Barrier,
+        GateGoingDown,
+        GateGoingUp,
+        ChopChop,
+        Thump,
+        Strike,
         Step
     };
 }

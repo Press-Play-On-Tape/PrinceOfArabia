@@ -76,7 +76,7 @@ void render(bool sameLevelAsPrince) {
                         FX::drawBitmap(xLoc, yLoc, Images::Blades, abs(item.data.blade.position), dbmMasked);
 
                         #ifndef SAVE_MEMORY_SOUND
-                            if (xLoc > 0 && xLoc < 128 && yLoc>= 0 && yLoc < 64 && item.data.blade.position == 4) {
+                            if (xLoc > 0 && xLoc < 128 && yLoc >= 0 && yLoc < 63 && item.data.blade.position == 4) {
                                 setSound(SoundIndex::ChopChop);
                             }
                         #endif 
