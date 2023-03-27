@@ -54,7 +54,7 @@ void title() {
         if (justPressed & B_BUTTON && cookie.getMode() != TitleScreenMode::CutScene_7_PlayGame) {
 
             //setRenderChamberBG();
-            cookie.setMode(TitleScreenMode::CutScene_1);
+            cookie.setMode(TitleScreenMode::CutScene_7_Transition);
 
             Invader_General &general = level.getItem(Constants::Invaders_General).data.invader_General;
             general.y = 0;

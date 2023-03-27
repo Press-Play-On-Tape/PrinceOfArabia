@@ -45,9 +45,16 @@ montage ../images/enemy/right/Backup/???_*.png -geometry 36x36+0+0 -background n
 montage ../images/skeleton/left/Backup/???_*.png -geometry 36x36+0+0 -background none -tile 10x4 ../images/skeleton/left/Skeleton_Left_36x36.png
 montage ../images/skeleton/right/Backup/???_*.png -geometry 36x36+0+0 -background none -tile 10x4 ../images/skeleton/right/Skeleton_Right_36x36.png
 
-python3 scripts/img2sheet.py ../images/princess/Hearts
-python3 scripts/img2sheet.py ../images/princess/Princess
-python3 scripts/img2sheet.py ../images/princess/Princess_Bounce
+#python3 scripts/img2sheet.py ../images/princess/Hearts
+#python3 scripts/img2sheet.py ../images/princess/Princess
+#python3 scripts/img2sheet.py ../images/princess/Princess_Bounce
+
+
+montage ../images/princess/Princess/*.png -geometry 32x32+0+0 -background none -tile 33x1 ../images/princess/Princess_32x32.png
+montage ../images/princess/Princess_Bounce/*.png -geometry 48x32+0+0 -background none -tile 17x1 ../images/princess/Princess_Bounce_48x32.png
+montage ../images/princess/Hearts/*.png -geometry 7x6+0+0 -background none -tile 4x1 ../images/princess/Hearts_7x6.png
+
+
 
 python3 scripts/createMovements.py ../src/utils/Constants.h movements.txt
 python3 scripts/createMovements2.py ../src/utils/Constants.h movements2.txt
