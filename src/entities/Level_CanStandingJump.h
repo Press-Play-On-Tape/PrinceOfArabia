@@ -18,14 +18,14 @@ StandingJumpResult canStandingJump(Prince &prince) {
     #endif
 
 
-    WallTileResults wallTile2_CurrLvl = this->isWallTile_ByCoords(tileXIdx + (1 * offset), tileYIdx, prince.getDirection());
-    WallTileResults wallTile3_CurrLvl = this->isWallTile_ByCoords(tileXIdx + (2 * offset), tileYIdx, prince.getDirection());
-    WallTileResults wallTile4_CurrLvl = this->isWallTile_ByCoords(tileXIdx + (3 * offset), tileYIdx, prince.getDirection());
-    WallTileResults wallTile5_CurrLvl = this->isWallTile_ByCoords(tileXIdx + (4 * offset), tileYIdx, prince.getDirection());
-    WallTileResults wallTile2_NextLvl = this->isWallTile_ByCoords(tileXIdx + (1 * offset), tileYIdx + 1, prince.getDirection());
-    WallTileResults wallTile3_NextLvl = this->isWallTile_ByCoords(tileXIdx + (2 * offset), tileYIdx + 1, prince.getDirection());
-    WallTileResults wallTile4_NextLvl = this->isWallTile_ByCoords(tileXIdx + (3 * offset), tileYIdx + 1, prince.getDirection());
-    WallTileResults wallTile5_NextLvl = this->isWallTile_ByCoords(tileXIdx + (4 * offset), tileYIdx + 1, prince.getDirection());
+    WallTileResults wallTile2_CurrLvl = this->isWallTile_ByCoords(tileXIdx + (1 * offset), tileYIdx, prince.getDirection(), true, 8);
+    WallTileResults wallTile3_CurrLvl = this->isWallTile_ByCoords(tileXIdx + (2 * offset), tileYIdx, prince.getDirection(), true, 6);
+    WallTileResults wallTile4_CurrLvl = this->isWallTile_ByCoords(tileXIdx + (3 * offset), tileYIdx, prince.getDirection(), true, 4);
+    WallTileResults wallTile5_CurrLvl = this->isWallTile_ByCoords(tileXIdx + (4 * offset), tileYIdx, prince.getDirection(), true, 2);
+    WallTileResults wallTile2_NextLvl = this->isWallTile_ByCoords(tileXIdx + (1 * offset), tileYIdx + 1, prince.getDirection(), true, 8);
+    WallTileResults wallTile3_NextLvl = this->isWallTile_ByCoords(tileXIdx + (2 * offset), tileYIdx + 1, prince.getDirection(), true, 6);
+    WallTileResults wallTile4_NextLvl = this->isWallTile_ByCoords(tileXIdx + (3 * offset), tileYIdx + 1, prince.getDirection(), true, 4);
+    WallTileResults wallTile5_NextLvl = this->isWallTile_ByCoords(tileXIdx + (4 * offset), tileYIdx + 1, prince.getDirection(), true, 2);
 
     bool isGroundTile2_CurrLvl = this->isGroundTile_ByCoords(tileXIdx + (1 * offset), tileYIdx);
     bool isGroundTile3_CurrLvl = this->isGroundTile_ByCoords(tileXIdx + (2 * offset), tileYIdx);

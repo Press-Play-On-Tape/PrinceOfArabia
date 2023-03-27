@@ -345,54 +345,112 @@ struct Level {
 
                             if (arduboy.isFrameCount(4)) {
 
+
                                 // Open Gate ..
 
-                                if (item.data.gate.closingDelay + 9 > item.data.gate.closingDelayMax) {
+                                switch (item.data.gate.movement) {
 
-                                    if (item.data.gate.position < 9) {
+                                    case GateMovement::GoingUp:
 
-                                        if (item.data.gate.position == 0) {
+                                        if (item.data.gate.closingDelay + 9 > item.data.gate.closingDelayMax) {
 
-                                            #ifndef SAVE_MEMORY_SOUND
-                                                sound.tonesFromFX(Sounds::GateGoingUp);
-                                            #endif    
+                                            if (item.data.gate.position < 9) {
+
+                                                if (item.data.gate.position == 0) {
+
+                                                    #ifndef SAVE_MEMORY_SOUND
+                                                        sound.tonesFromFX(Sounds::GateGoingUp);
+                                                    #endif    
+
+                                                }
+
+                                                item.data.gate.position++;
+
+                                                if (item.data.gate.position == 9) {
+                                                        
+                                                    switch (item.itemType) {
+
+                                                        case ItemType::Gate:
+
+                                                            item.data.gate.movement = GateMovement::WaitingToFall;
+                                                            break;
+
+                                                        case ItemType::Gate_StayOpen:
+
+                                                            item.data.gate.movement = GateMovement::StayOpen;
+                                                            break;
+
+                                                        default: break;
+
+                                                    }
+
+                                                }
+
+                                            }
 
                                         }
 
-                                        item.data.gate.position++;
+                                        break;
 
-                                    }
+                                    case GateMovement::WaitingToFall:
+                                   
+                                        if (item.data.gate.closingDelay > 0 && item.data.gate.closingDelay <= 9 && item.itemType != ItemType::Gate_StayOpen) {
+
+                                            if (item.data.gate.position == 9) {
+
+                                                #ifndef SAVE_MEMORY_SOUND
+                                                    sound.tonesFromFX(Sounds::GateGoingDown);
+                                                #endif    
+
+                                            }
+
+                                            item.data.gate.position = item.data.gate.position - 3;
+                                            item.data.gate.movement = GateMovement::GoingDown;
+
+                                        }
+
+                                        break;
+
+                                    case GateMovement::GoingDown:
+
+                                        if (item.data.gate.closingDelay > 0 && item.data.gate.closingDelay <= 9 && item.itemType != ItemType::Gate_StayOpen) {
+
+                                            if (item.data.gate.position >= 3 ) {
+
+                                                item.data.gate.position = item.data.gate.position - 3;
+                                                
+                                            }
+                                            else if (item.data.gate.position < 3) {
+
+                                                item.data.gate.position = 0;
+                                                
+                                                switch (item.itemType) {
+
+                                                    case ItemType::Gate:
+                                                        item.data.gate.movement = GateMovement::None;
+                                                        break;
+
+                                                    case ItemType::Gate_StayClosed:
+                                                        item.data.gate.movement = GateMovement::StayClosed;
+                                                        break;
+
+                                                    default: break;
+
+                                                }
+
+                                            }
+                                            
+                                            break;
+
+                                        }
+
+                                    default: break;
 
                                 }
 
 
-                                // Close gate ..
-
-                                else if (item.data.gate.closingDelay > 0 && item.data.gate.closingDelay <= 9 && item.itemType != ItemType::Gate_StayOpen) {
-
-                                    if (item.data.gate.position == 9) {
-
-                                        #ifndef SAVE_MEMORY_SOUND
-                                            sound.tonesFromFX(Sounds::GateGoingDown);
-                                        #endif    
-
-                                    }
-
-                                    if (item.data.gate.position >= 3 ) {
-
-                                        item.data.gate.position = item.data.gate.position - 3;
-                                        
-                                    }
-                                    else if (item.data.gate.position < 3) {
-
-                                        item.data.gate.position = 0;
-                                        
-                                    }
-                                    
-                                    break;
-
-                                }
- 
+                                // Update gate counter ..
+                               
                                 if (item.data.gate.closingDelay > 0) {
 
                                     item.data.gate.closingDelay--;
@@ -782,16 +840,16 @@ struct Level {
         }
 
 
-        WallTileResults isWallTile_ByCoords(int8_t x = Constants::CoordNone, int8_t y = Constants::CoordNone, Direction direction = Direction::Left, bool addOffsets = true) {
+        WallTileResults isWallTile_ByCoords(int8_t x = Constants::CoordNone, int8_t y = Constants::CoordNone, Direction direction = Direction::Left, bool addOffsets = true, uint8_t gateHeight = 7) {
 
             int8_t fgTile = this->getTile(Layer::Foreground, x, y, TILE_FLOOR_BASIC);
 
-            return isWallTile(fgTile, x, y, direction, addOffsets);
+            return isWallTile(fgTile, x, y, direction, addOffsets, gateHeight);
 
         }
 
 
-        WallTileResults isWallTile(int8_t fgTile, int8_t x = Constants::CoordNone, int8_t y = Constants::CoordNone, Direction direction = Direction::Left, bool addOffsets = true) {
+        WallTileResults isWallTile(int8_t fgTile, int8_t x = Constants::CoordNone, int8_t y = Constants::CoordNone, Direction direction = Direction::Left, bool addOffsets = true, uint8_t gateHeight = 7) {
 
             switch (fgTile) {
 
@@ -828,9 +886,16 @@ struct Level {
 
                                 Item &item = this->getItem(idx);
 
-                                if (item.data.gate.position <= 7) {
+                                switch (item.data.gate.movement) {
 
-                                    return WallTileResults::GateClosed;
+                                    case GateMovement::GoingUp:
+                                    case GateMovement::WaitingToFall:
+
+                                        return (item.data.gate.position >= gateHeight ? WallTileResults::None : WallTileResults::GateClosed);
+
+                                    default:
+
+                                        return WallTileResults::GateClosed;
 
                                 }
 
@@ -2657,11 +2722,22 @@ struct Level {
                                 case TILE_FLOOR_RH_END_3:
                                 case TILE_FLOOR_RH_END_4:
                                 case TILE_FLOOR_RH_END_5:
+                                // case TILE_FLOOR_RH_END_GATE_1:
+                                // case TILE_FLOOR_RH_END_GATE_2:
+                                // case TILE_FLOOR_RH_END_GATE_RUG:
+                                case TILE_FLOOR_RH_PILLAR_END_1:
+                                case TILE_FLOOR_RH_PILLAR_END_2:
+                                    return CanClimbDownResult::StepThenClimbDown;
+
+                                // case TILE_FLOOR_RH_END:
                                 case TILE_FLOOR_RH_END_GATE_1:
                                 case TILE_FLOOR_RH_END_GATE_2:
                                 case TILE_FLOOR_RH_END_GATE_RUG:
-                                case TILE_FLOOR_RH_PILLAR_END_1:
-                                case TILE_FLOOR_RH_PILLAR_END_2:
+
+                                    if (isWallTile_ByCoords(tileXIdx, tileYIdx, Direction::Right) != WallTileResults::None) {
+                                        return CanClimbDownResult::None;
+                                    }
+
                                     return CanClimbDownResult::StepThenClimbDown;
 
                                 default:                                
@@ -2681,11 +2757,21 @@ struct Level {
                                 case TILE_FLOOR_RH_END_3:
                                 case TILE_FLOOR_RH_END_4:
                                 case TILE_FLOOR_RH_END_5:
+                                // case TILE_FLOOR_RH_END_GATE_1:
+                                // case TILE_FLOOR_RH_END_GATE_2:
+                                // case TILE_FLOOR_RH_END_GATE_RUG:
+                                case TILE_FLOOR_RH_PILLAR_END_1:
+                                case TILE_FLOOR_RH_PILLAR_END_2:
+                                    return CanClimbDownResult::ClimbDown;
+
                                 case TILE_FLOOR_RH_END_GATE_1:
                                 case TILE_FLOOR_RH_END_GATE_2:
                                 case TILE_FLOOR_RH_END_GATE_RUG:
-                                case TILE_FLOOR_RH_PILLAR_END_1:
-                                case TILE_FLOOR_RH_PILLAR_END_2:
+
+                                    if (isWallTile_ByCoords(tileXIdx, tileYIdx, Direction::Right) != WallTileResults::None ) {
+                                        return CanClimbDownResult::None;
+                                    }
+                                    
                                     return CanClimbDownResult::ClimbDown;
 
                                 default:
@@ -2764,13 +2850,42 @@ struct Level {
                 gate.data.gate.closingDelay = closingDelay;
                 gate.data.gate.closingDelayMax = closingDelayMax;
 
+                switch (gate.data.gate.movement) {
+
+                    case GateMovement::GoingUp:
+                    case GateMovement::GoingDown:
+                    case GateMovement::WaitingToFall:
+                    case GateMovement::None:
+                   
+                        gate.data.gate.movement = GateMovement::GoingDown;
+                        break;
+
+                    default: break;
+                    
+                }
             }
             else {
 
                 gate.data.gate.closingDelay = gate.data.gate.defaultClosingDelay;
                 gate.data.gate.closingDelayMax = gate.data.gate.defaultClosingDelay;
 
+                switch (gate.data.gate.movement) {
+
+                    case GateMovement::GoingUp:
+                    case GateMovement::GoingDown:
+                    case GateMovement::WaitingToRaise:
+                    case GateMovement::None:
+               
+                        gate.data.gate.movement = GateMovement::GoingUp;
+                        break;
+
+                    default: break;
+                    
+                }
+
             }
+
+            //gate.data.gate.movement = GateMovement::GoingUp;
 
         }
 

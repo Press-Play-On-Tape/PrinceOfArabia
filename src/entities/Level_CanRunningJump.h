@@ -19,17 +19,17 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
 
     int8_t distToEdgeOfCurrentTile = distToEdgeOfTile(prince.getDirection(), prince.getPosition().x);
 
-    WallTileResults wallTile2_CurrLvl = this->isWallTile_ByCoords(tileXIdx + (1 * offset), tileYIdx, prince.getDirection());
-    WallTileResults wallTile3_CurrLvl = this->isWallTile_ByCoords(tileXIdx + (2 * offset), tileYIdx, prince.getDirection());
-    WallTileResults wallTile4_CurrLvl = this->isWallTile_ByCoords(tileXIdx + (3 * offset), tileYIdx, prince.getDirection());
-    WallTileResults wallTile5_CurrLvl = this->isWallTile_ByCoords(tileXIdx + (4 * offset), tileYIdx, prince.getDirection());
-    WallTileResults wallTile6_CurrLvl = this->isWallTile_ByCoords(tileXIdx + (5 * offset), tileYIdx, prince.getDirection());
+    WallTileResults wallTile2_CurrLvl = this->isWallTile_ByCoords(tileXIdx + (1 * offset), tileYIdx, prince.getDirection(), true, 8);
+    WallTileResults wallTile3_CurrLvl = this->isWallTile_ByCoords(tileXIdx + (2 * offset), tileYIdx, prince.getDirection(), true, 6);
+    WallTileResults wallTile4_CurrLvl = this->isWallTile_ByCoords(tileXIdx + (3 * offset), tileYIdx, prince.getDirection(), true, 4);
+    WallTileResults wallTile5_CurrLvl = this->isWallTile_ByCoords(tileXIdx + (4 * offset), tileYIdx, prince.getDirection(), true, 2);
+    WallTileResults wallTile6_CurrLvl = this->isWallTile_ByCoords(tileXIdx + (5 * offset), tileYIdx, prince.getDirection(), true, 0);
 
-    WallTileResults wallTile2_NextLvl = this->isWallTile_ByCoords(tileXIdx + (1 * offset), tileYIdx + 1, prince.getDirection());
-    WallTileResults wallTile3_NextLvl = this->isWallTile_ByCoords(tileXIdx + (2 * offset), tileYIdx + 1, prince.getDirection());
-    WallTileResults wallTile4_NextLvl = this->isWallTile_ByCoords(tileXIdx + (3 * offset), tileYIdx + 1, prince.getDirection());
-    WallTileResults wallTile5_NextLvl = this->isWallTile_ByCoords(tileXIdx + (4 * offset), tileYIdx + 1, prince.getDirection());
-    WallTileResults wallTile6_NextLvl = this->isWallTile_ByCoords(tileXIdx + (5 * offset), tileYIdx + 1, prince.getDirection());
+    WallTileResults wallTile2_NextLvl = this->isWallTile_ByCoords(tileXIdx + (1 * offset), tileYIdx + 1, prince.getDirection(), true, 8);
+    WallTileResults wallTile3_NextLvl = this->isWallTile_ByCoords(tileXIdx + (2 * offset), tileYIdx + 1, prince.getDirection(), true, 6);
+    WallTileResults wallTile4_NextLvl = this->isWallTile_ByCoords(tileXIdx + (3 * offset), tileYIdx + 1, prince.getDirection(), true, 4);
+    WallTileResults wallTile5_NextLvl = this->isWallTile_ByCoords(tileXIdx + (4 * offset), tileYIdx + 1, prince.getDirection(), true, 2);
+    WallTileResults wallTile6_NextLvl = this->isWallTile_ByCoords(tileXIdx + (5 * offset), tileYIdx + 1, prince.getDirection(), true, 0);
 
     bool isGroundTile2_CurrLvl = this->isGroundTile_ByCoords(tileXIdx + (1 * offset), tileYIdx);
     bool isGroundTile3_CurrLvl = this->isGroundTile_ByCoords(tileXIdx + (2 * offset), tileYIdx);
@@ -159,7 +159,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
     _____ 6 5 4 3 2 1     _____ 1 2 3 4 5 6
     WT CL 0 0 0 0 0 0     WT CL 0 0 0 0 0 0
     WT NL x x x x x x     WT NL x x x x x x
-    GT CL 1 0 0 x x _     GT CL _ x x 0 0 1
+    GT CL 1 0 0 0 x _     GT CL _ x 0 0 0 1
     GT NL x x x x x _     GT NL _ x x x x x
     */
 
@@ -168,6 +168,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
         wallTile4_CurrLvl == WallTileResults::None && 
         wallTile5_CurrLvl == WallTileResults::None && 
         (wallTile6_CurrLvl == WallTileResults::None || action == Action::RunJump_Level6Exit) &&
+        !isGroundTile3_CurrLvl && 
         !isGroundTile4_CurrLvl && 
         !isGroundTile5_CurrLvl && 
         isGroundTile6_CurrLvl) {

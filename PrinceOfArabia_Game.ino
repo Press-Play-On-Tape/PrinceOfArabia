@@ -2322,6 +2322,7 @@ void game() {
 
                             gate.data.gate.closingDelay = 10;
                             gate.data.gate.closingDelayMax = 255;
+                            gate.data.gate.movement = GateMovement::GoingDown;
                             gate.itemType = ItemType::Gate_StayClosed;           
                         }
                         break;

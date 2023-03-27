@@ -135,7 +135,6 @@ enum class StandingJumpResult : uint8_t {
     GrabLedge_40,
 };
 
-
 enum class RunningJumpResult : uint8_t {
     None,
     Normal_Pos2,
@@ -338,4 +337,14 @@ enum class SoundIndex : uint8_t {
     Strike = 24,
     Step = 25,
     Suppress_End = 25,
+};
+
+enum class GateMovement : uint8_t {
+    None = 0,
+    GoingUp = 1,
+    WaitingToFall = 2,
+    GoingDown = 3,
+    WaitingToRaise = 4,
+    StayOpen = 5,
+    StayClosed = 6,
 };

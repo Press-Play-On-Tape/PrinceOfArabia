@@ -3,6 +3,7 @@
 #define _PRODUCTION_SETTINGS
 
 #ifdef PRODUCTION_SETTINGS
+
     #define SAVE_MEMORY_SYSTEM_BUTTONS
     #define SAVE_MEMORY_USB
     #define _SAVE_MEMORY_PPOT
@@ -14,7 +15,7 @@
     #define _GIVE_SWORD
 
     #define LEVEL_DATA_FROM_FX
-    #define SAVE_TO_FX
+    #define _SAVE_TO_FX
     #define STARTING_LEVEL 1
     #define MAX_LEVEL 13
     #define _DEBUG_CUT_SCENES
@@ -40,7 +41,7 @@
 
     #define LEVEL_DATA_FROM_FX
     #define _SAVE_TO_FX
-    #define STARTING_LEVEL 7
+    #define STARTING_LEVEL 1
     #define MAX_LEVEL 13
     #define _DEBUG_CUT_SCENES
     #define _DEBUG_LEVELS
