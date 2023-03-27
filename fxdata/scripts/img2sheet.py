@@ -17,7 +17,7 @@ if os.path.isfile(imagepath):
 imagepath += os.sep  
 
 images = []
-for f in os.listdir(imagepath):
+for f in sorted(os.listdir(imagepath)):
   if os.path.isfile(imagepath + f):
     images.append(f)
 
