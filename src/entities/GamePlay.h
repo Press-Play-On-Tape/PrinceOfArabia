@@ -47,7 +47,7 @@ struct GamePlay {
     bool update(Arduboy2Ext & arduboy) {
 
         #ifndef SAVE_MEMORY_OTHER
-        if (gameState != GameState::Menu && gameState != GameState::Menu_Sound && gameState != GameState::Menu_Confirm && (arduboy.getFrameCount() - this->frameCount) % Constants::FrameRate == 0) {
+        if (gameState != GameState::Menu && (arduboy.getFrameCount() - this->frameCount) % Constants::FrameRate == 0) {
         #else
         if ((arduboy.getFrameCount() - this->frameCount) % Constants::FrameRate == 0) {
         #endif

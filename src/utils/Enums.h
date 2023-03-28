@@ -58,8 +58,6 @@ enum GameState : uint8_t {
     Game_StartLevel,
     #ifndef SAVE_MEMORY_OTHER
     Menu,
-    Menu_Sound,
-    Menu_Confirm,
     #endif
 };
 
@@ -161,12 +159,15 @@ enum class RunningJumpResult : uint8_t {
 
 enum class MenuOption : uint8_t {
     Resume = 0,
-    MainMenu = 1,
-    Sound = 2,
-    Save = 3,
-    Load_PrinceDead = 3,
-    Load = 4,
+    Load = 1,
+    Save = 2,
+    Sound = 3,
+    MainMenu = 4,
     Clear = 5,
+    Sound_On = 6,
+    Sound_Off = 7,
+    Clear_Yes = 8,
+    Clear_No = 9,
 };
 
 enum class TitleScreenOptions : uint8_t {

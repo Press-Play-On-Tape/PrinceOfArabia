@@ -555,52 +555,11 @@ void renderMenu(Prince &prince) {
 
     #ifndef SAVE_MEMORY_OTHER
     
-        uint8_t imageIdx;
-        uint8_t cursorY = 22;
-
-        switch (gamePlay.gameState) {
-
-            case GameState::Menu:
-
-                 if (menu.cursor == 4) {
-
-                     imageIdx = 4;
-                     cursorY = 12;
-
-                 }
-                 else if (menu.cursor == 5) {
-
-                     imageIdx = 5;
-                     cursorY =  2;
-
-                 }
-                 else {
-
-                     imageIdx = cookie.hasSavedLevel;
-                     if (!prince.isDead()) {
-
-                         imageIdx += 2;
-                     }
-                 }
-                break;
-
-            case GameState::Menu_Sound:
-
-                imageIdx = 7;
-                cursorY = 40;
-                break;
-
-            case GameState::Menu_Confirm:
-
-                imageIdx = 6;
-                cursorY = 40;
-                break;
-
-            default: break;
-
-        }
+        uint16_t data = getMenuData(MenuRenderDataTable);
+        uint8_t imageIdx = (data >> 8);
+        uint8_t cursorY  = (data);
         FX::drawBitmap(menu.x, 0, Images::Menu, imageIdx, dbmNormal);
-        FX::drawBitmap(menu.x + 3, cursorY + (menu.cursor * 10), Images::Sword_Cursor, 0, dbmNormal);
+        FX::drawBitmap(menu.x + 3, cursorY, Images::Sword_Cursor, 0, dbmNormal);
 
         renderNumber(menu.x + 27, 3, gamePlay.level);
         renderNumber(menu.x + 7, 13, gamePlay.timer_Min);

@@ -21,8 +21,8 @@
     #define _DEBUG_CUT_SCENES
     #define DEBUG_LEVELS
 
-    #define _POP_OR_POA
-    #define POP_ONLY
+    #define POP_OR_POA
+    #define _POP_ONLY
     #define _POA_ONLY
     #define USE_LED
 

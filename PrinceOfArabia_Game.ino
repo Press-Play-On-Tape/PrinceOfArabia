@@ -43,6 +43,17 @@ void game_StartLevel() {
 
 }
 
+uint16_t getMenuData(uint24_t table) {
+
+    uint8_t frameIndex = 0;
+
+    if (prince.isDead()) frameIndex = frameIndex + 1;
+    if (cookie.hasSavedLevel) frameIndex = frameIndex + 2;
+
+    FX::seekDataArray(table, frameIndex, (uint8_t)menu.cursor * 2, 20);
+    return FX::readPendingLastUInt16();
+}
+
 void game() {
 
     auto justPressed = arduboy.justPressedButtons();
@@ -1172,65 +1183,18 @@ void game() {
 
             case GameState::Menu:
 
-                if (justPressed & UP_BUTTON && menu.cursor > 0) {
-                    
-                    menu.cursor--;
+                uint16_t options = getMenuData(MenuControlDataTable);
+                if (justPressed & UP_BUTTON) {
 
-                } 
+                    menu.cursor = (options >> 8);
+                }
 
-                if (justPressed & DOWN_BUTTON)   {
+                if (justPressed & DOWN_BUTTON) {
 
-                    if (prince.isDead()) {
-                        if (menu.cursor < 2 || (menu.cursor == 2 && cookie.hasSavedLevel)) {
-                            menu.cursor++;
-                        }
-                    }
-                    else if (menu.cursor < 3 || (menu.cursor < 5 && cookie.hasSavedLevel)) {
-                        menu.cursor++;
-                    }
-
+                    menu.cursor =  (options & 0xFF);
                 }
 
                 if (justPressed & (A_BUTTON | B_BUTTON)) {
-
-                    if (prince.isDead() && cookie.hasSavedLevel) {
-                                                
-                        switch (static_cast<MenuOption>(menu.cursor)) {
-
-                            case MenuOption::Resume:
-                                menu.direction = Direction::Right;  
-                                break;
-
-                            case MenuOption::Load_PrinceDead:
-
-                                #ifdef SAVE_TO_FX
-
-                                    FX::loadGameState(cookie);
-
-                                #else
-
-                                    EEPROM_Utils::loadCookie(cookie);
-
-                                #endif
-
-                                menu.direction = Direction::Right;  
-                                break;
-
-                            case MenuOption::Sound:
-                                gamePlay.gameState = GameState::Menu_Sound;
-                                menu.cursor = 0;
-                                break;
-
-                            case MenuOption::MainMenu:
-                                gamePlay.gameState = GameState::Title_Init;  
-                                break;
-
-                            default: break;
-                                
-                        }
-
-                    }
-                    else {
     
                         switch (static_cast<MenuOption>(menu.cursor)) {
 
@@ -1239,8 +1203,8 @@ void game() {
                                 break;
 
                             case MenuOption::Sound:
-                                gamePlay.gameState = GameState::Menu_Sound;
-                                menu.cursor = !arduboy.audio.enabled();
+                                //gamePlay.gameState = GameState::Menu_Sound;
+                                menu.cursor = (uint8_t)MenuOption::Sound_Off - arduboy.audio.enabled();
                                 break;
 
                             case MenuOption::Save:
@@ -1266,79 +1230,48 @@ void game() {
                                 menu.direction = Direction::Right;
                                 break;
 
-                            case MenuOption::Clear:
-
-                                gamePlay.gameState = GameState::Menu_Confirm;
-                                menu.cursor = 0;
-                                break;
-
                             case MenuOption::MainMenu:
                                 gamePlay.gameState = GameState::Title_Init;  
+                                break;
+
+                            case MenuOption::Clear:
+
+                                menu.cursor = (uint8_t)MenuOption::Clear_Yes;
+                                break;
+
+                            case MenuOption::Sound_On:
+
+                                arduboy.audio.on();
+                                menu.direction = Direction::Right;
+                                break;
+
+                            case MenuOption::Sound_Off:
+
+                                arduboy.audio.off();
+                                menu.direction = Direction::Right;
+                                break;
+
+                            case MenuOption::Clear_Yes:
+
+                                cookie.hasSavedLevel = false;
+                                saveCookie(true);
+                                menu.direction = Direction::Right;
+                                break;
+
+                            case MenuOption::Clear_No:
+
+                                menu.cursor = (uint8_t)MenuOption::Clear;
                                 break;
 
                             default: break;
 
                         }
 
-                    }
-
                     justPressed = 0;
 
-                }   
+                }
 
                 break;
-
-
-            case GameState::Menu_Sound:
-            case GameState::Menu_Confirm:
-
-                if (justPressed & UP_BUTTON && menu.cursor > 0) {
-                    
-                    menu.cursor--;
-
-                } 
-
-                if (justPressed & DOWN_BUTTON && menu.cursor < 1) {
-                    
-                    menu.cursor++;
-
-                } 
-
-                if (justPressed & (A_BUTTON | B_BUTTON)) {
-
-                    if (gamePlay.gameState == GameState::Menu_Sound) {
-
-                        switch (menu.cursor) {
-
-                        case 0:
-                            arduboy.audio.on();
-                            menu.direction = Direction::Right;
-                            break;
-                        case 1:
-                            arduboy.audio.off();
-                            menu.direction = Direction::Right;
-                            break;
-                        }
-                    }
-                    else {
-                        switch (menu.cursor) {
-
-                        case 0:
-
-                            cookie.hasSavedLevel = false;
-                            saveCookie(true);
-                            menu.direction = Direction::Right;  
-                            break;
-
-                        case 1:
-                            gamePlay.gameState = GameState::Menu; 
-                            menu.cursor = static_cast<uint8_t>(MenuOption::Clear);
-                            break;
-
-                        }
-                    }
-
-                } 
 
             default: break;
 
@@ -2654,7 +2587,7 @@ void game() {
     render(sameLevelAsPrince);
     
     #ifndef SAVE_MEMORY_OTHER
-    if (gamePlay.gameState == GameState::Menu || gamePlay.gameState == GameState::Menu_Sound || gamePlay.gameState == GameState::Menu_Confirm) {
+    if (gamePlay.gameState == GameState::Menu) {
         renderMenu(prince);
     }
     #endif

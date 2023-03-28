@@ -168,8 +168,6 @@ void loop() {
         case GameState::Game:
         #ifndef SAVE_MEMORY_OTHER
         case GameState::Menu:
-        case GameState::Menu_Sound:
-        case GameState::Menu_Confirm:
         #endif
 
             game();

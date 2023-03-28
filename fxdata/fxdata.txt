@@ -250,6 +250,116 @@ uint8_t Title_Cursor_XPos[] = {
     41,  10,  60,  95,          // NRCH
 };
 
+uint8_t MenuControlDataTable[] = {
+
+    // up // down   // MenuStates (no save, not dead)
+
+    0,        2,    // 0 Resume
+   -1,       -1,    // 1 Load
+    0,        3,    // 2 Save
+    2,        4,    // 3 Sound
+    3,        4,    // 4 Main
+   -1,       -1,    // 5 Clear
+    6,        7,    // 6 sound_set_on
+    6,        7,    // 7 sound_set_off
+   -1,       -1,    // 8 clear_confirm_yes
+   -1,       -1,    // 9 clear_confirm_no
+
+    // up // down   // MenuStates (no save, dead)
+
+    0,        3,    // 0 Resume
+   -1,       -1,    // 1 Load
+   -1,       -1,    // 2 Save
+    0,        4,    // 3 Sound
+    3,        4,    // 4 Main
+   -1,       -1,    // 5 Clear
+    6,        7,    // 6 sound_set_on
+    6,        7,    // 7 sound_set_off
+   -1,       -1,    // 8 clear_confirm_yes
+   -1,       -1,    // 9 clear_confirm_no
+
+    // up // down   // MenuStates (save, not dead)
+
+    0,        1,     // 0 Resume
+    0,        2,     // 1 Load
+    1,        3,     // 2 Save
+    2,        4,     // 3 Sound
+    3,        5,     // 4 Main
+    4,        5,     // 5 Clear
+    6,        7,     // 6 sound_set_on
+    6,        7,     // 7 sound_set_off
+    8,        9,     // 8 clear_confirm_yes
+    8,        9,     // 9 clear_confirm_no
+
+    // up // Cursor  // MenuStates (save, dead)
+
+    0,        1,     // 0 Resume
+    0,        3,     // 1 Load
+   -1,       -1,     // 2 Save
+    1,        4,     // 3 Sound
+    3,        4,     // 4 Main
+   -1,       -1,     // 5 Clear
+    6,        7,     // 6 sound_set_on
+    6,        7,     // 7 sound_set_off
+   -1,       -1,     // 8 clear_confirm_yes
+   -1,       -1,     // 9 clear_confirm_no
+}
+
+uint8_t MenuRenderDataTable[] = {
+
+    //imageIndex // Cursor  // MenuStates (no save, not dead)
+
+    2,              22,     // 0 Resume
+   -1,              -1,     // 1 Load
+    2,              32,     // 2 Save
+    2,              42,     // 3 Sound
+    2,              52,     // 4 Main
+   -1,              -1,     // 5 Clear
+    6,              40,     // 6 sound_set_on
+    6,              50,     // 7 sound_set_off
+   -1,              -1,     // 8 clear_confirm_yes
+   -1,              -1,     // 9 clear_confirm_no
+
+    //imageIndex // Cursor  // MenuStates (no save, dead)
+
+    0,              22,     // 0 Resume
+   -1,              -1,     // 1 Load
+   -1,              -1,     // 2 Save
+    0,              32,     // 3 Sound
+    0,              42,     // 4 Main
+   -1,              -1,     // 5 Clear
+    6,              40,     // 6 sound_set_on
+    6,              50,     // 7 sound_set_off
+   -1,              -1,     // 8 clear_confirm_yes
+   -1,              -1,     // 9 clear_confirm_no
+
+    //imageIndex // Cursor  // MenuStates (save, not dead)
+
+    3,              22,     // 0 Resume
+    3,              32,     // 1 Load
+    3,              42,     // 2 Save
+    3,              52,     // 3 Sound
+    4,              52,     // 4 Main
+    5,              52,     // 5 Clear
+    6,              40,     // 6 sound_set_on
+    6,              50,     // 7 sound_set_off
+    7,              40,     // 8 clear_confirm_yes
+    7,              50,     // 9 clear_confirm_no
+
+    //imageIndex // Cursor  // MenuStates (save, dead)
+
+    1,              22,     // 0 Resume
+    1,              32,     // 1 Load
+   -1,              -1,     // 2 Save
+    1,              42,     // 3 Sound
+    1,              52,     // 4 Main
+   -1,              -1,     // 5 Clear
+    6,              40,     // 6 sound_set_on
+    6,              50,     // 7 sound_set_off
+   -1,              -1,     // 8 clear_confirm_yes
+   -1,              -1,     // 9 clear_confirm_no
+}
+
 Invaders_HUD_frame[] = {
     int16_t 120,  0, uint24_t HUD_Backgrounds,  uint8_t 1, dbmNormal
     int16_t 123, 40, uint24_t Numbers_Small,    uint8_t 0, dbmNormal_last
