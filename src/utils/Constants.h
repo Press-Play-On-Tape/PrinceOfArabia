@@ -1,6 +1,6 @@
 #pragma once
 
-#define _PRODUCTION_SETTINGS
+#define PRODUCTION_SETTINGS
 
 #ifdef PRODUCTION_SETTINGS
 
@@ -41,7 +41,7 @@
 
     #define LEVEL_DATA_FROM_FX
     #define _SAVE_TO_FX
-    #define STARTING_LEVEL 3
+    #define STARTING_LEVEL 2
     #define MAX_LEVEL 13
     #define _DEBUG_CUT_SCENES
     #define _DEBUG_LEVELS

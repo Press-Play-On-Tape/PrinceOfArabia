@@ -863,6 +863,7 @@ struct Level {
                 case TILE_FG_WALL_8:
                 case TILE_FLOOR_GATE_FRONT_TRACK_4:
                 case TILE_RUG_FRONT_TRACK:
+
                     return WallTileResults::SolidWall;
 
                 case TILE_FLOOR_GATE_FRONT_TRACK_1:
@@ -888,13 +889,12 @@ struct Level {
 
                                 switch (item.data.gate.movement) {
 
+                                    case GateMovement::None:
                                     case GateMovement::GoingUp:
                                     case GateMovement::WaitingToFall:
-
                                         return (item.data.gate.position >= gateHeight ? WallTileResults::None : WallTileResults::GateClosed);
 
                                     default:
-
                                         return WallTileResults::GateClosed;
 
                                 }
