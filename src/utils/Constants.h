@@ -1,6 +1,6 @@
 #pragma once
 
-#define PRODUCTION_SETTINGS
+#define _PRODUCTION_SETTINGS
 
 #ifdef PRODUCTION_SETTINGS
 
@@ -33,7 +33,7 @@
     #define _SAVE_MEMORY_USB
     #define SAVE_MEMORY_PPOT
     #define SAVE_MEMORY_OTHER
-    #define _SAVE_MEMORY_SOUND
+    #define SAVE_MEMORY_SOUND
     #define SAVE_MEMORY_ENEMY
     #define SAVE_MEMORY_INVADER
     #define _ALT_B_BUTTON
@@ -41,7 +41,7 @@
 
     #define LEVEL_DATA_FROM_FX
     #define _SAVE_TO_FX
-    #define STARTING_LEVEL 1
+    #define STARTING_LEVEL 3
     #define MAX_LEVEL 13
     #define _DEBUG_CUT_SCENES
     #define _DEBUG_LEVELS
@@ -181,7 +181,7 @@ constexpr uint16_t Jump_Up_B_14_End                              = Stance::Jump_
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /*                                                               01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define STANDING_TURN_SEQ                                        27,    28,    29,    30,    31,
-#define STANDING_TURN_OFFSETS                                    0,0,   -1,0,  -1,0,  2,0,   0,0,
+#define STANDING_TURN_OFFSETS                                    0,0,   -1,0,  1,0,   0,0,   0,0,
 constexpr uint16_t Standing_Turn_1_Start                         = Stance::Jump_Up_B_14_End + 1; 
 constexpr uint16_t Standing_Turn_2                               = Stance::Standing_Turn_1_Start + 1;
 constexpr uint16_t Standing_Turn_3                               = Stance::Standing_Turn_2 + 1;

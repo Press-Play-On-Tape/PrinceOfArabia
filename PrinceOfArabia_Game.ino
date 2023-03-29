@@ -262,19 +262,19 @@ void game() {
 
                     // Draw sword? Not if the prince is dead!
 
-                    if (abs(xDelta) < 70 && yDelta == 0 && enemyIsVisible && sameLevelAsPrince) {
+                    if (abs(xDelta) < 70 && yDelta == 0 && enemyIsVisible && sameLevelAsPrince && !prince.isDead()) {
 
-                        switch (prince.getStance()) {
+                        // switch (prince.getStance()) {
 
-                            case Stance::Falling_Dead_1_Start ... Stance::Falling_Dead_3_End:
-                            case Stance::Falling_Dead_Blade_1_Start ... Stance::Falling_Dead_Blade_2_End:
-                                break;
+                        //     case Stance::Falling_Dead_1_Start ... Stance::Falling_Dead_3_End:
+                        //     case Stance::Falling_Dead_Blade_1_Start ... Stance::Falling_Dead_Blade_2_End:
+                        //         break;
 
-                            default:
+                        //     default:
                                 enemy.pushSequence(Stance::Draw_Sword_1_Start, Stance::Draw_Sword_6_End, Stance::Sword_Normal);
-                                break;
+                                // break;
 
-                        }
+                        // }
 
                     }
 
@@ -2140,6 +2140,9 @@ void game() {
         
         if (prince.getHealth() > 0) {
 
+            handleBlades();
+
+/*
             switch (prince.getStance()) {
 
                 case Stance::Climbing_1_Start ... Stance::Climbing_15_End:
@@ -2212,6 +2215,7 @@ void game() {
                     break;
 
             }
+*/            
 
         }
 
