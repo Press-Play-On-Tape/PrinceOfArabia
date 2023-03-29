@@ -41,7 +41,7 @@
 
     #define LEVEL_DATA_FROM_FX
     #define _SAVE_TO_FX
-    #define STARTING_LEVEL 2
+    #define STARTING_LEVEL 6
     #define MAX_LEVEL 13
     #define _DEBUG_CUT_SCENES
     #define _DEBUG_LEVELS

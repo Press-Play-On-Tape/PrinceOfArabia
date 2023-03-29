@@ -2855,9 +2855,18 @@ struct Level {
                     case GateMovement::GoingUp:
                     case GateMovement::GoingDown:
                     case GateMovement::WaitingToFall:
-                    case GateMovement::None:
                    
                         gate.data.gate.movement = GateMovement::GoingDown;
+                        break;
+
+                    case GateMovement::None:
+                   
+                        if (gate.data.gate.position == 9) {
+                            gate.data.gate.movement = GateMovement::GoingDown;
+                        }
+                        else {
+                            gate.data.gate.movement = GateMovement::GoingUp;
+                        }
                         break;
 
                     default: break;
