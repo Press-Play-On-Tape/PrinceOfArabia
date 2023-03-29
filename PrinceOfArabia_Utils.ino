@@ -719,20 +719,147 @@ void saveCookie(bool enableLEDs) {
 #endif
 
 
-void handleBlades(int8_t tileXIdx, int8_t tileYIdx) {
+void handleBlades() {
+
+    uint8_t princeLX;
+    uint8_t princeRX;
+
+    int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x);
+    int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y);
+
+    if (prince.getDirection() == Direction::Right) {
+        tileXIdx++;
+    }
+
+
+// Serial.print("Blade ");
+// Serial.print(tileXIdx);
+// Serial.print(",");
+// Serial.print(tileYIdx);
+// Serial.print(" Prince ");
+// Serial.print(prince.getPosition().x);
+// Serial.print(",");
+// Serial.println(prince.getPosition().y);
+
+
+// Serial.print(" Prince ");
+// Serial.print(prince.getPosition().x);
+// Serial.print(",");
+// Serial.print(prince.getPosition().y);
+
+    ImageDetails imageDetails;
+    prince.getImageDetails(imageDetails);
+
+// Serial.print(" R:");
+// Serial.print(imageDetails.reach);
+// Serial.print(" H:");
+// Serial.print(imageDetails.heel);
+// Serial.print(" T:");
+// Serial.print(imageDetails.toe);
+
+    int8_t distToEdgeOfTile = level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX());
+    //if (prince.getDirection() == Direction::Right && distToEdgeOfTile == 10) { tileXIdx = tileXIdx - 1;}
+
+// Serial.print(", dist: ");
+// Serial.print(distToEdgeOfTile);
+// Serial.print(", blade: ");
+// Serial.print(tileXIdx);
+// Serial.print(",");
+// Serial.print(tileYIdx);
+// Serial.print(" - ");
+
+
+
+    princeLX= prince.getPosition().x + imageDetails.reach;
+    princeRX= prince.getPosition().x + imageDetails.heel;
+//princeMid= prince.getPosition().x;// + (prince.getDirection() == Direction::Right ? -4 : 2);
+
+    if (princeRX < princeLX) {
+        uint8_t temp = princeRX;
+        princeRX = princeLX;
+        princeLX = temp;
+    }
 
     uint8_t itemIdx = level.getItem(ItemType::Blade, tileXIdx, tileYIdx);
 
     if (itemIdx != Constants::NoItemFound) {
-
+// Serial.print("yes");
+        uint8_t chopperX = (tileXIdx * 12) + 3;
         Item &item = level.getItem(itemIdx);
 
-        if (abs(item.data.blade.position) <= 5) {
+
+// int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x + prince.getDirectionOffset(4));
+// int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y);
+
+
+
+
+        if (chopperX > princeLX &&  chopperX < princeRX && abs(item.data.blade.position) <= 5) {
 
             pushDead(prince, level, gamePlay, true, DeathType::Blade);
+            // Serial.print(" DEAD ");
 
         }
 
     }
+//     else {
+
+// Serial.print("no");
+// chopperX1=0;
+
+//     }
+
+    //if (prince.getDirection() == Direction::Left) {
+// Serial.print(", blade2: ");
+// Serial.print(tileXIdx - 1);
+// Serial.print(",");
+// Serial.print(tileYIdx);
+// Serial.print(" - ");
+
+    {
+        uint8_t itemIdx = level.getItem(ItemType::Blade, tileXIdx - 1, tileYIdx);
+
+        if (itemIdx != Constants::NoItemFound) {
+    // Serial.print("yes");
+            uint8_t chopperX = ((tileXIdx-1) * 12) + 3;
+            Item &item = level.getItem(itemIdx);
+
+
+    // int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x + prince.getDirectionOffset(4));
+    // int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y);
+
+
+
+
+            if (chopperX > princeLX &&  chopperX < princeRX && abs(item.data.blade.position) <= 5) {
+
+               pushDead(prince, level, gamePlay, true, DeathType::Blade);
+            // Serial.print(" DEAD ");
+
+            }
+
+        }
+
+    }
+//         else {
+
+//     Serial.print("no");
+// chopperX2 = 0;
+//         }
+
+    //}
+
+        // Serial.print(" ");
+        // Serial.print(chopperX1);
+        // Serial.print(":");
+        // Serial.print(chopperX2);
+        // Serial.print(" ");
+        // Serial.print(princeLX);
+        // Serial.print(":");
+        // Serial.print(princeMid);
+        // Serial.print(":");
+        // Serial.print(princeRX);
+
+        // Serial.println(" ..");
 
 }

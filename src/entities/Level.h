@@ -316,7 +316,7 @@ struct Level {
                              
                             item.data.blade.position++;
                             
-                            if (item.data.blade.position == 40) {
+                            if (item.data.blade.position == 55) {
 
                                 item.data.blade.position = -5;
 
