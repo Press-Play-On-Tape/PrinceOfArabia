@@ -22,12 +22,12 @@ for f in sorted(os.listdir(imagepath)):
     images.append(f)
 
 imagecount = len(images)
-cols = imagecount // int(sqrt(imagecount))
-if  (imagecount % cols) > (imagecount % (cols+1)): cols += 1
-rows = (imagecount + cols -1) //  cols
-if rows * cols > imagecount:
-  rows = 1
-  cols = imagecount
+cols = imagecount
+for i in range(int(sqrt(imagecount)),0,-1):
+  if imagecount % i == 0:
+    cols = imagecount // i
+    break
+rows = imagecount // cols
 img = Image.open(imagepath + images[0]).convert("RGBA")
 width = img.size[0]
 height = img.size[1]
