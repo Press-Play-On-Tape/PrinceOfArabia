@@ -523,7 +523,7 @@ void render(bool sameLevelAsPrince) {
 
         switch (gamePlay.timeRemaining) {
 
-            case 1 ... 80:
+            case 0 ... 59:
                 FX::drawBitmap(23, y, Images::TimeRemaining, 0, dbmMasked);
                 renderNumber_Upright(29, y + 5, gamePlay.timer_Min);
                 break;
@@ -533,21 +533,21 @@ void render(bool sameLevelAsPrince) {
     }
 
 
-    // Game over / press A ..
+    // press A ..
 
     Sign sign = level.getSign();
 
     if (sign.counter == 1) {
 
-        uint24_t signImage = Images::PressA;
+        //uint24_t signImage = Images::PressA;
+        //
+        //if (sign.type == SignType::GameOver) {
+        //
+        //    signImage = Images::GameOver;
+        //
+        //}
 
-        if (sign.type == SignType::GameOver) {
-
-            signImage = Images::GameOver;
-
-        }
-
-        FX::drawBitmap(24, sign.y, signImage, 0, dbmMasked);
+        FX::drawBitmap(24, sign.y, Images::PressA, 0, dbmMasked);
 
     }
 

@@ -6,7 +6,7 @@
 
 struct Sign {
 
-    SignType type;
+    //SignType type;
     uint8_t counter;
     uint8_t y;
     

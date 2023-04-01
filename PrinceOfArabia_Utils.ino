@@ -422,16 +422,17 @@ void pushDead(Prince &entity, Level &level, GamePlay &gamePlay, bool clear, Deat
 
     entity.setHealth(0);
 
-    if (gamePlay.isGameOver()) {
+    //if (gamePlay.isGameOver()) { // in case GameOver Gamestate is changed and end text is shown instead
 
-        showSign(entity, level, SignType::GameOver);
-
-    }
-    else {
-
-        showSign(entity, level, SignType::PressA);
-
-    }
+    //    showSign(entity, level, SignType::GameOver);
+    //
+    //}
+    //else {
+    //
+    //    showSign(entity, level, SignType::PressA);
+    //
+    //}
+    showSign(entity, level);
 
 }
 
@@ -450,10 +451,11 @@ void pushDead(Enemy &entity, bool clear) {
 }
 
 
-void showSign(Prince &prince, Level &level, SignType signType) {
+//void showSign(Prince &prince, Level &level, SignType signType) {
+void showSign(Prince &prince, Level &level) {
 
     Sign &sign = level.getSign();
-    sign.type = signType;
+    //sign.type = signType;
     sign.counter = 20;
 
     switch (prince.getY()) {

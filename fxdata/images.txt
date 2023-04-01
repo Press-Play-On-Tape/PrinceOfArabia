@@ -24,7 +24,7 @@ namespace Images {
 
     image_t TimeRemaining           = "../images/title/TimeRemaining.png"
     image_t LevelNumber             = "../images/title/LevelNumber.png"
-    image_t GameOver                = "../images/title/GameOver.png"
+    //image_t GameOver                = "../images/title/GameOver.png"
     image_t PressA                  = "../images/title/PressA.png"
     image_t TimeOut_PoP             = "../images/title/TimeOut_PoP.png"
     image_t TimeOut_PoA             = "../images/title/TimeOut_PoA.png"
