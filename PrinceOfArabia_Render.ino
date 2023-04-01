@@ -363,6 +363,9 @@ void render(bool sameLevelAsPrince) {
 
                 switch (fgTile) {
 
+                    case Constants::Tile_CollapsedTile_Full:
+                        break;
+
                     case Constants::Tile_CollapsedTile_Half:
                         FX::drawBitmap(x * Constants::TileWidth, yCoord, Images::Tile_Dungeon_98_FG, 0, dbmMasked);
                         break;
