@@ -1668,6 +1668,9 @@ void game() {
                             
                             int16_t xDelta = prince.getPosition().x - enemy.getPosition().x;
                             int16_t yDelta = prince.getPosition().y - enemy.getPosition().y;
+                            int16_t enemyPos = enemy.getPosition().x - (level.getXLocation() * Constants::TileWidth);
+
+                            if (enemyPos < 0 || enemyPos >= WIDTH) break;
 
                             if (abs(xDelta) <= Constants::StrikeDistance && yDelta == 0 && enemyIsVisible) {
                             
@@ -2183,6 +2186,9 @@ void game() {
 
                             int16_t xDelta = prince.getPosition().x - enemy.getPosition().x;
                             int16_t yDelta = prince.getPosition().y - enemy.getPosition().y;
+                            int16_t enemyPos = enemy.getPosition().x - (level.getXLocation() * Constants::TileWidth);
+
+                            if (enemyPos < 0 || enemyPos >= WIDTH) break;
 
                             switch (prince.getStance()) {
 
