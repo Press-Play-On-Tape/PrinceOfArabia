@@ -55,8 +55,8 @@ uint8_t level9_Data[] = {
     40,                         // Enemy starting x tile
     0,                          // Enemy starting y tile
     52,                         // Enemy starting x pos (left entry)
-    22,                         // Enemy starting x pos (right entry)
-    18,                         // Enemy starting x pos (left extent)
+    6,                          // Enemy starting x pos (right entry)
+    6,                          // Enemy starting x pos (left extent)
     62,                         // Enemy starting x pos (right extent)
     56,                         // Enemy starting y pos (25, 56, 87)
     5,                          // Enemy starting health
