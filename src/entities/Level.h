@@ -2648,10 +2648,11 @@ struct Level {
             #endif
 
             int8_t bgTile1 = this->getTile(Layer::Background, tileXIdx, tileYIdx, TILE_FLOOR_BASIC);
+            int8_t bgTile2 = this->getTile(Layer::Background, tileXIdx - 1, tileYIdx, TILE_FLOOR_BASIC);
             int8_t distToEdge = distToEdgeOfTile(direction, prince.getPosition().x);
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANCLIMBDOWN)
-            if(direction == Direction::Left) {
+            if (direction == Direction::Left) {
                 DEBUG_PRINT(F("Left "));
             }
             else {
@@ -2659,8 +2660,10 @@ struct Level {
             }
             DEBUG_PRINT(F("dist "));
             DEBUG_PRINT(distToEdge);
-            DEBUG_PRINT(F(", bg "));
+            DEBUG_PRINT(F(", bg1 "));
             DEBUG_PRINT(bgTile1);
+            DEBUG_PRINT(F(", bg2 "));
+            DEBUG_PRINT(bgTile2);
             DEBUG_PRINTLN("");
             #endif
 
@@ -2683,7 +2686,12 @@ struct Level {
                                 case TILE_FLOOR_LH_END_PATTERN_2:
                                 case TILE_COLUMN_3:
                                 case TILE_PILLAR_2:
-                                    return CanClimbDownResult::StepThenClimbDown;
+
+                                    if (bgTile2 != TILE_FLOOR_BASIC) {
+                                        return CanClimbDownResult::StepThenClimbDown;
+                                    }
+    
+                                    return CanClimbDownResult::None;
 
                                 default:                                
                                     return CanClimbDownResult::None;
@@ -2702,7 +2710,12 @@ struct Level {
                                 case TILE_FLOOR_LH_END_PATTERN_2:
                                 case TILE_COLUMN_3:
                                 case TILE_PILLAR_2:
-                                    return CanClimbDownResult::ClimbDown;
+
+                                    if (bgTile2 != TILE_FLOOR_BASIC) {
+                                       return CanClimbDownResult::ClimbDown;
+                                    }
+
+                                    return CanClimbDownResult::None;
 
                                 default:
                                     return CanClimbDownResult::None;
