@@ -36,14 +36,23 @@ python3 scripts/ReplaceTiles.py ../levels/Level20_RunningJumps_FG.csv ../levels/
 python3 scripts/ReplaceTiles.py ../levels/Level28_RunningJumps_BG.csv ../levels/Level28_RunningJumps_BG_convert.csv
 python3 scripts/ReplaceTiles.py ../levels/Level28_RunningJumps_FG.csv ../levels/Level28_RunningJumps_FG_convert.csv
 
-montage ../images/prince/left/Backup/???_*.png -geometry 36x36+0+0 -background none -tile 15x15 ../images/prince/left/Prince_Left_36x36.png
-montage ../images/prince/right/Backup/???_*.png -geometry 36x36+0+0 -background none -tile 15x15 ../images/prince/right/Prince_Right_36x36.png
-montage ../images/mirror/left/Backup/???_*.png -geometry 36x36+0+0 -background none -tile 15x9 ../images/mirror/left/Mirror_Left_36x36.png
-montage ../images/mirror/right/Backup/???_*.png -geometry 36x36+0+0 -background none -tile 15x9 ../images/mirror/right/Mirror_Right_36x36.png
-montage ../images/enemy/left/Backup/???_*.png -geometry 36x36+0+0 -background none -tile 10x4 ../images/enemy/left/Enemy_Left_36x36.png
-montage ../images/enemy/right/Backup/???_*.png -geometry 36x36+0+0 -background none -tile 10x4 ../images/enemy/right/Enemy_Right_36x36.png
-montage ../images/skeleton/left/Backup/???_*.png -geometry 36x36+0+0 -background none -tile 10x4 ../images/skeleton/left/Skeleton_Left_36x36.png
-montage ../images/skeleton/right/Backup/???_*.png -geometry 36x36+0+0 -background none -tile 10x4 ../images/skeleton/right/Skeleton_Right_36x36.png
+#montage ../images/prince/left/Backup/???_*.png -geometry 36x36+0+0 -background none -tile 15x15 ../images/prince/left/Prince_Left_36x36.png
+#montage ../images/prince/right/Backup/???_*.png -geometry 36x36+0+0 -background none -tile 15x15 ../images/prince/right/Prince_Right_36x36.png
+#montage ../images/mirror/left/Backup/???_*.png -geometry 36x36+0+0 -background none -tile 15x9 ../images/mirror/left/Mirror_Left_36x36.png
+#montage ../images/mirror/right/Backup/???_*.png -geometry 36x36+0+0 -background none -tile 15x9 ../images/mirror/right/Mirror_Right_36x36.png
+#montage ../images/enemy/left/Backup/???_*.png -geometry 36x36+0+0 -background none -tile 10x4 ../images/enemy/left/Enemy_Left_36x36.png
+#montage ../images/enemy/right/Backup/???_*.png -geometry 36x36+0+0 -background none -tile 10x4 ../images/enemy/right/Enemy_Right_36x36.png
+#montage ../images/skeleton/left/Backup/???_*.png -geometry 36x36+0+0 -background none -tile 10x4 ../images/skeleton/left/Skeleton_Left_36x36.png
+#montage ../images/skeleton/right/Backup/???_*.png -geometry 36x36+0+0 -background none -tile 10x4 ../images/skeleton/right/Skeleton_Right_36x36.png
+
+python3 scripts/img2sheet.py ../images/prince/left/Prince_Left
+python3 scripts/img2sheet.py ../images/prince/right/Prince_Right
+python3 scripts/img2sheet.py ../images/mirror/left/Mirror_Left
+python3 scripts/img2sheet.py ../images/mirror/right/Mirror_Right
+python3 scripts/img2sheet.py ../images/enemy/left/Enemy_Left
+python3 scripts/img2sheet.py ../images/enemy/right/Enemy_Right
+python3 scripts/img2sheet.py ../images/skeleton/left/Skeleton_Left
+python3 scripts/img2sheet.py ../images/skeleton/right/Skeleton_Right
 
 python3 scripts/img2sheet.py ../images/princess/Hearts
 python3 scripts/img2sheet.py ../images/princess/Princess

@@ -109,7 +109,7 @@ namespace Images {
 
     // Jaffar Images 
 
-    image_t Jaffar                  = "../images/jaffar/Jaffar_32x32_1.png"
+    image_t Jaffar                  = "../images/jaffar/Jaffar_32x32.png"
 
 
     // Prince Images
