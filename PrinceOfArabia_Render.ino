@@ -52,7 +52,7 @@ void render(bool sameLevelAsPrince) {
         int16_t xLoc = (item.data.location.x - level.getXLocation()) * Constants::TileWidth;
         int16_t yLoc = ((item.data.location.y - level.getYLocation()) * Constants::TileHeight) - level.getYOffset() + Constants::ScreenTopOffset;
 
-        if (item.itemType != ItemType::None) {
+        //if (item.itemType != ItemType::None) {
 
             switch (item.itemType) {
 
@@ -194,7 +194,7 @@ void render(bool sameLevelAsPrince) {
 
             }
 
-        }
+        //}
 
     }
 
@@ -287,7 +287,7 @@ void render(bool sameLevelAsPrince) {
         int16_t xLoc = (item.data.location.x - level.getXLocation()) * Constants::TileWidth;
         int16_t yLoc = ((item.data.location.y - level.getYLocation()) * Constants::TileHeight) - level.getYOffset() + Constants::ScreenTopOffset;
 
-        if (item.itemType != ItemType::None) {
+        //if (item.itemType != ItemType::None) {
 
             switch (item.itemType) {
 
@@ -314,7 +314,7 @@ void render(bool sameLevelAsPrince) {
 
             }
 
-        }
+        //}
 
     }
 
@@ -354,7 +354,7 @@ void render(bool sameLevelAsPrince) {
 
     for (uint8_t y = 0; y < 4; y++) {
 
-        for (uint8_t x = 0; x < 10; x++) {
+        for (int8_t x = 9; x >=0 ; x--) {
 
             int8_t fgTile = level.getTile(Layer::Foreground, x, y - 1, TILE_NONE);
             int16_t yCoord = (y * Constants::TileHeight) - level.getYOffset() - Constants::TileHeight + Constants::ScreenTopOffset;
