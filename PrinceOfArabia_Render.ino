@@ -523,7 +523,7 @@ void render(bool sameLevelAsPrince) {
 
         switch (gamePlay.timeRemaining) {
 
-            case 0 ... 59:
+            case 1 ... 80:
                 FX::drawBitmap(23, y, Images::TimeRemaining, 0, dbmMasked);
                 renderNumber_Upright(29, y + 5, gamePlay.timer_Min);
                 break;
