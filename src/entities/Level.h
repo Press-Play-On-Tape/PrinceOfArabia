@@ -866,6 +866,17 @@ struct Level {
 
                     return WallTileResults::SolidWall;
 
+                case TILE_RUG_1:
+                case TILE_RUG_2:
+
+                    if (direction == Direction::Right) {
+
+                        return WallTileResults::SolidWall;
+
+                    }
+
+                    return WallTileResults::None;
+
                 case TILE_FLOOR_GATE_FRONT_TRACK_1:
                 case TILE_FLOOR_GATE_FRONT_TRACK_2:
                 case TILE_FLOOR_GATE_FRONT_TRACK_3:
