@@ -192,9 +192,15 @@ void processRunJump(Prince &prince, Level &level, bool testEnemy) {
 
     }
 
-    uint24_t pos = RunningJumpStances + static_cast<uint24_t>(static_cast<uint16_t>(jumpResult) * 16);
+    if (jumpResult != RunningJumpResult::KeepRunning) {
+        
+        uint24_t pos = RunningJumpStances + static_cast<uint24_t>(static_cast<uint16_t>(jumpResult) * 16);
+        processJump(pos);
 
-    processJump(pos);
+    }
+    else {
+        prince.pushSequence(Stance::Run_Repeat_5_Mid, Stance::Run_Repeat_8_End);
+    }
 
 }
 

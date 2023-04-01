@@ -257,7 +257,37 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
 
         }
 
+
+        /* ----------------------------------------------------------------------------------- */
+        /*  3. Fix for #112.
         
+        Positions 2, 6, 10.
+
+        
+        Left                  Right
+        _____ 6 5 4 3 2 1     _____ 1 2 3 4 5 6
+        WT CL x 0 0 0 0 0     WT CL 0 0 0 0 0 x
+        WT NL x 1 0 0 x x     WT NL x x 0 0 1 x
+        GT CL x 1 0 0 1 _     GT CL _ 1 0 0 1 x
+        GT NL x x x x x _     GT NL _ x x x x x
+        */
+
+        if (wallTile2_CurrLvl == WallTileResults::None && 
+            wallTile3_CurrLvl == WallTileResults::None && 
+            wallTile4_CurrLvl == WallTileResults::None && 
+            wallTile5_CurrLvl == WallTileResults::None && 
+            wallTile2_NextLvl != WallTileResults::None &&
+            wallTile3_NextLvl == WallTileResults::None &&
+            wallTile4_NextLvl == WallTileResults::None &&
+            wallTile5_NextLvl != WallTileResults::None &&
+            isGroundTile2_CurrLvl && 
+            !isGroundTile3_CurrLvl && 
+            !isGroundTile4_CurrLvl && 
+            isGroundTile5_CurrLvl) {
+
+            return RunningJumpResult::KeepRunning;
+
+        }
 
 
         /* ----------------------------------------------------------------------------------- */
