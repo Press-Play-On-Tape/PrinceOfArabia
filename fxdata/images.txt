@@ -96,6 +96,7 @@ namespace Images {
     image_t Tiles_Dungeon           = "../images/tiles/tiles_dungeon_12x31.png"
     image_t Tile_Dungeon_97         = "../images/tiles/tile_dungeon_97.png"
     image_t Tile_Dungeon_98         = "../images/tiles/tile_dungeon_98.png"
+    image_t Tile_Dungeon_98_FG      = "../images/tiles/tile_dungeon_98_FG.png"
     image_t Tiles_Dungeon_Torch     = "../images/tiles/tiles_dungeon_torch_12x31.png"
 
 
