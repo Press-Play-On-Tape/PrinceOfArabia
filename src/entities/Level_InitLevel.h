@@ -4,7 +4,9 @@ void loadItems(uint8_t level, Prince &prince) {
     FX::readBytes((uint8_t*)&this->items, Constants::Items_Count * sizeof(Item));
     FX::readEnd();
 
+#ifdef DEBUG_LEVELS
     prince.setSword(level > 1);
+#endif
 
 }
 

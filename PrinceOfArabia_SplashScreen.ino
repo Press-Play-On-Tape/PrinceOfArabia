@@ -24,7 +24,7 @@ void splashScreen() {
             titleScreenVars.counter++;
         }
 
-        if (pressed > 0 && titleScreenVars.counter == 16) {
+        else if (pressed > 0) {
             
             gamePlay.gameState = GameState::Title_Init; 
 

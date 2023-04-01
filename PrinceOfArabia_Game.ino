@@ -1203,7 +1203,6 @@ void game() {
                                 break;
 
                             case MenuOption::Sound:
-                                //gamePlay.gameState = GameState::Menu_Sound;
                                 menu.cursor = (uint8_t)MenuOption::Sound_Off - arduboy.audio.enabled();
                                 break;
 

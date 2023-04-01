@@ -146,10 +146,10 @@ class BaseEntity {
             int8_t direction = this->getDirection() == Direction::Left ? -1 : 1;
 
             FX::seekData(startPos);
-            imageDetails.reach = static_cast<int8_t>(FX::readPendingUInt8() * direction);
-            imageDetails.toe = static_cast<int8_t>(FX::readPendingUInt8() * direction);
-            imageDetails.heel = static_cast<int8_t>(FX::readPendingUInt8() * direction);
-            FX::readEnd();
+            uint16_t data = FX::readPendingUInt16();
+            imageDetails.reach = static_cast<int8_t>((data >> 8) * direction);
+            imageDetails.toe = static_cast<int8_t>((data & 0xFF) * direction);
+            imageDetails.heel = static_cast<int8_t>(FX::readEnd() * direction);
 
             #ifdef DEBUG_IMAGE_DETAILS
             DEBUG_PRINT(F("ImageIndex: "));
@@ -174,8 +174,7 @@ class BaseEntity {
         uint8_t getImageIndexFromStance(uint16_t stance) {
 
             FX::seekData(Constants::StanceToImageXRefFX + stance);
-            uint8_t image = FX::readPendingUInt8();
-            FX::readEnd();
+            uint8_t image = FX::readEnd();
 
             return image;
             
