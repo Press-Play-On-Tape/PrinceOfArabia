@@ -27,7 +27,7 @@ void render(bool sameLevelAsPrince) {
 
                 case 124:
                 case 127:
-                   FX::drawBitmap(x * Constants::TileWidth, yCoord, Images::Tiles_Dungeon_Torch, (arduboy.getFrameCount(15, (x + 2)) / 5), dbmMasked);
+                   FX::drawBitmap(x * Constants::TileWidth, yCoord, Images::Tiles_Dungeon_Torch, (arduboy.getFrameCount(15, (x + 2)) / 5), dbmNormal);
                    break;
 
             }
@@ -391,7 +391,7 @@ void render(bool sameLevelAsPrince) {
         int16_t xLoc = (item.data.location.x - level.getXLocation()) * Constants::TileWidth;
         int16_t yLoc = ((item.data.location.y - level.getYLocation()) * Constants::TileHeight) - level.getYOffset() + Constants::ScreenTopOffset;
 
-        if (item.itemType != ItemType::None) {
+        //if (item.itemType != ItemType::None) {
 
             switch (item.itemType) {
 
@@ -420,7 +420,7 @@ void render(bool sameLevelAsPrince) {
 
             }
 
-        }
+        //}
 
     }
 
