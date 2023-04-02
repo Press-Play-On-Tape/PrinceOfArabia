@@ -582,7 +582,7 @@ void game() {
 
                         fixPosition();  // Fix the position if we are not in positions 2, 6 or 10.
 
-                        if ((pressed & btnFacingDirection) && (pressed & DOWN_BUTTON)) {
+                        if ((pressed & btnFacingDirection) && (pressed & B_BUTTON)) {
 
                             if (level.canMoveForward(prince, Action::SmallStep, prince.getDirection(), 0)) {
 
@@ -1276,11 +1276,26 @@ void game() {
 
                 #ifndef ALT_B_BUTTON
 
-                    if (justPressed & B_BUTTON && prince.isEmpty()) {
+                    if ((pressed & B_BUTTON) && prince.isEmpty()) {
 
-                        gamePlay.gameState = GameState::Menu;
-                        menu.direction = Direction::Left;
-                        menu.cursor = static_cast<uint8_t>(MenuOption::Resume);
+                        if (bCounter > 4) {
+
+                            gamePlay.gameState = GameState::Menu;
+                            menu.direction = Direction::Left;
+                            menu.cursor = static_cast<uint8_t>(MenuOption::Resume);
+                            bCounter = 0;
+
+                        }
+                        else {
+
+                            bCounter++;
+
+                        }
+
+                    }
+                    else {
+
+                        bCounter = 0;
 
                     }
 

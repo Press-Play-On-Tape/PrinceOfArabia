@@ -38,6 +38,7 @@ Stack <int16_t, Constants::StackSize> princeStack;
 Prince &prince = cookie.prince;
 Stack <int16_t, Constants::StackSize> enemyStack;
 Mouse mouse;
+uint8_t bCounter = 0;
 
 #ifndef SAVE_MEMORY_ENEMY
 Enemy &enemy = cookie.enemy;
