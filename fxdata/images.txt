@@ -16,7 +16,6 @@ namespace Images {
     image_t Title_Cursor            = "../images/title/Title_Cursor.png"
     image_t Title_SoundIcon         = "../images/title/SoundIcon_8x8_1.png"
     image_t Title_Credits           = "../images/title/Title_Credits.png"
-    image_t Title_Select            = "../images/title/Title_Select.png"
     image_t Saves                   = "../images/title/Saves.png"
 
 
