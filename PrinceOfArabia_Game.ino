@@ -231,12 +231,13 @@ void game() {
 
     #ifndef SAVE_MEMORY_ENEMY
 
+        //When sameLevelAsPrince is true, enemyIsVisible is always true, so enemyIsVisible can be left out in any logic where sameLevelAsPrince  is used
         isEnemyVisible(prince, enemy.isEmpty(), enemyIsVisible, sameLevelAsPrince, justEnteredRoom);
 
 
         // If within distance, we can draw swords if we have one!
 
-        if (justPressed & B_BUTTON && enemyIsVisible && sameLevelAsPrince && prince.getSword() && prince.getStance() == Stance::Upright && prince.isEmpty() && enemy.getHealth() > 0 && enemy.getEnemyType() != EnemyType::MirrorAfterChallengeL12) {
+        if (justPressed & B_BUTTON && /* enemyIsVisible && */ sameLevelAsPrince && prince.getSword() && prince.getStance() == Stance::Upright && prince.isEmpty() && enemy.getHealth() > 0 && enemy.getEnemyType() != EnemyType::MirrorAfterChallengeL12) {
             
             prince.pushSequence(Stance::Draw_Sword_1_Start, Stance::Draw_Sword_6_End, Stance::Sword_Normal);
             justPressed = 0;
@@ -250,7 +251,7 @@ void game() {
         //
         // ---------------------------------------------------------------------------------------------------------------------------------------
 
-        if (enemy.isEmpty() && enemyIsVisible && !sameLevelAsPrince) {
+        if (enemy.isEmpty() && /* enemyIsVisible && */ !sameLevelAsPrince) {
 
             switch (enemy.getStance()) {
 
@@ -278,7 +279,7 @@ void game() {
 
                     // Draw sword? Not if the prince is dead!
 
-                    if (abs(xDelta) < 70 && yDelta == 0 && enemyIsVisible && sameLevelAsPrince && !prince.isDead()) {
+                    if (abs(xDelta) < 70 && yDelta == 0 && /* enemyIsVisible && */ sameLevelAsPrince && !prince.isDead()) {
 
                         // switch (prince.getStance()) {
 
@@ -893,7 +894,7 @@ void game() {
                             DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jump from Run_Repeat_4"));
                             #endif
 
-                            processRunJump(prince, level, enemyIsVisible & sameLevelAsPrince);
+                            processRunJump(prince, level, /* enemyIsVisible & */ sameLevelAsPrince);
 
                         }
                         else if (pressed & btnFacingDirection) {
@@ -950,7 +951,7 @@ void game() {
                             DEBUG_PRINTLN(F("RIGHT_BUTTON & A_BUTTON, Running Jump from Run_Start_6_End, Run_Repeat_8_End or Run_Repeat_8_End_Turn"));
                             #endif
 
-                            processRunJump(prince, level, enemyIsVisible & sameLevelAsPrince);
+                            processRunJump(prince, level, /* enemyIsVisible & */ sameLevelAsPrince);
 
                         }
                         else if (pressed & btnFacingDirection) {
@@ -1198,7 +1199,7 @@ void game() {
 
                 #ifndef ALT_B_BUTTON
 
-                    if ((pressed & B_BUTTON) && prince.isEmpty()) {
+                    if ((pressed & B_BUTTON) && prince.isEmpty() && (!sameLevelAsPrince || enemy.getHealth() == 0)) {
 
                         if (bCounter > 4) {
 
