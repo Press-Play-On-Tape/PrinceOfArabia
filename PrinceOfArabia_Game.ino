@@ -1192,14 +1192,12 @@ void game() {
     // Handle menu
 
     #ifndef SAVE_MEMORY_OTHER
-
         switch (gamePlay.gameState) {
 
             case GameState::Game:
 
                 #ifndef ALT_B_BUTTON
-
-                    if ((pressed & B_BUTTON) && prince.isEmpty() && (!sameLevelAsPrince || enemy.getHealth() == 0)) {
+                    if ((pressed & B_BUTTON) && prince.isEmpty() && (!sameLevelAsPrince || enemy.getHealth() == 0 || prince.getHealth() == 0)) {
 
                         if (bCounter > 4) {
 
