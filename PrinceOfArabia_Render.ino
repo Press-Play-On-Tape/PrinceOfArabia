@@ -443,8 +443,8 @@ void render(bool sameLevelAsPrince) {
 
     // Render health ..
 
-    uint8_t enemyHealth = enemy.getHealth();
     #ifndef SAVE_MEMORY_ENEMY
+        uint8_t enemyHealth = enemy.getHealth();
 
         if (!sameLevelAsPrince || enemyHealth == 0) {
             FX::drawBitmap(120, 0, Images::HUD_Backgrounds, 0, dbmNormal);
