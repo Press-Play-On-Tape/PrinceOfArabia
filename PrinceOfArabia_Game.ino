@@ -569,377 +569,398 @@ void game() {
 
         // Check to see if we can leave the level, otherwise 
 
-        if (canFallResult != CanFallResult::CanFall && !leaveLevel(prince, level)) {
+        if (!leaveLevel(prince, level)) {
 
             uint8_t btnFacingDirection = (prince.getDirection() == Direction::Right ? RIGHT_BUTTON : LEFT_BUTTON);
             uint8_t btnOppositeDirection = (prince.getDirection() == Direction::Right ? LEFT_BUTTON : RIGHT_BUTTON);
 
-            switch (prince.getStance()) {
+            if (canFallResult != CanFallResult::CanFall) {
 
-                case Stance::Upright:
+                switch (prince.getStance()) {
 
-                    fixPosition();  // Fix the position if we are not in positions 2, 6 or 10.
+                    case Stance::Upright:
 
-                    if ((pressed & btnFacingDirection) && (pressed & DOWN_BUTTON)) {
+                        fixPosition();  // Fix the position if we are not in positions 2, 6 or 10.
 
-                        if (level.canMoveForward(prince, Action::SmallStep, prince.getDirection(), 0)) {
+                        if ((pressed & btnFacingDirection) && (pressed & DOWN_BUTTON)) {
 
-                            prince.pushSequence(Stance::Small_Step_1_Start, Stance::Small_Step_6_End, Stance::Upright);
-                            break;
+                            if (level.canMoveForward(prince, Action::SmallStep, prince.getDirection(), 0)) {
 
-                        }
+                                prince.pushSequence(Stance::Small_Step_1_Start, Stance::Small_Step_6_End, Stance::Upright);
+                                break;
 
-                    }
-                    else if (pressed & btnFacingDirection) {
-
-                        if (level.canMoveForward(prince, Action::Step, prince.getDirection(), 0)) {
-
-                            prince.push(Stance::Single_Step_1_Start);
-                            break;
-
-                        }
-                        else if (level.canMoveForward(prince, Action::SmallStep, prince.getDirection(), 0)) {
-
-                            prince.pushSequence(Stance::Small_Step_1_Start, Stance::Small_Step_6_End, Stance::Upright);
-                            break;
-
-                        }
-
-                    }
-                    else if (pressed & btnOppositeDirection) {
-
-                        prince.pushSequence(Stance::Standing_Turn_1_Start, Stance::Standing_Turn_5_End, Stance::Upright_Turn);
-                        break;
-
-                    }
-                    else if (pressed & A_BUTTON) {
-
-                        processStandingJump(prince, level);
-                        break;
-
-                    }
-
-                    if (pressed & DOWN_BUTTON) {
-                    
-                        CanClimbDownResult canClimbDownResult = level.canClimbDown(prince);
-                        
-                        if (canClimbDownResult == CanClimbDownResult::None) {
-
-                            gamePlay.crouchTimer++;
-
-                            if (gamePlay.crouchTimer == 4) {
-                                prince.pushSequence(Stance::Crouch_1_Start, Stance::Crouch_3_End);
                             }
 
-                        } 
+                        }
+                        else if (pressed & btnFacingDirection) {
+
+                            if (level.canMoveForward(prince, Action::Step, prince.getDirection(), 0)) {
+
+                                prince.push(Stance::Single_Step_1_Start);
+                                break;
+
+                            }
+                            else if (level.canMoveForward(prince, Action::SmallStep, prince.getDirection(), 0)) {
+
+                                prince.pushSequence(Stance::Small_Step_1_Start, Stance::Small_Step_6_End, Stance::Upright);
+                                break;
+
+                            }
+
+                        }
+                        else if (pressed & btnOppositeDirection) {
+
+                            prince.pushSequence(Stance::Standing_Turn_1_Start, Stance::Standing_Turn_5_End, Stance::Upright_Turn);
+                            break;
+
+                        }
+                        else if (pressed & A_BUTTON) {
+
+                            processStandingJump(prince, level);
+                            break;
+
+                        }
+
+                        if (pressed & DOWN_BUTTON) {
                         
-                        else {
-
-                            // Basic climbing sequence for all, incuding CanClimbDownResult::ClimbDown
-
-                            prince.pushSequence(Stance::Step_Climbing_15_End, Stance::Step_Climbing_1_Start, Stance::Jump_Up_A_14_End);
+                            CanClimbDownResult canClimbDownResult = level.canClimbDown(prince);
                             
-                            switch (canClimbDownResult) {
+                            if (canClimbDownResult == CanClimbDownResult::None) {
 
-                                case CanClimbDownResult::TurnThenClimbDown:
-                                    prince.pushSequence(Stance::Standing_Turn_1_Start, Stance::Standing_Turn_5_End, Stance::Upright_Turn);
-                                    break;
+                                gamePlay.crouchTimer++;
 
-                                case CanClimbDownResult::StepThenTurnThenClimbDown:
-                                    prince.pushSequence(Stance::Standing_Turn_1_Start, Stance::Standing_Turn_5_End, Stance::Upright_Turn);
-                                    prince.pushSequence(Stance::Small_Step_1_Start, Stance::Small_Step_6_End, Stance::Upright);
-                                    break;
+                                if (gamePlay.crouchTimer == 4) {
+                                    prince.pushSequence(Stance::Crouch_1_Start, Stance::Crouch_3_End);
+                                }
 
-                                case CanClimbDownResult::StepThenClimbDown:
-                                    prince.pushSequence(Stance::Small_Step_6_End, Stance::Small_Step_1_Start, Stance::Upright);
-                                    break;
+                            } 
+                            
+                            else {
+
+                                // Basic climbing sequence for all, incuding CanClimbDownResult::ClimbDown
+
+                                prince.pushSequence(Stance::Step_Climbing_15_End, Stance::Step_Climbing_1_Start, Stance::Jump_Up_A_14_End);
+                                
+                                switch (canClimbDownResult) {
+
+                                    case CanClimbDownResult::TurnThenClimbDown:
+                                        prince.pushSequence(Stance::Standing_Turn_1_Start, Stance::Standing_Turn_5_End, Stance::Upright_Turn);
+                                        break;
+
+                                    case CanClimbDownResult::StepThenTurnThenClimbDown:
+                                        prince.pushSequence(Stance::Standing_Turn_1_Start, Stance::Standing_Turn_5_End, Stance::Upright_Turn);
+                                        prince.pushSequence(Stance::Small_Step_1_Start, Stance::Small_Step_6_End, Stance::Upright);
+                                        break;
+
+                                    case CanClimbDownResult::StepThenClimbDown:
+                                        prince.pushSequence(Stance::Small_Step_6_End, Stance::Small_Step_1_Start, Stance::Upright);
+                                        break;
+                                }
+
+                                prince.setHangingCounter(150);
+
                             }
 
-                            prince.setHangingCounter(150);
-
                         }
 
-                    }
+                        else if (pressed & UP_BUTTON) {
 
-                    else if (pressed & UP_BUTTON) {
+                            CanJumpUpResult jumpResult = level.canJumpUp(prince);
+                            int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x);
+                            int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y) - 1;
 
-                        CanJumpUpResult jumpResult = level.canJumpUp(prince);
-                        int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x);
-                        int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y) - 1;
+                            switch (jumpResult) {
 
-                        switch (jumpResult) {
+                                case CanJumpUpResult::Jump:
+                                    prince.pushSequence(Stance::Jump_Up_A_1_Start, Stance::Jump_Up_A_14_End);
+                                    break;
 
-                            case CanJumpUpResult::Jump:
-                                prince.pushSequence(Stance::Jump_Up_A_1_Start, Stance::Jump_Up_A_14_End);
-                                break;
+                                case CanJumpUpResult::JumpThenFall:
+                                    pushJumpUp_Drop(prince);
+                                    break;
 
-                            case CanJumpUpResult::JumpThenFall:
-                                pushJumpUp_Drop(prince);
-                                break;
+                                case CanJumpUpResult::JumpThenFall_HideHands:
+                                    prince.pushSequence(Stance::Jump_Up_Drop_HideHands_1_Start, Stance::Jump_Up_Drop_HideHands_19_End, Stance::Upright);
+                                    break;
 
-                            case CanJumpUpResult::JumpThenFall_HideHands:
-                                prince.pushSequence(Stance::Jump_Up_Drop_HideHands_1_Start, Stance::Jump_Up_Drop_HideHands_19_End, Stance::Upright);
-                                break;
+                                case CanJumpUpResult::JumpThenFall_CollapseFloor:
+                                    {
+                                        tileXIdx = tileXIdx + prince.getDirectionOffset(1);
+                                        uint8_t itemIdx = level.getItem(ItemType::AppearingFloor, ItemType::CollapsingFloor, tileXIdx, tileYIdx);
 
-                            case CanJumpUpResult::JumpThenFall_CollapseFloor:
-                                {
-                                    tileXIdx = tileXIdx + prince.getDirectionOffset(1);
-                                    uint8_t itemIdx = level.getItem(ItemType::AppearingFloor, ItemType::CollapsingFloor, tileXIdx, tileYIdx);
+                                        if (itemIdx != Constants::NoItemFound) {
 
-                                    if (itemIdx != Constants::NoItemFound) {
+                                            Item &item = level.getItem(itemIdx);
+                                            item.data.collapsingFloor.timeToFall = Constants::FallingTileAbove;
 
-                                        Item &item = level.getItem(itemIdx);
-                                        item.data.collapsingFloor.timeToFall = Constants::FallingTileAbove;
+                                        }
+
+                                        pushJumpUp_Drop(prince);
 
                                     }
+                                    break;
 
-                                    pushJumpUp_Drop(prince);
+                                case CanJumpUpResult::JumpThenFall_CollapseFloorAbove:
+                                    {
+                                        uint8_t itemIdx = level.getItem(ItemType::AppearingFloor, ItemType::CollapsingFloor, tileXIdx, tileYIdx);
 
-                                }
-                                break;
+                                        if (itemIdx != Constants::NoItemFound) {
 
-                            case CanJumpUpResult::JumpThenFall_CollapseFloorAbove:
-                                {
-                                    uint8_t itemIdx = level.getItem(ItemType::AppearingFloor, ItemType::CollapsingFloor, tileXIdx, tileYIdx);
+                                            Item &item = level.getItem(itemIdx);
+                                            item.data.collapsingFloor.timeToFall = Constants::FallingTileAbove;
 
-                                    if (itemIdx != Constants::NoItemFound) {
+                                        }
 
-                                        Item &item = level.getItem(itemIdx);
-                                        item.data.collapsingFloor.timeToFall = Constants::FallingTileAbove;
-
-                                    }
-
-                                    pushJumpUp_Drop(prince);
-
-                                }
-                                break;
-
-                            case CanJumpUpResult::StepThenJumpThenFall_CollapseFloor:
-                                {
-                                    tileXIdx = tileXIdx + prince.getDirectionOffset(1);
-                                    uint8_t itemIdx = level.getItem(ItemType::AppearingFloor, ItemType::CollapsingFloor, tileXIdx, tileYIdx);
-
-                                    if (itemIdx != Constants::NoItemFound) {
-
-                                        Item &item = level.getItem(itemIdx);
-                                        item.data.collapsingFloor.timeToFall = Constants::FallingTileAbove;
+                                        pushJumpUp_Drop(prince);
 
                                     }
+                                    break;
 
-                                    pushJumpUp_Drop(prince);
-                                    prince.pushSequence(Stance::Small_Step_1_Start, Stance::Small_Step_6_End, Stance::Upright);
+                                case CanJumpUpResult::StepThenJumpThenFall_CollapseFloor:
+                                    {
+                                        tileXIdx = tileXIdx + prince.getDirectionOffset(1);
+                                        uint8_t itemIdx = level.getItem(ItemType::AppearingFloor, ItemType::CollapsingFloor, tileXIdx, tileYIdx);
 
-                                }
-                                break;
+                                        if (itemIdx != Constants::NoItemFound) {
 
-                            case CanJumpUpResult::StepThenJump:
-                                prince.pushSequence(Stance::Jump_Up_A_1_Start, Stance::Jump_Up_A_14_End);
-                                prince.pushSequence(Stance::Small_Step_1_Start, Stance::Small_Step_6_End);
-                                break;
+                                            Item &item = level.getItem(itemIdx);
+                                            item.data.collapsingFloor.timeToFall = Constants::FallingTileAbove;
 
-                            case CanJumpUpResult::TurnThenJump:
-                                prince.pushSequence(Stance::Jump_Up_A_1_Start, Stance::Jump_Up_A_14_End);
-                                prince.pushSequence(Stance::Standing_Turn_1_Start, Stance::Standing_Turn_5_End, Stance::Upright_Turn);
-                                break;
+                                        }
 
-                            case CanJumpUpResult::JumpDist10:
-                                prince.pushSequence(Stance::Jump_Up_B_1_Start, Stance::Jump_Up_B_14_End);
-                                break;
+                                        pushJumpUp_Drop(prince);
+                                        prince.pushSequence(Stance::Small_Step_1_Start, Stance::Small_Step_6_End, Stance::Upright);
 
-                            default: break;
+                                    }
+                                    break;
 
-                        }
+                                case CanJumpUpResult::StepThenJump:
+                                    prince.pushSequence(Stance::Jump_Up_A_1_Start, Stance::Jump_Up_A_14_End);
+                                    prince.pushSequence(Stance::Small_Step_1_Start, Stance::Small_Step_6_End);
+                                    break;
 
-                    }
+                                case CanJumpUpResult::TurnThenJump:
+                                    prince.pushSequence(Stance::Jump_Up_A_1_Start, Stance::Jump_Up_A_14_End);
+                                    prince.pushSequence(Stance::Standing_Turn_1_Start, Stance::Standing_Turn_5_End, Stance::Upright_Turn);
+                                    break;
 
-                    break;
+                                case CanJumpUpResult::JumpDist10:
+                                    prince.pushSequence(Stance::Jump_Up_B_1_Start, Stance::Jump_Up_B_14_End);
+                                    break;
 
-                case Stance::Jump_Up_A_14_End:     // Hanging on ledge  (dist 2)..
-                case Stance::Jump_Up_B_14_End: 
-                case Stance::Straight_Drop_HangOn_6_End:
-              
-                    if (pressed & DOWN_BUTTON) {
+                                default: break;
 
-
-                        // If on level 7, remove time remaining label as it jumps around as you drop ..
-
-                        if (gamePlay.level == 7 && level.getXLocation() == 10 && level.getYLocation() == 0) {
-
-                            gamePlay.timeRemaining = 0;
+                            }
 
                         }
 
+                        break;
 
-                        CanClimbDownPart2Result climbDownResult = level.canClimbDown_Part2(prince, 0);
+                    // case Stance::Jump_Up_A_14_End:     // Hanging on ledge  (dist 2)..
+                    // case Stance::Jump_Up_B_14_End: 
+                    // case Stance::Straight_Drop_HangOn_6_End:
+                
+                    //     if (pressed & DOWN_BUTTON) {
 
-                        switch (climbDownResult) {
 
-                            case CanClimbDownPart2Result::Level_1_Under:
-                                prince.pushSequence(Stance::Jump_Up_Drop_B_1_Start, Stance::Jump_Up_Drop_B_5_End, Stance::Upright);
-                                break;
+                    //         // If on level 7, remove time remaining label as it jumps around as you drop ..
 
-                            case CanClimbDownPart2Result::Level_1:
-                                prince.pushSequence(Stance::Jump_Up_Drop_A_1_Start, Stance::Jump_Up_Drop_A_5_End, Stance::Upright);
-                                break;
+                    //         if (gamePlay.level == 7 && level.getXLocation() == 10 && level.getYLocation() == 0) {
 
-                            case CanClimbDownPart2Result::Falling:
+                    //             gamePlay.timeRemaining = 0;
 
-                                #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
-                                DEBUG_PRINTLN(F("Jump_Up_A_14_End, Jump_Up_B_14_End, setFalling(1)"));
-                                #endif
+                    //         }
 
-                                prince.setFalling(1);
-                                prince.pushSequence(Stance::Jump_Up_Drop_C_1_Start, Stance::Jump_Up_Drop_C_5_End);
-                                break;
 
-                            default:
-                                break;
+                    //         CanClimbDownPart2Result climbDownResult = level.canClimbDown_Part2(prince, 0);
+
+                    //         switch (climbDownResult) {
+
+                    //             case CanClimbDownPart2Result::Level_1_Under:
+                    //                 prince.pushSequence(Stance::Jump_Up_Drop_B_1_Start, Stance::Jump_Up_Drop_B_5_End, Stance::Upright);
+                    //                 break;
+
+                    //             case CanClimbDownPart2Result::Level_1:
+                    //                 prince.pushSequence(Stance::Jump_Up_Drop_A_1_Start, Stance::Jump_Up_Drop_A_5_End, Stance::Upright);
+                    //                 break;
+
+                    //             case CanClimbDownPart2Result::Falling:
+
+                    //                 #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
+                    //                 DEBUG_PRINTLN(F("Jump_Up_A_14_End, Jump_Up_B_14_End, setFalling(1)"));
+                    //                 #endif
+
+                    //                 prince.setFalling(1);
+                    //                 prince.pushSequence(Stance::Jump_Up_Drop_C_1_Start, Stance::Jump_Up_Drop_C_5_End);
+                    //                 break;
+
+                    //             default:
+                    //                 break;
+
+                    //         }
+
+                    //     }
+                    //     else if (pressed & UP_BUTTON && !(gamePlay.level == 7 && level.getXLocation() == 10 && level.getYLocation() == 0)) {
+
+                    //         if (level.canJumpUp_Part2(prince)) {
+                    //             prince.pushSequence(Stance::Step_Climbing_1_Start, Stance::Step_Climbing_15_End, Stance::Upright);
+                    //         }
+                    //         else {
+                    //             prince.pushSequence(Stance::Step_Climbing_Block_1_Start, Stance::Step_Climbing_Block_9_End, Stance::Upright);                        
+                    //         }
+
+                    //     }
+
+
+                    //     // Drop after a period of time hanging ..
+
+                    //     else if(prince.getHangingCounter() == 0) {
+
+                    //         CanClimbDownPart2Result climbDownResult = level.canClimbDown_Part2(prince, 0);
+
+                    //         switch (climbDownResult) {
+
+                    //             case CanClimbDownPart2Result::Level_1_Under:
+                    //                 prince.pushSequence(Stance::Jump_Up_Drop_B_1_Start, Stance::Jump_Up_Drop_B_5_End, Stance::Upright);
+                    //                 break;
+
+                    //             case CanClimbDownPart2Result::Level_1:
+                    //                 prince.pushSequence(Stance::Jump_Up_Drop_A_1_Start, Stance::Jump_Up_Drop_A_5_End, Stance::Upright);
+                    //                 break;
+
+                    //             case CanClimbDownPart2Result::Falling:
+                                    
+                    //                 #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
+                    //                 DEBUG_PRINTLN(F("Drop after hanging, setFalling(1)"));
+                    //                 #endif
+
+                    //                 prince.setFalling(1);
+                    //                 prince.pushSequence(Stance::Jump_Up_Drop_C_1_Start, Stance::Jump_Up_Drop_C_5_End);
+                    //                 break;
+
+                    //             default:
+                    //                 break;
+
+                    //         }
+
+                    //     }
+
+                    //     break;
+
+                    case Stance::Single_Step_1_Start:
+
+                        // If the user is still holding the left / right button then escalate the movement to a run ..
+
+                        if (pressed & btnFacingDirection) {
+
+                            if (level.canMoveForward(prince, Action::RunStart, prince.getDirection(), 0)) {
+                                prince.pushSequence(Stance::Run_Start_2, Stance::Run_Start_6_End);
+                            }
+                            else {
+                                prince.pushSequence(Stance::Single_Step_2, Stance::Single_Step_8_End, Stance::Upright);
+                            }
 
                         }
-
-                    }
-                    else if (pressed & UP_BUTTON && !(gamePlay.level == 7 && level.getXLocation() == 10 && level.getYLocation() == 0)) {
-
-                        if (level.canJumpUp_Part2(prince)) {
-                            prince.pushSequence(Stance::Step_Climbing_1_Start, Stance::Step_Climbing_15_End, Stance::Upright);
-                        }
-                        else {
-                            prince.pushSequence(Stance::Step_Climbing_Block_1_Start, Stance::Step_Climbing_Block_9_End, Stance::Upright);                        
-                        }
-
-                    }
-
-
-                    // Drop after a period of time hanging ..
-
-                    else if(prince.getHangingCounter() == 0) {
-
-                        CanClimbDownPart2Result climbDownResult = level.canClimbDown_Part2(prince, 0);
-
-                        switch (climbDownResult) {
-
-                            case CanClimbDownPart2Result::Level_1_Under:
-                                prince.pushSequence(Stance::Jump_Up_Drop_B_1_Start, Stance::Jump_Up_Drop_B_5_End, Stance::Upright);
-                                break;
-
-                            case CanClimbDownPart2Result::Level_1:
-                                prince.pushSequence(Stance::Jump_Up_Drop_A_1_Start, Stance::Jump_Up_Drop_A_5_End, Stance::Upright);
-                                break;
-
-                            case CanClimbDownPart2Result::Falling:
-                                
-                                #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
-                                DEBUG_PRINTLN(F("Drop after hanging, setFalling(1)"));
-                                #endif
-
-                                prince.setFalling(1);
-                                prince.pushSequence(Stance::Jump_Up_Drop_C_1_Start, Stance::Jump_Up_Drop_C_5_End);
-                                break;
-
-                            default:
-                                break;
-
-                        }
-
-                    }
-
-                    break;
-
-                case Stance::Single_Step_1_Start:
-
-                    // If the user is still holding the left / right button then escalate the movement to a run ..
-
-                    if (pressed & btnFacingDirection) {
-
-                        if (level.canMoveForward(prince, Action::RunStart, prince.getDirection(), 0)) {
-                            prince.pushSequence(Stance::Run_Start_2, Stance::Run_Start_6_End);
-                        }
-                        else {
+                        else if (!(pressed & btnFacingDirection)) {
                             prince.pushSequence(Stance::Single_Step_2, Stance::Single_Step_8_End, Stance::Upright);
                         }
 
-                    }
-                    else if (!(pressed & btnFacingDirection)) {
-                        prince.pushSequence(Stance::Single_Step_2, Stance::Single_Step_8_End, Stance::Upright);
-                    }
+                        break;
 
-                    break;
+                    case Stance::Run_Repeat_4:
+                                
+                        if ((pressed & btnFacingDirection) && (pressed & A_BUTTON)) {
 
-                case Stance::Run_Repeat_4:
-                            
-                    if ((pressed & btnFacingDirection) && (pressed & A_BUTTON)) {
-
-                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
-                        DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jump from Run_Repeat_4"));
-                        #endif
-
-                        processRunJump(prince, level, enemyIsVisible & sameLevelAsPrince);
-
-                    }
-                    else if (pressed & btnFacingDirection) {
-
-                        if (level.canMoveForward(prince, Action::RunRepeat, prince.getDirection(), 0)) {
-
-                            #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
-                            DEBUG_PRINTLN(F("RIGHT_BUTTON, Run Repeat (1)"));
+                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
+                            DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jump from Run_Repeat_4"));
                             #endif
 
-                            prince.pushSequence(Stance::Run_Repeat_5_Mid, Stance::Run_Repeat_8_End);
+                            processRunJump(prince, level, enemyIsVisible & sameLevelAsPrince);
+
                         }
-                        else {
+                        else if (pressed & btnFacingDirection) {
+
+                            if (level.canMoveForward(prince, Action::RunRepeat, prince.getDirection(), 0)) {
+
+                                #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
+                                DEBUG_PRINTLN(F("RIGHT_BUTTON, Run Repeat (1)"));
+                                #endif
+
+                                prince.pushSequence(Stance::Run_Repeat_5_Mid, Stance::Run_Repeat_8_End);
+                            }
+                            else {
+
+                                #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
+                                DEBUG_PRINTLN(F("RIGHT_BUTTON, Run Stop (1)"));
+                                #endif
+
+                                prince.pushSequence(Stance::Stopping_1_Start, Stance::Stopping_5_End, Stance::Upright);
+                            }
+
+                        }
+                        else if (pressed & btnOppositeDirection) {
 
                             #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
-                            DEBUG_PRINTLN(F("RIGHT_BUTTON, Run Stop (1)"));
+                            DEBUG_PRINTLN(F("LEFT_BUTTON, Switch Directions"));
+                            #endif
+
+                            processRunningTurn();
+
+                        }
+                        else if (!(pressed & btnFacingDirection)) {
+
+                            #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
+                            DEBUG_PRINTLN(F("RIGHT_BUTTON, Run Stop (2)"));
                             #endif
 
                             prince.pushSequence(Stance::Stopping_1_Start, Stance::Stopping_5_End, Stance::Upright);
                         }
 
-                    }
-                    else if (pressed & btnOppositeDirection) {
+                        break;
 
-                        #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
-                        DEBUG_PRINTLN(F("LEFT_BUTTON, Switch Directions"));
-                        #endif
+                    case Stance::Run_Start_6_End:
+                    case Stance::Run_Repeat_8_End:
+                    case Stance::Run_Repeat_8_End_Turn:
+        
+                        if ((pressed & btnFacingDirection) && (pressed & A_BUTTON)) {
 
-                        processRunningTurn();
+                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
+                            DEBUG_PRINTLN(F("RIGHT_BUTTON & A_BUTTON, Running Jump from Run_Start_6_End, Run_Repeat_8_End or Run_Repeat_8_End_Turn"));
+                            #endif
 
-                    }
-                    else if (!(pressed & btnFacingDirection)) {
+                            processRunJump(prince, level, enemyIsVisible & sameLevelAsPrince);
 
-                        #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
-                        DEBUG_PRINTLN(F("RIGHT_BUTTON, Run Stop (2)"));
-                        #endif
+                        }
+                        else if (pressed & btnFacingDirection) {
 
-                        prince.pushSequence(Stance::Stopping_1_Start, Stance::Stopping_5_End, Stance::Upright);
-                    }
+                            if (level.canMoveForward(prince, Action::RunRepeat, prince.getDirection(), 0)) {
 
-                    break;
+                                #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
+                                DEBUG_PRINTLN(F("RIGHT_BUTTON, Running Repeat"));
+                                #endif
+                                
+                                prince.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_4);
+                            }
+                            else {
 
-                case Stance::Run_Start_6_End:
-                case Stance::Run_Repeat_8_End:
-                case Stance::Run_Repeat_8_End_Turn:
-    
-                    if ((pressed & btnFacingDirection) && (pressed & A_BUTTON)) {
+                                #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
+                                DEBUG_PRINTLN(F("RIGHT_BUTTON, Running Stop"));
+                                #endif
 
-                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP)
-                        DEBUG_PRINTLN(F("RIGHT_BUTTON & A_BUTTON, Running Jump from Run_Start_6_End, Run_Repeat_8_End or Run_Repeat_8_End_Turn"));
-                        #endif
+                                prince.pushSequence(Stance::Stopping_1_Start, Stance::Stopping_5_End, Stance::Upright);
+                            }
 
-                        processRunJump(prince, level, enemyIsVisible & sameLevelAsPrince);
-
-                    }
-                    else if (pressed & btnFacingDirection) {
-
-                        if (level.canMoveForward(prince, Action::RunRepeat, prince.getDirection(), 0)) {
+                        }
+                        else if (pressed & btnOppositeDirection) {
 
                             #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
-                            DEBUG_PRINTLN(F("RIGHT_BUTTON, Running Repeat"));
+                            DEBUG_PRINTLN(F("LEFT_BUTTON, Running Turn"));
                             #endif
-                            
-                            prince.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_4);
+
+                            processRunningTurn();
+
                         }
-                        else {
+                        else if (!(pressed & btnFacingDirection)) {
 
                             #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
                             DEBUG_PRINTLN(F("RIGHT_BUTTON, Running Stop"));
@@ -948,201 +969,284 @@ void game() {
                             prince.pushSequence(Stance::Stopping_1_Start, Stance::Stopping_5_End, Stance::Upright);
                         }
 
-                    }
-                    else if (pressed & btnOppositeDirection) {
+                        break;
 
-                        #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
-                        DEBUG_PRINTLN(F("LEFT_BUTTON, Running Turn"));
-                        #endif
+                    case Stance::Crouch_3_End:
+                    case Stance::Crouch_HOP_7_End:
 
-                        processRunningTurn();
+                        if (prince.getCrouchingCounter() == 0) {
 
-                    }
-                    else if (!(pressed & btnFacingDirection)) {
+                            if (!(pressed & DOWN_BUTTON)) {
 
-                        #if defined(DEBUG) && defined(DEBUG_PRINT_ACTION)
-                        DEBUG_PRINTLN(F("RIGHT_BUTTON, Running Stop"));
-                        #endif
+                                prince.pushSequence(Stance::Crouch_Stand_3, Stance::Crouch_Stand_12_End, Stance::Upright);
 
-                        prince.pushSequence(Stance::Stopping_1_Start, Stance::Stopping_5_End, Stance::Upright);
-                    }
-
-                    break;
-
-                case Stance::Crouch_3_End:
-                case Stance::Crouch_HOP_7_End:
-
-                    if (prince.getCrouchingCounter() == 0) {
-
-                        if (!(pressed & DOWN_BUTTON)) {
-
-                            prince.pushSequence(Stance::Crouch_Stand_3, Stance::Crouch_Stand_12_End, Stance::Upright);
-
-                        }
-                        else if ((prince.getDirection() == Direction::Left && (pressed & LEFT_BUTTON)) || (prince.getDirection() == Direction::Right && (pressed & RIGHT_BUTTON))) {
-
-                            if (level.canMoveForward(prince, Action::CrouchHop, prince.getDirection(), 0)) {
-                                prince.pushSequence(Stance::Crouch_HOP_1_Start, Stance::Crouch_HOP_7_End);
                             }
+                            else if ((prince.getDirection() == Direction::Left && (pressed & LEFT_BUTTON)) || (prince.getDirection() == Direction::Right && (pressed & RIGHT_BUTTON))) {
 
-                        }
-                        else if (pressed & A_BUTTON) {
-
-                            uint8_t itemIdx = level.canReachItem(prince, ItemType::Potion_Small, ItemType::Potion_Float);
-
-                            if (itemIdx != Constants::NoItemFound) {
-
-                                Item &item = level.getItem(itemIdx);
-                                
-                                switch (item.itemType) {
-
-                                    case ItemType::Potion_Small:
-                                    case ItemType::Potion_Large:
-                                    case ItemType::Potion_Float:
-                                        #ifndef SAVE_MEMORY_SOUND
-                                            setSound(SoundIndex::Tada);
-                                        #endif
-                                        break;
-
-                                    default:
-                                        #ifndef SAVE_MEMORY_SOUND
-                                            setSound(SoundIndex::Dead);
-                                        #endif
-                                        break;
-                                    
+                                if (level.canMoveForward(prince, Action::CrouchHop, prince.getDirection(), 0)) {
+                                    prince.pushSequence(Stance::Crouch_HOP_1_Start, Stance::Crouch_HOP_7_End);
                                 }
 
-                                uint8_t idx = static_cast<uint8_t>(item.itemType) - static_cast<uint8_t>(ItemType::Potion_Small); 
-                                prince.pushSequence(Stance::Drink_Tonic_Small_1_Start + (idx * 15), Stance::Drink_Tonic_Small_15_End + (idx * 15), Stance::Upright);
-                                item.itemType = ItemType::None;
-
-                                break;
-
                             }
+                            else if (pressed & A_BUTTON) {
 
-                            itemIdx = level.canReachItem(prince, ItemType::Sword);
+                                uint8_t itemIdx = level.canReachItem(prince, ItemType::Potion_Small, ItemType::Potion_Float);
 
-                            if (itemIdx != Constants::NoItemFound) {
+                                if (itemIdx != Constants::NoItemFound) {
 
-                                #ifndef SAVE_MEMORY_SOUND
-                                    setSound(SoundIndex::Tada);
-                                #endif
+                                    Item &item = level.getItem(itemIdx);
+                                    
+                                    switch (item.itemType) {
 
-                                Item &item = level.getItem(itemIdx);
-                                item.itemType = ItemType::None;
-                                prince.setSword(true);
-                                prince.clear();
-                                prince.pushSequence(Stance::Pickup_Sword_1_Start, Stance::Pickup_Sword_16_End, Stance::Upright);
+                                        case ItemType::Potion_Small:
+                                        case ItemType::Potion_Large:
+                                        case ItemType::Potion_Float:
+                                            #ifndef SAVE_MEMORY_SOUND
+                                                setSound(SoundIndex::Tada);
+                                            #endif
+                                            break;
+
+                                        default:
+                                            #ifndef SAVE_MEMORY_SOUND
+                                                setSound(SoundIndex::Dead);
+                                            #endif
+                                            break;
+                                        
+                                    }
+
+                                    uint8_t idx = static_cast<uint8_t>(item.itemType) - static_cast<uint8_t>(ItemType::Potion_Small); 
+                                    prince.pushSequence(Stance::Drink_Tonic_Small_1_Start + (idx * 15), Stance::Drink_Tonic_Small_15_End + (idx * 15), Stance::Upright);
+                                    item.itemType = ItemType::None;
+
+                                    break;
+
+                                }
+
+                                itemIdx = level.canReachItem(prince, ItemType::Sword);
+
+                                if (itemIdx != Constants::NoItemFound) {
+
+                                    #ifndef SAVE_MEMORY_SOUND
+                                        setSound(SoundIndex::Tada);
+                                    #endif
+
+                                    Item &item = level.getItem(itemIdx);
+                                    item.itemType = ItemType::None;
+                                    prince.setSword(true);
+                                    prince.clear();
+                                    prince.pushSequence(Stance::Pickup_Sword_1_Start, Stance::Pickup_Sword_16_End, Stance::Upright);
+
+                                }
 
                             }
 
                         }
 
-                    }
-
-                    break;
+                        break;
 
 
-                case Stance::Sword_Normal:
+                    case Stance::Sword_Normal:
 
-                    #ifndef SAVE_MEMORY_ENEMY
+                        #ifndef SAVE_MEMORY_ENEMY
 
-                        if ((pressed & A_BUTTON) ) {
+                            if ((pressed & A_BUTTON) ) {
 
-                            prince.pushSequence(Stance::Pickup_Sword_7_PutAway, Stance::Pickup_Sword_16_End, Stance::Upright);
+                                prince.pushSequence(Stance::Pickup_Sword_7_PutAway, Stance::Pickup_Sword_16_End, Stance::Upright);
 
-                            if (gamePlay.level == 12 && enemy.getEnemyType() == EnemyType::MirrorAttackingL12) {
+                                if (gamePlay.level == 12 && enemy.getEnemyType() == EnemyType::MirrorAttackingL12) {
+
+                                    switch (enemy.getStance()) {
+
+                                        case Stance::Attack_Block_1_Start ... Stance::Attack_Block_3_End:
+                                        case Stance::Draw_Sword_1_Start ... Stance::Draw_Sword_6_End:
+                                        case Stance::Sword_Step_1_Start ... Stance::Sword_Step_3_End:
+                                        case Stance::Sword_Step_Back_1_Start ... Stance::Sword_Step_Back_3_End:
+                                        case Stance::Sword_Normal:
+
+                                            enemy.setEnemyType(EnemyType::MirrorAfterChallengeL12);
+                                            enemy.clear();
+                                            enemy.pushSequence(Stance::Pickup_Sword_7_PutAway, Stance::Pickup_Sword_16_End, Stance::Upright);
+                                            break;
+
+                                            
+                                    }
+
+                                }
+
+                            }
+
+                            else if (pressed & B_BUTTON) {
+
+                                prince.pushSequence(Stance::Sword_Attack_1_Start, Stance::Sword_Attack_8_End, Stance::Sword_Normal);
+
+                            }
+
+                            else if (pressed & UP_BUTTON) { // Block attack?
 
                                 switch (enemy.getStance()) {
 
-                                    case Stance::Attack_Block_1_Start ... Stance::Attack_Block_3_End:
-                                    case Stance::Draw_Sword_1_Start ... Stance::Draw_Sword_6_End:
-                                    case Stance::Sword_Step_1_Start ... Stance::Sword_Step_3_End:
-                                    case Stance::Sword_Step_Back_1_Start ... Stance::Sword_Step_Back_3_End:
-                                    case Stance::Sword_Normal:
+                                    // Block attack from enemy only if not all the way through sequence ..
 
-                                        enemy.setEnemyType(EnemyType::MirrorAfterChallengeL12);
+                                    case Stance::Sword_Attack_2 ... Stance::Sword_Attack_4:
+
                                         enemy.clear();
-                                        enemy.pushSequence(Stance::Pickup_Sword_7_PutAway, Stance::Pickup_Sword_16_End, Stance::Upright);
+                                        enemy.pushSequence(Stance::Attack_Block_1_Start, Stance::Attack_Block_3_End, Stance::Sword_Normal);
                                         break;
 
-                                        
+                                    default: break;
+
+                                }
+
+                                prince.pushSequence(Stance::Attack_Block_1_Start, Stance::Attack_Block_3_End, Stance::Sword_Normal);
+
+                            }
+
+                            else if ((pressed & btnFacingDirection) || (pressed & btnOppositeDirection)) {
+                                
+                                if (((pressed & RIGHT_BUTTON) && (prince.getDirection() == Direction::Right)) ||
+                                    ((pressed & LEFT_BUTTON) &&  (prince.getDirection() == Direction::Left))) {
+
+                                    if (level.canMoveForward(prince, Action::SmallStep, prince.getDirection(), 0)) {
+                                        prince.pushSequence(Stance::Sword_Step_1_Start, Stance::Sword_Step_3_End, Stance::Sword_Normal);
+                                        break;
+                                    }
+
+                                }
+                                else {
+
+                                    if (level.canMoveForward(prince, Action::SmallStep, prince.getOppositeDirection(), Constants::OppositeDirection_Offset)) {
+                                        prince.pushSequence(Stance::Sword_Step_Back_1_Start, Stance::Sword_Step_Back_3_End, Stance::Sword_Normal);
+                                        break;
+                                    }
+                                    
                                 }
 
                             }
 
-                        }
+                            else {
+                                    
+                                if (pressed & btnOppositeDirection) {
 
-                        else if (pressed & B_BUTTON) {
-
-                            prince.pushSequence(Stance::Sword_Attack_1_Start, Stance::Sword_Attack_8_End, Stance::Sword_Normal);
-
-                        }
-
-                        else if (pressed & UP_BUTTON) { // Block attack?
-
-                            switch (enemy.getStance()) {
-
-                                // Block attack from enemy only if not all the way through sequence ..
-
-                                case Stance::Sword_Attack_2 ... Stance::Sword_Attack_4:
-
-                                    enemy.clear();
-                                    enemy.pushSequence(Stance::Attack_Block_1_Start, Stance::Attack_Block_3_End, Stance::Sword_Normal);
-                                    break;
-
-                                default: break;
-
-                            }
-
-                            prince.pushSequence(Stance::Attack_Block_1_Start, Stance::Attack_Block_3_End, Stance::Sword_Normal);
-
-                        }
-
-                        else if ((pressed & btnFacingDirection) || (pressed & btnOppositeDirection)) {
-                            
-                            if (((pressed & RIGHT_BUTTON) && (prince.getDirection() == Direction::Right)) ||
-                                 ((pressed & LEFT_BUTTON) &&  (prince.getDirection() == Direction::Left))) {
-
-                                if (level.canMoveForward(prince, Action::SmallStep, prince.getDirection(), 0)) {
                                     prince.pushSequence(Stance::Sword_Step_1_Start, Stance::Sword_Step_3_End, Stance::Sword_Normal);
-                                    break;
+
+                                }
+                                    
+                                if (pressed & btnFacingDirection) {
+
+                                    prince.pushSequence(Stance::Sword_Step_Back_1_Start, Stance::Sword_Step_Back_3_End, Stance::Sword_Normal);
+
                                 }
 
+                            }
+
+                        #endif
+
+                        break;
+                    
+
+                    default: break;
+
+                }
+
+            }
+            else {
+
+                switch (prince.getStance()) {
+
+                    case Stance::Jump_Up_A_14_End:     // Hanging on ledge  (dist 2)..
+                    case Stance::Jump_Up_B_14_End: 
+                    case Stance::Straight_Drop_HangOn_6_End:
+                
+                        if (pressed & DOWN_BUTTON) {
+
+
+                            // If on level 7, remove time remaining label as it jumps around as you drop ..
+
+                            if (gamePlay.level == 7 && level.getXLocation() == 10 && level.getYLocation() == 0) {
+
+                                gamePlay.timeRemaining = 0;
+
+                            }
+
+
+                            CanClimbDownPart2Result climbDownResult = level.canClimbDown_Part2(prince, 0);
+
+                            switch (climbDownResult) {
+
+                                case CanClimbDownPart2Result::Level_1_Under:
+                                    prince.pushSequence(Stance::Jump_Up_Drop_B_1_Start, Stance::Jump_Up_Drop_B_5_End, Stance::Upright);
+                                    break;
+
+                                case CanClimbDownPart2Result::Level_1:
+                                    prince.pushSequence(Stance::Jump_Up_Drop_A_1_Start, Stance::Jump_Up_Drop_A_5_End, Stance::Upright);
+                                    break;
+
+                                case CanClimbDownPart2Result::Falling:
+
+                                    #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
+                                    DEBUG_PRINTLN(F("Jump_Up_A_14_End, Jump_Up_B_14_End, setFalling(1)"));
+                                    #endif
+
+                                    prince.setFalling(1);
+                                    prince.pushSequence(Stance::Jump_Up_Drop_C_1_Start, Stance::Jump_Up_Drop_C_5_End);
+                                    break;
+
+                                default:
+                                    break;
+
+                            }
+
+                        }
+                        else if (pressed & UP_BUTTON && !(gamePlay.level == 7 && level.getXLocation() == 10 && level.getYLocation() == 0)) {
+
+                            if (level.canJumpUp_Part2(prince)) {
+                                prince.pushSequence(Stance::Step_Climbing_1_Start, Stance::Step_Climbing_15_End, Stance::Upright);
                             }
                             else {
+                                prince.pushSequence(Stance::Step_Climbing_Block_1_Start, Stance::Step_Climbing_Block_9_End, Stance::Upright);                        
+                            }
 
-                                if (level.canMoveForward(prince, Action::SmallStep, prince.getOppositeDirection(), Constants::OppositeDirection_Offset)) {
-                                    prince.pushSequence(Stance::Sword_Step_Back_1_Start, Stance::Sword_Step_Back_3_End, Stance::Sword_Normal);
+                        }
+
+
+                        // Drop after a period of time hanging ..
+
+                        else if(prince.getHangingCounter() == 0) {
+
+                            CanClimbDownPart2Result climbDownResult = level.canClimbDown_Part2(prince, 0);
+
+                            switch (climbDownResult) {
+
+                                case CanClimbDownPart2Result::Level_1_Under:
+                                    prince.pushSequence(Stance::Jump_Up_Drop_B_1_Start, Stance::Jump_Up_Drop_B_5_End, Stance::Upright);
                                     break;
-                                }
-                                
+
+                                case CanClimbDownPart2Result::Level_1:
+                                    prince.pushSequence(Stance::Jump_Up_Drop_A_1_Start, Stance::Jump_Up_Drop_A_5_End, Stance::Upright);
+                                    break;
+
+                                case CanClimbDownPart2Result::Falling:
+                                    
+                                    #if defined(DEBUG) && defined(DEBUG_ACTION_FALLING)
+                                    DEBUG_PRINTLN(F("Drop after hanging, setFalling(1)"));
+                                    #endif
+
+                                    prince.setFalling(1);
+                                    prince.pushSequence(Stance::Jump_Up_Drop_C_1_Start, Stance::Jump_Up_Drop_C_5_End);
+                                    break;
+
+                                default:
+                                    break;
+
                             }
 
                         }
 
-                        else {
-                                
-                            if (pressed & btnOppositeDirection) {
+                        break;
 
-                                prince.pushSequence(Stance::Sword_Step_1_Start, Stance::Sword_Step_3_End, Stance::Sword_Normal);
+                    default: break;
 
-                            }
-                                
-                            if (pressed & btnFacingDirection) {
-
-                                prince.pushSequence(Stance::Sword_Step_Back_1_Start, Stance::Sword_Step_Back_3_End, Stance::Sword_Normal);
-
-                            }
-
-                        }
-
-                    #endif
-
-                    break;
-                
-
-                default: break;
+                }
 
             }
 
