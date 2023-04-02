@@ -41,7 +41,7 @@
 
     #define LEVEL_DATA_FROM_FX
     #define _SAVE_TO_FX
-    #define STARTING_LEVEL 1
+    #define STARTING_LEVEL 8
     #define MAX_LEVEL 13
     #define _DEBUG_CUT_SCENES
     #define _DEBUG_LEVELS
@@ -661,7 +661,7 @@ constexpr uint16_t Running_Jump_2_DropLvl_10_14_End              = Stance::Runni
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /*  Dist 28                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define RUNNING_JUMP_3_2_SEQ                                     20,    21,    22,    23,    169,   24,    25,    26,
-#define RUNNING_JUMP_3_2_OFFSETS                                 4,0,   5,0,   4,0,   4,-2,  4,0,   3,-2,  3,3,   2,1,
+#define RUNNING_JUMP_3_2_OFFSETS                                 4,0,   5,0,   4,0,   4,-2,  3,0,   3,-2,  3,3,   2,1,
 constexpr uint16_t Running_Jump_3_2_1_Start                      = Stance::Running_Jump_2_DropLvl_10_14_End + 1;
 constexpr uint16_t Running_Jump_3_2_2                            = Stance::Running_Jump_3_2_1_Start + 1;
 constexpr uint16_t Running_Jump_3_2_3                            = Stance::Running_Jump_3_2_2 + 1;
@@ -675,7 +675,7 @@ constexpr uint16_t Running_Jump_3_2_8_End                        = Stance::Runni
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /*  Dist 32                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define RUNNING_JUMP_3_6_SEQ                                     20,    21,    22,    23,    169,   24,    25,    26,
-#define RUNNING_JUMP_3_6_OFFSETS                                 4,0,   5,0,   5,0,   5,-2,  4,0,   4,-2,  4,3,   2,1,
+#define RUNNING_JUMP_3_6_OFFSETS                                 4,0,   5,0,   5,0,   5,-2,  4,0,   4,-2,  3,3,   2,1,
 constexpr uint16_t Running_Jump_3_6_1_Start                      = Stance::Running_Jump_3_2_8_End + 1;
 constexpr uint16_t Running_Jump_3_6_2                            = Stance::Running_Jump_3_6_1_Start + 1;
 constexpr uint16_t Running_Jump_3_6_3                            = Stance::Running_Jump_3_6_2 + 1;
@@ -687,9 +687,9 @@ constexpr uint16_t Running_Jump_3_6_8_End                        = Stance::Runni
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*  Dist 36                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+/*  Dist 40                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define RUNNING_JUMP_3_10_SEQ                                    20,    21,    22,    23,    169,   24,    25,    26,
-#define RUNNING_JUMP_3_10_OFFSETS                                5,0,   6,0,   6,0,   6,-2,  6,0,   5,-2,  4,3,   2,1,
+#define RUNNING_JUMP_3_10_OFFSETS                                5,0,   6,0,   6,0,   6,-2,  6,0,   5,-2,  4,3,   3,1,
 constexpr uint16_t Running_Jump_3_10_1_Start                     = Stance::Running_Jump_3_6_8_End + 1;
 constexpr uint16_t Running_Jump_3_10_2                           = Stance::Running_Jump_3_10_1_Start + 1;
 constexpr uint16_t Running_Jump_3_10_3                           = Stance::Running_Jump_3_10_2 + 1;
@@ -701,7 +701,7 @@ constexpr uint16_t Running_Jump_3_10_8_End                       = Stance::Runni
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*  Dist 47                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+/*  Dist 45                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define RUNNING_JUMP_3_DROPLVL_SEQ                               19,    20,    21,    22,    23,    24,    25,    26,    121,   122,   123,   124,   125,   126,
 #define RUNNING_JUMP_3_DROPLVL_OFFSETS                           3,0,   3,0,   3,0,   3,0,   4,-2,  4,-1,  4,3,   4,2,   4,4,   4,5,   3,5,   2,5,   2,5,   2,5,
 constexpr uint16_t Running_Jump_3_DropLvl_1_Start                = Stance::Running_Jump_3_10_8_End + 1;

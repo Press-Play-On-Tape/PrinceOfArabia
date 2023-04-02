@@ -601,6 +601,11 @@ void game() {
                             break;
 
                         }
+                        else {
+
+                            pressed = 0;
+                            
+                        }
 
                     }
                     else if (pressed & btnFacingDirection) {
