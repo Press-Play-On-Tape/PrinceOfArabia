@@ -742,11 +742,11 @@ void handleBlades() {
     ImageDetails imageDetails;
     prince.getImageDetails(imageDetails);
 
-    int8_t distToEdgeOfTile = level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX());
-    //if (prince.getDirection() == Direction::Right && distToEdgeOfTile == 10) { tileXIdx = tileXIdx - 1;}
+    princeLX = prince.getX() + imageDetails.reach;
+    princeRX = prince.getX() + imageDetails.heel;
 
-    princeLX= prince.getPosition().x + imageDetails.reach;
-    princeRX= prince.getPosition().x + imageDetails.heel;
+    if (princeLX == 0 && princeRX != 0) princeLX = princeRX;
+    if (princeLX != 0 && princeRX == 0) princeRX = princeLX;
 
     if (princeRX < princeLX) {
         uint8_t temp = princeRX;
@@ -754,37 +754,28 @@ void handleBlades() {
         princeLX = temp;
     }
 
-    {
-        uint8_t itemIdx = level.getItem(ItemType::Blade, tileXIdx, tileYIdx);
+    handleBlades_Single(tileXIdx, tileYIdx, princeLX, princeRX);
+    handleBlades_Single(tileXIdx - 1, tileYIdx, princeLX, princeRX);
 
-        if (itemIdx != Constants::NoItemFound) {
+}
 
-            uint8_t chopperX = (tileXIdx * 12) + 3;
-            Item &item = level.getItem(itemIdx);
 
-            if (chopperX > princeLX &&  chopperX < princeRX && abs(item.data.blade.position) <= 5) {
+void handleBlades_Single(int8_t tileXIdx, int8_t tileYIdx, uint8_t princeLX, uint8_t princeRX)     {
 
-                pushDead(prince, level, gamePlay, true, DeathType::Blade);
+    uint8_t itemIdx = level.getItem(ItemType::Blade, tileXIdx, tileYIdx);
 
-            }
+    if (itemIdx != Constants::NoItemFound) {
 
-        }
+        int8_t chopperX = ((tileXIdx - level.getXLocation()) * Constants::TileWidth) + 3;
+        Item &item = level.getItem(itemIdx);
 
-    }
+        if (chopperX > princeLX &&  chopperX < princeRX && abs(item.data.blade.position) <= 5) {
+                                        
+            #if defined(DEBUG) && defined(DEBUG_PUSH_DEAD)
+            DEBUG_PRINTLN(F("pushDead 15"));
+            #endif
 
-    {
-        uint8_t itemIdx = level.getItem(ItemType::Blade, tileXIdx - 1, tileYIdx);
-
-        if (itemIdx != Constants::NoItemFound) {
-
-            uint8_t chopperX = ((tileXIdx - 1) * 12) + 3;
-            Item &item = level.getItem(itemIdx);
-
-            if (chopperX > princeLX &&  chopperX < princeRX && abs(item.data.blade.position) <= 5) {
-
-               pushDead(prince, level, gamePlay, true, DeathType::Blade);
-
-            }
+            pushDead(prince, level, gamePlay, true, DeathType::Blade);
 
         }
 

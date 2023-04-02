@@ -1,6 +1,6 @@
 #pragma once
 
-#define PRODUCTION_SETTINGS
+#define _PRODUCTION_SETTINGS
 
 #ifdef PRODUCTION_SETTINGS
 
@@ -12,7 +12,7 @@
     #define _SAVE_MEMORY_ENEMY
     #define _SAVE_MEMORY_INVADER
     #define _ALT_B_BUTTON
-    #define _GIVE_SWORD
+    #define GIVE_SWORD
 
     #define LEVEL_DATA_FROM_FX
     #define SAVE_TO_FX
@@ -58,7 +58,7 @@
 #define DEBUG_PRINT    Serial.print
 #define DEBUG_PRINTLN  Serial.println
 
-#define _DEBUG_ONSCREEN_DETAILS
+#define DEBUG_ONSCREEN_DETAILS
 #define _DEBUG_ONSCREEN_DETAILS_MIN
 
 #define _DEBUG_PRINCE_DETAILS
@@ -87,6 +87,7 @@
 #define DEBUG_ACTION_CANRUNNINGJUMP_2
 #define DEBUG_ACTION_CANRUNNINGJUMP_1
 #define _DEBUG_ISGROUNDTILE
+#define DEBUG_PUSH_DEAD
 
 
 //-------------------------------------------------------------------------------------
