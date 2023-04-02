@@ -1836,13 +1836,12 @@ void game() {
 
                 // If no match, test with player's heel ..
 
-                if (itemIdx == Constants::NoItemFound) {
+//                 if (itemIdx == Constants::NoItemFound) {
 
-                    tileXIdx = level.coordToTileIndexX(prince.getPosition().x + imageDetails.heel);
-                    itemIdx = level.getItem(ItemType::InteractiveItemType_Start, ItemType::InteractiveItemType_End, tileXIdx, tileYIdx);
+//                     tileXIdx = level.coordToTileIndexX(prince.getPosition().x + imageDetails.heel);
+//                     itemIdx = level.getItem(ItemType::InteractiveItemType_Start, ItemType::InteractiveItemType_End, tileXIdx, tileYIdx);
 
-                }
-
+//                 }
 
 
                 // Level 12: are we passing the Mirror?
@@ -2010,7 +2009,6 @@ void game() {
                                         case Stance::Run_Start_2 ... Stance::Run_Start_6_End:  // Skip starting run ..
                                         case Stance::Run_Repeat_1_Start ... Stance::Run_Repeat_8_End:
                                         case Stance::Running_Jumps_Start ... Stance::Running_Jumps_End:
-                                        // case Stance::Standing_Jumps_Start ... Stance::Standing_Jumps_End:
                                         case Stance::Standing_Jump_36_7 ... Stance::Standing_Jump_36_18_End:
                                         case Stance::Standing_Jump_32_7 ... Stance::Standing_Jump_32_16_End:
                                         case Stance::Standing_Jump_28_7 ... Stance::Standing_Jump_28_16_End:
@@ -2077,81 +2075,6 @@ void game() {
         if (prince.getHealth() > 0) {
 
             handleBlades();
-
-/*
-            switch (prince.getStance()) {
-
-                case Stance::Climbing_1_Start ... Stance::Climbing_15_End:
-                case Stance::Step_Climbing_1_Start ... Stance::Step_Climbing_15_End:
-                    break;
-
-                case Stance::Sword_Step_Back_1_Start ... Stance::Sword_Step_Back_3_End:
-                    {
-                        int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x);
-                        int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y);
-
-                        handleBlades(tileXIdx, tileYIdx);
-
-                    }
-
-
-                    break;
-
-                case Stance::Sword_Step_1_Start ... Stance::Sword_Step_3_End:
-                    {
-                        int8_t distToEdgeOfTile = level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX());
-
-                        if (distToEdgeOfTile > 2) {
-
-                            int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x + prince.getDirectionOffset(4));
-                            int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y);
-
-                            handleBlades(tileXIdx, tileYIdx);
-
-                        }
-
-                    }
-
-
-                    break;
-
-                case Stance::Sword_Normal:
-                    {
-                        int8_t distToEdgeOfTile = level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX());
-
-                        if (distToEdgeOfTile > 2) {
-
-                            int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x);
-                            int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y);
-    
-                            handleBlades(tileXIdx, tileYIdx);
-
-                        }
-
-                    }
-
-
-                    break;
-
-                default:
-                    {
-                        int8_t distToEdgeOfTile = level.distToEdgeOfTile(prince.getDirection(), (level.getXLocation() * Constants::TileWidth) + prince.getX());
-
-                        if (distToEdgeOfTile <= 4) {
-
-                            int8_t tileXIdx = level.coordToTileIndexX(prince.getPosition().x) + ((prince.getDirection() == Direction::Right && distToEdgeOfTile == 2) ? 1 : 0);
-                            int8_t tileYIdx = level.coordToTileIndexY(prince.getPosition().y);
-                            
-                            handleBlades(tileXIdx, tileYIdx);
-
-                        }
-
-                    }
-
-                    break;
-
-            }
-*/            
 
         }
 
