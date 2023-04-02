@@ -741,7 +741,7 @@ void handleBlades() {
 
     ImageDetails imageDetails;
     prince.getImageDetails(imageDetails);
-
+    
     princeLX = prince.getX() + imageDetails.reach;
     princeRX = prince.getX() + imageDetails.heel;
 
@@ -754,13 +754,12 @@ void handleBlades() {
         princeLX = temp;
     }
 
-    handleBlades_Single(tileXIdx, tileYIdx, princeLX, princeRX);
-    handleBlades_Single(tileXIdx - 1, tileYIdx, princeLX, princeRX);
+    handleBlade_Single(tileXIdx, tileYIdx, princeLX, princeRX);
+    handleBlade_Single(tileXIdx - 1, tileYIdx, princeLX, princeRX);
 
 }
 
-
-void handleBlades_Single(int8_t tileXIdx, int8_t tileYIdx, uint8_t princeLX, uint8_t princeRX)     {
+void handleBlade_Single(int8_t tileXIdx, int8_t tileYIdx, uint8_t princeLX, uint8_t princeRX) {
 
     uint8_t itemIdx = level.getItem(ItemType::Blade, tileXIdx, tileYIdx);
 
@@ -770,11 +769,11 @@ void handleBlades_Single(int8_t tileXIdx, int8_t tileYIdx, uint8_t princeLX, uin
         Item &item = level.getItem(itemIdx);
 
         if (chopperX > princeLX &&  chopperX < princeRX && abs(item.data.blade.position) <= 5) {
-                                        
+
             #if defined(DEBUG) && defined(DEBUG_PUSH_DEAD)
             DEBUG_PRINTLN(F("pushDead 15"));
             #endif
-
+            
             pushDead(prince, level, gamePlay, true, DeathType::Blade);
 
         }
