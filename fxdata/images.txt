@@ -2,7 +2,7 @@ namespace Images {
 
     // PPoT Splash Screen ..
 
-    image_t PPOT                    = "../images/splash/PPOT_65x31_1.png"
+    image_t PPOT                    = "../images/PPOT_65x31_1.png"
 
 
     // Title Screen ..
@@ -40,8 +40,8 @@ namespace Images {
     image_t Eeek                    = "../images/title/Eeek.png"
     image_t LevelRect               = "../images/title/LevelRect.png"
 
-    image_t Mouse                   = "../images/mouse/Mouse_16x16.png"
-    image_t HourGlasses             = "../images/hourglass/HourGlasses_19x23.png"
+    image_t Mouse                   = "../images/Mouse_16x16.png"
+    image_t HourGlasses             = "../images/HourGlasses_19x23.png"
 
 
     // HUD
@@ -101,34 +101,34 @@ namespace Images {
 
     // Princess Images
 
-    image_t Princess                = "../images/princess/Princess_32x32_0.png"
-    image_t Princess_Bounce         = "../images/princess/Princess_Bounce_48x32_0.png"
-    image_t Hearts                  = "../images/princess/Hearts_7x6_0.png"
+    image_t Princess                = "../images/Princess_32x32_0.png"
+    image_t Princess_Bounce         = "../images/Princess_Bounce_48x32_0.png"
+    image_t Hearts                  = "../images/Hearts_7x6_0.png"
 
 
     // Jaffar Images 
 
-    image_t Jaffar                  = "../images/jaffar/Jaffar_32x32.png"
+    image_t Jaffar                  = "../images/Jaffar_32x32.png"
 
 
     // Prince Images
 
-    image_t Prince_Left             = "../images/prince/Prince_Left_36x36_0.png"
-    image_t Prince_Right            = "../images/prince/Prince_Right_36x36_0.png"
+    image_t Prince_Left             = "../images/Prince_Left_36x36_0.png"
+    image_t Prince_Right            = "../images/Prince_Right_36x36_0.png"
 
 
     // Mirror images
 
-    image_t Mirror_Right            = "../images/mirror/Mirror_Right_36x36_0.png"
-    image_t Mirror_Left             = "../images/mirror/Mirror_Left_36x36_0.png"
+    image_t Mirror_Right            = "../images/Mirror_Right_36x36_0.png"
+    image_t Mirror_Left             = "../images/Mirror_Left_36x36_0.png"
 
 
     // Enemy images
 
-    image_t Enemy_Right             = "../images/enemy/Enemy_Right_36x36_0.png"
-    image_t Enemy_Left              = "../images/enemy/Enemy_Left_36x36_0.png"
-    image_t Skeleton_Right          = "../images/skeleton/Skeleton_Right_36x36_0.png"
-    image_t Skeleton_Left           = "../images/skeleton/Skeleton_Left_36x36_0.png"
+    image_t Enemy_Right             = "../images/Enemy_Right_36x36_0.png"
+    image_t Enemy_Left              = "../images/Enemy_Left_36x36_0.png"
+    image_t Skeleton_Right          = "../images/Skeleton_Right_36x36_0.png"
+    image_t Skeleton_Left           = "../images/Skeleton_Left_36x36_0.png"
 
 
     // Invaders

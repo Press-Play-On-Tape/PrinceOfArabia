@@ -24,7 +24,8 @@ imagepath += os.sep
 images = []
 for f in sorted(os.listdir(imagepath)):
   if os.path.isfile(imagepath + f):
-    images.append(f)
+    if f != ".DS_Store":
+      images.append(f)
 
 imagecount = len(images)
 cols = imagecount

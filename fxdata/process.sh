@@ -45,18 +45,18 @@ python3 scripts/ReplaceTiles.py ../levels/Level28_RunningJumps_FG.csv ../levels/
 #montage ../images/skeleton/left/Backup/???_*.png -geometry 36x36+0+0 -background none -tile 10x4 ../images/skeleton/left/Skeleton_Left_36x36.png
 #montage ../images/skeleton/right/Backup/???_*.png -geometry 36x36+0+0 -background none -tile 10x4 ../images/skeleton/right/Skeleton_Right_36x36.png
 
-python3 scripts/img2sheet.py ../images/prince/images ../images/prince/Prince_Left False
-python3 scripts/img2sheet.py ../images/prince/images ../images/prince/Prince_Right True
-python3 scripts/img2sheet.py ../images/mirror/images ../images/mirror/Mirror_Left False
-python3 scripts/img2sheet.py ../images/mirror/images ../images/mirror/Mirror_Right True
-python3 scripts/img2sheet.py ../images/enemy/images ../images/enemy/Enemy_Left False
-python3 scripts/img2sheet.py ../images/enemy/images ../images/enemy/Enemy_Right True
-python3 scripts/img2sheet.py ../images/skeleton/images ../images/skeleton/Skeleton_Left False
-python3 scripts/img2sheet.py ../images/skeleton/images ../images/skeleton/Skeleton_Right True
+python3 scripts/img2sheet.py ../images/prince ../images/Prince_Left False
+python3 scripts/img2sheet.py ../images/prince ../images/Prince_Right True
+python3 scripts/img2sheet.py ../images/mirror ../images/Mirror_Left False
+python3 scripts/img2sheet.py ../images/mirror ../images/Mirror_Right True
+python3 scripts/img2sheet.py ../images/enemy ../images/Enemy_Left False
+python3 scripts/img2sheet.py ../images/enemy ../images/Enemy_Right True
+python3 scripts/img2sheet.py ../images/skeleton ../images/Skeleton_Left False
+python3 scripts/img2sheet.py ../images/skeleton ../images/Skeleton_Right True
 
-python3 scripts/img2sheet.py ../images/princess/Hearts ../images/princess/Hearts False
-python3 scripts/img2sheet.py ../images/princess/Princess ../images/princess/Princess False
-python3 scripts/img2sheet.py ../images/princess/Princess_Bounce ../images/princess/Princess_Bounce False
+python3 scripts/img2sheet.py ../images/princess/Hearts ../images/Hearts False
+python3 scripts/img2sheet.py ../images/princess/Princess ../images/Princess False
+python3 scripts/img2sheet.py ../images/princess/Princess_Bounce ../images/Princess_Bounce False
 
 
 #montage ../images/princess/Princess/*.png -geometry 32x32+0+0 -background none -tile 33x1 ../images/princess/Princess_32x32.png
