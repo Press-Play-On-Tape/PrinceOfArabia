@@ -101,9 +101,9 @@ namespace Images {
 
     // Princess Images
 
-    image_t Princess                = "../images/princess/Princess_32x32.png"
-    image_t Princess_Bounce         = "../images/princess/Princess_Bounce_48x32.png"
-    image_t Hearts                  = "../images/princess/Hearts_7x6.png"
+    image_t Princess                = "../images/princess/Princess_32x32_0.png"
+    image_t Princess_Bounce         = "../images/princess/Princess_Bounce_48x32_0.png"
+    image_t Hearts                  = "../images/princess/Hearts_7x6_0.png"
 
 
     // Jaffar Images 
@@ -113,22 +113,22 @@ namespace Images {
 
     // Prince Images
 
-    image_t Prince_Left             = "../images/prince/left/Prince_Left_36x36.png"
-    image_t Prince_Right            = "../images/prince/right/Prince_Right_36x36.png"
+    image_t Prince_Left             = "../images/prince/Prince_Left_36x36_0.png"
+    image_t Prince_Right            = "../images/prince/Prince_Right_36x36_0.png"
 
 
     // Mirror images
 
-    image_t Mirror_Right            = "../images/mirror/right/Mirror_Right_36x36.png"
-    image_t Mirror_Left             = "../images/mirror/left/Mirror_Left_36x36.png"
+    image_t Mirror_Right            = "../images/mirror/Mirror_Right_36x36_0.png"
+    image_t Mirror_Left             = "../images/mirror/Mirror_Left_36x36_0.png"
 
 
     // Enemy images
 
-    image_t Enemy_Right             = "../images/enemy/right/Enemy_Right_36x36.png"
-    image_t Enemy_Left              = "../images/enemy/left/Enemy_Left_36x36.png"
-    image_t Skeleton_Right          = "../images/skeleton/right/Skeleton_Right_36x36.png"
-    image_t Skeleton_Left           = "../images/skeleton/left/Skeleton_Left_36x36.png"
+    image_t Enemy_Right             = "../images/enemy/Enemy_Right_36x36_0.png"
+    image_t Enemy_Left              = "../images/enemy/Enemy_Left_36x36_0.png"
+    image_t Skeleton_Right          = "../images/skeleton/Skeleton_Right_36x36_0.png"
+    image_t Skeleton_Left           = "../images/skeleton/Skeleton_Left_36x36_0.png"
 
 
     // Invaders
