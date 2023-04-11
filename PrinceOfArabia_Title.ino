@@ -32,6 +32,10 @@ void title_Init() {
 
 }
 
+void saveSoundState() {
+
+    eeprom_update_byte((uint8_t*)2, arduboy.audio.enabled()); // arduboy2base::eepromAudioOnOff is protected so we just use 2 here :P
+}
 
 // ----------------------------------------------------------------------------
 //  Handle state updates .. 
@@ -134,6 +138,7 @@ void title() {
         if (justPressed & B_BUTTON) {
 
             arduboy.audio.toggle();
+            saveSoundState();
 
         }
 

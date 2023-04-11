@@ -1285,14 +1285,14 @@ void game() {
                             case MenuOption::Sound_On:
 
                                 arduboy.audio.on();
-                                eeprom_update_byte((uint8_t*)2, true); // arduboy2base::eepromAudioOnOff is protected so we just use 2 here :P
+                                saveSoundState();
                                 menu.direction = Direction::Right;
                                 break;
 
                             case MenuOption::Sound_Off:
 
                                 arduboy.audio.off();
-                                eeprom_update_byte((uint8_t*)2, false); // arduboy2base::eepromAudioOnOff is protected so we just use 2 here :P
+                                saveSoundState();
                                 menu.direction = Direction::Right;
                                 break;
 
