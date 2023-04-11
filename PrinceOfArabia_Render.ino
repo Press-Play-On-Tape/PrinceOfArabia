@@ -555,7 +555,7 @@ void render(bool sameLevelAsPrince) {
 }
 
 
-void renderMenu(Prince &prince) {
+void renderMenu() {
 
     #ifndef SAVE_MEMORY_OTHER
     

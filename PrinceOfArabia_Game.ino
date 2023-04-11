@@ -672,6 +672,8 @@ void game() {
                                 case CanClimbDownResult::StepThenClimbDown:
                                     prince.pushSequence(Stance::Small_Step_6_End, Stance::Small_Step_1_Start, Stance::Upright);
                                     break;
+
+                                default: break;
                             }
 
                             prince.setHangingCounter(150);
@@ -1223,7 +1225,7 @@ void game() {
                 break;
 
             case GameState::Menu:
-
+            {
                 uint16_t options = getMenuData(MenuControlDataTable);
                 if (justPressed & UP_BUTTON) {
 
@@ -1234,6 +1236,7 @@ void game() {
 
                     menu.cursor =  (options & 0xFF);
                 }
+            }
 
                 if (justPressed & (A_BUTTON | B_BUTTON)) {
     
@@ -1282,12 +1285,14 @@ void game() {
                             case MenuOption::Sound_On:
 
                                 arduboy.audio.on();
+                                eeprom_update_byte((uint8_t*)2, true); // arduboy2base::eepromAudioOnOff is protected so we just use 2 here :P
                                 menu.direction = Direction::Right;
                                 break;
 
                             case MenuOption::Sound_Off:
 
                                 arduboy.audio.off();
+                                eeprom_update_byte((uint8_t*)2, false); // arduboy2base::eepromAudioOnOff is protected so we just use 2 here :P
                                 menu.direction = Direction::Right;
                                 break;
 
@@ -2608,7 +2613,7 @@ void game() {
     
     #ifndef SAVE_MEMORY_OTHER
     if (gamePlay.gameState == GameState::Menu) {
-        renderMenu(prince);
+        renderMenu();
     }
     #endif
 
