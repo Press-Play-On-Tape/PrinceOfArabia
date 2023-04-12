@@ -17,35 +17,39 @@ struct MenuItem {
     }
 
     bool update() {
-            
+
+        bool result = false;
+        uint8_t x = this->x;
+
         switch (this->direction) {
 
             case Direction::Left:
                 
-                this->x = this->x - 4;
+                x -= 4;
               
-                if (this->x == 86) {
+                if (x == 86) {
                     this->direction = Direction::None;
                 }
                 
-                return false;
+                break;
 
             case Direction::Right:
 
-                this->x = this->x + 4;
+                x += 4;
 
-                if (this->x == 130) {
+                if (x == 130) {
 
                     this->direction = Direction::None;
-                    return true;
+                    result = true;
                 }
 
-                return false;
+                break;
 
-            default: return false;
+            default: break;
 
         }
-
+        this->x = x;
+        return result;
     }
  
 };
