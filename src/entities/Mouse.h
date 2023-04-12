@@ -18,7 +18,9 @@ struct Mouse {
 
     bool update() {
         
-        if (this->counter > 0) this->counter--;
+        uint8_t counter = this->counter;
+        if (counter != 0) --counter;
+        this->counter = counter;
 
         return this->counter == 70;
 

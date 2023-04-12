@@ -49,13 +49,10 @@ class Prince : public BaseEntity, public BaseStack {
 
             if (this->health < 3) this->health = 3;
 
-            if (stance != Stance::Jump_Up_A_14_End) {
+            this->crouchingCounter = 80;
+            this->hangingCounter = 0;
 
-                this->crouchingCounter = 80;
-                this->hangingCounter = 0;
-
-            }
-            else {
+            if (stance == Stance::Jump_Up_A_14_End) {
 
                 // Level 7
 
@@ -72,13 +69,13 @@ class Prince : public BaseEntity, public BaseStack {
 
             // Housekeeping ..
 
-            if (this->hangingCounter > 0) {
-                this->hangingCounter--;
-            }
+            uint8_t hangingCounter = this->hangingCounter;
+            if (hangingCounter != 0) --hangingCounter;
+            this->hangingCounter = hangingCounter;
 
-            if (this->crouchingCounter > 0) {
-                this->crouchingCounter--;
-            }
+            uint8_t crouchingCounter = this->crouchingCounter;
+            if (crouchingCounter != 0) --crouchingCounter;
+            this->crouchingCounter = crouchingCounter;
 
             this->stack->update();
 
@@ -141,8 +138,6 @@ class Prince : public BaseEntity, public BaseStack {
                     return false;
                     
             }
-            
-            return false;
             
         }
 
