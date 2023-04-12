@@ -52,21 +52,23 @@ struct GamePlay {
         if ((arduboy.getFrameCount() - this->frameCount) % Constants::FrameRate == 0) {
         #endif
 
-            if (this->timer_Sec == 0) {
-                if (this->timer_Min > 0) {
-                    this->timer_Min--;
-                    this->timer_Sec = 59;
-                }
+            int8_t sec = this->timer_Sec;
+            int8_t min = this->timer_Min;
+            if (--sec < 0) {
+
+              sec = 59;
+              if (--min >= 0) this->timer_Min = min;
+
             }
-            else {
-                this->timer_Sec--;
-            }
+            this->timer_Sec = sec;
 
         }
 
-        if (this->timeRemaining > 0) this->timeRemaining--;
+        uint8_t timeRemaining = this->timeRemaining;
+        if (timeRemaining != 0) --timeRemaining;
+        this->timeRemaining = timeRemaining;
 
-        return (this->timer_Min == 0 && this->timer_Sec == 0);
+        return (this->timer_Min | this->timer_Sec) == 0;
 
     }
 
@@ -82,14 +84,12 @@ struct GamePlay {
         if (this->timer_Sec > 0) return false;
 
         return true;
-        
+
     }
 
     uint8_t getGrab() {
 
-        this->grab++;
-
-        if (this->grab == 4) this->grab = 0;
+        this->grab = (this->grab + 1) % 4;
 
         return this->grab;
         
