@@ -185,16 +185,15 @@ struct Level {
                     this->loadMap(gamePlay);
                     this->loadItems(gamePlay.level, prince);
 
-                    if (prince.getY() > 56) {
+                    uint8_t yOffset = 0;
+                    int16_t y = prince.getY() - 56;
 
-                        this->yOffset = prince.getY() - 56;
+                    if (y > 0) {
 
-                    }
-                    else {
-
-                        this->yOffset = 0;
+                        yOffset = y;
 
                     }
+                    this->yOffset = yOffset;
 
                 }
 
@@ -308,7 +307,7 @@ struct Level {
 
                 Item &item = this->getItem(i);
 
-                if (item.itemType != ItemType::None) {
+                //if (item.itemType != ItemType::None) {
 
                     switch (item.itemType) {
 
@@ -643,7 +642,7 @@ struct Level {
 
                     }
 
-                }
+                //}
 
             }
 
@@ -651,11 +650,7 @@ struct Level {
 
                 if (arduboy.isFrameCount(2)) {
 
-                    if (flash.frame > 0) {
-                        
                         flash.frame--;
-
-                    }
                         
                 }
 
