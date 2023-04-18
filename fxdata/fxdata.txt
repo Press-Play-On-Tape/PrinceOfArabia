@@ -538,6 +538,12 @@ uint16_t RunningJumpStances[] = {
                                     284,                              292,                            18,              0,            0,            0,                                                                   0, 0,
     // Jump1_Pos10                  Stance::Running_Jump_1_10_1_Start, Stance::Running_Jump_1_10_10_End, Stance::Upright, Stance::None, Stance::None, Stance::None, 
                                     293,                               302,                              18,              0,            0,            0,                                                                0, 0,
+    // Jump3_GrabLedge_Pos2         Stance::Running_Jump_3_GL_2_1_Start, Stance::Running_Jump_3_GL_2_16_End, Stance::Jump_Up_A_14_End, Stance::None, Stance::None, Stance::None, 
+                                    480,                                 495,                                32,                       0,            0,            0,                                                   1, 200,
+    // Jump3_GrabLedge_Pos6         Stance::Running_Jump_3_GL_6_1_Start, Stance::Running_Jump_3_GL_6_16_End, Stance::Jump_Up_A_14_End, Stance::None, Stance::None, Stance::None, 
+                                    496,                                 511,                                32,                       0,            0,            0,                                                   1, 200,
+    // Jump3_GrabLedge_Pos10        Stance::Running_Jump_3_GL_10_1_Start, Stance::Running_Jump_3_GL_10_16_End, Stance::Jump_Up_A_14_End, Stance::None, Stance::None, Stance::None, 
+                                    512,                                  527,                                 32,                       0,            0,            0,                                                 1, 200,
 
 }
 
