@@ -1,6 +1,6 @@
 #pragma once
 
-#define PRODUCTION_SETTINGS
+#define _PRODUCTION_SETTINGS
 
 #ifdef PRODUCTION_SETTINGS
 
@@ -41,7 +41,7 @@
 
     #define LEVEL_DATA_FROM_FX
     #define _SAVE_TO_FX
-    #define STARTING_LEVEL 8
+    #define STARTING_LEVEL 1
     #define MAX_LEVEL 13
     #define _DEBUG_CUT_SCENES
     #define _DEBUG_LEVELS
@@ -58,7 +58,7 @@
 #define DEBUG_PRINT    Serial.print
 #define DEBUG_PRINTLN  Serial.println
 
-#define _DEBUG_ONSCREEN_DETAILS
+#define DEBUG_ONSCREEN_DETAILS
 #define _DEBUG_ONSCREEN_DETAILS_MIN
 
 #define _DEBUG_PRINCE_DETAILS
@@ -69,7 +69,7 @@
 #define _DEBUG_PRINCE_RENDERING
 #define _DEBUG_IMAGE_DETAILS
 
-#define _DEBUG_ACTION_CANMOVEFORWARD
+#define DEBUG_ACTION_CANMOVEFORWARD
 #define _DEBUG_ACTION_CANJUMPUP
 #define _DEBUG_ACTION_CANJUMPUP_PART2
 #define _DEBUG_ACTION_CANCLIMBDOWN
@@ -689,7 +689,7 @@ constexpr uint16_t Running_Jump_3_6_8_End                        = Stance::Runni
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /*  Dist 40                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define RUNNING_JUMP_3_10_SEQ                                    20,    21,    22,    23,    169,   24,    25,    26,
-#define RUNNING_JUMP_3_10_OFFSETS                                5,0,   6,0,   6,0,   6,-2,  6,0,   5,-2,  4,3,   3,1,
+#define RUNNING_JUMP_3_10_OFFSETS                                5,0,   6,0,   6,0,   6,-2,  6,0,   5,-2,  4,3,   2,1,
 constexpr uint16_t Running_Jump_3_10_1_Start                     = Stance::Running_Jump_3_6_8_End + 1;
 constexpr uint16_t Running_Jump_3_10_2                           = Stance::Running_Jump_3_10_1_Start + 1;
 constexpr uint16_t Running_Jump_3_10_3                           = Stance::Running_Jump_3_10_2 + 1;
