@@ -497,7 +497,7 @@ TitleFrameIndexTable[] = {
 uint16_t RunningJumpStances[] = {
 
     // None                         Stance::Stopping_1_Start, Stance::Stopping_5_End, Stance::Upright, Stance::None, Stance::None, Stance::None, 
-                                    488,                      492,                    18,              0,            0,            0,                                                                                   0, 0,                                                                     
+                                    536,                      540,                    18,              0,            0,            0,                                                                                   0, 0,                                                                     
     // Normal_Pos2                  Stance::Running_Jump_Short_2_1_Start, Stance::Running_Jump_Short_2_7_End, Stance::Run_Repeat_4, Stance::None, Stance::None, Stance::None, 
                                     262,                                  268,                                13,                   0,            0,            0,                                                      0, 0, 
     // Normal_Pos6                  Stance::Running_Jump_Short_6_1_Start, Stance::Running_Jump_Short_6_7_End, Stance::Run_Repeat_4, Stance::None, Stance::None, Stance::None, 
