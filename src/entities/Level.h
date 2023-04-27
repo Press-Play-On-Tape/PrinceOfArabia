@@ -1442,12 +1442,14 @@ struct Level {
             printAction(action);
             DEBUG_PRINT(F(" direction "));
             DEBUG_PRINT((uint8_t)direction);
+            DEBUG_PRINT(F(" tileXIdx "));
+            DEBUG_PRINT(tileXIdx);
+            DEBUG_PRINT(F(", tileYIdx "));
+            DEBUG_PRINT(tileYIdx);
             DEBUG_PRINT(F(" xOffset "));
             DEBUG_PRINT(xOffset);
             DEBUG_PRINT(F(", offset "));
             DEBUG_PRINT(offset);
-            DEBUG_PRINT(F(", coordToTileIndexX "));
-            DEBUG_PRINT(entity.getPosition().x);
             DEBUG_PRINT(F(", coordToTileIndexX + offset "));
             DEBUG_PRINT(entity.getPosition().x + (xOffset * offset));
             DEBUG_PRINT(F(" = "));
@@ -1489,6 +1491,12 @@ struct Level {
 
                             case Action::SwordStep:
                             case Action::SwordStep2:
+
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+                                DEBUG_PRINT(F(" Ret 1: "));
+                                DEBUG_PRINTLN(entity.getPosition().x + (xOffset * offset) - static_cast<uint8_t>(action) >= (entity.getX_Tile() * Constants::TileWidth) + entity.getX_LeftExtent());
+                                #endif
+
                                 return (entity.getPosition().x + (xOffset * offset) - static_cast<uint8_t>(action) >= (entity.getX_Tile() * Constants::TileWidth) + entity.getX_LeftExtent());
 
                             case Action::SmallStep:
@@ -1498,16 +1506,25 @@ struct Level {
 
                                     case 0 ... 5:
                                         {
+                                            WallTileResults wallTile = this->isWallTile(fgTile2, tileXIdx, tileYIdx, Direction::Left, false);
+
                                             #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
                                             printTileInfo(bgTile2, fgTile2);
+                                            DEBUG_PRINT(F(" Ret 2: "));
+                                            DEBUG_PRINTLN(wallTile == WallTileResults::None);
                                             #endif
-                                            
-                                            WallTileResults wallTile = this->isWallTile(fgTile2, tileXIdx, tileYIdx, Direction::Left, false);
+
                                             return (wallTile == WallTileResults::None);
                                         }
                                         return false;
 
                                     default:
+
+                                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+                                        DEBUG_PRINT(F(" Ret 3: "));
+                                        DEBUG_PRINTLN(true);
+                                        #endif                                    
+
                                         return true;
 
                                 }
@@ -1522,16 +1539,25 @@ struct Level {
 
                                     case 0 ... 9:
                                         {
+                                            WallTileResults wallTile = this->isWallTile(fgTile2, tileXIdx, tileYIdx, Direction::Left, false);
+
                                             #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
                                             printTileInfo(bgTile2, fgTile2);
+                                            DEBUG_PRINT(F(" Ret 4: "));
+                                            DEBUG_PRINTLN(wallTile == WallTileResults::None);
                                             #endif
 
-                                            WallTileResults wallTile = this->isWallTile(fgTile2, tileXIdx, tileYIdx, Direction::Left, false);
                                             return (wallTile == WallTileResults::None);
                                         }
                                         return false;
 
                                     default:
+
+                                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+                                        DEBUG_PRINT(F(" Ret 5: "));
+                                        DEBUG_PRINTLN(true);
+                                        #endif               
+
                                         return true;
 
                                 }
@@ -1540,11 +1566,14 @@ struct Level {
 
                             case Action::RunRepeat:
                                 {
+                                    WallTileResults wallTile = this->isWallTile(fgTile2, tileXIdx, tileYIdx, Direction::Left, false);
+
                                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
                                     printTileInfo(bgTile2, fgTile2);
-                                    #endif
-                                    
-                                    WallTileResults wallTile = this->isWallTile(fgTile2, tileXIdx, tileYIdx, Direction::Left, false);
+                                    DEBUG_PRINT(F(" Ret 4: "));
+                                    DEBUG_PRINTLN(wallTile == WallTileResults::None);
+                                    #endif                                    
+
                                     return wallTile == WallTileResults::None;
 
                                 }
@@ -1588,72 +1617,104 @@ struct Level {
 
                             case Action::SwordStep:
                             case Action::SwordStep2:
+
+                                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+                                    DEBUG_PRINT(F(" Ret 1: "));
+                                    DEBUG_PRINTLN(entity.getPosition().x + (xOffset * offset) + static_cast<uint8_t>(action) <= (entity.getX_Tile() * Constants::TileWidth) + entity.getX_RightExtent());
+                                    #endif
+
                                 return (entity.getPosition().x + (xOffset * offset) + static_cast<uint8_t>(action) <= (entity.getX_Tile() * Constants::TileWidth) + entity.getX_RightExtent());
 
                             case Action::SmallStep:
                             case Action::CrouchHop:
-                                {
-                                    WallTileResults wallTile = this->isWallTile(fgTile2, tileXIdx, tileYIdx, Direction::Right, false);
 
-                                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
-                                    printTileInfo(bgTile2, fgTile2);
-                                    #endif
+                                switch (distToEdgeOfCurrentTile) {
 
-                                    switch (distToEdgeOfCurrentTile) {
+                                    case 0 ... 5:
+                                        {
+                                            WallTileResults wallTile = this->isWallTile(fgTile2, tileXIdx, tileYIdx, Direction::Right, false);
 
-                                        case 0 ... 6:
+                                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+                                            printTileInfo(bgTile2, fgTile2);
+                                            DEBUG_PRINT(F(" Ret 2: "));
+                                            DEBUG_PRINTLN(wallTile == WallTileResults::None);
+                                            #endif       
 
-                                            return wallTile == WallTileResults::None;
-                                            
-                                        default:
+                                            return (wallTile == WallTileResults::None);
+                                        }
+                                        return false;
 
-                                            return true;
+                                    default:
 
-                                    }
+                                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+                                        DEBUG_PRINT(F(" Ret 3: "));
+                                        DEBUG_PRINTLN(true);
+                                        #endif
+
+                                        return true;
 
                                 }
-
-                                break;
 
                             case Action::Step:
                             case Action::RunStart:
                             case Action::RunningTurn:
-                                {
-                                    WallTileResults wallTile = this->isWallTile(fgTile2, tileXIdx, tileYIdx, Direction::Right, false);
 
-                                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
-                                    printTileInfo(bgTile2, fgTile2);
-                                    #endif
+                                switch (distToEdgeOfCurrentTile) {
 
-                                    switch (distToEdgeOfCurrentTile) {
+                                    case 0 ... 9:
+                                        {
+                                            WallTileResults wallTile = this->isWallTile(fgTile2, tileXIdx, tileYIdx, Direction::Right, false);
 
-                                        case 0 ... 9:
+                                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+                                            printTileInfo(bgTile2, fgTile2);
+                                            DEBUG_PRINT(F(" Ret 4: "));
+                                            DEBUG_PRINTLN(wallTile == WallTileResults::None);
+                                            #endif
+                                            return (wallTile == WallTileResults::None);
+                                        }
+                                        return false;
 
-                                            return wallTile == WallTileResults::None;
+                                    default:
 
-                                        case 10:
+                                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+                                        DEBUG_PRINT(F(" Ret 5: "));
+                                        DEBUG_PRINTLN(true);
+                                        #endif
 
-                                            return wallTile != WallTileResults::GateClosed;
-                                            
-                                        default:
-                                            return true;
-
-                                    }
+                                        return true;
 
                                 }
 
-                                break;
+                                return false;
 
                             case Action::RunRepeat:
-                                {
-                                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
-                                    printTileInfo(bgTile2, fgTile2);
-                                    #endif
-                                    
-                                    WallTileResults wallTile = this->isWallTile(fgTile2, tileXIdx, tileYIdx, Direction::Right, false);
-                                    return wallTile == WallTileResults::None;
+                                
+                                switch (distToEdgeOfCurrentTile) {
 
-                                }
+                                    case 0 ... 9:
+                                        {
+                                            WallTileResults wallTile = this->isWallTile(fgTile2, tileXIdx, tileYIdx, Direction::Right, false);
+
+                                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+                                            printTileInfo(bgTile2, fgTile2);
+                                            DEBUG_PRINT(F(" Ret 6: "));
+                                            DEBUG_PRINTLN(wallTile == WallTileResults::None);
+                                            #endif       
+
+                                            return (wallTile == WallTileResults::None);
+                                        }
+                                        return false;
+
+                                    default:
+
+                                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+                                        DEBUG_PRINT(F(" Ret 7: "));
+                                        DEBUG_PRINTLN(true);
+                                        #endif       
+
+                                        return true;
+
+                                }                                    
                                 
                                 return false;
 
@@ -1680,188 +1741,95 @@ struct Level {
             DEBUG_PRINTLN(F("-----------------------------------------------------"));
             #endif
 
-            // switch (prince.getDirection()) {
+            CanJumpUpResult resultLeft = this->canJumpUp_Test(prince, prince.getDirection());
 
-            //     case Direction::Left:
-            //         {
-                        CanJumpUpResult resultLeft = this->canJumpUp_Test(prince, prince.getDirection());
+            switch (resultLeft) {
 
-                        switch (resultLeft) {
+                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                    
+                    case CanJumpUpResult::Jump:
+                    case CanJumpUpResult::StepThenJump:
 
-                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                
-                                case CanJumpUpResult::Jump:
-                                case CanJumpUpResult::StepThenJump:
+                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                        DEBUG_PRINT(F("L1 Test success, Return "));
+                        DEBUG_PRINTLN(static_cast<uint8_t>(resultLeft));
+                        #endif
+                                                            
+                        return resultLeft;
 
-                                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                    DEBUG_PRINT(F("L1 Test success, Return "));
-                                    DEBUG_PRINTLN(static_cast<uint8_t>(resultLeft));
-                                    #endif
-                                                                        
-                                    return resultLeft;
+                    case CanJumpUpResult::JumpThenFall_CollapseFloor:
 
-                                case CanJumpUpResult::JumpThenFall_CollapseFloor:
+                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                        DEBUG_PRINTLN(F("L2 Test success, Return JumpThenFall_CollapseFloor"));
+                        #endif                            
 
-                                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                    DEBUG_PRINTLN(F("L2 Test success, Return JumpThenFall_CollapseFloor"));
-                                    #endif                            
+                        return CanJumpUpResult::JumpThenFall_CollapseFloor;
 
-                                    return CanJumpUpResult::JumpThenFall_CollapseFloor;
+                    case CanJumpUpResult::JumpThenFall_CollapseFloorAbove:
 
-                                case CanJumpUpResult::JumpThenFall_CollapseFloorAbove:
+                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                        DEBUG_PRINTLN(F("L3 Test success, Return JumpThenFall_CollapseFloorAbove"));
+                        #endif                            
 
-                                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                    DEBUG_PRINTLN(F("L3 Test success, Return JumpThenFall_CollapseFloorAbove"));
-                                    #endif                            
+                        return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
 
-                                    return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
+                    case CanJumpUpResult::StepThenJumpThenFall_CollapseFloor:
 
-                                case CanJumpUpResult::StepThenJumpThenFall_CollapseFloor:
+                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                        DEBUG_PRINTLN(F("L4 Test success, Return StepThenJumpThenFall_CollapseFloor"));
+                        #endif                            
 
-                                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                    DEBUG_PRINTLN(F("L4 Test success, Return StepThenJumpThenFall_CollapseFloor"));
-                                    #endif                            
+                        return CanJumpUpResult::StepThenJumpThenFall_CollapseFloor;
 
-                                    return CanJumpUpResult::StepThenJumpThenFall_CollapseFloor;
+                #else
 
-                            #else
+                    case CanJumpUpResult::Jump:
+                    case CanJumpUpResult::StepThenJump:
+                    case CanJumpUpResult::JumpThenFall_CollapseFloor:
+                    case CanJumpUpResult::JumpThenFall_CollapseFloorAbove:
+                    case CanJumpUpResult::StepThenJumpThenFall_CollapseFloor:
+                        return resultLeft;
 
-                                case CanJumpUpResult::Jump:
-                                case CanJumpUpResult::StepThenJump:
-                                case CanJumpUpResult::JumpThenFall_CollapseFloor:
-                                case CanJumpUpResult::JumpThenFall_CollapseFloorAbove:
-                                case CanJumpUpResult::StepThenJumpThenFall_CollapseFloor:
-                                    return resultLeft;
+                #endif
 
-                            #endif
 
+                default:
+                    {
+                        CanJumpUpResult resultRight = this->canJumpUp_Test(prince, prince.getOppositeDirection());
+
+                        switch (resultRight) {
+
+                            case CanJumpUpResult::Jump:
+
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                DEBUG_PRINT(F("R1 Test success, Return TurnThenJump"));
+                                #endif
+
+                                return CanJumpUpResult::TurnThenJump;
 
                             default:
-                                {
-                                    CanJumpUpResult resultRight = this->canJumpUp_Test(prince, prince.getOppositeDirection());
 
-                                    switch (resultRight) {
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                DEBUG_PRINT(F("R2 Test failed, Return "));
+                                DEBUG_PRINTLN(static_cast<uint8_t>(resultLeft));
+                                #endif
 
-                                        case CanJumpUpResult::Jump:
+                                CanJumpUpResult result = this->canJumpUp_Test_Dist10(prince, prince.getDirection());
 
-                                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                            DEBUG_PRINT(F("R1 Test success, Return TurnThenJump"));
-                                            #endif
+                                #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
+                                DEBUG_PRINT(F("R3 canJumpUp_Test_Dist10 Return "));
+                                DEBUG_PRINTLN(static_cast<uint8_t>(result));
+                                #endif
 
-                                            return CanJumpUpResult::TurnThenJump;
-
-                                        default:
-
-                                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                            DEBUG_PRINT(F("R2 Test failed, Return "));
-                                            DEBUG_PRINTLN(static_cast<uint8_t>(resultLeft));
-                                            #endif
-
-                                            CanJumpUpResult result = this->canJumpUp_Test_Dist10(prince, prince.getDirection());
-
-                                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-                                            DEBUG_PRINT(F("R3 canJumpUp_Test_Dist10 Return "));
-                                            DEBUG_PRINTLN(static_cast<uint8_t>(result));
-                                            #endif
-
-                                            return result;
-
-                                    }
-
-                                }
-
-                                break;
+                                return result;
 
                         }
-                        
-            //         }
 
-            //         break;
+                    }
 
-            //     case Direction::Right:
-            //         {
-            //             CanJumpUpResult resultRight = this->canJumpUp_Test(prince, Direction::Right);
+                    break;
 
-            //             switch (resultRight) {
-
-            //                 case CanJumpUpResult::Jump:
-            //                 case CanJumpUpResult::StepThenJump:
-
-            //                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-            //                     DEBUG_PRINT(F("R1 Test success, Return "));
-            //                     DEBUG_PRINTLN(static_cast<uint8_t>(resultRight));
-            //                     #endif                            
-
-            //                     return resultRight;
-
-            //                 case CanJumpUpResult::JumpThenFall_CollapseFloor:
-
-            //                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-            //                     DEBUG_PRINTLN(F("R2 Test success, Return JumpThenFall_CollapseFloor"));
-            //                     #endif                            
-
-            //                     return CanJumpUpResult::JumpThenFall_CollapseFloor;
-
-            //                 case CanJumpUpResult::JumpThenFall_CollapseFloorAbove:
-
-            //                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-            //                     DEBUG_PRINTLN(F("R3 Test success, Return JumpThenFall_CollapseFloorAbove"));
-            //                     #endif                            
-
-            //                     return CanJumpUpResult::JumpThenFall_CollapseFloorAbove;
-
-            //                 case CanJumpUpResult::StepThenJumpThenFall_CollapseFloor:
-
-            //                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-            //                     DEBUG_PRINTLN(F("R4 Test success, Return StepThenJumpThenFall_CollapseFloor"));
-            //                     #endif                            
-
-            //                     return CanJumpUpResult::StepThenJumpThenFall_CollapseFloor;
-
-            //                 default:
-            //                     {
-            //                         CanJumpUpResult resultLeft = this->canJumpUp_Test(prince, Direction::Left);
-
-            //                         switch (resultLeft) {
-
-            //                             case CanJumpUpResult::Jump:
-
-            //                                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-            //                                 DEBUG_PRINT(F("L1 Test success, Return TurnThenJump"));
-            //                                 #endif     
-
-            //                                 return CanJumpUpResult::TurnThenJump;
-
-            //                             default:
-
-            //                                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-            //                                 DEBUG_PRINT(F("L2 Test failed, Return "));
-            //                                 DEBUG_PRINTLN(static_cast<uint8_t>(resultRight));
-            //                                 #endif     
-
-            //                                 CanJumpUpResult result = this->canJumpUp_Test_Dist10(prince, Direction::Right);
-                                            
-            //                                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
-            //                                 DEBUG_PRINT(F("L3 canJumpUp_Test_Dist10 Return "));
-            //                                 DEBUG_PRINTLN(static_cast<uint8_t>(result));
-            //                                 #endif
-
-            //                                 return result;
-
-            //                         }
-
-            //                     }
-
-            //                     break;
-            //             }
-                        
-            //         }
-
-            //         break;
-
-            //     default:  break;
-
-            // }
+            }
 
             #if defined(DEBUG) && defined(DEBUG_ACTION_CANJUMPUP)
             DEBUG_PRINT(F("Return None"));

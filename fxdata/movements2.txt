@@ -4,7 +4,7 @@ namespace Constants {
 
         0,0, 0,0, 0,0,                                                                                                          // CROUCH_OFFSETS
         0,0, 1,0, 1,0, 1,0, 2,0, 2,0,                                                                                           // RUN_START_OFFSETS
-        3,0, 3,0, 3,0, 3,0, 3,0, 3,0, 3,0, 3,0,                                                                                 // RUN_REPEAT_OFFSETS
+        3,0, 3,0, 2,0, 4,0, 3,0, 3,0, 3,0, 3,0,                                                                                 // RUN_REPEAT_OFFSETS
         0,0,                                                                                                                    // UPRIGHT_OFFSETS
         0,0, 0,0, 0,0, -1,0, -1,0, 0,0, 0,0, 0,0, 0,0, 1,0, 1,0, 0,0, 0,0, 0,0,                                                 // JUMP_UP_A_OFFSETS
         0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, -1,0, -1,0, -1,0, -1,0, 0,0,                                               // JUMP_UP_B_OFFSETS
