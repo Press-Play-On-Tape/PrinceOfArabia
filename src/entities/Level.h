@@ -1688,34 +1688,19 @@ struct Level {
                                 return false;
 
                             case Action::RunRepeat:
-                                
-                                switch (distToEdgeOfCurrentTile) {
+                                {
+                                    WallTileResults wallTile = this->isWallTile(fgTile2, tileXIdx, tileYIdx, Direction::Right, false);
 
-                                    case 0 ... 9:
-                                        {
-                                            WallTileResults wallTile = this->isWallTile(fgTile2, tileXIdx, tileYIdx, Direction::Right, false);
+                                    #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
+                                    DEBUG_PRINT(F(" Ret 6: "));
+                                    DEBUG_PRINTLN(wallTile == WallTileResults::None);
+                                    printTileInfo(bgTile2, fgTile2);
+                                    #endif       
 
-                                            #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
-                                            printTileInfo(bgTile2, fgTile2);
-                                            DEBUG_PRINT(F(" Ret 6: "));
-                                            DEBUG_PRINTLN(wallTile == WallTileResults::None);
-                                            #endif       
+                                    return wallTile == WallTileResults::None;
 
-                                            return (wallTile == WallTileResults::None);
-                                        }
-                                        return false;
+                                }     
 
-                                    default:
-
-                                        #if defined(DEBUG) && defined(DEBUG_ACTION_CANMOVEFORWARD)
-                                        DEBUG_PRINT(F(" Ret 7: "));
-                                        DEBUG_PRINTLN(true);
-                                        #endif       
-
-                                        return true;
-
-                                }                                    
-                                
                                 return false;
 
                             default: return false;
