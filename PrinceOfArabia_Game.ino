@@ -239,8 +239,12 @@ void game() {
 
         if (justPressed & B_BUTTON && /* enemyIsVisible && */ sameLevelAsPrince && prince.getSword() && prince.getStance() == Stance::Upright && prince.isEmpty() && enemy.getHealth() > 0 && enemy.getEnemyType() != EnemyType::MirrorAfterChallengeL12) {
             
-            prince.pushSequence(Stance::Draw_Sword_1_Start, Stance::Draw_Sword_6_End, Stance::Sword_Normal);
-            justPressed = 0;
+            if (gamePlay.level != 4 || level.getXLocation() < 100) {
+
+                prince.pushSequence(Stance::Draw_Sword_1_Start, Stance::Draw_Sword_6_End, Stance::Sword_Normal);
+                justPressed = 0;
+
+            }
 
         }
 
@@ -1839,6 +1843,8 @@ void game() {
 
                     break;
 
+                case Stance::Single_Step_1_Start ...Stance::Single_Step_8_End:
+                case Stance::Small_Step_1_Start ...Stance::Small_Step_6_End:
                 case Stance::Run_Start_1_Start ...Stance::Run_Start_6_End:
                 case Stance::Run_Repeat_1_Start ... Stance::Run_Repeat_8_End:
                 case Stance::Standing_Jumps_Start ... Stance::Standing_Jumps_End:
