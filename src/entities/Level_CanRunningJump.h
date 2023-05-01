@@ -577,51 +577,6 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
 
 
         /* ----------------------------------------------------------------------------------- */
-        /*  3. Three levels to same floor ..
-        
-        Positions 2, 6, 10.
-        
-        Left                  Right
-        _____ 6 5 4 3 2 1     _____ 1 2 3 4 5 6
-        WT CL x 0 0 0 0 0     WT CL 0 0 0 0 0 x
-        WT NL x x x x x x     WT NL x x x x x x
-        GT CL x x 1 x x _     GT CL _ x x 1 x x
-        GT NL x x x x x _     GT NL _ x x x x x
-        */
-
-        // if (wallTile2_CurrLvl == WallTileResults::None && 
-        //     wallTile3_CurrLvl == WallTileResults::None &&
-        //     wallTile4_CurrLvl == WallTileResults::None && 
-        //     wallTile5_CurrLvl == WallTileResults::None &&
-        //     isGroundTile4_CurrLvl
-        //     ) {
-
-        //     switch (distToEdgeOfCurrentTile) {
-
-        //         case 2:
-
-        //             #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
-        //             DEBUG_PRINTLN(F("J3-12 Normal_Pos2"));
-        //             #endif
-
-        //             return RunningJumpResult::Normal_Pos2;
-
-        //         case 6:
-
-        //         case 10:
-
-        //             #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
-        //             DEBUG_PRINTLN(F("J3-13 Normal_Pos6"));
-        //             #endif
-
-        //             return RunningJumpResult::Normal_Pos6;
-
-        //     }
-
-        // }
-
-
-        /* ----------------------------------------------------------------------------------- */
         /*  3. Three levels to same floor (might be nothing to land on) ..
         
         Positions 2, 6, 10.
@@ -712,7 +667,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
         }
 
         #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_2)
-        DEBUG_PRINTLN(F("J2-4 Jump2_Pos6"));
+        DEBUG_PRINTLN(F("J2-4 Jump6_Pos6"));
         #endif
 
         return RunningJumpResult::Jump2_Pos6;
@@ -763,7 +718,7 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
 
     }
 
-        
+
     /* ----------------------------------------------------------------------------------- */
     /* 1. Can we jump straight ahead?
     
