@@ -509,9 +509,9 @@ constexpr uint16_t Running_Jump_11_End                           = Stance::Runni
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*  Dist 33                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+/*  Dist 32                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define RUNNING_JUMP_SHORT_2_SEQ                                 20,    21,    22,    23,    24,    25,    26,
-#define RUNNING_JUMP_SHORT_2_OFFSETS                             5,0,   5,0,   5,0,   5,-2,  6,-2,  5,3,   2,1,
+#define RUNNING_JUMP_SHORT_2_OFFSETS                             5,0,   5,0,   5,0,   5,-2,  5,-2,  5,3,   2,1,
 constexpr uint16_t Running_Jump_Short_2_1_Start                  = Stance::Running_Jump_11_End + 1;
 constexpr uint16_t Running_Jump_Short_2_2                        = Stance::Running_Jump_Short_2_1_Start + 1;
 constexpr uint16_t Running_Jump_Short_2_3                        = Stance::Running_Jump_Short_2_2 + 1;
@@ -522,9 +522,9 @@ constexpr uint16_t Running_Jump_Short_2_7_End                    = Stance::Runni
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*  Dist 37                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+/*  Dist 36                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define RUNNING_JUMP_SHORT_6_SEQ                                 20,    21,    22,    23,    24,    25,    26,
-#define RUNNING_JUMP_SHORT_6_OFFSETS                             6,0,   6,0,   6,0,   6,-2,  6,-2,  5,3,   2,1,
+#define RUNNING_JUMP_SHORT_6_OFFSETS                             6,0,   6,0,   6,0,   6,-2,  5,-2,  5,3,   2,1,
 constexpr uint16_t Running_Jump_Short_6_1_Start                  = Stance::Running_Jump_Short_2_7_End + 1;
 constexpr uint16_t Running_Jump_Short_6_2                        = Stance::Running_Jump_Short_6_1_Start + 1;
 constexpr uint16_t Running_Jump_Short_6_3                        = Stance::Running_Jump_Short_6_2 + 1;

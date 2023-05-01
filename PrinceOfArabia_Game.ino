@@ -227,7 +227,7 @@ void game() {
     
     }
 
-    // Is the prince within distance of the enemy (cycle through all enemies to find it any closest)?
+    // Is the prince within distance of the enemy (cycle through all enemies to find if any closest)?
 
     #ifndef SAVE_MEMORY_ENEMY
 
@@ -237,7 +237,7 @@ void game() {
 
         // If within distance, we can draw swords if we have one!
 
-        if (justPressed & B_BUTTON && /* enemyIsVisible && */ sameLevelAsPrince && prince.getSword() && prince.getStance() == Stance::Upright && prince.isEmpty() && enemy.getHealth() > 0 && enemy.getEnemyType() != EnemyType::MirrorAfterChallengeL12) {
+        if (justPressed & B_BUTTON && sameLevelAsPrince && prince.getSword() && prince.getStance() == Stance::Upright && prince.isEmpty() && enemy.getHealth() > 0 && enemy.getEnemyType() != EnemyType::MirrorAfterChallengeL12) {
             
             if (gamePlay.level != 4 || level.getXLocation() < 100) {
 
@@ -255,7 +255,7 @@ void game() {
         //
         // ---------------------------------------------------------------------------------------------------------------------------------------
 
-        if (enemy.isEmpty() && /* enemyIsVisible && */ !sameLevelAsPrince) {
+        if (enemy.isEmpty() && !sameLevelAsPrince) {
 
             switch (enemy.getStance()) {
 
@@ -283,19 +283,9 @@ void game() {
 
                     // Draw sword? Not if the prince is dead!
 
-                    if (abs(xDelta) < 70 && yDelta == 0 && /* enemyIsVisible && */ sameLevelAsPrince && !prince.isDead()) {
+                    if (abs(xDelta) < 70 && yDelta == 0 && sameLevelAsPrince && !prince.isDead()) {
 
-                        // switch (prince.getStance()) {
-
-                        //     case Stance::Falling_Dead_1_Start ... Stance::Falling_Dead_3_End:
-                        //     case Stance::Falling_Dead_Blade_1_Start ... Stance::Falling_Dead_Blade_2_End:
-                        //         break;
-
-                        //     default:
-                                enemy.pushSequence(Stance::Draw_Sword_1_Start, Stance::Draw_Sword_6_End, Stance::Sword_Normal);
-                                // break;
-
-                        // }
+                        enemy.pushSequence(Stance::Draw_Sword_1_Start, Stance::Draw_Sword_6_End, Stance::Sword_Normal);
 
                     }
 
@@ -900,7 +890,7 @@ void game() {
                             DEBUG_PRINTLN(F("LEFT_BUTTON & A_BUTTON, Running Jump from Run_Repeat_4"));
                             #endif
 
-                            processRunJump(prince, level, /* enemyIsVisible & */ sameLevelAsPrince);
+                            processRunJump(prince, level, sameLevelAsPrince);
 
                         }
                         else if (pressed & btnFacingDirection) {

@@ -170,6 +170,10 @@ void processRunJump(Prince &prince, Level &level, bool testEnemy) {
 
             if (xDelta > -30 && xDelta < 30) {
 
+                if (enemy.getPosition().x < prince.getPosition().x && xDelta >= 0) goto goodToGo;         // Attempting to jump while running away to the right ..
+                if (enemy.getPosition().x > prince.getPosition().x && xDelta <= 0) goto goodToGo;         // Attempting to jump while running away to the left ..
+
+                prince.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_4);
                 return;
 
             }
@@ -177,6 +181,9 @@ void processRunJump(Prince &prince, Level &level, bool testEnemy) {
         }
 
     #endif
+
+
+    goodToGo:
 
 
     // Level 6 exit ..
