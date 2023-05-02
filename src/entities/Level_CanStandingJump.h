@@ -339,6 +339,48 @@ StandingJumpResult canStandingJump(Prince &prince) {
     }
 
 
+
+
+    /* ----------------------------------------------------------------------------------- */
+    /*  Jump to Position 2?
+    
+    Left                   Right
+    _____ 6 5 4 3 2 1      _____ 1 2 3 4 5 6
+    WT CL x x 1 0 0 x      WT CL x 0 0 1 x x
+    WT NL x x x 1 0 x      WT CL x 0 1 x x x
+    GT CL x x x x x _      GT CL _ x x x x x
+    GT NL x x x x x _      GT NL _ x x x x x 
+    */
+
+    if (wallTile2_CurrLvl == WallTileResults::None && 
+        wallTile3_CurrLvl == WallTileResults::None && 
+        wallTile4_CurrLvl != WallTileResults::None && 
+        isGroundTile3_CurrLvl) {
+    
+        switch(distToEdgeOfCurrentTile) {
+
+            case 2:
+            case 6:
+
+                #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP) && defined(DEBUG_ACTION_CANSTANDINGJUMP_DETAIL)
+                DEBUG_PRINTLN(F("J1 Normal_28"));
+                #endif
+
+                return StandingJumpResult::Normal_24;
+
+            case 10:
+
+                #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP) && defined(DEBUG_ACTION_CANSTANDINGJUMP_DETAIL)
+                DEBUG_PRINTLN(F("J3 Normal_28"));
+                #endif
+
+                return StandingJumpResult::Normal_28;
+
+        }                            
+
+    }
+
+
     /* ----------------------------------------------------------------------------------- */
     /*  Jump to position 3 and drop a level?
     
