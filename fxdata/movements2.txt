@@ -30,7 +30,7 @@ namespace Constants {
         3,0, 3,0, 4,0, 4,-2, 4,-2, 4,3, 2,1,                                                                                    // RUNNING_JUMP_2_2_OFFSETS
         4,0, 4,0, 5,0, 5,-2, 4,-2, 4,3, 2,1,                                                                                    // RUNNING_JUMP_2_6_OFFSETS
         4,0, 5,0, 6,0, 6,-2, 6,-2, 4,3, 2,1,                                                                                    // RUNNING_JUMP_2_10_OFFSETS
-        3,0, 3,0, 3,0, 3,0, 4,-2, 4,-1, 3,3, 3,2, 2,4, 2,5, 2,5, 2,5, 2,5, 1,5,                                                 // RUNNING_JUMP_2_DROPLVL_OFFSETS
+        3,0, 3,0, 3,0, 3,0, 4,-2, 4,-1, 3,3, 3,2, 2,4, 2,5, 2,5, 2,5, 2,5, 1,5,                                                 // RUNNING_JUMP_2_DROPLVL_6_OFFSETS
         3,0, 3,0, 3,0, 3,0, 4,-2, 4,-1, 4,3, 4,2, 4,4, 4,5, 3,5, 2,5, 2,5, 2,5,                                                 // RUNNING_JUMP_2_DROPLVL_10_OFFSETS
         4,0, 5,0, 4,0, 4,-2, 3,0, 3,-2, 3,3, 2,1,                                                                               // RUNNING_JUMP_3_2_OFFSETS
         4,0, 5,0, 5,0, 5,-2, 4,0, 4,-2, 3,3, 2,1,                                                                               // RUNNING_JUMP_3_6_OFFSETS
@@ -87,6 +87,7 @@ namespace Constants {
         0,0, 0,0,                                                                                                               // FALLING_DEAD_BLADE_OFFSETS
         0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0,                                                                                 // DELAY_OFFSETS
         0,6, 0,5, 0,5, 0,5, 0,5, 0,5,                                                                                           // STRAIGHT_DROP_HANGON_OFFSETS
+        3,0, 3,0, 3,0, 3,0, 3,-2, 3,-1, 2,3, 2,2, 2,4, 2,5, 2,5, 2,5, 2,5, 1,5,                                                 // RUNNING_JUMP_2_DROPLVL_2_OFFSETS
     };
 
 namespace_end

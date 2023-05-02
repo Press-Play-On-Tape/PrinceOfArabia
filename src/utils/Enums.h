@@ -149,7 +149,7 @@ enum class RunningJumpResult : uint8_t {
     Jump3_DropLevel_Pos10,
     Jump2_Pos2,
     Jump2_Pos6,
-    Jump2_DropLevel,
+    Jump2_DropLevel_Pos6,
     Jump2_DropLevel_Pos10,
     Jump2_Pos10,
     Jump1_Pos2,
@@ -158,6 +158,7 @@ enum class RunningJumpResult : uint8_t {
     Jump3_GrabLedge_Pos2,
     Jump3_GrabLedge_Pos6,
     Jump3_GrabLedge_Pos10,
+    Jump2_DropLevel_Pos2,
     KeepRunning,
 };
 

@@ -698,18 +698,26 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
 
         switch (distToEdgeOfCurrentTile) {
 
-            case 0 ... 7:
+            case 0 ... 4:
 
                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_2)
-                DEBUG_PRINTLN(F("J2-5 Jump2_DropLevel"));
+                DEBUG_PRINTLN(F("J2-5 Jump2_DropLevel_Pos2"));
                 #endif
 
-                return RunningJumpResult::Jump2_DropLevel;
+                return RunningJumpResult::Jump2_DropLevel_Pos2;
+
+            case 5 ... 7:
+
+                #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_2)
+                DEBUG_PRINTLN(F("J2-6 Jump2_DropLevel_Pos6"));
+                #endif
+
+                return RunningJumpResult::Jump2_DropLevel_Pos6;
 
             default:
 
                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_2)
-                DEBUG_PRINTLN(F("J2-6 Jump2_DropLevel_Pos10"));
+                DEBUG_PRINTLN(F("J2-7 Jump2_DropLevel_Pos10"));
                 #endif
 
                 return RunningJumpResult::Jump2_DropLevel_Pos10;

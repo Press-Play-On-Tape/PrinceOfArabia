@@ -526,7 +526,7 @@ uint16_t RunningJumpStances[] = {
                                     303,                              309,                            13,                   0,            0,            0,                                                              0, 0,
     // Jump2_Pos6                   Stance::Running_Jump_2_6_1_Start, Stance::Running_Jump_2_6_7_End, Stance::Run_Repeat_4, Stance::None, Stance::None, Stance::None, 
                                     310,                              316,                            13,                   0,            0,            0,                                                      0, 0,
-    // Jump2_DropLevel              Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, Stance::Running_Jump_2_DropLvl_1_Start, Stance::Running_Jump_2_DropLvl_14_End, Stance::None, 
+    // Jump2_DropLevel_Pos6         Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, Stance::Running_Jump_2_DropLvl_6_1_Start, Stance::Running_Jump_2_DropLvl_6_14_End, Stance::None, 
                                     592,                          603,                         18,              324,                                    337,                                   0,                       1, 0,
     // Jump2_DropLevel_Pos10        Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, Stance::Running_Jump_2_DropLvl_10_1_Start, Stance::Running_Jump_2_DropLvl_10_14_End, Stance::None, 
                                     592,                          603,                         18,              338,                                       351,                                      0,                 1, 0,
@@ -544,6 +544,8 @@ uint16_t RunningJumpStances[] = {
                                     496,                                 511,                                32,                       0,            0,            0,                                                   1, 200,
     // Jump3_GrabLedge_Pos10        Stance::Running_Jump_3_GL_10_1_Start, Stance::Running_Jump_3_GL_10_16_End, Stance::Jump_Up_A_14_End, Stance::None, Stance::None, Stance::None, 
                                     512,                                  527,                                 32,                       0,            0,            0,                                                 1, 200,
+    // Jump2_DropLevel_Pos2         Stance::Crouch_Stand_1_Start, Stance::Crouch_Stand_12_End, Stance::Upright, Stance::Running_Jump_2_DropLvl_2_1_Start, Stance::Running_Jump_2_DropLvl_2_14_End, Stance::None, 
+                                    592,                          603,                         18,              846,                                      859,                                   0,                       1, 0,
 
 }
 
