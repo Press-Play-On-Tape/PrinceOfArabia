@@ -12,7 +12,7 @@
     #define _SAVE_MEMORY_ENEMY
     #define _SAVE_MEMORY_INVADER
     #define _ALT_B_BUTTON
-    #define _GIVE_SWORD
+    #define GIVE_SWORD
 
     #define LEVEL_DATA_FROM_FX
     #define SAVE_TO_FX
@@ -639,9 +639,9 @@ constexpr uint16_t Running_Jump_2_DropLvl_6_14_End               = Stance::Runni
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*  Dist 45                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
+/*  Dist 44                                                      01     02     03     04     05     06     07     08     09     10     11     12     13     14     15     16     17     18     19     20 */
 #define RUNNING_JUMP_2_DROPLVL_10_SEQ                            19,    20,    21,    22,    23,    24,    25,    26,    121,   122,   123,   124,   125,   126,
-#define RUNNING_JUMP_2_DROPLVL_10_OFFSETS                        3,0,   3,0,   3,0,   3,0,   4,-2,  4,-1,  4,3,   4,2,   4,4,   4,5,   3,5,   2,5,   2,5,   2,5,
+#define RUNNING_JUMP_2_DROPLVL_10_OFFSETS                        3,0,   3,0,   3,0,   3,0,   4,-2,  4,-1,  4,3,   4,2,   4,4,   4,5,   3,5,   2,5,   2,5,   1,5,
 constexpr uint16_t Running_Jump_2_DropLvl_10_1_Start             = Stance::Running_Jump_2_DropLvl_6_14_End + 1;
 constexpr uint16_t Running_Jump_2_DropLvl_10_2                   = Stance::Running_Jump_2_DropLvl_10_1_Start + 1;
 constexpr uint16_t Running_Jump_2_DropLvl_10_3                   = Stance::Running_Jump_2_DropLvl_10_2 + 1;
