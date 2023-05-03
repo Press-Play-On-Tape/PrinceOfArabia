@@ -360,14 +360,14 @@ StandingJumpResult canStandingJump(Prince &prince) {
         switch(distToEdgeOfCurrentTile) {
 
             case 2:
-            case 6:
 
                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP) && defined(DEBUG_ACTION_CANSTANDINGJUMP_DETAIL)
-                DEBUG_PRINTLN(F("J1 Normal_28"));
+                DEBUG_PRINTLN(F("J1 Normal_24"));
                 #endif
 
                 return StandingJumpResult::Normal_24;
 
+            case 6:
             case 10:
 
                 #if defined(DEBUG) && defined(DEBUG_ACTION_CANSTANDINGJUMP) && defined(DEBUG_ACTION_CANSTANDINGJUMP_DETAIL)
