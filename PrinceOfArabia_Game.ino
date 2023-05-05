@@ -577,7 +577,7 @@ void game() {
 
         // Check to see if we can leave the level, otherwise 
 
-        if (!leaveLevel(prince, level)) {
+        if (!prince.isDead() && !leaveLevel(prince, level)) {
 
             uint8_t btnFacingDirection = (prince.getDirection() == Direction::Right ? RIGHT_BUTTON : LEFT_BUTTON);
             uint8_t btnOppositeDirection = (prince.getDirection() == Direction::Right ? LEFT_BUTTON : RIGHT_BUTTON);
