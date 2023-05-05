@@ -877,73 +877,67 @@ struct Level {
                 case TILE_FLOOR_GATE_FRONT_TRACK_3:
                 case TILE_FLOOR_GATE_FRONT_TRACK_5:
                     
-                    if (direction == Direction::Left) {
-
-                        int8_t offset = (addOffsets ? 1 : 0);
-
-                        if (x != Constants::CoordNone && y != Constants::CoordNone) {
-
-                            uint8_t idx = this->getItem(ItemType::Gate, ItemType::Gate_StayOpen, x + this->getXLocation() + offset, y + this->getYLocation());
-
-                            if (idx == Constants::NoItemFound) {
-                                idx = this->getItem(ItemType::Gate_StayClosed, x + this->getXLocation() + offset, y + this->getYLocation());
-                            }
-
-                            if (idx != Constants::NoItemFound) {
-
-                                Item &item = this->getItem(idx);
-
-                                switch (item.data.gate.movement) {
-
-                                    case GateMovement::None:
-                                    case GateMovement::GoingUp:
-                                    case GateMovement::WaitingToFall:
-                                        return (item.data.gate.position >= gateHeight ? WallTileResults::None : WallTileResults::GateClosed);
-
-                                    default:
-                                        return WallTileResults::GateClosed;
-
-                                }
-
-                            }
-
-                        }
-
-
-                    }
-
-                    return WallTileResults::None;
+                    return testForGate(x, y, direction, addOffsets, gateHeight);
 
                 default:
                     
                     if (direction == Direction::Right) {
 
-                        int8_t offset = (addOffsets ? 0 : 1);
-
-                        if (x != Constants::CoordNone && y != Constants::CoordNone) {
-
-                            uint8_t idx = this->getItem(ItemType::Gate, ItemType::Gate_StayOpen, x + this->getXLocation() + offset, y + this->getYLocation());
-
-                            if (idx != Constants::NoItemFound) {
-
-                                Item &item = this->getItem(idx);
-
-                                if (item.data.gate.position <= 7) {
-
-                                    return WallTileResults::GateClosed;
-
-                                }
-
-
-                            }
-
-                        }
+                        return testForGate(x, y, direction, addOffsets, gateHeight);
 
                     }
 
                     return WallTileResults::None;
 
             }
+
+        }
+
+
+        WallTileResults testForGate(int8_t x = Constants::CoordNone, int8_t y = Constants::CoordNone, Direction direction = Direction::Left, bool addOffsets = true, uint8_t gateHeight = 7) {
+
+            int8_t offset = 0;
+            
+            if (direction == Direction::Left) {
+                
+                offset = (addOffsets ? 1 : 0);
+
+            }
+            else {
+
+                offset = (addOffsets ? 0 : 1);
+
+            }
+
+            if (x != Constants::CoordNone && y != Constants::CoordNone) {
+
+                uint8_t idx = this->getItem(ItemType::Gate, ItemType::Gate_StayOpen, x + this->getXLocation() + offset, y + this->getYLocation());
+
+                if (idx == Constants::NoItemFound) {
+                    idx = this->getItem(ItemType::Gate_StayClosed, x + this->getXLocation() + offset, y + this->getYLocation());
+                }
+
+                if (idx != Constants::NoItemFound) {
+
+                    Item &item = this->getItem(idx);
+
+                    switch (item.data.gate.movement) {
+
+                        case GateMovement::None:
+                        case GateMovement::GoingUp:
+                        case GateMovement::WaitingToFall:
+                            return (item.data.gate.position >= gateHeight ? WallTileResults::None : WallTileResults::GateClosed);
+
+                        default:
+                            return WallTileResults::GateClosed;
+
+                    }
+
+                }
+
+            }
+
+            return WallTileResults::None;
 
         }
 
@@ -955,6 +949,7 @@ struct Level {
             return isGroundTile(bgTile);
 
         }
+
 
         bool isGroundTile(int8_t bgTile) {
 
