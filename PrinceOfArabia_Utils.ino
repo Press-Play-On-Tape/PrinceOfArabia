@@ -535,7 +535,12 @@ void playGrab() {
 
         if (!enemyIsVisible || !swapEnemies) {
             
-            enemy.setActiveEnemy(currentEnemy);
+            if (justEnteredRoom) {
+                enemy.clear();
+            }
+            else {
+                enemy.setActiveEnemy(currentEnemy);
+            }
 
         }
 
