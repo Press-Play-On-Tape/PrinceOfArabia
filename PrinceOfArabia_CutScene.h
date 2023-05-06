@@ -553,6 +553,10 @@ void invader_UpdateEnemyBullets(Invader_General2 &general2, Invader_Player &play
 
             }
 
+            if (bullet.y >= 64) {
+                bullet.y = -4;
+            }
+
         }
 
     }

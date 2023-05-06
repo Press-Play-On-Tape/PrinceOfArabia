@@ -1193,7 +1193,11 @@ void game() {
             case GameState::Game:
 
                 #ifndef ALT_B_BUTTON
+                    #ifndef SAVE_MEMORY_ENEMY
                     if ((pressed & B_BUTTON) && prince.isEmpty() && (!sameLevelAsPrince || enemy.getHealth() == 0 || prince.getHealth() == 0)) {
+                    #else
+                    if ((pressed & B_BUTTON) && prince.isEmpty() && (!sameLevelAsPrince || prince.getHealth() == 0)) {
+                    #endif
 
                         if (bCounter > 4) {
 
