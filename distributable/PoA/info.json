@@ -3,8 +3,8 @@
   "binaries": [
     {
       "title": "Prince of Arabia FX",
-      "filename": "PrinceOfArabia_V110.hex",
-      "flashdata": "PrinceOfArabia_V110.bin",
+      "filename": "PrinceOfArabia.hex",
+      "flashdata": "PrinceOfArabia.bin",
       "device": "ArduboyFX"
     }
   ]

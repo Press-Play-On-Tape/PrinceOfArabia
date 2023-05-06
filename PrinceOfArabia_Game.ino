@@ -1851,22 +1851,28 @@ void game() {
 
                             int16_t x = prince.getPosition().x / Constants::TileWidth;
                             int16_t y = prince.getPosition().y / Constants::TileHeight;
-                            
-                            if (x == 104 && y == 0 && enemy.getStatus() == Status::Dormant_ActionReady) {
 
-                                enemy.setStatus(Status::Active);
-                                enemy.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_8_End, Stance::Hide_Mirror);
-                                enemy.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_8_End);
-                                enemy.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_8_End);
-                                enemy.pushSequence(Stance::Run_Start_1_Start, Stance::Run_Start_6_End);
+                            if (x >= 103 && x <= 105 && y == 0) {
 
-                                prince.setHealth(1);
+                                enemy.setActiveEnemy(0);
                                 
-                                Item &exitDoor = level.getItem(Constants::Item_ExitDoor);
-                                
-                                if (exitDoor.data.exitDoor.direction != Direction::Up) {
+                                if (enemy.getStatus() == Status::Dormant_ActionReady) {
 
-                                    exitDoor.data.exitDoor.direction = Direction::Up;
+                                    enemy.setStatus(Status::Active);
+                                    enemy.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_8_End, Stance::Hide_Mirror);
+                                    enemy.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_8_End);
+                                    enemy.pushSequence(Stance::Run_Repeat_1_Start, Stance::Run_Repeat_8_End);
+                                    enemy.pushSequence(Stance::Run_Start_1_Start, Stance::Run_Start_6_End);
+
+                                    prince.setHealth(1);
+                                    
+                                    Item &exitDoor = level.getItem(Constants::Item_ExitDoor);
+                                    
+                                    if (exitDoor.data.exitDoor.direction != Direction::Up) {
+
+                                        exitDoor.data.exitDoor.direction = Direction::Up;
+
+                                    }
 
                                 }
 
