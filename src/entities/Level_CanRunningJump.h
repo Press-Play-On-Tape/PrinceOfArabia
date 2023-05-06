@@ -447,10 +447,10 @@ RunningJumpResult canRunningJump(Prince &prince, Action action) {
                 case 0 ... 3:
 
                     #if defined(DEBUG) && defined(DEBUG_ACTION_CANRUNNINGJUMP) && defined(DEBUG_ACTION_CANRUNNINGJUMP_DETAIL) && defined(DEBUG_ACTION_CANRUNNINGJUMP_3)
-                    DEBUG_PRINTLN(F("J3-6 Jump3_Pos10"));
+                    DEBUG_PRINTLN(F("J3-6 Jump3_Pos2"));
                     #endif
 
-                    return RunningJumpResult::Jump3_Pos10;
+                    return RunningJumpResult::Jump3_Pos2;
                     
                 case 4 ... 7:
 
