@@ -501,7 +501,7 @@ void playGrab() {
 
             enemy.setActiveEnemy(i);
 
-            if (enemy.getStatus() == Status::Active) {
+            if (enemy.getStatus() == Status::Active || enemy.getStatus() == Status::Dormant || enemy.getStatus() == Status::Dormant_ActionReady) {
 
                 uint8_t tileXIdx = level.coordToTileIndexX(enemy.getPosition().x);
                 uint8_t tileYIdx = level.coordToTileIndexY(enemy.getPosition().y);

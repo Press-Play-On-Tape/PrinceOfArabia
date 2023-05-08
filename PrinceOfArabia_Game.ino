@@ -1852,7 +1852,7 @@ void game() {
                             int16_t x = prince.getPosition().x / Constants::TileWidth;
                             int16_t y = prince.getPosition().y / Constants::TileHeight;
 
-                            if (x >= 103 && x <= 105 && y == 0) {
+                            if (x == 104 && y == 0) {
 
                                 enemy.setActiveEnemy(0);
                                 
