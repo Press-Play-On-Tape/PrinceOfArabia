@@ -237,7 +237,7 @@ void game() {
 
         // If within distance, we can draw swords if we have one!
 
-        if (justPressed & B_BUTTON && sameLevelAsPrince && prince.getSword() && prince.getStance() == Stance::Upright && prince.isEmpty() && enemy.getHealth() > 0 && enemy.getEnemyType() != EnemyType::MirrorAfterChallengeL12) {
+        if (justPressed & B_BUTTON && sameLevelAsPrince && prince.getSword() && prince.getStance() == Stance::Upright && prince.isEmpty() && enemy.getHealth() > 0 && enemy.getEnemyType() != EnemyType::MirrorAfterChallengeL12 && enemy.getStatus() != Status::Dormant) {
             
             if (gamePlay.level != 4 || level.getXLocation() < 100) {
 

@@ -446,7 +446,7 @@ void render(bool sameLevelAsPrince) {
     #ifndef SAVE_MEMORY_ENEMY
         uint8_t enemyHealth = enemy.getHealth();
 
-        if (!sameLevelAsPrince || enemyHealth == 0) {
+        if (enemy.getStatus() == Status::Dormant || !sameLevelAsPrince || enemyHealth == 0) {
             FX::drawBitmap(120, 0, Images::HUD_Backgrounds, 0, dbmNormal);
         }
         else {
@@ -466,7 +466,7 @@ void render(bool sameLevelAsPrince) {
     }
 
     #ifndef SAVE_MEMORY_ENEMY
-    if (!sameLevelAsPrince || enemyHealth == 0) {
+    if (enemy.getStatus() == Status::Dormant || !sameLevelAsPrince || enemyHealth == 0) {
     #else
     if (!sameLevelAsPrince) {
     #endif
